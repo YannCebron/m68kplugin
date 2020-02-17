@@ -1,0 +1,10 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kMoveInstructionImpl(MOVE_INSTRUCTION)
+    PsiElement(move)('move')
+    PsiWhiteSpace(' ')
+    PsiElement(#)('#')
+    M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+      PsiElement(dec_number)('1')
+    PsiErrorElement:',' expected
+      <empty list>

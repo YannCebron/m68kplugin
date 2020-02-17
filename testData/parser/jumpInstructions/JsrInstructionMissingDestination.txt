@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kJsrInstructionImpl(JSR_INSTRUCTION)
+    PsiElement(jsr)('jsr')
+    PsiErrorElement:<effective address> expected
+      <empty list>
+  PsiWhiteSpace(' ')

@@ -1,0 +1,8 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kSubaInstructionImpl(SUBA_INSTRUCTION)
+    PsiElement(suba)('suba')
+    PsiWhiteSpace(' ')
+    PsiElement(data_register)('d0')
+    PsiElement(,)(',')
+    PsiElement(address_register)('a0')

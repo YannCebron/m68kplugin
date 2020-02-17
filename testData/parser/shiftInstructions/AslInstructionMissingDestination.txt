@@ -1,0 +1,10 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kAslInstructionImpl(ASL_INSTRUCTION)
+    PsiElement(asl)('asl')
+  PsiWhiteSpace(' ')
+  PsiElement(#)('#')
+  PsiElement(dec_number)('1')
+  PsiElement(,)(',')
+  PsiErrorElement:<data register> or <effective address> expected
+    <empty list>

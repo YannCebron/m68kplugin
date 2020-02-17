@@ -1,0 +1,676 @@
+/*
+ * Copyright 2020 The Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+ References:
+ 
+ http://users.encs.concordia.ca/~aagarwal/coen311/motorola68000.txt
+ http://www.easy68k.com/files/EASy68KQuickRef.pdf
+ https://neo.dmcs.pl/pn/asembler_68000/asm.html
+ https://github.com/marhel/r68k/blob/master/tools/src/assembler/parser.rs
+*/
+
+{
+  parserClass = "com.yanncebron.m68kplugin.lang.M68kParser"
+  parserImports = [
+    "static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*"
+  ]
+
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kPsiElement"
+  extends = "com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix = "M68k"
+  psiImplClassSuffix = "Impl"
+  psiPackage = "com.yanncebron.m68kplugin.lang.psi"
+  psiImplPackage = "com.yanncebron.m68kplugin.lang.psi.impl"
+
+  elementTypeHolderClass = "com.yanncebron.m68kplugin.lang.psi.M68kTypes"
+  elementTypeClass = "com.yanncebron.m68kplugin.lang.psi.M68kCompositeElementType"
+
+  classHeader = "license.txt"
+  generate = [
+    java="8"
+    tokens = "no"
+  ]
+  
+  pin(".*_instruction") = 1
+  name(".*_instruction") = "instruction"
+}
+
+root ::= root_item*
+private root_item ::=  (instructions | labels)   {
+  recoverWhile = root_item_recover
+}
+private root_item_recover ::= !(instructions | labels) {
+  consumeTokenMethod="consumeTokenFast"
+}
+//private     crlf::='\n' // todo stop parsing after line?
+
+private labels ::= label | localLabel
+
+// todo must start on newline? usually not, but not required
+// todo full name is: DevPac. prefixed with last non-local label
+fake label_base ::= ID {
+  implements = "com.intellij.psi.PsiNamedElement"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelBaseMixIn"
+}
+
+label ::= ID COLON? {
+  extends = label_base
+}
+
+localLabel ::= DOT ID COLON? {
+  pin = 1
+  name = "local label"
+  extends = label_base
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLocalLabelBaseMixIn"
+}
+
+// todo sort instructions by frequency?
+private instructions ::= directives |
+
+                         move_instructions |
+
+                         misc_instructions |
+
+                         jump_instructions |
+
+                         add_sub_instructions |
+                         mul_div_instructions |
+                         bcd_instructions|
+
+                         cmp_instructions |
+
+                         bool_instructions |
+                         bit_instructions |
+                         shift_instructions |
+
+                         bCC_instructions |
+                         dbCC_instructions |
+                         sCC_instructions
+
+
+private data_size_byte ::= DOT_B
+private data_size_short ::= DOT_S
+private data_size_word ::= DOT_W
+private data_size_long ::= DOT_L
+private data_size_word_long ::= data_size_word | data_size_long  {
+//  name = ".w|l"
+}
+private data_size_all ::= data_size_byte | data_size_word_long  {
+//  name = ".b|w|l"
+}
+
+private data_register ::= DATA_REGISTER {
+  name = "data register"
+}
+
+private program_counter ::= PC
+private program_counter_indirect ::= ID L_PAREN program_counter R_PAREN
+
+private address_register ::= ADDRESS_REGISTER | SP {
+  name = "address register"
+}
+private address_register_pre_decrement ::= MINUS L_PAREN address_register R_PAREN
+private address_register_post_increment ::= L_PAREN ADDRESS_REGISTER R_PAREN PLUS
+private address_register_indirect ::= (label_ref_expression | MINUS | number_expression)? L_PAREN address_register R_PAREN PLUS? {
+  pin = "("                            // todo ID --> (label)expression ?
+}
+
+private status_register ::= SR
+private condition_code_register ::= CCR
+private supervisor_stack_pointer ::= SSP
+private user_stack_pointer ::= USP
+
+private any_register ::= data_register |
+                         address_register |
+                         program_counter |
+                         status_register | condition_code_register |
+                         supervisor_stack_pointer | user_stack_pointer |
+                         address_register_indirect |
+                         program_counter_indirect 
+                         // todo?
+
+private effective_address ::= program_counter_indirect |
+                              (ID L_PAREN address_register R_PAREN) |   // todo label_reference "jsr     _LVODoIO(a6)"
+                              expression |
+                              label_reference // TODO
+{
+  name = "effective address"
+}
+
+label_reference ::= ID {
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelReferenceMixIn"
+  name = "label"
+}
+
+private immediate_data ::= HASH expression {
+  pin = 1
+//  name = "immediate data" // todo
+}
+
+
+// Move ==================================================================
+private move_instructions ::= move_instruction |
+                              movea_instruction |
+                              moveq_instruction |
+                              movem_instruction
+
+move_instruction ::= MOVE data_size_all?
+                     (any_register | immediate_data) COMMA (any_register | effective_address)
+movea_instruction ::= MOVEA data_size_word_long?
+                      (any_register | effective_address | immediate_data) COMMA address_register
+                                         
+moveq_instruction ::= MOVEQ data_size_long?
+                      immediate_data COMMA data_register
+
+private register_list ::= any_register (MINUS any_register)?
+private register_lists ::= register_list (DIV register_list)*
+movem_instruction ::= MOVEM data_size_word_long?
+                      (
+                        (register_lists COMMA address_register_indirect) |
+                        (address_register_indirect COMMA register_lists)
+                      )
+
+
+// Jump ==================================================================
+private jump_instructions ::= jsr_instruction|
+                              bsr_instruction |
+                              jmp_instruction |
+                              rts_instruction |
+                              rte_instruction |
+                              rtr_instruction
+
+jsr_instruction ::= JSR effective_address
+bsr_instruction ::= BSR (data_size_short | data_size_word)? effective_address
+jmp_instruction ::= JMP effective_address
+rts_instruction ::= RTS
+rte_instruction ::= RTE
+rtr_instruction ::= RTR
+
+// *bcd ==================================================================
+private bcd_instructions ::= abcd_instruction |
+                             nbcd_instruction |
+                             sbcd_instruction
+
+private bcd_tail ::= (data_size_byte)?
+                     (
+                      (data_register COMMA data_register) |
+                      (address_register_pre_decrement COMMA address_register_pre_decrement)
+                     )
+
+abcd_instruction ::= ABCD bcd_tail
+nbcd_instruction ::= NBCD (data_size_byte)? any_register
+sbcd_instruction ::= SBCD bcd_tail
+
+// Add/Sub ==================================================================
+private add_sub_instructions ::= add_instruction |
+                                 adda_instruction |
+                                 addi_instruction |
+                                 addq_instruction |
+                                 addx_instruction |
+                                 sub_instruction |
+                                 suba_instruction |
+                                 subi_instruction |
+                                 subq_instruction |
+                                 subx_instruction
+
+private add_sub_tail ::=   data_size_all?
+                           (
+                             (data_register                        COMMA (data_register | effective_address)) |
+                             ((effective_address | address_register | immediate_data) COMMA data_register )
+                           )
+private add_sub_a_tail ::= data_size_word_long?
+                           any_register COMMA address_register
+private add_sub_i_tail ::= data_size_all?
+                           immediate_data COMMA any_register
+private add_sub_q_tail ::= data_size_all?
+                           immediate_data COMMA (data_register | effective_address | address_register)
+private add_sub_x_tail ::= data_size_all?
+                           (
+                             (data_register COMMA data_register) |
+                             (address_register_pre_decrement COMMA address_register_pre_decrement)
+                           )
+
+add_instruction ::= ADD add_sub_tail
+adda_instruction ::= ADDA add_sub_a_tail
+addi_instruction ::= ADDI add_sub_i_tail
+addq_instruction ::= ADDQ add_sub_q_tail
+addx_instruction ::= ADDX add_sub_x_tail
+
+sub_instruction ::= SUB add_sub_tail
+suba_instruction ::= SUBA add_sub_a_tail
+subi_instruction ::= SUBI add_sub_i_tail
+subq_instruction ::= SUBQ add_sub_q_tail
+subx_instruction ::= SUBX add_sub_x_tail
+
+
+// Mul/Div ==================================================================
+private mul_div_instructions ::= muls_instruction |
+                                 mulu_instruction |
+                                 divs_instruction |
+                                 divu_instruction
+
+private mul_div_tail ::= data_size_word?
+                         (data_register | effective_address | immediate_data) COMMA data_register
+
+muls_instruction ::= MULS mul_div_tail
+mulu_instruction ::= MULU mul_div_tail
+divs_instruction ::= DIVS mul_div_tail
+divu_instruction ::= DIVU mul_div_tail
+
+
+// Boolean ==================================================================
+private bool_instructions ::= and_instruction |
+                              andi_instruction |
+                              or_instruction |
+                              ori_instruction |
+                              eor_instruction |
+                              eori_instruction |
+                              not_instruction
+                              
+private bool_tail ::= data_size_all? any_register COMMA any_register
+private bool_i_tail ::= data_size_all? (any_register | immediate_data) COMMA any_register
+
+and_instruction ::= AND bool_tail
+andi_instruction ::= ANDI bool_i_tail
+
+or_instruction ::= OR bool_tail
+ori_instruction ::= ORI bool_i_tail
+
+eor_instruction ::= EOR bool_tail
+eori_instruction ::= EORI bool_i_tail
+
+not_instruction ::= NOT data_size_all? (data_register | effective_address)
+
+
+// Misc ==================================================================
+private misc_instructions ::= tst_instruction |
+                              tas_instruction |
+                              lea_instruction |
+                              pea_instruction |
+                              clr_instruction |
+
+                              nop_instruction |
+                              illegal_instruction |
+                              reset_instruction |
+                              trap_instruction |
+                              trapv_instruction |
+
+                              link_instruction |
+                              unlk_instruction |
+
+                              ext_instruction |
+                              neg_instruction |
+                              negx_instruction |
+
+                              swap_instruction |
+                              chk_instruction |
+                              exg_instruction
+
+nop_instruction ::= NOP
+illegal_instruction ::= ILLEGAL
+reset_instruction ::= RESET
+trap_instruction ::= TRAP immediate_data
+trapv_instruction ::= TRAPV
+
+link_instruction ::= LINK address_register COMMA immediate_data
+unlk_instruction ::= UNLK address_register
+
+lea_instruction ::= LEA data_size_long? effective_address COMMA (address_register | label_reference)
+pea_instruction ::= PEA data_size_long? any_register
+
+clr_instruction ::= CLR data_size_all? (effective_address | any_register | label_reference)
+
+tst_instruction ::= TST data_size_all? (effective_address | any_register)
+tas_instruction ::= TAS data_size_byte? any_register
+
+ext_instruction ::= EXT data_size_word_long? data_register
+
+exg_instruction ::= EXG data_size_long? any_register COMMA any_register
+
+neg_instruction ::= NEG data_size_all? (data_register | effective_address)
+negx_instruction ::= NEGX data_size_all? (data_register | effective_address)
+
+swap_instruction ::= SWAP data_size_word? data_register
+
+chk_instruction ::= CHK data_size_word? any_register COMMA data_register
+
+
+// Compare ==================================================================
+private cmp_instructions ::= cmp_instruction |
+                             cmpa_instruction |
+                             cmpi_instruction |
+                             cmpm_instruction
+
+cmp_instruction ::= CMP data_size_all?
+                    (data_register | effective_address | address_register_indirect) COMMA data_register
+cmpa_instruction ::= CMPA data_size_word_long?
+                     any_register COMMA address_register
+cmpi_instruction ::= CMPI data_size_all?
+                     immediate_data COMMA any_register
+cmpm_instruction ::= CMPM data_size_all?
+                     address_register_post_increment COMMA address_register_post_increment
+
+
+// Branch ==================================================================
+private bCC_instructions ::= bra_instruction |
+                             bcs_instruction |
+                             blo_instruction |
+                             bls_instruction |
+                             beq_instruction |
+                             bne_instruction |
+                             bhi_instruction |
+                             bcc_instruction |
+                             bpl_instruction |
+                             bvc_instruction |
+                             blt_instruction |
+                             ble_instruction |
+                             bgt_instruction |
+                             bge_instruction |
+                             bmi_instruction |
+                             bvs_instruction
+
+private bCC_tail ::= (data_size_all | data_size_short)? label_reference
+
+bra_instruction ::= BRA bCC_tail
+bcs_instruction ::= BCS bCC_tail
+blo_instruction ::= BLO bCC_tail // == bcs
+bls_instruction ::= BLS bCC_tail
+beq_instruction ::= BEQ bCC_tail
+bne_instruction ::= BNE bCC_tail
+bhi_instruction ::= BHI bCC_tail
+bcc_instruction ::= BCC bCC_tail
+bpl_instruction ::= BPL bCC_tail
+bvc_instruction ::= BVC bCC_tail
+
+blt_instruction ::= BLT bCC_tail
+ble_instruction ::= BLE bCC_tail
+bgt_instruction ::= BGT bCC_tail
+bge_instruction ::= BGE bCC_tail
+bmi_instruction ::= BMI bCC_tail
+bvs_instruction ::= BVS bCC_tail
+
+
+// DecrementAndBranch ==============================================
+private dbCC_instructions ::= dbra_instruction |
+                              dbcs_instruction |
+                              dbls_instruction |
+                              dbeq_instruction |
+                              dbne_instruction |
+                              dbhi_instruction |
+                              dbcc_instruction |
+                              dbpl_instruction |
+                              dbvc_instruction |
+                              dblt_instruction |
+                              dble_instruction |
+                              dbgt_instruction |
+                              dbge_instruction |
+                              dbmi_instruction |
+                              dbvs_instruction |
+                              dbf_instruction |
+                              dbt_instruction
+
+private dbCC_tail ::= (data_size_all | data_size_short)? data_register COMMA label_reference
+
+dbra_instruction ::= DBRA dbCC_tail
+dbcs_instruction ::= DBCS dbCC_tail
+dbls_instruction ::= DBLS dbCC_tail
+dbeq_instruction ::= DBEQ dbCC_tail
+dbne_instruction ::= DBNE dbCC_tail
+dbhi_instruction ::= DBHI dbCC_tail
+dbcc_instruction ::= DBCC dbCC_tail
+dbpl_instruction ::= DBPL dbCC_tail
+dbvc_instruction ::= DBVC dbCC_tail
+
+dblt_instruction ::= DBLT dbCC_tail
+dble_instruction ::= DBLE dbCC_tail
+dbgt_instruction ::= DBGT dbCC_tail
+dbge_instruction ::= DBGE dbCC_tail
+dbmi_instruction ::= DBMI dbCC_tail
+dbvs_instruction ::= DBVS dbCC_tail
+dbf_instruction ::= DBF dbCC_tail
+dbt_instruction ::= DBT dbCC_tail
+
+// sCC instructions ========================================================
+private sCC_instructions ::= seq_instruction |
+                             sne_instruction |
+                             spl_instruction |
+                             smi_instruction |
+                             svc_instruction |
+                             svs_instruction |
+                             st_instruction  |
+                             sf_instruction  |
+                             sge_instruction |
+                             sgt_instruction |
+                             sle_instruction |
+                             slt_instruction |
+                             scc_instruction |
+                             shi_instruction |
+                             sls_instruction |
+                             scs_instruction
+
+private sCC_tail ::= data_size_byte? (any_register | effective_address)
+
+seq_instruction ::= SEQ sCC_tail
+sne_instruction ::= SNE sCC_tail
+spl_instruction ::= SPL sCC_tail
+smi_instruction ::= SMI sCC_tail
+svc_instruction ::= SVC sCC_tail
+svs_instruction ::= SVS sCC_tail
+st_instruction  ::= ST  sCC_tail
+sf_instruction  ::= SF  sCC_tail
+sge_instruction ::= SGE sCC_tail
+sgt_instruction ::= SGT sCC_tail
+sle_instruction ::= SLE sCC_tail
+slt_instruction ::= SLT sCC_tail
+scc_instruction ::= SCC sCC_tail
+shi_instruction ::= SHI sCC_tail
+sls_instruction ::= SLS sCC_tail
+scs_instruction ::= SCS sCC_tail
+
+// Bit =====================================================================
+private bit_instructions ::= bchg_instruction |
+                             bclr_instruction |
+                             bset_instruction |
+                             btst_instruction
+
+private bit_tail ::= (data_size_byte | data_size_long)?
+                     (immediate_data | data_register) COMMA (data_register | effective_address)
+
+bchg_instruction ::= BCHG bit_tail
+bclr_instruction ::= BCLR bit_tail
+bset_instruction ::= BSET bit_tail
+btst_instruction ::= BTST bit_tail
+
+
+// Shift ===================================================================
+private shift_instructions ::= asl_instruction |
+                               asr_instruction |
+                               lsl_instruction |
+                               lsr_instruction |
+                               rol_instruction |
+                               ror_instruction |
+                               roxl_instruction |
+                               roxr_instruction
+
+private shift_tail ::= data_size_all?
+                       (immediate_data | data_register) COMMA (data_register | effective_address)
+
+asl_instruction ::= ASL shift_tail
+asr_instruction ::= ASR shift_tail
+
+lsl_instruction ::= LSL shift_tail
+lsr_instruction ::= LSR shift_tail
+
+rol_instruction ::= ROL shift_tail
+ror_instruction ::= ROR shift_tail
+
+roxl_instruction ::= ROXL shift_tail
+roxr_instruction ::= ROXR shift_tail
+
+
+// Directives  ===================================================================
+private directives ::= equ_directive |
+                       blk_directive |
+                       equals_directive |
+                       equr_directive |
+                       even_directive |
+                       odd_directive |
+                       incbin_directive |
+                       incdir_directive |
+                       include_directive  |
+                       dc_directive |
+                       dcb_directive |
+                       ds_directive |
+                       rsset_directive |
+                       rsreset_directive |
+                       rs_directive |
+                       opt_directive
+
+fake equ_directive_base ::= label expression? {
+//  implements = "com.intellij.psi.PsiNameIdentifierOwner"
+//  methods = [  getNameIdentifier]
+}
+equ_directive ::= label EQU expression {
+  pin = 2
+  extends = equ_directive_base
+}
+
+equals_directive ::= label EQ expression {
+  pin = 2
+  extends = equ_directive_base
+}
+
+equr_directive ::= label EQUR (data_register | address_register) {
+  pin = 2
+  extends = equ_directive_base   // todo doesn't make sense (expression != register)
+}
+
+even_directive ::= EVEN
+odd_directive ::= ODD
+
+private include_path ::= STRING {
+  name = "include path"
+}
+incbin_directive ::= INCBIN include_path {
+  pin =1
+}
+incdir_directive ::= INCDIR include_path {
+  pin = 1
+}
+include_directive ::= INCLUDE include_path {
+  pin = 1
+}
+
+private dc_element ::= expression
+dc_directive ::= DC data_size_all? dc_element (COMMA dc_element)* {
+  pin = 1
+}
+
+dcb_directive ::= DCB data_size_all? expression (COMMA expression)? {
+  pin = 1
+  methods = [
+    expr = ""
+    number = "expr[0]"
+    value = "expr[1]"
+  ]
+}
+
+ds_directive ::= DS data_size_all? expression {
+  pin = 1
+}
+
+rsset_directive ::= RSSET expression {
+  pin = 1
+}
+rsreset_directive ::= RSRESET {
+  pin = 1
+}
+
+rs_directive ::= label RS data_size_all? expression {
+  pin = 2
+}
+
+blk_directive ::= BLK data_size_all? expression COMMA expression {
+  pin = 1
+}
+
+private opt_element ::= ID (PLUS | MINUS) {
+  pin = 1
+  name = "option(+|-)"
+}
+opt_directive ::= OPT opt_element (COMMA opt_element)* {
+  pin = 1
+}
+
+
+// Expressions  ============================================================
+;{
+  extends("(plus|minus|mul|div|mod|exp|shift.*|or|and)_expression") = binary_expression
+  extends(".*expression") = expression
+  consumeTokenMethod(".*expression")="consumeTokenFast"
+}
+
+expression ::= add_group |
+               mul_group |
+               unary_group |
+               exp_expression |
+               shift_group |
+               bool_group |
+               primary_group
+
+fake binary_expression ::= expression+ {
+  methods = [
+    expression = ""
+    left = "/expression[0]"
+    right = "/expression[1]"
+  ]
+  pin = 2
+}
+
+private add_group ::= plus_expression | minus_expression
+plus_expression ::= expression PLUS expression
+minus_expression ::= expression MINUS expression
+
+private mul_group ::= mul_expression | div_expression | mod_expression
+mul_expression ::= expression MUL expression
+div_expression ::= expression DIV expression
+mod_expression ::= expression PERCENT expression
+
+private unary_group ::= unary_plus_expression | unary_minus_expression | unary_complement_expression
+unary_plus_expression ::= PLUS expression
+unary_minus_expression ::= MINUS expression
+unary_complement_expression ::= TILDE expression
+
+exp_expression ::= expression POW expression  // todo is this XOR?
+
+private shift_group ::= shift_left_expression | shift_right_expression
+shift_left_expression ::= expression SHIFT_L expression
+shift_right_expression ::= expression SHIFT_R expression
+
+private bool_group ::= or_expression | and_expression
+or_expression ::= expression PIPE expression
+and_expression ::= expression AMPERS_AND expression
+
+private primary_group ::= number_expression | string_expression | paren_expression | label_ref_expression
+number_expression ::= DEC_NUMBER | HEX_NUMBER | OCT_NUMBER | BIN_NUMBER
+string_expression ::= STRING
+paren_expression ::=L_PAREN expression R_PAREN {
+  pin = 1
+}
+label_ref_expression ::= label_reference
+

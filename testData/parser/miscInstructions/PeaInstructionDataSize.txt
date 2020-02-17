@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kPeaInstructionImpl(PEA_INSTRUCTION)
+    PsiElement(pea)('pea')
+    PsiElement(.l)('.l')
+    PsiWhiteSpace(' ')
+    PsiElement(address_register)('a0')

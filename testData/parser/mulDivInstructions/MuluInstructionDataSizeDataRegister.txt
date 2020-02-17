@@ -1,0 +1,9 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kMuluInstructionImpl(MULU_INSTRUCTION)
+    PsiElement(mulu)('mulu')
+    PsiElement(.w)('.w')
+    PsiWhiteSpace(' ')
+    PsiElement(data_register)('d0')
+    PsiElement(,)(',')
+    PsiElement(data_register)('d1')

@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kRssetDirectiveImpl(RSSET_DIRECTIVE)
+    PsiElement(rsset)('rsset')
+    PsiWhiteSpace(' ')
+    M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+      PsiElement(dec_number)('0')

@@ -1,0 +1,9 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kAbcdInstructionImpl(ABCD_INSTRUCTION)
+    PsiElement(abcd)('abcd')
+  PsiWhiteSpace(' ')
+  PsiElement(data_register)('d0')
+  PsiElement(,)(',')
+  PsiErrorElement:<data register> expected
+    <empty list>

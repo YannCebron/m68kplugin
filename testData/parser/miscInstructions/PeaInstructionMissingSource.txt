@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kPeaInstructionImpl(PEA_INSTRUCTION)
+    PsiElement(pea)('pea')
+    PsiErrorElement:'(', '-', '.l', <address register>, <data register>, ccr, id, pc, sr, ssp or usp expected
+      <empty list>
+  PsiWhiteSpace(' ')

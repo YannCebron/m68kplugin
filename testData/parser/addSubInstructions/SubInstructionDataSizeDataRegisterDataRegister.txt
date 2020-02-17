@@ -1,0 +1,9 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kSubInstructionImpl(SUB_INSTRUCTION)
+    PsiElement(sub)('sub')
+    PsiElement(.b)('.b')
+    PsiWhiteSpace(' ')
+    PsiElement(data_register)('d0')
+    PsiElement(,)(',')
+    PsiElement(data_register)('d1')

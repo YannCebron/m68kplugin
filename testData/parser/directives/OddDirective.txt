@@ -1,0 +1,4 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kOddDirectiveImpl(ODD_DIRECTIVE)
+    PsiElement(odd)('odd')

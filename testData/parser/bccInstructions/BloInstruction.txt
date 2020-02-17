@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kBloInstructionImpl(BLO_INSTRUCTION)
+    PsiElement(blo)('blo')
+    PsiWhiteSpace(' ')
+    M68kLabelReferenceImpl(LABEL_REFERENCE)
+      PsiElement(id)('label')

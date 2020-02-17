@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kIncludeDirectiveImpl(INCLUDE_DIRECTIVE)
+    PsiElement(include)('include')
+    PsiErrorElement:<include path> expected
+      <empty list>
+  PsiWhiteSpace(' ')

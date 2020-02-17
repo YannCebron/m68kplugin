@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kLeaInstructionImpl(LEA_INSTRUCTION)
+    PsiElement(lea)('lea')
+    PsiErrorElement:'.l' or <effective address> expected
+      <empty list>
+  PsiWhiteSpace(' ')

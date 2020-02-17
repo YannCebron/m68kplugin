@@ -1,0 +1,10 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kAndiInstructionImpl(ANDI_INSTRUCTION)
+    PsiElement(andi)('andi')
+    PsiWhiteSpace(' ')
+    PsiElement(#)('#')
+    M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+      PsiElement(dec_number)('0')
+    PsiElement(,)(',')
+    PsiElement(data_register)('d1')

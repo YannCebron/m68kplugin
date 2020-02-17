@@ -1,0 +1,6 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kSwapInstructionImpl(SWAP_INSTRUCTION)
+    PsiElement(swap)('swap')
+    PsiWhiteSpace(' ')
+    PsiElement(data_register)('d0')

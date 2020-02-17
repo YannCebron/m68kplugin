@@ -1,0 +1,10 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kOptDirectiveImpl(OPT_DIRECTIVE)
+    PsiElement(opt)('opt')
+    PsiWhiteSpace(' ')
+    PsiElement(id)('w')
+    PsiElement(+)('+')
+    PsiElement(,)(',')
+    PsiElement(id)('u')
+    PsiElement(+)('+')

@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kBccInstructionImpl(BCC_INSTRUCTION)
+    PsiElement(bcc)('bcc')
+    PsiWhiteSpace(' ')
+    M68kLabelReferenceImpl(LABEL_REFERENCE)
+      PsiElement(id)('label')

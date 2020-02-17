@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kDivuInstructionImpl(DIVU_INSTRUCTION)
+    PsiElement(divu)('divu')
+    PsiErrorElement:'#', '.w', <data register> or <effective address> expected
+      <empty list>
+  PsiWhiteSpace(' ')

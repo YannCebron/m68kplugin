@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kBchgInstructionImpl(BCHG_INSTRUCTION)
+    PsiElement(bchg)('bchg')
+    PsiErrorElement:'#', '.b', '.l' or <data register> expected
+      <empty list>
+  PsiWhiteSpace(' ')

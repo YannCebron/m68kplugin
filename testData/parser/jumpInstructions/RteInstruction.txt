@@ -1,0 +1,4 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kRteInstructionImpl(RTE_INSTRUCTION)
+    PsiElement(rte)('rte')

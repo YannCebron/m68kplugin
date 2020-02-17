@@ -1,0 +1,6 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kNotInstructionImpl(NOT_INSTRUCTION)
+    PsiElement(not)('not')
+    PsiWhiteSpace(' ')
+    PsiElement(data_register)('d0')

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalDependencies">
+    <plugin id="DevKit" />
+    <plugin id="com.intellij.copyright" />
+    <plugin id="com.intellij.gradle" />
+    <plugin id="org.jetbrains.idea.grammar" min-version="2019.3" />
+  </component>
+</project>

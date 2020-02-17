@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kMuluInstructionImpl(MULU_INSTRUCTION)
+    PsiElement(mulu)('mulu')
+    PsiErrorElement:'#', '.w', <data register> or <effective address> expected
+      <empty list>
+  PsiWhiteSpace(' ')

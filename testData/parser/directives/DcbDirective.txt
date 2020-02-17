@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kDcbDirectiveImpl(DCB_DIRECTIVE)
+    PsiElement(dcb)('dcb')
+    PsiWhiteSpace(' ')
+    M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+      PsiElement(dec_number)('42')

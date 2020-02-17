@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kCmpiInstructionImpl(CMPI_INSTRUCTION)
+    PsiElement(cmpi)('cmpi')
+    PsiErrorElement:'#', '.b', '.l' or '.w' expected
+      <empty list>
+  PsiWhiteSpace(' ')

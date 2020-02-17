@@ -1,0 +1,9 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kBsetInstructionImpl(BSET_INSTRUCTION)
+    PsiElement(bset)('bset')
+    PsiElement(.b)('.b')
+    PsiWhiteSpace(' ')
+    PsiElement(data_register)('d1')
+    PsiElement(,)(',')
+    PsiElement(data_register)('d2')

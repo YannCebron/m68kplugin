@@ -1,0 +1,9 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kDivsInstructionImpl(DIVS_INSTRUCTION)
+    PsiElement(divs)('divs')
+  PsiWhiteSpace(' ')
+  PsiElement(data_register)('d0')
+  PsiElement(,)(',')
+  PsiErrorElement:<data register> expected
+    <empty list>

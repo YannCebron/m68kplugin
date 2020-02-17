@@ -1,0 +1,4 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kIllegalInstructionImpl(ILLEGAL_INSTRUCTION)
+    PsiElement(illegal)('illegal')

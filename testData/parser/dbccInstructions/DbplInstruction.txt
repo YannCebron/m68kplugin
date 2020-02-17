@@ -1,0 +1,9 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kDbplInstructionImpl(DBPL_INSTRUCTION)
+    PsiElement(dbpl)('dbpl')
+    PsiWhiteSpace(' ')
+    PsiElement(data_register)('d0')
+    PsiElement(,)(',')
+    M68kLabelReferenceImpl(LABEL_REFERENCE)
+      PsiElement(id)('label')

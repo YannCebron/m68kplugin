@@ -1,0 +1,9 @@
+FILE
+  M68kRsDirectiveImpl(RS_DIRECTIVE)
+    M68kLabelImpl(LABEL)
+      PsiElement(id)('label')
+    PsiWhiteSpace(' ')
+    PsiElement(rs)('rs')
+    PsiErrorElement:'.b', '.l', '.w' or <expression> expected
+      <empty list>
+  PsiWhiteSpace(' ')

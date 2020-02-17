@@ -1,0 +1,8 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kTasInstructionImpl(TAS_INSTRUCTION)
+    PsiElement(tas)('tas')
+    PsiWhiteSpace(' ')
+    PsiElement(()('(')
+    PsiElement(address_register)('a0')
+    PsiElement())(')')

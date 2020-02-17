@@ -1,0 +1,92 @@
+<!--
+  ~ Copyright 2020 The Authors
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<idea-plugin>
+  <id>com.yanncebron.m68kplugin</id>
+  <name>Motorola 68000 Assembler</name>
+  <vendor email="yann.cebron@gmail.com" url="https://yanncebron.github.io/">Yann Cébron</vendor>
+
+  <description><![CDATA[
+    Supports Motorola 68000 assembly language.
+
+    <br/>
+    <br/>
+    <em>All product names, trademarks and registered trademarks are property of their respective owners.</em>
+    ]]></description>
+
+  <depends>com.intellij.modules.platform</depends>
+
+  <resource-bundle>messages.M68kBundle</resource-bundle>
+
+  <extensions defaultExtensionNs="com.intellij">
+
+    <fileType name="M68k Assembler"
+              implementationClass="com.yanncebron.m68kplugin.lang.M68kFileType"
+              fieldName="INSTANCE"
+              language="M68k"
+              extensions="s;asm;i"/>
+    <lang.parserDefinition
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.lang.M68kParserDefinition"/>
+    <!--  todo both do nothing?  -->
+    <!--    <lang.quoteHandler-->
+    <!--        language="M68k"-->
+    <quoteHandler fileType="M68k Assembler"
+                  className="com.yanncebron.m68kplugin.lang.M68kQuoteHandler"/>
+    <lang.braceMatcher
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.lang.M68kBraceMatcher"/>
+    <lang.commenter
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.lang.M68kCommenter"/>
+
+
+    <lang.syntaxHighlighterFactory
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.lang.highlighting.M68kSyntaxHighlighterFactory"/>
+    <colorSettingsPage
+        implementation="com.yanncebron.m68kplugin.lang.highlighting.M68kColorSettingsPage"/>
+    <annotator
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.lang.highlighting.M68kSyntaxAnnotator"/>
+
+    <lang.findUsagesProvider
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.lang.findUsages.M68kFindUsagesProvider"/>
+    <elementDescriptionProvider
+        implementation="com.yanncebron.m68kplugin.lang.M68kElementDescriptionProvider"/>
+    <usageTypeProvider
+        implementation="com.yanncebron.m68kplugin.lang.findUsages.M68kUsageTypeProvider"/>
+
+    <lang.refactoringSupport
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.lang.refactoring.M68kRefactoringSupportProvider"/>
+    <lang.elementManipulator
+        forClass="com.yanncebron.m68kplugin.lang.psi.M68kLabelReference"
+        implementationClass="com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelReferenceElementManipulator"/>
+
+
+    <lang.psiStructureViewFactory
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.structureview.M68kStructureViewFactory"/>
+
+    <moveLeftRightHandler
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.editor.M68kMoveLeftRightHandler"/>
+
+  </extensions>
+
+</idea-plugin>

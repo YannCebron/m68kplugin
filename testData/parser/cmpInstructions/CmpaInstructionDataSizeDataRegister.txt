@@ -1,0 +1,9 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kCmpaInstructionImpl(CMPA_INSTRUCTION)
+    PsiElement(cmpa)('cmpa')
+    PsiElement(.l)('.l')
+    PsiWhiteSpace(' ')
+    PsiElement(data_register)('d0')
+    PsiElement(,)(',')
+    PsiElement(address_register)('a0')

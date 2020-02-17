@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kDivsInstructionImpl(DIVS_INSTRUCTION)
+    PsiElement(divs)('divs')
+    PsiErrorElement:'#', '.w', <data register> or <effective address> expected
+      <empty list>
+  PsiWhiteSpace(' ')

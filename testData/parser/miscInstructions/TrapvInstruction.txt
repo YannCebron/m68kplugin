@@ -1,0 +1,4 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kTrapvInstructionImpl(TRAPV_INSTRUCTION)
+    PsiElement(trapv)('trapv')

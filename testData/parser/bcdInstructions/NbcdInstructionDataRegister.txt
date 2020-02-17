@@ -1,0 +1,6 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kNbcdInstructionImpl(NBCD_INSTRUCTION)
+    PsiElement(nbcd)('nbcd')
+    PsiWhiteSpace(' ')
+    PsiElement(data_register)('d0')

@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kDbraInstructionImpl(DBRA_INSTRUCTION)
+    PsiElement(dbra)('dbra')
+    PsiErrorElement:'.b', '.l', '.s', '.w' or <data register> expected
+      <empty list>
+  PsiWhiteSpace(' ')

@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kJmpInstructionImpl(JMP_INSTRUCTION)
+    PsiElement(jmp)('jmp')
+    PsiErrorElement:<effective address> expected
+      <empty list>
+  PsiWhiteSpace(' ')

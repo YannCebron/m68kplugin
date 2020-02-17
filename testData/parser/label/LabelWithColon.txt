@@ -1,0 +1,4 @@
+FILE
+  M68kLabelImpl(LABEL)
+    PsiElement(id)('label')
+    PsiElement(:)(':')

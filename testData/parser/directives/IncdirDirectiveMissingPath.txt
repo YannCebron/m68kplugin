@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kIncdirDirectiveImpl(INCDIR_DIRECTIVE)
+    PsiElement(incdir)('incdir')
+    PsiErrorElement:<include path> expected
+      <empty list>
+  PsiWhiteSpace(' ')

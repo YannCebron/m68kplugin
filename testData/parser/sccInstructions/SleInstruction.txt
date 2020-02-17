@@ -1,0 +1,8 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kSleInstructionImpl(SLE_INSTRUCTION)
+    PsiElement(sle)('sle')
+    PsiWhiteSpace(' ')
+    M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
+      M68kLabelReferenceImpl(LABEL_REFERENCE)
+        PsiElement(id)('label')

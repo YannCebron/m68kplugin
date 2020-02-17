@@ -1,0 +1,8 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kMoveaInstructionImpl(MOVEA_INSTRUCTION)
+    PsiElement(movea)('movea')
+    PsiWhiteSpace(' ')
+    PsiElement(address_register)('a0')
+    PsiElement(,)(',')
+    PsiElement(address_register)('a1')

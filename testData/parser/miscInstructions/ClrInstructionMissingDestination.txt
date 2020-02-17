@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kClrInstructionImpl(CLR_INSTRUCTION)
+    PsiElement(clr)('clr')
+    PsiErrorElement:'(', '-', '.b', '.l', '.w', <address register>, <data register>, <effective address>, <label>, ccr, id, pc, sr, ssp or usp expected
+      <empty list>
+  PsiWhiteSpace(' ')

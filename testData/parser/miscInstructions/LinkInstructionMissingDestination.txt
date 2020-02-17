@@ -1,0 +1,9 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kLinkInstructionImpl(LINK_INSTRUCTION)
+    PsiElement(link)('link')
+    PsiWhiteSpace(' ')
+    PsiElement(address_register)('a0')
+    PsiElement(,)(',')
+    PsiErrorElement:'#' expected
+      <empty list>

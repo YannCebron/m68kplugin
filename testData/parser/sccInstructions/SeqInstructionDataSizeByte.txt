@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kSeqInstructionImpl(SEQ_INSTRUCTION)
+    PsiElement(seq)('seq')
+    PsiElement(.b)('.b')
+    PsiWhiteSpace(' ')
+    PsiElement(data_register)('d0')

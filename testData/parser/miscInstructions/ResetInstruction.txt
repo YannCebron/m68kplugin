@@ -1,0 +1,4 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kResetInstructionImpl(RESET_INSTRUCTION)
+    PsiElement(reset)('reset')

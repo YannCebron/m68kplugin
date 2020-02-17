@@ -1,0 +1,9 @@
+FILE
+  M68kEqurDirectiveImpl(EQUR_DIRECTIVE)
+    M68kLabelImpl(LABEL)
+      PsiElement(id)('label')
+    PsiWhiteSpace(' ')
+    PsiElement(equr)('equr')
+    PsiErrorElement:<address register> or <data register> expected
+      <empty list>
+  PsiWhiteSpace(' ')

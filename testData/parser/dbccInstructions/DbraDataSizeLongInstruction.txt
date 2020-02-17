@@ -1,0 +1,10 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kDbraInstructionImpl(DBRA_INSTRUCTION)
+    PsiElement(dbra)('dbra')
+    PsiElement(.l)('.l')
+    PsiWhiteSpace(' ')
+    PsiElement(data_register)('d0')
+    PsiElement(,)(',')
+    M68kLabelReferenceImpl(LABEL_REFERENCE)
+      PsiElement(id)('label')

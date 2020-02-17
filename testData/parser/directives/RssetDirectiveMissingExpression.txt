@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kRssetDirectiveImpl(RSSET_DIRECTIVE)
+    PsiElement(rsset)('rsset')
+    PsiErrorElement:<expression> expected
+      <empty list>
+  PsiWhiteSpace(' ')

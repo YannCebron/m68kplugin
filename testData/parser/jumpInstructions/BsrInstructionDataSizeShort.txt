@@ -1,0 +1,10 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kBsrInstructionImpl(BSR_INSTRUCTION)
+    PsiElement(bsr)('bsr')
+    PsiElement(.s)('.s')
+    PsiWhiteSpace(' ')
+    PsiElement(id)('offset')
+    PsiElement(()('(')
+    PsiElement(address_register)('a0')
+    PsiElement())(')')

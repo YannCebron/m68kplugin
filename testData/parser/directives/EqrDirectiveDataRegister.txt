@@ -1,0 +1,8 @@
+FILE
+  M68kEqurDirectiveImpl(EQUR_DIRECTIVE)
+    M68kLabelImpl(LABEL)
+      PsiElement(id)('label')
+    PsiWhiteSpace(' ')
+    PsiElement(equr)('equr')
+    PsiWhiteSpace(' ')
+    PsiElement(data_register)('d6')

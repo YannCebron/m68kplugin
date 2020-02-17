@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kSubInstructionImpl(SUB_INSTRUCTION)
+    PsiElement(sub)('sub')
+    PsiErrorElement:'#', '.b', '.l', '.w', <address register>, <data register> or <effective address> expected
+      <empty list>
+  PsiWhiteSpace(' ')

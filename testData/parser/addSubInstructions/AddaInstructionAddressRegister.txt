@@ -1,0 +1,8 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kAddaInstructionImpl(ADDA_INSTRUCTION)
+    PsiElement(adda)('adda')
+    PsiWhiteSpace(' ')
+    PsiElement(address_register)('a1')
+    PsiElement(,)(',')
+    PsiElement(address_register)('a0')

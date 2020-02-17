@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kAddInstructionImpl(ADD_INSTRUCTION)
+    PsiElement(add)('add')
+    PsiErrorElement:'#', '.b', '.l', '.w', <address register>, <data register> or <effective address> expected
+      <empty list>
+  PsiWhiteSpace(' ')

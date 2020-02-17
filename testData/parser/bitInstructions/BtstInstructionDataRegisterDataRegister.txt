@@ -1,0 +1,8 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kBtstInstructionImpl(BTST_INSTRUCTION)
+    PsiElement(btst)('btst')
+    PsiWhiteSpace(' ')
+    PsiElement(data_register)('d1')
+    PsiElement(,)(',')
+    PsiElement(data_register)('d2')

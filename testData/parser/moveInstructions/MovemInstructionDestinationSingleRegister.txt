@@ -1,0 +1,10 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kMovemInstructionImpl(MOVEM_INSTRUCTION)
+    PsiElement(movem)('movem')
+    PsiWhiteSpace(' ')
+    PsiElement(()('(')
+    PsiElement(address_register)('a7')
+    PsiElement())(')')
+    PsiElement(,)(',')
+    PsiElement(data_register)('d1')

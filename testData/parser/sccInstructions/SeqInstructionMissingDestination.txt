@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kSeqInstructionImpl(SEQ_INSTRUCTION)
+    PsiElement(seq)('seq')
+    PsiErrorElement:'(', '-', '.b', <address register>, <data register>, <effective address>, ccr, id, pc, sr, ssp or usp expected
+      <empty list>
+  PsiWhiteSpace(' ')

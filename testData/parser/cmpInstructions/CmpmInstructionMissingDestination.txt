@@ -1,0 +1,12 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kCmpmInstructionImpl(CMPM_INSTRUCTION)
+    PsiElement(cmpm)('cmpm')
+    PsiWhiteSpace(' ')
+    PsiElement(()('(')
+    PsiElement(address_register)('a0')
+    PsiElement())(')')
+    PsiElement(+)('+')
+    PsiElement(,)(',')
+    PsiErrorElement:'(' expected
+      <empty list>

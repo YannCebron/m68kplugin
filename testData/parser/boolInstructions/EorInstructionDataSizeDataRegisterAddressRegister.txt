@@ -1,0 +1,9 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kEorInstructionImpl(EOR_INSTRUCTION)
+    PsiElement(eor)('eor')
+    PsiElement(.l)('.l')
+    PsiWhiteSpace(' ')
+    PsiElement(data_register)('d0')
+    PsiElement(,)(',')
+    PsiElement(address_register)('a1')

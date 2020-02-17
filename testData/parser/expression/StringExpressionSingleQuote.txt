@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kDcDirectiveImpl(DC_DIRECTIVE)
+    PsiElement(dc)('dc')
+    PsiWhiteSpace(' ')
+    M68kStringExpressionImpl(STRING_EXPRESSION)
+      PsiElement(string)(''string'')

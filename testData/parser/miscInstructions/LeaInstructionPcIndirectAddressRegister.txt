@@ -1,0 +1,11 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kLeaInstructionImpl(LEA_INSTRUCTION)
+    PsiElement(lea)('lea')
+    PsiWhiteSpace(' ')
+    PsiElement(id)('id')
+    PsiElement(()('(')
+    PsiElement(pc)('pc')
+    PsiElement())(')')
+    PsiElement(,)(',')
+    PsiElement(address_register)('a0')

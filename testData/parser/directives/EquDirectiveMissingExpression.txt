@@ -1,0 +1,9 @@
+FILE
+  M68kEquDirectiveImpl(EQU_DIRECTIVE)
+    M68kLabelImpl(LABEL)
+      PsiElement(id)('label')
+    PsiWhiteSpace(' ')
+    PsiElement(equ)('equ')
+    PsiErrorElement:<expression> expected
+      <empty list>
+  PsiWhiteSpace(' ')

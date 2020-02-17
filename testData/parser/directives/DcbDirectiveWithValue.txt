@@ -1,0 +1,11 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kDcbDirectiveImpl(DCB_DIRECTIVE)
+    PsiElement(dcb)('dcb')
+    PsiElement(.l)('.l')
+    PsiWhiteSpace(' ')
+    M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+      PsiElement(dec_number)('42')
+    PsiElement(,)(',')
+    M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+      PsiElement(dec_number)('666')

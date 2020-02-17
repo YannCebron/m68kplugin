@@ -1,0 +1,9 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kBchgInstructionImpl(BCHG_INSTRUCTION)
+    PsiElement(bchg)('bchg')
+  PsiWhiteSpace(' ')
+  PsiElement(data_register)('d0')
+  PsiElement(,)(',')
+  PsiErrorElement:<data register> or <effective address> expected
+    <empty list>

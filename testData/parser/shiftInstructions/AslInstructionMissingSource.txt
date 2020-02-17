@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kAslInstructionImpl(ASL_INSTRUCTION)
+    PsiElement(asl)('asl')
+    PsiErrorElement:'#', '.b', '.l', '.w' or <data register> expected
+      <empty list>
+  PsiWhiteSpace(' ')

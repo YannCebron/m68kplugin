@@ -1,0 +1,9 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kBclrInstructionImpl(BCLR_INSTRUCTION)
+    PsiElement(bclr)('bclr')
+    PsiElement(.l)('.l')
+    PsiWhiteSpace(' ')
+    PsiElement(data_register)('d1')
+    PsiElement(,)(',')
+    PsiElement(data_register)('d2')

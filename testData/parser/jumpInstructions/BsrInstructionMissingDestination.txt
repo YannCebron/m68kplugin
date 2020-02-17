@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kBsrInstructionImpl(BSR_INSTRUCTION)
+    PsiElement(bsr)('bsr')
+    PsiErrorElement:'.s', '.w' or <effective address> expected
+      <empty list>
+  PsiWhiteSpace(' ')

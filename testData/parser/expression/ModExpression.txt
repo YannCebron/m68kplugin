@@ -1,0 +1,11 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kDcDirectiveImpl(DC_DIRECTIVE)
+    PsiElement(dc)('dc')
+    PsiWhiteSpace(' ')
+    M68kModExpressionImpl(MOD_EXPRESSION)
+      M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+        PsiElement(dec_number)('10')
+      PsiElement(%)('%')
+      M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+        PsiElement(dec_number)('3')

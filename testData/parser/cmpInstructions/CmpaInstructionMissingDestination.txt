@@ -1,0 +1,9 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kCmpaInstructionImpl(CMPA_INSTRUCTION)
+    PsiElement(cmpa)('cmpa')
+    PsiWhiteSpace(' ')
+    PsiElement(data_register)('d0')
+    PsiElement(,)(',')
+    PsiErrorElement:<address register> expected
+      <empty list>
