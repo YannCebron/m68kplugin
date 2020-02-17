@@ -35,7 +35,7 @@ public class ExpressionParsingTest extends M68kParsingTestCase {
   }
 
   public void testMulExpression() throws Exception {
-    doCodeTest(" dc 1*2");  // todo comment
+    doCodeTest(" dc 1*2");
   }
 
   public void testDivExpression() throws Exception {
