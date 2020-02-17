@@ -16,6 +16,9 @@
 
 package com.yanncebron.m68kplugin.parser;
 
+import com.intellij.testFramework.TestDataPath;
+
+@TestDataPath("$PROJECT_ROOT/testData/parser/directives")
 public class DirectivesParsingTest extends M68kParsingTestCase {
 
   public DirectivesParsingTest() {

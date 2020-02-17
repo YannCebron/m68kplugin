@@ -16,8 +16,11 @@
 
 package com.yanncebron.m68kplugin.parser;
 
+import com.intellij.testFramework.TestDataPath;
+
 import java.io.IOException;
 
+@TestDataPath("$PROJECT_ROOT/testData/parser/label")
 public class LabelParsingTest extends M68kParsingTestCase {
 
   public LabelParsingTest() {

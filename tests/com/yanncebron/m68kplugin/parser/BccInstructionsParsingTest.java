@@ -16,8 +16,11 @@
 
 package com.yanncebron.m68kplugin.parser;
 
+import com.intellij.testFramework.TestDataPath;
+
 import java.io.IOException;
 
+@TestDataPath("$PROJECT_ROOT/testData/parser/bccInstructions")
 public class BccInstructionsParsingTest extends M68kParsingTestCase {
 
   public BccInstructionsParsingTest() {

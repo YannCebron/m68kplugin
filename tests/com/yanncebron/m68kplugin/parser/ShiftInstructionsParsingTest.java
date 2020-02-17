@@ -16,7 +16,10 @@
 
 package com.yanncebron.m68kplugin.parser;
 
+import com.intellij.testFramework.TestDataPath;
+
 // todo dst=effective_address
+@TestDataPath("$PROJECT_ROOT/testData/parser/shiftInstructions")
 public class ShiftInstructionsParsingTest extends M68kParsingTestCase {
 
   public ShiftInstructionsParsingTest() {

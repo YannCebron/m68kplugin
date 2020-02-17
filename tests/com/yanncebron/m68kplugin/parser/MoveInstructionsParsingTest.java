@@ -16,6 +16,9 @@
 
 package com.yanncebron.m68kplugin.parser;
 
+import com.intellij.testFramework.TestDataPath;
+
+@TestDataPath("$PROJECT_ROOT/testData/parser/moveInstructions")
 public class MoveInstructionsParsingTest extends M68kParsingTestCase {
 
   public MoveInstructionsParsingTest() {
