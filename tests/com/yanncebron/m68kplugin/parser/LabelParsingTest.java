@@ -39,12 +39,20 @@ public class LabelParsingTest extends M68kParsingTestCase {
     doCodeTest("label nop");
   }
 
+  public void testLabelWithColonInstruction() throws IOException {
+    doCodeTest("label: nop");
+  }
+
   public void testLocalLabel() throws IOException {
     doCodeTest(".localLabel");
   }
 
   public void testLocalLabelWithColon() throws IOException {
     doCodeTest(".localLabel:");
+  }
+
+  public void testLocalLabelWithColonInstruction() throws IOException {
+    doCodeTest(".localLabel: nop");
   }
 
 }
