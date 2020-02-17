@@ -247,7 +247,7 @@ public class _M68kLexer implements FlexLexer {
 
   private static final String ZZ_ROWMAP_PACKED_0 =
     "\0\0\0\75\0\172\0\267\0\364\0\364\0\u0131\0\u016e"+
-    "\0\364\0\u01ab\0\364\0\364\0\u016e\0\u016e\0\u01e8\0\u0225"+
+    "\0\364\0\u01ab\0\364\0\364\0\u016e\0\364\0\u01e8\0\u0225"+
     "\0\u0262\0\u029f\0\u02dc\0\u0319\0\u0356\0\u0393\0\u03d0\0\u02dc"+
     "\0\364\0\364\0\364\0\364\0\364\0\364\0\364\0\364"+
     "\0\364\0\364\0\u040d\0\u044a\0\364\0\364\0\u0487\0\u04c4"+
@@ -600,9 +600,9 @@ public class _M68kLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\4\0\2\11\2\1\1\11\1\1\2\11\14\1\12\11"+
-    "\2\1\2\11\23\1\2\0\1\11\3\0\4\1\2\11"+
-    "\367\1";
+    "\4\0\2\11\2\1\1\11\1\1\2\11\1\1\1\11"+
+    "\12\1\12\11\2\1\2\11\23\1\2\0\1\11\3\0"+
+    "\4\1\2\11\367\1";
 
   private static int [] zzUnpackAttribute() {
     int [] result = new int[316];

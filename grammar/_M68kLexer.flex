@@ -43,6 +43,7 @@ CRLF=[\r\n]
 WHITE_SPACE=[\ \t\f]
 
 COMMENT=;.*|\*.* // todo leading "*" only on empty line
+EOL_COMMENT=;.*
 
 DECNUMBER=[0-9]+
 HEXNUMBER=\$\p{XDigit}+
@@ -275,7 +276,7 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
   [rR][sS][rR][eE][sS][eE][tT]    { return RSRESET; }
 
 
-  {COMMENT}                       { yybegin(IN_COMMENT); return COMMENT; }
+  {EOL_COMMENT}                   { yybegin(IN_COMMENT); return COMMENT; }
 
   {DECNUMBER}                     { return DEC_NUMBER; }
   {HEXNUMBER}                     { return HEX_NUMBER; }
