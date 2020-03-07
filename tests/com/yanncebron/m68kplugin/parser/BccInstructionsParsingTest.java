@@ -71,6 +71,10 @@ public class BccInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" bcc label");
   }
 
+  public void testBhsInstruction() throws IOException {
+    doCodeTest(" bhs label");
+  }
+
   public void testBplInstruction() throws IOException {
     doCodeTest(" bpl label");
   }

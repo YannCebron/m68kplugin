@@ -213,6 +213,7 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
   [bB][nN][eE]                    { incBranchIdMode(); return BNE; }
   [bB][hH][iI]                    { incBranchIdMode(); return BHI; }
   [bB][cC][cC]                    { incBranchIdMode(); return BCC; }
+  [bB][hH][sS]                    { incBranchIdMode(); return BHS; }
   [bB][pP][lL]                    { incBranchIdMode(); return BPL; }
   [bB][vV][cC]                    { incBranchIdMode(); return BVC; }
   [bB][lL][tT]                    { incBranchIdMode(); return BLT; }

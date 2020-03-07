@@ -41,6 +41,7 @@ public final class M68kTokenGroups {
     BGE,
     BGT,
     BHI,
+    BHS,
     BLE,
     BLK,
     BLO,

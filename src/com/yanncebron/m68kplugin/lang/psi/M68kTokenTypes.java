@@ -43,6 +43,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType BGE = new M68kTokenType("bge");
   public static final IElementType BGT = new M68kTokenType("bgt");
   public static final IElementType BHI = new M68kTokenType("bhi");
+  public static final IElementType BHS = new M68kTokenType("bhs");
   public static final IElementType BIN_NUMBER = new M68kTokenType("bin_number");
   public static final IElementType BLE = new M68kTokenType("ble");
   public static final IElementType BLK = new M68kTokenType("blk");

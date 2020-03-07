@@ -550,6 +550,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   //                              bne_instruction |
   //                              bhi_instruction |
   //                              bcc_instruction |
+  //                              bhs_instruction |
   //                              bpl_instruction |
   //                              bvc_instruction |
   //                              blt_instruction |
@@ -569,6 +570,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = bne_instruction(b, l + 1);
     if (!r) r = bhi_instruction(b, l + 1);
     if (!r) r = bcc_instruction(b, l + 1);
+    if (!r) r = bhs_instruction(b, l + 1);
     if (!r) r = bpl_instruction(b, l + 1);
     if (!r) r = bvc_instruction(b, l + 1);
     if (!r) r = blt_instruction(b, l + 1);
@@ -796,6 +798,20 @@ public class M68kParser implements PsiParser, LightPsiParser {
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, BHI_INSTRUCTION, "<instruction>");
     r = consumeToken(b, BHI);
+    p = r; // pin = 1
+    r = r && bCC_tail(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // BHS bCC_tail
+  public static boolean bhs_instruction(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bhs_instruction")) return false;
+    if (!nextTokenIs(b, "<instruction>", BHS)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, BHS_INSTRUCTION, "<instruction>");
+    r = consumeToken(b, BHS);
     p = r; // pin = 1
     r = r && bCC_tail(b, l + 1);
     exit_section_(b, l, m, r, p, null);

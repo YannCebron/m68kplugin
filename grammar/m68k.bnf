@@ -375,6 +375,7 @@ private bCC_instructions ::= bra_instruction |
                              bne_instruction |
                              bhi_instruction |
                              bcc_instruction |
+                             bhs_instruction |
                              bpl_instruction |
                              bvc_instruction |
                              blt_instruction |
@@ -394,6 +395,7 @@ beq_instruction ::= BEQ bCC_tail
 bne_instruction ::= BNE bCC_tail
 bhi_instruction ::= BHI bCC_tail
 bcc_instruction ::= BCC bCC_tail
+bhs_instruction ::= BHS bCC_tail // == bcc
 bpl_instruction ::= BPL bCC_tail
 bvc_instruction ::= BVC bCC_tail
 
