@@ -7,7 +7,6 @@
 - I18n
 
 ### Broken lexing/parsing
-- `blt.s .l`
 - `.b|w|l` must be immediate after instruction (Parser prob?)
 
 ## Before 1st release

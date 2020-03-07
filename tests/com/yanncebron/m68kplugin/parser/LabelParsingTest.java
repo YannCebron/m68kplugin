@@ -43,6 +43,10 @@ public class LabelParsingTest extends M68kParsingTestCase {
     doCodeTest("label: nop");
   }
 
+  public void testLabelWithColonInstructionNoWhitespace() throws IOException {
+    doCodeTest("label:nop");
+  }
+
   public void testLocalLabel() throws IOException {
     doCodeTest(".localLabel");
   }
@@ -53,6 +57,18 @@ public class LabelParsingTest extends M68kParsingTestCase {
 
   public void testLocalLabelWithColonInstruction() throws IOException {
     doCodeTest(".localLabel: nop");
+  }
+
+  public void testLocalLabelWithColonInstructionNoWhitespace() throws IOException {
+    doCodeTest(".localLabel:nop");
+  }
+
+  public void testLocalLabelWithDataSizeName() throws IOException {
+    doCodeTest(".s bra.s .s");
+  }
+
+  public void testLocalLabelWithColonWithDataSizeName() throws IOException {
+    doCodeTest(".s: bra.s .s");
   }
 
 }

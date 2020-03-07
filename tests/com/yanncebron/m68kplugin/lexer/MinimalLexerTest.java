@@ -38,7 +38,7 @@ public class MinimalLexerTest extends M68kLexerTestCase {
   public void testLabelOnFirstLine() {
     doTest("label",
       "id ('label')");
-  }                                   
+  }
 
   public void testLabelWithColonOnFirstLine() {
     doTest("label:",
@@ -78,6 +78,60 @@ public class MinimalLexerTest extends M68kLexerTestCase {
     doTest(".localLabel",
       ". ('.')\n" +
         "id ('localLabel')");
+  }
+
+  public void testLocalLabelWithColonFollowedByInstructionNoWhitespace() {
+    doTest(".localLabel:rts",
+      ". ('.')\n" +
+        "id ('localLabel')\n" +
+        ": (':')\n" +
+        "rts ('rts')");
+  }
+
+  public void testLocalLabelDotDataSizeName() {
+    doTest(".s bra .s",
+      ". ('.')\n" +
+        "id ('s')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "bra ('bra')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "id ('.s')");
+  }
+
+  public void testLocalLabelWithColonDotDataSizeName() {
+    doTest(".s: bra .s",
+      ". ('.')\n" +
+        "id ('s')\n" +
+        ": (':')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "bra ('bra')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "id ('.s')");
+  }
+
+  public void testLocalLabelDotDataSizeNameInstructionDataSize() {
+    doTest(".s bra.s .s",
+      ". ('.')\n" +
+        "id ('s')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "bra ('bra')\n" +
+        ".s ('.s')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "id ('.s')");
+  }
+
+  public void testLocalLabelMultipleDotDataSizeName() {
+    doTest(".l\n" +
+        ".s bra .s",
+      ". ('.')\n" +
+        "id ('l')\n" +
+        "WHITE_SPACE ('\\n')\n" +
+        ". ('.')\n" +
+        "id ('s')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "bra ('bra')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "id ('.s')");
   }
 
 }

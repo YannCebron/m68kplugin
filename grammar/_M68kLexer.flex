@@ -20,15 +20,29 @@ import com.intellij.psi.tree.IElementType;
 
 import com.intellij.lexer.FlexLexer;
 
-import java.nio.channels.Pipe;import static com.intellij.psi.TokenType.BAD_CHARACTER;
+import static com.intellij.psi.TokenType.BAD_CHARACTER;
 import static com.intellij.psi.TokenType.WHITE_SPACE;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
 %%
 
 %{
+  private int branchIdMode;
+
   public _M68kLexer() {
     this((java.io.Reader)null);
+  }
+
+  public boolean isBranchIdMode() {
+    return branchIdMode > 1;
+  }
+
+  public void clearBranchIdMode(){
+    branchIdMode = 0;
+  }
+
+  public void incBranchIdMode() {
+    branchIdMode++;
   }
 %}
 
@@ -69,16 +83,16 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
   {LABEL}   { yybegin(IN_LABEL); return ID; }
 
   {WHITE_SPACE}* {COMMENT} { yybegin(IN_COMMENT); return COMMENT; }
-  {WHITE_SPACE}+ { yybegin(IN_INSTRUCTION); return WHITE_SPACE; }
+  {WHITE_SPACE}+ { clearBranchIdMode(); yybegin(IN_INSTRUCTION); return WHITE_SPACE; }
 }
 
 
 // todo valid? "INTREQ=$09C"
 <IN_LABEL> {
-  ":" { yybegin(IN_INSTRUCTION); return COLON; }
+  ":" { clearBranchIdMode(); yybegin(IN_INSTRUCTION); return COLON; }
 
   {WHITE_SPACE}+ {COMMENT} { yybegin(IN_COMMENT); return COMMENT; }
-  {WHITE_SPACE}+ { yybegin(IN_INSTRUCTION); return WHITE_SPACE; }
+  {WHITE_SPACE}+ { clearBranchIdMode(); yybegin(IN_INSTRUCTION); return WHITE_SPACE; }
 
   {CRLF} { yybegin(YYINITIAL); return WHITE_SPACE; }
 }
@@ -90,7 +104,7 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
 <IN_INSTRUCTION> {
 //  "\\n"                  { return NL; }
   {CRLF}         { yybegin(YYINITIAL); return WHITE_SPACE; }
-  {WHITE_SPACE}  { return WHITE_SPACE; }
+  {WHITE_SPACE}  { incBranchIdMode(); return WHITE_SPACE; }
 
   "."  { return DOT; }
   ":"  { return COLON; }
@@ -191,40 +205,40 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
   [bB][sS][eE][tT]                { return BSET; }
   [bB][tT][sS][tT]                { return BTST; }
 
-  [bB][rR][aA]                    { return BRA; }
-  [bB][cC][sS]                    { return BCS; }
-  [bB][lL][oO]                    { return BLO; }
-  [bB][lL][sS]                    { return BLS; }
-  [bB][eE][qQ]                    { return BEQ; }
-  [bB][nN][eE]                    { return BNE; }
-  [bB][hH][iI]                    { return BHI; }
-  [bB][cC][cC]                    { return BCC; }
-  [bB][pP][lL]                    { return BPL; }
-  [bB][vV][cC]                    { return BVC; }
-  [bB][lL][tT]                    { return BLT; }
-  [bB][lL][eE]                    { return BLE; }
-  [bB][gG][tT]                    { return BGT; }
-  [bB][gG][eE]                    { return BGE; }
-  [bB][mM][iI]                    { return BMI; }
-  [bB][vV][sS]                    { return BVS; }
+  [bB][rR][aA]                    { incBranchIdMode(); return BRA; }
+  [bB][cC][sS]                    { incBranchIdMode(); return BCS; }
+  [bB][lL][oO]                    { incBranchIdMode(); return BLO; }
+  [bB][lL][sS]                    { incBranchIdMode(); return BLS; }
+  [bB][eE][qQ]                    { incBranchIdMode(); return BEQ; }
+  [bB][nN][eE]                    { incBranchIdMode(); return BNE; }
+  [bB][hH][iI]                    { incBranchIdMode(); return BHI; }
+  [bB][cC][cC]                    { incBranchIdMode(); return BCC; }
+  [bB][pP][lL]                    { incBranchIdMode(); return BPL; }
+  [bB][vV][cC]                    { incBranchIdMode(); return BVC; }
+  [bB][lL][tT]                    { incBranchIdMode(); return BLT; }
+  [bB][lL][eE]                    { incBranchIdMode(); return BLE; }
+  [bB][gG][tT]                    { incBranchIdMode(); return BGT; }
+  [bB][gG][eE]                    { incBranchIdMode(); return BGE; }
+  [bB][mM][iI]                    { incBranchIdMode(); return BMI; }
+  [bB][vV][sS]                    { incBranchIdMode(); return BVS; }
 
-  [dD][bB][rR][aA]                { return DBRA; }
-  [dD][bB][cC][sS]                { return DBCS; }
-  [dD][bB][lL][sS]                { return DBLS; }
-  [dD][bB][eE][qQ]                { return DBEQ; }
-  [dD][bB][nN][eE]                { return DBNE; }
-  [dD][bB][hH][iI]                { return DBHI; }
-  [dD][bB][cC][cC]                { return DBCC; }
-  [dD][bB][pP][lL]                { return DBPL; }
-  [dD][bB][vV][cC]                { return DBVC; }
-  [dD][bB][lL][tT]                { return DBLT; }
-  [dD][bB][lL][eE]                { return DBLE; }
-  [dD][bB][gG][tT]                { return DBGT; }
-  [dD][bB][gG][eE]                { return DBGE; }
-  [dD][bB][mM][iI]                { return DBMI; }
-  [dD][bB][vV][sS]                { return DBVS; }
-  [dD][bB][fF]                    { return DBF; }
-  [dD][bB][tT]                    { return DBT; }
+  [dD][bB][rR][aA]                { incBranchIdMode(); return DBRA; }
+  [dD][bB][cC][sS]                { incBranchIdMode(); return DBCS; }
+  [dD][bB][lL][sS]                { incBranchIdMode(); return DBLS; }
+  [dD][bB][eE][qQ]                { incBranchIdMode(); return DBEQ; }
+  [dD][bB][nN][eE]                { incBranchIdMode(); return DBNE; }
+  [dD][bB][hH][iI]                { incBranchIdMode(); return DBHI; }
+  [dD][bB][cC][cC]                { incBranchIdMode(); return DBCC; }
+  [dD][bB][pP][lL]                { incBranchIdMode(); return DBPL; }
+  [dD][bB][vV][cC]                { incBranchIdMode(); return DBVC; }
+  [dD][bB][lL][tT]                { incBranchIdMode(); return DBLT; }
+  [dD][bB][lL][eE]                { incBranchIdMode(); return DBLE; }
+  [dD][bB][gG][tT]                { incBranchIdMode(); return DBGT; }
+  [dD][bB][gG][eE]                { incBranchIdMode(); return DBGE; }
+  [dD][bB][mM][iI]                { incBranchIdMode(); return DBMI; }
+  [dD][bB][vV][sS]                { incBranchIdMode(); return DBVS; }
+  [dD][bB][fF]                    { incBranchIdMode(); return DBF; }
+  [dD][bB][tT]                    { incBranchIdMode(); return DBT; }
 
   [sS][eE][qQ]                    { return SEQ; }
   [sS][nN][eE]                    { return SNE; }
@@ -253,10 +267,10 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
   [rR][oO][xX][rR]                { return ROXR; }
 
 
-  "." [bB]                        { return DOT_B; }
-  "." [sS]                        { return DOT_S; }
-  "." [wW]                        { return DOT_W; }
-  "." [lL]                        { return DOT_L; }
+  "." [bB]                        { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_B; }
+  "." [sS]                        { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_S; }
+  "." [wW]                        { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_W; }
+  "." [lL]                        { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_L; }
 
 
   [bB][lL][kK]                    { return BLK; }
