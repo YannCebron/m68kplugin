@@ -51,11 +51,11 @@
 }
 
 root ::= root_item*
-private root_item ::=  (instructions | labels)   {
+private root_item ::= (instructions | labels) {
   recoverWhile = root_item_recover
 }
 private root_item_recover ::= !(instructions | labels) {
-  consumeTokenMethod="consumeTokenFast"
+  consumeTokenMethod = "consumeTokenFast"
 }
 //private     crlf::='\n' // todo stop parsing after line?
 
@@ -107,10 +107,10 @@ private data_size_byte ::= DOT_B
 private data_size_short ::= DOT_S
 private data_size_word ::= DOT_W
 private data_size_long ::= DOT_L
-private data_size_word_long ::= data_size_word | data_size_long  {
+private data_size_word_long ::= data_size_word | data_size_long {
 //  name = ".w|l"
 }
-private data_size_all ::= data_size_byte | data_size_word_long  {
+private data_size_all ::= data_size_byte | data_size_word_long {
 //  name = ".b|w|l"
 }
 
@@ -534,7 +534,7 @@ private directives ::= equ_directive |
                        odd_directive |
                        incbin_directive |
                        incdir_directive |
-                       include_directive  |
+                       include_directive |
                        dc_directive |
                        dcb_directive |
                        ds_directive |

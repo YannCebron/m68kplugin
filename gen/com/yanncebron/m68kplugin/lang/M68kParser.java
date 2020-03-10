@@ -1377,7 +1377,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_byte | data_size_word_long  {
+  // data_size_byte | data_size_word_long {
   // //  name = ".b|w|l"
   // }
   static boolean data_size_all(PsiBuilder b, int l) {
@@ -1390,7 +1390,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // data_size_word_long  {
+  // data_size_word_long {
   // //  name = ".b|w|l"
   // }
   private static boolean data_size_all_1(PsiBuilder b, int l) {
@@ -1435,7 +1435,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_word | data_size_long  {
+  // data_size_word | data_size_long {
   // //  name = ".w|l"
   // }
   static boolean data_size_word_long(PsiBuilder b, int l) {
@@ -1449,7 +1449,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // data_size_long  {
+  // data_size_long {
   // //  name = ".w|l"
   // }
   private static boolean data_size_word_long_1(PsiBuilder b, int l) {
@@ -1879,7 +1879,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   //                        odd_directive |
   //                        incbin_directive |
   //                        incdir_directive |
-  //                        include_directive  |
+  //                        include_directive |
   //                        dc_directive |
   //                        dcb_directive |
   //                        ds_directive |
