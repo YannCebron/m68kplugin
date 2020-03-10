@@ -103,8 +103,8 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
 
 <IN_INSTRUCTION> {
 //  "\\n"                  { return NL; }
-  {CRLF}         { yybegin(YYINITIAL); return WHITE_SPACE; }
-  {WHITE_SPACE}  { incBranchIdMode(); return WHITE_SPACE; }
+  {CRLF}          { yybegin(YYINITIAL); return WHITE_SPACE; }
+  {WHITE_SPACE}+  { incBranchIdMode();  return WHITE_SPACE; }
 
   "."  { return DOT; }
   ":"  { return COLON; }
