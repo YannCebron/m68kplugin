@@ -214,14 +214,14 @@ private bcd_instructions ::= abcd_instruction |
                              nbcd_instruction |
                              sbcd_instruction
 
-private bcd_tail ::= (data_size_byte)?
+private bcd_tail ::= data_size_byte?
                      (
                       (data_register COMMA data_register) |
                       (address_register_pre_decrement COMMA address_register_pre_decrement)
                      )
 
 abcd_instruction ::= ABCD bcd_tail
-nbcd_instruction ::= NBCD (data_size_byte)? any_register
+nbcd_instruction ::= NBCD data_size_byte? any_register
 sbcd_instruction ::= SBCD bcd_tail
 
 // Add/Sub ==================================================================

@@ -641,7 +641,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (data_size_byte)?
+  // data_size_byte?
   //                      (
   //                       (data_register COMMA data_register) |
   //                       (address_register_pre_decrement COMMA address_register_pre_decrement)
@@ -656,21 +656,11 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (data_size_byte)?
+  // data_size_byte?
   private static boolean bcd_tail_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bcd_tail_0")) return false;
-    bcd_tail_0_0(b, l + 1);
+    data_size_byte(b, l + 1);
     return true;
-  }
-
-  // (data_size_byte)
-  private static boolean bcd_tail_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bcd_tail_0_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = data_size_byte(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
   }
 
   // (data_register COMMA data_register) |
@@ -2688,7 +2678,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // NBCD (data_size_byte)? any_register
+  // NBCD data_size_byte? any_register
   public static boolean nbcd_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "nbcd_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", NBCD)) return false;
@@ -2702,21 +2692,11 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r || p;
   }
 
-  // (data_size_byte)?
+  // data_size_byte?
   private static boolean nbcd_instruction_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "nbcd_instruction_1")) return false;
-    nbcd_instruction_1_0(b, l + 1);
+    data_size_byte(b, l + 1);
     return true;
-  }
-
-  // (data_size_byte)
-  private static boolean nbcd_instruction_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "nbcd_instruction_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = data_size_byte(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
   }
 
   /* ********************************************************** */
