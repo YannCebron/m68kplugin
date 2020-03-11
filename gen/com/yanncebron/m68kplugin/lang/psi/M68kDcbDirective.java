@@ -21,11 +21,10 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kDcbDirective extends M68kPsiElement {
 
-  @NotNull
-  List<M68kExpression> getExpressionList();
+  @Nullable
+  M68kExpression getNumber();
 
-  //WARNING: expr(...) is skipped
-  //matching expr(M68kDcbDirective, ...)
-  //methods are not found in null
+  @Nullable
+  M68kExpression getValue();
 
 }

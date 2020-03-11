@@ -586,9 +586,9 @@ dc_directive ::= DC data_size_all? dc_element (COMMA dc_element)* {
 dcb_directive ::= DCB data_size_all? expression (COMMA expression)? {
   pin = 1
   methods = [
-    expr = ""
-    number = "expr[0]"
-    value = "expr[1]"
+    expression = ""
+    number = "expression[0]"
+    value = "expression[1]"
   ]
 }
 

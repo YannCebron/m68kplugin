@@ -42,9 +42,17 @@ public class M68kDcbDirectiveImpl extends ASTWrapperPsiElement implements M68kDc
   }
 
   @Override
-  @NotNull
-  public List<M68kExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
+  @Nullable
+  public M68kExpression getNumber() {
+    List<M68kExpression> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
+    return p1.size() < 1 ? null : p1.get(0);
+  }
+
+  @Override
+  @Nullable
+  public M68kExpression getValue() {
+    List<M68kExpression> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
+    return p1.size() < 2 ? null : p1.get(1);
   }
 
 }
