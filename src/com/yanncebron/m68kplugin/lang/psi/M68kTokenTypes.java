@@ -102,6 +102,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType DS = new M68kTokenType("ds");
   public static final IElementType EOR = new M68kTokenType("eor");
   public static final IElementType EORI = new M68kTokenType("eori");
+  public static final IElementType ENDM = new M68kTokenType("endm");
   public static final IElementType EQ = new M68kTokenType("=");
   public static final IElementType EQU = new M68kTokenType("equ");
   public static final IElementType EQUR = new M68kTokenType("equr");
@@ -122,6 +123,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType LSL = new M68kTokenType("lsl");
   public static final IElementType LSR = new M68kTokenType("lsr");
   public static final IElementType L_PAREN = new M68kTokenType("(");
+  public static final IElementType MACRO = new M68kTokenType("macro");
   public static final IElementType MINUS = new M68kTokenType("-");
   public static final IElementType MOVE = new M68kTokenType("move");
   public static final IElementType MOVEA = new M68kTokenType("movea");

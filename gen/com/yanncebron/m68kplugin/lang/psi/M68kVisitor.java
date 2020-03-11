@@ -277,6 +277,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitEndmDirective(@NotNull M68kEndmDirective o) {
+    visitPsiElement(o);
+  }
+
   public void visitEorInstruction(@NotNull M68kEorInstruction o) {
     visitPsiElement(o);
   }
@@ -378,6 +382,10 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitLsrInstruction(@NotNull M68kLsrInstruction o) {
+    visitPsiElement(o);
+  }
+
+  public void visitMacroDirective(@NotNull M68kMacroDirective o) {
     visitPsiElement(o);
   }
 

@@ -1834,7 +1834,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
   //                        rsset_directive |
   //                        rsreset_directive |
   //                        rs_directive |
-  //                        opt_directive
+  //                        opt_directive |
+  //                        macro_directive |
+  //                        endm_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -1854,6 +1856,8 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = rsreset_directive(b, l + 1);
     if (!r) r = rs_directive(b, l + 1);
     if (!r) r = opt_directive(b, l + 1);
+    if (!r) r = macro_directive(b, l + 1);
+    if (!r) r = endm_directive(b, l + 1);
     return r;
   }
 
@@ -1933,6 +1937,18 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = r && address_register(b, l + 1);
     r = r && consumeToken(b, R_PAREN);
     exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // ENDM
+  public static boolean endm_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "endm_directive")) return false;
+    if (!nextTokenIs(b, ENDM)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ENDM);
+    exit_section_(b, m, ENDM_DIRECTIVE, r);
     return r;
   }
 
@@ -2377,6 +2393,19 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = r && shift_tail(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  /* ********************************************************** */
+  // label MACRO
+  public static boolean macro_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "macro_directive")) return false;
+    if (!nextTokenIs(b, ID)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = label(b, l + 1);
+    r = r && consumeToken(b, MACRO);
+    exit_section_(b, m, MACRO_DIRECTIVE, r);
+    return r;
   }
 
   /* ********************************************************** */

@@ -85,6 +85,7 @@ public interface M68kTypes {
   IElementType DIVU_INSTRUCTION = new M68kCompositeElementType("DIVU_INSTRUCTION");
   IElementType DIV_EXPRESSION = new M68kCompositeElementType("DIV_EXPRESSION");
   IElementType DS_DIRECTIVE = new M68kCompositeElementType("DS_DIRECTIVE");
+  IElementType ENDM_DIRECTIVE = new M68kCompositeElementType("ENDM_DIRECTIVE");
   IElementType EORI_INSTRUCTION = new M68kCompositeElementType("EORI_INSTRUCTION");
   IElementType EOR_INSTRUCTION = new M68kCompositeElementType("EOR_INSTRUCTION");
   IElementType EQUALS_DIRECTIVE = new M68kCompositeElementType("EQUALS_DIRECTIVE");
@@ -109,6 +110,7 @@ public interface M68kTypes {
   IElementType LOCAL_LABEL = new M68kCompositeElementType("LOCAL_LABEL");
   IElementType LSL_INSTRUCTION = new M68kCompositeElementType("LSL_INSTRUCTION");
   IElementType LSR_INSTRUCTION = new M68kCompositeElementType("LSR_INSTRUCTION");
+  IElementType MACRO_DIRECTIVE = new M68kCompositeElementType("MACRO_DIRECTIVE");
   IElementType MINUS_EXPRESSION = new M68kCompositeElementType("MINUS_EXPRESSION");
   IElementType MOD_EXPRESSION = new M68kCompositeElementType("MOD_EXPRESSION");
   IElementType MOVEA_INSTRUCTION = new M68kCompositeElementType("MOVEA_INSTRUCTION");
@@ -372,6 +374,9 @@ public interface M68kTypes {
       else if (type == DS_DIRECTIVE) {
         return new M68kDsDirectiveImpl(node);
       }
+      else if (type == ENDM_DIRECTIVE) {
+        return new M68kEndmDirectiveImpl(node);
+      }
       else if (type == EORI_INSTRUCTION) {
         return new M68kEoriInstructionImpl(node);
       }
@@ -440,6 +445,9 @@ public interface M68kTypes {
       }
       else if (type == LSR_INSTRUCTION) {
         return new M68kLsrInstructionImpl(node);
+      }
+      else if (type == MACRO_DIRECTIVE) {
+        return new M68kMacroDirectiveImpl(node);
       }
       else if (type == MINUS_EXPRESSION) {
         return new M68kMinusExpressionImpl(node);

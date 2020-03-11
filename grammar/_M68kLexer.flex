@@ -291,6 +291,8 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
   [rR][sS][sS][eE][tT]            { return RSSET; }
   [rR][sS][rR][eE][sS][eE][tT]    { return RSRESET; }
 
+  [mM][aA][cC][rR][oO]            { return MACRO; }
+  [eE][nN][dD][mM]                { return ENDM; }
 
   {EOL_COMMENT}                   { yybegin(IN_COMMENT); return COMMENT; }
 

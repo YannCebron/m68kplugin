@@ -3,7 +3,7 @@
 - add missing instructions (??)
 - research available directives, case-sensitivity (DevPac: no)?
 - add missing expression operators (XOR?)
-- macros
+- macros (WIP)
 - I18n
 
 ### Broken lexing/parsing
@@ -17,6 +17,7 @@
 - CHANGELOG.md
 
 ## Highlighting
+- `macro` missing `endm`
 - privileged instructions
 - registers:
   - dedicated color for each (**WIP** at least special registers (`SP` == `A7`!) vs. A*n* vs. D*n*)

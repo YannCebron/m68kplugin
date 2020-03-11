@@ -1,0 +1,6 @@
+FILE
+  M68kMacroDirectiveImpl(MACRO_DIRECTIVE)
+    M68kLabelImpl(LABEL)
+      PsiElement(id)('macroName')
+    PsiWhiteSpace(' ')
+    PsiElement(macro)('MACRO')

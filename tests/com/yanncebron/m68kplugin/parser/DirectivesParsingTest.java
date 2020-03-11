@@ -140,4 +140,12 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
   public void testOptDirectiveMissingParameter() throws Exception {
     doCodeTest(" opt ");
   }
+
+  public void testMacroDirective() throws Exception {
+    doCodeTest("macroName MACRO");
+  }
+
+  public void testEndmDirective() throws Exception {
+    doCodeTest("endm");
+  }
 }

@@ -557,7 +557,9 @@ private directives ::= equ_directive |
                        rsset_directive |
                        rsreset_directive |
                        rs_directive |
-                       opt_directive
+                       opt_directive |
+                       macro_directive |
+                       endm_directive
 
 fake equ_directive_base ::= label expression? {
 //  implements = "com.intellij.psi.PsiNameIdentifierOwner"
@@ -635,6 +637,8 @@ opt_directive ::= OPT opt_element (COMMA opt_element)* {
   pin = 1
 }
 
+macro_directive ::= label MACRO
+endm_directive ::= ENDM
 
 // Expressions  ============================================================
 ;{
