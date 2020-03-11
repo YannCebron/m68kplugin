@@ -19,12 +19,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kMovemInstruction extends M68kPsiElement {
+public interface M68kRegisterList extends M68kPsiElement {
 
-  @Nullable
-  M68kExpression getExpression();
-
-  @Nullable
-  M68kRegisterList getRegisterList();
+  @NotNull
+  List<M68kRegisterRange> getRegisterRangeList();
 
 }

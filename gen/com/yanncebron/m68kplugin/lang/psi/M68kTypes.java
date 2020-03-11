@@ -132,6 +132,8 @@ public interface M68kTypes {
   IElementType PAREN_EXPRESSION = new M68kCompositeElementType("PAREN_EXPRESSION");
   IElementType PEA_INSTRUCTION = new M68kCompositeElementType("PEA_INSTRUCTION");
   IElementType PLUS_EXPRESSION = new M68kCompositeElementType("PLUS_EXPRESSION");
+  IElementType REGISTER_LIST = new M68kCompositeElementType("REGISTER_LIST");
+  IElementType REGISTER_RANGE = new M68kCompositeElementType("REGISTER_RANGE");
   IElementType RESET_INSTRUCTION = new M68kCompositeElementType("RESET_INSTRUCTION");
   IElementType ROL_INSTRUCTION = new M68kCompositeElementType("ROL_INSTRUCTION");
   IElementType ROR_INSTRUCTION = new M68kCompositeElementType("ROR_INSTRUCTION");
@@ -507,6 +509,12 @@ public interface M68kTypes {
       }
       else if (type == PLUS_EXPRESSION) {
         return new M68kPlusExpressionImpl(node);
+      }
+      else if (type == REGISTER_LIST) {
+        return new M68kRegisterListImpl(node);
+      }
+      else if (type == REGISTER_RANGE) {
+        return new M68kRegisterRangeImpl(node);
       }
       else if (type == RESET_INSTRUCTION) {
         return new M68kResetInstructionImpl(node);

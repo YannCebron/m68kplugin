@@ -2,6 +2,6 @@ FILE
   PsiWhiteSpace(' ')
   M68kMovemInstructionImpl(MOVEM_INSTRUCTION)
     PsiElement(movem)('movem')
-    PsiErrorElement:'(', '-', '.l', '.w', <address register>, <data register>, ccr, id, pc, sr, ssp or usp expected
+    PsiErrorElement:'(', '-', '.l', '.w' or <register range> expected
       <empty list>
   PsiWhiteSpace(' ')

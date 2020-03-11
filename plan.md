@@ -46,7 +46,6 @@
 - expand/shrink selection: 
   - full line
   - "blocks"
-  - register-list segments (make `register_list` rule public?)
   - immediate data preceding `#`
   - `offsetExpression(An)`
 - move left/right: swap src|dest

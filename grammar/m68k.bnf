@@ -144,6 +144,11 @@ private any_register ::= data_register |
                          program_counter_indirect 
                          // todo?
 
+// "d0-d7/a1/a4"
+private register_range_element ::= data_register | address_register
+register_range ::= register_range_element (MINUS register_range_element)?
+register_list ::= register_range (DIV register_range)*
+
 private effective_address ::= program_counter_indirect |
                               (ID L_PAREN address_register R_PAREN) |   // todo label_reference "jsr     _LVODoIO(a6)"
                               expression |
@@ -177,12 +182,10 @@ movea_instruction ::= MOVEA data_size_word_long?
 moveq_instruction ::= MOVEQ data_size_long?
                       immediate_data COMMA data_register
 
-private register_list ::= any_register (MINUS any_register)?
-private register_lists ::= register_list (DIV register_list)*
 movem_instruction ::= MOVEM data_size_word_long?
                       (
-                        (register_lists COMMA address_register_indirect) |
-                        (address_register_indirect COMMA register_lists)
+                        (register_list COMMA address_register_indirect) |
+                        (address_register_indirect COMMA register_list)
                       )
 
 

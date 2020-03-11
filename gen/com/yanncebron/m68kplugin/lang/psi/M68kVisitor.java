@@ -473,6 +473,14 @@ public class M68kVisitor extends PsiElementVisitor {
     visitBinaryExpression(o);
   }
 
+  public void visitRegisterList(@NotNull M68kRegisterList o) {
+    visitPsiElement(o);
+  }
+
+  public void visitRegisterRange(@NotNull M68kRegisterRange o) {
+    visitPsiElement(o);
+  }
+
   public void visitResetInstruction(@NotNull M68kResetInstruction o) {
     visitPsiElement(o);
   }

@@ -25,14 +25,14 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kMovemInstructionImpl extends ASTWrapperPsiElement implements M68kMovemInstruction {
+public class M68kRegisterListImpl extends ASTWrapperPsiElement implements M68kRegisterList {
 
-  public M68kMovemInstructionImpl(@NotNull ASTNode node) {
+  public M68kRegisterListImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitMovemInstruction(this);
+    visitor.visitRegisterList(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -41,15 +41,9 @@ public class M68kMovemInstructionImpl extends ASTWrapperPsiElement implements M6
   }
 
   @Override
-  @Nullable
-  public M68kExpression getExpression() {
-    return findChildByClass(M68kExpression.class);
-  }
-
-  @Override
-  @Nullable
-  public M68kRegisterList getRegisterList() {
-    return findChildByClass(M68kRegisterList.class);
+  @NotNull
+  public List<M68kRegisterRange> getRegisterRangeList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kRegisterRange.class);
   }
 
 }
