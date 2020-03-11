@@ -12,7 +12,7 @@ Adds support for [Motorola 68000](https://en.wikipedia.org/wiki/Motorola_68000) 
 * Parsing with semantic error highlighting
 * Labels: Goto Declaration/Find Usages/Rename
 * Smart *Extend|Shrink Selection*
-* *Move Element Left|Right* for binary expressions, `dc` values
+* *Move Element Left|Right* for binary expressions, register list, `dc` values
 
 ### IDE
 * Structure View
