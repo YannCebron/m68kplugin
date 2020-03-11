@@ -822,6 +822,19 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // data_size_byte | data_size_long
+  static boolean bit_data_size(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bit_data_size")) return false;
+    if (!nextTokenIs(b, "<.b|l>", DOT_B, DOT_L)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<.b|l>");
+    r = data_size_byte(b, l + 1);
+    if (!r) r = data_size_long(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // bchg_instruction |
   //                              bclr_instruction |
   //                              bset_instruction |
@@ -837,7 +850,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (data_size_byte | data_size_long)?
+  // bit_data_size?
   //                      (immediate_data | data_register) COMMA (data_register | effective_address)
   static boolean bit_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bit_tail")) return false;
@@ -851,20 +864,11 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (data_size_byte | data_size_long)?
+  // bit_data_size?
   private static boolean bit_tail_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bit_tail_0")) return false;
-    bit_tail_0_0(b, l + 1);
+    bit_data_size(b, l + 1);
     return true;
-  }
-
-  // data_size_byte | data_size_long
-  private static boolean bit_tail_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bit_tail_0_0")) return false;
-    boolean r;
-    r = data_size_byte(b, l + 1);
-    if (!r) r = data_size_long(b, l + 1);
-    return r;
   }
 
   // immediate_data | data_register

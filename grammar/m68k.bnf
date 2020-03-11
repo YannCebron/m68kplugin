@@ -502,7 +502,11 @@ private bit_instructions ::= bchg_instruction |
                              bset_instruction |
                              btst_instruction
 
-private bit_tail ::= (data_size_byte | data_size_long)?
+private bit_data_size ::= data_size_byte | data_size_long {
+  name = ".b|l"
+}
+
+private bit_tail ::= bit_data_size?
                      (immediate_data | data_register) COMMA (data_register | effective_address)
 
 bchg_instruction ::= BCHG bit_tail
