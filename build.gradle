@@ -69,6 +69,13 @@ intellij {
   sandboxDirectory = project.rootDir.canonicalPath + "/" + sandboxDir
 }
 
+
+runIde {
+  if (project.hasProperty("ideDirectory")) {
+    ideDirectory project.property("ideDirectory")
+  }
+}
+
 buildSearchableOptions {
   enabled false
 }
@@ -101,8 +108,8 @@ task generateM68KLexer(type: GenerateLexer) {
 
 // Plugin verification =========================================================== 
 runPluginVerifier {
-    pluginFileName = "$rootProject.name-$version"
-    ides = ["IC-2019.3"]
+  pluginFileName = "$rootProject.name-$version"
+  ides = ["IC-2019.3"]
 //    verifierVersion = "1.222"
 }
 
