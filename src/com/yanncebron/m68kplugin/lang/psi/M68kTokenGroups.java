@@ -182,7 +182,8 @@ public final class M68kTokenGroups {
     AMPERS_AND,
     PIPE,
     SHIFT_L,
-    SHIFT_R
+    SHIFT_R,
+    BACKSLASH
   );
 
   public static final TokenSet NUMBERS = TokenSet.create(

@@ -120,6 +120,7 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
   "~"  { return TILDE; }
   "%"  { return PERCENT; }
   "&"  { return AMPERS_AND; }
+  "\\" { return BACKSLASH; }
   "|"  { return PIPE; }
   "<<" { return SHIFT_L; }
   ">>" { return SHIFT_R; }
