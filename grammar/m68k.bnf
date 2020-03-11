@@ -108,10 +108,10 @@ private data_size_short ::= DOT_S
 private data_size_word ::= DOT_W
 private data_size_long ::= DOT_L
 private data_size_word_long ::= data_size_word | data_size_long {
-//  name = ".w|l"
+  name = ".w|l"
 }
 private data_size_all ::= data_size_byte | data_size_word_long {
-//  name = ".b|w|l"
+  name = ".b|w|l"
 }
 
 private data_register ::= DATA_REGISTER {
@@ -198,7 +198,12 @@ private jump_instructions ::= jsr_instruction|
                               rtr_instruction
 
 jsr_instruction ::= JSR effective_address
-bsr_instruction ::= BSR (data_size_short | data_size_word)? effective_address
+
+private bsr_data_size ::= (data_size_short | data_size_word) {
+  name = ".s|w"
+}
+bsr_instruction ::= BSR bsr_data_size? effective_address
+
 jmp_instruction ::= JMP effective_address
 rts_instruction ::= RTS
 rte_instruction ::= RTE
@@ -370,6 +375,10 @@ cmpm_instruction ::= CMPM data_size_all?
 
 
 // Branch ==================================================================
+private CC_data_size ::= (data_size_all | data_size_short) {
+  name = ".s|b|w|l"
+}
+
 private bCC_instructions ::= bra_instruction |
                              bcs_instruction |
                              blo_instruction |
@@ -388,7 +397,7 @@ private bCC_instructions ::= bra_instruction |
                              bmi_instruction |
                              bvs_instruction
 
-private bCC_tail ::= (data_size_all | data_size_short)? label_reference
+private bCC_tail ::= CC_data_size? label_reference
 
 bra_instruction ::= BRA bCC_tail
 bcs_instruction ::= BCS bCC_tail
@@ -429,7 +438,7 @@ private dbCC_instructions ::= dbra_instruction |
                               dbf_instruction |
                               dbt_instruction
 
-private dbCC_tail ::= (data_size_all | data_size_short)? data_register COMMA label_reference
+private dbCC_tail ::= CC_data_size? data_register COMMA label_reference
 
 dbra_instruction ::= DBRA dbCC_tail
 dbcs_instruction ::= DBCS dbCC_tail

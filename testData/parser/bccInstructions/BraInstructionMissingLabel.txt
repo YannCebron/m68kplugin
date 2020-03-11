@@ -2,6 +2,6 @@ FILE
   PsiWhiteSpace(' ')
   M68kBraInstructionImpl(BRA_INSTRUCTION)
     PsiElement(bra)('bra')
-    PsiErrorElement:'.b', '.l', '.s', '.w' or <label> expected
+    PsiErrorElement:<.s|b|w|l> or <label> expected
       <empty list>
   PsiWhiteSpace(' ')

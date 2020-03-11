@@ -2,7 +2,7 @@ FILE
   PsiWhiteSpace(' ')
   M68kBsrInstructionImpl(BSR_INSTRUCTION)
     PsiElement(bsr)('bsr')
-    PsiErrorElement:'.s', '.w' or <effective address> expected, got '.l'
+    PsiErrorElement:<.s|w> or <effective address> expected, got '.l'
       <empty list>
   PsiElement(.l)('.l')
   PsiWhiteSpace(' ')

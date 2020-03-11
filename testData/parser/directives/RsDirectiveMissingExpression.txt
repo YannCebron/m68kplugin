@@ -4,6 +4,6 @@ FILE
       PsiElement(id)('label')
     PsiWhiteSpace(' ')
     PsiElement(rs)('rs')
-    PsiErrorElement:'.b', '.l', '.w' or <expression> expected
+    PsiErrorElement:<.b|w|l> or <expression> expected
       <empty list>
   PsiWhiteSpace(' ')
