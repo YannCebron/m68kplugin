@@ -17,7 +17,7 @@ limitations under the License.
 plugins {
   id 'java'
   id 'org.jetbrains.intellij' version '0.4.17'
-  id "org.jetbrains.grammarkit" version "2020.1"
+  id "org.jetbrains.grammarkit" version "2020.1.2"
 }
 
 
