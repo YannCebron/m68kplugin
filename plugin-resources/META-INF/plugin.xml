@@ -62,6 +62,9 @@
     <annotator
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.lang.highlighting.M68kSyntaxAnnotator"/>
+    <codeInsight.lineMarkerProvider
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.lang.highlighting.M68kMethodSeparatorLineMarkerProvider"/>
 
     <lang.findUsagesProvider
         language="M68k"

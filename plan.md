@@ -26,7 +26,6 @@
 - `ReadWriteAccessDetector` for registers
 - method separators
   - "detected" subroutines
-  - macro definition
 - color-picker/inlays: copper list colors
 
 ## Resolve/Refactor
