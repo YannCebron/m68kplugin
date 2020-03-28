@@ -27,7 +27,8 @@ import org.jetbrains.annotations.Nullable;
 public class M68kBraceMatcher implements PairedBraceMatcher {
 
   private final BracePair[] pairs = new BracePair[]{
-    new BracePair(M68kTokenTypes.L_PAREN, M68kTokenTypes.R_PAREN, false)
+    new BracePair(M68kTokenTypes.L_PAREN, M68kTokenTypes.R_PAREN, false),
+    new BracePair(M68kTokenTypes.MACRO, M68kTokenTypes.ENDM, true)
   };
 
   @NotNull
