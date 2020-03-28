@@ -65,6 +65,7 @@
 - string in `dc.b` not terminated with `,0`
 - check optimizations from vasm/DevPac
 - multiple `opt` directives (?)
+- macro label naming convention (all uppercase)
 
 ## Navigation
 - goto symbol for labels/macros/EQUs (?) --> Stubs
