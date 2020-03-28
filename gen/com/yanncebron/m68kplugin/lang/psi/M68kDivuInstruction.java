@@ -25,6 +25,9 @@ public interface M68kDivuInstruction extends M68kPsiElement {
   M68kExpression getExpression();
 
   @Nullable
+  M68kImmediateData getImmediateData();
+
+  @Nullable
   M68kLabelReference getLabelReference();
 
 }

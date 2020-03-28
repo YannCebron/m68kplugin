@@ -41,9 +41,15 @@ public class M68kLslInstructionImpl extends ASTWrapperPsiElement implements M68k
   }
 
   @Override
-  @NotNull
-  public List<M68kExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
+  @Nullable
+  public M68kExpression getExpression() {
+    return findChildByClass(M68kExpression.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kImmediateData getImmediateData() {
+    return findChildByClass(M68kImmediateData.class);
   }
 
   @Override

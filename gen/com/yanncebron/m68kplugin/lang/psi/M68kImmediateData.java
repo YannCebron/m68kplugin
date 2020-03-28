@@ -19,12 +19,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kEoriInstruction extends M68kPsiElement {
-
-  @NotNull
-  List<M68kExpression> getExpressionList();
+public interface M68kImmediateData extends M68kPsiElement {
 
   @Nullable
-  M68kImmediateData getImmediateData();
+  M68kExpression getExpression();
 
 }

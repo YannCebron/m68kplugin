@@ -48,6 +48,12 @@ public class M68kDivuInstructionImpl extends ASTWrapperPsiElement implements M68
 
   @Override
   @Nullable
+  public M68kImmediateData getImmediateData() {
+    return findChildByClass(M68kImmediateData.class);
+  }
+
+  @Override
+  @Nullable
   public M68kLabelReference getLabelReference() {
     return findChildByClass(M68kLabelReference.class);
   }

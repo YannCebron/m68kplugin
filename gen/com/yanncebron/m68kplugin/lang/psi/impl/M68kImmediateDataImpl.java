@@ -25,14 +25,14 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kOriInstructionImpl extends ASTWrapperPsiElement implements M68kOriInstruction {
+public class M68kImmediateDataImpl extends ASTWrapperPsiElement implements M68kImmediateData {
 
-  public M68kOriInstructionImpl(@NotNull ASTNode node) {
+  public M68kImmediateDataImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitOriInstruction(this);
+    visitor.visitImmediateData(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -41,15 +41,9 @@ public class M68kOriInstructionImpl extends ASTWrapperPsiElement implements M68k
   }
 
   @Override
-  @NotNull
-  public List<M68kExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
-  }
-
-  @Override
   @Nullable
-  public M68kImmediateData getImmediateData() {
-    return findChildByClass(M68kImmediateData.class);
+  public M68kExpression getExpression() {
+    return findChildByClass(M68kExpression.class);
   }
 
 }

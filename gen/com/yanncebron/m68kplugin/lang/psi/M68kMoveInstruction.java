@@ -25,6 +25,9 @@ public interface M68kMoveInstruction extends M68kPsiElement {
   List<M68kExpression> getExpressionList();
 
   @Nullable
+  M68kImmediateData getImmediateData();
+
+  @Nullable
   M68kLabelReference getLabelReference();
 
 }

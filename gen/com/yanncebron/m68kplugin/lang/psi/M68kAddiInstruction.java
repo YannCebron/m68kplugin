@@ -21,7 +21,10 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kAddiInstruction extends M68kPsiElement {
 
-  @NotNull
-  List<M68kExpression> getExpressionList();
+  @Nullable
+  M68kExpression getExpression();
+
+  @Nullable
+  M68kImmediateData getImmediateData();
 
 }

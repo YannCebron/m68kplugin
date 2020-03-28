@@ -42,8 +42,8 @@ public class M68kMoveqInstructionImpl extends ASTWrapperPsiElement implements M6
 
   @Override
   @Nullable
-  public M68kExpression getExpression() {
-    return findChildByClass(M68kExpression.class);
+  public M68kImmediateData getImmediateData() {
+    return findChildByClass(M68kImmediateData.class);
   }
 
 }

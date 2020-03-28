@@ -46,4 +46,10 @@ public class M68kAndiInstructionImpl extends ASTWrapperPsiElement implements M68
     return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
   }
 
+  @Override
+  @Nullable
+  public M68kImmediateData getImmediateData() {
+    return findChildByClass(M68kImmediateData.class);
+  }
+
 }

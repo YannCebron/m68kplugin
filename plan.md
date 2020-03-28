@@ -46,7 +46,6 @@
 - expand/shrink selection: 
   - full line
   - "blocks"
-  - immediate data preceding `#`
   - `offsetExpression(An)`
 - move left/right: swap src|dest
 - templates, `TemplateContextType`

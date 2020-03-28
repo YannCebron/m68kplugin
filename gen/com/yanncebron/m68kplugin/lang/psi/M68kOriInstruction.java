@@ -24,4 +24,7 @@ public interface M68kOriInstruction extends M68kPsiElement {
   @NotNull
   List<M68kExpression> getExpressionList();
 
+  @Nullable
+  M68kImmediateData getImmediateData();
+
 }

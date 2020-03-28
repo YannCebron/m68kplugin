@@ -162,7 +162,7 @@ label_reference ::= ID {
   name = "label"
 }
 
-private immediate_data ::= HASH expression {
+immediate_data ::= HASH expression {
   pin = 1
   name = "immediate data"
 }
