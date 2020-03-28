@@ -86,9 +86,9 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
     return "<label>label</label>:\n" +
       "  lea $dff000,a6\n" +
       "* line comment\n" +
-      "  moveq #0,d0\n" +
+      "  moveq #1>>2,d0\n" +
       "<localLabel>.local</localLabel>:\n" +
-      "  moveq %0101,d1\n" +
+      "  moveq %0101+$FF,d1\n" +
       "  move.l d0,(a1) ;comment\n" +
       "  rts\n" +
       "\n" +
