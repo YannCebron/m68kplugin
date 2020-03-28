@@ -164,7 +164,7 @@ label_reference ::= ID {
 
 private immediate_data ::= HASH expression {
   pin = 1
-//  name = "immediate data" // todo
+  name = "immediate data"
 }
 
 

@@ -2,6 +2,6 @@ FILE
   PsiWhiteSpace(' ')
   M68kSubInstructionImpl(SUB_INSTRUCTION)
     PsiElement(sub)('sub')
-    PsiErrorElement:'#', <.b|w|l>, <address register>, <data register> or <effective address> expected
+    PsiErrorElement:<.b|w|l>, <address register>, <data register>, <effective address> or <immediate data> expected
       <empty list>
   PsiWhiteSpace(' ')

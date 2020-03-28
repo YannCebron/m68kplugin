@@ -2,6 +2,6 @@ FILE
   PsiWhiteSpace(' ')
   M68kMoveInstructionImpl(MOVE_INSTRUCTION)
     PsiElement(move)('move')
-    PsiErrorElement:'#', '(', '-', <.b|w|l>, <address register>, <data register>, ccr, id, pc, sr, ssp or usp expected
+    PsiErrorElement:'(', '-', <.b|w|l>, <address register>, <data register>, <immediate data>, ccr, id, pc, sr, ssp or usp expected
       <empty list>
   PsiWhiteSpace(' ')

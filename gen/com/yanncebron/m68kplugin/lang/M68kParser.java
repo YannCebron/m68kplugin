@@ -2108,9 +2108,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // HASH expression
   static boolean immediate_data(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "immediate_data")) return false;
-    if (!nextTokenIs(b, HASH)) return false;
+    if (!nextTokenIs(b, "<immediate data>", HASH)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null, "<immediate data>");
     r = consumeToken(b, HASH);
     p = r; // pin = 1
     r = r && expression(b, l + 1, -1);

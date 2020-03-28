@@ -2,6 +2,6 @@ FILE
   PsiWhiteSpace(' ')
   M68kTrapInstructionImpl(TRAP_INSTRUCTION)
     PsiElement(trap)('trap')
-    PsiErrorElement:'#' expected
+    PsiErrorElement:<immediate data> expected
       <empty list>
   PsiWhiteSpace(' ')

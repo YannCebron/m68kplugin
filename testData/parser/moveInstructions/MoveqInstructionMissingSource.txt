@@ -2,6 +2,6 @@ FILE
   PsiWhiteSpace(' ')
   M68kMoveqInstructionImpl(MOVEQ_INSTRUCTION)
     PsiElement(moveq)('moveq')
-    PsiErrorElement:'#' or '.l' expected
+    PsiErrorElement:'.l' or <immediate data> expected
       <empty list>
   PsiWhiteSpace(' ')
