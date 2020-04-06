@@ -1,0 +1,8 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kRsDirectiveImpl(RS_DIRECTIVE)
+    PsiElement(rs)('rs')
+    PsiElement(.b)('.b')
+    PsiWhiteSpace(' ')
+    M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+      PsiElement(dec_number)('42')

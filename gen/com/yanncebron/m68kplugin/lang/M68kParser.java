@@ -3171,9 +3171,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, RS_DIRECTIVE, null);
     r = consumeToken(b, RS);
-    r = r && rs_directive_1(b, l + 1);
-    p = r; // pin = 2
-    r = r && expression(b, l + 1, -1);
+    p = r; // pin = 1
+    r = r && report_error_(b, rs_directive_1(b, l + 1));
+    r = p && expression(b, l + 1, -1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

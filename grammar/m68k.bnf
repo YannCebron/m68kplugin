@@ -632,7 +632,7 @@ rsreset_directive ::= RSRESET {
 }
 
 rs_directive ::= RS data_size_all? expression {
-  pin = 2
+  pin = 1
   extends = data_sized
 }
 
