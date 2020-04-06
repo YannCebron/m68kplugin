@@ -1,0 +1,9 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kDcDirectiveImpl(DC_DIRECTIVE)
+    PsiElement(dc)('dc')
+    PsiWhiteSpace(' ')
+    M68kUnaryComplementExpressionImpl(UNARY_COMPLEMENT_EXPRESSION)
+      PsiElement(~)('~')
+      PsiErrorElement:<expression> expected
+        <empty list>

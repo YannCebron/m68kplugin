@@ -53,12 +53,24 @@ public class ExpressionParsingTest extends M68kParsingTestCase {
     doCodeTest(" dc +1");
   }
 
+  public void testUnaryPlusExpressionMissingExpression() throws Exception {
+    doCodeTest(" dc +");
+  }
+
   public void testUnaryMinusExpression() throws Exception {
     doCodeTest(" dc -1");
   }
 
+  public void testUnaryMinusExpressionMissingExpression() throws Exception {
+    doCodeTest(" dc -");
+  }
+
   public void testUnaryComplementExpression() throws Exception {
     doCodeTest(" dc ~1");
+  }
+
+  public void testUnaryComplementExpressionMissingExpression() throws Exception {
+    doCodeTest(" dc ~");
   }
 
   public void testExpExpression() throws Exception {
@@ -113,16 +125,32 @@ public class ExpressionParsingTest extends M68kParsingTestCase {
     doCodeTest(" dc 1<<2");
   }
 
+  public void testShiftLeftExpressionMissingRightExpression() throws Exception {
+    doCodeTest(" dc 1<<");
+  }
+
   public void testShiftRightExpression() throws Exception {
     doCodeTest(" dc 1>>2");
+  }
+
+  public void testShiftRightExpressionMissingRightExpression() throws Exception {
+    doCodeTest(" dc 1>>");
   }
 
   public void testAndExpression() throws Exception {
     doCodeTest(" dc 1&2");
   }
 
+  public void testAndExpressionMissingRightExpression() throws Exception {
+    doCodeTest(" dc 1&");
+  }
+
   public void testOrExpression() throws Exception {
     doCodeTest(" dc 1|2");
+  }
+
+  public void testOrExpressionMissingRightExpression() throws Exception {
+    doCodeTest(" dc 1|");
   }
 
   public void testComplexExpression() throws Exception {
