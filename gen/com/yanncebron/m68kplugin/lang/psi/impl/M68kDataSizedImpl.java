@@ -22,16 +22,18 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
-public class M68kDsDirectiveImpl extends M68kDataSizedImpl implements M68kDsDirective {
+public class M68kDataSizedImpl extends ASTWrapperPsiElement implements M68kDataSized {
 
-  public M68kDsDirectiveImpl(@NotNull ASTNode node) {
+  public M68kDataSizedImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitDsDirective(this);
+    visitor.visitDataSized(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -41,8 +43,8 @@ public class M68kDsDirectiveImpl extends M68kDataSizedImpl implements M68kDsDire
 
   @Override
   @Nullable
-  public M68kExpression getExpression() {
-    return findChildByClass(M68kExpression.class);
+  public M68kDataSize getDataSize() {
+    return M68kPsiImplUtil.getDataSize(this);
   }
 
 }

@@ -22,11 +22,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
-public class M68kDcbDirectiveImpl extends ASTWrapperPsiElement implements M68kDcbDirective {
+public class M68kDcbDirectiveImpl extends M68kDataSizedImpl implements M68kDcbDirective {
 
   public M68kDcbDirectiveImpl(@NotNull ASTNode node) {
     super(node);

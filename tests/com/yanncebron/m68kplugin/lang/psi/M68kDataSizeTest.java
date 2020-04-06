@@ -13,15 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.yanncebron.m68kplugin.lang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
+import junit.framework.TestCase;
 
-public interface M68kRsDirective extends M68kDataSized {
+public class M68kDataSizeTest extends TestCase {
 
-  @Nullable
-  M68kExpression getExpression();
+  public void testFindByText() {
+    assertDataSize(M68kDataSize.BYTE, ".b");
+    assertDataSize(M68kDataSize.BYTE, ".B");
+    assertDataSize(M68kDataSize.SHORT, ".s");
+    assertDataSize(M68kDataSize.WORD, ".w");
+    assertDataSize(M68kDataSize.LONG, ".L");
+
+    assertDataSize(null, "INVALID_VALUE");
+  }
+
+  private void assertDataSize(M68kDataSize expected, String text) {
+    assertEquals(expected, M68kDataSize.findByText(text));
+  }
 
 }

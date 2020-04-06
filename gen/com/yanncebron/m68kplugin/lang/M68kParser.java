@@ -53,6 +53,8 @@ public class M68kParser implements PsiParser, LightPsiParser {
   public static final TokenSet[] EXTENDS_SETS_ = new TokenSet[] {
     create_token_set_(LABEL, LOCAL_LABEL),
     create_token_set_(EQUALS_DIRECTIVE, EQUR_DIRECTIVE, EQU_DIRECTIVE),
+    create_token_set_(BLK_DIRECTIVE, DCB_DIRECTIVE, DC_DIRECTIVE, DS_DIRECTIVE,
+      RS_DIRECTIVE),
     create_token_set_(AND_EXPRESSION, DIV_EXPRESSION, EXPRESSION, EXP_EXPRESSION,
       LABEL_REF_EXPRESSION, MINUS_EXPRESSION, MOD_EXPRESSION, MUL_EXPRESSION,
       NUMBER_EXPRESSION, OR_EXPRESSION, PAREN_EXPRESSION, PLUS_EXPRESSION,
@@ -3162,24 +3164,23 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // label RS data_size_all? expression
+  // RS data_size_all? expression
   public static boolean rs_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "rs_directive")) return false;
-    if (!nextTokenIs(b, ID)) return false;
+    if (!nextTokenIs(b, RS)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, RS_DIRECTIVE, null);
-    r = label(b, l + 1);
-    r = r && consumeToken(b, RS);
+    r = consumeToken(b, RS);
+    r = r && rs_directive_1(b, l + 1);
     p = r; // pin = 2
-    r = r && report_error_(b, rs_directive_2(b, l + 1));
-    r = p && expression(b, l + 1, -1) && r;
+    r = r && expression(b, l + 1, -1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
   // data_size_all?
-  private static boolean rs_directive_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "rs_directive_2")) return false;
+  private static boolean rs_directive_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "rs_directive_1")) return false;
     data_size_all(b, l + 1);
     return true;
   }

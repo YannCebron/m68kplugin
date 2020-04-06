@@ -19,9 +19,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kRsDirective extends M68kDataSized {
+public interface M68kDataSized extends M68kPsiElement {
 
   @Nullable
-  M68kExpression getExpression();
+  M68kDataSize getDataSize();
 
 }

@@ -22,10 +22,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
-public class M68kBlkDirectiveImpl extends ASTWrapperPsiElement implements M68kBlkDirective {
+public class M68kBlkDirectiveImpl extends M68kDataSizedImpl implements M68kBlkDirective {
 
   public M68kBlkDirectiveImpl(@NotNull ASTNode node) {
     super(node);
@@ -41,9 +41,17 @@ public class M68kBlkDirectiveImpl extends ASTWrapperPsiElement implements M68kBl
   }
 
   @Override
-  @NotNull
-  public List<M68kExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
+  @Nullable
+  public M68kExpression getNumber() {
+    List<M68kExpression> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
+    return p1.size() < 1 ? null : p1.get(0);
+  }
+
+  @Override
+  @Nullable
+  public M68kExpression getValue() {
+    List<M68kExpression> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
+    return p1.size() < 2 ? null : p1.get(1);
   }
 
 }

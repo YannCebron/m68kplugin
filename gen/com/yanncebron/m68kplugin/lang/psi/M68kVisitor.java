@@ -110,7 +110,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitBlkDirective(@NotNull M68kBlkDirective o) {
-    visitPsiElement(o);
+    visitDataSized(o);
   }
 
   public void visitBloInstruction(@NotNull M68kBloInstruction o) {
@@ -185,6 +185,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitDataSized(@NotNull M68kDataSized o) {
+    visitPsiElement(o);
+  }
+
   public void visitDbccInstruction(@NotNull M68kDbccInstruction o) {
     visitPsiElement(o);
   }
@@ -254,11 +258,11 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitDcDirective(@NotNull M68kDcDirective o) {
-    visitPsiElement(o);
+    visitDataSized(o);
   }
 
   public void visitDcbDirective(@NotNull M68kDcbDirective o) {
-    visitPsiElement(o);
+    visitDataSized(o);
   }
 
   public void visitDivExpression(@NotNull M68kDivExpression o) {
@@ -274,7 +278,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitDsDirective(@NotNull M68kDsDirective o) {
-    visitPsiElement(o);
+    visitDataSized(o);
   }
 
   public void visitEndmDirective(@NotNull M68kEndmDirective o) {
@@ -514,7 +518,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitRsDirective(@NotNull M68kRsDirective o) {
-    visitPsiElement(o);
+    visitDataSized(o);
   }
 
   public void visitRsresetDirective(@NotNull M68kRsresetDirective o) {

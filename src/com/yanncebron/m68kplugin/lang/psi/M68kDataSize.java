@@ -13,15 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.yanncebron.m68kplugin.lang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
+import com.intellij.openapi.util.Comparing;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public interface M68kRsDirective extends M68kDataSized {
+public enum M68kDataSize {
+
+  BYTE(".b"), SHORT(".s"), WORD(".w"), LONG(".l");
+
+  @NonNls
+  private final String text;
+
+  M68kDataSize(String text) {
+    this.text = text;
+  }
+
+  @NonNls
+  public String getText() {
+    return text;
+  }
 
   @Nullable
-  M68kExpression getExpression();
-
+  public static M68kDataSize findByText(@NotNull @NonNls String text) {
+    for (M68kDataSize value : values()) {
+      if (Comparing.strEqual(text, value.getText(), false)) return value;
+    }
+    return null;
+  }
 }

@@ -19,9 +19,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kBlkDirective extends M68kPsiElement {
+public interface M68kBlkDirective extends M68kDataSized {
 
-  @NotNull
-  List<M68kExpression> getExpressionList();
+  @Nullable
+  M68kExpression getNumber();
+
+  @Nullable
+  M68kExpression getValue();
 
 }

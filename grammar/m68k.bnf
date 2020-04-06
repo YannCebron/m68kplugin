@@ -40,6 +40,8 @@
   elementTypeHolderClass = "com.yanncebron.m68kplugin.lang.psi.M68kTypes"
   elementTypeClass = "com.yanncebron.m68kplugin.lang.psi.M68kCompositeElementType"
 
+  psiImplUtilClass="com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil"
+
   classHeader = "license.txt"
   generate = [
     java="8"
@@ -102,6 +104,9 @@ private instructions ::= directives |
                          dbCC_instructions |
                          sCC_instructions
 
+fake data_sized ::= {
+  methods = [ getDataSize ]
+}
 
 private data_size_byte ::= DOT_B
 private data_size_short ::= DOT_S
@@ -599,10 +604,12 @@ include_directive ::= INCLUDE include_path {
 private dc_element ::= expression
 dc_directive ::= DC data_size_all? dc_element (COMMA dc_element)* {
   pin = 1
+  extends = data_sized
 }
 
 dcb_directive ::= DCB data_size_all? expression (COMMA expression)? {
   pin = 1
+  extends = data_sized
   methods = [
     expression = ""
     number = "expression[0]"
@@ -612,6 +619,7 @@ dcb_directive ::= DCB data_size_all? expression (COMMA expression)? {
 
 ds_directive ::= DS data_size_all? expression {
   pin = 1
+  extends = data_sized
 }
 
 rsset_directive ::= RSSET expression {
@@ -621,12 +629,19 @@ rsreset_directive ::= RSRESET {
   pin = 1
 }
 
-rs_directive ::= label RS data_size_all? expression {
+rs_directive ::= RS data_size_all? expression {
   pin = 2
+  extends = data_sized
 }
 
 blk_directive ::= BLK data_size_all? expression COMMA expression {
   pin = 1
+  extends = data_sized
+  methods = [
+    expression = ""
+    number = "expression[0]"
+    value = "expression[1]"
+  ]
 }
 
 private opt_element ::= ID (PLUS | MINUS) {

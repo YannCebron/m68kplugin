@@ -118,11 +118,11 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
   }
 
   public void testRsDirective() throws Exception {
-    doCodeTest("label rs 42");
+    doCodeTest(" rs 42");
   }
 
   public void testRsDirectiveMissingExpression() throws Exception {
-    doCodeTest("label rs ");
+    doCodeTest(" rs ");
   }
 
   public void testBlkDirective() throws Exception {
