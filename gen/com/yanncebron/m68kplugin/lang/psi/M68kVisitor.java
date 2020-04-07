@@ -382,7 +382,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitLeaInstruction(@NotNull M68kLeaInstruction o) {
-    visitPsiElement(o);
+    visitDataSized(o);
   }
 
   public void visitLinkInstruction(@NotNull M68kLinkInstruction o) {
