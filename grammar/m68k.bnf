@@ -352,7 +352,9 @@ pea_instruction ::= PEA data_size_long? any_register {
   extends = data_sized
 }
 
-clr_instruction ::= CLR data_size_all? (effective_address | any_register | label_reference)
+clr_instruction ::= CLR data_size_all? (effective_address | any_register | label_reference) {
+  extends = data_sized
+}
 
 tst_instruction ::= TST data_size_all? (effective_address | any_register)
 tas_instruction ::= TAS data_size_byte? any_register

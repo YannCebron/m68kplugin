@@ -170,7 +170,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitClrInstruction(@NotNull M68kClrInstruction o) {
-    visitPsiElement(o);
+    visitDataSized(o);
   }
 
   public void visitCmpInstruction(@NotNull M68kCmpInstruction o) {
