@@ -359,7 +359,9 @@ clr_instruction ::= CLR data_size_all? (effective_address | any_register | label
 tst_instruction ::= TST data_size_all? (effective_address | any_register) {
   extends = data_sized
 }
-tas_instruction ::= TAS data_size_byte? any_register
+tas_instruction ::= TAS data_size_byte? any_register {
+  extends = data_sized
+}
 
 ext_instruction ::= EXT data_size_word_long? data_register
 

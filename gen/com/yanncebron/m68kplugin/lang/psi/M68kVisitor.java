@@ -658,7 +658,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitTasInstruction(@NotNull M68kTasInstruction o) {
-    visitPsiElement(o);
+    visitDataSized(o);
   }
 
   public void visitTrapInstruction(@NotNull M68kTrapInstruction o) {
