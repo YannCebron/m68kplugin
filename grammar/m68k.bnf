@@ -310,7 +310,7 @@ fake bool_instruction_base ::= {
 }
 
 private bool_tail ::= data_size_all? any_register COMMA any_register
-private bool_i_tail ::= data_size_all? (any_register | immediate_data) COMMA any_register
+private bool_i_tail ::= data_size_all? immediate_data COMMA any_register
 
 and_instruction ::= AND bool_tail {
   extends = bool_instruction_base

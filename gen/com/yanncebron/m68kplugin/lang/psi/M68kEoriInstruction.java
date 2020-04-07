@@ -21,8 +21,8 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kEoriInstruction extends M68kBoolInstructionBase {
 
-  @NotNull
-  List<M68kExpression> getExpressionList();
+  @Nullable
+  M68kExpression getExpression();
 
   @Nullable
   M68kImmediateData getImmediateData();

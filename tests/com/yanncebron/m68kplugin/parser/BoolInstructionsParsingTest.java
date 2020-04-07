@@ -35,10 +35,6 @@ public class BoolInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" and.l d0,a1");
   }
 
-  public void testAndiInstructionDataRegisterDataRegister() throws IOException {
-    doCodeTest(" andi d0,d1");
-  }
-
   public void testAndiInstructionImmediateDataRegister() throws IOException {
     doCodeTest(" andi #0,d1");
   }
@@ -51,10 +47,6 @@ public class BoolInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" or.l d0,a1");
   }
 
-  public void testOriInstructionDataRegisterDataRegister() throws IOException {
-    doCodeTest(" ori d0,d1");
-  }
-
   public void testOriInstructionImmediateDataRegister() throws IOException {
     doCodeTest(" ori #0,d1");
   }
@@ -65,10 +57,6 @@ public class BoolInstructionsParsingTest extends M68kParsingTestCase {
 
   public void testEorInstructionDataSizeDataRegisterAddressRegister() throws IOException {
     doCodeTest(" eor.l d0,a1");
-  }
-
-  public void testEoriInstructionDataRegisterDataRegister() throws IOException {
-    doCodeTest(" eori d0,d1");
   }
 
   public void testEoriInstructionImmediateDataRegister() throws IOException {

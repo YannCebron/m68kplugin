@@ -40,9 +40,9 @@ public class M68kOriInstructionImpl extends M68kBoolInstructionBaseImpl implemen
   }
 
   @Override
-  @NotNull
-  public List<M68kExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
+  @Nullable
+  public M68kExpression getExpression() {
+    return findChildByClass(M68kExpression.class);
   }
 
   @Override

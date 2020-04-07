@@ -999,13 +999,13 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_all? (any_register | immediate_data) COMMA any_register
+  // data_size_all? immediate_data COMMA any_register
   static boolean bool_i_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bool_i_tail")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = bool_i_tail_0(b, l + 1);
-    r = r && bool_i_tail_1(b, l + 1);
+    r = r && immediate_data(b, l + 1);
     r = r && consumeToken(b, COMMA);
     r = r && any_register(b, l + 1);
     exit_section_(b, m, null, r);
@@ -1017,15 +1017,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "bool_i_tail_0")) return false;
     data_size_all(b, l + 1);
     return true;
-  }
-
-  // any_register | immediate_data
-  private static boolean bool_i_tail_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bool_i_tail_1")) return false;
-    boolean r;
-    r = any_register(b, l + 1);
-    if (!r) r = immediate_data(b, l + 1);
-    return r;
   }
 
   /* ********************************************************** */
