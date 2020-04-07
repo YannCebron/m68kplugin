@@ -19,15 +19,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kBtstInstruction extends M68kBitInstructionBase {
-
-  @Nullable
-  M68kExpression getExpression();
-
-  @Nullable
-  M68kImmediateData getImmediateData();
-
-  @Nullable
-  M68kLabelReference getLabelReference();
+public interface M68kBitInstructionBase extends M68kDataSized {
 
 }
