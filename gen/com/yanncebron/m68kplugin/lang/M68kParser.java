@@ -64,7 +64,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
       CMP_INSTRUCTION, DCB_DIRECTIVE, DC_DIRECTIVE, DS_DIRECTIVE,
       LEA_INSTRUCTION, LSL_INSTRUCTION, LSR_INSTRUCTION, PEA_INSTRUCTION,
       ROL_INSTRUCTION, ROR_INSTRUCTION, ROXL_INSTRUCTION, ROXR_INSTRUCTION,
-      RS_DIRECTIVE),
+      RS_DIRECTIVE, TST_INSTRUCTION),
   };
 
   /* ********************************************************** */

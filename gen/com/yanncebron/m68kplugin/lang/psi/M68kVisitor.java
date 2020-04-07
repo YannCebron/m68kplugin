@@ -670,7 +670,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitTstInstruction(@NotNull M68kTstInstruction o) {
-    visitPsiElement(o);
+    visitDataSized(o);
   }
 
   public void visitUnaryComplementExpression(@NotNull M68kUnaryComplementExpression o) {
