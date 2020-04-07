@@ -174,19 +174,23 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitCmpInstruction(@NotNull M68kCmpInstruction o) {
-    visitPsiElement(o);
+    visitCmpInstructionBase(o);
+  }
+
+  public void visitCmpInstructionBase(@NotNull M68kCmpInstructionBase o) {
+    visitDataSized(o);
   }
 
   public void visitCmpaInstruction(@NotNull M68kCmpaInstruction o) {
-    visitPsiElement(o);
+    visitCmpInstructionBase(o);
   }
 
   public void visitCmpiInstruction(@NotNull M68kCmpiInstruction o) {
-    visitPsiElement(o);
+    visitCmpInstructionBase(o);
   }
 
   public void visitCmpmInstruction(@NotNull M68kCmpmInstruction o) {
-    visitPsiElement(o);
+    visitCmpInstructionBase(o);
   }
 
   public void visitDataSized(@NotNull M68kDataSized o) {

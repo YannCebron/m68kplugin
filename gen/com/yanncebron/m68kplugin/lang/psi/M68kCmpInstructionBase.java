@@ -19,12 +19,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kCmpInstruction extends M68kCmpInstructionBase {
-
-  @Nullable
-  M68kExpression getExpression();
-
-  @Nullable
-  M68kLabelReference getLabelReference();
+public interface M68kCmpInstructionBase extends M68kDataSized {
 
 }
