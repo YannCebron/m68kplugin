@@ -367,7 +367,9 @@ ext_instruction ::= EXT data_size_word_long? data_register {
   extends = data_sized
 }
 
-exg_instruction ::= EXG data_size_long? any_register COMMA any_register
+exg_instruction ::= EXG data_size_long? any_register COMMA any_register {
+  extends = data_sized
+}
 
 neg_instruction ::= NEG data_size_all? (data_register | effective_address)
 negx_instruction ::= NEGX data_size_all? (data_register | effective_address)
