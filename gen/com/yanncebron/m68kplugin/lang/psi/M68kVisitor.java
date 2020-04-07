@@ -22,7 +22,7 @@ import com.intellij.psi.PsiNamedElement;
 public class M68kVisitor extends PsiElementVisitor {
 
   public void visitAbcdInstruction(@NotNull M68kAbcdInstruction o) {
-    visitPsiElement(o);
+    visitBcdInstructionBase(o);
   }
 
   public void visitAddInstruction(@NotNull M68kAddInstruction o) {
@@ -67,6 +67,10 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitBccInstruction(@NotNull M68kBccInstruction o) {
     visitPsiElement(o);
+  }
+
+  public void visitBcdInstructionBase(@NotNull M68kBcdInstructionBase o) {
+    visitDataSized(o);
   }
 
   public void visitBchgInstruction(@NotNull M68kBchgInstruction o) {
@@ -446,7 +450,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitNbcdInstruction(@NotNull M68kNbcdInstruction o) {
-    visitPsiElement(o);
+    visitDataSized(o);
   }
 
   public void visitNegInstruction(@NotNull M68kNegInstruction o) {
@@ -554,7 +558,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitSbcdInstruction(@NotNull M68kSbcdInstruction o) {
-    visitPsiElement(o);
+    visitBcdInstructionBase(o);
   }
 
   public void visitSccInstruction(@NotNull M68kSccInstruction o) {

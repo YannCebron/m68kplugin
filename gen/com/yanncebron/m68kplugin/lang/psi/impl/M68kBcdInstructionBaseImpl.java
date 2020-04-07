@@ -24,14 +24,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kSbcdInstructionImpl extends M68kBcdInstructionBaseImpl implements M68kSbcdInstruction {
+public class M68kBcdInstructionBaseImpl extends M68kDataSizedImpl implements M68kBcdInstructionBase {
 
-  public M68kSbcdInstructionImpl(@NotNull ASTNode node) {
+  public M68kBcdInstructionBaseImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitSbcdInstruction(this);
+    visitor.visitBcdInstructionBase(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {

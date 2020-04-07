@@ -19,6 +19,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kAbcdInstruction extends M68kBcdInstructionBase {
+public interface M68kBcdInstructionBase extends M68kDataSized {
 
 }

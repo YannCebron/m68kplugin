@@ -220,6 +220,9 @@ rtr_instruction ::= RTR
 private bcd_instructions ::= abcd_instruction |
                              nbcd_instruction |
                              sbcd_instruction
+fake bcd_instruction_base ::= {
+  extends = data_sized
+}
 
 private bcd_tail ::= data_size_byte?
                      (
@@ -227,9 +230,15 @@ private bcd_tail ::= data_size_byte?
                       (address_register_pre_decrement COMMA address_register_pre_decrement)
                      )
 
-abcd_instruction ::= ABCD bcd_tail
-nbcd_instruction ::= NBCD data_size_byte? any_register
-sbcd_instruction ::= SBCD bcd_tail
+abcd_instruction ::= ABCD bcd_tail {
+  extends = bcd_instruction_base
+}
+nbcd_instruction ::= NBCD data_size_byte? any_register {
+  extends = data_sized
+}
+sbcd_instruction ::= SBCD bcd_tail {
+  extends = bcd_instruction_base
+}
 
 // Add/Sub ==================================================================
 private add_sub_instructions ::= add_instruction |
