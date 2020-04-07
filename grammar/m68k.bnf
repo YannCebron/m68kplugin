@@ -363,7 +363,9 @@ tas_instruction ::= TAS data_size_byte? any_register {
   extends = data_sized
 }
 
-ext_instruction ::= EXT data_size_word_long? data_register
+ext_instruction ::= EXT data_size_word_long? data_register {
+  extends = data_sized
+}
 
 exg_instruction ::= EXG data_size_long? any_register COMMA any_register
 
