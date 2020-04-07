@@ -348,7 +348,9 @@ unlk_instruction ::= UNLK address_register
 lea_instruction ::= LEA data_size_long? effective_address COMMA (address_register | label_reference) {
   extends = data_sized
 }
-pea_instruction ::= PEA data_size_long? any_register
+pea_instruction ::= PEA data_size_long? any_register {
+  extends = data_sized
+}
 
 clr_instruction ::= CLR data_size_all? (effective_address | any_register | label_reference)
 

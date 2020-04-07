@@ -490,7 +490,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitPeaInstruction(@NotNull M68kPeaInstruction o) {
-    visitPsiElement(o);
+    visitDataSized(o);
   }
 
   public void visitPlusExpression(@NotNull M68kPlusExpression o) {
