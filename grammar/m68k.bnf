@@ -296,20 +296,37 @@ private bool_instructions ::= and_instruction |
                               eor_instruction |
                               eori_instruction |
                               not_instruction
-                              
+fake bool_instruction_base ::= {
+  extends = data_sized
+}
+
 private bool_tail ::= data_size_all? any_register COMMA any_register
 private bool_i_tail ::= data_size_all? (any_register | immediate_data) COMMA any_register
 
-and_instruction ::= AND bool_tail
-andi_instruction ::= ANDI bool_i_tail
+and_instruction ::= AND bool_tail {
+  extends = bool_instruction_base
+}
+andi_instruction ::= ANDI bool_i_tail {
+  extends = bool_instruction_base
+}
 
-or_instruction ::= OR bool_tail
-ori_instruction ::= ORI bool_i_tail
+or_instruction ::= OR bool_tail {
+  extends = bool_instruction_base
+}
+ori_instruction ::= ORI bool_i_tail {
+  extends = bool_instruction_base
+}
 
-eor_instruction ::= EOR bool_tail
-eori_instruction ::= EORI bool_i_tail
+eor_instruction ::= EOR bool_tail {
+  extends = bool_instruction_base
+}
+eori_instruction ::= EORI bool_i_tail {
+  extends = bool_instruction_base
+}
 
-not_instruction ::= NOT data_size_all? (data_register | effective_address)
+not_instruction ::= NOT data_size_all? (data_register | effective_address) {
+  extends = bool_instruction_base
+}
 
 
 // Misc ==================================================================

@@ -24,25 +24,19 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kAndInstructionImpl extends M68kBoolInstructionBaseImpl implements M68kAndInstruction {
+public class M68kBoolInstructionBaseImpl extends M68kDataSizedImpl implements M68kBoolInstructionBase {
 
-  public M68kAndInstructionImpl(@NotNull ASTNode node) {
+  public M68kBoolInstructionBaseImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitAndInstruction(this);
+    visitor.visitBoolInstructionBase(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public List<M68kExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
   }
 
 }

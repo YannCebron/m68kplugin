@@ -22,10 +22,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kOrInstructionImpl extends ASTWrapperPsiElement implements M68kOrInstruction {
+public class M68kOrInstructionImpl extends M68kBoolInstructionBaseImpl implements M68kOrInstruction {
 
   public M68kOrInstructionImpl(@NotNull ASTNode node) {
     super(node);

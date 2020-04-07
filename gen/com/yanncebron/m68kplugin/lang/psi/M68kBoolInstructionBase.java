@@ -19,9 +19,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kOrInstruction extends M68kBoolInstructionBase {
-
-  @NotNull
-  List<M68kExpression> getExpressionList();
+public interface M68kBoolInstructionBase extends M68kDataSized {
 
 }
