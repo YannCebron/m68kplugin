@@ -450,7 +450,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitNegxInstruction(@NotNull M68kNegxInstruction o) {
-    visitPsiElement(o);
+    visitDataSized(o);
   }
 
   public void visitNopInstruction(@NotNull M68kNopInstruction o) {

@@ -374,7 +374,9 @@ exg_instruction ::= EXG data_size_long? any_register COMMA any_register {
 neg_instruction ::= NEG data_size_all? (data_register | effective_address) {
   extends = data_sized
 }
-negx_instruction ::= NEGX data_size_all? (data_register | effective_address)
+negx_instruction ::= NEGX data_size_all? (data_register | effective_address) {
+  extends = data_sized
+}
 
 swap_instruction ::= SWAP data_size_word? data_register
 
