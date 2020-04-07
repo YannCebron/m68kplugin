@@ -543,20 +543,40 @@ private shift_instructions ::= asl_instruction |
                                roxl_instruction |
                                roxr_instruction
 
+fake shift_instruction_base ::= {
+  extends = data_sized
+}
+
 private shift_tail ::= data_size_all?
                        (immediate_data | data_register) COMMA (data_register | effective_address)
 
-asl_instruction ::= ASL shift_tail
-asr_instruction ::= ASR shift_tail
+asl_instruction ::= ASL shift_tail {
+  extends = shift_instruction_base
+}
+asr_instruction ::= ASR shift_tail {
+  extends = shift_instruction_base
+}
 
-lsl_instruction ::= LSL shift_tail
-lsr_instruction ::= LSR shift_tail
+lsl_instruction ::= LSL shift_tail {
+  extends = shift_instruction_base
+}
+lsr_instruction ::= LSR shift_tail {
+  extends = shift_instruction_base
+}
 
-rol_instruction ::= ROL shift_tail
-ror_instruction ::= ROR shift_tail
+rol_instruction ::= ROL shift_tail {
+  extends = shift_instruction_base
+}
+ror_instruction ::= ROR shift_tail {
+  extends = shift_instruction_base
+}
 
-roxl_instruction ::= ROXL shift_tail
-roxr_instruction ::= ROXR shift_tail
+roxl_instruction ::= ROXL shift_tail {
+  extends = shift_instruction_base
+}
+roxr_instruction ::= ROXR shift_tail {
+  extends = shift_instruction_base
+}
 
 
 // Directives  ===================================================================

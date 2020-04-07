@@ -24,37 +24,19 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kRoxrInstructionImpl extends M68kShiftInstructionBaseImpl implements M68kRoxrInstruction {
+public class M68kShiftInstructionBaseImpl extends M68kDataSizedImpl implements M68kShiftInstructionBase {
 
-  public M68kRoxrInstructionImpl(@NotNull ASTNode node) {
+  public M68kShiftInstructionBaseImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitRoxrInstruction(this);
+    visitor.visitShiftInstructionBase(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public M68kExpression getExpression() {
-    return findChildByClass(M68kExpression.class);
-  }
-
-  @Override
-  @Nullable
-  public M68kImmediateData getImmediateData() {
-    return findChildByClass(M68kImmediateData.class);
-  }
-
-  @Override
-  @Nullable
-  public M68kLabelReference getLabelReference() {
-    return findChildByClass(M68kLabelReference.class);
   }
 
 }

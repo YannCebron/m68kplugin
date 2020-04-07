@@ -58,11 +58,11 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitAslInstruction(@NotNull M68kAslInstruction o) {
-    visitPsiElement(o);
+    visitShiftInstructionBase(o);
   }
 
   public void visitAsrInstruction(@NotNull M68kAsrInstruction o) {
-    visitPsiElement(o);
+    visitShiftInstructionBase(o);
   }
 
   public void visitBccInstruction(@NotNull M68kBccInstruction o) {
@@ -390,11 +390,11 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitLslInstruction(@NotNull M68kLslInstruction o) {
-    visitPsiElement(o);
+    visitShiftInstructionBase(o);
   }
 
   public void visitLsrInstruction(@NotNull M68kLsrInstruction o) {
-    visitPsiElement(o);
+    visitShiftInstructionBase(o);
   }
 
   public void visitMacroDirective(@NotNull M68kMacroDirective o) {
@@ -506,19 +506,19 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitRolInstruction(@NotNull M68kRolInstruction o) {
-    visitPsiElement(o);
+    visitShiftInstructionBase(o);
   }
 
   public void visitRorInstruction(@NotNull M68kRorInstruction o) {
-    visitPsiElement(o);
+    visitShiftInstructionBase(o);
   }
 
   public void visitRoxlInstruction(@NotNull M68kRoxlInstruction o) {
-    visitPsiElement(o);
+    visitShiftInstructionBase(o);
   }
 
   public void visitRoxrInstruction(@NotNull M68kRoxrInstruction o) {
-    visitPsiElement(o);
+    visitShiftInstructionBase(o);
   }
 
   public void visitRsDirective(@NotNull M68kRsDirective o) {
@@ -575,6 +575,10 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitShiInstruction(@NotNull M68kShiInstruction o) {
     visitPsiElement(o);
+  }
+
+  public void visitShiftInstructionBase(@NotNull M68kShiftInstructionBase o) {
+    visitDataSized(o);
   }
 
   public void visitShiftLeftExpression(@NotNull M68kShiftLeftExpression o) {

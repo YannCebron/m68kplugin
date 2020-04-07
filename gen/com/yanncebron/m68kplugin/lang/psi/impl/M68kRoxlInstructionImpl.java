@@ -22,10 +22,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kRoxlInstructionImpl extends ASTWrapperPsiElement implements M68kRoxlInstruction {
+public class M68kRoxlInstructionImpl extends M68kShiftInstructionBaseImpl implements M68kRoxlInstruction {
 
   public M68kRoxlInstructionImpl(@NotNull ASTNode node) {
     super(node);
