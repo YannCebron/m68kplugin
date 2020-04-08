@@ -17,24 +17,42 @@
 package com.yanncebron.m68kplugin.lang.psi;
 
 import com.intellij.openapi.util.Comparing;
+import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public enum M68kDataSize {
 
-  BYTE(".b"), SHORT(".s"), WORD(".w"), LONG(".l");
+  BYTE(".b", M68kTokenTypes.DOT_B),
+  SHORT(".s", M68kTokenTypes.DOT_S),
+  WORD(".w", M68kTokenTypes.DOT_W),
+  LONG(".l", M68kTokenTypes.DOT_L);
 
   @NonNls
   private final String text;
+  private final IElementType elementType;
 
-  M68kDataSize(String text) {
+  M68kDataSize(String text, IElementType elementType) {
     this.text = text;
+    this.elementType = elementType;
   }
 
   @NonNls
   public String getText() {
     return text;
+  }
+
+  public IElementType getElementType() {
+    return elementType;
+  }
+
+  @Nullable
+  public static M68kDataSize findByElementType(@NotNull IElementType elementType) {
+    for (M68kDataSize value : values()) {
+      if (elementType == value.getElementType()) return value;
+    }
+    return null;
   }
 
   @Nullable

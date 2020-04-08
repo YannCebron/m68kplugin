@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
+import com.intellij.psi.tree.IElementType;
 import junit.framework.TestCase;
 
 public class M68kDataSizeTest extends TestCase {
@@ -32,6 +33,19 @@ public class M68kDataSizeTest extends TestCase {
 
   private void assertDataSize(M68kDataSize expected, String text) {
     assertEquals(expected, M68kDataSize.findByText(text));
+  }
+
+  public void testFindByElementType() {
+    assertDataSize2(M68kDataSize.BYTE, M68kTokenTypes.DOT_B);
+    assertDataSize2(M68kDataSize.SHORT, M68kTokenTypes.DOT_S);
+    assertDataSize2(M68kDataSize.WORD, M68kTokenTypes.DOT_W);
+    assertDataSize2(M68kDataSize.LONG, M68kTokenTypes.DOT_L);
+
+    assertDataSize2(null, M68kTokenTypes.ABCD);
+  }
+
+  private void assertDataSize2(M68kDataSize expected, IElementType elementType) {
+    assertEquals(expected, M68kDataSize.findByElementType(elementType));
   }
 
 }

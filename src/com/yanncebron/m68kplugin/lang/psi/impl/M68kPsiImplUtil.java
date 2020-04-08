@@ -29,7 +29,6 @@ public class M68kPsiImplUtil {
     final ASTNode childByType = psiElement.getNode().findChildByType(M68kTokenGroups.DATA_SIZES);
     if (childByType == null) return null;
 
-    String text = childByType.getPsi().getText();
-    return M68kDataSize.findByText(text);
+    return M68kDataSize.findByElementType(childByType.getElementType());
   }
 }
