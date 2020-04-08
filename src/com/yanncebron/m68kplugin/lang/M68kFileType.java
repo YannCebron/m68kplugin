@@ -46,7 +46,7 @@ public class M68kFileType extends LanguageFileType {
   @NotNull
   @Override
   public String getDefaultExtension() {
-    return ".s";
+    return "s";
   }
 
   @Nullable
