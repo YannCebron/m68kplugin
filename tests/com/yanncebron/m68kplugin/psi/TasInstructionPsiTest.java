@@ -25,12 +25,14 @@ public class TasInstructionPsiTest extends M68kPsiTestCase {
     final M68kTasInstruction instruction = parse("tas d0");
 
     assertNull(instruction.getDataSize());
+    assertNotNull(instruction.getAdmDrd());
   }
 
   public void testWithDataSize() {
-    final M68kTasInstruction instruction = parse("tas.b d0");
+    final M68kTasInstruction instruction = parse("tas.b -(a1)");
 
     assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
+    assertNotNull(instruction.getAdmApd());
   }
 
   private M68kTasInstruction parse(String text) {

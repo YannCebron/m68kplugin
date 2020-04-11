@@ -133,11 +133,11 @@ public class MiscInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" tst.l label");
   }
 
-  public void testTasInstruction() throws Exception {
+  public void testTasInstructionDrd() throws Exception {
     doCodeTest(" tas d0");
   }
 
-  public void testTasInstructionDataSize() throws Exception {
+  public void testTasInstructionDataSizeAri() throws Exception {
     doCodeTest(" tas (a0)");
   }
 
