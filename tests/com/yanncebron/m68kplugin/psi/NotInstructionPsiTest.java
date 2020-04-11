@@ -19,7 +19,7 @@ package com.yanncebron.m68kplugin.psi;
 import com.yanncebron.m68kplugin.lang.psi.M68kDataSize;
 import com.yanncebron.m68kplugin.lang.psi.M68kNotInstruction;
 
-public class NotnstructionPsiTest extends M68kPsiTestCase {
+public class NotInstructionPsiTest extends M68kPsiTestCase {
 
   public void testWithoutDataSize() {
     final M68kNotInstruction instruction = parse("not d0");
@@ -28,9 +28,10 @@ public class NotnstructionPsiTest extends M68kPsiTestCase {
   }
 
   public void testWithDataSize() {
-    final M68kNotInstruction instruction = parse("not.b d0");
+    final M68kNotInstruction instruction = parse("not.b 42(a0,d0)");
 
     assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
+    assertNotNull(instruction.getAdmAix());
   }
 
   private M68kNotInstruction parse(String text) {

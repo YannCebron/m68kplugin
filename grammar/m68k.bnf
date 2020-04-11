@@ -379,7 +379,7 @@ eori_instruction ::= EORI bool_i_tail {
   extends = bool_instruction_base
 }
 
-not_instruction ::= NOT data_size_all? (data_register | effective_address) {
+not_instruction ::= NOT data_size_all? adm_group_all_except_ard_pc_imm {
   extends = bool_instruction_base
 }
 

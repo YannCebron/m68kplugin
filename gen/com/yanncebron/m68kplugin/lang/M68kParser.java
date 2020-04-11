@@ -3025,7 +3025,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // NOT data_size_all? (data_register | effective_address)
+  // NOT data_size_all? adm_group_all_except_ard_pc_imm
   public static boolean not_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "not_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", NOT)) return false;
@@ -3034,7 +3034,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, NOT);
     p = r; // pin = 1
     r = r && report_error_(b, not_instruction_1(b, l + 1));
-    r = p && not_instruction_2(b, l + 1) && r;
+    r = p && adm_group_all_except_ard_pc_imm(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -3044,15 +3044,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "not_instruction_1")) return false;
     data_size_all(b, l + 1);
     return true;
-  }
-
-  // data_register | effective_address
-  private static boolean not_instruction_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "not_instruction_2")) return false;
-    boolean r;
-    r = data_register(b, l + 1);
-    if (!r) r = effective_address(b, l + 1);
-    return r;
   }
 
   /* ********************************************************** */

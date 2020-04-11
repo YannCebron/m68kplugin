@@ -63,15 +63,15 @@ public class BoolInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" eori #0,d1");
   }
 
-  public void testNotInstructionDataRegister() throws IOException {
+  public void testNotInstructionDrd() throws IOException {
     doCodeTest(" not d0");
   }
 
-  public void testNotInstructionDataSizeDataRegister() throws IOException {
+  public void testNotInstructionDataSizeDrd() throws IOException {
     doCodeTest(" not.b d0");
   }
 
-  public void testNotInstructionLabel() throws IOException {
+  public void testNotInstructionAbs() throws IOException {
     doCodeTest(" not label");
   }
 
