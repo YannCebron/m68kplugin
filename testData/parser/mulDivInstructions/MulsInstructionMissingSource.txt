@@ -2,6 +2,6 @@ FILE
   PsiWhiteSpace(' ')
   M68kMulsInstructionImpl(MULS_INSTRUCTION)
     PsiElement(muls)('muls')
-    PsiErrorElement:'(', '-', '.w', <address register>, <data register>, <expression> or <immediate data> expected
+    PsiErrorElement:'(', '-', '.w', <data register>, <expression> or <immediate data> expected
       <empty list>
   PsiWhiteSpace(' ')

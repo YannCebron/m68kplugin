@@ -72,12 +72,6 @@ public class M68kMulsInstructionImpl extends ASTWrapperPsiElement implements M68
 
   @Override
   @Nullable
-  public M68kAdmArd getAdmArd() {
-    return findChildByClass(M68kAdmArd.class);
-  }
-
-  @Override
-  @Nullable
   public M68kAdmAri getAdmAri() {
     return findChildByClass(M68kAdmAri.class);
   }

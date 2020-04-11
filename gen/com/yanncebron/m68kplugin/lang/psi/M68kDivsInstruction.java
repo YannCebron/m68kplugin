@@ -37,9 +37,6 @@ public interface M68kDivsInstruction extends M68kPsiElement {
   M68kAdmApi getAdmApi();
 
   @Nullable
-  M68kAdmArd getAdmArd();
-
-  @Nullable
   M68kAdmAri getAdmAri();
 
   @NotNull

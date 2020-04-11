@@ -210,6 +210,7 @@ adm_imm ::= HASH expression data_size_word_long? {
 
 // ATTN: ordering in groups
 private adm_group_all ::=                   adm_drd | adm_ard | adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+private adm_group_all_except_ard ::=        adm_drd |           adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
 private adm_group_all_except_imm ::=        adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
 private adm_group_all_except_pc_imm ::=     adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
 private adm_group_all_except_ard_pc_imm ::= adm_drd |                     adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
@@ -335,7 +336,7 @@ private mul_div_instructions ::= muls_instruction |
                                  divu_instruction
 
 private mul_div_tail ::= data_size_word?
-                         adm_group_all COMMA adm_drd 
+                         adm_group_all_except_ard COMMA adm_drd
 
 muls_instruction ::= MULS mul_div_tail
 mulu_instruction ::= MULU mul_div_tail

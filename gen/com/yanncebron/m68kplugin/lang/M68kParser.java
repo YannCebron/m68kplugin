@@ -607,6 +607,24 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // adm_drd |           adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+  static boolean adm_group_all_except_ard(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_group_all_except_ard")) return false;
+    boolean r;
+    r = adm_drd(b, l + 1);
+    if (!r) r = adm_imm(b, l + 1);
+    if (!r) r = adm_api(b, l + 1);
+    if (!r) r = adm_ari(b, l + 1);
+    if (!r) r = adm_apd(b, l + 1);
+    if (!r) r = adm_pcd(b, l + 1);
+    if (!r) r = adm_pci(b, l + 1);
+    if (!r) r = adm_adi(b, l + 1);
+    if (!r) r = adm_aix(b, l + 1);
+    if (!r) r = adm_abs(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
   // adm_drd |                     adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
   static boolean adm_group_all_except_ard_pc_imm(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_group_all_except_ard_pc_imm")) return false;
@@ -2888,13 +2906,13 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // data_size_word?
-  //                          adm_group_all COMMA adm_drd
+  //                          adm_group_all_except_ard COMMA adm_drd
   static boolean mul_div_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "mul_div_tail")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = mul_div_tail_0(b, l + 1);
-    r = r && adm_group_all(b, l + 1);
+    r = r && adm_group_all_except_ard(b, l + 1);
     r = r && consumeToken(b, COMMA);
     r = r && adm_drd(b, l + 1);
     exit_section_(b, m, null, r);
