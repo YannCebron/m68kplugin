@@ -1,0 +1,13 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kNegxInstructionImpl(NEGX_INSTRUCTION)
+    PsiElement(negx)('negx')
+    PsiElement(.b)('.b')
+    PsiWhiteSpace(' ')
+    M68kAdmAdiImpl(ADM_ADI)
+      M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+        PsiElement(dec_number)('42')
+      PsiElement(()('(')
+      M68kAdmArdImpl(ADM_ARD)
+        PsiElement(address_register)('a1')
+      PsiElement())(')')

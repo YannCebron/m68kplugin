@@ -4,4 +4,6 @@ FILE
     PsiElement(neg)('neg')
     PsiElement(.b)('.b')
     PsiWhiteSpace(' ')
-    PsiElement(data_register)('d0')
+    M68kAdmAbsImpl(ADM_ABS)
+      M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+        PsiElement(hex_number)('$400')

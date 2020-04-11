@@ -450,10 +450,10 @@ exg_instruction ::= EXG data_size_long? adm_rrd COMMA adm_rrd {
   ]
 }
 
-neg_instruction ::= NEG data_size_all? (data_register | effective_address) {
+neg_instruction ::= NEG data_size_all? adm_group_all_except_ard_pc_imm {
   extends = data_sized
 }
-negx_instruction ::= NEGX data_size_all? (data_register | effective_address) {
+negx_instruction ::= NEGX data_size_all? adm_group_all_except_ard_pc_imm {
   extends = data_sized
 }
 

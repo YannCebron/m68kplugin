@@ -25,6 +25,7 @@ public class NegInstructionPsiTest extends M68kPsiTestCase {
     final M68kNegInstruction instruction = parse("neg d0");
 
     assertNull(instruction.getDataSize());
+    assertNotNull(instruction.getAdmDrd());
   }
 
   public void testWithDataSize() {

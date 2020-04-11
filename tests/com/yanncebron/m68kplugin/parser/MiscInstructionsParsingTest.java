@@ -157,20 +157,20 @@ public class MiscInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" exg.l d0,a0");
   }
 
-  public void testNegInstruction() throws Exception {
+  public void testNegInstructionDrd() throws Exception {
     doCodeTest(" neg d0");
   }
 
-  public void testNegInstructionDataSize() throws Exception {
-    doCodeTest(" neg.b d0");
+  public void testNegInstructionDataSizeAbs() throws Exception {
+    doCodeTest(" neg.b $400");
   }
 
-  public void testNegxInstruction() throws Exception {
+  public void testNegxInstructionDrd() throws Exception {
     doCodeTest(" negx d0");
   }
 
-  public void testNegxInstructionDataSize() throws Exception {
-    doCodeTest(" negx.b d0");
+  public void testNegxInstructionDataSizeAdi() throws Exception {
+    doCodeTest(" negx.b 42(a1)");
   }
 
   public void testSwapInstruction() throws Exception {

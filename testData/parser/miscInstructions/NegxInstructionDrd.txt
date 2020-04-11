@@ -2,6 +2,6 @@ FILE
   PsiWhiteSpace(' ')
   M68kNegxInstructionImpl(NEGX_INSTRUCTION)
     PsiElement(negx)('negx')
-    PsiElement(.b)('.b')
     PsiWhiteSpace(' ')
-    PsiElement(data_register)('d0')
+    M68kAdmDrdImpl(ADM_DRD)
+      PsiElement(data_register)('d0')
