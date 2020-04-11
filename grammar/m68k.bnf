@@ -267,8 +267,8 @@ fake bcd_instruction_base ::= {
 
 private bcd_tail ::= data_size_byte?
                      (
-                      (data_register COMMA data_register) |
-                      (address_register_pre_decrement COMMA address_register_pre_decrement)
+                      (adm_drd COMMA adm_drd) |
+                      (adm_apd COMMA adm_apd)
                      )
 
 abcd_instruction ::= ABCD bcd_tail {

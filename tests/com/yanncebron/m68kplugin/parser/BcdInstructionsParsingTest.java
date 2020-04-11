@@ -27,19 +27,19 @@ public class BcdInstructionsParsingTest extends M68kParsingTestCase {
     super("bcdInstructions");
   }
 
-  public void testAbcdInstructionDataRegisterDataRegister() throws IOException {
+  public void testAbcdInstructionDrdDrd() throws IOException {
     doCodeTest(" abcd d0,d1");
   }
 
-  public void testAbcdInstructionDataRegisterMissingDestination() throws IOException {
+  public void testAbcdInstructionDrdMissingDestination() throws IOException {
     doCodeTest(" abcd d0,");
   }
 
-  public void testAbcdInstructionAddressRegisterAddressRegister() throws IOException {
+  public void testAbcdInstructionApdApd() throws IOException {
     doCodeTest(" abcd -(a0),-(a1)");
   }
 
-  public void testAbcdInstructionAddressRegisterMissingDestination() throws IOException {
+  public void testAbcdInstructionApdMissingDestination() throws IOException {
     doCodeTest(" abcd -(a0),");
   }
 
@@ -55,11 +55,11 @@ public class BcdInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" nbcd a0");
   }
 
-  public void testSbcdInstructionDataRegisterDataRegister() throws IOException {
+  public void testSbcdInstructionDrdDrd() throws IOException {
     doCodeTest(" sbcd d0,d1");
   }
 
-  public void testSbcdInstructionAddressRegisterAddressRegister() throws IOException {
+  public void testSbcdInstructionApdApd() throws IOException {
     doCodeTest(" sbcd -(a0),-(a1)");
   }
 

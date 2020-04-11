@@ -21,4 +21,10 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kSbcdInstruction extends M68kBcdInstructionBase {
 
+  @NotNull
+  List<M68kAdmApd> getAdmApdList();
+
+  @NotNull
+  List<M68kAdmDrd> getAdmDrdList();
+
 }

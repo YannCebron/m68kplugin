@@ -883,8 +883,8 @@ public class M68kParser implements PsiParser, LightPsiParser {
   /* ********************************************************** */
   // data_size_byte?
   //                      (
-  //                       (data_register COMMA data_register) |
-  //                       (address_register_pre_decrement COMMA address_register_pre_decrement)
+  //                       (adm_drd COMMA adm_drd) |
+  //                       (adm_apd COMMA adm_apd)
   //                      )
   static boolean bcd_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bcd_tail")) return false;
@@ -903,8 +903,8 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // (data_register COMMA data_register) |
-  //                       (address_register_pre_decrement COMMA address_register_pre_decrement)
+  // (adm_drd COMMA adm_drd) |
+  //                       (adm_apd COMMA adm_apd)
   private static boolean bcd_tail_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bcd_tail_1")) return false;
     boolean r;
@@ -915,26 +915,26 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // data_register COMMA data_register
+  // adm_drd COMMA adm_drd
   private static boolean bcd_tail_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bcd_tail_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = data_register(b, l + 1);
+    r = adm_drd(b, l + 1);
     r = r && consumeToken(b, COMMA);
-    r = r && data_register(b, l + 1);
+    r = r && adm_drd(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // address_register_pre_decrement COMMA address_register_pre_decrement
+  // adm_apd COMMA adm_apd
   private static boolean bcd_tail_1_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bcd_tail_1_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = address_register_pre_decrement(b, l + 1);
+    r = adm_apd(b, l + 1);
     r = r && consumeToken(b, COMMA);
-    r = r && address_register_pre_decrement(b, l + 1);
+    r = r && adm_apd(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
