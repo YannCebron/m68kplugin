@@ -2,11 +2,13 @@ FILE
   PsiWhiteSpace(' ')
   M68kAbcdInstructionImpl(ABCD_INSTRUCTION)
     PsiElement(abcd)('abcd')
-  PsiWhiteSpace(' ')
-  PsiElement(-)('-')
-  PsiElement(()('(')
-  PsiElement(address_register)('a0')
-  PsiElement())(')')
-  PsiElement(,)(',')
-  PsiErrorElement:'-' expected
-    <empty list>
+    PsiWhiteSpace(' ')
+    M68kAdmApdImpl(ADM_APD)
+      PsiElement(-)('-')
+      PsiElement(()('(')
+      M68kAdmArdImpl(ADM_ARD)
+        PsiElement(address_register)('a0')
+      PsiElement())(')')
+    PsiElement(,)(',')
+    PsiErrorElement:'-' expected
+      <empty list>

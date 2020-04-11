@@ -265,11 +265,14 @@ fake bcd_instruction_base ::= {
   extends = data_sized
 }
 
+private bcd_tail_apd ::= adm_apd COMMA adm_apd {
+  pin = 1
+}
+private bcd_tail_drd ::= adm_drd COMMA adm_drd {
+  pin = 1
+}
 private bcd_tail ::= data_size_byte?
-                     (
-                      (adm_drd COMMA adm_drd) |
-                      (adm_apd COMMA adm_apd)
-                     )
+                     bcd_tail_drd | bcd_tail_apd
 
 abcd_instruction ::= ABCD bcd_tail {
   extends = bcd_instruction_base
