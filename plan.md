@@ -46,7 +46,6 @@
 - expand/shrink selection: 
   - full line
   - "blocks"
-  - `offsetExpression(An)`
 - move left/right: swap src|dest
 - templates, `TemplateContextType`
 - spellchecker, bundled dictionary
