@@ -2293,7 +2293,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // EXG data_size_long? any_register COMMA any_register
+  // EXG data_size_long? adm_rrd COMMA adm_rrd
   public static boolean exg_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "exg_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", EXG)) return false;
@@ -2302,9 +2302,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, EXG);
     p = r; // pin = 1
     r = r && report_error_(b, exg_instruction_1(b, l + 1));
-    r = p && report_error_(b, any_register(b, l + 1)) && r;
+    r = p && report_error_(b, adm_rrd(b, l + 1)) && r;
     r = p && report_error_(b, consumeToken(b, COMMA)) && r;
-    r = p && any_register(b, l + 1) && r;
+    r = p && adm_rrd(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

@@ -21,7 +21,10 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kExgInstruction extends M68kDataSized {
 
-  @NotNull
-  List<M68kExpression> getExpressionList();
+  @Nullable
+  M68kAdmRrd getSource();
+
+  @Nullable
+  M68kAdmRrd getDestination();
 
 }

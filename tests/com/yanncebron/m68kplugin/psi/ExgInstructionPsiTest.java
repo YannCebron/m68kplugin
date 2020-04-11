@@ -16,6 +16,8 @@
 
 package com.yanncebron.m68kplugin.psi;
 
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmDrd;
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmRrd;
 import com.yanncebron.m68kplugin.lang.psi.M68kDataSize;
 import com.yanncebron.m68kplugin.lang.psi.M68kExgInstruction;
 
@@ -25,6 +27,16 @@ public class ExgInstructionPsiTest extends M68kPsiTestCase {
     final M68kExgInstruction instruction = parse("exg d0,d1");
 
     assertNull(instruction.getDataSize());
+
+    final M68kAdmRrd source = assertInstanceOf(instruction.getSource(), M68kAdmRrd.class);
+    assertNull(source.getAdmArd());
+    final M68kAdmDrd sourceDrd = assertInstanceOf(source.getAdmDrd(), M68kAdmDrd.class);
+    assertEquals("d0", sourceDrd.getText());
+
+    final M68kAdmRrd destination = assertInstanceOf(instruction.getDestination(), M68kAdmRrd.class);
+    assertNull(destination.getAdmArd());
+    final M68kAdmDrd destinationDrd = assertInstanceOf(destination.getAdmDrd(), M68kAdmDrd.class);
+    assertEquals("d1", destinationDrd.getText());
   }
 
   public void testWithDataSize() {

@@ -23,6 +23,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
 public class M68kExgInstructionImpl extends M68kDataSizedImpl implements M68kExgInstruction {
 
@@ -40,9 +41,17 @@ public class M68kExgInstructionImpl extends M68kDataSizedImpl implements M68kExg
   }
 
   @Override
-  @NotNull
-  public List<M68kExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
+  @Nullable
+  public M68kAdmRrd getSource() {
+    List<M68kAdmRrd> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmRrd.class);
+    return p1.size() < 1 ? null : p1.get(0);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmRrd getDestination() {
+    List<M68kAdmRrd> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmRrd.class);
+    return p1.size() < 2 ? null : p1.get(1);
   }
 
 }
