@@ -209,10 +209,10 @@ adm_imm ::= HASH expression data_size_word_long? {
 }
 
 // ATTN: ordering in groups
-private adm_group_all ::=               adm_drd | adm_ard | adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-private adm_group_all_except_imm ::=    adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-private adm_group_all_except_pc_imm ::= adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
-
+private adm_group_all ::=                   adm_drd | adm_ard | adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+private adm_group_all_except_imm ::=        adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+private adm_group_all_except_pc_imm ::=     adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
+private adm_group_all_except_ard_pc_imm ::= adm_drd |                     adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
 
 // Move ==================================================================
 private move_instructions ::= move_instruction |
@@ -306,7 +306,7 @@ private add_sub_tail ::= data_size_all?
 private add_sub_a_tail ::= data_size_word_long?
   adm_group_all COMMA adm_ard
 private add_sub_i_tail ::= data_size_all?
-  adm_imm COMMA (adm_drd | adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs)
+  adm_imm COMMA adm_group_all_except_ard_pc_imm
 private add_sub_q_tail ::= data_size_all?
   adm_imm COMMA adm_group_all_except_pc_imm
 private add_sub_x_tail ::= data_size_all?

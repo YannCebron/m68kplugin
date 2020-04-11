@@ -135,7 +135,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // data_size_all?
-  //   adm_imm COMMA (adm_drd | adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs)
+  //   adm_imm COMMA adm_group_all_except_ard_pc_imm
   static boolean add_sub_i_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "add_sub_i_tail")) return false;
     boolean r;
@@ -143,7 +143,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = add_sub_i_tail_0(b, l + 1);
     r = r && adm_imm(b, l + 1);
     r = r && consumeToken(b, COMMA);
-    r = r && add_sub_i_tail_3(b, l + 1);
+    r = r && adm_group_all_except_ard_pc_imm(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -153,20 +153,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "add_sub_i_tail_0")) return false;
     data_size_all(b, l + 1);
     return true;
-  }
-
-  // adm_drd | adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
-  private static boolean add_sub_i_tail_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "add_sub_i_tail_3")) return false;
-    boolean r;
-    r = adm_drd(b, l + 1);
-    if (!r) r = adm_api(b, l + 1);
-    if (!r) r = adm_ari(b, l + 1);
-    if (!r) r = adm_apd(b, l + 1);
-    if (!r) r = adm_adi(b, l + 1);
-    if (!r) r = adm_aix(b, l + 1);
-    if (!r) r = adm_abs(b, l + 1);
-    return r;
   }
 
   /* ********************************************************** */
@@ -614,6 +600,21 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = adm_apd(b, l + 1);
     if (!r) r = adm_pcd(b, l + 1);
     if (!r) r = adm_pci(b, l + 1);
+    if (!r) r = adm_adi(b, l + 1);
+    if (!r) r = adm_aix(b, l + 1);
+    if (!r) r = adm_abs(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // adm_drd |                     adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
+  static boolean adm_group_all_except_ard_pc_imm(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_group_all_except_ard_pc_imm")) return false;
+    boolean r;
+    r = adm_drd(b, l + 1);
+    if (!r) r = adm_api(b, l + 1);
+    if (!r) r = adm_ari(b, l + 1);
+    if (!r) r = adm_apd(b, l + 1);
     if (!r) r = adm_adi(b, l + 1);
     if (!r) r = adm_aix(b, l + 1);
     if (!r) r = adm_abs(b, l + 1);
