@@ -4008,7 +4008,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // TST data_size_all? (effective_address | any_register)
+  // TST data_size_all? adm_group_all_except_ard_pc_imm
   public static boolean tst_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "tst_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", TST)) return false;
@@ -4017,7 +4017,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, TST);
     p = r; // pin = 1
     r = r && report_error_(b, tst_instruction_1(b, l + 1));
-    r = p && tst_instruction_2(b, l + 1) && r;
+    r = p && adm_group_all_except_ard_pc_imm(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -4027,15 +4027,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "tst_instruction_1")) return false;
     data_size_all(b, l + 1);
     return true;
-  }
-
-  // effective_address | any_register
-  private static boolean tst_instruction_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "tst_instruction_2")) return false;
-    boolean r;
-    r = effective_address(b, l + 1);
-    if (!r) r = any_register(b, l + 1);
-    return r;
   }
 
   /* ********************************************************** */

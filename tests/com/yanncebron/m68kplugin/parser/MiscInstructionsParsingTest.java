@@ -121,15 +121,15 @@ public class MiscInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" clr ");
   }
 
-  public void testTstInstruction() throws Exception {
-    doCodeTest(" tst label");
+  public void testTstInstructionAri() throws Exception {
+    doCodeTest(" tst (a0)");
   }
 
-  public void testTstInstructionDataRegister() throws Exception {
+  public void testTstInstructionDrd() throws Exception {
     doCodeTest(" tst d0");
   }
 
-  public void testTstInstructionDataSize() throws Exception {
+  public void testTstInstructionDataSizeAbs() throws Exception {
     doCodeTest(" tst.l label");
   }
 

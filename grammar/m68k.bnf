@@ -430,7 +430,7 @@ clr_instruction ::= CLR data_size_all? (effective_address | any_register | label
   extends = data_sized
 }
 
-tst_instruction ::= TST data_size_all? (effective_address | any_register) {
+tst_instruction ::= TST data_size_all? adm_group_all_except_ard_pc_imm {
   extends = data_sized
 }
 tas_instruction ::= TAS data_size_byte? adm_group_all_except_ard_pc_imm {

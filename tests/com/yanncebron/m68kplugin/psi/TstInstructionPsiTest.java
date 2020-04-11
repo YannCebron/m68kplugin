@@ -25,12 +25,14 @@ public class TstInstructionPsiTest extends M68kPsiTestCase {
     final M68kTstInstruction instruction = parse("tst d0");
 
     assertNull(instruction.getDataSize());
+    assertNotNull(instruction.getAdmDrd());
   }
 
   public void testWithDataSize() {
-    final M68kTstInstruction instruction = parse("tst.l d0");
+    final M68kTstInstruction instruction = parse("tst.l -(a1)");
 
     assertEquals(M68kDataSize.LONG, instruction.getDataSize());
+    assertNotNull(instruction.getAdmApd());
   }
 
   private M68kTstInstruction parse(String text) {
