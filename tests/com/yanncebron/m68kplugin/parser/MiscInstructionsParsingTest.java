@@ -109,11 +109,11 @@ public class MiscInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" pea ");
   }
 
-  public void testClrInstruction() throws Exception {
+  public void testClrInstructionAbs() throws Exception {
     doCodeTest(" clr label");
   }
 
-  public void testClrInstructionDataSize() throws Exception {
+  public void testClrInstructionDataSizeAbs() throws Exception {
     doCodeTest(" clr.l label");
   }
 

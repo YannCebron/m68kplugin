@@ -1,9 +1,0 @@
-FILE
-  PsiWhiteSpace(' ')
-  M68kClrInstructionImpl(CLR_INSTRUCTION)
-    PsiElement(clr)('clr')
-    PsiElement(.l)('.l')
-    PsiWhiteSpace(' ')
-    M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
-      M68kLabelReferenceImpl(LABEL_REFERENCE)
-        PsiElement(id)('label')

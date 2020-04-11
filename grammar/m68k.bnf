@@ -426,7 +426,7 @@ pea_instruction ::= PEA data_size_long? any_register {
   extends = data_sized
 }
 
-clr_instruction ::= CLR data_size_all? (effective_address | any_register | label_reference) {
+clr_instruction ::= CLR data_size_all? adm_group_all_except_ard_pc_imm {
   extends = data_sized
 }
 
