@@ -58,7 +58,10 @@
 
 ## Inspections
 - nonsensical `move`, e.g. src==dest
-- non-symmetrical `movem`
+- `movem` 
+  - non-symmetrical
+  - duplicated registers (`d3/d0-d4` -> `d3`)
+  - mixed up registers (`d0-a2`) 
 - sort/optimize register list
 - string in `dc.b` not terminated with `,0`
 - check optimizations from vasm/DevPac
