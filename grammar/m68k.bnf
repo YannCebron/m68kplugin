@@ -150,7 +150,7 @@ private any_register ::= data_register |
                          // todo?
 
 // "d0-d7/a1/a4"
-private register_range_element ::= data_register | address_register
+private register_range_element ::= adm_drd | adm_ard
 register_range ::= register_range_element (MINUS register_range_element)?
 register_list ::= register_range (DIV register_range)*
 

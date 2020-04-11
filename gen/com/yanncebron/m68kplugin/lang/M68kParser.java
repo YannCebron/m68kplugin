@@ -3308,12 +3308,12 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_register | address_register
+  // adm_drd | adm_ard
   static boolean register_range_element(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "register_range_element")) return false;
     boolean r;
-    r = data_register(b, l + 1);
-    if (!r) r = address_register(b, l + 1);
+    r = adm_drd(b, l + 1);
+    if (!r) r = adm_ard(b, l + 1);
     return r;
   }
 

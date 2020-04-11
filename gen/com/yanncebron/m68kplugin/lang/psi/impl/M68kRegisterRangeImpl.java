@@ -40,4 +40,16 @@ public class M68kRegisterRangeImpl extends ASTWrapperPsiElement implements M68kR
     else super.accept(visitor);
   }
 
+  @Override
+  @NotNull
+  public List<M68kAdmArd> getAdmArdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmArd.class);
+  }
+
+  @Override
+  @NotNull
+  public List<M68kAdmDrd> getAdmDrdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmDrd.class);
+  }
+
 }
