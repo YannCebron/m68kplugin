@@ -28,9 +28,19 @@ import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 abstract class M68kPsiTestCase extends LightPlatformTestCase {
 
   protected M68kPsiElement doParse(final String text) {
+    return doParse(text, false);
+  }
+
+  /**
+   * workaround for eq* directives including `label`
+   */
+  protected M68kPsiElement doParse(final String text, final boolean withLabel) {
     final M68kFile m68kFile = createFile(text);
 
     final PsiElement firstChild = m68kFile.getFirstChild();
+    if (withLabel) {
+      return assertInstanceOf(firstChild, M68kPsiElement.class);
+    }
 
     assertNotNull(firstChild);
     final PsiElement sibling = firstChild.getNextSibling();

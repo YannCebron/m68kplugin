@@ -21,4 +21,7 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kEqurDirective extends M68kEquDirectiveBase {
 
+  @Nullable
+  M68kAdmRrd getAdmRrd();
+
 }

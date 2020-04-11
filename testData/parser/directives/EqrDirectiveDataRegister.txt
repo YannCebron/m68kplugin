@@ -5,4 +5,6 @@ FILE
     PsiWhiteSpace(' ')
     PsiElement(equr)('equr')
     PsiWhiteSpace(' ')
-    PsiElement(data_register)('d6')
+    M68kAdmRrdImpl(ADM_RRD)
+      M68kAdmDrdImpl(ADM_DRD)
+        PsiElement(data_register)('d6')

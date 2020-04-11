@@ -39,4 +39,10 @@ public class M68kEqurDirectiveImpl extends M68kEquDirectiveBaseImpl implements M
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public M68kAdmRrd getAdmRrd() {
+    return findChildByClass(M68kAdmRrd.class);
+  }
+
 }

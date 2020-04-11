@@ -4,6 +4,6 @@ FILE
       PsiElement(id)('label')
     PsiWhiteSpace(' ')
     PsiElement(equr)('equr')
-    PsiErrorElement:<address register> or <data register> expected
+    PsiErrorElement:<data|address register> expected
       <empty list>
   PsiWhiteSpace(' ')

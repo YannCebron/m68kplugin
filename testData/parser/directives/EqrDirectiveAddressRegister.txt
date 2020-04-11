@@ -5,4 +5,6 @@ FILE
     PsiWhiteSpace(' ')
     PsiElement(equr)('equr')
     PsiWhiteSpace(' ')
-    PsiElement(address_register)('a4')
+    M68kAdmRrdImpl(ADM_RRD)
+      M68kAdmArdImpl(ADM_ARD)
+        PsiElement(address_register)('a4')

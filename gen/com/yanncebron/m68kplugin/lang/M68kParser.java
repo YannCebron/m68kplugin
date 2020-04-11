@@ -2257,7 +2257,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // label EQUR (data_register | address_register)
+  // label EQUR adm_rrd
   public static boolean equr_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "equr_directive")) return false;
     if (!nextTokenIs(b, "<equr directive>", ID, UNDERSCORE)) return false;
@@ -2266,18 +2266,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = label(b, l + 1);
     r = r && consumeToken(b, EQUR);
     p = r; // pin = 2
-    r = r && equr_directive_2(b, l + 1);
+    r = r && adm_rrd(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
-  }
-
-  // data_register | address_register
-  private static boolean equr_directive_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "equr_directive_2")) return false;
-    boolean r;
-    r = data_register(b, l + 1);
-    if (!r) r = address_register(b, l + 1);
-    return r;
   }
 
   /* ********************************************************** */

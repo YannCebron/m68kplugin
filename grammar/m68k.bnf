@@ -721,7 +721,7 @@ equals_directive ::= label EQ expression {
   extends = equ_directive_base
 }
 
-equr_directive ::= label EQUR (data_register | address_register) {
+equr_directive ::= label EQUR adm_rrd {
   pin = 2
   extends = equ_directive_base   // todo doesn't make sense (expression != register)
 }
