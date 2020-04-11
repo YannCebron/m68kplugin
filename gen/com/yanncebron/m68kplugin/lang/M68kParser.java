@@ -3894,7 +3894,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
         r = expression(b, l, 5);
         exit_section_(b, l, m, OR_EXPRESSION, r, true, null);
       }
-      else if (g < 5 && consumeTokenSmart(b, AMPERS_AND)) {
+      else if (g < 5 && consumeTokenSmart(b, AMPERSAND)) {
         r = expression(b, l, 5);
         exit_section_(b, l, m, AND_EXPRESSION, r, true, null);
       }

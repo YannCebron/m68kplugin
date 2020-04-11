@@ -1065,7 +1065,7 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 208: break;
           case 27: 
-            { return AMPERS_AND;
+            { return AMPERSAND;
             } 
             // fall through
           case 209: break;

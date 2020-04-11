@@ -181,7 +181,7 @@ public final class M68kTokenGroups {
     DIV,
     TILDE,
     PERCENT,
-    AMPERS_AND,
+    AMPERSAND,
     PIPE,
     SHIFT_L,
     SHIFT_R,
