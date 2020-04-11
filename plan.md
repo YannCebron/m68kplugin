@@ -7,6 +7,7 @@
 
 ### Broken lexing/parsing
 - `.b|w|l` must be immediate after instruction (Parser prob?)
+- allow `equr` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
 
 ## Before 1st release
 - file icons
