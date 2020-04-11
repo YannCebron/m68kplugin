@@ -33,6 +33,9 @@
 
   <extensions defaultExtensionNs="com.intellij">
 
+    <registryKey key="m68k.highlight.unresolved.ref" defaultValue="false"
+                 description="Highlight unresolved references"/>
+
     <fileType name="M68k Assembler"
               implementationClass="com.yanncebron.m68kplugin.lang.M68kFileType"
               fieldName="INSTANCE"
