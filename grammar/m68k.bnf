@@ -70,7 +70,7 @@ fake label_base ::= ID {
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelBaseMixIn"
 }
 
-label ::= ID COLON? {
+label ::= UNDERSCORE? ID COLON? {
   extends = label_base
 }
 

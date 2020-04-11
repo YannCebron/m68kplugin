@@ -47,6 +47,10 @@ public class LabelParsingTest extends M68kParsingTestCase {
     doCodeTest("label:nop");
   }
 
+  public void testLabelWithUnderscorePrefix() throws IOException {
+    doCodeTest("_label");
+  }
+
   public void testLocalLabel() throws IOException {
     doCodeTest(".localLabel");
   }

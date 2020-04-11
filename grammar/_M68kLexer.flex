@@ -80,6 +80,8 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
   {CRLF} { return WHITE_SPACE; }
 
   "."    { return DOT; }  // TODO ??
+  "_"    { return UNDERSCORE; }  // TODO ??
+  
   {LABEL}   { yybegin(IN_LABEL); return ID; }
 
   {WHITE_SPACE}* {COMMENT} { yybegin(IN_COMMENT); return COMMENT; }

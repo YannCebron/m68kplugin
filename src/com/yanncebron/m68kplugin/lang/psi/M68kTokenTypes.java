@@ -195,6 +195,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType TRAP = new M68kTokenType("trap");
   public static final IElementType TRAPV = new M68kTokenType("trapv");
   public static final IElementType TST = new M68kTokenType("tst");
+  public static final IElementType UNDERSCORE = new M68kTokenType("_");
   public static final IElementType UNLK = new M68kTokenType("unlk");
   public static final IElementType USP = new M68kTokenType("usp");
 

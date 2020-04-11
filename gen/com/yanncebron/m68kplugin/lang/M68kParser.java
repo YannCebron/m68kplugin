@@ -1986,9 +1986,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // label EQU expression
   public static boolean equ_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "equ_directive")) return false;
-    if (!nextTokenIs(b, ID)) return false;
+    if (!nextTokenIs(b, "<equ directive>", ID, UNDERSCORE)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, EQU_DIRECTIVE, null);
+    Marker m = enter_section_(b, l, _NONE_, EQU_DIRECTIVE, "<equ directive>");
     r = label(b, l + 1);
     r = r && consumeToken(b, EQU);
     p = r; // pin = 2
@@ -2001,9 +2001,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // label EQ expression
   public static boolean equals_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "equals_directive")) return false;
-    if (!nextTokenIs(b, ID)) return false;
+    if (!nextTokenIs(b, "<equals directive>", ID, UNDERSCORE)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, EQUALS_DIRECTIVE, null);
+    Marker m = enter_section_(b, l, _NONE_, EQUALS_DIRECTIVE, "<equals directive>");
     r = label(b, l + 1);
     r = r && consumeToken(b, EQ);
     p = r; // pin = 2
@@ -2016,9 +2016,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // label EQUR (data_register | address_register)
   public static boolean equr_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "equr_directive")) return false;
-    if (!nextTokenIs(b, ID)) return false;
+    if (!nextTokenIs(b, "<equr directive>", ID, UNDERSCORE)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, EQUR_DIRECTIVE, null);
+    Marker m = enter_section_(b, l, _NONE_, EQUR_DIRECTIVE, "<equr directive>");
     r = label(b, l + 1);
     r = r && consumeToken(b, EQUR);
     p = r; // pin = 2
@@ -2257,21 +2257,29 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ID COLON?
+  // UNDERSCORE? ID COLON?
   public static boolean label(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "label")) return false;
-    if (!nextTokenIs(b, ID)) return false;
+    if (!nextTokenIs(b, "<label>", ID, UNDERSCORE)) return false;
     boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, ID);
-    r = r && label_1(b, l + 1);
-    exit_section_(b, m, LABEL, r);
+    Marker m = enter_section_(b, l, _NONE_, LABEL, "<label>");
+    r = label_0(b, l + 1);
+    r = r && consumeToken(b, ID);
+    r = r && label_2(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
+  // UNDERSCORE?
+  private static boolean label_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "label_0")) return false;
+    consumeToken(b, UNDERSCORE);
+    return true;
+  }
+
   // COLON?
-  private static boolean label_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "label_1")) return false;
+  private static boolean label_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "label_2")) return false;
     consumeToken(b, COLON);
     return true;
   }
@@ -2292,7 +2300,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // label | localLabel
   static boolean labels(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "labels")) return false;
-    if (!nextTokenIs(b, "", DOT, ID)) return false;
     boolean r;
     r = label(b, l + 1);
     if (!r) r = localLabel(b, l + 1);
@@ -2401,12 +2408,12 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // label MACRO
   public static boolean macro_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "macro_directive")) return false;
-    if (!nextTokenIs(b, ID)) return false;
+    if (!nextTokenIs(b, "<macro directive>", ID, UNDERSCORE)) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, MACRO_DIRECTIVE, "<macro directive>");
     r = label(b, l + 1);
     r = r && consumeToken(b, MACRO);
-    exit_section_(b, m, MACRO_DIRECTIVE, r);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
