@@ -277,11 +277,12 @@ private bcd_tail ::= data_size_byte?
 abcd_instruction ::= ABCD bcd_tail {
   extends = bcd_instruction_base
 }
-nbcd_instruction ::= NBCD data_size_byte? any_register {
-  extends = data_sized
-}
 sbcd_instruction ::= SBCD bcd_tail {
   extends = bcd_instruction_base
+}
+
+nbcd_instruction ::= NBCD data_size_byte? adm_group_all_except_pc_imm {
+  extends = data_sized
 }
 
 // Add/Sub ==================================================================

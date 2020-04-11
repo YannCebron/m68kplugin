@@ -3,4 +3,5 @@ FILE
   M68kNbcdInstructionImpl(NBCD_INSTRUCTION)
     PsiElement(nbcd)('nbcd')
     PsiWhiteSpace(' ')
-    PsiElement(address_register)('a0')
+    M68kAdmArdImpl(ADM_ARD)
+      PsiElement(address_register)('a0')

@@ -2946,7 +2946,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // NBCD data_size_byte? any_register
+  // NBCD data_size_byte? adm_group_all_except_pc_imm
   public static boolean nbcd_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "nbcd_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", NBCD)) return false;
@@ -2955,7 +2955,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, NBCD);
     p = r; // pin = 1
     r = r && report_error_(b, nbcd_instruction_1(b, l + 1));
-    r = p && any_register(b, l + 1) && r;
+    r = p && adm_group_all_except_pc_imm(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

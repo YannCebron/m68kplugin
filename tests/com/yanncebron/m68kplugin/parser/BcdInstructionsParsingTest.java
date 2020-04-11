@@ -43,15 +43,19 @@ public class BcdInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" abcd -(a0),");
   }
 
-  public void testNbcdInstructionDataRegister() throws IOException {
+  public void testNbcdInstructionDrd() throws IOException {
     doCodeTest(" nbcd d0");
   }
 
-  public void testNbcdInstructionDataSizeDataRegister() throws IOException {
+  public void testNbcdInstructionAbs() throws IOException {
+    doCodeTest(" nbcd $50000");
+  }
+
+  public void testNbcdInstructionDataSizeDrd() throws IOException {
     doCodeTest(" nbcd.b d0");
   }
 
-  public void testNbcdInstructionAddressRegister() throws IOException {
+  public void testNbcdInstructionArd() throws IOException {
     doCodeTest(" nbcd a0");
   }
 
