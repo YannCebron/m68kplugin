@@ -838,8 +838,14 @@ and_expression ::= expression AMPERSAND expression
 private primary_group ::= number_expression | string_expression | paren_expression | label_ref_expression
 number_expression ::= DEC_NUMBER | HEX_NUMBER | OCT_NUMBER | BIN_NUMBER
 string_expression ::= STRING
-paren_expression ::=L_PAREN expression R_PAREN {
+
+private plain_paren_expression ::= L_PAREN expression R_PAREN {
   pin = 1
 }
+private bracket_paren_expression ::= L_BRACKET expression R_BRACKET {
+  pin = 1
+}
+paren_expression ::= plain_paren_expression | bracket_paren_expression
+
 label_ref_expression ::= label_reference
 

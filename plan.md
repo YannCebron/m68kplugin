@@ -1,5 +1,4 @@
 ## Known issues
-- brackets == parentheses?
 - add missing instructions (??)
 - research available directives, case-sensitivity (DevPac: no)?
 - add missing expression operators (XOR?)

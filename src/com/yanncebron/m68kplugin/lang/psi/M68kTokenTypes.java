@@ -122,6 +122,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType LINK = new M68kTokenType("link");
   public static final IElementType LSL = new M68kTokenType("lsl");
   public static final IElementType LSR = new M68kTokenType("lsr");
+  public static final IElementType L_BRACKET = new M68kTokenType("[");
   public static final IElementType L_PAREN = new M68kTokenType("(");
   public static final IElementType MACRO = new M68kTokenType("macro");
   public static final IElementType MINUS = new M68kTokenType("-");
@@ -159,6 +160,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType RTE = new M68kTokenType("rte");
   public static final IElementType RTR = new M68kTokenType("rtr");
   public static final IElementType RTS = new M68kTokenType("rts");
+  public static final IElementType R_BRACKET = new M68kTokenType("]");
   public static final IElementType R_PAREN = new M68kTokenType(")");
   public static final IElementType SBCD = new M68kTokenType("sbcd");
   public static final IElementType SEMICOLON = new M68kTokenType(";");

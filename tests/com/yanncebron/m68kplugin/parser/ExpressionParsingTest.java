@@ -105,8 +105,16 @@ public class ExpressionParsingTest extends M68kParsingTestCase {
     doCodeTest(" dc (1)");
   }
 
+  public void testParenWithBracketsExpression() throws Exception {
+    doCodeTest(" dc [1]");
+  }
+
   public void testParenExpressionMissingExpression() throws Exception {
     doCodeTest(" dc (");
+  }
+
+  public void testParenWithBracketsExpressionMissingExpression() throws Exception {
+    doCodeTest(" dc [");
   }
 
   public void testParenExpressionMissingRightParen() throws Exception {

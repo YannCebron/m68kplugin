@@ -1286,6 +1286,21 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // L_BRACKET expression R_BRACKET
+  static boolean bracket_paren_expression(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bracket_paren_expression")) return false;
+    if (!nextTokenIsFast(b, L_BRACKET)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
+    r = consumeTokenFast(b, L_BRACKET);
+    p = r; // pin = 1
+    r = r && report_error_(b, expression(b, l + 1, -1));
+    r = p && consumeToken(b, R_BRACKET) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
   // BSET bit_tail
   public static boolean bset_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bset_instruction")) return false;
@@ -3161,6 +3176,21 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // L_PAREN expression R_PAREN
+  static boolean plain_paren_expression(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "plain_paren_expression")) return false;
+    if (!nextTokenIsFast(b, L_PAREN)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
+    r = consumeTokenFast(b, L_PAREN);
+    p = r; // pin = 1
+    r = r && report_error_(b, expression(b, l + 1, -1));
+    r = p && consumeToken(b, R_PAREN) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
   // PC
   static boolean program_counter(PsiBuilder b, int l) {
     return consumeToken(b, PC);
@@ -4162,18 +4192,16 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // L_PAREN expression R_PAREN
+  // plain_paren_expression | bracket_paren_expression
   public static boolean paren_expression(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "paren_expression")) return false;
-    if (!nextTokenIsSmart(b, L_PAREN)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, PAREN_EXPRESSION, null);
-    r = consumeTokenSmart(b, L_PAREN);
-    p = r; // pin = 1
-    r = r && report_error_(b, expression(b, l + 1, -1));
-    r = p && consumeToken(b, R_PAREN) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+    if (!nextTokenIsFast(b, L_BRACKET, L_PAREN)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, PAREN_EXPRESSION, "<paren expression>");
+    r = plain_paren_expression(b, l + 1);
+    if (!r) r = bracket_paren_expression(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
   }
 
   // label_reference

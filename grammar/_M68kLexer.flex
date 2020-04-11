@@ -128,6 +128,8 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
   ">>" { return SHIFT_R; }
   "("  { return L_PAREN; }
   ")"  { return R_PAREN; }
+  "["  { return L_BRACKET; }
+  "]"  { return R_BRACKET; }
 
   [sS][pP]      { return SP; }
   [sS][sS][pP]  { return SSP; }
