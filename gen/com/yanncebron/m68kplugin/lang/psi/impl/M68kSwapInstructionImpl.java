@@ -39,4 +39,10 @@ public class M68kSwapInstructionImpl extends M68kDataSizedImpl implements M68kSw
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public M68kAdmDrd getAdmDrd() {
+    return findChildByClass(M68kAdmDrd.class);
+  }
+
 }

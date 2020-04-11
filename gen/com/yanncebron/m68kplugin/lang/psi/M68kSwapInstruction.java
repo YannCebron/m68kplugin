@@ -21,4 +21,7 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kSwapInstruction extends M68kDataSized {
 
+  @Nullable
+  M68kAdmDrd getAdmDrd();
+
 }

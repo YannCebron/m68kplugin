@@ -4,4 +4,5 @@ FILE
     PsiElement(swap)('swap')
     PsiElement(.w)('.w')
     PsiWhiteSpace(' ')
-    PsiElement(data_register)('d0')
+    M68kAdmDrdImpl(ADM_DRD)
+      PsiElement(data_register)('d0')

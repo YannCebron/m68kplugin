@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.psi;
 
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmDrd;
 import com.yanncebron.m68kplugin.lang.psi.M68kDataSize;
 import com.yanncebron.m68kplugin.lang.psi.M68kSwapInstruction;
 
@@ -31,6 +32,10 @@ public class SwapInstructionPsiTest extends M68kPsiTestCase {
     final M68kSwapInstruction instruction = parse("swap.w d0");
 
     assertEquals(M68kDataSize.WORD, instruction.getDataSize());
+
+    final M68kAdmDrd admDrd = instruction.getAdmDrd();
+    assertNotNull(admDrd);
+    assertEquals("d0", admDrd.getText());
   }
 
   private M68kSwapInstruction parse(String text) {

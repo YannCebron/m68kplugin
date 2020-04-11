@@ -3964,7 +3964,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // SWAP data_size_word? data_register
+  // SWAP data_size_word? adm_drd
   public static boolean swap_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "swap_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", SWAP)) return false;
@@ -3973,7 +3973,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, SWAP);
     p = r; // pin = 1
     r = r && report_error_(b, swap_instruction_1(b, l + 1));
-    r = p && data_register(b, l + 1) && r;
+    r = p && adm_drd(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
