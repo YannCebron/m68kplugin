@@ -143,6 +143,7 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
   [nN][oO][pP]                    { return NOP; }
   [iI][lL][lL][eE][gG][aA][lL]    { return ILLEGAL; }
   [rR][eE][sS][eE][tT]            { return RESET; }
+  [sS][tT][oO][pP]                { return STOP; }
   [tT][rR][aA][pP]                { return TRAP; }
   [tT][rR][aA][pP][vV]            { return TRAPV; }
   [lL][iI][nN][kK]                { return LINK; }

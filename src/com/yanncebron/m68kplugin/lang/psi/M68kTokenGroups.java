@@ -133,6 +133,7 @@ public final class M68kTokenGroups {
     SHI,
     SLS,
     SCS,
+    STOP,
     SUB,
     SUBA,
     SUBI,

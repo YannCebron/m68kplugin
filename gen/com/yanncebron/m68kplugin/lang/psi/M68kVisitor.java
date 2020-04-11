@@ -677,6 +677,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitStopInstruction(@NotNull M68kStopInstruction o) {
+    visitPsiElement(o);
+  }
+
   public void visitStringExpression(@NotNull M68kStringExpression o) {
     visitExpression(o);
   }

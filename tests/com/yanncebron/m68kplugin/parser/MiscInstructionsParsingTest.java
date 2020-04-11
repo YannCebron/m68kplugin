@@ -37,6 +37,10 @@ public class MiscInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" reset");
   }
 
+  public void testStopInstruction() throws Exception {
+    doCodeTest(" stop #1");
+  }
+
   public void testTrapInstruction() throws Exception {
     doCodeTest(" trap #1");
   }

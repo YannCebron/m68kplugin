@@ -185,6 +185,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType SP = new M68kTokenType("sp");
   public static final IElementType SSP = new M68kTokenType("ssp");
   public static final IElementType SR = new M68kTokenType("sr");
+  public static final IElementType STOP = new M68kTokenType("stop");
   public static final IElementType STRING = new M68kTokenType("string");
   public static final IElementType SUB = new M68kTokenType("sub");
   public static final IElementType SUBA = new M68kTokenType("suba");

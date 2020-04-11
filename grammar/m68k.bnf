@@ -390,6 +390,7 @@ private misc_instructions ::= tst_instruction |
                               nop_instruction |
                               illegal_instruction |
                               reset_instruction |
+                              stop_instruction |
                               trap_instruction |
                               trapv_instruction |
 
@@ -407,6 +408,7 @@ private misc_instructions ::= tst_instruction |
 nop_instruction ::= NOP
 illegal_instruction ::= ILLEGAL
 reset_instruction ::= RESET
+stop_instruction ::= STOP adm_imm
 trap_instruction ::= TRAP adm_imm
 trapv_instruction ::= TRAPV
 
