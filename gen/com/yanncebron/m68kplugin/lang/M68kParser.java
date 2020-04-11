@@ -2317,7 +2317,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // EXT data_size_word_long? data_register
+  // EXT data_size_word_long? adm_drd
   public static boolean ext_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ext_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", EXT)) return false;
@@ -2326,7 +2326,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, EXT);
     p = r; // pin = 1
     r = r && report_error_(b, ext_instruction_1(b, l + 1));
-    r = p && data_register(b, l + 1) && r;
+    r = p && adm_drd(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

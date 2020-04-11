@@ -39,4 +39,10 @@ public class M68kExtInstructionImpl extends M68kDataSizedImpl implements M68kExt
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public M68kAdmDrd getAdmDrd() {
+    return findChildByClass(M68kAdmDrd.class);
+  }
+
 }

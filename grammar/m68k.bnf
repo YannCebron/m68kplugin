@@ -431,7 +431,7 @@ tas_instruction ::= TAS data_size_byte? any_register {
   extends = data_sized
 }
 
-ext_instruction ::= EXT data_size_word_long? data_register {
+ext_instruction ::= EXT data_size_word_long? adm_drd {
   extends = data_sized
 }
 
