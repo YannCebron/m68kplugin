@@ -22,6 +22,6 @@ import com.intellij.psi.PsiElement;
 public interface M68kTrapInstruction extends M68kPsiElement {
 
   @Nullable
-  M68kImmediateData getImmediateData();
+  M68kAdmImm getAdmImm();
 
 }

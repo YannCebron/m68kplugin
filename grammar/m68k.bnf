@@ -407,7 +407,7 @@ private misc_instructions ::= tst_instruction |
 nop_instruction ::= NOP
 illegal_instruction ::= ILLEGAL
 reset_instruction ::= RESET
-trap_instruction ::= TRAP immediate_data
+trap_instruction ::= TRAP adm_imm
 trapv_instruction ::= TRAPV
 
 link_instruction ::= LINK adm_ard COMMA immediate_data

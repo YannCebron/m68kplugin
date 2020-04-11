@@ -4008,7 +4008,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // TRAP immediate_data
+  // TRAP adm_imm
   public static boolean trap_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "trap_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", TRAP)) return false;
@@ -4016,7 +4016,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, TRAP_INSTRUCTION, "<instruction>");
     r = consumeToken(b, TRAP);
     p = r; // pin = 1
-    r = r && immediate_data(b, l + 1);
+    r = r && adm_imm(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

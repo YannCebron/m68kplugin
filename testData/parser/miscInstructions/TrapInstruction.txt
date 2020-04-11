@@ -3,7 +3,7 @@ FILE
   M68kTrapInstructionImpl(TRAP_INSTRUCTION)
     PsiElement(trap)('trap')
     PsiWhiteSpace(' ')
-    M68kImmediateDataImpl(IMMEDIATE_DATA)
+    M68kAdmImmImpl(ADM_IMM)
       PsiElement(#)('#')
       M68kNumberExpressionImpl(NUMBER_EXPRESSION)
         PsiElement(dec_number)('1')
