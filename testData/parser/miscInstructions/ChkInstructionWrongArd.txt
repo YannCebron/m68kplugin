@@ -1,0 +1,10 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kChkInstructionImpl(CHK_INSTRUCTION)
+    PsiElement(chk)('chk')
+    PsiErrorElement:'(', '-', '.w', <data register>, <expression> or <immediate data> expected, got 'a0'
+      <empty list>
+  PsiWhiteSpace(' ')
+  PsiElement(address_register)('a0')
+  PsiElement(,)(',')
+  PsiElement(data_register)('d0')

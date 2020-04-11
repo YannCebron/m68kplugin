@@ -28,9 +28,10 @@ public class ChkInstructionPsiTest extends M68kPsiTestCase {
   }
 
   public void testWithDataSize() {
-    final M68kChkInstruction instruction = parse("chk.w d0,d1");
+    final M68kChkInstruction instruction = parse("chk.w (a0),d1");
 
     assertEquals(M68kDataSize.WORD, instruction.getDataSize());
+    assertNotNull(instruction.getAdmAri());
   }
 
   private M68kChkInstruction parse(String text) {

@@ -1447,7 +1447,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // CHK data_size_word? any_register COMMA data_register
+  // CHK data_size_word? adm_group_all_except_ard COMMA adm_drd
   public static boolean chk_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "chk_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", CHK)) return false;
@@ -1456,9 +1456,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, CHK);
     p = r; // pin = 1
     r = r && report_error_(b, chk_instruction_1(b, l + 1));
-    r = p && report_error_(b, any_register(b, l + 1)) && r;
+    r = p && report_error_(b, adm_group_all_except_ard(b, l + 1)) && r;
     r = p && report_error_(b, consumeToken(b, COMMA)) && r;
-    r = p && data_register(b, l + 1) && r;
+    r = p && adm_drd(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

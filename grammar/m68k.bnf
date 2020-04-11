@@ -462,7 +462,7 @@ swap_instruction ::= SWAP data_size_word? adm_drd {
   extends = data_sized
 }
 
-chk_instruction ::= CHK data_size_word? any_register COMMA data_register {
+chk_instruction ::= CHK data_size_word? adm_group_all_except_ard COMMA adm_drd {
   extends = data_sized
 }
 

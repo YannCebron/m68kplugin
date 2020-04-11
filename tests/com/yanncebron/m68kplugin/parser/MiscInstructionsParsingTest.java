@@ -181,12 +181,16 @@ public class MiscInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" swap.w d0");
   }
 
-  public void testChkInstruction() throws Exception {
-    doCodeTest(" chk a0,d0");
+  public void testChkInstructionApi() throws Exception {
+    doCodeTest(" chk (a0)+,d0");
   }
 
-  public void testChkInstructionDataSize() throws Exception {
+  public void testChkInstructionDataSizeAri() throws Exception {
     doCodeTest(" chk.w (a0),d0");
+  }
+
+  public void testChkInstructionWrongArd() throws Exception {
+    doCodeTest(" chk a0,d0");
   }
 
 }
