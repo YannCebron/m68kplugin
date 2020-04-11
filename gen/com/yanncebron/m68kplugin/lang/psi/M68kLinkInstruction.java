@@ -22,6 +22,9 @@ import com.intellij.psi.PsiElement;
 public interface M68kLinkInstruction extends M68kPsiElement {
 
   @Nullable
+  M68kAdmArd getAdmArd();
+
+  @Nullable
   M68kImmediateData getImmediateData();
 
 }

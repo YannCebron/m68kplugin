@@ -2584,7 +2584,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // LINK address_register COMMA immediate_data
+  // LINK adm_ard COMMA immediate_data
   public static boolean link_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "link_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", LINK)) return false;
@@ -2592,7 +2592,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, LINK_INSTRUCTION, "<instruction>");
     r = consumeToken(b, LINK);
     p = r; // pin = 1
-    r = r && report_error_(b, address_register(b, l + 1));
+    r = r && report_error_(b, adm_ard(b, l + 1));
     r = p && report_error_(b, consumeToken(b, COMMA)) && r;
     r = p && immediate_data(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
@@ -4065,7 +4065,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // UNLK address_register
+  // UNLK adm_ard
   public static boolean unlk_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "unlk_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", UNLK)) return false;
@@ -4073,7 +4073,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, UNLK_INSTRUCTION, "<instruction>");
     r = consumeToken(b, UNLK);
     p = r; // pin = 1
-    r = r && address_register(b, l + 1);
+    r = r && adm_ard(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

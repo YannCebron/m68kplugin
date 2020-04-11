@@ -21,4 +21,7 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kUnlkInstruction extends M68kPsiElement {
 
+  @Nullable
+  M68kAdmArd getAdmArd();
+
 }

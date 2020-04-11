@@ -42,6 +42,12 @@ public class M68kLinkInstructionImpl extends ASTWrapperPsiElement implements M68
 
   @Override
   @Nullable
+  public M68kAdmArd getAdmArd() {
+    return findChildByClass(M68kAdmArd.class);
+  }
+
+  @Override
+  @Nullable
   public M68kImmediateData getImmediateData() {
     return findChildByClass(M68kImmediateData.class);
   }

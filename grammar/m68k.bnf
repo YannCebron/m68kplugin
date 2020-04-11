@@ -410,8 +410,8 @@ reset_instruction ::= RESET
 trap_instruction ::= TRAP immediate_data
 trapv_instruction ::= TRAPV
 
-link_instruction ::= LINK address_register COMMA immediate_data
-unlk_instruction ::= UNLK address_register
+link_instruction ::= LINK adm_ard COMMA immediate_data
+unlk_instruction ::= UNLK adm_ard
 
 lea_instruction ::= LEA data_size_long? effective_address COMMA (address_register | label_reference) {
   extends = data_sized

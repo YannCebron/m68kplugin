@@ -3,4 +3,5 @@ FILE
   M68kUnlkInstructionImpl(UNLK_INSTRUCTION)
     PsiElement(unlk)('unlk')
     PsiWhiteSpace(' ')
-    PsiElement(address_register)('a0')
+    M68kAdmArdImpl(ADM_ARD)
+      PsiElement(address_register)('a0')
