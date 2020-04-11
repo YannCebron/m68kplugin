@@ -21,4 +21,10 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kAddxInstruction extends M68kPsiElement {
 
+  @NotNull
+  List<M68kAdmApd> getAdmApdList();
+
+  @NotNull
+  List<M68kAdmDrd> getAdmDrdList();
+
 }

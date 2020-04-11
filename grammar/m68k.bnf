@@ -173,6 +173,46 @@ immediate_data ::= HASH expression {
 }
 
 
+// addressing modes  =====================================================
+// d0
+adm_drd ::= DATA_REGISTER {
+  name = "data register"
+}
+// a0 | sp
+adm_ard ::= ADDRESS_REGISTER | SP {
+  name = "address register"
+}
+// Rn
+adm_rrd ::= adm_drd | adm_ard {
+  name = "data|address register"
+}
+// (a0)
+adm_ari ::= L_PAREN adm_ard R_PAREN
+// (a0)+
+adm_api ::= L_PAREN adm_ard R_PAREN PLUS
+// -(a0)
+adm_apd ::= MINUS L_PAREN adm_ard R_PAREN
+// index(a0)
+adm_adi ::= expression L_PAREN adm_ard R_PAREN
+// index(a0,d0)
+adm_aix ::= expression L_PAREN adm_ard COMMA adm_rrd R_PAREN
+// 4000 | 4000.w | 4000.l 
+adm_abs ::= expression data_size_word_long?
+// index(pc)
+adm_pcd ::= expression L_PAREN PC R_PAREN
+// index(pc,d0)
+adm_pci ::= expression L_PAREN PC COMMA adm_rrd R_PAREN
+// #4000 | #4000.w | #4000.l
+adm_imm ::= HASH expression data_size_word_long? {
+  pin = 1
+  name = "immediate data"
+}
+
+// ATTN: ordering in groups
+private adm_group_all ::=               adm_drd | adm_ard | adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+private adm_group_all_except_pc_imm ::= adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
+
+
 // Move ==================================================================
 private move_instructions ::= move_instruction |
                               movea_instruction |
@@ -252,22 +292,22 @@ private add_sub_instructions ::= add_instruction |
                                  subq_instruction |
                                  subx_instruction
 
-private add_sub_tail ::=   data_size_all?
-                           (
-                             (data_register                        COMMA (data_register | effective_address)) |
-                             ((effective_address | address_register | immediate_data) COMMA data_register )
-                           )
+private add_sub_tail ::= data_size_all?
+  (
+    (adm_group_all COMMA adm_drd) |
+    (adm_drd COMMA adm_group_all_except_pc_imm)
+  )
 private add_sub_a_tail ::= data_size_word_long?
-                           any_register COMMA address_register
+  adm_group_all COMMA adm_ard
 private add_sub_i_tail ::= data_size_all?
-                           immediate_data COMMA any_register
+  adm_imm COMMA (adm_drd | adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs)
 private add_sub_q_tail ::= data_size_all?
-                           immediate_data COMMA (data_register | effective_address | address_register)
+  adm_imm COMMA adm_group_all_except_pc_imm
 private add_sub_x_tail ::= data_size_all?
-                           (
-                             (data_register COMMA data_register) |
-                             (address_register_pre_decrement COMMA address_register_pre_decrement)
-                           )
+  (
+    (adm_drd COMMA adm_drd) |
+    (adm_apd COMMA adm_apd)
+  )
 
 add_instruction ::= ADD add_sub_tail
 adda_instruction ::= ADDA add_sub_a_tail

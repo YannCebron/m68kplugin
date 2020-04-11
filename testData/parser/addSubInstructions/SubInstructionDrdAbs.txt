@@ -1,0 +1,12 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kSubInstructionImpl(SUB_INSTRUCTION)
+    PsiElement(sub)('sub')
+    PsiWhiteSpace(' ')
+    M68kAdmDrdImpl(ADM_DRD)
+      PsiElement(data_register)('d0')
+    PsiElement(,)(',')
+    M68kAdmAbsImpl(ADM_ABS)
+      M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
+        M68kLabelReferenceImpl(LABEL_REFERENCE)
+          PsiElement(id)('label')

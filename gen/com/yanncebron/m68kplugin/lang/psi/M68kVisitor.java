@@ -45,6 +45,54 @@ public class M68kVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitAdmAbs(@NotNull M68kAdmAbs o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAdmAdi(@NotNull M68kAdmAdi o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAdmAix(@NotNull M68kAdmAix o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAdmApd(@NotNull M68kAdmApd o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAdmApi(@NotNull M68kAdmApi o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAdmArd(@NotNull M68kAdmArd o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAdmAri(@NotNull M68kAdmAri o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAdmDrd(@NotNull M68kAdmDrd o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAdmImm(@NotNull M68kAdmImm o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAdmPcd(@NotNull M68kAdmPcd o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAdmPci(@NotNull M68kAdmPci o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAdmRrd(@NotNull M68kAdmRrd o) {
+    visitPsiElement(o);
+  }
+
   public void visitAndExpression(@NotNull M68kAndExpression o) {
     visitBinaryExpression(o);
   }

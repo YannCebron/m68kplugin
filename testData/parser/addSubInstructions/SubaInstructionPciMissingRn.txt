@@ -1,0 +1,13 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kSubaInstructionImpl(SUBA_INSTRUCTION)
+    PsiElement(suba)('suba')
+  PsiWhiteSpace(' ')
+  PsiElement(dec_number)('42')
+  PsiElement(()('(')
+  PsiElement(pc)('pc')
+  PsiElement(,)(',')
+  PsiErrorElement:<data|address register> expected, got ')'
+    PsiElement())(')')
+  PsiElement(,)(',')
+  PsiElement(address_register)('a0')

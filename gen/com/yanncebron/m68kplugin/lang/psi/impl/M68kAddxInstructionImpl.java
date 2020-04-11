@@ -40,4 +40,16 @@ public class M68kAddxInstructionImpl extends ASTWrapperPsiElement implements M68
     else super.accept(visitor);
   }
 
+  @Override
+  @NotNull
+  public List<M68kAdmApd> getAdmApdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmApd.class);
+  }
+
+  @Override
+  @NotNull
+  public List<M68kAdmDrd> getAdmDrdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmDrd.class);
+  }
+
 }

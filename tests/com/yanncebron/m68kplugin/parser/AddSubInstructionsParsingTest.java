@@ -35,59 +35,99 @@ public class AddSubInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" add d0,");
   }
 
-  public void testAddInstructionDataRegisterDataRegister() throws IOException {
+  public void testAddInstructionDrdDrd() throws IOException {
     doCodeTest(" add d0,d1");
   }
 
-  public void testAddInstructionDataSizeDataRegisterDataRegister() throws IOException {
+  public void testAddInstructionDataSizeDrdDrd() throws IOException {
     doCodeTest(" add.b d0,d1");
   }
 
-  public void testAddInstructionDataRegisterLabel() throws IOException {
+  public void testAddInstructionDrdAbs() throws IOException {
     doCodeTest(" add d0,label");
   }
 
-  public void testAddInstructionLabelDataRegister() throws IOException {
+  public void testAddInstructionAbsDrd() throws IOException {
     doCodeTest(" add label,d1");
   }
 
-  public void testAddInstructionAddressRegisterDataRegister() throws IOException {
+  public void testAddInstructionArdDrd() throws IOException {
     doCodeTest(" add a0,d1");
   }
 
-  public void testAddInstructionImmediateDataDataRegister() throws IOException {
+  public void testAddInstructionImmDrd() throws IOException {
     doCodeTest(" add #2,d1");
   }
 
-  public void testAddaInstructionDataRegister() throws IOException {
+  public void testAddaInstructionDrd() throws IOException {
     doCodeTest(" adda d0,a0");
   }
 
-  public void testAddaInstructionDataSizeDataRegister() throws IOException {
+  public void testAddaInstructionDataSizeDrd() throws IOException {
     doCodeTest(" adda.l d0,a0");
   }
 
-  public void testAddaInstructionAddressRegister() throws IOException {
+  public void testAddaInstructionArd() throws IOException {
     doCodeTest(" adda a1,a0");
   }
 
-  public void testAddiInstructionDataRegister() throws IOException {
+  public void testAddiInstructionDrd() throws IOException {
     doCodeTest(" addi #1,d0");
   }
 
-  public void testAddiInstructionAddressRegister() throws IOException {
+  public void testAddiInstructionWrongArd() throws IOException {
     doCodeTest(" addi #1,a0");
   }
 
-  public void testAddqInstructionDataRegister() throws IOException {
+  public void testAddqInstructionDrd() throws IOException {
     doCodeTest(" addq #1,d0");
   }
 
-  public void testAddxInstructionDataRegisterDataRegister() throws IOException {
+  public void testAddqInstructionDataSizeDrd() throws IOException {
+    doCodeTest(" addq #1.w,d0");
+  }
+
+  public void testAddqInstructionArd() throws IOException {
+    doCodeTest(" addq #1,a0");
+  }
+
+  public void testAddqInstructionAri() throws IOException {
+    doCodeTest(" addq #1,(a0)");
+  }
+
+  public void testAddqInstructionApi() throws IOException {
+    doCodeTest(" addq #1,(a0)+");
+  }
+
+  public void testAddqInstructionApd() throws IOException {
+    doCodeTest(" addq #1,-(a0)");
+  }
+
+  public void testAddqInstructionAdi() throws IOException {
+    doCodeTest(" addq #1,42(a0)");
+  }
+
+  public void testAddqInstructionAix() throws IOException {
+    doCodeTest(" addq #1,42(a0,d0)");
+  }
+
+  public void testAddqInstructionAbs() throws IOException {
+    doCodeTest(" addq #1,42");
+  }
+
+  public void testAddqInstructionAbsDataSize() throws IOException {
+    doCodeTest(" addq #1,42.w");
+  }
+
+  public void testAddqInstructionAbsExpression() throws IOException {
+    doCodeTest(" addq #1,42+666");
+  }
+
+  public void testAddxInstructionDrdDrd() throws IOException {
     doCodeTest(" addx d0,d1");
   }
 
-  public void testAddxInstructionPreDecrementAddressRegister() throws IOException {
+  public void testAddxInstructionApdApd() throws IOException {
     doCodeTest(" addx -(a0),-(a1)");
   }
 
@@ -100,59 +140,71 @@ public class AddSubInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" sub d0,");
   }
 
-  public void testSubInstructionDataRegisterDataRegister() throws IOException {
+  public void testSubInstructionDrdDrd() throws IOException {
     doCodeTest(" sub d0,d1");
   }
 
-  public void testSubInstructionDataSizeDataRegisterDataRegister() throws IOException {
+  public void testSubInstructionDataSizeDrdDrd() throws IOException {
     doCodeTest(" sub.b d0,d1");
   }
 
-  public void testSubInstructionDataRegisterLabel() throws IOException {
+  public void testSubInstructionDrdAbs() throws IOException {
     doCodeTest(" sub d0,label");
   }
 
-  public void testSubInstructionLabelDataRegister() throws IOException {
+  public void testSubInstructionAbsDrd() throws IOException {
     doCodeTest(" sub label,d1");
   }
 
-  public void testSubInstructionAddressRegisterDataRegister() throws IOException {
+  public void testSubInstructionArdDrd() throws IOException {
     doCodeTest(" sub a0,d1");
   }
 
-  public void testSubInstructionImmediateDataDataRegister() throws IOException {
+  public void testSubInstructionImmDrd() throws IOException {
     doCodeTest(" sub #2,d1");
   }
 
-  public void testSubaInstructionDataRegister() throws IOException {
+  public void testSubaInstructionDrd() throws IOException {
     doCodeTest(" suba d0,a0");
   }
 
-  public void testSubaInstructionDataSizeDataRegister() throws IOException {
+  public void testSubaInstructionDataSizeDrd() throws IOException {
     doCodeTest(" suba.l d0,a0");
   }
 
-  public void testSubaInstructionAddressRegister() throws IOException {
+  public void testSubaInstructionArd() throws IOException {
     doCodeTest(" suba a1,a0");
   }
 
-  public void testSubiInstructionDataRegister() throws IOException {
+  public void testSubaInstructionPcd() throws IOException {
+    doCodeTest(" suba 42(pc),a0");
+  }
+
+  public void testSubaInstructionPci() throws IOException {
+    doCodeTest(" suba 42(pc,d0),a0");
+  }
+
+  public void testSubaInstructionPciMissingRn() throws IOException {
+    doCodeTest(" suba 42(pc,),a0");
+  }
+
+  public void testSubiInstructionDrd() throws IOException {
     doCodeTest(" subi #1,d0");
   }
 
-  public void testSubiInstructionAddressRegister() throws IOException {
+  public void testSubiInstructionWrongArd() throws IOException {
     doCodeTest(" subi #1,a0");
   }
 
-  public void testSubqInstructionDataRegister() throws IOException {
+  public void testSubqInstructionDrd() throws IOException {
     doCodeTest(" subq #1,d0");
   }
 
-  public void testSubxInstructionDataRegisterDataRegister() throws IOException {
+  public void testSubxInstructionDrdDrd() throws IOException {
     doCodeTest(" subx d0,d1");
   }
 
-  public void testSubxInstructionPreDecrementAddressRegister() throws IOException {
+  public void testSubxInstructionApdApd() throws IOException {
     doCodeTest(" subx -(a0),-(a1)");
   }
 
