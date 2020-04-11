@@ -35,19 +35,19 @@ public class MulDivInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" muls d0,");
   }
 
-  public void testMulsInstructionDataRegister() throws IOException {
+  public void testMulsInstructionDrd() throws IOException {
     doCodeTest(" muls d0,d1");
   }
 
-  public void testMulsInstructionDataSizeDataRegister() throws IOException {
+  public void testMulsInstructionDataSizeDrd() throws IOException {
     doCodeTest(" muls.w d0,d1");
   }
 
-  public void testMulsInstructionLabel() throws IOException {
+  public void testMulsInstructionAbs() throws IOException {
     doCodeTest(" muls label,d1");
   }
 
-  public void testMulsInstructionImmediateData() throws IOException {
+  public void testMulsInstructionImm() throws IOException {
     doCodeTest(" muls #42,d1");
   }
 
@@ -59,19 +59,19 @@ public class MulDivInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" mulu d0,");
   }
 
-  public void testMuluInstructionDataRegister() throws IOException {
+  public void testMuluInstructionDrd() throws IOException {
     doCodeTest(" mulu d0,d1");
   }
 
-  public void testMuluInstructionDataSizeDataRegister() throws IOException {
+  public void testMuluInstructionDataSizeDrd() throws IOException {
     doCodeTest(" mulu.w d0,d1");
   }
 
-  public void testMuluInstructionLabel() throws IOException {
+  public void testMuluInstructionAbs() throws IOException {
     doCodeTest(" mulu label,d1");
   }
 
-  public void testMuluInstructionImmediateData() throws IOException {
+  public void testMuluInstructionImm() throws IOException {
     doCodeTest(" mulu #42,d1");
   }
 
@@ -83,19 +83,19 @@ public class MulDivInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" divs d0,");
   }
 
-  public void testDivsInstructionDataRegister() throws IOException {
+  public void testDivsInstructionDrd() throws IOException {
     doCodeTest(" divs d0,d1");
   }
 
-  public void testDivsInstructionDataSizeDataRegister() throws IOException {
+  public void testDivsInstructionDataSizeDrd() throws IOException {
     doCodeTest(" divs.w d0,d1");
   }
 
-  public void testDivsInstructionLabel() throws IOException {
+  public void testDivsInstructionAbs() throws IOException {
     doCodeTest(" divs label,d1");
   }
 
-  public void testDivsInstructionImmediateData() throws IOException {
+  public void testDivsInstructionImm() throws IOException {
     doCodeTest(" divs #42,d1");
   }
 
@@ -107,20 +107,24 @@ public class MulDivInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" divu d0,");
   }
 
-  public void testDivuInstructionDataRegister() throws IOException {
+  public void testDivuInstructionDrd() throws IOException {
     doCodeTest(" divu d0,d1");
   }
 
-  public void testDivuInstructionDataSizeDataRegister() throws IOException {
+  public void testDivuInstructionDataSizeDrd() throws IOException {
     doCodeTest(" divu.w d0,d1");
   }
 
-  public void testDivuInstructionLabel() throws IOException {
+  public void testDivuInstructionAbs() throws IOException {
     doCodeTest(" divu label,d1");
   }
 
-  public void testDivuInstructionImmediateData() throws IOException {
+  public void testDivuInstructionImm() throws IOException {
     doCodeTest(" divu #42,d1");
+  }
+
+  public void testDivuInstructionPcd() throws IOException {
+    doCodeTest(" divu 42(pc),d1");
   }
 
 }

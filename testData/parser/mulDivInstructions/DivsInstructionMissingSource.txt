@@ -2,6 +2,6 @@ FILE
   PsiWhiteSpace(' ')
   M68kDivsInstructionImpl(DIVS_INSTRUCTION)
     PsiElement(divs)('divs')
-    PsiErrorElement:'.w', <data register>, <effective address> or <immediate data> expected
+    PsiErrorElement:'(', '-', '.w', <address register>, <data register>, <expression> or <immediate data> expected
       <empty list>
   PsiWhiteSpace(' ')

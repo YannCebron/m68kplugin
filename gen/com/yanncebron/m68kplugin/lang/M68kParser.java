@@ -2894,15 +2894,15 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // data_size_word?
-  //                          (data_register | effective_address | immediate_data) COMMA data_register
+  //                          adm_group_all COMMA adm_drd
   static boolean mul_div_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "mul_div_tail")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = mul_div_tail_0(b, l + 1);
-    r = r && mul_div_tail_1(b, l + 1);
+    r = r && adm_group_all(b, l + 1);
     r = r && consumeToken(b, COMMA);
-    r = r && data_register(b, l + 1);
+    r = r && adm_drd(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -2912,16 +2912,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "mul_div_tail_0")) return false;
     data_size_word(b, l + 1);
     return true;
-  }
-
-  // data_register | effective_address | immediate_data
-  private static boolean mul_div_tail_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "mul_div_tail_1")) return false;
-    boolean r;
-    r = data_register(b, l + 1);
-    if (!r) r = effective_address(b, l + 1);
-    if (!r) r = immediate_data(b, l + 1);
-    return r;
   }
 
   /* ********************************************************** */

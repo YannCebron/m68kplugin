@@ -331,7 +331,7 @@ private mul_div_instructions ::= muls_instruction |
                                  divu_instruction
 
 private mul_div_tail ::= data_size_word?
-                         (data_register | effective_address | immediate_data) COMMA data_register
+                         adm_group_all COMMA adm_drd 
 
 muls_instruction ::= MULS mul_div_tail
 mulu_instruction ::= MULU mul_div_tail
