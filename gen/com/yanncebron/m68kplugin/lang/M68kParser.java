@@ -2584,7 +2584,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // LINK adm_ard COMMA immediate_data
+  // LINK adm_ard COMMA adm_imm
   public static boolean link_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "link_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", LINK)) return false;
@@ -2594,7 +2594,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     p = r; // pin = 1
     r = r && report_error_(b, adm_ard(b, l + 1));
     r = p && report_error_(b, consumeToken(b, COMMA)) && r;
-    r = p && immediate_data(b, l + 1) && r;
+    r = p && adm_imm(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

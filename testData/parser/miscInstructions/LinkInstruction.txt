@@ -6,7 +6,7 @@ FILE
     M68kAdmArdImpl(ADM_ARD)
       PsiElement(address_register)('a0')
     PsiElement(,)(',')
-    M68kImmediateDataImpl(IMMEDIATE_DATA)
+    M68kAdmImmImpl(ADM_IMM)
       PsiElement(#)('#')
       M68kNumberExpressionImpl(NUMBER_EXPRESSION)
         PsiElement(dec_number)('1')

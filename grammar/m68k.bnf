@@ -410,7 +410,7 @@ reset_instruction ::= RESET
 trap_instruction ::= TRAP adm_imm
 trapv_instruction ::= TRAPV
 
-link_instruction ::= LINK adm_ard COMMA immediate_data
+link_instruction ::= LINK adm_ard COMMA adm_imm
 unlk_instruction ::= UNLK adm_ard
 
 lea_instruction ::= LEA data_size_long? effective_address COMMA (address_register | label_reference) {

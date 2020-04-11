@@ -25,6 +25,6 @@ public interface M68kLinkInstruction extends M68kPsiElement {
   M68kAdmArd getAdmArd();
 
   @Nullable
-  M68kImmediateData getImmediateData();
+  M68kAdmImm getAdmImm();
 
 }
