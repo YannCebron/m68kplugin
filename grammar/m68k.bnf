@@ -132,7 +132,7 @@ private address_register ::= ADDRESS_REGISTER | SP {
 private address_register_pre_decrement ::= MINUS L_PAREN address_register R_PAREN
 private address_register_post_increment ::= L_PAREN ADDRESS_REGISTER R_PAREN PLUS
 private address_register_indirect ::= (label_ref_expression | MINUS | number_expression)? L_PAREN address_register R_PAREN PLUS? {
-  pin = "("                            // todo ID --> (label)expression ?
+  pin = "("
 }
 
 private status_register ::= SR
@@ -155,9 +155,9 @@ register_range ::= register_range_element (MINUS register_range_element)?
 register_list ::= register_range (DIV register_range)*
 
 private effective_address ::= program_counter_indirect |
-                              (ID L_PAREN address_register R_PAREN) |   // todo label_reference "jsr     _LVODoIO(a6)"
+                              (ID L_PAREN address_register R_PAREN) |
                               expression |
-                              label_reference // TODO
+                              label_reference
 {
   name = "effective address"
 }

@@ -2171,7 +2171,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // program_counter_indirect |
-  //                               (ID L_PAREN address_register R_PAREN) |   // todo label_reference "jsr     _LVODoIO(a6)"
+  //                               (ID L_PAREN address_register R_PAREN) |
   //                               expression |
   //                               label_reference
   static boolean effective_address(PsiBuilder b, int l) {
