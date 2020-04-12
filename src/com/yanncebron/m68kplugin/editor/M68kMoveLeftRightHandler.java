@@ -20,6 +20,7 @@ import com.intellij.codeInsight.editorActions.moveLeftRight.MoveElementLeftRight
 import com.intellij.psi.PsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kBinaryExpression;
 import com.yanncebron.m68kplugin.lang.psi.M68kDcDirective;
+import com.yanncebron.m68kplugin.lang.psi.M68kExgInstruction;
 import com.yanncebron.m68kplugin.lang.psi.M68kRegisterList;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,6 +39,10 @@ public class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
     if (element instanceof M68kRegisterList) {
       M68kRegisterList registerList = (M68kRegisterList) element;
       return registerList.getRegisterRangeList().toArray(PsiElement.EMPTY_ARRAY);
+    }
+    if (element instanceof M68kExgInstruction) {
+      final M68kExgInstruction exgInstruction = (M68kExgInstruction) element;
+      return new PsiElement[]{exgInstruction.getSource(), exgInstruction.getDestination()};
     }
     return PsiElement.EMPTY_ARRAY;
   }
