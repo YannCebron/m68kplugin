@@ -64,11 +64,11 @@ public class M68kParser implements PsiParser, LightPsiParser {
       CLR_INSTRUCTION, CMPA_INSTRUCTION, CMPI_INSTRUCTION, CMPM_INSTRUCTION,
       CMP_INSTRUCTION, DCB_DIRECTIVE, DC_DIRECTIVE, DS_DIRECTIVE,
       EORI_INSTRUCTION, EOR_INSTRUCTION, EXG_INSTRUCTION, EXT_INSTRUCTION,
-      LEA_INSTRUCTION, LSL_INSTRUCTION, LSR_INSTRUCTION, NBCD_INSTRUCTION,
-      NEGX_INSTRUCTION, NEG_INSTRUCTION, NOT_INSTRUCTION, ORI_INSTRUCTION,
-      OR_INSTRUCTION, PEA_INSTRUCTION, ROL_INSTRUCTION, ROR_INSTRUCTION,
-      ROXL_INSTRUCTION, ROXR_INSTRUCTION, RS_DIRECTIVE, SBCD_INSTRUCTION,
-      SWAP_INSTRUCTION, TAS_INSTRUCTION, TST_INSTRUCTION),
+      LEA_INSTRUCTION, LSL_INSTRUCTION, LSR_INSTRUCTION, MOVEQ_INSTRUCTION,
+      NBCD_INSTRUCTION, NEGX_INSTRUCTION, NEG_INSTRUCTION, NOT_INSTRUCTION,
+      ORI_INSTRUCTION, OR_INSTRUCTION, PEA_INSTRUCTION, ROL_INSTRUCTION,
+      ROR_INSTRUCTION, ROXL_INSTRUCTION, ROXR_INSTRUCTION, RS_DIRECTIVE,
+      SBCD_INSTRUCTION, SWAP_INSTRUCTION, TAS_INSTRUCTION, TST_INSTRUCTION),
   };
 
   /* ********************************************************** */
@@ -2866,7 +2866,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // MOVEQ data_size_long?
-  //                       immediate_data COMMA data_register
+  //                       adm_imm COMMA adm_drd
   public static boolean moveq_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "moveq_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", MOVEQ)) return false;
@@ -2875,9 +2875,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, MOVEQ);
     p = r; // pin = 1
     r = r && report_error_(b, moveq_instruction_1(b, l + 1));
-    r = p && report_error_(b, immediate_data(b, l + 1)) && r;
+    r = p && report_error_(b, adm_imm(b, l + 1)) && r;
     r = p && report_error_(b, consumeToken(b, COMMA)) && r;
-    r = p && data_register(b, l + 1) && r;
+    r = p && adm_drd(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

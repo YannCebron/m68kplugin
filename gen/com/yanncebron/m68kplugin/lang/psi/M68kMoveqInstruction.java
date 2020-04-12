@@ -19,9 +19,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kMoveqInstruction extends M68kPsiElement {
+public interface M68kMoveqInstruction extends M68kDataSized {
 
   @Nullable
-  M68kImmediateData getImmediateData();
+  M68kAdmImm getSource();
+
+  @Nullable
+  M68kAdmDrd getDestination();
 
 }

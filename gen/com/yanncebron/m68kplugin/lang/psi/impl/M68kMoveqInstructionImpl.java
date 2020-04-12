@@ -22,10 +22,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kMoveqInstructionImpl extends ASTWrapperPsiElement implements M68kMoveqInstruction {
+public class M68kMoveqInstructionImpl extends M68kDataSizedImpl implements M68kMoveqInstruction {
 
   public M68kMoveqInstructionImpl(@NotNull ASTNode node) {
     super(node);
@@ -42,8 +41,14 @@ public class M68kMoveqInstructionImpl extends ASTWrapperPsiElement implements M6
 
   @Override
   @Nullable
-  public M68kImmediateData getImmediateData() {
-    return findChildByClass(M68kImmediateData.class);
+  public M68kAdmImm getSource() {
+    return findChildByClass(M68kAdmImm.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmDrd getDestination() {
+    return findChildByClass(M68kAdmDrd.class);
   }
 
 }
