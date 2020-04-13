@@ -340,7 +340,7 @@ fake bool_instruction_base ::= {
 
 private bool_tail ::= data_size_all?
                       (
-                        (adm_group_all_except_ard COMMA adm_drd) |
+                        (adm_group_all_except_ard COMMA adm_group_all_except_ard_pc_imm) |
                         (adm_drd COMMA adm_group_all_except_ard_pc_imm)
                       )
 private bool_i_tail ::= data_size_all?

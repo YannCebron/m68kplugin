@@ -35,6 +35,10 @@ public class BoolInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" and.l d0,42(a1,d0)");
   }
 
+  public void testAndInstructionImmAbs() throws Exception {
+    doCodeTest(" and.w #$8100,label");
+  }
+
   public void testAndiInstructionDrd() throws IOException {
     doCodeTest(" andi #0,d1");
   }

@@ -40,39 +40,39 @@ public class M68kOrInstructionImpl extends M68kBoolInstructionBaseImpl implement
   }
 
   @Override
-  @Nullable
-  public M68kAdmAbs getAdmAbs() {
-    return findChildByClass(M68kAdmAbs.class);
+  @NotNull
+  public List<M68kAdmAbs> getAdmAbsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAbs.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmAdi getAdmAdi() {
-    return findChildByClass(M68kAdmAdi.class);
+  @NotNull
+  public List<M68kAdmAdi> getAdmAdiList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAdi.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmAix getAdmAix() {
-    return findChildByClass(M68kAdmAix.class);
+  @NotNull
+  public List<M68kAdmAix> getAdmAixList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAix.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmApd getAdmApd() {
-    return findChildByClass(M68kAdmApd.class);
+  @NotNull
+  public List<M68kAdmApd> getAdmApdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmApd.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmApi getAdmApi() {
-    return findChildByClass(M68kAdmApi.class);
+  @NotNull
+  public List<M68kAdmApi> getAdmApiList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmApi.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmAri getAdmAri() {
-    return findChildByClass(M68kAdmAri.class);
+  @NotNull
+  public List<M68kAdmAri> getAdmAriList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAri.class);
   }
 
   @Override

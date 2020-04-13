@@ -21,23 +21,23 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kOrInstruction extends M68kBoolInstructionBase {
 
-  @Nullable
-  M68kAdmAbs getAdmAbs();
+  @NotNull
+  List<M68kAdmAbs> getAdmAbsList();
 
-  @Nullable
-  M68kAdmAdi getAdmAdi();
+  @NotNull
+  List<M68kAdmAdi> getAdmAdiList();
 
-  @Nullable
-  M68kAdmAix getAdmAix();
+  @NotNull
+  List<M68kAdmAix> getAdmAixList();
 
-  @Nullable
-  M68kAdmApd getAdmApd();
+  @NotNull
+  List<M68kAdmApd> getAdmApdList();
 
-  @Nullable
-  M68kAdmApi getAdmApi();
+  @NotNull
+  List<M68kAdmApi> getAdmApiList();
 
-  @Nullable
-  M68kAdmAri getAdmAri();
+  @NotNull
+  List<M68kAdmAri> getAdmAriList();
 
   @NotNull
   List<M68kAdmDrd> getAdmDrdList();
