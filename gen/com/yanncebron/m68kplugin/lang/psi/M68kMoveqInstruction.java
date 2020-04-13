@@ -19,7 +19,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kMoveqInstruction extends M68kDataSized {
+public interface M68kMoveqInstruction extends M68kMoveInstructionBase {
 
   @Nullable
   M68kAdmImm getSource();

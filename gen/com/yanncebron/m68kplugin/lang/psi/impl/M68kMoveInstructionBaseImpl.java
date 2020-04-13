@@ -24,31 +24,19 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kMoveqInstructionImpl extends M68kMoveInstructionBaseImpl implements M68kMoveqInstruction {
+public class M68kMoveInstructionBaseImpl extends M68kDataSizedImpl implements M68kMoveInstructionBase {
 
-  public M68kMoveqInstructionImpl(@NotNull ASTNode node) {
+  public M68kMoveInstructionBaseImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitMoveqInstruction(this);
+    visitor.visitMoveInstructionBase(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public M68kAdmImm getSource() {
-    return findChildByClass(M68kAdmImm.class);
-  }
-
-  @Override
-  @Nullable
-  public M68kAdmDrd getDestination() {
-    return findChildByClass(M68kAdmDrd.class);
   }
 
 }

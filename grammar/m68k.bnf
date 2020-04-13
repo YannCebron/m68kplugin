@@ -222,19 +222,23 @@ private move_instructions ::= move_instruction |
                               movem_instruction |
                               movep_instruction
 
+fake move_instruction_base ::= {
+  extends = data_sized
+}
+
 move_instruction ::= MOVE data_size_all?
                      adm_group_all COMMA adm_group_all_except_pc_imm {
-  extends = data_sized
+  extends = move_instruction_base
 }
 
 movea_instruction ::= MOVEA data_size_word_long?
                       adm_group_all COMMA adm_ard {
-  extends = data_sized
+  extends = move_instruction_base
 }
                                          
 moveq_instruction ::= MOVEQ data_size_long?
                       adm_imm COMMA adm_drd {
-  extends = data_sized
+  extends = move_instruction_base
   methods = [
     source = "adm_imm"
     destination = "adm_drd"
@@ -246,7 +250,7 @@ movem_instruction ::= MOVEM data_size_word_long?
                         ( register_list COMMA (adm_ari | adm_apd | adm_adi | adm_aix | adm_abs) ) |
                         ( (adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA register_list )
                       ) {
-  extends = data_sized
+  extends = move_instruction_base
 }
 
 movep_instruction ::= MOVEP data_size_word_long?
@@ -254,7 +258,7 @@ movep_instruction ::= MOVEP data_size_word_long?
                         (adm_drd COMMA adm_adi) |
                         (adm_adi COMMA adm_drd)
                       ) {
-  extends = data_sized
+  extends = move_instruction_base
 }
 
 

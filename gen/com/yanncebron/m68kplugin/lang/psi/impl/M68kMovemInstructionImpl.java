@@ -24,7 +24,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kMovemInstructionImpl extends M68kDataSizedImpl implements M68kMovemInstruction {
+public class M68kMovemInstructionImpl extends M68kMoveInstructionBaseImpl implements M68kMovemInstruction {
 
   public M68kMovemInstructionImpl(@NotNull ASTNode node) {
     super(node);
