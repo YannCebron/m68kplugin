@@ -19,15 +19,39 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kMoveInstruction extends M68kPsiElement {
+public interface M68kMoveInstruction extends M68kDataSized {
 
   @NotNull
-  List<M68kExpression> getExpressionList();
+  List<M68kAdmAbs> getAdmAbsList();
+
+  @NotNull
+  List<M68kAdmAdi> getAdmAdiList();
+
+  @NotNull
+  List<M68kAdmAix> getAdmAixList();
+
+  @NotNull
+  List<M68kAdmApd> getAdmApdList();
+
+  @NotNull
+  List<M68kAdmApi> getAdmApiList();
+
+  @NotNull
+  List<M68kAdmArd> getAdmArdList();
+
+  @NotNull
+  List<M68kAdmAri> getAdmAriList();
+
+  @NotNull
+  List<M68kAdmDrd> getAdmDrdList();
 
   @Nullable
-  M68kImmediateData getImmediateData();
+  M68kAdmImm getAdmImm();
 
   @Nullable
-  M68kLabelReference getLabelReference();
+  M68kAdmPcd getAdmPcd();
+
+  @Nullable
+  M68kAdmPci getAdmPci();
 
 }

@@ -22,10 +22,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kMoveInstructionImpl extends ASTWrapperPsiElement implements M68kMoveInstruction {
+public class M68kMoveInstructionImpl extends M68kDataSizedImpl implements M68kMoveInstruction {
 
   public M68kMoveInstructionImpl(@NotNull ASTNode node) {
     super(node);
@@ -42,20 +41,68 @@ public class M68kMoveInstructionImpl extends ASTWrapperPsiElement implements M68
 
   @Override
   @NotNull
-  public List<M68kExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
+  public List<M68kAdmAbs> getAdmAbsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAbs.class);
+  }
+
+  @Override
+  @NotNull
+  public List<M68kAdmAdi> getAdmAdiList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAdi.class);
+  }
+
+  @Override
+  @NotNull
+  public List<M68kAdmAix> getAdmAixList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAix.class);
+  }
+
+  @Override
+  @NotNull
+  public List<M68kAdmApd> getAdmApdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmApd.class);
+  }
+
+  @Override
+  @NotNull
+  public List<M68kAdmApi> getAdmApiList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmApi.class);
+  }
+
+  @Override
+  @NotNull
+  public List<M68kAdmArd> getAdmArdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmArd.class);
+  }
+
+  @Override
+  @NotNull
+  public List<M68kAdmAri> getAdmAriList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAri.class);
+  }
+
+  @Override
+  @NotNull
+  public List<M68kAdmDrd> getAdmDrdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmDrd.class);
   }
 
   @Override
   @Nullable
-  public M68kImmediateData getImmediateData() {
-    return findChildByClass(M68kImmediateData.class);
+  public M68kAdmImm getAdmImm() {
+    return findChildByClass(M68kAdmImm.class);
   }
 
   @Override
   @Nullable
-  public M68kLabelReference getLabelReference() {
-    return findChildByClass(M68kLabelReference.class);
+  public M68kAdmPcd getAdmPcd() {
+    return findChildByClass(M68kAdmPcd.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmPci getAdmPci() {
+    return findChildByClass(M68kAdmPci.class);
   }
 
 }

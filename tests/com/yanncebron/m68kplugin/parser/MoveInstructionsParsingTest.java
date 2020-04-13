@@ -37,32 +37,40 @@ public class MoveInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" move #1,");
   }
 
-  public void testMoveInstructionDataRegisterDataRegister() throws Exception {
+  public void testMoveInstructionDrdDrd() throws Exception {
     doCodeTest(" move d0,d1");
   }
 
-  public void testMoveInstructionDataSizeByteDataRegisterDataRegister() throws Exception {
+  public void testMoveInstructionDataSizeByteDrdDrd() throws Exception {
     doCodeTest(" move.b d0,d1");
   }
-              
-  public void testMoveInstructionDataSizeWordDataRegisterDataRegister() throws Exception {
+
+  public void testMoveInstructionDataSizeWordDrdDrd() throws Exception {
     doCodeTest(" move.w d0,d1");
   }
 
-  public void testMoveInstructionDataSizeLongDataRegisterDataRegister() throws Exception {
-    doCodeTest(" move.w d0,d1");
+  public void testMoveInstructionDataSizeLongDrdDrd() throws Exception {
+    doCodeTest(" move.l d0,d1");
   }
 
-  public void testMoveInstructionImmediateDataRegister() throws Exception {
+  public void testMoveInstructionImmDrd() throws Exception {
     doCodeTest(" move #1,d1");
   }
 
-  public void testMoveInstructionDataRegisterEffectiveAddress() throws Exception {
+  public void testMoveInstructionDrdAbs() throws Exception {
     doCodeTest(" move d0,dest");
   }
 
-  public void testMoveInstructionAddressRegisterAddressRegister() throws Exception {
+  public void testMoveInstructionArdDrd() throws Exception {
+    doCodeTest(" move a0,d0");
+  }
+
+  public void testMoveInstructionArdArd() throws Exception {
     doCodeTest(" move a0,a1");
+  }
+
+  public void testMoveInstructionAbsArd() throws Exception {
+    doCodeTest(" move.l 4,a6");
   }
 
 

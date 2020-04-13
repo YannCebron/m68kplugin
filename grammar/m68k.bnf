@@ -223,7 +223,9 @@ private move_instructions ::= move_instruction |
                               movep_instruction
 
 move_instruction ::= MOVE data_size_all?
-                     (any_register | immediate_data) COMMA (any_register | effective_address)
+                     adm_group_all COMMA adm_group_all_except_pc_imm {
+  extends = data_sized
+}
 
 movea_instruction ::= MOVEA data_size_word_long?
                       adm_group_all COMMA adm_ard {

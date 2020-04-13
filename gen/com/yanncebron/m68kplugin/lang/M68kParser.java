@@ -65,11 +65,11 @@ public class M68kParser implements PsiParser, LightPsiParser {
       CMP_INSTRUCTION, DCB_DIRECTIVE, DC_DIRECTIVE, DS_DIRECTIVE,
       EORI_INSTRUCTION, EOR_INSTRUCTION, EXG_INSTRUCTION, EXT_INSTRUCTION,
       LEA_INSTRUCTION, LSL_INSTRUCTION, LSR_INSTRUCTION, MOVEA_INSTRUCTION,
-      MOVEM_INSTRUCTION, MOVEP_INSTRUCTION, MOVEQ_INSTRUCTION, NBCD_INSTRUCTION,
-      NEGX_INSTRUCTION, NEG_INSTRUCTION, NOT_INSTRUCTION, ORI_INSTRUCTION,
-      OR_INSTRUCTION, PEA_INSTRUCTION, ROL_INSTRUCTION, ROR_INSTRUCTION,
-      ROXL_INSTRUCTION, ROXR_INSTRUCTION, RS_DIRECTIVE, SBCD_INSTRUCTION,
-      SWAP_INSTRUCTION, TAS_INSTRUCTION, TST_INSTRUCTION),
+      MOVEM_INSTRUCTION, MOVEP_INSTRUCTION, MOVEQ_INSTRUCTION, MOVE_INSTRUCTION,
+      NBCD_INSTRUCTION, NEGX_INSTRUCTION, NEG_INSTRUCTION, NOT_INSTRUCTION,
+      ORI_INSTRUCTION, OR_INSTRUCTION, PEA_INSTRUCTION, ROL_INSTRUCTION,
+      ROR_INSTRUCTION, ROXL_INSTRUCTION, ROXR_INSTRUCTION, RS_DIRECTIVE,
+      SBCD_INSTRUCTION, SWAP_INSTRUCTION, TAS_INSTRUCTION, TST_INSTRUCTION),
   };
 
   /* ********************************************************** */
@@ -2712,7 +2712,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // MOVE data_size_all?
-  //                      (any_register | immediate_data) COMMA (any_register | effective_address)
+  //                      adm_group_all COMMA adm_group_all_except_pc_imm
   public static boolean move_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "move_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", MOVE)) return false;
@@ -2721,9 +2721,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, MOVE);
     p = r; // pin = 1
     r = r && report_error_(b, move_instruction_1(b, l + 1));
-    r = p && report_error_(b, move_instruction_2(b, l + 1)) && r;
+    r = p && report_error_(b, adm_group_all(b, l + 1)) && r;
     r = p && report_error_(b, consumeToken(b, COMMA)) && r;
-    r = p && move_instruction_4(b, l + 1) && r;
+    r = p && adm_group_all_except_pc_imm(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -2733,24 +2733,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "move_instruction_1")) return false;
     data_size_all(b, l + 1);
     return true;
-  }
-
-  // any_register | immediate_data
-  private static boolean move_instruction_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "move_instruction_2")) return false;
-    boolean r;
-    r = any_register(b, l + 1);
-    if (!r) r = immediate_data(b, l + 1);
-    return r;
-  }
-
-  // any_register | effective_address
-  private static boolean move_instruction_4(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "move_instruction_4")) return false;
-    boolean r;
-    r = any_register(b, l + 1);
-    if (!r) r = effective_address(b, l + 1);
-    return r;
   }
 
   /* ********************************************************** */
