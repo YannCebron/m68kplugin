@@ -75,19 +75,19 @@ public class MoveInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" movea a0,");
   }
 
-  public void testMoveaInstructionAddressRegister() throws Exception {
+  public void testMoveaInstructionArd() throws Exception {
     doCodeTest(" movea a0,a1");
   }
 
-  public void testMoveaInstructionAddressRegisterDataSizeWord() throws Exception {
+  public void testMoveaInstructionDataSizeWordArd() throws Exception {
     doCodeTest(" movea.w a0,a1");
   }
 
-  public void testMoveaInstructionAddressRegisterDataSizeLong() throws Exception {
-    doCodeTest(" movea.l a0,a1");
+  public void testMoveaInstructionDataSizeLongImm() throws Exception {
+    doCodeTest(" movea.l #1,a1");
   }
 
-  public void testMoveaInstructionEffectiveAddress() throws Exception {
+  public void testMoveaInstructionAbs() throws Exception {
     doCodeTest(" movea src,a1");
   }
 

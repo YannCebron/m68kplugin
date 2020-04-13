@@ -3,7 +3,8 @@ FILE
   M68kMoveaInstructionImpl(MOVEA_INSTRUCTION)
     PsiElement(movea)('movea')
     PsiWhiteSpace(' ')
-    PsiElement(address_register)('a0')
+    M68kAdmArdImpl(ADM_ARD)
+      PsiElement(address_register)('a0')
     PsiElement(,)(',')
     PsiErrorElement:<address register> expected
       <empty list>
