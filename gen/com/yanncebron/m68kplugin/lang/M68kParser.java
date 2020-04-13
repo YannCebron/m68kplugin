@@ -2560,7 +2560,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // LEA data_size_long?
-  // LEA data_size_long?
   //                     (adm_ard | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA adm_ard
   public static boolean lea_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "lea_instruction")) return false;
@@ -3230,7 +3229,8 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // PEA data_size_long? any_register
+  // PEA data_size_long? 
+  //                     (adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs)
   public static boolean pea_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "pea_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", PEA)) return false;
@@ -3239,7 +3239,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, PEA);
     p = r; // pin = 1
     r = r && report_error_(b, pea_instruction_1(b, l + 1));
-    r = p && any_register(b, l + 1) && r;
+    r = p && pea_instruction_2(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -3249,6 +3249,20 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "pea_instruction_1")) return false;
     data_size_long(b, l + 1);
     return true;
+  }
+
+  // adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+  private static boolean pea_instruction_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "pea_instruction_2")) return false;
+    boolean r;
+    r = adm_ari(b, l + 1);
+    if (!r) r = adm_apd(b, l + 1);
+    if (!r) r = adm_pcd(b, l + 1);
+    if (!r) r = adm_pci(b, l + 1);
+    if (!r) r = adm_adi(b, l + 1);
+    if (!r) r = adm_aix(b, l + 1);
+    if (!r) r = adm_abs(b, l + 1);
+    return r;
   }
 
   /* ********************************************************** */

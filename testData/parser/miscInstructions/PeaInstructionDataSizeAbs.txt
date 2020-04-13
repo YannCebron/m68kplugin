@@ -4,4 +4,6 @@ FILE
     PsiElement(pea)('pea')
     PsiElement(.l)('.l')
     PsiWhiteSpace(' ')
-    PsiElement(address_register)('a0')
+    M68kAdmAbsImpl(ADM_ABS)
+      M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+        PsiElement(dec_number)('50000')

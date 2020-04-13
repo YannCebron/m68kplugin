@@ -93,12 +93,12 @@ public class MiscInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" lea src,");
   }
 
-  public void testPeaInstruction() throws Exception {
-    doCodeTest(" pea a0");
+  public void testPeaInstructionAri() throws Exception {
+    doCodeTest(" pea (a0)");
   }
 
-  public void testPeaInstructionDataSize() throws Exception {
-    doCodeTest(" pea.l a0");
+  public void testPeaInstructionDataSizeAbs() throws Exception {
+    doCodeTest(" pea.l 50000");
   }
 
   public void testPeaInstructionMissingSource() throws Exception {

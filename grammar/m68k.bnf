@@ -451,7 +451,8 @@ lea_instruction ::= LEA data_size_long?
                     (adm_ard | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA adm_ard {
   extends = data_sized
 }
-pea_instruction ::= PEA data_size_long? any_register {
+pea_instruction ::= PEA data_size_long?
+                    (adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) {
   extends = data_sized
 }
 
