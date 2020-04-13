@@ -115,7 +115,6 @@ public interface M68kTypes {
   IElementType JMP_INSTRUCTION = new M68kCompositeElementType("JMP_INSTRUCTION");
   IElementType JSR_INSTRUCTION = new M68kCompositeElementType("JSR_INSTRUCTION");
   IElementType LABEL = new M68kCompositeElementType("LABEL");
-  IElementType LABEL_REFERENCE = new M68kCompositeElementType("LABEL_REFERENCE");
   IElementType LABEL_REF_EXPRESSION = new M68kCompositeElementType("LABEL_REF_EXPRESSION");
   IElementType LEA_INSTRUCTION = new M68kCompositeElementType("LEA_INSTRUCTION");
   IElementType LINK_INSTRUCTION = new M68kCompositeElementType("LINK_INSTRUCTION");
@@ -474,9 +473,6 @@ public interface M68kTypes {
       }
       else if (type == LABEL) {
         return new M68kLabelImpl(node);
-      }
-      else if (type == LABEL_REFERENCE) {
-        return new M68kLabelReferenceImpl(node);
       }
       else if (type == LABEL_REF_EXPRESSION) {
         return new M68kLabelRefExpressionImpl(node);

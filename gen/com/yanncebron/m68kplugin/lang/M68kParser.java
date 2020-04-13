@@ -2419,18 +2419,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ID
-  public static boolean label_reference(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "label_reference")) return false;
-    if (!nextTokenIs(b, "<label>", ID)) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, LABEL_REFERENCE, "<label>");
-    r = consumeToken(b, ID);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
   // label | localLabel
   static boolean labels(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "labels")) return false;
@@ -4173,14 +4161,14 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // label_reference
+  // ID
   public static boolean label_ref_expression(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "label_ref_expression")) return false;
     if (!nextTokenIsSmart(b, ID)) return false;
     boolean r;
-    Marker m = enter_section_(b);
-    r = label_reference(b, l + 1);
-    exit_section_(b, m, LABEL_REF_EXPRESSION, r);
+    Marker m = enter_section_(b, l, _NONE_, LABEL_REF_EXPRESSION, "<label>");
+    r = consumeTokenSmart(b, ID);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 

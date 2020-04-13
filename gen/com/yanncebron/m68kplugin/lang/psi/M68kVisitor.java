@@ -429,10 +429,6 @@ public class M68kVisitor extends PsiElementVisitor {
     visitExpression(o);
   }
 
-  public void visitLabelReference(@NotNull M68kLabelReference o) {
-    visitPsiElement(o);
-  }
-
   public void visitLeaInstruction(@NotNull M68kLeaInstruction o) {
     visitDataSized(o);
   }

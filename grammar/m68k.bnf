@@ -128,11 +128,6 @@ register_range ::= register_range_element (MINUS register_range_element)?
 register_list ::= register_range (DIV register_range)*
 
 
-label_reference ::= ID {
-  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelReferenceMixIn"
-  name = "label"
-}
-
 // addressing modes  =====================================================
 // d0
 adm_drd ::= DATA_REGISTER {
@@ -868,5 +863,8 @@ private bracket_paren_expression ::= L_BRACKET expression R_BRACKET {
 }
 paren_expression ::= plain_paren_expression | bracket_paren_expression
 
-label_ref_expression ::= label_reference
+label_ref_expression ::= ID {
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelRefExpressionMixIn"
+  name = "label"
+}
 

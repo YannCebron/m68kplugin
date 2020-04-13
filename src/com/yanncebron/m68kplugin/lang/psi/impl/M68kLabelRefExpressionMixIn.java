@@ -34,16 +34,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-// todo separate impl for Expression?
-public abstract class M68kLabelReferenceMixIn extends ASTWrapperPsiElement {
+public abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
 
-  protected M68kLabelReferenceMixIn(@NotNull ASTNode node) {
+  protected M68kLabelRefExpressionMixIn(@NotNull ASTNode node) {
     super(node);
   }
 
   @Override
   public PsiReference getReference() {
-    return new PsiReferenceBase<M68kLabelReferenceMixIn>(this) {
+    return new PsiReferenceBase<M68kLabelRefExpressionMixIn>(this) {
       @Nullable
       @Override
       public PsiElement resolve() {

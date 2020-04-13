@@ -8,5 +8,4 @@ FILE
     PsiElement(,)(',')
     M68kAdmAbsImpl(ADM_ABS)
       M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
-        M68kLabelReferenceImpl(LABEL_REFERENCE)
-          PsiElement(id)('dest')
+        PsiElement(id)('dest')

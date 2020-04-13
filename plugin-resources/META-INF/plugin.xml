@@ -81,8 +81,8 @@
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.lang.refactoring.M68kRefactoringSupportProvider"/>
     <lang.elementManipulator
-        forClass="com.yanncebron.m68kplugin.lang.psi.M68kLabelReference"
-        implementationClass="com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelReferenceElementManipulator"/>
+        forClass="com.yanncebron.m68kplugin.lang.psi.M68kLabelRefExpression"
+        implementationClass="com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelRefExpressionElementManipulator"/>
 
 
     <lang.psiStructureViewFactory

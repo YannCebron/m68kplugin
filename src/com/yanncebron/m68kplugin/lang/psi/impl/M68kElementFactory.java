@@ -34,10 +34,10 @@ public class M68kElementFactory {
     return (M68kLabel) file.getFirstChild();
   }
 
-  public static M68kLabelReference createLabelReference(Project project, String name) {
+  public static M68kLabelRefExpression createLabelRefExpression(Project project, String name) {
     final M68kBraInstruction firstChild = (M68kBraInstruction) createFile(project, " bra " + name).getChildren()[1];
     final M68kExpression expression = firstChild.getExpression();
     assert expression instanceof M68kLabelRefExpression;
-    return ((M68kLabelRefExpression) expression).getLabelReference();
+    return (M68kLabelRefExpression) expression;
   }
 }

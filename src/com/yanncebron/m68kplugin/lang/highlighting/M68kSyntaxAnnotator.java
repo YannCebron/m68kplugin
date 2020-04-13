@@ -23,7 +23,7 @@ import com.intellij.openapi.util.registry.Registry;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabelReference;
+import com.yanncebron.m68kplugin.lang.psi.M68kLabelRefExpression;
 import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import org.jetbrains.annotations.NotNull;
@@ -39,7 +39,7 @@ public class M68kSyntaxAnnotator implements Annotator {
     }
 
     // todo temp --> inspection?
-    if (element instanceof M68kLabelReference && Registry.is("m68k.highlight.unresolved.ref")) {
+    if (element instanceof M68kLabelRefExpression && Registry.is("m68k.highlight.unresolved.ref")) {
       final PsiReference reference = element.getReference();
       if (reference.resolve() == null) {
         holder.createErrorAnnotation(element, ProblemsHolder.unresolvedReferenceMessage(reference));

@@ -21,7 +21,4 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kLabelRefExpression extends M68kExpression {
 
-  @NotNull
-  M68kLabelReference getLabelReference();
-
 }

@@ -24,7 +24,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kLabelRefExpressionImpl extends M68kExpressionImpl implements M68kLabelRefExpression {
+public class M68kLabelRefExpressionImpl extends M68kLabelRefExpressionMixIn implements M68kLabelRefExpression {
 
   public M68kLabelRefExpressionImpl(@NotNull ASTNode node) {
     super(node);
@@ -37,12 +37,6 @@ public class M68kLabelRefExpressionImpl extends M68kExpressionImpl implements M6
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public M68kLabelReference getLabelReference() {
-    return findNotNullChildByClass(M68kLabelReference.class);
   }
 
 }

@@ -19,17 +19,17 @@ package com.yanncebron.m68kplugin.lang.psi.impl;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.AbstractElementManipulator;
 import com.intellij.util.IncorrectOperationException;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabelReference;
+import com.yanncebron.m68kplugin.lang.psi.M68kLabelRefExpression;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 // todo inline in LabelReference#handleRename?
-public class M68kLabelReferenceElementManipulator extends AbstractElementManipulator<M68kLabelReference> {
+public class M68kLabelRefExpressionElementManipulator extends AbstractElementManipulator<M68kLabelRefExpression> {
 
   @Nullable
   @Override
-  public M68kLabelReference handleContentChange(@NotNull M68kLabelReference element, @NotNull TextRange range, String newContent) throws IncorrectOperationException {
-    final M68kLabelReference labelReference = M68kElementFactory.createLabelReference(element.getProject(), newContent);
+  public M68kLabelRefExpression handleContentChange(@NotNull M68kLabelRefExpression element, @NotNull TextRange range, String newContent) throws IncorrectOperationException {
+    final M68kLabelRefExpression labelReference = M68kElementFactory.createLabelRefExpression(element.getProject(), newContent);
     element.replace(labelReference);
     return element;
   }

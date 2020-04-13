@@ -5,5 +5,4 @@ FILE
     PsiElement(.s)('.s')
     PsiWhiteSpace(' ')
     M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
-      M68kLabelReferenceImpl(LABEL_REFERENCE)
-        PsiElement(id)('label')
+      PsiElement(id)('label')
