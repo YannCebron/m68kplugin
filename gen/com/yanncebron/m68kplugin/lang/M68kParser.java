@@ -1976,7 +1976,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // DC data_size_all? dc_element (COMMA dc_element)*
+  // DC data_size_all? expression (COMMA expression)*
   public static boolean dc_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "dc_directive")) return false;
     if (!nextTokenIs(b, DC)) return false;
@@ -1985,7 +1985,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, DC);
     p = r; // pin = 1
     r = r && report_error_(b, dc_directive_1(b, l + 1));
-    r = p && report_error_(b, dc_element(b, l + 1)) && r;
+    r = p && report_error_(b, expression(b, l + 1, -1)) && r;
     r = p && dc_directive_3(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
@@ -1998,7 +1998,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // (COMMA dc_element)*
+  // (COMMA expression)*
   private static boolean dc_directive_3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "dc_directive_3")) return false;
     while (true) {
@@ -2009,21 +2009,15 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // COMMA dc_element
+  // COMMA expression
   private static boolean dc_directive_3_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "dc_directive_3_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, COMMA);
-    r = r && dc_element(b, l + 1);
+    r = r && expression(b, l + 1, -1);
     exit_section_(b, m, null, r);
     return r;
-  }
-
-  /* ********************************************************** */
-  // expression
-  static boolean dc_element(PsiBuilder b, int l) {
-    return expression(b, l + 1, -1);
   }
 
   /* ********************************************************** */
@@ -3229,7 +3223,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // PEA data_size_long? 
+  // PEA data_size_long?
   //                     (adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs)
   public static boolean pea_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "pea_instruction")) return false;

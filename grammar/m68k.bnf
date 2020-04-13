@@ -781,8 +781,7 @@ include_directive ::= INCLUDE include_path {
   pin = 1
 }
 
-private dc_element ::= expression
-dc_directive ::= DC data_size_all? dc_element (COMMA dc_element)* {
+dc_directive ::= DC data_size_all? expression (COMMA expression)* {
   pin = 1
   extends = data_sized
 }
