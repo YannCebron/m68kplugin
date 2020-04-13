@@ -46,8 +46,17 @@ public class AddSubInstructionsParsingTest extends M68kParsingTestCase {
   public void testAddInstructionDrdAbs() throws IOException {
     doCodeTest(" add d0,label");
   }
+
   public void testAddInstructionAbsDrd() throws IOException {
     doCodeTest(" add label,d1");
+  }
+
+  public void testAddInstructionAbsArd() throws IOException {
+    doCodeTest(" add label,a0");
+  }
+
+  public void testAddInstructionImmArd() throws IOException {
+    doCodeTest(" add #1,a0");
   }
 
   public void testAddInstructionArdDrd() throws IOException {

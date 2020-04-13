@@ -281,11 +281,7 @@ private add_sub_instructions ::= add_instruction |
                                  subx_instruction
 
 private add_sub_tail ::= data_size_all?
-  (
-    (adm_drd COMMA adm_group_all_except_pc_imm) |
-    (adm_imm COMMA adm_group_all_except_pc_imm) |
-    (adm_group_all_except_imm COMMA adm_drd)
-  )
+  adm_group_all COMMA adm_group_all_except_pc_imm
 private add_sub_a_tail ::= data_size_word_long?
   adm_group_all COMMA adm_ard
 private add_sub_i_tail ::= data_size_all?
