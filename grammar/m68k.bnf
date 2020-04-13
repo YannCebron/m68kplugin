@@ -589,7 +589,7 @@ private dbCC_instructions ::= dbra_instruction |
                               dbf_instruction |
                               dbt_instruction
 
-private dbCC_tail ::= CC_data_size? data_register COMMA label_reference
+private dbCC_tail ::= CC_data_size? adm_drd COMMA expression
 
 dbra_instruction ::= DBRA dbCC_tail
 dbcs_instruction ::= DBCS dbCC_tail

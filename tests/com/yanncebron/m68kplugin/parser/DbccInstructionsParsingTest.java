@@ -51,7 +51,7 @@ public class DbccInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" dbcs d0,label");
   }
 
-  public void testDBlsInstruction() throws IOException {
+  public void testDblsInstruction() throws IOException {
     doCodeTest(" dbls d0,label");
   }
 

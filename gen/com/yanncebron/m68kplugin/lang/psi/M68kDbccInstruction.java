@@ -22,6 +22,9 @@ import com.intellij.psi.PsiElement;
 public interface M68kDbccInstruction extends M68kPsiElement {
 
   @Nullable
-  M68kLabelReference getLabelReference();
+  M68kAdmDrd getAdmDrd();
+
+  @Nullable
+  M68kExpression getExpression();
 
 }

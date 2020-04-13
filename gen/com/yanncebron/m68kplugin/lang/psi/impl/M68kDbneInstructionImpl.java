@@ -42,8 +42,14 @@ public class M68kDbneInstructionImpl extends ASTWrapperPsiElement implements M68
 
   @Override
   @Nullable
-  public M68kLabelReference getLabelReference() {
-    return findChildByClass(M68kLabelReference.class);
+  public M68kAdmDrd getAdmDrd() {
+    return findChildByClass(M68kAdmDrd.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kExpression getExpression() {
+    return findChildByClass(M68kExpression.class);
   }
 
 }

@@ -1717,15 +1717,15 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // CC_data_size? data_register COMMA label_reference
+  // CC_data_size? adm_drd COMMA expression
   static boolean dbCC_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "dbCC_tail")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = dbCC_tail_0(b, l + 1);
-    r = r && data_register(b, l + 1);
+    r = r && adm_drd(b, l + 1);
     r = r && consumeToken(b, COMMA);
-    r = r && label_reference(b, l + 1);
+    r = r && expression(b, l + 1, -1);
     exit_section_(b, m, null, r);
     return r;
   }
