@@ -1133,16 +1133,15 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // data_size_all?
-  //                       (
-  //                         (adm_group_all_except_ard COMMA adm_group_all_except_ard_pc_imm) |
-  //                         (adm_drd COMMA adm_group_all_except_ard_pc_imm)
-  //                       )
+  //                       adm_group_all_except_ard COMMA adm_group_all_except_ard_pc_imm
   static boolean bool_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bool_tail")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = bool_tail_0(b, l + 1);
-    r = r && bool_tail_1(b, l + 1);
+    r = r && adm_group_all_except_ard(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_group_all_except_ard_pc_imm(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1152,42 +1151,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "bool_tail_0")) return false;
     data_size_all(b, l + 1);
     return true;
-  }
-
-  // (adm_group_all_except_ard COMMA adm_group_all_except_ard_pc_imm) |
-  //                         (adm_drd COMMA adm_group_all_except_ard_pc_imm)
-  private static boolean bool_tail_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bool_tail_1")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = bool_tail_1_0(b, l + 1);
-    if (!r) r = bool_tail_1_1(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // adm_group_all_except_ard COMMA adm_group_all_except_ard_pc_imm
-  private static boolean bool_tail_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bool_tail_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = adm_group_all_except_ard(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && adm_group_all_except_ard_pc_imm(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // adm_drd COMMA adm_group_all_except_ard_pc_imm
-  private static boolean bool_tail_1_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bool_tail_1_1")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = adm_drd(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && adm_group_all_except_ard_pc_imm(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
   }
 
   /* ********************************************************** */
