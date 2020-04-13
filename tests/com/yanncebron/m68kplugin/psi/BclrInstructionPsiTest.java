@@ -25,16 +25,12 @@ public class BclrInstructionPsiTest extends M68kPsiTestCase {
     final M68kBclrInstruction instruction = parse("bclr #1,d0");
 
     assertNull(instruction.getDataSize());
-
-    assertNotNull(instruction.getImmediateData());
   }
 
   public void testWithDataSize() {
     final M68kBclrInstruction instruction = parse("bclr.b #1,d0");
 
     assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
-
-    assertNotNull(instruction.getImmediateData());
   }
 
   private M68kBclrInstruction parse(String text) {

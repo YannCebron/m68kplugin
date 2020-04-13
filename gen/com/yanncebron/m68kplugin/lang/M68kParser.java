@@ -1104,7 +1104,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // bit_data_size?
-  //                      (immediate_data | data_register) COMMA (data_register | effective_address)
+  //                      (adm_drd | adm_imm) COMMA adm_group_all_except_ard_pc_imm
   static boolean bit_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bit_tail")) return false;
     boolean r;
@@ -1112,7 +1112,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = bit_tail_0(b, l + 1);
     r = r && bit_tail_1(b, l + 1);
     r = r && consumeToken(b, COMMA);
-    r = r && bit_tail_3(b, l + 1);
+    r = r && adm_group_all_except_ard_pc_imm(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1124,21 +1124,12 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // immediate_data | data_register
+  // adm_drd | adm_imm
   private static boolean bit_tail_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bit_tail_1")) return false;
     boolean r;
-    r = immediate_data(b, l + 1);
-    if (!r) r = data_register(b, l + 1);
-    return r;
-  }
-
-  // data_register | effective_address
-  private static boolean bit_tail_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bit_tail_3")) return false;
-    boolean r;
-    r = data_register(b, l + 1);
-    if (!r) r = effective_address(b, l + 1);
+    r = adm_drd(b, l + 1);
+    if (!r) r = adm_imm(b, l + 1);
     return r;
   }
 
@@ -1406,7 +1397,8 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // BTST bit_tail
+  // BTST bit_data_size?
+  //                      (adm_drd | adm_imm) COMMA adm_group_all_except_ard
   public static boolean btst_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "btst_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", BTST)) return false;
@@ -1414,9 +1406,28 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, BTST_INSTRUCTION, "<instruction>");
     r = consumeToken(b, BTST);
     p = r; // pin = 1
-    r = r && bit_tail(b, l + 1);
+    r = r && report_error_(b, btst_instruction_1(b, l + 1));
+    r = p && report_error_(b, btst_instruction_2(b, l + 1)) && r;
+    r = p && report_error_(b, consumeToken(b, COMMA)) && r;
+    r = p && adm_group_all_except_ard(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  // bit_data_size?
+  private static boolean btst_instruction_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "btst_instruction_1")) return false;
+    bit_data_size(b, l + 1);
+    return true;
+  }
+
+  // adm_drd | adm_imm
+  private static boolean btst_instruction_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "btst_instruction_2")) return false;
+    boolean r;
+    r = adm_drd(b, l + 1);
+    if (!r) r = adm_imm(b, l + 1);
+    return r;
   }
 
   /* ********************************************************** */

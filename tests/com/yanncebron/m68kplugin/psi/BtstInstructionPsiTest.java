@@ -25,16 +25,12 @@ public class BtstInstructionPsiTest extends M68kPsiTestCase {
     final M68kBtstInstruction instruction = parse("btst #1,d0");
 
     assertNull(instruction.getDataSize());
-
-    assertNotNull(instruction.getImmediateData());
   }
 
   public void testWithDataSize() {
     final M68kBtstInstruction instruction = parse("btst.b #1,d0");
 
     assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
-
-    assertNotNull(instruction.getImmediateData());
   }
 
   private M68kBtstInstruction parse(String text) {

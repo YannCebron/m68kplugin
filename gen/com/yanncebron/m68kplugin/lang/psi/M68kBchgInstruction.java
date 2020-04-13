@@ -22,12 +22,27 @@ import com.intellij.psi.PsiElement;
 public interface M68kBchgInstruction extends M68kBitInstructionBase {
 
   @Nullable
-  M68kExpression getExpression();
+  M68kAdmAbs getAdmAbs();
 
   @Nullable
-  M68kImmediateData getImmediateData();
+  M68kAdmAdi getAdmAdi();
 
   @Nullable
-  M68kLabelReference getLabelReference();
+  M68kAdmAix getAdmAix();
+
+  @Nullable
+  M68kAdmApd getAdmApd();
+
+  @Nullable
+  M68kAdmApi getAdmApi();
+
+  @Nullable
+  M68kAdmAri getAdmAri();
+
+  @NotNull
+  List<M68kAdmDrd> getAdmDrdList();
+
+  @Nullable
+  M68kAdmImm getAdmImm();
 
 }

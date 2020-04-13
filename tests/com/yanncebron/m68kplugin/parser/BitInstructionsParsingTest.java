@@ -18,7 +18,6 @@ package com.yanncebron.m68kplugin.parser;
 
 import com.intellij.testFramework.TestDataPath;
 
-// todo dst=effective_address
 @TestDataPath("$PROJECT_ROOT/testData/parser/bitInstructions")
 public class BitInstructionsParsingTest extends M68kParsingTestCase {
 
@@ -26,15 +25,15 @@ public class BitInstructionsParsingTest extends M68kParsingTestCase {
     super("bitInstructions");
   }
 
-  public void testBchgInstructionImmediateDataRegister() throws Exception {
+  public void testBchgInstructionImmDrd() throws Exception {
     doCodeTest(" bchg #1,d0");
   }
 
-  public void testBchgInstructionDataSizeImmediateDataRegister() throws Exception {
+  public void testBchgInstructionDataSizeImmDrd() throws Exception {
     doCodeTest(" bchg.b #1,d0");
   }
 
-  public void testBchgInstructionDataRegisterDataRegister() throws Exception {
+  public void testBchgInstructionDrdDrd() throws Exception {
     doCodeTest(" bchg d0,d1");
   }
 
@@ -46,15 +45,23 @@ public class BitInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" bchg d0,");
   }
 
-  public void testBclrInstructionDataRegisterDataRegister() throws Exception {
+  public void testBclrInstructionDrdDrd() throws Exception {
     doCodeTest(" bclr.l d1,d2");
   }
 
-  public void testBsetInstructionDataRegisterDataRegister() throws Exception {
+  public void testBsetInstructionDrdDrd() throws Exception {
     doCodeTest(" bset.b d1,d2");
   }
 
-  public void testBtstInstructionDataRegisterDataRegister() throws Exception {
+  public void testBtstInstructionDrdDrd() throws Exception {
     doCodeTest(" btst d1,d2");
+  }
+
+  public void testBtstInstructionDrdPcd() throws Exception {
+    doCodeTest(" btst d1,42(pc)");
+  }
+
+  public void testBtstInstructionImmPci() throws Exception {
+    doCodeTest(" btst #1,42(pc,d0)");
   }
 }

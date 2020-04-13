@@ -26,7 +26,7 @@ public class BchgInstructionPsiTest extends M68kPsiTestCase {
 
     assertNull(instruction.getDataSize());
 
-    assertNotNull(instruction.getImmediateData());
+    assertNotNull(instruction.getAdmImm());
   }
 
   public void testWithDataSize() {
@@ -34,7 +34,7 @@ public class BchgInstructionPsiTest extends M68kPsiTestCase {
 
     assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
 
-    assertNotNull(instruction.getImmediateData());
+    assertNotNull(instruction.getAdmImm());
   }
 
   private M68kBchgInstruction parse(String text) {
