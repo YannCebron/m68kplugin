@@ -21,4 +21,10 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kCmpmInstruction extends M68kCmpInstructionBase {
 
+  @Nullable
+  M68kAdmApi getSource();
+
+  @Nullable
+  M68kAdmApi getDestination();
+
 }

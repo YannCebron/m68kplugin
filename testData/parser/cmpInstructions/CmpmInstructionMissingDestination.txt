@@ -3,10 +3,12 @@ FILE
   M68kCmpmInstructionImpl(CMPM_INSTRUCTION)
     PsiElement(cmpm)('cmpm')
     PsiWhiteSpace(' ')
-    PsiElement(()('(')
-    PsiElement(address_register)('a0')
-    PsiElement())(')')
-    PsiElement(+)('+')
+    M68kAdmApiImpl(ADM_API)
+      PsiElement(()('(')
+      M68kAdmArdImpl(ADM_ARD)
+        PsiElement(address_register)('a0')
+      PsiElement())(')')
+      PsiElement(+)('+')
     PsiElement(,)(',')
     PsiErrorElement:'(' expected
       <empty list>

@@ -21,10 +21,37 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kCmpInstruction extends M68kCmpInstructionBase {
 
-  @Nullable
-  M68kExpression getExpression();
+  @NotNull
+  List<M68kAdmAbs> getAdmAbsList();
+
+  @NotNull
+  List<M68kAdmAdi> getAdmAdiList();
+
+  @NotNull
+  List<M68kAdmAix> getAdmAixList();
+
+  @NotNull
+  List<M68kAdmApd> getAdmApdList();
+
+  @NotNull
+  List<M68kAdmApi> getAdmApiList();
+
+  @NotNull
+  List<M68kAdmArd> getAdmArdList();
+
+  @NotNull
+  List<M68kAdmAri> getAdmAriList();
+
+  @NotNull
+  List<M68kAdmDrd> getAdmDrdList();
 
   @Nullable
-  M68kLabelReference getLabelReference();
+  M68kAdmImm getAdmImm();
+
+  @Nullable
+  M68kAdmPcd getAdmPcd();
+
+  @Nullable
+  M68kAdmPci getAdmPci();
 
 }

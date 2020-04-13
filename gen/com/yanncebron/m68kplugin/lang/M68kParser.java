@@ -1495,7 +1495,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // CMP data_size_all?
-  //                     (data_register | effective_address | address_register_indirect) COMMA data_register
+  //                     adm_group_all COMMA adm_group_all_except_pc_imm
   public static boolean cmp_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cmp_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", CMP)) return false;
@@ -1504,9 +1504,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, CMP);
     p = r; // pin = 1
     r = r && report_error_(b, cmp_instruction_1(b, l + 1));
-    r = p && report_error_(b, cmp_instruction_2(b, l + 1)) && r;
+    r = p && report_error_(b, adm_group_all(b, l + 1)) && r;
     r = p && report_error_(b, consumeToken(b, COMMA)) && r;
-    r = p && data_register(b, l + 1) && r;
+    r = p && adm_group_all_except_pc_imm(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -1516,16 +1516,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "cmp_instruction_1")) return false;
     data_size_all(b, l + 1);
     return true;
-  }
-
-  // data_register | effective_address | address_register_indirect
-  private static boolean cmp_instruction_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "cmp_instruction_2")) return false;
-    boolean r;
-    r = data_register(b, l + 1);
-    if (!r) r = effective_address(b, l + 1);
-    if (!r) r = address_register_indirect(b, l + 1);
-    return r;
   }
 
   /* ********************************************************** */
@@ -1545,7 +1535,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // CMPA data_size_word_long?
-  //                      any_register COMMA address_register
+  //                      adm_group_all COMMA adm_ard
   public static boolean cmpa_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cmpa_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", CMPA)) return false;
@@ -1554,9 +1544,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, CMPA);
     p = r; // pin = 1
     r = r && report_error_(b, cmpa_instruction_1(b, l + 1));
-    r = p && report_error_(b, any_register(b, l + 1)) && r;
+    r = p && report_error_(b, adm_group_all(b, l + 1)) && r;
     r = p && report_error_(b, consumeToken(b, COMMA)) && r;
-    r = p && address_register(b, l + 1) && r;
+    r = p && adm_ard(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -1570,7 +1560,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // CMPI data_size_all?
-  //                      immediate_data COMMA any_register
+  //                      adm_imm COMMA adm_group_all_except_ard_pc_imm
   public static boolean cmpi_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cmpi_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", CMPI)) return false;
@@ -1579,9 +1569,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, CMPI);
     p = r; // pin = 1
     r = r && report_error_(b, cmpi_instruction_1(b, l + 1));
-    r = p && report_error_(b, immediate_data(b, l + 1)) && r;
+    r = p && report_error_(b, adm_imm(b, l + 1)) && r;
     r = p && report_error_(b, consumeToken(b, COMMA)) && r;
-    r = p && any_register(b, l + 1) && r;
+    r = p && adm_group_all_except_ard_pc_imm(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -1595,7 +1585,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // CMPM data_size_all?
-  //                      address_register_post_increment COMMA address_register_post_increment
+  //                      adm_api COMMA adm_api
   public static boolean cmpm_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cmpm_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", CMPM)) return false;
@@ -1604,9 +1594,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, CMPM);
     p = r; // pin = 1
     r = r && report_error_(b, cmpm_instruction_1(b, l + 1));
-    r = p && report_error_(b, address_register_post_increment(b, l + 1)) && r;
+    r = p && report_error_(b, adm_api(b, l + 1)) && r;
     r = p && report_error_(b, consumeToken(b, COMMA)) && r;
-    r = p && address_register_post_increment(b, l + 1) && r;
+    r = p && adm_api(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

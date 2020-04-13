@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.psi;
 
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmApi;
 import com.yanncebron.m68kplugin.lang.psi.M68kCmpmInstruction;
 import com.yanncebron.m68kplugin.lang.psi.M68kDataSize;
 
@@ -31,6 +32,12 @@ public class CmpmInstructionPsiTest extends M68kPsiTestCase {
     final M68kCmpmInstruction instruction = parse("cmpm.w (a0)+,(a1)+");
 
     assertEquals(M68kDataSize.WORD, instruction.getDataSize());
+    final M68kAdmApi source = instruction.getSource();
+    assertNotNull(source);
+    assertEquals("(a0)+", source.getText());
+    final M68kAdmApi destination = instruction.getDestination();
+    assertNotNull(destination);
+    assertEquals("(a1)+", destination.getText());
   }
 
   private M68kCmpmInstruction parse(String text) {

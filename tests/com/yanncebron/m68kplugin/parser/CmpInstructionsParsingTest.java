@@ -35,42 +35,48 @@ public class CmpInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" cmp d0,");
   }
 
-  public void testCmpInstructionDataRegister() throws IOException {
+  public void testCmpInstructionDrd() throws IOException {
     doCodeTest(" cmp d0,d1");
   }
 
-  public void testCmpInstructionLabel() throws IOException {
+  public void testCmpInstructionAbs() throws IOException {
     doCodeTest(" cmp label,d1");
   }
 
-  public void testCmpInstructionDataSizeDataRegister() throws IOException {
+  public void testCmpInstructionDataSizeDrd() throws IOException {
     doCodeTest(" cmp.b d0,d1");
   }
 
+
+  // cmpa ==================================================================
   public void testCmpaInstructionMissingDestination() throws IOException {
     doCodeTest(" cmpa d0,");
   }
 
-  public void testCmpaInstructionDataRegister() throws IOException {
+  public void testCmpaInstructionDrd() throws IOException {
     doCodeTest(" cmpa d0,a0");
   }
 
-  public void testCmpaInstructionDataSizeDataRegister() throws IOException {
+  public void testCmpaInstructionDataSizeDrd() throws IOException {
     doCodeTest(" cmpa.l d0,a0");
   }
 
+
+  // cmpi ==================================================================
   public void testCmpiInstructionMissingSource() throws IOException {
     doCodeTest(" cmpi ");
   }
 
-  public void testCmpiInstructionDataRegister() throws IOException {
+  public void testCmpiInstructionDrd() throws IOException {
     doCodeTest(" cmpi #1,d0");
   }
 
-  public void testCmpiInstructionAddressRegister() throws IOException {
-    doCodeTest(" cmpi #1,a0");
+  public void testCmpiInstructionApd() throws IOException {
+    doCodeTest(" cmpi #1,-(a0)");
   }
 
+
+  // cmpm ==================================================================
   public void testCmpmInstructionMissingSource() throws IOException {
     doCodeTest(" cmpm ");
   }

@@ -503,20 +503,25 @@ fake cmp_instruction_base ::= {
 }
 
 cmp_instruction ::= CMP data_size_all?
-                    (data_register | effective_address | address_register_indirect) COMMA data_register {
+                    adm_group_all COMMA adm_group_all_except_pc_imm {
   extends = cmp_instruction_base
 }
 cmpa_instruction ::= CMPA data_size_word_long?
-                     any_register COMMA address_register {
+                     adm_group_all COMMA adm_ard {
   extends = cmp_instruction_base
 }
 cmpi_instruction ::= CMPI data_size_all?
-                     immediate_data COMMA any_register {
+                     adm_imm COMMA adm_group_all_except_ard_pc_imm {
   extends = cmp_instruction_base
 }
 cmpm_instruction ::= CMPM data_size_all?
-                     address_register_post_increment COMMA address_register_post_increment {
+                     adm_api COMMA adm_api {
   extends = cmp_instruction_base
+  methods = [
+    adm_api = ""
+    source = "adm_api[0]"
+    destination = "adm_api[1]"
+  ]
 }
 
 

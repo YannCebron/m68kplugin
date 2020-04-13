@@ -23,6 +23,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
 public class M68kCmpmInstructionImpl extends M68kCmpInstructionBaseImpl implements M68kCmpmInstruction {
 
@@ -37,6 +38,20 @@ public class M68kCmpmInstructionImpl extends M68kCmpInstructionBaseImpl implemen
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmApi getSource() {
+    List<M68kAdmApi> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmApi.class);
+    return p1.size() < 1 ? null : p1.get(0);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmApi getDestination() {
+    List<M68kAdmApi> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmApi.class);
+    return p1.size() < 2 ? null : p1.get(1);
   }
 
 }

@@ -3,7 +3,8 @@ FILE
   M68kCmpInstructionImpl(CMP_INSTRUCTION)
     PsiElement(cmp)('cmp')
     PsiWhiteSpace(' ')
-    PsiElement(data_register)('d0')
+    M68kAdmDrdImpl(ADM_DRD)
+      PsiElement(data_register)('d0')
     PsiElement(,)(',')
-    PsiErrorElement:<data register> expected
+    PsiErrorElement:'(', '-', <address register>, <data register> or <expression> expected
       <empty list>
