@@ -29,16 +29,20 @@ public class JumpInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" bsr label");
   }
 
+  public void testBsrInstructionExpression() throws Exception {
+    doCodeTest(" bsr label+label2");
+  }
+
   public void testBsrInstructionMissingDestination() throws Exception {
     doCodeTest(" bsr ");
   }
 
   public void testBsrInstructionDataSizeShort() throws Exception {
-    doCodeTest(" bsr.s offset(a0)");
+    doCodeTest(" bsr.s offset");
   }
 
   public void testBsrInstructionDataSizeWord() throws Exception {
-    doCodeTest(" bsr.w offset(pc)");
+    doCodeTest(" bsr.w offset");
   }
 
   public void testBsrInstructionWrongDataSizeLong() throws Exception {

@@ -28,8 +28,8 @@ public class BsrInstructionPsiTest extends M68kPsiTestCase {
 
     assertNull(instruction.getDataSize());
 
-    assertNull(instruction.getLabelReference());
-    assertInstanceOf(instruction.getExpression(), M68kNumberExpression.class);
+    final M68kNumberExpression address = assertInstanceOf(instruction.getExpression(), M68kNumberExpression.class);
+    assertEquals("40000", address.getText());
   }
 
   public void testWithDataSize() {

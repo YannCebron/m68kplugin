@@ -45,10 +45,4 @@ public class M68kBsrInstructionImpl extends M68kDataSizedImpl implements M68kBsr
     return findChildByClass(M68kExpression.class);
   }
 
-  @Override
-  @Nullable
-  public M68kLabelReference getLabelReference() {
-    return findChildByClass(M68kLabelReference.class);
-  }
-
 }

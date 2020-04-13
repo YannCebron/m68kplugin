@@ -1384,7 +1384,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // BSR bsr_data_size? effective_address
+  // BSR bsr_data_size? expression
   public static boolean bsr_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bsr_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", BSR)) return false;
@@ -1393,7 +1393,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, BSR);
     p = r; // pin = 1
     r = r && report_error_(b, bsr_instruction_1(b, l + 1));
-    r = p && effective_address(b, l + 1) && r;
+    r = p && expression(b, l + 1, -1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

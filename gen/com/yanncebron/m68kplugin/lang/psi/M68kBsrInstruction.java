@@ -24,7 +24,4 @@ public interface M68kBsrInstruction extends M68kDataSized {
   @Nullable
   M68kExpression getExpression();
 
-  @Nullable
-  M68kLabelReference getLabelReference();
-
 }
