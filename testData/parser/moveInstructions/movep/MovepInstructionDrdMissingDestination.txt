@@ -1,0 +1,9 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kMovepInstructionImpl(MOVEP_INSTRUCTION)
+    PsiElement(movep)('movep')
+  PsiWhiteSpace(' ')
+  PsiElement(data_register)('d0')
+  PsiElement(,)(',')
+  PsiErrorElement:<expression> expected
+    <empty list>
