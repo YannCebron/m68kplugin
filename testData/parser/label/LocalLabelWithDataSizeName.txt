@@ -7,5 +7,6 @@ FILE
     PsiElement(bra)('bra')
     PsiElement(.s)('.s')
     PsiWhiteSpace(' ')
-    M68kLabelReferenceImpl(LABEL_REFERENCE)
-      PsiElement(id)('.s')
+    M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
+      M68kLabelReferenceImpl(LABEL_REFERENCE)
+        PsiElement(id)('.s')

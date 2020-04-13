@@ -855,13 +855,13 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // CC_data_size? label_reference
+  // CC_data_size? expression
   static boolean bCC_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bCC_tail")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = bCC_tail_0(b, l + 1);
-    r = r && label_reference(b, l + 1);
+    r = r && expression(b, l + 1, -1);
     exit_section_(b, m, null, r);
     return r;
   }

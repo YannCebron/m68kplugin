@@ -20,9 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFileFactory;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
-import com.yanncebron.m68kplugin.lang.psi.M68kBraInstruction;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabelReference;
+import com.yanncebron.m68kplugin.lang.psi.*;
 
 public class M68kElementFactory {
 
@@ -38,8 +36,8 @@ public class M68kElementFactory {
 
   public static M68kLabelReference createLabelReference(Project project, String name) {
     final M68kBraInstruction firstChild = (M68kBraInstruction) createFile(project, " bra " + name).getChildren()[1];
-    final M68kLabelReference labelReference = firstChild.getLabelReference();
-    assert labelReference != null;
-    return labelReference;
+    final M68kExpression expression = firstChild.getExpression();
+    assert expression instanceof M68kLabelRefExpression;
+    return ((M68kLabelRefExpression) expression).getLabelReference();
   }
 }

@@ -548,7 +548,7 @@ private bCC_instructions ::= bra_instruction |
                              bmi_instruction |
                              bvs_instruction
 
-private bCC_tail ::= CC_data_size? label_reference
+private bCC_tail ::= CC_data_size? expression
 
 bra_instruction ::= BRA bCC_tail
 bcs_instruction ::= BCS bCC_tail

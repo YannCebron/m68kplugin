@@ -22,6 +22,6 @@ import com.intellij.psi.PsiElement;
 public interface M68kBneInstruction extends M68kPsiElement {
 
   @Nullable
-  M68kLabelReference getLabelReference();
+  M68kExpression getExpression();
 
 }

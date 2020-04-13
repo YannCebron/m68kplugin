@@ -3,5 +3,6 @@ FILE
   M68kBvcInstructionImpl(BVC_INSTRUCTION)
     PsiElement(bvc)('bvc')
     PsiWhiteSpace(' ')
-    M68kLabelReferenceImpl(LABEL_REFERENCE)
-      PsiElement(id)('label')
+    M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
+      M68kLabelReferenceImpl(LABEL_REFERENCE)
+        PsiElement(id)('label')

@@ -42,8 +42,8 @@ public class M68kBgeInstructionImpl extends ASTWrapperPsiElement implements M68k
 
   @Override
   @Nullable
-  public M68kLabelReference getLabelReference() {
-    return findChildByClass(M68kLabelReference.class);
+  public M68kExpression getExpression() {
+    return findChildByClass(M68kExpression.class);
   }
 
 }
