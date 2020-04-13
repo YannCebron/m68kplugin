@@ -2,11 +2,12 @@ FILE
   PsiWhiteSpace(' ')
   M68kLeaInstructionImpl(LEA_INSTRUCTION)
     PsiElement(lea)('lea')
+    PsiElement(.l)('.l')
     PsiWhiteSpace(' ')
     M68kAdmAbsImpl(ADM_ABS)
       M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
         M68kLabelReferenceImpl(LABEL_REFERENCE)
           PsiElement(id)('src')
     PsiElement(,)(',')
-    PsiErrorElement:<address register> expected
-      <empty list>
+    M68kAdmArdImpl(ADM_ARD)
+      PsiElement(address_register)('a0')

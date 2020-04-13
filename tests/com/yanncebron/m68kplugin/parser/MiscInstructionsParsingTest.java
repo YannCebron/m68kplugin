@@ -73,20 +73,16 @@ public class MiscInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" unlk ");
   }
 
-  public void testLeaInstructionPcIndirectAddressRegister() throws Exception {
+  public void testLeaInstructionPcd() throws Exception {
     doCodeTest(" lea id(pc),a0");
   }
 
-  public void testLeaInstructionLabelLabel() throws Exception {
-    doCodeTest(" lea src,dest");
+  public void testLeaInstructionExpression() throws Exception {
+    doCodeTest(" lea $4000+42,a0");
   }
 
-  public void testLeaInstructionExpressionLabel() throws Exception {
-    doCodeTest(" lea $4000+42,dest");
-  }
-
-  public void testLeaInstructionDataSizeLabelLabel() throws Exception {
-    doCodeTest(" lea.l src,dest");
+  public void testLeaInstructionDataSizeAbs() throws Exception {
+    doCodeTest(" lea.l src,a0");
   }
 
   public void testLeaInstructionMissingSource() throws Exception {
