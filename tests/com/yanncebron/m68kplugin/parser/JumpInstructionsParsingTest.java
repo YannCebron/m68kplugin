@@ -25,14 +25,6 @@ public class JumpInstructionsParsingTest extends M68kParsingTestCase {
     super("jumpInstructions");
   }
 
-  public void testJsrInstruction() throws Exception {
-    doCodeTest(" jsr label");
-  }
-
-  public void testJsrInstructionMissingDestination() throws Exception {
-    doCodeTest(" jsr ");
-  }
-
   public void testBsrInstruction() throws Exception {
     doCodeTest(" bsr label");
   }
@@ -53,12 +45,28 @@ public class JumpInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" bsr.l ");
   }
 
-  public void testJmpInstruction() throws Exception {
+  public void testJmpInstructionAbs() throws Exception {
     doCodeTest(" jmp label");
   }
 
   public void testJmpInstructionMissingDestination() throws Exception {
     doCodeTest(" jmp ");
+  }
+
+  public void testJsrInstructionAbs() throws Exception {
+    doCodeTest(" jsr label");
+  }
+
+  public void testJsrInstructionAdi() throws Exception {
+    doCodeTest(" jsr label(a0)");
+  }
+
+  public void testJsrInstructionAix() throws Exception {
+    doCodeTest(" jsr 42(a0,d0)");
+  }
+
+  public void testJsrInstructionMissingDestination() throws Exception {
+    doCodeTest(" jsr ");
   }
 
   public void testRtsInstruction() throws Exception {

@@ -2448,7 +2448,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // JMP effective_address
+  // JMP jmp_jsr_tail
   public static boolean jmp_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "jmp_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", JMP)) return false;
@@ -2456,13 +2456,27 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, JMP_INSTRUCTION, "<instruction>");
     r = consumeToken(b, JMP);
     p = r; // pin = 1
-    r = r && effective_address(b, l + 1);
+    r = r && jmp_jsr_tail(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
   /* ********************************************************** */
-  // JSR effective_address
+  // adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+  static boolean jmp_jsr_tail(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "jmp_jsr_tail")) return false;
+    boolean r;
+    r = adm_ari(b, l + 1);
+    if (!r) r = adm_pcd(b, l + 1);
+    if (!r) r = adm_pci(b, l + 1);
+    if (!r) r = adm_adi(b, l + 1);
+    if (!r) r = adm_aix(b, l + 1);
+    if (!r) r = adm_abs(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // JSR jmp_jsr_tail
   public static boolean jsr_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "jsr_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", JSR)) return false;
@@ -2470,7 +2484,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, JSR_INSTRUCTION, "<instruction>");
     r = consumeToken(b, JSR);
     p = r; // pin = 1
-    r = r && effective_address(b, l + 1);
+    r = r && jmp_jsr_tail(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

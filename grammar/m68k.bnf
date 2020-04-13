@@ -270,8 +270,6 @@ private jump_instructions ::= jsr_instruction|
                               rte_instruction |
                               rtr_instruction
 
-jsr_instruction ::= JSR effective_address
-
 private bsr_data_size ::= (data_size_short | data_size_word) {
   name = ".s|w"
 }
@@ -279,7 +277,10 @@ bsr_instruction ::= BSR bsr_data_size? effective_address {
   extends = data_sized
 }
 
-jmp_instruction ::= JMP effective_address
+private jmp_jsr_tail ::= adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+jmp_instruction ::= JMP jmp_jsr_tail
+jsr_instruction ::= JSR jmp_jsr_tail
+
 rts_instruction ::= RTS
 rte_instruction ::= RTE
 rtr_instruction ::= RTR

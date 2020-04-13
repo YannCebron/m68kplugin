@@ -22,9 +22,21 @@ import com.intellij.psi.PsiElement;
 public interface M68kJsrInstruction extends M68kPsiElement {
 
   @Nullable
-  M68kExpression getExpression();
+  M68kAdmAbs getAdmAbs();
 
   @Nullable
-  M68kLabelReference getLabelReference();
+  M68kAdmAdi getAdmAdi();
+
+  @Nullable
+  M68kAdmAix getAdmAix();
+
+  @Nullable
+  M68kAdmAri getAdmAri();
+
+  @Nullable
+  M68kAdmPcd getAdmPcd();
+
+  @Nullable
+  M68kAdmPci getAdmPci();
 
 }
