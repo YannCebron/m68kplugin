@@ -40,9 +40,63 @@ public class M68kOrInstructionImpl extends M68kBoolInstructionBaseImpl implement
   }
 
   @Override
+  @Nullable
+  public M68kAdmAbs getAdmAbs() {
+    return findChildByClass(M68kAdmAbs.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmAdi getAdmAdi() {
+    return findChildByClass(M68kAdmAdi.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmAix getAdmAix() {
+    return findChildByClass(M68kAdmAix.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmApd getAdmApd() {
+    return findChildByClass(M68kAdmApd.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmApi getAdmApi() {
+    return findChildByClass(M68kAdmApi.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmAri getAdmAri() {
+    return findChildByClass(M68kAdmAri.class);
+  }
+
+  @Override
   @NotNull
-  public List<M68kExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
+  public List<M68kAdmDrd> getAdmDrdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmDrd.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmImm getAdmImm() {
+    return findChildByClass(M68kAdmImm.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmPcd getAdmPcd() {
+    return findChildByClass(M68kAdmPcd.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmPci getAdmPci() {
+    return findChildByClass(M68kAdmPci.class);
   }
 
 }

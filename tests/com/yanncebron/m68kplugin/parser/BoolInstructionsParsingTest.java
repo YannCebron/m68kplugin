@@ -27,39 +27,39 @@ public class BoolInstructionsParsingTest extends M68kParsingTestCase {
     super("boolInstructions");
   }
 
-  public void testAndInstructionDataRegisterDataRegister() throws IOException {
+  public void testAndInstructionDrdDrd() throws IOException {
     doCodeTest(" and d0,d1");
   }
 
-  public void testAndInstructionDataSizeDataRegisterAddressRegister() throws IOException {
-    doCodeTest(" and.l d0,a1");
+  public void testAndInstructionDataSizeDrdAix() throws IOException {
+    doCodeTest(" and.l d0,42(a1,d0)");
   }
 
-  public void testAndiInstructionImmediateDataRegister() throws IOException {
+  public void testAndiInstructionDrd() throws IOException {
     doCodeTest(" andi #0,d1");
   }
 
-  public void testOrInstructionDataRegisterDataRegister() throws IOException {
+  public void testOrInstructionDrdDrd() throws IOException {
     doCodeTest(" or d0,d1");
   }
 
-  public void testOrInstructionDataSizeDataRegisterAddressRegister() throws IOException {
-    doCodeTest(" or.l d0,a1");
+  public void testOrInstructionDataSizeDrdAbs() throws IOException {
+    doCodeTest(" or.l d0,$50000");
   }
 
-  public void testOriInstructionImmediateDataRegister() throws IOException {
+  public void testOriInstructionDrd() throws IOException {
     doCodeTest(" ori #0,d1");
   }
 
-  public void testEorInstructionDataRegisterDataRegister() throws IOException {
+  public void testEorInstructionDrdDrd() throws IOException {
     doCodeTest(" eor d0,d1");
   }
 
-  public void testEorInstructionDataSizeDataRegisterAddressRegister() throws IOException {
-    doCodeTest(" eor.l d0,a1");
+  public void testEorInstructionDataSizeDrdAdi() throws IOException {
+    doCodeTest(" eor.l d0,42(a0)");
   }
 
-  public void testEoriInstructionImmediateDataRegister() throws IOException {
+  public void testEoriInstructionDrd() throws IOException {
     doCodeTest(" eori #0,d1");
   }
 

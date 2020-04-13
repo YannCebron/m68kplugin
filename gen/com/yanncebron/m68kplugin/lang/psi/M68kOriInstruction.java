@@ -22,9 +22,27 @@ import com.intellij.psi.PsiElement;
 public interface M68kOriInstruction extends M68kBoolInstructionBase {
 
   @Nullable
-  M68kExpression getExpression();
+  M68kAdmAbs getAdmAbs();
 
   @Nullable
-  M68kImmediateData getImmediateData();
+  M68kAdmAdi getAdmAdi();
+
+  @Nullable
+  M68kAdmAix getAdmAix();
+
+  @Nullable
+  M68kAdmApd getAdmApd();
+
+  @Nullable
+  M68kAdmApi getAdmApi();
+
+  @Nullable
+  M68kAdmAri getAdmAri();
+
+  @Nullable
+  M68kAdmDrd getAdmDrd();
+
+  @Nullable
+  M68kAdmImm getAdmImm();
 
 }

@@ -383,8 +383,13 @@ fake bool_instruction_base ::= {
   extends = data_sized
 }
 
-private bool_tail ::= data_size_all? any_register COMMA any_register
-private bool_i_tail ::= data_size_all? immediate_data COMMA any_register
+private bool_tail ::= data_size_all?
+                      (
+                        (adm_group_all_except_ard COMMA adm_drd) |
+                        (adm_drd COMMA adm_group_all_except_ard_pc_imm)
+                      )
+private bool_i_tail ::= data_size_all?
+                        adm_imm COMMA adm_group_all_except_ard_pc_imm
 
 and_instruction ::= AND bool_tail {
   extends = bool_instruction_base
