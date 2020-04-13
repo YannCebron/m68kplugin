@@ -241,9 +241,11 @@ moveq_instruction ::= MOVEQ data_size_long?
 
 movem_instruction ::= MOVEM data_size_word_long?
                       (
-                        (register_list COMMA address_register_indirect) |
-                        (address_register_indirect COMMA register_list)
-                      )
+                        ( register_list COMMA (adm_ari | adm_apd | adm_adi | adm_aix | adm_abs) ) |
+                        ( (adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA register_list )
+                      ) {
+  extends = data_sized
+}
 
 movep_instruction ::= MOVEP data_size_word_long?
                       (

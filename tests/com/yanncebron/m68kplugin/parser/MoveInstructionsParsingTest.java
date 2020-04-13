@@ -144,15 +144,15 @@ public class MoveInstructionsParsingTest extends M68kParsingTestCase {
   }
 
   public void testMovemInstructionDestinationSingleRegister() throws Exception {
-    doCodeTest(" movem (a7),d1");
+    doCodeTest(" movem (a7)+,d1");
   }
 
   public void testMovemInstructionDestinationRegisterRange() throws Exception {
-    doCodeTest(" movem (a7),d1-d3");
+    doCodeTest(" movem 42(a7),d1-d3");
   }
 
   public void testMovemInstructionDestinationMultipleRegisters() throws Exception {
-    doCodeTest(" movem (a7),d1/d2/a0");
+    doCodeTest(" movem 42(a7,d0),d1/d2/a0");
   }
 
 }

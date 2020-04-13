@@ -478,7 +478,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitMovemInstruction(@NotNull M68kMovemInstruction o) {
-    visitPsiElement(o);
+    visitDataSized(o);
   }
 
   public void visitMovepInstruction(@NotNull M68kMovepInstruction o) {

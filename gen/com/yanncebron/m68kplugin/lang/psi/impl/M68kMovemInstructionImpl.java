@@ -22,10 +22,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kMovemInstructionImpl extends ASTWrapperPsiElement implements M68kMovemInstruction {
+public class M68kMovemInstructionImpl extends M68kDataSizedImpl implements M68kMovemInstruction {
 
   public M68kMovemInstructionImpl(@NotNull ASTNode node) {
     super(node);
@@ -42,8 +41,50 @@ public class M68kMovemInstructionImpl extends ASTWrapperPsiElement implements M6
 
   @Override
   @Nullable
-  public M68kExpression getExpression() {
-    return findChildByClass(M68kExpression.class);
+  public M68kAdmAbs getAdmAbs() {
+    return findChildByClass(M68kAdmAbs.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmAdi getAdmAdi() {
+    return findChildByClass(M68kAdmAdi.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmAix getAdmAix() {
+    return findChildByClass(M68kAdmAix.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmApd getAdmApd() {
+    return findChildByClass(M68kAdmApd.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmApi getAdmApi() {
+    return findChildByClass(M68kAdmApi.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmAri getAdmAri() {
+    return findChildByClass(M68kAdmAri.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmPcd getAdmPcd() {
+    return findChildByClass(M68kAdmPcd.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmPci getAdmPci() {
+    return findChildByClass(M68kAdmPci.class);
   }
 
   @Override

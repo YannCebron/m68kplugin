@@ -2,6 +2,6 @@ FILE
   PsiWhiteSpace(' ')
   M68kMovemInstructionImpl(MOVEM_INSTRUCTION)
     PsiElement(movem)('movem')
-    PsiErrorElement:'(', '-', <.w|l> or <register range> expected
+    PsiErrorElement:'(', <.w|l>, <expression> or <register range> expected
       <empty list>
   PsiWhiteSpace(' ')
