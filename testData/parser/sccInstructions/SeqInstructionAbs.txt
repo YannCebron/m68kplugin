@@ -1,7 +1,7 @@
 FILE
   PsiWhiteSpace(' ')
-  M68kSneInstructionImpl(SNE_INSTRUCTION)
-    PsiElement(sne)('sne')
+  M68kSeqInstructionImpl(SEQ_INSTRUCTION)
+    PsiElement(seq)('seq')
     PsiWhiteSpace(' ')
     M68kAdmAbsImpl(ADM_ABS)
       M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)

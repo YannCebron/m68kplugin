@@ -3574,13 +3574,13 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_byte? (any_register | effective_address)
+  // data_size_byte? adm_group_all_except_ard_pc_imm
   static boolean sCC_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "sCC_tail")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = sCC_tail_0(b, l + 1);
-    r = r && sCC_tail_1(b, l + 1);
+    r = r && adm_group_all_except_ard_pc_imm(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -3590,15 +3590,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "sCC_tail_0")) return false;
     data_size_byte(b, l + 1);
     return true;
-  }
-
-  // any_register | effective_address
-  private static boolean sCC_tail_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "sCC_tail_1")) return false;
-    boolean r;
-    r = any_register(b, l + 1);
-    if (!r) r = effective_address(b, l + 1);
-    return r;
   }
 
   /* ********************************************************** */

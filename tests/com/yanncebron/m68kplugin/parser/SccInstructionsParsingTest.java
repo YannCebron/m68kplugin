@@ -31,12 +31,16 @@ public class SccInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" seq ");
   }
 
-  public void testSeqInstructionDataRegister() throws IOException {
+  public void testSeqInstructionDrd() throws IOException {
     doCodeTest(" seq d0");
   }
 
-  public void testSeqInstructionLabel() throws IOException {
+  public void testSeqInstructionAbs() throws IOException {
     doCodeTest(" seq label");
+  }
+
+  public void testSeqInstructionAix() throws IOException {
+    doCodeTest(" seq 42(a0,d0)");
   }
 
   public void testSeqInstructionDataSizeByte() throws IOException {

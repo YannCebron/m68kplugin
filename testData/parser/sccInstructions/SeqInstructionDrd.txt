@@ -3,4 +3,5 @@ FILE
   M68kSeqInstructionImpl(SEQ_INSTRUCTION)
     PsiElement(seq)('seq')
     PsiWhiteSpace(' ')
-    PsiElement(data_register)('d0')
+    M68kAdmDrdImpl(ADM_DRD)
+      PsiElement(data_register)('d0')

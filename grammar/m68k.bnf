@@ -628,7 +628,7 @@ private sCC_instructions ::= seq_instruction |
                              sls_instruction |
                              scs_instruction
 
-private sCC_tail ::= data_size_byte? (any_register | effective_address)
+private sCC_tail ::= data_size_byte? adm_group_all_except_ard_pc_imm
 
 seq_instruction ::= SEQ sCC_tail
 sne_instruction ::= SNE sCC_tail
