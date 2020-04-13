@@ -151,8 +151,9 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
 
   [mM][oO][vV][eE]                { return MOVE; }
   [mM][oO][vV][eE][aA]            { return MOVEA; }
-  [mM][oO][vV][eE][qQ]            { return MOVEQ; }
   [mM][oO][vV][eE][mM]            { return MOVEM; }
+  [mM][oO][vV][eE][pP]            { return MOVEP; }
+  [mM][oO][vV][eE][qQ]            { return MOVEQ; }
 
   [tT][sS][tT]                    { return TST; }
   [tT][aA][sS]                    { return TAS; }

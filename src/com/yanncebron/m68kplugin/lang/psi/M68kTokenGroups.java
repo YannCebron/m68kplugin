@@ -96,6 +96,7 @@ public final class M68kTokenGroups {
     MOVE,
     MOVEA,
     MOVEM,
+    MOVEP,
     MOVEQ,
     MUL,
     MULS,

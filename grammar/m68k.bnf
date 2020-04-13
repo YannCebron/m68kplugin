@@ -219,7 +219,8 @@ private adm_group_all_except_ard_pc_imm ::= adm_drd |                     adm_ap
 private move_instructions ::= move_instruction |
                               movea_instruction |
                               moveq_instruction |
-                              movem_instruction
+                              movem_instruction |
+                              movep_instruction
 
 move_instruction ::= MOVE data_size_all?
                      (any_register | immediate_data) COMMA (any_register | effective_address)
@@ -240,6 +241,14 @@ movem_instruction ::= MOVEM data_size_word_long?
                         (register_list COMMA address_register_indirect) |
                         (address_register_indirect COMMA register_list)
                       )
+
+movep_instruction ::= MOVEP data_size_word_long?
+                      (
+                        (adm_drd COMMA adm_adi) |
+                        (adm_adi COMMA adm_drd)
+                      ) {
+  extends = data_sized
+}
 
 
 // Jump ==================================================================

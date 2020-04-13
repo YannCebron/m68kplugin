@@ -129,6 +129,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType MOVE = new M68kTokenType("move");
   public static final IElementType MOVEA = new M68kTokenType("movea");
   public static final IElementType MOVEM = new M68kTokenType("movem");
+  public static final IElementType MOVEP = new M68kTokenType("movep");
   public static final IElementType MOVEQ = new M68kTokenType("moveq");
   public static final IElementType MUL = new M68kTokenType("*");
   public static final IElementType MULS = new M68kTokenType("muls");

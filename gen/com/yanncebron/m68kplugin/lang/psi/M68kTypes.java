@@ -128,6 +128,7 @@ public interface M68kTypes {
   IElementType MOD_EXPRESSION = new M68kCompositeElementType("MOD_EXPRESSION");
   IElementType MOVEA_INSTRUCTION = new M68kCompositeElementType("MOVEA_INSTRUCTION");
   IElementType MOVEM_INSTRUCTION = new M68kCompositeElementType("MOVEM_INSTRUCTION");
+  IElementType MOVEP_INSTRUCTION = new M68kCompositeElementType("MOVEP_INSTRUCTION");
   IElementType MOVEQ_INSTRUCTION = new M68kCompositeElementType("MOVEQ_INSTRUCTION");
   IElementType MOVE_INSTRUCTION = new M68kCompositeElementType("MOVE_INSTRUCTION");
   IElementType MULS_INSTRUCTION = new M68kCompositeElementType("MULS_INSTRUCTION");
@@ -513,6 +514,9 @@ public interface M68kTypes {
       }
       else if (type == MOVEM_INSTRUCTION) {
         return new M68kMovemInstructionImpl(node);
+      }
+      else if (type == MOVEP_INSTRUCTION) {
+        return new M68kMovepInstructionImpl(node);
       }
       else if (type == MOVEQ_INSTRUCTION) {
         return new M68kMoveqInstructionImpl(node);

@@ -64,11 +64,12 @@ public class M68kParser implements PsiParser, LightPsiParser {
       CLR_INSTRUCTION, CMPA_INSTRUCTION, CMPI_INSTRUCTION, CMPM_INSTRUCTION,
       CMP_INSTRUCTION, DCB_DIRECTIVE, DC_DIRECTIVE, DS_DIRECTIVE,
       EORI_INSTRUCTION, EOR_INSTRUCTION, EXG_INSTRUCTION, EXT_INSTRUCTION,
-      LEA_INSTRUCTION, LSL_INSTRUCTION, LSR_INSTRUCTION, MOVEQ_INSTRUCTION,
-      NBCD_INSTRUCTION, NEGX_INSTRUCTION, NEG_INSTRUCTION, NOT_INSTRUCTION,
-      ORI_INSTRUCTION, OR_INSTRUCTION, PEA_INSTRUCTION, ROL_INSTRUCTION,
-      ROR_INSTRUCTION, ROXL_INSTRUCTION, ROXR_INSTRUCTION, RS_DIRECTIVE,
-      SBCD_INSTRUCTION, SWAP_INSTRUCTION, TAS_INSTRUCTION, TST_INSTRUCTION),
+      LEA_INSTRUCTION, LSL_INSTRUCTION, LSR_INSTRUCTION, MOVEP_INSTRUCTION,
+      MOVEQ_INSTRUCTION, NBCD_INSTRUCTION, NEGX_INSTRUCTION, NEG_INSTRUCTION,
+      NOT_INSTRUCTION, ORI_INSTRUCTION, OR_INSTRUCTION, PEA_INSTRUCTION,
+      ROL_INSTRUCTION, ROR_INSTRUCTION, ROXL_INSTRUCTION, ROXR_INSTRUCTION,
+      RS_DIRECTIVE, SBCD_INSTRUCTION, SWAP_INSTRUCTION, TAS_INSTRUCTION,
+      TST_INSTRUCTION),
   };
 
   /* ********************************************************** */
@@ -2756,7 +2757,8 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // move_instruction |
   //                               movea_instruction |
   //                               moveq_instruction |
-  //                               movem_instruction
+  //                               movem_instruction |
+  //                               movep_instruction
   static boolean move_instructions(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "move_instructions")) return false;
     boolean r;
@@ -2764,6 +2766,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = movea_instruction(b, l + 1);
     if (!r) r = moveq_instruction(b, l + 1);
     if (!r) r = movem_instruction(b, l + 1);
+    if (!r) r = movep_instruction(b, l + 1);
     return r;
   }
 
@@ -2860,6 +2863,68 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = address_register_indirect(b, l + 1);
     r = r && consumeToken(b, COMMA);
     r = r && register_list(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // MOVEP data_size_word_long?
+  //                       (
+  //                         (adm_drd COMMA adm_adi) |
+  //                         (adm_adi COMMA adm_drd)
+  //                       )
+  public static boolean movep_instruction(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movep_instruction")) return false;
+    if (!nextTokenIs(b, "<instruction>", MOVEP)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, MOVEP_INSTRUCTION, "<instruction>");
+    r = consumeToken(b, MOVEP);
+    p = r; // pin = 1
+    r = r && report_error_(b, movep_instruction_1(b, l + 1));
+    r = p && movep_instruction_2(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // data_size_word_long?
+  private static boolean movep_instruction_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movep_instruction_1")) return false;
+    data_size_word_long(b, l + 1);
+    return true;
+  }
+
+  // (adm_drd COMMA adm_adi) |
+  //                         (adm_adi COMMA adm_drd)
+  private static boolean movep_instruction_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movep_instruction_2")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = movep_instruction_2_0(b, l + 1);
+    if (!r) r = movep_instruction_2_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // adm_drd COMMA adm_adi
+  private static boolean movep_instruction_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movep_instruction_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = adm_drd(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_adi(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // adm_adi COMMA adm_drd
+  private static boolean movep_instruction_2_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movep_instruction_2_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = adm_adi(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_drd(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }

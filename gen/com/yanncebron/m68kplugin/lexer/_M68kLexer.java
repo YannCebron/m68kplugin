@@ -220,10 +220,11 @@ public class _M68kLexer implements FlexLexer {
     "\4\21\1\241\1\242\1\243\1\244\1\245\1\246\1\247"+
     "\1\250\1\21\1\251\1\252\1\253\1\254\1\255\1\256"+
     "\1\21\1\257\4\21\1\260\1\261\1\262\1\263\1\264"+
-    "\1\21\1\265\1\21\1\266\1\21\1\267\1\270\1\271";
+    "\1\265\1\21\1\266\1\21\1\267\1\21\1\270\1\271"+
+    "\1\272";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[331];
+    int [] result = new int[332];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -288,11 +289,11 @@ public class _M68kLexer implements FlexLexer {
     "\0\u25a7\0\u042f\0\u042f\0\u042f\0\u042f\0\u042f\0\u25e6\0\u042f"+
     "\0\u042f\0\u2625\0\u2664\0\u042f\0\u042f\0\u042f\0\u042f\0\u042f"+
     "\0\u26a3\0\u042f\0\u26e2\0\u2721\0\u2760\0\u279f\0\u042f\0\u042f"+
-    "\0\u042f\0\u042f\0\u042f\0\u27de\0\u042f\0\u281d\0\u042f\0\u285c"+
-    "\0\u042f\0\u042f\0\u042f";
+    "\0\u042f\0\u042f\0\u042f\0\u042f\0\u27de\0\u042f\0\u281d\0\u042f"+
+    "\0\u285c\0\u042f\0\u042f\0\u042f";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[331];
+    int [] result = new int[332];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -562,19 +563,20 @@ public class _M68kLexer implements FlexLexer {
     "\20\0\16\32\1\u013f\10\32\7\0\1\32\3\0\1\32"+
     "\2\0\1\32\6\0\3\32\20\0\10\32\1\u0140\16\32"+
     "\7\0\1\32\3\0\1\32\2\0\1\32\6\0\3\32"+
-    "\20\0\6\32\1\u0141\11\32\1\u0142\1\u0143\5\32\7\0"+
-    "\1\32\3\0\1\32\2\0\1\32\6\0\3\32\20\0"+
-    "\13\32\1\u0144\13\32\7\0\1\32\3\0\1\32\2\0"+
-    "\1\32\6\0\3\32\20\0\4\32\1\u0145\22\32\7\0"+
-    "\1\32\3\0\1\32\2\0\1\32\6\0\3\32\20\0"+
-    "\5\32\1\u0146\21\32\7\0\1\32\3\0\1\32\2\0"+
-    "\1\32\6\0\3\32\20\0\7\32\1\u0147\17\32\7\0"+
-    "\1\32\3\0\1\32\2\0\1\32\6\0\3\32\20\0"+
-    "\6\32\1\u0148\20\32\7\0\1\32\3\0\1\32\2\0"+
-    "\1\32\6\0\3\32\20\0\15\32\1\u0149\11\32\7\0"+
-    "\1\32\3\0\1\32\2\0\1\32\6\0\3\32\20\0"+
-    "\13\32\1\u014a\13\32\7\0\1\32\3\0\1\32\2\0"+
-    "\1\32\6\0\3\32\20\0\12\32\1\u014b\14\32";
+    "\20\0\1\32\1\u0141\4\32\1\u0142\11\32\1\u0143\1\u0144"+
+    "\5\32\7\0\1\32\3\0\1\32\2\0\1\32\6\0"+
+    "\3\32\20\0\13\32\1\u0145\13\32\7\0\1\32\3\0"+
+    "\1\32\2\0\1\32\6\0\3\32\20\0\4\32\1\u0146"+
+    "\22\32\7\0\1\32\3\0\1\32\2\0\1\32\6\0"+
+    "\3\32\20\0\5\32\1\u0147\21\32\7\0\1\32\3\0"+
+    "\1\32\2\0\1\32\6\0\3\32\20\0\7\32\1\u0148"+
+    "\17\32\7\0\1\32\3\0\1\32\2\0\1\32\6\0"+
+    "\3\32\20\0\6\32\1\u0149\20\32\7\0\1\32\3\0"+
+    "\1\32\2\0\1\32\6\0\3\32\20\0\15\32\1\u014a"+
+    "\11\32\7\0\1\32\3\0\1\32\2\0\1\32\6\0"+
+    "\3\32\20\0\13\32\1\u014b\13\32\7\0\1\32\3\0"+
+    "\1\32\2\0\1\32\6\0\3\32\20\0\12\32\1\u014c"+
+    "\14\32";
 
   private static int [] zzUnpackTrans() {
     int [] result = new int[10395];
@@ -617,10 +619,10 @@ public class _M68kLexer implements FlexLexer {
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
     "\4\0\2\11\2\1\1\11\1\1\3\11\2\1\1\11"+
     "\6\1\1\11\4\1\12\11\2\1\4\11\23\1\2\0"+
-    "\1\11\3\0\4\1\2\11\u0101\1";
+    "\1\11\3\0\4\1\2\11\u0102\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[331];
+    int [] result = new int[332];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -943,927 +945,932 @@ public class _M68kLexer implements FlexLexer {
             { return BAD_CHARACTER;
             } 
             // fall through
-          case 186: break;
+          case 187: break;
           case 2: 
             { return WHITE_SPACE;
             } 
             // fall through
-          case 187: break;
+          case 188: break;
           case 3: 
             { clearBranchIdMode(); yybegin(IN_INSTRUCTION); return WHITE_SPACE;
             } 
             // fall through
-          case 188: break;
+          case 189: break;
           case 4: 
             { yybegin(IN_COMMENT); return COMMENT;
             } 
             // fall through
-          case 189: break;
+          case 190: break;
           case 5: 
             { return DOT;
             } 
             // fall through
-          case 190: break;
+          case 191: break;
           case 6: 
             { yybegin(IN_LABEL); return ID;
             } 
             // fall through
-          case 191: break;
+          case 192: break;
           case 7: 
             { return UNDERSCORE;
             } 
             // fall through
-          case 192: break;
+          case 193: break;
           case 8: 
             { yybegin(YYINITIAL); return WHITE_SPACE;
             } 
             // fall through
-          case 193: break;
+          case 194: break;
           case 9: 
             { clearBranchIdMode(); yybegin(IN_INSTRUCTION); return COLON;
             } 
             // fall through
-          case 194: break;
+          case 195: break;
           case 10: 
             { incBranchIdMode();  return WHITE_SPACE;
             } 
             // fall through
-          case 195: break;
+          case 196: break;
           case 11: 
             { return SEMICOLON;
             } 
             // fall through
-          case 196: break;
+          case 197: break;
           case 12: 
             { return MUL;
             } 
             // fall through
-          case 197: break;
+          case 198: break;
           case 13: 
             { return DEC_NUMBER;
             } 
             // fall through
-          case 198: break;
+          case 199: break;
           case 14: 
             { return PERCENT;
             } 
             // fall through
-          case 199: break;
+          case 200: break;
           case 15: 
             { return PIPE;
             } 
             // fall through
-          case 200: break;
+          case 201: break;
           case 16: 
             { return BACKSLASH;
             } 
             // fall through
-          case 201: break;
+          case 202: break;
           case 17: 
             { return ID;
             } 
             // fall through
-          case 202: break;
+          case 203: break;
           case 18: 
             { return COLON;
             } 
             // fall through
-          case 203: break;
+          case 204: break;
           case 19: 
             { return COMMA;
             } 
             // fall through
-          case 204: break;
+          case 205: break;
           case 20: 
             { return PLUS;
             } 
             // fall through
-          case 205: break;
+          case 206: break;
           case 21: 
             { return MINUS;
             } 
             // fall through
-          case 206: break;
+          case 207: break;
           case 22: 
             { return DIV;
             } 
             // fall through
-          case 207: break;
+          case 208: break;
           case 23: 
             { return EQ;
             } 
             // fall through
-          case 208: break;
+          case 209: break;
           case 24: 
             { return POW;
             } 
             // fall through
-          case 209: break;
+          case 210: break;
           case 25: 
             { return HASH;
             } 
             // fall through
-          case 210: break;
+          case 211: break;
           case 26: 
             { return TILDE;
             } 
             // fall through
-          case 211: break;
+          case 212: break;
           case 27: 
             { return AMPERSAND;
             } 
             // fall through
-          case 212: break;
+          case 213: break;
           case 28: 
             { return L_PAREN;
             } 
             // fall through
-          case 213: break;
+          case 214: break;
           case 29: 
             { return R_PAREN;
             } 
             // fall through
-          case 214: break;
+          case 215: break;
           case 30: 
             { return L_BRACKET;
             } 
             // fall through
-          case 215: break;
+          case 216: break;
           case 31: 
             { return R_BRACKET;
             } 
             // fall through
-          case 216: break;
+          case 217: break;
           case 32: 
             { return HEX_NUMBER;
             } 
             // fall through
-          case 217: break;
+          case 218: break;
           case 33: 
             { return OCT_NUMBER;
             } 
             // fall through
-          case 218: break;
+          case 219: break;
           case 34: 
             { return BIN_NUMBER;
             } 
             // fall through
-          case 219: break;
+          case 220: break;
           case 35: 
             { return STRING;
             } 
             // fall through
-          case 220: break;
+          case 221: break;
           case 36: 
             { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_S;
             } 
             // fall through
-          case 221: break;
+          case 222: break;
           case 37: 
             { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_L;
             } 
             // fall through
-          case 222: break;
+          case 223: break;
           case 38: 
             { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_B;
             } 
             // fall through
-          case 223: break;
+          case 224: break;
           case 39: 
             { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_W;
             } 
             // fall through
-          case 224: break;
+          case 225: break;
           case 40: 
             { return SHIFT_L;
             } 
             // fall through
-          case 225: break;
+          case 226: break;
           case 41: 
             { return SHIFT_R;
             } 
             // fall through
-          case 226: break;
+          case 227: break;
           case 42: 
             { return SF;
             } 
             // fall through
-          case 227: break;
+          case 228: break;
           case 43: 
             { return SP;
             } 
             // fall through
-          case 228: break;
+          case 229: break;
           case 44: 
             { return SR;
             } 
             // fall through
-          case 229: break;
+          case 230: break;
           case 45: 
             { return ST;
             } 
             // fall through
-          case 230: break;
+          case 231: break;
           case 46: 
             { return PC;
             } 
             // fall through
-          case 231: break;
+          case 232: break;
           case 47: 
             { return RS;
             } 
             // fall through
-          case 232: break;
+          case 233: break;
           case 48: 
             { return DATA_REGISTER;
             } 
             // fall through
-          case 233: break;
+          case 234: break;
           case 49: 
             { return DS;
             } 
             // fall through
-          case 234: break;
+          case 235: break;
           case 50: 
             { return DC;
             } 
             // fall through
-          case 235: break;
+          case 236: break;
           case 51: 
             { return ADDRESS_REGISTER;
             } 
             // fall through
-          case 236: break;
+          case 237: break;
           case 52: 
             { return OR;
             } 
             // fall through
-          case 237: break;
+          case 238: break;
           case 53: 
             { return SSP;
             } 
             // fall through
-          case 238: break;
+          case 239: break;
           case 54: 
             { return SPL;
             } 
             // fall through
-          case 239: break;
+          case 240: break;
           case 55: 
             { return SUB;
             } 
             // fall through
-          case 240: break;
+          case 241: break;
           case 56: 
             { return SCS;
             } 
             // fall through
-          case 241: break;
+          case 242: break;
           case 57: 
             { return SCC;
             } 
             // fall through
-          case 242: break;
+          case 243: break;
           case 58: 
             { return SNE;
             } 
             // fall through
-          case 243: break;
+          case 244: break;
           case 59: 
             { return SLS;
             } 
             // fall through
-          case 244: break;
+          case 245: break;
           case 60: 
             { return SLE;
             } 
             // fall through
-          case 245: break;
+          case 246: break;
           case 61: 
             { return SLT;
             } 
             // fall through
-          case 246: break;
+          case 247: break;
           case 62: 
             { return SEQ;
             } 
             // fall through
-          case 247: break;
+          case 248: break;
           case 63: 
             { return SGE;
             } 
             // fall through
-          case 248: break;
+          case 249: break;
           case 64: 
             { return SGT;
             } 
             // fall through
-          case 249: break;
+          case 250: break;
           case 65: 
             { return SVS;
             } 
             // fall through
-          case 250: break;
+          case 251: break;
           case 66: 
             { return SVC;
             } 
             // fall through
-          case 251: break;
+          case 252: break;
           case 67: 
             { return SMI;
             } 
             // fall through
-          case 252: break;
+          case 253: break;
           case 68: 
             { return SHI;
             } 
             // fall through
-          case 253: break;
+          case 254: break;
           case 69: 
             { return PEA;
             } 
             // fall through
-          case 254: break;
+          case 255: break;
           case 70: 
             { return USP;
             } 
             // fall through
-          case 255: break;
+          case 256: break;
           case 71: 
             { return CCR;
             } 
             // fall through
-          case 256: break;
+          case 257: break;
           case 72: 
             { return CLR;
             } 
             // fall through
-          case 257: break;
+          case 258: break;
           case 73: 
             { return CMP;
             } 
             // fall through
-          case 258: break;
+          case 259: break;
           case 74: 
             { return CHK;
             } 
             // fall through
-          case 259: break;
+          case 260: break;
           case 75: 
             { return ROR;
             } 
             // fall through
-          case 260: break;
+          case 261: break;
           case 76: 
             { return ROL;
             } 
             // fall through
-          case 261: break;
+          case 262: break;
           case 77: 
             { return RTS;
             } 
             // fall through
-          case 262: break;
+          case 263: break;
           case 78: 
             { return RTR;
             } 
             // fall through
-          case 263: break;
+          case 264: break;
           case 79: 
             { return RTE;
             } 
             // fall through
-          case 264: break;
+          case 265: break;
           case 80: 
             { return DCB;
             } 
             // fall through
-          case 265: break;
+          case 266: break;
           case 81: 
             { incBranchIdMode(); return DBF;
             } 
             // fall through
-          case 266: break;
+          case 267: break;
           case 82: 
             { incBranchIdMode(); return DBT;
             } 
             // fall through
-          case 267: break;
+          case 268: break;
           case 83: 
             { return ASR;
             } 
             // fall through
-          case 268: break;
+          case 269: break;
           case 84: 
             { return ASL;
             } 
             // fall through
-          case 269: break;
+          case 270: break;
           case 85: 
             { return ADD;
             } 
             // fall through
-          case 270: break;
+          case 271: break;
           case 86: 
             { return AND;
             } 
             // fall through
-          case 271: break;
+          case 272: break;
           case 87: 
             { return NOP;
             } 
             // fall through
-          case 272: break;
+          case 273: break;
           case 88: 
             { return NOT;
             } 
             // fall through
-          case 273: break;
+          case 274: break;
           case 89: 
             { return NEG;
             } 
             // fall through
-          case 274: break;
+          case 275: break;
           case 90: 
             { return OPT;
             } 
             // fall through
-          case 275: break;
+          case 276: break;
           case 91: 
             { return ORI;
             } 
             // fall through
-          case 276: break;
+          case 277: break;
           case 92: 
             { return ODD;
             } 
             // fall through
-          case 277: break;
+          case 278: break;
           case 93: 
             { return LSR;
             } 
             // fall through
-          case 278: break;
+          case 279: break;
           case 94: 
             { return LSL;
             } 
             // fall through
-          case 279: break;
+          case 280: break;
           case 95: 
             { return LEA;
             } 
             // fall through
-          case 280: break;
+          case 281: break;
           case 96: 
             { return EOR;
             } 
             // fall through
-          case 281: break;
+          case 282: break;
           case 97: 
             { return EQU;
             } 
             // fall through
-          case 282: break;
+          case 283: break;
           case 98: 
             { return EXG;
             } 
             // fall through
-          case 283: break;
+          case 284: break;
           case 99: 
             { return EXT;
             } 
             // fall through
-          case 284: break;
+          case 285: break;
           case 100: 
             { return TST;
             } 
             // fall through
-          case 285: break;
+          case 286: break;
           case 101: 
             { return TAS;
             } 
             // fall through
-          case 286: break;
+          case 287: break;
           case 102: 
             { return JSR;
             } 
             // fall through
-          case 287: break;
+          case 288: break;
           case 103: 
             { return JMP;
             } 
             // fall through
-          case 288: break;
+          case 289: break;
           case 104: 
             { return BSR;
             } 
             // fall through
-          case 289: break;
+          case 290: break;
           case 105: 
             { incBranchIdMode(); return BPL;
             } 
             // fall through
-          case 290: break;
+          case 291: break;
           case 106: 
             { incBranchIdMode(); return BCS;
             } 
             // fall through
-          case 291: break;
+          case 292: break;
           case 107: 
             { incBranchIdMode(); return BCC;
             } 
             // fall through
-          case 292: break;
+          case 293: break;
           case 108: 
             { incBranchIdMode(); return BRA;
             } 
             // fall through
-          case 293: break;
+          case 294: break;
           case 109: 
             { incBranchIdMode(); return BNE;
             } 
             // fall through
-          case 294: break;
+          case 295: break;
           case 110: 
             { incBranchIdMode(); return BLS;
             } 
             // fall through
-          case 295: break;
+          case 296: break;
           case 111: 
             { incBranchIdMode(); return BLO;
             } 
             // fall through
-          case 296: break;
+          case 297: break;
           case 112: 
             { incBranchIdMode(); return BLE;
             } 
             // fall through
-          case 297: break;
+          case 298: break;
           case 113: 
             { incBranchIdMode(); return BLT;
             } 
             // fall through
-          case 298: break;
+          case 299: break;
           case 114: 
             { return BLK;
             } 
             // fall through
-          case 299: break;
+          case 300: break;
           case 115: 
             { incBranchIdMode(); return BEQ;
             } 
             // fall through
-          case 300: break;
+          case 301: break;
           case 116: 
             { incBranchIdMode(); return BGE;
             } 
             // fall through
-          case 301: break;
+          case 302: break;
           case 117: 
             { incBranchIdMode(); return BGT;
             } 
             // fall through
-          case 302: break;
+          case 303: break;
           case 118: 
             { incBranchIdMode(); return BVS;
             } 
             // fall through
-          case 303: break;
+          case 304: break;
           case 119: 
             { incBranchIdMode(); return BVC;
             } 
             // fall through
-          case 304: break;
+          case 305: break;
           case 120: 
             { incBranchIdMode(); return BMI;
             } 
             // fall through
-          case 305: break;
+          case 306: break;
           case 121: 
             { incBranchIdMode(); return BHS;
             } 
             // fall through
-          case 306: break;
+          case 307: break;
           case 122: 
             { incBranchIdMode(); return BHI;
             } 
             // fall through
-          case 307: break;
+          case 308: break;
           case 123: 
             { return SUBA;
             } 
             // fall through
-          case 308: break;
+          case 309: break;
           case 124: 
             { return SUBI;
             } 
             // fall through
-          case 309: break;
+          case 310: break;
           case 125: 
             { return SUBQ;
             } 
             // fall through
-          case 310: break;
+          case 311: break;
           case 126: 
             { return SUBX;
             } 
             // fall through
-          case 311: break;
+          case 312: break;
           case 127: 
             { return STOP;
             } 
             // fall through
-          case 312: break;
+          case 313: break;
           case 128: 
             { return SBCD;
             } 
             // fall through
-          case 313: break;
+          case 314: break;
           case 129: 
             { return SWAP;
             } 
             // fall through
-          case 314: break;
+          case 315: break;
           case 130: 
             { return UNLK;
             } 
             // fall through
-          case 315: break;
+          case 316: break;
           case 131: 
             { return CMPA;
             } 
             // fall through
-          case 316: break;
+          case 317: break;
           case 132: 
             { return CMPI;
             } 
             // fall through
-          case 317: break;
+          case 318: break;
           case 133: 
             { return CMPM;
             } 
             // fall through
-          case 318: break;
+          case 319: break;
           case 134: 
             { return ROXR;
             } 
             // fall through
-          case 319: break;
+          case 320: break;
           case 135: 
             { return ROXL;
             } 
             // fall through
-          case 320: break;
+          case 321: break;
           case 136: 
             { return DIVS;
             } 
             // fall through
-          case 321: break;
+          case 322: break;
           case 137: 
             { return DIVU;
             } 
             // fall through
-          case 322: break;
+          case 323: break;
           case 138: 
             { incBranchIdMode(); return DBPL;
             } 
             // fall through
-          case 323: break;
+          case 324: break;
           case 139: 
             { incBranchIdMode(); return DBCS;
             } 
             // fall through
-          case 324: break;
+          case 325: break;
           case 140: 
             { incBranchIdMode(); return DBCC;
             } 
             // fall through
-          case 325: break;
+          case 326: break;
           case 141: 
             { incBranchIdMode(); return DBRA;
             } 
             // fall through
-          case 326: break;
+          case 327: break;
           case 142: 
             { incBranchIdMode(); return DBNE;
             } 
             // fall through
-          case 327: break;
+          case 328: break;
           case 143: 
             { incBranchIdMode(); return DBLS;
             } 
             // fall through
-          case 328: break;
+          case 329: break;
           case 144: 
             { incBranchIdMode(); return DBLE;
             } 
             // fall through
-          case 329: break;
+          case 330: break;
           case 145: 
             { incBranchIdMode(); return DBLT;
             } 
             // fall through
-          case 330: break;
+          case 331: break;
           case 146: 
             { incBranchIdMode(); return DBEQ;
             } 
             // fall through
-          case 331: break;
+          case 332: break;
           case 147: 
             { incBranchIdMode(); return DBGE;
             } 
             // fall through
-          case 332: break;
+          case 333: break;
           case 148: 
             { incBranchIdMode(); return DBGT;
             } 
             // fall through
-          case 333: break;
+          case 334: break;
           case 149: 
             { incBranchIdMode(); return DBVS;
             } 
             // fall through
-          case 334: break;
+          case 335: break;
           case 150: 
             { incBranchIdMode(); return DBVC;
             } 
             // fall through
-          case 335: break;
+          case 336: break;
           case 151: 
             { incBranchIdMode(); return DBMI;
             } 
             // fall through
-          case 336: break;
+          case 337: break;
           case 152: 
             { incBranchIdMode(); return DBHI;
             } 
             // fall through
-          case 337: break;
+          case 338: break;
           case 153: 
             { return ADDA;
             } 
             // fall through
-          case 338: break;
+          case 339: break;
           case 154: 
             { return ADDI;
             } 
             // fall through
-          case 339: break;
+          case 340: break;
           case 155: 
             { return ADDQ;
             } 
             // fall through
-          case 340: break;
+          case 341: break;
           case 156: 
             { return ADDX;
             } 
             // fall through
-          case 341: break;
+          case 342: break;
           case 157: 
             { return ANDI;
             } 
             // fall through
-          case 342: break;
+          case 343: break;
           case 158: 
             { return ABCD;
             } 
             // fall through
-          case 343: break;
+          case 344: break;
           case 159: 
             { return NEGX;
             } 
             // fall through
-          case 344: break;
+          case 345: break;
           case 160: 
             { return NBCD;
             } 
             // fall through
-          case 345: break;
+          case 346: break;
           case 161: 
             { return LINK;
             } 
             // fall through
-          case 346: break;
+          case 347: break;
           case 162: 
             { return ENDM;
             } 
             // fall through
-          case 347: break;
+          case 348: break;
           case 163: 
             { return EORI;
             } 
             // fall through
-          case 348: break;
+          case 349: break;
           case 164: 
             { return EVEN;
             } 
             // fall through
-          case 349: break;
+          case 350: break;
           case 165: 
             { return EQUR;
             } 
             // fall through
-          case 350: break;
+          case 351: break;
           case 166: 
             { return TRAP;
             } 
             // fall through
-          case 351: break;
+          case 352: break;
           case 167: 
             { return MULS;
             } 
             // fall through
-          case 352: break;
+          case 353: break;
           case 168: 
             { return MULU;
             } 
             // fall through
-          case 353: break;
+          case 354: break;
           case 169: 
             { return MOVE;
             } 
             // fall through
-          case 354: break;
+          case 355: break;
           case 170: 
             { return BSET;
             } 
             // fall through
-          case 355: break;
+          case 356: break;
           case 171: 
             { return BCLR;
             } 
             // fall through
-          case 356: break;
+          case 357: break;
           case 172: 
             { return BCHG;
             } 
             // fall through
-          case 357: break;
+          case 358: break;
           case 173: 
             { return BTST;
             } 
             // fall through
-          case 358: break;
+          case 359: break;
           case 174: 
             { return RSSET;
             } 
             // fall through
-          case 359: break;
+          case 360: break;
           case 175: 
             { return RESET;
             } 
             // fall through
-          case 360: break;
+          case 361: break;
           case 176: 
             { return TRAPV;
             } 
             // fall through
-          case 361: break;
+          case 362: break;
           case 177: 
             { return MACRO;
             } 
             // fall through
-          case 362: break;
-          case 178: 
-            { return MOVEA;
-            } 
-            // fall through
           case 363: break;
-          case 179: 
-            { return MOVEM;
+          case 178: 
+            { return MOVEP;
             } 
             // fall through
           case 364: break;
-          case 180: 
-            { return MOVEQ;
+          case 179: 
+            { return MOVEA;
             } 
             // fall through
           case 365: break;
-          case 181: 
-            { return INCDIR;
+          case 180: 
+            { return MOVEM;
             } 
             // fall through
           case 366: break;
-          case 182: 
-            { return INCBIN;
+          case 181: 
+            { return MOVEQ;
             } 
             // fall through
           case 367: break;
-          case 183: 
-            { return RSRESET;
+          case 182: 
+            { return INCDIR;
             } 
             // fall through
           case 368: break;
-          case 184: 
-            { return INCLUDE;
+          case 183: 
+            { return INCBIN;
             } 
             // fall through
           case 369: break;
-          case 185: 
-            { return ILLEGAL;
+          case 184: 
+            { return RSRESET;
             } 
             // fall through
           case 370: break;
+          case 185: 
+            { return INCLUDE;
+            } 
+            // fall through
+          case 371: break;
+          case 186: 
+            { return ILLEGAL;
+            } 
+            // fall through
+          case 372: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }
