@@ -7,6 +7,7 @@
 
 ### Broken lexing/parsing
 - `.b|w|l` must be immediate after instruction (Parser prob?)
+- lexing: multiple data size tokens `move 4.l,a0` works, but `move.l 4.l,a0` not
 - allow `equr` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
 
 ## Before 1st release
