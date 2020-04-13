@@ -397,10 +397,6 @@ public class M68kVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitImmediateData(@NotNull M68kImmediateData o) {
-    visitPsiElement(o);
-  }
-
   public void visitIncbinDirective(@NotNull M68kIncbinDirective o) {
     visitPsiElement(o);
   }

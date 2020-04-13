@@ -104,6 +104,8 @@ private instructions ::= directives |
                          dbCC_instructions |
                          sCC_instructions
 
+
+// data size  _______=====================================================
 fake data_sized ::= {
   methods = [ getDataSize ]
 }
@@ -119,59 +121,17 @@ private data_size_all ::= data_size_byte | data_size_word_long {
   name = ".b|w|l"
 }
 
-private data_register ::= DATA_REGISTER {
-  name = "data register"
-}
-
-private program_counter ::= PC
-private program_counter_indirect ::= ID L_PAREN program_counter R_PAREN
-
-private address_register ::= ADDRESS_REGISTER | SP {
-  name = "address register"
-}
-private address_register_pre_decrement ::= MINUS L_PAREN address_register R_PAREN
-private address_register_post_increment ::= L_PAREN ADDRESS_REGISTER R_PAREN PLUS
-private address_register_indirect ::= (label_ref_expression | MINUS | number_expression)? L_PAREN address_register R_PAREN PLUS? {
-  pin = "("
-}
-
-private status_register ::= SR
-private condition_code_register ::= CCR
-private supervisor_stack_pointer ::= SSP
-private user_stack_pointer ::= USP
-
-private any_register ::= data_register |
-                         address_register |
-                         program_counter |
-                         status_register | condition_code_register |
-                         supervisor_stack_pointer | user_stack_pointer |
-                         address_register_indirect |
-                         program_counter_indirect 
-                         // todo?
 
 // "d0-d7/a1/a4"
 private register_range_element ::= adm_drd | adm_ard
 register_range ::= register_range_element (MINUS register_range_element)?
 register_list ::= register_range (DIV register_range)*
 
-private effective_address ::= program_counter_indirect |
-                              (ID L_PAREN address_register R_PAREN) |
-                              expression |
-                              label_reference
-{
-  name = "effective address"
-}
 
 label_reference ::= ID {
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelReferenceMixIn"
   name = "label"
 }
-
-immediate_data ::= HASH expression {
-  pin = 1
-  name = "immediate data"
-}
-
 
 // addressing modes  =====================================================
 // d0

@@ -381,84 +381,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ADDRESS_REGISTER | SP
-  static boolean address_register(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "address_register")) return false;
-    if (!nextTokenIs(b, "<address register>", ADDRESS_REGISTER, SP)) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, null, "<address register>");
-    r = consumeToken(b, ADDRESS_REGISTER);
-    if (!r) r = consumeToken(b, SP);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // (label_ref_expression | MINUS | number_expression)? L_PAREN address_register R_PAREN PLUS?
-  static boolean address_register_indirect(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "address_register_indirect")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = address_register_indirect_0(b, l + 1);
-    r = r && consumeToken(b, L_PAREN);
-    r = r && address_register(b, l + 1);
-    r = r && consumeToken(b, R_PAREN);
-    r = r && address_register_indirect_4(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // (label_ref_expression | MINUS | number_expression)?
-  private static boolean address_register_indirect_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "address_register_indirect_0")) return false;
-    address_register_indirect_0_0(b, l + 1);
-    return true;
-  }
-
-  // label_ref_expression | MINUS | number_expression
-  private static boolean address_register_indirect_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "address_register_indirect_0_0")) return false;
-    boolean r;
-    r = label_ref_expression(b, l + 1);
-    if (!r) r = consumeToken(b, MINUS);
-    if (!r) r = number_expression(b, l + 1);
-    return r;
-  }
-
-  // PLUS?
-  private static boolean address_register_indirect_4(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "address_register_indirect_4")) return false;
-    consumeToken(b, PLUS);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // L_PAREN ADDRESS_REGISTER R_PAREN PLUS
-  static boolean address_register_post_increment(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "address_register_post_increment")) return false;
-    if (!nextTokenIs(b, L_PAREN)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, L_PAREN, ADDRESS_REGISTER, R_PAREN, PLUS);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // MINUS L_PAREN address_register R_PAREN
-  static boolean address_register_pre_decrement(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "address_register_pre_decrement")) return false;
-    if (!nextTokenIs(b, MINUS)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, MINUS, L_PAREN);
-    r = r && address_register(b, l + 1);
-    r = r && consumeToken(b, R_PAREN);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
   // ADDX add_sub_x_tail
   public static boolean addx_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "addx_instruction")) return false;
@@ -760,29 +682,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = r && bool_i_tail(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
-  }
-
-  /* ********************************************************** */
-  // data_register |
-  //                          address_register |
-  //                          program_counter |
-  //                          status_register | condition_code_register |
-  //                          supervisor_stack_pointer | user_stack_pointer |
-  //                          address_register_indirect |
-  //                          program_counter_indirect
-  static boolean any_register(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "any_register")) return false;
-    boolean r;
-    r = data_register(b, l + 1);
-    if (!r) r = address_register(b, l + 1);
-    if (!r) r = program_counter(b, l + 1);
-    if (!r) r = status_register(b, l + 1);
-    if (!r) r = condition_code_register(b, l + 1);
-    if (!r) r = supervisor_stack_pointer(b, l + 1);
-    if (!r) r = user_stack_pointer(b, l + 1);
-    if (!r) r = address_register_indirect(b, l + 1);
-    if (!r) r = program_counter_indirect(b, l + 1);
-    return r;
   }
 
   /* ********************************************************** */
@@ -1659,24 +1558,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // CCR
-  static boolean condition_code_register(PsiBuilder b, int l) {
-    return consumeToken(b, CCR);
-  }
-
-  /* ********************************************************** */
-  // DATA_REGISTER
-  static boolean data_register(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "data_register")) return false;
-    if (!nextTokenIs(b, "<data register>", DATA_REGISTER)) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, null, "<data register>");
-    r = consumeToken(b, DATA_REGISTER);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
   // data_size_byte | data_size_word_long
   static boolean data_size_all(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "data_size_all")) return false;
@@ -2205,35 +2086,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // program_counter_indirect |
-  //                               (ID L_PAREN address_register R_PAREN) |
-  //                               expression |
-  //                               label_reference
-  static boolean effective_address(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "effective_address")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, null, "<effective address>");
-    r = program_counter_indirect(b, l + 1);
-    if (!r) r = effective_address_1(b, l + 1);
-    if (!r) r = expression(b, l + 1, -1);
-    if (!r) r = label_reference(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // ID L_PAREN address_register R_PAREN
-  private static boolean effective_address_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "effective_address_1")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, ID, L_PAREN);
-    r = r && address_register(b, l + 1);
-    r = r && consumeToken(b, R_PAREN);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
   // ENDM
   public static boolean endm_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "endm_directive")) return false;
@@ -2386,20 +2238,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, ILLEGAL);
     exit_section_(b, l, m, r, false, null);
     return r;
-  }
-
-  /* ********************************************************** */
-  // HASH expression
-  public static boolean immediate_data(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "immediate_data")) return false;
-    if (!nextTokenIs(b, "<immediate data>", HASH)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, IMMEDIATE_DATA, "<immediate data>");
-    r = consumeToken(b, HASH);
-    p = r; // pin = 1
-    r = r && expression(b, l + 1, -1);
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
   }
 
   /* ********************************************************** */
@@ -3325,26 +3163,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // PC
-  static boolean program_counter(PsiBuilder b, int l) {
-    return consumeToken(b, PC);
-  }
-
-  /* ********************************************************** */
-  // ID L_PAREN program_counter R_PAREN
-  static boolean program_counter_indirect(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "program_counter_indirect")) return false;
-    if (!nextTokenIs(b, ID)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, ID, L_PAREN);
-    r = r && program_counter(b, l + 1);
-    r = r && consumeToken(b, R_PAREN);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
   // register_range (DIV register_range)*
   public static boolean register_list(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "register_list")) return false;
@@ -3985,12 +3803,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // SR
-  static boolean status_register(PsiBuilder b, int l) {
-    return consumeToken(b, SR);
-  }
-
-  /* ********************************************************** */
   // STOP adm_imm
   public static boolean stop_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stop_instruction")) return false;
@@ -4072,12 +3884,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = r && add_sub_x_tail(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
-  }
-
-  /* ********************************************************** */
-  // SSP
-  static boolean supervisor_stack_pointer(PsiBuilder b, int l) {
-    return consumeToken(b, SSP);
   }
 
   /* ********************************************************** */
@@ -4212,12 +4018,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = r && adm_ard(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
-  }
-
-  /* ********************************************************** */
-  // USP
-  static boolean user_stack_pointer(PsiBuilder b, int l) {
-    return consumeToken(b, USP);
   }
 
   /* ********************************************************** */
