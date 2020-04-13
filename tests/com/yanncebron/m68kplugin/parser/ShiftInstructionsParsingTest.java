@@ -18,7 +18,6 @@ package com.yanncebron.m68kplugin.parser;
 
 import com.intellij.testFramework.TestDataPath;
 
-// todo dst=effective_address
 @TestDataPath("$PROJECT_ROOT/testData/parser/shiftInstructions")
 public class ShiftInstructionsParsingTest extends M68kParsingTestCase {
 
@@ -26,15 +25,23 @@ public class ShiftInstructionsParsingTest extends M68kParsingTestCase {
     super("shiftInstructions");
   }
 
-  public void testAslInstructionImmediateDataRegister() throws Exception {
+  public void testAslInstructionAri() throws Exception {
+    doCodeTest(" asl (a0)");
+  }
+
+  public void testAslInstructionAbs() throws Exception {
+    doCodeTest(" asl $40000");
+  }
+
+  public void testAslInstructionImmDrd() throws Exception {
     doCodeTest(" asl #1,d0");
   }
 
-  public void testAslInstructionDataSizeImmediateDataRegister() throws Exception {
+  public void testAslInstructionDataSizeImmDrd() throws Exception {
     doCodeTest(" asl.b #1,d0");
   }
 
-  public void testAslInstructionDataRegisterDataRegister() throws Exception {
+  public void testAslInstructionDrdDrd() throws Exception {
     doCodeTest(" asl d1,d0");
   }
 
@@ -46,31 +53,31 @@ public class ShiftInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" asl #1,");
   }
 
-  public void testAsrInstructionImmediateDataRegister() throws Exception {
+  public void testAsrInstructionImmDrd() throws Exception {
     doCodeTest(" asr.w #1,d0");
   }
 
-  public void testLslInstructionImmediateDataRegister() throws Exception {
+  public void testLslInstructionImmDrd() throws Exception {
     doCodeTest(" lsl.l #1,d0");
   }
 
-  public void testLsrInstructionImmediateDataRegister() throws Exception {
+  public void testLsrInstructionImmDrd() throws Exception {
     doCodeTest(" lsr #1,d0");
   }
 
-  public void testRolInstructionImmediateDataRegister() throws Exception {
+  public void testRolInstructionImmDrd() throws Exception {
     doCodeTest(" rol #1,d0");
   }
 
-  public void testRorInstructionImmediateDataRegister() throws Exception {
+  public void testRorInstructionImmDrd() throws Exception {
     doCodeTest(" ror #1,d0");
   }
 
-  public void testRoxlInstructionImmediateDataRegister() throws Exception {
+  public void testRoxlInstructionImmDrd() throws Exception {
     doCodeTest(" roxl #1,d0");
   }
 
-  public void testRoxrInstructionImmediateDataRegister() throws Exception {
+  public void testRoxrInstructionImmDrd() throws Exception {
     doCodeTest(" roxr #1,d0");
   }
 

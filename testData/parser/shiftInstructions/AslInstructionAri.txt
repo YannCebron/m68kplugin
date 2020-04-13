@@ -1,0 +1,10 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kAslInstructionImpl(ASL_INSTRUCTION)
+    PsiElement(asl)('asl')
+    PsiWhiteSpace(' ')
+    M68kAdmAriImpl(ADM_ARI)
+      PsiElement(()('(')
+      M68kAdmArdImpl(ADM_ARD)
+        PsiElement(address_register)('a0')
+      PsiElement())(')')

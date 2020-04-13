@@ -6,5 +6,5 @@ FILE
   PsiElement(#)('#')
   PsiElement(dec_number)('1')
   PsiElement(,)(',')
-  PsiErrorElement:<data register> or <effective address> expected
+  PsiErrorElement:<data register> expected
     <empty list>

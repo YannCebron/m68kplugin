@@ -41,20 +41,50 @@ public class M68kLslInstructionImpl extends M68kShiftInstructionBaseImpl impleme
 
   @Override
   @Nullable
-  public M68kExpression getExpression() {
-    return findChildByClass(M68kExpression.class);
+  public M68kAdmAbs getAdmAbs() {
+    return findChildByClass(M68kAdmAbs.class);
   }
 
   @Override
   @Nullable
-  public M68kImmediateData getImmediateData() {
-    return findChildByClass(M68kImmediateData.class);
+  public M68kAdmAdi getAdmAdi() {
+    return findChildByClass(M68kAdmAdi.class);
   }
 
   @Override
   @Nullable
-  public M68kLabelReference getLabelReference() {
-    return findChildByClass(M68kLabelReference.class);
+  public M68kAdmAix getAdmAix() {
+    return findChildByClass(M68kAdmAix.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmApd getAdmApd() {
+    return findChildByClass(M68kAdmApd.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmApi getAdmApi() {
+    return findChildByClass(M68kAdmApi.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmAri getAdmAri() {
+    return findChildByClass(M68kAdmAri.class);
+  }
+
+  @Override
+  @NotNull
+  public List<M68kAdmDrd> getAdmDrdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmDrd.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmImm getAdmImm() {
+    return findChildByClass(M68kAdmImm.class);
   }
 
 }

@@ -3758,42 +3758,81 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_all?
-  //                        (immediate_data | data_register) COMMA (data_register | effective_address)
+  // ( data_size_all?
+  //       (adm_drd | adm_imm) COMMA adm_drd
+  //     ) |
+  //     ( data_size_word?
+  //       (adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs)
+  //     )
   static boolean shift_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "shift_tail")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = shift_tail_0(b, l + 1);
-    r = r && shift_tail_1(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && shift_tail_3(b, l + 1);
+    if (!r) r = shift_tail_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // data_size_all?
+  //       (adm_drd | adm_imm) COMMA adm_drd
   private static boolean shift_tail_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "shift_tail_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = shift_tail_0_0(b, l + 1);
+    r = r && shift_tail_0_1(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_drd(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_all?
+  private static boolean shift_tail_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "shift_tail_0_0")) return false;
     data_size_all(b, l + 1);
     return true;
   }
 
-  // immediate_data | data_register
-  private static boolean shift_tail_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "shift_tail_1")) return false;
+  // adm_drd | adm_imm
+  private static boolean shift_tail_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "shift_tail_0_1")) return false;
     boolean r;
-    r = immediate_data(b, l + 1);
-    if (!r) r = data_register(b, l + 1);
+    r = adm_drd(b, l + 1);
+    if (!r) r = adm_imm(b, l + 1);
     return r;
   }
 
-  // data_register | effective_address
-  private static boolean shift_tail_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "shift_tail_3")) return false;
+  // data_size_word?
+  //       (adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs)
+  private static boolean shift_tail_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "shift_tail_1")) return false;
     boolean r;
-    r = data_register(b, l + 1);
-    if (!r) r = effective_address(b, l + 1);
+    Marker m = enter_section_(b);
+    r = shift_tail_1_0(b, l + 1);
+    r = r && shift_tail_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_word?
+  private static boolean shift_tail_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "shift_tail_1_0")) return false;
+    data_size_word(b, l + 1);
+    return true;
+  }
+
+  // adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
+  private static boolean shift_tail_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "shift_tail_1_1")) return false;
+    boolean r;
+    r = adm_api(b, l + 1);
+    if (!r) r = adm_ari(b, l + 1);
+    if (!r) r = adm_apd(b, l + 1);
+    if (!r) r = adm_adi(b, l + 1);
+    if (!r) r = adm_aix(b, l + 1);
+    if (!r) r = adm_abs(b, l + 1);
     return r;
   }
 
