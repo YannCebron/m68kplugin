@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.lang.highlighting;
 
+import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
@@ -42,7 +43,8 @@ public class M68kSyntaxAnnotator implements Annotator {
     if (element instanceof M68kLabelRefExpression && Registry.is("m68k.highlight.unresolved.ref")) {
       final PsiReference reference = element.getReference();
       if (reference.resolve() == null) {
-        holder.createErrorAnnotation(element, ProblemsHolder.unresolvedReferenceMessage(reference));
+        holder.createErrorAnnotation(element, ProblemsHolder.unresolvedReferenceMessage(reference))
+          .setHighlightType(ProblemHighlightType.LIKE_UNKNOWN_SYMBOL);
       }
     }
   }
