@@ -10,7 +10,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
     - name: Run tests
       run: |
         chmod +x gradlew
         ./gradlew check
+
+    - name: Verify Plugin on IntelliJ Platforms
+      id: verify
+      uses: ChrisCarini/intellij-platform-plugin-verifier-action@v0.0.1
+      with:
+        ide-versions: |
+          ideaIC:2019.3
+          ideaIC:2020.1
+    - name: Get log file path and print contents
+            run: |
+              echo "The verifier log file [${{steps.verify.outputs.verification-output-log-filename}}] contents : " ;
+              cat ${{steps.verify.outputs.verification-output-log-filename}}
