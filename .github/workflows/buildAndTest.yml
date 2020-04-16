@@ -16,6 +16,8 @@ jobs:
         chmod +x gradlew
         ./gradlew check
 
+    - name: Build the plugin using Gradle
+      run: ./gradlew buildPlugin
     - name: Verify Plugin on IntelliJ Platforms
       id: verify
       uses: ChrisCarini/intellij-platform-plugin-verifier-action@v0.0.1
