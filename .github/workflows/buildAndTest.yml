@@ -24,6 +24,6 @@ jobs:
           ideaIC:2019.3
           ideaIC:2020.1
     - name: Get log file path and print contents
-            run: |
-              echo "The verifier log file [${{steps.verify.outputs.verification-output-log-filename}}] contents : " ;
-              cat ${{steps.verify.outputs.verification-output-log-filename}}
+      run: |
+        echo "The verifier log file [${{steps.verify.outputs.verification-output-log-filename}}] contents : " ;
+        cat ${{steps.verify.outputs.verification-output-log-filename}}
