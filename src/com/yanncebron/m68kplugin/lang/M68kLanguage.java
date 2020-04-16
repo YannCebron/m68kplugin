@@ -26,7 +26,7 @@ public class M68kLanguage extends Language {
 
   public static final M68kLanguage INSTANCE = new M68kLanguage();
 
-  public M68kLanguage() {
+  private M68kLanguage() {
     super(ID);
   }
 
