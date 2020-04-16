@@ -23,6 +23,9 @@ Adds support for [Motorola 68000](https://en.wikipedia.org/wiki/Motorola_68000) 
 
 ## Known issues
 * various smaller parser issues
+* unsupported features:
+  - macros
+  - includes
 
 ## Plans
 See [Plan](plan.md) for planned features and ideas.
