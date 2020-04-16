@@ -10,7 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-
+    - name: Setup Cache
+      uses: actions/cache@v1
+      with:
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
     - name: Run tests
       run: |
         chmod +x gradlew
