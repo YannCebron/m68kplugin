@@ -1,6 +1,6 @@
-## Motorola 68000 Assembler Support for IntelliJ Platform
-
 ![CI](https://github.com/YannCebron/m68kplugin/workflows/CI/badge.svg)
+
+## Motorola 68000 Assembler Support for IntelliJ Platform
 
 Adds support for [Motorola 68000](https://en.wikipedia.org/wiki/Motorola_68000) assembly language in [IntelliJ Platform](http://www.jetbrains.org/intellij/sdk/docs/intro/intellij_platform.html#ides-based-on-the-intellij-platform) based IDEs (like [IntelliJ IDEA](https://www.jetbrains.com/idea/)).
 
