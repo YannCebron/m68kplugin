@@ -20,7 +20,9 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
     - name: Run tests
-      run: ./gradle check
+      run: |
+        chmod +x gradle
+        ./gradle check
 
     - name: Build the plugin using Gradle
       run: ./gradle buildPlugin
