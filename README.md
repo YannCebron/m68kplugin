@@ -1,4 +1,4 @@
-![CI](https://github.com/YannCebron/m68kplugin/workflows/CI/badge.svg)
+![https://github.com/YannCebron/m68kplugin/actions?query=workflow%3ACI](https://github.com/YannCebron/m68kplugin/workflows/CI/badge.svg)
 
 ## Motorola 68000 Assembler Support for IntelliJ Platform
 
