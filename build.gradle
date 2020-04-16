@@ -113,4 +113,4 @@ runPluginVerifier {
 //    verifierVersion = "1.222"
 }
 
-//check.dependsOn runPluginVerifier
+check.dependsOn verifyPlugin
