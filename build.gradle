@@ -74,6 +74,7 @@ runIde {
   if (project.hasProperty("ideDirectory")) {
     ideDirectory project.property("ideDirectory")
   }
+  systemProperty('idea.auto.reload.plugins', false)
 }
 
 buildSearchableOptions {
@@ -110,7 +111,7 @@ task generateM68KLexer(type: GenerateLexer) {
 runPluginVerifier {
   pluginFileName = "$rootProject.name-$version"
   ides = ["IC-2019.3", "IC-2020.1"]
-    verifierVersion = "1.235"
+  verifierVersion = "1.235"
 }
 
 check.dependsOn verifyPlugin
