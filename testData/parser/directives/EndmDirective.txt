@@ -1,3 +1,4 @@
 FILE
-  M68kLabelImpl(LABEL)
-    PsiElement(id)('endm')
+  PsiWhiteSpace(' ')
+  M68kEndmDirectiveImpl(ENDM_DIRECTIVE)
+    PsiElement(endm)('endm')

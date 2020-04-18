@@ -150,7 +150,7 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
   }
 
   public void testEndmDirective() throws Exception {
-    doCodeTest("endm");
+    doCodeTest(" endm");
   }
 
   public void testOrgDirective() throws Exception {
