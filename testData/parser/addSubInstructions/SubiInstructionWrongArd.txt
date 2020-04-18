@@ -2,9 +2,12 @@ FILE
   PsiWhiteSpace(' ')
   M68kSubiInstructionImpl(SUBI_INSTRUCTION)
     PsiElement(subi)('subi')
-  PsiWhiteSpace(' ')
-  PsiElement(#)('#')
-  PsiElement(dec_number)('1')
-  PsiElement(,)(',')
-  PsiErrorElement:'(', '-', <data register> or <expression> expected, got 'a0'
-    PsiElement(address_register)('a0')
+    PsiWhiteSpace(' ')
+    M68kAdmImmImpl(ADM_IMM)
+      PsiElement(#)('#')
+      M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+        PsiElement(dec_number)('1')
+    PsiElement(,)(',')
+    PsiErrorElement:'(', '-', <data register> or <expression> expected, got 'a0'
+      <empty list>
+  PsiElement(address_register)('a0')

@@ -53,10 +53,12 @@
 }
 
 root ::= root_item*
-private root_item ::= (instructions | labels) {
+private root_item ::= (instructions | labels)
+{
   recoverWhile = root_item_recover
 }
-private root_item_recover ::= !(instructions | labels) {
+private root_item_recover ::= !(instructions | labels)
+{
   consumeTokenMethod = "consumeTokenFast"
 }
 //private     crlf::='\n' // todo stop parsing after line?
@@ -65,16 +67,19 @@ private labels ::= label | localLabel
 
 // todo must start on newline? usually not, but not required
 // todo full name is: DevPac. prefixed with last non-local label
-fake label_base ::= ID {
+fake label_base ::= ID
+{
   implements = "com.intellij.psi.PsiNamedElement"
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelBaseMixIn"
 }
 
-label ::= UNDERSCORE? ID COLON? {
+label ::= UNDERSCORE? ID COLON?
+{
   extends = label_base
 }
 
-localLabel ::= DOT ID COLON? {
+localLabel ::= DOT ID COLON?
+{
   pin = 1
   name = "local label"
   extends = label_base
@@ -106,7 +111,8 @@ private instructions ::= directives |
 
 
 // data size  _______=====================================================
-fake data_sized ::= {
+fake data_sized ::=
+{
   methods = [ getDataSize ]
 }
 
@@ -114,10 +120,12 @@ private data_size_byte ::= DOT_B
 private data_size_short ::= DOT_S
 private data_size_word ::= DOT_W
 private data_size_long ::= DOT_L
-private data_size_word_long ::= data_size_word | data_size_long {
+private data_size_word_long ::= data_size_word | data_size_long
+{
   name = ".w|l"
 }
-private data_size_all ::= data_size_byte | data_size_word_long {
+private data_size_all ::= data_size_byte | data_size_word_long
+{
   name = ".b|w|l"
 }
 
@@ -130,15 +138,18 @@ register_list ::= register_range (DIV register_range)*
 
 // addressing modes  =====================================================
 // d0
-adm_drd ::= DATA_REGISTER {
+adm_drd ::= DATA_REGISTER
+{
   name = "data register"
 }
 // a0 | sp
-adm_ard ::= ADDRESS_REGISTER | SP {
+adm_ard ::= ADDRESS_REGISTER | SP
+{
   name = "address register"
 }
 // Rn
-adm_rrd ::= adm_drd | adm_ard {
+adm_rrd ::= adm_drd | adm_ard
+{
   name = "data|address register"
 }
 // (a0)
@@ -158,7 +169,8 @@ adm_pcd ::= expression L_PAREN PC R_PAREN
 // index(pc,d0)
 adm_pci ::= expression L_PAREN PC COMMA adm_rrd R_PAREN
 // #4000 | #4000.w | #4000.l
-adm_imm ::= HASH expression data_size_word_long? {
+adm_imm ::= HASH expression data_size_word_long?
+{
   pin = 1
   name = "immediate data"
 }
@@ -173,6 +185,24 @@ private adm_group_all_except_ard ::=        adm_drd |           adm_imm | adm_ap
 private adm_group_all_except_pc_imm ::=     adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
 private adm_group_all_except_ard_pc_imm ::= adm_drd |                     adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
 
+
+// Common tails
+private tail_data_size_all___all__all_except_pc_imm ::=     data_size_all?       adm_group_all COMMA adm_group_all_except_pc_imm
+{
+  pin = 2
+}
+private tail_data_size_all___imm__all_except_ard_pc_imm ::= data_size_all?       adm_imm       COMMA adm_group_all_except_ard_pc_imm
+{
+  pin = 2
+}
+private tail_data_size_word_long___all__ard ::=             data_size_word_long? adm_group_all COMMA adm_ard
+{
+  pin = 2
+}
+
+private tail_data_size_all___all_except_ard_pc_imm ::=      data_size_all?       adm_group_all_except_ard_pc_imm
+
+
 // Move ==================================================================
 private move_instructions ::= move_instruction |
                               movea_instruction |
@@ -180,41 +210,41 @@ private move_instructions ::= move_instruction |
                               movem_instruction |
                               movep_instruction
 
-fake move_instruction_base ::= {
+fake move_instruction_base ::=
+{
   extends = data_sized
 }
 
-private move_tail_plain ::= data_size_all? adm_group_all COMMA adm_group_all_except_pc_imm  {
-  pin = 2
-}
-private move_tail_usp_ard ::= data_size_long? adm_usp COMMA adm_ard {
+private move_tail_usp_ard ::= data_size_long? adm_usp COMMA adm_ard
+{
   pin = 2
 }
 private move_tail_ard_usp ::= data_size_long? adm_ard COMMA adm_usp
 private move_tail_to_ccr_sr ::= data_size_word? adm_group_all_except_ard COMMA (adm_ccr | adm_sr)
-private move_tail_sr ::= data_size_word? adm_sr COMMA adm_group_all_except_ard_pc_imm {
+private move_tail_sr ::= data_size_word? adm_sr COMMA adm_group_all_except_ard_pc_imm
+{
   pin = 2
 }
-
 move_instruction ::= MOVE
                      (
-                       (move_tail_ard_usp) |
-                       (move_tail_usp_ard) |
-                       (move_tail_sr) |
-                       (move_tail_to_ccr_sr) |
-                       (move_tail_plain) 
+                       move_tail_usp_ard |
+                       move_tail_sr |
+                       move_tail_to_ccr_sr |
+                       move_tail_ard_usp |
+                       tail_data_size_all___all__all_except_pc_imm
                      )
 {
   extends = move_instruction_base
 }
 
-movea_instruction ::= MOVEA data_size_word_long?
-                      adm_group_all COMMA adm_ard {
+movea_instruction ::= MOVEA tail_data_size_word_long___all__ard
+{
   extends = move_instruction_base
 }
                                          
 moveq_instruction ::= MOVEQ data_size_long?
-                      adm_imm COMMA adm_drd {
+                      adm_imm COMMA adm_drd
+{
   extends = move_instruction_base
   methods = [
     source = "adm_imm"
@@ -226,15 +256,25 @@ movem_instruction ::= MOVEM data_size_word_long?
                       (
                         ( register_list COMMA (adm_ari | adm_apd | adm_adi | adm_aix | adm_abs) ) |
                         ( (adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA register_list )
-                      ) {
+                      )
+{
   extends = move_instruction_base
 }
 
+private movep_tail_drd_adi ::= adm_drd COMMA adm_adi
+{
+  pin = 1
+}
+private movep_tail_adi_drd ::= adm_adi COMMA adm_drd
+{
+  pin = 1
+}
 movep_instruction ::= MOVEP data_size_word_long?
                       (
-                        (adm_drd COMMA adm_adi) |
-                        (adm_adi COMMA adm_drd)
-                      ) {
+                        movep_tail_drd_adi |
+                        movep_tail_adi_drd
+                      )
+{
   extends = move_instruction_base
 }
 
@@ -247,10 +287,12 @@ private jump_instructions ::= jsr_instruction|
                               rte_instruction |
                               rtr_instruction
 
-private bsr_data_size ::= (data_size_short | data_size_word) {
+private bsr_data_size ::= (data_size_short | data_size_word)
+{
   name = ".s|w"
 }
-bsr_instruction ::= BSR bsr_data_size? expression {
+bsr_instruction ::= BSR bsr_data_size? expression
+{
   extends = data_sized
 }
 
@@ -266,27 +308,33 @@ rtr_instruction ::= RTR
 private bcd_instructions ::= abcd_instruction |
                              nbcd_instruction |
                              sbcd_instruction
-fake bcd_instruction_base ::= {
+fake bcd_instruction_base ::=
+{
   extends = data_sized
 }
 
-private bcd_tail_apd ::= adm_apd COMMA adm_apd {
+private bcd_tail_apd ::= adm_apd COMMA adm_apd
+{
   pin = 1
 }
-private bcd_tail_drd ::= adm_drd COMMA adm_drd {
+private bcd_tail_drd ::= adm_drd COMMA adm_drd
+{
   pin = 1
 }
 private bcd_tail ::= data_size_byte?
                      bcd_tail_drd | bcd_tail_apd
 
-abcd_instruction ::= ABCD bcd_tail {
+abcd_instruction ::= ABCD bcd_tail
+{
   extends = bcd_instruction_base
 }
-sbcd_instruction ::= SBCD bcd_tail {
+sbcd_instruction ::= SBCD bcd_tail
+{
   extends = bcd_instruction_base
 }
 
-nbcd_instruction ::= NBCD data_size_byte? adm_group_all_except_pc_imm {
+nbcd_instruction ::= NBCD data_size_byte? adm_group_all_except_pc_imm
+{
   extends = data_sized
 }
 
@@ -302,29 +350,34 @@ private add_sub_instructions ::= add_instruction |
                                  subq_instruction |
                                  subx_instruction
 
-private add_sub_tail ::= data_size_all?
-  adm_group_all COMMA adm_group_all_except_pc_imm
-private add_sub_a_tail ::= data_size_word_long?
-  adm_group_all COMMA adm_ard
-private add_sub_i_tail ::= data_size_all?
-  adm_imm COMMA adm_group_all_except_ard_pc_imm
-private add_sub_q_tail ::= data_size_all?
-  adm_imm COMMA adm_group_all_except_pc_imm
-private add_sub_x_tail ::= data_size_all?
-  (
-    (adm_drd COMMA adm_drd) |
-    (adm_apd COMMA adm_apd)
-  )
+private add_sub_q_tail ::= data_size_all? adm_imm COMMA adm_group_all_except_pc_imm
+{
+  pin = 2
+}
 
-add_instruction ::= ADD add_sub_tail
-adda_instruction ::= ADDA add_sub_a_tail
-addi_instruction ::= ADDI add_sub_i_tail
+private add_sub_x_tail_drd_drd ::= adm_drd COMMA adm_drd
+{
+  pin = 1
+}
+private add_sub_x_tail_apd_apd ::= adm_apd COMMA adm_apd
+{
+  pin = 1
+}
+private add_sub_x_tail ::= data_size_all?
+                           (
+                             add_sub_x_tail_drd_drd |
+                             add_sub_x_tail_apd_apd
+                           )
+
+add_instruction ::= ADD tail_data_size_all___all__all_except_pc_imm
+adda_instruction ::= ADDA tail_data_size_word_long___all__ard
+addi_instruction ::= ADDI tail_data_size_all___imm__all_except_ard_pc_imm
 addq_instruction ::= ADDQ add_sub_q_tail
 addx_instruction ::= ADDX add_sub_x_tail
 
-sub_instruction ::= SUB add_sub_tail
-suba_instruction ::= SUBA add_sub_a_tail
-subi_instruction ::= SUBI add_sub_i_tail
+sub_instruction ::= SUB tail_data_size_all___all__all_except_pc_imm
+suba_instruction ::= SUBA tail_data_size_word_long___all__ard
+subi_instruction ::= SUBI tail_data_size_all___imm__all_except_ard_pc_imm
 subq_instruction ::= SUBQ add_sub_q_tail
 subx_instruction ::= SUBX add_sub_x_tail
 
@@ -337,6 +390,9 @@ private mul_div_instructions ::= muls_instruction |
 
 private mul_div_tail ::= data_size_word?
                          adm_group_all_except_ard COMMA adm_drd
+{
+  pin = 2
+}
 
 muls_instruction ::= MULS mul_div_tail
 mulu_instruction ::= MULU mul_div_tail
@@ -352,39 +408,49 @@ private bool_instructions ::= and_instruction |
                               eor_instruction |
                               eori_instruction |
                               not_instruction
-fake bool_instruction_base ::= {
+fake bool_instruction_base ::=
+{
   extends = data_sized
 }
 
 private bool_tail ::= data_size_all?
                       adm_group_all_except_ard COMMA adm_group_all_except_ard_pc_imm
-private bool_i_tail ::= (
-                          (data_size_all? adm_imm COMMA adm_group_all_except_ard_pc_imm) |
-                          (data_size_byte? adm_imm COMMA adm_ccr) |
-                          (data_size_word? adm_imm COMMA adm_sr)
-                        )
-and_instruction ::= AND bool_tail {
+
+private bool_i_tail_imm_ccr ::= data_size_byte? adm_imm COMMA adm_ccr
+private bool_i_tail_imm_sr ::= data_size_word? adm_imm COMMA adm_sr 
+private bool_i_tail ::= bool_i_tail_imm_ccr |
+                        bool_i_tail_imm_sr |
+                        tail_data_size_all___imm__all_except_ard_pc_imm
+
+and_instruction ::= AND bool_tail
+{
   extends = bool_instruction_base
 }
-andi_instruction ::= ANDI bool_i_tail {
+andi_instruction ::= ANDI bool_i_tail
+{
   extends = bool_instruction_base
 }
 
-or_instruction ::= OR bool_tail {
+or_instruction ::= OR bool_tail
+{
   extends = bool_instruction_base
 }
-ori_instruction ::= ORI bool_i_tail {
-  extends = bool_instruction_base
-}
-
-eor_instruction ::= EOR bool_tail {
-  extends = bool_instruction_base
-}
-eori_instruction ::= EORI bool_i_tail {
+ori_instruction ::= ORI bool_i_tail
+{
   extends = bool_instruction_base
 }
 
-not_instruction ::= NOT data_size_all? adm_group_all_except_ard_pc_imm {
+eor_instruction ::= EOR bool_tail
+{
+  extends = bool_instruction_base
+}
+eori_instruction ::= EORI bool_i_tail
+{
+  extends = bool_instruction_base
+}
+
+not_instruction ::= NOT tail_data_size_all___all_except_ard_pc_imm
+{
   extends = bool_instruction_base
 }
 
@@ -425,30 +491,37 @@ link_instruction ::= LINK adm_ard COMMA adm_imm
 unlk_instruction ::= UNLK adm_ard
 
 lea_instruction ::= LEA data_size_long?
-                    (adm_ard | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA adm_ard {
+                    (adm_ard | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA adm_ard
+{
   extends = data_sized
 }
 pea_instruction ::= PEA data_size_long?
-                    (adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) {
+                    (adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs)
+{
   extends = data_sized
 }
 
-clr_instruction ::= CLR data_size_all? adm_group_all_except_ard_pc_imm {
+clr_instruction ::= CLR tail_data_size_all___all_except_ard_pc_imm
+{
   extends = data_sized
 }
 
-tst_instruction ::= TST data_size_all? adm_group_all_except_ard_pc_imm {
+tst_instruction ::= TST tail_data_size_all___all_except_ard_pc_imm
+{
   extends = data_sized
 }
-tas_instruction ::= TAS data_size_byte? adm_group_all_except_ard_pc_imm {
+tas_instruction ::= TAS data_size_byte? adm_group_all_except_ard_pc_imm
+{
   extends = data_sized
 }
 
-ext_instruction ::= EXT data_size_word_long? adm_drd {
+ext_instruction ::= EXT data_size_word_long? adm_drd
+{
   extends = data_sized
 }
 
-exg_instruction ::= EXG data_size_long? adm_rrd COMMA adm_rrd {
+exg_instruction ::= EXG data_size_long? adm_rrd COMMA adm_rrd
+{
   extends = data_sized
   methods = [
     adm_rrd = ""
@@ -457,18 +530,22 @@ exg_instruction ::= EXG data_size_long? adm_rrd COMMA adm_rrd {
   ]
 }
 
-neg_instruction ::= NEG data_size_all? adm_group_all_except_ard_pc_imm {
+neg_instruction ::= NEG tail_data_size_all___all_except_ard_pc_imm
+{
   extends = data_sized
 }
-negx_instruction ::= NEGX data_size_all? adm_group_all_except_ard_pc_imm {
+negx_instruction ::= NEGX tail_data_size_all___all_except_ard_pc_imm
+{
   extends = data_sized
 }
 
-swap_instruction ::= SWAP data_size_word? adm_drd {
+swap_instruction ::= SWAP data_size_word? adm_drd
+{
   extends = data_sized
 }
 
-chk_instruction ::= CHK data_size_word? adm_group_all_except_ard COMMA adm_drd {
+chk_instruction ::= CHK data_size_word? adm_group_all_except_ard COMMA adm_drd
+{
   extends = data_sized
 }
 
@@ -478,24 +555,26 @@ private cmp_instructions ::= cmp_instruction |
                              cmpa_instruction |
                              cmpi_instruction |
                              cmpm_instruction
-fake cmp_instruction_base ::= {
+fake cmp_instruction_base ::=
+{
   extends = data_sized
 }
 
-cmp_instruction ::= CMP data_size_all?
-                    adm_group_all COMMA adm_group_all_except_pc_imm {
+cmp_instruction ::= CMP tail_data_size_all___all__all_except_pc_imm
+{
   extends = cmp_instruction_base
 }
-cmpa_instruction ::= CMPA data_size_word_long?
-                     adm_group_all COMMA adm_ard {
+cmpa_instruction ::= CMPA tail_data_size_word_long___all__ard
+{
   extends = cmp_instruction_base
 }
-cmpi_instruction ::= CMPI data_size_all?
-                     adm_imm COMMA adm_group_all_except_ard_pc_imm {
+cmpi_instruction ::= CMPI tail_data_size_all___imm__all_except_ard_pc_imm
+{
   extends = cmp_instruction_base
 }
 cmpm_instruction ::= CMPM data_size_all?
-                     adm_api COMMA adm_api {
+                     adm_api COMMA adm_api
+{
   extends = cmp_instruction_base
   methods = [
     adm_api = ""
@@ -506,7 +585,8 @@ cmpm_instruction ::= CMPM data_size_all?
 
 
 // Branch ==================================================================
-private CC_data_size ::= (data_size_all | data_size_short) {
+private CC_data_size ::= (data_size_all | data_size_short)
+{
   name = ".s|b|w|l"
 }
 
@@ -570,6 +650,9 @@ private dbCC_instructions ::= dbra_instruction |
                               dbt_instruction
 
 private dbCC_tail ::= CC_data_size? adm_drd COMMA expression
+{
+  pin = 2
+}
 
 dbra_instruction ::= DBRA dbCC_tail
 dbcs_instruction ::= DBCS dbCC_tail
@@ -633,28 +716,34 @@ private bit_instructions ::= bchg_instruction |
                              bset_instruction |
                              btst_instruction
 
-fake bit_instruction_base ::= {
+fake bit_instruction_base ::=
+{
   extends = data_sized
 }
 
-private bit_data_size ::= data_size_byte | data_size_long {
+private bit_data_size ::= data_size_byte | data_size_long
+{
   name = ".b|l"
 }
 private bit_tail ::= bit_data_size?
                      (adm_drd | adm_imm) COMMA adm_group_all_except_ard_pc_imm
 
-bchg_instruction ::= BCHG bit_tail {
+bchg_instruction ::= BCHG bit_tail
+{
   extends = bit_instruction_base
 }
-bclr_instruction ::= BCLR bit_tail {
+bclr_instruction ::= BCLR bit_tail
+{
   extends = bit_instruction_base
 }
-bset_instruction ::= BSET bit_tail {
+bset_instruction ::= BSET bit_tail
+{
   extends = bit_instruction_base
 }
 
 btst_instruction ::= BTST bit_data_size?
-                     (adm_drd | adm_imm) COMMA adm_group_all_except_ard {
+                     (adm_drd | adm_imm) COMMA adm_group_all_except_ard
+{
   extends = bit_instruction_base
 }
 
@@ -669,7 +758,8 @@ private shift_instructions ::= asl_instruction |
                                roxl_instruction |
                                roxr_instruction
 
-fake shift_instruction_base ::= {
+fake shift_instruction_base ::=
+{
   extends = data_sized
 }
 
@@ -683,31 +773,39 @@ private shift_tail ::=
     )
   )
 
-asl_instruction ::= ASL shift_tail {
+asl_instruction ::= ASL shift_tail
+{
   extends = shift_instruction_base
 }
-asr_instruction ::= ASR shift_tail {
-  extends = shift_instruction_base
-}
-
-lsl_instruction ::= LSL shift_tail {
-  extends = shift_instruction_base
-}
-lsr_instruction ::= LSR shift_tail {
+asr_instruction ::= ASR shift_tail
+{
   extends = shift_instruction_base
 }
 
-rol_instruction ::= ROL shift_tail {
+lsl_instruction ::= LSL shift_tail
+{
   extends = shift_instruction_base
 }
-ror_instruction ::= ROR shift_tail {
+lsr_instruction ::= LSR shift_tail
+{
   extends = shift_instruction_base
 }
 
-roxl_instruction ::= ROXL shift_tail {
+rol_instruction ::= ROL shift_tail
+{
   extends = shift_instruction_base
 }
-roxr_instruction ::= ROXR shift_tail {
+ror_instruction ::= ROR shift_tail
+{
+  extends = shift_instruction_base
+}
+
+roxl_instruction ::= ROXL shift_tail
+{
+  extends = shift_instruction_base
+}
+roxr_instruction ::= ROXR shift_tail
+{
   extends = shift_instruction_base
 }
 
@@ -734,21 +832,25 @@ private directives ::= equ_directive |
                        endm_directive |
                        end_directive
 
-fake equ_directive_base ::= label expression? {
+fake equ_directive_base ::= label expression?
+{
 //  implements = "com.intellij.psi.PsiNameIdentifierOwner"
 //  methods = [  getNameIdentifier]
 }
-equ_directive ::= label EQU expression {
+equ_directive ::= label EQU expression
+{
   pin = 2
   extends = equ_directive_base
 }
 
-equals_directive ::= label EQ expression {
+equals_directive ::= label EQ expression
+{
   pin = 2
   extends = equ_directive_base
 }
 
-equr_directive ::= label EQUR adm_rrd {
+equr_directive ::= label EQUR adm_rrd
+{
   pin = 2
   extends = equ_directive_base   // todo doesn't make sense (expression != register)
 }
@@ -758,52 +860,31 @@ odd_directive ::= ODD
 
 end_directive ::= END
 
-private include_path ::= STRING {
+private include_path ::= STRING
+{
   name = "include path"
 }
-incbin_directive ::= INCBIN include_path {
+incbin_directive ::= INCBIN include_path
+{
   pin =1
 }
-incdir_directive ::= INCDIR include_path {
+incdir_directive ::= INCDIR include_path
+{
   pin = 1
 }
-include_directive ::= INCLUDE include_path {
+include_directive ::= INCLUDE include_path
+{
   pin = 1
 }
 
-dc_directive ::= DC data_size_all? expression (COMMA expression)* {
+dc_directive ::= DC data_size_all? expression (COMMA expression)*
+{
   pin = 1
   extends = data_sized
 }
 
-dcb_directive ::= DCB data_size_all? expression (COMMA expression)? {
-  pin = 1
-  extends = data_sized
-  methods = [
-    expression = ""
-    number = "expression[0]"
-    value = "expression[1]"
-  ]
-}
-
-ds_directive ::= DS data_size_all? expression {
-  pin = 1
-  extends = data_sized
-}
-
-rsset_directive ::= RSSET expression {
-  pin = 1
-}
-rsreset_directive ::= RSRESET {
-  pin = 1
-}
-
-rs_directive ::= RS data_size_all? expression {
-  pin = 1
-  extends = data_sized
-}
-
-blk_directive ::= BLK data_size_all? expression COMMA expression {
+dcb_directive ::= DCB data_size_all? expression (COMMA expression)?
+{
   pin = 1
   extends = data_sized
   methods = [
@@ -813,15 +894,50 @@ blk_directive ::= BLK data_size_all? expression COMMA expression {
   ]
 }
 
-private opt_element ::= ID (PLUS | MINUS) {
+ds_directive ::= DS data_size_all? expression
+{
+  pin = 1
+  extends = data_sized
+}
+
+rsset_directive ::= RSSET expression
+{
+  pin = 1
+}
+rsreset_directive ::= RSRESET
+{
+  pin = 1
+}
+
+rs_directive ::= RS data_size_all? expression
+{
+  pin = 1
+  extends = data_sized
+}
+
+blk_directive ::= BLK data_size_all? expression COMMA expression
+{
+  pin = 1
+  extends = data_sized
+  methods = [
+    expression = ""
+    number = "expression[0]"
+    value = "expression[1]"
+  ]
+}
+
+private opt_element ::= ID (PLUS | MINUS)
+{
   pin = 1
   name = "option(+|-)"
 }
-opt_directive ::= OPT opt_element (COMMA opt_element)* {
+opt_directive ::= OPT opt_element (COMMA opt_element)*
+{
   pin = 1
 }
 
-org_directive ::= ORG expression {
+org_directive ::= ORG expression
+{
   pin = 1
 }
 
@@ -843,7 +959,8 @@ expression ::= add_group |
                bool_group |
                primary_group
 
-fake binary_expression ::= expression+ {
+fake binary_expression ::= expression+
+{
   methods = [
     expression = ""
     left = "/expression[0]"
@@ -880,15 +997,18 @@ private primary_group ::= number_expression | string_expression | paren_expressi
 number_expression ::= DEC_NUMBER | HEX_NUMBER | OCT_NUMBER | BIN_NUMBER
 string_expression ::= STRING
 
-private plain_paren_expression ::= L_PAREN expression R_PAREN {
+private plain_paren_expression ::= L_PAREN expression R_PAREN
+{
   pin = 1
 }
-private bracket_paren_expression ::= L_BRACKET expression R_BRACKET {
+private bracket_paren_expression ::= L_BRACKET expression R_BRACKET
+{
   pin = 1
 }
 paren_expression ::= plain_paren_expression | bracket_paren_expression
 
-label_ref_expression ::= ID {
+label_ref_expression ::= ID
+{
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelRefExpressionMixIn"
   name = "label"
 }

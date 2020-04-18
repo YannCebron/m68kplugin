@@ -2,10 +2,13 @@ FILE
   PsiWhiteSpace(' ')
   M68kAndiInstructionImpl(ANDI_INSTRUCTION)
     PsiElement(andi)('andi')
-  PsiElement(.l)('.l')
-  PsiWhiteSpace(' ')
-  PsiElement(#)('#')
-  PsiElement(dec_number)('0')
-  PsiElement(,)(',')
-  PsiErrorElement:'(', '-', <data register> or <expression> expected, got 'ccr'
-    PsiElement(ccr)('ccr')
+    PsiElement(.l)('.l')
+    PsiWhiteSpace(' ')
+    M68kAdmImmImpl(ADM_IMM)
+      PsiElement(#)('#')
+      M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+        PsiElement(dec_number)('0')
+    PsiElement(,)(',')
+    PsiErrorElement:'(', '-', <data register> or <expression> expected, got 'ccr'
+      <empty list>
+  PsiElement(ccr)('ccr')

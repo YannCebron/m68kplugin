@@ -2,8 +2,9 @@ FILE
   PsiWhiteSpace(' ')
   M68kMuluInstructionImpl(MULU_INSTRUCTION)
     PsiElement(mulu)('mulu')
-  PsiWhiteSpace(' ')
-  PsiElement(data_register)('d0')
-  PsiElement(,)(',')
-  PsiErrorElement:<data register> expected
-    <empty list>
+    PsiWhiteSpace(' ')
+    M68kAdmDrdImpl(ADM_DRD)
+      PsiElement(data_register)('d0')
+    PsiElement(,)(',')
+    PsiErrorElement:<data register> expected
+      <empty list>

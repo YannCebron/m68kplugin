@@ -2,8 +2,9 @@ FILE
   PsiWhiteSpace(' ')
   M68kSubInstructionImpl(SUB_INSTRUCTION)
     PsiElement(sub)('sub')
-  PsiWhiteSpace(' ')
-  PsiElement(data_register)('d0')
-  PsiElement(,)(',')
-  PsiErrorElement:'(', '-', <address register>, <data register> or <expression> expected
-    <empty list>
+    PsiWhiteSpace(' ')
+    M68kAdmDrdImpl(ADM_DRD)
+      PsiElement(data_register)('d0')
+    PsiElement(,)(',')
+    PsiErrorElement:'(', '-', <address register>, <data register> or <expression> expected
+      <empty list>

@@ -2,6 +2,6 @@ FILE
   PsiWhiteSpace(' ')
   M68kMovepInstructionImpl(MOVEP_INSTRUCTION)
     PsiElement(movep)('movep')
-    PsiErrorElement:<.w|l>, <data register> or <expression> expected
+    PsiErrorElement:<.w|l>, <expression> or data_register expected
       <empty list>
   PsiWhiteSpace(' ')
