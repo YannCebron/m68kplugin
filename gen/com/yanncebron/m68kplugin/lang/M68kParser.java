@@ -286,7 +286,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "adm_abs")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ADM_ABS, "<adm abs>");
-    r = expression(b, l + 1, -1);
+    r = M68kExpressionParser.expression(b, l + 1, -1);
     r = r && adm_abs_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -305,7 +305,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "adm_adi")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ADM_ADI, "<adm adi>");
-    r = expression(b, l + 1, -1);
+    r = M68kExpressionParser.expression(b, l + 1, -1);
     r = r && consumeToken(b, L_PAREN);
     r = r && adm_ard(b, l + 1);
     r = r && consumeToken(b, R_PAREN);
@@ -319,7 +319,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "adm_aix")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ADM_AIX, "<adm aix>");
-    r = expression(b, l + 1, -1);
+    r = M68kExpressionParser.expression(b, l + 1, -1);
     r = r && consumeToken(b, L_PAREN);
     r = r && adm_ard(b, l + 1);
     r = r && consumeToken(b, COMMA);
@@ -485,7 +485,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, ADM_IMM, "<immediate data>");
     r = consumeToken(b, HASH);
     p = r; // pin = 1
-    r = r && report_error_(b, expression(b, l + 1, -1));
+    r = r && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1));
     r = p && adm_imm_2(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
@@ -504,7 +504,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "adm_pcd")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ADM_PCD, "<adm pcd>");
-    r = expression(b, l + 1, -1);
+    r = M68kExpressionParser.expression(b, l + 1, -1);
     r = r && consumeTokens(b, 0, L_PAREN, PC, R_PAREN);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -516,7 +516,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "adm_pci")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ADM_PCI, "<adm pci>");
-    r = expression(b, l + 1, -1);
+    r = M68kExpressionParser.expression(b, l + 1, -1);
     r = r && consumeTokens(b, 0, L_PAREN, PC, COMMA);
     r = r && adm_rrd(b, l + 1);
     r = r && consumeToken(b, R_PAREN);
@@ -664,7 +664,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b);
     r = bCC_tail_0(b, l + 1);
-    r = r && expression(b, l + 1, -1);
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -960,9 +960,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, BLK);
     p = r; // pin = 1
     r = r && report_error_(b, blk_directive_1(b, l + 1));
-    r = p && report_error_(b, expression(b, l + 1, -1)) && r;
+    r = p && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1)) && r;
     r = p && report_error_(b, consumeToken(b, COMMA)) && r;
-    r = p && expression(b, l + 1, -1) && r;
+    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -1173,21 +1173,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // L_BRACKET expression R_BRACKET
-  static boolean bracket_paren_expression(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bracket_paren_expression")) return false;
-    if (!nextTokenIsFast(b, L_BRACKET)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
-    r = consumeTokenFast(b, L_BRACKET);
-    p = r; // pin = 1
-    r = r && report_error_(b, expression(b, l + 1, -1));
-    r = p && consumeToken(b, R_BRACKET) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
-  }
-
-  /* ********************************************************** */
   // BSET bit_tail
   public static boolean bset_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bset_instruction")) return false;
@@ -1224,7 +1209,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, BSR);
     p = r; // pin = 1
     r = r && report_error_(b, bsr_instruction_1(b, l + 1));
-    r = p && expression(b, l + 1, -1) && r;
+    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -1518,7 +1503,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = r && adm_drd(b, l + 1);
     p = r; // pin = 2
     r = r && report_error_(b, consumeToken(b, COMMA));
-    r = p && expression(b, l + 1, -1) && r;
+    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -1778,7 +1763,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, DC);
     p = r; // pin = 1
     r = r && report_error_(b, dc_directive_1(b, l + 1));
-    r = p && report_error_(b, expression(b, l + 1, -1)) && r;
+    r = p && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1)) && r;
     r = p && dc_directive_3(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
@@ -1808,7 +1793,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, COMMA);
-    r = r && expression(b, l + 1, -1);
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1823,7 +1808,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, DCB);
     p = r; // pin = 1
     r = r && report_error_(b, dcb_directive_1(b, l + 1));
-    r = p && report_error_(b, expression(b, l + 1, -1)) && r;
+    r = p && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1)) && r;
     r = p && dcb_directive_3(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
@@ -1849,7 +1834,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, COMMA);
-    r = r && expression(b, l + 1, -1);
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1939,7 +1924,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, DS);
     p = r; // pin = 1
     r = r && report_error_(b, ds_directive_1(b, l + 1));
-    r = p && expression(b, l + 1, -1) && r;
+    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -2013,7 +1998,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = label(b, l + 1);
     r = r && consumeToken(b, EQU);
     p = r; // pin = 2
-    r = r && expression(b, l + 1, -1);
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -2028,7 +2013,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = label(b, l + 1);
     r = r && consumeToken(b, EQ);
     p = r; // pin = 2
-    r = r && expression(b, l + 1, -1);
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -3049,7 +3034,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, ORG_DIRECTIVE, null);
     r = consumeToken(b, ORG);
     p = r; // pin = 1
-    r = r && expression(b, l + 1, -1);
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -3103,21 +3088,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = adm_aix(b, l + 1);
     if (!r) r = adm_abs(b, l + 1);
     return r;
-  }
-
-  /* ********************************************************** */
-  // L_PAREN expression R_PAREN
-  static boolean plain_paren_expression(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "plain_paren_expression")) return false;
-    if (!nextTokenIsFast(b, L_PAREN)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
-    r = consumeTokenFast(b, L_PAREN);
-    p = r; // pin = 1
-    r = r && report_error_(b, expression(b, l + 1, -1));
-    r = p && consumeToken(b, R_PAREN) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
   }
 
   /* ********************************************************** */
@@ -3310,7 +3280,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, RS);
     p = r; // pin = 1
     r = r && report_error_(b, rs_directive_1(b, l + 1));
-    r = p && expression(b, l + 1, -1) && r;
+    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -3343,7 +3313,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, RSSET_DIRECTIVE, null);
     r = consumeToken(b, RSSET);
     p = r; // pin = 1
-    r = r && expression(b, l + 1, -1);
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -4047,170 +4017,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = r && adm_ard(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
-  }
-
-  /* ********************************************************** */
-  // Expression root: expression
-  // Operator priority table:
-  // 0: BINARY(plus_expression) BINARY(minus_expression)
-  // 1: BINARY(mul_expression) BINARY(div_expression) BINARY(mod_expression)
-  // 2: PREFIX(unary_plus_expression) PREFIX(unary_minus_expression) PREFIX(unary_complement_expression)
-  // 3: BINARY(exp_expression)
-  // 4: BINARY(shift_left_expression) BINARY(shift_right_expression)
-  // 5: BINARY(or_expression) BINARY(and_expression)
-  // 6: ATOM(number_expression) ATOM(string_expression) ATOM(paren_expression) ATOM(label_ref_expression)
-  public static boolean expression(PsiBuilder b, int l, int g) {
-    if (!recursion_guard_(b, l, "expression")) return false;
-    addVariant(b, "<expression>");
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, "<expression>");
-    r = unary_plus_expression(b, l + 1);
-    if (!r) r = unary_minus_expression(b, l + 1);
-    if (!r) r = unary_complement_expression(b, l + 1);
-    if (!r) r = number_expression(b, l + 1);
-    if (!r) r = string_expression(b, l + 1);
-    if (!r) r = paren_expression(b, l + 1);
-    if (!r) r = label_ref_expression(b, l + 1);
-    p = r;
-    r = r && expression_0(b, l + 1, g);
-    exit_section_(b, l, m, null, r, p, null);
-    return r || p;
-  }
-
-  public static boolean expression_0(PsiBuilder b, int l, int g) {
-    if (!recursion_guard_(b, l, "expression_0")) return false;
-    boolean r = true;
-    while (true) {
-      Marker m = enter_section_(b, l, _LEFT_, null);
-      if (g < 0 && consumeTokenSmart(b, PLUS)) {
-        r = expression(b, l, 0);
-        exit_section_(b, l, m, PLUS_EXPRESSION, r, true, null);
-      }
-      else if (g < 0 && consumeTokenSmart(b, MINUS)) {
-        r = expression(b, l, 0);
-        exit_section_(b, l, m, MINUS_EXPRESSION, r, true, null);
-      }
-      else if (g < 1 && consumeTokenSmart(b, MUL)) {
-        r = expression(b, l, 1);
-        exit_section_(b, l, m, MUL_EXPRESSION, r, true, null);
-      }
-      else if (g < 1 && consumeTokenSmart(b, DIV)) {
-        r = expression(b, l, 1);
-        exit_section_(b, l, m, DIV_EXPRESSION, r, true, null);
-      }
-      else if (g < 1 && consumeTokenSmart(b, PERCENT)) {
-        r = expression(b, l, 1);
-        exit_section_(b, l, m, MOD_EXPRESSION, r, true, null);
-      }
-      else if (g < 3 && consumeTokenSmart(b, POW)) {
-        r = expression(b, l, 3);
-        exit_section_(b, l, m, EXP_EXPRESSION, r, true, null);
-      }
-      else if (g < 4 && consumeTokenSmart(b, SHIFT_L)) {
-        r = expression(b, l, 4);
-        exit_section_(b, l, m, SHIFT_LEFT_EXPRESSION, r, true, null);
-      }
-      else if (g < 4 && consumeTokenSmart(b, SHIFT_R)) {
-        r = expression(b, l, 4);
-        exit_section_(b, l, m, SHIFT_RIGHT_EXPRESSION, r, true, null);
-      }
-      else if (g < 5 && consumeTokenSmart(b, PIPE)) {
-        r = expression(b, l, 5);
-        exit_section_(b, l, m, OR_EXPRESSION, r, true, null);
-      }
-      else if (g < 5 && consumeTokenSmart(b, AMPERSAND)) {
-        r = expression(b, l, 5);
-        exit_section_(b, l, m, AND_EXPRESSION, r, true, null);
-      }
-      else {
-        exit_section_(b, l, m, null, false, false, null);
-        break;
-      }
-    }
-    return r;
-  }
-
-  public static boolean unary_plus_expression(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "unary_plus_expression")) return false;
-    if (!nextTokenIsSmart(b, PLUS)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, null);
-    r = consumeTokenSmart(b, PLUS);
-    p = r;
-    r = p && expression(b, l, 2);
-    exit_section_(b, l, m, UNARY_PLUS_EXPRESSION, r, p, null);
-    return r || p;
-  }
-
-  public static boolean unary_minus_expression(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "unary_minus_expression")) return false;
-    if (!nextTokenIsSmart(b, MINUS)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, null);
-    r = consumeTokenSmart(b, MINUS);
-    p = r;
-    r = p && expression(b, l, 2);
-    exit_section_(b, l, m, UNARY_MINUS_EXPRESSION, r, p, null);
-    return r || p;
-  }
-
-  public static boolean unary_complement_expression(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "unary_complement_expression")) return false;
-    if (!nextTokenIsSmart(b, TILDE)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, null);
-    r = consumeTokenSmart(b, TILDE);
-    p = r;
-    r = p && expression(b, l, 2);
-    exit_section_(b, l, m, UNARY_COMPLEMENT_EXPRESSION, r, p, null);
-    return r || p;
-  }
-
-  // DEC_NUMBER | HEX_NUMBER | OCT_NUMBER | BIN_NUMBER
-  public static boolean number_expression(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "number_expression")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, NUMBER_EXPRESSION, "<number expression>");
-    r = consumeTokenSmart(b, DEC_NUMBER);
-    if (!r) r = consumeTokenSmart(b, HEX_NUMBER);
-    if (!r) r = consumeTokenSmart(b, OCT_NUMBER);
-    if (!r) r = consumeTokenSmart(b, BIN_NUMBER);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // STRING
-  public static boolean string_expression(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "string_expression")) return false;
-    if (!nextTokenIsSmart(b, STRING)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeTokenSmart(b, STRING);
-    exit_section_(b, m, STRING_EXPRESSION, r);
-    return r;
-  }
-
-  // plain_paren_expression | bracket_paren_expression
-  public static boolean paren_expression(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "paren_expression")) return false;
-    if (!nextTokenIsFast(b, L_BRACKET, L_PAREN)) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, PAREN_EXPRESSION, "<paren expression>");
-    r = plain_paren_expression(b, l + 1);
-    if (!r) r = bracket_paren_expression(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // ID
-  public static boolean label_ref_expression(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "label_ref_expression")) return false;
-    if (!nextTokenIsSmart(b, ID)) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, LABEL_REF_EXPRESSION, "<label>");
-    r = consumeTokenSmart(b, ID);
-    exit_section_(b, l, m, r, false, null);
-    return r;
   }
 
 }

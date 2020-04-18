@@ -899,6 +899,7 @@ endm_directive ::= ENDM
 
 // Expressions  ============================================================
 ;{
+  parserClass = "com.yanncebron.m68kplugin.lang.M68kExpressionParser"
   extends("(plus|minus|mul|div|mod|exp|shift.*|or|and)_expression") = binary_expression
   extends(".*expression") = expression
   consumeTokenMethod(".*expression")="consumeTokenFast"
