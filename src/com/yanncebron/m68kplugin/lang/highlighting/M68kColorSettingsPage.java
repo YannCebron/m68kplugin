@@ -48,6 +48,19 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
     new AttributesDescriptor("Registers//SR", M68kTextAttributes.SR_REGISTER),
     new AttributesDescriptor("Registers//CCR", M68kTextAttributes.CCR_REGISTER),
 
+    new AttributesDescriptor("Addressing Mode//Dn", M68kTextAttributes.ADM_DRD),
+    new AttributesDescriptor("Addressing Mode//An", M68kTextAttributes.ADM_ARD),
+    new AttributesDescriptor("Addressing Mode//(An)", M68kTextAttributes.ADM_ARI),
+    new AttributesDescriptor("Addressing Mode//(An)+", M68kTextAttributes.ADM_API),
+    new AttributesDescriptor("Addressing Mode//-(An)", M68kTextAttributes.ADM_APD),
+    new AttributesDescriptor("Addressing Mode//i(An)", M68kTextAttributes.ADM_ADI),
+    new AttributesDescriptor("Addressing Mode//i(An,Rn)", M68kTextAttributes.ADM_AIX),
+    new AttributesDescriptor("Addressing Mode//#n", M68kTextAttributes.ADM_IMM),
+    new AttributesDescriptor("Addressing Mode//i(PC)", M68kTextAttributes.ADM_PCD),
+    new AttributesDescriptor("Addressing Mode//i(PC,Rn)", M68kTextAttributes.ADM_PCI),
+    new AttributesDescriptor("Addressing Mode//Absolute(.w|l)", M68kTextAttributes.ADM_ABS),
+
+
     new AttributesDescriptor("Literals//Decimal number", M68kTextAttributes.DEC_NUMBER),
     new AttributesDescriptor("Literals//Hexadecimal number", M68kTextAttributes.HEX_NUMBER),
     new AttributesDescriptor("Literals//Octal number", M68kTextAttributes.OCT_NUMBER),
@@ -84,12 +97,18 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
   @Override
   public String getDemoText() {
     return "<label>label</label>:\n" +
-      "  lea $dff000,a6\n" +
+      "  lea <admAbs>$dff000</admAbs>,<admArd>a6</admArd> ;comment\n" +
       "* line comment\n" +
-      "  moveq #1>>2,d0\n" +
+      "  moveq <admImm>#1>>2</admImm>,<admDrd>d0</admDrd>\n" +
+      "  movea.l <admAri>(a1)</admAri>,<admArd>a0</admArd>\n" +
+      "  movea.l <admApi>(a1)+</admApi>,<admArd>a0</admArd>\n" +
+      "  movea.l <admApd>-(a1)</admApd>,<admArd>a0</admArd>\n" +
+      "  movea.l <admAdi>42(a1)</admAdi>,<admArd>a0</admArd>\n" +
+      "  movea.l <admAix>42(a1,d0)</admAix>,<admArd>a0</admArd>\n" +
+      "  movea.l <admPcd>42(PC)</admPcd>,<admArd>a0</admArd>\n" +
+      "  movea.l <admPci>42(pc,d0)</admPci>,<admArd>a0</admArd>\n" +
       "<localLabel>.local</localLabel>:\n" +
-      "  moveq %0101+$FF,d1\n" +
-      "  move.l d0,(a1) ;comment\n" +
+      "  moveq <admImm>#%0101+$FF</admImm>,<admDrd>d1</admDrd>\n" +
       "  rts\n" +
       "\n" +
       "<label>DATA</label> equ @42\n" +
@@ -102,6 +121,19 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
     Map<String, TextAttributesKey> additionalMap = new HashMap<>();
     additionalMap.put("label", M68kTextAttributes.LABEL);
     additionalMap.put("localLabel", M68kTextAttributes.LOCAL_LABEL);
+
+
+    additionalMap.put("admDrd", M68kTextAttributes.ADM_DRD);
+    additionalMap.put("admArd", M68kTextAttributes.ADM_ARD);
+    additionalMap.put("admAri", M68kTextAttributes.ADM_ARI);
+    additionalMap.put("admApi", M68kTextAttributes.ADM_API);
+    additionalMap.put("admApd", M68kTextAttributes.ADM_APD);
+    additionalMap.put("admAdi", M68kTextAttributes.ADM_ADI);
+    additionalMap.put("admAix", M68kTextAttributes.ADM_AIX);
+    additionalMap.put("admPcd", M68kTextAttributes.ADM_PCD);
+    additionalMap.put("admPci", M68kTextAttributes.ADM_PCI);
+    additionalMap.put("admAbs", M68kTextAttributes.ADM_ABS);
+    additionalMap.put("admImm", M68kTextAttributes.ADM_IMM);
     return additionalMap;
   }
 
