@@ -3124,12 +3124,13 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // register_range (DIV register_range)*
   public static boolean register_list(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "register_list")) return false;
-    boolean r;
+    boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, REGISTER_LIST, "<register list>");
     r = register_range(b, l + 1);
+    p = r; // pin = 1
     r = r && register_list_1(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   // (DIV register_range)*
@@ -3146,52 +3147,45 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // DIV register_range
   private static boolean register_list_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "register_list_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
     r = consumeToken(b, DIV);
+    p = r; // pin = 1
     r = r && register_range(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */
-  // register_range_element (MINUS register_range_element)?
+  // adm_rrd (MINUS adm_rrd)?
   public static boolean register_range(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "register_range")) return false;
-    boolean r;
+    boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, REGISTER_RANGE, "<register range>");
-    r = register_range_element(b, l + 1);
+    r = adm_rrd(b, l + 1);
+    p = r; // pin = 1
     r = r && register_range_1(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
-  // (MINUS register_range_element)?
+  // (MINUS adm_rrd)?
   private static boolean register_range_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "register_range_1")) return false;
     register_range_1_0(b, l + 1);
     return true;
   }
 
-  // MINUS register_range_element
+  // MINUS adm_rrd
   private static boolean register_range_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "register_range_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
     r = consumeToken(b, MINUS);
-    r = r && register_range_element(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // adm_drd | adm_ard
-  static boolean register_range_element(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "register_range_element")) return false;
-    boolean r;
-    r = adm_drd(b, l + 1);
-    if (!r) r = adm_ard(b, l + 1);
-    return r;
+    p = r; // pin = 1
+    r = r && adm_rrd(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */

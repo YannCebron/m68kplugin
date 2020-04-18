@@ -22,9 +22,9 @@ import com.intellij.psi.PsiElement;
 public interface M68kRegisterRange extends M68kPsiElement {
 
   @NotNull
-  List<M68kAdmArd> getAdmArdList();
+  M68kAdmRrd getFrom();
 
-  @NotNull
-  List<M68kAdmDrd> getAdmDrdList();
+  @Nullable
+  M68kAdmRrd getTo();
 
 }

@@ -131,9 +131,17 @@ private data_size_all ::= data_size_byte | data_size_word_long
 
 
 // "d0-d7/a1/a4"
-private register_range_element ::= adm_drd | adm_ard
-register_range ::= register_range_element (MINUS register_range_element)?
-register_list ::= register_range (DIV register_range)*
+register_range ::= adm_rrd (MINUS adm_rrd)? {
+  pin(".*") = 1
+  methods = [
+    adm_rrd= ""
+    from = "adm_rrd[0]"
+    to = "adm_rrd[1]"
+  ]
+}
+register_list ::= register_range (DIV register_range)* {
+  pin(".*") = 1
+}
 
 
 // addressing modes  =====================================================

@@ -12,5 +12,6 @@ FILE
     PsiElement(,)(',')
     M68kRegisterListImpl(REGISTER_LIST)
       M68kRegisterRangeImpl(REGISTER_RANGE)
-        M68kAdmDrdImpl(ADM_DRD)
-          PsiElement(data_register)('d1')
+        M68kAdmRrdImpl(ADM_RRD)
+          M68kAdmDrdImpl(ADM_DRD)
+            PsiElement(data_register)('d1')

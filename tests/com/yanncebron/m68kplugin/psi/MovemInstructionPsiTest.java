@@ -32,6 +32,22 @@ public class MovemInstructionPsiTest extends M68kPsiTestCase {
     final List<M68kRegisterRange> registerRangeList = registerList.getRegisterRangeList();
     assertSize(3, registerRangeList);
 
+    final M68kRegisterRange firstRegisterRange = registerRangeList.get(0);
+    final M68kAdmRrd firstFrom = firstRegisterRange.getFrom();
+    assertNotNull(firstFrom);
+    final M68kAdmDrd firstFromAdmDrd = firstFrom.getAdmDrd();
+    assertNotNull(firstFromAdmDrd);
+    assertEquals("d1", firstFromAdmDrd.getText());
+    final M68kAdmRrd firstTo = firstRegisterRange.getTo();
+    assertNotNull(firstTo);
+    final M68kAdmDrd firstToAdmDrd = firstTo.getAdmDrd();
+    assertNotNull(firstToAdmDrd);
+    assertEquals("d2", firstTo.getText());
+
+    final M68kRegisterRange secondRegisterRange = registerRangeList.get(1);
+    assertNull(secondRegisterRange.getTo());
+
+
     final M68kAdmAri admAri = instruction.getAdmAri();
     assertNotNull(admAri);
     assertEquals("(a7)", admAri.getText());

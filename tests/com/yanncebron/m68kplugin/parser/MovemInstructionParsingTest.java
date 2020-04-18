@@ -49,6 +49,14 @@ public class MovemInstructionParsingTest extends M68kParsingTestCase {
     doCodeTest(" movem d1-d3,(a7)");
   }
 
+  public void testMovemInstructionRegisterRangeMissingTo() throws Exception {
+    doCodeTest(" movem d1-,(a7)");
+  }
+
+  public void testMovemInstructionRegisterRangeMissingNextRange() throws Exception {
+    doCodeTest(" movem d1/,(a7)");
+  }
+
   public void testMovemInstructionMultipleRegisterRange() throws Exception {
     doCodeTest(" movem d1-d3/a0-a2,(a7)");
   }

@@ -9,15 +9,8 @@ FILE
           M68kAdmDrdImpl(ADM_DRD)
             PsiElement(data_register)('d1')
       PsiElement(/)('/')
-      M68kRegisterRangeImpl(REGISTER_RANGE)
-        M68kAdmRrdImpl(ADM_RRD)
-          M68kAdmDrdImpl(ADM_DRD)
-            PsiElement(data_register)('d2')
-      PsiElement(/)('/')
-      M68kRegisterRangeImpl(REGISTER_RANGE)
-        M68kAdmRrdImpl(ADM_RRD)
-          M68kAdmArdImpl(ADM_ARD)
-            PsiElement(address_register)('a0')
+      PsiErrorElement:<data|address register> expected, got ','
+        <empty list>
     PsiElement(,)(',')
     M68kAdmAriImpl(ADM_ARI)
       PsiElement(()('(')
