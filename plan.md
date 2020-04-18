@@ -27,6 +27,7 @@
 - method separators
   - "detected" subroutines
 - color-picker/inlays: copper list colors
+- anything after `end` directive
 
 ## Resolve/Refactor
 - rename/resolve to label
