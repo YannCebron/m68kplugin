@@ -204,6 +204,10 @@ private tail_data_size_all___all_except_ard_pc_imm ::=      data_size_all?      
 
 
 // Move ==================================================================
+;
+{
+  extends("move.*_instruction") = move_instruction_base
+}
 private move_instructions ::= move_instruction |
                               movea_instruction |
                               moveq_instruction |
@@ -233,19 +237,12 @@ move_instruction ::= MOVE
                        move_tail_ard_usp |
                        tail_data_size_all___all__all_except_pc_imm
                      )
-{
-  extends = move_instruction_base
-}
 
 movea_instruction ::= MOVEA tail_data_size_word_long___all__ard
-{
-  extends = move_instruction_base
-}
-                                         
+
 moveq_instruction ::= MOVEQ data_size_long?
                       adm_imm COMMA adm_drd
 {
-  extends = move_instruction_base
   methods = [
     source = "adm_imm"
     destination = "adm_drd"
@@ -257,9 +254,6 @@ movem_instruction ::= MOVEM data_size_word_long?
                         ( register_list COMMA (adm_ari | adm_apd | adm_adi | adm_aix | adm_abs) ) |
                         ( (adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA register_list )
                       )
-{
-  extends = move_instruction_base
-}
 
 private movep_tail_drd_adi ::= adm_drd COMMA adm_adi
 {
@@ -274,9 +268,6 @@ movep_instruction ::= MOVEP data_size_word_long?
                         movep_tail_drd_adi |
                         movep_tail_adi_drd
                       )
-{
-  extends = move_instruction_base
-}
 
 
 // Jump ==================================================================
@@ -305,6 +296,10 @@ rte_instruction ::= RTE
 rtr_instruction ::= RTR
 
 // *bcd ==================================================================
+;
+{
+  extends("(abcd|sbcd)_instruction") = bcd_instruction_base
+}
 private bcd_instructions ::= abcd_instruction |
                              nbcd_instruction |
                              sbcd_instruction
@@ -325,13 +320,9 @@ private bcd_tail ::= data_size_byte?
                      bcd_tail_drd | bcd_tail_apd
 
 abcd_instruction ::= ABCD bcd_tail
-{
-  extends = bcd_instruction_base
-}
+
 sbcd_instruction ::= SBCD bcd_tail
-{
-  extends = bcd_instruction_base
-}
+
 
 nbcd_instruction ::= NBCD data_size_byte? adm_group_all_except_pc_imm
 {
@@ -401,6 +392,10 @@ divu_instruction ::= DIVU mul_div_tail
 
 
 // Boolean ==================================================================
+;
+{
+  extends("(and.*|or.*|eor.*|not)_instruction") = bool_instruction_base
+}
 private bool_instructions ::= and_instruction |
                               andi_instruction |
                               or_instruction |
@@ -423,36 +418,15 @@ private bool_i_tail ::= bool_i_tail_imm_ccr |
                         tail_data_size_all___imm__all_except_ard_pc_imm
 
 and_instruction ::= AND bool_tail
-{
-  extends = bool_instruction_base
-}
 andi_instruction ::= ANDI bool_i_tail
-{
-  extends = bool_instruction_base
-}
 
 or_instruction ::= OR bool_tail
-{
-  extends = bool_instruction_base
-}
 ori_instruction ::= ORI bool_i_tail
-{
-  extends = bool_instruction_base
-}
 
 eor_instruction ::= EOR bool_tail
-{
-  extends = bool_instruction_base
-}
 eori_instruction ::= EORI bool_i_tail
-{
-  extends = bool_instruction_base
-}
 
 not_instruction ::= NOT tail_data_size_all___all_except_ard_pc_imm
-{
-  extends = bool_instruction_base
-}
 
 
 // Misc ==================================================================
@@ -551,6 +525,10 @@ chk_instruction ::= CHK data_size_word? adm_group_all_except_ard COMMA adm_drd
 
 
 // Compare ==================================================================
+;
+{
+  extends("cmp.*_instruction") = cmp_instruction_base
+}
 private cmp_instructions ::= cmp_instruction |
                              cmpa_instruction |
                              cmpi_instruction |
@@ -561,21 +539,14 @@ fake cmp_instruction_base ::=
 }
 
 cmp_instruction ::= CMP tail_data_size_all___all__all_except_pc_imm
-{
-  extends = cmp_instruction_base
-}
+
 cmpa_instruction ::= CMPA tail_data_size_word_long___all__ard
-{
-  extends = cmp_instruction_base
-}
+
 cmpi_instruction ::= CMPI tail_data_size_all___imm__all_except_ard_pc_imm
-{
-  extends = cmp_instruction_base
-}
+
 cmpm_instruction ::= CMPM data_size_all?
                      adm_api COMMA adm_api
 {
-  extends = cmp_instruction_base
   methods = [
     adm_api = ""
     source = "adm_api[0]"
@@ -711,6 +682,10 @@ sls_instruction ::= SLS sCC_tail
 scs_instruction ::= SCS sCC_tail
 
 // Bit =====================================================================
+;
+{
+  extends("(bchg|bclr|bset|btst)_instruction") = bit_instruction_base
+}
 private bit_instructions ::= bchg_instruction |
                              bclr_instruction |
                              bset_instruction |
@@ -729,26 +704,20 @@ private bit_tail ::= bit_data_size?
                      (adm_drd | adm_imm) COMMA adm_group_all_except_ard_pc_imm
 
 bchg_instruction ::= BCHG bit_tail
-{
-  extends = bit_instruction_base
-}
+
 bclr_instruction ::= BCLR bit_tail
-{
-  extends = bit_instruction_base
-}
+
 bset_instruction ::= BSET bit_tail
-{
-  extends = bit_instruction_base
-}
 
 btst_instruction ::= BTST bit_data_size?
                      (adm_drd | adm_imm) COMMA adm_group_all_except_ard
-{
-  extends = bit_instruction_base
-}
 
 
 // Shift ===================================================================
+;
+{
+  extends("(as.*|ls.*|ro.*)_instruction") = shift_instruction_base
+}
 private shift_instructions ::= asl_instruction |
                                asr_instruction |
                                lsl_instruction |
@@ -774,40 +743,16 @@ private shift_tail ::=
   )
 
 asl_instruction ::= ASL shift_tail
-{
-  extends = shift_instruction_base
-}
 asr_instruction ::= ASR shift_tail
-{
-  extends = shift_instruction_base
-}
 
 lsl_instruction ::= LSL shift_tail
-{
-  extends = shift_instruction_base
-}
 lsr_instruction ::= LSR shift_tail
-{
-  extends = shift_instruction_base
-}
 
 rol_instruction ::= ROL shift_tail
-{
-  extends = shift_instruction_base
-}
 ror_instruction ::= ROR shift_tail
-{
-  extends = shift_instruction_base
-}
 
 roxl_instruction ::= ROXL shift_tail
-{
-  extends = shift_instruction_base
-}
 roxr_instruction ::= ROXR shift_tail
-{
-  extends = shift_instruction_base
-}
 
 
 // Directives  ===================================================================
