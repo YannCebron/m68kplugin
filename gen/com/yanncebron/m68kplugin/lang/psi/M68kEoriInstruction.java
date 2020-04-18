@@ -40,9 +40,15 @@ public interface M68kEoriInstruction extends M68kBoolInstructionBase {
   M68kAdmAri getAdmAri();
 
   @Nullable
+  M68kAdmCcr getAdmCcr();
+
+  @Nullable
   M68kAdmDrd getAdmDrd();
 
   @Nullable
   M68kAdmImm getAdmImm();
+
+  @Nullable
+  M68kAdmSr getAdmSr();
 
 }

@@ -77,6 +77,12 @@ public class M68kEoriInstructionImpl extends M68kBoolInstructionBaseImpl impleme
 
   @Override
   @Nullable
+  public M68kAdmCcr getAdmCcr() {
+    return findChildByClass(M68kAdmCcr.class);
+  }
+
+  @Override
+  @Nullable
   public M68kAdmDrd getAdmDrd() {
     return findChildByClass(M68kAdmDrd.class);
   }
@@ -85,6 +91,12 @@ public class M68kEoriInstructionImpl extends M68kBoolInstructionBaseImpl impleme
   @Nullable
   public M68kAdmImm getAdmImm() {
     return findChildByClass(M68kAdmImm.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmSr getAdmSr() {
+    return findChildByClass(M68kAdmSr.class);
   }
 
 }

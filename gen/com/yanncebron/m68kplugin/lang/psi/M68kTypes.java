@@ -35,11 +35,13 @@ public interface M68kTypes {
   IElementType ADM_API = new M68kCompositeElementType("ADM_API");
   IElementType ADM_ARD = new M68kCompositeElementType("ADM_ARD");
   IElementType ADM_ARI = new M68kCompositeElementType("ADM_ARI");
+  IElementType ADM_CCR = new M68kCompositeElementType("ADM_CCR");
   IElementType ADM_DRD = new M68kCompositeElementType("ADM_DRD");
   IElementType ADM_IMM = new M68kCompositeElementType("ADM_IMM");
   IElementType ADM_PCD = new M68kCompositeElementType("ADM_PCD");
   IElementType ADM_PCI = new M68kCompositeElementType("ADM_PCI");
   IElementType ADM_RRD = new M68kCompositeElementType("ADM_RRD");
+  IElementType ADM_SR = new M68kCompositeElementType("ADM_SR");
   IElementType ANDI_INSTRUCTION = new M68kCompositeElementType("ANDI_INSTRUCTION");
   IElementType AND_EXPRESSION = new M68kCompositeElementType("AND_EXPRESSION");
   IElementType AND_INSTRUCTION = new M68kCompositeElementType("AND_INSTRUCTION");
@@ -237,6 +239,9 @@ public interface M68kTypes {
       else if (type == ADM_ARI) {
         return new M68kAdmAriImpl(node);
       }
+      else if (type == ADM_CCR) {
+        return new M68kAdmCcrImpl(node);
+      }
       else if (type == ADM_DRD) {
         return new M68kAdmDrdImpl(node);
       }
@@ -251,6 +256,9 @@ public interface M68kTypes {
       }
       else if (type == ADM_RRD) {
         return new M68kAdmRrdImpl(node);
+      }
+      else if (type == ADM_SR) {
+        return new M68kAdmSrImpl(node);
       }
       else if (type == ANDI_INSTRUCTION) {
         return new M68kAndiInstructionImpl(node);

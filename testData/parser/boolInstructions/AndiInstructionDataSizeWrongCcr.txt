@@ -1,0 +1,11 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kAndiInstructionImpl(ANDI_INSTRUCTION)
+    PsiElement(andi)('andi')
+  PsiElement(.l)('.l')
+  PsiWhiteSpace(' ')
+  PsiElement(#)('#')
+  PsiElement(dec_number)('0')
+  PsiElement(,)(',')
+  PsiErrorElement:'(', '-', <data register> or <expression> expected, got 'ccr'
+    PsiElement(ccr)('ccr')

@@ -43,6 +43,30 @@ public class BoolInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" andi #0,d1");
   }
 
+  public void testAndiInstructionCcr() throws IOException {
+    doCodeTest(" andi #0,ccr");
+  }
+
+  public void testAndiInstructionDataSizeCcr() throws IOException {
+    doCodeTest(" andi.b #0,ccr");
+  }
+
+  public void testAndiInstructionDataSizeWrongCcr() throws IOException {
+    doCodeTest(" andi.l #0,ccr");
+  }
+
+  public void testAndiInstructionSr() throws IOException {
+    doCodeTest(" andi #0,sr");
+  }
+
+  public void testAndiInstructionDataSizeSr() throws IOException {
+    doCodeTest(" andi.w #0,sr");
+  }
+
+  public void testAndiInstructionDataSizeWrongSr() throws IOException {
+    doCodeTest(" andi.b #0,sr");
+  }
+
   public void testOrInstructionDrdDrd() throws IOException {
     doCodeTest(" or d0,d1");
   }

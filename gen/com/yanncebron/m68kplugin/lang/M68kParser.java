@@ -447,6 +447,18 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // CCR
+  public static boolean adm_ccr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_ccr")) return false;
+    if (!nextTokenIs(b, CCR)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, CCR);
+    exit_section_(b, m, ADM_CCR, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // DATA_REGISTER
   public static boolean adm_drd(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_drd")) return false;
@@ -583,6 +595,18 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = adm_drd(b, l + 1);
     if (!r) r = adm_ard(b, l + 1);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // SR
+  public static boolean adm_sr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_sr")) return false;
+    if (!nextTokenIs(b, SR)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, SR);
+    exit_section_(b, m, ADM_SR, r);
     return r;
   }
 
@@ -1071,13 +1095,26 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_all?
-  //                         adm_imm COMMA adm_group_all_except_ard_pc_imm
+  // (data_size_all? adm_imm COMMA adm_group_all_except_ard_pc_imm) |
+  //                           (data_size_byte? adm_imm COMMA adm_ccr) |
+  //                           (data_size_word? adm_imm COMMA adm_sr)
   static boolean bool_i_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bool_i_tail")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = bool_i_tail_0(b, l + 1);
+    if (!r) r = bool_i_tail_1(b, l + 1);
+    if (!r) r = bool_i_tail_2(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_all? adm_imm COMMA adm_group_all_except_ard_pc_imm
+  private static boolean bool_i_tail_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bool_i_tail_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = bool_i_tail_0_0(b, l + 1);
     r = r && adm_imm(b, l + 1);
     r = r && consumeToken(b, COMMA);
     r = r && adm_group_all_except_ard_pc_imm(b, l + 1);
@@ -1086,9 +1123,49 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   // data_size_all?
-  private static boolean bool_i_tail_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bool_i_tail_0")) return false;
+  private static boolean bool_i_tail_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bool_i_tail_0_0")) return false;
     data_size_all(b, l + 1);
+    return true;
+  }
+
+  // data_size_byte? adm_imm COMMA adm_ccr
+  private static boolean bool_i_tail_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bool_i_tail_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = bool_i_tail_1_0(b, l + 1);
+    r = r && adm_imm(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_ccr(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_byte?
+  private static boolean bool_i_tail_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bool_i_tail_1_0")) return false;
+    data_size_byte(b, l + 1);
+    return true;
+  }
+
+  // data_size_word? adm_imm COMMA adm_sr
+  private static boolean bool_i_tail_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bool_i_tail_2")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = bool_i_tail_2_0(b, l + 1);
+    r = r && adm_imm(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_sr(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_word?
+  private static boolean bool_i_tail_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bool_i_tail_2_0")) return false;
+    data_size_word(b, l + 1);
     return true;
   }
 

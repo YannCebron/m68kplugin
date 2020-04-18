@@ -73,6 +73,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitAdmCcr(@NotNull M68kAdmCcr o) {
+    visitPsiElement(o);
+  }
+
   public void visitAdmDrd(@NotNull M68kAdmDrd o) {
     visitPsiElement(o);
   }
@@ -90,6 +94,10 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitAdmRrd(@NotNull M68kAdmRrd o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAdmSr(@NotNull M68kAdmSr o) {
     visitPsiElement(o);
   }
 

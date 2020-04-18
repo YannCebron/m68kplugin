@@ -1,0 +1,12 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kAndiInstructionImpl(ANDI_INSTRUCTION)
+    PsiElement(andi)('andi')
+    PsiWhiteSpace(' ')
+    M68kAdmImmImpl(ADM_IMM)
+      PsiElement(#)('#')
+      M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+        PsiElement(dec_number)('0')
+    PsiElement(,)(',')
+    M68kAdmCcrImpl(ADM_CCR)
+      PsiElement(ccr)('ccr')
