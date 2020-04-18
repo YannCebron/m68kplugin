@@ -21,29 +21,32 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kMoveInstruction extends M68kMoveInstructionBase {
 
-  @NotNull
-  List<M68kAdmAbs> getAdmAbsList();
+  @Nullable
+  M68kAdmAbs getAdmAbs();
 
-  @NotNull
-  List<M68kAdmAdi> getAdmAdiList();
+  @Nullable
+  M68kAdmAdi getAdmAdi();
 
-  @NotNull
-  List<M68kAdmAix> getAdmAixList();
+  @Nullable
+  M68kAdmAix getAdmAix();
 
-  @NotNull
-  List<M68kAdmApd> getAdmApdList();
+  @Nullable
+  M68kAdmApd getAdmApd();
 
-  @NotNull
-  List<M68kAdmApi> getAdmApiList();
+  @Nullable
+  M68kAdmApi getAdmApi();
 
-  @NotNull
-  List<M68kAdmArd> getAdmArdList();
+  @Nullable
+  M68kAdmArd getAdmArd();
 
-  @NotNull
-  List<M68kAdmAri> getAdmAriList();
+  @Nullable
+  M68kAdmAri getAdmAri();
 
-  @NotNull
-  List<M68kAdmDrd> getAdmDrdList();
+  @Nullable
+  M68kAdmCcr getAdmCcr();
+
+  @Nullable
+  M68kAdmDrd getAdmDrd();
 
   @Nullable
   M68kAdmImm getAdmImm();
@@ -53,6 +56,9 @@ public interface M68kMoveInstruction extends M68kMoveInstructionBase {
 
   @Nullable
   M68kAdmPci getAdmPci();
+
+  @Nullable
+  M68kAdmSr getAdmSr();
 
   @Nullable
   M68kAdmUsp getAdmUsp();

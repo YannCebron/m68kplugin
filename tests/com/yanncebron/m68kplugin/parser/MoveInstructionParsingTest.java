@@ -73,6 +73,8 @@ public class MoveInstructionParsingTest extends M68kParsingTestCase {
     doCodeTest(" move.l 4,a6");
   }
 
+
+  // USP ----------------------------------------------------------------
   public void testMoveInstructionUspArd() throws Exception {
     doCodeTest(" move usp,a0");
   }
@@ -95,6 +97,40 @@ public class MoveInstructionParsingTest extends M68kParsingTestCase {
 
   public void testMoveInstructionDataSizeWrongArdUsp() throws Exception {
     doCodeTest(" move.b a0,usp");
+  }
+
+
+  // CCR/SR -------------------------------------------------------------
+  public void testMoveInstructionDrdCcr() throws Exception {
+    doCodeTest(" move d0,ccr");
+  }
+
+  public void testMoveInstructionDataSizeDrdCcr() throws Exception {
+    doCodeTest(" move.w d0,ccr");
+  }
+
+  public void testMoveInstructionDataSizeWrongDrdCcr() throws Exception {
+    doCodeTest(" move.b d0,ccr");
+  }
+
+  public void testMoveInstructionAdiSr() throws Exception {
+    doCodeTest(" move 2(a0),sr");
+  }
+
+  public void testMoveInstructionDataSizeAbsSr() throws Exception {
+    doCodeTest(" move.w 42,sr");
+  }
+
+  public void testMoveInstructionSrAdi() throws Exception {
+    doCodeTest(" move sr,2(a0)");
+  }
+
+  public void testMoveInstructionDataSizeSrAdi() throws Exception {
+    doCodeTest(" move.w sr,2(a0)");
+  }
+
+  public void testMoveInstructionDataSizeWrongSrDrd() throws Exception {
+    doCodeTest(" move.b sr,d0");
   }
 
 }

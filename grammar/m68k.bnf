@@ -191,12 +191,18 @@ private move_tail_usp_ard ::= data_size_long? adm_usp COMMA adm_ard {
   pin = 2
 }
 private move_tail_ard_usp ::= data_size_long? adm_ard COMMA adm_usp
+private move_tail_to_ccr_sr ::= data_size_word? adm_group_all_except_ard COMMA (adm_ccr | adm_sr)
+private move_tail_sr ::= data_size_word? adm_sr COMMA adm_group_all_except_ard_pc_imm {
+  pin = 2
+}
 
 move_instruction ::= MOVE
                      (
                        (move_tail_ard_usp) |
-                       (move_tail_plain) |
-                       (move_tail_usp_ard)
+                       (move_tail_usp_ard) |
+                       (move_tail_sr) |
+                       (move_tail_to_ccr_sr) |
+                       (move_tail_plain) 
                      )
 {
   extends = move_instruction_base

@@ -40,51 +40,57 @@ public class M68kMoveInstructionImpl extends M68kMoveInstructionBaseImpl impleme
   }
 
   @Override
-  @NotNull
-  public List<M68kAdmAbs> getAdmAbsList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAbs.class);
+  @Nullable
+  public M68kAdmAbs getAdmAbs() {
+    return findChildByClass(M68kAdmAbs.class);
   }
 
   @Override
-  @NotNull
-  public List<M68kAdmAdi> getAdmAdiList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAdi.class);
+  @Nullable
+  public M68kAdmAdi getAdmAdi() {
+    return findChildByClass(M68kAdmAdi.class);
   }
 
   @Override
-  @NotNull
-  public List<M68kAdmAix> getAdmAixList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAix.class);
+  @Nullable
+  public M68kAdmAix getAdmAix() {
+    return findChildByClass(M68kAdmAix.class);
   }
 
   @Override
-  @NotNull
-  public List<M68kAdmApd> getAdmApdList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmApd.class);
+  @Nullable
+  public M68kAdmApd getAdmApd() {
+    return findChildByClass(M68kAdmApd.class);
   }
 
   @Override
-  @NotNull
-  public List<M68kAdmApi> getAdmApiList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmApi.class);
+  @Nullable
+  public M68kAdmApi getAdmApi() {
+    return findChildByClass(M68kAdmApi.class);
   }
 
   @Override
-  @NotNull
-  public List<M68kAdmArd> getAdmArdList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmArd.class);
+  @Nullable
+  public M68kAdmArd getAdmArd() {
+    return findChildByClass(M68kAdmArd.class);
   }
 
   @Override
-  @NotNull
-  public List<M68kAdmAri> getAdmAriList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAri.class);
+  @Nullable
+  public M68kAdmAri getAdmAri() {
+    return findChildByClass(M68kAdmAri.class);
   }
 
   @Override
-  @NotNull
-  public List<M68kAdmDrd> getAdmDrdList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmDrd.class);
+  @Nullable
+  public M68kAdmCcr getAdmCcr() {
+    return findChildByClass(M68kAdmCcr.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmDrd getAdmDrd() {
+    return findChildByClass(M68kAdmDrd.class);
   }
 
   @Override
@@ -103,6 +109,12 @@ public class M68kMoveInstructionImpl extends M68kMoveInstructionBaseImpl impleme
   @Nullable
   public M68kAdmPci getAdmPci() {
     return findChildByClass(M68kAdmPci.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmSr getAdmSr() {
+    return findChildByClass(M68kAdmSr.class);
   }
 
   @Override
