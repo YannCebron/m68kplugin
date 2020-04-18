@@ -1,0 +1,10 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kMoveInstructionImpl(MOVE_INSTRUCTION)
+    PsiElement(move)('move')
+  PsiElement(.b)('.b')
+  PsiWhiteSpace(' ')
+  PsiErrorElement:'(', '-', <address register>, <data register>, <expression> or <immediate data> expected, got 'usp'
+    PsiElement(usp)('usp')
+  PsiElement(,)(',')
+  PsiElement(address_register)('a0')

@@ -101,6 +101,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitAdmUsp(@NotNull M68kAdmUsp o) {
+    visitPsiElement(o);
+  }
+
   public void visitAndExpression(@NotNull M68kAndExpression o) {
     visitBinaryExpression(o);
   }

@@ -105,4 +105,10 @@ public class M68kMoveInstructionImpl extends M68kMoveInstructionBaseImpl impleme
     return findChildByClass(M68kAdmPci.class);
   }
 
+  @Override
+  @Nullable
+  public M68kAdmUsp getAdmUsp() {
+    return findChildByClass(M68kAdmUsp.class);
+  }
+
 }

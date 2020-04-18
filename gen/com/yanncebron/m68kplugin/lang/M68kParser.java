@@ -611,6 +611,18 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // USP
+  public static boolean adm_usp(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_usp")) return false;
+    if (!nextTokenIs(b, USP)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, USP);
+    exit_section_(b, m, ADM_USP, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // AND bool_tail
   public static boolean and_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "and_instruction")) return false;
@@ -2562,8 +2574,12 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // MOVE data_size_all?
-  //                      adm_group_all COMMA adm_group_all_except_pc_imm
+  // MOVE
+  //                      (
+  //                        (move_tail_ard_usp) |
+  //                        (move_tail_plain) |
+  //                        (move_tail_usp_ard)
+  //                      )
   public static boolean move_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "move_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", MOVE)) return false;
@@ -2571,19 +2587,53 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, MOVE_INSTRUCTION, "<instruction>");
     r = consumeToken(b, MOVE);
     p = r; // pin = 1
-    r = r && report_error_(b, move_instruction_1(b, l + 1));
-    r = p && report_error_(b, adm_group_all(b, l + 1)) && r;
-    r = p && report_error_(b, consumeToken(b, COMMA)) && r;
-    r = p && adm_group_all_except_pc_imm(b, l + 1) && r;
+    r = r && move_instruction_1(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
-  // data_size_all?
+  // (move_tail_ard_usp) |
+  //                        (move_tail_plain) |
+  //                        (move_tail_usp_ard)
   private static boolean move_instruction_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "move_instruction_1")) return false;
-    data_size_all(b, l + 1);
-    return true;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = move_instruction_1_0(b, l + 1);
+    if (!r) r = move_instruction_1_1(b, l + 1);
+    if (!r) r = move_instruction_1_2(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (move_tail_ard_usp)
+  private static boolean move_instruction_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_instruction_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = move_tail_ard_usp(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (move_tail_plain)
+  private static boolean move_instruction_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_instruction_1_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = move_tail_plain(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (move_tail_usp_ard)
+  private static boolean move_instruction_1_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_instruction_1_2")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = move_tail_usp_ard(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
   }
 
   /* ********************************************************** */
@@ -2601,6 +2651,72 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = movem_instruction(b, l + 1);
     if (!r) r = movep_instruction(b, l + 1);
     return r;
+  }
+
+  /* ********************************************************** */
+  // data_size_long? adm_ard COMMA adm_usp
+  static boolean move_tail_ard_usp(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_ard_usp")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = move_tail_ard_usp_0(b, l + 1);
+    r = r && adm_ard(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_usp(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_long?
+  private static boolean move_tail_ard_usp_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_ard_usp_0")) return false;
+    data_size_long(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // data_size_all? adm_group_all COMMA adm_group_all_except_pc_imm
+  static boolean move_tail_plain(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_plain")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
+    r = move_tail_plain_0(b, l + 1);
+    r = r && adm_group_all(b, l + 1);
+    p = r; // pin = 2
+    r = r && report_error_(b, consumeToken(b, COMMA));
+    r = p && adm_group_all_except_pc_imm(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // data_size_all?
+  private static boolean move_tail_plain_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_plain_0")) return false;
+    data_size_all(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // data_size_long? adm_usp COMMA adm_ard
+  static boolean move_tail_usp_ard(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_usp_ard")) return false;
+    if (!nextTokenIs(b, "", DOT_L, USP)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
+    r = move_tail_usp_ard_0(b, l + 1);
+    r = r && adm_usp(b, l + 1);
+    p = r; // pin = 2
+    r = r && report_error_(b, consumeToken(b, COMMA));
+    r = p && adm_ard(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // data_size_long?
+  private static boolean move_tail_usp_ard_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_usp_ard_0")) return false;
+    data_size_long(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */

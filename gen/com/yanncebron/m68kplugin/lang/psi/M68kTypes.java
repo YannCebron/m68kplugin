@@ -42,6 +42,7 @@ public interface M68kTypes {
   IElementType ADM_PCI = new M68kCompositeElementType("ADM_PCI");
   IElementType ADM_RRD = new M68kCompositeElementType("ADM_RRD");
   IElementType ADM_SR = new M68kCompositeElementType("ADM_SR");
+  IElementType ADM_USP = new M68kCompositeElementType("ADM_USP");
   IElementType ANDI_INSTRUCTION = new M68kCompositeElementType("ANDI_INSTRUCTION");
   IElementType AND_EXPRESSION = new M68kCompositeElementType("AND_EXPRESSION");
   IElementType AND_INSTRUCTION = new M68kCompositeElementType("AND_INSTRUCTION");
@@ -259,6 +260,9 @@ public interface M68kTypes {
       }
       else if (type == ADM_SR) {
         return new M68kAdmSrImpl(node);
+      }
+      else if (type == ADM_USP) {
+        return new M68kAdmUspImpl(node);
       }
       else if (type == ANDI_INSTRUCTION) {
         return new M68kAndiInstructionImpl(node);

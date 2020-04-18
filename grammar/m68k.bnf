@@ -165,6 +165,7 @@ adm_imm ::= HASH expression data_size_word_long? {
 
 adm_sr ::= SR
 adm_ccr ::= CCR
+adm_usp ::= USP
 
 // ATTN: ordering in groups
 private adm_group_all ::=                   adm_drd | adm_ard | adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
@@ -183,8 +184,21 @@ fake move_instruction_base ::= {
   extends = data_sized
 }
 
-move_instruction ::= MOVE data_size_all?
-                     adm_group_all COMMA adm_group_all_except_pc_imm {
+private move_tail_plain ::= data_size_all? adm_group_all COMMA adm_group_all_except_pc_imm  {
+  pin = 2
+}
+private move_tail_usp_ard ::= data_size_long? adm_usp COMMA adm_ard {
+  pin = 2
+}
+private move_tail_ard_usp ::= data_size_long? adm_ard COMMA adm_usp
+
+move_instruction ::= MOVE
+                     (
+                       (move_tail_ard_usp) |
+                       (move_tail_plain) |
+                       (move_tail_usp_ard)
+                     )
+{
   extends = move_instruction_base
 }
 

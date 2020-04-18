@@ -1,0 +1,10 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kMoveInstructionImpl(MOVE_INSTRUCTION)
+    PsiElement(move)('move')
+    PsiWhiteSpace(' ')
+    M68kAdmUspImpl(ADM_USP)
+      PsiElement(usp)('usp')
+    PsiElement(,)(',')
+    M68kAdmArdImpl(ADM_ARD)
+      PsiElement(address_register)('a0')

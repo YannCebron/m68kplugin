@@ -73,4 +73,28 @@ public class MoveInstructionParsingTest extends M68kParsingTestCase {
     doCodeTest(" move.l 4,a6");
   }
 
+  public void testMoveInstructionUspArd() throws Exception {
+    doCodeTest(" move usp,a0");
+  }
+
+  public void testMoveInstructionDataSizeUspArd() throws Exception {
+    doCodeTest(" move.l usp,a0");
+  }
+
+  public void testMoveInstructionDataSizeWrongUspArd() throws Exception {
+    doCodeTest(" move.b usp,a0");
+  }
+
+  public void testMoveInstructionArdUsp() throws Exception {
+    doCodeTest(" move a0,usp");
+  }
+
+  public void testMoveInstructionDataSizeArdUsp() throws Exception {
+    doCodeTest(" move.l a0,usp");
+  }
+
+  public void testMoveInstructionDataSizeWrongArdUsp() throws Exception {
+    doCodeTest(" move.b a0,usp");
+  }
+
 }

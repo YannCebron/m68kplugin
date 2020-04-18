@@ -1,0 +1,12 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kMoveInstructionImpl(MOVE_INSTRUCTION)
+    PsiElement(move)('move')
+    PsiElement(.b)('.b')
+    PsiWhiteSpace(' ')
+    M68kAdmArdImpl(ADM_ARD)
+      PsiElement(address_register)('a0')
+    PsiElement(,)(',')
+    PsiErrorElement:'(', '-', <address register>, <data register> or <expression> expected, got 'usp'
+      <empty list>
+  PsiElement(usp)('usp')

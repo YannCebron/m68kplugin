@@ -19,42 +19,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kMoveInstruction extends M68kMoveInstructionBase {
-
-  @NotNull
-  List<M68kAdmAbs> getAdmAbsList();
-
-  @NotNull
-  List<M68kAdmAdi> getAdmAdiList();
-
-  @NotNull
-  List<M68kAdmAix> getAdmAixList();
-
-  @NotNull
-  List<M68kAdmApd> getAdmApdList();
-
-  @NotNull
-  List<M68kAdmApi> getAdmApiList();
-
-  @NotNull
-  List<M68kAdmArd> getAdmArdList();
-
-  @NotNull
-  List<M68kAdmAri> getAdmAriList();
-
-  @NotNull
-  List<M68kAdmDrd> getAdmDrdList();
-
-  @Nullable
-  M68kAdmImm getAdmImm();
-
-  @Nullable
-  M68kAdmPcd getAdmPcd();
-
-  @Nullable
-  M68kAdmPci getAdmPci();
-
-  @Nullable
-  M68kAdmUsp getAdmUsp();
+public interface M68kAdmUsp extends M68kPsiElement {
 
 }
