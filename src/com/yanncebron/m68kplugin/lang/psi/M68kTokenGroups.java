@@ -160,6 +160,7 @@ public final class M68kTokenGroups {
     DC,
     DCB,
     DS,
+    END,
     ENDM,
     EQ,
     EQU,

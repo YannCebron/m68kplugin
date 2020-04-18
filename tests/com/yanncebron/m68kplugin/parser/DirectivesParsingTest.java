@@ -160,4 +160,9 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
   public void testOrgDirectiveMissingParameter() throws Exception {
     doCodeTest(" org ");
   }
+
+  public void testEndDirective() throws Exception {
+    doCodeTest(" end");
+  }
+
 }

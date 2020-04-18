@@ -731,7 +731,8 @@ private directives ::= equ_directive |
                        opt_directive |
                        org_directive |
                        macro_directive |
-                       endm_directive
+                       endm_directive |
+                       end_directive
 
 fake equ_directive_base ::= label expression? {
 //  implements = "com.intellij.psi.PsiNameIdentifierOwner"
@@ -754,6 +755,8 @@ equr_directive ::= label EQUR adm_rrd {
 
 even_directive ::= EVEN
 odd_directive ::= ODD
+
+end_directive ::= END
 
 private include_path ::= STRING {
   name = "include path"

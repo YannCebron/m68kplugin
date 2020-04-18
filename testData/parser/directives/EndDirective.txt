@@ -1,0 +1,4 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kEndDirectiveImpl(END_DIRECTIVE)
+    PsiElement(end)('end')

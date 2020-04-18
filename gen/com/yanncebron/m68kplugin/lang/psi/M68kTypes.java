@@ -101,6 +101,7 @@ public interface M68kTypes {
   IElementType DIV_EXPRESSION = new M68kCompositeElementType("DIV_EXPRESSION");
   IElementType DS_DIRECTIVE = new M68kCompositeElementType("DS_DIRECTIVE");
   IElementType ENDM_DIRECTIVE = new M68kCompositeElementType("ENDM_DIRECTIVE");
+  IElementType END_DIRECTIVE = new M68kCompositeElementType("END_DIRECTIVE");
   IElementType EORI_INSTRUCTION = new M68kCompositeElementType("EORI_INSTRUCTION");
   IElementType EOR_INSTRUCTION = new M68kCompositeElementType("EOR_INSTRUCTION");
   IElementType EQUALS_DIRECTIVE = new M68kCompositeElementType("EQUALS_DIRECTIVE");
@@ -438,6 +439,9 @@ public interface M68kTypes {
       }
       else if (type == ENDM_DIRECTIVE) {
         return new M68kEndmDirectiveImpl(node);
+      }
+      else if (type == END_DIRECTIVE) {
+        return new M68kEndDirectiveImpl(node);
       }
       else if (type == EORI_INSTRUCTION) {
         return new M68kEoriInstructionImpl(node);

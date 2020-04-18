@@ -285,6 +285,7 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
   [dD][cC]                        { return DC; }
   [dD][cC][bB]                    { return DCB; }
   [dD][sS]                        { return DS; }
+  [eE][nN][dD]                    { return END; }
   [eE][qQ][uU]                    { return EQU; }
   [eE][qQ][uU][rR]                { return EQUR; }
   [eE][vV][eE][nN]                { return EVEN; }
