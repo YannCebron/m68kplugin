@@ -1991,6 +1991,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   //                        rsreset_directive |
   //                        rs_directive |
   //                        opt_directive |
+  //                        org_directive |
   //                        macro_directive |
   //                        endm_directive
   static boolean directives(PsiBuilder b, int l) {
@@ -2012,6 +2013,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = rsreset_directive(b, l + 1);
     if (!r) r = rs_directive(b, l + 1);
     if (!r) r = opt_directive(b, l + 1);
+    if (!r) r = org_directive(b, l + 1);
     if (!r) r = macro_directive(b, l + 1);
     if (!r) r = endm_directive(b, l + 1);
     return r;
@@ -3245,6 +3247,20 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, OR);
     p = r; // pin = 1
     r = r && bool_tail(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // ORG expression
+  public static boolean org_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "org_directive")) return false;
+    if (!nextTokenIs(b, ORG)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, ORG_DIRECTIVE, null);
+    r = consumeToken(b, ORG);
+    p = r; // pin = 1
+    r = r && expression(b, l + 1, -1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

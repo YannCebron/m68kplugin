@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kOrgDirectiveImpl(ORG_DIRECTIVE)
+    PsiElement(org)('org')
+    PsiErrorElement:<expression> expected
+      <empty list>
+  PsiWhiteSpace(' ')

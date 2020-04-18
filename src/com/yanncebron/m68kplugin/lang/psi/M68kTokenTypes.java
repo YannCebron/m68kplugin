@@ -143,6 +143,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType ODD = new M68kTokenType("odd");
   public static final IElementType OPT = new M68kTokenType("opt");
   public static final IElementType OR = new M68kTokenType("or");
+  public static final IElementType ORG = new M68kTokenType("org");
   public static final IElementType ORI = new M68kTokenType("ori");
   public static final IElementType PEA = new M68kTokenType("pea");
   public static final IElementType PC = new M68kTokenType("pc");

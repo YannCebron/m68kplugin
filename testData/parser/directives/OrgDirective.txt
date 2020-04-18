@@ -1,0 +1,7 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kOrgDirectiveImpl(ORG_DIRECTIVE)
+    PsiElement(org)('org')
+    PsiWhiteSpace(' ')
+    M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+      PsiElement(hex_number)('$50000')

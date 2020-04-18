@@ -171,6 +171,7 @@ public final class M68kTokenGroups {
     MACRO,
     ODD,
     OPT,
+    ORG,
     RS,
     RSSET,
     RSRESET

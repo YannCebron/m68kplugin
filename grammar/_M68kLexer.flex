@@ -293,6 +293,7 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
   [iI][nN][cC][lL][uU][dD][eE]    { return INCLUDE; }
   [oO][dD][dD]                    { return ODD; }
   [oO][pP][tT]                    { return OPT; }
+  [oO][rR][gG]                    { return ORG; }
   [rR][sS]                        { return RS; }
   [rR][sS][sS][eE][tT]            { return RSSET; }
   [rR][sS][rR][eE][sS][eE][tT]    { return RSRESET; }

@@ -729,6 +729,7 @@ private directives ::= equ_directive |
                        rsreset_directive |
                        rs_directive |
                        opt_directive |
+                       org_directive |
                        macro_directive |
                        endm_directive
 
@@ -814,6 +815,10 @@ private opt_element ::= ID (PLUS | MINUS) {
   name = "option(+|-)"
 }
 opt_directive ::= OPT opt_element (COMMA opt_element)* {
+  pin = 1
+}
+
+org_directive ::= ORG expression {
   pin = 1
 }
 

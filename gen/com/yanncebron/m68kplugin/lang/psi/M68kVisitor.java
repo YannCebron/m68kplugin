@@ -549,6 +549,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitBoolInstructionBase(o);
   }
 
+  public void visitOrgDirective(@NotNull M68kOrgDirective o) {
+    visitPsiElement(o);
+  }
+
   public void visitOriInstruction(@NotNull M68kOriInstruction o) {
     visitBoolInstructionBase(o);
   }
