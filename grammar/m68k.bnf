@@ -764,6 +764,11 @@ roxr_instruction ::= ROXR shift_tail
 
 
 // Directives  ===================================================================
+;
+{
+  parserClass = "com.yanncebron.m68kplugin.lang.M68kDirectivesParser"
+}
+
 private directives ::= equ_directive |
                        blk_directive |
                        equals_directive |
