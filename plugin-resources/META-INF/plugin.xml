@@ -93,6 +93,10 @@
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.editor.M68kMoveLeftRightHandler"/>
 
+
+    <problemFileHighlightFilter
+        implementation="com.yanncebron.m68kplugin.lang.M68kProblemFileHighlightFilter"/>
+
   </extensions>
 
 </idea-plugin>
