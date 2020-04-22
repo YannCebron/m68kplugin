@@ -111,7 +111,7 @@ task generateM68KLexer(type: GenerateLexer) {
 runPluginVerifier {
   pluginFileName = "$rootProject.name-$version"
   ides = ["IC-2019.3", "IC-2020.1"]
-  verifierVersion = "1.236"
+  verifierVersion = "1.238"
 }
 
 check.dependsOn verifyPlugin
