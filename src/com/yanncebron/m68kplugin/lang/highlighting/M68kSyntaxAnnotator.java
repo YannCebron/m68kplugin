@@ -23,16 +23,15 @@ import com.intellij.lang.annotation.Annotator;
 import com.intellij.openapi.util.registry.Registry;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabelRefExpression;
-import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
-import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
+import com.yanncebron.m68kplugin.lang.psi.*;
 import org.jetbrains.annotations.NotNull;
 
 public class M68kSyntaxAnnotator implements Annotator {
 
   @Override
   public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
+    if (!(element instanceof M68kPsiElement)) return;
+
     if (element instanceof M68kLabel) {
       holder.createInfoAnnotation(element.getNode().findChildByType(M68kTokenTypes.ID), null).setTextAttributes(M68kTextAttributes.LABEL);
     } else if (element instanceof M68kLocalLabel) {
