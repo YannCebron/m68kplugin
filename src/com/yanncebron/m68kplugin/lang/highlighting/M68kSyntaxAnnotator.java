@@ -20,19 +20,19 @@ import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.util.registry.Registry;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
-import com.yanncebron.m68kplugin.lang.psi.*;
+import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
+import com.yanncebron.m68kplugin.lang.psi.M68kLabelRefExpression;
+import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
+import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import org.jetbrains.annotations.NotNull;
 
 public class M68kSyntaxAnnotator implements Annotator {
 
   @Override
   public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
-    if (!(element instanceof M68kPsiElement)) return;
-
     if (element instanceof M68kLabel) {
       holder.createInfoAnnotation(element.getNode().findChildByType(M68kTokenTypes.ID), null).setTextAttributes(M68kTextAttributes.LABEL);
     } else if (element instanceof M68kLocalLabel) {
@@ -47,34 +47,5 @@ public class M68kSyntaxAnnotator implements Annotator {
           .setHighlightType(ProblemHighlightType.LIKE_UNKNOWN_SYMBOL);
       }
     }
-
-    if (element instanceof M68kAdmImm) {
-      highlight(holder, element, M68kTextAttributes.ADM_IMM);
-    } else if (element instanceof M68kAdmDrd) {
-      highlight(holder, element, M68kTextAttributes.ADM_DRD);
-    } else if (element instanceof M68kAdmArd) {
-      highlight(holder, element, M68kTextAttributes.ADM_ARD);
-    } else if (element instanceof M68kAdmAri) {
-      highlight(holder, element, M68kTextAttributes.ADM_ARI);
-    } else if (element instanceof M68kAdmApi) {
-      highlight(holder, element, M68kTextAttributes.ADM_API);
-    } else if (element instanceof M68kAdmApd) {
-      highlight(holder, element, M68kTextAttributes.ADM_APD);
-    } else if (element instanceof M68kAdmAdi) {
-      highlight(holder, element, M68kTextAttributes.ADM_ADI);
-    } else if (element instanceof M68kAdmAix) {
-      highlight(holder, element, M68kTextAttributes.ADM_AIX);
-    } else if (element instanceof M68kAdmAbs) {
-      highlight(holder, element, M68kTextAttributes.ADM_ABS);
-    } else if (element instanceof M68kAdmPcd) {
-      highlight(holder, element, M68kTextAttributes.ADM_PCD);
-    } else if (element instanceof M68kAdmPci) {
-      highlight(holder, element, M68kTextAttributes.ADM_PCI);
-    }
-
-  }
-
-  private static void highlight(AnnotationHolder holder, PsiElement psiElement, TextAttributesKey key) {
-    holder.createInfoAnnotation(psiElement, null).setTextAttributes(key);
   }
 }

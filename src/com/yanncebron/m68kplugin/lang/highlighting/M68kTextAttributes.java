@@ -52,31 +52,6 @@ public class M68kTextAttributes {
   public static final TextAttributesKey CCR_REGISTER =
     createTextAttributesKey("M68K_CCR_REGISTER", DefaultLanguageHighlighterColors.GLOBAL_VARIABLE);
 
-
-  public static final TextAttributesKey ADM_IMM =
-    createTextAttributesKey("M68K_ADM_IMM", HighlighterColors.TEXT);
-  public static final TextAttributesKey ADM_DRD =
-    createTextAttributesKey("M68K_ADM_DRD", HighlighterColors.TEXT);
-  public static final TextAttributesKey ADM_ARD =
-    createTextAttributesKey("M68K_ADM_ARD", HighlighterColors.TEXT);
-  public static final TextAttributesKey ADM_ARI =
-    createTextAttributesKey("M68K_ADM_ARI", HighlighterColors.TEXT);
-  public static final TextAttributesKey ADM_API =
-    createTextAttributesKey("M68K_ADM_API", HighlighterColors.TEXT);
-  public static final TextAttributesKey ADM_APD =
-    createTextAttributesKey("M68K_ADM_APD", HighlighterColors.TEXT);
-  public static final TextAttributesKey ADM_ADI =
-    createTextAttributesKey("M68K_ADM_ADI", HighlighterColors.TEXT);
-  public static final TextAttributesKey ADM_AIX =
-    createTextAttributesKey("M68K_ADM_AIX", HighlighterColors.TEXT);
-  public static final TextAttributesKey ADM_ABS =
-    createTextAttributesKey("M68K_ADM_ABS", HighlighterColors.TEXT);
-  public static final TextAttributesKey ADM_PCD =
-    createTextAttributesKey("M68K_ADM_PCD", HighlighterColors.TEXT);
-  public static final TextAttributesKey ADM_PCI =
-    createTextAttributesKey("M68K_ADM_PCI", HighlighterColors.TEXT);
-
-
   public static final TextAttributesKey DOT =
     createTextAttributesKey("M68K_DOT", DefaultLanguageHighlighterColors.DOT);
   public static final TextAttributesKey COLON =
