@@ -65,20 +65,20 @@ sourceSets {
 }
 
 intellij {
-  version intellij_platform_version
+  version = intellij_platform_version
   sandboxDirectory = project.rootDir.canonicalPath + "/" + sandboxDir
 }
 
 
 runIde {
   if (project.hasProperty("ideDirectory")) {
-    ideDirectory project.property("ideDirectory")
+    ideDirectory = project.property("ideDirectory")
   }
   systemProperty('idea.auto.reload.plugins', false)
 }
 
 buildSearchableOptions {
-  enabled false
+  enabled = false
 }
 
 patchPluginXml {
