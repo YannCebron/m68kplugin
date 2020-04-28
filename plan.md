@@ -16,6 +16,10 @@
 - README.md
 - CHANGELOG.md
 
+## Instruction Sets
+* 680x0 variants
+* 68881 FPU
+
 ## Highlighting
 - `macro` missing `endm`
 - privileged instructions

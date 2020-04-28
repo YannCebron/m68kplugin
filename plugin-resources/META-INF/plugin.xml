@@ -16,11 +16,11 @@
 
 <idea-plugin>
   <id>com.yanncebron.m68kplugin</id>
-  <name>Motorola 68000 Assembler</name>
+  <name>Motorola 68000 Series Assembler</name>
   <vendor email="yann.cebron@gmail.com" url="https://yanncebron.github.io/">Yann Cébron</vendor>
 
   <description><![CDATA[
-    Supports Motorola 68000 assembly language.
+    Supports Motorola 68000 Series assembly language.
 
     <br/>
     <br/>
