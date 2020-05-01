@@ -790,11 +790,7 @@ private directives ::= equ_directive |
                        macro_directive |
                        endm_directive |
                        end_directive |
-                       ifd_directive |
-                       ifnd_directive |
-                       else_directive |
-                       elseif_directive |
-                       endc_directive
+                       conditional_assembly_directives
 
 fake equ_directive_base ::= label expression?
 {
@@ -915,6 +911,11 @@ macro_directive ::= label MACRO
 endm_directive ::= ENDM
 
 
+private conditional_assembly_directives ::= ifd_directive |
+                                            ifnd_directive |
+                                            else_directive |
+                                            elseif_directive |
+                                            endc_directive
 private if_label ::= ID
 {
   name = "label"
@@ -930,6 +931,7 @@ ifnd_directive ::= IFND if_label
 elseif_directive ::= ELSEIF
 else_directive ::= ELSE
 endc_directive ::= ENDC
+
 
 // Expressions  ============================================================
 ;{
