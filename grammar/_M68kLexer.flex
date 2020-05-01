@@ -302,6 +302,9 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
   [mM][aA][cC][rR][oO]            { return MACRO; }
   [eE][nN][dD][mM]                { return ENDM; }
 
+  [iI][fF][nN][dD]                { return IFND; }
+  [eE][nN][dD][cC]                { return ENDC; }
+
   {EOL_COMMENT}                   { yybegin(IN_COMMENT); return COMMENT; }
 
   {DECNUMBER}                     { return DEC_NUMBER; }

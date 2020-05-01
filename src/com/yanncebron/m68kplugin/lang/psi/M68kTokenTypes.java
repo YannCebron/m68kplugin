@@ -103,6 +103,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType EOR = new M68kTokenType("eor");
   public static final IElementType EORI = new M68kTokenType("eori");
   public static final IElementType END = new M68kTokenType("end");
+  public static final IElementType ENDC = new M68kTokenType("endc");
   public static final IElementType ENDM = new M68kTokenType("endm");
   public static final IElementType EQ = new M68kTokenType("=");
   public static final IElementType EQU = new M68kTokenType("equ");
@@ -113,6 +114,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType HASH = new M68kTokenType("#");
   public static final IElementType HEX_NUMBER = new M68kTokenType("hex_number");
   public static final IElementType ID = new M68kTokenType("id");
+  public static final IElementType IFND = new M68kTokenType("ifnd");
   public static final IElementType ILLEGAL = new M68kTokenType("illegal");
   public static final IElementType INCBIN = new M68kTokenType("incbin");
   public static final IElementType INCDIR = new M68kTokenType("incdir");

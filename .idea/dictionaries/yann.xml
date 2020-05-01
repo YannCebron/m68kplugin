@@ -27,10 +27,12 @@
       <w>dbvc</w>
       <w>dbvs</w>
       <w>divu</w>
+      <w>endc</w>
       <w>endm</w>
       <w>eori</w>
       <w>equr</w>
       <w>grammarkit</w>
+      <w>ifnd</w>
       <w>incbin</w>
       <w>incdir</w>
       <w>kplugin</w>
