@@ -912,8 +912,19 @@ org_directive ::= ORG expression
 macro_directive ::= label MACRO
 endm_directive ::= ENDM
 
-ifd_directive ::= IFD ID
-ifnd_directive ::= IFND ID
+
+private if_label ::= ID
+{
+  name = "label"
+}
+ifd_directive ::= IFD if_label
+{
+  pin = 1
+}
+ifnd_directive ::= IFND if_label
+{
+  pin = 1
+}
 endc_directive ::= ENDC
 
 // Expressions  ============================================================

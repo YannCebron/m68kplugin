@@ -173,6 +173,10 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" ifd NAME");
   }
 
+  public void testIfdDirectiveMissingLabel() throws Exception {
+    doCodeTest(" ifd ");
+  }
+
   public void testIfndDirective() throws Exception {
     doCodeTest(" ifnd NAME");
   }

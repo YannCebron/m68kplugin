@@ -306,27 +306,43 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // IFD ID
-  public static boolean ifd_directive(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ifd_directive")) return false;
-    if (!nextTokenIs(b, IFD)) return false;
+  // ID
+  static boolean if_label(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "if_label")) return false;
+    if (!nextTokenIs(b, "<label>", ID)) return false;
     boolean r;
-    Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, IFD, ID);
-    exit_section_(b, m, IFD_DIRECTIVE, r);
+    Marker m = enter_section_(b, l, _NONE_, null, "<label>");
+    r = consumeToken(b, ID);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
-  // IFND ID
+  // IFD if_label
+  public static boolean ifd_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ifd_directive")) return false;
+    if (!nextTokenIs(b, IFD)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, IFD_DIRECTIVE, null);
+    r = consumeToken(b, IFD);
+    p = r; // pin = 1
+    r = r && if_label(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // IFND if_label
   public static boolean ifnd_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ifnd_directive")) return false;
     if (!nextTokenIs(b, IFND)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, IFND, ID);
-    exit_section_(b, m, IFND_DIRECTIVE, r);
-    return r;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, IFND_DIRECTIVE, null);
+    r = consumeToken(b, IFND);
+    p = r; // pin = 1
+    r = r && if_label(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */
