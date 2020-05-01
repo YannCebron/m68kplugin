@@ -792,6 +792,8 @@ private directives ::= equ_directive |
                        end_directive |
                        ifd_directive |
                        ifnd_directive |
+                       else_directive |
+                       elseif_directive |
                        endc_directive
 
 fake equ_directive_base ::= label expression?
@@ -925,6 +927,8 @@ ifnd_directive ::= IFND if_label
 {
   pin = 1
 }
+elseif_directive ::= ELSEIF
+else_directive ::= ELSE
 endc_directive ::= ENDC
 
 // Expressions  ============================================================

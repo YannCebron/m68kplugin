@@ -306,6 +306,8 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
   [iI][fF][dD]                    { return IFD; }
   [iI][fF][nN][dD]                { return IFND; }
   [eE][nN][dD][cC]                { return ENDC; }
+  [eE][lL][sS][eE]                { return ELSE; }
+  [eE][lL][sS][eE][iI][fF]        { return ELSEIF; }
 
   {EOL_COMMENT}                   { yybegin(IN_COMMENT); return COMMENT; }
 

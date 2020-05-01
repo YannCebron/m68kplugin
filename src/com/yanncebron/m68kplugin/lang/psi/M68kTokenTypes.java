@@ -102,6 +102,8 @@ public abstract class M68kTokenTypes {
   public static final IElementType DS = new M68kTokenType("ds");
   public static final IElementType EOR = new M68kTokenType("eor");
   public static final IElementType EORI = new M68kTokenType("eori");
+  public static final IElementType ELSE = new M68kTokenType("else");
+  public static final IElementType ELSEIF = new M68kTokenType("elseif");
   public static final IElementType END = new M68kTokenType("end");
   public static final IElementType ENDC = new M68kTokenType("endc");
   public static final IElementType ENDM = new M68kTokenType("endm");

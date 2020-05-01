@@ -159,6 +159,8 @@ public class M68kDirectivesParser {
   //                        end_directive |
   //                        ifd_directive |
   //                        ifnd_directive |
+  //                        else_directive |
+  //                        elseif_directive |
   //                        endc_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
@@ -186,6 +188,8 @@ public class M68kDirectivesParser {
     if (!r) r = end_directive(b, l + 1);
     if (!r) r = ifd_directive(b, l + 1);
     if (!r) r = ifnd_directive(b, l + 1);
+    if (!r) r = else_directive(b, l + 1);
+    if (!r) r = elseif_directive(b, l + 1);
     if (!r) r = endc_directive(b, l + 1);
     return r;
   }
@@ -210,6 +214,30 @@ public class M68kDirectivesParser {
     if (!recursion_guard_(b, l, "ds_directive_1")) return false;
     data_size_all(b, l + 1);
     return true;
+  }
+
+  /* ********************************************************** */
+  // ELSE
+  public static boolean else_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "else_directive")) return false;
+    if (!nextTokenIs(b, ELSE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ELSE);
+    exit_section_(b, m, ELSE_DIRECTIVE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // ELSEIF
+  public static boolean elseif_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "elseif_directive")) return false;
+    if (!nextTokenIs(b, ELSEIF)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ELSEIF);
+    exit_section_(b, m, ELSEIF_DIRECTIVE, r);
+    return r;
   }
 
   /* ********************************************************** */

@@ -181,6 +181,14 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" ifnd NAME");
   }
 
+  public void testElseDirective() throws Exception {
+    doCodeTest(" else");
+  }
+
+  public void testElseifDirective() throws Exception {
+    doCodeTest(" elseif");
+  }
+
   public void testEndcDirective() throws Exception {
     doCodeTest(" endc");
   }
