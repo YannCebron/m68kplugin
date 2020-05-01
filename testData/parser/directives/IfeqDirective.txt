@@ -1,0 +1,11 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kIfeqDirectiveImpl(IFEQ_DIRECTIVE)
+    PsiElement(ifeq)('ifeq')
+    PsiWhiteSpace(' ')
+    M68kPlusExpressionImpl(PLUS_EXPRESSION)
+      M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+        PsiElement(dec_number)('1')
+      PsiElement(+)('+')
+      M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+        PsiElement(dec_number)('2')

@@ -177,6 +177,30 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" ifd ");
   }
 
+  public void testIfeqDirective() throws Exception {
+    doCodeTest(" ifeq 1+2");
+  }
+
+  public void testIfneDirective() throws Exception {
+    doCodeTest(" ifne 1+2");
+  }
+
+  public void testIfgeDirective() throws Exception {
+    doCodeTest(" ifge 1+2");
+  }
+
+  public void testIfgtDirective() throws Exception {
+    doCodeTest(" ifgt 1+2");
+  }
+
+  public void testIfleDirective() throws Exception {
+    doCodeTest(" ifle 1+2");
+  }
+
+  public void testIfltDirective() throws Exception {
+    doCodeTest(" iflt 1+2");
+  }
+
   public void testIfndDirective() throws Exception {
     doCodeTest(" ifnd NAME");
   }

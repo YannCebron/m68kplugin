@@ -912,7 +912,13 @@ endm_directive ::= ENDM
 
 
 private conditional_assembly_directives ::= ifd_directive |
+                                            ifeq_directive |
+                                            ifge_directive |
+                                            ifgt_directive |
                                             ifnd_directive |
+                                            ifle_directive |
+                                            iflt_directive |
+                                            ifne_directive |
                                             else_directive |
                                             elseif_directive |
                                             endc_directive
@@ -925,6 +931,30 @@ ifd_directive ::= IFD if_label
   pin = 1
 }
 ifnd_directive ::= IFND if_label
+{
+  pin = 1
+}
+ifeq_directive ::= IFEQ expression
+{
+  pin = 1
+}
+ifge_directive ::= IFGE expression
+{
+  pin = 1
+}
+ifgt_directive ::= IFGT expression
+{
+  pin = 1
+}
+ifle_directive ::= IFLE expression
+{
+  pin = 1
+}
+iflt_directive ::= IFLT expression
+{
+  pin = 1
+}
+ifne_directive ::= IFNE expression
 {
   pin = 1
 }

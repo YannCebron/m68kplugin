@@ -116,7 +116,13 @@ public interface M68kTypes {
   IElementType EXP_EXPRESSION = new M68kCompositeElementType("EXP_EXPRESSION");
   IElementType EXT_INSTRUCTION = new M68kCompositeElementType("EXT_INSTRUCTION");
   IElementType IFD_DIRECTIVE = new M68kCompositeElementType("IFD_DIRECTIVE");
+  IElementType IFEQ_DIRECTIVE = new M68kCompositeElementType("IFEQ_DIRECTIVE");
+  IElementType IFGE_DIRECTIVE = new M68kCompositeElementType("IFGE_DIRECTIVE");
+  IElementType IFGT_DIRECTIVE = new M68kCompositeElementType("IFGT_DIRECTIVE");
+  IElementType IFLE_DIRECTIVE = new M68kCompositeElementType("IFLE_DIRECTIVE");
+  IElementType IFLT_DIRECTIVE = new M68kCompositeElementType("IFLT_DIRECTIVE");
   IElementType IFND_DIRECTIVE = new M68kCompositeElementType("IFND_DIRECTIVE");
+  IElementType IFNE_DIRECTIVE = new M68kCompositeElementType("IFNE_DIRECTIVE");
   IElementType ILLEGAL_INSTRUCTION = new M68kCompositeElementType("ILLEGAL_INSTRUCTION");
   IElementType INCBIN_DIRECTIVE = new M68kCompositeElementType("INCBIN_DIRECTIVE");
   IElementType INCDIR_DIRECTIVE = new M68kCompositeElementType("INCDIR_DIRECTIVE");
@@ -488,8 +494,26 @@ public interface M68kTypes {
       else if (type == IFD_DIRECTIVE) {
         return new M68kIfdDirectiveImpl(node);
       }
+      else if (type == IFEQ_DIRECTIVE) {
+        return new M68kIfeqDirectiveImpl(node);
+      }
+      else if (type == IFGE_DIRECTIVE) {
+        return new M68kIfgeDirectiveImpl(node);
+      }
+      else if (type == IFGT_DIRECTIVE) {
+        return new M68kIfgtDirectiveImpl(node);
+      }
+      else if (type == IFLE_DIRECTIVE) {
+        return new M68kIfleDirectiveImpl(node);
+      }
+      else if (type == IFLT_DIRECTIVE) {
+        return new M68kIfltDirectiveImpl(node);
+      }
       else if (type == IFND_DIRECTIVE) {
         return new M68kIfndDirectiveImpl(node);
+      }
+      else if (type == IFNE_DIRECTIVE) {
+        return new M68kIfneDirectiveImpl(node);
       }
       else if (type == ILLEGAL_INSTRUCTION) {
         return new M68kIllegalInstructionImpl(node);

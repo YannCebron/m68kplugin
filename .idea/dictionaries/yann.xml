@@ -32,7 +32,13 @@
       <w>eori</w>
       <w>equr</w>
       <w>grammarkit</w>
+      <w>ifeq</w>
+      <w>ifge</w>
+      <w>ifgt</w>
+      <w>ifle</w>
+      <w>iflt</w>
       <w>ifnd</w>
+      <w>ifne</w>
       <w>incbin</w>
       <w>incdir</w>
       <w>kplugin</w>

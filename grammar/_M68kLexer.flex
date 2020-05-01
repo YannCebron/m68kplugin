@@ -304,7 +304,13 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
   [eE][nN][dD][mM]                { return ENDM; }
 
   [iI][fF][dD]                    { return IFD; }
+  [iI][fF][eE][qQ]                { return IFEQ; }
+  [iI][fF][gG][eE]                { return IFGE; }
+  [iI][fF][gG][tT]                { return IFGT; }
   [iI][fF][nN][dD]                { return IFND; }
+  [iI][fF][nN][eE]                { return IFNE; }
+  [iI][fF][lL][eE]                { return IFLE; }
+  [iI][fF][lL][tT]                { return IFLT; }
   [eE][nN][dD][cC]                { return ENDC; }
   [eE][lL][sS][eE]                { return ELSE; }
   [eE][lL][sS][eE][iI][fF]        { return ELSEIF; }
