@@ -910,7 +910,10 @@ org_directive ::= ORG expression
 macro_directive ::= label MACRO
 endm_directive ::= ENDM
 
-
+;
+{
+  pin("if.*_directive") = 1
+}
 private conditional_assembly_directives ::= ifd_directive |
                                             ifeq_directive |
                                             ifge_directive |
@@ -922,42 +925,21 @@ private conditional_assembly_directives ::= ifd_directive |
                                             else_directive |
                                             elseif_directive |
                                             endc_directive
+
 private if_label ::= ID
 {
   name = "label"
 }
 ifd_directive ::= IFD if_label
-{
-  pin = 1
-}
 ifnd_directive ::= IFND if_label
-{
-  pin = 1
-}
+
 ifeq_directive ::= IFEQ expression
-{
-  pin = 1
-}
 ifge_directive ::= IFGE expression
-{
-  pin = 1
-}
 ifgt_directive ::= IFGT expression
-{
-  pin = 1
-}
 ifle_directive ::= IFLE expression
-{
-  pin = 1
-}
 iflt_directive ::= IFLT expression
-{
-  pin = 1
-}
 ifne_directive ::= IFNE expression
-{
-  pin = 1
-}
+
 elseif_directive ::= ELSEIF
 else_directive ::= ELSE
 endc_directive ::= ENDC
