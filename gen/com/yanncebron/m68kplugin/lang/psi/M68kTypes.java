@@ -113,6 +113,7 @@ public interface M68kTypes {
   IElementType EXPRESSION = new M68kCompositeElementType("EXPRESSION");
   IElementType EXP_EXPRESSION = new M68kCompositeElementType("EXP_EXPRESSION");
   IElementType EXT_INSTRUCTION = new M68kCompositeElementType("EXT_INSTRUCTION");
+  IElementType IFD_DIRECTIVE = new M68kCompositeElementType("IFD_DIRECTIVE");
   IElementType IFND_DIRECTIVE = new M68kCompositeElementType("IFND_DIRECTIVE");
   IElementType ILLEGAL_INSTRUCTION = new M68kCompositeElementType("ILLEGAL_INSTRUCTION");
   IElementType INCBIN_DIRECTIVE = new M68kCompositeElementType("INCBIN_DIRECTIVE");
@@ -475,6 +476,9 @@ public interface M68kTypes {
       }
       else if (type == EXT_INSTRUCTION) {
         return new M68kExtInstructionImpl(node);
+      }
+      else if (type == IFD_DIRECTIVE) {
+        return new M68kIfdDirectiveImpl(node);
       }
       else if (type == IFND_DIRECTIVE) {
         return new M68kIfndDirectiveImpl(node);

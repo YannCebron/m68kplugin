@@ -114,6 +114,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType HASH = new M68kTokenType("#");
   public static final IElementType HEX_NUMBER = new M68kTokenType("hex_number");
   public static final IElementType ID = new M68kTokenType("id");
+  public static final IElementType IFD = new M68kTokenType("ifd");
   public static final IElementType IFND = new M68kTokenType("ifnd");
   public static final IElementType ILLEGAL = new M68kTokenType("illegal");
   public static final IElementType INCBIN = new M68kTokenType("incbin");

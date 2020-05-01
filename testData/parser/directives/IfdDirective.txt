@@ -1,0 +1,6 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kIfdDirectiveImpl(IFD_DIRECTIVE)
+    PsiElement(ifd)('ifd')
+    PsiWhiteSpace(' ')
+    PsiElement(id)('NAME')

@@ -157,6 +157,7 @@ public class M68kDirectivesParser {
   //                        macro_directive |
   //                        endm_directive |
   //                        end_directive |
+  //                        ifd_directive |
   //                        ifnd_directive |
   //                        endc_directive
   static boolean directives(PsiBuilder b, int l) {
@@ -183,6 +184,7 @@ public class M68kDirectivesParser {
     if (!r) r = macro_directive(b, l + 1);
     if (!r) r = endm_directive(b, l + 1);
     if (!r) r = end_directive(b, l + 1);
+    if (!r) r = ifd_directive(b, l + 1);
     if (!r) r = ifnd_directive(b, l + 1);
     if (!r) r = endc_directive(b, l + 1);
     return r;
@@ -300,6 +302,18 @@ public class M68kDirectivesParser {
     Marker m = enter_section_(b);
     r = consumeToken(b, EVEN);
     exit_section_(b, m, EVEN_DIRECTIVE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IFD ID
+  public static boolean ifd_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ifd_directive")) return false;
+    if (!nextTokenIs(b, IFD)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, IFD, ID);
+    exit_section_(b, m, IFD_DIRECTIVE, r);
     return r;
   }
 

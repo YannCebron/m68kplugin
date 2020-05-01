@@ -303,6 +303,7 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
   [mM][aA][cC][rR][oO]            { return MACRO; }
   [eE][nN][dD][mM]                { return ENDM; }
 
+  [iI][fF][dD]                    { return IFD; }
   [iI][fF][nN][dD]                { return IFND; }
   [eE][nN][dD][cC]                { return ENDC; }
 

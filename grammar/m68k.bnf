@@ -790,6 +790,7 @@ private directives ::= equ_directive |
                        macro_directive |
                        endm_directive |
                        end_directive |
+                       ifd_directive |
                        ifnd_directive |
                        endc_directive
 
@@ -911,6 +912,7 @@ org_directive ::= ORG expression
 macro_directive ::= label MACRO
 endm_directive ::= ENDM
 
+ifd_directive ::= IFD ID
 ifnd_directive ::= IFND ID
 endc_directive ::= ENDC
 

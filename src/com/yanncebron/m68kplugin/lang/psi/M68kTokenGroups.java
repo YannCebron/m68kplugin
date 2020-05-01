@@ -167,6 +167,7 @@ public final class M68kTokenGroups {
     EQU,
     EQUR,
     EVEN,
+    IFD,
     IFND,
     INCBIN,
     INCDIR,
