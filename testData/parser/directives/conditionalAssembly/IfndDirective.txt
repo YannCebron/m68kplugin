@@ -3,4 +3,5 @@ FILE
   M68kIfndDirectiveImpl(IFND_DIRECTIVE)
     PsiElement(ifnd)('ifnd')
     PsiWhiteSpace(' ')
-    PsiElement(id)('NAME')
+    M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
+      PsiElement(id)('NAME')

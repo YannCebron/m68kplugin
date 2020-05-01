@@ -2,6 +2,6 @@ FILE
   PsiWhiteSpace(' ')
   M68kIfdDirectiveImpl(IFD_DIRECTIVE)
     PsiElement(ifd)('ifd')
-    PsiErrorElement:<label> expected
+    PsiErrorElement:<expression> expected
       <empty list>
   PsiWhiteSpace(' ')

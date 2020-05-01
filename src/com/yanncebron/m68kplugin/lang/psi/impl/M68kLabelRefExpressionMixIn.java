@@ -56,7 +56,8 @@ public abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
       @NotNull
       private List<M68kLabelBase> getAllLabels() { // todo
         List<M68kLabelBase> labels = new SmartList<>();
-        boolean inExpression = PsiTreeUtil.getParentOfType(getElement(), M68kExpression.class) != null;
+        boolean inExpressionOrLabelDirective = PsiTreeUtil.getParentOfType(getElement(),
+          M68kExpression.class, M68kIfdDirective.class, M68kIfndDirective.class) != null;
         getElement().getContainingFile().acceptChildren(new M68kVisitor() {
           @Override
           public void visitLabelBase(@NotNull M68kLabelBase o) {
@@ -65,11 +66,10 @@ public abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
 
           @Override
           public void visitEquDirectiveBase(@NotNull M68kEquDirectiveBase o) {
-            if (inExpression) labels.add(o.getLabel());
+            if (inExpressionOrLabelDirective) labels.add(o.getLabel());
           }
         });
         return labels;
-//        return PsiTreeUtil.getChildrenOfAnyType(getElement().getContainingFile(), M68kLabelBase.class);
       }
 
       @NotNull

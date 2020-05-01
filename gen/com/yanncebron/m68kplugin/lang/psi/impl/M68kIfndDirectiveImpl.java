@@ -40,4 +40,10 @@ public class M68kIfndDirectiveImpl extends ASTWrapperPsiElement implements M68kI
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public M68kExpression getExpression() {
+    return findChildByClass(M68kExpression.class);
+  }
+
 }

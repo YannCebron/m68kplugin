@@ -926,12 +926,8 @@ private conditional_assembly_directives ::= ifd_directive |
                                             elseif_directive |
                                             endc_directive
 
-private if_label ::= ID
-{
-  name = "label"
-}
-ifd_directive ::= IFD if_label
-ifnd_directive ::= IFND if_label
+ifd_directive ::= IFD expression
+ifnd_directive ::= IFND expression
 
 ifeq_directive ::= IFEQ expression
 ifge_directive ::= IFGE expression
