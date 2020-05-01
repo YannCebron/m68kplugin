@@ -649,6 +649,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitSetDirective(@NotNull M68kSetDirective o) {
+    visitEquDirectiveBase(o);
+  }
+
   public void visitSfInstruction(@NotNull M68kSfInstruction o) {
     visitPsiElement(o);
   }

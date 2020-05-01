@@ -41,6 +41,10 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest("label = ");
   }
 
+  public void testSetDirective() throws Exception {
+    doCodeTest("label set 42");
+  }
+
   public void testEqrDirectiveDataRegister() throws Exception {
     doCodeTest("label equr d6");
   }

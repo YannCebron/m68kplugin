@@ -177,7 +177,8 @@ public final class M68kTokenGroups {
     ORG,
     RS,
     RSSET,
-    RSRESET
+    RSRESET,
+    SET
   );
 
   public static final TokenSet OPERATORS = TokenSet.create(

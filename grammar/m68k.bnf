@@ -772,6 +772,7 @@ roxr_instruction ::= ROXR shift_tail
 private directives ::= equ_directive |
                        blk_directive |
                        equals_directive |
+                       set_directive |
                        equr_directive |
                        even_directive |
                        odd_directive |
@@ -804,6 +805,12 @@ equ_directive ::= label EQU expression
 }
 
 equals_directive ::= label EQ expression
+{
+  pin = 2
+  extends = equ_directive_base
+}
+
+set_directive ::= label SET expression
 {
   pin = 2
   extends = equ_directive_base

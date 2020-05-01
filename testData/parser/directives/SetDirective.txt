@@ -1,0 +1,9 @@
+FILE
+  M68kSetDirectiveImpl(SET_DIRECTIVE)
+    M68kLabelImpl(LABEL)
+      PsiElement(id)('label')
+    PsiWhiteSpace(' ')
+    PsiElement(set)('set')
+    PsiWhiteSpace(' ')
+    M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+      PsiElement(dec_number)('42')

@@ -139,6 +139,7 @@ public class M68kDirectivesParser {
   // equ_directive |
   //                        blk_directive |
   //                        equals_directive |
+  //                        set_directive |
   //                        equr_directive |
   //                        even_directive |
   //                        odd_directive |
@@ -164,6 +165,7 @@ public class M68kDirectivesParser {
     r = equ_directive(b, l + 1);
     if (!r) r = blk_directive(b, l + 1);
     if (!r) r = equals_directive(b, l + 1);
+    if (!r) r = set_directive(b, l + 1);
     if (!r) r = equr_directive(b, l + 1);
     if (!r) r = even_directive(b, l + 1);
     if (!r) r = odd_directive(b, l + 1);
@@ -509,6 +511,21 @@ public class M68kDirectivesParser {
     Marker m = enter_section_(b, l, _NONE_, RSSET_DIRECTIVE, null);
     r = consumeToken(b, RSSET);
     p = r; // pin = 1
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // label SET expression
+  public static boolean set_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "set_directive")) return false;
+    if (!nextTokenIs(b, "<set directive>", ID, UNDERSCORE)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, SET_DIRECTIVE, "<set directive>");
+    r = label(b, l + 1);
+    r = r && consumeToken(b, SET);
+    p = r; // pin = 2
     r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
