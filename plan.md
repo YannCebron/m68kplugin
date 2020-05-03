@@ -6,6 +6,7 @@
 
 ### Broken lexing/parsing
 - `.b|w|l` must be immediate after instruction (Parser prob?)
+- index expression == 0 is optional? `move.l d0,(a0,d2.w)`
 - allow `equr` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
 
 ## Before 1st release
