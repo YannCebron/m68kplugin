@@ -65,8 +65,8 @@ OCTNUMBER=@[0-7]+
 BINNUMBER=%[0|1]+
 
 STRING=('([^'\\]|\\.)*'|\"([^\"\\]|\\.)*\")  // todo no CRLF
-ID=[_|.]*[:letter:][a-zA-Z_0-9]*
-LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
+ID=[_.]*[a-zA-Z][a-zA-Z_0-9]*
+LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
 
 %state IN_LABEL
 %state IN_INSTRUCTION
