@@ -69,6 +69,10 @@ public class JumpInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" jsr 42(a0,d0)");
   }
 
+  public void testJsrInstructionAixMissingRn() throws Exception {
+    doCodeTest(" jsr 42(a0,)");
+  }
+
   public void testJsrInstructionMissingDestination() throws Exception {
     doCodeTest(" jsr ");
   }

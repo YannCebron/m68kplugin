@@ -1,0 +1,15 @@
+FILE
+  PsiWhiteSpace(' ')
+  M68kJsrInstructionImpl(JSR_INSTRUCTION)
+    PsiElement(jsr)('jsr')
+    PsiWhiteSpace(' ')
+    M68kAdmAixImpl(ADM_AIX)
+      M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+        PsiElement(dec_number)('42')
+      PsiElement(()('(')
+      M68kAdmArdImpl(ADM_ARD)
+        PsiElement(address_register)('a0')
+      PsiElement(,)(',')
+      PsiErrorElement:<data|address register> expected, got ')'
+        <empty list>
+      PsiElement())(')')

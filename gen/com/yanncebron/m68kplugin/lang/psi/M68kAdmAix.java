@@ -24,7 +24,7 @@ public interface M68kAdmAix extends M68kPsiElement {
   @NotNull
   M68kAdmArd getAdmArd();
 
-  @NotNull
+  @Nullable
   M68kAdmRrdIndex getAdmRrdIndex();
 
   @NotNull
