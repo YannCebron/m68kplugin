@@ -41,9 +41,9 @@ public class M68kAdmPciImpl extends ASTWrapperPsiElement implements M68kAdmPci {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public M68kAdmRrdIndex getAdmRrdIndex() {
-    return findNotNullChildByClass(M68kAdmRrdIndex.class);
+    return findChildByClass(M68kAdmRrdIndex.class);
   }
 
   @Override

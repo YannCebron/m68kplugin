@@ -3,13 +3,15 @@ FILE
   M68kSubaInstructionImpl(SUBA_INSTRUCTION)
     PsiElement(suba)('suba')
     PsiWhiteSpace(' ')
-    M68kAdmAbsImpl(ADM_ABS)
+    M68kAdmPciImpl(ADM_PCI)
       M68kNumberExpressionImpl(NUMBER_EXPRESSION)
         PsiElement(dec_number)('42')
-  PsiElement(()('(')
-  PsiElement(pc)('pc')
-  PsiElement(,)(',')
-  PsiErrorElement:<data|address register> expected, got ')'
-    PsiElement())(')')
-  PsiElement(,)(',')
-  PsiElement(address_register)('a0')
+      PsiElement(()('(')
+      PsiElement(pc)('pc')
+      PsiElement(,)(',')
+      PsiErrorElement:<data|address register> expected, got ')'
+        <empty list>
+      PsiElement())(')')
+    PsiElement(,)(',')
+    M68kAdmArdImpl(ADM_ARD)
+      PsiElement(address_register)('a0')

@@ -515,14 +515,15 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // expression L_PAREN PC COMMA adm_rrd_index R_PAREN
   public static boolean adm_pci(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_pci")) return false;
-    boolean r;
+    boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, ADM_PCI, "<adm pci>");
     r = M68kExpressionParser.expression(b, l + 1, -1);
-    r = r && consumeTokens(b, 0, L_PAREN, PC, COMMA);
-    r = r && adm_rrd_index(b, l + 1);
-    r = r && consumeToken(b, R_PAREN);
-    exit_section_(b, l, m, r, false, null);
-    return r;
+    r = r && consumeTokens(b, 3, L_PAREN, PC, COMMA);
+    p = r; // pin = 4
+    r = r && report_error_(b, adm_rrd_index(b, l + 1));
+    r = p && consumeToken(b, R_PAREN) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */

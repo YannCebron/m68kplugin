@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.psi;
 
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmPci;
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmRrdIndex;
 import com.yanncebron.m68kplugin.lang.psi.M68kDataSize;
 import com.yanncebron.m68kplugin.lang.psi.M68kMoveInstruction;
 
@@ -33,7 +34,9 @@ public class MoveInstructionPsiTest extends M68kPsiTestCase {
 
     final M68kAdmPci admPci = instruction.getAdmPci();
     assertNotNull(admPci);
-    assertEquals(M68kDataSize.WORD, admPci.getAdmRrdIndex().getDataSize());
+    final M68kAdmRrdIndex admRrdIndex = admPci.getAdmRrdIndex();
+    assertNotNull(admRrdIndex);
+    assertEquals(M68kDataSize.WORD, admRrdIndex.getDataSize());
   }
 
   private M68kMoveInstruction parse(String text) {

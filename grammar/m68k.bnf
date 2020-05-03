@@ -182,6 +182,9 @@ adm_abs ::= expression data_size_word_long?
 adm_pcd ::= expression L_PAREN PC R_PAREN
 // index(pc,d0)
 adm_pci ::= expression L_PAREN PC COMMA adm_rrd_index R_PAREN
+{
+  pin = 4
+}
 // #4000 | #4000.w | #4000.l
 adm_imm ::= HASH expression data_size_word_long?
 {
