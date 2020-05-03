@@ -22,17 +22,16 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kAdmPciImpl extends ASTWrapperPsiElement implements M68kAdmPci {
+public class M68kAdmRrdIndexImpl extends M68kDataSizedImpl implements M68kAdmRrdIndex {
 
-  public M68kAdmPciImpl(@NotNull ASTNode node) {
+  public M68kAdmRrdIndexImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitAdmPci(this);
+    visitor.visitAdmRrdIndex(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -41,15 +40,15 @@ public class M68kAdmPciImpl extends ASTWrapperPsiElement implements M68kAdmPci {
   }
 
   @Override
-  @NotNull
-  public M68kAdmRrdIndex getAdmRrdIndex() {
-    return findNotNullChildByClass(M68kAdmRrdIndex.class);
+  @Nullable
+  public M68kAdmArd getAdmArd() {
+    return findChildByClass(M68kAdmArd.class);
   }
 
   @Override
-  @NotNull
-  public M68kExpression getExpression() {
-    return findNotNullChildByClass(M68kExpression.class);
+  @Nullable
+  public M68kAdmDrd getAdmDrd() {
+    return findChildByClass(M68kAdmDrd.class);
   }
 
 }

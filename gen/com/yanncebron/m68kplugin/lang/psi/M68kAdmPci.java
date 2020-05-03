@@ -22,7 +22,7 @@ import com.intellij.psi.PsiElement;
 public interface M68kAdmPci extends M68kPsiElement {
 
   @NotNull
-  M68kAdmRrd getAdmRrd();
+  M68kAdmRrdIndex getAdmRrdIndex();
 
   @NotNull
   M68kExpression getExpression();

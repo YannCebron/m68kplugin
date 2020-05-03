@@ -48,8 +48,8 @@ public class M68kAdmAixImpl extends ASTWrapperPsiElement implements M68kAdmAix {
 
   @Override
   @NotNull
-  public M68kAdmRrd getAdmRrd() {
-    return findNotNullChildByClass(M68kAdmRrd.class);
+  public M68kAdmRrdIndex getAdmRrdIndex() {
+    return findNotNullChildByClass(M68kAdmRrdIndex.class);
   }
 
   @Override

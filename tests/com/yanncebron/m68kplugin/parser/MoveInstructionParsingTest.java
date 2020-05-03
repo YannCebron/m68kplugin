@@ -73,6 +73,14 @@ public class MoveInstructionParsingTest extends M68kParsingTestCase {
     doCodeTest(" move.l 4,a6");
   }
 
+  public void testMoveInstructionPciDataSizeDrd() throws Exception {
+    doCodeTest(" move.b 42(PC,d6.w),d6");
+  }
+
+  public void testMoveInstructionPciLabelDataSizeDrd() throws Exception {
+    doCodeTest(" move.w label(pc,d0.w),d0");
+  }
+
 
   // USP ----------------------------------------------------------------
   public void testMoveInstructionUspArd() throws Exception {

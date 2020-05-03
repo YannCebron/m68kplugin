@@ -160,6 +160,12 @@ adm_rrd ::= adm_drd | adm_ard
 {
   name = "data|address register"
 }
+// Rn[.bwl] used in adm_ix/adm_pci
+adm_rrd_index ::= (adm_drd data_size_all?) | (adm_ard data_size_word_long?)
+{
+  name = "data|address register"
+  extends = data_sized
+}
 // (a0)
 adm_ari ::= L_PAREN adm_ard R_PAREN
 // (a0)+
@@ -169,13 +175,13 @@ adm_apd ::= MINUS L_PAREN adm_ard R_PAREN
 // index(a0)
 adm_adi ::= expression L_PAREN adm_ard R_PAREN
 // index(a0,d0)
-adm_aix ::= expression L_PAREN adm_ard COMMA adm_rrd R_PAREN
+adm_aix ::= expression L_PAREN adm_ard COMMA adm_rrd_index R_PAREN
 // 4000 | 4000.w | 4000.l 
 adm_abs ::= expression data_size_word_long?
 // index(pc)
 adm_pcd ::= expression L_PAREN PC R_PAREN
 // index(pc,d0)
-adm_pci ::= expression L_PAREN PC COMMA adm_rrd R_PAREN
+adm_pci ::= expression L_PAREN PC COMMA adm_rrd_index R_PAREN
 // #4000 | #4000.w | #4000.l
 adm_imm ::= HASH expression data_size_word_long?
 {

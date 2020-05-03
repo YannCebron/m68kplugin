@@ -1096,7 +1096,7 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 227: break;
           case 28: 
-            { return L_PAREN;
+            { clearBranchIdMode(); return L_PAREN;
             } 
             // fall through
           case 228: break;
@@ -1106,7 +1106,7 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 229: break;
           case 30: 
-            { return L_BRACKET;
+            { clearBranchIdMode(); return L_BRACKET;
             } 
             // fall through
           case 230: break;

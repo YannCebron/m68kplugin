@@ -58,18 +58,19 @@ public class M68kParser implements PsiParser, LightPsiParser {
       NUMBER_EXPRESSION, OR_EXPRESSION, PAREN_EXPRESSION, PLUS_EXPRESSION,
       SHIFT_LEFT_EXPRESSION, SHIFT_RIGHT_EXPRESSION, STRING_EXPRESSION, UNARY_COMPLEMENT_EXPRESSION,
       UNARY_MINUS_EXPRESSION, UNARY_PLUS_EXPRESSION),
-    create_token_set_(ABCD_INSTRUCTION, ANDI_INSTRUCTION, AND_INSTRUCTION, ASL_INSTRUCTION,
-      ASR_INSTRUCTION, BCHG_INSTRUCTION, BCLR_INSTRUCTION, BLK_DIRECTIVE,
-      BSET_INSTRUCTION, BSR_INSTRUCTION, BTST_INSTRUCTION, CHK_INSTRUCTION,
-      CLR_INSTRUCTION, CMPA_INSTRUCTION, CMPI_INSTRUCTION, CMPM_INSTRUCTION,
-      CMP_INSTRUCTION, DCB_DIRECTIVE, DC_DIRECTIVE, DS_DIRECTIVE,
-      EORI_INSTRUCTION, EOR_INSTRUCTION, EXG_INSTRUCTION, EXT_INSTRUCTION,
-      LEA_INSTRUCTION, LSL_INSTRUCTION, LSR_INSTRUCTION, MOVEA_INSTRUCTION,
-      MOVEM_INSTRUCTION, MOVEP_INSTRUCTION, MOVEQ_INSTRUCTION, MOVE_INSTRUCTION,
-      NBCD_INSTRUCTION, NEGX_INSTRUCTION, NEG_INSTRUCTION, NOT_INSTRUCTION,
-      ORI_INSTRUCTION, OR_INSTRUCTION, PEA_INSTRUCTION, ROL_INSTRUCTION,
-      ROR_INSTRUCTION, ROXL_INSTRUCTION, ROXR_INSTRUCTION, RS_DIRECTIVE,
-      SBCD_INSTRUCTION, SWAP_INSTRUCTION, TAS_INSTRUCTION, TST_INSTRUCTION),
+    create_token_set_(ABCD_INSTRUCTION, ADM_RRD_INDEX, ANDI_INSTRUCTION, AND_INSTRUCTION,
+      ASL_INSTRUCTION, ASR_INSTRUCTION, BCHG_INSTRUCTION, BCLR_INSTRUCTION,
+      BLK_DIRECTIVE, BSET_INSTRUCTION, BSR_INSTRUCTION, BTST_INSTRUCTION,
+      CHK_INSTRUCTION, CLR_INSTRUCTION, CMPA_INSTRUCTION, CMPI_INSTRUCTION,
+      CMPM_INSTRUCTION, CMP_INSTRUCTION, DCB_DIRECTIVE, DC_DIRECTIVE,
+      DS_DIRECTIVE, EORI_INSTRUCTION, EOR_INSTRUCTION, EXG_INSTRUCTION,
+      EXT_INSTRUCTION, LEA_INSTRUCTION, LSL_INSTRUCTION, LSR_INSTRUCTION,
+      MOVEA_INSTRUCTION, MOVEM_INSTRUCTION, MOVEP_INSTRUCTION, MOVEQ_INSTRUCTION,
+      MOVE_INSTRUCTION, NBCD_INSTRUCTION, NEGX_INSTRUCTION, NEG_INSTRUCTION,
+      NOT_INSTRUCTION, ORI_INSTRUCTION, OR_INSTRUCTION, PEA_INSTRUCTION,
+      ROL_INSTRUCTION, ROR_INSTRUCTION, ROXL_INSTRUCTION, ROXR_INSTRUCTION,
+      RS_DIRECTIVE, SBCD_INSTRUCTION, SWAP_INSTRUCTION, TAS_INSTRUCTION,
+      TST_INSTRUCTION),
   };
 
   /* ********************************************************** */
@@ -314,7 +315,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // expression L_PAREN adm_ard COMMA adm_rrd R_PAREN
+  // expression L_PAREN adm_ard COMMA adm_rrd_index R_PAREN
   public static boolean adm_aix(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_aix")) return false;
     boolean r;
@@ -323,7 +324,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = r && consumeToken(b, L_PAREN);
     r = r && adm_ard(b, l + 1);
     r = r && consumeToken(b, COMMA);
-    r = r && adm_rrd(b, l + 1);
+    r = r && adm_rrd_index(b, l + 1);
     r = r && consumeToken(b, R_PAREN);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -511,14 +512,14 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // expression L_PAREN PC COMMA adm_rrd R_PAREN
+  // expression L_PAREN PC COMMA adm_rrd_index R_PAREN
   public static boolean adm_pci(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_pci")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ADM_PCI, "<adm pci>");
     r = M68kExpressionParser.expression(b, l + 1, -1);
     r = r && consumeTokens(b, 0, L_PAREN, PC, COMMA);
-    r = r && adm_rrd(b, l + 1);
+    r = r && adm_rrd_index(b, l + 1);
     r = r && consumeToken(b, R_PAREN);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -534,6 +535,54 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = adm_ard(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  /* ********************************************************** */
+  // (adm_drd data_size_all?) | (adm_ard data_size_word_long?)
+  public static boolean adm_rrd_index(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_rrd_index")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, ADM_RRD_INDEX, "<data|address register>");
+    r = adm_rrd_index_0(b, l + 1);
+    if (!r) r = adm_rrd_index_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // adm_drd data_size_all?
+  private static boolean adm_rrd_index_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_rrd_index_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = adm_drd(b, l + 1);
+    r = r && adm_rrd_index_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_all?
+  private static boolean adm_rrd_index_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_rrd_index_0_1")) return false;
+    data_size_all(b, l + 1);
+    return true;
+  }
+
+  // adm_ard data_size_word_long?
+  private static boolean adm_rrd_index_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_rrd_index_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = adm_ard(b, l + 1);
+    r = r && adm_rrd_index_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_word_long?
+  private static boolean adm_rrd_index_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_rrd_index_1_1")) return false;
+    data_size_word_long(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */

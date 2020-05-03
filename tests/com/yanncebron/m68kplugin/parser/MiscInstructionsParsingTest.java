@@ -85,6 +85,10 @@ public class MiscInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" lea.l src,a0");
   }
 
+  public void testLeaInstructionAixDataSize() throws  Exception {
+    doCodeTest(" lea 8(a0,d1.w),a0");
+  }
+
   public void testLeaInstructionMissingSource() throws Exception {
     doCodeTest(" lea ");
   }
