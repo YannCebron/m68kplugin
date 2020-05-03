@@ -140,4 +140,16 @@ public class MinimalLexerTest extends M68kLexerTestCase {
         "id ('.s')");
   }
 
+  public void testInstructionAdmAbsWithDataSize() {
+    doTest("  movea.l 4.l,a0",
+      "WHITE_SPACE ('  ')\n" +
+        "movea ('movea')\n" +
+        ".l ('.l')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "dec_number ('4')\n" +
+        ".l ('.l')\n" +
+        ", (',')\n" +
+        "address_register ('a0')");
+  }
+
 }

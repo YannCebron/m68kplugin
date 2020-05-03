@@ -118,7 +118,7 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
   "/"  { return DIV; }
   "="  { return EQ; }
   "^"  { return POW; }
-  "#"  { return HASH; }
+  "#"  { clearBranchIdMode(); return HASH; }
   "~"  { return TILDE; }
   "%"  { return PERCENT; }
   "&"  { return AMPERSAND; }
@@ -317,10 +317,10 @@ LABEL=[:letter:][a-zA-Z_0-9]*  // todo without "./_" first char
 
   {EOL_COMMENT}                   { yybegin(IN_COMMENT); return COMMENT; }
 
-  {DECNUMBER}                     { return DEC_NUMBER; }
-  {HEXNUMBER}                     { return HEX_NUMBER; }
-  {OCTNUMBER}                     { return OCT_NUMBER; }
-  {BINNUMBER}                     { return BIN_NUMBER; }
+  {DECNUMBER}                     { clearBranchIdMode(); return DEC_NUMBER; }
+  {HEXNUMBER}                     { clearBranchIdMode(); return HEX_NUMBER; }
+  {OCTNUMBER}                     { clearBranchIdMode(); return OCT_NUMBER; }
+  {BINNUMBER}                     { clearBranchIdMode(); return BIN_NUMBER; }
 
   {ID}                            { return ID; }
   {STRING}                        { return STRING; }

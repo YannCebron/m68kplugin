@@ -49,4 +49,8 @@ public class MoveaInstructionParsingTest extends M68kParsingTestCase {
     doCodeTest(" movea src,a1");
   }
 
+  public void testMoveaInstructionAbsWithDataSize() throws Exception {
+    doCodeTest(" movea.l 4.l,a0");
+  }
+
 }
