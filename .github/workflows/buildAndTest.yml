@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: gradle:jdk11
+      image: gradle:jdk8
     steps:
     - uses: actions/checkout@v2
     - name: Setup Cache
