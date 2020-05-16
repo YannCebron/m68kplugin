@@ -20,9 +20,9 @@ import com.intellij.psi.tree.IElementType;
 import com.yanncebron.m68kplugin.lang.M68kLanguage;
 import org.jetbrains.annotations.NotNull;
 
-public class M68kCompositeElementType extends IElementType {
+class M68kCompositeElementType extends IElementType {
 
-  public M68kCompositeElementType(@NotNull String debugName) {
+  M68kCompositeElementType(@NotNull String debugName) {
     super(debugName, M68kLanguage.INSTANCE);
   }
 }
