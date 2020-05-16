@@ -18,6 +18,7 @@ package com.yanncebron.m68kplugin.lang.psi;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.PsiElement;
 import com.intellij.lang.ASTNode;
+import com.yanncebron.m68kplugin.lang.stubs.M68kStubElementTypeFactory;
 import com.yanncebron.m68kplugin.lang.psi.impl.*;
 
 public interface M68kTypes {
@@ -130,7 +131,7 @@ public interface M68kTypes {
   IElementType INCLUDE_DIRECTIVE = new M68kCompositeElementType("INCLUDE_DIRECTIVE");
   IElementType JMP_INSTRUCTION = new M68kCompositeElementType("JMP_INSTRUCTION");
   IElementType JSR_INSTRUCTION = new M68kCompositeElementType("JSR_INSTRUCTION");
-  IElementType LABEL = new M68kCompositeElementType("LABEL");
+  IElementType LABEL = M68kStubElementTypeFactory.stubFactory("LABEL");
   IElementType LABEL_REF_EXPRESSION = new M68kCompositeElementType("LABEL_REF_EXPRESSION");
   IElementType LEA_INSTRUCTION = new M68kCompositeElementType("LEA_INSTRUCTION");
   IElementType LINK_INSTRUCTION = new M68kCompositeElementType("LINK_INSTRUCTION");

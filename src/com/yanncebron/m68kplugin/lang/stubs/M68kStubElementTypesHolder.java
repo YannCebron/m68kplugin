@@ -16,5 +16,48 @@
 
 package com.yanncebron.m68kplugin.lang.stubs;
 
+import com.intellij.psi.stubs.*;
+import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
+import com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelImpl;
+import com.yanncebron.m68kplugin.lang.stubs.impl.M68kLabelStubImpl;
+import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+
 public interface M68kStubElementTypesHolder {
+
+  IStubElementType<M68kLabelStub, M68kLabel> LABEL =
+    new M68kStubElementType<M68kLabelStub, M68kLabel>("LABEL") {
+
+      @Override
+      public void serialize(@NotNull M68kLabelStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+        dataStream.writeName(stub.getName());
+      }
+
+      @NotNull
+      @Override
+      public M68kLabelStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+        return new M68kLabelStubImpl(parentStub, this, dataStream.readNameString());
+      }
+
+      @Override
+      public void indexStub(@NotNull M68kLabelStub stub, @NotNull IndexSink sink) {
+        final String name = stub.getName();
+        if (name != null) {
+          sink.occurrence(M68kLabelStubIndex.KEY, name);
+        }
+      }
+
+      @Override
+      public M68kLabel createPsi(@NotNull M68kLabelStub stub) {
+        return new M68kLabelImpl(stub, this);
+      }
+
+      @NotNull
+      @Override
+      public M68kLabelStub createStub(@NotNull M68kLabel psi, StubElement parentStub) {
+        return new M68kLabelStubImpl(parentStub, this, psi.getName());
+      }
+    };
 }

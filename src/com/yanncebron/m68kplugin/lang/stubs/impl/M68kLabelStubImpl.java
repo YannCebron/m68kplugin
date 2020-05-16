@@ -13,14 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.yanncebron.m68kplugin.lang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.StubBasedPsiElement;
+package com.yanncebron.m68kplugin.lang.stubs.impl;
+
+import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.NamedStubBase;
+import com.intellij.psi.stubs.StubElement;
+import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.stubs.M68kLabelStub;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public interface M68kLabel extends M68kLabelBase, StubBasedPsiElement<M68kLabelStub> {
+public class M68kLabelStubImpl extends NamedStubBase<M68kLabel> implements M68kLabelStub {
+
+  public M68kLabelStubImpl(StubElement parent,
+                           @NotNull IStubElementType elementType,
+                           @Nullable String name) {
+    super(parent, elementType, name);
+  }
 
 }

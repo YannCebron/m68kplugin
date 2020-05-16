@@ -14,31 +14,19 @@
  * limitations under the License.
  */
 
-package com.yanncebron.m68kplugin.lang;
+package com.yanncebron.m68kplugin.lang.stubs.index;
 
-import com.intellij.psi.tree.IStubFileElementType;
+import com.intellij.psi.stubs.StringStubIndexExtension;
+import com.intellij.psi.stubs.StubIndexKey;
+import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import org.jetbrains.annotations.NotNull;
 
-public class M68kFileElementType extends IStubFileElementType {
+public class M68kLabelStubIndex extends StringStubIndexExtension<M68kLabel> {
 
-  static final M68kFileElementType INSTANCE = new M68kFileElementType();
-
-  public static final String STUB_EXTERNAL_ID_PREFIX = "M68k.";
-  public static final int STUB_VERSION = 1;
-
-  private static final String EXTERNAL_ID = STUB_EXTERNAL_ID_PREFIX + "FILE";
-
-  private M68kFileElementType() {
-    super(EXTERNAL_ID, M68kLanguage.INSTANCE);
-  }
+  public static final StubIndexKey<String, M68kLabel> KEY = StubIndexKey.createIndexKey("m68k.label.index");
 
   @Override
-  public int getStubVersion() {
-    return STUB_VERSION;
-  }
-
-  @Override
-  public @NotNull String getExternalId() {
-    return EXTERNAL_ID;
+  public @NotNull StubIndexKey<String, M68kLabel> getKey() {
+    return KEY;
   }
 }

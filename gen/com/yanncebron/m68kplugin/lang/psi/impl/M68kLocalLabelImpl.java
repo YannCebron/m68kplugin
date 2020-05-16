@@ -24,7 +24,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kLocalLabelImpl extends M68kLocalLabelBaseMixIn implements M68kLocalLabel {
+public class M68kLocalLabelImpl extends M68kLocalLabelMixIn implements M68kLocalLabel {
 
   public M68kLocalLabelImpl(ASTNode node) {
     super(node);

@@ -17,7 +17,6 @@ package com.yanncebron.m68kplugin.lang.psi;
 
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiNamedElement;
 
 public class M68kVisitor extends PsiElementVisitor {
 
@@ -485,10 +484,6 @@ public class M68kVisitor extends PsiElementVisitor {
     visitLabelBase(o);
   }
 
-  public void visitLabelBase(@NotNull M68kLabelBase o) {
-    visitPsiNamedElement(o);
-  }
-
   public void visitLabelRefExpression(@NotNull M68kLabelRefExpression o) {
     visitExpression(o);
   }
@@ -821,8 +816,8 @@ public class M68kVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitPsiNamedElement(@NotNull PsiNamedElement o) {
-    visitElement(o);
+  public void visitLabelBase(@NotNull M68kLabelBase o) {
+    visitPsiElement(o);
   }
 
   public void visitPsiElement(@NotNull M68kPsiElement o) {

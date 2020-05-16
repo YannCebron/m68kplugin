@@ -73,7 +73,7 @@
 - macro label naming convention (all uppercase)
 
 ## Navigation
-- goto symbol for labels/macros/EQUs (?) --> Stubs
+- **WIP** goto symbol for labels/macros/EQUs (?) --> Stubs
 - **WIP** structure view 
   - `equr` "location"
   - macros

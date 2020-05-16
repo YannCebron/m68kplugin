@@ -66,24 +66,21 @@ private root_item_recover ::= !(instructions | labels)
 private labels ::= label | localLabel
 
 // todo must start on newline? usually not, but not required
-// todo full name is: DevPac. prefixed with last non-local label
-fake label_base ::= ID
-{
-  implements = "com.intellij.psi.PsiNamedElement"
-  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelBaseMixIn"
-}
-
 label ::= UNDERSCORE? ID COLON?
 {
-  extends = label_base
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kLabelBase"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelMixIn"
+  elementTypeFactory = "com.yanncebron.m68kplugin.lang.stubs.M68kStubElementTypeFactory.stubFactory"
+  stubClass = "com.yanncebron.m68kplugin.lang.stubs.M68kLabelStub"
 }
 
+// todo full name is: DevPac. prefixed with last non-local label
 localLabel ::= DOT ID COLON?
 {
   pin = 1
   name = "local label"
-  extends = label_base
-  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLocalLabelBaseMixIn"
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kLabelBase"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLocalLabelMixIn"
 }
 
 // todo sort instructions by frequency?

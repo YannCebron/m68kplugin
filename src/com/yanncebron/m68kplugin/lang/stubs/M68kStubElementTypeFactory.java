@@ -13,13 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.yanncebron.m68kplugin.lang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNamedElement;
+package com.yanncebron.m68kplugin.lang.stubs;
 
-public interface M68kLabelBase extends PsiNamedElement {
+import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubElement;
+import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
+import org.jetbrains.annotations.NotNull;
+
+public final class M68kStubElementTypeFactory {
+
+  public static IStubElementType<? extends StubElement<? extends M68kPsiElement>, ? extends M68kPsiElement> stubFactory(@NotNull String name) {
+    if ("LABEL".equals(name)) {
+      return M68kStubElementTypesHolder.LABEL;
+    }
+
+    throw new RuntimeException("Unknown element type '" + name + "'");
+  }
 
 }

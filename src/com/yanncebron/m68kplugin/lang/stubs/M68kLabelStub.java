@@ -13,14 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.yanncebron.m68kplugin.lang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.StubBasedPsiElement;
-import com.yanncebron.m68kplugin.lang.stubs.M68kLabelStub;
+package com.yanncebron.m68kplugin.lang.stubs;
 
-public interface M68kLabel extends M68kLabelBase, StubBasedPsiElement<M68kLabelStub> {
+import com.intellij.psi.stubs.NamedStub;
+import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 
+public interface M68kLabelStub extends NamedStub<M68kLabel> {
 }

@@ -48,6 +48,7 @@
     <stubElementTypeHolder
         externalIdPrefix="M68k."
         class="com.yanncebron.m68kplugin.lang.stubs.M68kStubElementTypesHolder"/>
+    <stubIndex implementation="com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex"/>
 
     <!--  todo both do nothing?  -->
     <!--    <lang.quoteHandler-->
@@ -102,6 +103,8 @@
     <problemFileHighlightFilter
         implementation="com.yanncebron.m68kplugin.lang.M68kProblemFileHighlightFilter"/>
 
+    <gotoSymbolContributor
+        implementation="com.yanncebron.m68kplugin.navigation.M68kGotoLabelChooseByNameContributor"/>
   </extensions>
 
 </idea-plugin>
