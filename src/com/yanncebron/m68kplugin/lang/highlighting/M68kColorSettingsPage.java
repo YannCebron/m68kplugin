@@ -32,34 +32,31 @@ import java.util.Map;
 public class M68kColorSettingsPage implements ColorSettingsPage {
 
   private static final AttributesDescriptor[] ourDescriptors = {
-    new AttributesDescriptor("Instruction", M68kTextAttributes.INSTRUCTION),
-    new AttributesDescriptor("Labels//Label", M68kTextAttributes.LABEL),
-    new AttributesDescriptor("Labels//Local Label", M68kTextAttributes.LOCAL_LABEL),
-    new AttributesDescriptor("Comment", M68kTextAttributes.COMMENT),
-    new AttributesDescriptor("Directive", M68kTextAttributes.DIRECTIVE),
-    new AttributesDescriptor("Data Size", M68kTextAttributes.DATA_SIZES),
-
-    new AttributesDescriptor("Registers//Data register", M68kTextAttributes.DATA_REGISTER),
-    new AttributesDescriptor("Registers//Address register", M68kTextAttributes.ADDRESS_REGISTER),
-    new AttributesDescriptor("Registers//SP", M68kTextAttributes.SP_REGISTER),
-    new AttributesDescriptor("Registers//SSP", M68kTextAttributes.SSP_REGISTER),
-    new AttributesDescriptor("Registers//USP", M68kTextAttributes.USP_REGISTER),
-    new AttributesDescriptor("Registers//PC", M68kTextAttributes.PC_REGISTER),
-    new AttributesDescriptor("Registers//SR", M68kTextAttributes.SR_REGISTER),
-    new AttributesDescriptor("Registers//CCR", M68kTextAttributes.CCR_REGISTER),
-
-    new AttributesDescriptor("Literals//Decimal number", M68kTextAttributes.DEC_NUMBER),
-    new AttributesDescriptor("Literals//Hexadecimal number", M68kTextAttributes.HEX_NUMBER),
-    new AttributesDescriptor("Literals//Octal number", M68kTextAttributes.OCT_NUMBER),
-    new AttributesDescriptor("Literals//Binary number", M68kTextAttributes.BIN_NUMBER),
-    new AttributesDescriptor("Literals//String", M68kTextAttributes.STRING),
-
     new AttributesDescriptor("Braces and Operators//Colon", M68kTextAttributes.COLON),
     new AttributesDescriptor("Braces and Operators//Comma", M68kTextAttributes.COMMA),
     new AttributesDescriptor("Braces and Operators//Dot", M68kTextAttributes.DOT),
     new AttributesDescriptor("Braces and Operators//Hash", M68kTextAttributes.HASH),
     new AttributesDescriptor("Braces and Operators//Operators", M68kTextAttributes.OPERATORS),
     new AttributesDescriptor("Braces and Operators//Parentheses", M68kTextAttributes.PARENTHESES),
+    new AttributesDescriptor("Comment", M68kTextAttributes.COMMENT),
+    new AttributesDescriptor("Data Size", M68kTextAttributes.DATA_SIZES),
+    new AttributesDescriptor("Directive", M68kTextAttributes.DIRECTIVE),
+    new AttributesDescriptor("Instruction", M68kTextAttributes.INSTRUCTION),
+    new AttributesDescriptor("Labels//Label", M68kTextAttributes.LABEL),
+    new AttributesDescriptor("Labels//Local Label", M68kTextAttributes.LOCAL_LABEL),
+    new AttributesDescriptor("Literals//Binary number", M68kTextAttributes.BIN_NUMBER),
+    new AttributesDescriptor("Literals//Decimal number", M68kTextAttributes.DEC_NUMBER),
+    new AttributesDescriptor("Literals//Hexadecimal number", M68kTextAttributes.HEX_NUMBER),
+    new AttributesDescriptor("Literals//Octal number", M68kTextAttributes.OCT_NUMBER),
+    new AttributesDescriptor("Literals//String", M68kTextAttributes.STRING),
+    new AttributesDescriptor("Registers//Address register", M68kTextAttributes.ADDRESS_REGISTER),
+    new AttributesDescriptor("Registers//CCR", M68kTextAttributes.CCR_REGISTER),
+    new AttributesDescriptor("Registers//Data register", M68kTextAttributes.DATA_REGISTER),
+    new AttributesDescriptor("Registers//PC", M68kTextAttributes.PC_REGISTER),
+    new AttributesDescriptor("Registers//SP", M68kTextAttributes.SP_REGISTER),
+    new AttributesDescriptor("Registers//SR", M68kTextAttributes.SR_REGISTER),
+    new AttributesDescriptor("Registers//SSP", M68kTextAttributes.SSP_REGISTER),
+    new AttributesDescriptor("Registers//USP", M68kTextAttributes.USP_REGISTER)
   };
 
   @NotNull
