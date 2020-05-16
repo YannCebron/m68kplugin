@@ -18,6 +18,10 @@ package com.yanncebron.m68kplugin.lexer;
 
 public class CommentLexerTest extends M68kLexerTestCase {
 
+  public void testCommentWithoutText() {
+    doTest(";", "comment (';')");
+  }
+
   public void testCommentOnFirstLine() {
     doTest("; Comment", "comment ('; Comment')");
   }
