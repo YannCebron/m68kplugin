@@ -34,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
+abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
 
   protected M68kLabelRefExpressionMixIn(@NotNull ASTNode node) {
     super(node);
