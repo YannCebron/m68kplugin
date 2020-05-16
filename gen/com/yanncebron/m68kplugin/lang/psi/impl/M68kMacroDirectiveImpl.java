@@ -43,7 +43,7 @@ public class M68kMacroDirectiveImpl extends ASTWrapperPsiElement implements M68k
   @Override
   @NotNull
   public M68kLabel getLabel() {
-    return findNotNullChildByClass(M68kLabel.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, M68kLabel.class));
   }
 
 }

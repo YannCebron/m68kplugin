@@ -43,13 +43,13 @@ public class M68kDbfInstructionImpl extends ASTWrapperPsiElement implements M68k
   @Override
   @Nullable
   public M68kAdmDrd getAdmDrd() {
-    return findChildByClass(M68kAdmDrd.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmDrd.class);
   }
 
   @Override
   @Nullable
   public M68kExpression getExpression() {
-    return findChildByClass(M68kExpression.class);
+    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
   }
 
 }

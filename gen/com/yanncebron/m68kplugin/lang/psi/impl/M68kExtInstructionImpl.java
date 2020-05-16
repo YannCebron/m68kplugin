@@ -42,7 +42,7 @@ public class M68kExtInstructionImpl extends M68kDataSizedImpl implements M68kExt
   @Override
   @Nullable
   public M68kAdmDrd getAdmDrd() {
-    return findChildByClass(M68kAdmDrd.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmDrd.class);
   }
 
 }

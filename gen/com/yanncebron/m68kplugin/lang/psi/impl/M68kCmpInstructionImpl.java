@@ -90,19 +90,19 @@ public class M68kCmpInstructionImpl extends M68kCmpInstructionBaseImpl implement
   @Override
   @Nullable
   public M68kAdmImm getAdmImm() {
-    return findChildByClass(M68kAdmImm.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmImm.class);
   }
 
   @Override
   @Nullable
   public M68kAdmPcd getAdmPcd() {
-    return findChildByClass(M68kAdmPcd.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmPcd.class);
   }
 
   @Override
   @Nullable
   public M68kAdmPci getAdmPci() {
-    return findChildByClass(M68kAdmPci.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmPci.class);
   }
 
 }

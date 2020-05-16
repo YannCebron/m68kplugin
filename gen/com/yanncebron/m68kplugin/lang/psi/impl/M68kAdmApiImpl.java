@@ -43,7 +43,7 @@ public class M68kAdmApiImpl extends ASTWrapperPsiElement implements M68kAdmApi {
   @Override
   @NotNull
   public M68kAdmArd getAdmArd() {
-    return findNotNullChildByClass(M68kAdmArd.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, M68kAdmArd.class));
   }
 
 }

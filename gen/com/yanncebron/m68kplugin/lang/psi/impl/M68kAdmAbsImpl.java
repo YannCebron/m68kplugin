@@ -43,7 +43,7 @@ public class M68kAdmAbsImpl extends ASTWrapperPsiElement implements M68kAdmAbs {
   @Override
   @NotNull
   public M68kExpression getExpression() {
-    return findNotNullChildByClass(M68kExpression.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, M68kExpression.class));
   }
 
 }

@@ -43,7 +43,7 @@ public class M68kUnlkInstructionImpl extends ASTWrapperPsiElement implements M68
   @Override
   @Nullable
   public M68kAdmArd getAdmArd() {
-    return findChildByClass(M68kAdmArd.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmArd.class);
   }
 
 }

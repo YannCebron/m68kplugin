@@ -42,13 +42,13 @@ public class M68kMoveqInstructionImpl extends M68kMoveInstructionBaseImpl implem
   @Override
   @Nullable
   public M68kAdmImm getSource() {
-    return findChildByClass(M68kAdmImm.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmImm.class);
   }
 
   @Override
   @Nullable
   public M68kAdmDrd getDestination() {
-    return findChildByClass(M68kAdmDrd.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmDrd.class);
   }
 
 }

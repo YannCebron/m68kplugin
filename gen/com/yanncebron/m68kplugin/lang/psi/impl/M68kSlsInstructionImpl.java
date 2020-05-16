@@ -43,43 +43,43 @@ public class M68kSlsInstructionImpl extends ASTWrapperPsiElement implements M68k
   @Override
   @Nullable
   public M68kAdmAbs getAdmAbs() {
-    return findChildByClass(M68kAdmAbs.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmAbs.class);
   }
 
   @Override
   @Nullable
   public M68kAdmAdi getAdmAdi() {
-    return findChildByClass(M68kAdmAdi.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmAdi.class);
   }
 
   @Override
   @Nullable
   public M68kAdmAix getAdmAix() {
-    return findChildByClass(M68kAdmAix.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmAix.class);
   }
 
   @Override
   @Nullable
   public M68kAdmApd getAdmApd() {
-    return findChildByClass(M68kAdmApd.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmApd.class);
   }
 
   @Override
   @Nullable
   public M68kAdmApi getAdmApi() {
-    return findChildByClass(M68kAdmApi.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmApi.class);
   }
 
   @Override
   @Nullable
   public M68kAdmAri getAdmAri() {
-    return findChildByClass(M68kAdmAri.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmAri.class);
   }
 
   @Override
   @Nullable
   public M68kAdmDrd getAdmDrd() {
-    return findChildByClass(M68kAdmDrd.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmDrd.class);
   }
 
 }

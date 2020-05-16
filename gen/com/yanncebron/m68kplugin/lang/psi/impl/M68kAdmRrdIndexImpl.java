@@ -42,13 +42,13 @@ public class M68kAdmRrdIndexImpl extends M68kDataSizedImpl implements M68kAdmRrd
   @Override
   @Nullable
   public M68kAdmArd getAdmArd() {
-    return findChildByClass(M68kAdmArd.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmArd.class);
   }
 
   @Override
   @Nullable
   public M68kAdmDrd getAdmDrd() {
-    return findChildByClass(M68kAdmDrd.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmDrd.class);
   }
 
 }

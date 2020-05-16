@@ -42,7 +42,7 @@ public class M68kUnaryComplementExpressionImpl extends M68kExpressionImpl implem
   @Override
   @Nullable
   public M68kExpression getExpression() {
-    return findChildByClass(M68kExpression.class);
+    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
   }
 
 }

@@ -43,13 +43,13 @@ public class M68kEqurDirectiveImpl extends ASTWrapperPsiElement implements M68kE
   @Override
   @Nullable
   public M68kAdmRrd getAdmRrd() {
-    return findChildByClass(M68kAdmRrd.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmRrd.class);
   }
 
   @Override
   @NotNull
   public M68kLabel getLabel() {
-    return findNotNullChildByClass(M68kLabel.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, M68kLabel.class));
   }
 
 }

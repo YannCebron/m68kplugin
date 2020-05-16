@@ -42,25 +42,25 @@ public class M68kLeaInstructionImpl extends M68kDataSizedImpl implements M68kLea
   @Override
   @Nullable
   public M68kAdmAbs getAdmAbs() {
-    return findChildByClass(M68kAdmAbs.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmAbs.class);
   }
 
   @Override
   @Nullable
   public M68kAdmAdi getAdmAdi() {
-    return findChildByClass(M68kAdmAdi.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmAdi.class);
   }
 
   @Override
   @Nullable
   public M68kAdmAix getAdmAix() {
-    return findChildByClass(M68kAdmAix.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmAix.class);
   }
 
   @Override
   @Nullable
   public M68kAdmApd getAdmApd() {
-    return findChildByClass(M68kAdmApd.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmApd.class);
   }
 
   @Override
@@ -72,19 +72,19 @@ public class M68kLeaInstructionImpl extends M68kDataSizedImpl implements M68kLea
   @Override
   @Nullable
   public M68kAdmAri getAdmAri() {
-    return findChildByClass(M68kAdmAri.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmAri.class);
   }
 
   @Override
   @Nullable
   public M68kAdmPcd getAdmPcd() {
-    return findChildByClass(M68kAdmPcd.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmPcd.class);
   }
 
   @Override
   @Nullable
   public M68kAdmPci getAdmPci() {
-    return findChildByClass(M68kAdmPci.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmPci.class);
   }
 
 }

@@ -43,13 +43,13 @@ public class M68kAdmRrdImpl extends ASTWrapperPsiElement implements M68kAdmRrd {
   @Override
   @Nullable
   public M68kAdmArd getAdmArd() {
-    return findChildByClass(M68kAdmArd.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmArd.class);
   }
 
   @Override
   @Nullable
   public M68kAdmDrd getAdmDrd() {
-    return findChildByClass(M68kAdmDrd.class);
+    return PsiTreeUtil.getChildOfType(this, M68kAdmDrd.class);
   }
 
 }

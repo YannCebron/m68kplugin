@@ -43,13 +43,13 @@ public class M68kEquDirectiveBaseImpl extends ASTWrapperPsiElement implements M6
   @Override
   @Nullable
   public M68kExpression getExpression() {
-    return findChildByClass(M68kExpression.class);
+    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
   }
 
   @Override
   @NotNull
   public M68kLabel getLabel() {
-    return findNotNullChildByClass(M68kLabel.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, M68kLabel.class));
   }
 
 }

@@ -43,7 +43,7 @@ public class M68kIfdDirectiveImpl extends ASTWrapperPsiElement implements M68kIf
   @Override
   @Nullable
   public M68kExpression getExpression() {
-    return findChildByClass(M68kExpression.class);
+    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
   }
 
 }

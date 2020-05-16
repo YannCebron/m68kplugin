@@ -42,7 +42,7 @@ public class M68kBsrInstructionImpl extends M68kDataSizedImpl implements M68kBsr
   @Override
   @Nullable
   public M68kExpression getExpression() {
-    return findChildByClass(M68kExpression.class);
+    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
   }
 
 }

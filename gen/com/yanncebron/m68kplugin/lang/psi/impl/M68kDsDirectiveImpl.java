@@ -42,7 +42,7 @@ public class M68kDsDirectiveImpl extends M68kDataSizedImpl implements M68kDsDire
   @Override
   @Nullable
   public M68kExpression getExpression() {
-    return findChildByClass(M68kExpression.class);
+    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
   }
 
 }

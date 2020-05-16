@@ -42,7 +42,7 @@ public class M68kParenExpressionImpl extends M68kExpressionImpl implements M68kP
   @Override
   @Nullable
   public M68kExpression getExpression() {
-    return findChildByClass(M68kExpression.class);
+    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
   }
 
 }
