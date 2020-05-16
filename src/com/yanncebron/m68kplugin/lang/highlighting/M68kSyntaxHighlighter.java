@@ -40,10 +40,9 @@ public class M68kSyntaxHighlighter extends SyntaxHighlighterBase {
     keys.put(M68kTokenTypes.COLON, M68kTextAttributes.COLON);
     keys.put(M68kTokenTypes.COMMA, M68kTextAttributes.COMMA);
     keys.put(M68kTokenTypes.HASH, M68kTextAttributes.HASH);
-    keys.put(M68kTokenTypes.L_PAREN, M68kTextAttributes.PARENTHESES);
-    keys.put(M68kTokenTypes.R_PAREN, M68kTextAttributes.PARENTHESES);
-    keys.put(M68kTokenTypes.L_BRACKET, M68kTextAttributes.PARENTHESES);
-    keys.put(M68kTokenTypes.R_BRACKET, M68kTextAttributes.PARENTHESES);
+    fillMap(keys, M68kTextAttributes.PARENTHESES,
+      M68kTokenTypes.L_PAREN, M68kTokenTypes.R_PAREN,
+      M68kTokenTypes.L_BRACKET, M68kTokenTypes.R_BRACKET);
     fillMap(keys, M68kTokenGroups.OPERATORS, M68kTextAttributes.OPERATORS);
 
     keys.put(M68kTokenTypes.COMMENT, M68kTextAttributes.COMMENT);
