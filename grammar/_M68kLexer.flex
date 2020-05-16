@@ -79,8 +79,8 @@ LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
 <YYINITIAL> {
   {CRLF} { return WHITE_SPACE; }
 
-  "."    { return DOT; }  // TODO ??
-  "_"    { return UNDERSCORE; }  // TODO ??
+  "."    { return DOT; }
+  "_"    { return UNDERSCORE; }
   
   {LABEL}   { yybegin(IN_LABEL); return ID; }
 
