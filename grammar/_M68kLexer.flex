@@ -72,9 +72,6 @@ LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
 %state IN_INSTRUCTION
 %state IN_COMMENT
 
-// todo instructions: <WHITE_SPACE> <ins><dataSize?> <WHITE_SPACE> <PARAMS?>
-// todo comment tail: <WHITE SPACE> <COMMENT_TEXT_WITHOUT_PREFIX> // "; commentwithPrefix"
-
 %%
 <YYINITIAL> {
   {CRLF} { return WHITE_SPACE; }
