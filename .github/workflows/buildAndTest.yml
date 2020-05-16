@@ -22,8 +22,6 @@ jobs:
     - name: Run tests
       run: gradle check
 
-    - name: Build the plugin using Gradle
-      run: gradle buildPlugin
     - name: Verify Plugin on IntelliJ Platforms
       id: verify
       uses: ChrisCarini/intellij-platform-plugin-verifier-action@v0.0.2
