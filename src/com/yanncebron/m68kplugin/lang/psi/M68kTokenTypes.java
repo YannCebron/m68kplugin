@@ -177,7 +177,6 @@ public abstract class M68kTokenTypes {
   public static final IElementType R_BRACKET = new M68kTokenType("]");
   public static final IElementType R_PAREN = new M68kTokenType(")");
   public static final IElementType SBCD = new M68kTokenType("sbcd");
-  public static final IElementType SEMICOLON = new M68kTokenType(";");
   public static final IElementType SEQ = new M68kTokenType("seq");
   public static final IElementType SET = new M68kTokenType("set");
   public static final IElementType SNE = new M68kTokenType("sne");

@@ -110,7 +110,6 @@ LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
 
   "."  { return DOT; }
   ":"  { return COLON; }
-  ";"  { return SEMICOLON; }
   ","  { return COMMA; }
   "+"  { return PLUS; }
   "-"  { return MINUS; }
