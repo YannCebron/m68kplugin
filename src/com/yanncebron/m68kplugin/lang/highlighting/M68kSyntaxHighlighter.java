@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.lang.highlighting;
 
 import com.intellij.lexer.Lexer;
+import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.TokenType;
@@ -34,7 +35,7 @@ public class M68kSyntaxHighlighter extends SyntaxHighlighterBase {
   private static final Map<IElementType, TextAttributesKey> keys = new HashMap<>();
 
   static {
-    keys.put(TokenType.BAD_CHARACTER, M68kTextAttributes.BAD_CHARACTER);
+    keys.put(TokenType.BAD_CHARACTER, HighlighterColors.BAD_CHARACTER);
 
     keys.put(M68kTokenTypes.DOT, M68kTextAttributes.DOT);
     keys.put(M68kTokenTypes.COLON, M68kTextAttributes.COLON);

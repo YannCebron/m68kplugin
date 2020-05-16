@@ -17,7 +17,6 @@
 package com.yanncebron.m68kplugin.lang.highlighting;
 
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
-import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
@@ -80,6 +79,4 @@ public class M68kTextAttributes {
   public static final TextAttributesKey BIN_NUMBER =
     createTextAttributesKey("M68K_BIN_NUMBER", DefaultLanguageHighlighterColors.NUMBER);
 
-  public static final TextAttributesKey BAD_CHARACTER =
-    createTextAttributesKey("M68K_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER);
 }
