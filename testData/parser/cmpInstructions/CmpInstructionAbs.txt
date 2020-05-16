@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kCmpInstructionImpl(CMP_INSTRUCTION)
     PsiElement(cmp)('cmp')

@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kRtsInstructionImpl(RTS_INSTRUCTION)
     PsiElement(rts)('rts')

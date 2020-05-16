@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kBleInstructionImpl(BLE_INSTRUCTION)
     PsiElement(ble)('ble')

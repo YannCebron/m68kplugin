@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kAslInstructionImpl(ASL_INSTRUCTION)
     PsiElement(asl)('asl')

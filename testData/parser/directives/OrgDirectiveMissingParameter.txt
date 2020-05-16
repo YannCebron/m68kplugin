@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kOrgDirectiveImpl(ORG_DIRECTIVE)
     PsiElement(org)('org')

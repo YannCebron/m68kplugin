@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kDbmiInstructionImpl(DBMI_INSTRUCTION)
     PsiElement(dbmi)('dbmi')

@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kBmiInstructionImpl(BMI_INSTRUCTION)
     PsiElement(bmi)('bmi')

@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kBtstInstructionImpl(BTST_INSTRUCTION)
     PsiElement(btst)('btst')

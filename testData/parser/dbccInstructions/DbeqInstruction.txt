@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kDbeqInstructionImpl(DBEQ_INSTRUCTION)
     PsiElement(dbeq)('dbeq')

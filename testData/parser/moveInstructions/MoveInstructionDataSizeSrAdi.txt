@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kMoveInstructionImpl(MOVE_INSTRUCTION)
     PsiElement(move)('move')

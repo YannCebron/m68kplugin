@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kIfgtDirectiveImpl(IFGT_DIRECTIVE)
     PsiElement(ifgt)('ifgt')

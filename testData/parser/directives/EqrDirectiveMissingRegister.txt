@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   M68kEqurDirectiveImpl(EQUR_DIRECTIVE)
     M68kLabelImpl(LABEL)
       PsiElement(id)('label')

@@ -36,7 +36,7 @@ public class M68kParserDefinition implements ParserDefinition {
   public static final TokenSet COMMENTS = TokenSet.create(M68kTokenTypes.COMMENT);
   public static final TokenSet STRING_LITERALS = TokenSet.create(M68kTokenTypes.STRING);
 
-  public static final IFileElementType FILE = new IFileElementType(M68kLanguage.INSTANCE);
+  public static final IFileElementType FILE = M68kFileElementType.INSTANCE;
 
   @NotNull
   @Override

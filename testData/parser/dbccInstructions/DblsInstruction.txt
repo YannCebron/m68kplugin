@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kDblsInstructionImpl(DBLS_INSTRUCTION)
     PsiElement(dbls)('dbls')

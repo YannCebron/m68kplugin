@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kOrInstructionImpl(OR_INSTRUCTION)
     PsiElement(or)('or')

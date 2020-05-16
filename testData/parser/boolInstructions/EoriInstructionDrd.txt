@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kEoriInstructionImpl(EORI_INSTRUCTION)
     PsiElement(eori)('eori')

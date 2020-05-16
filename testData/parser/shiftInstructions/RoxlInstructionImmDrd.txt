@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kRoxlInstructionImpl(ROXL_INSTRUCTION)
     PsiElement(roxl)('roxl')

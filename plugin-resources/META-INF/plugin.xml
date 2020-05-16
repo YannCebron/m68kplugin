@@ -44,6 +44,11 @@
     <lang.parserDefinition
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.lang.M68kParserDefinition"/>
+
+    <stubElementTypeHolder
+        externalIdPrefix="M68k."
+        class="com.yanncebron.m68kplugin.lang.stubs.M68kStubElementTypesHolder"/>
+
     <!--  todo both do nothing?  -->
     <!--    <lang.quoteHandler-->
     <!--        language="M68k"-->

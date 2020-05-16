@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kNegxInstructionImpl(NEGX_INSTRUCTION)
     PsiElement(negx)('negx')

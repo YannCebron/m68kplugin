@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kPeaInstructionImpl(PEA_INSTRUCTION)
     PsiElement(pea)('pea')

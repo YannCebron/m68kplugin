@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kDbvsInstructionImpl(DBVS_INSTRUCTION)
     PsiElement(dbvs)('dbvs')

@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kSneInstructionImpl(SNE_INSTRUCTION)
     PsiElement(sne)('sne')

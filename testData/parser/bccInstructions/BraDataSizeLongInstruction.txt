@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kBraInstructionImpl(BRA_INSTRUCTION)
     PsiElement(bra)('bra')

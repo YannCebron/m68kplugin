@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kLsrInstructionImpl(LSR_INSTRUCTION)
     PsiElement(lsr)('lsr')

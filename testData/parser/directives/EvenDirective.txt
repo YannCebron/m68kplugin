@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kEvenDirectiveImpl(EVEN_DIRECTIVE)
     PsiElement(even)('even')

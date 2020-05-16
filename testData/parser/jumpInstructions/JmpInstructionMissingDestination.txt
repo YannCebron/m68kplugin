@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kJmpInstructionImpl(JMP_INSTRUCTION)
     PsiElement(jmp)('jmp')

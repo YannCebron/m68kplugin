@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kAbcdInstructionImpl(ABCD_INSTRUCTION)
     PsiElement(abcd)('abcd')

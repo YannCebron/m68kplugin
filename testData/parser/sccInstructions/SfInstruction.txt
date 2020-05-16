@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kSfInstructionImpl(SF_INSTRUCTION)
     PsiElement(sf)('sf')

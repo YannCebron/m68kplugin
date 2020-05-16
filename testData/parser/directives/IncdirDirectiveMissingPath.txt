@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kIncdirDirectiveImpl(INCDIR_DIRECTIVE)
     PsiElement(incdir)('incdir')

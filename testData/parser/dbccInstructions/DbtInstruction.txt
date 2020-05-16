@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kDbtInstructionImpl(DBT_INSTRUCTION)
     PsiElement(dbt)('dbt')

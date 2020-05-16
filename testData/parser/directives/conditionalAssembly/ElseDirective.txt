@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kElseDirectiveImpl(ELSE_DIRECTIVE)
     PsiElement(else)('else')

@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kTrapInstructionImpl(TRAP_INSTRUCTION)
     PsiElement(trap)('trap')

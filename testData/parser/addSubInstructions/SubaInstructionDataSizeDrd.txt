@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kSubaInstructionImpl(SUBA_INSTRUCTION)
     PsiElement(suba)('suba')

@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kBltInstructionImpl(BLT_INSTRUCTION)
     PsiElement(blt)('blt')

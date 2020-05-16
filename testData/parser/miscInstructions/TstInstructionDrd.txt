@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kTstInstructionImpl(TST_INSTRUCTION)
     PsiElement(tst)('tst')

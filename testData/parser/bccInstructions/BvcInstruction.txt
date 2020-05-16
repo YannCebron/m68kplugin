@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kBvcInstructionImpl(BVC_INSTRUCTION)
     PsiElement(bvc)('bvc')

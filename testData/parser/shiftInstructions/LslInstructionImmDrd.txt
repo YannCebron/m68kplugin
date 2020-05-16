@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kLslInstructionImpl(LSL_INSTRUCTION)
     PsiElement(lsl)('lsl')

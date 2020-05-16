@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kBclrInstructionImpl(BCLR_INSTRUCTION)
     PsiElement(bclr)('bclr')

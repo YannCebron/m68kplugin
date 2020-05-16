@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kRssetDirectiveImpl(RSSET_DIRECTIVE)
     PsiElement(rsset)('rsset')

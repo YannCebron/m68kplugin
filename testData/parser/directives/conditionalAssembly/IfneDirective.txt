@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kIfneDirectiveImpl(IFNE_DIRECTIVE)
     PsiElement(ifne)('ifne')

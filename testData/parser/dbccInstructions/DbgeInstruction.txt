@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kDbgeInstructionImpl(DBGE_INSTRUCTION)
     PsiElement(dbge)('dbge')

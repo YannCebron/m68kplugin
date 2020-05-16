@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kNopInstructionImpl(NOP_INSTRUCTION)
     PsiElement(nop)('nop')

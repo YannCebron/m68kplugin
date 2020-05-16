@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kIncbinDirectiveImpl(INCBIN_DIRECTIVE)
     PsiElement(incbin)('incbin')

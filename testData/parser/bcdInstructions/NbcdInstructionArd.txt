@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kNbcdInstructionImpl(NBCD_INSTRUCTION)
     PsiElement(nbcd)('nbcd')

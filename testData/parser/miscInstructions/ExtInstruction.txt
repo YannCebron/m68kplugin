@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kExtInstructionImpl(EXT_INSTRUCTION)
     PsiElement(ext)('ext')

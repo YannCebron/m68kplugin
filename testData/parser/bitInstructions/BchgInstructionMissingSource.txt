@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kBchgInstructionImpl(BCHG_INSTRUCTION)
     PsiElement(bchg)('bchg')

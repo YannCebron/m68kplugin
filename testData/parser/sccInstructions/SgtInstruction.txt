@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kSgtInstructionImpl(SGT_INSTRUCTION)
     PsiElement(sgt)('sgt')

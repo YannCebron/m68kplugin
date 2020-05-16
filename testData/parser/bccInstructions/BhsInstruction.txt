@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kBhsInstructionImpl(BHS_INSTRUCTION)
     PsiElement(bhs)('bhs')

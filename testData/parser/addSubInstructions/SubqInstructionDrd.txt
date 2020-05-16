@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kSubqInstructionImpl(SUBQ_INSTRUCTION)
     PsiElement(subq)('subq')

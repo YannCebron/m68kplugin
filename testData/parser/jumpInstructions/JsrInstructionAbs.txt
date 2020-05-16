@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kJsrInstructionImpl(JSR_INSTRUCTION)
     PsiElement(jsr)('jsr')

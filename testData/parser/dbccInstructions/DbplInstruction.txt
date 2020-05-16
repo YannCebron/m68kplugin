@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kDbplInstructionImpl(DBPL_INSTRUCTION)
     PsiElement(dbpl)('dbpl')

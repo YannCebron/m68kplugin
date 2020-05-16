@@ -1,4 +1,4 @@
-FILE
+M68k.FILE
   PsiWhiteSpace(' ')
   M68kBlkDirectiveImpl(BLK_DIRECTIVE)
     PsiElement(blk)('blk')
