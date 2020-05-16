@@ -402,7 +402,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitEqurDirective(@NotNull M68kEqurDirective o) {
-    visitEquDirectiveBase(o);
+    visitPsiElement(o);
   }
 
   public void visitEvenDirective(@NotNull M68kEvenDirective o) {

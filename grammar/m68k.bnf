@@ -830,7 +830,6 @@ set_directive ::= label SET expression
 equr_directive ::= label EQUR adm_rrd
 {
   pin = 2
-  extends = equ_directive_base   // todo doesn't make sense (expression != register)
 }
 
 even_directive ::= EVEN
