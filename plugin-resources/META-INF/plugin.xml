@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin>
+<idea-plugin url="https://github.com/YannCebron/m68kplugin">
   <id>com.yanncebron.m68kplugin</id>
   <name>Motorola 68000 Series Assembler</name>
   <vendor email="yann.cebron@gmail.com" url="https://yanncebron.github.io/">Yann Cébron</vendor>
