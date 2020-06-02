@@ -19,6 +19,7 @@ Adds support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_
 * Labels: Goto Declaration/Find Usages/Rename
 * Smart *Extend|Shrink Selection*
 * *Move Element Left|Right* for `exg`, binary expressions, register list, `dc` values
+* Spellchecker
 
 ### IDE
 * Structure View

@@ -105,6 +105,10 @@
 
     <gotoSymbolContributor
         implementation="com.yanncebron.m68kplugin.navigation.M68kGotoLabelChooseByNameContributor"/>
+
+    <spellchecker.support
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.lang.spellchecker.M68kSpellcheckerStrategy"/>
   </extensions>
 
 </idea-plugin>
