@@ -16,15 +16,17 @@
 
 package com.yanncebron.m68kplugin.lang;
 
-import com.intellij.psi.tree.IStubFileElementType;
+import com.intellij.psi.stubs.PsiFileStub;
+import com.intellij.psi.tree.ILightStubFileElementType;
 import org.jetbrains.annotations.NotNull;
 
-public class M68kFileElementType extends IStubFileElementType {
+public class M68kFileElementType extends ILightStubFileElementType<PsiFileStub<M68kFile>> {
 
-  static final M68kFileElementType INSTANCE = new M68kFileElementType();
+  public static final M68kFileElementType INSTANCE = new M68kFileElementType();
 
   public static final String STUB_EXTERNAL_ID_PREFIX = "M68k.";
-  public static final int STUB_VERSION = 1;
+
+  public static final int STUB_VERSION = 2;
 
   private static final String EXTERNAL_ID = STUB_EXTERNAL_ID_PREFIX + "FILE";
 

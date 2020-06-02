@@ -16,6 +16,9 @@
 
 package com.yanncebron.m68kplugin.lang.stubs;
 
+import com.intellij.lang.LighterAST;
+import com.intellij.lang.LighterASTNode;
+import com.intellij.psi.impl.source.tree.LightTreeUtil;
 import com.intellij.psi.stubs.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelImpl;
@@ -29,6 +32,12 @@ public interface M68kStubElementTypesHolder {
 
   IStubElementType<M68kLabelStub, M68kLabel> LABEL =
     new M68kStubElementType<M68kLabelStub, M68kLabel>("LABEL") {
+
+      @NotNull
+      @Override
+      public M68kLabelStub createStub(@NotNull LighterAST tree, @NotNull LighterASTNode node, @NotNull StubElement parentStub) {
+        return new M68kLabelStubImpl(parentStub, this, LightTreeUtil.toFilteredString(tree, node, null));
+      }
 
       @Override
       public void serialize(@NotNull M68kLabelStub stub, @NotNull StubOutputStream dataStream) throws IOException {
@@ -54,10 +63,5 @@ public interface M68kStubElementTypesHolder {
         return new M68kLabelImpl(stub, this);
       }
 
-      @NotNull
-      @Override
-      public M68kLabelStub createStub(@NotNull M68kLabel psi, StubElement parentStub) {
-        return new M68kLabelStubImpl(parentStub, this, psi.getName());
-      }
     };
 }

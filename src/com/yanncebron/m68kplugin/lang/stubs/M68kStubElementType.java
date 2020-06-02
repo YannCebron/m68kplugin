@@ -16,7 +16,7 @@
 
 package com.yanncebron.m68kplugin.lang.stubs;
 
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.ILightStubElementType;
 import com.intellij.psi.stubs.StubElement;
 import com.yanncebron.m68kplugin.lang.M68kFileElementType;
 import com.yanncebron.m68kplugin.lang.M68kLanguage;
@@ -24,7 +24,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 import org.jetbrains.annotations.NotNull;
 
 abstract class M68kStubElementType<StubT extends StubElement<? extends M68kPsiElement>, PsiT extends M68kPsiElement>
-  extends IStubElementType<StubT, PsiT> {
+  extends ILightStubElementType<StubT, PsiT> {
 
   M68kStubElementType(@NotNull String debugName) {
     super(debugName, M68kLanguage.INSTANCE);
@@ -33,5 +33,12 @@ abstract class M68kStubElementType<StubT extends StubElement<? extends M68kPsiEl
   @Override
   public final @NotNull String getExternalId() {
     return M68kFileElementType.STUB_EXTERNAL_ID_PREFIX + toString();
+  }
+
+  @NotNull
+  @Override
+  public final StubT createStub(@NotNull PsiT psi, StubElement parentStub) {
+    final String message = "Should not be called. Element=" + psi + "; class" + psi.getClass() + "; file=" + (psi.isValid() ? psi.getContainingFile() : "-");
+    throw new UnsupportedOperationException(message);
   }
 }
