@@ -18,8 +18,11 @@ package com.yanncebron.m68kplugin.lang.highlighting;
 
 import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.lang.ASTNode;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.util.registry.Registry;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
@@ -27,6 +30,8 @@ import com.yanncebron.m68kplugin.lang.psi.*;
 import org.jetbrains.annotations.NotNull;
 
 public class M68kSyntaxAnnotator implements Annotator {
+
+  private static final boolean DEBUG_MODE = ApplicationManager.getApplication().isUnitTestMode();
 
   @Override
   public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
@@ -40,9 +45,9 @@ public class M68kSyntaxAnnotator implements Annotator {
     }
 
     if (element instanceof M68kLabel) {
-      holder.createInfoAnnotation(element.getNode().findChildByType(M68kTokenTypes.ID), null).setTextAttributes(M68kTextAttributes.LABEL);
+      doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LABEL);
     } else if (element instanceof M68kLocalLabel) {
-      holder.createInfoAnnotation(element.getNode().findChildByType(M68kTokenTypes.ID), null).setTextAttributes(M68kTextAttributes.LOCAL_LABEL);
+      doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LOCAL_LABEL);
     }
 
     // todo temp --> inspection?
@@ -54,4 +59,10 @@ public class M68kSyntaxAnnotator implements Annotator {
       }
     }
   }
+
+  private static void doAnnotate(AnnotationHolder holder, ASTNode node, TextAttributesKey key) {
+    (DEBUG_MODE ? holder.createInfoAnnotation(node, key.getExternalName()) : holder.createInfoAnnotation(node, null))
+      .setTextAttributes(key);
+  }
+
 }

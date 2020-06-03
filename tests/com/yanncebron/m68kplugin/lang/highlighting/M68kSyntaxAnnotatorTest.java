@@ -27,4 +27,11 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
         " <info descr=\"Privileged instruction\">stop #2</info>");
     myFixture.testHighlighting(false, true, false);
   }
+
+  public void testLabels() {
+    myFixture.configureByText("test.s",
+      ".<info descr=\"M68K_LOCAL_LABEL\">localLabel</info>\n" +
+        "<info descr=\"M68K_LABEL\">globalLabel</info>");
+    myFixture.testHighlighting(false, true, false);
+  }
 }
