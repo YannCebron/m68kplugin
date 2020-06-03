@@ -32,13 +32,15 @@ public class M68kMethodSeparatorLineMarkerProviderTest extends BasePlatformTestC
   protected void setUp() throws Exception {
     super.setUp();
     DaemonCodeAnalyzerSettings.getInstance().SHOW_METHOD_SEPARATORS = true;
-
   }
 
   @Override
   protected void tearDown() throws Exception {
-    super.tearDown();
-    DaemonCodeAnalyzerSettings.getInstance().SHOW_METHOD_SEPARATORS = false;
+    try {
+      super.tearDown();
+    } finally {
+      DaemonCodeAnalyzerSettings.getInstance().SHOW_METHOD_SEPARATORS = false;
+    }
   }
 
   public void testMacro() {
