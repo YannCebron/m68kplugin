@@ -22,7 +22,7 @@
 
 ## Highlighting
 - `macro` missing `endm`
-- privileged instructions
+- privileged instructions **WIP**
 - registers:
   - dedicated color for each (**WIP** at least special registers (`SP` == `A7`!) vs. A*n* vs. D*n*)
   - rainbow highlighting?

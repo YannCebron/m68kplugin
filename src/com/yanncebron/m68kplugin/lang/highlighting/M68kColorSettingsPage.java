@@ -42,6 +42,7 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
     new AttributesDescriptor("Data Size", M68kTextAttributes.DATA_SIZES),
     new AttributesDescriptor("Directive", M68kTextAttributes.DIRECTIVE),
     new AttributesDescriptor("Instruction", M68kTextAttributes.INSTRUCTION),
+    new AttributesDescriptor("Privileged Instruction", M68kTextAttributes.PRIVILEGED_INSTRUCTION),
     new AttributesDescriptor("Labels//Label", M68kTextAttributes.LABEL),
     new AttributesDescriptor("Labels//Local Label", M68kTextAttributes.LOCAL_LABEL),
     new AttributesDescriptor("Literals//Binary number", M68kTextAttributes.BIN_NUMBER),
@@ -83,6 +84,7 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
     return "<label>label</label>:\n" +
       "  lea $dff000,a6\n" +
       "* line comment\n" +
+      "  <privilegedInstruction>stop</privilegedInstruction>\n" +
       "  moveq #1>>2,d0\n" +
       "<localLabel>.local</localLabel>:\n" +
       "  moveq %0101+$FF,d1\n" +
@@ -99,6 +101,7 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
     Map<String, TextAttributesKey> additionalMap = new HashMap<>();
     additionalMap.put("label", M68kTextAttributes.LABEL);
     additionalMap.put("localLabel", M68kTextAttributes.LOCAL_LABEL);
+    additionalMap.put("privilegedInstruction", M68kTextAttributes.PRIVILEGED_INSTRUCTION);
     return additionalMap;
   }
 

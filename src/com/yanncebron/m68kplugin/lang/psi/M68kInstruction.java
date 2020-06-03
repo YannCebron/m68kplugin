@@ -13,15 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.yanncebron.m68kplugin.lang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
+public interface M68kInstruction extends M68kPsiElement {
 
-public interface M68kSwapInstruction extends M68kDataSized, M68kInstruction {
-
-  @Nullable
-  M68kAdmDrd getAdmDrd();
-
+  default boolean isPrivileged() {
+    return false;
+  }
 }

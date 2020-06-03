@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.lang.highlighting;
 
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
+import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
@@ -25,6 +26,9 @@ public class M68kTextAttributes {
 
   public static final TextAttributesKey INSTRUCTION =
     createTextAttributesKey("M68K_INSTRUCTION", DefaultLanguageHighlighterColors.KEYWORD);
+  public static final TextAttributesKey PRIVILEGED_INSTRUCTION =
+    createTextAttributesKey("M68K_PRIVILEGED_INSTRUCTION", CodeInsightColors.RUNTIME_ERROR);
+
   public static final TextAttributesKey LABEL =
     createTextAttributesKey("M68K_LABEL", DefaultLanguageHighlighterColors.STATIC_METHOD);
   public static final TextAttributesKey LOCAL_LABEL =

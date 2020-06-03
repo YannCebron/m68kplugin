@@ -22,12 +22,11 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kStopInstructionImpl extends ASTWrapperPsiElement implements M68kStopInstruction {
+public class M68kStopInstructionImpl extends M68kPrivilegedInstructionMixIn implements M68kStopInstruction {
 
-  public M68kStopInstructionImpl(@NotNull ASTNode node) {
+  public M68kStopInstructionImpl(ASTNode node) {
     super(node);
   }
 

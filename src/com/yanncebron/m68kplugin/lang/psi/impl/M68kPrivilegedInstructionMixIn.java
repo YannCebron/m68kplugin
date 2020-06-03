@@ -13,15 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.yanncebron.m68kplugin.lang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
+package com.yanncebron.m68kplugin.lang.psi.impl;
 
-public interface M68kSwapInstruction extends M68kDataSized, M68kInstruction {
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import com.intellij.lang.ASTNode;
+import com.yanncebron.m68kplugin.lang.psi.M68kInstruction;
+import org.jetbrains.annotations.NotNull;
 
-  @Nullable
-  M68kAdmDrd getAdmDrd();
+abstract class M68kPrivilegedInstructionMixIn extends ASTWrapperPsiElement implements M68kInstruction {
 
+  protected M68kPrivilegedInstructionMixIn(@NotNull ASTNode node) {
+    super(node);
+  }
+
+  @Override
+  public final boolean isPrivileged() {
+    return true;
+  }
 }

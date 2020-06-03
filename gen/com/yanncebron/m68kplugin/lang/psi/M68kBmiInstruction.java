@@ -19,7 +19,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kBmiInstruction extends M68kPsiElement {
+public interface M68kBmiInstruction extends M68kInstruction {
 
   @Nullable
   M68kExpression getExpression();

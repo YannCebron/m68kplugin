@@ -50,6 +50,8 @@
   
   pin(".*_instruction") = 1
   name(".*_instruction") = "instruction"
+
+  implements(".*_instruction.*") = "com.yanncebron.m68kplugin.lang.psi.M68kInstruction"
 }
 
 root ::= root_item*
@@ -310,6 +312,10 @@ jsr_instruction ::= JSR jmp_jsr_tail
 
 rts_instruction ::= RTS
 rte_instruction ::= RTE
+{
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kPrivilegedInstructionMixIn"
+}
+
 rtr_instruction ::= RTR
 
 // *bcd ==================================================================
@@ -474,7 +480,13 @@ private misc_instructions ::= tst_instruction |
 nop_instruction ::= NOP
 illegal_instruction ::= ILLEGAL
 reset_instruction ::= RESET
+{
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kPrivilegedInstructionMixIn"
+}
 stop_instruction ::= STOP adm_imm
+{
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kPrivilegedInstructionMixIn"
+}
 trap_instruction ::= TRAP adm_imm
 trapv_instruction ::= TRAPV
 

@@ -13,15 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.yanncebron.m68kplugin.lang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
+package com.yanncebron.m68kplugin.lang.highlighting;
 
-public interface M68kSwapInstruction extends M68kDataSized, M68kInstruction {
+import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 
-  @Nullable
-  M68kAdmDrd getAdmDrd();
+public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
 
+  public void testPrivilegedInstructions() {
+    myFixture.configureByText("test.s",
+      " <info descr=\"Privileged instruction\">rte</info>\n" +
+        " <info descr=\"Privileged instruction\">reset</info>\n" +
+        " <info descr=\"Privileged instruction\">stop #2</info>");
+    myFixture.testHighlighting(false, true, false);
+  }
 }

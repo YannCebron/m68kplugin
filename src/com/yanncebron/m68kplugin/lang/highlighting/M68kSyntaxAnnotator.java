@@ -32,6 +32,13 @@ public class M68kSyntaxAnnotator implements Annotator {
   public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
     if (!(element instanceof M68kPsiElement)) return;
 
+    if (element instanceof M68kInstruction) {
+      M68kInstruction instruction = (M68kInstruction) element;
+      if (instruction.isPrivileged()) {
+        holder.createInfoAnnotation(element, "Privileged instruction").setTextAttributes(M68kTextAttributes.PRIVILEGED_INSTRUCTION);
+      }
+    }
+
     if (element instanceof M68kLabel) {
       holder.createInfoAnnotation(element.getNode().findChildByType(M68kTokenTypes.ID), null).setTextAttributes(M68kTextAttributes.LABEL);
     } else if (element instanceof M68kLocalLabel) {

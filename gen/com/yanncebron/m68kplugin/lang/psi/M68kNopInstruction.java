@@ -19,6 +19,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kNopInstruction extends M68kPsiElement {
+public interface M68kNopInstruction extends M68kInstruction {
 
 }

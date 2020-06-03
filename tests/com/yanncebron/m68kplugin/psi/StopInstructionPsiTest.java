@@ -22,8 +22,9 @@ import com.yanncebron.m68kplugin.lang.psi.M68kStopInstruction;
 
 public class StopInstructionPsiTest extends M68kPsiTestCase {
 
-  public void testTrapInstruction() {
+  public void testStopInstruction() {
     final M68kStopInstruction instruction = parse("stop #2");
+    assertTrue(instruction.isPrivileged());
 
     final M68kAdmImm admImm = instruction.getAdmImm();
     assertNotNull(admImm);

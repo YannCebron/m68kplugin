@@ -13,15 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.yanncebron.m68kplugin.lang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
+package com.yanncebron.m68kplugin.psi;
 
-public interface M68kSwapInstruction extends M68kDataSized, M68kInstruction {
+import com.yanncebron.m68kplugin.lang.psi.M68kResetInstruction;
+import org.jetbrains.annotations.NotNull;
 
-  @Nullable
-  M68kAdmDrd getAdmDrd();
+public class ResetInstructionPsiTest extends M68kPsiTestCase {
+
+  public void testResetInstruction() {
+    final M68kResetInstruction instruction = parse("reset");
+    assertTrue(instruction.isPrivileged());
+  }
+
+  private @NotNull M68kResetInstruction parse(String text) {
+    return assertInstanceOf(doParse(" " + text), M68kResetInstruction.class);
+  }
 
 }
