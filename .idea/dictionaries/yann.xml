@@ -62,6 +62,8 @@
       <w>trapv</w>
       <w>unlk</w>
       <w>vasm</w>
+      <w>vlink</w>
+      <w>xdef</w>
       <w>yanncebron</w>
     </words>
   </dictionary>

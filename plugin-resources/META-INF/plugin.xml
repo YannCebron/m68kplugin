@@ -109,6 +109,8 @@
     <spellchecker.support
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.lang.spellchecker.M68kSpellcheckerStrategy"/>
+    <spellchecker.bundledDictionaryProvider
+        implementation="com.yanncebron.m68kplugin.lang.spellchecker.M68kBundledDictionaryProvider"/>
   </extensions>
 
 </idea-plugin>

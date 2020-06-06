@@ -53,7 +53,6 @@
   - "blocks"
 - move left/right: swap src|dest
 - templates, `TemplateContextType`
-- bundled dictionary
 - highlight returns
 - formatter
 - documentation:
