@@ -79,6 +79,7 @@
   - nest local labels
   - include/incbin (?)
 - breadcrumbs
+- Goto Related: `.i`/binary file -> including files
 
 ## IDE
 - support copyright plugin
