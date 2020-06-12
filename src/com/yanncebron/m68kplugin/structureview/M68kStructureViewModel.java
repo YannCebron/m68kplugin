@@ -24,9 +24,12 @@ import com.intellij.ide.structureView.impl.common.PsiTreeElementBase;
 import com.intellij.ide.util.treeView.smartTree.*;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
+import com.intellij.util.BooleanFunction;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import org.jetbrains.annotations.NotNull;
+
+import javax.swing.*;
 
 public class M68kStructureViewModel extends StructureViewModelBase implements StructureViewModel.ElementInfoProvider {
 
@@ -53,37 +56,25 @@ public class M68kStructureViewModel extends StructureViewModelBase implements St
   @Override
   public Filter[] getFilters() {
     return new Filter[]{
-      new Filter() {
-        @Override
-        public boolean isVisible(TreeElement treeNode) {
-          if (!(treeNode instanceof PsiTreeElementBase)) return false;
+      createFilter(psiElement -> psiElement instanceof M68kIncludeDirective || psiElement instanceof M68kIncbinDirective,
+        "Show includes", AllIcons.Graph.Layout, "SHOW_INCLUDES"),
+      createFilter(psiElement -> psiElement instanceof M68kLabel,
+        "Show labels", AllIcons.Nodes.Method, "SHOW_LABELS"),
+      createFilter(psiElement -> psiElement instanceof M68kLocalLabel,
+        "Show local labels", AllIcons.Nodes.AbstractMethod, "SHOW_LOCAL_LABELS"),
+      createFilter(psiElement -> psiElement instanceof M68kEquDirectiveBase,
+        "Show EQUs", AllIcons.Nodes.Constant, "SHOW_EQU_DIRECTIVES")
+    };
+  }
 
-          final PsiElement element = ((PsiTreeElementBase) treeNode).getElement();
-          return !(element instanceof M68kIncludeDirective || element instanceof M68kIncbinDirective);
-        }
-
-        @Override
-        public boolean isReverted() {
-          return true;
-        }
-
-        @NotNull
-        @Override
-        public ActionPresentation getPresentation() {
-          return new ActionPresentationData("Show includes", null, AllIcons.Graph.Layout);
-        }
-
-        @NotNull
-        @Override
-        public String getName() {
-          return "SHOW_INCLUDES";
-        }
-      }, new Filter() {
+  private static Filter createFilter(BooleanFunction<PsiElement> filter,
+                                     @NotNull String text, Icon icon, @NotNull String name) {
+    return new Filter() {
       @Override
       public boolean isVisible(TreeElement treeNode) {
         if (!(treeNode instanceof PsiTreeElementBase)) return false;
 
-        return !(((PsiTreeElementBase) treeNode).getElement() instanceof M68kLabel);
+        return !filter.fun(((PsiTreeElementBase) treeNode).getElement());
       }
 
       @Override
@@ -91,66 +82,16 @@ public class M68kStructureViewModel extends StructureViewModelBase implements St
         return true;
       }
 
-      @NotNull
       @Override
-      public ActionPresentation getPresentation() {
-        return new ActionPresentationData("Show labels", null, AllIcons.Nodes.Method);
+      public @NotNull ActionPresentation getPresentation() {
+        return new ActionPresentationData(text, null, icon);
       }
 
-      @NotNull
       @Override
+      @NotNull
       public String getName() {
-        return "SHOW_LABELS";
+        return name;
       }
-    }, new Filter() {
-      @Override
-      public boolean isVisible(TreeElement treeNode) {
-        if (!(treeNode instanceof PsiTreeElementBase)) return false;
-
-        return !(((PsiTreeElementBase) treeNode).getElement() instanceof M68kLocalLabel);
-      }
-
-      @Override
-      public boolean isReverted() {
-        return true;
-      }
-
-      @NotNull
-      @Override
-      public ActionPresentation getPresentation() {
-        return new ActionPresentationData("Show local labels", null, AllIcons.Nodes.AbstractMethod);
-      }
-
-      @NotNull
-      @Override
-      public String getName() {
-        return "SHOW_LOCAL_LABELS";
-      }
-    }, new Filter() {
-      @Override
-      public boolean isVisible(TreeElement treeNode) {
-        if (!(treeNode instanceof PsiTreeElementBase)) return false;
-
-        return !(((PsiTreeElementBase) treeNode).getElement() instanceof M68kEquDirectiveBase);
-      }
-
-      @Override
-      public boolean isReverted() {
-        return true;
-      }
-
-      @NotNull
-      @Override
-      public ActionPresentation getPresentation() {
-        return new ActionPresentationData("Show EQUs", null, AllIcons.Nodes.Constant);
-      }
-
-      @NotNull
-      @Override
-      public String getName() {
-        return "SHOW_EQUS";
-      }
-    }
     };
   }
 }
