@@ -80,6 +80,7 @@
   - include/incbin (?)
 - breadcrumbs
 - Goto Related: `.i`/binary file -> including files
+- Gutter Icon: `include` all included files (recursively)
 
 ## IDE
 - support copyright plugin
