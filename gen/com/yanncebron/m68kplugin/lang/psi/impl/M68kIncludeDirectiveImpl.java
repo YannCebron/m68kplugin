@@ -24,6 +24,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
 public class M68kIncludeDirectiveImpl extends ASTWrapperPsiElement implements M68kIncludeDirective {
 
@@ -38,6 +39,12 @@ public class M68kIncludeDirectiveImpl extends ASTWrapperPsiElement implements M6
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @Nullable
+  public String getIncludePath() {
+    return M68kPsiImplUtil.getIncludePath(this);
   }
 
 }

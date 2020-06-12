@@ -852,7 +852,10 @@ private include_path ::= STRING
 }
 incbin_directive ::= INCBIN include_path
 {
-  pin =1
+  pin = 1
+  methods = [
+    getIncludePath
+  ]
 }
 incdir_directive ::= INCDIR include_path
 {
@@ -861,6 +864,9 @@ incdir_directive ::= INCDIR include_path
 include_directive ::= INCLUDE include_path
 {
   pin = 1
+  methods = [
+    getIncludePath
+  ]
 }
 
 dc_directive ::= DC data_size_all? expression (COMMA expression)*

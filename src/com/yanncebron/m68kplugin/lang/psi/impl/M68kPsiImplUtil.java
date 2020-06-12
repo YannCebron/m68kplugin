@@ -17,9 +17,8 @@
 package com.yanncebron.m68kplugin.lang.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.yanncebron.m68kplugin.lang.psi.M68kDataSize;
-import com.yanncebron.m68kplugin.lang.psi.M68kDataSized;
-import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
+import com.intellij.openapi.util.text.StringUtil;
+import com.yanncebron.m68kplugin.lang.psi.*;
 import org.jetbrains.annotations.Nullable;
 
 public class M68kPsiImplUtil {
@@ -30,5 +29,25 @@ public class M68kPsiImplUtil {
     if (childByType == null) return null;
 
     return M68kDataSize.findByElementType(childByType.getElementType());
+  }
+
+  @Nullable
+  public static String getIncludePath(M68kIncbinDirective includeDirective) {
+    return _getIncludePath(includeDirective);
+  }
+
+  @Nullable
+  public static String getIncludePath(M68kIncludeDirective includeDirective) {
+    return _getIncludePath(includeDirective);
+  }
+
+  @Nullable
+  private static String _getIncludePath(M68kPsiElement includeDirective) {
+    final ASTNode node = includeDirective.getNode().findChildByType(M68kTokenTypes.STRING);
+    if (node == null) {
+      return null;
+    }
+
+    return StringUtil.unquoteString(node.getText());
   }
 }

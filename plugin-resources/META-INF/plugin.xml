@@ -90,6 +90,9 @@
         forClass="com.yanncebron.m68kplugin.lang.psi.M68kLabelRefExpression"
         implementationClass="com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelRefExpressionElementManipulator"/>
 
+    <include.provider
+        implementation="com.yanncebron.m68kplugin.lang.index.M68kFileIncludeProvider"/>
+
 
     <lang.psiStructureViewFactory
         language="M68k"

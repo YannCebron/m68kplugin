@@ -21,4 +21,7 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kIncbinDirective extends M68kPsiElement {
 
+  @Nullable
+  String getIncludePath();
+
 }
