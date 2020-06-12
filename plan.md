@@ -77,7 +77,6 @@
   - `equr` "location"
   - macros
   - nest local labels
-  - include/incbin (?)
 - breadcrumbs
 - Goto Related: `.i`/binary file -> including files
 - Gutter Icon: `include` all included files (recursively)

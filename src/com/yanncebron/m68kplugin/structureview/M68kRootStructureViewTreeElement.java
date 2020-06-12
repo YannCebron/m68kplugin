@@ -49,7 +49,9 @@ class M68kRootStructureViewTreeElement extends PsiTreeElementBase<M68kFile> {
   @NotNull
   @Override
   public Collection<StructureViewTreeElement> getChildrenBase() {
-    final List<PsiElement> children = PsiTreeUtil.getChildrenOfAnyType(getValue(), M68kLabelBase.class, M68kEquDirectiveBase.class);
+    final List<PsiElement> children = PsiTreeUtil.getChildrenOfAnyType(getValue(),
+      M68kLabelBase.class, M68kEquDirectiveBase.class,
+      M68kIncludeDirective.class, M68kIncbinDirective.class);
 
     Collection<StructureViewTreeElement> nodes = new ArrayList<>();
     for (PsiElement child : children) {
@@ -81,6 +83,46 @@ class M68kRootStructureViewTreeElement extends PsiTreeElementBase<M68kFile> {
 
           @NotNull
           @Override
+          public Collection<StructureViewTreeElement> getChildrenBase() {
+            return Collections.emptyList();
+          }
+        });
+      } else if (child instanceof M68kIncludeDirective) {
+        M68kIncludeDirective includeDirective = (M68kIncludeDirective) child;
+        nodes.add(new PsiTreeElementBase<M68kIncludeDirective>(includeDirective) {
+          @Override
+          @Nullable
+          public String getPresentableText() {
+            return includeDirective.getIncludePath();
+          }
+
+          @Override
+          public Icon getIcon(boolean open) {
+            return AllIcons.Graph.Layout;
+          }
+
+          @Override
+          @NotNull
+          public Collection<StructureViewTreeElement> getChildrenBase() {
+            return Collections.emptyList();
+          }
+        });
+      } else if (child instanceof M68kIncbinDirective) {
+        M68kIncbinDirective incbinDirective = (M68kIncbinDirective) child;
+        nodes.add(new PsiTreeElementBase<M68kIncbinDirective>(incbinDirective) {
+          @Override
+          @Nullable
+          public String getPresentableText() {
+            return incbinDirective.getIncludePath();
+          }
+
+          @Override
+          public Icon getIcon(boolean open) {
+            return AllIcons.FileTypes.Archive;
+          }
+
+          @Override
+          @NotNull
           public Collection<StructureViewTreeElement> getChildrenBase() {
             return Collections.emptyList();
           }
