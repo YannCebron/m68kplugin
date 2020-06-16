@@ -22,6 +22,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.impl.include.FileIncludeInfo;
 import com.intellij.psi.impl.include.FileIncludeProvider;
 import com.intellij.util.Consumer;
+import com.intellij.util.PathUtilRt;
 import com.intellij.util.SmartList;
 import com.intellij.util.indexing.FileContent;
 import com.intellij.util.text.StringSearcher;
@@ -68,8 +69,7 @@ public class M68kFileIncludeProvider extends FileIncludeProvider {
 
         final String includePath = o.getIncludePath();
         if (includePath != null) {
-          int index = includePath.lastIndexOf("/");
-          String filename = index >= 0 ? includePath.substring(index + 1) : includePath;
+          String filename = PathUtilRt.getFileName(includePath);
           final FileIncludeInfo includeInfo = new FileIncludeInfo(filename, includePath, -1, true);
           result.add(includeInfo);
         }

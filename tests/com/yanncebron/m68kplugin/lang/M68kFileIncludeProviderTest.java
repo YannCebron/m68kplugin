@@ -52,9 +52,9 @@ public class M68kFileIncludeProviderTest extends BasePlatformTestCase {
 
   public void testIncbinSingleResolvedFile() {
     myFixture.addFileToProject("test.i", "");
-    final PsiFile testIncludedFile = myFixture.addFileToProject("test.dat", "");
+    final PsiFile testIncludedFile = myFixture.addFileToProject("dir/test.dat", "");
     myFixture.configureByText("test.s",
-      " incbin 'test.dat'\n" +
+      " incbin 'dir/test.dat'\n" +
         " include 'test.i'");
 
     final VirtualFile[] includedFiles = getIncludedFiles(false, false);
