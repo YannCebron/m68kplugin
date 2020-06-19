@@ -90,6 +90,11 @@
         forClass="com.yanncebron.m68kplugin.lang.psi.M68kLabelRefExpression"
         implementationClass="com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelRefExpressionElementManipulator"/>
 
+    <liveTemplateContext
+        implementation="com.yanncebron.m68kplugin.template.M68kTemplateContextType"/>
+    <defaultLiveTemplatesProvider
+        implementation="com.yanncebron.m68kplugin.template.M68kDefaultLiveTemplatesProvider"/>
+
     <include.provider
         implementation="com.yanncebron.m68kplugin.lang.index.M68kFileIncludeProvider"/>
 

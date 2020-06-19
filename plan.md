@@ -52,7 +52,6 @@
   - full line
   - "blocks"
 - move left/right: swap src|dest
-- templates, `TemplateContextType`
 - highlight returns
 - formatter
 - documentation:
