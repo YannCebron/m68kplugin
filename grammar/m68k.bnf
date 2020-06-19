@@ -943,7 +943,8 @@ endm_directive ::= ENDM
 {
   pin("if.*_directive") = 1
 }
-private conditional_assembly_directives ::= ifd_directive |
+private conditional_assembly_directives ::= if_directive |
+                                            ifd_directive |
                                             ifeq_directive |
                                             ifge_directive |
                                             ifgt_directive |
@@ -955,6 +956,7 @@ private conditional_assembly_directives ::= ifd_directive |
                                             elseif_directive |
                                             endc_directive
 
+if_directive ::= IF expression
 ifd_directive ::= IFD expression
 ifnd_directive ::= IFND expression
 

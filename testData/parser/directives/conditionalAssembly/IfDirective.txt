@@ -1,0 +1,7 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kIfDirectiveImpl(IF_DIRECTIVE)
+    PsiElement(if)('if')
+    PsiWhiteSpace(' ')
+    M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
+      PsiElement(id)('NAME')

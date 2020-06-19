@@ -125,6 +125,7 @@ public interface M68kTypes {
   IElementType IFLT_DIRECTIVE = new M68kCompositeElementType("IFLT_DIRECTIVE");
   IElementType IFND_DIRECTIVE = new M68kCompositeElementType("IFND_DIRECTIVE");
   IElementType IFNE_DIRECTIVE = new M68kCompositeElementType("IFNE_DIRECTIVE");
+  IElementType IF_DIRECTIVE = new M68kCompositeElementType("IF_DIRECTIVE");
   IElementType ILLEGAL_INSTRUCTION = new M68kCompositeElementType("ILLEGAL_INSTRUCTION");
   IElementType INCBIN_DIRECTIVE = new M68kCompositeElementType("INCBIN_DIRECTIVE");
   IElementType INCDIR_DIRECTIVE = new M68kCompositeElementType("INCDIR_DIRECTIVE");
@@ -519,6 +520,9 @@ public interface M68kTypes {
       }
       else if (type == IFNE_DIRECTIVE) {
         return new M68kIfneDirectiveImpl(node);
+      }
+      else if (type == IF_DIRECTIVE) {
+        return new M68kIfDirectiveImpl(node);
       }
       else if (type == ILLEGAL_INSTRUCTION) {
         return new M68kIllegalInstructionImpl(node);

@@ -50,7 +50,8 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // ifd_directive |
+  // if_directive |
+  //                                             ifd_directive |
   //                                             ifeq_directive |
   //                                             ifge_directive |
   //                                             ifgt_directive |
@@ -64,7 +65,8 @@ public class M68kDirectivesParser {
   static boolean conditional_assembly_directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "conditional_assembly_directives")) return false;
     boolean r;
-    r = ifd_directive(b, l + 1);
+    r = if_directive(b, l + 1);
+    if (!r) r = ifd_directive(b, l + 1);
     if (!r) r = ifeq_directive(b, l + 1);
     if (!r) r = ifge_directive(b, l + 1);
     if (!r) r = ifgt_directive(b, l + 1);
@@ -352,6 +354,20 @@ public class M68kDirectivesParser {
     r = consumeToken(b, EVEN);
     exit_section_(b, m, EVEN_DIRECTIVE, r);
     return r;
+  }
+
+  /* ********************************************************** */
+  // IF expression
+  public static boolean if_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "if_directive")) return false;
+    if (!nextTokenIs(b, IF)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, IF_DIRECTIVE, null);
+    r = consumeToken(b, IF);
+    p = r; // pin = 1
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */

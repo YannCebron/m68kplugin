@@ -25,6 +25,10 @@ public class ConditionalAssemblyDirectivesParsingTest extends M68kParsingTestCas
     super("directives/conditionalAssembly");
   }
 
+  public void testIfDirective() throws Exception {
+    doCodeTest(" if NAME");
+  }
+
   public void testIfdDirective() throws Exception {
     doCodeTest(" ifd NAME");
   }
