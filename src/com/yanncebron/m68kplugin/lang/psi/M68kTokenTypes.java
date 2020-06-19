@@ -118,6 +118,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType ID = new M68kTokenType("id");
   public static final IElementType IF = new M68kTokenType("if");
   public static final IElementType IFB = new M68kTokenType("ifb");
+  public static final IElementType IFC = new M68kTokenType("ifc");
   public static final IElementType IFD = new M68kTokenType("ifd");
   public static final IElementType IFEQ = new M68kTokenType("ifeq");
   public static final IElementType IFGE = new M68kTokenType("ifge");
@@ -125,6 +126,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType IFLE = new M68kTokenType("ifle");
   public static final IElementType IFLT = new M68kTokenType("iflt");
   public static final IElementType IFNB = new M68kTokenType("ifnb");
+  public static final IElementType IFNC = new M68kTokenType("ifnc");
   public static final IElementType IFND = new M68kTokenType("ifnd");
   public static final IElementType IFNE = new M68kTokenType("ifne");
   public static final IElementType ILLEGAL = new M68kTokenType("illegal");

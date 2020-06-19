@@ -1,0 +1,10 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kIfncDirectiveImpl(IFNC_DIRECTIVE)
+    PsiElement(ifnc)('ifnc')
+    PsiWhiteSpace(' ')
+    M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
+      PsiElement(id)('arg1')
+    PsiElement(,)(',')
+    PsiErrorElement:<expression> expected
+      <empty list>

@@ -61,6 +61,8 @@ public class M68kDirectivesParser {
   //                                             ifne_directive |
   //                                             ifb_directive |
   //                                             ifnb_directive |
+  //                                             ifc_directive |
+  //                                             ifnc_directive |
   //                                             else_directive |
   //                                             elseif_directive |
   //                                             endc_directive
@@ -78,6 +80,8 @@ public class M68kDirectivesParser {
     if (!r) r = ifne_directive(b, l + 1);
     if (!r) r = ifb_directive(b, l + 1);
     if (!r) r = ifnb_directive(b, l + 1);
+    if (!r) r = ifc_directive(b, l + 1);
+    if (!r) r = ifnc_directive(b, l + 1);
     if (!r) r = else_directive(b, l + 1);
     if (!r) r = elseif_directive(b, l + 1);
     if (!r) r = endc_directive(b, l + 1);
@@ -389,6 +393,22 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
+  // IFC expression COMMA expression
+  public static boolean ifc_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ifc_directive")) return false;
+    if (!nextTokenIs(b, IFC)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, IFC_DIRECTIVE, null);
+    r = consumeToken(b, IFC);
+    p = r; // pin = 1
+    r = r && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1));
+    r = p && report_error_(b, consumeToken(b, COMMA)) && r;
+    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
   // IFD expression
   public static boolean ifd_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ifd_directive")) return false;
@@ -482,6 +502,22 @@ public class M68kDirectivesParser {
     r = consumeToken(b, IFNB);
     p = r; // pin = 1
     r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // IFNC expression COMMA expression
+  public static boolean ifnc_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ifnc_directive")) return false;
+    if (!nextTokenIs(b, IFNC)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, IFNC_DIRECTIVE, null);
+    r = consumeToken(b, IFNC);
+    p = r; // pin = 1
+    r = r && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1));
+    r = p && report_error_(b, consumeToken(b, COMMA)) && r;
+    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

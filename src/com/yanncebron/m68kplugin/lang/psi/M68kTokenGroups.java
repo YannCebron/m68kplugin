@@ -185,6 +185,7 @@ public final class M68kTokenGroups {
     ENDC,
     IF,
     IFB,
+    IFC,
     IFD,
     IFEQ,
     IFGE,
@@ -192,6 +193,7 @@ public final class M68kTokenGroups {
     IFLE,
     IFLT,
     IFNB,
+    IFNC,
     IFND,
     IFNE
   );

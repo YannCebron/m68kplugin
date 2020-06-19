@@ -34,6 +34,7 @@ ifgt
 ifle
 iflt
 ifnb
+ifnc
 ifnd
 ifne
 incbin

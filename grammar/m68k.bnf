@@ -954,6 +954,8 @@ private conditional_assembly_directives ::= if_directive |
                                             ifne_directive |
                                             ifb_directive |
                                             ifnb_directive |
+                                            ifc_directive |
+                                            ifnc_directive |
                                             else_directive |
                                             elseif_directive |
                                             endc_directive
@@ -971,6 +973,20 @@ ifne_directive ::= IFNE expression
 
 ifb_directive ::= IFB expression
 ifnb_directive ::= IFNB expression
+ifc_directive ::= IFC expression COMMA expression {
+  methods = [
+    expression = ""
+    arg1 = "expression[0]"
+    arg2 = "expression[1]"
+  ]
+}
+ifnc_directive ::= IFNC expression COMMA expression {
+  methods = [
+    expression = ""
+    arg1 = "expression[0]"
+    arg2 = "expression[1]"
+  ]
+}
 
 elseif_directive ::= ELSEIF
 else_directive ::= ELSE

@@ -37,6 +37,18 @@ public class ConditionalAssemblyDirectivesParsingTest extends M68kParsingTestCas
     doCodeTest(" ifnb NAME");
   }
 
+  public void testIfcDirective() throws Exception {
+    doCodeTest(" ifc arg1,arg2");
+  }
+
+  public void testIfncDirective() throws Exception {
+    doCodeTest(" ifnc arg1,arg2");
+  }
+
+  public void testIfncDirectiveMissingArg2() throws Exception {
+    doCodeTest(" ifnc arg1,");
+  }
+
   public void testIfdDirective() throws Exception {
     doCodeTest(" ifd NAME");
   }
