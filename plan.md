@@ -84,6 +84,9 @@
 - support copyright plugin
 - symbol names in commit dialog (`PlainTextSymbolCompletionContributor`)
 
+## External Tools
+- make errors navigatable (`ConsoleFilterProvider`)
+
 ## Tools
 - http://deadliners.net/gradientmaster/
 
