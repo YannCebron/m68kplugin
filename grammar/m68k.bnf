@@ -952,6 +952,8 @@ private conditional_assembly_directives ::= if_directive |
                                             ifle_directive |
                                             iflt_directive |
                                             ifne_directive |
+                                            ifb_directive |
+                                            ifnb_directive |
                                             else_directive |
                                             elseif_directive |
                                             endc_directive
@@ -966,6 +968,9 @@ ifgt_directive ::= IFGT expression
 ifle_directive ::= IFLE expression
 iflt_directive ::= IFLT expression
 ifne_directive ::= IFNE expression
+
+ifb_directive ::= IFB expression
+ifnb_directive ::= IFNB expression
 
 elseif_directive ::= ELSEIF
 else_directive ::= ELSE

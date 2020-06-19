@@ -117,12 +117,14 @@ public interface M68kTypes {
   IElementType EXPRESSION = new M68kCompositeElementType("EXPRESSION");
   IElementType EXP_EXPRESSION = new M68kCompositeElementType("EXP_EXPRESSION");
   IElementType EXT_INSTRUCTION = new M68kCompositeElementType("EXT_INSTRUCTION");
+  IElementType IFB_DIRECTIVE = new M68kCompositeElementType("IFB_DIRECTIVE");
   IElementType IFD_DIRECTIVE = new M68kCompositeElementType("IFD_DIRECTIVE");
   IElementType IFEQ_DIRECTIVE = new M68kCompositeElementType("IFEQ_DIRECTIVE");
   IElementType IFGE_DIRECTIVE = new M68kCompositeElementType("IFGE_DIRECTIVE");
   IElementType IFGT_DIRECTIVE = new M68kCompositeElementType("IFGT_DIRECTIVE");
   IElementType IFLE_DIRECTIVE = new M68kCompositeElementType("IFLE_DIRECTIVE");
   IElementType IFLT_DIRECTIVE = new M68kCompositeElementType("IFLT_DIRECTIVE");
+  IElementType IFNB_DIRECTIVE = new M68kCompositeElementType("IFNB_DIRECTIVE");
   IElementType IFND_DIRECTIVE = new M68kCompositeElementType("IFND_DIRECTIVE");
   IElementType IFNE_DIRECTIVE = new M68kCompositeElementType("IFNE_DIRECTIVE");
   IElementType IF_DIRECTIVE = new M68kCompositeElementType("IF_DIRECTIVE");
@@ -497,6 +499,9 @@ public interface M68kTypes {
       else if (type == EXT_INSTRUCTION) {
         return new M68kExtInstructionImpl(node);
       }
+      else if (type == IFB_DIRECTIVE) {
+        return new M68kIfbDirectiveImpl(node);
+      }
       else if (type == IFD_DIRECTIVE) {
         return new M68kIfdDirectiveImpl(node);
       }
@@ -514,6 +519,9 @@ public interface M68kTypes {
       }
       else if (type == IFLT_DIRECTIVE) {
         return new M68kIfltDirectiveImpl(node);
+      }
+      else if (type == IFNB_DIRECTIVE) {
+        return new M68kIfnbDirectiveImpl(node);
       }
       else if (type == IFND_DIRECTIVE) {
         return new M68kIfndDirectiveImpl(node);

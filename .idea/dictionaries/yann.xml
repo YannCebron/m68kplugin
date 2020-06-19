@@ -37,6 +37,7 @@
       <w>ifgt</w>
       <w>ifle</w>
       <w>iflt</w>
+      <w>ifnb</w>
       <w>ifnd</w>
       <w>ifne</w>
       <w>incbin</w>

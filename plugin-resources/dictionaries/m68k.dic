@@ -33,6 +33,7 @@ ifge
 ifgt
 ifle
 iflt
+ifnb
 ifnd
 ifne
 incbin
