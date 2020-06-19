@@ -176,6 +176,7 @@ public final class M68kTokenGroups {
     RS,
     RSRESET,
     RSSET,
+    SECTION,
     SET
   );
 

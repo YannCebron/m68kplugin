@@ -811,6 +811,7 @@ private directives ::= equ_directive |
                        macro_directive |
                        endm_directive |
                        end_directive |
+                       section_directive |
                        conditional_assembly_directives
 
 fake equ_directive_base ::= label expression?
@@ -845,6 +846,8 @@ even_directive ::= EVEN
 odd_directive ::= ODD
 
 end_directive ::= END
+
+section_directive ::= SECTION expression (COMMA expression)? (COMMA expression)?
 
 private include_path ::= STRING
 {

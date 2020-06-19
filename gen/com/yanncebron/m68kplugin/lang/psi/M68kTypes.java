@@ -185,6 +185,7 @@ public interface M68kTypes {
   IElementType SBCD_INSTRUCTION = new M68kCompositeElementType("SBCD_INSTRUCTION");
   IElementType SCC_INSTRUCTION = new M68kCompositeElementType("SCC_INSTRUCTION");
   IElementType SCS_INSTRUCTION = new M68kCompositeElementType("SCS_INSTRUCTION");
+  IElementType SECTION_DIRECTIVE = new M68kCompositeElementType("SECTION_DIRECTIVE");
   IElementType SEQ_INSTRUCTION = new M68kCompositeElementType("SEQ_INSTRUCTION");
   IElementType SET_DIRECTIVE = new M68kCompositeElementType("SET_DIRECTIVE");
   IElementType SF_INSTRUCTION = new M68kCompositeElementType("SF_INSTRUCTION");
@@ -704,6 +705,9 @@ public interface M68kTypes {
       }
       else if (type == SCS_INSTRUCTION) {
         return new M68kScsInstructionImpl(node);
+      }
+      else if (type == SECTION_DIRECTIVE) {
+        return new M68kSectionDirectiveImpl(node);
       }
       else if (type == SEQ_INSTRUCTION) {
         return new M68kSeqInstructionImpl(node);

@@ -294,6 +294,7 @@ LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
   [rR][sS]                        { return RS; }
   [rR][sS][sS][eE][tT]            { return RSSET; }
   [rR][sS][rR][eE][sS][eE][tT]    { return RSRESET; }
+  [sS][eE][cC][tT][iI][oO][nN]    { return SECTION; }
   [sS][eE][tT]                    { return SET; }
 
   [mM][aA][cC][rR][oO]            { return MACRO; }

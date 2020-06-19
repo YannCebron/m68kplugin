@@ -177,4 +177,8 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" end");
   }
 
+  public void testSectionDirective() throws Exception {
+    doCodeTest(" section tos,code,chip");
+  }
+
 }
