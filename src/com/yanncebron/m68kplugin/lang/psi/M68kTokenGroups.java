@@ -160,26 +160,12 @@ public final class M68kTokenGroups {
     DC,
     DCB,
     DS,
-    ELSE,
-    ELSEIF,
     END,
-    ENDC,
     ENDM,
     EQ,
     EQU,
     EQUR,
     EVEN,
-    IF,
-    IFB,
-    IFD,
-    IFEQ,
-    IFGE,
-    IFGT,
-    IFLE,
-    IFLT,
-    IFNB,
-    IFND,
-    IFNE,
     INCBIN,
     INCDIR,
     INCLUDE,
@@ -191,6 +177,23 @@ public final class M68kTokenGroups {
     RSRESET,
     RSSET,
     SET
+  );
+
+  public static final TokenSet CONDITIONAL_ASSEMBLY_DIRECTIVES = TokenSet.create(
+    ELSE,
+    ELSEIF,
+    ENDC,
+    IF,
+    IFB,
+    IFD,
+    IFEQ,
+    IFGE,
+    IFGT,
+    IFLE,
+    IFLT,
+    IFNB,
+    IFND,
+    IFNE
   );
 
   public static final TokenSet OPERATORS = TokenSet.create(

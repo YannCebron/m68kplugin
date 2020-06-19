@@ -40,19 +40,20 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
     new AttributesDescriptor("Braces and Operators//Parentheses", M68kTextAttributes.PARENTHESES),
     new AttributesDescriptor("Comment", M68kTextAttributes.COMMENT),
     new AttributesDescriptor("Data Size", M68kTextAttributes.DATA_SIZES),
-    new AttributesDescriptor("Directive", M68kTextAttributes.DIRECTIVE),
+    new AttributesDescriptor("Directives//Directive", M68kTextAttributes.DIRECTIVE),
+    new AttributesDescriptor("Directives//Conditional Assembly Directive", M68kTextAttributes.CONDITIONAL_ASSEMBLY_DIRECTIVE),
     new AttributesDescriptor("Instructions//Instruction", M68kTextAttributes.INSTRUCTION),
     new AttributesDescriptor("Instructions//Privileged Instruction", M68kTextAttributes.PRIVILEGED_INSTRUCTION),
     new AttributesDescriptor("Labels//Label", M68kTextAttributes.LABEL),
     new AttributesDescriptor("Labels//Local Label", M68kTextAttributes.LOCAL_LABEL),
-    new AttributesDescriptor("Literals//Binary number", M68kTextAttributes.BIN_NUMBER),
-    new AttributesDescriptor("Literals//Decimal number", M68kTextAttributes.DEC_NUMBER),
-    new AttributesDescriptor("Literals//Hexadecimal number", M68kTextAttributes.HEX_NUMBER),
-    new AttributesDescriptor("Literals//Octal number", M68kTextAttributes.OCT_NUMBER),
+    new AttributesDescriptor("Literals//Binary Number", M68kTextAttributes.BIN_NUMBER),
+    new AttributesDescriptor("Literals//Decimal Number", M68kTextAttributes.DEC_NUMBER),
+    new AttributesDescriptor("Literals//Hexadecimal Number", M68kTextAttributes.HEX_NUMBER),
+    new AttributesDescriptor("Literals//Octal Number", M68kTextAttributes.OCT_NUMBER),
     new AttributesDescriptor("Literals//String", M68kTextAttributes.STRING),
-    new AttributesDescriptor("Registers//Address register", M68kTextAttributes.ADDRESS_REGISTER),
+    new AttributesDescriptor("Registers//Address Register", M68kTextAttributes.ADDRESS_REGISTER),
     new AttributesDescriptor("Registers//CCR", M68kTextAttributes.CCR_REGISTER),
-    new AttributesDescriptor("Registers//Data register", M68kTextAttributes.DATA_REGISTER),
+    new AttributesDescriptor("Registers//Data Register", M68kTextAttributes.DATA_REGISTER),
     new AttributesDescriptor("Registers//PC", M68kTextAttributes.PC_REGISTER),
     new AttributesDescriptor("Registers//SP", M68kTextAttributes.SP_REGISTER),
     new AttributesDescriptor("Registers//SR", M68kTextAttributes.SR_REGISTER),
@@ -91,6 +92,9 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
       "  move.l d0,(a1) ;comment\n" +
       "  rts\n" +
       "\n" +
+      "  IFND LABEL\n" +
+      "<label>FLAG</label> SET 1\n" +
+      "  ENDC\n" +
       "<label>DATA</label> equ @42\n" +
       "  dc.b 'some text',0\n";
   }

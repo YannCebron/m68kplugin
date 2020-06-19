@@ -57,6 +57,7 @@ public class M68kSyntaxHighlighter extends SyntaxHighlighterBase {
     fillMap(keys, M68kTokenGroups.INSTRUCTIONS, M68kTextAttributes.INSTRUCTION);
     fillMap(keys, M68kTokenGroups.DATA_SIZES, M68kTextAttributes.DATA_SIZES);
     fillMap(keys, M68kTokenGroups.DIRECTIVES, M68kTextAttributes.DIRECTIVE);
+    fillMap(keys, M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES, M68kTextAttributes.CONDITIONAL_ASSEMBLY_DIRECTIVE);
 
     keys.put(M68kTokenTypes.DATA_REGISTER, M68kTextAttributes.DATA_REGISTER);
     keys.put(M68kTokenTypes.ADDRESS_REGISTER, M68kTextAttributes.ADDRESS_REGISTER);

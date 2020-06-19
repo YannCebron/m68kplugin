@@ -35,8 +35,11 @@ public class M68kTextAttributes {
     createTextAttributesKey("M68K_LOCAL_LABEL", DefaultLanguageHighlighterColors.INSTANCE_METHOD);
   public static final TextAttributesKey DATA_SIZES =
     createTextAttributesKey("M68K_DATA_SIZES", DefaultLanguageHighlighterColors.KEYWORD);
+
   public static final TextAttributesKey DIRECTIVE =
     createTextAttributesKey("M68K_DIRECTIVE", DefaultLanguageHighlighterColors.CONSTANT);
+  public static final TextAttributesKey CONDITIONAL_ASSEMBLY_DIRECTIVE =
+    createTextAttributesKey("M68K_CONDITIONAL_ASSEMBLY_DIRECTIVE", DefaultLanguageHighlighterColors.METADATA);
 
   public static final TextAttributesKey DATA_REGISTER =
     createTextAttributesKey("M68K_DATA_REGISTER", DefaultLanguageHighlighterColors.GLOBAL_VARIABLE);
