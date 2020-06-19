@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.psi;
 
 import com.yanncebron.m68kplugin.lang.psi.M68kIncbinDirective;
+import com.yanncebron.m68kplugin.lang.psi.M68kNumberExpression;
 import org.jetbrains.annotations.NotNull;
 
 public class IncbinDirectivePsiTest extends M68kPsiTestCase {
@@ -31,6 +32,16 @@ public class IncbinDirectivePsiTest extends M68kPsiTestCase {
     final M68kIncbinDirective directive = parse("incbin \"test.i\"");
 
     assertEquals("test.i", directive.getIncludePath());
+  }
+
+  public void testWithQuotesOffsetLength() {
+    final M68kIncbinDirective directive = parse("incbin \"test.i\",0,42");
+
+    assertEquals("test.i", directive.getIncludePath());
+    final M68kNumberExpression offsetExpression = assertInstanceOf(directive.getOffset(), M68kNumberExpression.class);
+    assertEquals("0", offsetExpression.getText());
+    final M68kNumberExpression lengthExpression = assertInstanceOf(directive.getLength(), M68kNumberExpression.class);
+    assertEquals("42", lengthExpression.getText());
   }
 
   @NotNull

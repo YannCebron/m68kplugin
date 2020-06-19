@@ -47,4 +47,18 @@ public class M68kIncbinDirectiveImpl extends ASTWrapperPsiElement implements M68
     return M68kPsiImplUtil.getIncludePath(this);
   }
 
+  @Override
+  @Nullable
+  public M68kExpression getOffset() {
+    List<M68kExpression> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
+    return p1.size() < 1 ? null : p1.get(0);
+  }
+
+  @Override
+  @Nullable
+  public M68kExpression getLength() {
+    List<M68kExpression> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
+    return p1.size() < 2 ? null : p1.get(1);
+  }
+
 }

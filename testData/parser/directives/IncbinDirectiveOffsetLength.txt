@@ -1,0 +1,12 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kIncbinDirectiveImpl(INCBIN_DIRECTIVE)
+    PsiElement(incbin)('incbin')
+    PsiWhiteSpace(' ')
+    PsiElement(string)('"path"')
+    PsiElement(,)(',')
+    M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
+      PsiElement(id)('offset')
+    PsiElement(,)(',')
+    M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+      PsiElement(dec_number)('42')

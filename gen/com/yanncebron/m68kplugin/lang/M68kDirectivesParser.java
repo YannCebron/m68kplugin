@@ -467,7 +467,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // INCBIN include_path
+  // INCBIN include_path (COMMA expression)? (COMMA expression)?
   public static boolean incbin_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "incbin_directive")) return false;
     if (!nextTokenIs(b, INCBIN)) return false;
@@ -475,9 +475,47 @@ public class M68kDirectivesParser {
     Marker m = enter_section_(b, l, _NONE_, INCBIN_DIRECTIVE, null);
     r = consumeToken(b, INCBIN);
     p = r; // pin = 1
-    r = r && include_path(b, l + 1);
+    r = r && report_error_(b, include_path(b, l + 1));
+    r = p && report_error_(b, incbin_directive_2(b, l + 1)) && r;
+    r = p && incbin_directive_3(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  // (COMMA expression)?
+  private static boolean incbin_directive_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "incbin_directive_2")) return false;
+    incbin_directive_2_0(b, l + 1);
+    return true;
+  }
+
+  // COMMA expression
+  private static boolean incbin_directive_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "incbin_directive_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COMMA);
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (COMMA expression)?
+  private static boolean incbin_directive_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "incbin_directive_3")) return false;
+    incbin_directive_3_0(b, l + 1);
+    return true;
+  }
+
+  // COMMA expression
+  private static boolean incbin_directive_3_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "incbin_directive_3_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COMMA);
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, m, null, r);
+    return r;
   }
 
   /* ********************************************************** */

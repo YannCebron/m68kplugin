@@ -1,0 +1,9 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kIncbinDirectiveImpl(INCBIN_DIRECTIVE)
+    PsiElement(incbin)('incbin')
+    PsiWhiteSpace(' ')
+    PsiElement(string)('"path"')
+  PsiElement(,)(',')
+  PsiErrorElement:<expression> expected
+    <empty list>

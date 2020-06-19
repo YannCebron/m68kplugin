@@ -69,6 +69,14 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" incbin \"path\"");
   }
 
+  public void testIncbinDirectiveOffsetLength() throws Exception {
+    doCodeTest(" incbin \"path\",offset,42");
+  }
+
+  public void testIncbinDirectiveMissingOffsetExpression() throws Exception {
+    doCodeTest(" incbin \"path\",");
+  }
+
   public void testIncdirDirective() throws Exception {
     doCodeTest(" incdir \"path\"");
   }

@@ -850,11 +850,14 @@ private include_path ::= STRING
 {
   name = "include path"
 }
-incbin_directive ::= INCBIN include_path
+incbin_directive ::= INCBIN include_path (COMMA expression)? (COMMA expression)?
 {
   pin = 1
   methods = [
     getIncludePath
+    expression = ""
+    offset = "expression[0]"
+    length = "expression[1]"
   ]
 }
 incdir_directive ::= INCDIR include_path

@@ -24,4 +24,10 @@ public interface M68kIncbinDirective extends M68kPsiElement {
   @Nullable
   String getIncludePath();
 
+  @Nullable
+  M68kExpression getOffset();
+
+  @Nullable
+  M68kExpression getLength();
+
 }
