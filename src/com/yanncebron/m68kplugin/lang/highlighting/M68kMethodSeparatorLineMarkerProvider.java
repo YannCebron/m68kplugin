@@ -25,6 +25,7 @@ import com.intellij.openapi.editor.markup.SeparatorPlacement;
 import com.intellij.psi.PsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kEndmDirective;
 import com.yanncebron.m68kplugin.lang.psi.M68kMacroDirective;
+import com.yanncebron.m68kplugin.lang.psi.M68kSectionDirective;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -42,6 +43,10 @@ public class M68kMethodSeparatorLineMarkerProvider implements LineMarkerProvider
 
     if (element instanceof M68kEndmDirective) {
       return createSeparatorBottom(element.getFirstChild());
+    }
+
+    if (element instanceof M68kSectionDirective) {
+      return createSeparator(element.getFirstChild());
     }
 
     return null;

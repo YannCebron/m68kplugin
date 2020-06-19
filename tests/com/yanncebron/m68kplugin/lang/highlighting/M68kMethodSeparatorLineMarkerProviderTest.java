@@ -44,12 +44,9 @@ public class M68kMethodSeparatorLineMarkerProviderTest extends BasePlatformTestC
   }
 
   public void testMacro() {
-    myFixture.configureByText("test.s",
-      "macroName macro\n" +
+    final List<LineMarkerInfo> lineMarkerInfos =
+      getLineMarkerInfos("macroName macro\n" +
         " endm\n");
-    myFixture.doHighlighting();
-    final @NotNull List<LineMarkerInfo> lineMarkerInfos =
-      DaemonCodeAnalyzerImpl.getLineMarkers(myFixture.getEditor().getDocument(), getProject());
 
     assertSize(2, lineMarkerInfos);
 
@@ -62,5 +59,24 @@ public class M68kMethodSeparatorLineMarkerProviderTest extends BasePlatformTestC
     assertEquals(SeparatorPlacement.BOTTOM, after.separatorPlacement);
     final LeafPsiElement afterPsiElement = assertInstanceOf(after.getElement(), LeafPsiElement.class);
     assertEquals("endm", afterPsiElement.getText());
+  }
+
+  public void testSection() {
+    final List<LineMarkerInfo> lineMarkerInfos =
+      getLineMarkerInfos(" section tos,code,chip\n");
+
+    final LineMarkerInfo before = assertOneElement(lineMarkerInfos);
+    assertEquals(SeparatorPlacement.TOP, before.separatorPlacement);
+    final LeafPsiElement beforePsiElement = assertInstanceOf(before.getElement(), LeafPsiElement.class);
+    assertEquals("section", beforePsiElement.getText());
+  }
+
+  @NotNull
+  private List<LineMarkerInfo> getLineMarkerInfos(String text) {
+    myFixture.configureByText("test.s", text);
+    myFixture.doHighlighting();
+    final @NotNull List<LineMarkerInfo> lineMarkerInfos =
+      DaemonCodeAnalyzerImpl.getLineMarkers(myFixture.getEditor().getDocument(), getProject());
+    return lineMarkerInfos;
   }
 }

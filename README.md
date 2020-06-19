@@ -14,7 +14,7 @@ Adds support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_
 ### Editor
 * Syntax highlighting
   * fully customizable via *Preferences | Editor | Color Scheme | M68k Assembler*
-  * method separator for `macro`/`endm` blocks
+  * method separator for `macro`/`endm`, `section` blocks
 * Parsing with semantic error highlighting
 * Labels: Goto Declaration/Find Usages/Rename
 * Smart *Extend|Shrink Selection*
