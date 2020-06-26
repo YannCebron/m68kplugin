@@ -44,6 +44,7 @@
 - register
   - shift up/down through available ones
   - change/cycle through address mode by typing/intention/...?
+- `refactoring.extractIncludeHandler`
 
 ## Editing
 - `EnterHandlerDelegate`: smart indent? and/or `LineIndentProvider`
