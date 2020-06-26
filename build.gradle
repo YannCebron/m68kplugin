@@ -17,7 +17,8 @@ limitations under the License.
 plugins {
   id 'java'
   id 'org.jetbrains.intellij' version '0.4.21'
-  id "org.jetbrains.grammarkit" version "2020.1.4"
+  id "org.jetbrains.grammarkit" version '2020.1.4'
+  id 'org.jetbrains.changelog' version '0.3.2'
 }
 
 
@@ -81,11 +82,10 @@ buildSearchableOptions {
   enabled = false
 }
 
+apply plugin: 'org.jetbrains.changelog'
 patchPluginXml {
-  changeNotes """  
-    <b>${version}</b>
-    Initial Release - alpha version."""
   untilBuild = null
+  changeNotes({ changelog.latest.toHTML() })
 }
 
 

@@ -14,7 +14,6 @@
 - plugin description
 - `ErrorReportSubmitter`
 - README.md
-- CHANGELOG.md
 
 ## Instruction Sets
 * 680x0 variants
