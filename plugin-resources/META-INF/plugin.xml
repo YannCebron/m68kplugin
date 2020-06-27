@@ -121,4 +121,9 @@
         implementation="com.yanncebron.m68kplugin.lang.spellchecker.M68kBundledDictionaryProvider"/>
   </extensions>
 
+  <actions>
+    <action id="com.yanncebron.m68kplugin.internal.M68kProjectStatisticsAction"
+            class="com.yanncebron.m68kplugin.internal.M68kProjectStatisticsAction"
+            text="M68k Project Statistics"/>
+  </actions>
 </idea-plugin>
