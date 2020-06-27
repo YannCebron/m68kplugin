@@ -21,6 +21,7 @@
 
 ## Highlighting
 - `macro` missing `endm`
+- conditional assembly missing `endc`
 - registers:
   - dedicated color for each (**WIP** at least special registers (`SP` == `A7`!) vs. A*n* vs. D*n*)
   - rainbow highlighting?
