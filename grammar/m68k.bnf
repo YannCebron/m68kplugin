@@ -256,6 +256,9 @@ move_instruction ::= MOVE
                        move_tail_ard_usp |
                        tail_data_size_all___all__all_except_pc_imm
                      )
+{
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kMoveInstructionMixIn"
+}
 
 movea_instruction ::= MOVEA tail_data_size_word_long___all__ard
 
