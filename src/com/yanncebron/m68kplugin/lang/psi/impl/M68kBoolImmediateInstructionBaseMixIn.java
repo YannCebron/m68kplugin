@@ -13,15 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.yanncebron.m68kplugin.lang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
+package com.yanncebron.m68kplugin.lang.psi.impl;
 
-public interface M68kEoriInstruction extends M68kBoolImmediateInstructionBase {
+import com.intellij.lang.ASTNode;
+import com.yanncebron.m68kplugin.lang.psi.M68kBoolImmediateInstructionBase;
+import org.jetbrains.annotations.NotNull;
 
-  @Nullable
-  M68kAdmImm getAdmImm();
+abstract class M68kBoolImmediateInstructionBaseMixIn extends M68kBoolInstructionBaseImpl implements M68kBoolImmediateInstructionBase {
+  protected M68kBoolImmediateInstructionBaseMixIn(@NotNull ASTNode node) {
+    super(node);
+  }
 
+  @Override
+  public boolean isPrivileged() {
+    return getAdmSr() != null;
+  }
 }

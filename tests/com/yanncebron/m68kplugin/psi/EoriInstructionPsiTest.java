@@ -33,6 +33,12 @@ public class EoriInstructionPsiTest extends M68kPsiTestCase {
     assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
   }
 
+  public void testSRPrivileged() {
+    final M68kEoriInstruction instruction = parse("eori #1,SR");
+
+    assertTrue(instruction.isPrivileged());
+  }
+
   private M68kEoriInstruction parse(String text) {
     return assertInstanceOf(doParse(" " + text), M68kEoriInstruction.class);
   }

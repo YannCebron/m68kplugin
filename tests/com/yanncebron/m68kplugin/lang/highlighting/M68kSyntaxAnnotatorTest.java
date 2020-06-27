@@ -24,7 +24,11 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
     myFixture.configureByText("test.s",
       " <info descr=\"Privileged instruction\">rte</info>\n" +
         " <info descr=\"Privileged instruction\">reset</info>\n" +
-        " <info descr=\"Privileged instruction\">stop #2</info>");
+        " <info descr=\"Privileged instruction\">stop #2</info>\n" +
+        " <info descr=\"Privileged instruction\">andi #2,SR</info>\n" +
+        " <info descr=\"Privileged instruction\">ori #2,SR</info>\n" +
+        " <info descr=\"Privileged instruction\">eori #2,SR</info>"
+    );
     myFixture.testHighlighting(false, true, false);
   }
 
