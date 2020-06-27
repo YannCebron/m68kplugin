@@ -19,6 +19,7 @@ package com.yanncebron.m68kplugin.lang.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class M68kPsiImplUtil {
@@ -29,6 +30,17 @@ public class M68kPsiImplUtil {
     if (childByType == null) return null;
 
     return M68kDataSize.findByElementType(childByType.getElementType());
+  }
+
+  // TODO extract M68kInstructionWithSrcAndDest
+  public static boolean isDest(M68kInstruction instruction, @NotNull M68kPsiElement sourceOrDestElement) {
+    final ASTNode commaNode = instruction.getNode().findChildByType(M68kTokenTypes.COMMA);
+    return commaNode != null && commaNode.getStartOffset() < sourceOrDestElement.getNode().getStartOffset();
+  }
+
+  public static boolean isSrc(M68kInstruction instruction, @NotNull M68kPsiElement sourceOrDestElement) {
+    final ASTNode commaNode = instruction.getNode().findChildByType(M68kTokenTypes.COMMA);
+    return commaNode != null && commaNode.getStartOffset() > sourceOrDestElement.getNode().getStartOffset();
   }
 
   @Nullable
