@@ -1894,30 +1894,30 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // directives |
-  //                          move_instructions |
-  //                          misc_instructions |
+  // move_instructions |
   //                          jump_instructions |
   //                          add_sub_instructions |
   //                          mul_div_instructions |
   //                          bcd_instructions|
+  //                          misc_instructions |
   //                          cmp_instructions |
   //                          bool_instructions |
   //                          bit_instructions |
   //                          shift_instructions |
   //                          bCC_instructions |
   //                          dbCC_instructions |
-  //                          sCC_instructions
+  //                          sCC_instructions |
+  //                          directives |
+  //                          conditional_assembly_directives
   static boolean instructions(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "instructions")) return false;
     boolean r;
-    r = M68kDirectivesParser.directives(b, l + 1);
-    if (!r) r = move_instructions(b, l + 1);
-    if (!r) r = misc_instructions(b, l + 1);
+    r = move_instructions(b, l + 1);
     if (!r) r = jump_instructions(b, l + 1);
     if (!r) r = add_sub_instructions(b, l + 1);
     if (!r) r = mul_div_instructions(b, l + 1);
     if (!r) r = bcd_instructions(b, l + 1);
+    if (!r) r = misc_instructions(b, l + 1);
     if (!r) r = cmp_instructions(b, l + 1);
     if (!r) r = bool_instructions(b, l + 1);
     if (!r) r = bit_instructions(b, l + 1);
@@ -1925,6 +1925,8 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = bCC_instructions(b, l + 1);
     if (!r) r = dbCC_instructions(b, l + 1);
     if (!r) r = sCC_instructions(b, l + 1);
+    if (!r) r = M68kDirectivesParser.directives(b, l + 1);
+    if (!r) r = M68kDirectivesParser.conditional_assembly_directives(b, l + 1);
     return r;
   }
 

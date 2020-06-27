@@ -85,18 +85,15 @@ localLabel ::= DOT ID COLON?
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLocalLabelMixIn"
 }
 
-// todo sort instructions by frequency?
-private instructions ::= directives |
-
-                         move_instructions |
-
-                         misc_instructions |
+private instructions ::= move_instructions |
 
                          jump_instructions |
 
                          add_sub_instructions |
                          mul_div_instructions |
                          bcd_instructions|
+
+                         misc_instructions |
 
                          cmp_instructions |
 
@@ -106,7 +103,10 @@ private instructions ::= directives |
 
                          bCC_instructions |
                          dbCC_instructions |
-                         sCC_instructions
+                         sCC_instructions |
+
+                         directives |
+                         conditional_assembly_directives
 
 
 // data size  _______=====================================================
@@ -808,12 +808,12 @@ private directives ::= equ_directive |
                        equr_directive |
                        even_directive |
                        odd_directive |
-                       incbin_directive |
-                       incdir_directive |
-                       include_directive |
                        dc_directive |
                        dcb_directive |
                        ds_directive |
+                       incbin_directive |
+                       incdir_directive |
+                       include_directive |
                        rsset_directive |
                        rsreset_directive |
                        rs_directive |
@@ -822,8 +822,7 @@ private directives ::= equ_directive |
                        macro_directive |
                        endm_directive |
                        end_directive |
-                       section_directive |
-                       conditional_assembly_directives
+                       section_directive
 
 fake equ_directive_base ::= label expression?
 {

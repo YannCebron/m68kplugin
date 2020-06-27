@@ -182,12 +182,12 @@ public class M68kDirectivesParser {
   //                        equr_directive |
   //                        even_directive |
   //                        odd_directive |
-  //                        incbin_directive |
-  //                        incdir_directive |
-  //                        include_directive |
   //                        dc_directive |
   //                        dcb_directive |
   //                        ds_directive |
+  //                        incbin_directive |
+  //                        incdir_directive |
+  //                        include_directive |
   //                        rsset_directive |
   //                        rsreset_directive |
   //                        rs_directive |
@@ -196,8 +196,7 @@ public class M68kDirectivesParser {
   //                        macro_directive |
   //                        endm_directive |
   //                        end_directive |
-  //                        section_directive |
-  //                        conditional_assembly_directives
+  //                        section_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -208,12 +207,12 @@ public class M68kDirectivesParser {
     if (!r) r = equr_directive(b, l + 1);
     if (!r) r = even_directive(b, l + 1);
     if (!r) r = odd_directive(b, l + 1);
-    if (!r) r = incbin_directive(b, l + 1);
-    if (!r) r = incdir_directive(b, l + 1);
-    if (!r) r = include_directive(b, l + 1);
     if (!r) r = dc_directive(b, l + 1);
     if (!r) r = dcb_directive(b, l + 1);
     if (!r) r = ds_directive(b, l + 1);
+    if (!r) r = incbin_directive(b, l + 1);
+    if (!r) r = incdir_directive(b, l + 1);
+    if (!r) r = include_directive(b, l + 1);
     if (!r) r = rsset_directive(b, l + 1);
     if (!r) r = rsreset_directive(b, l + 1);
     if (!r) r = rs_directive(b, l + 1);
@@ -223,7 +222,6 @@ public class M68kDirectivesParser {
     if (!r) r = endm_directive(b, l + 1);
     if (!r) r = end_directive(b, l + 1);
     if (!r) r = section_directive(b, l + 1);
-    if (!r) r = conditional_assembly_directives(b, l + 1);
     return r;
   }
 
