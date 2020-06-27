@@ -39,6 +39,18 @@ public class MoveInstructionPsiTest extends M68kPsiTestCase {
     assertEquals(M68kDataSize.WORD, admRrdIndex.getDataSize());
   }
 
+  public void testAdmSrSource() {
+    final M68kMoveInstruction instruction = parse("move.w SR,d6");
+
+    assertFalse(instruction.isPrivileged());
+  }
+
+  public void testAdmSrDest() {
+    final M68kMoveInstruction instruction = parse("move.w d6,SR");
+
+    assertTrue(instruction.isPrivileged());
+  }
+
   private M68kMoveInstruction parse(String text) {
     return assertInstanceOf(doParse(" " + text), M68kMoveInstruction.class);
   }

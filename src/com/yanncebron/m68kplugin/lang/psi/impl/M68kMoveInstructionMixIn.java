@@ -17,7 +17,9 @@
 package com.yanncebron.m68kplugin.lang.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmSr;
 import com.yanncebron.m68kplugin.lang.psi.M68kMoveInstruction;
+import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import org.jetbrains.annotations.NotNull;
 
 abstract class M68kMoveInstructionMixIn extends M68kMoveInstructionBaseImpl implements M68kMoveInstruction {
@@ -28,6 +30,13 @@ abstract class M68kMoveInstructionMixIn extends M68kMoveInstructionBaseImpl impl
 
   @Override
   public boolean isPrivileged() {
-    return getAdmUsp() != null;
+    if (getAdmUsp() != null) return true;
+
+    final M68kAdmSr admSr = getAdmSr();
+    if (admSr != null) {
+      final ASTNode commaNode = getNode().findChildByType(M68kTokenTypes.COMMA);
+      return commaNode != null && commaNode.getStartOffset() < admSr.getNode().getStartOffset();
+    }
+    return false;
   }
 }
