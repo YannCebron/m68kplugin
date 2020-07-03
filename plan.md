@@ -1,12 +1,12 @@
-## Known issues
+# Known issues & Plans
+
+## Broken lexing/parsing
 - research available directives, case-sensitivity (DevPac: no)?
 - add missing expression operators (XOR?)
-- macros (WIP)
-
-### Broken lexing/parsing
-- `.b|w|l` must be immediate after instruction (Parser prob?)
+- do not allow spaces, e.g. `.b|w|l` must be immediate after instruction
 - index expression == 0 is optional? `move.l d0,(a0,d2.w)`
 - allow `equr` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
+- macro: parameters, calls
 
 ## Before 1st release
 - file icons
@@ -30,6 +30,7 @@
   - "detected" subroutines
 - color-picker/inlays: copper list colors
 - anything after `end` directive
+- highlight returns
 
 ## Resolve/Refactor
 - rename/resolve to label
@@ -51,7 +52,6 @@
   - full line
   - "blocks"
 - move left/right: swap src|dest
-- highlight returns
 - formatter
 - documentation:
   - quick doc/hover for number literals: dec/hex/oct/bin
@@ -67,7 +67,7 @@
 - string in `dc.b` not terminated with `,0`
 - check optimizations from vasm/DevPac
 - multiple `opt` directives (?)
-- macro label naming convention (all uppercase)
+- label naming conventions
 
 ## Navigation
 - **WIP** goto symbol for labels/macros/EQUs (?) --> Stubs
