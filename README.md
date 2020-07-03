@@ -1,4 +1,5 @@
 [![CI](https://github.com/YannCebron/m68kplugin/workflows/CI/badge.svg)](https://github.com/YannCebron/m68kplugin/actions?query=workflow%3ACI)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 
 ## Motorola 68000 Series Assembler Support for IntelliJ Platform
 
