@@ -18,11 +18,12 @@ package com.yanncebron.m68kplugin.lang.psi;
 
 import com.intellij.psi.tree.IElementType;
 import com.yanncebron.m68kplugin.lang.M68kLanguage;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 class M68kTokenType extends IElementType {
 
-  M68kTokenType(@NotNull String debugName) {
+  M68kTokenType(@NotNull @NonNls String debugName) {
     super(debugName, M68kLanguage.INSTANCE);
   }
 }

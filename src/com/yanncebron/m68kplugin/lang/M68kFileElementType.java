@@ -18,16 +18,19 @@ package com.yanncebron.m68kplugin.lang;
 
 import com.intellij.psi.stubs.PsiFileStub;
 import com.intellij.psi.tree.ILightStubFileElementType;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 public class M68kFileElementType extends ILightStubFileElementType<PsiFileStub<M68kFile>> {
 
   public static final M68kFileElementType INSTANCE = new M68kFileElementType();
 
+  @NonNls
   public static final String STUB_EXTERNAL_ID_PREFIX = "M68k.";
 
   public static final int STUB_VERSION = 2;
 
+  @NonNls
   private static final String EXTERNAL_ID = STUB_EXTERNAL_ID_PREFIX + "FILE";
 
   private M68kFileElementType() {

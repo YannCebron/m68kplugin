@@ -26,6 +26,7 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.util.registry.Registry;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
+import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +41,8 @@ public class M68kSyntaxAnnotator implements Annotator {
     if (element instanceof M68kInstruction) {
       M68kInstruction instruction = (M68kInstruction) element;
       if (instruction.isPrivileged()) {
-        holder.createInfoAnnotation(element, "Privileged instruction").setTextAttributes(M68kTextAttributes.PRIVILEGED_INSTRUCTION);
+        holder.createInfoAnnotation(element, M68kBundle.message("highlight.privileged.instruction"))
+          .setTextAttributes(M68kTextAttributes.PRIVILEGED_INSTRUCTION);
       }
     }
 

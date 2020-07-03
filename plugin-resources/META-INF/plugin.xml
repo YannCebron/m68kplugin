@@ -122,8 +122,7 @@
   </extensions>
 
   <actions>
-    <action id="com.yanncebron.m68kplugin.internal.M68kProjectStatisticsAction"
-            class="com.yanncebron.m68kplugin.internal.M68kProjectStatisticsAction"
-            text="M68k Project Statistics"/>
+    <action id="M68kProjectStatisticsAction"
+            class="com.yanncebron.m68kplugin.internal.M68kProjectStatisticsAction"/>
   </actions>
 </idea-plugin>

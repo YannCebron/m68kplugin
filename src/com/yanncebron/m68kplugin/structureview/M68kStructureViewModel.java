@@ -25,6 +25,7 @@ import com.intellij.ide.util.treeView.smartTree.*;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.BooleanFunction;
+import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import org.jetbrains.annotations.NotNull;
@@ -57,13 +58,13 @@ public class M68kStructureViewModel extends StructureViewModelBase implements St
   public Filter[] getFilters() {
     return new Filter[]{
       createFilter(psiElement -> psiElement instanceof M68kIncludeDirective || psiElement instanceof M68kIncbinDirective,
-        "Show includes", AllIcons.Graph.Layout, "SHOW_INCLUDES"),
+        M68kBundle.message("structureview.filter.includes"), AllIcons.Graph.Layout, "SHOW_INCLUDES"),
       createFilter(psiElement -> psiElement instanceof M68kLabel,
-        "Show labels", AllIcons.Nodes.Method, "SHOW_LABELS"),
+        M68kBundle.message("structureview.filter.labels"), AllIcons.Nodes.Method, "SHOW_LABELS"),
       createFilter(psiElement -> psiElement instanceof M68kLocalLabel,
-        "Show local labels", AllIcons.Nodes.AbstractMethod, "SHOW_LOCAL_LABELS"),
+        M68kBundle.message("structureview.filter.local.labels"), AllIcons.Nodes.AbstractMethod, "SHOW_LOCAL_LABELS"),
       createFilter(psiElement -> psiElement instanceof M68kEquDirectiveBase,
-        "Show EQUs", AllIcons.Nodes.Constant, "SHOW_EQU_DIRECTIVES")
+        M68kBundle.message("structureview.filter.equ"), AllIcons.Nodes.Constant, "SHOW_EQU_DIRECTIVES")
     };
   }
 

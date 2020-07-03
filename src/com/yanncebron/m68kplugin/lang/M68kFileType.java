@@ -18,6 +18,7 @@ package com.yanncebron.m68kplugin.lang;
 
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import com.yanncebron.m68kplugin.M68kBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,13 +35,13 @@ public class M68kFileType extends LanguageFileType {
   @NotNull
   @Override
   public String getName() {
-    return "M68k Assembler";
+    return M68kBundle.message("general.m68k.assembler");
   }
 
   @NotNull
   @Override
   public String getDescription() {
-    return "Motorola 68000 Assembler";
+    return M68kBundle.message("general.m68000.assembler");
   }
 
   @NotNull

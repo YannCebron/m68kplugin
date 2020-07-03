@@ -21,6 +21,7 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.intellij.openapi.options.colors.ColorSettingsPage;
+import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,34 +33,39 @@ import java.util.Map;
 public class M68kColorSettingsPage implements ColorSettingsPage {
 
   private static final AttributesDescriptor[] ourDescriptors = {
-    new AttributesDescriptor("Braces and Operators//Colon", M68kTextAttributes.COLON),
-    new AttributesDescriptor("Braces and Operators//Comma", M68kTextAttributes.COMMA),
-    new AttributesDescriptor("Braces and Operators//Dot", M68kTextAttributes.DOT),
-    new AttributesDescriptor("Braces and Operators//Hash", M68kTextAttributes.HASH),
-    new AttributesDescriptor("Braces and Operators//Operators", M68kTextAttributes.OPERATORS),
-    new AttributesDescriptor("Braces and Operators//Parentheses", M68kTextAttributes.PARENTHESES),
-    new AttributesDescriptor("Comment", M68kTextAttributes.COMMENT),
-    new AttributesDescriptor("Data Size", M68kTextAttributes.DATA_SIZES),
-    new AttributesDescriptor("Directives//Directive", M68kTextAttributes.DIRECTIVE),
-    new AttributesDescriptor("Directives//Conditional Assembly Directive", M68kTextAttributes.CONDITIONAL_ASSEMBLY_DIRECTIVE),
-    new AttributesDescriptor("Instructions//Instruction", M68kTextAttributes.INSTRUCTION),
-    new AttributesDescriptor("Instructions//Privileged Instruction", M68kTextAttributes.PRIVILEGED_INSTRUCTION),
-    new AttributesDescriptor("Labels//Label", M68kTextAttributes.LABEL),
-    new AttributesDescriptor("Labels//Local Label", M68kTextAttributes.LOCAL_LABEL),
-    new AttributesDescriptor("Literals//Binary Number", M68kTextAttributes.BIN_NUMBER),
-    new AttributesDescriptor("Literals//Decimal Number", M68kTextAttributes.DEC_NUMBER),
-    new AttributesDescriptor("Literals//Hexadecimal Number", M68kTextAttributes.HEX_NUMBER),
-    new AttributesDescriptor("Literals//Octal Number", M68kTextAttributes.OCT_NUMBER),
-    new AttributesDescriptor("Literals//String", M68kTextAttributes.STRING),
-    new AttributesDescriptor("Registers//Address Register", M68kTextAttributes.ADDRESS_REGISTER),
-    new AttributesDescriptor("Registers//CCR", M68kTextAttributes.CCR_REGISTER),
-    new AttributesDescriptor("Registers//Data Register", M68kTextAttributes.DATA_REGISTER),
-    new AttributesDescriptor("Registers//PC", M68kTextAttributes.PC_REGISTER),
-    new AttributesDescriptor("Registers//SP", M68kTextAttributes.SP_REGISTER),
-    new AttributesDescriptor("Registers//SR", M68kTextAttributes.SR_REGISTER),
-    new AttributesDescriptor("Registers//SSP", M68kTextAttributes.SSP_REGISTER),
-    new AttributesDescriptor("Registers//USP", M68kTextAttributes.USP_REGISTER)
+    createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.colon", M68kTextAttributes.COLON),
+    createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.comma", M68kTextAttributes.COMMA),
+    createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.dot", M68kTextAttributes.DOT),
+    createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.hash", M68kTextAttributes.HASH),
+    createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.operators", M68kTextAttributes.OPERATORS),
+    createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.parentheses", M68kTextAttributes.PARENTHESES),
+    createDescriptor("color.settings.group.root", "attribute.descriptor.comment", M68kTextAttributes.COMMENT),
+    createDescriptor("color.settings.group.root", "attribute.descriptor.data.size", M68kTextAttributes.DATA_SIZES),
+    createDescriptor("color.settings.group.directives", "attribute.descriptor.directive", M68kTextAttributes.DIRECTIVE),
+    createDescriptor("color.settings.group.directives", "attribute.descriptor.conditional.assembly.directive", M68kTextAttributes.CONDITIONAL_ASSEMBLY_DIRECTIVE),
+    createDescriptor("color.settings.group.instructions", "attribute.descriptor.instruction", M68kTextAttributes.INSTRUCTION),
+    createDescriptor("color.settings.group.instructions", "attribute.descriptor.privileged.instruction", M68kTextAttributes.PRIVILEGED_INSTRUCTION),
+    createDescriptor("color.settings.group.labels", "attribute.descriptor.label", M68kTextAttributes.LABEL),
+    createDescriptor("color.settings.group.labels", "attribute.descriptor.local.label", M68kTextAttributes.LOCAL_LABEL),
+    createDescriptor("color.settings.group.literals", "attribute.descriptor.binary.number", M68kTextAttributes.BIN_NUMBER),
+    createDescriptor("color.settings.group.literals", "attribute.descriptor.decimal.number", M68kTextAttributes.DEC_NUMBER),
+    createDescriptor("color.settings.group.literals", "attribute.descriptor.hex.number", M68kTextAttributes.HEX_NUMBER),
+    createDescriptor("color.settings.group.literals", "attribute.descriptor.oct.number", M68kTextAttributes.OCT_NUMBER),
+    createDescriptor("color.settings.group.literals", "attribute.descriptor.string", M68kTextAttributes.STRING),
+    createDescriptor("color.settings.group.registers", "attribute.descriptor.address.register", M68kTextAttributes.ADDRESS_REGISTER),
+    createDescriptor("color.settings.group.registers", "attribute.descriptor.ccr.register", M68kTextAttributes.CCR_REGISTER),
+    createDescriptor("color.settings.group.registers", "attribute.descriptor.data.register", M68kTextAttributes.DATA_REGISTER),
+    createDescriptor("color.settings.group.registers", "attribute.descriptor.pc.register", M68kTextAttributes.PC_REGISTER),
+    createDescriptor("color.settings.group.registers", "attribute.descriptor.sp.register", M68kTextAttributes.SP_REGISTER),
+    createDescriptor("color.settings.group.registers", "attribute.descriptor.sr.register", M68kTextAttributes.SR_REGISTER),
+    createDescriptor("color.settings.group.registers", "attribute.descriptor.ssp.register", M68kTextAttributes.SSP_REGISTER),
+    createDescriptor("color.settings.group.registers", "attribute.descriptor.usp.register", M68kTextAttributes.USP_REGISTER),
   };
+
+  private static AttributesDescriptor createDescriptor(String groupKey, String typeKey, TextAttributesKey textAttributesKey) {
+    final String displayName = M68kBundle.message(groupKey) + M68kBundle.message(typeKey);
+    return new AttributesDescriptor(displayName, textAttributesKey);
+  }
 
   @NotNull
   @Override

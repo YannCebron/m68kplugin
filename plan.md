@@ -2,7 +2,6 @@
 - research available directives, case-sensitivity (DevPac: no)?
 - add missing expression operators (XOR?)
 - macros (WIP)
-- I18n
 
 ### Broken lexing/parsing
 - `.b|w|l` must be immediate after instruction (Parser prob?)

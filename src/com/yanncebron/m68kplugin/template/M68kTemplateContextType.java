@@ -18,13 +18,14 @@ package com.yanncebron.m68kplugin.template;
 
 import com.intellij.codeInsight.template.TemplateContextType;
 import com.intellij.psi.PsiFile;
+import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import org.jetbrains.annotations.NotNull;
 
 public class M68kTemplateContextType extends TemplateContextType {
 
   public M68kTemplateContextType() {
-    super("M68K", "M68k Assembler");
+    super("M68K", M68kBundle.message("general.m68k.assembler"));
   }
 
   @Override

@@ -25,6 +25,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.usageView.UsageViewLongNameLocation;
 import com.intellij.usageView.UsageViewShortNameLocation;
+import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
 import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
@@ -60,11 +61,11 @@ public class M68kFindUsagesProvider implements FindUsagesProvider {
   @Override
   public String getType(@NotNull PsiElement element) {
     if (element instanceof M68kLabel) {
-      return "Label";
+      return M68kBundle.message("term.label");
     }
 
     if (element instanceof M68kLocalLabel) {
-      return "Local label";
+      return M68kBundle.message("term.local.label");
     }
     return "???";
   }

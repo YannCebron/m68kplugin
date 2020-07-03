@@ -33,7 +33,7 @@ public enum M68kDataSize {
   private final String text;
   private final IElementType elementType;
 
-  M68kDataSize(String text, IElementType elementType) {
+  M68kDataSize(@NonNls String text, IElementType elementType) {
     this.text = text;
     this.elementType = elementType;
   }

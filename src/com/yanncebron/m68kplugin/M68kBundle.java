@@ -16,6 +16,23 @@
 
 package com.yanncebron.m68kplugin;
 
-//todo
-public class M68kBundle {
+import com.intellij.AbstractBundle;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.PropertyKey;
+
+public class M68kBundle extends AbstractBundle {
+
+  @NonNls
+  private static final String PATH_TO_BUNDLE = "messages.M68kBundle";
+
+  private static final M68kBundle INSTANCE = new M68kBundle();
+
+  private M68kBundle() {
+    super(PATH_TO_BUNDLE);
+  }
+
+  public static String message(@NotNull @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key, Object @NotNull ... params) {
+    return INSTANCE.getMessage(key, params);
+  }
 }
