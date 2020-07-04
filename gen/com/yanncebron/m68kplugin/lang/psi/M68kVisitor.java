@@ -185,6 +185,7 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitBlkDirective(@NotNull M68kBlkDirective o) {
     visitDataSized(o);
+    // visitDirective(o);
   }
 
   public void visitBloInstruction(@NotNull M68kBloInstruction o) {
@@ -350,10 +351,12 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitDcDirective(@NotNull M68kDcDirective o) {
     visitDataSized(o);
+    // visitDirective(o);
   }
 
   public void visitDcbDirective(@NotNull M68kDcbDirective o) {
     visitDataSized(o);
+    // visitDirective(o);
   }
 
   public void visitDivExpression(@NotNull M68kDivExpression o) {
@@ -370,6 +373,7 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitDsDirective(@NotNull M68kDsDirective o) {
     visitDataSized(o);
+    // visitDirective(o);
   }
 
   public void visitElseConditionalAssemblyDirective(@NotNull M68kElseConditionalAssemblyDirective o) {
@@ -381,7 +385,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitEndDirective(@NotNull M68kEndDirective o) {
-    visitPsiElement(o);
+    visitDirective(o);
   }
 
   public void visitEndcConditionalAssemblyDirective(@NotNull M68kEndcConditionalAssemblyDirective o) {
@@ -389,7 +393,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitEndmDirective(@NotNull M68kEndmDirective o) {
-    visitPsiElement(o);
+    visitDirective(o);
   }
 
   public void visitEorInstruction(@NotNull M68kEorInstruction o) {
@@ -405,7 +409,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitEquDirectiveBase(@NotNull M68kEquDirectiveBase o) {
-    visitPsiElement(o);
+    visitDirective(o);
   }
 
   public void visitEqualsDirective(@NotNull M68kEqualsDirective o) {
@@ -413,11 +417,11 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitEqurDirective(@NotNull M68kEqurDirective o) {
-    visitPsiElement(o);
+    visitDirective(o);
   }
 
   public void visitEvenDirective(@NotNull M68kEvenDirective o) {
-    visitPsiElement(o);
+    visitDirective(o);
   }
 
   public void visitExgInstruction(@NotNull M68kExgInstruction o) {
@@ -495,15 +499,15 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitIncbinDirective(@NotNull M68kIncbinDirective o) {
-    visitPsiElement(o);
+    visitDirective(o);
   }
 
   public void visitIncdirDirective(@NotNull M68kIncdirDirective o) {
-    visitPsiElement(o);
+    visitDirective(o);
   }
 
   public void visitIncludeDirective(@NotNull M68kIncludeDirective o) {
-    visitPsiElement(o);
+    visitDirective(o);
   }
 
   public void visitJmpInstruction(@NotNull M68kJmpInstruction o) {
@@ -544,7 +548,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitMacroDirective(@NotNull M68kMacroDirective o) {
-    visitPsiElement(o);
+    visitDirective(o);
   }
 
   public void visitMinusExpression(@NotNull M68kMinusExpression o) {
@@ -620,11 +624,11 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitOddDirective(@NotNull M68kOddDirective o) {
-    visitPsiElement(o);
+    visitDirective(o);
   }
 
   public void visitOptDirective(@NotNull M68kOptDirective o) {
-    visitPsiElement(o);
+    visitDirective(o);
   }
 
   public void visitOrExpression(@NotNull M68kOrExpression o) {
@@ -636,7 +640,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitOrgDirective(@NotNull M68kOrgDirective o) {
-    visitPsiElement(o);
+    visitDirective(o);
   }
 
   public void visitOriInstruction(@NotNull M68kOriInstruction o) {
@@ -686,14 +690,15 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitRsDirective(@NotNull M68kRsDirective o) {
     visitDataSized(o);
+    // visitDirective(o);
   }
 
   public void visitRsresetDirective(@NotNull M68kRsresetDirective o) {
-    visitPsiElement(o);
+    visitDirective(o);
   }
 
   public void visitRssetDirective(@NotNull M68kRssetDirective o) {
-    visitPsiElement(o);
+    visitDirective(o);
   }
 
   public void visitRteInstruction(@NotNull M68kRteInstruction o) {
@@ -721,7 +726,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitSectionDirective(@NotNull M68kSectionDirective o) {
-    visitPsiElement(o);
+    visitDirective(o);
   }
 
   public void visitSeqInstruction(@NotNull M68kSeqInstruction o) {
@@ -865,6 +870,10 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitConditionalAssemblyDirective(@NotNull M68kConditionalAssemblyDirective o) {
+    visitPsiElement(o);
+  }
+
+  public void visitDirective(@NotNull M68kDirective o) {
     visitPsiElement(o);
   }
 

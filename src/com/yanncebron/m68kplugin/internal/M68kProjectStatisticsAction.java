@@ -34,15 +34,14 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.include.FileIncludeManager;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.tree.TokenSet;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
+import com.yanncebron.m68kplugin.lang.psi.M68kDirective;
 import com.yanncebron.m68kplugin.lang.psi.M68kInstruction;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
-import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -92,7 +91,7 @@ public class M68kProjectStatisticsAction extends AnAction {
           final VirtualFile[] recursiveInclude = fileIncludeManager.getIncludedFiles(virtualFile, true, true);
           final VirtualFile[] incbinInclude = fileIncludeManager.getIncludedFiles(virtualFile, false);
 
-          String info = StringUtils.rightPad(virtualFile.getName(), 20) +
+          String info = StringUtils.rightPad(virtualFile.getName(), 40) +
             StringUtils.leftPad(String.valueOf(errors.length), 8) + " | "
             + directInclude.length + " (" + (recursiveInclude.length - 1) + ") [" + incbinInclude.length + "]";
           fileInfos.add(info);
@@ -104,8 +103,7 @@ public class M68kProjectStatisticsAction extends AnAction {
           M68kLabelBase[] computeLabels = m68kPsiFile.findChildrenByClass(M68kLabelBase.class);
           countByClass(labels, computeLabels);
 
-          @NotNull M68kPsiElement[] all = m68kPsiFile.findChildrenByClass(M68kPsiElement.class);
-          countByClass(directives, getByTokenGroup(all, M68kTokenGroups.DIRECTIVES));
+          countByClass(directives, m68kPsiFile.findChildrenByClass(M68kDirective.class));
           countByClass(conditional, m68kPsiFile.findChildrenByClass(M68kConditionalAssemblyDirective.class));
         }
       }), "Scanning Files...", true, project);
@@ -113,7 +111,7 @@ public class M68kProjectStatisticsAction extends AnAction {
     StringBuilder sb = new StringBuilder();
     sb.append("Total files: ").append(fileInfos.size()).append("\n\n");
     Collections.sort(fileInfos);
-    sb.append("File                  Errors | include (recursive) [incbin]\n");
+    sb.append("File                                      Errors | include (recursive) [incbin]\n");
     sb.append(StringUtil.join(fileInfos, "\n"));
 
     appendClasses(labels, sb);
@@ -131,11 +129,6 @@ public class M68kProjectStatisticsAction extends AnAction {
     return new TreeMap<>((o1, o2) -> Comparing.compare(o1.getSimpleName(), o2.getSimpleName()));
   }
 
-  private static M68kPsiElement[] getByTokenGroup(@NotNull M68kPsiElement[] all, TokenSet tokenSet) {
-    return ContainerUtil.filter(all, psiElement -> psiElement.getNode().findChildByType(tokenSet) != null)
-      .toArray(new M68kPsiElement[0]);
-  }
-
   private void appendClasses(Map<Class<? extends M68kPsiElement>, Integer> instructions, StringBuilder sb) {
     int total = instructions.values().stream().mapToInt(value -> value).sum();
     sb.append("\n");
@@ -145,7 +138,7 @@ public class M68kProjectStatisticsAction extends AnAction {
     for (Map.Entry<Class<? extends M68kPsiElement>, Integer> entry : instructions.entrySet()) {
       final String fqn = entry.getKey().getSimpleName();
       final String className = fqn.substring(4, fqn.length() - 4);
-      sb.append(StringUtils.rightPad(className, 20))
+      sb.append(StringUtils.rightPad(className, 40))
         .append(StringUtils.leftPad(String.valueOf(entry.getValue()), 8)).append("\n");
     }
   }

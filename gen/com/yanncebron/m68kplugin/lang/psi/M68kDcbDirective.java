@@ -19,7 +19,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kDcbDirective extends M68kDataSized {
+public interface M68kDcbDirective extends M68kDataSized, M68kDirective {
 
   @Nullable
   M68kExpression getNumber();
