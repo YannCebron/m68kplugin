@@ -44,13 +44,13 @@
 
   classHeader = "license.txt"
   generate = [
-    java="8"
+    java = "8"
     tokens = "no"
   ]
   
+
   pin(".*_instruction") = 1
   name(".*_instruction") = "instruction"
-
   implements(".*_instruction.*") = "com.yanncebron.m68kplugin.lang.psi.M68kInstruction"
 }
 
