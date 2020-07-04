@@ -755,34 +755,33 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // data_size_byte?
-  //                      bcd_tail_drd | bcd_tail_apd
+  //                      (
+  //                        bcd_tail_drd | bcd_tail_apd
+  //                      )
   static boolean bcd_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bcd_tail")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = bcd_tail_0(b, l + 1);
-    if (!r) r = bcd_tail_apd(b, l + 1);
+    r = r && bcd_tail_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // data_size_byte?
-  //                      bcd_tail_drd
   private static boolean bcd_tail_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bcd_tail_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = bcd_tail_0_0(b, l + 1);
-    r = r && bcd_tail_drd(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // data_size_byte?
-  private static boolean bcd_tail_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bcd_tail_0_0")) return false;
     data_size_byte(b, l + 1);
     return true;
+  }
+
+  // bcd_tail_drd | bcd_tail_apd
+  private static boolean bcd_tail_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bcd_tail_1")) return false;
+    boolean r;
+    r = bcd_tail_drd(b, l + 1);
+    if (!r) r = bcd_tail_apd(b, l + 1);
+    return r;
   }
 
   /* ********************************************************** */
@@ -1072,8 +1071,8 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // bool_i_tail_imm_ccr |
-  //                         bool_i_tail_imm_sr |
-  //                         tail_data_size_all___imm__all_except_ard_pc_imm
+  //                           bool_i_tail_imm_sr |
+  //                           tail_data_size_all___imm__all_except_ard_pc_imm
   static boolean bool_i_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bool_i_tail")) return false;
     boolean r;

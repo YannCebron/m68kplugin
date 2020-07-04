@@ -343,7 +343,9 @@ private bcd_tail_drd ::= adm_drd COMMA adm_drd
   pin = 1
 }
 private bcd_tail ::= data_size_byte?
-                     bcd_tail_drd | bcd_tail_apd
+                     (
+                       bcd_tail_drd | bcd_tail_apd
+                     )
 
 abcd_instruction ::= ABCD bcd_tail
 
@@ -440,9 +442,11 @@ private bool_tail ::= data_size_all?
 
 private bool_i_tail_imm_ccr ::= data_size_byte? adm_imm COMMA adm_ccr
 private bool_i_tail_imm_sr ::= data_size_word? adm_imm COMMA adm_sr
-private bool_i_tail ::= bool_i_tail_imm_ccr |
-                        bool_i_tail_imm_sr |
-                        tail_data_size_all___imm__all_except_ard_pc_imm
+private bool_i_tail ::= (
+                          bool_i_tail_imm_ccr |
+                          bool_i_tail_imm_sr |
+                          tail_data_size_all___imm__all_except_ard_pc_imm
+                        )
 
 // todo fix pin on adm_imm for NotNull in inheritors
 fake bool_immediate_instruction_base ::= bool_i_tail
