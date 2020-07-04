@@ -43,6 +43,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kInstruction;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
+import com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -105,7 +106,7 @@ public class M68kProjectStatisticsAction extends AnAction {
 
           @NotNull M68kPsiElement[] all = m68kPsiFile.findChildrenByClass(M68kPsiElement.class);
           countByClass(directives, getByTokenGroup(all, M68kTokenGroups.DIRECTIVES));
-          countByClass(conditional, getByTokenGroup(all, M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES));
+          countByClass(conditional, m68kPsiFile.findChildrenByClass(M68kConditionalAssemblyDirective.class));
         }
       }), "Scanning Files...", true, project);
 

@@ -439,55 +439,55 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitIfDirective(@NotNull M68kIfDirective o) {
-    visitPsiElement(o);
+    visitConditionalAssemblyDirective(o);
   }
 
   public void visitIfbDirective(@NotNull M68kIfbDirective o) {
-    visitPsiElement(o);
+    visitConditionalAssemblyDirective(o);
   }
 
   public void visitIfcDirective(@NotNull M68kIfcDirective o) {
-    visitPsiElement(o);
+    visitConditionalAssemblyDirective(o);
   }
 
   public void visitIfdDirective(@NotNull M68kIfdDirective o) {
-    visitPsiElement(o);
+    visitConditionalAssemblyDirective(o);
   }
 
   public void visitIfeqDirective(@NotNull M68kIfeqDirective o) {
-    visitPsiElement(o);
+    visitConditionalAssemblyDirective(o);
   }
 
   public void visitIfgeDirective(@NotNull M68kIfgeDirective o) {
-    visitPsiElement(o);
+    visitConditionalAssemblyDirective(o);
   }
 
   public void visitIfgtDirective(@NotNull M68kIfgtDirective o) {
-    visitPsiElement(o);
+    visitConditionalAssemblyDirective(o);
   }
 
   public void visitIfleDirective(@NotNull M68kIfleDirective o) {
-    visitPsiElement(o);
+    visitConditionalAssemblyDirective(o);
   }
 
   public void visitIfltDirective(@NotNull M68kIfltDirective o) {
-    visitPsiElement(o);
+    visitConditionalAssemblyDirective(o);
   }
 
   public void visitIfnbDirective(@NotNull M68kIfnbDirective o) {
-    visitPsiElement(o);
+    visitConditionalAssemblyDirective(o);
   }
 
   public void visitIfncDirective(@NotNull M68kIfncDirective o) {
-    visitPsiElement(o);
+    visitConditionalAssemblyDirective(o);
   }
 
   public void visitIfndDirective(@NotNull M68kIfndDirective o) {
-    visitPsiElement(o);
+    visitConditionalAssemblyDirective(o);
   }
 
   public void visitIfneDirective(@NotNull M68kIfneDirective o) {
-    visitPsiElement(o);
+    visitConditionalAssemblyDirective(o);
   }
 
   public void visitIllegalInstruction(@NotNull M68kIllegalInstruction o) {
@@ -862,6 +862,10 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitUnlkInstruction(@NotNull M68kUnlkInstruction o) {
     visitInstruction(o);
+  }
+
+  public void visitConditionalAssemblyDirective(@NotNull M68kConditionalAssemblyDirective o) {
+    visitPsiElement(o);
   }
 
   public void visitInstruction(@NotNull M68kInstruction o) {

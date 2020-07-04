@@ -1029,6 +1029,7 @@ label_ref_expression ::= ID
   parserClass = "com.yanncebron.m68kplugin.lang.M68kConditionalAssemblyParser"
   psiPackage = "com.yanncebron.m68kplugin.lang.psi.conditional"
   psiImplPackage = "com.yanncebron.m68kplugin.lang.psi.conditional.impl"
+  implements("if.*_directive") = "com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective"
   pin("if.*_directive") = 1
 }
 private conditional_assembly_directives ::= if_directive |

@@ -18,10 +18,9 @@ package com.yanncebron.m68kplugin.lang.psi.conditional;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
-import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kExpression;
 
-public interface M68kIfnbDirective extends M68kPsiElement {
+public interface M68kIfnbDirective extends M68kConditionalAssemblyDirective {
 
   @Nullable
   M68kExpression getExpression();

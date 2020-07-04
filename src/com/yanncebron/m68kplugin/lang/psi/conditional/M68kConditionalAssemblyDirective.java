@@ -13,16 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.yanncebron.m68kplugin.lang.psi.conditional;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
-import com.yanncebron.m68kplugin.lang.psi.M68kExpression;
+import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 
-public interface M68kIfgeDirective extends M68kConditionalAssemblyDirective {
-
-  @Nullable
-  M68kExpression getExpression();
-
+public interface M68kConditionalAssemblyDirective extends M68kPsiElement {
 }
