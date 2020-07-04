@@ -16,5 +16,10 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
+/**
+ * Base interface for all assembler directives.
+ *
+ * @see com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective
+ */
 public interface M68kDirective extends M68kPsiElement {
 }

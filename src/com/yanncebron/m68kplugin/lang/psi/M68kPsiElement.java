@@ -18,5 +18,8 @@ package com.yanncebron.m68kplugin.lang.psi;
 
 import com.intellij.psi.PsiElement;
 
+/**
+ * Base PSI interface for all M68K PSI.
+ */
 public interface M68kPsiElement extends PsiElement {
 }

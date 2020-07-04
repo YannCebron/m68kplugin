@@ -16,8 +16,14 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
+/**
+ * Base interface for all M68k Instructions.
+ */
 public interface M68kInstruction extends M68kPsiElement {
 
+  /**
+   * @return {@code true} if the instruction requires supervisor privilege, {@code false} otherwise.
+   */
   default boolean isPrivileged() {
     return false;
   }

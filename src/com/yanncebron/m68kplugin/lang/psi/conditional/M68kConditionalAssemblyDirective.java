@@ -18,5 +18,8 @@ package com.yanncebron.m68kplugin.lang.psi.conditional;
 
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 
+/**
+ * Base interface for all conditional assembly directives.
+ */
 public interface M68kConditionalAssemblyDirective extends M68kPsiElement {
 }
