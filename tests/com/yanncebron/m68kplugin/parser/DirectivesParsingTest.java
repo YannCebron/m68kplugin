@@ -181,4 +181,8 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" section tos,code,chip");
   }
 
+  public void testSectionDirectiveMissingParameters() throws Exception {
+    doCodeTest(" section ");
+  }
+
 }

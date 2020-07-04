@@ -863,6 +863,9 @@ odd_directive ::= ODD
 end_directive ::= END
 
 section_directive ::= SECTION expression (COMMA expression)? (COMMA expression)?
+{
+  pin = 1
+}
 
 private include_path ::= STRING
 {

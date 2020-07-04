@@ -533,14 +533,15 @@ public class M68kDirectivesParser {
   public static boolean section_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "section_directive")) return false;
     if (!nextTokenIs(b, SECTION)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, SECTION_DIRECTIVE, null);
     r = consumeToken(b, SECTION);
-    r = r && M68kExpressionParser.expression(b, l + 1, -1);
-    r = r && section_directive_2(b, l + 1);
-    r = r && section_directive_3(b, l + 1);
-    exit_section_(b, m, SECTION_DIRECTIVE, r);
-    return r;
+    p = r; // pin = 1
+    r = r && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1));
+    r = p && report_error_(b, section_directive_2(b, l + 1)) && r;
+    r = p && section_directive_3(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   // (COMMA expression)?
