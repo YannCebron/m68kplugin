@@ -19,6 +19,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.PsiElement;
 import com.intellij.lang.ASTNode;
 import com.yanncebron.m68kplugin.lang.stubs.M68kStubElementTypeFactory;
+import com.yanncebron.m68kplugin.lang.psi.conditional.impl.*;
 import com.yanncebron.m68kplugin.lang.psi.impl.*;
 
 public interface M68kTypes {

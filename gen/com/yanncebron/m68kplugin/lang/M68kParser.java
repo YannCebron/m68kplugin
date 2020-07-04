@@ -1926,7 +1926,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = dbCC_instructions(b, l + 1);
     if (!r) r = sCC_instructions(b, l + 1);
     if (!r) r = M68kDirectivesParser.directives(b, l + 1);
-    if (!r) r = M68kDirectivesParser.conditional_assembly_directives(b, l + 1);
+    if (!r) r = M68kConditionalAssemblyParser.conditional_assembly_directives(b, l + 1);
     return r;
   }
 

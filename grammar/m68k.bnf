@@ -952,59 +952,6 @@ org_directive ::= ORG expression
 macro_directive ::= label MACRO
 endm_directive ::= ENDM
 
-;
-{
-  pin("if.*_directive") = 1
-}
-private conditional_assembly_directives ::= if_directive |
-                                            ifd_directive |
-                                            ifeq_directive |
-                                            ifge_directive |
-                                            ifgt_directive |
-                                            ifnd_directive |
-                                            ifle_directive |
-                                            iflt_directive |
-                                            ifne_directive |
-                                            ifb_directive |
-                                            ifnb_directive |
-                                            ifc_directive |
-                                            ifnc_directive |
-                                            else_directive |
-                                            elseif_directive |
-                                            endc_directive
-
-if_directive ::= IF expression
-ifd_directive ::= IFD expression
-ifnd_directive ::= IFND expression
-
-ifeq_directive ::= IFEQ expression
-ifge_directive ::= IFGE expression
-ifgt_directive ::= IFGT expression
-ifle_directive ::= IFLE expression
-iflt_directive ::= IFLT expression
-ifne_directive ::= IFNE expression
-
-ifb_directive ::= IFB expression
-ifnb_directive ::= IFNB expression
-ifc_directive ::= IFC expression COMMA expression {
-  methods = [
-    expression = ""
-    arg1 = "expression[0]"
-    arg2 = "expression[1]"
-  ]
-}
-ifnc_directive ::= IFNC expression COMMA expression {
-  methods = [
-    expression = ""
-    arg1 = "expression[0]"
-    arg2 = "expression[1]"
-  ]
-}
-
-elseif_directive ::= ELSEIF
-else_directive ::= ELSE
-endc_directive ::= ENDC
-
 
 // Expressions  ============================================================
 ;{
@@ -1076,3 +1023,59 @@ label_ref_expression ::= ID
   name = "label"
 }
 
+
+;
+{
+  parserClass = "com.yanncebron.m68kplugin.lang.M68kConditionalAssemblyParser"
+  psiPackage = "com.yanncebron.m68kplugin.lang.psi.conditional"
+  psiImplPackage = "com.yanncebron.m68kplugin.lang.psi.conditional.impl"
+  pin("if.*_directive") = 1
+}
+private conditional_assembly_directives ::= if_directive |
+                                            ifd_directive |
+                                            ifeq_directive |
+                                            ifge_directive |
+                                            ifgt_directive |
+                                            ifnd_directive |
+                                            ifle_directive |
+                                            iflt_directive |
+                                            ifne_directive |
+                                            ifb_directive |
+                                            ifnb_directive |
+                                            ifc_directive |
+                                            ifnc_directive |
+                                            else_directive |
+                                            elseif_directive |
+                                            endc_directive
+
+if_directive ::= IF expression
+ifd_directive ::= IFD expression
+ifnd_directive ::= IFND expression
+
+ifeq_directive ::= IFEQ expression
+ifge_directive ::= IFGE expression
+ifgt_directive ::= IFGT expression
+ifle_directive ::= IFLE expression
+iflt_directive ::= IFLT expression
+ifne_directive ::= IFNE expression
+
+ifb_directive ::= IFB expression
+ifnb_directive ::= IFNB expression
+ifc_directive ::= IFC expression COMMA expression {
+  methods = [
+    expression = ""
+    arg1 = "expression[0]"
+    arg2 = "expression[1]"
+  ]
+}
+ifnc_directive ::= IFNC expression COMMA expression {
+  methods = [
+    expression = ""
+    arg1 = "expression[0]"
+    arg2 = "expression[1]"
+  ]
+}
+
+elseif_directive ::= ELSEIF
+else_directive ::= ELSE
+endc_directive ::= ENDC
