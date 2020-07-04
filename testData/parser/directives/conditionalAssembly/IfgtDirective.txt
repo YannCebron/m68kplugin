@@ -1,6 +1,6 @@
 M68k.FILE
   PsiWhiteSpace(' ')
-  M68kIfgtDirectiveImpl(IFGT_DIRECTIVE)
+  M68kIfgtConditionalAssemblyDirectiveImpl(IFGT_CONDITIONAL_ASSEMBLY_DIRECTIVE)
     PsiElement(ifgt)('ifgt')
     PsiWhiteSpace(' ')
     M68kPlusExpressionImpl(PLUS_EXPRESSION)

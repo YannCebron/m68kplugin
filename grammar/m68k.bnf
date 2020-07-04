@@ -1029,47 +1029,47 @@ label_ref_expression ::= ID
   parserClass = "com.yanncebron.m68kplugin.lang.M68kConditionalAssemblyParser"
   psiPackage = "com.yanncebron.m68kplugin.lang.psi.conditional"
   psiImplPackage = "com.yanncebron.m68kplugin.lang.psi.conditional.impl"
-  implements("if.*_directive") = "com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective"
-  pin("if.*_directive") = 1
+  implements(".*_conditional_assembly_directive") = "com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective"
+  pin(".*_conditional_assembly_directive") = 1
 }
-private conditional_assembly_directives ::= if_directive |
-                                            ifd_directive |
-                                            ifeq_directive |
-                                            ifge_directive |
-                                            ifgt_directive |
-                                            ifnd_directive |
-                                            ifle_directive |
-                                            iflt_directive |
-                                            ifne_directive |
-                                            ifb_directive |
-                                            ifnb_directive |
-                                            ifc_directive |
-                                            ifnc_directive |
-                                            else_directive |
-                                            elseif_directive |
-                                            endc_directive
+private conditional_assembly_directives ::= if_conditional_assembly_directive |
+                                            ifd_conditional_assembly_directive |
+                                            ifeq_conditional_assembly_directive |
+                                            ifge_conditional_assembly_directive |
+                                            ifgt_conditional_assembly_directive |
+                                            ifnd_conditional_assembly_directive |
+                                            ifle_conditional_assembly_directive |
+                                            iflt_conditional_assembly_directive |
+                                            ifne_conditional_assembly_directive |
+                                            ifb_conditional_assembly_directive |
+                                            ifnb_conditional_assembly_directive |
+                                            ifc_conditional_assembly_directive |
+                                            ifnc_conditional_assembly_directive |
+                                            else_conditional_assembly_directive |
+                                            elseif_conditional_assembly_directive |
+                                            endc_conditional_assembly_directive
 
-if_directive ::= IF expression
-ifd_directive ::= IFD expression
-ifnd_directive ::= IFND expression
+if_conditional_assembly_directive ::= IF expression
+ifd_conditional_assembly_directive ::= IFD expression
+ifnd_conditional_assembly_directive ::= IFND expression
 
-ifeq_directive ::= IFEQ expression
-ifge_directive ::= IFGE expression
-ifgt_directive ::= IFGT expression
-ifle_directive ::= IFLE expression
-iflt_directive ::= IFLT expression
-ifne_directive ::= IFNE expression
+ifeq_conditional_assembly_directive ::= IFEQ expression
+ifge_conditional_assembly_directive ::= IFGE expression
+ifgt_conditional_assembly_directive ::= IFGT expression
+ifle_conditional_assembly_directive ::= IFLE expression
+iflt_conditional_assembly_directive ::= IFLT expression
+ifne_conditional_assembly_directive ::= IFNE expression
 
-ifb_directive ::= IFB expression
-ifnb_directive ::= IFNB expression
-ifc_directive ::= IFC expression COMMA expression {
+ifb_conditional_assembly_directive ::= IFB expression
+ifnb_conditional_assembly_directive ::= IFNB expression
+ifc_conditional_assembly_directive ::= IFC expression COMMA expression {
   methods = [
     expression = ""
     arg1 = "expression[0]"
     arg2 = "expression[1]"
   ]
 }
-ifnc_directive ::= IFNC expression COMMA expression {
+ifnc_conditional_assembly_directive ::= IFNC expression COMMA expression {
   methods = [
     expression = ""
     arg1 = "expression[0]"
@@ -1077,6 +1077,6 @@ ifnc_directive ::= IFNC expression COMMA expression {
   ]
 }
 
-elseif_directive ::= ELSEIF
-else_directive ::= ELSE
-endc_directive ::= ENDC
+elseif_conditional_assembly_directive ::= ELSEIF
+else_conditional_assembly_directive ::= ELSE
+endc_conditional_assembly_directive ::= ENDC

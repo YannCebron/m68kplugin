@@ -1,6 +1,6 @@
 M68k.FILE
   PsiWhiteSpace(' ')
-  M68kIfleDirectiveImpl(IFLE_DIRECTIVE)
+  M68kIfleConditionalAssemblyDirectiveImpl(IFLE_CONDITIONAL_ASSEMBLY_DIRECTIVE)
     PsiElement(ifle)('ifle')
     PsiWhiteSpace(' ')
     M68kPlusExpressionImpl(PLUS_EXPRESSION)

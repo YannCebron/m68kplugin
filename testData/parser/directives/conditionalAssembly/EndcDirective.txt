@@ -1,4 +1,4 @@
 M68k.FILE
   PsiWhiteSpace(' ')
-  M68kEndcDirectiveImpl(ENDC_DIRECTIVE)
+  M68kEndcConditionalAssemblyDirectiveImpl(ENDC_CONDITIONAL_ASSEMBLY_DIRECTIVE)
     PsiElement(endc)('endc')

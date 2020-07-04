@@ -1,6 +1,6 @@
 M68k.FILE
   PsiWhiteSpace(' ')
-  M68kIfdDirectiveImpl(IFD_DIRECTIVE)
+  M68kIfdConditionalAssemblyDirectiveImpl(IFD_CONDITIONAL_ASSEMBLY_DIRECTIVE)
     PsiElement(ifd)('ifd')
     PsiErrorElement:<expression> expected
       <empty list>

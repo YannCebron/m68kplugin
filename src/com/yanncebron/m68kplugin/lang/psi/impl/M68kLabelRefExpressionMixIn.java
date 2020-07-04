@@ -29,8 +29,8 @@ import com.intellij.util.Function;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.psi.*;
-import com.yanncebron.m68kplugin.lang.psi.conditional.M68kIfdDirective;
-import com.yanncebron.m68kplugin.lang.psi.conditional.M68kIfndDirective;
+import com.yanncebron.m68kplugin.lang.psi.conditional.M68kIfdConditionalAssemblyDirective;
+import com.yanncebron.m68kplugin.lang.psi.conditional.M68kIfndConditionalAssemblyDirective;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,7 +59,7 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
       private List<M68kLabelBase> getAllLabels() { // todo
         List<M68kLabelBase> labels = new SmartList<>();
         boolean inExpressionOrLabelDirective = PsiTreeUtil.getParentOfType(getElement(),
-          M68kExpression.class, M68kIfdDirective.class, M68kIfndDirective.class) != null;
+          M68kExpression.class, M68kIfdConditionalAssemblyDirective.class, M68kIfndConditionalAssemblyDirective.class) != null;
         getElement().getContainingFile().acceptChildren(new M68kVisitor() {
           @Override
           public void visitLabelBase(@NotNull M68kLabelBase o) {

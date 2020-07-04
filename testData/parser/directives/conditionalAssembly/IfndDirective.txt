@@ -1,6 +1,6 @@
 M68k.FILE
   PsiWhiteSpace(' ')
-  M68kIfndDirectiveImpl(IFND_DIRECTIVE)
+  M68kIfndConditionalAssemblyDirectiveImpl(IFND_CONDITIONAL_ASSEMBLY_DIRECTIVE)
     PsiElement(ifnd)('ifnd')
     PsiWhiteSpace(' ')
     M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)

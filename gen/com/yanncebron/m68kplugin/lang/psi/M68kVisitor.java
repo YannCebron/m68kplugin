@@ -372,20 +372,20 @@ public class M68kVisitor extends PsiElementVisitor {
     visitDataSized(o);
   }
 
-  public void visitElseDirective(@NotNull M68kElseDirective o) {
-    visitPsiElement(o);
+  public void visitElseConditionalAssemblyDirective(@NotNull M68kElseConditionalAssemblyDirective o) {
+    visitConditionalAssemblyDirective(o);
   }
 
-  public void visitElseifDirective(@NotNull M68kElseifDirective o) {
-    visitPsiElement(o);
+  public void visitElseifConditionalAssemblyDirective(@NotNull M68kElseifConditionalAssemblyDirective o) {
+    visitConditionalAssemblyDirective(o);
   }
 
   public void visitEndDirective(@NotNull M68kEndDirective o) {
     visitPsiElement(o);
   }
 
-  public void visitEndcDirective(@NotNull M68kEndcDirective o) {
-    visitPsiElement(o);
+  public void visitEndcConditionalAssemblyDirective(@NotNull M68kEndcConditionalAssemblyDirective o) {
+    visitConditionalAssemblyDirective(o);
   }
 
   public void visitEndmDirective(@NotNull M68kEndmDirective o) {
@@ -438,55 +438,55 @@ public class M68kVisitor extends PsiElementVisitor {
     // visitInstruction(o);
   }
 
-  public void visitIfDirective(@NotNull M68kIfDirective o) {
+  public void visitIfConditionalAssemblyDirective(@NotNull M68kIfConditionalAssemblyDirective o) {
     visitConditionalAssemblyDirective(o);
   }
 
-  public void visitIfbDirective(@NotNull M68kIfbDirective o) {
+  public void visitIfbConditionalAssemblyDirective(@NotNull M68kIfbConditionalAssemblyDirective o) {
     visitConditionalAssemblyDirective(o);
   }
 
-  public void visitIfcDirective(@NotNull M68kIfcDirective o) {
+  public void visitIfcConditionalAssemblyDirective(@NotNull M68kIfcConditionalAssemblyDirective o) {
     visitConditionalAssemblyDirective(o);
   }
 
-  public void visitIfdDirective(@NotNull M68kIfdDirective o) {
+  public void visitIfdConditionalAssemblyDirective(@NotNull M68kIfdConditionalAssemblyDirective o) {
     visitConditionalAssemblyDirective(o);
   }
 
-  public void visitIfeqDirective(@NotNull M68kIfeqDirective o) {
+  public void visitIfeqConditionalAssemblyDirective(@NotNull M68kIfeqConditionalAssemblyDirective o) {
     visitConditionalAssemblyDirective(o);
   }
 
-  public void visitIfgeDirective(@NotNull M68kIfgeDirective o) {
+  public void visitIfgeConditionalAssemblyDirective(@NotNull M68kIfgeConditionalAssemblyDirective o) {
     visitConditionalAssemblyDirective(o);
   }
 
-  public void visitIfgtDirective(@NotNull M68kIfgtDirective o) {
+  public void visitIfgtConditionalAssemblyDirective(@NotNull M68kIfgtConditionalAssemblyDirective o) {
     visitConditionalAssemblyDirective(o);
   }
 
-  public void visitIfleDirective(@NotNull M68kIfleDirective o) {
+  public void visitIfleConditionalAssemblyDirective(@NotNull M68kIfleConditionalAssemblyDirective o) {
     visitConditionalAssemblyDirective(o);
   }
 
-  public void visitIfltDirective(@NotNull M68kIfltDirective o) {
+  public void visitIfltConditionalAssemblyDirective(@NotNull M68kIfltConditionalAssemblyDirective o) {
     visitConditionalAssemblyDirective(o);
   }
 
-  public void visitIfnbDirective(@NotNull M68kIfnbDirective o) {
+  public void visitIfnbConditionalAssemblyDirective(@NotNull M68kIfnbConditionalAssemblyDirective o) {
     visitConditionalAssemblyDirective(o);
   }
 
-  public void visitIfncDirective(@NotNull M68kIfncDirective o) {
+  public void visitIfncConditionalAssemblyDirective(@NotNull M68kIfncConditionalAssemblyDirective o) {
     visitConditionalAssemblyDirective(o);
   }
 
-  public void visitIfndDirective(@NotNull M68kIfndDirective o) {
+  public void visitIfndConditionalAssemblyDirective(@NotNull M68kIfndConditionalAssemblyDirective o) {
     visitConditionalAssemblyDirective(o);
   }
 
-  public void visitIfneDirective(@NotNull M68kIfneDirective o) {
+  public void visitIfneConditionalAssemblyDirective(@NotNull M68kIfneConditionalAssemblyDirective o) {
     visitConditionalAssemblyDirective(o);
   }
 
