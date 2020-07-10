@@ -25,7 +25,7 @@ import com.twelvemonkeys.lang.StringUtil;
 public class M68kInstructionDocumentationProviderTest extends BasePlatformTestCase {
 
   public void testMoveInstruction() {
-    doTestGenerateDoc(" mov<caret>e", "<h2>MOVE - Copy data from source to destination</h2>");
+    doTestGenerateDoc(" MOV<caret>e", "<h2>MOVE - Copy data from source to destination</h2>");
   }
 
   public void testAslInstruction() {

@@ -21,9 +21,13 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.io.StreamUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.io.URLUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kInstruction;
+import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
+import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import org.commonmark.Extension;
 import org.commonmark.ext.gfm.tables.TablesExtension;
 import org.commonmark.node.Node;
@@ -40,7 +44,6 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class M68kInstructionDocumentationProvider extends AbstractDocumentationProvider {
 
@@ -56,24 +59,24 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
     "</style>";
 
 
-  private static final Map<String, Set<String>> MNEMONIC_MAP = ContainerUtil.<String, Set<String>>immutableMapBuilder()
-    .put("aslasr", ContainerUtil.immutableSet("asl", "asr"))
-    .put("bcc", ContainerUtil.immutableSet("bcs", "blo", "bls", "beq", "bne", "bhi", "bcc", "bhs", "bpl", "bvc", "blt", "ble", "bgt", "bge", "bmi", "bvs"))
-    .put("dbcc", ContainerUtil.immutableSet("dbra", "dbcs", "dbls", "dbeq", "dbne", "dbhi", "dbcc", "dbpl", "dbvc", "dblt", "dble", "dbgt", "dbge", "dbmi", "dbvs", "dbf", "dbt"))
-    .put("divs_divu", ContainerUtil.immutableSet("divs", "divu"))
-    .put("muls_mulu", ContainerUtil.immutableSet("muls", "mulu"))
-    .put("lsl_lsr", ContainerUtil.immutableSet("lsl", "lsr"))
-    .put("scc", ContainerUtil.immutableSet("seq", "sne", "spl", "smi", "svc", "svs", "st", "sf", "sge", "sgt", "sle", "slt", "scc", "shi", "sls", "scs"))
+  private static final Map<String, TokenSet> MNEMONIC_MAP = ContainerUtil.<String, TokenSet>immutableMapBuilder()
+    .put("aslasr", TokenSet.create(M68kTokenTypes.ASL, M68kTokenTypes.ASR))
+    .put("bcc", M68kTokenGroups.BCC_INSTRUCTIONS)
+    .put("dbcc", M68kTokenGroups.DBCC_INSTRUCTIONS)
+    .put("divs_divu", TokenSet.create(M68kTokenTypes.DIVS, M68kTokenTypes.DIVU))
+    .put("muls_mulu", TokenSet.create(M68kTokenTypes.MULS, M68kTokenTypes.MULU))
+    .put("lsl_lsr", TokenSet.create(M68kTokenTypes.LSL, M68kTokenTypes.LSR))
+    .put("scc", M68kTokenGroups.SCC_INSTRUCTIONS)
     .build();
 
   @NotNull
-  private static String findDocMnemonic(String originalMnemonic) {
-    for (Map.Entry<String, Set<String>> entry : MNEMONIC_MAP.entrySet()) {
+  private static String findDocMnemonic(IElementType originalMnemonic) {
+    for (Map.Entry<String, TokenSet> entry : MNEMONIC_MAP.entrySet()) {
       if (entry.getValue().contains(originalMnemonic)) {
         return entry.getKey();
       }
     }
-    return originalMnemonic;
+    return StringUtil.toLowerCase(originalMnemonic.toString());
   }
 
   @Override
@@ -82,19 +85,19 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
 
     M68kInstruction instruction = (M68kInstruction) element;
 
-    final String originalMnemonic = StringUtil.toLowerCase(instruction.getNode().getFirstChildNode().getElementType().toString());
-    String mnemonic = findDocMnemonic(originalMnemonic);
+    final IElementType originalMnemonic = instruction.getNode().getFirstChildNode().getElementType();
+    String docMnemonic = findDocMnemonic(originalMnemonic);
 
-    final InputStream resource = getClass().getResourceAsStream(DOCS_MNEMONIC_ROOT + mnemonic + ".md");
+    final InputStream resource = getClass().getResourceAsStream(DOCS_MNEMONIC_ROOT + docMnemonic + ".md");
     if (resource == null) {
-      return "No documentation for '" + mnemonic + "' ('" + originalMnemonic + "')";
+      return "No documentation for '" + docMnemonic + "' ('" + originalMnemonic + "')";
     }
 
     final String text;
     try {
       text = FileUtil.loadTextAndClose(resource);
     } catch (IOException e) {
-      return "Error loading documentation for '" + mnemonic + "': " + e.getMessage();
+      return "Error loading documentation for '" + docMnemonic + "': " + e.getMessage();
     }
 
     List<Extension> extensions = Collections.singletonList(TablesExtension.create());
