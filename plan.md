@@ -2,6 +2,9 @@
 
 ## Broken lexing/parsing
 - research available directives, case-sensitivity (DevPac: no)?
+  - `align`
+  - `fail`
+  - `endif`
 - add missing expression operators (XOR?)
 - do not allow spaces, e.g. `.b|w|l` must be immediate after instruction
 - index expression == 0 is optional? `move.l d0,(a0,d2.w)`
