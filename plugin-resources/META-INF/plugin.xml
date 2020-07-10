@@ -83,6 +83,9 @@
     <usageTypeProvider
         implementation="com.yanncebron.m68kplugin.lang.findUsages.M68kUsageTypeProvider"/>
 
+    <targetElementEvaluator
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.lang.M68kTargetElementEvaluator"/>
     <lang.refactoringSupport
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.lang.refactoring.M68kRefactoringSupportProvider"/>
@@ -107,6 +110,10 @@
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.editor.M68kMoveLeftRightHandler"/>
 
+
+    <lang.documentationProvider
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.documentation.M68kInstructionDocumentationProvider"/>
 
     <problemFileHighlightFilter
         implementation="com.yanncebron.m68kplugin.lang.M68kProblemFileHighlightFilter"/>
