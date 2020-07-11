@@ -880,7 +880,7 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 206: break;
           case 2: 
-            { return WHITE_SPACE;
+            { return LINEFEED;
             } 
             // fall through
           case 207: break;
@@ -910,7 +910,7 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 212: break;
           case 8: 
-            { yybegin(YYINITIAL); return WHITE_SPACE;
+            { yybegin(YYINITIAL); return LINEFEED;
             } 
             // fall through
           case 213: break;

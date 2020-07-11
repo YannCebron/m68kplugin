@@ -1893,6 +1893,16 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // instructions | labels
+  static boolean instruction_or_label(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "instruction_or_label")) return false;
+    boolean r;
+    r = instructions(b, l + 1);
+    if (!r) r = labels(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
   // move_instructions |
   //                          jump_instructions |
   //                          add_sub_instructions |
@@ -2065,6 +2075,23 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = adm_adi(b, l + 1);
     if (!r) r = adm_aix(b, l + 1);
     if (!r) r = adm_abs(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // LINEFEED+
+  static boolean line_feed(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "line_feed")) return false;
+    if (!nextTokenIsFast(b, LINEFEED)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokenFast(b, LINEFEED);
+    while (r) {
+      int c = current_position_(b);
+      if (!consumeTokenFast(b, LINEFEED)) break;
+      if (!empty_element_parsed_guard_(b, "line_feed", c)) break;
+    }
+    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -2835,34 +2862,43 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // instructions | labels
+  // line_feed | instruction_or_label line_feed?
   static boolean root_item(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "root_item")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_);
-    r = instructions(b, l + 1);
-    if (!r) r = labels(b, l + 1);
+    r = line_feed(b, l + 1);
+    if (!r) r = root_item_1(b, l + 1);
     exit_section_(b, l, m, r, false, M68kParser::root_item_recover);
     return r;
   }
 
+  // instruction_or_label line_feed?
+  private static boolean root_item_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "root_item_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = instruction_or_label(b, l + 1);
+    r = r && root_item_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // line_feed?
+  private static boolean root_item_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "root_item_1_1")) return false;
+    line_feed(b, l + 1);
+    return true;
+  }
+
   /* ********************************************************** */
-  // !(instructions | labels)
+  // !instruction_or_label
   static boolean root_item_recover(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "root_item_recover")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NOT_);
-    r = !root_item_recover_0(b, l + 1);
+    r = !instruction_or_label(b, l + 1);
     exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // instructions | labels
-  private static boolean root_item_recover_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "root_item_recover_0")) return false;
-    boolean r;
-    r = instructions(b, l + 1);
-    if (!r) r = labels(b, l + 1);
     return r;
   }
 

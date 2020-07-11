@@ -36,8 +36,8 @@ public class CommentLexerTest extends M68kLexerTestCase {
   public void testCommentLineFeedComment() {
     doTest("; Comment\n\n; second comment",
       "comment ('; Comment')\n" +
-        "WHITE_SPACE ('\\n')\n" +
-        "WHITE_SPACE ('\\n')\n" +
+        "LINEFEED ('\\n')\n" +
+        "LINEFEED ('\\n')\n" +
         "comment ('; second comment')");
   }
 

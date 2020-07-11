@@ -23,6 +23,8 @@ import com.intellij.psi.tree.IElementType;
  */
 public abstract class M68kTokenTypes {
 
+  public static final IElementType LINEFEED = new M68kTokenType("LINEFEED");
+
   public static final IElementType ABCD = new M68kTokenType("abcd");
   public static final IElementType ADD = new M68kTokenType("add");
   public static final IElementType ADDA = new M68kTokenType("adda");

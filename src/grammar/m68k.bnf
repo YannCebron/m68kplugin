@@ -55,15 +55,21 @@
 }
 
 root ::= root_item*
-private root_item ::= (instructions | labels)
-{
-  recoverWhile = root_item_recover
-}
-private root_item_recover ::= !(instructions | labels)
+
+private line_feed ::= LINEFEED+
 {
   consumeTokenMethod = "consumeTokenFast"
 }
-//private     crlf::='\n' // todo stop parsing after line?
+private instruction_or_label ::= instructions | labels
+
+private root_item ::= line_feed | instruction_or_label line_feed?
+{
+  recoverWhile = root_item_recover
+}
+private root_item_recover ::= !instruction_or_label
+{
+  consumeTokenMethod = "consumeTokenFast"
+}
 
 private labels ::= label | localLabel
 

@@ -24,14 +24,14 @@ public class MinimalLexerTest extends M68kLexerTestCase {
 
   public void testLineFeedsOnly() {
     doTest("\n\n",
-      "WHITE_SPACE ('\\n')\n" +
-        "WHITE_SPACE ('\\n')");
+      "LINEFEED ('\\n')\n" +
+        "LINEFEED ('\\n')");
   }
 
   public void testLineFeedsAndWhitespaceOnly() {
     doTest("  \n ",
       "WHITE_SPACE ('  ')\n" +
-        "WHITE_SPACE ('\\n')\n" +
+        "LINEFEED ('\\n')\n" +
         "WHITE_SPACE (' ')");
   }
 
@@ -50,7 +50,7 @@ public class MinimalLexerTest extends M68kLexerTestCase {
     doTest("label:\n",
       "id ('label')\n" +
         ": (':')\n" +
-        "WHITE_SPACE ('\\n')");
+        "LINEFEED ('\\n')");
   }
 
   public void testLabelWithColonFollowedByInstruction() {
@@ -70,7 +70,7 @@ public class MinimalLexerTest extends M68kLexerTestCase {
 
   public void testLineFeedLabelOnSecondLine() {
     doTest("\nlabel",
-      "WHITE_SPACE ('\\n')\n" +
+      "LINEFEED ('\\n')\n" +
         "id ('label')");
   }
 
@@ -131,7 +131,7 @@ public class MinimalLexerTest extends M68kLexerTestCase {
         ".s bra .s",
       ". ('.')\n" +
         "id ('l')\n" +
-        "WHITE_SPACE ('\\n')\n" +
+        "LINEFEED ('\\n')\n" +
         ". ('.')\n" +
         "id ('s')\n" +
         "WHITE_SPACE (' ')\n" +

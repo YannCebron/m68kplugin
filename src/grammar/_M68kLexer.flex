@@ -74,7 +74,7 @@ LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
 
 %%
 <YYINITIAL> {
-  {CRLF} { return WHITE_SPACE; }
+  {CRLF} { return LINEFEED; }
 
   "."    { return DOT; }
   "_"    { return UNDERSCORE; }
@@ -93,16 +93,15 @@ LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
   {WHITE_SPACE}+ {COMMENT} { yybegin(IN_COMMENT); return COMMENT; }
   {WHITE_SPACE}+ { clearBranchIdMode(); yybegin(IN_INSTRUCTION); return WHITE_SPACE; }
 
-  {CRLF} { yybegin(YYINITIAL); return WHITE_SPACE; }
+  {CRLF} { yybegin(YYINITIAL); return LINEFEED; }
 }
 
 <IN_COMMENT> {
-  {CRLF} { yybegin(YYINITIAL); return WHITE_SPACE; }
+  {CRLF} { yybegin(YYINITIAL); return LINEFEED; }
 }
 
 <IN_INSTRUCTION> {
-//  "\\n"                  { return NL; }
-  {CRLF}          { yybegin(YYINITIAL); return WHITE_SPACE; }
+  {CRLF}          { yybegin(YYINITIAL); return LINEFEED; }
   {WHITE_SPACE}+  { incBranchIdMode();  return WHITE_SPACE; }
 
   "."  { return DOT; }
