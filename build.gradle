@@ -100,8 +100,8 @@ grammarKit {
 }
 
 task generateM68KLexer(type: GenerateLexer) {
-  source = "grammar/_M68kLexer.flex"
-  skeleton = "grammar/idea-flex.skeleton"
+  source = "src/grammar/_M68kLexer.flex"
+  skeleton = "src/grammar/idea-flex.skeleton"
   targetDir = "gen/com/yanncebron/m68kplugin/lexer/"
   targetClass = "_M68kLexer"
   purgeOldFiles = true
