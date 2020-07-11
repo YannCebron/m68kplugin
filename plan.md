@@ -7,7 +7,6 @@
   - `endif`
 - add missing expression operators (XOR?)
 - do not allow spaces, e.g. `.b|w|l` must be immediate after instruction
-- index expression == 0 is optional? `move.l d0,(a0,d2.w)`
 - allow `equr` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
 - macro: parameters, calls
 

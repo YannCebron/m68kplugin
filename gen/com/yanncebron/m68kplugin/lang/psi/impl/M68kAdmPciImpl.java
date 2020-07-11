@@ -47,9 +47,9 @@ public class M68kAdmPciImpl extends ASTWrapperPsiElement implements M68kAdmPci {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public M68kExpression getExpression() {
-    return notNullChild(PsiTreeUtil.getChildOfType(this, M68kExpression.class));
+    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
   }
 
 }

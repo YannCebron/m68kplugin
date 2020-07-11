@@ -57,6 +57,10 @@ public class JumpInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" jmp ");
   }
 
+  public void testJmpInstructionAixWithoutIndexExpression() throws Exception {
+    doCodeTest(" jmp (pc,d0)");
+  }
+
   public void testJsrInstructionAbs() throws Exception {
     doCodeTest(" jsr label");
   }

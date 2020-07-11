@@ -24,7 +24,7 @@ public interface M68kAdmPci extends M68kPsiElement {
   @Nullable
   M68kAdmRrdIndex getAdmRrdIndex();
 
-  @NotNull
+  @Nullable
   M68kExpression getExpression();
 
 }

@@ -1,0 +1,13 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kJmpInstructionImpl(JMP_INSTRUCTION)
+    PsiElement(jmp)('jmp')
+    PsiWhiteSpace(' ')
+    M68kAdmPciImpl(ADM_PCI)
+      PsiElement(()('(')
+      PsiElement(pc)('pc')
+      PsiElement(,)(',')
+      M68kAdmRrdIndexImpl(ADM_RRD_INDEX)
+        M68kAdmDrdImpl(ADM_DRD)
+          PsiElement(data_register)('d0')
+      PsiElement())(')')
