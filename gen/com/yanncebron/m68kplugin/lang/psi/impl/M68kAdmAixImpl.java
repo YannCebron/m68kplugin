@@ -53,9 +53,9 @@ public class M68kAdmAixImpl extends ASTWrapperPsiElement implements M68kAdmAix {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public M68kExpression getExpression() {
-    return notNullChild(PsiTreeUtil.getChildOfType(this, M68kExpression.class));
+    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
   }
 
 }

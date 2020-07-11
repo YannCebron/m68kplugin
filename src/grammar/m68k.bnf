@@ -180,9 +180,10 @@ adm_apd ::= MINUS L_PAREN adm_ard R_PAREN
 // index(a0)
 adm_adi ::= expression L_PAREN adm_ard R_PAREN
 // index(a0,d0)
-adm_aix ::= expression L_PAREN adm_ard COMMA adm_rrd_index R_PAREN
+adm_aix ::= expression? L_PAREN adm_ard COMMA adm_rrd_index R_PAREN
 {
-  pin = 4
+  pin = "COMMA"
+  name = "expression"
 }
 // 4000 | 4000.w | 4000.l 
 adm_abs ::= expression data_size_word_long?
@@ -1022,13 +1023,7 @@ number_expression ::= DEC_NUMBER | HEX_NUMBER | OCT_NUMBER | BIN_NUMBER
 string_expression ::= STRING
 
 private plain_paren_expression ::= L_PAREN expression R_PAREN
-{
-  pin = 1
-}
 private bracket_paren_expression ::= L_BRACKET expression R_BRACKET
-{
-  pin = 1
-}
 paren_expression ::= plain_paren_expression | bracket_paren_expression
 
 label_ref_expression ::= ID

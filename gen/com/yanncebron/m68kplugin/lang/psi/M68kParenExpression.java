@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kParenExpression extends M68kExpression {
 
-  @Nullable
+  @NotNull
   M68kExpression getExpression();
 
 }

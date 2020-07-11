@@ -314,20 +314,27 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // expression L_PAREN adm_ard COMMA adm_rrd_index R_PAREN
+  // expression? L_PAREN adm_ard COMMA adm_rrd_index R_PAREN
   public static boolean adm_aix(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_aix")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, ADM_AIX, "<adm aix>");
-    r = M68kExpressionParser.expression(b, l + 1, -1);
+    Marker m = enter_section_(b, l, _NONE_, ADM_AIX, "<expression>");
+    r = adm_aix_0(b, l + 1);
     r = r && consumeToken(b, L_PAREN);
     r = r && adm_ard(b, l + 1);
     r = r && consumeToken(b, COMMA);
-    p = r; // pin = 4
+    p = r; // pin = COMMA
     r = r && report_error_(b, adm_rrd_index(b, l + 1));
     r = p && consumeToken(b, R_PAREN) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  // expression?
+  private static boolean adm_aix_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_aix_0")) return false;
+    M68kExpressionParser.expression(b, l + 1, -1);
+    return true;
   }
 
   /* ********************************************************** */

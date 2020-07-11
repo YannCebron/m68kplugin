@@ -123,6 +123,10 @@ public class AddSubInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" addq #1,42(a0,d0)");
   }
 
+  public void testAddqInstructionAixWithoutIndexExpression() throws IOException {
+    doCodeTest(" addq #1,(a0,d0)");
+  }
+
   public void testAddqInstructionAbs() throws IOException {
     doCodeTest(" addq #1,42");
   }
