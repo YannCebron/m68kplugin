@@ -60,12 +60,14 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
 
 
   private static final Map<String, TokenSet> MNEMONIC_MAP = ContainerUtil.<String, TokenSet>immutableMapBuilder()
-    .put("aslasr", TokenSet.create(M68kTokenTypes.ASL, M68kTokenTypes.ASR))
+    .put("asl_asr", TokenSet.create(M68kTokenTypes.ASL, M68kTokenTypes.ASR))
     .put("bcc", M68kTokenGroups.BCC_INSTRUCTIONS)
     .put("dbcc", M68kTokenGroups.DBCC_INSTRUCTIONS)
     .put("divs_divu", TokenSet.create(M68kTokenTypes.DIVS, M68kTokenTypes.DIVU))
     .put("muls_mulu", TokenSet.create(M68kTokenTypes.MULS, M68kTokenTypes.MULU))
     .put("lsl_lsr", TokenSet.create(M68kTokenTypes.LSL, M68kTokenTypes.LSR))
+    .put("rol_ror", TokenSet.create(M68kTokenTypes.ROL, M68kTokenTypes.ROR))
+    .put("roxl_roxr", TokenSet.create(M68kTokenTypes.ROXL, M68kTokenTypes.ROXR))
     .put("scc", M68kTokenGroups.SCC_INSTRUCTIONS)
     .build();
 

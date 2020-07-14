@@ -25,11 +25,19 @@ import com.twelvemonkeys.lang.StringUtil;
 public class M68kInstructionDocumentationProviderTest extends BasePlatformTestCase {
 
   public void testMoveInstruction() {
-    doTestGenerateDoc(" MOV<caret>e", "<h2>MOVE - Copy data from source to destination</h2>");
+    doTestGenerateDoc(" MOV<caret>e", "<h1>MOVE - Copy data from source to destination</h1>");
   }
 
   public void testAslInstruction() {
     doTestGenerateDoc(" as<caret>l", "<h1>ASL, ASR - Arithmetic shift left/right</h1>");
+  }
+
+  public void testLslInstruction() {
+    doTestGenerateDoc(" ls<caret>l", "<h1>LSL, LSR - Logical shift left/right</h1>");
+  }
+
+  public void testRoxlInstruction() {
+    doTestGenerateDoc(" rox<caret>l", "<h1>ROXL, ROXR - Rotate left/right with extend</h1>");
   }
 
   public void testBccInstruction() {

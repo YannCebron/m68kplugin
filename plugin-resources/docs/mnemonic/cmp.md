@@ -1,4 +1,4 @@
-## CMP - Compare
+# CMP - Compare
 
 ## Operation
 [destination] - [source]
@@ -13,7 +13,7 @@ CMP (Test,A6,D3.W),D
 ```
 
 ## Attributes
-Size = byte, word, longword
+`Size` byte, word, longword
 
 ## Description
 Subtract the source operand from the destination operand and

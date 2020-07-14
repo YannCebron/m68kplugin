@@ -1,4 +1,4 @@
-## BSR - Branch to subroutine
+# BSR - Branch to subroutine
 
 ## Operation
 [SP] ← [SP] - 4; [M([SP])] ← [PC]; [PC] ← [PC] + d
@@ -11,7 +11,7 @@ BSR <literal>
 ```
 
 ## Attributes
-Size = byte, word
+`Size` byte, word
 
 ## Description
 The longword address of the instruction immediately following

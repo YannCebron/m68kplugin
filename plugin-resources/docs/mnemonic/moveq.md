@@ -1,4 +1,4 @@
-## MOVEQ - Move quick (copy a small literal to a destination)
+# MOVEQ - Move quick (copy a small literal to a destination)
 
 ## Operation
 [destination] ← \<literal\>
@@ -9,7 +9,7 @@ MOVEQ #<data>,Dn
 ```
 
 ## Attributes
-Size = longword
+`Size`  longword
 
 ## Description
 Move the specified literal to a data register. The literal data is an

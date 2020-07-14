@@ -1,4 +1,4 @@
-## MOVEP - Move peripheral data
+# MOVEP - Move peripheral data
 
 ## Operation
 [destination] ← [source]
@@ -16,7 +16,7 @@ MOVEP (Input,A6),D5
 ```
 
 ## Attributes
-Size = word, longword
+`Size`  word, longword
 
 ## Description
 The `MOVEP` operation moves data between a data register and a

@@ -1,4 +1,4 @@
-## `DBcc` - Test condition, decrement, and branch
+# DBcc - Test condition, decrement, and branch
 
 ## Operation
 IF(condition false)<br/>
@@ -13,7 +13,7 @@ IF(condition false)<br/>
 `DBcc` Dn,<label>
 ```
 ## Attributes
-Size = word
+`Size` word
 
 ## Description
 The `DBcc` instruction provides an automatic looping facility and

@@ -1,4 +1,4 @@
-## LINK - Link and allocate
+# LINK - Link and allocate
 
 ## Operation
 [SP] ← [SP] - 4; [M([SP])] ← [An];
@@ -15,7 +15,7 @@ LINK A6,#-12
 ```
 
 ## Attributes
-Size = word
+`Size` word
 
 ## Description
 The contents of the specified address register are first pushed

@@ -1,4 +1,4 @@
-## MOVE - Copy data from source to destination
+# MOVE - Copy data from source to destination
 
 ## Operation
 [destination] ← [source]
@@ -17,7 +17,7 @@ MOVE Temp1,Temp2
 ```
 
 ## Attributes
-Size = byte, word, longword
+`Size` byte, word, longword
 
 ## Description
 Move the contents of the source to the destination location. The
@@ -53,7 +53,7 @@ MOVE <ea>,CCR
 ```
 
 ## Attributes
-Size = word
+`Size` word
 
 ## Description
 Move the contents of the source operand to the condition code
@@ -76,7 +76,7 @@ the CCR. For example, `MOVE #0,CCR` clears all the CCRís bits.
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 |✓||✓|✓|✓|✓|✓|✓|✓|✓|✓|✓|
 
-## MOVE from SR - Copy data from SR to destination
+# MOVE from SR - Copy data from SR to destination
 
 ## Operation
 [destination] ← [SR]
@@ -87,7 +87,7 @@ MOVE SR,<ea>
 ```
 
 ## Attributes
-Size = word
+`Size` word
 
 ## Description
 Move the contents of the status register to the destination location.
@@ -107,7 +107,7 @@ these processors results in a privilege violation trap.
 |✓||✓|✓|✓|✓|✓|✓|✓||||
 
 
-## MOVE to SR - Copy data to SR from source
+# MOVE to SR - Copy data to SR from source
 
 ## Operation
 IF [S] = 1<br/>
@@ -120,7 +120,7 @@ MOVE <ea>,SR
 ```
 
 ## Attributes
-Size = word
+`Size` word
 
 
 ## Description
@@ -146,7 +146,7 @@ and sets the interrupt mask level to 7.
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 |✓||✓|✓|✓|✓|✓|✓|✓|✓|✓|✓|
 
-## MOVE USP - Copy data to or from USP
+# MOVE USP - Copy data to or from USP
 
 ## Operation 1
 IF [S] = 1&nbsp;&nbsp;&nbsp;&nbsp;{MOVE USP,An form}<br/>
@@ -169,7 +169,7 @@ MOVE An,USP
 ```
 
 ## Attributes
-Size = longword
+`Size` longword
 
 ## Description
 Move the contents of the user stack pointer to an address register

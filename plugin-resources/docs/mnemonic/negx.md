@@ -1,4 +1,4 @@
-## NEGX - Negate with extend
+# NEGX - Negate with extend
 
 ## Operation
 [destination] ← 0 - [destination] - [X]
@@ -9,7 +9,7 @@ NEGX <ea>
 ```
 
 ## Attributes
-Size = byte, word, longword
+`Size`  byte, word, longword
 
 ## Description
 The operand addressed as the destination and the extend bit are

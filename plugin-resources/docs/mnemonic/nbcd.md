@@ -1,4 +1,4 @@
-## NBCD - Negate decimal with sign extend
+# NBCD - Negate decimal with sign extend
 
 ## Operation
 [destination]<sub>10</sub> ← 0 − [destination]<sub>10</sub> - [X]
@@ -10,7 +10,7 @@ NBCD <ea>
 
 
 ## Attributes
-Size = byte
+`Size`  byte
 
 ## Description
 The operand addressed as the destination and the extend bit in

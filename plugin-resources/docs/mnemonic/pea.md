@@ -1,4 +1,4 @@
-## PEA - Push effective address
+# PEA - Push effective address
 
 ## Operation
 [SP] ← [SP] - 4; [M([SP])] ← \<ea\>
@@ -9,7 +9,7 @@ PEA <ea>
 ```
 
 ## Attributes
-Size = longword
+`Size`  longword
 
 ## Description
 The longword effective address specified by the instruction is

@@ -1,4 +1,4 @@
-## CLR - Clear an operand
+# CLR - Clear an operand
 
 ## Operation
 [destination] ← 0
@@ -13,7 +13,7 @@ CLR (A4)+
 ```
 
 ## Attributes
-Size = byte, word, longword
+`Size` byte, word, longword
 
 ## Description
 The destination is cleared ó loaded with all zeros. The CLR instruction can't be used to clear an address register. You can use

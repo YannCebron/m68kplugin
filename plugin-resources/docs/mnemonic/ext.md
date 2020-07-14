@@ -1,4 +1,4 @@
-## EXT - Sign-extend a data register
+# EXT - Sign-extend a data register
 
 ## Operation
 [destination] ← sign-extended[destination]
@@ -10,7 +10,7 @@ EXT.L Dn
 ```
 
 ## Attributes
-Size = word, longword
+`Size` word, longword
 
 ## Description
 Extend the least-significant byte in a data register to a word, or

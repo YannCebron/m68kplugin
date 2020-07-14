@@ -1,4 +1,4 @@
-## CMPM - Compare memory with memory
+# CMPM - Compare memory with memory
 
 ## Operation
 [destination] - [source]
@@ -8,7 +8,7 @@
 CMPM (Ay)+,(Ax)+
 ```
 ## Attributes
-Size = byte, word, longword
+`Size` byte, word, longword
 
 ## Sample syntax
 ```assembly

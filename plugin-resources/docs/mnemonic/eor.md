@@ -1,4 +1,4 @@
-## EOR - Exclusive OR logical
+# EOR - Exclusive OR logical
 
 ## Operation
 [destination] ← [source] ⊕ [destination]
@@ -13,7 +13,7 @@ EOR D3,-(A3)
 ```
 
 ## Attributes
-Size = byte, word, longword.
+`Size` byte, word, longword.
 
 ## Description
 EOR (exclusive or) the source operand with the destination
