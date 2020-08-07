@@ -20,11 +20,11 @@
   <vendor email="yann.cebron@gmail.com" url="https://yanncebron.github.io/">Yann Cébron</vendor>
 
   <description><![CDATA[
-    Supports Motorola 68000 Series assembly language.
+    Supports <a href="https://en.wikipedia.org/wiki/Motorola_68000_series">Motorola 68000 series</a> assembly language.
 
     <br/>
     <br/>
-    <em>All product names, trademarks and registered trademarks are property of their respective owners.</em>
+    <em>All product names, trademarks, and registered trademarks are property of their respective owners.</em>
     ]]></description>
 
   <depends>com.intellij.modules.platform</depends>
