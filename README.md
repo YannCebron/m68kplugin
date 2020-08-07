@@ -19,7 +19,7 @@ Adds support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_
   * highlight privileged instructions
 * Parsing with semantic error highlighting
 * Documentation for mnemonics
-* Labels: Goto Declaration/Find Usages/Rename
+* Labels: Navigate | Symbol, Goto Declaration, Find Usages, Rename
 * Smart *Extend|Shrink Selection*
 * *Move Element Left|Right* for `exg`, binary expressions, register list, `dc` values
 * Spellchecker
