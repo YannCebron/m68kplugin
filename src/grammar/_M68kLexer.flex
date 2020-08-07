@@ -276,7 +276,9 @@ LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
   "." [lL]                        { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_L; }
 
 
+  [aA][lL][iI][gG][nN]            { return ALIGN; }
   [bB][lL][kK]                    { return BLK; }
+  [cC][nN][oO][pP]                { return CNOP; }
   [dD][cC]                        { return DC; }
   [dD][cC][bB]                    { return DCB; }
   [dD][sS]                        { return DS; }

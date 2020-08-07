@@ -26,6 +26,22 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 public class M68kDirectivesParser {
 
   /* ********************************************************** */
+  // ALIGN expression COMMA expression
+  public static boolean align_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "align_directive")) return false;
+    if (!nextTokenIs(b, ALIGN)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, ALIGN_DIRECTIVE, null);
+    r = consumeToken(b, ALIGN);
+    p = r; // pin = 1
+    r = r && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1));
+    r = p && report_error_(b, consumeToken(b, COMMA)) && r;
+    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
   // BLK data_size_all? expression COMMA expression
   public static boolean blk_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "blk_directive")) return false;
@@ -47,6 +63,22 @@ public class M68kDirectivesParser {
     if (!recursion_guard_(b, l, "blk_directive_1")) return false;
     data_size_all(b, l + 1);
     return true;
+  }
+
+  /* ********************************************************** */
+  // CNOP expression COMMA expression
+  public static boolean cnop_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "cnop_directive")) return false;
+    if (!nextTokenIs(b, CNOP)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, CNOP_DIRECTIVE, null);
+    r = consumeToken(b, CNOP);
+    p = r; // pin = 1
+    r = r && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1));
+    r = p && report_error_(b, consumeToken(b, COMMA)) && r;
+    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */
@@ -146,6 +178,8 @@ public class M68kDirectivesParser {
   //                        dc_directive |
   //                        dcb_directive |
   //                        ds_directive |
+  //                        align_directive |
+  //                        cnop_directive |
   //                        incbin_directive |
   //                        incdir_directive |
   //                        include_directive |
@@ -171,6 +205,8 @@ public class M68kDirectivesParser {
     if (!r) r = dc_directive(b, l + 1);
     if (!r) r = dcb_directive(b, l + 1);
     if (!r) r = ds_directive(b, l + 1);
+    if (!r) r = align_directive(b, l + 1);
+    if (!r) r = cnop_directive(b, l + 1);
     if (!r) r = incbin_directive(b, l + 1);
     if (!r) r = incdir_directive(b, l + 1);
     if (!r) r = include_directive(b, l + 1);

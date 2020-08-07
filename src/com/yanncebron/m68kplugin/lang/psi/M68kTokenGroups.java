@@ -165,7 +165,9 @@ public final class M68kTokenGroups {
   );
 
   public static final TokenSet DIRECTIVES = TokenSet.create(
+    ALIGN,
     BLK,
+    CNOP,
     DC,
     DCB,
     DS,

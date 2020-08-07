@@ -3,7 +3,6 @@
 ## Broken Lexing/Parsing
 
 - research available directives, case-sensitivity (DevPac: no)?
-  - `align`
   - `fail`
   - `endif`
 - add missing expression operators (XOR?)

@@ -1,0 +1,10 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kAlignDirectiveImpl(ALIGN_DIRECTIVE)
+    PsiElement(align)('align')
+    PsiWhiteSpace(' ')
+    M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+      PsiElement(dec_number)('0')
+    PsiElement(,)(',')
+    M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+      PsiElement(dec_number)('4')

@@ -8,6 +8,7 @@ btst
 cmpa
 cmpi
 cmpm
+cnop
 dbcc
 dbcs
 dbeq

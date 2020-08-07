@@ -46,6 +46,7 @@ public interface M68kTypes {
   IElementType ADM_RRD_INDEX = new M68kCompositeElementType("ADM_RRD_INDEX");
   IElementType ADM_SR = new M68kCompositeElementType("ADM_SR");
   IElementType ADM_USP = new M68kCompositeElementType("ADM_USP");
+  IElementType ALIGN_DIRECTIVE = new M68kCompositeElementType("ALIGN_DIRECTIVE");
   IElementType ANDI_INSTRUCTION = new M68kCompositeElementType("ANDI_INSTRUCTION");
   IElementType AND_EXPRESSION = new M68kCompositeElementType("AND_EXPRESSION");
   IElementType AND_INSTRUCTION = new M68kCompositeElementType("AND_INSTRUCTION");
@@ -80,6 +81,7 @@ public interface M68kTypes {
   IElementType CMPI_INSTRUCTION = new M68kCompositeElementType("CMPI_INSTRUCTION");
   IElementType CMPM_INSTRUCTION = new M68kCompositeElementType("CMPM_INSTRUCTION");
   IElementType CMP_INSTRUCTION = new M68kCompositeElementType("CMP_INSTRUCTION");
+  IElementType CNOP_DIRECTIVE = new M68kCompositeElementType("CNOP_DIRECTIVE");
   IElementType DBCC_INSTRUCTION = new M68kCompositeElementType("DBCC_INSTRUCTION");
   IElementType DBCS_INSTRUCTION = new M68kCompositeElementType("DBCS_INSTRUCTION");
   IElementType DBEQ_INSTRUCTION = new M68kCompositeElementType("DBEQ_INSTRUCTION");
@@ -290,6 +292,9 @@ public interface M68kTypes {
       else if (type == ADM_USP) {
         return new M68kAdmUspImpl(node);
       }
+      else if (type == ALIGN_DIRECTIVE) {
+        return new M68kAlignDirectiveImpl(node);
+      }
       else if (type == ANDI_INSTRUCTION) {
         return new M68kAndiInstructionImpl(node);
       }
@@ -391,6 +396,9 @@ public interface M68kTypes {
       }
       else if (type == CMP_INSTRUCTION) {
         return new M68kCmpInstructionImpl(node);
+      }
+      else if (type == CNOP_DIRECTIVE) {
+        return new M68kCnopDirectiveImpl(node);
       }
       else if (type == DBCC_INSTRUCTION) {
         return new M68kDbccInstructionImpl(node);

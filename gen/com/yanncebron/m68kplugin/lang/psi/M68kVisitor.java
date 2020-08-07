@@ -109,6 +109,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitAlignDirective(@NotNull M68kAlignDirective o) {
+    visitPsiElement(o);
+  }
+
   public void visitAndExpression(@NotNull M68kAndExpression o) {
     visitBinaryExpression(o);
   }
@@ -275,6 +279,10 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitCmpmInstruction(@NotNull M68kCmpmInstruction o) {
     visitCmpInstructionBase(o);
+  }
+
+  public void visitCnopDirective(@NotNull M68kCnopDirective o) {
+    visitPsiElement(o);
   }
 
   public void visitDataSized(@NotNull M68kDataSized o) {

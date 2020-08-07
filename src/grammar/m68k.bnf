@@ -824,6 +824,8 @@ private directives ::= equ_directive |
                        dc_directive |
                        dcb_directive |
                        ds_directive |
+                       align_directive |
+                       cnop_directive |
                        incbin_directive |
                        incdir_directive |
                        include_directive |
@@ -867,6 +869,25 @@ equr_directive ::= label EQUR adm_rrd
 
 even_directive ::= EVEN
 odd_directive ::= ODD
+
+align_directive ::= ALIGN expression COMMA expression
+{
+  pin = 1
+  methods = [
+    expression = ""
+    divisor = "expression[1]"
+    offset = "expression[0]"
+  ]
+}
+cnop_directive ::= CNOP expression COMMA expression
+{
+  pin = 1
+  methods = [
+    expression = ""
+    divisor = "expression[1]"
+    offset = "expression[0]"
+  ]
+}
 
 end_directive ::= END
 

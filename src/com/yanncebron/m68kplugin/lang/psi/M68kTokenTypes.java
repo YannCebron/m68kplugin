@@ -32,6 +32,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType ADDQ = new M68kTokenType("addq");
   public static final IElementType ADDRESS_REGISTER = new M68kTokenType("address_register");
   public static final IElementType ADDX = new M68kTokenType("addx");
+  public static final IElementType ALIGN = new M68kTokenType("align");
   public static final IElementType AMPERSAND = new M68kTokenType("&");
   public static final IElementType AND = new M68kTokenType("and");
   public static final IElementType ANDI = new M68kTokenType("andi");
@@ -64,6 +65,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType BVS = new M68kTokenType("bvs");
   public static final IElementType CCR = new M68kTokenType("ccr");
   public static final IElementType CHK = new M68kTokenType("chk");
+  public static final IElementType CNOP = new M68kTokenType("cnop");
   public static final IElementType CLR = new M68kTokenType("clr");
   public static final IElementType CMP = new M68kTokenType("cmp");
   public static final IElementType CMPA = new M68kTokenType("cmpa");

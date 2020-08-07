@@ -1,0 +1,10 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kCnopDirectiveImpl(CNOP_DIRECTIVE)
+    PsiElement(cnop)('cnop')
+    PsiWhiteSpace(' ')
+    M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+      PsiElement(dec_number)('0')
+    PsiElement(,)(',')
+    PsiErrorElement:<expression> expected
+      <empty list>
