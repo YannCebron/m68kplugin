@@ -1,6 +1,6 @@
-# Known issues & Plans
+# Known Issues & Plans
 
-## Broken lexing/parsing
+## Broken Lexing/Parsing
 
 - research available directives, case-sensitivity (DevPac: no)?
   - `align`
@@ -12,7 +12,7 @@
 - macro: parameters, calls
 - Lexer: `LexerTestCase.checkCorrectRestartOnEveryToken`
 
-## Before 1st release
+## Before 1st Release
 
 - file icons
 - plugin description
