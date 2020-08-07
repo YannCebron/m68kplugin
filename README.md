@@ -5,9 +5,11 @@
 
 Adds support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_68000_series) assembly language in [IntelliJ Platform](http://www.jetbrains.org/intellij/sdk/docs/intro/intellij_platform.html#ides-based-on-the-intellij-platform) based IDEs (like [IntelliJ IDEA](https://www.jetbrains.com/idea/)).
 
-**This plugin is at a very early stage and provided "as-is", please see also [Known issues](#known-issues) below.**
+> NOTE **This plugin is at a very early stage and provided "as-is", please see also [Known issues](#known-issues) below.**
 
 ## Features
+Support is currently focused on editing, code-insight and navigation.
+There is no support for project setup, integration with build tools or running/debugging.
 
 ### Supported CPUs
 * 68000
