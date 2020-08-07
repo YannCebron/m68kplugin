@@ -1,6 +1,7 @@
 # Known issues & Plans
 
 ## Broken lexing/parsing
+
 - research available directives, case-sensitivity (DevPac: no)?
   - `align`
   - `fail`
@@ -12,16 +13,19 @@
 - Lexer: `LexerTestCase.checkCorrectRestartOnEveryToken`
 
 ## Before 1st release
+
 - file icons
 - plugin description
 - `ErrorReportSubmitter`
 - README.md
 
 ## Instruction Sets
+
 * 680x0 variants
 * 68881 FPU
 
 ## Highlighting
+
 - `macro` missing `endm`
 - conditional assembly missing `endc`
 - registers:
@@ -36,9 +40,10 @@
 - highlight returns
 
 ## Resolve/Refactor
+
 - rename/resolve to label
   - resolve references
-  - local label: in-place rename 
+  - local label: in-place rename
   - highlight usages
   - eventually `UsageTargetProvider`
 - highlight unused label/EQUs(?)
@@ -51,8 +56,9 @@
 - `refactoring.extractIncludeHandler`
 
 ## Editing
+
 - `EnterHandlerDelegate`: smart indent? and/or `LineIndentProvider`
-- expand/shrink selection: 
+- expand/shrink selection:
   - full line
   - "blocks"
 - move left/right: swap src|dest
@@ -62,11 +68,12 @@
   - quick doc/hover for `equ`/`equr`/`=` directives
 
 ## Inspections
+
 - nonsensical `move`, e.g. src==dest
-- `movem` 
+- `movem`
   - non-symmetrical
   - duplicated registers (`d3/d0-d4` -> `d3`)
-  - mixed up registers (`d0-a2`) 
+  - mixed up registers (`d0-a2`)
 - sort/optimize register list
 - string in `dc.b` not terminated with `,0`
 - check optimizations from vasm/DevPac
@@ -74,8 +81,9 @@
 - label naming conventions
 
 ## Navigation
+
 - **WIP** goto symbol for labels/macros/EQUs (?) --> Stubs
-- **WIP** structure view 
+- **WIP** structure view
   - `equr` "location"
   - macros
   - nest local labels
@@ -84,16 +92,20 @@
 - Gutter Icon: `include` all included files (recursively)
 
 ## IDE
+
 - support copyright plugin
 - symbol names in commit dialog (`PlainTextSymbolCompletionContributor`)
 
 ## External Tools
+
 - make errors navigatable (`ConsoleFilterProvider`)
 
 ## Tools
+
 - http://deadliners.net/gradientmaster/
 
 ## Resources
+
 - http://mrjester.hapisan.com/04_MC68/Index.html
 - https://github.com/alpine9000/amiga_examples
 - https://amigasourcepres.gitlab.io/page/books/assembler/
