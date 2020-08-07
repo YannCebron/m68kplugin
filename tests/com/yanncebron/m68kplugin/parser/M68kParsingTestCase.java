@@ -34,6 +34,8 @@ abstract class M68kParsingTestCase extends ParsingTestCase {
   protected void doCodeTest(@NotNull String code) throws IOException {
     super.doCodeTest(code);
 
+    ensureCorrectReparse(myFile);
+
     final String testName = getTestName();
     if (!testName.contains("Missing") && !testName.contains("Wrong")) {
       ensureNoErrorElements();
