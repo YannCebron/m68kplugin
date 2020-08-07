@@ -6,6 +6,8 @@
 Adds support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_68000_series) assembly language
 in [IntelliJ Platform](http://www.jetbrains.org/intellij/sdk/docs/intro/intellij_platform.html#ides-based-on-the-intellij-platform)
 based IDEs (like [IntelliJ IDEA](https://www.jetbrains.com/idea/)).
+                               
+There are currently no published releases, please use `gradle buildPlugin` to create plugin distribution from sources.
 
 > NOTE **This plugin is at a very early stage and provided "as-is". Please see also [Known issues](#known-issues) below.**
 
@@ -22,14 +24,14 @@ See [Plan](plan.md) for planned features and ideas.
 
 ### Editor
 
-* Syntax highlighting
+* Syntax Highlighting
   * Fully customizable via *Preferences | Editor | Color Scheme | M68k Assembler*
   * Method separator for `macro`/`endm`, `section` blocks
   * Highlight privileged instructions
 * Parsing with semantic error highlighting
 * Documentation for mnemonics
 * Labels: *Navigate|Declaration or Usages*, *Edit|Find Usages*, *Refactor|Rename*
-* Smart *Extend|Shrink Selection*
+* Smart *Edit|Extend/Shrink Selection*
 * *Code|Move Element Left/Right* for `exg`, binary expressions, register list, `dc` values
 * Spellchecker
 * Live Templates
@@ -37,7 +39,7 @@ See [Plan](plan.md) for planned features and ideas.
 ### IDE
 
 * Structure View
-* *Navigate | Symbol* for labels
+* *Navigate|Symbol* for labels
 
 ## Known Issues
 
