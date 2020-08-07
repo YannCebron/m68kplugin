@@ -3,18 +3,23 @@
 
 ## Motorola 68000 Series Assembler Support for IntelliJ Platform
 
-Adds support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_68000_series) assembly language in [IntelliJ Platform](http://www.jetbrains.org/intellij/sdk/docs/intro/intellij_platform.html#ides-based-on-the-intellij-platform) based IDEs (like [IntelliJ IDEA](https://www.jetbrains.com/idea/)).
+Adds support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_68000_series) assembly language
+in [IntelliJ Platform](http://www.jetbrains.org/intellij/sdk/docs/intro/intellij_platform.html#ides-based-on-the-intellij-platform)
+based IDEs (like [IntelliJ IDEA](https://www.jetbrains.com/idea/)).
 
-> NOTE **This plugin is at a very early stage and provided "as-is", please see also [Known issues](#known-issues) below.**
+> NOTE **This plugin is at a very early stage and provided "as-is". Please see also [Known issues](#known-issues) below.**
 
 ## Features
-Support is currently focused on editing, code-insight and navigation.
-There is no support for project setup, integration with build tools or running/debugging.
+
+Support is currently focused on editing, code-insight, and navigation. There is no support for project setup,
+integration with build tools, or running/debugging.
 
 ### Supported CPUs
+
 * 68000
 
 ### Editor
+
 * Syntax highlighting
   * fully customizable via *Preferences | Editor | Color Scheme | M68k Assembler*
   * method separator for `macro`/`endm`, `section` blocks
@@ -28,30 +33,38 @@ There is no support for project setup, integration with build tools or running/d
 * Live Templates
 
 ### IDE
+
 * Structure View
 
-
 ## Known issues
-* various smaller parser issues
-* unsupported features:
+
+* Various smaller parser issues
+* Unsupported features:
   - macros
   - includes
 
 ## Plans
+
 See [Plan](plan.md) for planned features and ideas.
 
 ## Credits
+
 Plugin Logo from [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Motorola_M_symbol_blue.svg)
- 
+
 Language support built using [Grammar-Kit](https://github.com/JetBrains/Grammar-Kit)
 
-Gradle setup uses [gradle-intellij-plugin](https://github.com/JetBrains/gradle-intellij-plugin/), [gradle-grammar-kit-plugin](https://github.com/JetBrains/gradle-grammar-kit-plugin) and [verifier.gradle](https://github.com/FWDekker/intellij-randomness/blob/master/gradle/scripts/verifier.gradle)
-           
-Mnemonic documentation taken from [m68k-instructions-documentation](https://github.com/prb28/m68k-instructions-documentation)
+Gradle setup uses [gradle-intellij-plugin](https://github.com/JetBrains/gradle-intellij-plugin/)
+, [gradle-grammar-kit-plugin](https://github.com/JetBrains/gradle-grammar-kit-plugin)
+and [verifier.gradle](https://github.com/FWDekker/intellij-randomness/blob/master/gradle/scripts/verifier.gradle)
+
+Mnemonic documentation taken
+from [m68k-instructions-documentation](https://github.com/prb28/m68k-instructions-documentation)
 
 ## License
+
 Licensed under the Apache License, Version 2.0 (the "License"), see [LICENCE](LICENCE)
 
-This software includes [commonmark-java](https://github.com/atlassian/commonmark-java) library, Copyright (c) 2015-2016, Atlassian Pty Ltd             
+This software includes [commonmark-java](https://github.com/atlassian/commonmark-java) library, Copyright (c) 2015-2016,
+Atlassian Pty Ltd
 
-*All product names, trademarks and registered trademarks are property of their respective owners.*
+*All product names, trademarks, and registered trademarks are property of their respective owners.*
