@@ -21,9 +21,9 @@ integration with build tools, or running/debugging.
 ### Editor
 
 * Syntax highlighting
-  * fully customizable via *Preferences | Editor | Color Scheme | M68k Assembler*
-  * method separator for `macro`/`endm`, `section` blocks
-  * highlight privileged instructions
+  * Fully customizable via *Preferences | Editor | Color Scheme | M68k Assembler*
+  * Method separator for `macro`/`endm`, `section` blocks
+  * Highlight privileged instructions
 * Parsing with semantic error highlighting
 * Documentation for mnemonics
 * Labels: Navigate | Symbol, Goto Declaration, Find Usages, Rename
@@ -36,12 +36,12 @@ integration with build tools, or running/debugging.
 
 * Structure View
 
-## Known issues
+## Known Issues
 
-* Various smaller parser issues
+* Various smaller parser issues, please [submit issue](https://github.com/YannCebron/m68kplugin/issues)
 * Unsupported features:
-  - macros
-  - includes
+  - Macros
+  - Includes
 
 ## Plans
 
