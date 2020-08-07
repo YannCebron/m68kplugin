@@ -14,6 +14,8 @@ based IDEs (like [IntelliJ IDEA](https://www.jetbrains.com/idea/)).
 Support is currently focused on editing, code-insight, and navigation. There is no support for project setup,
 integration with build tools, or running/debugging.
 
+See [Plan](plan.md) for planned features and ideas.
+
 ### Supported CPUs
 
 * 68000
@@ -26,15 +28,16 @@ integration with build tools, or running/debugging.
   * Highlight privileged instructions
 * Parsing with semantic error highlighting
 * Documentation for mnemonics
-* Labels: Navigate | Symbol, Goto Declaration, Find Usages, Rename
+* Labels: *Navigate|Declaration or Usages*, *Edit|Find Usages*, *Refactor|Rename*
 * Smart *Extend|Shrink Selection*
-* *Move Element Left|Right* for `exg`, binary expressions, register list, `dc` values
+* *Code|Move Element Left/Right* for `exg`, binary expressions, register list, `dc` values
 * Spellchecker
 * Live Templates
 
 ### IDE
 
 * Structure View
+* *Navigate | Symbol* for labels
 
 ## Known Issues
 
@@ -42,10 +45,6 @@ integration with build tools, or running/debugging.
 * Unsupported features:
   - Macros
   - Includes
-
-## Plans
-
-See [Plan](plan.md) for planned features and ideas.
 
 ## Credits
 
