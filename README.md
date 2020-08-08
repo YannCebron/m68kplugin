@@ -7,7 +7,7 @@ Adds support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_
 in [IntelliJ Platform](http://www.jetbrains.org/intellij/sdk/docs/intro/intellij_platform.html#ides-based-on-the-intellij-platform)
 based IDEs (like [IntelliJ IDEA](https://www.jetbrains.com/idea/)).
                                
-There are currently no published releases, please use `gradle buildPlugin` to create plugin distribution from sources.
+There are currently no published releases, please run `./gradlew buildPlugin` to create plugin distribution from sources in `build/distributions`.
 
 > NOTE **This plugin is at a very early stage and provided "as-is". Please see also [Known issues](#known-issues) below.**
 
@@ -44,7 +44,7 @@ See [Plan](plan.md) for planned features and ideas.
 
 ## Known Issues
 
-* Various smaller parser issues (see [Broken Lexing/Parsing](plan.md#broken-lexingparsing), please [submit issue](https://github.com/YannCebron/m68kplugin/issues) if not listed yet
+* Various smaller parser issues (see [Broken Lexing/Parsing](plan.md#broken-lexingparsing)), please [submit issue](https://github.com/YannCebron/m68kplugin/issues) if not listed yet
 * Unsupported features:
   - Macros
   - Includes
