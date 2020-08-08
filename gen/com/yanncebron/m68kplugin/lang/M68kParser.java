@@ -1226,13 +1226,13 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_short | data_size_word
+  // data_size_short | data_size_byte | data_size_word
   static boolean bsr_data_size(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bsr_data_size")) return false;
-    if (!nextTokenIs(b, "<.s|w>", DOT_S, DOT_W)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, null, "<.s|w>");
+    Marker m = enter_section_(b, l, _NONE_, null, "<.s|b|w>");
     r = data_size_short(b, l + 1);
+    if (!r) r = data_size_byte(b, l + 1);
     if (!r) r = data_size_word(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;

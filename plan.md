@@ -4,7 +4,6 @@
 
 - research available directives [VASM](https://github.com/Leffmann/vasm/blob/master/syntax/mot/syntax.c#L1595), case-sensitivity (DevPac: no)?
 - `or.w #$0700,sr` -> `ori`
-- `bsr<.b>`
 - in expressions, mnemonic parsed as instruction, not identifier (`size = (bpls*bpl)`)  
 - add missing expression operators (XOR?)
 - do not allow spaces, e.g. `.b|w|l` must be immediate after instruction

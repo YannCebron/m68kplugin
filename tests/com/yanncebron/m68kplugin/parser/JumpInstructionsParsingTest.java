@@ -41,6 +41,10 @@ public class JumpInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" bsr.s offset");
   }
 
+  public void testBsrInstructionDataSizeByte() throws Exception {
+    doCodeTest(" bsr.b offset");
+  }
+
   public void testBsrInstructionDataSizeWord() throws Exception {
     doCodeTest(" bsr.w offset");
   }

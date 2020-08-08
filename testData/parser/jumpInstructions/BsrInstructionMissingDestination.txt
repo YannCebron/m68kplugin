@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kBsrInstructionImpl(BSR_INSTRUCTION)
     PsiElement(bsr)('bsr')
-    PsiErrorElement:<.s|w> or <expression> expected
+    PsiErrorElement:<.s|b|w> or <expression> expected
       <empty list>
   PsiWhiteSpace(' ')
