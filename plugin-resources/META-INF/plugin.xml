@@ -40,7 +40,7 @@
               implementationClass="com.yanncebron.m68kplugin.lang.M68kFileType"
               fieldName="INSTANCE"
               language="M68k"
-              extensions="s;asm;i"/>
+              extensions="s;asm;i;X68"/>
     <lang.parserDefinition
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.lang.M68kParserDefinition"/>
