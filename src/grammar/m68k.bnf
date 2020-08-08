@@ -14,15 +14,6 @@
  * limitations under the License.
  */
 
-/*
- References:
- 
- http://users.encs.concordia.ca/~aagarwal/coen311/motorola68000.txt
- http://www.easy68k.com/files/EASy68KQuickRef.pdf
- https://neo.dmcs.pl/pn/asembler_68000/asm.html
- https://github.com/marhel/r68k/blob/master/tools/src/assembler/parser.rs
-*/
-
 {
   parserClass = "com.yanncebron.m68kplugin.lang.M68kParser"
   parserImports = [
