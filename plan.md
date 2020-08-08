@@ -4,6 +4,7 @@
 
 - research available directives [VASM](https://github.com/Leffmann/vasm/blob/master/syntax/mot/syntax.c#L1595), case-sensitivity (DevPac: no)?
 - `or.w #$0700,sr` -> `ori`
+- `include`/`incbin` path without quotes  
 - in expressions, mnemonic parsed as instruction, not identifier (`size = (bpls*bpl)`)  
 - add missing expression operators (XOR?)
 - do not allow spaces, e.g. `.b|w|l` must be immediate after instruction
@@ -13,10 +14,9 @@
 
 ## Before 1st Release
 
-- file icons
+- file icons (source/include)
 - plugin description
 - `ErrorReportSubmitter`
-- README.md
 
 ## Instruction Sets
 
@@ -25,8 +25,9 @@
 
 ## Highlighting
 
-- `macro` missing `endm`
-- conditional assembly missing `endc`
+- anything after `end` directive
+- unpaired `macro`/`endm`
+- unpaired conditional assembly directives, missing `endc`/`endif`
 - registers:
   - dedicated color for each (**WIP** at least special registers (`SP` == `A7`!) vs. A*n* vs. D*n*)
   - rainbow highlighting?
@@ -34,8 +35,8 @@
 - `ReadWriteAccessDetector` for registers
 - method separators
   - "detected" subroutines
+- highlight unused label (local only? located in non-include files only?)
 - color-picker/inlays: copper list colors
-- anything after `end` directive
 - highlight returns
 
 ## Resolve/Refactor
@@ -45,20 +46,19 @@
   - local label: in-place rename
   - highlight usages
   - eventually `UsageTargetProvider`
-- highlight unused label/EQUs(?)
-- safe delete label/EQUs
+- safe delete label
 - `NamesValidator`
 - register
   - shift up/down through available ones
   - change/cycle through address mode by typing/intention/...?
-  - `a7` <-> `sp`
+  - `a7` <=> `sp`
 - `refactoring.extractIncludeHandler`
+- duplicates detection, "extract macro"
 
 ## Editing
 
-- `EnterHandlerDelegate`: smart indent? and/or `LineIndentProvider`
+- `EnterHandlerDelegate` smart indent? or `LineIndentProvider`
 - expand/shrink selection:
-  - full line
   - "blocks"
 - move left/right: swap src|dest
 - formatter
@@ -105,6 +105,7 @@
 
 ## Resources
 
+- https://www.nxp.com/files-static/archives/doc/ref_manual/M68000PRM.pdf
 - http://mrjester.hapisan.com/04_MC68/Index.html
 - https://github.com/alpine9000/amiga_examples
 - https://amigasourcepres.gitlab.io/page/books/assembler/
