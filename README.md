@@ -28,6 +28,7 @@ See [Plan](plan.md) for planned features and ideas.
   * Fully customizable via *Preferences | Editor | Color Scheme | M68k Assembler*
   * Method separator for `macro`/`endm`, `section` blocks
   * Highlight privileged instructions
+  * Highlight matching brace/paired directives
 * Parsing with semantic error highlighting
 * Documentation for mnemonics
 * Labels: *Navigate|Declaration or Usages*, *Edit|Find Usages*, *Refactor|Rename*
