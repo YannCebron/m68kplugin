@@ -2,11 +2,13 @@
 
 ## Broken Lexing/Parsing
 
-- research available directives, case-sensitivity (DevPac: no)?
-  - `fail`
+- research available directives [VASM](https://github.com/Leffmann/vasm/blob/master/syntax/mot/syntax.c#L1595), case-sensitivity (DevPac: no)?
+- `or.w #$0700,sr` -> `ori`
+- `bsr<.b>`
+- in expressions, mnemonic parsed as instruction, not identifier (`size = (bpls*bpl)`)  
 - add missing expression operators (XOR?)
 - do not allow spaces, e.g. `.b|w|l` must be immediate after instruction
-- allow `equr` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
+- allow `equr`/`reg` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
 - macro: parameters, calls
 - Lexer: `LexerTestCase.checkCorrectRestartOnEveryToken`
 
