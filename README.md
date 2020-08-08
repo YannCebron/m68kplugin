@@ -44,7 +44,7 @@ See [Plan](plan.md) for planned features and ideas.
 
 ## Known Issues
 
-* Various smaller parser issues, please [submit issue](https://github.com/YannCebron/m68kplugin/issues)
+* Various smaller parser issues (see [Broken Lexing/Parsing](plan.md#broken-lexingparsing), please [submit issue](https://github.com/YannCebron/m68kplugin/issues) if not listed yet
 * Unsupported features:
   - Macros
   - Includes
