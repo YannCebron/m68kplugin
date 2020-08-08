@@ -195,6 +195,7 @@ public final class M68kTokenGroups {
     ELSE,
     ELSEIF,
     ENDC,
+    ENDIF,
     IF,
     IFB,
     IFC,

@@ -108,6 +108,7 @@ public interface M68kTypes {
   IElementType ELSEIF_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("ELSEIF_CONDITIONAL_ASSEMBLY_DIRECTIVE");
   IElementType ELSE_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("ELSE_CONDITIONAL_ASSEMBLY_DIRECTIVE");
   IElementType ENDC_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("ENDC_CONDITIONAL_ASSEMBLY_DIRECTIVE");
+  IElementType ENDIF_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("ENDIF_CONDITIONAL_ASSEMBLY_DIRECTIVE");
   IElementType ENDM_DIRECTIVE = new M68kCompositeElementType("ENDM_DIRECTIVE");
   IElementType END_DIRECTIVE = new M68kCompositeElementType("END_DIRECTIVE");
   IElementType EORI_INSTRUCTION = new M68kCompositeElementType("EORI_INSTRUCTION");
@@ -477,6 +478,9 @@ public interface M68kTypes {
       }
       else if (type == ENDC_CONDITIONAL_ASSEMBLY_DIRECTIVE) {
         return new M68kEndcConditionalAssemblyDirectiveImpl(node);
+      }
+      else if (type == ENDIF_CONDITIONAL_ASSEMBLY_DIRECTIVE) {
+        return new M68kEndifConditionalAssemblyDirectiveImpl(node);
       }
       else if (type == ENDM_DIRECTIVE) {
         return new M68kEndmDirectiveImpl(node);

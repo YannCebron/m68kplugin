@@ -315,6 +315,7 @@ LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
   [iI][fF][lL][eE]                { return IFLE; }
   [iI][fF][lL][tT]                { return IFLT; }
   [eE][nN][dD][cC]                { return ENDC; }
+  [eE][nN][dD][iI][fF]            { return ENDIF; }
   [eE][lL][sS][eE]                { return ELSE; }
   [eE][lL][sS][eE][iI][fF]        { return ELSEIF; }
 

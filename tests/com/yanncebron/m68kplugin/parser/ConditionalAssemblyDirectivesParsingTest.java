@@ -97,4 +97,8 @@ public class ConditionalAssemblyDirectivesParsingTest extends M68kParsingTestCas
     doCodeTest(" endc");
   }
 
+  public void testEndifDirective() throws Exception {
+    doCodeTest(" endif");
+  }
+
 }

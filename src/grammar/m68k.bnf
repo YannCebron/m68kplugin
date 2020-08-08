@@ -1078,7 +1078,8 @@ private conditional_assembly_directives ::= if_conditional_assembly_directive |
                                             ifnc_conditional_assembly_directive |
                                             else_conditional_assembly_directive |
                                             elseif_conditional_assembly_directive |
-                                            endc_conditional_assembly_directive
+                                            endc_conditional_assembly_directive |
+                                            endif_conditional_assembly_directive
 
 if_conditional_assembly_directive ::= IF expression
 ifd_conditional_assembly_directive ::= IFD expression
@@ -1111,3 +1112,4 @@ ifnc_conditional_assembly_directive ::= IFNC expression COMMA expression {
 elseif_conditional_assembly_directive ::= ELSEIF
 else_conditional_assembly_directive ::= ELSE
 endc_conditional_assembly_directive ::= ENDC
+endif_conditional_assembly_directive ::= ENDIF

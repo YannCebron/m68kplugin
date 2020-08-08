@@ -400,6 +400,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitConditionalAssemblyDirective(o);
   }
 
+  public void visitEndifConditionalAssemblyDirective(@NotNull M68kEndifConditionalAssemblyDirective o) {
+    visitConditionalAssemblyDirective(o);
+  }
+
   public void visitEndmDirective(@NotNull M68kEndmDirective o) {
     visitDirective(o);
   }

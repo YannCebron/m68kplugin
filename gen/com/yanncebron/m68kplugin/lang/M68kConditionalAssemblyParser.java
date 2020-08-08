@@ -41,7 +41,8 @@ public class M68kConditionalAssemblyParser {
   //                                             ifnc_conditional_assembly_directive |
   //                                             else_conditional_assembly_directive |
   //                                             elseif_conditional_assembly_directive |
-  //                                             endc_conditional_assembly_directive
+  //                                             endc_conditional_assembly_directive |
+  //                                             endif_conditional_assembly_directive
   static boolean conditional_assembly_directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "conditional_assembly_directives")) return false;
     boolean r;
@@ -61,6 +62,7 @@ public class M68kConditionalAssemblyParser {
     if (!r) r = else_conditional_assembly_directive(b, l + 1);
     if (!r) r = elseif_conditional_assembly_directive(b, l + 1);
     if (!r) r = endc_conditional_assembly_directive(b, l + 1);
+    if (!r) r = endif_conditional_assembly_directive(b, l + 1);
     return r;
   }
 
@@ -97,6 +99,18 @@ public class M68kConditionalAssemblyParser {
     Marker m = enter_section_(b);
     r = consumeToken(b, ENDC);
     exit_section_(b, m, ENDC_CONDITIONAL_ASSEMBLY_DIRECTIVE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // ENDIF
+  public static boolean endif_conditional_assembly_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "endif_conditional_assembly_directive")) return false;
+    if (!nextTokenIs(b, ENDIF)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ENDIF);
+    exit_section_(b, m, ENDIF_CONDITIONAL_ASSEMBLY_DIRECTIVE, r);
     return r;
   }
 

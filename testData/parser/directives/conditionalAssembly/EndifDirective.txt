@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kEndifConditionalAssemblyDirectiveImpl(ENDIF_CONDITIONAL_ASSEMBLY_DIRECTIVE)
+    PsiElement(endif)('endif')

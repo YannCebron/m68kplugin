@@ -4,7 +4,6 @@
 
 - research available directives, case-sensitivity (DevPac: no)?
   - `fail`
-  - `endif`
 - add missing expression operators (XOR?)
 - do not allow spaces, e.g. `.b|w|l` must be immediate after instruction
 - allow `equr` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
