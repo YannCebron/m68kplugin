@@ -9,14 +9,14 @@ based IDEs (like [IntelliJ IDEA](https://www.jetbrains.com/idea/)).
                                
 There are currently no published releases, please run `./gradlew buildPlugin` to create plugin distribution from sources in `build/distributions`.
 
-> NOTE **This plugin is at a very early stage and provided "as-is". Please see also [Known issues](#known-issues) below.**
+> NOTE **This plugin is at a very early stage and provided "as-is". Please see also [Known Issues](#known-issues) below.**
 
 ## Features
 
 Support is currently focused on editing, code-insight, and navigation. There is no support for project setup,
 integration with build tools, or running/debugging.
 
-See [Plan](plan.md) for planned features and ideas.
+Please see [Plan](plan.md) for planned features and ideas.
 
 ### Supported CPUs
 
