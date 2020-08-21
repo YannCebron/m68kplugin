@@ -27,7 +27,12 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.BooleanFunction;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.M68kFile;
-import com.yanncebron.m68kplugin.lang.psi.*;
+import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
+import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
+import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kEquDirectiveBase;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncbinDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncludeDirective;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;

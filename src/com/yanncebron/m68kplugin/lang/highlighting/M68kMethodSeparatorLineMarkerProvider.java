@@ -23,9 +23,9 @@ import com.intellij.codeInsight.daemon.impl.LineMarkersPass;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.markup.SeparatorPlacement;
 import com.intellij.psi.PsiElement;
-import com.yanncebron.m68kplugin.lang.psi.M68kEndmDirective;
-import com.yanncebron.m68kplugin.lang.psi.M68kMacroDirective;
-import com.yanncebron.m68kplugin.lang.psi.M68kSectionDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kEndmDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kSectionDirective;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

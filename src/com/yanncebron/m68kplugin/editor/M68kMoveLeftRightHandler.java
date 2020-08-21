@@ -18,10 +18,10 @@ package com.yanncebron.m68kplugin.editor;
 
 import com.intellij.codeInsight.editorActions.moveLeftRight.MoveElementLeftRightHandler;
 import com.intellij.psi.PsiElement;
-import com.yanncebron.m68kplugin.lang.psi.expression.M68kBinaryExpression;
-import com.yanncebron.m68kplugin.lang.psi.M68kDcDirective;
 import com.yanncebron.m68kplugin.lang.psi.M68kExgInstruction;
 import com.yanncebron.m68kplugin.lang.psi.M68kRegisterList;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kDcDirective;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kBinaryExpression;
 import org.jetbrains.annotations.NotNull;
 
 public class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {

@@ -19,6 +19,8 @@ package com.yanncebron.m68kplugin.lang.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncbinDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncludeDirective;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

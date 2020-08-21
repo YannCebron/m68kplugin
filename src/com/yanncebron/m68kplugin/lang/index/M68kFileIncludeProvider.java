@@ -27,8 +27,8 @@ import com.intellij.util.SmartList;
 import com.intellij.util.indexing.FileContent;
 import com.intellij.util.text.StringSearcher;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
-import com.yanncebron.m68kplugin.lang.psi.M68kIncbinDirective;
-import com.yanncebron.m68kplugin.lang.psi.M68kIncludeDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncbinDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncludeDirective;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import org.jetbrains.annotations.NotNull;
 

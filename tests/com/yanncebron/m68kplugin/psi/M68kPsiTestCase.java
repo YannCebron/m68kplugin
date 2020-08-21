@@ -25,7 +25,7 @@ import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.M68kLanguage;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 
-abstract class M68kPsiTestCase extends LightPlatformTestCase {
+public abstract class M68kPsiTestCase extends LightPlatformTestCase {
 
   protected M68kPsiElement doParse(final String text) {
     return doParse(text, false);
