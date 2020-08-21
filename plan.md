@@ -2,7 +2,77 @@
 
 ## Broken Lexing/Parsing
 
-- research available directives [VASM](https://github.com/Leffmann/vasm/blob/master/syntax/mot/syntax.c#L1595), case-sensitivity (DevPac: no)?
+- missing directives ([VASM](https://github.com/Leffmann/vasm/blob/master/syntax/mot/syntax.c#L1595))
+  - `rorg`
+  - `offset`
+  - `code`
+  - `cseg`
+  - `text`
+  - `data`
+  - `dseg`
+  - `bss`
+  - `bss_c`
+  - `bss_f`
+  - `code_c`
+  - `code_f`
+  - `data_c`
+  - `data_f`
+  - `public`
+  - `xdef`
+  - `xref`
+  - `nref`
+  - `entry`
+  - `extrn`
+  - `global`
+  - `import`
+  - `export`
+  - `weak`
+  - `comm`
+  - `load`
+  - `jumperr`
+  - `jumpptr`
+  - `mask2`
+  - `dx.*`
+  - `dr.*`
+  - `fail`
+  - `idnt`
+  - `ttl`
+  - `list`
+  - `nolist`
+  - `module`
+  - `plen`
+  - `llen`
+  - `page`
+  - `nopage`
+  - `spc`
+  - `output`
+  - `symdebug`
+  - `dsource`
+  - `debug`
+  - `comment`
+  - `image`
+  - `rept`
+  - `endr`
+  - `mexit`
+  - `rem`
+  - `erem`
+  - `ifmacrod`
+  - `ifmacrond`
+  - `ifmi`
+  - `ifpl`
+  - `clrso`
+  - `setso`
+  - `so.*`
+  - `fo.*`
+  - `cargs`
+  - `echo`
+  - `printt`
+  - `printv`
+  - `auto`
+  - `inline`
+  - `einline`
+  - `struct`
+  - `estruct`
 - `or.w #$0700,sr` -> `ori`
 - `include`/`incbin` path without quotes  
 - in expressions, mnemonic parsed as instruction, not identifier (`size = (bpls*bpl)`)  
