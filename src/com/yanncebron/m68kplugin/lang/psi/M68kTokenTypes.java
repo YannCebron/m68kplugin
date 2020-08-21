@@ -31,6 +31,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType ADDI = new M68kTokenType("addi");
   public static final IElementType ADDQ = new M68kTokenType("addq");
   public static final IElementType ADDRESS_REGISTER = new M68kTokenType("address_register");
+  public static final IElementType ADDWATCH = new M68kTokenType("addwatch");
   public static final IElementType ADDX = new M68kTokenType("addx");
   public static final IElementType ALIGN = new M68kTokenType("align");
   public static final IElementType AMPERSAND = new M68kTokenType("&");

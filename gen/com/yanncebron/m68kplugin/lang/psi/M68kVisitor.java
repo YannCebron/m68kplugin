@@ -43,6 +43,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitInstruction(o);
   }
 
+  public void visitAddwatchDirective(@NotNull M68kAddwatchDirective o) {
+    visitDirective(o);
+  }
+
   public void visitAddxInstruction(@NotNull M68kAddxInstruction o) {
     visitInstruction(o);
   }

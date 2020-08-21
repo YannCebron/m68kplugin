@@ -201,4 +201,12 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" cnop 0,");
   }
 
+  public void testAddwatchDirective() throws Exception {
+    doCodeTest(" addwatch label");
+  }
+
+  public void testAddwatchDirectiveMissingLabel() throws Exception {
+    doCodeTest(" addwatch ");
+  }
+
 }

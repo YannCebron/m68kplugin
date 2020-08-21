@@ -26,6 +26,20 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 public class M68kDirectivesParser {
 
   /* ********************************************************** */
+  // ADDWATCH expression
+  public static boolean addwatch_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "addwatch_directive")) return false;
+    if (!nextTokenIs(b, ADDWATCH)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, ADDWATCH_DIRECTIVE, null);
+    r = consumeToken(b, ADDWATCH);
+    p = r; // pin = 1
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
   // ALIGN expression COMMA expression
   public static boolean align_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "align_directive")) return false;
@@ -191,7 +205,8 @@ public class M68kDirectivesParser {
   //                        macro_directive |
   //                        endm_directive |
   //                        end_directive |
-  //                        section_directive
+  //                        section_directive |
+  //                        addwatch_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -219,6 +234,7 @@ public class M68kDirectivesParser {
     if (!r) r = endm_directive(b, l + 1);
     if (!r) r = end_directive(b, l + 1);
     if (!r) r = section_directive(b, l + 1);
+    if (!r) r = addwatch_directive(b, l + 1);
     return r;
   }
 

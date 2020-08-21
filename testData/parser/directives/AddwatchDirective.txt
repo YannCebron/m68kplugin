@@ -1,0 +1,7 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kAddwatchDirectiveImpl(ADDWATCH_DIRECTIVE)
+    PsiElement(addwatch)('addwatch')
+    PsiWhiteSpace(' ')
+    M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
+      PsiElement(id)('label')

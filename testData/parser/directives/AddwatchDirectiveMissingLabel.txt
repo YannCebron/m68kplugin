@@ -1,0 +1,7 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kAddwatchDirectiveImpl(ADDWATCH_DIRECTIVE)
+    PsiElement(addwatch)('addwatch')
+    PsiErrorElement:<expression> expected
+      <empty list>
+  PsiWhiteSpace(' ')

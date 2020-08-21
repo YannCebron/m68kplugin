@@ -30,6 +30,7 @@ public interface M68kTypes {
   IElementType ADDA_INSTRUCTION = new M68kCompositeElementType("ADDA_INSTRUCTION");
   IElementType ADDI_INSTRUCTION = new M68kCompositeElementType("ADDI_INSTRUCTION");
   IElementType ADDQ_INSTRUCTION = new M68kCompositeElementType("ADDQ_INSTRUCTION");
+  IElementType ADDWATCH_DIRECTIVE = new M68kCompositeElementType("ADDWATCH_DIRECTIVE");
   IElementType ADDX_INSTRUCTION = new M68kCompositeElementType("ADDX_INSTRUCTION");
   IElementType ADD_INSTRUCTION = new M68kCompositeElementType("ADD_INSTRUCTION");
   IElementType ADM_ABS = new M68kCompositeElementType("ADM_ABS");
@@ -240,6 +241,9 @@ public interface M68kTypes {
       }
       else if (type == ADDQ_INSTRUCTION) {
         return new M68kAddqInstructionImpl(node);
+      }
+      else if (type == ADDWATCH_DIRECTIVE) {
+        return new M68kAddwatchDirectiveImpl(node);
       }
       else if (type == ADDX_INSTRUCTION) {
         return new M68kAddxInstructionImpl(node);
