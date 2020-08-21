@@ -18,7 +18,7 @@ package com.yanncebron.m68kplugin.lang.psi.directive;
 
 import com.yanncebron.m68kplugin.lang.psi.M68kDataSize;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
-import com.yanncebron.m68kplugin.psi.M68kPsiTestCase;
+import com.yanncebron.m68kplugin.lang.psi.M68kPsiTestCase;
 
 public class DcbDirectivePsiTest extends M68kPsiTestCase {
 

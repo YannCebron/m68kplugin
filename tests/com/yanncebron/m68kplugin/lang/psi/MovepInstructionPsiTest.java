@@ -14,26 +14,26 @@
  * limitations under the License.
  */
 
-package com.yanncebron.m68kplugin.lang.psi.directive;
+package com.yanncebron.m68kplugin.lang.psi;
 
-import com.yanncebron.m68kplugin.lang.psi.M68kAdmDrd;
-import com.yanncebron.m68kplugin.lang.psi.M68kAdmRrd;
-import com.yanncebron.m68kplugin.lang.psi.M68kPsiTestCase;
+public class MovepInstructionPsiTest extends M68kPsiTestCase {
 
-public class EqurDirectivePsiTest extends M68kPsiTestCase {
+  public void testWithDataSize() {
+    final M68kMovepInstruction instruction = parse("movep.l d0,42(a0)");
 
-  public void testDataRegister() {
-    final M68kEqurDirective directive = parse("label equr d0");
-
-    final M68kAdmRrd admRrd = directive.getAdmRrd();
-    assertNotNull(admRrd);
-    final M68kAdmDrd admDrd = admRrd.getAdmDrd();
+    assertEquals(M68kDataSize.LONG, instruction.getDataSize());
+    final M68kAdmDrd admDrd = instruction.getAdmDrd();
     assertNotNull(admDrd);
     assertEquals("d0", admDrd.getText());
+
+    final M68kAdmAdi admAdi = instruction.getAdmAdi();
+    assertNotNull(admAdi);
+    final M68kAdmArd admArd = admAdi.getAdmArd();
+    assertEquals("a0", admArd.getText());
   }
 
-  private M68kEqurDirective parse(String text) {
-    return assertInstanceOf(doParse(text, true), M68kEqurDirective.class);
+  private M68kMovepInstruction parse(String text) {
+    return assertInstanceOf(doParse(" " + text), M68kMovepInstruction.class);
   }
 
 }

@@ -14,27 +14,19 @@
  * limitations under the License.
  */
 
-package com.yanncebron.m68kplugin.lang.psi.directive;
+package com.yanncebron.m68kplugin.lang.psi;
 
-import com.yanncebron.m68kplugin.lang.psi.M68kPsiTestCase;
 import org.jetbrains.annotations.NotNull;
 
-public class IncludeDirectivePsiTest extends M68kPsiTestCase {
+public class RteInstructionPsiTest extends M68kPsiTestCase {
 
-  public void testMissingIncludePath() {
-    final M68kIncludeDirective directive = parse("include ");
-
-    assertNull(directive.getIncludePath());
+  public void testRteInstruction() {
+    final M68kRteInstruction instruction = parse("rte");
+    assertTrue(instruction.isPrivileged());
   }
 
-  public void testWithQuotes() {
-    final M68kIncludeDirective directive = parse("include \"test.i\"");
-
-    assertEquals("test.i", directive.getIncludePath());
+  private @NotNull M68kRteInstruction parse(String text) {
+    return assertInstanceOf(doParse(" " + text), M68kRteInstruction.class);
   }
 
-  @NotNull
-  private M68kIncludeDirective parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kIncludeDirective.class);
-  }
 }
