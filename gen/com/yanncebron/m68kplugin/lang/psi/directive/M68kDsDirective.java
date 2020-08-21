@@ -19,7 +19,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kDataSized;
-import com.yanncebron.m68kplugin.lang.psi.M68kDirective;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
 public interface M68kDsDirective extends M68kDataSized, M68kDirective {

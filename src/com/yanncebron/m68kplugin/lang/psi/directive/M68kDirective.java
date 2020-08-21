@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package com.yanncebron.m68kplugin.lang.psi;
+package com.yanncebron.m68kplugin.lang.psi.directive;
+
+import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 
 /**
  * Base interface for all assembler directives.

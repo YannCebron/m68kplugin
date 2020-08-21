@@ -804,7 +804,7 @@ roxr_instruction ::= ROXR shift_tail
   psiPackage = "com.yanncebron.m68kplugin.lang.psi.directive"
   psiImplPackage = "com.yanncebron.m68kplugin.lang.psi.directive.impl"
   parserClass = "com.yanncebron.m68kplugin.lang.M68kDirectivesParser"
-  implements("(blk|set|equr|even|odd|dc|dcb|ds|incbin|incdir|include|rsset|rsreset|rs|opt|org|macro|endm|end|section)_directive|equ_directive_base") = "com.yanncebron.m68kplugin.lang.psi.M68kDirective"
+  implements("(blk|set|equr|even|odd|dc|dcb|ds|incbin|incdir|include|rsset|rsreset|rs|opt|org|macro|endm|end|section)_directive|equ_directive_base") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
 }
 
 private directives ::= equ_directive |

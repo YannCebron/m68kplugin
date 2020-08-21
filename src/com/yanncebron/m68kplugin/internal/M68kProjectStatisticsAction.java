@@ -38,11 +38,11 @@ import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
-import com.yanncebron.m68kplugin.lang.psi.M68kDirective;
 import com.yanncebron.m68kplugin.lang.psi.M68kInstruction;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 

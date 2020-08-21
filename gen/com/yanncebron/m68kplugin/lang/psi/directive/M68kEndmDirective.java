@@ -18,7 +18,6 @@ package com.yanncebron.m68kplugin.lang.psi.directive;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
-import com.yanncebron.m68kplugin.lang.psi.M68kDirective;
 
 public interface M68kEndmDirective extends M68kDirective {
 
