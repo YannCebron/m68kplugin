@@ -229,4 +229,12 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" nolist");
   }
 
+  public void testPageDirective() throws Exception {
+    doCodeTest(" page");
+  }
+
+  public void testNopageDirective() throws Exception {
+    doCodeTest(" nopage");
+  }
+
 }

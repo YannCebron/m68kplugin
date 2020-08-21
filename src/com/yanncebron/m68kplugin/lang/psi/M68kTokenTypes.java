@@ -165,6 +165,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType NEG = new M68kTokenType("neg");
   public static final IElementType NEGX = new M68kTokenType("negx");
   public static final IElementType NOLIST = new M68kTokenType("nolist");
+  public static final IElementType NOPAGE = new M68kTokenType("nopage");
   public static final IElementType NOP = new M68kTokenType("nop");
   public static final IElementType NOT = new M68kTokenType("not");
   public static final IElementType OCT_NUMBER = new M68kTokenType("oct_number");
@@ -173,6 +174,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType OR = new M68kTokenType("or");
   public static final IElementType ORG = new M68kTokenType("org");
   public static final IElementType ORI = new M68kTokenType("ori");
+  public static final IElementType PAGE = new M68kTokenType("page");
   public static final IElementType PC = new M68kTokenType("pc");
   public static final IElementType PEA = new M68kTokenType("pea");
   public static final IElementType PERCENT = new M68kTokenType("%");

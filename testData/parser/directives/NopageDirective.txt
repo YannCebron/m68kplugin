@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kNopageDirectiveImpl(NOPAGE_DIRECTIVE)
+    PsiElement(nopage)('nopage')

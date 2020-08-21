@@ -169,6 +169,7 @@ public interface M68kTypes {
   IElementType NEGX_INSTRUCTION = new M68kCompositeElementType("NEGX_INSTRUCTION");
   IElementType NEG_INSTRUCTION = new M68kCompositeElementType("NEG_INSTRUCTION");
   IElementType NOLIST_DIRECTIVE = new M68kCompositeElementType("NOLIST_DIRECTIVE");
+  IElementType NOPAGE_DIRECTIVE = new M68kCompositeElementType("NOPAGE_DIRECTIVE");
   IElementType NOP_INSTRUCTION = new M68kCompositeElementType("NOP_INSTRUCTION");
   IElementType NOT_INSTRUCTION = new M68kCompositeElementType("NOT_INSTRUCTION");
   IElementType NUMBER_EXPRESSION = new M68kCompositeElementType("NUMBER_EXPRESSION");
@@ -178,6 +179,7 @@ public interface M68kTypes {
   IElementType ORI_INSTRUCTION = new M68kCompositeElementType("ORI_INSTRUCTION");
   IElementType OR_EXPRESSION = new M68kCompositeElementType("OR_EXPRESSION");
   IElementType OR_INSTRUCTION = new M68kCompositeElementType("OR_INSTRUCTION");
+  IElementType PAGE_DIRECTIVE = new M68kCompositeElementType("PAGE_DIRECTIVE");
   IElementType PAREN_EXPRESSION = new M68kCompositeElementType("PAREN_EXPRESSION");
   IElementType PEA_INSTRUCTION = new M68kCompositeElementType("PEA_INSTRUCTION");
   IElementType PLUS_EXPRESSION = new M68kCompositeElementType("PLUS_EXPRESSION");
@@ -661,6 +663,9 @@ public interface M68kTypes {
       else if (type == NOLIST_DIRECTIVE) {
         return new M68kNolistDirectiveImpl(node);
       }
+      else if (type == NOPAGE_DIRECTIVE) {
+        return new M68kNopageDirectiveImpl(node);
+      }
       else if (type == NOP_INSTRUCTION) {
         return new M68kNopInstructionImpl(node);
       }
@@ -687,6 +692,9 @@ public interface M68kTypes {
       }
       else if (type == OR_INSTRUCTION) {
         return new M68kOrInstructionImpl(node);
+      }
+      else if (type == PAGE_DIRECTIVE) {
+        return new M68kPageDirectiveImpl(node);
       }
       else if (type == PAREN_EXPRESSION) {
         return new M68kParenExpressionImpl(node);

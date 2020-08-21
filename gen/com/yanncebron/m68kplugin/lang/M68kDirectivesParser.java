@@ -211,7 +211,9 @@ public class M68kDirectivesParser {
   //                        jumperr_directive |
   //                        jumpptr_directive |
   //                        list_directive |
-  //                        nolist_directive
+  //                        nolist_directive |
+  //                        page_directive |
+  //                        nopage_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -245,6 +247,8 @@ public class M68kDirectivesParser {
     if (!r) r = jumpptr_directive(b, l + 1);
     if (!r) r = list_directive(b, l + 1);
     if (!r) r = nolist_directive(b, l + 1);
+    if (!r) r = page_directive(b, l + 1);
+    if (!r) r = nopage_directive(b, l + 1);
     return r;
   }
 
@@ -521,6 +525,18 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
+  // NOPAGE
+  public static boolean nopage_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "nopage_directive")) return false;
+    if (!nextTokenIs(b, NOPAGE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, NOPAGE);
+    exit_section_(b, m, NOPAGE_DIRECTIVE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // ODD
   public static boolean odd_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "odd_directive")) return false;
@@ -604,6 +620,18 @@ public class M68kDirectivesParser {
     r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  /* ********************************************************** */
+  // PAGE
+  public static boolean page_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "page_directive")) return false;
+    if (!nextTokenIs(b, PAGE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PAGE);
+    exit_section_(b, m, PAGE_DIRECTIVE, r);
+    return r;
   }
 
   /* ********************************************************** */

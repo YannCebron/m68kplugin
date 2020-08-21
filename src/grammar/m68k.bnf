@@ -804,7 +804,7 @@ roxr_instruction ::= ROXR shift_tail
   psiPackage = "com.yanncebron.m68kplugin.lang.psi.directive"
   psiImplPackage = "com.yanncebron.m68kplugin.lang.psi.directive.impl"
   parserClass = "com.yanncebron.m68kplugin.lang.M68kDirectivesParser"
-  implements("(blk|set|equr|even|odd|dc|dcb|ds|incbin|incdir|include|rsset|rsreset|rs|opt|org|macro|endm|mexit|end|section|addwatch|jumperr|jumpptr|list|nolist)_directive|equ_directive_base") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
+  implements("(blk|set|equr|even|odd|dc|dcb|ds|incbin|incdir|include|rsset|rsreset|rs|opt|org|macro|endm|mexit|end|section|addwatch|jumperr|jumpptr|list|nolist|page|nopage)_directive|equ_directive_base") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
 }
 
 private directives ::= equ_directive |
@@ -836,7 +836,9 @@ private directives ::= equ_directive |
                        jumperr_directive |
                        jumpptr_directive |
                        list_directive |
-                       nolist_directive
+                       nolist_directive |
+                       page_directive |
+                       nopage_directive
 
 fake equ_directive_base ::= label expression?
 {
@@ -1006,6 +1008,9 @@ jumpptr_directive ::= JUMPPTR expression
 
 list_directive ::= LIST
 nolist_directive ::= NOLIST
+
+page_directive ::= PAGE
+nopage_directive ::= NOPAGE
 
 
 // Expressions  ============================================================

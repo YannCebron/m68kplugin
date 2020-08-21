@@ -653,6 +653,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitInstruction(o);
   }
 
+  public void visitNopageDirective(@NotNull M68kNopageDirective o) {
+    visitDirective(o);
+  }
+
   public void visitNotInstruction(@NotNull M68kNotInstruction o) {
     visitBoolInstructionBase(o);
   }
@@ -683,6 +687,10 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitOriInstruction(@NotNull M68kOriInstruction o) {
     visitBoolImmediateInstructionBase(o);
+  }
+
+  public void visitPageDirective(@NotNull M68kPageDirective o) {
+    visitDirective(o);
   }
 
   public void visitParenExpression(@NotNull M68kParenExpression o) {

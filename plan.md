@@ -38,8 +38,6 @@
   - `module`
   - `plen`
   - `llen`
-  - `page`
-  - `nopage`
   - `spc`
   - `output`
   - `symdebug`

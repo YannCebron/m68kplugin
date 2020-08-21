@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kPageDirectiveImpl(PAGE_DIRECTIVE)
+    PsiElement(page)('page')
