@@ -10,13 +10,9 @@
   - `text`
   - `data`
   - `dseg`
-  - `bss`
-  - `bss_c`
-  - `bss_f`
-  - `code_c`
-  - `code_f`
-  - `data_c`
-  - `data_f`
+  - `bss`/`bss_c`/`bss_f`
+  - `code_c`/`code_f`
+  - `data_c`/`data_f`
   - `public`
   - `xdef`
   - `xref`
@@ -42,25 +38,19 @@
   - `debug`
   - `comment`
   - `image`
-  - `rept`
-  - `endr`
-  - `rem`
-  - `erem`
-  - `ifmacrod`
-  - `ifmacrond`
+  - `rept`/`endr`
+  - `rem`/`erem` - ignores everything between
+  - `ifmacrod`/`ifmacrond`
   - `ifmi`
   - `ifpl`
-  - `clrso`
-  - `setso`
+  - `clrso`/`setso`
   - `so.*`
   - `fo.*`
   - `cargs`
   - `echo`
-  - `printt`
-  - `printv`
+  - `printt`/`printv`
   - `auto`
-  - `inline`
-  - `einline`
+  - `inline`/`einline`
   - `struct`
   - `estruct`
 - `or.w #$0700,sr` -> `ori`
