@@ -51,8 +51,7 @@
   - `printt`/`printv`
   - `auto`
   - `inline`/`einline`
-  - `struct`
-  - `estruct`
+  - `struct`/`estruct`
 - `or.w #$0700,sr` -> `ori`
 - `include`/`incbin` path without quotes  
 - in expressions, mnemonic parsed as instruction, not identifier (`size = (bpls*bpl)`)  
