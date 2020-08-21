@@ -297,6 +297,7 @@ LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
   [oO][pP][tT]                    { return OPT; }
   [oO][rR][gG]                    { return ORG; }
   [pP][aA][gG][eE]                { return PAGE; }
+  [pP][lL][eE][nN]                { return PLEN; }
   [nN][oO][lL][iI][sS][tT]        { return NOLIST; }
   [nN][oO][pP][aA][gG][eE]        { return NOPAGE; }
   [rR][sS]                        { return RS; }

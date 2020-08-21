@@ -179,6 +179,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType PEA = new M68kTokenType("pea");
   public static final IElementType PERCENT = new M68kTokenType("%");
   public static final IElementType PIPE = new M68kTokenType("|");
+  public static final IElementType PLEN = new M68kTokenType("plen");
   public static final IElementType PLUS = new M68kTokenType("+");
   public static final IElementType POW = new M68kTokenType("^");
   public static final IElementType RESET = new M68kTokenType("reset");

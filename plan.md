@@ -36,7 +36,6 @@
   - `idnt`
   - `ttl`
   - `module`
-  - `plen`
   - `llen`
   - `spc`
   - `output`

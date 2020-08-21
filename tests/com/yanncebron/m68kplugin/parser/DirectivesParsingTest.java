@@ -237,4 +237,8 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" nopage");
   }
 
+  public void testPlenDirective() throws Exception {
+    doCodeTest(" plen 22");
+  }
+
 }

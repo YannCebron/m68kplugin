@@ -188,6 +188,7 @@ public final class M68kTokenGroups {
     NOLIST,
     NOPAGE,
     PAGE,
+    PLEN,
     ODD,
     OPT,
     ORG,
