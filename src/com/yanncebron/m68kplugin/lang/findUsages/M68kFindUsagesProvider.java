@@ -67,7 +67,8 @@ public class M68kFindUsagesProvider implements FindUsagesProvider {
     if (element instanceof M68kLocalLabel) {
       return M68kBundle.message("term.local.label");
     }
-    return "???";
+
+    return "";
   }
 
   @NotNull
