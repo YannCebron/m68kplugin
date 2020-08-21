@@ -90,7 +90,7 @@
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.lang.refactoring.M68kRefactoringSupportProvider"/>
     <lang.elementManipulator
-        forClass="com.yanncebron.m68kplugin.lang.psi.M68kLabelRefExpression"
+        forClass="com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression"
         implementationClass="com.yanncebron.m68kplugin.lang.psi.expression.impl.M68kLabelRefExpressionElementManipulator"/>
 
     <liveTemplateContext
