@@ -241,4 +241,8 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" plen 22");
   }
 
+  public void testLlenDirective() throws Exception {
+    doCodeTest(" llen 22");
+  }
+
 }

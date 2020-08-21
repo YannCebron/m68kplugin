@@ -565,6 +565,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitDirective(o);
   }
 
+  public void visitLlenDirective(@NotNull M68kLlenDirective o) {
+    visitDirective(o);
+  }
+
   public void visitLocalLabel(@NotNull M68kLocalLabel o) {
     visitLabelBase(o);
   }

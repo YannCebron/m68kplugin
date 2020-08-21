@@ -146,6 +146,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType LEA = new M68kTokenType("lea");
   public static final IElementType LINK = new M68kTokenType("link");
   public static final IElementType LIST = new M68kTokenType("list");
+  public static final IElementType LLEN = new M68kTokenType("llen");
   public static final IElementType LSL = new M68kTokenType("lsl");
   public static final IElementType LSR = new M68kTokenType("lsr");
   public static final IElementType L_BRACKET = new M68kTokenType("[");

@@ -150,6 +150,7 @@ public interface M68kTypes {
   IElementType LEA_INSTRUCTION = new M68kCompositeElementType("LEA_INSTRUCTION");
   IElementType LINK_INSTRUCTION = new M68kCompositeElementType("LINK_INSTRUCTION");
   IElementType LIST_DIRECTIVE = new M68kCompositeElementType("LIST_DIRECTIVE");
+  IElementType LLEN_DIRECTIVE = new M68kCompositeElementType("LLEN_DIRECTIVE");
   IElementType LOCAL_LABEL = new M68kCompositeElementType("LOCAL_LABEL");
   IElementType LSL_INSTRUCTION = new M68kCompositeElementType("LSL_INSTRUCTION");
   IElementType LSR_INSTRUCTION = new M68kCompositeElementType("LSR_INSTRUCTION");
@@ -606,6 +607,9 @@ public interface M68kTypes {
       }
       else if (type == LIST_DIRECTIVE) {
         return new M68kListDirectiveImpl(node);
+      }
+      else if (type == LLEN_DIRECTIVE) {
+        return new M68kLlenDirectiveImpl(node);
       }
       else if (type == LOCAL_LABEL) {
         return new M68kLocalLabelImpl(node);

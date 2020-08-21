@@ -36,7 +36,6 @@
   - `idnt`
   - `ttl`
   - `module`
-  - `llen`
   - `spc`
   - `output`
   - `symdebug`
