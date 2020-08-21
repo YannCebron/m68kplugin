@@ -42,6 +42,7 @@ ifne
 incbin
 incdir
 jumperr
+jumpptr
 movea
 movem
 movep

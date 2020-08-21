@@ -291,6 +291,7 @@ LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
   [iI][nN][cC][dD][iI][rR]        { return INCDIR; }
   [iI][nN][cC][lL][uU][dD][eE]    { return INCLUDE; }
   [jJ][uU][mM][pP][eE][rR][rR]    { return JUMPERR; }
+  [jJ][uU][mM][pP][pP][tT][rR]    { return JUMPPTR; }
   [oO][dD][dD]                    { return ODD; }
   [oO][pP][tT]                    { return OPT; }
   [oO][rR][gG]                    { return ORG; }

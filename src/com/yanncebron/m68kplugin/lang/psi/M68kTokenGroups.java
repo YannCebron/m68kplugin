@@ -182,6 +182,7 @@ public final class M68kTokenGroups {
     INCDIR,
     INCLUDE,
     JUMPERR,
+    JUMPPTR,
     MACRO,
     ODD,
     OPT,

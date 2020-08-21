@@ -47,6 +47,7 @@
       <w>incbin</w>
       <w>incdir</w>
       <w>jumperr</w>
+      <w>jumpptr</w>
       <w>kplugin</w>
       <w>movea</w>
       <w>movem</w>

@@ -29,7 +29,6 @@
   - `weak`
   - `comm`
   - `load`
-  - `jumpptr`
   - `mask2`
   - `dx.*`
   - `dr.*`

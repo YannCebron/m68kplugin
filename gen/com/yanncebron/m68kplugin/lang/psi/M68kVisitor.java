@@ -540,6 +540,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitDirective(o);
   }
 
+  public void visitJumpptrDirective(@NotNull M68kJumpptrDirective o) {
+    visitDirective(o);
+  }
+
   public void visitLabel(@NotNull M68kLabel o) {
     visitLabelBase(o);
   }
