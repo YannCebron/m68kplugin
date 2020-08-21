@@ -24,6 +24,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
 public class M68kAdmAbsImpl extends ASTWrapperPsiElement implements M68kAdmAbs {
 

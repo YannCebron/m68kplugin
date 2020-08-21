@@ -17,8 +17,8 @@
 package com.yanncebron.m68kplugin.psi;
 
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmImm;
-import com.yanncebron.m68kplugin.lang.psi.M68kNumberExpression;
 import com.yanncebron.m68kplugin.lang.psi.M68kStopInstruction;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
 
 public class StopInstructionPsiTest extends M68kPsiTestCase {
 

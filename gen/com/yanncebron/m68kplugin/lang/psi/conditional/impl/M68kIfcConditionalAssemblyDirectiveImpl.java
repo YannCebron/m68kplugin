@@ -26,7 +26,7 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.conditional.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
-import com.yanncebron.m68kplugin.lang.psi.M68kExpression;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
 public class M68kIfcConditionalAssemblyDirectiveImpl extends ASTWrapperPsiElement implements M68kIfcConditionalAssemblyDirective {

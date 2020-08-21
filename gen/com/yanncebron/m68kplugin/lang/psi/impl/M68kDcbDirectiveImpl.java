@@ -23,6 +23,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
 public class M68kDcbDirectiveImpl extends M68kDataSizedImpl implements M68kDcbDirective {

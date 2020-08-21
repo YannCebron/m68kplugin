@@ -20,7 +20,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.usages.impl.rules.UsageType;
 import com.intellij.usages.impl.rules.UsageTypeProvider;
-import com.yanncebron.m68kplugin.lang.psi.M68kStringExpression;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kStringExpression;
 import org.jetbrains.annotations.Nullable;
 
 public class M68kUsageTypeProvider implements UsageTypeProvider {

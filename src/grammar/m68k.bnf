@@ -984,6 +984,8 @@ endm_directive ::= ENDM
 // Expressions  ============================================================
 ;{
   parserClass = "com.yanncebron.m68kplugin.lang.M68kExpressionParser"
+  psiPackage = "com.yanncebron.m68kplugin.lang.psi.expression"
+  psiImplPackage="com.yanncebron.m68kplugin.lang.psi.expression.impl"
   extends("(plus|minus|mul|div|mod|exp|shift.*|or|and)_expression") = binary_expression
   extends(".*expression") = expression
   consumeTokenMethod(".*expression")="consumeTokenFast"
@@ -1041,7 +1043,7 @@ paren_expression ::= plain_paren_expression | bracket_paren_expression
 
 label_ref_expression ::= ID
 {
-  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelRefExpressionMixIn"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.expression.impl.M68kLabelRefExpressionMixIn"
   name = "label"
 }
 

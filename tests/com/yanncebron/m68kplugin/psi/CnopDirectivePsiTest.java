@@ -17,7 +17,7 @@
 package com.yanncebron.m68kplugin.psi;
 
 import com.yanncebron.m68kplugin.lang.psi.M68kCnopDirective;
-import com.yanncebron.m68kplugin.lang.psi.M68kNumberExpression;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
 
 public class CnopDirectivePsiTest extends M68kPsiTestCase {
 

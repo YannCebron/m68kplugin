@@ -17,7 +17,7 @@
 package com.yanncebron.m68kplugin.psi;
 
 import com.yanncebron.m68kplugin.lang.psi.M68kIncbinDirective;
-import com.yanncebron.m68kplugin.lang.psi.M68kNumberExpression;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
 import org.jetbrains.annotations.NotNull;
 
 public class IncbinDirectivePsiTest extends M68kPsiTestCase {

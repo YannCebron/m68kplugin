@@ -91,7 +91,7 @@
         implementationClass="com.yanncebron.m68kplugin.lang.refactoring.M68kRefactoringSupportProvider"/>
     <lang.elementManipulator
         forClass="com.yanncebron.m68kplugin.lang.psi.M68kLabelRefExpression"
-        implementationClass="com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelRefExpressionElementManipulator"/>
+        implementationClass="com.yanncebron.m68kplugin.lang.psi.expression.impl.M68kLabelRefExpressionElementManipulator"/>
 
     <liveTemplateContext
         implementation="com.yanncebron.m68kplugin.template.M68kTemplateContextType"/>

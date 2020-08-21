@@ -16,7 +16,11 @@
 
 package com.yanncebron.m68kplugin.psi;
 
-import com.yanncebron.m68kplugin.lang.psi.*;
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmDrd;
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmImm;
+import com.yanncebron.m68kplugin.lang.psi.M68kDataSize;
+import com.yanncebron.m68kplugin.lang.psi.M68kMoveqInstruction;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
 
 public class MoveqInstructionPsiTest extends M68kPsiTestCase {
 
