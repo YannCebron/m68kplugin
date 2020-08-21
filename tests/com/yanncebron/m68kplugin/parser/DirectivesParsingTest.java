@@ -165,6 +165,10 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" endm");
   }
 
+  public void testMexitDirective() throws Exception {
+    doCodeTest(" mexit");
+  }
+
   public void testOrgDirective() throws Exception {
     doCodeTest(" org $50000");
   }

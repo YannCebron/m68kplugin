@@ -49,7 +49,6 @@
   - `image`
   - `rept`
   - `endr`
-  - `mexit`
   - `rem`
   - `erem`
   - `ifmacrod`

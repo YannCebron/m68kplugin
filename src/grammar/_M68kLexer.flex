@@ -305,6 +305,7 @@ LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
 
   [mM][aA][cC][rR][oO]            { return MACRO; }
   [eE][nN][dD][mM]                { return ENDM; }
+  [mM][eE][xX][iI][tT]            { return MEXIT; }
 
   [iI][fF]                        { return IF; }
   [iI][fF][bB]                    { return IFB; }

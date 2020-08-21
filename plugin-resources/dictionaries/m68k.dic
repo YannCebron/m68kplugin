@@ -43,6 +43,7 @@ incbin
 incdir
 jumperr
 jumpptr
+mexit
 movea
 movem
 movep

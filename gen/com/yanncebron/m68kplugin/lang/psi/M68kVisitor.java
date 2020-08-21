@@ -581,6 +581,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitDirective(o);
   }
 
+  public void visitMexitDirective(@NotNull M68kMexitDirective o) {
+    visitDirective(o);
+  }
+
   public void visitMinusExpression(@NotNull M68kMinusExpression o) {
     visitBinaryExpression(o);
   }

@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kMexitDirectiveImpl(MEXIT_DIRECTIVE)
+    PsiElement(mexit)('mexit')

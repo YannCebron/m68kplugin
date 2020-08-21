@@ -204,6 +204,7 @@ public class M68kDirectivesParser {
   //                        org_directive |
   //                        macro_directive |
   //                        endm_directive |
+  //                        mexit_directive |
   //                        end_directive |
   //                        section_directive |
   //                        addwatch_directive |
@@ -236,6 +237,7 @@ public class M68kDirectivesParser {
     if (!r) r = org_directive(b, l + 1);
     if (!r) r = macro_directive(b, l + 1);
     if (!r) r = endm_directive(b, l + 1);
+    if (!r) r = mexit_directive(b, l + 1);
     if (!r) r = end_directive(b, l + 1);
     if (!r) r = section_directive(b, l + 1);
     if (!r) r = addwatch_directive(b, l + 1);
@@ -491,6 +493,18 @@ public class M68kDirectivesParser {
     r = label(b, l + 1);
     r = r && consumeToken(b, MACRO);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // MEXIT
+  public static boolean mexit_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "mexit_directive")) return false;
+    if (!nextTokenIs(b, MEXIT)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, MEXIT);
+    exit_section_(b, m, MEXIT_DIRECTIVE, r);
     return r;
   }
 
