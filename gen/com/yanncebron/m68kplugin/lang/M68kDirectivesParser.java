@@ -208,7 +208,9 @@ public class M68kDirectivesParser {
   //                        section_directive |
   //                        addwatch_directive |
   //                        jumperr_directive |
-  //                        jumpptr_directive
+  //                        jumpptr_directive |
+  //                        list_directive |
+  //                        nolist_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -239,6 +241,8 @@ public class M68kDirectivesParser {
     if (!r) r = addwatch_directive(b, l + 1);
     if (!r) r = jumperr_directive(b, l + 1);
     if (!r) r = jumpptr_directive(b, l + 1);
+    if (!r) r = list_directive(b, l + 1);
+    if (!r) r = nolist_directive(b, l + 1);
     return r;
   }
 
@@ -466,6 +470,18 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
+  // LIST
+  public static boolean list_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "list_directive")) return false;
+    if (!nextTokenIs(b, LIST)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, LIST);
+    exit_section_(b, m, LIST_DIRECTIVE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // label MACRO
   public static boolean macro_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "macro_directive")) return false;
@@ -475,6 +491,18 @@ public class M68kDirectivesParser {
     r = label(b, l + 1);
     r = r && consumeToken(b, MACRO);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // NOLIST
+  public static boolean nolist_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "nolist_directive")) return false;
+    if (!nextTokenIs(b, NOLIST)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, NOLIST);
+    exit_section_(b, m, NOLIST_DIRECTIVE, r);
     return r;
   }
 

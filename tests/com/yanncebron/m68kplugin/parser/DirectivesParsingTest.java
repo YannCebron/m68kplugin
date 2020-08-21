@@ -217,4 +217,12 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" jumpptr label");
   }
 
+  public void testListDirective() throws Exception {
+    doCodeTest(" list");
+  }
+
+  public void testNolistDirective() throws Exception {
+    doCodeTest(" nolist");
+  }
+
 }

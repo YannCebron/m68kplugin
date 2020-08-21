@@ -35,8 +35,6 @@
   - `fail`
   - `idnt`
   - `ttl`
-  - `list`
-  - `nolist`
   - `module`
   - `plen`
   - `llen`

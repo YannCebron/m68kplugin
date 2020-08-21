@@ -149,6 +149,7 @@ public interface M68kTypes {
   IElementType LABEL_REF_EXPRESSION = new M68kCompositeElementType("LABEL_REF_EXPRESSION");
   IElementType LEA_INSTRUCTION = new M68kCompositeElementType("LEA_INSTRUCTION");
   IElementType LINK_INSTRUCTION = new M68kCompositeElementType("LINK_INSTRUCTION");
+  IElementType LIST_DIRECTIVE = new M68kCompositeElementType("LIST_DIRECTIVE");
   IElementType LOCAL_LABEL = new M68kCompositeElementType("LOCAL_LABEL");
   IElementType LSL_INSTRUCTION = new M68kCompositeElementType("LSL_INSTRUCTION");
   IElementType LSR_INSTRUCTION = new M68kCompositeElementType("LSR_INSTRUCTION");
@@ -166,6 +167,7 @@ public interface M68kTypes {
   IElementType NBCD_INSTRUCTION = new M68kCompositeElementType("NBCD_INSTRUCTION");
   IElementType NEGX_INSTRUCTION = new M68kCompositeElementType("NEGX_INSTRUCTION");
   IElementType NEG_INSTRUCTION = new M68kCompositeElementType("NEG_INSTRUCTION");
+  IElementType NOLIST_DIRECTIVE = new M68kCompositeElementType("NOLIST_DIRECTIVE");
   IElementType NOP_INSTRUCTION = new M68kCompositeElementType("NOP_INSTRUCTION");
   IElementType NOT_INSTRUCTION = new M68kCompositeElementType("NOT_INSTRUCTION");
   IElementType NUMBER_EXPRESSION = new M68kCompositeElementType("NUMBER_EXPRESSION");
@@ -598,6 +600,9 @@ public interface M68kTypes {
       else if (type == LINK_INSTRUCTION) {
         return new M68kLinkInstructionImpl(node);
       }
+      else if (type == LIST_DIRECTIVE) {
+        return new M68kListDirectiveImpl(node);
+      }
       else if (type == LOCAL_LABEL) {
         return new M68kLocalLabelImpl(node);
       }
@@ -648,6 +653,9 @@ public interface M68kTypes {
       }
       else if (type == NEG_INSTRUCTION) {
         return new M68kNegInstructionImpl(node);
+      }
+      else if (type == NOLIST_DIRECTIVE) {
+        return new M68kNolistDirectiveImpl(node);
       }
       else if (type == NOP_INSTRUCTION) {
         return new M68kNopInstructionImpl(node);

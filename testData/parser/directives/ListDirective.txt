@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kListDirectiveImpl(LIST_DIRECTIVE)
+    PsiElement(list)('list')

@@ -145,6 +145,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType JUMPPTR = new M68kTokenType("jumpptr");
   public static final IElementType LEA = new M68kTokenType("lea");
   public static final IElementType LINK = new M68kTokenType("link");
+  public static final IElementType LIST = new M68kTokenType("list");
   public static final IElementType LSL = new M68kTokenType("lsl");
   public static final IElementType LSR = new M68kTokenType("lsr");
   public static final IElementType L_BRACKET = new M68kTokenType("[");
@@ -162,6 +163,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType NBCD = new M68kTokenType("nbcd");
   public static final IElementType NEG = new M68kTokenType("neg");
   public static final IElementType NEGX = new M68kTokenType("negx");
+  public static final IElementType NOLIST = new M68kTokenType("nolist");
   public static final IElementType NOP = new M68kTokenType("nop");
   public static final IElementType NOT = new M68kTokenType("not");
   public static final IElementType OCT_NUMBER = new M68kTokenType("oct_number");

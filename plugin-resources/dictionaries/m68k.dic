@@ -51,6 +51,7 @@ muls
 mulu
 nbcd
 negx
+nolist
 roxl
 roxr
 rsreset
