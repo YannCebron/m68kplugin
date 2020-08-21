@@ -29,7 +29,6 @@
   - `weak`
   - `comm`
   - `load`
-  - `jumperr`
   - `jumpptr`
   - `mask2`
   - `dx.*`

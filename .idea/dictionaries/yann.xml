@@ -46,6 +46,7 @@
       <w>ifne</w>
       <w>incbin</w>
       <w>incdir</w>
+      <w>jumperr</w>
       <w>kplugin</w>
       <w>movea</w>
       <w>movem</w>

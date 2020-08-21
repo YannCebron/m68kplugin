@@ -1,0 +1,7 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kJumperrDirectiveImpl(JUMPERR_DIRECTIVE)
+    PsiElement(jumperr)('jumperr')
+    PsiWhiteSpace(' ')
+    M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
+      PsiElement(id)('label')

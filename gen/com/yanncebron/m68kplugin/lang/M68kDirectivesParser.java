@@ -206,7 +206,8 @@ public class M68kDirectivesParser {
   //                        endm_directive |
   //                        end_directive |
   //                        section_directive |
-  //                        addwatch_directive
+  //                        addwatch_directive |
+  //                        jumperr_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -235,6 +236,7 @@ public class M68kDirectivesParser {
     if (!r) r = end_directive(b, l + 1);
     if (!r) r = section_directive(b, l + 1);
     if (!r) r = addwatch_directive(b, l + 1);
+    if (!r) r = jumperr_directive(b, l + 1);
     return r;
   }
 
@@ -431,6 +433,20 @@ public class M68kDirectivesParser {
     r = consumeToken(b, STRING);
     exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  /* ********************************************************** */
+  // JUMPERR expression
+  public static boolean jumperr_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "jumperr_directive")) return false;
+    if (!nextTokenIs(b, JUMPERR)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, JUMPERR_DIRECTIVE, null);
+    r = consumeToken(b, JUMPERR);
+    p = r; // pin = 1
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */

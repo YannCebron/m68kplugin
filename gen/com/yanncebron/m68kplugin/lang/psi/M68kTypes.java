@@ -143,6 +143,7 @@ public interface M68kTypes {
   IElementType INCLUDE_DIRECTIVE = new M68kCompositeElementType("INCLUDE_DIRECTIVE");
   IElementType JMP_INSTRUCTION = new M68kCompositeElementType("JMP_INSTRUCTION");
   IElementType JSR_INSTRUCTION = new M68kCompositeElementType("JSR_INSTRUCTION");
+  IElementType JUMPERR_DIRECTIVE = new M68kCompositeElementType("JUMPERR_DIRECTIVE");
   IElementType LABEL = M68kStubElementTypeFactory.stubFactory("LABEL");
   IElementType LABEL_REF_EXPRESSION = new M68kCompositeElementType("LABEL_REF_EXPRESSION");
   IElementType LEA_INSTRUCTION = new M68kCompositeElementType("LEA_INSTRUCTION");
@@ -577,6 +578,9 @@ public interface M68kTypes {
       }
       else if (type == JSR_INSTRUCTION) {
         return new M68kJsrInstructionImpl(node);
+      }
+      else if (type == JUMPERR_DIRECTIVE) {
+        return new M68kJumperrDirectiveImpl(node);
       }
       else if (type == LABEL) {
         return new M68kLabelImpl(node);

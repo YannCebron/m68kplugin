@@ -141,6 +141,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType INCLUDE = new M68kTokenType("include");
   public static final IElementType JMP = new M68kTokenType("jmp");
   public static final IElementType JSR = new M68kTokenType("jsr");
+  public static final IElementType JUMPERR = new M68kTokenType("jumperr");
   public static final IElementType LEA = new M68kTokenType("lea");
   public static final IElementType LINK = new M68kTokenType("link");
   public static final IElementType LSL = new M68kTokenType("lsl");

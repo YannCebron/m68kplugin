@@ -209,4 +209,8 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" addwatch ");
   }
 
+  public void testJumperrDirective() throws Exception {
+    doCodeTest(" jumperr label");
+  }
+
 }
