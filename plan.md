@@ -36,7 +36,6 @@
   - `idnt`
   - `ttl`
   - `module`
-  - `spc`
   - `output`
   - `symdebug`
   - `dsource`

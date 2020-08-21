@@ -215,6 +215,7 @@ public interface M68kTypes {
   IElementType SLT_INSTRUCTION = new M68kCompositeElementType("SLT_INSTRUCTION");
   IElementType SMI_INSTRUCTION = new M68kCompositeElementType("SMI_INSTRUCTION");
   IElementType SNE_INSTRUCTION = new M68kCompositeElementType("SNE_INSTRUCTION");
+  IElementType SPC_DIRECTIVE = new M68kCompositeElementType("SPC_DIRECTIVE");
   IElementType SPL_INSTRUCTION = new M68kCompositeElementType("SPL_INSTRUCTION");
   IElementType STOP_INSTRUCTION = new M68kCompositeElementType("STOP_INSTRUCTION");
   IElementType STRING_EXPRESSION = new M68kCompositeElementType("STRING_EXPRESSION");
@@ -802,6 +803,9 @@ public interface M68kTypes {
       }
       else if (type == SNE_INSTRUCTION) {
         return new M68kSneInstructionImpl(node);
+      }
+      else if (type == SPC_DIRECTIVE) {
+        return new M68kSpcDirectiveImpl(node);
       }
       else if (type == SPL_INSTRUCTION) {
         return new M68kSplInstructionImpl(node);

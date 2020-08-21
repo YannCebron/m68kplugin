@@ -245,4 +245,8 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" llen 22");
   }
 
+  public void testSpcDirective() throws Exception {
+    doCodeTest(" spc 22");
+  }
+
 }

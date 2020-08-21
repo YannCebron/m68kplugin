@@ -214,6 +214,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType SMI = new M68kTokenType("smi");
   public static final IElementType SNE = new M68kTokenType("sne");
   public static final IElementType SP = new M68kTokenType("sp");
+  public static final IElementType SPC = new M68kTokenType("spc");
   public static final IElementType SPL = new M68kTokenType("spl");
   public static final IElementType SR = new M68kTokenType("sr");
   public static final IElementType SSP = new M68kTokenType("ssp");

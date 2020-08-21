@@ -804,7 +804,7 @@ roxr_instruction ::= ROXR shift_tail
   psiPackage = "com.yanncebron.m68kplugin.lang.psi.directive"
   psiImplPackage = "com.yanncebron.m68kplugin.lang.psi.directive.impl"
   parserClass = "com.yanncebron.m68kplugin.lang.M68kDirectivesParser"
-  implements("(blk|set|equr|even|odd|dc|dcb|ds|incbin|incdir|include|rsset|rsreset|rs|opt|org|macro|endm|mexit|end|section|addwatch|jumperr|jumpptr|list|nolist|page|nopage|plen|llen)_directive|equ_directive_base") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
+  implements("(blk|set|equr|even|odd|dc|dcb|ds|incbin|incdir|include|rsset|rsreset|rs|opt|org|macro|endm|mexit|end|section|addwatch|jumperr|jumpptr|list|nolist|page|nopage|plen|llen|spc)_directive|equ_directive_base") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
 }
 
 private directives ::= equ_directive |
@@ -840,7 +840,8 @@ private directives ::= equ_directive |
                        page_directive |
                        nopage_directive |
                        plen_directive |
-                       llen_directive
+                       llen_directive |
+                       spc_directive
 
 fake equ_directive_base ::= label expression?
 {
@@ -1018,6 +1019,10 @@ plen_directive ::= PLEN expression
   pin = 1
 }
 llen_directive ::= LLEN expression
+{
+  pin = 1
+}
+spc_directive ::= SPC expression
 {
   pin = 1
 }
