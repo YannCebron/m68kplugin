@@ -42,7 +42,9 @@ public class M68kConditionalAssemblyParser {
   //                                             else_conditional_assembly_directive |
   //                                             elseif_conditional_assembly_directive |
   //                                             endc_conditional_assembly_directive |
-  //                                             endif_conditional_assembly_directive
+  //                                             endif_conditional_assembly_directive |
+  //                                             ifmacrod_conditional_assembly_directive |
+  //                                             ifmacrond_conditional_assembly_directive
   static boolean conditional_assembly_directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "conditional_assembly_directives")) return false;
     boolean r;
@@ -63,6 +65,8 @@ public class M68kConditionalAssemblyParser {
     if (!r) r = elseif_conditional_assembly_directive(b, l + 1);
     if (!r) r = endc_conditional_assembly_directive(b, l + 1);
     if (!r) r = endif_conditional_assembly_directive(b, l + 1);
+    if (!r) r = ifmacrod_conditional_assembly_directive(b, l + 1);
+    if (!r) r = ifmacrond_conditional_assembly_directive(b, l + 1);
     return r;
   }
 
@@ -236,6 +240,34 @@ public class M68kConditionalAssemblyParser {
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, IFLT_CONDITIONAL_ASSEMBLY_DIRECTIVE, null);
     r = consumeToken(b, IFLT);
+    p = r; // pin = 1
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // IFMACROD expression
+  public static boolean ifmacrod_conditional_assembly_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ifmacrod_conditional_assembly_directive")) return false;
+    if (!nextTokenIs(b, IFMACROD)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, IFMACROD_CONDITIONAL_ASSEMBLY_DIRECTIVE, null);
+    r = consumeToken(b, IFMACROD);
+    p = r; // pin = 1
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // IFMACROND expression
+  public static boolean ifmacrond_conditional_assembly_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ifmacrond_conditional_assembly_directive")) return false;
+    if (!nextTokenIs(b, IFMACROND)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, IFMACROND_CONDITIONAL_ASSEMBLY_DIRECTIVE, null);
+    r = consumeToken(b, IFMACROND);
     p = r; // pin = 1
     r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, l, m, r, p, null);

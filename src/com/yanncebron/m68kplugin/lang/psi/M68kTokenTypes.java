@@ -143,6 +143,8 @@ public abstract class M68kTokenTypes {
   public static final IElementType IFGT = new M68kTokenType("ifgt");
   public static final IElementType IFLE = new M68kTokenType("ifle");
   public static final IElementType IFLT = new M68kTokenType("iflt");
+  public static final IElementType IFMACROD = new M68kTokenType("ifmacrod");
+  public static final IElementType IFMACROND = new M68kTokenType("ifmacrond");
   public static final IElementType IFNB = new M68kTokenType("ifnb");
   public static final IElementType IFNC = new M68kTokenType("ifnc");
   public static final IElementType IFND = new M68kTokenType("ifnd");

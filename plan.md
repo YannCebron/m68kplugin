@@ -32,7 +32,6 @@
   - `image`
   - `rept`/`endr`
   - `rem`/`erem` - ignores everything between
-  - `ifmacrod`/`ifmacrond`
   - `ifmi`
   - `ifpl`
   - `clrso`/`setso`

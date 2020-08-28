@@ -144,6 +144,8 @@ public interface M68kTypes {
   IElementType IFGT_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("IFGT_CONDITIONAL_ASSEMBLY_DIRECTIVE");
   IElementType IFLE_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("IFLE_CONDITIONAL_ASSEMBLY_DIRECTIVE");
   IElementType IFLT_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("IFLT_CONDITIONAL_ASSEMBLY_DIRECTIVE");
+  IElementType IFMACROD_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("IFMACROD_CONDITIONAL_ASSEMBLY_DIRECTIVE");
+  IElementType IFMACROND_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("IFMACROND_CONDITIONAL_ASSEMBLY_DIRECTIVE");
   IElementType IFNB_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("IFNB_CONDITIONAL_ASSEMBLY_DIRECTIVE");
   IElementType IFNC_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("IFNC_CONDITIONAL_ASSEMBLY_DIRECTIVE");
   IElementType IFND_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("IFND_CONDITIONAL_ASSEMBLY_DIRECTIVE");
@@ -604,6 +606,12 @@ public interface M68kTypes {
       }
       else if (type == IFLT_CONDITIONAL_ASSEMBLY_DIRECTIVE) {
         return new M68kIfltConditionalAssemblyDirectiveImpl(node);
+      }
+      else if (type == IFMACROD_CONDITIONAL_ASSEMBLY_DIRECTIVE) {
+        return new M68kIfmacrodConditionalAssemblyDirectiveImpl(node);
+      }
+      else if (type == IFMACROND_CONDITIONAL_ASSEMBLY_DIRECTIVE) {
+        return new M68kIfmacrondConditionalAssemblyDirectiveImpl(node);
       }
       else if (type == IFNB_CONDITIONAL_ASSEMBLY_DIRECTIVE) {
         return new M68kIfnbConditionalAssemblyDirectiveImpl(node);

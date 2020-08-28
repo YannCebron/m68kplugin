@@ -1150,7 +1150,10 @@ private conditional_assembly_directives ::= if_conditional_assembly_directive |
                                             else_conditional_assembly_directive |
                                             elseif_conditional_assembly_directive |
                                             endc_conditional_assembly_directive |
-                                            endif_conditional_assembly_directive
+                                            endif_conditional_assembly_directive |
+                                            ifmacrod_conditional_assembly_directive |
+                                            ifmacrond_conditional_assembly_directive
+
 
 if_conditional_assembly_directive ::= IF expression
 ifd_conditional_assembly_directive ::= IFD expression
@@ -1179,6 +1182,9 @@ ifnc_conditional_assembly_directive ::= IFNC expression COMMA expression {
     arg2 = "expression[1]"
   ]
 }
+
+ifmacrod_conditional_assembly_directive ::= IFMACROD expression
+ifmacrond_conditional_assembly_directive ::= IFMACROND expression
 
 elseif_conditional_assembly_directive ::= ELSEIF
 else_conditional_assembly_directive ::= ELSE

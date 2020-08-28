@@ -544,6 +544,14 @@ public class M68kVisitor extends PsiElementVisitor {
     visitConditionalAssemblyDirective(o);
   }
 
+  public void visitIfmacrodConditionalAssemblyDirective(@NotNull M68kIfmacrodConditionalAssemblyDirective o) {
+    visitConditionalAssemblyDirective(o);
+  }
+
+  public void visitIfmacrondConditionalAssemblyDirective(@NotNull M68kIfmacrondConditionalAssemblyDirective o) {
+    visitConditionalAssemblyDirective(o);
+  }
+
   public void visitIfnbConditionalAssemblyDirective(@NotNull M68kIfnbConditionalAssemblyDirective o) {
     visitConditionalAssemblyDirective(o);
   }

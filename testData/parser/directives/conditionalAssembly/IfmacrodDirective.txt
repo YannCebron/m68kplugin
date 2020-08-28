@@ -1,0 +1,7 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kIfmacrodConditionalAssemblyDirectiveImpl(IFMACROD_CONDITIONAL_ASSEMBLY_DIRECTIVE)
+    PsiElement(ifmacrod)('ifmacrod')
+    PsiWhiteSpace(' ')
+    M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
+      PsiElement(id)('name')

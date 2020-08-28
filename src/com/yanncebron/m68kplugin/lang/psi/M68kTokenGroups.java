@@ -229,6 +229,8 @@ public final class M68kTokenGroups {
     IFGT,
     IFLE,
     IFLT,
+    IFMACROD,
+    IFMACROND,
     IFNB,
     IFNC,
     IFND,

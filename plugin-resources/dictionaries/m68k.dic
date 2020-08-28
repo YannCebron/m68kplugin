@@ -38,6 +38,8 @@ ifge
 ifgt
 ifle
 iflt
+ifmacrod
+ifmacrond
 ifnb
 ifnc
 ifnd
