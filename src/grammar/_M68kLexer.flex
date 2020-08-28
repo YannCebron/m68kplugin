@@ -290,6 +290,7 @@ LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
   [dD][cC]                        { return DC; }
   [dD][cC][bB]                    { return DCB; }
   [dD][sS]                        { return DS; }
+  [dD][sS][eE][gG]                { return DSEG; }
   [eE][nN][dD]                    { return END; }
   [eE][iI][nN][lL][iI][nN][eE]    { return EINLINE; }
   [eE][qQ][uU]                    { return EQU; }

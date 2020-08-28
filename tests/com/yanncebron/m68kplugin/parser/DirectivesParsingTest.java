@@ -209,6 +209,10 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" code_f");
   }
 
+  public void testDsegDirective() throws Exception {
+    doCodeTest(" dseg");
+  }
+
   public void testDataDirective() throws Exception {
     doCodeTest(" data");
   }

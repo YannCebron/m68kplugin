@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kDsegDirectiveImpl(DSEG_DIRECTIVE)
+    PsiElement(dseg)('dseg')

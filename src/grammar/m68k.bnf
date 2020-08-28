@@ -806,7 +806,7 @@ roxr_instruction ::= ROXR shift_tail
   parserClass = "com.yanncebron.m68kplugin.lang.M68kDirectivesParser"
   implements("(blk|set|equr|even|odd|dc|dcb|ds|incbin|incdir|include|rsset|rsreset|rs)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(opt|org|macro|endm|mexit|end|section|addwatch|jumperr|jumpptr|list|nolist|page|nopage|plen|llen|spc|inline|einline)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
-  implements("(text|cseg|code|code_c|code_f|data|data_c|data_f)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
+  implements("(text|cseg|code|code_c|code_f|data|dseg|data_c|data_f)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("equ_directive_base") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
 }
 
@@ -840,6 +840,7 @@ private directives ::= equ_directive |
                        code_directive |
                        code_c_directive |
                        code_f_directive |
+                       dseg_directive |
                        data_directive |
                        data_c_directive |
                        data_f_directive |
@@ -917,6 +918,7 @@ cseg_directive ::= CSEG
 code_directive ::= CODE
 code_c_directive ::= CODE_C
 code_f_directive ::= CODE_F
+dseg_directive ::= DSEG
 data_directive ::= DATA
 data_c_directive ::= DATA_C
 data_f_directive ::= DATA_F

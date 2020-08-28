@@ -27,6 +27,7 @@ dbra
 dbvc
 dbvs
 divu
+dseg
 einline
 endc
 endm

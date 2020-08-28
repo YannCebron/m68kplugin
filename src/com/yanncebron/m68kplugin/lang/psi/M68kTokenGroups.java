@@ -179,6 +179,7 @@ public final class M68kTokenGroups {
     DC,
     DCB,
     DS,
+    DSEG,
     EINLINE,
     END,
     ENDM,
