@@ -244,6 +244,18 @@ public class M68kVisitor extends PsiElementVisitor {
     // visitInstruction(o);
   }
 
+  public void visitBssCDirective(@NotNull M68kBssCDirective o) {
+    visitDirective(o);
+  }
+
+  public void visitBssDirective(@NotNull M68kBssDirective o) {
+    visitDirective(o);
+  }
+
+  public void visitBssFDirective(@NotNull M68kBssFDirective o) {
+    visitDirective(o);
+  }
+
   public void visitBtstInstruction(@NotNull M68kBtstInstruction o) {
     visitBitInstructionBase(o);
   }

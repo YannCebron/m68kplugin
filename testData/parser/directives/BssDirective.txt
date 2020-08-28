@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kBssDirectiveImpl(BSS_DIRECTIVE)
+    PsiElement(bss)('bss')

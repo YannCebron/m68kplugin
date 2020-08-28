@@ -5,7 +5,6 @@
 - missing directives ([VASM](http://sun.hasenbraten.de/vasm/release/vasm_4.html#Mot-Syntax-Module))
   - `rorg`
   - `offset`
-  - `bss`/`bss_c`/`bss_f`
   - `public`
   - `xdef`
   - `xref`

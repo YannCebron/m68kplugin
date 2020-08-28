@@ -80,6 +80,42 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
+  // BSS_C
+  public static boolean bss_c_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bss_c_directive")) return false;
+    if (!nextTokenIs(b, BSS_C)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, BSS_C);
+    exit_section_(b, m, BSS_C_DIRECTIVE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // BSS
+  public static boolean bss_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bss_directive")) return false;
+    if (!nextTokenIs(b, BSS)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, BSS);
+    exit_section_(b, m, BSS_DIRECTIVE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // BSS_F
+  public static boolean bss_f_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bss_f_directive")) return false;
+    if (!nextTokenIs(b, BSS_F)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, BSS_F);
+    exit_section_(b, m, BSS_F_DIRECTIVE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // CNOP expression COMMA expression
   public static boolean cnop_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cnop_directive")) return false;
@@ -300,6 +336,9 @@ public class M68kDirectivesParser {
   //                        data_directive |
   //                        data_c_directive |
   //                        data_f_directive |
+  //                        bss_directive |
+  //                        bss_c_directive |
+  //                        bss_f_directive |
   //                        addwatch_directive |
   //                        jumperr_directive |
   //                        jumpptr_directive |
@@ -349,6 +388,9 @@ public class M68kDirectivesParser {
     if (!r) r = data_directive(b, l + 1);
     if (!r) r = data_c_directive(b, l + 1);
     if (!r) r = data_f_directive(b, l + 1);
+    if (!r) r = bss_directive(b, l + 1);
+    if (!r) r = bss_c_directive(b, l + 1);
+    if (!r) r = bss_f_directive(b, l + 1);
     if (!r) r = addwatch_directive(b, l + 1);
     if (!r) r = jumperr_directive(b, l + 1);
     if (!r) r = jumpptr_directive(b, l + 1);

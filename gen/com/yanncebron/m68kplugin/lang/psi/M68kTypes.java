@@ -75,6 +75,9 @@ public interface M68kTypes {
   IElementType BRA_INSTRUCTION = new M68kCompositeElementType("BRA_INSTRUCTION");
   IElementType BSET_INSTRUCTION = new M68kCompositeElementType("BSET_INSTRUCTION");
   IElementType BSR_INSTRUCTION = new M68kCompositeElementType("BSR_INSTRUCTION");
+  IElementType BSS_C_DIRECTIVE = new M68kCompositeElementType("BSS_C_DIRECTIVE");
+  IElementType BSS_DIRECTIVE = new M68kCompositeElementType("BSS_DIRECTIVE");
+  IElementType BSS_F_DIRECTIVE = new M68kCompositeElementType("BSS_F_DIRECTIVE");
   IElementType BTST_INSTRUCTION = new M68kCompositeElementType("BTST_INSTRUCTION");
   IElementType BVC_INSTRUCTION = new M68kCompositeElementType("BVC_INSTRUCTION");
   IElementType BVS_INSTRUCTION = new M68kCompositeElementType("BVS_INSTRUCTION");
@@ -397,6 +400,15 @@ public interface M68kTypes {
       }
       else if (type == BSR_INSTRUCTION) {
         return new M68kBsrInstructionImpl(node);
+      }
+      else if (type == BSS_C_DIRECTIVE) {
+        return new M68kBssCDirectiveImpl(node);
+      }
+      else if (type == BSS_DIRECTIVE) {
+        return new M68kBssDirectiveImpl(node);
+      }
+      else if (type == BSS_F_DIRECTIVE) {
+        return new M68kBssFDirectiveImpl(node);
       }
       else if (type == BTST_INSTRUCTION) {
         return new M68kBtstInstructionImpl(node);

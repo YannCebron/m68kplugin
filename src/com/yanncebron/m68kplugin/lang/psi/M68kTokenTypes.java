@@ -59,6 +59,9 @@ public abstract class M68kTokenTypes {
   public static final IElementType BNE = new M68kTokenType("bne");
   public static final IElementType BPL = new M68kTokenType("bpl");
   public static final IElementType BRA = new M68kTokenType("bra");
+  public static final IElementType BSS = new M68kTokenType("bss");
+  public static final IElementType BSS_C = new M68kTokenType("bss_c");
+  public static final IElementType BSS_F = new M68kTokenType("bss_f");
   public static final IElementType BSET = new M68kTokenType("bset");
   public static final IElementType BSR = new M68kTokenType("bsr");
   public static final IElementType BTST = new M68kTokenType("btst");
