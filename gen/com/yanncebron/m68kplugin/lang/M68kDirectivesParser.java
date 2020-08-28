@@ -901,7 +901,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // SECTION expression (COMMA (CODE | TEXT))? (COMMA expression)?
+  // SECTION expression (COMMA section_type)? (COMMA expression)?
   public static boolean section_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "section_directive")) return false;
     if (!nextTokenIs(b, SECTION)) return false;
@@ -916,30 +916,21 @@ public class M68kDirectivesParser {
     return r || p;
   }
 
-  // (COMMA (CODE | TEXT))?
+  // (COMMA section_type)?
   private static boolean section_directive_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "section_directive_2")) return false;
     section_directive_2_0(b, l + 1);
     return true;
   }
 
-  // COMMA (CODE | TEXT)
+  // COMMA section_type
   private static boolean section_directive_2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "section_directive_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, COMMA);
-    r = r && section_directive_2_0_1(b, l + 1);
+    r = r && section_type(b, l + 1);
     exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // CODE | TEXT
-  private static boolean section_directive_2_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "section_directive_2_0_1")) return false;
-    boolean r;
-    r = consumeToken(b, CODE);
-    if (!r) r = consumeToken(b, TEXT);
     return r;
   }
 
@@ -958,6 +949,24 @@ public class M68kDirectivesParser {
     r = consumeToken(b, COMMA);
     r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // CODE | CODE_C | CODE_F | TEXT | DATA | DATA_C | DATA_F | BSS | BSS_C | BSS_F
+  static boolean section_type(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "section_type")) return false;
+    boolean r;
+    r = consumeToken(b, CODE);
+    if (!r) r = consumeToken(b, CODE_C);
+    if (!r) r = consumeToken(b, CODE_F);
+    if (!r) r = consumeToken(b, TEXT);
+    if (!r) r = consumeToken(b, DATA);
+    if (!r) r = consumeToken(b, DATA_C);
+    if (!r) r = consumeToken(b, DATA_F);
+    if (!r) r = consumeToken(b, BSS);
+    if (!r) r = consumeToken(b, BSS_C);
+    if (!r) r = consumeToken(b, BSS_F);
     return r;
   }
 
