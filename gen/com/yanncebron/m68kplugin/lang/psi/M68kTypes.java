@@ -85,6 +85,9 @@ public interface M68kTypes {
   IElementType CMPM_INSTRUCTION = new M68kCompositeElementType("CMPM_INSTRUCTION");
   IElementType CMP_INSTRUCTION = new M68kCompositeElementType("CMP_INSTRUCTION");
   IElementType CNOP_DIRECTIVE = new M68kCompositeElementType("CNOP_DIRECTIVE");
+  IElementType CODE_C_DIRECTIVE = new M68kCompositeElementType("CODE_C_DIRECTIVE");
+  IElementType CODE_DIRECTIVE = new M68kCompositeElementType("CODE_DIRECTIVE");
+  IElementType CODE_F_DIRECTIVE = new M68kCompositeElementType("CODE_F_DIRECTIVE");
   IElementType CSEG_DIRECTIVE = new M68kCompositeElementType("CSEG_DIRECTIVE");
   IElementType DBCC_INSTRUCTION = new M68kCompositeElementType("DBCC_INSTRUCTION");
   IElementType DBCS_INSTRUCTION = new M68kCompositeElementType("DBCS_INSTRUCTION");
@@ -420,6 +423,15 @@ public interface M68kTypes {
       }
       else if (type == CNOP_DIRECTIVE) {
         return new M68kCnopDirectiveImpl(node);
+      }
+      else if (type == CODE_C_DIRECTIVE) {
+        return new M68kCodeCDirectiveImpl(node);
+      }
+      else if (type == CODE_DIRECTIVE) {
+        return new M68kCodeDirectiveImpl(node);
+      }
+      else if (type == CODE_F_DIRECTIVE) {
+        return new M68kCodeFDirectiveImpl(node);
       }
       else if (type == CSEG_DIRECTIVE) {
         return new M68kCsegDirectiveImpl(node);

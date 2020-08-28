@@ -67,6 +67,9 @@ public abstract class M68kTokenTypes {
   public static final IElementType CCR = new M68kTokenType("ccr");
   public static final IElementType CHK = new M68kTokenType("chk");
   public static final IElementType CNOP = new M68kTokenType("cnop");
+  public static final IElementType CODE = new M68kTokenType("code");
+  public static final IElementType CODE_C = new M68kTokenType("code_c");
+  public static final IElementType CODE_F = new M68kTokenType("code_f");
   public static final IElementType CLR = new M68kTokenType("clr");
   public static final IElementType CMP = new M68kTokenType("cmp");
   public static final IElementType CMPA = new M68kTokenType("cmpa");

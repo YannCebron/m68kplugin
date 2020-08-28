@@ -96,6 +96,42 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
+  // CODE_C
+  public static boolean code_c_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "code_c_directive")) return false;
+    if (!nextTokenIs(b, CODE_C)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, CODE_C);
+    exit_section_(b, m, CODE_C_DIRECTIVE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // CODE
+  public static boolean code_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "code_directive")) return false;
+    if (!nextTokenIs(b, CODE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, CODE);
+    exit_section_(b, m, CODE_DIRECTIVE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // CODE_F
+  public static boolean code_f_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "code_f_directive")) return false;
+    if (!nextTokenIs(b, CODE_F)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, CODE_F);
+    exit_section_(b, m, CODE_F_DIRECTIVE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // CSEG
   public static boolean cseg_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cseg_directive")) return false;
@@ -221,6 +257,9 @@ public class M68kDirectivesParser {
   //                        section_directive |
   //                        text_directive |
   //                        cseg_directive |
+  //                        code_directive |
+  //                        code_c_directive |
+  //                        code_f_directive |
   //                        addwatch_directive |
   //                        jumperr_directive |
   //                        jumpptr_directive |
@@ -263,6 +302,9 @@ public class M68kDirectivesParser {
     if (!r) r = section_directive(b, l + 1);
     if (!r) r = text_directive(b, l + 1);
     if (!r) r = cseg_directive(b, l + 1);
+    if (!r) r = code_directive(b, l + 1);
+    if (!r) r = code_c_directive(b, l + 1);
+    if (!r) r = code_f_directive(b, l + 1);
     if (!r) r = addwatch_directive(b, l + 1);
     if (!r) r = jumperr_directive(b, l + 1);
     if (!r) r = jumpptr_directive(b, l + 1);
@@ -761,7 +803,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // SECTION expression (COMMA expression)? (COMMA expression)?
+  // SECTION expression (COMMA (CODE | TEXT))? (COMMA expression)?
   public static boolean section_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "section_directive")) return false;
     if (!nextTokenIs(b, SECTION)) return false;
@@ -776,21 +818,30 @@ public class M68kDirectivesParser {
     return r || p;
   }
 
-  // (COMMA expression)?
+  // (COMMA (CODE | TEXT))?
   private static boolean section_directive_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "section_directive_2")) return false;
     section_directive_2_0(b, l + 1);
     return true;
   }
 
-  // COMMA expression
+  // COMMA (CODE | TEXT)
   private static boolean section_directive_2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "section_directive_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, COMMA);
-    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    r = r && section_directive_2_0_1(b, l + 1);
     exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // CODE | TEXT
+  private static boolean section_directive_2_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "section_directive_2_0_1")) return false;
+    boolean r;
+    r = consumeToken(b, CODE);
+    if (!r) r = consumeToken(b, TEXT);
     return r;
   }
 

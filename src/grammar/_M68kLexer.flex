@@ -279,6 +279,9 @@ LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
   [aA][dD][dD][wW][aA][tT][cC][hH] { return ADDWATCH; }
   [aA][lL][iI][gG][nN]            { return ALIGN; }
   [bB][lL][kK]                    { return BLK; }
+  [cC][oO][dD][eE]                { return CODE; }
+  [cC][oO][dD][eE]_[cC]           { return CODE_C; }
+  [cC][oO][dD][eE]_[fF]           { return CODE_F; }
   [cC][nN][oO][pP]                { return CNOP; }
   [cC][sS][eE][gG]                { return CSEG; }
   [dD][cC]                        { return DC; }
