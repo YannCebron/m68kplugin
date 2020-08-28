@@ -36,7 +36,7 @@ public class M68kBraceMatcher implements PairedBraceMatcher {
       new BracePair(M68kTokenTypes.L_BRACKET, M68kTokenTypes.R_BRACKET, false),
 
       new BracePair(M68kTokenTypes.MACRO, M68kTokenTypes.ENDM, true),
-
+      new BracePair(M68kTokenTypes.INLINE, M68kTokenTypes.EINLINE, true),
     },
     createConditionalAssemblyBracePairs(
       M68kTokenTypes.IF, M68kTokenTypes.IFB, M68kTokenTypes.IFNB,

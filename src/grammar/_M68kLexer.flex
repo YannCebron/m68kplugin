@@ -284,12 +284,14 @@ LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
   [dD][cC][bB]                    { return DCB; }
   [dD][sS]                        { return DS; }
   [eE][nN][dD]                    { return END; }
+  [eE][iI][nN][lL][iI][nN][eE]    { return EINLINE; }
   [eE][qQ][uU]                    { return EQU; }
   [eE][qQ][uU][rR]                { return EQUR; }
   [eE][vV][eE][nN]                { return EVEN; }
   [iI][nN][cC][bB][iI][nN]        { return INCBIN; }
   [iI][nN][cC][dD][iI][rR]        { return INCDIR; }
   [iI][nN][cC][lL][uU][dD][eE]    { return INCLUDE; }
+  [iI][nN][lL][iI][nN][eE]        { return INLINE; }
   [jJ][uU][mM][pP][eE][rR][rR]    { return JUMPERR; }
   [jJ][uU][mM][pP][pP][tT][rR]    { return JUMPPTR; }
   [lL][lL][eE][nN]                { return LLEN; }

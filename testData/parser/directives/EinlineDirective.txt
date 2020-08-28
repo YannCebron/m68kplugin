@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kEinlineDirectiveImpl(EINLINE_DIRECTIVE)
+    PsiElement(einline)('einline')

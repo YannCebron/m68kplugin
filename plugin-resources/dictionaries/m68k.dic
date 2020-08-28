@@ -26,6 +26,7 @@ dbra
 dbvc
 dbvs
 divu
+einline
 endc
 endm
 eori

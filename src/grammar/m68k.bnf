@@ -843,7 +843,9 @@ private directives ::= equ_directive |
                        nopage_directive |
                        plen_directive |
                        llen_directive |
-                       spc_directive
+                       spc_directive |
+                       inline_directive |
+                       einline_directive
 
 fake equ_directive_base ::= label expression?
 {
@@ -1028,6 +1030,9 @@ spc_directive ::= SPC expression
 {
   pin = 1
 }
+
+inline_directive ::= INLINE
+einline_directive ::= EINLINE
 
 // Expressions  ============================================================
 ;{

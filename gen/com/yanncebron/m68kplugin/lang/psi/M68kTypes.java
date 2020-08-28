@@ -108,6 +108,7 @@ public interface M68kTypes {
   IElementType DIVU_INSTRUCTION = new M68kCompositeElementType("DIVU_INSTRUCTION");
   IElementType DIV_EXPRESSION = new M68kCompositeElementType("DIV_EXPRESSION");
   IElementType DS_DIRECTIVE = new M68kCompositeElementType("DS_DIRECTIVE");
+  IElementType EINLINE_DIRECTIVE = new M68kCompositeElementType("EINLINE_DIRECTIVE");
   IElementType ELSEIF_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("ELSEIF_CONDITIONAL_ASSEMBLY_DIRECTIVE");
   IElementType ELSE_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("ELSE_CONDITIONAL_ASSEMBLY_DIRECTIVE");
   IElementType ENDC_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("ENDC_CONDITIONAL_ASSEMBLY_DIRECTIVE");
@@ -141,6 +142,7 @@ public interface M68kTypes {
   IElementType INCBIN_DIRECTIVE = new M68kCompositeElementType("INCBIN_DIRECTIVE");
   IElementType INCDIR_DIRECTIVE = new M68kCompositeElementType("INCDIR_DIRECTIVE");
   IElementType INCLUDE_DIRECTIVE = new M68kCompositeElementType("INCLUDE_DIRECTIVE");
+  IElementType INLINE_DIRECTIVE = new M68kCompositeElementType("INLINE_DIRECTIVE");
   IElementType JMP_INSTRUCTION = new M68kCompositeElementType("JMP_INSTRUCTION");
   IElementType JSR_INSTRUCTION = new M68kCompositeElementType("JSR_INSTRUCTION");
   IElementType JUMPERR_DIRECTIVE = new M68kCompositeElementType("JUMPERR_DIRECTIVE");
@@ -486,6 +488,9 @@ public interface M68kTypes {
       else if (type == DS_DIRECTIVE) {
         return new M68kDsDirectiveImpl(node);
       }
+      else if (type == EINLINE_DIRECTIVE) {
+        return new M68kEinlineDirectiveImpl(node);
+      }
       else if (type == ELSEIF_CONDITIONAL_ASSEMBLY_DIRECTIVE) {
         return new M68kElseifConditionalAssemblyDirectiveImpl(node);
       }
@@ -581,6 +586,9 @@ public interface M68kTypes {
       }
       else if (type == INCLUDE_DIRECTIVE) {
         return new M68kIncludeDirectiveImpl(node);
+      }
+      else if (type == INLINE_DIRECTIVE) {
+        return new M68kInlineDirectiveImpl(node);
       }
       else if (type == JMP_INSTRUCTION) {
         return new M68kJmpInstructionImpl(node);

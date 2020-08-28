@@ -2,7 +2,7 @@
 
 ## Broken Lexing/Parsing
 
-- missing directives ([VASM](https://github.com/Leffmann/vasm/blob/master/syntax/mot/syntax.c#L1595))
+- missing directives ([VASM](http://sun.hasenbraten.de/vasm/release/vasm_4.html#Mot-Syntax-Module))
   - `rorg`
   - `offset`
   - `code`
@@ -50,7 +50,6 @@
   - `echo`
   - `printt`/`printv`
   - `auto`
-  - `inline`/`einline`
   - `struct`/`estruct`
 - `or.w #$0700,sr` -> `ori`
 - `include`/`incbin` path without quotes  
@@ -76,6 +75,7 @@
 
 - anything after `end` directive
 - unpaired `macro`/`endm`
+- unpaired `inline`/`einline`
 - unpaired conditional assembly directives, missing `endc`/`endif`
 - registers:
   - dedicated color for each (**WIP** at least special registers (`SP` == `A7`!) vs. A*n* vs. D*n*)

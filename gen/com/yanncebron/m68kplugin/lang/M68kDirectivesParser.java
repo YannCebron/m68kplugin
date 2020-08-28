@@ -216,7 +216,9 @@ public class M68kDirectivesParser {
   //                        nopage_directive |
   //                        plen_directive |
   //                        llen_directive |
-  //                        spc_directive
+  //                        spc_directive |
+  //                        inline_directive |
+  //                        einline_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -255,6 +257,8 @@ public class M68kDirectivesParser {
     if (!r) r = plen_directive(b, l + 1);
     if (!r) r = llen_directive(b, l + 1);
     if (!r) r = spc_directive(b, l + 1);
+    if (!r) r = inline_directive(b, l + 1);
+    if (!r) r = einline_directive(b, l + 1);
     return r;
   }
 
@@ -278,6 +282,18 @@ public class M68kDirectivesParser {
     if (!recursion_guard_(b, l, "ds_directive_1")) return false;
     data_size_all(b, l + 1);
     return true;
+  }
+
+  /* ********************************************************** */
+  // EINLINE
+  public static boolean einline_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "einline_directive")) return false;
+    if (!nextTokenIs(b, EINLINE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, EINLINE);
+    exit_section_(b, m, EINLINE_DIRECTIVE, r);
+    return r;
   }
 
   /* ********************************************************** */
@@ -450,6 +466,18 @@ public class M68kDirectivesParser {
     Marker m = enter_section_(b, l, _NONE_, null, "<include path>");
     r = consumeToken(b, STRING);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // INLINE
+  public static boolean inline_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inline_directive")) return false;
+    if (!nextTokenIs(b, INLINE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, INLINE);
+    exit_section_(b, m, INLINE_DIRECTIVE, r);
     return r;
   }
 

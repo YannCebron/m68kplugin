@@ -249,4 +249,12 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" spc 22");
   }
 
+  public void testInlineDirective() throws Exception {
+    doCodeTest(" inline");
+  }
+
+  public void testEinlineDirective() throws Exception {
+    doCodeTest(" einline");
+  }
+
 }

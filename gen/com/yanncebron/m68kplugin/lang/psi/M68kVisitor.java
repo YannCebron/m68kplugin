@@ -390,6 +390,10 @@ public class M68kVisitor extends PsiElementVisitor {
     // visitDirective(o);
   }
 
+  public void visitEinlineDirective(@NotNull M68kEinlineDirective o) {
+    visitPsiElement(o);
+  }
+
   public void visitElseConditionalAssemblyDirective(@NotNull M68kElseConditionalAssemblyDirective o) {
     visitConditionalAssemblyDirective(o);
   }
@@ -526,6 +530,10 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitIncludeDirective(@NotNull M68kIncludeDirective o) {
     visitDirective(o);
+  }
+
+  public void visitInlineDirective(@NotNull M68kInlineDirective o) {
+    visitPsiElement(o);
   }
 
   public void visitJmpInstruction(@NotNull M68kJmpInstruction o) {

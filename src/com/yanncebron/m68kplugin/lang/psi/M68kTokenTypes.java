@@ -105,6 +105,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType DOT_S = new M68kTokenType(".s");
   public static final IElementType DOT_W = new M68kTokenType(".w");
   public static final IElementType DS = new M68kTokenType("ds");
+  public static final IElementType EINLINE = new M68kTokenType("einline");
   public static final IElementType ELSE = new M68kTokenType("else");
   public static final IElementType ELSEIF = new M68kTokenType("elseif");
   public static final IElementType END = new M68kTokenType("end");
@@ -139,6 +140,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType INCBIN = new M68kTokenType("incbin");
   public static final IElementType INCDIR = new M68kTokenType("incdir");
   public static final IElementType INCLUDE = new M68kTokenType("include");
+  public static final IElementType INLINE = new M68kTokenType("inline");
   public static final IElementType JMP = new M68kTokenType("jmp");
   public static final IElementType JSR = new M68kTokenType("jsr");
   public static final IElementType JUMPERR = new M68kTokenType("jumperr");
