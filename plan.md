@@ -34,9 +34,8 @@
   - `rem`/`erem` - ignores everything between
   - `ifmi`
   - `ifpl`
-  - `clrso`/`setso`
-  - `so.*`
-  - `fo.*`
+  - `so.*`, `clrso`/`setso`
+  - `fo.*`, `clrfo`/`setfo`
   - `cargs`
   - `echo`
   - `printt`/`printv`
