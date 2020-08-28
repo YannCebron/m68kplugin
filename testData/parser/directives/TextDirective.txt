@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kTextDirectiveImpl(TEXT_DIRECTIVE)
+    PsiElement(text)('text')

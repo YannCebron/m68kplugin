@@ -200,7 +200,8 @@ public final class M68kTokenGroups {
     RSSET,
     SECTION,
     SET,
-    SPC
+    SPC,
+    TEXT
   );
 
   public static final TokenSet CONDITIONAL_ASSEMBLY_DIRECTIVES = TokenSet.create(

@@ -231,6 +231,7 @@ public interface M68kTypes {
   IElementType SVS_INSTRUCTION = new M68kCompositeElementType("SVS_INSTRUCTION");
   IElementType SWAP_INSTRUCTION = new M68kCompositeElementType("SWAP_INSTRUCTION");
   IElementType TAS_INSTRUCTION = new M68kCompositeElementType("TAS_INSTRUCTION");
+  IElementType TEXT_DIRECTIVE = new M68kCompositeElementType("TEXT_DIRECTIVE");
   IElementType TRAPV_INSTRUCTION = new M68kCompositeElementType("TRAPV_INSTRUCTION");
   IElementType TRAP_INSTRUCTION = new M68kCompositeElementType("TRAP_INSTRUCTION");
   IElementType TST_INSTRUCTION = new M68kCompositeElementType("TST_INSTRUCTION");
@@ -853,6 +854,9 @@ public interface M68kTypes {
       }
       else if (type == TAS_INSTRUCTION) {
         return new M68kTasInstructionImpl(node);
+      }
+      else if (type == TEXT_DIRECTIVE) {
+        return new M68kTextDirectiveImpl(node);
       }
       else if (type == TRAPV_INSTRUCTION) {
         return new M68kTrapvInstructionImpl(node);

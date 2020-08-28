@@ -7,7 +7,6 @@
   - `offset`
   - `code`
   - `cseg`
-  - `text`
   - `data`
   - `dseg`
   - `bss`/`bss_c`/`bss_f`

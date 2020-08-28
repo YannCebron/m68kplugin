@@ -906,6 +906,10 @@ public class M68kVisitor extends PsiElementVisitor {
     // visitInstruction(o);
   }
 
+  public void visitTextDirective(@NotNull M68kTextDirective o) {
+    visitDirective(o);
+  }
+
   public void visitTrapInstruction(@NotNull M68kTrapInstruction o) {
     visitInstruction(o);
   }

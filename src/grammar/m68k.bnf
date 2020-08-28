@@ -806,6 +806,7 @@ roxr_instruction ::= ROXR shift_tail
   parserClass = "com.yanncebron.m68kplugin.lang.M68kDirectivesParser"
   implements("(blk|set|equr|even|odd|dc|dcb|ds|incbin|incdir|include|rsset|rsreset|rs)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(opt|org|macro|endm|mexit|end|section|addwatch|jumperr|jumpptr|list|nolist|page|nopage|plen|llen|spc|inline|einline)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
+  implements("(text)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("equ_directive_base") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
 }
 
@@ -834,6 +835,7 @@ private directives ::= equ_directive |
                        mexit_directive |
                        end_directive |
                        section_directive |
+                       text_directive |
                        addwatch_directive |
                        jumperr_directive |
                        jumpptr_directive |
@@ -903,6 +905,8 @@ section_directive ::= SECTION expression (COMMA expression)? (COMMA expression)?
 {
   pin = 1
 }
+text_directive ::= TEXT
+
 
 private include_path ::= STRING
 {
