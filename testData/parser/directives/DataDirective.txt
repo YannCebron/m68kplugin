@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kDataDirectiveImpl(DATA_DIRECTIVE)
+    PsiElement(data)('data')

@@ -79,6 +79,9 @@ public abstract class M68kTokenTypes {
   public static final IElementType COMMA = new M68kTokenType(",");
   public static final IElementType COMMENT = new M68kTokenType("comment");
   public static final IElementType CSEG = new M68kTokenType("cseg");
+  public static final IElementType DATA = new M68kTokenType("data");
+  public static final IElementType DATA_C = new M68kTokenType("data_c");
+  public static final IElementType DATA_F = new M68kTokenType("data_f");
   public static final IElementType DATA_REGISTER = new M68kTokenType("data_register");
   public static final IElementType DBCC = new M68kTokenType("dbcc");
   public static final IElementType DBCS = new M68kTokenType("dbcs");

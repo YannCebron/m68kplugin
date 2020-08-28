@@ -144,6 +144,42 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
+  // DATA_C
+  public static boolean data_c_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "data_c_directive")) return false;
+    if (!nextTokenIs(b, DATA_C)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, DATA_C);
+    exit_section_(b, m, DATA_C_DIRECTIVE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // DATA
+  public static boolean data_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "data_directive")) return false;
+    if (!nextTokenIs(b, DATA)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, DATA);
+    exit_section_(b, m, DATA_DIRECTIVE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // DATA_F
+  public static boolean data_f_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "data_f_directive")) return false;
+    if (!nextTokenIs(b, DATA_F)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, DATA_F);
+    exit_section_(b, m, DATA_F_DIRECTIVE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // DC data_size_all? expression (COMMA expression)*
   public static boolean dc_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "dc_directive")) return false;
@@ -260,6 +296,9 @@ public class M68kDirectivesParser {
   //                        code_directive |
   //                        code_c_directive |
   //                        code_f_directive |
+  //                        data_directive |
+  //                        data_c_directive |
+  //                        data_f_directive |
   //                        addwatch_directive |
   //                        jumperr_directive |
   //                        jumpptr_directive |
@@ -305,6 +344,9 @@ public class M68kDirectivesParser {
     if (!r) r = code_directive(b, l + 1);
     if (!r) r = code_c_directive(b, l + 1);
     if (!r) r = code_f_directive(b, l + 1);
+    if (!r) r = data_directive(b, l + 1);
+    if (!r) r = data_c_directive(b, l + 1);
+    if (!r) r = data_f_directive(b, l + 1);
     if (!r) r = addwatch_directive(b, l + 1);
     if (!r) r = jumperr_directive(b, l + 1);
     if (!r) r = jumpptr_directive(b, l + 1);

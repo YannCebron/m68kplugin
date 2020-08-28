@@ -284,6 +284,9 @@ LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
   [cC][oO][dD][eE]_[fF]           { return CODE_F; }
   [cC][nN][oO][pP]                { return CNOP; }
   [cC][sS][eE][gG]                { return CSEG; }
+  [dD][aA][tT][aA]                { return DATA; }
+  [dD][aA][tT][aA]_[cC]           { return DATA_C; }
+  [dD][aA][tT][aA]_[fF]           { return DATA_F; }
   [dD][cC]                        { return DC; }
   [dD][cC][bB]                    { return DCB; }
   [dD][sS]                        { return DS; }
