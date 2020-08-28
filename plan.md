@@ -6,7 +6,6 @@
   - `rorg`
   - `offset`
   - `code`
-  - `cseg`
   - `data`
   - `dseg`
   - `bss`/`bss_c`/`bss_f`

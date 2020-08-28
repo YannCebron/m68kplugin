@@ -169,6 +169,7 @@ public final class M68kTokenGroups {
     ALIGN,
     BLK,
     CNOP,
+    CSEG,
     DC,
     DCB,
     DS,

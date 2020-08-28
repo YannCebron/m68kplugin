@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kCsegDirectiveImpl(CSEG_DIRECTIVE)
+    PsiElement(cseg)('cseg')

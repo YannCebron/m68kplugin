@@ -96,6 +96,18 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
+  // CSEG
+  public static boolean cseg_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "cseg_directive")) return false;
+    if (!nextTokenIs(b, CSEG)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, CSEG);
+    exit_section_(b, m, CSEG_DIRECTIVE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // DC data_size_all? expression (COMMA expression)*
   public static boolean dc_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "dc_directive")) return false;
@@ -208,6 +220,7 @@ public class M68kDirectivesParser {
   //                        end_directive |
   //                        section_directive |
   //                        text_directive |
+  //                        cseg_directive |
   //                        addwatch_directive |
   //                        jumperr_directive |
   //                        jumpptr_directive |
@@ -249,6 +262,7 @@ public class M68kDirectivesParser {
     if (!r) r = end_directive(b, l + 1);
     if (!r) r = section_directive(b, l + 1);
     if (!r) r = text_directive(b, l + 1);
+    if (!r) r = cseg_directive(b, l + 1);
     if (!r) r = addwatch_directive(b, l + 1);
     if (!r) r = jumperr_directive(b, l + 1);
     if (!r) r = jumpptr_directive(b, l + 1);

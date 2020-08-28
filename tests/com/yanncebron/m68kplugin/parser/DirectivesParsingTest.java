@@ -193,6 +193,10 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" text");
   }
 
+  public void testCsegDirective() throws Exception {
+    doCodeTest(" cseg");
+  }
+
   public void testAlignDirective() throws Exception {
     doCodeTest(" align 0,4");
   }

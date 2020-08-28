@@ -10,6 +10,7 @@ cmpa
 cmpi
 cmpm
 cnop
+cseg
 dbcc
 dbcs
 dbeq

@@ -280,6 +280,7 @@ LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
   [aA][lL][iI][gG][nN]            { return ALIGN; }
   [bB][lL][kK]                    { return BLK; }
   [cC][nN][oO][pP]                { return CNOP; }
+  [cC][sS][eE][gG]                { return CSEG; }
   [dD][cC]                        { return DC; }
   [dD][cC][bB]                    { return DCB; }
   [dD][sS]                        { return DS; }

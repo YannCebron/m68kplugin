@@ -85,6 +85,7 @@ public interface M68kTypes {
   IElementType CMPM_INSTRUCTION = new M68kCompositeElementType("CMPM_INSTRUCTION");
   IElementType CMP_INSTRUCTION = new M68kCompositeElementType("CMP_INSTRUCTION");
   IElementType CNOP_DIRECTIVE = new M68kCompositeElementType("CNOP_DIRECTIVE");
+  IElementType CSEG_DIRECTIVE = new M68kCompositeElementType("CSEG_DIRECTIVE");
   IElementType DBCC_INSTRUCTION = new M68kCompositeElementType("DBCC_INSTRUCTION");
   IElementType DBCS_INSTRUCTION = new M68kCompositeElementType("DBCS_INSTRUCTION");
   IElementType DBEQ_INSTRUCTION = new M68kCompositeElementType("DBEQ_INSTRUCTION");
@@ -419,6 +420,9 @@ public interface M68kTypes {
       }
       else if (type == CNOP_DIRECTIVE) {
         return new M68kCnopDirectiveImpl(node);
+      }
+      else if (type == CSEG_DIRECTIVE) {
+        return new M68kCsegDirectiveImpl(node);
       }
       else if (type == DBCC_INSTRUCTION) {
         return new M68kDbccInstructionImpl(node);
