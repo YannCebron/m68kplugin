@@ -77,7 +77,7 @@ runIde {
   if (project.hasProperty("ideDirectory")) {
     ideDirectory = project.property("ideDirectory")
   }
-  systemProperty('idea.auto.reload.plugins', false)
+  autoReloadPlugins = false
 }
 
 buildSearchableOptions {
