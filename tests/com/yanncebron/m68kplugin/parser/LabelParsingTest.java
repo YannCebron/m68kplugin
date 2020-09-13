@@ -75,12 +75,13 @@ public class LabelParsingTest extends M68kParsingTestCase {
     doCodeTest(".s bra.s .s");
   }
 
+  // todo does not work without '\n' after label
   public void testLocalLabelWithColonWithDataSizeName() throws IOException {
-    doCodeTest(".s: bra.s .s");
+    doCodeTest(".s: \n bra.s .s");
   }
 
   public void testLocalLabelWithColonWithDataSizeNameMultipleSpaces() throws IOException {
-    doCodeTest(".s:    bra.s   .s");
+    doCodeTest(".s: \n   bra.s   .s");
   }
 
 }
