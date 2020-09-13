@@ -1031,6 +1031,9 @@ private macrocall_parameter ::= adm_group_all
   name = "macro parameter"
 }
 macrocall_directive ::= <<afterWhitespace>> ID macrocall_parameter? (COMMA macrocall_parameter)*
+{
+  mixin = "com.yanncebron.m68kplugin.lang.psi.directive.impl.M68kMacrocallDirectiveMixIn"
+}
 
 addwatch_directive ::= ADDWATCH expression
 {

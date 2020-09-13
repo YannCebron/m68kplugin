@@ -22,7 +22,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
@@ -38,9 +37,9 @@ import com.yanncebron.m68kplugin.lang.psi.M68kAdmImm;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmPcd;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmPci;
 
-public class M68kMacrocallDirectiveImpl extends ASTWrapperPsiElement implements M68kMacrocallDirective {
+public class M68kMacrocallDirectiveImpl extends M68kMacrocallDirectiveMixIn implements M68kMacrocallDirective {
 
-  public M68kMacrocallDirectiveImpl(@NotNull ASTNode node) {
+  public M68kMacrocallDirectiveImpl(ASTNode node) {
     super(node);
   }
 

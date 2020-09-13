@@ -57,7 +57,8 @@ public class M68kSyntaxAnnotator implements Annotator {
     }
 
     // todo temp --> inspection?
-    if (element instanceof M68kLabelRefExpression && Registry.is("m68k.highlight.unresolved.ref")) {
+    if ((element instanceof M68kLabelRefExpression || element instanceof M68kMacrocallDirective) &&
+      Registry.is("m68k.highlight.unresolved.ref")) {
       final PsiReference reference = element.getReference();
       if (reference.resolve() == null) {
         holder.createErrorAnnotation(element, ProblemsHolder.unresolvedReferenceMessage(reference))
