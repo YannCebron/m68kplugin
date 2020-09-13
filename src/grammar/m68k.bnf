@@ -19,6 +19,7 @@
   parserImports = [
     "static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*"
   ]
+  parserUtilClass="com.yanncebron.m68kplugin.lang.M68kParserUtil"
 
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kPsiElement"
   extends = "com.intellij.extapi.psi.ASTWrapperPsiElement"
@@ -65,7 +66,7 @@ private root_item_recover ::= !instruction_or_label
 private labels ::= label | localLabel
 
 // todo must start on newline? usually not, but not required
-label ::= UNDERSCORE? ID COLON?
+label ::= !<<afterWhitespace>> UNDERSCORE? ID COLON?
 {
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kLabelBase"
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelMixIn"
@@ -74,9 +75,9 @@ label ::= UNDERSCORE? ID COLON?
 }
 
 // todo full name is: DevPac. prefixed with last non-local label
-localLabel ::= DOT ID COLON?
+localLabel ::= !<<afterWhitespace>> DOT ID COLON?
 {
-  pin = 1
+  pin = 2
   name = "local label"
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kLabelBase"
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLocalLabelMixIn"
@@ -805,7 +806,7 @@ roxr_instruction ::= ROXR shift_tail
   psiImplPackage = "com.yanncebron.m68kplugin.lang.psi.directive.impl"
   parserClass = "com.yanncebron.m68kplugin.lang.M68kDirectivesParser"
   implements("(blk|set|equr|even|odd|dc|dcb|ds|incbin|incdir|include|rsset|rsreset|rs)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
-  implements("(opt|org|macro|endm|mexit|end|section|addwatch|jumperr|jumpptr|list|nolist|page|nopage|plen|llen|spc|inline|einline)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
+  implements("(opt|org|macro|endm|mexit|macrocall|end|section|addwatch|jumperr|jumpptr|list|nolist|page|nopage|plen|llen|spc|inline|einline)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(text|cseg|code|code_c|code_f|data|dseg|data_c|data_f|bss|bss_c|bss_f)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("equ_directive_base") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
 }
@@ -833,6 +834,7 @@ private directives ::= equ_directive |
                        macro_directive |
                        endm_directive |
                        mexit_directive |
+                       macrocall_directive |
                        end_directive |
                        section_directive |
                        text_directive |
@@ -1023,6 +1025,12 @@ org_directive ::= ORG expression
 macro_directive ::= label MACRO
 endm_directive ::= ENDM
 mexit_directive ::= MEXIT
+
+private macrocall_parameter ::= adm_group_all
+{
+  name = "macro parameter"
+}
+macrocall_directive ::= <<afterWhitespace>> ID macrocall_parameter? (COMMA macrocall_parameter)*
 
 addwatch_directive ::= ADDWATCH expression
 {

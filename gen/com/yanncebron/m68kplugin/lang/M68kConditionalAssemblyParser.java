@@ -18,7 +18,7 @@ package com.yanncebron.m68kplugin.lang;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
+import static com.yanncebron.m68kplugin.lang.M68kParserUtil.*;
 import static com.yanncebron.m68kplugin.lang.M68kParser.*;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 

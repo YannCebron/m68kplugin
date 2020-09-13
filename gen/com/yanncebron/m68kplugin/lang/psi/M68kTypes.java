@@ -169,6 +169,7 @@ public interface M68kTypes {
   IElementType LOCAL_LABEL = new M68kCompositeElementType("LOCAL_LABEL");
   IElementType LSL_INSTRUCTION = new M68kCompositeElementType("LSL_INSTRUCTION");
   IElementType LSR_INSTRUCTION = new M68kCompositeElementType("LSR_INSTRUCTION");
+  IElementType MACROCALL_DIRECTIVE = new M68kCompositeElementType("MACROCALL_DIRECTIVE");
   IElementType MACRO_DIRECTIVE = new M68kCompositeElementType("MACRO_DIRECTIVE");
   IElementType MEXIT_DIRECTIVE = new M68kCompositeElementType("MEXIT_DIRECTIVE");
   IElementType MINUS_EXPRESSION = new M68kCompositeElementType("MINUS_EXPRESSION");
@@ -681,6 +682,9 @@ public interface M68kTypes {
       }
       else if (type == LSR_INSTRUCTION) {
         return new M68kLsrInstructionImpl(node);
+      }
+      else if (type == MACROCALL_DIRECTIVE) {
+        return new M68kMacrocallDirectiveImpl(node);
       }
       else if (type == MACRO_DIRECTIVE) {
         return new M68kMacroDirectiveImpl(node);

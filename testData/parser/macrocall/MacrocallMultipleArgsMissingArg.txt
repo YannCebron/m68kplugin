@@ -1,0 +1,10 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kMacrocallDirectiveImpl(MACROCALL_DIRECTIVE)
+    PsiElement(id)('MACRO_NAME')
+    PsiWhiteSpace(' ')
+    M68kAdmDrdImpl(ADM_DRD)
+      PsiElement(data_register)('d7')
+  PsiElement(,)(',')
+  PsiErrorElement:<macro parameter> expected
+    <empty list>

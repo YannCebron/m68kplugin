@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kMacrocallDirectiveImpl(MACROCALL_DIRECTIVE)
+    PsiElement(id)('MACRO_NAME')

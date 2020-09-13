@@ -40,4 +40,10 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
         "<info descr=\"M68K_LABEL\">globalLabel</info>");
     myFixture.testHighlighting(false, true, false);
   }
+
+  public void testMacroCall() {
+    myFixture.configureByText("test.s",
+      " <info descr=\"M68K_MACRO_CALL\">MACRO_NAME</info> d7,param");
+    myFixture.testHighlighting(false, true, false);
+  }
 }

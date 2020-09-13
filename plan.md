@@ -47,7 +47,7 @@
 - add missing expression operators (XOR?)
 - do not allow spaces, e.g. `.b|w|l` must be immediate after instruction
 - allow `equr`/`reg` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
-- macro: parameters, calls
+- macro: placeholders, label-counters
 - Lexer: `LexerTestCase.checkCorrectRestartOnEveryToken`
 
 ## Before 1st Release
@@ -67,6 +67,7 @@
 - unpaired `macro`/`endm`
 - unpaired `inline`/`einline`
 - unpaired conditional assembly directives, missing `endc`/`endif`
+- macro call: parameter count mismatch
 - registers:
   - dedicated color for each (**WIP** at least special registers (`SP` == `A7`!) vs. A*n* vs. D*n*)
   - rainbow highlighting?

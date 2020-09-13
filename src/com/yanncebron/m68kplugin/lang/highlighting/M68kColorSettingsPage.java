@@ -45,6 +45,7 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
     createDescriptor("color.settings.group.directives", "attribute.descriptor.conditional.assembly.directive", M68kTextAttributes.CONDITIONAL_ASSEMBLY_DIRECTIVE),
     createDescriptor("color.settings.group.instructions", "attribute.descriptor.instruction", M68kTextAttributes.INSTRUCTION),
     createDescriptor("color.settings.group.instructions", "attribute.descriptor.privileged.instruction", M68kTextAttributes.PRIVILEGED_INSTRUCTION),
+    createDescriptor("color.settings.group.instructions", "attribute.descriptor.macrocall", M68kTextAttributes.MACRO_CALL),
     createDescriptor("color.settings.group.labels", "attribute.descriptor.label", M68kTextAttributes.LABEL),
     createDescriptor("color.settings.group.labels", "attribute.descriptor.local.label", M68kTextAttributes.LOCAL_LABEL),
     createDescriptor("color.settings.group.literals", "attribute.descriptor.binary.number", M68kTextAttributes.BIN_NUMBER),
@@ -94,6 +95,7 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
       "  <privilegedInstruction>stop</privilegedInstruction>\n" +
       "  moveq #1>>2,d0\n" +
       "<localLabel>.local</localLabel>:\n" +
+      "  <macroCall>MACRO_NAME</macroCall> a7,FLAG\n" +
       "  moveq %0101+$FF,d1\n" +
       "  move.l d0,(a1) ;comment\n" +
       "  rts\n" +
@@ -111,6 +113,7 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
     Map<String, TextAttributesKey> additionalMap = new HashMap<>();
     additionalMap.put("label", M68kTextAttributes.LABEL);
     additionalMap.put("localLabel", M68kTextAttributes.LOCAL_LABEL);
+    additionalMap.put("macroCall", M68kTextAttributes.MACRO_CALL);
     additionalMap.put("privilegedInstruction", M68kTextAttributes.PRIVILEGED_INSTRUCTION);
     return additionalMap;
   }

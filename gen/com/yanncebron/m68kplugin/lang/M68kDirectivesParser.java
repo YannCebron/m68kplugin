@@ -18,7 +18,7 @@ package com.yanncebron.m68kplugin.lang;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
+import static com.yanncebron.m68kplugin.lang.M68kParserUtil.*;
 import static com.yanncebron.m68kplugin.lang.M68kParser.*;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
@@ -325,6 +325,7 @@ public class M68kDirectivesParser {
   //                        macro_directive |
   //                        endm_directive |
   //                        mexit_directive |
+  //                        macrocall_directive |
   //                        end_directive |
   //                        section_directive |
   //                        text_directive |
@@ -377,6 +378,7 @@ public class M68kDirectivesParser {
     if (!r) r = macro_directive(b, l + 1);
     if (!r) r = endm_directive(b, l + 1);
     if (!r) r = mexit_directive(b, l + 1);
+    if (!r) r = macrocall_directive(b, l + 1);
     if (!r) r = end_directive(b, l + 1);
     if (!r) r = section_directive(b, l + 1);
     if (!r) r = text_directive(b, l + 1);
@@ -480,7 +482,6 @@ public class M68kDirectivesParser {
   // label EQU expression
   public static boolean equ_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "equ_directive")) return false;
-    if (!nextTokenIs(b, "<equ directive>", ID, UNDERSCORE)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, EQU_DIRECTIVE, "<equ directive>");
     r = label(b, l + 1);
@@ -495,7 +496,6 @@ public class M68kDirectivesParser {
   // label EQ expression
   public static boolean equals_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "equals_directive")) return false;
-    if (!nextTokenIs(b, "<equals directive>", ID, UNDERSCORE)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, EQUALS_DIRECTIVE, "<equals directive>");
     r = label(b, l + 1);
@@ -510,7 +510,6 @@ public class M68kDirectivesParser {
   // label EQUR adm_rrd
   public static boolean equr_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "equr_directive")) return false;
-    if (!nextTokenIs(b, "<equr directive>", ID, UNDERSCORE)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, EQUR_DIRECTIVE, "<equr directive>");
     r = label(b, l + 1);
@@ -695,11 +694,64 @@ public class M68kDirectivesParser {
   // label MACRO
   public static boolean macro_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "macro_directive")) return false;
-    if (!nextTokenIs(b, "<macro directive>", ID, UNDERSCORE)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, MACRO_DIRECTIVE, "<macro directive>");
     r = label(b, l + 1);
     r = r && consumeToken(b, MACRO);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // <<afterWhitespace>> ID macrocall_parameter? (COMMA macrocall_parameter)*
+  public static boolean macrocall_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "macrocall_directive")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, MACROCALL_DIRECTIVE, "<macrocall directive>");
+    r = afterWhitespace(b, l + 1);
+    r = r && consumeToken(b, ID);
+    r = r && macrocall_directive_2(b, l + 1);
+    r = r && macrocall_directive_3(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // macrocall_parameter?
+  private static boolean macrocall_directive_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "macrocall_directive_2")) return false;
+    macrocall_parameter(b, l + 1);
+    return true;
+  }
+
+  // (COMMA macrocall_parameter)*
+  private static boolean macrocall_directive_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "macrocall_directive_3")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!macrocall_directive_3_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "macrocall_directive_3", c)) break;
+    }
+    return true;
+  }
+
+  // COMMA macrocall_parameter
+  private static boolean macrocall_directive_3_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "macrocall_directive_3_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COMMA);
+    r = r && macrocall_parameter(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // adm_group_all
+  static boolean macrocall_parameter(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "macrocall_parameter")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<macro parameter>");
+    r = adm_group_all(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -974,7 +1026,6 @@ public class M68kDirectivesParser {
   // label SET expression
   public static boolean set_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "set_directive")) return false;
-    if (!nextTokenIs(b, "<set directive>", ID, UNDERSCORE)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, SET_DIRECTIVE, "<set directive>");
     r = label(b, l + 1);

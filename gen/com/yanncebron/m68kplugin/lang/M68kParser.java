@@ -18,7 +18,7 @@ package com.yanncebron.m68kplugin.lang;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
+import static com.yanncebron.m68kplugin.lang.M68kParserUtil.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.TokenSet;
@@ -2015,29 +2015,39 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // UNDERSCORE? ID COLON?
+  // !<<afterWhitespace>> UNDERSCORE? ID COLON?
   public static boolean label(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "label")) return false;
-    if (!nextTokenIs(b, "<label>", ID, UNDERSCORE)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, LABEL, "<label>");
     r = label_0(b, l + 1);
+    r = r && label_1(b, l + 1);
     r = r && consumeToken(b, ID);
-    r = r && label_2(b, l + 1);
+    r = r && label_3(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // !<<afterWhitespace>>
+  private static boolean label_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "label_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_);
+    r = !afterWhitespace(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   // UNDERSCORE?
-  private static boolean label_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "label_0")) return false;
+  private static boolean label_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "label_1")) return false;
     consumeToken(b, UNDERSCORE);
     return true;
   }
 
   // COLON?
-  private static boolean label_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "label_2")) return false;
+  private static boolean label_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "label_3")) return false;
     consumeToken(b, COLON);
     return true;
   }
@@ -2126,22 +2136,32 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // DOT ID COLON?
+  // !<<afterWhitespace>> DOT ID COLON?
   public static boolean localLabel(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "localLabel")) return false;
-    if (!nextTokenIs(b, "<local label>", DOT)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, LOCAL_LABEL, "<local label>");
-    r = consumeTokens(b, 1, DOT, ID);
-    p = r; // pin = 1
-    r = r && localLabel_2(b, l + 1);
+    r = localLabel_0(b, l + 1);
+    r = r && consumeTokens(b, 1, DOT, ID);
+    p = r; // pin = 2
+    r = r && localLabel_3(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
+  // !<<afterWhitespace>>
+  private static boolean localLabel_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "localLabel_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_);
+    r = !afterWhitespace(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
   // COLON?
-  private static boolean localLabel_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "localLabel_2")) return false;
+  private static boolean localLabel_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "localLabel_3")) return false;
     consumeToken(b, COLON);
     return true;
   }
