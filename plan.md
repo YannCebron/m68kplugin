@@ -42,8 +42,8 @@
   - `auto`
   - `struct`/`estruct`
 - `or.w #$0700,sr` -> `ori`
-- `include`/`incbin` path without quotes  
-- in expressions, mnemonic parsed as instruction, not identifier (`size = (bpls*bpl)`)  
+- `include`/`incbin` path without quotes
+- in expressions, mnemonic parsed as instruction, not identifier (`size = (bpls*bpl)`)
 - add missing expression operators (XOR?)
 - do not allow spaces, e.g. `.b|w|l` must be immediate after instruction
 - allow `equr`/`reg` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
@@ -105,6 +105,7 @@
 - documentation:
   - quick doc/hover for number literals: dec/hex/oct/bin
   - quick doc/hover for `equ`/`equr`/`=` directives
+- code folding `CustomFoldingBuilder`
 
 ## Inspections
 
