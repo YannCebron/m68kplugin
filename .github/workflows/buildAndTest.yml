@@ -28,7 +28,7 @@ jobs:
       run: gradle buildPlugin
     - name: Verify Plugin on IntelliJ Platforms
       id: verify
-      uses: ChrisCarini/intellij-platform-plugin-verifier-action@v0.0.2
+      uses: ChrisCarini/intellij-platform-plugin-verifier-action@v1.0.3
       with:
         ide-versions: |
           ideaIC:2019.3.5
