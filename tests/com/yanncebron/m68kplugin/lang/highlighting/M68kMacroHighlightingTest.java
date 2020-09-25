@@ -23,12 +23,21 @@ import com.intellij.testFramework.fixtures.BasePlatformTestCase;
  */
 public class M68kMacroHighlightingTest extends BasePlatformTestCase {
 
-  public void testMacroParameterSuppressErrorHighlight() {
+  public void testMacroParameterAdmImmSuppressErrorHighlight() {
+    doMacroBodyHighlightingTest("move.w #\\1,d0");
+  }
+
+  public void testMacroParameterAdmAdiSuppressErrorHighlight2() {
+    doMacroBodyHighlightingTest("btst #\\1,\\2(a5)");
+  }
+
+  private void doMacroBodyHighlightingTest(String macroBodyText) {
     myFixture.configureByText("test.s",
-      "macroName MACRO\n" +
-        " move.w #\\1,d0\n" +
-        " ENDM"
+      "macroName MACRO\n " +
+        macroBodyText +
+        "\n ENDM"
     );
     myFixture.testHighlighting();
   }
+
 }

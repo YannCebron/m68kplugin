@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.lang.highlighting;
 
 import com.intellij.codeInsight.highlighting.HighlightErrorFilter;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiErrorElement;
 import com.yanncebron.m68kplugin.lang.M68kLanguage;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroParameterDirective;
@@ -32,11 +33,17 @@ public class M68kMacroParameterHighlightErrorFilter extends HighlightErrorFilter
   public boolean shouldHighlightErrorElement(@NotNull PsiErrorElement element) {
     if (element.getLanguage() != M68kLanguage.INSTANCE) return true;
 
-    if (element.getNextSibling() instanceof M68kMacroParameterDirective ||
-      element.getPrevSibling() instanceof M68kMacroParameterDirective) {
+    if (hasMacroParameterDirectiveSibling(element) ||
+    hasMacroParameterDirectiveSibling(element.getParent())) {
       return false;
     }
 
     return !element.getErrorDescription().endsWith(" got '\\'");
+  }
+
+  private boolean hasMacroParameterDirectiveSibling(PsiElement element) {
+    return
+      element.getNextSibling() instanceof M68kMacroParameterDirective ||
+      element.getPrevSibling() instanceof M68kMacroParameterDirective;
   }
 }
