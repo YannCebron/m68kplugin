@@ -113,10 +113,10 @@ fake data_sized ::=
   methods = [ getDataSize ]
 }
 
-private data_size_byte ::= DOT_B
-private data_size_short ::= DOT_S
-private data_size_word ::= DOT_W
-private data_size_long ::= DOT_L
+private data_size_byte ::= !<<afterWhitespace>> DOT_B
+private data_size_short ::= !<<afterWhitespace>> DOT_S
+private data_size_word ::= !<<afterWhitespace>> DOT_W
+private data_size_long ::= !<<afterWhitespace>> DOT_L
 private data_size_word_long ::= data_size_word | data_size_long
 {
   name = ".w|l"

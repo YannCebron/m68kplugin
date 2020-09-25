@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kMuluInstructionImpl(MULU_INSTRUCTION)
     PsiElement(mulu)('mulu')
-    PsiErrorElement:'(', '-', '.w', <data register>, <expression> or <immediate data> expected
+    PsiErrorElement:'(', '-', <data register>, <expression> or <immediate data> expected
       <empty list>
   PsiWhiteSpace(' ')

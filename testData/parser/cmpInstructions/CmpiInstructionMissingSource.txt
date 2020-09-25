@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kCmpiInstructionImpl(CMPI_INSTRUCTION)
     PsiElement(cmpi)('cmpi')
-    PsiErrorElement:<.b|w|l> or <immediate data> expected
+    PsiErrorElement:<immediate data> expected
       <empty list>
   PsiWhiteSpace(' ')

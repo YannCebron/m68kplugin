@@ -40,7 +40,7 @@ public class BoolInstructionsParsingTest extends M68kParsingTestCase {
   }
 
   public void testAndiInstructionMissingSource() throws IOException {
-    doCodeTest(" andi");
+    doCodeTest(" andi ");
   }
 
   public void testAndiInstructionDrd() throws IOException {

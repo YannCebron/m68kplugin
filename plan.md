@@ -45,7 +45,7 @@
 - `include`/`incbin` path without quotes
 - in expressions, mnemonic parsed as instruction, not identifier (`size = (bpls*bpl)`)
 - add missing expression operators (XOR?)
-- do not allow spaces, e.g. `.b|w|l` must be immediate after instruction
+- do not allow spaces (?!)
 - allow `equr`/`reg` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
 - macro: label-counters, `ifmacrod`/`ifmacrond` code insight
 - Lexer: `LexerTestCase.checkCorrectRestartOnEveryToken`

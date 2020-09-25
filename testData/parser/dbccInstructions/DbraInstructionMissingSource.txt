@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kDbraInstructionImpl(DBRA_INSTRUCTION)
     PsiElement(dbra)('dbra')
-    PsiErrorElement:<.s|b|w|l> or <data register> expected
+    PsiErrorElement:<data register> expected
       <empty list>
   PsiWhiteSpace(' ')

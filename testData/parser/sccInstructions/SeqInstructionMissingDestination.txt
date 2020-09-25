@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kSeqInstructionImpl(SEQ_INSTRUCTION)
     PsiElement(seq)('seq')
-    PsiErrorElement:'(', '-', '.b', <data register> or <expression> expected
+    PsiErrorElement:'(', '-', <data register> or <expression> expected
       <empty list>
   PsiWhiteSpace(' ')

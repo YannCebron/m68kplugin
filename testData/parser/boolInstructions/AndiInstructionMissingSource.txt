@@ -2,5 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kAndiInstructionImpl(ANDI_INSTRUCTION)
     PsiElement(andi)('andi')
-    PsiErrorElement:'#', '.b', '.w', <.b|w|l> or <immediate data> expected
+    PsiErrorElement:<immediate data> expected
       <empty list>
+  PsiWhiteSpace(' ')

@@ -31,6 +31,10 @@ public class BccInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" bra ");
   }
 
+  public void testBraInstructionMissingLabelNoWhitespace() throws IOException {
+    doCodeTest(" bra");
+  }
+
   public void testBraInstruction() throws IOException {
     doCodeTest(" bra label");
   }

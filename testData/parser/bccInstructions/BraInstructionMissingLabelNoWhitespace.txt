@@ -2,6 +2,5 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kBraInstructionImpl(BRA_INSTRUCTION)
     PsiElement(bra)('bra')
-    PsiErrorElement:<expression> expected
+    PsiErrorElement:<.s|b|w|l> or <expression> expected
       <empty list>
-  PsiWhiteSpace(' ')
