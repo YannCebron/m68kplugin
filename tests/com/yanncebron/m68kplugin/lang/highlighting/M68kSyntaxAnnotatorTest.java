@@ -41,6 +41,14 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
     myFixture.testHighlighting(false, true, false);
   }
 
+  public void testMacroParameter() {
+    myFixture.configureByText("test.s",
+      "<info descr=\"M68K_LABEL\">macroName</info> macro\n" +
+        "  <info descr=\"M68K_MACRO_PARAMETER\">\\1</info>\n" +
+        " endm");
+    myFixture.testHighlighting(false, true, false);
+  }
+
   public void testMacroCall() {
     myFixture.configureByText("test.s",
       " <info descr=\"M68K_MACRO_CALL\">MACRO_NAME</info> d7,param");

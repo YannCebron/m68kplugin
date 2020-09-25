@@ -325,6 +325,7 @@ public class M68kDirectivesParser {
   //                        macro_directive |
   //                        endm_directive |
   //                        mexit_directive |
+  //                        macro_parameter_directive |
   //                        macrocall_directive |
   //                        end_directive |
   //                        section_directive |
@@ -378,6 +379,7 @@ public class M68kDirectivesParser {
     if (!r) r = macro_directive(b, l + 1);
     if (!r) r = endm_directive(b, l + 1);
     if (!r) r = mexit_directive(b, l + 1);
+    if (!r) r = macro_parameter_directive(b, l + 1);
     if (!r) r = macrocall_directive(b, l + 1);
     if (!r) r = end_directive(b, l + 1);
     if (!r) r = section_directive(b, l + 1);
@@ -698,6 +700,32 @@ public class M68kDirectivesParser {
     Marker m = enter_section_(b, l, _NONE_, MACRO_DIRECTIVE, "<macro directive>");
     r = label(b, l + 1);
     r = r && consumeToken(b, MACRO);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // BACKSLASH macro_parameter_index_parameter
+  public static boolean macro_parameter_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "macro_parameter_directive")) return false;
+    if (!nextTokenIs(b, BACKSLASH)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, MACRO_PARAMETER_DIRECTIVE, null);
+    r = consumeToken(b, BACKSLASH);
+    p = r; // pin = 1
+    r = r && macro_parameter_index_parameter(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // DEC_NUMBER
+  static boolean macro_parameter_index_parameter(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "macro_parameter_index_parameter")) return false;
+    if (!nextTokenIs(b, "<index>", DEC_NUMBER)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<index>");
+    r = consumeToken(b, DEC_NUMBER);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

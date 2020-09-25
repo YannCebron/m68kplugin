@@ -74,6 +74,8 @@
     <codeInsight.lineMarkerProvider
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.lang.highlighting.M68kMethodSeparatorLineMarkerProvider"/>
+    <highlightErrorFilter
+        implementation="com.yanncebron.m68kplugin.lang.highlighting.M68kMacroParameterHighlightErrorFilter"/>
 
     <lang.findUsagesProvider
         language="M68k"

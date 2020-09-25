@@ -171,6 +171,7 @@ public interface M68kTypes {
   IElementType LSR_INSTRUCTION = new M68kCompositeElementType("LSR_INSTRUCTION");
   IElementType MACROCALL_DIRECTIVE = new M68kCompositeElementType("MACROCALL_DIRECTIVE");
   IElementType MACRO_DIRECTIVE = new M68kCompositeElementType("MACRO_DIRECTIVE");
+  IElementType MACRO_PARAMETER_DIRECTIVE = new M68kCompositeElementType("MACRO_PARAMETER_DIRECTIVE");
   IElementType MEXIT_DIRECTIVE = new M68kCompositeElementType("MEXIT_DIRECTIVE");
   IElementType MINUS_EXPRESSION = new M68kCompositeElementType("MINUS_EXPRESSION");
   IElementType MOD_EXPRESSION = new M68kCompositeElementType("MOD_EXPRESSION");
@@ -688,6 +689,9 @@ public interface M68kTypes {
       }
       else if (type == MACRO_DIRECTIVE) {
         return new M68kMacroDirectiveImpl(node);
+      }
+      else if (type == MACRO_PARAMETER_DIRECTIVE) {
+        return new M68kMacroParameterDirectiveImpl(node);
       }
       else if (type == MEXIT_DIRECTIVE) {
         return new M68kMexitDirectiveImpl(node);

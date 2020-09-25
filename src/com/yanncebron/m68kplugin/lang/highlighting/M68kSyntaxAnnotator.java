@@ -28,6 +28,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroParameterDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacrocallDirective;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
 import org.jetbrains.annotations.NotNull;
@@ -54,6 +55,8 @@ public class M68kSyntaxAnnotator implements Annotator {
       doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LOCAL_LABEL);
     } else if (element instanceof M68kMacrocallDirective) {
       doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.MACRO_CALL);
+    } else if (element instanceof M68kMacroParameterDirective) {
+      doAnnotate(holder, element.getNode(), M68kTextAttributes.MACRO_PARAMETER);
     }
 
     // todo temp --> inspection?

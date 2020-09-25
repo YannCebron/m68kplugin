@@ -645,6 +645,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitDirective(o);
   }
 
+  public void visitMacroParameterDirective(@NotNull M68kMacroParameterDirective o) {
+    visitPsiElement(o);
+  }
+
   public void visitMacrocallDirective(@NotNull M68kMacrocallDirective o) {
     visitDirective(o);
   }
