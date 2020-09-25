@@ -29,7 +29,7 @@ import com.intellij.psi.PsiReference;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroParameterDirective;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacrocallDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
 import org.jetbrains.annotations.NotNull;
 
@@ -53,14 +53,14 @@ public class M68kSyntaxAnnotator implements Annotator {
       doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LABEL);
     } else if (element instanceof M68kLocalLabel) {
       doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LOCAL_LABEL);
-    } else if (element instanceof M68kMacrocallDirective) {
+    } else if (element instanceof M68kMacroCallDirective) {
       doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.MACRO_CALL);
     } else if (element instanceof M68kMacroParameterDirective) {
       doAnnotate(holder, element.getNode(), M68kTextAttributes.MACRO_PARAMETER);
     }
 
     // todo temp --> inspection?
-    if ((element instanceof M68kLabelRefExpression || element instanceof M68kMacrocallDirective) &&
+    if ((element instanceof M68kLabelRefExpression || element instanceof M68kMacroCallDirective) &&
       Registry.is("m68k.highlight.unresolved.ref")) {
       final PsiReference reference = element.getReference();
       if (reference.resolve() == null) {

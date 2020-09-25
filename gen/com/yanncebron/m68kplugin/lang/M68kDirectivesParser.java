@@ -326,7 +326,7 @@ public class M68kDirectivesParser {
   //                        endm_directive |
   //                        mexit_directive |
   //                        macro_parameter_directive |
-  //                        macrocall_directive |
+  //                        macro_call_directive |
   //                        end_directive |
   //                        section_directive |
   //                        text_directive |
@@ -380,7 +380,7 @@ public class M68kDirectivesParser {
     if (!r) r = endm_directive(b, l + 1);
     if (!r) r = mexit_directive(b, l + 1);
     if (!r) r = macro_parameter_directive(b, l + 1);
-    if (!r) r = macrocall_directive(b, l + 1);
+    if (!r) r = macro_call_directive(b, l + 1);
     if (!r) r = end_directive(b, l + 1);
     if (!r) r = section_directive(b, l + 1);
     if (!r) r = text_directive(b, l + 1);
@@ -693,6 +693,60 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
+  // <<afterWhitespace>> ID macro_call_parameter? (COMMA macro_call_parameter)*
+  public static boolean macro_call_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "macro_call_directive")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, MACRO_CALL_DIRECTIVE, "<macro call directive>");
+    r = afterWhitespace(b, l + 1);
+    r = r && consumeToken(b, ID);
+    r = r && macro_call_directive_2(b, l + 1);
+    r = r && macro_call_directive_3(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // macro_call_parameter?
+  private static boolean macro_call_directive_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "macro_call_directive_2")) return false;
+    macro_call_parameter(b, l + 1);
+    return true;
+  }
+
+  // (COMMA macro_call_parameter)*
+  private static boolean macro_call_directive_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "macro_call_directive_3")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!macro_call_directive_3_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "macro_call_directive_3", c)) break;
+    }
+    return true;
+  }
+
+  // COMMA macro_call_parameter
+  private static boolean macro_call_directive_3_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "macro_call_directive_3_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COMMA);
+    r = r && macro_call_parameter(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // adm_group_all
+  static boolean macro_call_parameter(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "macro_call_parameter")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<macro parameter>");
+    r = adm_group_all(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // label MACRO
   public static boolean macro_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "macro_directive")) return false;
@@ -726,60 +780,6 @@ public class M68kDirectivesParser {
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, null, "<index>");
     r = consumeToken(b, DEC_NUMBER);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // <<afterWhitespace>> ID macrocall_parameter? (COMMA macrocall_parameter)*
-  public static boolean macrocall_directive(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "macrocall_directive")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, MACROCALL_DIRECTIVE, "<macrocall directive>");
-    r = afterWhitespace(b, l + 1);
-    r = r && consumeToken(b, ID);
-    r = r && macrocall_directive_2(b, l + 1);
-    r = r && macrocall_directive_3(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // macrocall_parameter?
-  private static boolean macrocall_directive_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "macrocall_directive_2")) return false;
-    macrocall_parameter(b, l + 1);
-    return true;
-  }
-
-  // (COMMA macrocall_parameter)*
-  private static boolean macrocall_directive_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "macrocall_directive_3")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!macrocall_directive_3_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "macrocall_directive_3", c)) break;
-    }
-    return true;
-  }
-
-  // COMMA macrocall_parameter
-  private static boolean macrocall_directive_3_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "macrocall_directive_3_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, COMMA);
-    r = r && macrocall_parameter(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // adm_group_all
-  static boolean macrocall_parameter(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "macrocall_parameter")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, null, "<macro parameter>");
-    r = adm_group_all(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

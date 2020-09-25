@@ -1,11 +1,8 @@
 M68k.FILE
   PsiWhiteSpace(' ')
-  M68kMacrocallDirectiveImpl(MACROCALL_DIRECTIVE)
+  M68kMacroCallDirectiveImpl(MACRO_CALL_DIRECTIVE)
     PsiElement(id)('MACRO_NAME')
     PsiWhiteSpace(' ')
-    M68kAdmDrdImpl(ADM_DRD)
-      PsiElement(data_register)('d7')
-    PsiElement(,)(',')
     M68kAdmAbsImpl(ADM_ABS)
       M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
         PsiElement(id)('arg')

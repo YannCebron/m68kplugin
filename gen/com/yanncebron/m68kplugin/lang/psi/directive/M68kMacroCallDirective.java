@@ -30,7 +30,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kAdmImm;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmPcd;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmPci;
 
-public interface M68kMacrocallDirective extends M68kDirective {
+public interface M68kMacroCallDirective extends M68kDirective {
 
   @NotNull
   List<M68kAdmAbs> getAdmAbsList();

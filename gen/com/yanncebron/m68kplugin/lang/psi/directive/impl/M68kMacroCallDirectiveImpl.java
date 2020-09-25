@@ -37,14 +37,14 @@ import com.yanncebron.m68kplugin.lang.psi.M68kAdmImm;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmPcd;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmPci;
 
-public class M68kMacrocallDirectiveImpl extends M68kMacrocallDirectiveMixIn implements M68kMacrocallDirective {
+public class M68kMacroCallDirectiveImpl extends M68kMacrocallDirectiveMixIn implements M68kMacroCallDirective {
 
-  public M68kMacrocallDirectiveImpl(ASTNode node) {
+  public M68kMacroCallDirectiveImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitMacrocallDirective(this);
+    visitor.visitMacroCallDirective(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {

@@ -806,7 +806,7 @@ roxr_instruction ::= ROXR shift_tail
   psiImplPackage = "com.yanncebron.m68kplugin.lang.psi.directive.impl"
   parserClass = "com.yanncebron.m68kplugin.lang.M68kDirectivesParser"
   implements("(blk|set|equr|even|odd|dc|dcb|ds|incbin|incdir|include|rsset|rsreset|rs)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
-  implements("(opt|org|macro|endm|mexit|macroparameter|macrocall|end|section|addwatch|jumperr|jumpptr|list|nolist|page|nopage|plen|llen|spc|inline|einline)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
+  implements("(opt|org|macro|endm|mexit|macro_parameter|macro_call|end|section|addwatch|jumperr|jumpptr|list|nolist|page|nopage|plen|llen|spc|inline|einline)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(text|cseg|code|code_c|code_f|data|dseg|data_c|data_f|bss|bss_c|bss_f)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("equ_directive_base") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
 }
@@ -835,7 +835,7 @@ private directives ::= equ_directive |
                        endm_directive |
                        mexit_directive |
                        macro_parameter_directive |
-                       macrocall_directive |
+                       macro_call_directive |
                        end_directive |
                        section_directive |
                        text_directive |
@@ -1039,11 +1039,11 @@ macro_parameter_directive ::= BACKSLASH macro_parameter_index_parameter
   ]
 }
 
-private macrocall_parameter ::= adm_group_all
+private macro_call_parameter ::= adm_group_all
 {
   name = "macro parameter"
 }
-macrocall_directive ::= <<afterWhitespace>> ID macrocall_parameter? (COMMA macrocall_parameter)*
+macro_call_directive ::= <<afterWhitespace>> ID macro_call_parameter? (COMMA macro_call_parameter)*
 {
   mixin = "com.yanncebron.m68kplugin.lang.psi.directive.impl.M68kMacrocallDirectiveMixIn"
 }

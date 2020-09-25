@@ -27,19 +27,19 @@ public class MacrocallParsingTest extends M68kParsingTestCase {
     super("macrocall");
   }
 
-  public void testMacrocallNoArgs() throws IOException {
+  public void testMacroCallNoArgs() throws IOException {
     doCodeTest(" MACRO_NAME");
   }
 
-  public void testMacrocallSingleArg() throws IOException {
+  public void testMacroCallSingleArg() throws IOException {
     doCodeTest(" MACRO_NAME arg");
   }
 
-  public void testMacrocallMultipleArgs() throws IOException {
+  public void testMacroCallMultipleArgs() throws IOException {
     doCodeTest(" MACRO_NAME d7,arg");
   }
 
-  public void testMacrocallMultipleArgsMissingArg() throws IOException {
+  public void testMacroCallMultipleArgsMissingArg() throws IOException {
     doCodeTest(" MACRO_NAME d7,");
   }
 
