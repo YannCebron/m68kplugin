@@ -116,7 +116,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitAlignDirective(@NotNull M68kAlignDirective o) {
-    visitPsiElement(o);
+    visitDirective(o);
   }
 
   public void visitAndExpression(@NotNull M68kAndExpression o) {
@@ -300,7 +300,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitCnopDirective(@NotNull M68kCnopDirective o) {
-    visitPsiElement(o);
+    visitDirective(o);
   }
 
   public void visitCodeCDirective(@NotNull M68kCodeCDirective o) {
