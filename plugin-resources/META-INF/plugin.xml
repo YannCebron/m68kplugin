@@ -113,7 +113,9 @@
         implementationClass="com.yanncebron.m68kplugin.editor.M68kMoveLeftRightHandler"/>
     <extendWordSelectionHandler
         implementation="com.yanncebron.m68kplugin.editor.M68kLabelBlocksSelectionHandler"/>
-
+    <lang.foldingBuilder
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.editor.M68kFoldingBuilder"/>
 
     <lang.documentationProvider
         language="M68k"

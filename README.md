@@ -35,6 +35,7 @@ Please see [Plan](plan.md) for planned features and ideas.
 * Smart *Edit|Extend/Shrink Selection*
 * *Code|Move Element Left/Right* for `exg`, binary expressions, register list, `dc` values
 * Spellchecker
+* Code Folding  
 * Live Templates
 
 ### IDE

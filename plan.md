@@ -105,7 +105,8 @@
 - documentation:
   - quick doc/hover for number literals: dec/hex/oct/bin
   - quick doc/hover for `equ`/`equr`/`=` directives
-- code folding `CustomFoldingBuilder`
+- **WIP** code folding
+  - fold by default + settings for ?!
 - macro call: parameter info/preview referring place
 
 ## Inspections
