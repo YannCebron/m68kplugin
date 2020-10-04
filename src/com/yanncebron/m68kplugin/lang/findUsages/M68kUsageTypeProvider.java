@@ -21,6 +21,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.usages.impl.rules.UsageType;
 import com.intellij.usages.impl.rules.UsageTypeProvider;
 import com.yanncebron.m68kplugin.M68kBundle;
+import com.yanncebron.m68kplugin.lang.M68kLanguage;
 import com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
@@ -36,6 +37,10 @@ public class M68kUsageTypeProvider implements UsageTypeProvider {
   @Nullable
   @Override
   public UsageType getUsageType(PsiElement element) {
+    if (element.getLanguage() != M68kLanguage.INSTANCE) {
+      return null;
+    }
+    
     if (PsiTreeUtil.getParentOfType(element, M68kDirective.class) != null) {
       return DIRECTIVE;
     }
