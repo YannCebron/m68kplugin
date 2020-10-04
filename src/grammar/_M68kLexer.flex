@@ -64,7 +64,9 @@ HEXNUMBER=\$\p{XDigit}+
 OCTNUMBER=@[0-7]+
 BINNUMBER=%[0|1]+
 
-STRING=('([^'\\]|\\.)*'|\"([^\"\\]|\\.)*\")  // todo no CRLF
+SINGLE_QUOTED_STRING='([^\\'\r\n]|\\[^\r\n])*'?
+DOUBLE_QUOTED_STRING=\"([^\\\"\r\n]|\\[^\r\n])*\"?
+
 ID=[_.]*[a-zA-Z][a-zA-Z_0-9]*
 LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
 
@@ -354,7 +356,8 @@ LABEL=[a-zA-Z][a-zA-Z_0-9]*  // todo without "./_" first char
   {BINNUMBER}                     { clearBranchIdMode(); return BIN_NUMBER; }
 
   {ID}                            { return ID; }
-  {STRING}                        { return STRING; }
+  {SINGLE_QUOTED_STRING}          { return STRING; }
+  {DOUBLE_QUOTED_STRING}          { return STRING; }
 }
 
 [^] { return BAD_CHARACTER; }

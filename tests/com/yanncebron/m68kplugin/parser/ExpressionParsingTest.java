@@ -97,8 +97,16 @@ public class ExpressionParsingTest extends M68kParsingTestCase {
     doCodeTest(" dc \"string\"");
   }
 
+  public void testStringExpressionDoubleQuoteNoClosingQuote() throws Exception {
+    doCodeTest(" dc \"string");
+  }
+
   public void testStringExpressionSingleQuote() throws Exception {
     doCodeTest(" dc 'string'");
+  }
+
+  public void testStringExpressionSingleQuoteNoClosingQuote() throws Exception {
+    doCodeTest(" dc 'string");
   }
 
   public void testParenExpression() throws Exception {
