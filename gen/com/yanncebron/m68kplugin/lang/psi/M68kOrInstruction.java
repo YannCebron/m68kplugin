@@ -39,6 +39,9 @@ public interface M68kOrInstruction extends M68kBoolInstructionBase {
   @NotNull
   List<M68kAdmAri> getAdmAriList();
 
+  @Nullable
+  M68kAdmCcr getAdmCcr();
+
   @NotNull
   List<M68kAdmDrd> getAdmDrdList();
 
@@ -50,5 +53,8 @@ public interface M68kOrInstruction extends M68kBoolInstructionBase {
 
   @Nullable
   M68kAdmPci getAdmPci();
+
+  @Nullable
+  M68kAdmSr getAdmSr();
 
 }

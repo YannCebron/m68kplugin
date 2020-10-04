@@ -76,6 +76,12 @@ public class M68kEorInstructionImpl extends M68kBoolInstructionBaseImpl implemen
   }
 
   @Override
+  @Nullable
+  public M68kAdmCcr getAdmCcr() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmCcr.class);
+  }
+
+  @Override
   @NotNull
   public List<M68kAdmDrd> getAdmDrdList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmDrd.class);
@@ -97,6 +103,12 @@ public class M68kEorInstructionImpl extends M68kBoolInstructionBaseImpl implemen
   @Nullable
   public M68kAdmPci getAdmPci() {
     return PsiTreeUtil.getChildOfType(this, M68kAdmPci.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmSr getAdmSr() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmSr.class);
   }
 
 }

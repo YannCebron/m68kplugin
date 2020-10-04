@@ -41,7 +41,6 @@
   - `printt`/`printv`
   - `auto`
   - `struct`/`estruct`
-- `or.w #$0700,sr` -> `ori`
 - `include`/`incbin` path without quotes
 - in expressions, mnemonic parsed as instruction, not identifier (`size = (bpls*bpl)`)
 - add missing expression operators (XOR?)

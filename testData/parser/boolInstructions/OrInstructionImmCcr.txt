@@ -1,0 +1,12 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kOrInstructionImpl(OR_INSTRUCTION)
+    PsiElement(or)('or')
+    PsiWhiteSpace(' ')
+    M68kAdmImmImpl(ADM_IMM)
+      PsiElement(#)('#')
+      M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+        PsiElement(hex_number)('$0700')
+    PsiElement(,)(',')
+    M68kAdmCcrImpl(ADM_CCR)
+      PsiElement(ccr)('ccr')

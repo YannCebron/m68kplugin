@@ -79,8 +79,20 @@ public class BoolInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" or.l d0,$50000");
   }
 
+  public void testOrInstructionImmSr() throws IOException {
+    doCodeTest(" or #$0700,sr");
+  }
+
+  public void testOrInstructionImmCcr() throws IOException {
+    doCodeTest(" or #$0700,ccr");
+  }
+
   public void testOriInstructionDrd() throws IOException {
     doCodeTest(" ori #0,d1");
+  }
+
+  public void testOriInstructionImmSr() throws IOException {
+    doCodeTest(" ori #$0700,sr");
   }
 
   public void testEorInstructionDrdDrd() throws IOException {
