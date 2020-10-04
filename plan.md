@@ -127,6 +127,11 @@
 - multiple `opt` directives (?)
 - label naming conventions
 - cyclic `include`
+- expression:
+  - type check
+  - range check  
+  - simplify
+  - convert numeric literal to other bases
 
 ## Navigation
 
