@@ -18,51 +18,10 @@ package com.yanncebron.m68kplugin.lang.psi.directive;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
-import com.yanncebron.m68kplugin.lang.psi.M68kAdmAbs;
-import com.yanncebron.m68kplugin.lang.psi.M68kAdmAdi;
-import com.yanncebron.m68kplugin.lang.psi.M68kAdmAix;
-import com.yanncebron.m68kplugin.lang.psi.M68kAdmApd;
-import com.yanncebron.m68kplugin.lang.psi.M68kAdmApi;
-import com.yanncebron.m68kplugin.lang.psi.M68kAdmArd;
-import com.yanncebron.m68kplugin.lang.psi.M68kAdmAri;
-import com.yanncebron.m68kplugin.lang.psi.M68kAdmDrd;
-import com.yanncebron.m68kplugin.lang.psi.M68kAdmImm;
-import com.yanncebron.m68kplugin.lang.psi.M68kAdmPcd;
-import com.yanncebron.m68kplugin.lang.psi.M68kAdmPci;
 
 public interface M68kMacroCallDirective extends M68kDirective {
 
   @NotNull
-  List<M68kAdmAbs> getAdmAbsList();
-
-  @NotNull
-  List<M68kAdmAdi> getAdmAdiList();
-
-  @NotNull
-  List<M68kAdmAix> getAdmAixList();
-
-  @NotNull
-  List<M68kAdmApd> getAdmApdList();
-
-  @NotNull
-  List<M68kAdmApi> getAdmApiList();
-
-  @NotNull
-  List<M68kAdmArd> getAdmArdList();
-
-  @NotNull
-  List<M68kAdmAri> getAdmAriList();
-
-  @NotNull
-  List<M68kAdmDrd> getAdmDrdList();
-
-  @NotNull
-  List<M68kAdmImm> getAdmImmList();
-
-  @NotNull
-  List<M68kAdmPcd> getAdmPcdList();
-
-  @NotNull
-  List<M68kAdmPci> getAdmPciList();
+  List<M68kMacroCallParameter> getMacroCallParameterList();
 
 }

@@ -737,10 +737,10 @@ public class M68kDirectivesParser {
 
   /* ********************************************************** */
   // adm_group_all
-  static boolean macro_call_parameter(PsiBuilder b, int l) {
+  public static boolean macro_call_parameter(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "macro_call_parameter")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, null, "<macro parameter>");
+    Marker m = enter_section_(b, l, _NONE_, MACRO_CALL_PARAMETER, "<macro parameter>");
     r = adm_group_all(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
