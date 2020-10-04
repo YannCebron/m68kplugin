@@ -93,9 +93,7 @@
   - `a7` <=> `sp`
 - `refactoring.extractIncludeHandler`
 - duplicates detection, "extract macro"
-- Find Usages:
-  - check `LITERAL_USAGE` in `M68kUsageTypeProvider`
-  - distinguish usage type:
+- Find Usages - distinguish usage type:
     - expression
     - directive
     - conditional assembly directive
