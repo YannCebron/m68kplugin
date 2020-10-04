@@ -2473,10 +2473,35 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // register_list COMMA (adm_ari | adm_apd | adm_adi | adm_aix | adm_abs)
+  static boolean movem_from_tail(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movem_from_tail")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = register_list(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && movem_from_tail_2(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
+  private static boolean movem_from_tail_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movem_from_tail_2")) return false;
+    boolean r;
+    r = adm_ari(b, l + 1);
+    if (!r) r = adm_apd(b, l + 1);
+    if (!r) r = adm_adi(b, l + 1);
+    if (!r) r = adm_aix(b, l + 1);
+    if (!r) r = adm_abs(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
   // MOVEM data_size_word_long?
   //                       (
-  //                         ( register_list COMMA (adm_ari | adm_apd | adm_adi | adm_aix | adm_abs) ) |
-  //                         ( (adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA register_list )
+  //                          movem_from_tail  |
+  //                          movem_to_tail
   //                       )
   public static boolean movem_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "movem_instruction")) return false;
@@ -2498,48 +2523,23 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // ( register_list COMMA (adm_ari | adm_apd | adm_adi | adm_aix | adm_abs) ) |
-  //                         ( (adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA register_list )
+  // movem_from_tail  |
+  //                          movem_to_tail
   private static boolean movem_instruction_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "movem_instruction_2")) return false;
     boolean r;
-    Marker m = enter_section_(b);
-    r = movem_instruction_2_0(b, l + 1);
-    if (!r) r = movem_instruction_2_1(b, l + 1);
-    exit_section_(b, m, null, r);
+    r = movem_from_tail(b, l + 1);
+    if (!r) r = movem_to_tail(b, l + 1);
     return r;
   }
 
-  // register_list COMMA (adm_ari | adm_apd | adm_adi | adm_aix | adm_abs)
-  private static boolean movem_instruction_2_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "movem_instruction_2_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = register_list(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && movem_instruction_2_0_2(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
-  private static boolean movem_instruction_2_0_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "movem_instruction_2_0_2")) return false;
-    boolean r;
-    r = adm_ari(b, l + 1);
-    if (!r) r = adm_apd(b, l + 1);
-    if (!r) r = adm_adi(b, l + 1);
-    if (!r) r = adm_aix(b, l + 1);
-    if (!r) r = adm_abs(b, l + 1);
-    return r;
-  }
-
+  /* ********************************************************** */
   // (adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA register_list
-  private static boolean movem_instruction_2_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "movem_instruction_2_1")) return false;
+  static boolean movem_to_tail(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movem_to_tail")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = movem_instruction_2_1_0(b, l + 1);
+    r = movem_to_tail_0(b, l + 1);
     r = r && consumeToken(b, COMMA);
     r = r && register_list(b, l + 1);
     exit_section_(b, m, null, r);
@@ -2547,8 +2547,8 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   // adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-  private static boolean movem_instruction_2_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "movem_instruction_2_1_0")) return false;
+  private static boolean movem_to_tail_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movem_to_tail_0")) return false;
     boolean r;
     r = adm_api(b, l + 1);
     if (!r) r = adm_ari(b, l + 1);
