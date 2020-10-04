@@ -2,9 +2,11 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kAslInstructionImpl(ASL_INSTRUCTION)
     PsiElement(asl)('asl')
-  PsiWhiteSpace(' ')
-  PsiElement(#)('#')
-  PsiElement(dec_number)('1')
-  PsiElement(,)(',')
-  PsiErrorElement:<data register> expected
-    <empty list>
+    PsiWhiteSpace(' ')
+    M68kAdmImmImpl(ADM_IMM)
+      PsiElement(#)('#')
+      M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+        PsiElement(dec_number)('1')
+    PsiElement(,)(',')
+    PsiErrorElement:<data register> expected
+      <empty list>

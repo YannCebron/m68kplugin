@@ -780,14 +780,15 @@ fake shift_instruction_base ::=
   extends = data_sized
 }
 
+private shift_tail_drd ::= data_size_all? (adm_drd | adm_imm) COMMA adm_drd
+{
+  pin = 2
+}
+private shift_tail_other ::= data_size_word? (adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs)
 private shift_tail ::=
   (
-    ( data_size_all?
-      (adm_drd | adm_imm) COMMA adm_drd
-    ) |
-    ( data_size_word?
-      (adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs)
-    )
+     shift_tail_drd |
+     shift_tail_other
   )
 
 asl_instruction ::= ASL shift_tail
