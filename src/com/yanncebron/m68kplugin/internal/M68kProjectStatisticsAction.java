@@ -65,6 +65,7 @@ public class M68kProjectStatisticsAction extends AnAction {
     Map<Class<? extends M68kPsiElement>, Integer> conditional = createMap();
 
     List<String> fileInfos = new ArrayList<>();
+    final int[] totalErrors = {0};
 
     ProgressManager.getInstance().runProcessWithProgressSynchronously(() ->
       ApplicationManager.getApplication().runReadAction(() -> {
@@ -86,6 +87,7 @@ public class M68kProjectStatisticsAction extends AnAction {
           final M68kFile m68kPsiFile = (M68kFile) psiFile;
 
           final PsiErrorElement[] errors = m68kPsiFile.findChildrenByClass(PsiErrorElement.class);
+          totalErrors[0] = totalErrors[0] + errors.length;
 
           final VirtualFile[] directInclude = fileIncludeManager.getIncludedFiles(virtualFile, true);
           final VirtualFile[] recursiveInclude = fileIncludeManager.getIncludedFiles(virtualFile, true, true);
@@ -109,7 +111,7 @@ public class M68kProjectStatisticsAction extends AnAction {
       }), "Scanning Files...", true, project);
 
     StringBuilder sb = new StringBuilder();
-    sb.append("Total files: ").append(fileInfos.size()).append("\n\n");
+    sb.append("Total files: ").append(fileInfos.size()).append("  Total Errors: ").append(totalErrors[0]).append("\n\n");
     Collections.sort(fileInfos);
     sb.append("File                                      Errors | include (recursive) [incbin]\n");
     sb.append(StringUtil.join(fileInfos, "\n"));
