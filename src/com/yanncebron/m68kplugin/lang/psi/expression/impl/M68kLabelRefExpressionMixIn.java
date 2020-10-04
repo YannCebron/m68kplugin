@@ -24,17 +24,13 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.PsiReferenceBase;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Function;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
 import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
-import com.yanncebron.m68kplugin.lang.psi.conditional.M68kIfdConditionalAssemblyDirective;
-import com.yanncebron.m68kplugin.lang.psi.conditional.M68kIfndConditionalAssemblyDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kEquDirectiveBase;
-import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -62,8 +58,6 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
       @NotNull
       private List<M68kLabelBase> getAllLabels() { // todo
         List<M68kLabelBase> labels = new SmartList<>();
-        boolean inExpressionOrLabelDirective = PsiTreeUtil.getParentOfType(getElement(),
-          M68kExpression.class, M68kIfdConditionalAssemblyDirective.class, M68kIfndConditionalAssemblyDirective.class) != null;
         getElement().getContainingFile().acceptChildren(new M68kVisitor() {
           @Override
           public void visitLabelBase(@NotNull M68kLabelBase o) {
@@ -72,7 +66,7 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
 
           @Override
           public void visitEquDirectiveBase(@NotNull M68kEquDirectiveBase o) {
-            if (inExpressionOrLabelDirective) labels.add(o.getLabel());
+            labels.add(o.getLabel());
           }
         });
         return labels;
