@@ -128,7 +128,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitAndiInstruction(@NotNull M68kAndiInstruction o) {
-    visitBoolImmediateInstructionBase(o);
+    visitBoolInstructionBase(o);
   }
 
   public void visitAslInstruction(@NotNull M68kAslInstruction o) {
@@ -216,10 +216,6 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitBneInstruction(@NotNull M68kBneInstruction o) {
     visitInstruction(o);
-  }
-
-  public void visitBoolImmediateInstructionBase(@NotNull M68kBoolImmediateInstructionBase o) {
-    visitBoolInstructionBase(o);
   }
 
   public void visitBoolInstructionBase(@NotNull M68kBoolInstructionBase o) {
@@ -467,7 +463,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitEoriInstruction(@NotNull M68kEoriInstruction o) {
-    visitBoolImmediateInstructionBase(o);
+    visitBoolInstructionBase(o);
   }
 
   public void visitEquDirective(@NotNull M68kEquDirective o) {
@@ -730,7 +726,8 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitNotInstruction(@NotNull M68kNotInstruction o) {
-    visitBoolInstructionBase(o);
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitNumberExpression(@NotNull M68kNumberExpression o) {
@@ -758,7 +755,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitOriInstruction(@NotNull M68kOriInstruction o) {
-    visitBoolImmediateInstructionBase(o);
+    visitBoolInstructionBase(o);
   }
 
   public void visitPageDirective(@NotNull M68kPageDirective o) {

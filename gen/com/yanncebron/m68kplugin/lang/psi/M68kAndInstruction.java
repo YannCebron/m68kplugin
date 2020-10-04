@@ -21,40 +21,4 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kAndInstruction extends M68kBoolInstructionBase {
 
-  @NotNull
-  List<M68kAdmAbs> getAdmAbsList();
-
-  @NotNull
-  List<M68kAdmAdi> getAdmAdiList();
-
-  @NotNull
-  List<M68kAdmAix> getAdmAixList();
-
-  @NotNull
-  List<M68kAdmApd> getAdmApdList();
-
-  @NotNull
-  List<M68kAdmApi> getAdmApiList();
-
-  @NotNull
-  List<M68kAdmAri> getAdmAriList();
-
-  @Nullable
-  M68kAdmCcr getAdmCcr();
-
-  @NotNull
-  List<M68kAdmDrd> getAdmDrdList();
-
-  @Nullable
-  M68kAdmImm getAdmImm();
-
-  @Nullable
-  M68kAdmPcd getAdmPcd();
-
-  @Nullable
-  M68kAdmPci getAdmPci();
-
-  @Nullable
-  M68kAdmSr getAdmSr();
-
 }

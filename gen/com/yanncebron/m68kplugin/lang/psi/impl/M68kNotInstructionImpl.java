@@ -24,7 +24,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kNotInstructionImpl extends M68kBoolInstructionBaseImpl implements M68kNotInstruction {
+public class M68kNotInstructionImpl extends M68kDataSizedImpl implements M68kNotInstruction {
 
   public M68kNotInstructionImpl(@NotNull ASTNode node) {
     super(node);

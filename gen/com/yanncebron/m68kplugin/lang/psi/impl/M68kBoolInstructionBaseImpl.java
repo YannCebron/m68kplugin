@@ -24,7 +24,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kBoolInstructionBaseImpl extends M68kDataSizedImpl implements M68kBoolInstructionBase {
+public class M68kBoolInstructionBaseImpl extends M68kBoolInstructionBaseMixIn implements M68kBoolInstructionBase {
 
   public M68kBoolInstructionBaseImpl(@NotNull ASTNode node) {
     super(node);
@@ -37,6 +37,78 @@ public class M68kBoolInstructionBaseImpl extends M68kDataSizedImpl implements M6
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @NotNull
+  public List<M68kAdmAbs> getAdmAbsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAbs.class);
+  }
+
+  @Override
+  @NotNull
+  public List<M68kAdmAdi> getAdmAdiList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAdi.class);
+  }
+
+  @Override
+  @NotNull
+  public List<M68kAdmAix> getAdmAixList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAix.class);
+  }
+
+  @Override
+  @NotNull
+  public List<M68kAdmApd> getAdmApdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmApd.class);
+  }
+
+  @Override
+  @NotNull
+  public List<M68kAdmApi> getAdmApiList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmApi.class);
+  }
+
+  @Override
+  @NotNull
+  public List<M68kAdmAri> getAdmAriList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAri.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmCcr getAdmCcr() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmCcr.class);
+  }
+
+  @Override
+  @NotNull
+  public List<M68kAdmDrd> getAdmDrdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmDrd.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmImm getAdmImm() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmImm.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmPcd getAdmPcd() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmPcd.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmPci getAdmPci() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmPci.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmSr getAdmSr() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmSr.class);
   }
 
 }

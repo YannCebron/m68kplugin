@@ -17,11 +17,12 @@
 package com.yanncebron.m68kplugin.lang.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.yanncebron.m68kplugin.lang.psi.M68kBoolImmediateInstructionBase;
+import com.yanncebron.m68kplugin.lang.psi.M68kBoolInstructionBase;
 import org.jetbrains.annotations.NotNull;
 
-abstract class M68kBoolImmediateInstructionBaseMixIn extends M68kBoolInstructionBaseImpl implements M68kBoolImmediateInstructionBase {
-  protected M68kBoolImmediateInstructionBaseMixIn(@NotNull ASTNode node) {
+abstract class M68kBoolInstructionBaseMixIn extends M68kDataSizedImpl implements M68kBoolInstructionBase {
+
+  protected M68kBoolInstructionBaseMixIn(@NotNull ASTNode node) {
     super(node);
   }
 

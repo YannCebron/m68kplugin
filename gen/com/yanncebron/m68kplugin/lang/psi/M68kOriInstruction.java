@@ -19,9 +19,27 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kOriInstruction extends M68kBoolImmediateInstructionBase {
+public interface M68kOriInstruction extends M68kBoolInstructionBase {
 
   @Nullable
-  M68kAdmImm getAdmImm();
+  M68kAdmAbs getAdmAbs();
+
+  @Nullable
+  M68kAdmAdi getAdmAdi();
+
+  @Nullable
+  M68kAdmAix getAdmAix();
+
+  @Nullable
+  M68kAdmApd getAdmApd();
+
+  @Nullable
+  M68kAdmApi getAdmApi();
+
+  @Nullable
+  M68kAdmAri getAdmAri();
+
+  @Nullable
+  M68kAdmDrd getAdmDrd();
 
 }

@@ -422,8 +422,7 @@ divu_instruction ::= DIVU mul_div_tail
 // Boolean ==================================================================
 ;
 {
-  extends("(and|or|eor|not)_instruction") = bool_instruction_base
-  extends("(andi|ori|eori)_instruction") = bool_immediate_instruction_base
+  extends("(and|andi|or|ori|eor|eori)_instruction") = bool_instruction_base
 }
 private bool_instructions ::= and_instruction |
                               andi_instruction |
@@ -432,9 +431,10 @@ private bool_instructions ::= and_instruction |
                               eor_instruction |
                               eori_instruction |
                               not_instruction
-fake bool_instruction_base ::=
+fake bool_instruction_base ::= bool_tail
 {
   extends = data_sized
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kBoolInstructionBaseMixIn"
 }
 
 private bool_tail ::= data_size_all?
@@ -448,13 +448,6 @@ private bool_i_tail ::= (
                           tail_data_size_all___imm__all_except_ard_pc_imm
                         )
 
-// todo fix pin on adm_imm for NotNull in inheritors
-fake bool_immediate_instruction_base ::= bool_i_tail
-{
-  extends = bool_instruction_base
-  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kBoolImmediateInstructionBaseMixIn"
-}
-
 and_instruction ::= AND bool_tail
 andi_instruction ::= ANDI bool_i_tail
 
@@ -465,6 +458,9 @@ eor_instruction ::= EOR bool_tail
 eori_instruction ::= EORI bool_i_tail
 
 not_instruction ::= NOT tail_data_size_all___all_except_ard_pc_imm
+{
+  extends = data_sized
+}
 
 
 // Misc ==================================================================
