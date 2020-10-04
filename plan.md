@@ -104,8 +104,8 @@
 
 - `EnterHandlerDelegate` smart indent? or `LineIndentProvider`
 - expand/shrink selection:
-  - "blocks"
-  - macro/conditional assembly blocks `BraceMatcherBasedSelectioner`
+  - **WIP** "blocks"
+  - macro/conditional assembly blocks
 - move left/right: swap src|dest
 - formatter
 - documentation:
