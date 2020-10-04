@@ -955,6 +955,9 @@ incbin_directive ::= INCBIN include_path (COMMA expression)? (COMMA expression)?
 incdir_directive ::= INCDIR include_path
 {
   pin = 1
+  methods = [
+    getIncludePath
+  ]
 }
 include_directive ::= INCLUDE include_path
 {

@@ -20,6 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncbinDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncdirDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncludeDirective;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -52,6 +53,11 @@ public class M68kPsiImplUtil {
 
   @Nullable
   public static String getIncludePath(M68kIncludeDirective includeDirective) {
+    return _getIncludePath(includeDirective);
+  }
+
+  @Nullable
+  public static String getIncludePath(M68kIncdirDirective includeDirective) {
     return _getIncludePath(includeDirective);
   }
 

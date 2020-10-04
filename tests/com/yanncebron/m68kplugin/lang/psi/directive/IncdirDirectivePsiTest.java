@@ -13,15 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.yanncebron.m68kplugin.lang.psi.directive;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
+import com.yanncebron.m68kplugin.lang.psi.M68kPsiTestCase;
+import org.jetbrains.annotations.NotNull;
 
-public interface M68kIncdirDirective extends M68kDirective {
+public class IncdirDirectivePsiTest extends M68kPsiTestCase {
 
-  @Nullable
-  String getIncludePath();
+  public void testMissingIncludePath() {
+    final M68kIncdirDirective directive = parse("incdir ");
 
+    assertNull(directive.getIncludePath());
+  }
+
+  public void testWithQuotes() {
+    final M68kIncdirDirective directive = parse("incdir \"my/path\"");
+
+    assertEquals("my/path", directive.getIncludePath());
+  }
+
+  @NotNull
+  private M68kIncdirDirective parse(String text) {
+    return assertInstanceOf(doParse(" " + text), M68kIncdirDirective.class);
+  }
 }
