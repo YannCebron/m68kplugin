@@ -2476,13 +2476,14 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // register_list COMMA (adm_ari | adm_apd | adm_adi | adm_aix | adm_abs)
   static boolean movem_from_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "movem_from_tail")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
     r = register_list(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && movem_from_tail_2(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
+    p = r; // pin = 1
+    r = r && report_error_(b, consumeToken(b, COMMA));
+    r = p && movem_from_tail_2(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   // adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
@@ -2537,13 +2538,14 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // (adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA register_list
   static boolean movem_to_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "movem_to_tail")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
     r = movem_to_tail_0(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && register_list(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
+    p = r; // pin = 1
+    r = r && report_error_(b, consumeToken(b, COMMA));
+    r = p && register_list(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   // adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs

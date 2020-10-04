@@ -272,7 +272,13 @@ moveq_instruction ::= MOVEQ data_size_long?
 }
 
 private movem_from_tail ::= register_list COMMA (adm_ari | adm_apd | adm_adi | adm_aix | adm_abs)
+{
+  pin = 1
+}
 private movem_to_tail ::= (adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA register_list
+{
+  pin = 1
+}
 movem_instruction ::= MOVEM data_size_word_long?
                       (
                          movem_from_tail  |
