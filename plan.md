@@ -94,7 +94,7 @@
   - `a7` <=> `sp`
 - `refactoring.extractIncludeHandler`
 - duplicates detection, "extract macro"
-- Find Usages: 
+- Find Usages:
   - check `LITERAL_USAGE` in `M68kUsageTypeProvider`
   - distinguish usage type:
     - expression
@@ -126,6 +126,7 @@
 - check optimizations from vasm/DevPac
 - multiple `opt` directives (?)
 - label naming conventions
+- cyclic `include`
 
 ## Navigation
 
@@ -137,6 +138,7 @@
 - breadcrumbs
 - Goto Related: `.i`/binary file -> including files
 - Gutter Icon: `include` all included files (recursively)
+- `include` UML visualization
 
 ## IDE
 
