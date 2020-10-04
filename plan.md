@@ -93,10 +93,6 @@
   - `a7` <=> `sp`
 - `refactoring.extractIncludeHandler`
 - duplicates detection, "extract macro"
-- Find Usages - distinguish usage type:
-    - expression
-    - directive
-    - conditional assembly directive
 
 ## Editing
 

@@ -31,7 +31,7 @@ Please see [Plan](plan.md) for planned features and ideas.
   * Highlight matching brace/paired directives
 * Parsing with semantic error highlighting
 * Documentation for mnemonics
-* Labels: *Navigate|Declaration or Usages*, *Edit|Find Usages*, *Refactor|Rename*
+* Labels: *Navigate|Declaration or Usages*, *Edit|Find Usages* (grouped by type), *Refactor|Rename*
 * Smart *Edit|Extend/Shrink Selection*
 * *Code|Move Element Left/Right* for `exg`, binary expressions, register list, `dc` values
 * Spellchecker

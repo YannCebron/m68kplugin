@@ -20,16 +20,35 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.usages.impl.rules.UsageType;
 import com.intellij.usages.impl.rules.UsageTypeProvider;
+import com.yanncebron.m68kplugin.M68kBundle;
+import com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kStringExpression;
 import org.jetbrains.annotations.Nullable;
 
 public class M68kUsageTypeProvider implements UsageTypeProvider {
 
+  static final UsageType EXPRESSION = new UsageType(M68kBundle.message("usage.type.expression"));
+  static final UsageType DIRECTIVE = new UsageType(M68kBundle.message("usage.type.directive"));
+  static final UsageType CONDITIONAL_ASSEMBLY = new UsageType(M68kBundle.message("usage.type.conditional.assembly"));
+
   @Nullable
   @Override
   public UsageType getUsageType(PsiElement element) {
+    if (PsiTreeUtil.getParentOfType(element, M68kDirective.class) != null) {
+      return DIRECTIVE;
+    }
+    if (PsiTreeUtil.getParentOfType(element, M68kConditionalAssemblyDirective.class) != null) {
+      return CONDITIONAL_ASSEMBLY;
+    }
+
+    // search for text occurrences
     if (PsiTreeUtil.getParentOfType(element, M68kStringExpression.class) != null) {
       return UsageType.LITERAL_USAGE;
+    }
+    if (PsiTreeUtil.getParentOfType(element, M68kExpression.class) != null) {
+      return EXPRESSION;
     }
     return null;
   }
