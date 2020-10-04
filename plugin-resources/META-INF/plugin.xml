@@ -50,11 +50,9 @@
         class="com.yanncebron.m68kplugin.lang.stubs.M68kStubElementTypesHolder"/>
     <stubIndex implementation="com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex"/>
 
-    <!--  todo both do nothing?  -->
-    <!--    <lang.quoteHandler-->
-    <!--        language="M68k"-->
-    <quoteHandler fileType="M68k Assembler"
-                  className="com.yanncebron.m68kplugin.lang.M68kQuoteHandler"/>
+    <lang.quoteHandler
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.lang.M68kQuoteHandler"/>
     <lang.braceMatcher
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.lang.M68kBraceMatcher"/>
