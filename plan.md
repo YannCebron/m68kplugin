@@ -108,6 +108,9 @@
 - **WIP** code folding
   - fold by default + settings for ?!
 - macro call: parameter info/preview referring place
+- `dc`:
+  - join lines
+  - smart enter handler to split value list
 
 ## Inspections
 
