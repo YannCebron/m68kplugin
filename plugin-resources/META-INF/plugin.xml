@@ -93,6 +93,11 @@
         forClass="com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression"
         implementationClass="com.yanncebron.m68kplugin.lang.psi.expression.impl.M68kLabelRefExpressionElementManipulator"/>
 
+    <codeStyleSettingsProvider
+        implementation="com.yanncebron.m68kplugin.settings.codestyle.M68kCodeStyleSettingsProvider"/>
+    <langCodeStyleSettingsProvider
+        implementation="com.yanncebron.m68kplugin.settings.codestyle.M68kLanguageCodeStyleSettingsProvider"/>
+
     <liveTemplateContext
         implementation="com.yanncebron.m68kplugin.template.M68kTemplateContextType"/>
     <defaultLiveTemplatesProvider
