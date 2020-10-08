@@ -136,6 +136,7 @@
   - macros
   - nest local labels
 - breadcrumbs
+- Quick Definition: better range for labels like `macro` etc. `ImplementationTextSelectioner`  
 - Goto Related: `.i`/binary file -> including files
 - Gutter Icon: `include` all included files (recursively)
 - `include` UML visualization
