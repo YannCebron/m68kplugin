@@ -39,10 +39,14 @@ public class M68kBraceMatcher implements PairedBraceMatcher {
       new BracePair(M68kTokenTypes.INLINE, M68kTokenTypes.EINLINE, true),
     },
     createConditionalAssemblyBracePairs(
-      M68kTokenTypes.IF, M68kTokenTypes.IFB, M68kTokenTypes.IFNB,
-      M68kTokenTypes.IFD, M68kTokenTypes.IFND, M68kTokenTypes.IFEQ,
-      M68kTokenTypes.IFGE, M68kTokenTypes.IFGT, M68kTokenTypes.IFLE, M68kTokenTypes.IFLT,
-      M68kTokenTypes.IFNE, M68kTokenTypes.ELSE, M68kTokenTypes.ELSEIF,
+      M68kTokenTypes.IF,
+      M68kTokenTypes.IFB, M68kTokenTypes.IFNB,
+      M68kTokenTypes.IFC, M68kTokenTypes.IFNC,
+      M68kTokenTypes.IFD, M68kTokenTypes.IFND,
+      M68kTokenTypes.IFEQ, M68kTokenTypes.IFNE,
+      M68kTokenTypes.IFGE, M68kTokenTypes.IFGT,
+      M68kTokenTypes.IFLE, M68kTokenTypes.IFLT,
+      M68kTokenTypes.ELSE, M68kTokenTypes.ELSEIF,
       M68kTokenTypes.IFMACROD, M68kTokenTypes.IFMACROND)
   );
 
