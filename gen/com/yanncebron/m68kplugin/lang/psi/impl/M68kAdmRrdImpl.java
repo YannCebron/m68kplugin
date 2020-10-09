@@ -24,6 +24,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
 public class M68kAdmRrdImpl extends ASTWrapperPsiElement implements M68kAdmRrd {
 
@@ -50,6 +51,12 @@ public class M68kAdmRrdImpl extends ASTWrapperPsiElement implements M68kAdmRrd {
   @Nullable
   public M68kAdmDrd getAdmDrd() {
     return PsiTreeUtil.getChildOfType(this, M68kAdmDrd.class);
+  }
+
+  @Override
+  @NotNull
+  public M68kRegister getRegister() {
+    return M68kPsiImplUtil.getRegister(this);
   }
 
 }

@@ -26,12 +26,12 @@ public class ExgInstructionPsiTest extends M68kPsiTestCase {
     final M68kAdmRrd source = assertInstanceOf(instruction.getSource(), M68kAdmRrd.class);
     assertNull(source.getAdmArd());
     final M68kAdmDrd sourceDrd = assertInstanceOf(source.getAdmDrd(), M68kAdmDrd.class);
-    assertEquals("d0", sourceDrd.getText());
+    assertEquals(M68kRegister.D0, sourceDrd.getRegister());
 
     final M68kAdmRrd destination = assertInstanceOf(instruction.getDestination(), M68kAdmRrd.class);
     assertNull(destination.getAdmArd());
     final M68kAdmDrd destinationDrd = assertInstanceOf(destination.getAdmDrd(), M68kAdmDrd.class);
-    assertEquals("d1", destinationDrd.getText());
+    assertEquals(M68kRegister.D1, destinationDrd.getRegister());
   }
 
   public void testWithDataSize() {

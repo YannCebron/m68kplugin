@@ -24,12 +24,12 @@ public class MovepInstructionPsiTest extends M68kPsiTestCase {
     assertEquals(M68kDataSize.LONG, instruction.getDataSize());
     final M68kAdmDrd admDrd = instruction.getAdmDrd();
     assertNotNull(admDrd);
-    assertEquals("d0", admDrd.getText());
+    assertEquals(M68kRegister.D0, admDrd.getRegister());
 
     final M68kAdmAdi admAdi = instruction.getAdmAdi();
     assertNotNull(admAdi);
     final M68kAdmArd admArd = admAdi.getAdmArd();
-    assertEquals("a0", admArd.getText());
+    assertEquals(M68kRegister.A0, admArd.getRegister());
   }
 
   private M68kMovepInstruction parse(String text) {

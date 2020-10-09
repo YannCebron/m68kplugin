@@ -32,6 +32,7 @@ public class MoveqInstructionPsiTest extends M68kPsiTestCase {
     final M68kAdmDrd destination = instruction.getDestination();
     assertNotNull(destination);
     assertEquals("d0", destination.getText());
+    assertEquals(M68kRegister.D0, destination.getRegister());
   }
 
   public void testWithDataSize() {

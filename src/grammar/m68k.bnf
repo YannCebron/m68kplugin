@@ -146,16 +146,25 @@ register_list ::= register_range (DIV register_range)* {
 adm_drd ::= DATA_REGISTER
 {
   name = "data register"
+  methods = [
+    getRegister
+  ]
 }
 // a0 | sp
 adm_ard ::= ADDRESS_REGISTER | SP
 {
   name = "address register"
+  methods = [
+    getRegister
+  ]
 }
 // Rn
 adm_rrd ::= adm_drd | adm_ard
 {
   name = "data|address register"
+  methods = [
+    getRegister
+  ]
 }
 // Rn[.bwl] used in adm_ix/adm_pci
 adm_rrd_index ::= (adm_drd data_size_all?) | (adm_ard data_size_word_long?)

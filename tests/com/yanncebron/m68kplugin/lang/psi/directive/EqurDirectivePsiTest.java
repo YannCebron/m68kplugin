@@ -19,6 +19,7 @@ package com.yanncebron.m68kplugin.lang.psi.directive;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmDrd;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmRrd;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiTestCase;
+import com.yanncebron.m68kplugin.lang.psi.M68kRegister;
 
 public class EqurDirectivePsiTest extends M68kPsiTestCase {
 
@@ -29,7 +30,7 @@ public class EqurDirectivePsiTest extends M68kPsiTestCase {
     assertNotNull(admRrd);
     final M68kAdmDrd admDrd = admRrd.getAdmDrd();
     assertNotNull(admDrd);
-    assertEquals("d0", admDrd.getText());
+    assertEquals(M68kRegister.D0, admDrd.getRegister());
   }
 
   private M68kEqurDirective parse(String text) {

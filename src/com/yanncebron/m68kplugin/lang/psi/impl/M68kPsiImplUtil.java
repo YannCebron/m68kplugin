@@ -46,6 +46,26 @@ public class M68kPsiImplUtil {
     return commaNode != null && commaNode.getStartOffset() > sourceOrDestElement.getNode().getStartOffset();
   }
 
+  @NotNull
+  public static M68kRegister getRegister(M68kAdmDrd admElement) {
+    return _getRegister(admElement);
+  }
+
+  @NotNull
+  public static M68kRegister getRegister(M68kAdmArd admElement) {
+    return _getRegister(admElement);
+  }
+
+  @NotNull
+  public static M68kRegister getRegister(M68kAdmRrd admElement) {
+    return _getRegister(admElement);
+  }
+
+  @NotNull
+  private static M68kRegister _getRegister(M68kPsiElement admElement) {
+    return M68kRegister.find(admElement.getFirstChild().getNode().getElementType(), admElement.getText());
+  }
+
   @Nullable
   public static String getIncludePath(M68kIncbinDirective includeDirective) {
     return _getIncludePath(includeDirective);

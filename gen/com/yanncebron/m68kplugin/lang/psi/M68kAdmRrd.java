@@ -27,4 +27,7 @@ public interface M68kAdmRrd extends M68kPsiElement {
   @Nullable
   M68kAdmDrd getAdmDrd();
 
+  @NotNull
+  M68kRegister getRegister();
+
 }

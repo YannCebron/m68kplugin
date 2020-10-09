@@ -31,7 +31,7 @@ public class SwapInstructionPsiTest extends M68kPsiTestCase {
 
     final M68kAdmDrd admDrd = instruction.getAdmDrd();
     assertNotNull(admDrd);
-    assertEquals("d0", admDrd.getText());
+    assertEquals(M68kRegister.D0, admDrd.getRegister());
   }
 
   private M68kSwapInstruction parse(String text) {

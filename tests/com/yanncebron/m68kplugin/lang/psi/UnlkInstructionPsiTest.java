@@ -13,15 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.yanncebron.m68kplugin.lang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
+public class UnlkInstructionPsiTest extends M68kPsiTestCase {
 
-public interface M68kAdmDrd extends M68kPsiElement {
+  public void testUnlk() {
+    final M68kUnlkInstruction instruction = parse("unlk a0");
 
-  @NotNull
-  M68kRegister getRegister();
+    final M68kAdmArd admArd = instruction.getAdmArd();
+    assertNotNull(admArd);
+    assertEquals(M68kRegister.A0, admArd.getRegister());
+  }
+
+  private M68kUnlkInstruction parse(String text) {
+    return assertInstanceOf(doParse(" " + text), M68kUnlkInstruction.class);
+  }
 
 }

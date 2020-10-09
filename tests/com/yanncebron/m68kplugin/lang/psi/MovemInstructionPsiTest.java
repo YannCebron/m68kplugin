@@ -35,12 +35,12 @@ public class MovemInstructionPsiTest extends M68kPsiTestCase {
     assertNotNull(firstFrom);
     final M68kAdmDrd firstFromAdmDrd = firstFrom.getAdmDrd();
     assertNotNull(firstFromAdmDrd);
-    assertEquals("d1", firstFromAdmDrd.getText());
+    assertEquals(M68kRegister.D1, firstFromAdmDrd.getRegister());
     final M68kAdmRrd firstTo = firstRegisterRange.getTo();
     assertNotNull(firstTo);
     final M68kAdmDrd firstToAdmDrd = firstTo.getAdmDrd();
     assertNotNull(firstToAdmDrd);
-    assertEquals("d2", firstTo.getText());
+    assertEquals(M68kRegister.D2, firstToAdmDrd.getRegister());
 
     final M68kRegisterRange secondRegisterRange = registerRangeList.get(1);
     assertNull(secondRegisterRange.getTo());
@@ -48,7 +48,7 @@ public class MovemInstructionPsiTest extends M68kPsiTestCase {
 
     final M68kAdmAri admAri = instruction.getAdmAri();
     assertNotNull(admAri);
-    assertEquals("(a7)", admAri.getText());
+    assertEquals(M68kRegister.A7, admAri.getAdmArd().getRegister());
   }
 
   private M68kMovemInstruction parse(String text) {
