@@ -18,7 +18,9 @@ package com.yanncebron.m68kplugin.lang;
 
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import com.yanncebron.m68kplugin.M68kBundle;
 import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class M68kLanguage extends Language {
@@ -30,6 +32,12 @@ public class M68kLanguage extends Language {
 
   private M68kLanguage() {
     super(ID);
+  }
+
+  @NotNull
+  @Override
+  public String getDisplayName() {
+    return M68kBundle.message("general.m68k.assembler");
   }
 
   @Override
