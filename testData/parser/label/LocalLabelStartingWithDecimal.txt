@@ -1,0 +1,4 @@
+M68k.FILE
+  M68kLocalLabelImpl(LOCAL_LABEL)
+    PsiElement(.)('.')
+    PsiElement(id)('4label')

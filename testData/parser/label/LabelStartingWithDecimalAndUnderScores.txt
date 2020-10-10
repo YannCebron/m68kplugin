@@ -1,0 +1,3 @@
+M68k.FILE
+  M68kLabelImpl(LABEL)
+    PsiElement(id)('4la_bel123')

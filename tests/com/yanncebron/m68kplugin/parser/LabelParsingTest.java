@@ -35,6 +35,22 @@ public class LabelParsingTest extends M68kParsingTestCase {
     doCodeTest("label:");
   }
 
+  public void testLabelStartingWithDecimal() throws IOException {
+    doCodeTest("4label");
+  }
+
+  public void testLabelStartingWithMultipleDecimal() throws IOException {
+    doCodeTest("4321label");
+  }
+
+  public void testLabelStartingWithDecimalAndUnderScores() throws IOException {
+    doCodeTest("4la_bel123");
+  }
+
+  public void testLabelOnlyDecimalWrong() throws IOException {
+    doCodeTest("4");
+  }
+
   public void testLabelInstruction() throws IOException {
     doCodeTest("label nop");
   }
@@ -57,6 +73,10 @@ public class LabelParsingTest extends M68kParsingTestCase {
 
   public void testLocalLabelWithColon() throws IOException {
     doCodeTest(".localLabel:");
+  }
+
+  public void testLocalLabelStartingWithDecimal() throws IOException {
+    doCodeTest(".4label");
   }
 
   public void testLocalLabelWithColonInstruction() throws IOException {
