@@ -87,7 +87,6 @@
   - highlight usages
   - eventually `UsageTargetProvider`
 - safe delete label
-- `NamesValidator`
 - register
   - shift up/down through available ones
   - change/cycle through address mode by typing/intention/...?
