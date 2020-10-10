@@ -45,6 +45,7 @@
 - in expressions, mnemonic parsed as instruction, not identifier (`size = (bpls*bpl)`)
 - add missing expression operators (XOR?)
 - do not allow spaces (?!)
+- fix label starting with `_` 
 - allow `equr`/`reg` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
 - macro: label-counters, `ifmacrod`/`ifmacrond` code insight
 - Lexer: `LexerTestCase.checkCorrectRestartOnEveryToken`
