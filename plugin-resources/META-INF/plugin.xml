@@ -89,6 +89,9 @@
     <lang.refactoringSupport
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.lang.refactoring.M68kRefactoringSupportProvider"/>
+    <lang.namesValidator
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.lang.refactoring.M68kNamesValidator"/>
     <lang.elementManipulator
         forClass="com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression"
         implementationClass="com.yanncebron.m68kplugin.lang.psi.expression.impl.M68kLabelRefExpressionElementManipulator"/>
