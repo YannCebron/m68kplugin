@@ -45,6 +45,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @see com.yanncebron.m68kplugin.lang.M68kTargetElementEvaluator
+ */
 public class M68kInstructionDocumentationProvider extends AbstractDocumentationProvider {
 
   private static final String DOCS_MNEMONIC_ROOT = "/docs/mnemonic/";
