@@ -21,7 +21,7 @@ import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 
-public class M68kParserUtil extends GeneratedParserUtilBase {
+class M68kParserUtil extends GeneratedParserUtilBase {
 
   static boolean afterWhitespace(PsiBuilder b, @SuppressWarnings("UnusedParameters") int level) {
     final IElementType left = b.rawLookup(-1);
