@@ -23,22 +23,22 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 public final class M68kTokenGroups {
 
   public static final TokenSet BCC_INSTRUCTIONS = TokenSet.create(
-    BRA,
+    BCC,
     BCS,
+    BEQ,
+    BGE,
+    BGT,
+    BHI,
+    BHS,
+    BLE,
     BLO,
     BLS,
-    BEQ,
-    BNE,
-    BHI,
-    BCC,
-    BHS,
-    BPL,
-    BVC,
     BLT,
-    BLE,
-    BGT,
-    BGE,
     BMI,
+    BNE,
+    BPL,
+    BRA,
+    BVC,
     BVS
   );
 
@@ -157,9 +157,9 @@ public final class M68kTokenGroups {
 
   public static final TokenSet DATA_SIZES = TokenSet.create(
     DOT_B,
-    DOT_W,
     DOT_L,
-    DOT_S
+    DOT_S,
+    DOT_W
   );
 
   public static final TokenSet DIRECTIVES = TokenSet.create(
@@ -250,9 +250,9 @@ public final class M68kTokenGroups {
   );
 
   public static final TokenSet NUMBERS = TokenSet.create(
+    BIN_NUMBER,
     DEC_NUMBER,
     HEX_NUMBER,
-    OCT_NUMBER,
-    BIN_NUMBER
+    OCT_NUMBER
   );
 }
