@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-package com.yanncebron.m68kplugin.lang.psi.impl;
+package com.yanncebron.m68kplugin.lang.psi;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFileFactory;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
-import com.yanncebron.m68kplugin.lang.psi.M68kBraInstruction;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
 

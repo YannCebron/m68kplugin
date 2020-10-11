@@ -30,7 +30,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroDirective;
-import com.yanncebron.m68kplugin.lang.psi.impl.M68kElementFactory;
+import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

@@ -20,7 +20,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.AbstractElementManipulator;
 import com.intellij.util.IncorrectOperationException;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
-import com.yanncebron.m68kplugin.lang.psi.impl.M68kElementFactory;
+import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
