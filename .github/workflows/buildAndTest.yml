@@ -30,7 +30,6 @@ jobs:
       id: verify
       uses: ChrisCarini/intellij-platform-plugin-verifier-action@v1.0.3
       with:
-        verifier-version: '1.250'
         ide-versions: |
           ideaIC:2019.3.5
           ideaIC:2020.1.4
