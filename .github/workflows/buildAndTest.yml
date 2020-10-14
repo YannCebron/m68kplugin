@@ -34,7 +34,7 @@ jobs:
           ideaIC:2019.3.5
           ideaIC:2020.1.4
           ideaIC:2020.2.3
-        verifier-version: 1.250
+        verifier-version: '1.250'
     - name: Get log file path and print contents
       run: |
         echo "The verifier log file [${{steps.verify.outputs.verification-output-log-filename}}] contents : " ;
