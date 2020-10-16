@@ -73,7 +73,7 @@
   - rainbow highlighting?
 - display used vs. free registers in selected code block
 - `ReadWriteAccessDetector` for registers
-- method separators
+- method separators:
   - "detected" subroutines
 - highlight unused label (local only? located in non-include files only?)
 - color-picker/inlays: copper list colors
@@ -81,18 +81,21 @@
 
 ## Resolve/Refactor
 
-- rename/resolve to label
+- labels:
   - resolve references
   - local label: in-place rename
+  - find usages
   - highlight usages
   - eventually `UsageTargetProvider`
-- safe delete label
-- register
+  - safe delete
+- register:
   - shift up/down through available ones
   - change/cycle through address mode by typing/intention/...?
   - `a7` <=> `sp`
 - `refactoring.extractIncludeHandler`
-- duplicates detection, "extract macro"
+- duplicates detection:
+  - textual duplicate -> wrap in `rept`/`endr`
+  - "extract macro"
 
 ## Editing
 
@@ -103,7 +106,7 @@
 - move left/right: swap src|dest
 - formatter
 - documentation:
-  - quick doc/hover for number literals: dec/hex/oct/bin
+  - quick doc/hover for number literals: dec/hex/oct/bin/ASCII
   - quick doc/hover for `equ`/`equr`/`=` directives
 - **WIP** code folding
   - fold by default + settings for:
@@ -117,11 +120,11 @@
 ## Inspections
 
 - nonsensical `move`, e.g. src==dest
-- `movem`
-  - non-symmetrical
+- `movem` non-symmetrical register ranges
+- register list:  
   - duplicated registers (`d3/d0-d4` -> `d3`)
   - mixed up registers (`d0-a2`)
-- sort/optimize register list
+  - sort/optimize register list
 - string in `dc.b` not terminated with `,0`
 - check optimizations from vasm/DevPac
 - multiple `opt` directives (?)
