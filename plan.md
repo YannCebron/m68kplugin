@@ -54,7 +54,6 @@
 
 - file icons (source/include)
 - plugin description
-- `ErrorReportSubmitter`
 
 ## Instruction Sets
 
