@@ -21,15 +21,15 @@ import com.intellij.codeInspection.LocalInspectionToolSession;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.codeInspection.ui.SingleCheckboxOptionsPanel;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.util.containers.MultiMap;
 import com.yanncebron.m68kplugin.M68kBundle;
-import com.yanncebron.m68kplugin.lang.psi.M68kAdmRrd;
-import com.yanncebron.m68kplugin.lang.psi.M68kRegister;
-import com.yanncebron.m68kplugin.lang.psi.M68kRegisterRange;
-import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
+import com.yanncebron.m68kplugin.lang.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.Collection;
+import java.util.Map;
 
 public class M68kRegisterListRangeInspection extends LocalInspectionTool {
 
@@ -61,6 +61,24 @@ public class M68kRegisterListRangeInspection extends LocalInspectionTool {
           holder.registerProblem(range, M68kBundle.message("inspection.register.list.range.not.a.range"));
         } else if (fromRegister.isSameKind(toRegister) && fromRegister.ordinal() > toRegister.ordinal()) {
           holder.registerProblem(range, M68kBundle.message("inspection.register.list.range.reversed.range"));
+        }
+      }
+
+      @Override
+      public void visitRegisterList(@NotNull M68kRegisterList list) {
+        final MultiMap<M68kRegister, M68kRegisterRange> all = MultiMap.create();
+        for (M68kRegisterRange range : list.getRegisterRangeList()) {
+          for (M68kRegister register : range.getRegisters()) {
+            all.putValue(register, range);
+          }
+        }
+
+        for (Map.Entry<M68kRegister, Collection<M68kRegisterRange>> entries : all.entrySet()) {
+          if (entries.getValue().size() == 1) continue;
+
+          for (M68kRegisterRange dupRanges : entries.getValue()) {
+            holder.registerProblem(dupRanges, M68kBundle.message("inspection.register.list.range.duplicated.register", entries.getKey()));
+          }
         }
       }
     };

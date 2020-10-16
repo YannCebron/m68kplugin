@@ -26,6 +26,7 @@ import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncludeDirective;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.EnumSet;
 import java.util.Objects;
 
 public class M68kPsiImplUtil {
@@ -47,6 +48,23 @@ public class M68kPsiImplUtil {
   public static boolean isSrc(M68kInstruction instruction, @NotNull M68kPsiElement sourceOrDestElement) {
     final ASTNode commaNode = instruction.getNode().findChildByType(M68kTokenTypes.COMMA);
     return commaNode != null && commaNode.getStartOffset() > sourceOrDestElement.getNode().getStartOffset();
+  }
+
+  @NotNull
+  public static EnumSet<M68kRegister> getRegisters(M68kRegisterRange range) {
+    final M68kRegister fromRegister = range.getFrom().getRegister();
+
+    final M68kAdmRrd to = range.getTo();
+    if (to == null) {
+      return EnumSet.of(fromRegister);
+    }
+
+    final M68kRegister toRegister = to.getRegister();
+    if (fromRegister.ordinal() >= toRegister.ordinal()) {
+      return EnumSet.noneOf(M68kRegister.class);
+    }
+
+    return EnumSet.range(fromRegister, toRegister);
   }
 
   @NotNull

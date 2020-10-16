@@ -121,7 +121,6 @@
 - nonsensical `move`, e.g. src==dest
 - `movem` non-symmetrical register ranges
 - register list:  
-  - duplicated registers (`d3/d0-d4` -> `d3`)
   - sort/optimize register list
 - string in `dc.b` not terminated with `,0`
 - check optimizations from vasm/DevPac

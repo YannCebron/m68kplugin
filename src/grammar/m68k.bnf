@@ -134,6 +134,7 @@ register_range ::= adm_rrd (MINUS adm_rrd)? {
     adm_rrd= ""
     from = "adm_rrd[0]"
     to = "adm_rrd[1]"
+    getRegisters
   ]
 }
 register_list ::= register_range (DIV register_range)* {

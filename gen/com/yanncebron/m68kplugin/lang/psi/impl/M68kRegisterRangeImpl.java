@@ -24,6 +24,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import java.util.EnumSet;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
 public class M68kRegisterRangeImpl extends ASTWrapperPsiElement implements M68kRegisterRange {
@@ -53,6 +54,12 @@ public class M68kRegisterRangeImpl extends ASTWrapperPsiElement implements M68kR
   public M68kAdmRrd getTo() {
     List<M68kAdmRrd> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmRrd.class);
     return p1.size() < 2 ? null : p1.get(1);
+  }
+
+  @Override
+  @NotNull
+  public EnumSet<M68kRegister> getRegisters() {
+    return M68kPsiImplUtil.getRegisters(this);
   }
 
 }

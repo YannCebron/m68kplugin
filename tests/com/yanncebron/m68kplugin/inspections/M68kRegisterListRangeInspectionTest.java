@@ -44,6 +44,29 @@ public class M68kRegisterListRangeInspectionTest extends BasePlatformTestCase {
     doTest(" movem.l <error descr=\"Reversed range\">d7-d6</error>,(a7)");
   }
 
+  public void testRegisterListDuplicatedRegisterSingle() {
+    // d0/d0
+    doTest(" movem.l <error descr=\"Duplicated register D0\">d0</error>/<error descr=\"Duplicated register D0\">d0</error>,(a7)");
+
+    // d0/d0-d1
+    doTest(" movem.l <error descr=\"Duplicated register D0\">d0</error>/<error descr=\"Duplicated register D0\">d0-d1</error>,(a7)");
+
+    // d0-d1/d1-d2
+    doTest(" movem.l <error descr=\"Duplicated register D1\">d0-d1</error>/<error descr=\"Duplicated register D1\">d1-d2</error>,(a7)");
+
+    // a0/d0-a1
+    doTest("  movem.l <error descr=\"Duplicated register A0\">a0</error>/<error descr=\"Duplicated register A0\">d0-a1</error>,(a7)");
+  }
+
+  public void testRegisterListDuplicatedRegisterMultiple() {
+    // d0-d1/d0-d3
+    doTest(" movem.l <error descr=\"Duplicated register D0\"><error descr=\"Duplicated register D1\">d0-d1</error></error>/<error descr=\"Duplicated register D0\"><error descr=\"Duplicated register D1\">d0-d3</error></error>,(a7)");
+  }
+
+  public void testRegisterListDuplicatedRegisterReverseNotHighlighted() {
+    doTest(" movem.l <error descr=\"Reversed range\">d1-d0</error>/d0,(a7)");
+  }
+
   private void doTest(String text) {
     myFixture.configureByText("a.s", text);
     myFixture.testHighlighting();
