@@ -39,7 +39,8 @@ Please see [Plan](plan.md) for planned features and ideas.
 * Live Templates
 * Code Style Settings: Tab Size, Visual Guides
 * Code Inspections
-  * Register List/Range problems
+  * Unresolved label reference
+  * Register list/range problems
 
 ### IDE
 
