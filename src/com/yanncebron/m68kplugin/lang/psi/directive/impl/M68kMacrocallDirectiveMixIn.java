@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.lang.psi.directive.impl;
 
+import com.intellij.codeInsight.daemon.EmptyResolveMessageProvider;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
@@ -26,11 +27,12 @@ import com.intellij.psi.PsiReferenceBase;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
+import com.yanncebron.m68kplugin.M68kBundle;
+import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroDirective;
-import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,44 +49,55 @@ abstract class M68kMacrocallDirectiveMixIn extends ASTWrapperPsiElement {
     final ASTNode idNode = getNode().findChildByType(M68kTokenTypes.ID);
     assert idNode != null;
 
-    return new PsiReferenceBase<M68kMacrocallDirectiveMixIn>(this, idNode.getTextRange().shiftLeft(getTextOffset())) {
+    return new MacroCallReference(idNode);
+  }
 
-      @Nullable
-      @Override
-      public PsiElement resolve() {
-        String name = getValue();
+  private class MacroCallReference extends PsiReferenceBase<M68kMacrocallDirectiveMixIn> implements EmptyResolveMessageProvider {
 
-        return ContainerUtil.find(getAllMacroLabels(),
-          m68kMacroDirective -> name.equals(m68kMacroDirective.getName()));
-      }
+    public MacroCallReference(ASTNode idNode) {
+      super(M68kMacrocallDirectiveMixIn.this, idNode.getTextRange().shiftLeft(M68kMacrocallDirectiveMixIn.this.getTextOffset()));
+    }
 
-      @Override
-      public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
-        final ASTNode idNode = getNode().findChildByType(M68kTokenTypes.ID);
-        assert idNode != null;
-        final M68kLabel label = M68kElementFactory.createLabel(getProject(), newElementName);
-        getNode().replaceChild(idNode, label.getFirstChild().getNode());
-        return getElement();
-      }
+    @Nullable
+    @Override
+    public PsiElement resolve() {
+      String name = getValue();
 
-      @NotNull
-      @Override
-      public Object[] getVariants() {
-        return ContainerUtil.map2Array(getAllMacroLabels(), LookupElement.class, LookupElementBuilder::create);
-      }
+      return ContainerUtil.find(getAllMacroLabels(),
+        m68kMacroDirective -> name.equals(m68kMacroDirective.getName()));
+    }
 
-      private List<M68kLabel> getAllMacroLabels() {
-        List<M68kLabel> result = new SmartList<>();
+    @Override
+    public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
+      final ASTNode idNode = getNode().findChildByType(M68kTokenTypes.ID);
+      assert idNode != null;
+      final M68kLabel label = M68kElementFactory.createLabel(getProject(), newElementName);
+      getNode().replaceChild(idNode, label.getFirstChild().getNode());
+      return getElement();
+    }
 
-        getElement().getContainingFile().acceptChildren(new M68kVisitor() {
-          @Override
-          public void visitMacroDirective(@NotNull M68kMacroDirective o) {
-            result.add(o.getLabel());
-          }
-        });
-        return result;
-      }
+    @NotNull
+    @Override
+    public Object[] getVariants() {
+      return ContainerUtil.map2Array(getAllMacroLabels(), LookupElement.class, LookupElementBuilder::createWithIcon);
+    }
 
-    };
+    private List<M68kLabel> getAllMacroLabels() {
+      List<M68kLabel> result = new SmartList<>();
+
+      getElement().getContainingFile().acceptChildren(new M68kVisitor() {
+        @Override
+        public void visitMacroDirective(@NotNull M68kMacroDirective o) {
+          result.add(o.getLabel());
+        }
+      });
+      return result;
+    }
+
+    @NotNull
+    @Override
+    public String getUnresolvedMessagePattern() {
+      return M68kBundle.message("macrocall.directive.cannot.resolve", getValue());
+    }
   }
 }
