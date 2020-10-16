@@ -139,6 +139,12 @@
         implementationClass="com.yanncebron.m68kplugin.lang.spellchecker.M68kSpellcheckerStrategy"/>
     <spellchecker.bundledDictionaryProvider
         implementation="com.yanncebron.m68kplugin.lang.spellchecker.M68kBundledDictionaryProvider"/>
+
+    
+    <localInspection
+        language="M68k" enabledByDefault="true" level="ERROR"
+        key="inspection.register.list.range.name" groupKey="inspection.group.name"
+        implementationClass="com.yanncebron.m68kplugin.inspections.M68kRegisterListRangeInspection"/>
   </extensions>
 
   <actions>
