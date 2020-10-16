@@ -60,6 +60,17 @@ public class M68kRegisterTest extends TestCase {
     doTest(M68kTokenTypes.CCR, "DOESNT_MATTER", M68kRegister.CCR);
   }
 
+  public void testIsSameKind() {
+    assertTrue(M68kRegister.D0.isSameKind(M68kRegister.D0));
+    assertTrue(M68kRegister.D0.isSameKind(M68kRegister.D1));
+
+    assertTrue(M68kRegister.A0.isSameKind(M68kRegister.A1));
+
+    assertTrue(M68kRegister.SP.isSameKind(M68kRegister.SP));
+
+    assertFalse(M68kRegister.D0.isSameKind(M68kRegister.A1));
+  }
+
   private void doTest(IElementType elementType, String text, M68kRegister expected) {
     assertEquals(expected, M68kRegister.find(elementType, text));
   }

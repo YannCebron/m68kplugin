@@ -67,4 +67,8 @@ public enum M68kRegister {
     }
     throw new IllegalArgumentException("No register for " + elementType + " with text '" + text + "'");
   }
+
+  public boolean isSameKind(M68kRegister other) {
+    return elementType == other.elementType;
+  }
 }
