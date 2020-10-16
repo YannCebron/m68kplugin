@@ -16,21 +16,16 @@
 
 package com.yanncebron.m68kplugin.lang.highlighting;
 
-import com.intellij.codeInspection.ProblemHighlightType;
-import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.util.registry.Registry;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroParameterDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
-import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroParameterDirective;
 import org.jetbrains.annotations.NotNull;
 
 public class M68kSyntaxAnnotator implements Annotator {
@@ -47,9 +42,7 @@ public class M68kSyntaxAnnotator implements Annotator {
         holder.createInfoAnnotation(element, M68kBundle.message("highlight.privileged.instruction"))
           .setTextAttributes(M68kTextAttributes.PRIVILEGED_INSTRUCTION);
       }
-    }
-
-    if (element instanceof M68kLabel) {
+    } else if (element instanceof M68kLabel) {
       doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LABEL);
     } else if (element instanceof M68kLocalLabel) {
       doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LOCAL_LABEL);
@@ -57,16 +50,6 @@ public class M68kSyntaxAnnotator implements Annotator {
       doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.MACRO_CALL);
     } else if (element instanceof M68kMacroParameterDirective) {
       doAnnotate(holder, element.getNode(), M68kTextAttributes.MACRO_PARAMETER);
-    }
-
-    // todo temp --> inspection?
-    if ((element instanceof M68kLabelRefExpression || element instanceof M68kMacroCallDirective) &&
-      Registry.is("m68k.highlight.unresolved.ref")) {
-      final PsiReference reference = element.getReference();
-      if (reference.resolve() == null) {
-        holder.createErrorAnnotation(element, ProblemsHolder.unresolvedReferenceMessage(reference))
-          .setHighlightType(ProblemHighlightType.LIKE_UNKNOWN_SYMBOL);
-      }
     }
   }
 

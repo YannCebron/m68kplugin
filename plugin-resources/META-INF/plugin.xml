@@ -34,9 +34,6 @@
   <extensions defaultExtensionNs="com.intellij">
     <errorHandler implementation="com.yanncebron.m68kplugin.ide.M68kErrorReportSubmitter"/>
 
-    <registryKey key="m68k.highlight.unresolved.ref" defaultValue="false"
-                 description="Highlight unresolved references"/>
-
     <fileType name="M68k Assembler"
               implementationClass="com.yanncebron.m68kplugin.lang.M68kFileType"
               fieldName="INSTANCE"
@@ -140,11 +137,15 @@
     <spellchecker.bundledDictionaryProvider
         implementation="com.yanncebron.m68kplugin.lang.spellchecker.M68kBundledDictionaryProvider"/>
 
-    
+
     <localInspection
         language="M68k" enabledByDefault="true" level="ERROR"
         key="inspection.register.list.range.name" groupKey="inspection.group.name"
         implementationClass="com.yanncebron.m68kplugin.inspections.M68kRegisterListRangeInspection"/>
+    <localInspection
+        language="M68k" enabledByDefault="true" level="ERROR"
+        key="inspection.unresolved.label.reference.name" groupKey="inspection.group.name"
+        implementationClass="com.yanncebron.m68kplugin.inspections.M68kUnresolvedLabelReferenceInspection"/>
   </extensions>
 
   <actions>
