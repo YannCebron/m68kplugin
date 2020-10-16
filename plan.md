@@ -121,7 +121,7 @@
 - nonsensical `move`, e.g. src==dest
 - `movem` non-symmetrical register ranges
 - register list:  
-  - sort/optimize register list
+  - sort/optimize
 - string in `dc.b` not terminated with `,0`
 - check optimizations from vasm/DevPac
 - multiple `opt` directives (?)
