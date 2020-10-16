@@ -18,12 +18,15 @@ package com.yanncebron.m68kplugin.lang.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.util.ObjectUtils;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncbinDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncdirDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncludeDirective;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public class M68kPsiImplUtil {
 
@@ -58,7 +61,8 @@ public class M68kPsiImplUtil {
 
   @NotNull
   public static M68kRegister getRegister(M68kAdmRrd admElement) {
-    return _getRegister(admElement);
+    final M68kPsiElement registerElement = ObjectUtils.chooseNotNull(admElement.getAdmArd(), admElement.getAdmDrd());
+    return _getRegister(Objects.requireNonNull(registerElement));
   }
 
   @NotNull
