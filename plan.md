@@ -2,7 +2,7 @@
 
 ## Broken Lexing/Parsing
 
-- missing directives ([VASM](http://sun.hasenbraten.de/vasm/release/vasm_4.html#Mot-Syntax-Module))
+- missing directives ([VASM](http://sun.hasenbraten.de/vasm/release/vasm_4.html#Mot-Syntax-Module)), these will currently display false error _"Cannot resolve macro [name]"_
   - `rorg`
   - `offset`
   - `public`
