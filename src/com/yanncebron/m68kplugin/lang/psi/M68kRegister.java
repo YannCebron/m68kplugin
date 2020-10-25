@@ -41,7 +41,10 @@ public enum M68kRegister {
   A7(M68kTokenTypes.ADDRESS_REGISTER, "a7"),
 
   SP(M68kTokenTypes.SP, null),
+  SSP(M68kTokenTypes.SSP, null),
   USP(M68kTokenTypes.USP, null),
+
+  PC(M68kTokenTypes.PC, null),
 
   SR(M68kTokenTypes.SR, null),
   CCR(M68kTokenTypes.CCR, null);
