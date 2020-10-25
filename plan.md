@@ -63,8 +63,12 @@
 ## Highlighting
 
 - anything after `end` directive
-- unpaired `macro`/`endm`
-- unpaired `inline`/`einline`
+- unpaired directives:
+  - `macro`/`endm`
+  - `inline`/`einline`
+  - `rept`/`endr`
+  - `rem`/`erem`
+  - `struct`/`estruct`
 - unpaired conditional assembly directives, missing `endc`/`endif`
 - macro call: parameter count mismatch
 - registers:
