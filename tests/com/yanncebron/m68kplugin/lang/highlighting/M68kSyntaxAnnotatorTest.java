@@ -63,4 +63,24 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
         " <error descr=\"No content after 'end' directive allowed\">moveq #1,d0</error>");
     myFixture.testHighlighting();
   }
+
+  public void testUnmatchedDirectiveMacroMissingEndm() {
+    myFixture.configureByText("test.s",
+      "<error descr=\"Missing matching 'endm' directive\">macroName macro</error>");
+    myFixture.testHighlighting();
+  }
+
+  public void testUnmatchedDirectiveMacroMissingEndmNextMacro() {
+    myFixture.configureByText("test.s",
+      "<error descr=\"Missing matching 'endm' directive\">macroName macro</error>\n" +
+        "anotherMacro macro\n" +
+        " endm");
+    myFixture.testHighlighting();
+  }
+
+  public void testUnmatchedDirectiveInlineMissingEinline() {
+    myFixture.configureByText("test.s",
+      " <error descr=\"Missing matching 'einline' directive\">inline</error>");
+    myFixture.testHighlighting();
+  }
 }

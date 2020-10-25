@@ -25,9 +25,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kEndDirective;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroParameterDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import org.jetbrains.annotations.NotNull;
 
 public class M68kSyntaxAnnotator implements Annotator {
@@ -57,12 +55,38 @@ public class M68kSyntaxAnnotator implements Annotator {
       if (nextSibling != null) {
         holder.createErrorAnnotation(nextSibling, M68kBundle.message("highlight.no.content.after.end.directive"));
       }
+    } else if (element instanceof M68kMacroDirective) {
+      checkUnmatchedDirective(element, holder, M68kEndmDirective.class, "endm", M68kMacroDirective.class);
+    } else if (element instanceof M68kInlineDirective) {
+      checkUnmatchedDirective(element, holder, M68kEinlineDirective.class, "einline", M68kInlineDirective.class);
     }
   }
 
   private static void doAnnotate(AnnotationHolder holder, ASTNode node, TextAttributesKey key) {
     (DEBUG_MODE ? holder.createInfoAnnotation(node, key.getExternalName()) : holder.createInfoAnnotation(node, null))
       .setTextAttributes(key);
+  }
+
+  @SafeVarargs
+  private final void checkUnmatchedDirective(PsiElement element, AnnotationHolder holder,
+                                             Class<? extends M68kDirective> matchingDirective,
+                                             String matchingDirectiveText,
+                                             Class<? extends M68kDirective>... stopAtDirectives) {
+    final boolean hasMatchingClosingDirective = hasMatchingClosingDirective(element, matchingDirective, stopAtDirectives);
+    if (!hasMatchingClosingDirective) {
+      holder.createErrorAnnotation(element, M68kBundle.message("highlight.unmatched.directive", matchingDirectiveText));
+    }
+  }
+
+  @SafeVarargs
+  private static boolean hasMatchingClosingDirective(PsiElement element,
+                                                     Class<? extends M68kDirective> matchingDirective,
+                                                     Class<? extends M68kDirective>... stopAtDirectives) {
+    for (PsiElement child = element.getNextSibling(); child != null; child = child.getNextSibling()) {
+      if (PsiTreeUtil.instanceOf(child, stopAtDirectives)) return false;
+      if (matchingDirective.isInstance(child)) return true;
+    }
+    return false;
   }
 
 }

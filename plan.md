@@ -63,8 +63,6 @@
 ## Highlighting
 
 - unpaired directives:
-  - `macro`/`endm`
-  - `inline`/`einline`
   - `rept`/`endr`
   - `rem`/`erem`
   - `struct`/`estruct`
