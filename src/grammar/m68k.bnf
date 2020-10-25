@@ -84,7 +84,7 @@ localLabel ::= !<<afterWhitespace>> DOT ID COLON?
 }
 
 private instructions ::= move_instructions |
-
+                         data_movement_instructions |
                          jump_instructions |
 
                          add_sub_instructions |
@@ -310,6 +310,39 @@ movep_instruction ::= MOVEP data_size_word_long?
                       )
 
 
+// Data Movement =========================================================
+private data_movement_instructions ::= exg_instruction |
+                                       lea_instruction |
+                                       pea_instruction |
+                                       link_instruction |
+                                       unlk_instruction
+
+
+exg_instruction ::= EXG data_size_long? adm_rrd COMMA adm_rrd
+{
+  extends = data_sized
+  methods = [
+    adm_rrd = ""
+    source = "adm_rrd[0]"
+    destination = "adm_rrd[1]"
+  ]
+}
+
+lea_instruction ::= LEA data_size_long?
+                    (adm_ard | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA adm_ard
+{
+  extends = data_sized
+}
+pea_instruction ::= PEA data_size_long?
+                    (adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs)
+{
+  extends = data_sized
+}
+
+link_instruction ::= LINK adm_ard COMMA adm_imm
+unlk_instruction ::= UNLK adm_ard
+
+
 // Jump ==================================================================
 private jump_instructions ::= jsr_instruction|
                               bsr_instruction |
@@ -484,8 +517,6 @@ not_instruction ::= NOT tail_data_size_all___all_except_ard_pc_imm
 // Misc ==================================================================
 private misc_instructions ::= tst_instruction |
                               tas_instruction |
-                              lea_instruction |
-                              pea_instruction |
                               clr_instruction |
 
                               nop_instruction |
@@ -495,16 +526,13 @@ private misc_instructions ::= tst_instruction |
                               trap_instruction |
                               trapv_instruction |
 
-                              link_instruction |
-                              unlk_instruction |
 
                               ext_instruction |
                               neg_instruction |
                               negx_instruction |
 
                               swap_instruction |
-                              chk_instruction |
-                              exg_instruction
+                              chk_instruction
 
 nop_instruction ::= NOP
 illegal_instruction ::= ILLEGAL
@@ -518,20 +546,6 @@ stop_instruction ::= STOP adm_imm
 }
 trap_instruction ::= TRAP adm_imm
 trapv_instruction ::= TRAPV
-
-link_instruction ::= LINK adm_ard COMMA adm_imm
-unlk_instruction ::= UNLK adm_ard
-
-lea_instruction ::= LEA data_size_long?
-                    (adm_ard | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA adm_ard
-{
-  extends = data_sized
-}
-pea_instruction ::= PEA data_size_long?
-                    (adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs)
-{
-  extends = data_sized
-}
 
 clr_instruction ::= CLR tail_data_size_all___all_except_ard_pc_imm
 {
@@ -550,16 +564,6 @@ tas_instruction ::= TAS data_size_byte? adm_group_all_except_ard_pc_imm
 ext_instruction ::= EXT data_size_word_long? adm_drd
 {
   extends = data_sized
-}
-
-exg_instruction ::= EXG data_size_long? adm_rrd COMMA adm_rrd
-{
-  extends = data_sized
-  methods = [
-    adm_rrd = ""
-    source = "adm_rrd[0]"
-    destination = "adm_rrd[1]"
-  ]
 }
 
 neg_instruction ::= NEG tail_data_size_all___all_except_ard_pc_imm

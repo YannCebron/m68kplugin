@@ -1450,6 +1450,23 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // exg_instruction |
+  //                                        lea_instruction |
+  //                                        pea_instruction |
+  //                                        link_instruction |
+  //                                        unlk_instruction
+  static boolean data_movement_instructions(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "data_movement_instructions")) return false;
+    boolean r;
+    r = exg_instruction(b, l + 1);
+    if (!r) r = lea_instruction(b, l + 1);
+    if (!r) r = pea_instruction(b, l + 1);
+    if (!r) r = link_instruction(b, l + 1);
+    if (!r) r = unlk_instruction(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
   // data_size_byte | data_size_word_long
   static boolean data_size_all(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "data_size_all")) return false;
@@ -1988,6 +2005,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // move_instructions |
+  //                          data_movement_instructions |
   //                          jump_instructions |
   //                          add_sub_instructions |
   //                          mul_div_instructions |
@@ -2006,6 +2024,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "instructions")) return false;
     boolean r;
     r = move_instructions(b, l + 1);
+    if (!r) r = data_movement_instructions(b, l + 1);
     if (!r) r = jump_instructions(b, l + 1);
     if (!r) r = add_sub_instructions(b, l + 1);
     if (!r) r = mul_div_instructions(b, l + 1);
@@ -2267,8 +2286,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
   /* ********************************************************** */
   // tst_instruction |
   //                               tas_instruction |
-  //                               lea_instruction |
-  //                               pea_instruction |
   //                               clr_instruction |
   //                               nop_instruction |
   //                               illegal_instruction |
@@ -2276,21 +2293,16 @@ public class M68kParser implements PsiParser, LightPsiParser {
   //                               stop_instruction |
   //                               trap_instruction |
   //                               trapv_instruction |
-  //                               link_instruction |
-  //                               unlk_instruction |
   //                               ext_instruction |
   //                               neg_instruction |
   //                               negx_instruction |
   //                               swap_instruction |
-  //                               chk_instruction |
-  //                               exg_instruction
+  //                               chk_instruction
   static boolean misc_instructions(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "misc_instructions")) return false;
     boolean r;
     r = tst_instruction(b, l + 1);
     if (!r) r = tas_instruction(b, l + 1);
-    if (!r) r = lea_instruction(b, l + 1);
-    if (!r) r = pea_instruction(b, l + 1);
     if (!r) r = clr_instruction(b, l + 1);
     if (!r) r = nop_instruction(b, l + 1);
     if (!r) r = illegal_instruction(b, l + 1);
@@ -2298,14 +2310,11 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = stop_instruction(b, l + 1);
     if (!r) r = trap_instruction(b, l + 1);
     if (!r) r = trapv_instruction(b, l + 1);
-    if (!r) r = link_instruction(b, l + 1);
-    if (!r) r = unlk_instruction(b, l + 1);
     if (!r) r = ext_instruction(b, l + 1);
     if (!r) r = neg_instruction(b, l + 1);
     if (!r) r = negx_instruction(b, l + 1);
     if (!r) r = swap_instruction(b, l + 1);
     if (!r) r = chk_instruction(b, l + 1);
-    if (!r) r = exg_instruction(b, l + 1);
     return r;
   }
 
