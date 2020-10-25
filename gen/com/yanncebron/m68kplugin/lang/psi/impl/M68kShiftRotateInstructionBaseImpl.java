@@ -24,14 +24,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kShiftInstructionBaseImpl extends M68kDataSizedImpl implements M68kShiftInstructionBase {
+public class M68kShiftRotateInstructionBaseImpl extends M68kDataSizedImpl implements M68kShiftRotateInstructionBase {
 
-  public M68kShiftInstructionBaseImpl(@NotNull ASTNode node) {
+  public M68kShiftRotateInstructionBaseImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitShiftInstructionBase(this);
+    visitor.visitShiftRotateInstructionBase(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {

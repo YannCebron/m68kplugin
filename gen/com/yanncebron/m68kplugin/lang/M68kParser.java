@@ -954,11 +954,11 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // bchg_instruction |
-  //                              bclr_instruction |
-  //                              bset_instruction |
-  //                              btst_instruction
-  static boolean bit_instructions(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bit_instructions")) return false;
+  //                                           bclr_instruction |
+  //                                           bset_instruction |
+  //                                           btst_instruction
+  static boolean bit_manipulation_instructions(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bit_manipulation_instructions")) return false;
     boolean r;
     r = bchg_instruction(b, l + 1);
     if (!r) r = bclr_instruction(b, l + 1);
@@ -1135,27 +1135,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "bool_i_tail_imm_sr_0")) return false;
     data_size_word(b, l + 1);
     return true;
-  }
-
-  /* ********************************************************** */
-  // and_instruction |
-  //                               andi_instruction |
-  //                               or_instruction |
-  //                               ori_instruction |
-  //                               eor_instruction |
-  //                               eori_instruction |
-  //                               not_instruction
-  static boolean bool_instructions(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bool_instructions")) return false;
-    boolean r;
-    r = and_instruction(b, l + 1);
-    if (!r) r = andi_instruction(b, l + 1);
-    if (!r) r = or_instruction(b, l + 1);
-    if (!r) r = ori_instruction(b, l + 1);
-    if (!r) r = eor_instruction(b, l + 1);
-    if (!r) r = eori_instruction(b, l + 1);
-    if (!r) r = not_instruction(b, l + 1);
-    return r;
   }
 
   /* ********************************************************** */
@@ -2012,9 +1991,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
   //                          bcd_instructions|
   //                          misc_instructions |
   //                          cmp_instructions |
-  //                          bool_instructions |
-  //                          bit_instructions |
-  //                          shift_instructions |
+  //                          logical_operation_instructions |
+  //                          bit_manipulation_instructions |
+  //                          shift_rotate_instructions |
   //                          bCC_instructions |
   //                          dbCC_instructions |
   //                          sCC_instructions |
@@ -2031,9 +2010,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = bcd_instructions(b, l + 1);
     if (!r) r = misc_instructions(b, l + 1);
     if (!r) r = cmp_instructions(b, l + 1);
-    if (!r) r = bool_instructions(b, l + 1);
-    if (!r) r = bit_instructions(b, l + 1);
-    if (!r) r = shift_instructions(b, l + 1);
+    if (!r) r = logical_operation_instructions(b, l + 1);
+    if (!r) r = bit_manipulation_instructions(b, l + 1);
+    if (!r) r = shift_rotate_instructions(b, l + 1);
     if (!r) r = bCC_instructions(b, l + 1);
     if (!r) r = dbCC_instructions(b, l + 1);
     if (!r) r = sCC_instructions(b, l + 1);
@@ -2253,6 +2232,27 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "localLabel_3")) return false;
     consumeToken(b, COLON);
     return true;
+  }
+
+  /* ********************************************************** */
+  // and_instruction |
+  //                                            andi_instruction |
+  //                                            or_instruction |
+  //                                            ori_instruction |
+  //                                            eor_instruction |
+  //                                            eori_instruction |
+  //                                            not_instruction
+  static boolean logical_operation_instructions(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "logical_operation_instructions")) return false;
+    boolean r;
+    r = and_instruction(b, l + 1);
+    if (!r) r = andi_instruction(b, l + 1);
+    if (!r) r = or_instruction(b, l + 1);
+    if (!r) r = ori_instruction(b, l + 1);
+    if (!r) r = eor_instruction(b, l + 1);
+    if (!r) r = eori_instruction(b, l + 1);
+    if (!r) r = not_instruction(b, l + 1);
+    return r;
   }
 
   /* ********************************************************** */
@@ -3265,15 +3265,15 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // asl_instruction |
-  //                                asr_instruction |
-  //                                lsl_instruction |
-  //                                lsr_instruction |
-  //                                rol_instruction |
-  //                                ror_instruction |
-  //                                roxl_instruction |
-  //                                roxr_instruction
-  static boolean shift_instructions(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "shift_instructions")) return false;
+  //                                       asr_instruction |
+  //                                       lsl_instruction |
+  //                                       lsr_instruction |
+  //                                       rol_instruction |
+  //                                       ror_instruction |
+  //                                       roxl_instruction |
+  //                                       roxr_instruction
+  static boolean shift_rotate_instructions(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "shift_rotate_instructions")) return false;
     boolean r;
     r = asl_instruction(b, l + 1);
     if (!r) r = asr_instruction(b, l + 1);

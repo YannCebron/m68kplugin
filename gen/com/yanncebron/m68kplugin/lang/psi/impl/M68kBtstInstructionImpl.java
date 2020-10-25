@@ -24,7 +24,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kBtstInstructionImpl extends M68kBitInstructionBaseImpl implements M68kBtstInstruction {
+public class M68kBtstInstructionImpl extends M68kBitManipulationInstructionBaseImpl implements M68kBtstInstruction {
 
   public M68kBtstInstructionImpl(@NotNull ASTNode node) {
     super(node);

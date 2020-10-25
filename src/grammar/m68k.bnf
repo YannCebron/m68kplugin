@@ -95,9 +95,9 @@ private instructions ::= move_instructions |
 
                          cmp_instructions |
 
-                         bool_instructions |
-                         bit_instructions |
-                         shift_instructions |
+                         logical_operation_instructions |
+                         bit_manipulation_instructions |
+                         shift_rotate_instructions |
 
                          bCC_instructions |
                          dbCC_instructions |
@@ -475,13 +475,13 @@ divu_instruction ::= DIVU mul_div_tail
 {
   extends("(and|andi|or|ori|eor|eori)_instruction") = bool_instruction_base
 }
-private bool_instructions ::= and_instruction |
-                              andi_instruction |
-                              or_instruction |
-                              ori_instruction |
-                              eor_instruction |
-                              eori_instruction |
-                              not_instruction
+private logical_operation_instructions ::= and_instruction |
+                                           andi_instruction |
+                                           or_instruction |
+                                           ori_instruction |
+                                           eor_instruction |
+                                           eori_instruction |
+                                           not_instruction
 fake bool_instruction_base ::= bool_tail
 {
   extends = data_sized
@@ -746,14 +746,14 @@ scs_instruction ::= SCS sCC_tail
 // Bit =====================================================================
 ;
 {
-  extends("(bchg|bclr|bset|btst)_instruction") = bit_instruction_base
+  extends("(bchg|bclr|bset|btst)_instruction") = bit_manipulation_instruction_base
 }
-private bit_instructions ::= bchg_instruction |
-                             bclr_instruction |
-                             bset_instruction |
-                             btst_instruction
+private bit_manipulation_instructions ::= bchg_instruction |
+                                          bclr_instruction |
+                                          bset_instruction |
+                                          btst_instruction
 
-fake bit_instruction_base ::=
+fake bit_manipulation_instruction_base ::=
 {
   extends = data_sized
 }
@@ -775,21 +775,21 @@ btst_instruction ::= BTST bit_data_size?
                      (adm_drd | adm_imm) COMMA adm_group_all_except_ard
 
 
-// Shift ===================================================================
+// Shift/Rotate ============================================================
 ;
 {
-  extends("(as.*|ls.*|ro.*)_instruction") = shift_instruction_base
+  extends("(as.*|ls.*|ro.*)_instruction") = shift_rotate_instruction_base
 }
-private shift_instructions ::= asl_instruction |
-                               asr_instruction |
-                               lsl_instruction |
-                               lsr_instruction |
-                               rol_instruction |
-                               ror_instruction |
-                               roxl_instruction |
-                               roxr_instruction
+private shift_rotate_instructions ::= asl_instruction |
+                                      asr_instruction |
+                                      lsl_instruction |
+                                      lsr_instruction |
+                                      rol_instruction |
+                                      ror_instruction |
+                                      roxl_instruction |
+                                      roxr_instruction
 
-fake shift_instruction_base ::=
+fake shift_rotate_instruction_base ::=
 {
   extends = data_sized
 }

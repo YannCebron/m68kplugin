@@ -24,7 +24,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kRolInstructionImpl extends M68kShiftInstructionBaseImpl implements M68kRolInstruction {
+public class M68kRolInstructionImpl extends M68kShiftRotateInstructionBaseImpl implements M68kRolInstruction {
 
   public M68kRolInstructionImpl(@NotNull ASTNode node) {
     super(node);

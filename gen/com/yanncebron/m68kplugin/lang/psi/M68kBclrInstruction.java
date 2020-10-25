@@ -19,7 +19,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kBclrInstruction extends M68kBitInstructionBase {
+public interface M68kBclrInstruction extends M68kBitManipulationInstructionBase {
 
   @Nullable
   M68kAdmAbs getAdmAbs();

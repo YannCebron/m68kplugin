@@ -24,7 +24,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kLslInstructionImpl extends M68kShiftInstructionBaseImpl implements M68kLslInstruction {
+public class M68kLslInstructionImpl extends M68kShiftRotateInstructionBaseImpl implements M68kLslInstruction {
 
   public M68kLslInstructionImpl(@NotNull ASTNode node) {
     super(node);

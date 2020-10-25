@@ -132,11 +132,11 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitAslInstruction(@NotNull M68kAslInstruction o) {
-    visitShiftInstructionBase(o);
+    visitShiftRotateInstructionBase(o);
   }
 
   public void visitAsrInstruction(@NotNull M68kAsrInstruction o) {
-    visitShiftInstructionBase(o);
+    visitShiftRotateInstructionBase(o);
   }
 
   public void visitBccInstruction(@NotNull M68kBccInstruction o) {
@@ -149,11 +149,11 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitBchgInstruction(@NotNull M68kBchgInstruction o) {
-    visitBitInstructionBase(o);
+    visitBitManipulationInstructionBase(o);
   }
 
   public void visitBclrInstruction(@NotNull M68kBclrInstruction o) {
-    visitBitInstructionBase(o);
+    visitBitManipulationInstructionBase(o);
   }
 
   public void visitBcsInstruction(@NotNull M68kBcsInstruction o) {
@@ -184,7 +184,7 @@ public class M68kVisitor extends PsiElementVisitor {
     visitExpression(o);
   }
 
-  public void visitBitInstructionBase(@NotNull M68kBitInstructionBase o) {
+  public void visitBitManipulationInstructionBase(@NotNull M68kBitManipulationInstructionBase o) {
     visitDataSized(o);
     // visitInstruction(o);
   }
@@ -232,7 +232,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitBsetInstruction(@NotNull M68kBsetInstruction o) {
-    visitBitInstructionBase(o);
+    visitBitManipulationInstructionBase(o);
   }
 
   public void visitBsrInstruction(@NotNull M68kBsrInstruction o) {
@@ -253,7 +253,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitBtstInstruction(@NotNull M68kBtstInstruction o) {
-    visitBitInstructionBase(o);
+    visitBitManipulationInstructionBase(o);
   }
 
   public void visitBvcInstruction(@NotNull M68kBvcInstruction o) {
@@ -630,11 +630,11 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitLslInstruction(@NotNull M68kLslInstruction o) {
-    visitShiftInstructionBase(o);
+    visitShiftRotateInstructionBase(o);
   }
 
   public void visitLsrInstruction(@NotNull M68kLsrInstruction o) {
-    visitShiftInstructionBase(o);
+    visitShiftRotateInstructionBase(o);
   }
 
   public void visitMacroCallDirective(@NotNull M68kMacroCallDirective o) {
@@ -796,19 +796,19 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitRolInstruction(@NotNull M68kRolInstruction o) {
-    visitShiftInstructionBase(o);
+    visitShiftRotateInstructionBase(o);
   }
 
   public void visitRorInstruction(@NotNull M68kRorInstruction o) {
-    visitShiftInstructionBase(o);
+    visitShiftRotateInstructionBase(o);
   }
 
   public void visitRoxlInstruction(@NotNull M68kRoxlInstruction o) {
-    visitShiftInstructionBase(o);
+    visitShiftRotateInstructionBase(o);
   }
 
   public void visitRoxrInstruction(@NotNull M68kRoxrInstruction o) {
-    visitShiftInstructionBase(o);
+    visitShiftRotateInstructionBase(o);
   }
 
   public void visitRsDirective(@NotNull M68kRsDirective o) {
@@ -876,17 +876,17 @@ public class M68kVisitor extends PsiElementVisitor {
     visitInstruction(o);
   }
 
-  public void visitShiftInstructionBase(@NotNull M68kShiftInstructionBase o) {
-    visitDataSized(o);
-    // visitInstruction(o);
-  }
-
   public void visitShiftLeftExpression(@NotNull M68kShiftLeftExpression o) {
     visitBinaryExpression(o);
   }
 
   public void visitShiftRightExpression(@NotNull M68kShiftRightExpression o) {
     visitBinaryExpression(o);
+  }
+
+  public void visitShiftRotateInstructionBase(@NotNull M68kShiftRotateInstructionBase o) {
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitSleInstruction(@NotNull M68kSleInstruction o) {

@@ -19,6 +19,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kBitInstructionBase extends M68kDataSized, M68kInstruction {
+public interface M68kBitManipulationInstructionBase extends M68kDataSized, M68kInstruction {
 
 }

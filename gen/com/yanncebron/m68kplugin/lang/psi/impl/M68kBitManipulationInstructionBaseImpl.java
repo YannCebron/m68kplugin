@@ -24,14 +24,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kBitInstructionBaseImpl extends M68kDataSizedImpl implements M68kBitInstructionBase {
+public class M68kBitManipulationInstructionBaseImpl extends M68kDataSizedImpl implements M68kBitManipulationInstructionBase {
 
-  public M68kBitInstructionBaseImpl(@NotNull ASTNode node) {
+  public M68kBitManipulationInstructionBaseImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitBitInstructionBase(this);
+    visitor.visitBitManipulationInstructionBase(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
