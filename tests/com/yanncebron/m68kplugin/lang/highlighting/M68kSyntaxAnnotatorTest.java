@@ -55,4 +55,12 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
       " <info descr=\"M68K_MACRO_CALL\">MACRO_NAME</info> d7,param");
     myFixture.testHighlighting(false, true, false);
   }
+
+  public void testContentAfterEndDirective() {
+    myFixture.configureByText("test.s",
+      " end\n" +
+        "; comment is allowed\n" +
+        " <error descr=\"No content after 'end' directive allowed\">moveq #1,d0</error>");
+    myFixture.testHighlighting();
+  }
 }

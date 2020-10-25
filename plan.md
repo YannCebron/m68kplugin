@@ -62,7 +62,6 @@
 
 ## Highlighting
 
-- anything after `end` directive
 - unpaired directives:
   - `macro`/`endm`
   - `inline`/`einline`
