@@ -88,6 +88,7 @@
   - highlight usages
   - eventually `UsageTargetProvider`
   - safe delete
+  - unresolved: quick-fix add `include` to existing label
 - register:
   - shift up/down through available ones
   - change/cycle through address mode by typing/intention/...?
