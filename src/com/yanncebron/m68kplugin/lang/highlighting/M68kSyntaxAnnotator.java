@@ -26,6 +26,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 public class M68kSyntaxAnnotator implements Annotator {
@@ -70,7 +71,7 @@ public class M68kSyntaxAnnotator implements Annotator {
   @SafeVarargs
   private final void checkUnmatchedDirective(PsiElement element, AnnotationHolder holder,
                                              Class<? extends M68kDirective> matchingDirective,
-                                             String matchingDirectiveText,
+                                             @NonNls String matchingDirectiveText,
                                              Class<? extends M68kDirective>... stopAtDirectives) {
     final boolean hasMatchingClosingDirective = hasMatchingClosingDirective(element, matchingDirective, stopAtDirectives);
     if (!hasMatchingClosingDirective) {
