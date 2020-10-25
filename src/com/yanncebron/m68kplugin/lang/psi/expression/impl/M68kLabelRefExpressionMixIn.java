@@ -16,26 +16,35 @@
 
 package com.yanncebron.m68kplugin.lang.psi.expression.impl;
 
+import com.intellij.codeInsight.completion.PrioritizedLookupElement;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.util.Comparing;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.PsiReferenceBase;
-import com.intellij.util.Function;
+import com.intellij.util.CommonProcessors;
+import com.intellij.util.Processor;
 import com.intellij.util.SmartList;
-import com.intellij.util.containers.ContainerUtil;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
-import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
-import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
+import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kEquDirectiveBase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+/**
+ * Provides reference to label.
+ * <ol>
+ *   <li>if local label, search backwards, then forwards for local label only - until encountering global label ("parent scope")</li>
+ *   <li>global label in current file</li>
+ *   <li>TODO in resolve scope (includes)</li>
+ * </ol>
+ * <p>
+ * This allows for both correct scoping of local labels and optimal performance, as resolving can be optimized for each type.
+ */
 abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
 
   protected M68kLabelRefExpressionMixIn(@NotNull ASTNode node) {
@@ -48,47 +57,76 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
       @Nullable
       @Override
       public PsiElement resolve() {
-        final List<M68kLabelBase> labels = getAllLabels();
+        final String labelName = getValue();
+        if (labelName.startsWith(".")) {
+          final CommonProcessors.FindProcessor<M68kLocalLabel> findLocalProcessor = new CommonProcessors.FindProcessor<M68kLocalLabel>() {
+            @Override
+            protected boolean accept(M68kLocalLabel localLabel) {
+              return labelName.equals("." + localLabel.getName());
+            }
+          };
+          processLocalLabels(findLocalProcessor);
+          return findLocalProcessor.getFoundValue();
+        }
 
-        // todo hack for local label
-        final String labelName = StringUtil.startsWithChar(getValue(), '.') ? getValue().substring(1) : getValue();
-        return ContainerUtil.find(labels, m68kLabelBase -> labelName.equals(m68kLabelBase.getName()));
-      }
-
-      @NotNull
-      private List<M68kLabelBase> getAllLabels() { // todo
-        List<M68kLabelBase> labels = new SmartList<>();
-        getElement().getContainingFile().acceptChildren(new M68kVisitor() {
+        final CommonProcessors.FindProcessor<M68kLabel> findProcessor = new CommonProcessors.FindProcessor<M68kLabel>() {
           @Override
-          public void visitLabelBase(@NotNull M68kLabelBase o) {
-            labels.add(o);
+          protected boolean accept(M68kLabel m68kLabel) {
+            return Comparing.strEqual(labelName, m68kLabel.getName());
           }
-
-          @Override
-          public void visitEquDirectiveBase(@NotNull M68kEquDirectiveBase o) {
-            labels.add(o.getLabel());
-          }
-        });
-        return labels;
+        };
+        processLabels(findProcessor);
+        return findProcessor.getFoundValue();
       }
 
       @NotNull
       @Override
       public Object[] getVariants() {
-        return ContainerUtil.map2Array(getAllLabels(), LookupElement.class, new Function<M68kLabelBase, LookupElement>() {
+        List<LookupElement> variants = new SmartList<>();
 
-          // todo show equ value in completion
+        processLocalLabels(localLabel -> {
+          final LookupElementBuilder builder = LookupElementBuilder.create(localLabel, "." + localLabel.getName())
+            .withIcon(localLabel.getIcon(0));
+          variants.add(PrioritizedLookupElement.withPriority(builder, 50));
+          return true;
+        });
+
+        processLabels(m68kLabel -> {
+          variants.add(LookupElementBuilder.createWithIcon(m68kLabel));
+          return true;
+        });
+
+        return variants.toArray();
+      }
+
+      private void processLabels(Processor<M68kLabel> processor) {
+        getElement().getContainingFile().acceptChildren(new M68kVisitor() {
           @Override
-          public LookupElement fun(M68kLabelBase m68kLabelBase) {
-            final LookupElementBuilder withIcon = LookupElementBuilder.createWithIcon(m68kLabelBase);// todo
+          public void visitLabel(@NotNull M68kLabel o) {
+            processor.process(o);
+          }
 
-            if (m68kLabelBase instanceof M68kLocalLabel) {
-              return withIcon.withPresentableText("." + m68kLabelBase.getName());
-            }
-            return withIcon;
+          @Override
+          public void visitEquDirectiveBase(@NotNull M68kEquDirectiveBase o) {
+            processor.process(o.getLabel());
           }
         });
+
       }
+
+      private void processLocalLabels(Processor<M68kLocalLabel> processor) {
+        Processor<M68kPsiElement> localLabelProcessor = m68kPsiElement -> {
+          if (m68kPsiElement instanceof M68kLocalLabel) {
+            return processor.process((M68kLocalLabel) m68kPsiElement);
+          }
+          return true;
+        };
+
+        final PsiElement startElement = getElement().getParent();
+        if (!M68kPsiTreeUtil.processSiblingsBackwards(startElement, localLabelProcessor, M68kLabel.class)) return;
+        M68kPsiTreeUtil.processSiblingsForwards(startElement, localLabelProcessor, M68kLabel.class);
+      }
+
     };
   }
 
