@@ -18,11 +18,14 @@ package com.yanncebron.m68kplugin.inspections;
 
 import com.intellij.codeInspection.LocalInspectionTool;
 import com.intellij.codeInspection.LocalInspectionToolSession;
+import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
+import com.yanncebron.m68kplugin.lang.psi.conditional.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
 import org.jetbrains.annotations.NotNull;
@@ -49,7 +52,20 @@ public class M68kUnresolvedLabelReferenceInspection extends LocalInspectionTool 
   private void highlightReference(@NotNull M68kPsiElement psiElement, @NotNull ProblemsHolder holder) {
     final PsiReference reference = psiElement.getReference();
     if (reference != null && reference.resolve() == null) {
-      holder.registerProblem(reference);
+      if (isUsageInPotentiallyNonResolvingConditionalAssemblyDirective(psiElement)) {
+        holder.registerProblem(reference, ProblemHighlightType.WEAK_WARNING);
+      } else {
+        holder.registerProblem(reference);
+      }
     }
+  }
+
+  private boolean isUsageInPotentiallyNonResolvingConditionalAssemblyDirective(M68kPsiElement psiElement) {
+    final M68kConditionalAssemblyDirective conditionalAssemblyDirective =
+      PsiTreeUtil.getParentOfType(psiElement, M68kConditionalAssemblyDirective.class);
+    return conditionalAssemblyDirective instanceof M68kIfdConditionalAssemblyDirective ||
+      conditionalAssemblyDirective instanceof M68kIfndConditionalAssemblyDirective ||
+      conditionalAssemblyDirective instanceof M68kIfmacrodConditionalAssemblyDirective ||
+      conditionalAssemblyDirective instanceof M68kIfmacrondConditionalAssemblyDirective;
   }
 }
