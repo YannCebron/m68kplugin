@@ -73,21 +73,9 @@ public class M68kSyntaxAnnotator implements Annotator {
                                              Class<? extends M68kDirective> matchingDirective,
                                              @NonNls String matchingDirectiveText,
                                              Class<? extends M68kDirective>... stopAtDirectives) {
-    final boolean hasMatchingClosingDirective = hasMatchingClosingDirective(element, matchingDirective, stopAtDirectives);
-    if (!hasMatchingClosingDirective) {
-      holder.createErrorAnnotation(element, M68kBundle.message("highlight.unmatched.directive", matchingDirectiveText));
-    }
-  }
+    if (M68kPsiTreeUtil.hasSiblingForwards(element, matchingDirective, stopAtDirectives)) return;
 
-  @SafeVarargs
-  private static boolean hasMatchingClosingDirective(PsiElement element,
-                                                     Class<? extends M68kDirective> matchingDirective,
-                                                     Class<? extends M68kDirective>... stopAtDirectives) {
-    for (PsiElement child = element.getNextSibling(); child != null; child = child.getNextSibling()) {
-      if (PsiTreeUtil.instanceOf(child, stopAtDirectives)) return false;
-      if (matchingDirective.isInstance(child)) return true;
-    }
-    return false;
+    holder.createErrorAnnotation(element, M68kBundle.message("highlight.unmatched.directive", matchingDirectiveText));
   }
 
 }

@@ -20,6 +20,8 @@ import com.intellij.psi.PsiElement;
 
 /**
  * Base PSI interface for all M68K PSI.
+ *
+ * @see M68kPsiTreeUtil
  */
 public interface M68kPsiElement extends PsiElement {
 }
