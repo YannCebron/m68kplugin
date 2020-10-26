@@ -1,12 +1,13 @@
-name: Build
+name: Build & Test
 on: [push, pull_request]
 
 jobs:
 
   # Run Gradle Wrapper Validation Action to verify the wrapper's checksum
   gradleValidation:
-    name: Gradle Wrapper
+    name: Gradle Wrapper Validation
     runs-on: ubuntu-latest
+
     steps:
 
       # Check out current repository
@@ -17,37 +18,42 @@ jobs:
       - name: Gradle Wrapper Validation
         uses: gradle/wrapper-validation-action@v1.0.3
 
+
   build:
+    name: Build, Test & Validate Plugin
     needs: gradleValidation
     runs-on: ubuntu-latest
     container:
       image: gradle:jdk8
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup Cache
-      uses: actions/cache@v2
-      with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
-    - name: Run tests
-      run: gradle check
 
-    - name: Build the plugin using Gradle
-      run: gradle buildPlugin
-    - name: Verify Plugin on IntelliJ Platforms
-      id: verify
-      uses: ChrisCarini/intellij-platform-plugin-verifier-action@v1.0.3
-      with:
-        ide-versions: |
-          ideaIC:2019.3.5
-          ideaIC:2020.1.4
-          ideaIC:2020.2.3
-          ideaIC:LATEST-EAP-SNAPSHOT
-    - name: Get log file path and print contents
-      run: |
-        echo "The verifier log file [${{steps.verify.outputs.verification-output-log-filename}}] contents : " ;
-        cat ${{steps.verify.outputs.verification-output-log-filename}}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Run plugin tests
+        run: gradle check
+
+      - name: Build the plugin distribution
+        run: gradle buildPlugin
+
+      - name: Verify Plugin
+        id: verify
+        uses: ChrisCarini/intellij-platform-plugin-verifier-action@v1.0.3
+        with:
+          ide-versions: |
+            ideaIC:2019.3.5
+            ideaIC:2020.1.4
+            ideaIC:2020.2.3
+            ideaIC:LATEST-EAP-SNAPSHOT
+      - name: Plugin Verifier Output
+        run: |
+          echo "The verifier log file [${{steps.verify.outputs.verification-output-log-filename}}] contents : " ;
+          cat ${{steps.verify.outputs.verification-output-log-filename}}
