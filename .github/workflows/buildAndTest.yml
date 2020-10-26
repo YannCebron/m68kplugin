@@ -27,16 +27,24 @@ jobs:
       image: gradle:jdk8
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Cache
+
+      # Check out current repository
+      - name: Fetch Sources
+        uses: actions/checkout@v2
+
+      # Cache Gradle dependencies
+      - name: Setup Gradle Dependencies Cache
         uses: actions/cache@v2
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', 'gradle.properties') }}
+
+      # Cache Gradle Wrapper
+      - name: Setup Gradle Wrapper Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
 
       - name: Run plugin tests
         run: gradle check
@@ -45,7 +53,6 @@ jobs:
         run: gradle buildPlugin
 
       - name: Verify Plugin
-        id: verify
         uses: ChrisCarini/intellij-platform-plugin-verifier-action@v1.0.3
         with:
           ide-versions: |
