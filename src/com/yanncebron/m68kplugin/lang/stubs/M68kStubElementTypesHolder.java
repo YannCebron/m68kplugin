@@ -21,6 +21,7 @@ import com.intellij.lang.LighterASTNode;
 import com.intellij.psi.impl.source.tree.LightTreeUtil;
 import com.intellij.psi.stubs.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
+import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelImpl;
 import com.yanncebron.m68kplugin.lang.stubs.impl.M68kLabelStubImpl;
 import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
@@ -36,7 +37,8 @@ public interface M68kStubElementTypesHolder {
       @NotNull
       @Override
       public M68kLabelStub createStub(@NotNull LighterAST tree, @NotNull LighterASTNode node, @NotNull StubElement parentStub) {
-        return new M68kLabelStubImpl(parentStub, this, LightTreeUtil.toFilteredString(tree, node, null));
+        final LighterASTNode idNode = LightTreeUtil.requiredChildOfType(tree, node, M68kTokenTypes.ID);
+        return new M68kLabelStubImpl(parentStub, this, LightTreeUtil.toFilteredString(tree, idNode, null));
       }
 
       @Override
