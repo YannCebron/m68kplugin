@@ -4,21 +4,19 @@
 ## Motorola 68000 Series Assembly Language Support for IntelliJ-based IDEs
 
 Adds support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_68000_series) assembly language
-in [IntelliJ](http://www.jetbrains.org/intellij/sdk/docs/intro/intellij_platform.html#ides-based-on-the-intellij-platform)
--based IDEs (including [IntelliJ IDEA](https://www.jetbrains.com/idea/)
-, [Android Studio](https://developer.android.com/studio/) and many more).
+in [IntelliJ](https://www.jetbrains.org/intellij/sdk/docs/intro/intellij_platform.html#ides-based-on-the-intellij-platform) based IDEs
+(including [IntelliJ IDEA](https://www.jetbrains.com/idea/), [Android Studio](https://developer.android.com/studio/) and many more).
 
 > **NOTE:** This plugin is at a very early stage and provided "as-is". Please see also [Known Issues](#known-issues) below.
 
 ## Installation
 
-There are currently no published releases, please run `./gradlew buildPlugin` to create plugin distribution from sources
-in `build/distributions`.
+There are currently no published releases, please run `./gradlew buildPlugin` to create plugin distribution from sources in `build/distributions`.
 
 ## Features
 
-Support is currently focused on editing, code-insight, and navigation. There is no support for project setup,
-integration with build tools, or running/debugging.
+Support is currently focused on editing, code-insight, and navigation.
+There is no support for project setup, integration with build tools, or running/debugging.
 
 Please see [Plan](plan.md) for planned features and ideas.
 
@@ -36,9 +34,9 @@ Please see [Plan](plan.md) for planned features and ideas.
   * Highlight missing matching closing directive (`macro`/`endm`, `inline`/`einline`)
 * Parsing with semantic error highlighting
 * Documentation for mnemonics
-* Labels: *Navigate|Declaration or Usages*, *Edit|Find Usages* (grouped by type), *Refactor|Rename*
-* Smart *Edit|Extend/Shrink Selection*
-* *Code|Move Element Left/Right* for `exg`, binary expressions, register list, `dc` values
+* Labels: *Navigate | Declaration or Usages*, *Edit | Find Usages* (grouped by type), *Refactor | Rename*
+* Smart *Edit | Extend/Shrink Selection*
+* *Code | Move Element Left/Right* for `exg`, binary expressions, register list, `dc` values
 * Spellchecker
 * Code Folding
 * Live Templates
@@ -50,12 +48,11 @@ Please see [Plan](plan.md) for planned features and ideas.
 ### IDE
 
 * Structure View
-* *Navigate|Symbol* for labels
+* *Navigate | Symbol* for labels
 
 ## Known Issues
 
-* Various smaller parser issues (see [Broken Lexing/Parsing](plan.md#broken-lexingparsing)),
-  please [submit issue](https://github.com/YannCebron/m68kplugin/issues) if not listed yet
+* Various smaller [parser issues](plan.md#broken-lexingparsing), please [submit issue](https://github.com/YannCebron/m68kplugin/issues) if not listed yet
 * Unsupported features:
   - Includes
 
@@ -69,14 +66,12 @@ Gradle setup uses [gradle-intellij-plugin](https://github.com/JetBrains/gradle-i
 , [gradle-grammar-kit-plugin](https://github.com/JetBrains/gradle-grammar-kit-plugin)
 and [verifier.gradle](https://github.com/FWDekker/intellij-randomness/blob/master/gradle/scripts/verifier.gradle)
 
-Mnemonic documentation taken
-from [m68k-instructions-documentation](https://github.com/prb28/m68k-instructions-documentation)
+Mnemonic documentation taken from [m68k-instructions-documentation](https://github.com/prb28/m68k-instructions-documentation)
 
 ## License
 
 Licensed under the Apache License, Version 2.0 (the "License"), see [LICENCE](LICENCE)
 
-This software includes [commonmark-java](https://github.com/atlassian/commonmark-java) library, Copyright (c) 2015-2016,
-Atlassian Pty Ltd
+This software includes [commonmark-java](https://github.com/atlassian/commonmark-java) library, Copyright (c) 2015-2016, Atlassian Pty Ltd
 
 *All product names, trademarks, and registered trademarks are property of their respective owners.*
