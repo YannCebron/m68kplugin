@@ -52,5 +52,13 @@ jobs:
       - name: Build the plugin distribution
         run: gradle buildPlugin
 
+
+      # Cache verification IDEs
+      - name: Setup Plugin Verifier IDE Dependencies Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.pluginVerifier
+          key: ${{ runner.os }}-pluginverifier-ides-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', 'gradle.properties') }}
+
       - name: Verify Plugin
         run: gradle runPluginVerifier
