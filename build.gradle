@@ -16,13 +16,11 @@ limitations under the License.
 
 plugins {
   id 'java'
-  id 'org.jetbrains.intellij' version '0.5.0'
+  id 'org.jetbrains.intellij' version '0.6.0'
   id "org.jetbrains.grammarkit" version '2020.2.1'
   id 'org.jetbrains.changelog' version '0.6.0'
 }
 
-
-apply from: "$rootDir/gradle/scripts/verifier.gradle"
 
 group 'com.yanncebron'
 version = "${version}"
@@ -110,9 +108,7 @@ task generateM68KLexer(type: GenerateLexer) {
 
 // Plugin verification =========================================================== 
 runPluginVerifier {
-  pluginFileName = "$rootProject.name-$version"
-  ides = ["IC-2019.3.5", "IC-2020.1.4", "IC-2020.2.3"]
-  verifierVersion = "1.252"
+  ideVersions = ["IC-2019.3.5", "IC-2020.1.4", "IC-2020.2.3"]
 }
 
 check.dependsOn verifyPlugin
