@@ -108,7 +108,7 @@ task generateM68KLexer(type: GenerateLexer) {
 
 // Plugin verification =========================================================== 
 runPluginVerifier {
-  ideVersions = ["IC-2019.3.5", "IC-2020.1.4", "IC-2020.2.3"]
+  ideVersions = intellij_platform_verification_versions.split(",")
 }
 
 check.dependsOn verifyPlugin
