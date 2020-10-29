@@ -53,15 +53,4 @@ jobs:
         run: gradle buildPlugin
 
       - name: Verify Plugin
-        id: verify
-        uses: ChrisCarini/intellij-platform-plugin-verifier-action@v1.0.3
-        with:
-          ide-versions: |
-            ideaIC:2019.3.5
-            ideaIC:2020.1.4
-            ideaIC:2020.2.3
-            ideaIC:LATEST-EAP-SNAPSHOT
-      - name: Plugin Verifier Output
-        run: |
-          echo "The verifier log file [${{steps.verify.outputs.verification-output-log-filename}}] contents : " ;
-          cat ${{steps.verify.outputs.verification-output-log-filename}}
+        run: gradle runPluginVerifier
