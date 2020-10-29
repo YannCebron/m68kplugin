@@ -16,7 +16,7 @@ limitations under the License.
 
 plugins {
   id 'java'
-  id 'org.jetbrains.intellij' version '0.6.0'
+  id 'org.jetbrains.intellij' version '0.6.1'
   id "org.jetbrains.grammarkit" version '2020.2.1'
   id 'org.jetbrains.changelog' version '0.6.0'
 }
@@ -108,7 +108,7 @@ task generateM68KLexer(type: GenerateLexer) {
 
 // Plugin verification =========================================================== 
 runPluginVerifier {
-  ideVersions = intellij_platform_verification_versions.split(",")
+  ideVersions = intellij_platform_verification_versions
 }
 
 check.dependsOn verifyPlugin
