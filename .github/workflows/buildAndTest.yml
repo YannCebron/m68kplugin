@@ -58,7 +58,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.pluginVerifier
-          key: ${{ runner.os }}-pluginverifier-ides }}
+          key: ${{ runner.os }}-pluginverifier-xides }}
 #          key: ${{ runner.os }}-pluginverifier-ides-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', 'gradle.properties') }}
 
       - name: Verify Plugin
