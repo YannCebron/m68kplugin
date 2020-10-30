@@ -82,6 +82,7 @@ abstract class M68kMacrocallDirectiveMixIn extends ASTWrapperPsiElement {
       return ContainerUtil.map2Array(getAllMacroLabels(), LookupElement.class, LookupElementBuilder::createWithIcon);
     }
 
+    // todo macro must be defined before usage
     private List<M68kLabel> getAllMacroLabels() {
       List<M68kLabel> result = new SmartList<>();
 
