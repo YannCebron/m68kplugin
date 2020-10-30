@@ -20,16 +20,57 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.CustomFoldingBuilder;
 import com.intellij.lang.folding.FoldingDescriptor;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.util.Comparing;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.yanncebron.m68kplugin.lang.psi.M68kDataSize;
+import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kDcDirective;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kStringExpression;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.List;
 
 public class M68kFoldingBuilder extends CustomFoldingBuilder {
 
   @Override
-  protected void buildLanguageFoldRegions(@NotNull List<FoldingDescriptor> descriptors, @NotNull PsiElement root, @NotNull Document document, boolean quick) {
+  protected void buildLanguageFoldRegions(@NotNull List<FoldingDescriptor> descriptors,
+                                          @NotNull PsiElement root,
+                                          @NotNull Document document,
+                                          boolean quick) {
+    final M68kFoldingSettings settings = M68kFoldingSettings.getInstance();
+
+    root.acceptChildren(new M68kVisitor() {
+
+      @Override
+      public void visitDcDirective(@NotNull M68kDcDirective o) {
+        final String placeholderText = isZeroTerminatedStringLiteral(o);
+        if (placeholderText == null) return;
+
+        descriptors.add(new FoldingDescriptor(o.getNode(), o.getTextRange(), null,
+          placeholderText, settings.isCollapseZeroTerminatedStringLiteral(), Collections.emptySet()));
+      }
+    });
+  }
+
+  @Nullable
+  private String isZeroTerminatedStringLiteral(@NotNull M68kDcDirective o) {
+    if (o.getDataSize() != M68kDataSize.BYTE) return null;
+    final List<M68kExpression> expressions = o.getExpressionList();
+    if (expressions.size() != 2) return null;
+
+    final M68kExpression firstExpression = expressions.get(0);
+    if (!(firstExpression instanceof M68kStringExpression)) return null;
+
+    final M68kExpression secondExpression = expressions.get(1);
+    if (!(secondExpression instanceof M68kNumberExpression)) return null;
+    if (!Comparing.equal(secondExpression.getText(), "0")) return null;
+
+    return firstExpression.getText();
   }
 
   @Override

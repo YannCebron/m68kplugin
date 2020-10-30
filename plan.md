@@ -115,10 +115,8 @@
 - documentation:
   - quick doc/hover for number literals: dec/hex/oct/bin/ASCII
   - quick doc/hover for `equ`/`equr`/`=` directives
-- **WIP** code folding
-  - fold by default + settings for:
-    - `dc.b` - strings
-    - `movem` push/pop
+- **WIP** code folding with settings for:
+  - `movem` push/pop
 - macro call: parameter info/preview referring place
 - `dc`:
   - join lines

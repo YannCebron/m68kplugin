@@ -30,4 +30,8 @@ public class M68kFoldingBuilderTest extends BasePlatformTestCase {
   public void testCustomFolding() {
     myFixture.testFolding(getTestDataPath() + "/customFolding.s");
   }
+
+  public void testZeroTerminatedStringLiteral() {
+    myFixture.testFolding(getTestDataPath() + "/zeroTerminatedStringLiteral.s");
+  }
 }

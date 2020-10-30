@@ -38,6 +38,8 @@ Please see [Plan](plan.md) for planned features and ideas.
 * *Code | Move Element Left/Right* for `exg`, binary expressions, register list, `dc` values
 * Spellchecker
 * Code Folding
+  * Zero-terminated string literal (`dc.b "a text",0`)
+  * Custom regions via enclosing `* region [placeholderText]` / `* endregion` comments
 * Live Templates
 * Code Style Settings: Tab Size, Visual Guides
 * Code Inspections
