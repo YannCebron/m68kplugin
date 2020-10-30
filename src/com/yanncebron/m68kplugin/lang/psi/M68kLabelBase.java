@@ -16,8 +16,8 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-import com.intellij.navigation.NavigationItem;
+import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiNamedElement;
 
-public interface M68kLabelBase extends PsiNamedElement, NavigationItem, M68kPsiElement {
+public interface M68kLabelBase extends PsiNamedElement, NavigatablePsiElement, M68kPsiElement {
 }
