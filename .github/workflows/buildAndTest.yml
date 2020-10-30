@@ -26,7 +26,6 @@ jobs:
     container:
       image: gradle:jdk8
     outputs:
-      name: ${{ steps.properties.outputs.name }}
       version: ${{ steps.properties.outputs.version }}
       changelog: ${{ steps.properties.outputs.changelog }}
       artifact: ${{ steps.properties.outputs.artifact }}
@@ -61,15 +60,13 @@ jobs:
         run: |
           PROPERTIES="$(./gradlew properties --console=plain -q)"
           VERSION="$(echo "$PROPERTIES" | grep "^version:" | cut -f2- -d ' ')"
-          NAME="$(echo "$PROPERTIES" | grep "^pluginName_:" | cut -f2- -d ' ')"
           CHANGELOG="$(./gradlew getChangelog --unreleased --no-header --console=plain -q)"
           CHANGELOG="${CHANGELOG//'%'/'%25'}"
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
-          ARTIFACT="${NAME}-${VERSION}.zip"
+          ARTIFACT="m68kplugin-${VERSION}.zip"
 
           echo "::set-output name=version::$VERSION"
-          echo "::set-output name=name::$NAME"
           echo "::set-output name=changelog::$CHANGELOG"
           echo "::set-output name=artifact::$ARTIFACT"
 
