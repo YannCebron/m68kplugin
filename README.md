@@ -1,4 +1,4 @@
-[![CI](https://github.com/YannCebron/m68kplugin/workflows/CI/badge.svg)](https://github.com/YannCebron/m68kplugin/actions?query=workflow%3ACI)
+[![Build & Test](https://github.com/YannCebron/m68kplugin/workflows/Build%20&%20Test/badge.svg)](https://github.com/YannCebron/m68kplugin/actions?query=workflow%3A%22Build+%26+Test%22)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 
 ## Motorola 68000 Series Assembly Language Support for IntelliJ-based IDEs
