@@ -16,7 +16,6 @@
 
 package com.yanncebron.m68kplugin.compiler;
 
-import com.intellij.codeInsight.CodeInsightBundle;
 import com.intellij.codeInsight.daemon.impl.PsiElementListNavigator;
 import com.intellij.codeInsight.hint.HintManager;
 import com.intellij.execution.filters.Filter;
@@ -124,7 +123,7 @@ class M68kVasmLineInLocationFilter implements Filter {
             M68kBundle.message("vasm.line.in.location.filter.matching.elements.for", location),
             new DefaultPsiElementCellRenderer());
         } catch (IndexNotReadyException e) {
-          HintManager.getInstance().showErrorHint(editor, CodeInsightBundle.message("message.navigation.is.not.available.here.during.index.update"));
+          HintManager.getInstance().showErrorHint(editor, M68kBundle.message("message.navigation.is.not.available.here.during.index.update"));
         }
       });
   }
