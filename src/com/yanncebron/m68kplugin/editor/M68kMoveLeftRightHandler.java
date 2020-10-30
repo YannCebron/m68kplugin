@@ -18,10 +18,12 @@ package com.yanncebron.m68kplugin.editor;
 
 import com.intellij.codeInsight.editorActions.moveLeftRight.MoveElementLeftRightHandler;
 import com.intellij.psi.PsiElement;
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmRrd;
 import com.yanncebron.m68kplugin.lang.psi.M68kExgInstruction;
 import com.yanncebron.m68kplugin.lang.psi.M68kRegisterList;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDcDirective;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kBinaryExpression;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 import org.jetbrains.annotations.NotNull;
 
 public class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
@@ -32,17 +34,26 @@ public class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
     if (element instanceof M68kDcDirective) {
       return ((M68kDcDirective) element).getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
     }
+
     if (element instanceof M68kBinaryExpression) {
       M68kBinaryExpression binaryExpression = ((M68kBinaryExpression) element);
-      return new PsiElement[]{binaryExpression.getLeft(), binaryExpression.getRight()};
+      final M68kExpression right = binaryExpression.getRight();
+      if (right != null) return new PsiElement[]{binaryExpression.getLeft(), right};
     }
+
     if (element instanceof M68kRegisterList) {
       M68kRegisterList registerList = (M68kRegisterList) element;
       return registerList.getRegisterRangeList().toArray(PsiElement.EMPTY_ARRAY);
     }
+
     if (element instanceof M68kExgInstruction) {
       final M68kExgInstruction exgInstruction = (M68kExgInstruction) element;
-      return new PsiElement[]{exgInstruction.getSource(), exgInstruction.getDestination()};
+
+      final M68kAdmRrd source = exgInstruction.getSource();
+      final M68kAdmRrd destination = exgInstruction.getDestination();
+      if (source != null && destination != null) {
+        return new PsiElement[]{source, destination};
+      }
     }
     return PsiElement.EMPTY_ARRAY;
   }
