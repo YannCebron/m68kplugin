@@ -44,7 +44,9 @@
 - `section` directive: fix parsing  
 - `include`/`incbin` path without quotes
 - in expressions, mnemonic parsed as instruction, not identifier (`size = (bpls*bpl)`)
-- add missing expression operators (XOR?)
+- add missing expression operators 
+  - XOR?
+  - `!`
 - do not allow spaces (?!)
 - fix label starting with `_` 
 - allow `equr`/`reg` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
