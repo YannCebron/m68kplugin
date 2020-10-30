@@ -38,7 +38,7 @@ public class MoveqInstructionPsiTest extends M68kPsiTestCase {
   public void testWithDataSize() {
     final M68kMoveqInstruction instruction = parse("moveq.l #1,d1");
 
-    assertEquals(M68kDataSize.LONG, instruction.getDataSize());
+    assertEquals(M68kDataSize.LONGWORD, instruction.getDataSize());
   }
 
   private M68kMoveqInstruction parse(String text) {

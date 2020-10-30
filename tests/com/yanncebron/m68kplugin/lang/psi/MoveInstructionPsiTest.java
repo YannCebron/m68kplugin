@@ -23,7 +23,7 @@ public class MoveInstructionPsiTest extends M68kPsiTestCase {
   public void testWithDataSize() {
     final M68kMoveInstruction instruction = parse("move.l d0,42(a0)");
 
-    assertEquals(M68kDataSize.LONG, instruction.getDataSize());
+    assertEquals(M68kDataSize.LONGWORD, instruction.getDataSize());
   }
 
   public void testMoveInstructionPciDataSizeDrd() {

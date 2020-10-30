@@ -21,7 +21,7 @@ public class MovepInstructionPsiTest extends M68kPsiTestCase {
   public void testWithDataSize() {
     final M68kMovepInstruction instruction = parse("movep.l d0,42(a0)");
 
-    assertEquals(M68kDataSize.LONG, instruction.getDataSize());
+    assertEquals(M68kDataSize.LONGWORD, instruction.getDataSize());
     final M68kAdmDrd admDrd = instruction.getAdmDrd();
     assertNotNull(admDrd);
     assertEquals(M68kRegister.D0, admDrd.getRegister());

@@ -27,7 +27,7 @@ public enum M68kDataSize {
   BYTE(".b", M68kTokenTypes.DOT_B),
   SHORT(".s", M68kTokenTypes.DOT_S),
   WORD(".w", M68kTokenTypes.DOT_W),
-  LONG(".l", M68kTokenTypes.DOT_L);
+  LONGWORD(".l", M68kTokenTypes.DOT_L);
 
   @NonNls
   private final String text;

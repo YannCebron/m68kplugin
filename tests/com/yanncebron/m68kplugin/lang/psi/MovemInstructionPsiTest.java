@@ -23,7 +23,7 @@ public class MovemInstructionPsiTest extends M68kPsiTestCase {
   public void testWithDataSize() {
     final M68kMovemInstruction instruction = parse("movem.l d1-d2/a0/a2,(a7)");
 
-    assertEquals(M68kDataSize.LONG, instruction.getDataSize());
+    assertEquals(M68kDataSize.LONGWORD, instruction.getDataSize());
 
     final M68kRegisterList registerList = instruction.getRegisterList();
     assertNotNull(registerList);

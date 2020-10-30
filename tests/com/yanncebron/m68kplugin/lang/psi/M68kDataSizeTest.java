@@ -26,7 +26,7 @@ public class M68kDataSizeTest extends TestCase {
     assertDataSize(M68kDataSize.BYTE, ".B");
     assertDataSize(M68kDataSize.SHORT, ".s");
     assertDataSize(M68kDataSize.WORD, ".w");
-    assertDataSize(M68kDataSize.LONG, ".L");
+    assertDataSize(M68kDataSize.LONGWORD, ".L");
 
     assertDataSize(null, "INVALID_VALUE");
   }
@@ -39,7 +39,7 @@ public class M68kDataSizeTest extends TestCase {
     assertDataSize2(M68kDataSize.BYTE, M68kTokenTypes.DOT_B);
     assertDataSize2(M68kDataSize.SHORT, M68kTokenTypes.DOT_S);
     assertDataSize2(M68kDataSize.WORD, M68kTokenTypes.DOT_W);
-    assertDataSize2(M68kDataSize.LONG, M68kTokenTypes.DOT_L);
+    assertDataSize2(M68kDataSize.LONGWORD, M68kTokenTypes.DOT_L);
 
     assertDataSize2(null, M68kTokenTypes.ABCD);
   }

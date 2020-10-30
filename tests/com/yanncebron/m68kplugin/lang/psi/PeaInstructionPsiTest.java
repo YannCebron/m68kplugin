@@ -27,7 +27,7 @@ public class PeaInstructionPsiTest extends M68kPsiTestCase {
   public void testWithDataSize() {
     final M68kPeaInstruction instruction = parse("pea.l a0");
 
-    assertEquals(M68kDataSize.LONG, instruction.getDataSize());
+    assertEquals(M68kDataSize.LONGWORD, instruction.getDataSize());
   }
 
   private M68kPeaInstruction parse(String text) {

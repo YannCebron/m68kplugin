@@ -21,7 +21,7 @@ public class MoveaInstructionPsiTest extends M68kPsiTestCase {
   public void testWithDataSize() {
     final M68kMoveaInstruction instruction = parse("movea.l a0,a1");
 
-    assertEquals(M68kDataSize.LONG, instruction.getDataSize());
+    assertEquals(M68kDataSize.LONGWORD, instruction.getDataSize());
 
     assertSize(2, instruction.getAdmArdList());
   }

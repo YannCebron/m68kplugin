@@ -27,7 +27,7 @@ public class ClrInstructionPsiTest extends M68kPsiTestCase {
   public void testWithDataSize() {
     final M68kClrInstruction instruction = parse("clr.l -(a1)");
 
-    assertEquals(M68kDataSize.LONG, instruction.getDataSize());
+    assertEquals(M68kDataSize.LONGWORD, instruction.getDataSize());
     assertNotNull(instruction.getAdmApd());
   }
 

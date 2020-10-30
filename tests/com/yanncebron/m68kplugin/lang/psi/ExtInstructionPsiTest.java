@@ -27,7 +27,7 @@ public class ExtInstructionPsiTest extends M68kPsiTestCase {
   public void testWithDataSize() {
     final M68kExtInstruction instruction = parse("ext.l d0");
 
-    assertEquals(M68kDataSize.LONG, instruction.getDataSize());
+    assertEquals(M68kDataSize.LONGWORD, instruction.getDataSize());
   }
 
   private M68kExtInstruction parse(String text) {

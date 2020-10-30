@@ -37,7 +37,7 @@ public class ExgInstructionPsiTest extends M68kPsiTestCase {
   public void testWithDataSize() {
     final M68kExgInstruction instruction = parse("exg.l d0,d1");
 
-    assertEquals(M68kDataSize.LONG, instruction.getDataSize());
+    assertEquals(M68kDataSize.LONGWORD, instruction.getDataSize());
   }
 
   private M68kExgInstruction parse(String text) {
