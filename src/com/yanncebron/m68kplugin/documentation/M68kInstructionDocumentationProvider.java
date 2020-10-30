@@ -17,12 +17,15 @@
 package com.yanncebron.m68kplugin.documentation;
 
 import com.intellij.lang.documentation.AbstractDocumentationProvider;
+import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.io.StreamUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.io.URLUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kInstruction;
@@ -45,9 +48,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @see com.yanncebron.m68kplugin.lang.M68kTargetElementEvaluator
- */
 public class M68kInstructionDocumentationProvider extends AbstractDocumentationProvider {
 
   private static final String DOCS_MNEMONIC_ROOT = "/docs/mnemonic/";
@@ -82,6 +82,17 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
       }
     }
     return StringUtil.toLowerCase(originalMnemonic.toString());
+  }
+
+  @Nullable
+  @Override
+  public PsiElement getCustomDocumentationElement(@NotNull Editor editor, @NotNull PsiFile file,
+                                                  @Nullable PsiElement contextElement) {
+    if (contextElement != null &&
+      M68kTokenGroups.INSTRUCTIONS.contains(contextElement.getNode().getElementType())) {
+      return PsiTreeUtil.getParentOfType(contextElement, M68kInstruction.class);
+    }
+    return null;
   }
 
   @Override
