@@ -11,7 +11,7 @@ in [IntelliJ](https://www.jetbrains.org/intellij/sdk/docs/intro/intellij_platfor
 
 ## Installation
 
-There are currently no published releases, please run `./gradlew buildPlugin` to create plugin distribution from sources in `build/distributions`.
+There are currently no published releases, snapshot artifacts for manual installation are available via <kbd>Build & Test</kbd> GitHub CI (badge on top).
 
 ## Features
 
