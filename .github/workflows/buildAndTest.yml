@@ -25,6 +25,11 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: gradle:jdk8
+    outputs:
+      name: ${{ steps.properties.outputs.name }}
+      version: ${{ steps.properties.outputs.version }}
+      changelog: ${{ steps.properties.outputs.changelog }}
+      artifact: ${{ steps.properties.outputs.artifact }}
 
     steps:
 
@@ -49,8 +54,34 @@ jobs:
       - name: Run plugin tests
         run: gradle check
 
+      # Set environment variables
+      - name: Export Properties
+        id: properties
+        shell: bash
+        run: |
+          PROPERTIES="$(./gradlew properties --console=plain -q)"
+          VERSION="$(echo "$PROPERTIES" | grep "^version:" | cut -f2- -d ' ')"
+          NAME="$(echo "$PROPERTIES" | grep "^pluginName_:" | cut -f2- -d ' ')"
+          CHANGELOG="$(./gradlew getChangelog --unreleased --no-header --console=plain -q)"
+          CHANGELOG="${CHANGELOG//'%'/'%25'}"
+          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
+          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+          ARTIFACT="${NAME}-${VERSION}.zip"
+
+          echo "::set-output name=version::$VERSION"
+          echo "::set-output name=name::$NAME"
+          echo "::set-output name=changelog::$CHANGELOG"
+          echo "::set-output name=artifact::$ARTIFACT"
+
       - name: Build the plugin distribution
         run: gradle buildPlugin
+
+      # Upload plugin artifact
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: plugin-artifact
+          path: ./build/distributions/${{ needs.build.outputs.artifact }}
 
 
       # Cache verification IDEs
