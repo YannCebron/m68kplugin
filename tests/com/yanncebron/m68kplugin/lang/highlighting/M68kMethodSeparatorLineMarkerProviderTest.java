@@ -22,7 +22,6 @@ import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerImpl;
 import com.intellij.openapi.editor.markup.SeparatorPlacement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -44,38 +43,37 @@ public class M68kMethodSeparatorLineMarkerProviderTest extends BasePlatformTestC
   }
 
   public void testMacro() {
-    final List<LineMarkerInfo> lineMarkerInfos =
+    final List<LineMarkerInfo<?>> lineMarkerInfos =
       getLineMarkerInfos("macroName macro\n" +
         " endm\n");
 
     assertSize(2, lineMarkerInfos);
 
-    final LineMarkerInfo before = lineMarkerInfos.get(0);
+    final LineMarkerInfo<?> before = lineMarkerInfos.get(0);
     assertEquals(SeparatorPlacement.TOP, before.separatorPlacement);
     final LeafPsiElement beforePsiElement = assertInstanceOf(before.getElement(), LeafPsiElement.class);
     assertEquals("macroName", beforePsiElement.getText());
 
-    final LineMarkerInfo after = lineMarkerInfos.get(1);
+    final LineMarkerInfo<?> after = lineMarkerInfos.get(1);
     assertEquals(SeparatorPlacement.BOTTOM, after.separatorPlacement);
     final LeafPsiElement afterPsiElement = assertInstanceOf(after.getElement(), LeafPsiElement.class);
     assertEquals("endm", afterPsiElement.getText());
   }
 
   public void testSection() {
-    final List<LineMarkerInfo> lineMarkerInfos =
+    final List<LineMarkerInfo<?>> lineMarkerInfos =
       getLineMarkerInfos(" section tos,code,chip\n");
 
-    final LineMarkerInfo before = assertOneElement(lineMarkerInfos);
+    final LineMarkerInfo<?> before = assertOneElement(lineMarkerInfos);
     assertEquals(SeparatorPlacement.TOP, before.separatorPlacement);
     final LeafPsiElement beforePsiElement = assertInstanceOf(before.getElement(), LeafPsiElement.class);
     assertEquals("section", beforePsiElement.getText());
   }
 
-  @NotNull
-  private List<LineMarkerInfo> getLineMarkerInfos(String text) {
+  private List<LineMarkerInfo<?>> getLineMarkerInfos(String text) {
     myFixture.configureByText("test.s", text);
     myFixture.doHighlighting();
-    final @NotNull List<LineMarkerInfo> lineMarkerInfos =
+    final List<LineMarkerInfo<?>> lineMarkerInfos =
       DaemonCodeAnalyzerImpl.getLineMarkers(myFixture.getEditor().getDocument(), getProject());
     return lineMarkerInfos;
   }

@@ -23,7 +23,7 @@ import com.yanncebron.m68kplugin.M68kBundle;
 public class M68kFoldingOptionsProvider extends BeanConfigurable<M68kFoldingSettings> implements CodeFoldingOptionsProvider {
 
   public M68kFoldingOptionsProvider() {
-    super(M68kFoldingSettings.getInstance()); // todo provide group title
+    super(M68kFoldingSettings.getInstance(), M68kBundle.message("general.m68k.assembler"));
     final M68kFoldingSettings settings = M68kFoldingSettings.getInstance();
 
     checkBox(M68kBundle.message("folding.option.zero.terminated.string.literal"),
