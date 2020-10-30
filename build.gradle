@@ -106,9 +106,12 @@ task generateM68KLexer(type: GenerateLexer) {
 }
 
 
-// Plugin verification =========================================================== 
+// Plugin verification ===========================================================
+import org.jetbrains.intellij.tasks.RunPluginVerifierTask.FailureLevel
+
 runPluginVerifier {
   ideVersions = intellij_platform_verification_versions
+  failureLevel = FailureLevel.COMPATIBILITY_PROBLEMS
 }
 
 check.dependsOn verifyPlugin
