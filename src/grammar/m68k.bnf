@@ -935,7 +935,7 @@ cnop_directive ::= CNOP expression COMMA expression
 end_directive ::= END
 
 private section_type ::= CODE | CODE_C | CODE_F | TEXT | DATA | DATA_C | DATA_F | BSS | BSS_C | BSS_F
-section_directive ::= SECTION expression (COMMA section_type)? (COMMA expression)?
+section_directive ::= SECTION ID (COMMA section_type)? (COMMA ID)?
 {
   pin = 1
 }

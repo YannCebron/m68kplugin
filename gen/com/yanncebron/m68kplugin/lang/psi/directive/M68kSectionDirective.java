@@ -18,11 +18,7 @@ package com.yanncebron.m68kplugin.lang.psi.directive;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
-import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
 public interface M68kSectionDirective extends M68kDirective {
-
-  @NotNull
-  List<M68kExpression> getExpressionList();
 
 }

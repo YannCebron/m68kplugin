@@ -41,7 +41,6 @@
   - `printt`/`printv`
   - `auto`
   - `struct`/`estruct`
-- `section` directive: fix parsing
 - `include`/`incbin` path without quotes
 - in expressions, mnemonic parsed as instruction, not identifier (`size = (bpls*bpl)`)
 - add missing expression operators

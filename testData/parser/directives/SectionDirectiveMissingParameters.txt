@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kSectionDirectiveImpl(SECTION_DIRECTIVE)
     PsiElement(section)('section')
-    PsiErrorElement:<expression> expected
+    PsiErrorElement:id expected
       <empty list>
   PsiWhiteSpace(' ')

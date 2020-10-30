@@ -26,7 +26,6 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
-import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
 public class M68kSectionDirectiveImpl extends ASTWrapperPsiElement implements M68kSectionDirective {
 
@@ -41,12 +40,6 @@ public class M68kSectionDirectiveImpl extends ASTWrapperPsiElement implements M6
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public List<M68kExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
   }
 
 }

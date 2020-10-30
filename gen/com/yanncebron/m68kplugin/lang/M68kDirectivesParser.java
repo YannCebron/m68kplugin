@@ -981,16 +981,15 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // SECTION expression (COMMA section_type)? (COMMA expression)?
+  // SECTION ID (COMMA section_type)? (COMMA ID)?
   public static boolean section_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "section_directive")) return false;
     if (!nextTokenIs(b, SECTION)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, SECTION_DIRECTIVE, null);
-    r = consumeToken(b, SECTION);
+    r = consumeTokens(b, 1, SECTION, ID);
     p = r; // pin = 1
-    r = r && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1));
-    r = p && report_error_(b, section_directive_2(b, l + 1)) && r;
+    r = r && report_error_(b, section_directive_2(b, l + 1));
     r = p && section_directive_3(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
@@ -1014,20 +1013,19 @@ public class M68kDirectivesParser {
     return r;
   }
 
-  // (COMMA expression)?
+  // (COMMA ID)?
   private static boolean section_directive_3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "section_directive_3")) return false;
     section_directive_3_0(b, l + 1);
     return true;
   }
 
-  // COMMA expression
+  // COMMA ID
   private static boolean section_directive_3_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "section_directive_3_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, COMMA);
-    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    r = consumeTokens(b, 0, COMMA, ID);
     exit_section_(b, m, null, r);
     return r;
   }
