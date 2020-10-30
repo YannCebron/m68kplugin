@@ -48,6 +48,7 @@ Please see [Plan](plan.md) for planned features and ideas.
 
 * Structure View
 * *Navigate | Symbol* for labels
+* External tools: navigate to _file:lineNumber_ location or label from vasm console message                        
 
 ## Known Issues
 

@@ -41,16 +41,16 @@
   - `printt`/`printv`
   - `auto`
   - `struct`/`estruct`
-- `section` directive: fix parsing  
+- `section` directive: fix parsing
 - `include`/`incbin` path without quotes
 - in expressions, mnemonic parsed as instruction, not identifier (`size = (bpls*bpl)`)
-- add missing expression operators 
+- add missing expression operators
   - XOR?
   - `!`
 - do not allow spaces (?!)
-- fix label starting with `_` 
+- fix label starting with `_`
 - allow `equr`/`reg` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
-- macros: 
+- macros:
   - label-counters (`\@`)
   - `ifmacrod`/`ifmacrond` code insight
 - Internal tasks:
@@ -129,7 +129,7 @@
 
 - nonsensical `move`, e.g. src==dest
 - `movem` non-symmetrical register ranges
-- register list:  
+- register list:
   - sort/optimize
 - string in `dc.b` not terminated with `,0`
 - check optimizations from vasm/DevPac
@@ -138,7 +138,7 @@
 - cyclic `include`
 - expression:
   - type check
-  - range check  
+  - range check
   - simplify
   - convert numeric literal to other bases
 
@@ -150,7 +150,7 @@
   - macros
   - nest local labels
 - breadcrumbs
-- Quick Definition: better range for labels like `macro` etc. `ImplementationTextSelectioner`  
+- Quick Definition: better range for labels like `macro` etc. `ImplementationTextSelectioner`
 - Conditional Assembly structures: `CodeBlockSupportHandler`
 - Goto Related: `.i`/binary file -> including files
 - Gutter Icon: `include` all included files (recursively)
@@ -162,8 +162,6 @@
 - symbol names in commit dialog (`PlainTextSymbolCompletionContributor`)
 
 ## External Tools
-
-- make errors navigatable (`ConsoleFilterProvider`)
 
 ## Tools
 

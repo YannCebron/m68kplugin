@@ -146,6 +146,10 @@
         language="M68k" enabledByDefault="true" level="ERROR"
         key="inspection.unresolved.label.reference.name" groupKey="inspection.group.name"
         implementationClass="com.yanncebron.m68kplugin.inspections.M68kUnresolvedLabelReferenceInspection"/>
+
+
+    <consoleFilterProvider
+        implementation="com.yanncebron.m68kplugin.compiler.M68kVasmConsoleFilterProvider"/>
   </extensions>
 
   <actions>
