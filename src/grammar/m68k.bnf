@@ -65,8 +65,13 @@ private root_item_recover ::= !instruction_or_label
 
 private labels ::= label | localLabel
 
+private labelIdentifier ::= ID COLON?
+{
+  name = "label identifier"
+}
+
 // todo must start on newline? usually not, but not required
-label ::= !<<afterWhitespace>> ID COLON?
+label ::= !<<afterWhitespace>> labelIdentifier
 {
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kLabelBase"
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelMixIn"
@@ -75,7 +80,7 @@ label ::= !<<afterWhitespace>> ID COLON?
 }
 
 // todo full name is: DevPac. prefixed with last non-local label
-localLabel ::= !<<afterWhitespace>> DOT ID COLON?
+localLabel ::= !<<afterWhitespace>> DOT labelIdentifier
 {
   pin = 2
   name = "local label"
