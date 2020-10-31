@@ -305,4 +305,12 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" einline");
   }
 
+  public void testRemDirective() throws Exception {
+    doCodeTest(" rem");
+  }
+
+  public void testEremDirective() throws Exception {
+    doCodeTest(" erem");
+  }
+
 }

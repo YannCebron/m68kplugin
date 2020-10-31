@@ -45,6 +45,11 @@ public class M68kBraceMatcherTest extends BasePlatformTestCase {
       " einline");
   }
 
+  public void testRemErem() {
+    doTest(" <caret>rem\n" +
+      " erem");
+  }
+
   public void testConditionalAssembly() {
     doConditionalTest(M68kTokenTypes.IF);
     doConditionalTest(M68kTokenTypes.IFB);

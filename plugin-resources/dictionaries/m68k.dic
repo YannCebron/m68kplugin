@@ -33,6 +33,7 @@ endc
 endm
 eori
 equr
+erem
 ifeq
 ifge
 ifgt

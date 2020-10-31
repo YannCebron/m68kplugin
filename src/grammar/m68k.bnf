@@ -825,7 +825,7 @@ roxr_instruction ::= ROXR shift_tail
   psiImplPackage = "com.yanncebron.m68kplugin.lang.psi.directive.impl"
   parserClass = "com.yanncebron.m68kplugin.lang.M68kDirectivesParser"
   implements("(blk|set|equr|even|odd|dc|dcb|ds|align|cnop|incbin|incdir|include|rsset|rsreset|rs)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
-  implements("(opt|org|macro|endm|mexit|macro_parameter|macro_call|end|section|addwatch|jumperr|jumpptr|list|nolist|page|nopage|plen|llen|spc|inline|einline)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
+  implements("(opt|org|macro|endm|mexit|macro_parameter|macro_call|end|section|addwatch|jumperr|jumpptr|list|nolist|page|nopage|plen|llen|spc|inline|einline|rem|erem)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(text|cseg|code|code_c|code_f|data|dseg|data_c|data_f|bss|bss_c|bss_f)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("equ_directive_base") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
 }
@@ -880,7 +880,9 @@ private directives ::= equ_directive |
                        llen_directive |
                        spc_directive |
                        inline_directive |
-                       einline_directive
+                       einline_directive |
+                       rem_directive |
+                       erem_directive
 
 fake equ_directive_base ::= label expression?
 {
@@ -1105,6 +1107,9 @@ spc_directive ::= SPC expression
 
 inline_directive ::= INLINE
 einline_directive ::= EINLINE
+
+rem_directive ::= REM
+erem_directive ::= EREM
 
 // Expressions  ============================================================
 ;{

@@ -20,9 +20,12 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.CommonProcessors;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
@@ -60,6 +63,22 @@ public class M68kSyntaxAnnotator implements Annotator {
       checkUnmatchedDirective(element, holder, M68kEndmDirective.class, "endm", M68kMacroDirective.class);
     } else if (element instanceof M68kInlineDirective) {
       checkUnmatchedDirective(element, holder, M68kEinlineDirective.class, "einline", M68kInlineDirective.class);
+    } else if (element instanceof M68kRemDirective) {
+      boolean unmatched = checkUnmatchedDirective(element, holder, M68kEremDirective.class, "erem", M68kRemDirective.class);
+      if (!unmatched) {
+        final CommonProcessors.FindProcessor<M68kPsiElement> findClosingErem = new CommonProcessors.FindProcessor<M68kPsiElement>() {
+          @Override
+          protected boolean accept(M68kPsiElement o) {
+            return o instanceof M68kEremDirective;
+          }
+        };
+        M68kPsiTreeUtil.processSiblingsForwards(element, findClosingErem, M68kRemDirective.class);
+        final M68kPsiElement closingDirective = findClosingErem.getFoundValue();
+        assert closingDirective != null;
+
+        TextRange range = new TextRange(element.getTextRange().getEndOffset(), closingDirective.getTextOffset());
+        doAnnotate(holder, range, DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
+      }
     }
   }
 
@@ -68,14 +87,20 @@ public class M68kSyntaxAnnotator implements Annotator {
       .setTextAttributes(key);
   }
 
+  private static void doAnnotate(AnnotationHolder holder, TextRange range, TextAttributesKey key) {
+    (DEBUG_MODE ? holder.createInfoAnnotation(range, key.getExternalName()) : holder.createInfoAnnotation(range, null))
+      .setTextAttributes(key);
+  }
+
   @SafeVarargs
-  private final void checkUnmatchedDirective(PsiElement element, AnnotationHolder holder,
-                                             Class<? extends M68kDirective> matchingDirective,
-                                             @NonNls String matchingDirectiveText,
-                                             Class<? extends M68kDirective>... stopAtDirectives) {
-    if (M68kPsiTreeUtil.hasSiblingForwards(element, matchingDirective, stopAtDirectives)) return;
+  private final boolean checkUnmatchedDirective(PsiElement element, AnnotationHolder holder,
+                                                Class<? extends M68kDirective> matchingDirective,
+                                                @NonNls String matchingDirectiveText,
+                                                Class<? extends M68kDirective>... stopAtDirectives) {
+    if (M68kPsiTreeUtil.hasSiblingForwards(element, matchingDirective, stopAtDirectives)) return false;
 
     holder.createErrorAnnotation(element, M68kBundle.message("highlight.unmatched.directive", matchingDirectiveText));
+    return true;
   }
 
 }

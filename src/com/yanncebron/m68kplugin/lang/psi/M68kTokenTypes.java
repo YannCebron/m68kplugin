@@ -59,25 +59,25 @@ public abstract class M68kTokenTypes {
   public static final IElementType BNE = new M68kTokenType("bne");
   public static final IElementType BPL = new M68kTokenType("bpl");
   public static final IElementType BRA = new M68kTokenType("bra");
+  public static final IElementType BSET = new M68kTokenType("bset");
+  public static final IElementType BSR = new M68kTokenType("bsr");
   public static final IElementType BSS = new M68kTokenType("bss");
   public static final IElementType BSS_C = new M68kTokenType("bss_c");
   public static final IElementType BSS_F = new M68kTokenType("bss_f");
-  public static final IElementType BSET = new M68kTokenType("bset");
-  public static final IElementType BSR = new M68kTokenType("bsr");
   public static final IElementType BTST = new M68kTokenType("btst");
   public static final IElementType BVC = new M68kTokenType("bvc");
   public static final IElementType BVS = new M68kTokenType("bvs");
   public static final IElementType CCR = new M68kTokenType("ccr");
   public static final IElementType CHK = new M68kTokenType("chk");
-  public static final IElementType CNOP = new M68kTokenType("cnop");
-  public static final IElementType CODE = new M68kTokenType("code");
-  public static final IElementType CODE_C = new M68kTokenType("code_c");
-  public static final IElementType CODE_F = new M68kTokenType("code_f");
   public static final IElementType CLR = new M68kTokenType("clr");
   public static final IElementType CMP = new M68kTokenType("cmp");
   public static final IElementType CMPA = new M68kTokenType("cmpa");
   public static final IElementType CMPI = new M68kTokenType("cmpi");
   public static final IElementType CMPM = new M68kTokenType("cmpm");
+  public static final IElementType CNOP = new M68kTokenType("cnop");
+  public static final IElementType CODE = new M68kTokenType("code");
+  public static final IElementType CODE_C = new M68kTokenType("code_c");
+  public static final IElementType CODE_F = new M68kTokenType("code_f");
   public static final IElementType COLON = new M68kTokenType(":");
   public static final IElementType COMMA = new M68kTokenType(",");
   public static final IElementType COMMENT = new M68kTokenType("comment");
@@ -128,6 +128,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType EQ = new M68kTokenType("=");
   public static final IElementType EQU = new M68kTokenType("equ");
   public static final IElementType EQUR = new M68kTokenType("equr");
+  public static final IElementType EREM = new M68kTokenType("erem");
   public static final IElementType EVEN = new M68kTokenType("even");
   public static final IElementType EXG = new M68kTokenType("exg");
   public static final IElementType EXT = new M68kTokenType("ext");
@@ -181,8 +182,8 @@ public abstract class M68kTokenTypes {
   public static final IElementType NEG = new M68kTokenType("neg");
   public static final IElementType NEGX = new M68kTokenType("negx");
   public static final IElementType NOLIST = new M68kTokenType("nolist");
-  public static final IElementType NOPAGE = new M68kTokenType("nopage");
   public static final IElementType NOP = new M68kTokenType("nop");
+  public static final IElementType NOPAGE = new M68kTokenType("nopage");
   public static final IElementType NOT = new M68kTokenType("not");
   public static final IElementType OCT_NUMBER = new M68kTokenType("oct_number");
   public static final IElementType ODD = new M68kTokenType("odd");
@@ -198,6 +199,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType PLEN = new M68kTokenType("plen");
   public static final IElementType PLUS = new M68kTokenType("+");
   public static final IElementType POW = new M68kTokenType("^");
+  public static final IElementType REM = new M68kTokenType("rem");
   public static final IElementType RESET = new M68kTokenType("reset");
   public static final IElementType ROL = new M68kTokenType("rol");
   public static final IElementType ROR = new M68kTokenType("ror");
@@ -250,7 +252,6 @@ public abstract class M68kTokenTypes {
   public static final IElementType TRAP = new M68kTokenType("trap");
   public static final IElementType TRAPV = new M68kTokenType("trapv");
   public static final IElementType TST = new M68kTokenType("tst");
-  public static final IElementType UNDERSCORE = new M68kTokenType("_");
   public static final IElementType UNLK = new M68kTokenType("unlk");
   public static final IElementType USP = new M68kTokenType("usp");
 

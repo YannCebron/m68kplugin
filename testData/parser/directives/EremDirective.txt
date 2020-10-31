@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kEremDirectiveImpl(EREM_DIRECTIVE)
+    PsiElement(erem)('erem')

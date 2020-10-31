@@ -352,7 +352,9 @@ public class M68kDirectivesParser {
   //                        llen_directive |
   //                        spc_directive |
   //                        inline_directive |
-  //                        einline_directive
+  //                        einline_directive |
+  //                        rem_directive |
+  //                        erem_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -407,6 +409,8 @@ public class M68kDirectivesParser {
     if (!r) r = spc_directive(b, l + 1);
     if (!r) r = inline_directive(b, l + 1);
     if (!r) r = einline_directive(b, l + 1);
+    if (!r) r = rem_directive(b, l + 1);
+    if (!r) r = erem_directive(b, l + 1);
     return r;
   }
 
@@ -520,6 +524,18 @@ public class M68kDirectivesParser {
     r = r && adm_rrd(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  /* ********************************************************** */
+  // EREM
+  public static boolean erem_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "erem_directive")) return false;
+    if (!nextTokenIs(b, EREM)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, EREM);
+    exit_section_(b, m, EREM_DIRECTIVE, r);
+    return r;
   }
 
   /* ********************************************************** */
@@ -930,6 +946,18 @@ public class M68kDirectivesParser {
     r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  /* ********************************************************** */
+  // REM
+  public static boolean rem_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "rem_directive")) return false;
+    if (!nextTokenIs(b, REM)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, REM);
+    exit_section_(b, m, REM_DIRECTIVE, r);
+    return r;
   }
 
   /* ********************************************************** */

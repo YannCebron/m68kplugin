@@ -56,6 +56,14 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
     myFixture.testHighlighting(false, true, false);
   }
 
+  public void testRemBlock() {
+    myFixture.configureByText("test.s",
+      " rem<info descr=\"DEFAULT_TEMPLATE_LANGUAGE_COLOR\">\n" +
+        " bra somewhere\n" +
+        " </info>erem");
+    myFixture.testHighlighting(false, true, false);
+  }
+
   public void testContentAfterEndDirective() {
     myFixture.configureByText("test.s",
       " end\n" +
@@ -81,6 +89,12 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
   public void testUnmatchedDirectiveInlineMissingEinline() {
     myFixture.configureByText("test.s",
       " <error descr=\"Missing matching 'einline' directive\">inline</error>");
+    myFixture.testHighlighting();
+  }
+
+  public void testUnmatchedDirectiveRemMissingErem() {
+    myFixture.configureByText("test.s",
+      " <error descr=\"Missing matching 'erem' directive\">rem</error>");
     myFixture.testHighlighting();
   }
 }

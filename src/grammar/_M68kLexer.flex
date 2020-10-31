@@ -298,6 +298,7 @@ LABEL=[_]*[:digit:]*[:letter:][[:letter:][:digit:]_]*  // without "." first char
   [eE][iI][nN][lL][iI][nN][eE]    { return EINLINE; }
   [eE][qQ][uU]                    { return EQU; }
   [eE][qQ][uU][rR]                { return EQUR; }
+  [eE][rR][eE][mM]                { return EREM; }
   [eE][vV][eE][nN]                { return EVEN; }
   [iI][nN][cC][bB][iI][nN]        { return INCBIN; }
   [iI][nN][cC][dD][iI][rR]        { return INCDIR; }
@@ -314,6 +315,7 @@ LABEL=[_]*[:digit:]*[:letter:][[:letter:][:digit:]_]*  // without "." first char
   [pP][lL][eE][nN]                { return PLEN; }
   [nN][oO][lL][iI][sS][tT]        { return NOLIST; }
   [nN][oO][pP][aA][gG][eE]        { return NOPAGE; }
+  [rR][eE][mM]                    { return REM; }
   [rR][sS]                        { return RS; }
   [rR][sS][sS][eE][tT]            { return RSSET; }
   [rR][sS][rR][eE][sS][eE][tT]    { return RSRESET; }

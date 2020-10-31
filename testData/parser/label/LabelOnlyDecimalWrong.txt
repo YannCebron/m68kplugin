@@ -1,3 +1,3 @@
 M68k.FILE
-  PsiErrorElement:'.', <instruction>, '\', addwatch, align, blk, bss, bss_c, bss_f, cnop, code, code_c, code_f, cseg, data, data_c, data_f, dc, dcb, ds, dseg, einline, else, elseif, end, endc, endif, endm, even, id, if, ifb, ifc, ifd, ifeq, ifge, ifgt, ifle, iflt, ifmacrod, ifmacrond, ifnb, ifnc, ifnd, ifne, incbin, incdir, include, inline, jumperr and ... expected, got '4'
+  PsiErrorElement:'.', <instruction>, '\', addwatch, align, blk, bss, bss_c, bss_f, cnop, code, code_c, code_f, cseg, data, data_c, data_f, dc, dcb, ds, dseg, einline, else, elseif, end, endc, endif, endm, erem, even, id, if, ifb, ifc, ifd, ifeq, ifge, ifgt, ifle, iflt, ifmacrod, ifmacrond, ifnb, ifnc, ifnd, ifne, incbin, incdir, include, inline and ... expected, got '4'
     PsiElement(BAD_CHARACTER)('4')

@@ -31,7 +31,6 @@
   - `comment`
   - `image`
   - `rept`/`endr`
-  - `rem`/`erem` - ignores everything between
   - `ifmi`
   - `ifpl`
   - `so.*`, `clrso`/`setso`
@@ -67,10 +66,12 @@
 * 68881 FPU
 
 ## Highlighting
-
+                       
+- `rem` sections:
+  - do not highlight warnings/errors inside block
+  - do not include symbols for resolving
 - unpaired directives:
   - `rept`/`endr`
-  - `rem`/`erem`
   - `struct`/`estruct`
 - unpaired conditional assembly directives, missing `endc`/`endif`
 - highlight static conditional assembly directives status, e.g., `IFD`/`IFND`

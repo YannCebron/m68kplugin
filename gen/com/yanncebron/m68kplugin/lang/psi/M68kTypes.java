@@ -131,6 +131,7 @@ public interface M68kTypes {
   IElementType EQUALS_DIRECTIVE = new M68kCompositeElementType("EQUALS_DIRECTIVE");
   IElementType EQUR_DIRECTIVE = new M68kCompositeElementType("EQUR_DIRECTIVE");
   IElementType EQU_DIRECTIVE = new M68kCompositeElementType("EQU_DIRECTIVE");
+  IElementType EREM_DIRECTIVE = new M68kCompositeElementType("EREM_DIRECTIVE");
   IElementType EVEN_DIRECTIVE = new M68kCompositeElementType("EVEN_DIRECTIVE");
   IElementType EXG_INSTRUCTION = new M68kCompositeElementType("EXG_INSTRUCTION");
   IElementType EXPRESSION = new M68kCompositeElementType("EXPRESSION");
@@ -205,6 +206,7 @@ public interface M68kTypes {
   IElementType PLUS_EXPRESSION = new M68kCompositeElementType("PLUS_EXPRESSION");
   IElementType REGISTER_LIST = new M68kCompositeElementType("REGISTER_LIST");
   IElementType REGISTER_RANGE = new M68kCompositeElementType("REGISTER_RANGE");
+  IElementType REM_DIRECTIVE = new M68kCompositeElementType("REM_DIRECTIVE");
   IElementType RESET_INSTRUCTION = new M68kCompositeElementType("RESET_INSTRUCTION");
   IElementType ROL_INSTRUCTION = new M68kCompositeElementType("ROL_INSTRUCTION");
   IElementType ROR_INSTRUCTION = new M68kCompositeElementType("ROR_INSTRUCTION");
@@ -574,6 +576,9 @@ public interface M68kTypes {
       else if (type == EQU_DIRECTIVE) {
         return new M68kEquDirectiveImpl(node);
       }
+      else if (type == EREM_DIRECTIVE) {
+        return new M68kEremDirectiveImpl(node);
+      }
       else if (type == EVEN_DIRECTIVE) {
         return new M68kEvenDirectiveImpl(node);
       }
@@ -792,6 +797,9 @@ public interface M68kTypes {
       }
       else if (type == REGISTER_RANGE) {
         return new M68kRegisterRangeImpl(node);
+      }
+      else if (type == REM_DIRECTIVE) {
+        return new M68kRemDirectiveImpl(node);
       }
       else if (type == RESET_INSTRUCTION) {
         return new M68kResetInstructionImpl(node);
