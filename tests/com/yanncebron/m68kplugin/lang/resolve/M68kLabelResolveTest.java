@@ -50,9 +50,11 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     assertEquals(AllIcons.Nodes.Method, anotherTopLevelPresentation.getIcon());
 
     final LookupElement localLabelLookupElement = findLookupElement(".localLabel");
-    final PrioritizedLookupElement<?> as = localLabelLookupElement.as(PrioritizedLookupElement.CLASS_CONDITION_KEY);
-    assertNotNull(as);
-    assertEquals(50.0, as.getPriority());
+    final LookupElementPresentation localLabelPresentation = LookupElementPresentation.renderElement(localLabelLookupElement);
+    assertEquals(AllIcons.Nodes.AbstractMethod, localLabelPresentation.getIcon());
+    final PrioritizedLookupElement<?> prioritizedLookupElement = localLabelLookupElement.as(PrioritizedLookupElement.CLASS_CONDITION_KEY);
+    assertNotNull(prioritizedLookupElement);
+    assertEquals(50.0, prioritizedLookupElement.getPriority());
   }
 
   public void testResolveLocalLabelInCorrectScope() {
