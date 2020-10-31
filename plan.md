@@ -44,6 +44,7 @@
 - resolve local label in branch instructions (`jmp .next`) -> label_ref_expression
 - `include`/`incbin` path without quotes
 - in expressions, mnemonic parsed as instruction, not identifier (`size = (bpls*bpl)`)
+- in directive, parsed as token, not identifier (`SECTION code,code`)
 - add missing expression operators
   - XOR?
   - `!`
