@@ -41,6 +41,7 @@
   - `printt`/`printv`
   - `auto`
   - `struct`/`estruct`
+- resolve local label in branch instructions (`jmp .next`) -> label_ref_expression
 - `include`/`incbin` path without quotes
 - in expressions, mnemonic parsed as instruction, not identifier (`size = (bpls*bpl)`)
 - add missing expression operators
