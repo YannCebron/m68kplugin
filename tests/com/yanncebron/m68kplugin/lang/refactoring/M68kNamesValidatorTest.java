@@ -30,12 +30,12 @@ public class M68kNamesValidatorTest extends TestCase {
   }
 
   public void testIsIdentifier() {
-    String[] identifiers = {"a", "2a", "_A", ".local"};
+    String[] identifiers = {"a", "2a", "_A", "___MANY_UNDERSCORES", "_UNDER_SCORE", ".local"};
     for (String identifier : identifiers) {
       assertTrue(identifier, VALIDATOR.isIdentifier(identifier, null));
     }
 
-    String[] invalidIdentifiers = {"", "_", "2", "__a"};
+    String[] invalidIdentifiers = {"", "_", "2"};
     for (String identifier : invalidIdentifiers) {
       assertFalse(identifier, VALIDATOR.isIdentifier(identifier, null));
     }

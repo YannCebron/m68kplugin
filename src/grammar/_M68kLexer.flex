@@ -67,8 +67,8 @@ BINNUMBER=%[0|1]+
 SINGLE_QUOTED_STRING='([^\\'\r\n]|\\[^\r\n])*'?
 DOUBLE_QUOTED_STRING=\"([^\\\"\r\n]|\\[^\r\n])*\"?
 
-ID=[_.]?[:digit:]*[:letter:][[:letter:][:digit:]_]*
-LABEL=[:digit:]*[:letter:][[:letter:][:digit:]_]*  // todo without "./_" first char
+ID=[.]?[_]*[:digit:]*[:letter:][[:letter:][:digit:]_]*
+LABEL=[_]*[:digit:]*[:letter:][[:letter:][:digit:]_]*  // without "." first char
 
 %state IN_LABEL
 %state IN_INSTRUCTION
@@ -79,8 +79,6 @@ LABEL=[:digit:]*[:letter:][[:letter:][:digit:]_]*  // todo without "./_" first c
   {CRLF} { return LINEFEED; }
 
   "."    { return DOT; }
-  "_"    { return UNDERSCORE; }
-  
   {LABEL}   { yybegin(IN_LABEL); return ID; }
 
   {WHITE_SPACE}* {COMMENT} { yybegin(IN_COMMENT); return COMMENT; }

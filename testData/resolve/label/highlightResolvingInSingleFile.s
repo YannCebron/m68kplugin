@@ -1,6 +1,9 @@
+_underscoreTopLevelLabel
+
 topLevelLabel
   bra topLevelLabel
   bra .localLabel
+  bra _underscoreTopLevelLabel
 
 .localLabel
   bra .localLabel

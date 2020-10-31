@@ -76,8 +76,12 @@ public class MinimalLexerTest extends M68kLexerTestCase {
 
   public void testUnderscoreLabel() {
     doTest("_label",
-      "_ ('_')\n" +
-        "id ('label')");
+      "id ('_label')");
+  }
+
+  public void testUnderscoreTwiceLabel() {
+    doTest("__label",
+      "id ('__label')");
   }
 
   public void testLocalLabelOnFirstLine() {

@@ -48,7 +48,6 @@
   - XOR?
   - `!`
 - do not allow spaces (?!)
-- fix label starting with `_`
 - allow `equr`/`reg` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
 - macros:
   - label-counters (`\@`)

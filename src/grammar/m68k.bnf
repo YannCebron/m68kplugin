@@ -66,7 +66,7 @@ private root_item_recover ::= !instruction_or_label
 private labels ::= label | localLabel
 
 // todo must start on newline? usually not, but not required
-label ::= !<<afterWhitespace>> UNDERSCORE? ID COLON?
+label ::= !<<afterWhitespace>> ID COLON?
 {
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kLabelBase"
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelMixIn"
