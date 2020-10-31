@@ -32,6 +32,12 @@ public class M68kStubBuilderTest extends LightPlatformTestCase {
         "  LABEL:M68kLabelStubImpl\n");
   }
 
+  public void testLabelWithColon() {
+    doTest("label:",
+      "PsiFileStubImpl\n" +
+        "  LABEL:M68kLabelStubImpl\n");
+  }
+
   public void testLabelWithEqu() {
     doTest("label equ 42",
       "PsiFileStubImpl\n" +
