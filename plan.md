@@ -40,6 +40,7 @@
   - `printt`/`printv`
   - `auto`
   - `struct`/`estruct`
+- octal number starts with `@@`, not single `@` ?!
 - resolve local label in branch instructions (`jmp .next`) -> label_ref_expression
 - `include`/`incbin` path without quotes
 - in expressions, mnemonic parsed as instruction, not identifier (`size = (bpls*bpl)`)
