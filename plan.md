@@ -54,6 +54,7 @@
 - allow `equr`/`reg` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
 - macros:
   - label-counters (`\@`)
+  - allow `a`-`z` for macro parameters   
   - `ifmacrod`/`ifmacrond` code insight
 - Internal tasks:
   - `LexerTestCase.checkCorrectRestartOnEveryToken`
