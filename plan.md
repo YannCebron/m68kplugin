@@ -127,6 +127,7 @@
 - `dc`:
   - join lines
   - smart enter handler to split value list
+- `FocusModeProvider` 
 
 ## Inspections
 
