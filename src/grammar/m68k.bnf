@@ -1069,7 +1069,7 @@ macro_parameter_directive ::= BACKSLASH macro_parameter_index_parameter
   ]
 }
 
-macro_call_parameter ::= adm_group_all
+macro_call_parameter ::= adm_group_all | adm_sr | adm_ccr | adm_usp
 {
   name = "macro parameter"
 }

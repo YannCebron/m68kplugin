@@ -36,7 +36,7 @@ public class MacrocallParsingTest extends M68kParsingTestCase {
   }
 
   public void testMacroCallMultipleArgs() throws IOException {
-    doCodeTest(" MACRO_NAME d7,arg");
+    doCodeTest(" MACRO_NAME d7,arg,CCR");
   }
 
   public void testMacroCallMultipleArgsMissingArg() throws IOException {
