@@ -25,10 +25,13 @@ import com.intellij.openapi.util.Comparing;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.PsiReferenceBase;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.CommonProcessors;
 import com.intellij.util.Processor;
 import com.intellij.util.SmartList;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kEquDirectiveBase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +42,7 @@ import java.util.List;
  * Provides reference to label.
  * <ol>
  *   <li>if local label, search backwards, then forwards for local label only - until encountering global label ("parent scope")</li>
- *   <li>global label in current file</li>
+ *   <li>if label, search backwards, then forwards for label in current file</li>
  *   <li>TODO in resolve scope (includes)</li>
  * </ol>
  * <p>
@@ -71,8 +74,8 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
 
         final CommonProcessors.FindProcessor<M68kLabel> findProcessor = new CommonProcessors.FindProcessor<M68kLabel>() {
           @Override
-          protected boolean accept(M68kLabel m68kLabel) {
-            return Comparing.strEqual(labelName, m68kLabel.getName());
+          protected boolean accept(M68kLabel label) {
+            return Comparing.strEqual(labelName, label.getName());
           }
         };
         processLabels(findProcessor);
@@ -91,8 +94,8 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
           return true;
         });
 
-        processLabels(m68kLabel -> {
-          variants.add(LookupElementBuilder.createWithIcon(m68kLabel));
+        processLabels(label -> {
+          variants.add(LookupElementBuilder.createWithIcon(label));
           return true;
         });
 
@@ -100,18 +103,17 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
       }
 
       private void processLabels(Processor<M68kLabel> processor) {
-        getElement().getContainingFile().acceptChildren(new M68kVisitor() {
-          @Override
-          public void visitLabel(@NotNull M68kLabel o) {
-            processor.process(o);
+        Processor<M68kPsiElement> labelProcessor = m68kPsiElement -> {
+          if (m68kPsiElement instanceof M68kLabel) {
+            return processor.process((M68kLabel) m68kPsiElement);
           }
-
-          @Override
-          public void visitEquDirectiveBase(@NotNull M68kEquDirectiveBase o) {
-            processor.process(o.getLabel());
+          if (m68kPsiElement instanceof M68kEquDirectiveBase) {
+            return processor.process(((M68kEquDirectiveBase) m68kPsiElement).getLabel());
           }
-        });
+          return true;
+        };
 
+        doProcessLabels(labelProcessor);
       }
 
       private void processLocalLabels(Processor<M68kLocalLabel> processor) {
@@ -122,9 +124,21 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
           return true;
         };
 
-        final PsiElement startElement = getElement().getParent();
-        if (!M68kPsiTreeUtil.processSiblingsBackwards(startElement, localLabelProcessor, M68kLabel.class)) return;
-        M68kPsiTreeUtil.processSiblingsForwards(startElement, localLabelProcessor, M68kLabel.class);
+        doProcessLabels(localLabelProcessor, M68kLabel.class);
+      }
+
+      @SafeVarargs
+      private final void doProcessLabels(Processor<M68kPsiElement> labelProcessor,
+                                         Class<? extends M68kPsiElement>... stopAtElements) {
+        PsiElement startElement =
+          PsiTreeUtil.getParentOfType(getElement(),
+            M68kInstruction.class,
+            M68kDirective.class,
+            M68kConditionalAssemblyDirective.class);
+        assert startElement != null : getElement().getText();
+
+        if (!M68kPsiTreeUtil.processSiblingsBackwards(startElement, labelProcessor, stopAtElements)) return;
+        M68kPsiTreeUtil.processSiblingsForwards(startElement, labelProcessor, stopAtElements);
       }
 
     };

@@ -10,6 +10,7 @@ topLevelLabel
 
 .localLabel
   bra .localLabel
+  jmp .localLabel
 
 anotherTopLevelLabel
   bra <error descr="Cannot resolve symbol 'INVALID_LABEL'">INVALID_LABEL</error>
@@ -27,6 +28,8 @@ MONTH = 42
   move.l #<error descr="Cannot resolve symbol 'INVALID_LABEL'">INVALID_LABEL</error>,d2
 
 YEAR equ 2020
+DECADE equ YEAR*10
+INVALID_REFERENCE equ <error descr="Cannot resolve symbol 'INVALID_LABEL'">INVALID_LABEL</error>
 
 
 * conditional assembly directives referring potentially undefined label - weak highlighting
