@@ -70,9 +70,7 @@
 
 ## Highlighting
                        
-- `rem` sections:
-  - do not highlight warnings/errors inside block
-  - do not include symbols for resolving
+- `rem` sections: treat as real comment
 - unpaired directives:
   - `rept`/`endr`
   - `struct`/`estruct`
