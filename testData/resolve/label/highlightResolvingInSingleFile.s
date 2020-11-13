@@ -1,3 +1,5 @@
+* "plain" labels
+
 _underscoreTopLevelLabel
 
 topLevelLabel
@@ -12,7 +14,17 @@ topLevelLabel
   bra <error descr="Cannot resolve symbol '.INVALID_LABEL'">.INVALID_LABEL</error>
 
 
-* directives referring potentially undefined label - weak highlighting
+* M68kEquDirectiveBase
+
+DATE equ 233
+MONTH = 42
+  move.l #DATE,d0
+  move.l #MONTH,d1
+
+  move.l #<error descr="Cannot resolve symbol 'INVALID_LABEL'">INVALID_LABEL</error>,d2
+
+
+* conditional assembly directives referring potentially undefined label - weak highlighting
 
   ifd <weak_warning descr="Cannot resolve symbol 'INVALID_VALUE'">INVALID_VALUE</weak_warning>
   endif
