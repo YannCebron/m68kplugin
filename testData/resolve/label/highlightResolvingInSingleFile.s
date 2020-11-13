@@ -22,8 +22,11 @@ DATE equ 233
 MONTH = 42
   move.l #DATE,d0
   move.l #MONTH,d1
+  move.l #YEAR,d6
 
   move.l #<error descr="Cannot resolve symbol 'INVALID_LABEL'">INVALID_LABEL</error>,d2
+
+YEAR equ 2020
 
 
 * conditional assembly directives referring potentially undefined label - weak highlighting
