@@ -34,10 +34,12 @@ public class M68kSetDirectiveImpl extends M68kEquDirectiveBaseImpl implements M6
     super(node);
   }
 
+  @Override
   public void accept(@NotNull M68kVisitor visitor) {
     visitor.visitSetDirective(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

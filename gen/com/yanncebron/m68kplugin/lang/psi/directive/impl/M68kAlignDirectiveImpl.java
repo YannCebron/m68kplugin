@@ -39,6 +39,7 @@ public class M68kAlignDirectiveImpl extends ASTWrapperPsiElement implements M68k
     visitor.visitAlignDirective(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

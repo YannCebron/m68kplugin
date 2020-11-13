@@ -35,6 +35,7 @@ public class M68kAdmApiImpl extends ASTWrapperPsiElement implements M68kAdmApi {
     visitor.visitAdmApi(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

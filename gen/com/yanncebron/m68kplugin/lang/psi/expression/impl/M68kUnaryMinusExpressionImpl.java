@@ -32,10 +32,12 @@ public class M68kUnaryMinusExpressionImpl extends M68kExpressionImpl implements 
     super(node);
   }
 
+  @Override
   public void accept(@NotNull M68kVisitor visitor) {
     visitor.visitUnaryMinusExpression(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

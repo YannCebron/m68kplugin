@@ -34,6 +34,7 @@ public class M68kMoveInstructionImpl extends M68kMoveInstructionMixIn implements
     visitor.visitMoveInstruction(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

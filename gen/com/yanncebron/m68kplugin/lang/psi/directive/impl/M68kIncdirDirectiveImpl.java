@@ -38,14 +38,14 @@ public class M68kIncdirDirectiveImpl extends ASTWrapperPsiElement implements M68
     visitor.visitIncdirDirective(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
   }
 
   @Override
-  @Nullable
-  public String getIncludePath() {
+  public @Nullable String getIncludePath() {
     return M68kPsiImplUtil.getIncludePath(this);
   }
 

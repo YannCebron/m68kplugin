@@ -38,6 +38,7 @@ public class M68kMacroParameterDirectiveImpl extends ASTWrapperPsiElement implem
     visitor.visitMacroParameterDirective(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

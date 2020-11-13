@@ -22,8 +22,7 @@ import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
 public interface M68kIncbinDirective extends M68kDirective {
 
-  @Nullable
-  String getIncludePath();
+  @Nullable String getIncludePath();
 
   @Nullable
   M68kExpression getOffset();

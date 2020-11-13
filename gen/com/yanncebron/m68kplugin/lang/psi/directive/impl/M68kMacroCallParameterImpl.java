@@ -48,6 +48,7 @@ public class M68kMacroCallParameterImpl extends ASTWrapperPsiElement implements 
     visitor.visitMacroCallParameter(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

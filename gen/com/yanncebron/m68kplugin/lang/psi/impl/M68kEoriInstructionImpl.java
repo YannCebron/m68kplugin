@@ -30,10 +30,12 @@ public class M68kEoriInstructionImpl extends M68kBoolInstructionBaseImpl impleme
     super(node);
   }
 
+  @Override
   public void accept(@NotNull M68kVisitor visitor) {
     visitor.visitEoriInstruction(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

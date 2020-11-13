@@ -36,14 +36,14 @@ public class M68kDataSizedImpl extends ASTWrapperPsiElement implements M68kDataS
     visitor.visitDataSized(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
   }
 
   @Override
-  @Nullable
-  public M68kDataSize getDataSize() {
+  public @Nullable M68kDataSize getDataSize() {
     return M68kPsiImplUtil.getDataSize(this);
   }
 

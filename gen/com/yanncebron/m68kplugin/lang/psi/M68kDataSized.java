@@ -21,7 +21,6 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kDataSized extends M68kPsiElement {
 
-  @Nullable
-  M68kDataSize getDataSize();
+  @Nullable M68kDataSize getDataSize();
 
 }

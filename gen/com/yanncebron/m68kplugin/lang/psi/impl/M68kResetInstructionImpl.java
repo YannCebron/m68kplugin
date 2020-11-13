@@ -26,7 +26,7 @@ import com.yanncebron.m68kplugin.lang.psi.*;
 
 public class M68kResetInstructionImpl extends M68kPrivilegedInstructionMixIn implements M68kResetInstruction {
 
-  public M68kResetInstructionImpl(ASTNode node) {
+  public M68kResetInstructionImpl(@NotNull ASTNode node) {
     super(node);
   }
 
@@ -34,6 +34,7 @@ public class M68kResetInstructionImpl extends M68kPrivilegedInstructionMixIn imp
     visitor.visitResetInstruction(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

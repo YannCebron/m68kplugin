@@ -28,7 +28,7 @@ import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
 
 public class M68kMacroCallDirectiveImpl extends M68kMacrocallDirectiveMixIn implements M68kMacroCallDirective {
 
-  public M68kMacroCallDirectiveImpl(ASTNode node) {
+  public M68kMacroCallDirectiveImpl(@NotNull ASTNode node) {
     super(node);
   }
 
@@ -36,6 +36,7 @@ public class M68kMacroCallDirectiveImpl extends M68kMacrocallDirectiveMixIn impl
     visitor.visitMacroCallDirective(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

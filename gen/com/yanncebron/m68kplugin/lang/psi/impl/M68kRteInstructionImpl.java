@@ -26,7 +26,7 @@ import com.yanncebron.m68kplugin.lang.psi.*;
 
 public class M68kRteInstructionImpl extends M68kPrivilegedInstructionMixIn implements M68kRteInstruction {
 
-  public M68kRteInstructionImpl(ASTNode node) {
+  public M68kRteInstructionImpl(@NotNull ASTNode node) {
     super(node);
   }
 
@@ -34,6 +34,7 @@ public class M68kRteInstructionImpl extends M68kPrivilegedInstructionMixIn imple
     visitor.visitRteInstruction(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

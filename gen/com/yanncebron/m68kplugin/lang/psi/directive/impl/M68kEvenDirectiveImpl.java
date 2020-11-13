@@ -37,6 +37,7 @@ public class M68kEvenDirectiveImpl extends ASTWrapperPsiElement implements M68kE
     visitor.visitEvenDirective(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

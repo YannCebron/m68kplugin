@@ -36,14 +36,14 @@ public class M68kAdmDrdImpl extends ASTWrapperPsiElement implements M68kAdmDrd {
     visitor.visitAdmDrd(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
   }
 
   @Override
-  @NotNull
-  public M68kRegister getRegister() {
+  public @NotNull M68kRegister getRegister() {
     return M68kPsiImplUtil.getRegister(this);
   }
 

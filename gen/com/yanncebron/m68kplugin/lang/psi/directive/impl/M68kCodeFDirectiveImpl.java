@@ -37,6 +37,7 @@ public class M68kCodeFDirectiveImpl extends ASTWrapperPsiElement implements M68k
     visitor.visitCodeFDirective(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

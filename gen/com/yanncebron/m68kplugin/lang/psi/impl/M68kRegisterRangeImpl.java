@@ -37,6 +37,7 @@ public class M68kRegisterRangeImpl extends ASTWrapperPsiElement implements M68kR
     visitor.visitRegisterRange(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
@@ -57,8 +58,7 @@ public class M68kRegisterRangeImpl extends ASTWrapperPsiElement implements M68kR
   }
 
   @Override
-  @NotNull
-  public EnumSet<M68kRegister> getRegisters() {
+  public @NotNull EnumSet<M68kRegister> getRegisters() {
     return M68kPsiImplUtil.getRegisters(this);
   }
 

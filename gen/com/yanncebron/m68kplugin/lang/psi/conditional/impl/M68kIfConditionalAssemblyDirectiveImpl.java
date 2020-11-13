@@ -38,6 +38,7 @@ public class M68kIfConditionalAssemblyDirectiveImpl extends ASTWrapperPsiElement
     visitor.visitIfConditionalAssemblyDirective(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

@@ -26,7 +26,7 @@ import com.yanncebron.m68kplugin.lang.psi.*;
 
 public class M68kLocalLabelImpl extends M68kLocalLabelMixIn implements M68kLocalLabel {
 
-  public M68kLocalLabelImpl(ASTNode node) {
+  public M68kLocalLabelImpl(@NotNull ASTNode node) {
     super(node);
   }
 
@@ -34,6 +34,7 @@ public class M68kLocalLabelImpl extends M68kLocalLabelMixIn implements M68kLocal
     visitor.visitLocalLabel(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

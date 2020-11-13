@@ -1008,19 +1008,19 @@ public class M68kVisitor extends PsiElementVisitor {
     visitInstruction(o);
   }
 
-  public void visitConditionalAssemblyDirective(@NotNull M68kConditionalAssemblyDirective o) {
-    visitPsiElement(o);
-  }
-
-  public void visitDirective(@NotNull M68kDirective o) {
-    visitPsiElement(o);
-  }
-
   public void visitInstruction(@NotNull M68kInstruction o) {
     visitPsiElement(o);
   }
 
   public void visitLabelBase(@NotNull M68kLabelBase o) {
+    visitPsiElement(o);
+  }
+
+  public void visitConditionalAssemblyDirective(@NotNull M68kConditionalAssemblyDirective o) {
+    visitPsiElement(o);
+  }
+
+  public void visitDirective(@NotNull M68kDirective o) {
     visitPsiElement(o);
   }
 

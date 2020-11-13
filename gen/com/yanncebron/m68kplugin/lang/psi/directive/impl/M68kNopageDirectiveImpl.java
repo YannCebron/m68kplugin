@@ -37,6 +37,7 @@ public class M68kNopageDirectiveImpl extends ASTWrapperPsiElement implements M68
     visitor.visitNopageDirective(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

@@ -30,10 +30,12 @@ public class M68kBcdInstructionBaseImpl extends M68kDataSizedImpl implements M68
     super(node);
   }
 
+  @Override
   public void accept(@NotNull M68kVisitor visitor) {
     visitor.visitBcdInstructionBase(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

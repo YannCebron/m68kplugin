@@ -28,7 +28,6 @@ public interface M68kRegisterRange extends M68kPsiElement {
   @Nullable
   M68kAdmRrd getTo();
 
-  @NotNull
-  EnumSet<M68kRegister> getRegisters();
+  @NotNull EnumSet<M68kRegister> getRegisters();
 
 }

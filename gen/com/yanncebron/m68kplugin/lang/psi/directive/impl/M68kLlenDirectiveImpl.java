@@ -38,6 +38,7 @@ public class M68kLlenDirectiveImpl extends ASTWrapperPsiElement implements M68kL
     visitor.visitLlenDirective(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

@@ -34,6 +34,7 @@ public class M68kBoolInstructionBaseImpl extends M68kBoolInstructionBaseMixIn im
     visitor.visitBoolInstructionBase(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

@@ -30,10 +30,12 @@ public class M68kShiftRotateInstructionBaseImpl extends M68kDataSizedImpl implem
     super(node);
   }
 
+  @Override
   public void accept(@NotNull M68kVisitor visitor) {
     visitor.visitShiftRotateInstructionBase(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

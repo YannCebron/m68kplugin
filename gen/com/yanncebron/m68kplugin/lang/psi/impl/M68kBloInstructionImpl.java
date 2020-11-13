@@ -36,6 +36,7 @@ public class M68kBloInstructionImpl extends ASTWrapperPsiElement implements M68k
     visitor.visitBloInstruction(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

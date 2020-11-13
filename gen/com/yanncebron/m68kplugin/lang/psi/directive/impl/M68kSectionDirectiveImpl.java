@@ -37,6 +37,7 @@ public class M68kSectionDirectiveImpl extends ASTWrapperPsiElement implements M6
     visitor.visitSectionDirective(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

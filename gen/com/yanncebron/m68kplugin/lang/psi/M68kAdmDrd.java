@@ -21,7 +21,6 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kAdmDrd extends M68kPsiElement {
 
-  @NotNull
-  M68kRegister getRegister();
+  @NotNull M68kRegister getRegister();
 
 }

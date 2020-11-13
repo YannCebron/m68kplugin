@@ -26,7 +26,7 @@ import com.yanncebron.m68kplugin.lang.psi.*;
 
 public class M68kStopInstructionImpl extends M68kPrivilegedInstructionMixIn implements M68kStopInstruction {
 
-  public M68kStopInstructionImpl(ASTNode node) {
+  public M68kStopInstructionImpl(@NotNull ASTNode node) {
     super(node);
   }
 
@@ -34,6 +34,7 @@ public class M68kStopInstructionImpl extends M68kPrivilegedInstructionMixIn impl
     visitor.visitStopInstruction(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

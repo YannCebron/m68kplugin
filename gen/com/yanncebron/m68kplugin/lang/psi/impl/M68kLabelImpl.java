@@ -23,23 +23,24 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
-import com.intellij.psi.stubs.IStubElementType;
 import com.yanncebron.m68kplugin.lang.stubs.M68kLabelStub;
+import com.intellij.psi.stubs.IStubElementType;
 
 public class M68kLabelImpl extends M68kLabelMixIn implements M68kLabel {
 
-  public M68kLabelImpl(ASTNode node) {
+  public M68kLabelImpl(@NotNull ASTNode node) {
     super(node);
   }
 
-  public M68kLabelImpl(M68kLabelStub stub, IStubElementType stubType) {
-    super(stub, stubType);
+  public M68kLabelImpl(@NotNull M68kLabelStub stub, @NotNull IStubElementType type) {
+    super(stub, type);
   }
 
   public void accept(@NotNull M68kVisitor visitor) {
     visitor.visitLabel(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);

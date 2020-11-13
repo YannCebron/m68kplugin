@@ -30,10 +30,12 @@ public class M68kBitManipulationInstructionBaseImpl extends M68kDataSizedImpl im
     super(node);
   }
 
+  @Override
   public void accept(@NotNull M68kVisitor visitor) {
     visitor.visitBitManipulationInstructionBase(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
