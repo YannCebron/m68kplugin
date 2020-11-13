@@ -40,7 +40,6 @@
   - `printt`/`printv`
   - `auto`
   - `struct`/`estruct`
-- octal number starts with `@@`, not single `@` ?!
 - local label: ends with `$`
 - label: allow `.`  
 - resolve local label in branch instructions (`jmp .next`) -> label_ref_expression
