@@ -32,7 +32,6 @@ Please see [Plan](plan.md) for planned features and ideas.
   * Method separator for `macro`/`endm`, `section` blocks
   * Highlight privileged instructions
   * Highlight matching brace/paired directives
-  * Highlight missing matching opening/closing directive (`macro`/`endm`, `inline`/`einline`, `rem`/`erem`)
 * Parsing with semantic error highlighting
 * Documentation for mnemonics
 * Labels: *Navigate | Declaration or Usages*, *Edit | Find Usages* (grouped by type), *Refactor | Rename*
@@ -46,6 +45,7 @@ Please see [Plan](plan.md) for planned features and ideas.
 * Code Style Settings: Tab Size, Visual Guides
 * Code Inspections
   * Unresolved label reference
+  * Directives problems (missing matching opening/closing directive for `macro`/`endm`, `inline`/`einline`, `rem`/`erem`; content after `end`)
   * Register list/range problems
 
 ### IDE

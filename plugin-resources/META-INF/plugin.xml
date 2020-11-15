@@ -139,6 +139,10 @@
 
     <localInspection
         language="M68k" enabledByDefault="true" level="ERROR"
+        key="inspection.directives.name" groupKey="inspection.group.name"
+        implementationClass="com.yanncebron.m68kplugin.inspections.M68kDirectivesInspection"/>
+    <localInspection
+        language="M68k" enabledByDefault="true" level="ERROR"
         key="inspection.register.list.range.name" groupKey="inspection.group.name"
         implementationClass="com.yanncebron.m68kplugin.inspections.M68kRegisterListRangeInspection"/>
     <localInspection
