@@ -13,6 +13,8 @@ in [IntelliJ](https://www.jetbrains.org/intellij/sdk/docs/intro/intellij_platfor
 
 There are currently no published releases, snapshot artifacts for manual installation are available via <kbd>Build & Test</kbd> GitHub CI (badge on top).
 
+Plugin is compatible with IDE version 2020.1 and later.              
+
 ## Features
 
 Support is currently focused on editing, code-insight, and navigation. There is no support for project setup, integration with build tools, or running/debugging.
@@ -26,7 +28,7 @@ Please see [Plan](plan.md) for planned features and ideas.
 ### Editor
 
 * Syntax Highlighting
-  * Fully customizable via *Preferences | Editor | Color Scheme | M68k Assembler*
+  * Fully customizable via *Settings/Preferences | Editor | Color Scheme | M68k Assembler*
   * Method separator for `macro`/`endm`, `section` blocks
   * Highlight privileged instructions
   * Highlight matching brace/paired directives
