@@ -67,7 +67,7 @@ public class M68kFoldingBuilder extends CustomFoldingBuilder {
 
     final M68kExpression secondExpression = expressions.get(1);
     if (!(secondExpression instanceof M68kNumberExpression)) return null;
-    if (!"0".equals(secondExpression.getText())) return null;
+    if (!"0".equals(secondExpression.getText())) return null; // todo support non-decimal notation?
 
     return firstExpression.getText();
   }
