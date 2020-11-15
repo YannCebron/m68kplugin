@@ -98,8 +98,8 @@
 
     <liveTemplateContext
         implementation="com.yanncebron.m68kplugin.template.M68kTemplateContextType"/>
-    <defaultLiveTemplatesProvider
-        implementation="com.yanncebron.m68kplugin.template.M68kDefaultLiveTemplatesProvider"/>
+    <defaultLiveTemplates
+        file="/liveTemplates/M68kAssembler"/>
 
     <include.provider
         implementation="com.yanncebron.m68kplugin.lang.index.M68kFileIncludeProvider"/>

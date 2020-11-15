@@ -18,7 +18,7 @@ package com.yanncebron.m68kplugin.ide;
 
 import com.intellij.ide.BrowserUtil;
 import com.intellij.ide.plugins.IdeaPluginDescriptor;
-import com.intellij.ide.plugins.PluginManager;
+import com.intellij.ide.plugins.PluginManagerCore;
 import com.intellij.openapi.application.ApplicationInfo;
 import com.intellij.openapi.diagnostic.ErrorReportSubmitter;
 import com.intellij.openapi.diagnostic.IdeaLoggingEvent;
@@ -73,7 +73,7 @@ public class M68kErrorReportSubmitter extends ErrorReportSubmitter {
       sb.append(URLEncoder.encode(StringUtil.defaultIfEmpty(event.getMessage(), ""), UTF8));
 
       sb.append(URLEncoder.encode("\n\n### Runtime Information\n", UTF8));
-      final IdeaPluginDescriptor descriptor = PluginManager.getPlugin(getPluginDescriptor().getPluginId());
+      final IdeaPluginDescriptor descriptor = PluginManagerCore.getPlugin(getPluginDescriptor().getPluginId());
       assert descriptor != null;
       sb.append(URLEncoder.encode("Plugin version : " + descriptor.getVersion() + "\n", UTF8));
       sb.append(URLEncoder.encode("IDE: " + ApplicationInfo.getInstance().getFullApplicationName() +

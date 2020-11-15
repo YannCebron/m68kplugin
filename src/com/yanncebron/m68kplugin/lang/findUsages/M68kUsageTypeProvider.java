@@ -30,9 +30,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class M68kUsageTypeProvider implements UsageTypeProvider {
 
-  static final UsageType EXPRESSION = new UsageType(M68kBundle.message("usage.type.expression"));
-  static final UsageType DIRECTIVE = new UsageType(M68kBundle.message("usage.type.directive"));
-  static final UsageType CONDITIONAL_ASSEMBLY = new UsageType(M68kBundle.message("usage.type.conditional.assembly"));
+  static final UsageType EXPRESSION = new UsageType(M68kBundle.messagePointer("usage.type.expression"));
+  static final UsageType DIRECTIVE = new UsageType(M68kBundle.messagePointer("usage.type.directive"));
+  static final UsageType CONDITIONAL_ASSEMBLY = new UsageType(M68kBundle.messagePointer("usage.type.conditional.assembly"));
 
   @Nullable
   @Override
@@ -40,7 +40,7 @@ public class M68kUsageTypeProvider implements UsageTypeProvider {
     if (element.getLanguage() != M68kLanguage.INSTANCE) {
       return null;
     }
-    
+
     if (PsiTreeUtil.getParentOfType(element, M68kDirective.class) != null) {
       return DIRECTIVE;
     }

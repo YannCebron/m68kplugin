@@ -84,10 +84,11 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
     return StringUtil.toLowerCase(originalMnemonic.toString());
   }
 
-  @Nullable
   @Override
-  public PsiElement getCustomDocumentationElement(@NotNull Editor editor, @NotNull PsiFile file,
-                                                  @Nullable PsiElement contextElement) {
+  public @Nullable PsiElement getCustomDocumentationElement(@NotNull Editor editor,
+                                                            @NotNull PsiFile file,
+                                                            @Nullable PsiElement contextElement,
+                                                            int targetOffset) {
     if (contextElement != null &&
       M68kTokenGroups.INSTRUCTIONS.contains(contextElement.getNode().getElementType())) {
       return PsiTreeUtil.getParentOfType(contextElement, M68kInstruction.class);

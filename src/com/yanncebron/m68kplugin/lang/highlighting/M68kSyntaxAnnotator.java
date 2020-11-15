@@ -17,8 +17,10 @@
 package com.yanncebron.m68kplugin.lang.highlighting;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.annotation.AnnotationBuilder;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
+import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
@@ -43,8 +45,8 @@ public class M68kSyntaxAnnotator implements Annotator {
     if (element instanceof M68kInstruction) {
       M68kInstruction instruction = (M68kInstruction) element;
       if (instruction.isPrivileged()) {
-        holder.createInfoAnnotation(element, M68kBundle.message("highlight.privileged.instruction"))
-          .setTextAttributes(M68kTextAttributes.PRIVILEGED_INSTRUCTION);
+        holder.newAnnotation(HighlightSeverity.INFORMATION, M68kBundle.message("highlight.privileged.instruction"))
+          .textAttributes(M68kTextAttributes.PRIVILEGED_INSTRUCTION).create();
       }
     } else if (element instanceof M68kLabel) {
       doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LABEL);
@@ -57,7 +59,7 @@ public class M68kSyntaxAnnotator implements Annotator {
     } else if (element instanceof M68kEndDirective) {
       final M68kPsiElement nextSibling = PsiTreeUtil.getNextSiblingOfType(element, M68kPsiElement.class);
       if (nextSibling != null) {
-        holder.createErrorAnnotation(nextSibling, M68kBundle.message("highlight.no.content.after.end.directive"));
+        holder.createErrorAnnotation(nextSibling, M68kBundle.message("highlight.no.content.after.end.directive")); // todo range
       }
     } else if (element instanceof M68kMacroDirective) {
       checkUnmatchedOpeningDirective(element, holder, M68kEndmDirective.class, "endm", M68kMacroDirective.class);
@@ -89,13 +91,18 @@ public class M68kSyntaxAnnotator implements Annotator {
   }
 
   private static void doAnnotate(AnnotationHolder holder, ASTNode node, TextAttributesKey key) {
-    (DEBUG_MODE ? holder.createInfoAnnotation(node, key.getExternalName()) : holder.createInfoAnnotation(node, null))
-      .setTextAttributes(key);
+    final AnnotationBuilder builder;
+    if (DEBUG_MODE) {
+      builder = holder.newAnnotation(HighlightSeverity.INFORMATION, key.getExternalName());
+    } else {
+      builder = holder.newSilentAnnotation(HighlightSeverity.INFORMATION);
+    }
+    builder.range(node).textAttributes(key).create();
   }
 
   private static void doAnnotate(AnnotationHolder holder, TextRange range, TextAttributesKey key) {
     (DEBUG_MODE ? holder.createInfoAnnotation(range, key.getExternalName()) : holder.createInfoAnnotation(range, null))
-      .setTextAttributes(key);
+      .setTextAttributes(key); // todo range
   }
 
   @SafeVarargs
@@ -127,7 +134,7 @@ public class M68kSyntaxAnnotator implements Annotator {
       if (M68kPsiTreeUtil.hasSiblingBackwards(element, matchingDirective, stopAtDirectives)) return false;
     }
 
-    holder.createErrorAnnotation(element, M68kBundle.message("highlight.unmatched.directive", matchingDirectiveText));
+    holder.newAnnotation(HighlightSeverity.ERROR, M68kBundle.message("highlight.unmatched.directive", matchingDirectiveText)).create();
     return true;
   }
 

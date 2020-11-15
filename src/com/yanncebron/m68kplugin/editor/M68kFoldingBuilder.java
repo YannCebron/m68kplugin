@@ -20,7 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.CustomFoldingBuilder;
 import com.intellij.lang.folding.FoldingDescriptor;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.util.Comparing;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kDataSize;
@@ -68,7 +67,7 @@ public class M68kFoldingBuilder extends CustomFoldingBuilder {
 
     final M68kExpression secondExpression = expressions.get(1);
     if (!(secondExpression instanceof M68kNumberExpression)) return null;
-    if (!Comparing.equal(secondExpression.getText(), "0")) return null;
+    if (!"0".equals(secondExpression.getText())) return null;
 
     return firstExpression.getText();
   }
