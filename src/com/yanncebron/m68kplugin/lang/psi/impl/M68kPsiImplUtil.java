@@ -19,6 +19,7 @@ package com.yanncebron.m68kplugin.lang.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.ObjectUtils;
+import com.intellij.util.SmartList;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncbinDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncdirDirective;
@@ -27,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Objects;
 
 public class M68kPsiImplUtil {
@@ -37,6 +39,18 @@ public class M68kPsiImplUtil {
     if (childByType == null) return null;
 
     return M68kDataSize.findByElementType(childByType.getElementType());
+  }
+
+  @NotNull
+  public static List<M68kLocalLabel> getLocalLabels(M68kLabel label) {
+    List<M68kLocalLabel> result = new SmartList<>();
+    M68kPsiTreeUtil.processSiblingsForwards(label, m68kPsiElement -> {
+      if (m68kPsiElement instanceof M68kLocalLabel) {
+        result.add((M68kLocalLabel) m68kPsiElement);
+      }
+      return true;
+    }, M68kLabel.class);
+    return result;
   }
 
   // TODO extract M68kInstructionWithSrcAndDest

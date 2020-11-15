@@ -149,7 +149,6 @@
 - **WIP** structure view
   - `equr` "location"
   - macros
-  - nest local labels
 - breadcrumbs
 - Quick Definition: better range for labels like `macro` etc. `ImplementationTextSelectioner`
 - Conditional Assembly structures: `CodeBlockSupportHandler`

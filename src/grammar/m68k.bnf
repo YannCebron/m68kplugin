@@ -77,6 +77,9 @@ label ::= !<<afterWhitespace>> labelIdentifier
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelMixIn"
   elementTypeFactory = "com.yanncebron.m68kplugin.lang.stubs.M68kStubElementTypeFactory.stubFactory"
   stubClass = "com.yanncebron.m68kplugin.lang.stubs.M68kLabelStub"
+  methods = [
+    getLocalLabels
+  ]
 }
 
 // todo full name is: DevPac. prefixed with last non-local label

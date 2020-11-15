@@ -23,10 +23,9 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
-import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kEquDirectiveBase;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncbinDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncludeDirective;
@@ -56,17 +55,19 @@ class M68kRootStructureViewTreeElement extends PsiTreeElementBase<M68kFile> {
   @Override
   public Collection<StructureViewTreeElement> getChildrenBase() {
     final List<PsiElement> children = PsiTreeUtil.getChildrenOfAnyType(getValue(),
-      M68kLabelBase.class, M68kEquDirectiveBase.class,
+      M68kLabel.class, M68kEquDirectiveBase.class,
       M68kIncludeDirective.class, M68kIncbinDirective.class);
 
     Collection<StructureViewTreeElement> nodes = new ArrayList<>();
     for (PsiElement child : children) {
       if (child instanceof M68kLabel) {
         M68kLabel m68kLabel = (M68kLabel) child;
-        nodes.add(new M68kStructureViewNode(m68kLabel));
-      } else if (child instanceof M68kLocalLabel) {
-        M68kLocalLabel m68kLocalLabel = (M68kLocalLabel) child;
-        nodes.add(new M68kStructureViewNode(m68kLocalLabel));
+        nodes.add(new M68kStructureViewNode(m68kLabel) {
+          @Override
+          public @NotNull Collection<StructureViewTreeElement> getChildrenBase() {
+            return ContainerUtil.map2List(m68kLabel.getLocalLabels(), M68kStructureViewNode::new);
+          }
+        });
       } else if (child instanceof M68kEquDirectiveBase) {  // todo refactor to mixin + itemPresentation
         M68kEquDirectiveBase equDirective = (M68kEquDirectiveBase) child;
         nodes.add(new PsiTreeElementBase<M68kEquDirectiveBase>(equDirective) {

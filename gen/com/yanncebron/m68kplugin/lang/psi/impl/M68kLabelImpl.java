@@ -25,6 +25,7 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.stubs.M68kLabelStub;
 import com.intellij.psi.stubs.IStubElementType;
+import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
 public class M68kLabelImpl extends M68kLabelMixIn implements M68kLabel {
 
@@ -44,6 +45,11 @@ public class M68kLabelImpl extends M68kLabelMixIn implements M68kLabel {
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  public @NotNull List<M68kLocalLabel> getLocalLabels() {
+    return M68kPsiImplUtil.getLocalLabels(this);
   }
 
 }

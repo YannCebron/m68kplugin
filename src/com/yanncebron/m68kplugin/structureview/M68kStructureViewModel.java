@@ -54,7 +54,7 @@ public class M68kStructureViewModel extends StructureViewModelBase implements St
   @Override
   public boolean isAlwaysLeaf(StructureViewTreeElement element) {
     final Object value = element.getValue();
-    return value instanceof M68kLabelBase || value instanceof M68kEquDirectiveBase ||
+    return value instanceof M68kLocalLabel || value instanceof M68kEquDirectiveBase ||
       value instanceof M68kIncludeDirective || value instanceof M68kIncbinDirective;
   }
 
