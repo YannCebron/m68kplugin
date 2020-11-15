@@ -24,14 +24,16 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.PsiReferenceBase;
+import com.intellij.util.CommonProcessors;
 import com.intellij.util.IncorrectOperationException;
+import com.intellij.util.Processor;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
+import com.yanncebron.m68kplugin.lang.psi.M68kPsiTreeUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
-import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroDirective;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -63,8 +65,14 @@ abstract class M68kMacrocallDirectiveMixIn extends ASTWrapperPsiElement {
     public PsiElement resolve() {
       String name = getValue();
 
-      return ContainerUtil.find(getAllMacroLabels(),
-        m68kMacroDirective -> name.equals(m68kMacroDirective.getName()));
+      final CommonProcessors.FindProcessor<M68kLabel> findProcessor = new CommonProcessors.FindProcessor<M68kLabel>() {
+        @Override
+        protected boolean accept(M68kLabel m68kLabel) {
+          return name.equals(m68kLabel.getName());
+        }
+      };
+      processMacros(findProcessor);
+      return findProcessor.getFoundValue();
     }
 
     @Override
@@ -79,20 +87,19 @@ abstract class M68kMacrocallDirectiveMixIn extends ASTWrapperPsiElement {
     @NotNull
     @Override
     public Object[] getVariants() {
-      return ContainerUtil.map2Array(getAllMacroLabels(), LookupElement.class, LookupElementBuilder::createWithIcon);
+      List<M68kLabel> result = new SmartList<>();
+      processMacros(new CommonProcessors.CollectProcessor<>(result));
+
+      return ContainerUtil.map2Array(result, LookupElement.class, LookupElementBuilder::createWithIcon);
     }
 
-    // todo macro must be defined before usage
-    private List<M68kLabel> getAllMacroLabels() {
-      List<M68kLabel> result = new SmartList<>();
-
-      getElement().getContainingFile().acceptChildren(new M68kVisitor() {
-        @Override
-        public void visitMacroDirective(@NotNull M68kMacroDirective o) {
-          result.add(o.getLabel());
+    private void processMacros(Processor<M68kLabel> processor) {
+      M68kPsiTreeUtil.processSiblingsBackwards(getElement(), m68kPsiElement -> {
+        if (m68kPsiElement instanceof M68kMacroDirective) {
+          return processor.process(((M68kMacroDirective) m68kPsiElement).getLabel());
         }
+        return true;
       });
-      return result;
     }
 
     @NotNull

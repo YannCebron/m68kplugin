@@ -1,3 +1,6 @@
+* not declared yet
+  <error descr="Cannot resolve macro 'macro1'">macro1</error>
+
 macro1 macro
   endm
 

@@ -5,3 +5,6 @@ macro2 macro
   endm
 
   <caret>
+
+macro3 macro
+  endm
