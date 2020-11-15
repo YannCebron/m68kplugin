@@ -86,15 +86,33 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
     myFixture.testHighlighting();
   }
 
+  public void testUnmatchedDirectiveEndmMissingMacro() {
+    myFixture.configureByText("test.s",
+      " <error descr=\"Missing matching 'macro' directive\">endm</error>");
+    myFixture.testHighlighting();
+  }
+
   public void testUnmatchedDirectiveInlineMissingEinline() {
     myFixture.configureByText("test.s",
       " <error descr=\"Missing matching 'einline' directive\">inline</error>");
     myFixture.testHighlighting();
   }
 
+  public void testUnmatchedDirectiveEinlineMissingInline() {
+    myFixture.configureByText("test.s",
+      " <error descr=\"Missing matching 'inline' directive\">einline</error>");
+    myFixture.testHighlighting();
+  }
+
   public void testUnmatchedDirectiveRemMissingErem() {
     myFixture.configureByText("test.s",
       " <error descr=\"Missing matching 'erem' directive\">rem</error>");
+    myFixture.testHighlighting();
+  }
+
+  public void testUnmatchedDirectiveEremMissingRem() {
+    myFixture.configureByText("test.s",
+      " <error descr=\"Missing matching 'rem' directive\">erem</error>");
     myFixture.testHighlighting();
   }
 }

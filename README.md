@@ -30,7 +30,7 @@ Please see [Plan](plan.md) for planned features and ideas.
   * Method separator for `macro`/`endm`, `section` blocks
   * Highlight privileged instructions
   * Highlight matching brace/paired directives
-  * Highlight missing matching closing directive (`macro`/`endm`, `inline`/`einline`, `rem`/`erem`)
+  * Highlight missing matching opening/closing directive (`macro`/`endm`, `inline`/`einline`, `rem`/`erem`)
 * Parsing with semantic error highlighting
 * Documentation for mnemonics
 * Labels: *Navigate | Declaration or Usages*, *Edit | Find Usages* (grouped by type), *Refactor | Rename*

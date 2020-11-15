@@ -60,11 +60,15 @@ public class M68kSyntaxAnnotator implements Annotator {
         holder.createErrorAnnotation(nextSibling, M68kBundle.message("highlight.no.content.after.end.directive"));
       }
     } else if (element instanceof M68kMacroDirective) {
-      checkUnmatchedDirective(element, holder, M68kEndmDirective.class, "endm", M68kMacroDirective.class);
+      checkUnmatchedOpeningDirective(element, holder, M68kEndmDirective.class, "endm", M68kMacroDirective.class);
+    } else if (element instanceof M68kEndmDirective) {
+      checkUnmatchedClosingDirective(element, holder, M68kMacroDirective.class, "macro", M68kEndmDirective.class);
     } else if (element instanceof M68kInlineDirective) {
-      checkUnmatchedDirective(element, holder, M68kEinlineDirective.class, "einline", M68kInlineDirective.class);
+      checkUnmatchedOpeningDirective(element, holder, M68kEinlineDirective.class, "einline", M68kInlineDirective.class);
+    } else if (element instanceof M68kEinlineDirective) {
+      checkUnmatchedClosingDirective(element, holder, M68kInlineDirective.class, "inline", M68kEinlineDirective.class);
     } else if (element instanceof M68kRemDirective) {
-      boolean unmatched = checkUnmatchedDirective(element, holder, M68kEremDirective.class, "erem", M68kRemDirective.class);
+      boolean unmatched = checkUnmatchedOpeningDirective(element, holder, M68kEremDirective.class, "erem", M68kRemDirective.class);
       if (!unmatched) {
         final CommonProcessors.FindProcessor<M68kPsiElement> findClosingErem = new CommonProcessors.FindProcessor<M68kPsiElement>() {
           @Override
@@ -79,6 +83,8 @@ public class M68kSyntaxAnnotator implements Annotator {
         TextRange range = new TextRange(element.getTextRange().getEndOffset(), closingDirective.getTextOffset());
         doAnnotate(holder, range, DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
       }
+    } else if (element instanceof M68kEremDirective) {
+      checkUnmatchedClosingDirective(element, holder, M68kRemDirective.class, "rem", M68kEremDirective.class);
     }
   }
 
@@ -93,11 +99,33 @@ public class M68kSyntaxAnnotator implements Annotator {
   }
 
   @SafeVarargs
+  private final boolean checkUnmatchedOpeningDirective(PsiElement element, AnnotationHolder holder,
+                                                       Class<? extends M68kDirective> matchingDirective,
+                                                       @NonNls String matchingDirectiveText,
+                                                       Class<? extends M68kDirective>... stopAtDirectives) {
+    return checkUnmatchedDirective(element, holder, true, matchingDirective, matchingDirectiveText, stopAtDirectives);
+  }
+
+  @SuppressWarnings("UnusedReturnValue")
+  @SafeVarargs
+  private final boolean checkUnmatchedClosingDirective(PsiElement element, AnnotationHolder holder,
+                                                       Class<? extends M68kDirective> matchingDirective,
+                                                       @NonNls String matchingDirectiveText,
+                                                       Class<? extends M68kDirective>... stopAtDirectives) {
+    return checkUnmatchedDirective(element, holder, false, matchingDirective, matchingDirectiveText, stopAtDirectives);
+  }
+
+  @SafeVarargs
   private final boolean checkUnmatchedDirective(PsiElement element, AnnotationHolder holder,
+                                                boolean forwards,
                                                 Class<? extends M68kDirective> matchingDirective,
                                                 @NonNls String matchingDirectiveText,
                                                 Class<? extends M68kDirective>... stopAtDirectives) {
-    if (M68kPsiTreeUtil.hasSiblingForwards(element, matchingDirective, stopAtDirectives)) return false;
+    if (forwards) {
+      if (M68kPsiTreeUtil.hasSiblingForwards(element, matchingDirective, stopAtDirectives)) return false;
+    } else {
+      if (M68kPsiTreeUtil.hasSiblingBackwards(element, matchingDirective, stopAtDirectives)) return false;
+    }
 
     holder.createErrorAnnotation(element, M68kBundle.message("highlight.unmatched.directive", matchingDirectiveText));
     return true;
