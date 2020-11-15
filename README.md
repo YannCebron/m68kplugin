@@ -56,7 +56,7 @@ Please see [Plan](plan.md) for planned features and ideas.
 
 * Various smaller [parser issues](plan.md#broken-lexingparsing), please [submit issue](https://github.com/YannCebron/m68kplugin/issues) if not listed yet
 * Unsupported features:
-  - Includes
+  - Includes (resolves across all files)
 
 ## Credits
 

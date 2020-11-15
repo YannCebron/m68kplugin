@@ -1,0 +1,4 @@
+topLevelLabel
+  bra <caret>
+
+anotherTopLevelLabel
