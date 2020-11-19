@@ -29,6 +29,7 @@ import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroParameterDirective;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class M68kSyntaxAnnotator implements Annotator {
 
@@ -55,7 +56,11 @@ public class M68kSyntaxAnnotator implements Annotator {
     }
   }
 
-  private static void doAnnotate(AnnotationHolder holder, ASTNode node, TextAttributesKey key) {
+  private static void doAnnotate(AnnotationHolder holder, @Nullable ASTNode node, TextAttributesKey key) {
+    if (node == null) {
+      return; // todo workaround for non-supported label ID
+    }
+
     final AnnotationBuilder builder;
     if (DEBUG_MODE) {
       builder = holder.newAnnotation(HighlightSeverity.INFORMATION, key.getExternalName());
