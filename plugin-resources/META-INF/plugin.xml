@@ -112,6 +112,9 @@
     <moveLeftRightHandler
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.editor.M68kMoveLeftRightHandler"/>
+    <flipCommaIntention.flipper
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.editor.M68kCommaFlipper"/>
     <extendWordSelectionHandler
         implementation="com.yanncebron.m68kplugin.editor.M68kLabelBlocksSelectionHandler"/>
     <lang.foldingBuilder
