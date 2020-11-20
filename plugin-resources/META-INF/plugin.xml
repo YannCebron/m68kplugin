@@ -156,6 +156,10 @@
         language="M68k" enabledByDefault="true" level="ERROR" cleanupTool="true"
         key="inspection.usage.a7.register.name" groupKey="inspection.group.name"
         implementationClass="com.yanncebron.m68kplugin.inspections.M68kUsageA7RegisterInspection"/>
+    <localInspection
+        language="M68k" enabledByDefault="true" level="WARNING" cleanupTool="true"
+        key="inspection.unused.label.name" groupKey="inspection.group.name"
+        implementationClass="com.yanncebron.m68kplugin.inspections.M68kUnusedLabelInspection"/>
 
 
     <consoleFilterProvider

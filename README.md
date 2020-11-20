@@ -47,6 +47,7 @@ Please see [Plan](plan.md) for planned features and ideas.
 ### Code Inspections
 
 * Unresolved label reference
+* Unused local label
 * Directives problems
 * Register list/range problems
 * Usage of A7 register

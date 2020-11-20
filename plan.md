@@ -82,7 +82,7 @@
 - `ReadWriteAccessDetector` for registers
 - method separators:
   - "detected" subroutines
-- highlight unused label (local only? located in non-include files only?)
+- highlight unused label: global - located in non-include files only?
 - color-picker/inlays: copper list colors
 - highlight returns
 - highlight loop ranges `CodeBlockSupportHandler`
