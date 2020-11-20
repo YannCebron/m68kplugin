@@ -78,9 +78,6 @@
 - unpaired conditional assembly directives, missing `endc`/`endif`
 - highlight static conditional assembly directives status, e.g., `IFD`/`IFND`
 - macro call: parameter count mismatch
-- registers:
-  - dedicated color for each (**WIP** at least special registers (`SP` == `A7`!) vs. A*n* vs. D*n*)
-  - rainbow highlighting?
 - display used vs. free registers in selected code block
 - `ReadWriteAccessDetector` for registers
 - method separators:
