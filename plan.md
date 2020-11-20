@@ -89,6 +89,7 @@
 - color-picker/inlays: copper list colors
 - highlight returns
 - highlight loop ranges `CodeBlockSupportHandler`
+- unreachable code `ControlFlowProvider`
 
 ## Resolve/Refactor
 
