@@ -17,28 +17,45 @@
 package com.yanncebron.m68kplugin.lang.psi;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFileFactory;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
+import org.jetbrains.annotations.NotNull;
 
 public class M68kElementFactory {
 
+  @NotNull
   public static M68kFile createFile(Project project, String text) {
     return (M68kFile) PsiFileFactory.getInstance(project).
       createFileFromText("dummy.s", M68kFileType.INSTANCE, text);
   }
 
+  @NotNull
   public static M68kLabel createLabel(Project project, String name) {
     final M68kFile file = createFile(project, name);
-    return (M68kLabel) file.getFirstChild();
+    final PsiElement firstChild = file.getFirstChild();
+    assert firstChild instanceof M68kLabel : name;
+    return (M68kLabel) firstChild;
   }
 
+  @NotNull
+  public static M68kAdmArd createAddressRegister(Project project, String text) {
+    final M68kExgInstruction child = (M68kExgInstruction) createFile(project, " exg " + text + ",d0").getChildren()[1];
+    final M68kAdmRrd source = child.getSource();
+    assert source != null : text;
+    final M68kAdmArd admArd = source.getAdmArd();
+    assert admArd != null : text;
+    return admArd;
+  }
+
+  @NotNull
   public static M68kLabelRefExpression createLabelRefExpression(Project project, String name) {
     final M68kBraInstruction firstChild = (M68kBraInstruction) createFile(project, " bra " + name).getChildren()[1];
     final M68kExpression expression = firstChild.getExpression();
-    assert expression instanceof M68kLabelRefExpression;
+    assert expression instanceof M68kLabelRefExpression : name;
     return (M68kLabelRefExpression) expression;
   }
 }

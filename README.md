@@ -43,10 +43,13 @@ Please see [Plan](plan.md) for planned features and ideas.
   * Custom regions via enclosing `* region [placeholderText]` / `* endregion` comments
 * Live Templates
 * Code Style Settings: Tab Size, Visual Guides
-* Code Inspections
-  * Unresolved label reference
-  * Directives problems (missing matching opening/closing directive for `macro`/`endm`, `inline`/`einline`, `rem`/`erem`; content after `end`)
-  * Register list/range problems
+
+### Code Inspections
+
+* Unresolved label reference
+* Directives problems
+* Register list/range problems
+* Usage of A7 register
 
 ### IDE
 
