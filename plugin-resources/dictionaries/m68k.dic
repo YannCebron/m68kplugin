@@ -50,6 +50,8 @@ incdir
 jumperr
 jumpptr
 llen
+longword
+longwords
 mexit
 movea
 movem
@@ -73,6 +75,6 @@ subq
 subx
 trapv
 unlk
-xdef
 vasm
 vlink
+xdef
