@@ -24,4 +24,6 @@ public interface M68kAdmAri extends M68kPsiElement {
   @NotNull
   M68kAdmArd getAdmArd();
 
+  @NotNull M68kRegister getRegister();
+
 }

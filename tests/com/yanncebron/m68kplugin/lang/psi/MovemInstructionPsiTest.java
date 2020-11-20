@@ -49,7 +49,7 @@ public class MovemInstructionPsiTest extends M68kPsiTestCase {
 
     final M68kAdmAri admAri = instruction.getAdmAri();
     assertNotNull(admAri);
-    assertEquals(M68kRegister.A7, admAri.getAdmArd().getRegister());
+    assertEquals(M68kRegister.A7, admAri.getRegister());
   }
 
   private M68kMovemInstruction parse(String text) {

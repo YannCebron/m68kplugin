@@ -27,4 +27,6 @@ public interface M68kAdmRrdIndex extends M68kDataSized {
   @Nullable
   M68kAdmDrd getAdmDrd();
 
+  @NotNull M68kRegister getRegister();
+
 }

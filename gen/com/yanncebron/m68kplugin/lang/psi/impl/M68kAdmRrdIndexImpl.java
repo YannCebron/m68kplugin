@@ -23,6 +23,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
 public class M68kAdmRrdIndexImpl extends M68kDataSizedImpl implements M68kAdmRrdIndex {
 
@@ -51,6 +52,11 @@ public class M68kAdmRrdIndexImpl extends M68kDataSizedImpl implements M68kAdmRrd
   @Nullable
   public M68kAdmDrd getAdmDrd() {
     return PsiTreeUtil.getChildOfType(this, M68kAdmDrd.class);
+  }
+
+  @Override
+  public @NotNull M68kRegister getRegister() {
+    return M68kPsiImplUtil.getRegister(this);
   }
 
 }

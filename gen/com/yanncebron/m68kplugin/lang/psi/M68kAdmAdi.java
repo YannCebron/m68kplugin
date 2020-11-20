@@ -28,4 +28,6 @@ public interface M68kAdmAdi extends M68kPsiElement {
   @NotNull
   M68kExpression getExpression();
 
+  @NotNull M68kRegister getRegister();
+
 }

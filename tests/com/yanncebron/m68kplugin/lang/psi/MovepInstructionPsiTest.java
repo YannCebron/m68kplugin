@@ -28,8 +28,7 @@ public class MovepInstructionPsiTest extends M68kPsiTestCase {
 
     final M68kAdmAdi admAdi = instruction.getAdmAdi();
     assertNotNull(admAdi);
-    final M68kAdmArd admArd = admAdi.getAdmArd();
-    assertEquals(M68kRegister.A0, admArd.getRegister());
+    assertEquals(M68kRegister.A0, admAdi.getRegister());
   }
 
   private M68kMovepInstruction parse(String text) {

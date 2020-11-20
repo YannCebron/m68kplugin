@@ -151,6 +151,7 @@ register_list ::= register_range (DIV register_range)* {
 
 
 // addressing modes  =====================================================
+
 // d0
 adm_drd ::= DATA_REGISTER
 {
@@ -159,6 +160,7 @@ adm_drd ::= DATA_REGISTER
     getRegister
   ]
 }
+
 // a0 | sp
 adm_ard ::= ADDRESS_REGISTER | SP
 {
@@ -167,7 +169,8 @@ adm_ard ::= ADDRESS_REGISTER | SP
     getRegister
   ]
 }
-// Rn
+
+// R0
 adm_rrd ::= adm_drd | adm_ard
 {
   name = "data|address register"
@@ -175,36 +178,69 @@ adm_rrd ::= adm_drd | adm_ard
     getRegister
   ]
 }
-// Rn[.bwl] used in adm_ix/adm_pci
+
+// R0[.bwl] used in adm_ix/adm_pci
 adm_rrd_index ::= (adm_drd data_size_all?) | (adm_ard data_size_word_long?)
 {
   name = "data|address register"
+  methods = [
+    getRegister
+  ]
   extends = data_sized
 }
+
 // (a0)
 adm_ari ::= L_PAREN adm_ard R_PAREN
+{
+  methods = [
+    getRegister
+  ]
+}
+
 // (a0)+
 adm_api ::= L_PAREN adm_ard R_PAREN PLUS
+{
+  methods = [
+    getRegister
+  ]
+}
+
 // -(a0)
 adm_apd ::= MINUS L_PAREN adm_ard R_PAREN
+{
+  methods = [
+    getRegister
+  ]
+}
+
 // index(a0)
 adm_adi ::= expression L_PAREN adm_ard R_PAREN
+{
+  methods = [
+    getRegister
+  ]
+}
+
 // index(a0,d0)
 adm_aix ::= expression? L_PAREN adm_ard COMMA adm_rrd_index R_PAREN
 {
   pin = "COMMA"
   name = "expression"
 }
-// 4000 | 4000.w | 4000.l 
+
+// 4000 | 4000.w | 4000.l
 adm_abs ::= expression data_size_word_long?
+
 // index(pc)
 adm_pcd ::= expression L_PAREN PC R_PAREN
+
 // index(pc,d0)
 adm_pci ::= expression? L_PAREN PC COMMA adm_rrd_index R_PAREN
 {
   pin = "COMMA"
   name = "expression"
 }
+
 // #4000 | #4000.w | #4000.l
 adm_imm ::= HASH expression data_size_word_long?
 {

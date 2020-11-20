@@ -92,7 +92,33 @@ public class M68kPsiImplUtil {
   }
 
   @NotNull
+  public static M68kRegister getRegister(M68kAdmAri admElement) {
+    return _getRegister(admElement.getAdmArd());
+  }
+
+  @NotNull
+  public static M68kRegister getRegister(M68kAdmApi admElement) {
+    return _getRegister(admElement.getAdmArd());
+  }
+
+  @NotNull
+  public static M68kRegister getRegister(M68kAdmApd admElement) {
+    return _getRegister(admElement.getAdmArd());
+  }
+
+  @NotNull
+  public static M68kRegister getRegister(M68kAdmAdi admElement) {
+    return _getRegister(admElement.getAdmArd());
+  }
+
+  @NotNull
   public static M68kRegister getRegister(M68kAdmRrd admElement) {
+    final M68kPsiElement registerElement = ObjectUtils.chooseNotNull(admElement.getAdmArd(), admElement.getAdmDrd());
+    return _getRegister(Objects.requireNonNull(registerElement));
+  }
+
+  @NotNull
+  public static M68kRegister getRegister(M68kAdmRrdIndex admElement) {
     final M68kPsiElement registerElement = ObjectUtils.chooseNotNull(admElement.getAdmArd(), admElement.getAdmDrd());
     return _getRegister(Objects.requireNonNull(registerElement));
   }

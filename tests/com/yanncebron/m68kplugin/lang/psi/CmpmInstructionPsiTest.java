@@ -31,11 +31,12 @@ public class CmpmInstructionPsiTest extends M68kPsiTestCase {
     final M68kAdmApi source = instruction.getSource();
     assertNotNull(source);
     assertEquals("(a0)+", source.getText());
-    assertEquals(M68kRegister.A0, source.getAdmArd().getRegister());
+    assertEquals(M68kRegister.A0, source.getRegister());
+    
     final M68kAdmApi destination = instruction.getDestination();
     assertNotNull(destination);
     assertEquals("(a1)+", destination.getText());
-    assertEquals(M68kRegister.A1, destination.getAdmArd().getRegister());
+    assertEquals(M68kRegister.A1, destination.getRegister());
   }
 
   private M68kCmpmInstruction parse(String text) {

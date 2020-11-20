@@ -33,6 +33,7 @@ public class MoveInstructionPsiTest extends M68kPsiTestCase {
     assertNotNull(admPci);
     final M68kAdmRrdIndex admRrdIndex = admPci.getAdmRrdIndex();
     assertNotNull(admRrdIndex);
+    assertEquals(M68kRegister.D6, admRrdIndex.getRegister());
     assertEquals(M68kDataSize.WORD, admRrdIndex.getDataSize());
   }
 
