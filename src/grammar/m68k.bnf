@@ -1178,8 +1178,8 @@ fake binary_expression ::= expression+
 {
   methods = [
     expression = ""
-    left = "/expression[0]"
-    right = "/expression[1]"
+    left = "expression[0]"
+    right = "expression[1]"
   ]
   pin = 2
 }
