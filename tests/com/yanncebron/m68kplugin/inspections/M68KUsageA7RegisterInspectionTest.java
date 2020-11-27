@@ -42,7 +42,7 @@ public class M68KUsageA7RegisterInspectionTest extends BasePlatformTestCase {
 
   public void testReplaceWithSPFix() {
     myFixture.configureByText("a.s",
-      "  jmp 4(pc,<error descr=\"Usage of A7 register\">a<caret>7</error>.l)");
+      "  jmp 4(pc,<warning descr=\"Usage of A7 register\">a<caret>7</warning>.l)");
     myFixture.testHighlighting();
     final List<IntentionAction> intentions = myFixture.filterAvailableIntentions("Replace with SP");
     final IntentionAction intention = assertOneElement(intentions);
