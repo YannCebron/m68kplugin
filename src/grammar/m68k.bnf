@@ -1066,7 +1066,7 @@ rs_directive ::= RS data_size_all? expression
   extends = data_sized
 }
 
-blk_directive ::= BLK data_size_all? expression COMMA expression
+blk_directive ::= BLK data_size_all? expression (COMMA expression)?
 {
   pin = 1
   extends = data_sized

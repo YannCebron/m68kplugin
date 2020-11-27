@@ -56,7 +56,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // BLK data_size_all? expression COMMA expression
+  // BLK data_size_all? expression (COMMA expression)?
   public static boolean blk_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "blk_directive")) return false;
     if (!nextTokenIs(b, "<directive>", BLK)) return false;
@@ -66,8 +66,7 @@ public class M68kDirectivesParser {
     p = r; // pin = 1
     r = r && report_error_(b, blk_directive_1(b, l + 1));
     r = p && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1)) && r;
-    r = p && report_error_(b, consumeToken(b, COMMA)) && r;
-    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
+    r = p && blk_directive_3(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -77,6 +76,24 @@ public class M68kDirectivesParser {
     if (!recursion_guard_(b, l, "blk_directive_1")) return false;
     data_size_all(b, l + 1);
     return true;
+  }
+
+  // (COMMA expression)?
+  private static boolean blk_directive_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "blk_directive_3")) return false;
+    blk_directive_3_0(b, l + 1);
+    return true;
+  }
+
+  // COMMA expression
+  private static boolean blk_directive_3_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "blk_directive_3_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COMMA);
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, m, null, r);
+    return r;
   }
 
   /* ********************************************************** */

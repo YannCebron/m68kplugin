@@ -41,7 +41,6 @@
   - `printt`/`printv`
   - `auto`
   - `struct`/`estruct`
-- `blk.b 7*4`
 - local label: ends with `$`
 - label: allow `.`
 - `include`/`incbin` path without quotes
