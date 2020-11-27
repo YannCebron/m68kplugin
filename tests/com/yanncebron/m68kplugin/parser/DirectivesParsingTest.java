@@ -97,6 +97,10 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" dc.b 42");
   }
 
+  public void testDcDirectiveWithoutValue() throws Exception {
+    doCodeTest(" dc.b ");
+  }
+
   public void testDcDirectiveWithoutDataSize() throws Exception {
     doCodeTest(" dc 42");
   }
