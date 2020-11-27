@@ -19,13 +19,13 @@ package com.yanncebron.m68kplugin.lang.psi;
 public class CmpiInstructionPsiTest extends M68kPsiTestCase {
 
   public void testWithoutDataSize() {
-    final M68kCmpiInstruction instruction = parse("cmpi #1,a0");
+    final M68kCmpiInstruction instruction = parse("cmpi #1,d0");
 
     assertNull(instruction.getDataSize());
   }
 
   public void testWithDataSize() {
-    final M68kCmpiInstruction instruction = parse("cmpi.w #1,a0");
+    final M68kCmpiInstruction instruction = parse("cmpi.w #1,d0");
 
     assertEquals(M68kDataSize.WORD, instruction.getDataSize());
   }

@@ -20,6 +20,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiFileFactory;
 import com.intellij.testFramework.LightPlatformTestCase;
+import com.intellij.testFramework.PsiTestUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.M68kLanguage;
@@ -31,7 +32,7 @@ public abstract class M68kPsiTestCase extends LightPlatformTestCase {
   }
 
   /**
-   * workaround for eq* directives including `label`
+   * workaround for {@code eq*} directives including `label`
    */
   protected M68kPsiElement doParse(final String text, final boolean withLabel) {
     final M68kFile m68kFile = createFile(text);
@@ -49,6 +50,12 @@ public abstract class M68kPsiTestCase extends LightPlatformTestCase {
   private M68kFile createFile(final String text) throws IncorrectOperationException {
     final PsiFile psiFile = PsiFileFactory.getInstance(getProject())
       .createFileFromText("test.s", M68kLanguage.INSTANCE, text);
+
+    final String testName = getTestName(false);
+    if (!testName.contains("Missing") && !testName.contains("Wrong")) {
+      PsiTestUtil.checkErrorElements(psiFile);
+    }
+
     return assertInstanceOf(psiFile, M68kFile.class);
   }
 

@@ -19,13 +19,13 @@ package com.yanncebron.m68kplugin.lang.psi;
 public class PeaInstructionPsiTest extends M68kPsiTestCase {
 
   public void testWithoutDataSize() {
-    final M68kPeaInstruction instruction = parse("pea a0");
+    final M68kPeaInstruction instruction = parse("pea (a0)");
 
     assertNull(instruction.getDataSize());
   }
 
   public void testWithDataSize() {
-    final M68kPeaInstruction instruction = parse("pea.l a0");
+    final M68kPeaInstruction instruction = parse("pea.l (a0)");
 
     assertEquals(M68kDataSize.LONGWORD, instruction.getDataSize());
   }
