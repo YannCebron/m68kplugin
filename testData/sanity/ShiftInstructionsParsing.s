@@ -1,0 +1,12 @@
+ asl $40000
+ asl (a0)
+ rol #1,d0
+ asl.b #1,d0
+ roxr #1,d0
+ lsr #1,d0
+ asr.w #1,d0
+ roxl #1,d0
+ ror #1,d0
+ lsl.l #1,d0
+ asl d1,d0
+ asl #1,d0

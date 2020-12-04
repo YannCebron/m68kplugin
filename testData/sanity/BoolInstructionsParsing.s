@@ -1,0 +1,21 @@
+label
+ eor.l d0,42(a0)
+ or #$0700,sr
+ eori #0,d1
+ not.b d0
+ not label
+ not d0
+ andi.w #0,sr
+ or.l d0,$50000
+ andi #0,ccr
+ andi #0,d1
+ ori #0,d1
+ or d0,d1
+ or #$0700,ccr
+ andi.b #0,ccr
+ and d0,d1
+ ori #$0700,sr
+ and.w #$8100,label
+ andi #0,sr
+ eor d0,d1
+ and.l d0,42(a1,d0)
