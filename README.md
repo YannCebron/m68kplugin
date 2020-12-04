@@ -7,8 +7,6 @@ Adds support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_
 in [IntelliJ](https://www.jetbrains.org/intellij/sdk/docs/intro/intellij_platform.html#ides-based-on-the-intellij-platform) based IDEs
 (including [IntelliJ IDEA](https://www.jetbrains.com/idea/), [Android Studio](https://developer.android.com/studio/) and many more).
 
-> **NOTE:** This plugin is at a very early stage and provided "as-is", please see also [Known Issues](#known-issues) below.
-
 ## Installation and Features
 
 Please visit the [Documentation site](https://yanncebron.github.io/m68kplugin/) for more information.
