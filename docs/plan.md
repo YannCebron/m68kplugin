@@ -97,8 +97,6 @@
 - support copyright plugin
 - symbol names in commit dialog (`PlainTextSymbolCompletionContributor`)
 
-## External Tools
-
 ## Tools
 
 - http://deadliners.net/gradientmaster/
