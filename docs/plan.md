@@ -48,7 +48,7 @@
 - expand/shrink selection:
   - **WIP** "blocks"
   - macro/conditional assembly blocks
-- `M68kCommaFlipper`: swap src|dest if valid
+- `M68kCommaFlipper`: swap src\|dest if valid
 - formatter
 - documentation:
   - quick doc/hover for number literals: dec/hex/oct/bin/ASCII
