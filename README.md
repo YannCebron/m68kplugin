@@ -20,8 +20,7 @@ Plugin Logo from [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Mot
 Language support built using [Grammar-Kit](https://github.com/JetBrains/Grammar-Kit)
 
 Gradle setup uses [gradle-intellij-plugin](https://github.com/JetBrains/gradle-intellij-plugin/)
-, [gradle-grammar-kit-plugin](https://github.com/JetBrains/gradle-grammar-kit-plugin)
-and [verifier.gradle](https://github.com/FWDekker/intellij-randomness/blob/master/gradle/scripts/verifier.gradle)
+ and [gradle-grammar-kit-plugin](https://github.com/JetBrains/gradle-grammar-kit-plugin)
 
 Mnemonic documentation taken from [m68k-instructions-documentation](https://github.com/prb28/m68k-instructions-documentation)
 
