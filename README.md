@@ -37,7 +37,7 @@ Please see [Plan](plan.md) for planned features and ideas.
 * Labels: *Navigate | Declaration or Usages*, *Edit | Find Usages* (grouped by type), *Refactor | Rename*
 * Smart *Edit | Extend/Shrink Selection*
 * *Code | Move Element Left/Right* for `exg`, binary expressions, register list, `dc` values
-* Spellchecker with bundled dictionaries (M68/Amiga)
+* Spellchecker with bundled dictionaries (M68k/Amiga)
 * Code Folding
   * Zero-terminated string literal (`dc.b "a text",0`)
   * Custom regions via enclosing `* region [placeholderText]` / `* endregion` comments
