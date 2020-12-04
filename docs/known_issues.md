@@ -3,6 +3,10 @@ title: Known Issues
 ---
 
 # Known Issues
+                                            
+## Resolving
+
+- Includes (resolves across all files)
 
 ## Broken Lexing/Parsing
 
