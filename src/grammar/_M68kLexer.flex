@@ -67,8 +67,8 @@ BINNUMBER=%[0|1]+
 SINGLE_QUOTED_STRING='([^\\'\r\n]|\\[^\r\n])*'?
 DOUBLE_QUOTED_STRING=\"([^\\\"\r\n]|\\[^\r\n])*\"?
 
-ID=[.]?[_]*[:digit:]*[:letter:][[:letter:][:digit:]_]*
-LABEL=[_]*[:digit:]*[:letter:][[:letter:][:digit:]_]*  // without "." first char
+ID=[.]?[_]*[:digit:]*[a-zA-Z][[a-zA-Z][:digit:]_]*
+LABEL=[_]*[:digit:]*[a-zA-Z][[a-zA-Z][:digit:]_]*  // without "." first char
 
 %state IN_LABEL
 %state IN_INSTRUCTION
