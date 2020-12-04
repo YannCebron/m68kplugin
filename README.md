@@ -9,61 +9,9 @@ in [IntelliJ](https://www.jetbrains.org/intellij/sdk/docs/intro/intellij_platfor
 
 > **NOTE:** This plugin is at a very early stage and provided "as-is", please see also [Known Issues](#known-issues) below.
 
-## Installation
+## Installation and Features
 
-There are currently no published releases, snapshot artifacts for manual installation are available via <kbd>Build & Test</kbd> GitHub CI (badge on top).
-
-Plugin is compatible with IDE version 2020.1 and later.              
-
-## Features
-
-Support is currently focused on editing, code-insight, and navigation. There is no support for project setup, integration with build tools, or running/debugging.
-
-Please see [Plan](plan.md) for planned features and ideas.
-
-### Supported CPUs
-
-* 68000
-
-### Editor
-
-* Syntax Highlighting
-  * Fully customizable via *Settings/Preferences | Editor | Color Scheme | M68k Assembler*
-  * Method separator for `macro`/`endm`, `section` blocks
-  * Highlight privileged instructions
-  * Highlight matching brace/paired directives
-* Parsing with semantic error highlighting
-* Documentation for mnemonics
-* Labels: *Navigate | Declaration or Usages*, *Edit | Find Usages* (grouped by type), *Refactor | Rename*
-* Smart *Edit | Extend/Shrink Selection*
-* *Code | Move Element Left/Right* for `exg`, binary expressions, register list, `dc` values
-* Spellchecker with bundled dictionaries (M68k/Amiga)
-* Code Folding
-  * Zero-terminated string literal (`dc.b "a text",0`)
-  * Custom regions via enclosing `* region [placeholderText]` / `* endregion` comments
-* Live Templates
-* Code Style Settings: Tab Size, Visual Guides
-
-### Code Inspections
-
-* Unresolved label reference
-* Unused local label
-* Directives problems
-* Register list/range problems
-* Usage of A7 register
-
-### IDE
-
-* Structure View
-* *Navigate | Symbol* for labels
-* External tools: navigate to _file:lineNumber_ location or label from vasm console message
-* Register `FILE_ID.DIZ`/`*.NFO` files as plaintext
-
-## Known Issues
-
-* Various smaller [parser issues](plan.md#broken-lexingparsing), please [submit issue](https://github.com/YannCebron/m68kplugin/issues) if not listed yet
-* Unsupported features:
-  - Includes (resolves across all files)
+Please visit the [Documentation site](https://yanncebron.github.io/m68kplugin/) for more information.
 
 ## Credits
 
