@@ -17,5 +17,5 @@ Navigate to _file:lineNumber_ location or label from vasm console message
 
 ## Other
 
-Register `FILE_ID.DIZ`/`*.NFO` files as plaintext
+Register `FILE_ID.DIZ` and `*.NFO` files as plaintext
 
