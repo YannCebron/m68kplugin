@@ -20,4 +20,4 @@ Plugin is compatible with IDE version 2020.1 and later.
                
 ---
 
-[Project Homepage on GitHub](https://github.com/YannCebron/m68kplugin)
+Please visit the [Project Homepage on GitHub](https://github.com/YannCebron/m68kplugin) for Credits, License and Code of Conduct.
