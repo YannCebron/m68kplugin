@@ -5,7 +5,13 @@ permalink: /
 ---
 
 ## Motorola 68000 Series Assembly Language Support for IntelliJ-based IDEs
-   
-> **NOTE:** This plugin is at a very early stage and provided "as-is", please see also [Known Issues](known_issues.md).
+                                  
+Adds support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_68000_series) assembly language
+in [IntelliJ](https://www.jetbrains.org/intellij/sdk/docs/intro/intellij_platform.html#ides-based-on-the-intellij-platform) based IDEs
+(including [IntelliJ IDEA](https://www.jetbrains.com/idea/), [Android Studio](https://developer.android.com/studio/) and many more).
 
-_This site is under construction_
+> **NOTE:** This plugin is at a very early stage and provided "as-is", please see also [Known Issues](known_issues.md).
+               
+---
+
+[Project Homepage on GitHub](https://github.com/YannCebron/m68kplugin)
