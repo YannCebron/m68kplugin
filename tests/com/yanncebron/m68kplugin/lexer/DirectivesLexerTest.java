@@ -36,6 +36,13 @@ public class DirectivesLexerTest extends M68kLexerTestCase {
         "dec_number ('42')");
   }
 
+  public void testEqDirectiveWithoutWhitespace() {
+    doTest("A=42",
+      "id ('A')\n" +
+        "= ('=')\n" +
+        "dec_number ('42')");
+  }
+
   public void testEqrDirective() {
     doTest("label equr d6",
       "id ('label')\n" +

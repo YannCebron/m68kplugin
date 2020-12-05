@@ -86,9 +86,9 @@ LABEL=[_]*[:digit:]*[a-zA-Z][[a-zA-Z][:digit:]_]*  // without "." first char
 }
 
 
-// todo valid? "INTREQ=$09C"
 <IN_LABEL> {
   ":" { clearBranchIdMode(); yybegin(IN_INSTRUCTION); return COLON; }
+  "=" { clearBranchIdMode(); yybegin(IN_INSTRUCTION); return EQ; }
 
   {WHITE_SPACE}+ {COMMENT} { yybegin(IN_COMMENT); return COMMENT; }
   {WHITE_SPACE}+ { clearBranchIdMode(); yybegin(IN_INSTRUCTION); return WHITE_SPACE; }

@@ -37,6 +37,10 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest("label = 42");
   }
 
+  public void testEqDirectiveWithoutWhitespace() throws Exception {
+    doCodeTest("label=42");
+  }
+
   public void testEqDirectiveMissingExpression() throws Exception {
     doCodeTest("label = ");
   }
