@@ -49,6 +49,7 @@ title: Known Issues
   - `printt`/`printv`
   - `auto`
   - `struct`/`estruct`
+  - `reg`
 - local label: ends with `$`
 - label: allow `.`
 - `include`/`incbin` path without quotes
