@@ -2,6 +2,4 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kRsDirectiveImpl(RS_DIRECTIVE)
     PsiElement(rs)('rs')
-    PsiErrorElement:<expression> expected
-      <empty list>
   PsiWhiteSpace(' ')

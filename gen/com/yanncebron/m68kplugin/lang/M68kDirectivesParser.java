@@ -981,7 +981,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // RS data_size_all? expression
+  // RS data_size_all? expression?
   public static boolean rs_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "rs_directive")) return false;
     if (!nextTokenIs(b, "<directive>", RS)) return false;
@@ -990,7 +990,7 @@ public class M68kDirectivesParser {
     r = consumeToken(b, RS);
     p = r; // pin = 1
     r = r && report_error_(b, rs_directive_1(b, l + 1));
-    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
+    r = p && rs_directive_2(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -999,6 +999,13 @@ public class M68kDirectivesParser {
   private static boolean rs_directive_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "rs_directive_1")) return false;
     data_size_all(b, l + 1);
+    return true;
+  }
+
+  // expression?
+  private static boolean rs_directive_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "rs_directive_2")) return false;
+    M68kExpressionParser.expression(b, l + 1, -1);
     return true;
   }
 

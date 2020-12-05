@@ -1060,7 +1060,7 @@ rsreset_directive ::= RSRESET
   pin = 1
 }
 
-rs_directive ::= RS data_size_all? expression
+rs_directive ::= RS data_size_all? expression?
 {
   pin = 1
   extends = data_sized

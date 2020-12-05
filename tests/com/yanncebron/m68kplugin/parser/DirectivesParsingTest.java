@@ -145,7 +145,7 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" rs.b 42");
   }
 
-  public void testRsDirectiveMissingExpression() throws Exception {
+  public void testRsDirectiveWithoutExpression() throws Exception {
     doCodeTest(" rs ");
   }
 
