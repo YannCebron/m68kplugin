@@ -51,7 +51,7 @@ title: Known Issues
 - local label: ends with `$`
 - label: allow `.`
 - `include`/`incbin` path without quotes
-- in expressions, mnemonic parsed as instruction, not identifier (`size = (bpls*bpl)`)
+- in expressions, identifier parsed as instruction (`size = (bpls*bpl)`)
 - in directive, parsed as token, not identifier (`SECTION code,code`)
 - add missing expression operators
   - XOR?
