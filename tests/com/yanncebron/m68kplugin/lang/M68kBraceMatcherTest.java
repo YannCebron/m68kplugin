@@ -74,7 +74,7 @@ public class M68kBraceMatcherTest extends BasePlatformTestCase {
     doTest(" <caret>" + startElement.toString() + "\n" +
       " endc");
 
-    doTest(" <caret>" + startElement.toString() + "\n" +
+    doTest(" <caret>" + startElement + "\n" +
       " endif");
   }
 

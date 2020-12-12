@@ -32,7 +32,7 @@ abstract class M68kStubElementType<StubT extends StubElement<? extends M68kPsiEl
 
   @Override
   public final @NotNull String getExternalId() {
-    return M68kFileElementType.STUB_EXTERNAL_ID_PREFIX + toString();
+    return M68kFileElementType.STUB_EXTERNAL_ID_PREFIX + this;
   }
 
   @NotNull
