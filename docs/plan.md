@@ -33,6 +33,7 @@
   - highlight usages
   - eventually `UsageTargetProvider`
   - safe delete
+  - rename `RenameInputValidator`  
   - unresolved: quick-fix add `include` to existing label
 - register:
   - shift up/down through available ones
