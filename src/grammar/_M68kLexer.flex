@@ -261,6 +261,8 @@ LABEL=[_]*[:digit:]*[a-zA-Z][[a-zA-Z][:digit:]_]*  // without "." first char
   [sS][hH][iI]                    { return SHI; }
   [sS][lL][sS]                    { return SLS; }
   [sS][cC][sS]                    { return SCS; }
+  [sS][hH][sS]                    { return SHS; }
+  [sS][lL][oO]                    { return SLO; }
 
   [aA][sS][lL]                    { return ASL; }
   [aA][sS][rR]                    { return ASR; }

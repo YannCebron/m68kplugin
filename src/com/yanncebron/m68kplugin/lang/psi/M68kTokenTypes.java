@@ -218,6 +218,8 @@ public abstract class M68kTokenTypes {
   public static final IElementType SBCD = new M68kTokenType("sbcd");
   public static final IElementType SCC = new M68kTokenType("scc");
   public static final IElementType SCS = new M68kTokenType("scs");
+  public static final IElementType SHS = new M68kTokenType("shs");
+  public static final IElementType SLO = new M68kTokenType("slo");
   public static final IElementType SECTION = new M68kTokenType("section");
   public static final IElementType SEQ = new M68kTokenType("seq");
   public static final IElementType SET = new M68kTokenType("set");

@@ -770,7 +770,9 @@ private sCC_instructions ::= seq_instruction |
                              scc_instruction |
                              shi_instruction |
                              sls_instruction |
-                             scs_instruction
+                             scs_instruction |
+                             shs_instruction |
+                             slo_instruction
 
 private sCC_tail ::= data_size_byte? adm_group_all_except_ard_pc_imm
 
@@ -790,6 +792,8 @@ scc_instruction ::= SCC sCC_tail
 shi_instruction ::= SHI sCC_tail
 sls_instruction ::= SLS sCC_tail
 scs_instruction ::= SCS sCC_tail
+shs_instruction ::= SHS sCC_tail
+slo_instruction ::= SLO sCC_tail
 
 // Bit =====================================================================
 ;

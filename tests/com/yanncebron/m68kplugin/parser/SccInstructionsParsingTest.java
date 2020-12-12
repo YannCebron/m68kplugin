@@ -107,4 +107,12 @@ public class SccInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" sf label");
   }
 
+  public void testShsInstruction() throws IOException {
+    doCodeTest(" shs label");
+  }
+
+  public void testSloInstruction() throws IOException {
+    doCodeTest(" slo label");
+  }
+
 }

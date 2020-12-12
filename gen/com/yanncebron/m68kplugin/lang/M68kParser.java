@@ -3138,7 +3138,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
   //                              scc_instruction |
   //                              shi_instruction |
   //                              sls_instruction |
-  //                              scs_instruction
+  //                              scs_instruction |
+  //                              shs_instruction |
+  //                              slo_instruction
   static boolean sCC_instructions(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "sCC_instructions")) return false;
     boolean r;
@@ -3158,6 +3160,8 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = shi_instruction(b, l + 1);
     if (!r) r = sls_instruction(b, l + 1);
     if (!r) r = scs_instruction(b, l + 1);
+    if (!r) r = shs_instruction(b, l + 1);
+    if (!r) r = slo_instruction(b, l + 1);
     return r;
   }
 
@@ -3390,6 +3394,20 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // SHS sCC_tail
+  public static boolean shs_instruction(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "shs_instruction")) return false;
+    if (!nextTokenIs(b, "<instruction>", SHS)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, SHS_INSTRUCTION, "<instruction>");
+    r = consumeToken(b, SHS);
+    p = r; // pin = 1
+    r = r && sCC_tail(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
   // SLE sCC_tail
   public static boolean sle_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "sle_instruction")) return false;
@@ -3397,6 +3415,20 @@ public class M68kParser implements PsiParser, LightPsiParser {
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, SLE_INSTRUCTION, "<instruction>");
     r = consumeToken(b, SLE);
+    p = r; // pin = 1
+    r = r && sCC_tail(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // SLO sCC_tail
+  public static boolean slo_instruction(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slo_instruction")) return false;
+    if (!nextTokenIs(b, "<instruction>", SLO)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, SLO_INSTRUCTION, "<instruction>");
+    r = consumeToken(b, SLO);
     p = r; // pin = 1
     r = r && sCC_tail(b, l + 1);
     exit_section_(b, l, m, r, p, null);

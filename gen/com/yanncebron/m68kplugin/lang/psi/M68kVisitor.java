@@ -905,7 +905,15 @@ public class M68kVisitor extends PsiElementVisitor {
     // visitInstruction(o);
   }
 
+  public void visitShsInstruction(@NotNull M68kShsInstruction o) {
+    visitInstruction(o);
+  }
+
   public void visitSleInstruction(@NotNull M68kSleInstruction o) {
+    visitInstruction(o);
+  }
+
+  public void visitSloInstruction(@NotNull M68kSloInstruction o) {
     visitInstruction(o);
   }
 

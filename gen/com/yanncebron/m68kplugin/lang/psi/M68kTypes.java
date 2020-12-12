@@ -232,7 +232,9 @@ public interface M68kTypes {
   IElementType SHIFT_LEFT_EXPRESSION = new M68kCompositeElementType("SHIFT_LEFT_EXPRESSION");
   IElementType SHIFT_RIGHT_EXPRESSION = new M68kCompositeElementType("SHIFT_RIGHT_EXPRESSION");
   IElementType SHI_INSTRUCTION = new M68kCompositeElementType("SHI_INSTRUCTION");
+  IElementType SHS_INSTRUCTION = new M68kCompositeElementType("SHS_INSTRUCTION");
   IElementType SLE_INSTRUCTION = new M68kCompositeElementType("SLE_INSTRUCTION");
+  IElementType SLO_INSTRUCTION = new M68kCompositeElementType("SLO_INSTRUCTION");
   IElementType SLS_INSTRUCTION = new M68kCompositeElementType("SLS_INSTRUCTION");
   IElementType SLT_INSTRUCTION = new M68kCompositeElementType("SLT_INSTRUCTION");
   IElementType SMI_INSTRUCTION = new M68kCompositeElementType("SMI_INSTRUCTION");
@@ -878,8 +880,14 @@ public interface M68kTypes {
       else if (type == SHI_INSTRUCTION) {
         return new M68kShiInstructionImpl(node);
       }
+      else if (type == SHS_INSTRUCTION) {
+        return new M68kShsInstructionImpl(node);
+      }
       else if (type == SLE_INSTRUCTION) {
         return new M68kSleInstructionImpl(node);
+      }
+      else if (type == SLO_INSTRUCTION) {
+        return new M68kSloInstructionImpl(node);
       }
       else if (type == SLS_INSTRUCTION) {
         return new M68kSlsInstructionImpl(node);
