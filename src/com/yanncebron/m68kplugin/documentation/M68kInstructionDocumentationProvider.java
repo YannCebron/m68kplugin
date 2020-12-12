@@ -44,6 +44,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -127,7 +128,9 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
         public String sanitizeImageUrl(String url) {
           final String sanitizedUrl = super.sanitizeImageUrl(url);
           try {
-            final InputStream is = URLUtil.openStream(getClass().getResource(DOCS_MNEMONIC_ROOT + sanitizedUrl));
+            final URL resourceUrl = getClass().getResource(DOCS_MNEMONIC_ROOT + sanitizedUrl);
+            assert resourceUrl != null : sanitizedUrl;
+            final InputStream is = URLUtil.openStream(resourceUrl);
             final File tempFile = FileUtil.createTempFile("m68k", ".png", true);
             StreamUtil.copyStreamContent(is, new FileOutputStream(tempFile));
             return FileUtil.getUrl(tempFile);
