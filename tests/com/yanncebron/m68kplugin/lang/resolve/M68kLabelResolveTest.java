@@ -87,6 +87,7 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
   @NotNull
   private LookupElement findLookupElement(String lookupString) {
     final LookupElement[] lookupElements = myFixture.getLookupElements();
+    assertNotNull(lookupElements);
     final LookupElement lookupElement = ContainerUtil.find(lookupElements,
       element -> element.getLookupString().equals(lookupString));
     assertNotNull(lookupString, lookupElement);
