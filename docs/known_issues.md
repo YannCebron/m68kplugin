@@ -60,7 +60,6 @@ title: Known Issues
 - allow `equr`/`reg` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
 - macros:
   - support `macro <macroName>` notation
-  - resolve in other files
   - label-counters (`\@`)
   - allow `a`-`z` for macro parameters
   - `ifmacrod`/`ifmacrond` code insight

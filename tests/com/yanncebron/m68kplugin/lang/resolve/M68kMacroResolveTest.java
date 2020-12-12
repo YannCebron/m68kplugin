@@ -16,9 +16,13 @@
 
 package com.yanncebron.m68kplugin.lang.resolve;
 
+import com.intellij.codeInsight.lookup.LookupElement;
+import com.intellij.codeInsight.lookup.LookupElementPresentation;
 import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
+import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.inspections.M68kUnresolvedLabelReferenceInspection;
+import org.jetbrains.annotations.NotNull;
 
 @TestDataPath("$PROJECT_ROOT/testData/resolve/macro")
 public class M68kMacroResolveTest extends BasePlatformTestCase {
@@ -36,6 +40,31 @@ public class M68kMacroResolveTest extends BasePlatformTestCase {
   public void testCompletionVariantsInSingleFile() {
     myFixture.testCompletionVariants("macroCompletionVariantsInSingleFile.s",
       "macro1", "macro2");
+  }
+
+  public void testHighlightResolveInMultipleFiles() {
+    myFixture.enableInspections(new M68kUnresolvedLabelReferenceInspection());
+    myFixture.testHighlighting("macroHighlightResolvingInMultipleFiles.s", "macroHighlightResolvingInMultipleFiles_other.s");
+  }
+
+  public void testCompletionVariantsInMultipleFiles() {
+    myFixture.copyFileToProject("macroHighlightResolvingInMultipleFiles_other.s");
+    myFixture.testCompletionVariants("macroCompletionVariantsInMultipleFiles.s",
+      "macro1", "macro2", "otherMacro", "yetAnotherMacro");
+
+    final LookupElement otherLabel = findLookupElement("otherMacro");
+    final LookupElementPresentation otherLabelPresentation = LookupElementPresentation.renderElement(otherLabel);
+    assertEquals("macroHighlightResolvingInMultipleFiles_other.s", otherLabelPresentation.getTypeText());
+  }
+
+  @NotNull
+  private LookupElement findLookupElement(String lookupString) {
+    final LookupElement[] lookupElements = myFixture.getLookupElements();
+    assertNotNull(lookupElements);
+    final LookupElement lookupElement = ContainerUtil.find(lookupElements,
+      element -> element.getLookupString().equals(lookupString));
+    assertNotNull(lookupString, lookupElement);
+    return lookupElement;
   }
 
 }
