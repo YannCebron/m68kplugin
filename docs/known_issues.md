@@ -17,7 +17,7 @@ title: Known Issues
   - `public`
   - `nref` (PhxAss)
   - `entry`, `extrn`, `global`, `export` == `xdef`
-  - `import` == `xref
+  - `import` == `xref`
   - `weak`
   - `comm`
   - `common`
