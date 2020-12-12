@@ -325,4 +325,28 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" erem");
   }
 
+  public void testXDefDirective() throws Exception {
+    doCodeTest(" xdef label");
+  }
+
+  public void testXDefDirectiveMultipleLabels() throws Exception {
+    doCodeTest(" xdef label,label2");
+  }
+
+  public void testXDefDirectiveMissingLabel() throws Exception {
+    doCodeTest(" xdef ");
+  }
+
+  public void testXRefDirective() throws Exception {
+    doCodeTest(" xref label");
+  }
+
+  public void testXRefDirectiveMultipleLabels() throws Exception {
+    doCodeTest(" xref label,label2");
+  }
+
+  public void testXRefDirectiveMissingLabel() throws Exception {
+    doCodeTest(" xref ");
+  }
+
 }

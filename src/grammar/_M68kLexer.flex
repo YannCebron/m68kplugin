@@ -327,6 +327,8 @@ LABEL=[_]*[:digit:]*[a-zA-Z][[a-zA-Z][:digit:]_]*  // without "." first char
   [sS][eE][tT]                    { return SET; }
   [sS][pP][cC]                    { return SPC; }
   [tT][eE][xX][tT]                { return TEXT; }
+  [xX][dD][eE][fF]                { return XDEF; }
+  [xX][rR][eE][fF]                { return XREF; }
 
   [mM][aA][cC][rR][oO]            { return MACRO; }
   [eE][nN][dD][mM]                { return ENDM; }

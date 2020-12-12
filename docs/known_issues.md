@@ -15,8 +15,6 @@ title: Known Issues
   - `rorg`
   - `offset`
   - `public`
-  - `xdef`
-  - `xref`
   - `nref`
   - `entry`
   - `extrn`

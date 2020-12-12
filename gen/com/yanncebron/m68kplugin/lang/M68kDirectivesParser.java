@@ -371,7 +371,9 @@ public class M68kDirectivesParser {
   //                        inline_directive |
   //                        einline_directive |
   //                        rem_directive |
-  //                        erem_directive
+  //                        erem_directive |
+  //                        xdef_directive |
+  //                        xref_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -428,6 +430,8 @@ public class M68kDirectivesParser {
     if (!r) r = einline_directive(b, l + 1);
     if (!r) r = rem_directive(b, l + 1);
     if (!r) r = erem_directive(b, l + 1);
+    if (!r) r = xdef_directive(b, l + 1);
+    if (!r) r = xref_directive(b, l + 1);
     return r;
   }
 
@@ -1140,6 +1144,80 @@ public class M68kDirectivesParser {
     Marker m = enter_section_(b, l, _NONE_, TEXT_DIRECTIVE, "<directive>");
     r = consumeToken(b, TEXT);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // XDEF label_ref_expression (COMMA label_ref_expression)*
+  public static boolean xdef_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "xdef_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", XDEF)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, XDEF_DIRECTIVE, "<directive>");
+    r = consumeToken(b, XDEF);
+    p = r; // pin = 1
+    r = r && report_error_(b, M68kExpressionParser.label_ref_expression(b, l + 1));
+    r = p && xdef_directive_2(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // (COMMA label_ref_expression)*
+  private static boolean xdef_directive_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "xdef_directive_2")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!xdef_directive_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "xdef_directive_2", c)) break;
+    }
+    return true;
+  }
+
+  // COMMA label_ref_expression
+  private static boolean xdef_directive_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "xdef_directive_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COMMA);
+    r = r && M68kExpressionParser.label_ref_expression(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // XREF label_ref_expression (COMMA label_ref_expression)*
+  public static boolean xref_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "xref_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", XREF)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, XREF_DIRECTIVE, "<directive>");
+    r = consumeToken(b, XREF);
+    p = r; // pin = 1
+    r = r && report_error_(b, M68kExpressionParser.label_ref_expression(b, l + 1));
+    r = p && xref_directive_2(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // (COMMA label_ref_expression)*
+  private static boolean xref_directive_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "xref_directive_2")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!xref_directive_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "xref_directive_2", c)) break;
+    }
+    return true;
+  }
+
+  // COMMA label_ref_expression
+  private static boolean xref_directive_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "xref_directive_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COMMA);
+    r = r && M68kExpressionParser.label_ref_expression(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
   }
 

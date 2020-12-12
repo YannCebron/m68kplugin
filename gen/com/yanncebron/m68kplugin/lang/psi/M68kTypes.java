@@ -261,6 +261,8 @@ public interface M68kTypes {
   IElementType UNARY_MINUS_EXPRESSION = new M68kCompositeElementType("UNARY_MINUS_EXPRESSION");
   IElementType UNARY_PLUS_EXPRESSION = new M68kCompositeElementType("UNARY_PLUS_EXPRESSION");
   IElementType UNLK_INSTRUCTION = new M68kCompositeElementType("UNLK_INSTRUCTION");
+  IElementType XDEF_DIRECTIVE = new M68kCompositeElementType("XDEF_DIRECTIVE");
+  IElementType XREF_DIRECTIVE = new M68kCompositeElementType("XREF_DIRECTIVE");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
@@ -966,6 +968,12 @@ public interface M68kTypes {
       }
       else if (type == UNLK_INSTRUCTION) {
         return new M68kUnlkInstructionImpl(node);
+      }
+      else if (type == XDEF_DIRECTIVE) {
+        return new M68kXdefDirectiveImpl(node);
+      }
+      else if (type == XREF_DIRECTIVE) {
+        return new M68kXrefDirectiveImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }
