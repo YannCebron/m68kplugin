@@ -58,3 +58,7 @@ label set 42
  org $50000
  incbin "path",offset,42
  rs.b 42
+ xdef label
+ xdef label,anotherLabel
+ xref label
+ xref label,anotherLabel
