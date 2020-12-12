@@ -1259,6 +1259,8 @@ private conditional_assembly_directives ::= if_conditional_assembly_directive |
                                             ifle_conditional_assembly_directive |
                                             iflt_conditional_assembly_directive |
                                             ifne_conditional_assembly_directive |
+                                            ifmi_conditional_assembly_directive |
+                                            ifpl_conditional_assembly_directive |
                                             ifb_conditional_assembly_directive |
                                             ifnb_conditional_assembly_directive |
                                             ifc_conditional_assembly_directive |
@@ -1277,9 +1279,11 @@ ifnd_conditional_assembly_directive ::= IFND expression
 
 ifeq_conditional_assembly_directive ::= IFEQ expression
 ifge_conditional_assembly_directive ::= IFGE expression
+ifpl_conditional_assembly_directive ::= IFPL expression // == IFGE
 ifgt_conditional_assembly_directive ::= IFGT expression
 ifle_conditional_assembly_directive ::= IFLE expression
 iflt_conditional_assembly_directive ::= IFLT expression
+ifmi_conditional_assembly_directive ::= IFMI expression // == IFLT
 ifne_conditional_assembly_directive ::= IFNE expression
 
 ifb_conditional_assembly_directive ::= IFB expression

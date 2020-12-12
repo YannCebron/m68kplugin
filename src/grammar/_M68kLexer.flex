@@ -342,6 +342,7 @@ LABEL=[_]*[:digit:]*[a-zA-Z][[a-zA-Z][:digit:]_]*  // without "." first char
   [iI][fF][dD]                    { return IFD; }
   [iI][fF][eE][qQ]                { return IFEQ; }
   [iI][fF][gG][eE]                { return IFGE; }
+  [iI][fF][pP][lL]                { return IFPL; }
   [iI][fF][gG][tT]                { return IFGT; }
   [iI][fF][mM][aA][cC][rR][oO][dD]     { return IFMACROD; }
   [iI][fF][mM][aA][cC][rR][oO][nN][dD] { return IFMACROND; }
@@ -349,6 +350,7 @@ LABEL=[_]*[:digit:]*[a-zA-Z][[a-zA-Z][:digit:]_]*  // without "." first char
   [iI][fF][nN][eE]                { return IFNE; }
   [iI][fF][lL][eE]                { return IFLE; }
   [iI][fF][lL][tT]                { return IFLT; }
+  [iI][fF][mM][iI]                { return IFMI; }
   [eE][nN][dD][cC]                { return ENDC; }
   [eE][nN][dD][iI][fF]            { return ENDIF; }
   [eE][lL][sS][eE]                { return ELSE; }

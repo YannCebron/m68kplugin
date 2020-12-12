@@ -48,10 +48,12 @@
       <w>iflt</w>
       <w>ifmacrod</w>
       <w>ifmacrond</w>
+      <w>ifmi</w>
       <w>ifnb</w>
       <w>ifnc</w>
       <w>ifnd</w>
       <w>ifne</w>
+      <w>ifpl</w>
       <w>incbin</w>
       <w>incdir</w>
       <w>jumperr</w>

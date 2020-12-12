@@ -38,8 +38,6 @@ title: Known Issues
   - `comment`
   - `image`
   - `rept`/`endr`
-  - `ifmi`
-  - `ifpl`
   - `so.*`, `clrso`/`setso`
   - `fo.*`, `clrfo`/`setfo`
   - `cargs`

@@ -238,10 +238,12 @@ public final class M68kTokenGroups {
     IFLT,
     IFMACROD,
     IFMACROND,
+    IFMI,
     IFNB,
     IFNC,
     IFND,
-    IFNE
+    IFNE,
+    IFPL
   );
 
   public static final TokenSet OPERATORS = TokenSet.create(

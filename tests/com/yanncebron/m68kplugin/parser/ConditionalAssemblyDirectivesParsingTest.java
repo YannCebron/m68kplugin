@@ -81,6 +81,14 @@ public class ConditionalAssemblyDirectivesParsingTest extends M68kParsingTestCas
     doCodeTest(" iflt 1+2");
   }
 
+  public void testIfmiDirective() throws Exception {
+    doCodeTest(" ifmi 1+2");
+  }
+
+  public void testIfplDirective() throws Exception {
+    doCodeTest(" ifpl 1+2");
+  }
+
   public void testIfndDirective() throws Exception {
     doCodeTest(" ifnd NAME");
   }
