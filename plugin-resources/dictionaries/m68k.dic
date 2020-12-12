@@ -69,6 +69,7 @@ roxr
 rsreset
 rsset
 sbcd
+stackpointer
 suba
 subi
 subq
