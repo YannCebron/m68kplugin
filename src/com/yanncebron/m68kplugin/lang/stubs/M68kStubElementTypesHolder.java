@@ -56,6 +56,11 @@ public interface M68kStubElementTypesHolder {
       public void indexStub(@NotNull M68kLabelStub stub, @NotNull IndexSink sink) {
         final String name = stub.getName();
         if (name != null) {
+          // todo do not put broken parsing results into index
+          if (name.startsWith(".")) {
+            System.out.println("skipping wrong label '" + name + "'");
+            return;
+          }
           sink.occurrence(M68kLabelStubIndex.KEY, name);
         }
       }
