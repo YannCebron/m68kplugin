@@ -52,7 +52,7 @@ public class M68kFileIncludeProvider extends FileIncludeProvider {
   }
 
   @Override
-  public @NotNull FileIncludeInfo[] getIncludeInfos(FileContent content) {
+  public @NotNull FileIncludeInfo @NotNull [] getIncludeInfos(FileContent content) {
     CharSequence contentAsText = content.getContentAsText();
     if (new StringSearcher("include", false, true).scan(contentAsText) == -1 &&
       new StringSearcher("incbin", false, true).scan(contentAsText) == -1) {

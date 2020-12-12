@@ -62,7 +62,7 @@ public class M68kBraceMatcher implements PairedBraceMatcher {
 
   @NotNull
   @Override
-  public BracePair[] getPairs() {
+  public BracePair @NotNull [] getPairs() {
     return pairs;
   }
 

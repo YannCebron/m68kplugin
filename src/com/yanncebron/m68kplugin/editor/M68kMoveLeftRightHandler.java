@@ -30,7 +30,7 @@ public class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
 
   @NotNull
   @Override
-  public PsiElement[] getMovableSubElements(@NotNull PsiElement element) {
+  public PsiElement @NotNull [] getMovableSubElements(@NotNull PsiElement element) {
     if (element instanceof M68kDcDirective) {
       return ((M68kDcDirective) element).getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
     }

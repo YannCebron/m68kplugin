@@ -60,7 +60,7 @@ public class M68kStructureViewModel extends StructureViewModelBase implements St
 
   @NotNull
   @Override
-  public Filter[] getFilters() {
+  public Filter @NotNull [] getFilters() {
     return new Filter[]{
       createFilter(psiElement -> psiElement instanceof M68kIncludeDirective || psiElement instanceof M68kIncbinDirective,
         M68kBundle.message("structureview.filter.includes"), AllIcons.Graph.Layout, "SHOW_INCLUDES"),

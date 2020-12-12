@@ -77,7 +77,7 @@ public class M68kSyntaxHighlighter extends SyntaxHighlighterBase {
 
   @NotNull
   @Override
-  public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
+  public TextAttributesKey @NotNull [] getTokenHighlights(IElementType tokenType) {
     return pack(keys.get(tokenType));
   }
 

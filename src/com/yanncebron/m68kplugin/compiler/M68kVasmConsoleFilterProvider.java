@@ -28,7 +28,7 @@ public class M68kVasmConsoleFilterProvider implements ConsoleFilterProvider {
 
   @NotNull
   @Override
-  public Filter[] getDefaultFilters(@NotNull Project project) {
+  public Filter @NotNull [] getDefaultFilters(@NotNull Project project) {
     if (!FileTypeIndex.containsFileOfType(M68kFileType.INSTANCE, GlobalSearchScope.allScope(project))) {
       return Filter.EMPTY_ARRAY;
     }

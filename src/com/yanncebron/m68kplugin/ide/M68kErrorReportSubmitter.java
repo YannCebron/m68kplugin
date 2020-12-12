@@ -49,7 +49,7 @@ public class M68kErrorReportSubmitter extends ErrorReportSubmitter {
   }
 
   @Override
-  public boolean submit(@NotNull IdeaLoggingEvent[] events,
+  public boolean submit(@NotNull IdeaLoggingEvent @NotNull [] events,
                         @Nullable String additionalInfo,
                         @NotNull Component parentComponent,
                         @NotNull Consumer<SubmittedReportInfo> consumer) {

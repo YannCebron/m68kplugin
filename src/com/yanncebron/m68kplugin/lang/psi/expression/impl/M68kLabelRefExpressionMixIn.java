@@ -101,7 +101,7 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
 
       @NotNull
       @Override
-      public Object[] getVariants() {
+      public Object @NotNull [] getVariants() {
         List<LookupElement> variants = new SmartList<>();
 
         processLocalLabels(localLabel -> {
