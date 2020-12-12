@@ -3,28 +3,26 @@ title: Known Issues
 ---
 
 # Known Issues
-                                            
+
 ## Resolving
 
-- Includes (resolves across all files)
+- Includes not evaluated, resolves across all files
 
 ## Broken Lexing/Parsing
 
 - missing directives ([VASM](http://sun.hasenbraten.de/vasm/release/vasm_4.html#Mot-Syntax-Module)), these will
   currently display false error _"Cannot resolve macro [name]"_
   - `rorg`
-  - `offset`
+  - `offset` (Devpac)
   - `public`
-  - `nref`
-  - `entry`
-  - `extrn`
-  - `global`
-  - `import`
-  - `export`
+  - `nref` (PhxAss)
+  - `entry`, `extrn`, `global`, `export` == `xdef`
+  - `import` == `xref
   - `weak`
   - `comm`
+  - `common`
   - `load`
-  - `mask2`
+  - `mask2` (no-op)
   - `dx.*`
   - `dr.*`
   - `fail`
@@ -40,17 +38,24 @@ title: Known Issues
   - `rept`/`endr`
   - `so.*`, `clrso`/`setso`
   - `fo.*`, `clrfo`/`setfo`
-  - `cargs`
-  - `echo`
-  - `printt`/`printv`
+  - `cargs` (Devpac)
+  - `echo` (PhxAss)
+  - `printt`/`printv` (AsmOne)
   - `auto`
   - `struct`/`estruct`
   - `reg`
-- local label: ends with `$`
-- label: allow `.`
+  - `optc`
+  - `near code`
+  - `iif` (Devpac)
+- labels:
+  - allow `.`
+  - allow `@` (Devpac)
+  - local label ending with `$`
+  - ending with double-colon `::` -> automatically exported (`xdef`)
+  - allow referencing `global_name\local_name` syntax (PhxAss)
 - `include`/`incbin` path without quotes
-- in expressions, identifier parsed as instruction (`size = (bpls*bpl)`)
-- in directive, parsed as token, not identifier (`SECTION code,code`)
+- in expressions, identifier parsed as token (`size = (bpls*bpl)`)
+- in directive, identifier parsed as token (`SECTION code,code`)
 - add missing expression operators
   - XOR?
   - `!`
@@ -58,8 +63,36 @@ title: Known Issues
 - allow `equr`/`reg` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
 - macros:
   - support `macro <macroName>` notation
-  - label-counters (`\@`)
+  - special symbols:
+    - `\@` unique ID
+    - `\@!`
+    - `\@?`
+    - `\@@`
+    - `\#`
+    - `\?n`
+    - `\.`
+    - `\+`
+    - `\-`
+    - `\<symbolname>`
+    - `\@<symbolname>`
   - allow `a`-`z` for macro parameters
   - `ifmacrod`/`ifmacrond` code insight
+- global builtin symbols
+  - `*`
+  - `REPTN`
+  - `__LINE__`
+  - Macros
+    - `CARG`
+    - `NARG`
+  - Devpac:
+    - `__G2`
+    - `__LK`
+    - `__RS`, `__SO`, `__FO`
+  - PhxAss
+    - `_PHXASS_`
+    - `__CPU`, `__FPU`, `__MMU`
+    - `__OPTC`
+  - vasm
+    - `__VASM`
 - Internal tasks:
   - `LexerTestCase.checkCorrectRestartOnEveryToken`
