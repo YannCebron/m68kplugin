@@ -227,11 +227,13 @@ LABEL=[_]*[:digit:]*[a-zA-Z][[a-zA-Z][:digit:]_]*  // without "." first char
 
   [dD][bB][rR][aA]                { incBranchIdMode(); return DBRA; }
   [dD][bB][cC][sS]                { incBranchIdMode(); return DBCS; }
+  [dD][bB][lL][oO]                { incBranchIdMode(); return DBLO; }
   [dD][bB][lL][sS]                { incBranchIdMode(); return DBLS; }
   [dD][bB][eE][qQ]                { incBranchIdMode(); return DBEQ; }
   [dD][bB][nN][eE]                { incBranchIdMode(); return DBNE; }
   [dD][bB][hH][iI]                { incBranchIdMode(); return DBHI; }
   [dD][bB][cC][cC]                { incBranchIdMode(); return DBCC; }
+  [dD][bB][hH][sS]                { incBranchIdMode(); return DBHS; }
   [dD][bB][pP][lL]                { incBranchIdMode(); return DBPL; }
   [dD][bB][vV][cC]                { incBranchIdMode(); return DBVC; }
   [dD][bB][lL][tT]                { incBranchIdMode(); return DBLT; }

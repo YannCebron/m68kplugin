@@ -87,7 +87,9 @@ public abstract class M68kTokenTypes {
   public static final IElementType DATA_F = new M68kTokenType("data_f");
   public static final IElementType DATA_REGISTER = new M68kTokenType("data_register");
   public static final IElementType DBCC = new M68kTokenType("dbcc");
+  public static final IElementType DBHS = new M68kTokenType("dbhs");
   public static final IElementType DBCS = new M68kTokenType("dbcs");
+  public static final IElementType DBLO = new M68kTokenType("dblo");
   public static final IElementType DBEQ = new M68kTokenType("dbeq");
   public static final IElementType DBF = new M68kTokenType("dbf");
   public static final IElementType DBGE = new M68kTokenType("dbge");

@@ -710,11 +710,13 @@ bvs_instruction ::= BVS bCC_tail
 // DecrementAndBranch ==============================================
 private dbCC_instructions ::= dbra_instruction |
                               dbcs_instruction |
+                              dblo_instruction |
                               dbls_instruction |
                               dbeq_instruction |
                               dbne_instruction |
                               dbhi_instruction |
                               dbcc_instruction |
+                              dbhs_instruction |
                               dbpl_instruction |
                               dbvc_instruction |
                               dblt_instruction |
@@ -733,11 +735,13 @@ private dbCC_tail ::= CC_data_size? adm_drd COMMA expression
 
 dbra_instruction ::= DBRA dbCC_tail
 dbcs_instruction ::= DBCS dbCC_tail
+dblo_instruction ::= DBLO dbCC_tail // == dbcs
 dbls_instruction ::= DBLS dbCC_tail
 dbeq_instruction ::= DBEQ dbCC_tail
 dbne_instruction ::= DBNE dbCC_tail
 dbhi_instruction ::= DBHI dbCC_tail
 dbcc_instruction ::= DBCC dbCC_tail
+dbhs_instruction ::= DBHS dbCC_tail // == dbcc
 dbpl_instruction ::= DBPL dbCC_tail
 dbvc_instruction ::= DBVC dbCC_tail
 

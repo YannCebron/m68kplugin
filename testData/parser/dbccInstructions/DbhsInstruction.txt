@@ -1,0 +1,10 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kDbhsInstructionImpl(DBHS_INSTRUCTION)
+    PsiElement(dbhs)('dbhs')
+    PsiWhiteSpace(' ')
+    M68kAdmDrdImpl(ADM_DRD)
+      PsiElement(data_register)('d0')
+    PsiElement(,)(',')
+    M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
+      PsiElement(id)('label')

@@ -1560,11 +1560,13 @@ public class M68kParser implements PsiParser, LightPsiParser {
   /* ********************************************************** */
   // dbra_instruction |
   //                               dbcs_instruction |
+  //                               dblo_instruction |
   //                               dbls_instruction |
   //                               dbeq_instruction |
   //                               dbne_instruction |
   //                               dbhi_instruction |
   //                               dbcc_instruction |
+  //                               dbhs_instruction |
   //                               dbpl_instruction |
   //                               dbvc_instruction |
   //                               dblt_instruction |
@@ -1580,11 +1582,13 @@ public class M68kParser implements PsiParser, LightPsiParser {
     boolean r;
     r = dbra_instruction(b, l + 1);
     if (!r) r = dbcs_instruction(b, l + 1);
+    if (!r) r = dblo_instruction(b, l + 1);
     if (!r) r = dbls_instruction(b, l + 1);
     if (!r) r = dbeq_instruction(b, l + 1);
     if (!r) r = dbne_instruction(b, l + 1);
     if (!r) r = dbhi_instruction(b, l + 1);
     if (!r) r = dbcc_instruction(b, l + 1);
+    if (!r) r = dbhs_instruction(b, l + 1);
     if (!r) r = dbpl_instruction(b, l + 1);
     if (!r) r = dbvc_instruction(b, l + 1);
     if (!r) r = dblt_instruction(b, l + 1);
@@ -1719,6 +1723,20 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // DBHS dbCC_tail
+  public static boolean dbhs_instruction(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "dbhs_instruction")) return false;
+    if (!nextTokenIs(b, "<instruction>", DBHS)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, DBHS_INSTRUCTION, "<instruction>");
+    r = consumeToken(b, DBHS);
+    p = r; // pin = 1
+    r = r && dbCC_tail(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
   // DBLE dbCC_tail
   public static boolean dble_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "dble_instruction")) return false;
@@ -1726,6 +1744,20 @@ public class M68kParser implements PsiParser, LightPsiParser {
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, DBLE_INSTRUCTION, "<instruction>");
     r = consumeToken(b, DBLE);
+    p = r; // pin = 1
+    r = r && dbCC_tail(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // DBLO dbCC_tail
+  public static boolean dblo_instruction(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "dblo_instruction")) return false;
+    if (!nextTokenIs(b, "<instruction>", DBLO)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, DBLO_INSTRUCTION, "<instruction>");
+    r = consumeToken(b, DBLO);
     p = r; // pin = 1
     r = r && dbCC_tail(b, l + 1);
     exit_section_(b, l, m, r, p, null);

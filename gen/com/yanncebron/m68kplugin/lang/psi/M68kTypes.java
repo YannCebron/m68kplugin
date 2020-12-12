@@ -102,7 +102,9 @@ public interface M68kTypes {
   IElementType DBGE_INSTRUCTION = new M68kCompositeElementType("DBGE_INSTRUCTION");
   IElementType DBGT_INSTRUCTION = new M68kCompositeElementType("DBGT_INSTRUCTION");
   IElementType DBHI_INSTRUCTION = new M68kCompositeElementType("DBHI_INSTRUCTION");
+  IElementType DBHS_INSTRUCTION = new M68kCompositeElementType("DBHS_INSTRUCTION");
   IElementType DBLE_INSTRUCTION = new M68kCompositeElementType("DBLE_INSTRUCTION");
+  IElementType DBLO_INSTRUCTION = new M68kCompositeElementType("DBLO_INSTRUCTION");
   IElementType DBLS_INSTRUCTION = new M68kCompositeElementType("DBLS_INSTRUCTION");
   IElementType DBLT_INSTRUCTION = new M68kCompositeElementType("DBLT_INSTRUCTION");
   IElementType DBMI_INSTRUCTION = new M68kCompositeElementType("DBMI_INSTRUCTION");
@@ -489,8 +491,14 @@ public interface M68kTypes {
       else if (type == DBHI_INSTRUCTION) {
         return new M68kDbhiInstructionImpl(node);
       }
+      else if (type == DBHS_INSTRUCTION) {
+        return new M68kDbhsInstructionImpl(node);
+      }
       else if (type == DBLE_INSTRUCTION) {
         return new M68kDbleInstructionImpl(node);
+      }
+      else if (type == DBLO_INSTRUCTION) {
+        return new M68kDbloInstructionImpl(node);
       }
       else if (type == DBLS_INSTRUCTION) {
         return new M68kDblsInstructionImpl(node);
