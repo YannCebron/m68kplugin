@@ -45,8 +45,7 @@ public class M68kNamesValidator implements NamesValidator {
 
   @Override
   public boolean isIdentifier(@NotNull String input, Project project) {
-    // TODO fix
-    String name = StringUtil.startsWithChar(input, '.') || StringUtil.startsWithChar(input, '_') ? input.substring(1) : input;
+    String name = StringUtil.startsWithChar(input, '.') ? input.substring(1) : input;
     final M68kLexer lexer = new M68kLexer();
     lexer.start(name);
     return lexer.getTokenEnd() == name.length() && lexer.getTokenType() == M68kTokenTypes.ID;
