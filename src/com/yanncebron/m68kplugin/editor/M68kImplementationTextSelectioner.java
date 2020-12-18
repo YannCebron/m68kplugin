@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Expand <em>View | Quick Definition</em> range to full {@code macro ... endm} block.
  * <p>
- * todo what about "code blocks" - until next label? max _n_ elements?
+ * todo what about "code blocks"/dc.x blocks - until next label? max _n_ elements?
  * todo expand start offset to preceding docs until blank line?
  */
 public class M68kImplementationTextSelectioner implements ImplementationTextSelectioner {
