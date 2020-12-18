@@ -176,5 +176,8 @@
   <actions>
     <action id="M68kProjectStatisticsAction"
             class="com.yanncebron.m68kplugin.internal.M68kProjectStatisticsAction"/>
+
+    <action id="M68kShowUsedRegistersAction"
+            class="com.yanncebron.m68kplugin.codeInsight.M68kShowUsedRegistersAction"/>
   </actions>
 </idea-plugin>

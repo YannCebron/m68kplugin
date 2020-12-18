@@ -14,7 +14,6 @@
 - unpaired conditional assembly directives, missing `endc`/`endif`
 - highlight static conditional assembly directives status, e.g., `IFD`/`IFND`
 - macro call: parameter count mismatch
-- display used vs. free registers in selected code block
 - `ReadWriteAccessDetector` for registers
 - method separators:
   - "detected" subroutines

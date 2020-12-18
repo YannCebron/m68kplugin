@@ -34,3 +34,7 @@ nav_order: 1
   * Custom regions via enclosing `* region [placeholderText]` / `* endregion` comments
 * Live Templates
 * Code Style Settings: Tab Size, Visual Guides
+                         
+## Code Insight
+
+* *Show Used/Free Registers* for selection
