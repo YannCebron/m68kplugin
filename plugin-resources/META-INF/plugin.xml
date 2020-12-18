@@ -118,6 +118,9 @@
         implementationClass="com.yanncebron.m68kplugin.editor.M68kCommaFlipper"/>
     <extendWordSelectionHandler
         implementation="com.yanncebron.m68kplugin.editor.M68kLabelBlocksSelectionHandler"/>
+    <lang.implementationTextSelectioner
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.editor.M68kImplementationTextSelectioner"/>
     <lang.foldingBuilder
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.editor.M68kFoldingBuilder"/>

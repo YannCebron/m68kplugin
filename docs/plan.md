@@ -89,7 +89,7 @@
   - `equr` "location"
   - macros
 - breadcrumbs
-- Quick Definition: better range for labels like `macro` etc. `ImplementationTextSelectioner`
+- Quick Definition: better range for labels/"code-blocks"
 - Conditional Assembly structures: `CodeBlockSupportHandler`
 - Goto Related: `.i`/binary file -> including files
 - Gutter Icon: `include` all included files (recursively)
