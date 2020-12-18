@@ -67,7 +67,7 @@
 
 ## Inspections
 
-- nonsensical `move`, e.g. src==dest
+- nonsensical `move` (?!)
 - `movem` non-symmetrical register ranges
 - register list:
   - sort/optimize
