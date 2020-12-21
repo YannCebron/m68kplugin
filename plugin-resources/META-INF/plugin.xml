@@ -178,6 +178,7 @@
             class="com.yanncebron.m68kplugin.internal.M68kProjectStatisticsAction"/>
 
     <action id="M68kShowUsedRegistersAction"
+            icon="AllIcons.Actions.Properties"
             class="com.yanncebron.m68kplugin.codeInsight.M68kShowUsedRegistersAction"/>
   </actions>
 </idea-plugin>
