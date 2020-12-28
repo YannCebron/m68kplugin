@@ -30,7 +30,7 @@ import java.util.function.Supplier;
 @SuppressWarnings("rawtypes")
 public class M68kSanityTest extends CodeInsightFixtureTestCase {
 
-  private static final int ITERATION_COUNT = 1;
+  private static final int ITERATION_COUNT = 100;
 
   private static final boolean ENABLED = false;
 
