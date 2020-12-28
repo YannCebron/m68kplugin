@@ -61,7 +61,7 @@ public class M68kExpressionParser {
   // 2: PREFIX(unary_plus_expression) PREFIX(unary_minus_expression) PREFIX(unary_complement_expression)
   // 3: BINARY(exp_expression)
   // 4: BINARY(shift_left_expression) BINARY(shift_right_expression)
-  // 5: BINARY(or_expression) BINARY(and_expression)
+  // 5: BINARY(or_expression) BINARY(and_expression) BINARY(not_expression)
   // 6: ATOM(number_expression) ATOM(string_expression) ATOM(paren_expression) ATOM(label_ref_expression)
   public static boolean expression(PsiBuilder b, int l, int g) {
     if (!recursion_guard_(b, l, "expression")) return false;
@@ -125,6 +125,10 @@ public class M68kExpressionParser {
       else if (g < 5 && consumeTokenSmart(b, AMPERSAND)) {
         r = expression(b, l, 5);
         exit_section_(b, l, m, AND_EXPRESSION, r, true, null);
+      }
+      else if (g < 5 && consumeTokenSmart(b, EXCLAMATION)) {
+        r = expression(b, l, 5);
+        exit_section_(b, l, m, NOT_EXPRESSION, r, true, null);
       }
       else {
         exit_section_(b, l, m, null, false, false, null);

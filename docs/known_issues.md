@@ -57,7 +57,6 @@ title: Known Issues
 - in directive, identifier parsed as token (`SECTION code,code`)
 - add missing expression operators
   - XOR?
-  - `!`
 - do not allow spaces (?!)
 - allow `equr`/`reg` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
 - macros:

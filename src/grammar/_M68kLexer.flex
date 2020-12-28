@@ -115,6 +115,7 @@ LABEL=[_]*[:digit:]*[a-zA-Z][[a-zA-Z][:digit:]_]*  // without "." first char
   "^"  { return POW; }
   "#"  { clearBranchIdMode(); return HASH; }
   "~"  { return TILDE; }
+  "!"  { return EXCLAMATION; }
   "%"  { return PERCENT; }
   "&"  { return AMPERSAND; }
   "\\" { return BACKSLASH; }

@@ -133,6 +133,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType EQUR = new M68kTokenType("equr");
   public static final IElementType EREM = new M68kTokenType("erem");
   public static final IElementType EVEN = new M68kTokenType("even");
+  public static final IElementType EXCLAMATION = new M68kTokenType("!");
   public static final IElementType EXG = new M68kTokenType("exg");
   public static final IElementType EXT = new M68kTokenType("ext");
   public static final IElementType HASH = new M68kTokenType("#");

@@ -1188,7 +1188,7 @@ endr_directive ::= ENDR
   parserClass = "com.yanncebron.m68kplugin.lang.M68kExpressionParser"
   psiPackage = "com.yanncebron.m68kplugin.lang.psi.expression"
   psiImplPackage="com.yanncebron.m68kplugin.lang.psi.expression.impl"
-  extends("(plus|minus|mul|div|mod|exp|shift.*|or|and)_expression") = binary_expression
+  extends("(plus|minus|mul|div|mod|exp|shift.*|or|and|not)_expression") = binary_expression
   extends(".*expression") = expression
   consumeTokenMethod(".*expression")="consumeTokenFast"
 }
@@ -1231,9 +1231,10 @@ private shift_group ::= shift_left_expression | shift_right_expression
 shift_left_expression ::= expression SHIFT_L expression
 shift_right_expression ::= expression SHIFT_R expression
 
-private bool_group ::= or_expression | and_expression
+private bool_group ::= or_expression | and_expression | not_expression
 or_expression ::= expression PIPE expression
 and_expression ::= expression AMPERSAND expression
+not_expression ::= expression EXCLAMATION expression
 
 private primary_group ::= number_expression | string_expression | paren_expression | label_ref_expression
 number_expression ::= DEC_NUMBER | HEX_NUMBER | OCT_NUMBER | BIN_NUMBER

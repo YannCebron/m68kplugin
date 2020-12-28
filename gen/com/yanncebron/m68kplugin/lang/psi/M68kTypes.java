@@ -196,6 +196,7 @@ public interface M68kTypes {
   IElementType NOLIST_DIRECTIVE = new M68kCompositeElementType("NOLIST_DIRECTIVE");
   IElementType NOPAGE_DIRECTIVE = new M68kCompositeElementType("NOPAGE_DIRECTIVE");
   IElementType NOP_INSTRUCTION = new M68kCompositeElementType("NOP_INSTRUCTION");
+  IElementType NOT_EXPRESSION = new M68kCompositeElementType("NOT_EXPRESSION");
   IElementType NOT_INSTRUCTION = new M68kCompositeElementType("NOT_INSTRUCTION");
   IElementType NUMBER_EXPRESSION = new M68kCompositeElementType("NUMBER_EXPRESSION");
   IElementType ODD_DIRECTIVE = new M68kCompositeElementType("ODD_DIRECTIVE");
@@ -777,6 +778,9 @@ public interface M68kTypes {
       }
       else if (type == NOP_INSTRUCTION) {
         return new M68kNopInstructionImpl(node);
+      }
+      else if (type == NOT_EXPRESSION) {
+        return new M68kNotExpressionImpl(node);
       }
       else if (type == NOT_INSTRUCTION) {
         return new M68kNotInstructionImpl(node);

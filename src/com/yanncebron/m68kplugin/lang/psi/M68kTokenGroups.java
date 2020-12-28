@@ -252,6 +252,7 @@ public final class M68kTokenGroups {
     AMPERSAND,
     BACKSLASH,
     DIV,
+    EXCLAMATION,
     MINUS,
     MUL,
     PERCENT,
