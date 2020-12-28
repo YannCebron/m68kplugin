@@ -78,4 +78,16 @@ public class M68kDirectivesInspectionTest extends BasePlatformTestCase {
     myFixture.testHighlighting();
   }
 
+  public void testUnmatchedDirectiveReptMissingEndr() {
+    myFixture.configureByText("test.s",
+      " <error descr=\"Missing matching 'endr' directive\">rept 5</error>");
+    myFixture.testHighlighting();
+  }
+
+  public void testUnmatchedDirectiveEndrMissingRept() {
+    myFixture.configureByText("test.s",
+      " <error descr=\"Missing matching 'rept' directive\">endr</error>");
+    myFixture.testHighlighting();
+  }
+
 }

@@ -349,4 +349,16 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" xref ");
   }
 
+  public void testReptDirective() throws Exception {
+    doCodeTest(" rept 5");
+  }
+
+  public void testReptDirectiveMissingExpression() throws Exception {
+    doCodeTest(" rept ");
+  }
+
+  public void testEndrDirective() throws Exception {
+    doCodeTest(" endr");
+  }
+
 }

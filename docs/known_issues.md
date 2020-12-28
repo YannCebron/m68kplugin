@@ -35,7 +35,6 @@ title: Known Issues
   - `debug`
   - `comment`
   - `image`
-  - `rept`/`endr`
   - `so.*`, `clrso`/`setso`
   - `fo.*`, `clrfo`/`setfo`
   - `cargs` (Devpac)

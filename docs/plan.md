@@ -9,7 +9,6 @@
 
 - `rem` sections: treat as real comment
 - unpaired directives:
-  - `rept`/`endr`
   - `struct`/`estruct`
 - unpaired conditional assembly directives, missing `endc`/`endif`
 - highlight static conditional assembly directives status, e.g., `IFD`/`IFND`

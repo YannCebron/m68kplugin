@@ -877,7 +877,7 @@ roxr_instruction ::= ROXR shift_tail
   psiImplPackage = "com.yanncebron.m68kplugin.lang.psi.directive.impl"
   parserClass = "com.yanncebron.m68kplugin.lang.M68kDirectivesParser"
   implements("(blk|set|equr|even|odd|dc|dcb|ds|align|cnop|incbin|incdir|include|rsset|rsreset|rs)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
-  implements("(opt|org|macro|endm|mexit|macro_parameter|macro_call|end|section|addwatch|jumperr|jumpptr|list|nolist|page|nopage|plen|llen|spc|inline|einline|rem|erem|xdef|xref)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
+  implements("(opt|org|macro|endm|mexit|macro_parameter|macro_call|end|section|addwatch|jumperr|jumpptr|list|nolist|page|nopage|plen|llen|spc|inline|einline|rem|erem|xdef|xref|rept|endr)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(text|cseg|code|code_c|code_f|data|dseg|data_c|data_f|bss|bss_c|bss_f)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("equ_directive_base") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   name(".*_directive") = "directive"
@@ -937,7 +937,9 @@ private directives ::= equ_directive |
                        rem_directive |
                        erem_directive |
                        xdef_directive |
-                       xref_directive
+                       xref_directive |
+                       rept_directive |
+                       endr_directive
 
 fake equ_directive_base ::= label expression?
 {
@@ -1174,6 +1176,12 @@ xref_directive ::= XREF label_ref_expression (COMMA label_ref_expression)*
 {
   pin = 1
 }
+
+rept_directive ::= REPT expression
+{
+  pin = 1
+}
+endr_directive ::= ENDR
 
 // Expressions  ============================================================
 ;{

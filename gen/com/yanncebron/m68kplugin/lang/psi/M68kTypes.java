@@ -127,6 +127,7 @@ public interface M68kTypes {
   IElementType ENDC_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("ENDC_CONDITIONAL_ASSEMBLY_DIRECTIVE");
   IElementType ENDIF_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("ENDIF_CONDITIONAL_ASSEMBLY_DIRECTIVE");
   IElementType ENDM_DIRECTIVE = new M68kCompositeElementType("ENDM_DIRECTIVE");
+  IElementType ENDR_DIRECTIVE = new M68kCompositeElementType("ENDR_DIRECTIVE");
   IElementType END_DIRECTIVE = new M68kCompositeElementType("END_DIRECTIVE");
   IElementType EORI_INSTRUCTION = new M68kCompositeElementType("EORI_INSTRUCTION");
   IElementType EOR_INSTRUCTION = new M68kCompositeElementType("EOR_INSTRUCTION");
@@ -211,6 +212,7 @@ public interface M68kTypes {
   IElementType REGISTER_LIST = new M68kCompositeElementType("REGISTER_LIST");
   IElementType REGISTER_RANGE = new M68kCompositeElementType("REGISTER_RANGE");
   IElementType REM_DIRECTIVE = new M68kCompositeElementType("REM_DIRECTIVE");
+  IElementType REPT_DIRECTIVE = new M68kCompositeElementType("REPT_DIRECTIVE");
   IElementType RESET_INSTRUCTION = new M68kCompositeElementType("RESET_INSTRUCTION");
   IElementType ROL_INSTRUCTION = new M68kCompositeElementType("ROL_INSTRUCTION");
   IElementType ROR_INSTRUCTION = new M68kCompositeElementType("ROR_INSTRUCTION");
@@ -572,6 +574,9 @@ public interface M68kTypes {
       else if (type == ENDM_DIRECTIVE) {
         return new M68kEndmDirectiveImpl(node);
       }
+      else if (type == ENDR_DIRECTIVE) {
+        return new M68kEndrDirectiveImpl(node);
+      }
       else if (type == END_DIRECTIVE) {
         return new M68kEndDirectiveImpl(node);
       }
@@ -820,6 +825,9 @@ public interface M68kTypes {
       }
       else if (type == REM_DIRECTIVE) {
         return new M68kRemDirectiveImpl(node);
+      }
+      else if (type == REPT_DIRECTIVE) {
+        return new M68kReptDirectiveImpl(node);
       }
       else if (type == RESET_INSTRUCTION) {
         return new M68kResetInstructionImpl(node);

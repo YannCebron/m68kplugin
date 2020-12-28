@@ -73,6 +73,16 @@ public class M68kDirectivesInspection extends LocalInspectionTool {
       public void visitEremDirective(@NotNull M68kEremDirective element) {
         checkUnmatchedClosingDirective(element, holder, M68kRemDirective.class, "rem", M68kEremDirective.class);
       }
+
+      @Override
+      public void visitReptDirective(@NotNull M68kReptDirective element) {
+        checkUnmatchedOpeningDirective(element, holder, M68kEndrDirective.class, "endr", M68kReptDirective.class);
+      }
+
+      @Override
+      public void visitEndrDirective(@NotNull M68kEndrDirective o) {
+        checkUnmatchedClosingDirective(o, holder, M68kReptDirective.class, "rept", M68kEndrDirective.class);
+      }
     };
   }
 

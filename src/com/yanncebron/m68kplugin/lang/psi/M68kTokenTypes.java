@@ -122,6 +122,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType ELSE = new M68kTokenType("else");
   public static final IElementType ELSEIF = new M68kTokenType("elseif");
   public static final IElementType END = new M68kTokenType("end");
+  public static final IElementType ENDR = new M68kTokenType("endr");
   public static final IElementType ENDC = new M68kTokenType("endc");
   public static final IElementType ENDIF = new M68kTokenType("endif");
   public static final IElementType ENDM = new M68kTokenType("endm");
@@ -204,6 +205,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType PLUS = new M68kTokenType("+");
   public static final IElementType POW = new M68kTokenType("^");
   public static final IElementType REM = new M68kTokenType("rem");
+  public static final IElementType REPT = new M68kTokenType("rept");
   public static final IElementType RESET = new M68kTokenType("reset");
   public static final IElementType ROL = new M68kTokenType("rol");
   public static final IElementType ROR = new M68kTokenType("ror");

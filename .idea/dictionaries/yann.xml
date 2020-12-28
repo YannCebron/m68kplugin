@@ -38,6 +38,7 @@
       <w>einline</w>
       <w>endc</w>
       <w>endm</w>
+      <w>endr</w>
       <w>eori</w>
       <w>equr</w>
       <w>erem</w>
@@ -74,6 +75,7 @@
       <w>nolist</w>
       <w>nopage</w>
       <w>plen</w>
+      <w>rept</w>
       <w>roxl</w>
       <w>roxr</w>
       <w>rsreset</w>

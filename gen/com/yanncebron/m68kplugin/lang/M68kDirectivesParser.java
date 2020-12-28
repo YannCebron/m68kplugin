@@ -373,7 +373,9 @@ public class M68kDirectivesParser {
   //                        rem_directive |
   //                        erem_directive |
   //                        xdef_directive |
-  //                        xref_directive
+  //                        xref_directive |
+  //                        rept_directive |
+  //                        endr_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -432,6 +434,8 @@ public class M68kDirectivesParser {
     if (!r) r = erem_directive(b, l + 1);
     if (!r) r = xdef_directive(b, l + 1);
     if (!r) r = xref_directive(b, l + 1);
+    if (!r) r = rept_directive(b, l + 1);
+    if (!r) r = endr_directive(b, l + 1);
     return r;
   }
 
@@ -501,6 +505,18 @@ public class M68kDirectivesParser {
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ENDM_DIRECTIVE, "<directive>");
     r = consumeToken(b, ENDM);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // ENDR
+  public static boolean endr_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "endr_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", ENDR)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, ENDR_DIRECTIVE, "<directive>");
+    r = consumeToken(b, ENDR);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -982,6 +998,20 @@ public class M68kDirectivesParser {
     r = consumeToken(b, REM);
     exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  /* ********************************************************** */
+  // REPT expression
+  public static boolean rept_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "rept_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", REPT)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, REPT_DIRECTIVE, "<directive>");
+    r = consumeToken(b, REPT);
+    p = r; // pin = 1
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */

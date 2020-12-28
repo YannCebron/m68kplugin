@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kEndrDirectiveImpl(ENDR_DIRECTIVE)
+    PsiElement(endr)('endr')
