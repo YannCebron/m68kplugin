@@ -116,7 +116,8 @@ public class M68kDirectivesInspection extends LocalInspectionTool {
       if (M68kPsiTreeUtil.hasSiblingBackwards(element, matchingDirective, stopAtDirectives)) return false;
     }
 
-    holder.registerProblem(element, M68kBundle.message("highlight.unmatched.directive", matchingDirectiveText));
+    final String key = forwards ? "highlight.unmatched.directive.missing.closing" : "highlight.unmatched.directive.missing.opening";
+    holder.registerProblem(element, M68kBundle.message(key, matchingDirectiveText));
     return true;
   }
 

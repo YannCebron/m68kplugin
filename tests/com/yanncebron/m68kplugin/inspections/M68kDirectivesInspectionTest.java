@@ -36,13 +36,13 @@ public class M68kDirectivesInspectionTest extends BasePlatformTestCase {
 
   public void testUnmatchedDirectiveMacroMissingEndm() {
     myFixture.configureByText("test.s",
-      "<error descr=\"Missing matching 'endm' directive\">macroName macro</error>");
+      "<error descr=\"Missing matching 'endm' closing directive\">macroName macro</error>");
     myFixture.testHighlighting();
   }
 
   public void testUnmatchedDirectiveMacroMissingEndmNextMacro() {
     myFixture.configureByText("test.s",
-      "<error descr=\"Missing matching 'endm' directive\">macroName macro</error>\n" +
+      "<error descr=\"Missing matching 'endm' closing directive\">macroName macro</error>\n" +
         "anotherMacro macro\n" +
         " endm");
     myFixture.testHighlighting();
@@ -50,43 +50,43 @@ public class M68kDirectivesInspectionTest extends BasePlatformTestCase {
 
   public void testUnmatchedDirectiveEndmMissingMacro() {
     myFixture.configureByText("test.s",
-      " <error descr=\"Missing matching 'macro' directive\">endm</error>");
+      " <error descr=\"Missing matching 'macro' opening directive\">endm</error>");
     myFixture.testHighlighting();
   }
 
   public void testUnmatchedDirectiveInlineMissingEinline() {
     myFixture.configureByText("test.s",
-      " <error descr=\"Missing matching 'einline' directive\">inline</error>");
+      " <error descr=\"Missing matching 'einline' closing directive\">inline</error>");
     myFixture.testHighlighting();
   }
 
   public void testUnmatchedDirectiveEinlineMissingInline() {
     myFixture.configureByText("test.s",
-      " <error descr=\"Missing matching 'inline' directive\">einline</error>");
+      " <error descr=\"Missing matching 'inline' opening directive\">einline</error>");
     myFixture.testHighlighting();
   }
 
   public void testUnmatchedDirectiveRemMissingErem() {
     myFixture.configureByText("test.s",
-      " <error descr=\"Missing matching 'erem' directive\">rem</error>");
+      " <error descr=\"Missing matching 'erem' closing directive\">rem</error>");
     myFixture.testHighlighting();
   }
 
   public void testUnmatchedDirectiveEremMissingRem() {
     myFixture.configureByText("test.s",
-      " <error descr=\"Missing matching 'rem' directive\">erem</error>");
+      " <error descr=\"Missing matching 'rem' opening directive\">erem</error>");
     myFixture.testHighlighting();
   }
 
   public void testUnmatchedDirectiveReptMissingEndr() {
     myFixture.configureByText("test.s",
-      " <error descr=\"Missing matching 'endr' directive\">rept 5</error>");
+      " <error descr=\"Missing matching 'endr' closing directive\">rept 5</error>");
     myFixture.testHighlighting();
   }
 
   public void testUnmatchedDirectiveEndrMissingRept() {
     myFixture.configureByText("test.s",
-      " <error descr=\"Missing matching 'rept' directive\">endr</error>");
+      " <error descr=\"Missing matching 'rept' opening directive\">endr</error>");
     myFixture.testHighlighting();
   }
 
