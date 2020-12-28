@@ -257,6 +257,7 @@ public final class M68kTokenGroups {
     MUL,
     PERCENT,
     PIPE,
+    POW,
     PLUS,
     SHIFT_L,
     SHIFT_R,
