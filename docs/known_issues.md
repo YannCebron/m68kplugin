@@ -62,6 +62,7 @@ title: Known Issues
 - allow `equr`/`reg` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
 - macros:
   - support `macro <macroName>` notation
+  - macro call with register list `myMacro d0/d7`  
   - special symbols:
     - `\@` unique ID
     - `\@!`
