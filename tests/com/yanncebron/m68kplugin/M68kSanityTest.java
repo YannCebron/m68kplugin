@@ -32,6 +32,13 @@ public class M68kSanityTest extends CodeInsightFixtureTestCase {
 
   private static final int ITERATION_COUNT = 1;
 
+  private static final boolean ENABLED = false;
+
+  @Override
+  protected boolean shouldRunTest() {
+    return ENABLED && super.shouldRunTest();
+  }
+
   public void testIncrementalHighlighterUpdate() {
     PropertyChecker.customized()
       .withIterationCount(ITERATION_COUNT)
