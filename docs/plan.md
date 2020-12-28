@@ -17,10 +17,11 @@
 - `ReadWriteAccessDetector` for registers
 - method separators:
   - "detected" subroutines
-- highlight unused label: global - located in non-include files only?
 - color-picker/inlays: copper list colors
 - highlight returns
-- highlight loop ranges `CodeBlockSupportHandler`
+- highlight/navigate control structures `CodeBlockSupportHandler`:
+  - loop ranges
+  - conditional assembly
 - unreachable code `ControlFlowProvider`
 
 ## Resolve/Refactor
@@ -34,7 +35,7 @@
   - safe delete
   - rename `RenameInputValidator`
   - `NameSuggestionProvider` ?  
-  - unresolved: quick-fix add `include` to existing label
+  - unresolved: quick-fix to add `include` for existing label
 - register:
   - shift up/down through available ones
   - change/cycle through address mode by typing/intention/...?
@@ -53,7 +54,7 @@
 - formatter
 - documentation:
   - quick doc/hover for number literals: dec/hex/oct/bin/ASCII
-  - quick doc/hover for `equ`/`equr`/`=` directives
+  - quick doc/hover for `equ`/`equr`/`set`/`=` directives
   - render mode for comments before label
 - **WIP** code folding with settings for:
   - `movem` push/pop
@@ -68,6 +69,7 @@
 
 - nonsensical `move` (?!)
 - `movem` non-symmetrical register ranges
+- unused label: global - located in non-include files only?
 - register list:
   - sort/optimize
 - string in `dc.b` not terminated with `,0`
@@ -89,7 +91,6 @@
   - macros
 - breadcrumbs
 - Quick Definition: better range for labels/"code-blocks"
-- Conditional Assembly structures: `CodeBlockSupportHandler`
 - Goto Related: `.i`/binary file -> including files
 - Gutter Icon: `include` all included files (recursively)
 - `include` UML visualization
