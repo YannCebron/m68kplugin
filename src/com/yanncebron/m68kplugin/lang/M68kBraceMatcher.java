@@ -48,6 +48,7 @@ public class M68kBraceMatcher implements PairedBraceMatcher {
       M68kTokenTypes.IFEQ, M68kTokenTypes.IFNE,
       M68kTokenTypes.IFGE, M68kTokenTypes.IFGT,
       M68kTokenTypes.IFLE, M68kTokenTypes.IFLT,
+      M68kTokenTypes.IFMI, M68kTokenTypes.IFPL,
       M68kTokenTypes.ELSE, M68kTokenTypes.ELSEIF,
       M68kTokenTypes.IFMACROD, M68kTokenTypes.IFMACROND)
   );

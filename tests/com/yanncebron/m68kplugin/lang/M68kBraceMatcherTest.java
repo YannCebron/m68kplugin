@@ -69,6 +69,8 @@ public class M68kBraceMatcherTest extends BasePlatformTestCase {
     doConditionalTest(M68kTokenTypes.IFGT);
     doConditionalTest(M68kTokenTypes.IFLE);
     doConditionalTest(M68kTokenTypes.IFLT);
+    doConditionalTest(M68kTokenTypes.IFMI);
+    doConditionalTest(M68kTokenTypes.IFPL);
     doConditionalTest(M68kTokenTypes.ELSE);
     doConditionalTest(M68kTokenTypes.ELSEIF);
     doConditionalTest(M68kTokenTypes.IFMACROD);
