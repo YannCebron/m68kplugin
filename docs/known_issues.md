@@ -6,12 +6,12 @@ title: Known Issues
 
 ## Resolving
 
-- Includes not evaluated, resolves across all files
+- `include` directives not evaluated, resolving across all project files
 
 ## Broken Lexing/Parsing
 
 - missing directives ([VASM](http://sun.hasenbraten.de/vasm/release/vasm_4.html#Mot-Syntax-Module)), these will
-  currently display false error _"Cannot resolve macro [name]"_
+  currently display false error _"Cannot resolve macro $DIRECTIVE$"_
   - `rorg`
   - `offset` (Devpac)
   - `public`
