@@ -420,7 +420,7 @@ rtr_instruction ::= RTR
 // *bcd ==================================================================
 ;
 {
-  extends("(abcd|sbcd)_instruction") = bcd_instruction_base
+  extends("(abcd|sbcd|nbcd)_instruction") = bcd_instruction_base
 }
 private bcd_instructions ::= abcd_instruction |
                              nbcd_instruction |
@@ -447,11 +447,7 @@ abcd_instruction ::= ABCD bcd_tail
 
 sbcd_instruction ::= SBCD bcd_tail
 
-
 nbcd_instruction ::= NBCD data_size_byte? adm_group_all_except_pc_imm
-{
-  extends = data_sized
-}
 
 // Add/Sub ==================================================================
 private add_sub_instructions ::= add_instruction |
