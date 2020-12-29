@@ -231,6 +231,9 @@ adm_aix ::= expression? L_PAREN adm_ard COMMA adm_rrd_index R_PAREN
 
 // 4000 | 4000.w | 4000.l
 adm_abs ::= expression data_size_word_long?
+{
+  extends = data_sized
+}
 
 // index(pc)
 adm_pcd ::= expression L_PAREN PC R_PAREN

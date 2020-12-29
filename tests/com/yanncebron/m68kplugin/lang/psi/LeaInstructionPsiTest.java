@@ -25,9 +25,13 @@ public class LeaInstructionPsiTest extends M68kPsiTestCase {
   }
 
   public void testWithDataSize() {
-    final M68kLeaInstruction instruction = parse("lea.l $50000,a0");
+    final M68kLeaInstruction instruction = parse("lea.l $50000.l,a0");
 
     assertEquals(M68kDataSize.LONGWORD, instruction.getDataSize());
+
+    final M68kAdmAbs source = instruction.getAdmAbs();
+    assertNotNull(source);
+    assertEquals(M68kDataSize.LONGWORD, source.getDataSize());
   }
 
   private M68kLeaInstruction parse(String text) {

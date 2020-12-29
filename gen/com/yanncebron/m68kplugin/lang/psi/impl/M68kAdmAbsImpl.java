@@ -22,16 +22,16 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
-public class M68kAdmAbsImpl extends ASTWrapperPsiElement implements M68kAdmAbs {
+public class M68kAdmAbsImpl extends M68kDataSizedImpl implements M68kAdmAbs {
 
   public M68kAdmAbsImpl(@NotNull ASTNode node) {
     super(node);
   }
 
+  @Override
   public void accept(@NotNull M68kVisitor visitor) {
     visitor.visitAdmAbs(this);
   }

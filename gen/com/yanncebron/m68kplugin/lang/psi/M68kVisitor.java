@@ -57,7 +57,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitAdmAbs(@NotNull M68kAdmAbs o) {
-    visitPsiElement(o);
+    visitDataSized(o);
   }
 
   public void visitAdmAdi(@NotNull M68kAdmAdi o) {
