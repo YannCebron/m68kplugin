@@ -179,7 +179,7 @@ adm_rrd ::= adm_drd | adm_ard
   ]
 }
 
-// R0[.bwl] used in adm_ix/adm_pci
+// R0[.bwl] used in adm_ix/adm_pci / duplicates adm_rrd to avoid nesting
 adm_rrd_index ::= (adm_drd data_size_all?) | (adm_ard data_size_word_long?)
 {
   name = "data|address register"
