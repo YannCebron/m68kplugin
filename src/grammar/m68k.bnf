@@ -770,6 +770,11 @@ dbf_instruction ::= DBF dbCC_tail
 dbt_instruction ::= DBT dbCC_tail
 
 // sCC instructions ========================================================
+;
+{
+  extends("(seq|sne|spl|smi|svc|svs|st|sf|sge|sgt|sle|slt|scc|shi|sls|scs|shs|slo)_instruction") = scc_instruction_base
+}
+
 private sCC_instructions ::= seq_instruction |
                              sne_instruction |
                              spl_instruction |
@@ -790,6 +795,11 @@ private sCC_instructions ::= seq_instruction |
                              slo_instruction
 
 private sCC_tail ::= data_size_byte? adm_group_all_except_ard_pc_imm
+
+fake scc_instruction_base ::= sCC_tail
+{
+  extends = data_sized
+}
 
 seq_instruction ::= SEQ sCC_tail
 sne_instruction ::= SNE sCC_tail

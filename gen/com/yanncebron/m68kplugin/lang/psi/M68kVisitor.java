@@ -890,11 +890,16 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitSccInstruction(@NotNull M68kSccInstruction o) {
-    visitInstruction(o);
+    visitSccInstructionBase(o);
+  }
+
+  public void visitSccInstructionBase(@NotNull M68kSccInstructionBase o) {
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitScsInstruction(@NotNull M68kScsInstruction o) {
-    visitInstruction(o);
+    visitSccInstructionBase(o);
   }
 
   public void visitSectionDirective(@NotNull M68kSectionDirective o) {
@@ -902,7 +907,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitSeqInstruction(@NotNull M68kSeqInstruction o) {
-    visitInstruction(o);
+    visitSccInstructionBase(o);
   }
 
   public void visitSetDirective(@NotNull M68kSetDirective o) {
@@ -910,19 +915,19 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitSfInstruction(@NotNull M68kSfInstruction o) {
-    visitInstruction(o);
+    visitSccInstructionBase(o);
   }
 
   public void visitSgeInstruction(@NotNull M68kSgeInstruction o) {
-    visitInstruction(o);
+    visitSccInstructionBase(o);
   }
 
   public void visitSgtInstruction(@NotNull M68kSgtInstruction o) {
-    visitInstruction(o);
+    visitSccInstructionBase(o);
   }
 
   public void visitShiInstruction(@NotNull M68kShiInstruction o) {
-    visitInstruction(o);
+    visitSccInstructionBase(o);
   }
 
   public void visitShiftLeftExpression(@NotNull M68kShiftLeftExpression o) {
@@ -939,31 +944,31 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitShsInstruction(@NotNull M68kShsInstruction o) {
-    visitInstruction(o);
+    visitSccInstructionBase(o);
   }
 
   public void visitSleInstruction(@NotNull M68kSleInstruction o) {
-    visitInstruction(o);
+    visitSccInstructionBase(o);
   }
 
   public void visitSloInstruction(@NotNull M68kSloInstruction o) {
-    visitInstruction(o);
+    visitSccInstructionBase(o);
   }
 
   public void visitSlsInstruction(@NotNull M68kSlsInstruction o) {
-    visitInstruction(o);
+    visitSccInstructionBase(o);
   }
 
   public void visitSltInstruction(@NotNull M68kSltInstruction o) {
-    visitInstruction(o);
+    visitSccInstructionBase(o);
   }
 
   public void visitSmiInstruction(@NotNull M68kSmiInstruction o) {
-    visitInstruction(o);
+    visitSccInstructionBase(o);
   }
 
   public void visitSneInstruction(@NotNull M68kSneInstruction o) {
-    visitInstruction(o);
+    visitSccInstructionBase(o);
   }
 
   public void visitSpcDirective(@NotNull M68kSpcDirective o) {
@@ -971,11 +976,11 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitSplInstruction(@NotNull M68kSplInstruction o) {
-    visitInstruction(o);
+    visitSccInstructionBase(o);
   }
 
   public void visitStInstruction(@NotNull M68kStInstruction o) {
-    visitInstruction(o);
+    visitSccInstructionBase(o);
   }
 
   public void visitStopInstruction(@NotNull M68kStopInstruction o) {
@@ -1012,11 +1017,11 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitSvcInstruction(@NotNull M68kSvcInstruction o) {
-    visitInstruction(o);
+    visitSccInstructionBase(o);
   }
 
   public void visitSvsInstruction(@NotNull M68kSvsInstruction o) {
-    visitInstruction(o);
+    visitSccInstructionBase(o);
   }
 
   public void visitSwapInstruction(@NotNull M68kSwapInstruction o) {

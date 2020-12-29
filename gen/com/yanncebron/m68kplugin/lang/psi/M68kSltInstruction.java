@@ -19,27 +19,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kSltInstruction extends M68kInstruction {
-
-  @Nullable
-  M68kAdmAbs getAdmAbs();
-
-  @Nullable
-  M68kAdmAdi getAdmAdi();
-
-  @Nullable
-  M68kAdmAix getAdmAix();
-
-  @Nullable
-  M68kAdmApd getAdmApd();
-
-  @Nullable
-  M68kAdmApi getAdmApi();
-
-  @Nullable
-  M68kAdmAri getAdmAri();
-
-  @Nullable
-  M68kAdmDrd getAdmDrd();
+public interface M68kSltInstruction extends M68kSccInstructionBase {
 
 }
