@@ -41,4 +41,16 @@ public class M68kBitManipulationInstructionBaseImpl extends M68kDataSizedImpl im
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public M68kAdmDrd getSourceDrd() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmDrd.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmImm getSourceImm() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmImm.class);
+  }
+
 }

@@ -23,15 +23,18 @@ public class BchgInstructionPsiTest extends M68kPsiTestCase {
 
     assertNull(instruction.getDataSize());
 
-    assertNotNull(instruction.getAdmImm());
+    assertNotNull(instruction.getSourceImm());
   }
 
   public void testWithDataSize() {
-    final M68kBchgInstruction instruction = parse("bchg.b #1,d0");
+    final M68kBchgInstruction instruction = parse("bchg.b d1,d0");
 
     assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
 
-    assertNotNull(instruction.getAdmImm());
+    assertNull(instruction.getSourceImm());
+    final M68kAdmDrd sourceDrd = instruction.getSourceDrd();
+    assertNotNull(sourceDrd);
+    assertEquals(M68kRegister.D1, sourceDrd.getRegister());
   }
 
   private M68kBchgInstruction parse(String text) {

@@ -42,7 +42,4 @@ public interface M68kBsetInstruction extends M68kBitManipulationInstructionBase 
   @NotNull
   List<M68kAdmDrd> getAdmDrdList();
 
-  @Nullable
-  M68kAdmImm getAdmImm();
-
 }

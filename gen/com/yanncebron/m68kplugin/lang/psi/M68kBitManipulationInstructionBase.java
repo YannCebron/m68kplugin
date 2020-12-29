@@ -21,4 +21,10 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kBitManipulationInstructionBase extends M68kDataSized, M68kInstruction {
 
+  @Nullable
+  M68kAdmDrd getSourceDrd();
+
+  @Nullable
+  M68kAdmImm getSourceImm();
+
 }
