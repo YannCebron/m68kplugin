@@ -250,6 +250,7 @@ adm_imm ::= HASH expression data_size_word_long?
 {
   pin = 1
   name = "immediate data"
+//  extends = data_sized todo
 }
 
 adm_sr ::= SR
