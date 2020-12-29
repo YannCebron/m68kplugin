@@ -342,79 +342,84 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitDbccInstruction(@NotNull M68kDbccInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
+  }
+
+  public void visitDbccInstructionBase(@NotNull M68kDbccInstructionBase o) {
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitDbcsInstruction(@NotNull M68kDbcsInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
   }
 
   public void visitDbeqInstruction(@NotNull M68kDbeqInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
   }
 
   public void visitDbfInstruction(@NotNull M68kDbfInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
   }
 
   public void visitDbgeInstruction(@NotNull M68kDbgeInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
   }
 
   public void visitDbgtInstruction(@NotNull M68kDbgtInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
   }
 
   public void visitDbhiInstruction(@NotNull M68kDbhiInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
   }
 
   public void visitDbhsInstruction(@NotNull M68kDbhsInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
   }
 
   public void visitDbleInstruction(@NotNull M68kDbleInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
   }
 
   public void visitDbloInstruction(@NotNull M68kDbloInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
   }
 
   public void visitDblsInstruction(@NotNull M68kDblsInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
   }
 
   public void visitDbltInstruction(@NotNull M68kDbltInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
   }
 
   public void visitDbmiInstruction(@NotNull M68kDbmiInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
   }
 
   public void visitDbneInstruction(@NotNull M68kDbneInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
   }
 
   public void visitDbplInstruction(@NotNull M68kDbplInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
   }
 
   public void visitDbraInstruction(@NotNull M68kDbraInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
   }
 
   public void visitDbtInstruction(@NotNull M68kDbtInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
   }
 
   public void visitDbvcInstruction(@NotNull M68kDbvcInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
   }
 
   public void visitDbvsInstruction(@NotNull M68kDbvsInstruction o) {
-    visitInstruction(o);
+    visitDbccInstructionBase(o);
   }
 
   public void visitDcDirective(@NotNull M68kDcDirective o) {

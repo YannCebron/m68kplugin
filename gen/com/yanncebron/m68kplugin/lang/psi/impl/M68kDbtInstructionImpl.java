@@ -22,16 +22,16 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
-public class M68kDbtInstructionImpl extends ASTWrapperPsiElement implements M68kDbtInstruction {
+public class M68kDbtInstructionImpl extends M68kDbccInstructionBaseImpl implements M68kDbtInstruction {
 
   public M68kDbtInstructionImpl(@NotNull ASTNode node) {
     super(node);
   }
 
+  @Override
   public void accept(@NotNull M68kVisitor visitor) {
     visitor.visitDbtInstruction(this);
   }
@@ -40,18 +40,6 @@ public class M68kDbtInstructionImpl extends ASTWrapperPsiElement implements M68k
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public M68kAdmDrd getAdmDrd() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmDrd.class);
-  }
-
-  @Override
-  @Nullable
-  public M68kExpression getExpression() {
-    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
   }
 
 }

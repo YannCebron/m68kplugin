@@ -723,6 +723,10 @@ bvs_instruction ::= BVS bCC_tail
 
 
 // DecrementAndBranch ==============================================
+;
+{
+  extends("(dbra|dbcs|dblo|dbls|dbeq|dbne|dbhi|dbcc|dbhs|dbpl|dbvc|dblt|dble|dbgt|dbge|dbmi|dbvs|dbf|dbt)_instruction") = dbcc_instruction_base
+}
 private dbCC_instructions ::= dbra_instruction |
                               dbcs_instruction |
                               dblo_instruction |
@@ -746,6 +750,11 @@ private dbCC_instructions ::= dbra_instruction |
 private dbCC_tail ::= CC_data_size? adm_drd COMMA expression
 {
   pin = 2
+}
+
+fake dbcc_instruction_base ::= CC_data_size? adm_drd? COMMA expression? // == dbCC_tail with nullable adm_drd/expression due to pin
+{
+  extends = data_sized
 }
 
 dbra_instruction ::= DBRA dbCC_tail

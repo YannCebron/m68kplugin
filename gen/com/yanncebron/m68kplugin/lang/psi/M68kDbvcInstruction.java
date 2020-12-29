@@ -20,12 +20,6 @@ import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
-public interface M68kDbvcInstruction extends M68kInstruction {
-
-  @Nullable
-  M68kAdmDrd getAdmDrd();
-
-  @Nullable
-  M68kExpression getExpression();
+public interface M68kDbvcInstruction extends M68kDbccInstructionBase {
 
 }
