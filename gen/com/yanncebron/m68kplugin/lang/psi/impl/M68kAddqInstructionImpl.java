@@ -22,15 +22,15 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kAddqInstructionImpl extends ASTWrapperPsiElement implements M68kAddqInstruction {
+public class M68kAddqInstructionImpl extends M68kDataSizedImpl implements M68kAddqInstruction {
 
   public M68kAddqInstructionImpl(@NotNull ASTNode node) {
     super(node);
   }
 
+  @Override
   public void accept(@NotNull M68kVisitor visitor) {
     visitor.visitAddqInstruction(this);
   }

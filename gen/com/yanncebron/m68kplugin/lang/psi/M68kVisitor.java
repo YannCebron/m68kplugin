@@ -28,19 +28,23 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitAddInstruction(@NotNull M68kAddInstruction o) {
-    visitInstruction(o);
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitAddaInstruction(@NotNull M68kAddaInstruction o) {
-    visitInstruction(o);
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitAddiInstruction(@NotNull M68kAddiInstruction o) {
-    visitInstruction(o);
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitAddqInstruction(@NotNull M68kAddqInstruction o) {
-    visitInstruction(o);
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitAddwatchDirective(@NotNull M68kAddwatchDirective o) {
@@ -48,7 +52,8 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitAddxInstruction(@NotNull M68kAddxInstruction o) {
-    visitInstruction(o);
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitAdmAbs(@NotNull M68kAdmAbs o) {
@@ -973,23 +978,28 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitSubInstruction(@NotNull M68kSubInstruction o) {
-    visitInstruction(o);
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitSubaInstruction(@NotNull M68kSubaInstruction o) {
-    visitInstruction(o);
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitSubiInstruction(@NotNull M68kSubiInstruction o) {
-    visitInstruction(o);
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitSubqInstruction(@NotNull M68kSubqInstruction o) {
-    visitInstruction(o);
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitSubxInstruction(@NotNull M68kSubxInstruction o) {
-    visitInstruction(o);
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitSvcInstruction(@NotNull M68kSvcInstruction o) {
