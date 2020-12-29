@@ -427,11 +427,13 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitDivsInstruction(@NotNull M68kDivsInstruction o) {
-    visitInstruction(o);
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitDivuInstruction(@NotNull M68kDivuInstruction o) {
-    visitInstruction(o);
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitDsDirective(@NotNull M68kDsDirective o) {
@@ -724,11 +726,13 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitMulsInstruction(@NotNull M68kMulsInstruction o) {
-    visitInstruction(o);
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitMuluInstruction(@NotNull M68kMuluInstruction o) {
-    visitInstruction(o);
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitNbcdInstruction(@NotNull M68kNbcdInstruction o) {

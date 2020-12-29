@@ -498,6 +498,10 @@ subx_instruction ::= SUBX add_sub_x_tail
 
 
 // Mul/Div ==================================================================
+;
+{
+  extends("(mul.*|div.*)_instruction") = data_sized
+}
 private mul_div_instructions ::= muls_instruction |
                                  mulu_instruction |
                                  divs_instruction |
