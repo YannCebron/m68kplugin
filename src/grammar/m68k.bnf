@@ -43,7 +43,7 @@
 
   pin(".*_instruction") = 1
   name(".*_instruction") = "instruction"
-  implements(".*_instruction.*") = "com.yanncebron.m68kplugin.lang.psi.M68kInstruction"
+  implements("(.*_instruction|.*_instruction_base)") = "com.yanncebron.m68kplugin.lang.psi.M68kInstruction"
 }
 
 root ::= root_item*
