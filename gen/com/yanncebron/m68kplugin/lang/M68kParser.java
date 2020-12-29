@@ -342,13 +342,14 @@ public class M68kParser implements PsiParser, LightPsiParser {
   public static boolean adm_apd(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_apd")) return false;
     if (!nextTokenIs(b, MINUS)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, ADM_APD, null);
     r = consumeTokens(b, 0, MINUS, L_PAREN);
     r = r && adm_ard(b, l + 1);
+    p = r; // pin = 3
     r = r && consumeToken(b, R_PAREN);
-    exit_section_(b, m, ADM_APD, r);
-    return r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */

@@ -208,6 +208,7 @@ adm_api ::= L_PAREN adm_ard R_PAREN PLUS
 // -(a0)
 adm_apd ::= MINUS L_PAREN adm_ard R_PAREN
 {
+  pin = 3
   methods = [
     getRegister
   ]
