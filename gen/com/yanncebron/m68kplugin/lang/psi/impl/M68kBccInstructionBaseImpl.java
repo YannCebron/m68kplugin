@@ -25,21 +25,27 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
-public class M68kBgeInstructionImpl extends M68kBccInstructionBaseImpl implements M68kBgeInstruction {
+public class M68kBccInstructionBaseImpl extends M68kDataSizedImpl implements M68kBccInstructionBase {
 
-  public M68kBgeInstructionImpl(@NotNull ASTNode node) {
+  public M68kBccInstructionBaseImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   @Override
   public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitBgeInstruction(this);
+    visitor.visitBccInstructionBase(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @Nullable
+  public M68kExpression getExpression() {
+    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
   }
 
 }

@@ -672,6 +672,11 @@ private CC_data_size ::= (data_size_all | data_size_short)
   name = ".s|b|w|l"
 }
 
+;
+{
+  extends("(bra|bcs|blo|bls|beq|bne|bhi|bcc||bhs|bpl|bvc||blt|ble|bgt|bge|bmi|bvs)_instruction") = bcc_instruction_base
+}
+
 private bCC_instructions ::= bra_instruction |
                              bcs_instruction |
                              blo_instruction |
@@ -691,6 +696,11 @@ private bCC_instructions ::= bra_instruction |
                              bvs_instruction
 
 private bCC_tail ::= CC_data_size? expression
+
+fake bcc_instruction_base ::= CC_data_size? expression? // == bCC_tail with nullable expression due to pin
+{
+  extends = data_sized
+}
 
 bra_instruction ::= BRA bCC_tail
 bcs_instruction ::= BCS bCC_tail

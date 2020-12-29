@@ -13,33 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.yanncebron.m68kplugin.lang.psi.impl;
+package com.yanncebron.m68kplugin.lang.psi;
 
 import java.util.List;
 import org.jetbrains.annotations.*;
-import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.util.PsiTreeUtil;
-import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
-public class M68kBgeInstructionImpl extends M68kBccInstructionBaseImpl implements M68kBgeInstruction {
+public interface M68kBccInstructionBase extends M68kDataSized, M68kInstruction {
 
-  public M68kBgeInstructionImpl(@NotNull ASTNode node) {
-    super(node);
-  }
-
-  @Override
-  public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitBgeInstruction(this);
-  }
-
-  @Override
-  public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
-    else super.accept(visitor);
-  }
+  @Nullable
+  M68kExpression getExpression();
 
 }

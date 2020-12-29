@@ -145,7 +145,12 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitBccInstruction(@NotNull M68kBccInstruction o) {
-    visitInstruction(o);
+    visitBccInstructionBase(o);
+  }
+
+  public void visitBccInstructionBase(@NotNull M68kBccInstructionBase o) {
+    visitDataSized(o);
+    // visitInstruction(o);
   }
 
   public void visitBcdInstructionBase(@NotNull M68kBcdInstructionBase o) {
@@ -162,27 +167,27 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitBcsInstruction(@NotNull M68kBcsInstruction o) {
-    visitInstruction(o);
+    visitBccInstructionBase(o);
   }
 
   public void visitBeqInstruction(@NotNull M68kBeqInstruction o) {
-    visitInstruction(o);
+    visitBccInstructionBase(o);
   }
 
   public void visitBgeInstruction(@NotNull M68kBgeInstruction o) {
-    visitInstruction(o);
+    visitBccInstructionBase(o);
   }
 
   public void visitBgtInstruction(@NotNull M68kBgtInstruction o) {
-    visitInstruction(o);
+    visitBccInstructionBase(o);
   }
 
   public void visitBhiInstruction(@NotNull M68kBhiInstruction o) {
-    visitInstruction(o);
+    visitBccInstructionBase(o);
   }
 
   public void visitBhsInstruction(@NotNull M68kBhsInstruction o) {
-    visitInstruction(o);
+    visitBccInstructionBase(o);
   }
 
   public void visitBinaryExpression(@NotNull M68kBinaryExpression o) {
@@ -195,7 +200,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitBleInstruction(@NotNull M68kBleInstruction o) {
-    visitInstruction(o);
+    visitBccInstructionBase(o);
   }
 
   public void visitBlkDirective(@NotNull M68kBlkDirective o) {
@@ -204,23 +209,23 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitBloInstruction(@NotNull M68kBloInstruction o) {
-    visitInstruction(o);
+    visitBccInstructionBase(o);
   }
 
   public void visitBlsInstruction(@NotNull M68kBlsInstruction o) {
-    visitInstruction(o);
+    visitBccInstructionBase(o);
   }
 
   public void visitBltInstruction(@NotNull M68kBltInstruction o) {
-    visitInstruction(o);
+    visitBccInstructionBase(o);
   }
 
   public void visitBmiInstruction(@NotNull M68kBmiInstruction o) {
-    visitInstruction(o);
+    visitBccInstructionBase(o);
   }
 
   public void visitBneInstruction(@NotNull M68kBneInstruction o) {
-    visitInstruction(o);
+    visitBccInstructionBase(o);
   }
 
   public void visitBoolInstructionBase(@NotNull M68kBoolInstructionBase o) {
@@ -229,11 +234,11 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitBplInstruction(@NotNull M68kBplInstruction o) {
-    visitInstruction(o);
+    visitBccInstructionBase(o);
   }
 
   public void visitBraInstruction(@NotNull M68kBraInstruction o) {
-    visitInstruction(o);
+    visitBccInstructionBase(o);
   }
 
   public void visitBsetInstruction(@NotNull M68kBsetInstruction o) {
@@ -262,11 +267,11 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitBvcInstruction(@NotNull M68kBvcInstruction o) {
-    visitInstruction(o);
+    visitBccInstructionBase(o);
   }
 
   public void visitBvsInstruction(@NotNull M68kBvsInstruction o) {
-    visitInstruction(o);
+    visitBccInstructionBase(o);
   }
 
   public void visitChkInstruction(@NotNull M68kChkInstruction o) {
