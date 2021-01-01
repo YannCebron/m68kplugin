@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,6 +70,33 @@ DOUBLE_QUOTED_STRING=\"([^\\\"\r\n]|\\[^\r\n])*\"?
 ID=[.]?[_]*[:digit:]*[a-zA-Z][[a-zA-Z][:digit:]_]*
 LABEL=[_]*[:digit:]*[a-zA-Z][[a-zA-Z][:digit:]_]*  // without "." first char
 
+A=[aA]
+B=[bB]
+C=[cC]
+D=[dD]
+E=[eE]
+F=[fF]
+G=[gG]
+H=[hH]
+I=[iI]
+J=[jJ]
+K=[kK]
+L=[lL]
+M=[mM]
+N=[nN]
+O=[oO]
+P=[pP]
+Q=[qQ]
+R=[rR]
+S=[sS]
+T=[tT]
+U=[uU]
+V=[vV]
+W=[wW]
+X=[xX]
+Y=[yY]
+Z=[zZ]
+
 %state IN_LABEL
 %state IN_INSTRUCTION
 %state IN_COMMENT
@@ -127,248 +154,248 @@ LABEL=[_]*[:digit:]*[a-zA-Z][[a-zA-Z][:digit:]_]*  // without "." first char
   "["  { clearBranchIdMode(); return L_BRACKET; }
   "]"  { return R_BRACKET; }
 
-  [sS][pP]      { return SP; }
-  [sS][sS][pP]  { return SSP; }
-  [uU][sS][pP]  { return USP; }
-  [pP][cC]      { return PC; }
-  [sS][rR]      { return SR; }
-  [cC][cC][rR]  { return CCR; }
-  [dD][0-7]     { return DATA_REGISTER; }
-  [aA][0-7]     { return ADDRESS_REGISTER; }
+  {S}{P}     { return SP; }
+  {S}{S}{P}  { return SSP; }
+  {U}{S}{P}  { return USP; }
+  {P}{C}     { return PC; }
+  {S}{R}     { return SR; }
+  {C}{C}{R}  { return CCR; }
+  {D}[0-7]   { return DATA_REGISTER; }
+  {A}[0-7]   { return ADDRESS_REGISTER; }
 
-  [nN][oO][pP]                    { return NOP; }
-  [iI][lL][lL][eE][gG][aA][lL]    { return ILLEGAL; }
-  [rR][eE][sS][eE][tT]            { return RESET; }
-  [sS][tT][oO][pP]                { return STOP; }
-  [tT][rR][aA][pP]                { return TRAP; }
-  [tT][rR][aA][pP][vV]            { return TRAPV; }
-  [lL][iI][nN][kK]                { return LINK; }
-  [uU][nN][lL][kK]                { return UNLK; }
+  {N}{O}{P}                   { return NOP; }
+  {I}{L}{L}{E}{G}{A}{L}       { return ILLEGAL; }
+  {R}{E}{S}{E}{T}             { return RESET; }
+  {S}{T}{O}{P}                { return STOP; }
+  {T}{R}{A}{P}                { return TRAP; }
+  {T}{R}{A}{P}{V}             { return TRAPV; }
+  {L}{I}{N}{K}                { return LINK; }
+  {U}{N}{L}{K}                { return UNLK; }
 
-  [mM][oO][vV][eE]                { return MOVE; }
-  [mM][oO][vV][eE][aA]            { return MOVEA; }
-  [mM][oO][vV][eE][mM]            { return MOVEM; }
-  [mM][oO][vV][eE][pP]            { return MOVEP; }
-  [mM][oO][vV][eE][qQ]            { return MOVEQ; }
+  {M}{O}{V}{E}                { return MOVE; }
+  {M}{O}{V}{E}{A}             { return MOVEA; }
+  {M}{O}{V}{E}{M}             { return MOVEM; }
+  {M}{O}{V}{E}{P}             { return MOVEP; }
+  {M}{O}{V}{E}{Q}             { return MOVEQ; }
 
-  [tT][sS][tT]                    { return TST; }
-  [tT][aA][sS]                    { return TAS; }
-  [lL][eE][aA]                    { return LEA; }
-  [pP][eE][aA]                    { return PEA; }
-  [cC][lL][rR]                    { return CLR; }
+  {T}{S}{T}                   { return TST; }
+  {T}{A}{S}                   { return TAS; }
+  {L}{E}{A}                   { return LEA; }
+  {P}{E}{A}                   { return PEA; }
+  {C}{L}{R}                   { return CLR; }
 
-  [jJ][mM][pP]                    { return JMP; }
-  [jJ][sS][rR]                    { return JSR; }
-  [bB][sS][rR]                    { return BSR; }
-  [rR][tT][sS]                    { return RTS; }
-  [rR][tT][eE]                    { return RTE; }
-  [rR][tT][rR]                    { return RTR; }
+  {J}{M}{P}                   { return JMP; }
+  {J}{S}{R}                   { return JSR; }
+  {B}{S}{R}                   { return BSR; }
+  {R}{T}{S}                   { return RTS; }
+  {R}{T}{E}                   { return RTE; }
+  {R}{T}{R}                   { return RTR; }
 
-  [aA][dD][dD]                    { return ADD; }
-  [aA][dD][dD][aA]                { return ADDA; }
-  [aA][dD][dD][iI]                { return ADDI; }
-  [aA][dD][dD][qQ]                { return ADDQ; }
-  [aA][dD][dD][xX]                { return ADDX; }
-  [sS][uU][bB]                    { return SUB; }
-  [sS][uU][bB][aA]                { return SUBA; }
-  [sS][uU][bB][iI]                { return SUBI; }
-  [sS][uU][bB][qQ]                { return SUBQ; }
-  [sS][uU][bB][xX]                { return SUBX; }
-  [mM][uU][lL][sS]                { return MULS; }
-  [mM][uU][lL][uU]                { return MULU; }
-  [dD][iI][vV][sS]                { return DIVS; }
-  [dD][iI][vV][uU]                { return DIVU; }
+  {A}{D}{D}                   { return ADD; }
+  {A}{D}{D}{A}                { return ADDA; }
+  {A}{D}{D}{I}                { return ADDI; }
+  {A}{D}{D}{Q}                { return ADDQ; }
+  {A}{D}{D}{X}                { return ADDX; }
+  {S}{U}{B}                   { return SUB; }
+  {S}{U}{B}{A}                { return SUBA; }
+  {S}{U}{B}{I}                { return SUBI; }
+  {S}{U}{B}{Q}                { return SUBQ; }
+  {S}{U}{B}{X}                { return SUBX; }
+  {M}{U}{L}{S}                { return MULS; }
+  {M}{U}{L}{U}                { return MULU; }
+  {D}{I}{V}{S}                { return DIVS; }
+  {D}{I}{V}{U}                { return DIVU; }
 
-  [aA][bB][cC][dD]                { return ABCD; }
-  [nN][bB][cC][dD]                { return NBCD; }
-  [sS][bB][cC][dD]                { return SBCD; }
+  {A}{B}{C}{D}                { return ABCD; }
+  {N}{B}{C}{D}                { return NBCD; }
+  {S}{B}{C}{D}                { return SBCD; }
 
-  [aA][nN][dD]                    { return AND; }
-  [aA][nN][dD][iI]                { return ANDI; }
-  [oO][rR]                        { return OR; }
-  [oO][rR][iI]                    { return ORI; }
-  [eE][oO][rR]                    { return EOR; }
-  [eE][oO][rR][iI]                { return EORI; }
+  {A}{N}{D}                   { return AND; }
+  {A}{N}{D}{I}                { return ANDI; }
+  {O}{R}                      { return OR; }
+  {O}{R}{I}                   { return ORI; }
+  {E}{O}{R}                   { return EOR; }
+  {E}{O}{R}{I}                { return EORI; }
 
-  [eE][xX][tT]                    { return EXT; }
-  [nN][eE][gG]                    { return NEG; }
-  [nN][eE][gG][xX]                { return NEGX; }
-  [sS][wW][aA][pP]                { return SWAP; }
-  [nN][oO][tT]                    { return NOT; }
-  [cC][hH][kK]                    { return CHK; }
-  [eE][xX][gG]                    { return EXG; }
+  {E}{X}{T}                   { return EXT; }
+  {N}{E}{G}                   { return NEG; }
+  {N}{E}{G}{X}                { return NEGX; }
+  {S}{W}{A}{P}                { return SWAP; }
+  {N}{O}{T}                   { return NOT; }
+  {C}{H}{K}                   { return CHK; }
+  {E}{X}{G}                   { return EXG; }
 
-  [cC][mM][pP]                    { return CMP; }
-  [cC][mM][pP][aA]                { return CMPA; }
-  [cC][mM][pP][iI]                { return CMPI; }
-  [cC][mM][pP][mM]                { return CMPM; }
+  {C}{M}{P}                   { return CMP; }
+  {C}{M}{P}{A}                { return CMPA; }
+  {C}{M}{P}{I}                { return CMPI; }
+  {C}{M}{P}{M}                { return CMPM; }
 
-  [bB][cC][hH][gG]                { return BCHG; }
-  [bB][cC][lL][rR]                { return BCLR; }
-  [bB][sS][eE][tT]                { return BSET; }
-  [bB][tT][sS][tT]                { return BTST; }
+  {B}{C}{H}{G}                { return BCHG; }
+  {B}{C}{L}{R}                { return BCLR; }
+  {B}{S}{E}{T}                { return BSET; }
+  {B}{T}{S}{T}                { return BTST; }
 
-  [bB][rR][aA]                    { incBranchIdMode(); return BRA; }
-  [bB][cC][sS]                    { incBranchIdMode(); return BCS; }
-  [bB][lL][oO]                    { incBranchIdMode(); return BLO; }
-  [bB][lL][sS]                    { incBranchIdMode(); return BLS; }
-  [bB][eE][qQ]                    { incBranchIdMode(); return BEQ; }
-  [bB][nN][eE]                    { incBranchIdMode(); return BNE; }
-  [bB][hH][iI]                    { incBranchIdMode(); return BHI; }
-  [bB][cC][cC]                    { incBranchIdMode(); return BCC; }
-  [bB][hH][sS]                    { incBranchIdMode(); return BHS; }
-  [bB][pP][lL]                    { incBranchIdMode(); return BPL; }
-  [bB][vV][cC]                    { incBranchIdMode(); return BVC; }
-  [bB][lL][tT]                    { incBranchIdMode(); return BLT; }
-  [bB][lL][eE]                    { incBranchIdMode(); return BLE; }
-  [bB][gG][tT]                    { incBranchIdMode(); return BGT; }
-  [bB][gG][eE]                    { incBranchIdMode(); return BGE; }
-  [bB][mM][iI]                    { incBranchIdMode(); return BMI; }
-  [bB][vV][sS]                    { incBranchIdMode(); return BVS; }
+  {B}{R}{A}                   { incBranchIdMode(); return BRA; }
+  {B}{C}{S}                   { incBranchIdMode(); return BCS; }
+  {B}{L}{O}                   { incBranchIdMode(); return BLO; }
+  {B}{L}{S}                   { incBranchIdMode(); return BLS; }
+  {B}{E}{Q}                   { incBranchIdMode(); return BEQ; }
+  {B}{N}{E}                   { incBranchIdMode(); return BNE; }
+  {B}{H}{I}                   { incBranchIdMode(); return BHI; }
+  {B}{C}{C}                   { incBranchIdMode(); return BCC; }
+  {B}{H}{S}                   { incBranchIdMode(); return BHS; }
+  {B}{P}{L}                   { incBranchIdMode(); return BPL; }
+  {B}{V}{C}                   { incBranchIdMode(); return BVC; }
+  {B}{L}{T}                   { incBranchIdMode(); return BLT; }
+  {B}{L}{E}                   { incBranchIdMode(); return BLE; }
+  {B}{G}{T}                   { incBranchIdMode(); return BGT; }
+  {B}{G}{E}                   { incBranchIdMode(); return BGE; }
+  {B}{M}{I}                   { incBranchIdMode(); return BMI; }
+  {B}{V}{S}                   { incBranchIdMode(); return BVS; }
 
-  [dD][bB][rR][aA]                { incBranchIdMode(); return DBRA; }
-  [dD][bB][cC][sS]                { incBranchIdMode(); return DBCS; }
-  [dD][bB][lL][oO]                { incBranchIdMode(); return DBLO; }
-  [dD][bB][lL][sS]                { incBranchIdMode(); return DBLS; }
-  [dD][bB][eE][qQ]                { incBranchIdMode(); return DBEQ; }
-  [dD][bB][nN][eE]                { incBranchIdMode(); return DBNE; }
-  [dD][bB][hH][iI]                { incBranchIdMode(); return DBHI; }
-  [dD][bB][cC][cC]                { incBranchIdMode(); return DBCC; }
-  [dD][bB][hH][sS]                { incBranchIdMode(); return DBHS; }
-  [dD][bB][pP][lL]                { incBranchIdMode(); return DBPL; }
-  [dD][bB][vV][cC]                { incBranchIdMode(); return DBVC; }
-  [dD][bB][lL][tT]                { incBranchIdMode(); return DBLT; }
-  [dD][bB][lL][eE]                { incBranchIdMode(); return DBLE; }
-  [dD][bB][gG][tT]                { incBranchIdMode(); return DBGT; }
-  [dD][bB][gG][eE]                { incBranchIdMode(); return DBGE; }
-  [dD][bB][mM][iI]                { incBranchIdMode(); return DBMI; }
-  [dD][bB][vV][sS]                { incBranchIdMode(); return DBVS; }
-  [dD][bB][fF]                    { incBranchIdMode(); return DBF; }
-  [dD][bB][tT]                    { incBranchIdMode(); return DBT; }
+  {D}{B}{R}{A}                { incBranchIdMode(); return DBRA; }
+  {D}{B}{C}{S}                { incBranchIdMode(); return DBCS; }
+  {D}{B}{L}{O}                { incBranchIdMode(); return DBLO; }
+  {D}{B}{L}{S}                { incBranchIdMode(); return DBLS; }
+  {D}{B}{E}{Q}                { incBranchIdMode(); return DBEQ; }
+  {D}{B}{N}{E}                { incBranchIdMode(); return DBNE; }
+  {D}{B}{H}{I}                { incBranchIdMode(); return DBHI; }
+  {D}{B}{C}{C}                { incBranchIdMode(); return DBCC; }
+  {D}{B}{H}{S}                { incBranchIdMode(); return DBHS; }
+  {D}{B}{P}{L}                { incBranchIdMode(); return DBPL; }
+  {D}{B}{V}{C}                { incBranchIdMode(); return DBVC; }
+  {D}{B}{L}{T}                { incBranchIdMode(); return DBLT; }
+  {D}{B}{L}{E}                { incBranchIdMode(); return DBLE; }
+  {D}{B}{G}{T}                { incBranchIdMode(); return DBGT; }
+  {D}{B}{G}{E}                { incBranchIdMode(); return DBGE; }
+  {D}{B}{M}{I}                { incBranchIdMode(); return DBMI; }
+  {D}{B}{V}{S}                { incBranchIdMode(); return DBVS; }
+  {D}{B}{F}                   { incBranchIdMode(); return DBF; }
+  {D}{B}{T}                   { incBranchIdMode(); return DBT; }
 
-  [sS][eE][qQ]                    { return SEQ; }
-  [sS][nN][eE]                    { return SNE; }
-  [sS][pP][lL]                    { return SPL; }
-  [sS][mM][iI]                    { return SMI; }
-  [sS][vV][cC]                    { return SVC; }
-  [sS][vV][sS]                    { return SVS; }
-  [sS][tT]                        { return ST; }
-  [sS][fF]                        { return SF; }
-  [sS][gG][eE]                    { return SGE; }
-  [sS][gG][tT]                    { return SGT; }
-  [sS][lL][eE]                    { return SLE; }
-  [sS][lL][tT]                    { return SLT; }
-  [sS][cC][cC]                    { return SCC; }
-  [sS][hH][iI]                    { return SHI; }
-  [sS][lL][sS]                    { return SLS; }
-  [sS][cC][sS]                    { return SCS; }
-  [sS][hH][sS]                    { return SHS; }
-  [sS][lL][oO]                    { return SLO; }
+  {S}{E}{Q}                   { return SEQ; }
+  {S}{N}{E}                   { return SNE; }
+  {S}{P}{L}                   { return SPL; }
+  {S}{M}{I}                   { return SMI; }
+  {S}{V}{C}                   { return SVC; }
+  {S}{V}{S}                   { return SVS; }
+  {S}{T}                      { return ST; }
+  {S}{F}                      { return SF; }
+  {S}{G}{E}                   { return SGE; }
+  {S}{G}{T}                   { return SGT; }
+  {S}{L}{E}                   { return SLE; }
+  {S}{L}{T}                   { return SLT; }
+  {S}{C}{C}                   { return SCC; }
+  {S}{H}{I}                   { return SHI; }
+  {S}{L}{S}                   { return SLS; }
+  {S}{C}{S}                   { return SCS; }
+  {S}{H}{S}                   { return SHS; }
+  {S}{L}{O}                   { return SLO; }
 
-  [aA][sS][lL]                    { return ASL; }
-  [aA][sS][rR]                    { return ASR; }
-  [lL][sS][lL]                    { return LSL; }
-  [lL][sS][rR]                    { return LSR; }
-  [rR][oO][lL]                    { return ROL; }
-  [rR][oO][rR]                    { return ROR; }
-  [rR][oO][xX][lL]                { return ROXL; }
-  [rR][oO][xX][rR]                { return ROXR; }
-
-
-  "." [bB]                        { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_B; }
-  "." [sS]                        { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_S; }
-  "." [wW]                        { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_W; }
-  "." [lL]                        { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_L; }
+  {A}{S}{L}                   { return ASL; }
+  {A}{S}{R}                   { return ASR; }
+  {L}{S}{L}                   { return LSL; }
+  {L}{S}{R}                   { return LSR; }
+  {R}{O}{L}                   { return ROL; }
+  {R}{O}{R}                   { return ROR; }
+  {R}{O}{X}{L}                { return ROXL; }
+  {R}{O}{X}{R}                { return ROXR; }
 
 
-  [aA][dD][dD][wW][aA][tT][cC][hH] { return ADDWATCH; }
-  [aA][lL][iI][gG][nN]            { return ALIGN; }
-  [bB][lL][kK]                    { return BLK; }
-  [bB][sS][sS]                    { return BSS; }
-  [bB][sS][sS]_[cC]               { return BSS_C; }
-  [bB][sS][sS]_[fF]               { return BSS_F; }
-  [cC][oO][dD][eE]                { return CODE; }
-  [cC][oO][dD][eE]_[cC]           { return CODE_C; }
-  [cC][oO][dD][eE]_[fF]           { return CODE_F; }
-  [cC][nN][oO][pP]                { return CNOP; }
-  [cC][sS][eE][gG]                { return CSEG; }
-  [dD][aA][tT][aA]                { return DATA; }
-  [dD][aA][tT][aA]_[cC]           { return DATA_C; }
-  [dD][aA][tT][aA]_[fF]           { return DATA_F; }
-  [dD][cC]                        { return DC; }
-  [dD][cC][bB]                    { return DCB; }
-  [dD][sS]                        { return DS; }
-  [dD][sS][eE][gG]                { return DSEG; }
-  [eE][nN][dD]                    { return END; }
-  [eE][nN][dD][rR]                { return ENDR; }
-  [eE][iI][nN][lL][iI][nN][eE]    { return EINLINE; }
-  [eE][qQ][uU]                    { return EQU; }
-  [eE][qQ][uU][rR]                { return EQUR; }
-  [eE][rR][eE][mM]                { return EREM; }
-  [eE][vV][eE][nN]                { return EVEN; }
-  [iI][nN][cC][bB][iI][nN]        { return INCBIN; }
-  [iI][nN][cC][dD][iI][rR]        { return INCDIR; }
-  [iI][nN][cC][lL][uU][dD][eE]    { return INCLUDE; }
-  [iI][nN][lL][iI][nN][eE]        { return INLINE; }
-  [jJ][uU][mM][pP][eE][rR][rR]    { return JUMPERR; }
-  [jJ][uU][mM][pP][pP][tT][rR]    { return JUMPPTR; }
-  [lL][lL][eE][nN]                { return LLEN; }
-  [lL][iI][sS][tT]                { return LIST; }
-  [oO][dD][dD]                    { return ODD; }
-  [oO][pP][tT]                    { return OPT; }
-  [oO][rR][gG]                    { return ORG; }
-  [pP][aA][gG][eE]                { return PAGE; }
-  [pP][lL][eE][nN]                { return PLEN; }
-  [nN][oO][lL][iI][sS][tT]        { return NOLIST; }
-  [nN][oO][pP][aA][gG][eE]        { return NOPAGE; }
-  [rR][eE][mM]                    { return REM; }
-  [rR][eE][pP][tT]                { return REPT; }
-  [rR][sS]                        { return RS; }
-  [rR][sS][sS][eE][tT]            { return RSSET; }
-  [rR][sS][rR][eE][sS][eE][tT]    { return RSRESET; }
-  [sS][eE][cC][tT][iI][oO][nN]    { return SECTION; }
-  [sS][eE][tT]                    { return SET; }
-  [sS][pP][cC]                    { return SPC; }
-  [tT][eE][xX][tT]                { return TEXT; }
-  [xX][dD][eE][fF]                { return XDEF; }
-  [xX][rR][eE][fF]                { return XREF; }
+  "." {B}                     { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_B; }
+  "." {S}                     { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_S; }
+  "." {W}                     { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_W; }
+  "." {L}                     { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_L; }
 
-  [mM][aA][cC][rR][oO]            { return MACRO; }
-  [eE][nN][dD][mM]                { return ENDM; }
-  [mM][eE][xX][iI][tT]            { return MEXIT; }
 
-  [iI][fF]                        { return IF; }
-  [iI][fF][bB]                    { return IFB; }
-  [iI][fF][nN][bB]                { return IFNB; }
-  [iI][fF][cC]                    { return IFC; }
-  [iI][fF][nN][cC]                { return IFNC; }
-  [iI][fF][dD]                    { return IFD; }
-  [iI][fF][eE][qQ]                { return IFEQ; }
-  [iI][fF][gG][eE]                { return IFGE; }
-  [iI][fF][pP][lL]                { return IFPL; }
-  [iI][fF][gG][tT]                { return IFGT; }
-  [iI][fF][mM][aA][cC][rR][oO][dD]     { return IFMACROD; }
-  [iI][fF][mM][aA][cC][rR][oO][nN][dD] { return IFMACROND; }
-  [iI][fF][nN][dD]                { return IFND; }
-  [iI][fF][nN][eE]                { return IFNE; }
-  [iI][fF][lL][eE]                { return IFLE; }
-  [iI][fF][lL][tT]                { return IFLT; }
-  [iI][fF][mM][iI]                { return IFMI; }
-  [eE][nN][dD][cC]                { return ENDC; }
-  [eE][nN][dD][iI][fF]            { return ENDIF; }
-  [eE][lL][sS][eE]                { return ELSE; }
-  [eE][lL][sS][eE][iI][fF]        { return ELSEIF; }
+  {A}{D}{D}{W}{A}{T}{C}{H}    { return ADDWATCH; }
+  {A}{L}{I}{G}{N}             { return ALIGN; }
+  {B}{L}{K}                   { return BLK; }
+  {B}{S}{S}                   { return BSS; }
+  {B}{S}{S}_{C}               { return BSS_C; }
+  {B}{S}{S}_{F}               { return BSS_F; }
+  {C}{O}{D}{E}                { return CODE; }
+  {C}{O}{D}{E}_{C}            { return CODE_C; }
+  {C}{O}{D}{E}_{F}            { return CODE_F; }
+  {C}{N}{O}{P}                { return CNOP; }
+  {C}{S}{E}{G}                { return CSEG; }
+  {D}{A}{T}{A}                { return DATA; }
+  {D}{A}{T}{A}_{C}            { return DATA_C; }
+  {D}{A}{T}{A}_{F}            { return DATA_F; }
+  {D}{C}                      { return DC; }
+  {D}{C}{B}                   { return DCB; }
+  {D}{S}                      { return DS; }
+  {D}{S}{E}{G}                { return DSEG; }
+  {E}{N}{D}                   { return END; }
+  {E}{N}{D}{R}                { return ENDR; }
+  {E}{I}{N}{L}{I}{N}{E}       { return EINLINE; }
+  {E}{Q}{U}                   { return EQU; }
+  {E}{Q}{U}{R}                { return EQUR; }
+  {E}{R}{E}{M}                { return EREM; }
+  {E}{V}{E}{N}                { return EVEN; }
+  {I}{N}{C}{B}{I}{N}          { return INCBIN; }
+  {I}{N}{C}{D}{I}{R}          { return INCDIR; }
+  {I}{N}{C}{L}{U}{D}{E}       { return INCLUDE; }
+  {I}{N}{L}{I}{N}{E}          { return INLINE; }
+  {J}{U}{M}{P}{E}{R}{R}       { return JUMPERR; }
+  {J}{U}{M}{P}{P}{T}{R}       { return JUMPPTR; }
+  {L}{L}{E}{N}                { return LLEN; }
+  {L}{I}{S}{T}                { return LIST; }
+  {O}{D}{D}                   { return ODD; }
+  {O}{P}{T}                   { return OPT; }
+  {O}{R}{G}                   { return ORG; }
+  {P}{A}{G}{E}                { return PAGE; }
+  {P}{L}{E}{N}                { return PLEN; }
+  {N}{O}{L}{I}{S}{T}          { return NOLIST; }
+  {N}{O}{P}{A}{G}{E}          { return NOPAGE; }
+  {R}{E}{M}                   { return REM; }
+  {R}{E}{P}{T}                { return REPT; }
+  {R}{S}                      { return RS; }
+  {R}{S}{S}{E}{T}             { return RSSET; }
+  {R}{S}{R}{E}{S}{E}{T}       { return RSRESET; }
+  {S}{E}{C}{T}{I}{O}{N}       { return SECTION; }
+  {S}{E}{T}                   { return SET; }
+  {S}{P}{C}                   { return SPC; }
+  {T}{E}{X}{T}                { return TEXT; }
+  {X}{D}{E}{F}                { return XDEF; }
+  {X}{R}{E}{F}                { return XREF; }
 
-  {EOL_COMMENT}                   { yybegin(IN_COMMENT); return COMMENT; }
+  {M}{A}{C}{R}{O}             { return MACRO; }
+  {E}{N}{D}{M}                { return ENDM; }
+  {M}{E}{X}{I}{T}             { return MEXIT; }
 
-  {DECNUMBER}                     { clearBranchIdMode(); return DEC_NUMBER; }
-  {HEXNUMBER}                     { clearBranchIdMode(); return HEX_NUMBER; }
-  {OCTNUMBER}                     { clearBranchIdMode(); return OCT_NUMBER; }
-  {BINNUMBER}                     { clearBranchIdMode(); return BIN_NUMBER; }
+  {I}{F}                      { return IF; }
+  {I}{F}{B}                   { return IFB; }
+  {I}{F}{N}{B}                { return IFNB; }
+  {I}{F}{C}                   { return IFC; }
+  {I}{F}{N}{C}                { return IFNC; }
+  {I}{F}{D}                   { return IFD; }
+  {I}{F}{E}{Q}                { return IFEQ; }
+  {I}{F}{G}{E}                { return IFGE; }
+  {I}{F}{P}{L}                { return IFPL; }
+  {I}{F}{G}{T}                { return IFGT; }
+  {I}{F}{M}{A}{C}{R}{O}{D}    { return IFMACROD; }
+  {I}{F}{M}{A}{C}{R}{O}{N}{D} { return IFMACROND; }
+  {I}{F}{N}{D}                { return IFND; }
+  {I}{F}{N}{E}                { return IFNE; }
+  {I}{F}{L}{E}                { return IFLE; }
+  {I}{F}{L}{T}                { return IFLT; }
+  {I}{F}{M}{I}                { return IFMI; }
+  {E}{N}{D}{C}                { return ENDC; }
+  {E}{N}{D}{I}{F}             { return ENDIF; }
+  {E}{L}{S}{E}                { return ELSE; }
+  {E}{L}{S}{E}{I}{F}          { return ELSEIF; }
 
-  {ID}                            { return ID; }
-  {SINGLE_QUOTED_STRING}          { return STRING; }
-  {DOUBLE_QUOTED_STRING}          { return STRING; }
+  {EOL_COMMENT}               { yybegin(IN_COMMENT); return COMMENT; }
+
+  {DECNUMBER}                 { clearBranchIdMode(); return DEC_NUMBER; }
+  {HEXNUMBER}                 { clearBranchIdMode(); return HEX_NUMBER; }
+  {OCTNUMBER}                 { clearBranchIdMode(); return OCT_NUMBER; }
+  {BINNUMBER}                 { clearBranchIdMode(); return BIN_NUMBER; }
+
+  {ID}                        { return ID; }
+  {SINGLE_QUOTED_STRING}      { return STRING; }
+  {DOUBLE_QUOTED_STRING}      { return STRING; }
 }
 
 [^] { return BAD_CHARACTER; }
