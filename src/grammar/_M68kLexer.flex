@@ -103,8 +103,6 @@ Z=[zZ]
 
 %%
 <YYINITIAL> {
-  {CRLF} { return LINEFEED; }
-
   "."    { return DOT; }
   {LABEL}   { yybegin(IN_LABEL); return ID; }
 
@@ -112,6 +110,9 @@ Z=[zZ]
   {WHITE_SPACE}+ { clearBranchIdMode(); yybegin(IN_INSTRUCTION); return WHITE_SPACE; }
 }
 
+<YYINITIAL, IN_LABEL, IN_COMMENT, IN_INSTRUCTION> {
+  {CRLF} { yybegin(YYINITIAL); return LINEFEED; }
+}
 
 <IN_LABEL> {
   ":" { clearBranchIdMode(); yybegin(IN_INSTRUCTION); return COLON; }
@@ -119,16 +120,9 @@ Z=[zZ]
 
   {WHITE_SPACE}+ {COMMENT} { yybegin(IN_COMMENT); return COMMENT; }
   {WHITE_SPACE}+ { clearBranchIdMode(); yybegin(IN_INSTRUCTION); return WHITE_SPACE; }
-
-  {CRLF} { yybegin(YYINITIAL); return LINEFEED; }
-}
-
-<IN_COMMENT> {
-  {CRLF} { yybegin(YYINITIAL); return LINEFEED; }
 }
 
 <IN_INSTRUCTION> {
-  {CRLF}          { yybegin(YYINITIAL); return LINEFEED; }
   {WHITE_SPACE}+  { incBranchIdMode();  return WHITE_SPACE; }
 
   "."  { return DOT; }
