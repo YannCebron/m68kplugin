@@ -31,6 +31,7 @@ dseg
 einline
 endc
 endm
+endr
 eori
 equr
 erem
@@ -64,6 +65,7 @@ negx
 nolist
 nopage
 plen
+rept
 roxl
 roxr
 rsreset
