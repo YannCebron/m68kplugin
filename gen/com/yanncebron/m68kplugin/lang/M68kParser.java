@@ -1464,14 +1464,34 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_byte | data_size_word_long
+  // !<<afterWhitespace>> (DOT_B | DOT_W | DOT_L)
   static boolean data_size_all(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "data_size_all")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, null, "<.b|w|l>");
-    r = data_size_byte(b, l + 1);
-    if (!r) r = data_size_word_long(b, l + 1);
+    r = data_size_all_0(b, l + 1);
+    r = r && data_size_all_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // !<<afterWhitespace>>
+  private static boolean data_size_all_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "data_size_all_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_);
+    r = !afterWhitespace(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // DOT_B | DOT_W | DOT_L
+  private static boolean data_size_all_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "data_size_all_1")) return false;
+    boolean r;
+    r = consumeToken(b, DOT_B);
+    if (!r) r = consumeToken(b, DOT_W);
+    if (!r) r = consumeToken(b, DOT_L);
     return r;
   }
 
@@ -1564,14 +1584,33 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_word | data_size_long
+  // !<<afterWhitespace>> (DOT_W | DOT_L)
   static boolean data_size_word_long(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "data_size_word_long")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, null, "<.w|l>");
-    r = data_size_word(b, l + 1);
-    if (!r) r = data_size_long(b, l + 1);
+    r = data_size_word_long_0(b, l + 1);
+    r = r && data_size_word_long_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // !<<afterWhitespace>>
+  private static boolean data_size_word_long_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "data_size_word_long_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_);
+    r = !afterWhitespace(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // DOT_W | DOT_L
+  private static boolean data_size_word_long_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "data_size_word_long_1")) return false;
+    boolean r;
+    r = consumeToken(b, DOT_W);
+    if (!r) r = consumeToken(b, DOT_L);
     return r;
   }
 

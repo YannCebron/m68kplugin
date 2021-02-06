@@ -125,11 +125,11 @@ private data_size_byte ::= !<<afterWhitespace>> DOT_B
 private data_size_short ::= !<<afterWhitespace>> DOT_S
 private data_size_word ::= !<<afterWhitespace>> DOT_W
 private data_size_long ::= !<<afterWhitespace>> DOT_L
-private data_size_word_long ::= data_size_word | data_size_long
+private data_size_word_long ::= !<<afterWhitespace>> (DOT_W | DOT_L)
 {
   name = ".w|l"
 }
-private data_size_all ::= data_size_byte | data_size_word_long
+private data_size_all ::= !<<afterWhitespace>> (DOT_B | DOT_W | DOT_L)
 {
   name = ".b|w|l"
 }
