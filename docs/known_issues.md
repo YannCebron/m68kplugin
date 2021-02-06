@@ -52,7 +52,6 @@ title: Known Issues
   - local label in `=`/`equ`/`equr` directive
   - ending with double-colon `::` -> automatically exported (`xdef`)
   - allow referencing `global_name\local_name` syntax (PhxAss)
-  - ending with colon followed by comment: `label: ****`
 - `include`/`incbin` path without quotes
 - add missing expression operators
   - XOR?

@@ -438,7 +438,7 @@ Z=[zZ]
   // anything else is macro name - todo separate token?
   {ID}                        { yybegin(IN_OPERAND); return ID; }
 
-  {EOL_COMMENT}               { return COMMENT; }
+  {COMMENT}                   { return COMMENT; }
 }
 
 [^] { return BAD_CHARACTER; }

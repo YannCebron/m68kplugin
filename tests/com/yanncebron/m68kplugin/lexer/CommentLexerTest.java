@@ -67,6 +67,14 @@ public class CommentLexerTest extends M68kLexerTestCase {
         "comment ('; comment')");
   }
 
+  public void testStarCommentAfterLabelWithColon() {
+    doTest("label: *** comment",
+      "id ('label')\n" +
+        ": (':')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "comment ('*** comment')");
+  }
+
   public void testCommentAfterInstruction() {
     doTest(" nop ; comment",
       "WHITE_SPACE (' ')\n" +
