@@ -22,6 +22,7 @@
   - loop ranges
   - conditional assembly
 - unreachable code `ControlFlowProvider`
+- `section` directive: smarter highlighting/codeinsight
 
 ## Resolve/Refactor
 
