@@ -362,10 +362,10 @@ Z=[zZ]
   {B}{S}{S}                   { yybegin(AFTER_OPERAND); return BSS; }
   {B}{S}{S}_{C}               { yybegin(AFTER_OPERAND); return BSS_C; }
   {B}{S}{S}_{F}               { yybegin(AFTER_OPERAND); return BSS_F; }
+  {C}{N}{O}{P}                { yybegin(IN_OPERAND); return CNOP; }
   {C}{O}{D}{E}                { yybegin(AFTER_OPERAND); return CODE; }
   {C}{O}{D}{E}_{C}            { yybegin(AFTER_OPERAND); return CODE_C; }
   {C}{O}{D}{E}_{F}            { yybegin(AFTER_OPERAND); return CODE_F; }
-  {C}{N}{O}{P}                { yybegin(IN_OPERAND); return CNOP; }
   {C}{S}{E}{G}                { yybegin(AFTER_OPERAND); return CSEG; }
   {D}{A}{T}{A}                { yybegin(AFTER_OPERAND); return DATA; }
   {D}{A}{T}{A}_{C}            { yybegin(AFTER_OPERAND); return DATA_C; }
@@ -374,9 +374,9 @@ Z=[zZ]
   {D}{C}{B}                   { yybegin(AFTER_INSTRUCTION); return DCB; }
   {D}{S}                      { yybegin(AFTER_INSTRUCTION); return DS; }
   {D}{S}{E}{G}                { yybegin(AFTER_INSTRUCTION); return DSEG; }
+  {E}{I}{N}{L}{I}{N}{E}       { yybegin(AFTER_OPERAND); return EINLINE; }
   {E}{N}{D}                   { yybegin(AFTER_OPERAND); return END; }
   {E}{N}{D}{R}                { yybegin(AFTER_OPERAND); return ENDR; }
-  {E}{I}{N}{L}{I}{N}{E}       { yybegin(AFTER_OPERAND); return EINLINE; }
   {E}{Q}{U}                   { yybegin(IN_OPERAND); return EQU; }
   {E}{Q}{U}{R}                { yybegin(IN_OPERAND); return EQUR; }
   {E}{R}{E}{M}                { yybegin(AFTER_OPERAND); return EREM; }
@@ -387,20 +387,20 @@ Z=[zZ]
   {I}{N}{L}{I}{N}{E}          { yybegin(AFTER_OPERAND); return INLINE; }
   {J}{U}{M}{P}{E}{R}{R}       { yybegin(IN_OPERAND); return JUMPERR; }
   {J}{U}{M}{P}{P}{T}{R}       { yybegin(IN_OPERAND); return JUMPPTR; }
-  {L}{L}{E}{N}                { yybegin(IN_OPERAND); return LLEN; }
   {L}{I}{S}{T}                { yybegin(AFTER_OPERAND); return LIST; }
+  {L}{L}{E}{N}                { yybegin(IN_OPERAND); return LLEN; }
+  {N}{O}{L}{I}{S}{T}          { yybegin(AFTER_OPERAND); return NOLIST; }
+  {N}{O}{P}{A}{G}{E}          { yybegin(AFTER_OPERAND); return NOPAGE; }
   {O}{D}{D}                   { yybegin(AFTER_OPERAND); return ODD; }
   {O}{P}{T}                   { yybegin(IN_OPERAND); return OPT; }
   {O}{R}{G}                   { yybegin(IN_OPERAND); return ORG; }
   {P}{A}{G}{E}                { yybegin(AFTER_OPERAND); return PAGE; }
   {P}{L}{E}{N}                { yybegin(IN_OPERAND); return PLEN; }
-  {N}{O}{L}{I}{S}{T}          { yybegin(AFTER_OPERAND); return NOLIST; }
-  {N}{O}{P}{A}{G}{E}          { yybegin(AFTER_OPERAND); return NOPAGE; }
   {R}{E}{M}                   { yybegin(AFTER_OPERAND); return REM; }
   {R}{E}{P}{T}                { yybegin(IN_OPERAND); return REPT; }
   {R}{S}                      { yybegin(AFTER_INSTRUCTION); return RS; }
-  {R}{S}{S}{E}{T}             { yybegin(IN_OPERAND); return RSSET; }
   {R}{S}{R}{E}{S}{E}{T}       { yybegin(AFTER_OPERAND); return RSRESET; }
+  {R}{S}{S}{E}{T}             { yybegin(IN_OPERAND); return RSSET; }
   {S}{E}{C}{T}{I}{O}{N}       { yybegin(IN_OPERAND); return SECTION; }
   {S}{E}{T}                   { yybegin(IN_OPERAND); return SET; }
   {S}{P}{C}                   { yybegin(IN_OPERAND); return SPC; }
