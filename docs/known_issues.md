@@ -49,7 +49,6 @@ title: Known Issues
   - allow `.`
   - allow `@` (Devpac)
   - local label ending with `$`
-  - local label in `=`/`equ`/`equr` directive
   - ending with double-colon `::` -> automatically exported (`xdef`)
   - allow referencing `global_name\local_name` syntax (PhxAss)
 - `include`/`incbin` path without quotes
