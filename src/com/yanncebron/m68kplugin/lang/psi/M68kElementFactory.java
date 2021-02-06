@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFileFactory;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
 import org.jetbrains.annotations.NotNull;
@@ -39,6 +40,14 @@ public class M68kElementFactory {
     final PsiElement firstChild = file.getFirstChild();
     assert firstChild instanceof M68kLabel : name;
     return (M68kLabel) firstChild;
+  }
+
+  @NotNull
+  public static M68kMacroCallDirective createMacroCall(Project project, String name) {
+    final M68kFile file = createFile(project, " " + name);
+    final PsiElement firstChild = file.getChildren()[1];
+    assert firstChild instanceof M68kMacroCallDirective : name;
+    return (M68kMacroCallDirective) firstChild;
   }
 
   @NotNull

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -122,10 +122,10 @@ public abstract class M68kTokenTypes {
   public static final IElementType ELSE = new M68kTokenType("else");
   public static final IElementType ELSEIF = new M68kTokenType("elseif");
   public static final IElementType END = new M68kTokenType("end");
-  public static final IElementType ENDR = new M68kTokenType("endr");
   public static final IElementType ENDC = new M68kTokenType("endc");
   public static final IElementType ENDIF = new M68kTokenType("endif");
   public static final IElementType ENDM = new M68kTokenType("endm");
+  public static final IElementType ENDR = new M68kTokenType("endr");
   public static final IElementType EOR = new M68kTokenType("eor");
   public static final IElementType EORI = new M68kTokenType("eori");
   public static final IElementType EQ = new M68kTokenType("=");
@@ -175,6 +175,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType L_BRACKET = new M68kTokenType("[");
   public static final IElementType L_PAREN = new M68kTokenType("(");
   public static final IElementType MACRO = new M68kTokenType("macro");
+  public static final IElementType MACRO_CALL_ID = new M68kTokenType("macro_call_id");
   public static final IElementType MEXIT = new M68kTokenType("mexit");
   public static final IElementType MINUS = new M68kTokenType("-");
   public static final IElementType MOVE = new M68kTokenType("move");

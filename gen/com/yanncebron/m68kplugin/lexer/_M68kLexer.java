@@ -1046,7 +1046,7 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 267: break;
           case 12: 
-            { yybegin(IN_OPERAND); return ID;
+            { yybegin(IN_OPERAND); return MACRO_CALL_ID;
             } 
             // fall through
           case 268: break;

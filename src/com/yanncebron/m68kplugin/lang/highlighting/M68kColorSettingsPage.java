@@ -96,7 +96,7 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
       "  <privilegedInstruction>stop</privilegedInstruction>\n" +
       "  moveq #1>>2,d0\n" +
       "<localLabel>.local</localLabel>:\n" +
-      "  <macroCall>CALL_MACRO</macroCall> 42,OpenLibrary\n" +
+      "  CALL_MACRO 42,OpenLibrary\n" +
       "  moveq %0101+$FF,d1\n" +
       "  move.l d0,(a1) ;comment\n" +
       "  rts\n" +
@@ -118,7 +118,6 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
     Map<String, TextAttributesKey> additionalMap = new HashMap<>();
     additionalMap.put("label", M68kTextAttributes.LABEL);
     additionalMap.put("localLabel", M68kTextAttributes.LOCAL_LABEL);
-    additionalMap.put("macroCall", M68kTextAttributes.MACRO_CALL);
     additionalMap.put("macroParameter", M68kTextAttributes.MACRO_PARAMETER);
     additionalMap.put("privilegedInstruction", M68kTextAttributes.PRIVILEGED_INSTRUCTION);
     return additionalMap;

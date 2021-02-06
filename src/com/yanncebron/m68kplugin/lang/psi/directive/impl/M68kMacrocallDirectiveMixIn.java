@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,6 +44,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiTreeUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroDirective;
 import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
 import org.jetbrains.annotations.NotNull;
@@ -73,7 +74,7 @@ abstract class M68kMacrocallDirectiveMixIn extends ASTWrapperPsiElement {
 
   @Override
   public PsiReference getReference() {
-    final ASTNode idNode = getNode().findChildByType(M68kTokenTypes.ID);
+    final ASTNode idNode = getNode().findChildByType(M68kTokenTypes.MACRO_CALL_ID);
     assert idNode != null;
 
     return new MacroCallReference(idNode);
@@ -111,10 +112,10 @@ abstract class M68kMacrocallDirectiveMixIn extends ASTWrapperPsiElement {
 
     @Override
     public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
-      final ASTNode idNode = getNode().findChildByType(M68kTokenTypes.ID);
+      final ASTNode idNode = getNode().findChildByType(M68kTokenTypes.MACRO_CALL_ID);
       assert idNode != null;
-      final M68kLabel label = M68kElementFactory.createLabel(getProject(), newElementName);
-      getNode().replaceChild(idNode, label.getFirstChild().getNode());
+      final M68kMacroCallDirective macroCallDirective = M68kElementFactory.createMacroCall(getProject(), newElementName);
+      getNode().replaceChild(idNode, macroCallDirective.getFirstChild().getNode());
       return getElement();
     }
 

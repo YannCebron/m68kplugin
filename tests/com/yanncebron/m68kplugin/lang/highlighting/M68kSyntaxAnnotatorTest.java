@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,12 +47,6 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
       "<info descr=\"M68K_LABEL\">macroName</info> macro\n" +
         "  <info descr=\"M68K_MACRO_PARAMETER\">\\1</info>\n" +
         " endm");
-    myFixture.testHighlighting(false, true, false);
-  }
-
-  public void testMacroCall() {
-    myFixture.configureByText("test.s",
-      " <info descr=\"M68K_MACRO_CALL\">MACRO_NAME</info> d7,param");
     myFixture.testHighlighting(false, true, false);
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,6 +55,7 @@ public class M68kSyntaxHighlighter extends SyntaxHighlighterBase {
     keys.put(M68kTokenTypes.BIN_NUMBER, M68kTextAttributes.BIN_NUMBER);
 
     fillMap(keys, M68kTokenGroups.INSTRUCTIONS, M68kTextAttributes.INSTRUCTION);
+    keys.put(M68kTokenTypes.MACRO_CALL_ID, M68kTextAttributes.MACRO_CALL);
     fillMap(keys, M68kTokenGroups.DATA_SIZES, M68kTextAttributes.DATA_SIZES);
     fillMap(keys, M68kTokenGroups.DIRECTIVES, M68kTextAttributes.DIRECTIVE);
     fillMap(keys, M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES, M68kTextAttributes.CONDITIONAL_ASSEMBLY_DIRECTIVE);

@@ -760,40 +760,40 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // <<afterWhitespace>> ID macro_call_parameter? (COMMA macro_call_parameter)*
+  // MACRO_CALL_ID macro_call_parameter? (COMMA macro_call_parameter)*
   public static boolean macro_call_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "macro_call_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", MACRO_CALL_ID)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, MACRO_CALL_DIRECTIVE, "<directive>");
-    r = afterWhitespace(b, l + 1);
-    r = r && consumeToken(b, ID);
+    r = consumeToken(b, MACRO_CALL_ID);
+    r = r && macro_call_directive_1(b, l + 1);
     r = r && macro_call_directive_2(b, l + 1);
-    r = r && macro_call_directive_3(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   // macro_call_parameter?
-  private static boolean macro_call_directive_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "macro_call_directive_2")) return false;
+  private static boolean macro_call_directive_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "macro_call_directive_1")) return false;
     macro_call_parameter(b, l + 1);
     return true;
   }
 
   // (COMMA macro_call_parameter)*
-  private static boolean macro_call_directive_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "macro_call_directive_3")) return false;
+  private static boolean macro_call_directive_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "macro_call_directive_2")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!macro_call_directive_3_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "macro_call_directive_3", c)) break;
+      if (!macro_call_directive_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "macro_call_directive_2", c)) break;
     }
     return true;
   }
 
   // COMMA macro_call_parameter
-  private static boolean macro_call_directive_3_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "macro_call_directive_3_0")) return false;
+  private static boolean macro_call_directive_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "macro_call_directive_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, COMMA);

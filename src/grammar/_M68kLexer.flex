@@ -435,8 +435,8 @@ Z=[zZ]
   {E}{L}{S}{E}                { yybegin(AFTER_OPERAND); return ELSE; }
   {E}{L}{S}{E}{I}{F}          { yybegin(AFTER_OPERAND); return ELSEIF; }
 
-  // anything else is macro name - todo separate token?
-  {ID}                        { yybegin(IN_OPERAND); return ID; }
+  // anything else is macro name
+  {ID}                        { yybegin(IN_OPERAND); return MACRO_CALL_ID; }
 
   {COMMENT}                   { return COMMENT; }
 }

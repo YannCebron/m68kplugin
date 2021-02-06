@@ -39,6 +39,7 @@ public class M68kTokenTest extends BasePlatformTestCase {
     M68kTokenTypes.DOT,
     M68kTokenTypes.HASH,
     M68kTokenTypes.ID,
+    M68kTokenTypes.MACRO_CALL_ID,
     M68kTokenTypes.L_PAREN,
     M68kTokenTypes.L_BRACKET,
     M68kTokenTypes.R_PAREN,
