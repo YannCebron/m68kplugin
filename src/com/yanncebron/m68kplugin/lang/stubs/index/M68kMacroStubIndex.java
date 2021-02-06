@@ -14,12 +14,26 @@
  * limitations under the License.
  */
 
-package com.yanncebron.m68kplugin.lang.stubs;
+package com.yanncebron.m68kplugin.lang.stubs.index;
 
-import com.intellij.psi.stubs.NamedStub;
+import com.intellij.psi.stubs.StringStubIndexExtension;
+import com.intellij.psi.stubs.StubIndexKey;
+import com.yanncebron.m68kplugin.lang.M68kFileElementType;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
+import org.jetbrains.annotations.NotNull;
 
-public interface M68kLabelStub extends NamedStub<M68kLabel> {
+public class M68kMacroStubIndex extends StringStubIndexExtension<M68kLabel> {
 
-  boolean isMacro();
+  public static final StubIndexKey<String, M68kLabel> KEY = StubIndexKey.createIndexKey("m68k.macro.index");
+
+  @Override
+  public int getVersion() {
+    return M68kFileElementType.STUB_VERSION;
+  }
+
+  @Override
+  public @NotNull StubIndexKey<String, M68kLabel> getKey() {
+    return KEY;
+  }
+
 }

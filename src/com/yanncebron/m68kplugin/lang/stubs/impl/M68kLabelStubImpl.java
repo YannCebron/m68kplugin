@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,10 +26,18 @@ import org.jetbrains.annotations.Nullable;
 
 public class M68kLabelStubImpl extends NamedStubBase<M68kLabel> implements M68kLabelStub {
 
+  private final boolean isMacro;
+
   public M68kLabelStubImpl(StubElement parent,
                            @NotNull IStubElementType elementType,
-                           @Nullable String name) {
+                           @Nullable String name,
+                           boolean isMacro) {
     super(parent, elementType, name);
+    this.isMacro = isMacro;
   }
 
+  @Override
+  public boolean isMacro() {
+    return isMacro;
+  }
 }

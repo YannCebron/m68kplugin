@@ -33,7 +33,6 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiModificationTracker;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.CommonProcessors;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
@@ -46,7 +45,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kPsiTreeUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroDirective;
-import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
+import com.yanncebron.m68kplugin.lang.stubs.index.M68kMacroStubIndex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -124,7 +123,7 @@ abstract class M68kMacrocallDirectiveMixIn extends ASTWrapperPsiElement {
     public Object @NotNull [] getVariants() {
       List<LookupElement> variants = new SmartList<>();
       processLocalMacros(m68kLabel -> {
-        variants.add(PrioritizedLookupElement.withPriority(LookupElementBuilder.createWithIcon(m68kLabel), 30));
+        variants.add(PrioritizedLookupElement.withPriority(LookupElementBuilder.createWithIcon(m68kLabel).bold(), 30));
         return true;
       });
 
@@ -158,14 +157,14 @@ abstract class M68kMacrocallDirectiveMixIn extends ASTWrapperPsiElement {
       final GlobalSearchScope includeSearchScope = getIncludeSearchScope(project);
 
       if (macroName != null) {
-        ContainerUtil.process(getStubLabels(macroName, project, includeSearchScope), processor);
+        ContainerUtil.process(getMacroStubLabels(macroName, project, includeSearchScope), processor);
         return;
       }
 
-      List<String> allKeys = new ArrayList<>(500);
-      StubIndex.getInstance().processAllKeys(M68kLabelStubIndex.KEY, new CommonProcessors.CollectProcessor<>(allKeys), includeSearchScope, null);
+      List<String> allKeys = new ArrayList<>();
+      StubIndex.getInstance().processAllKeys(M68kMacroStubIndex.KEY, new CommonProcessors.CollectProcessor<>(allKeys), includeSearchScope, null);
       for (String key : allKeys) {
-        if (!ContainerUtil.process(getStubLabels(key, project, includeSearchScope), processor)) return;
+        if (!ContainerUtil.process(getMacroStubLabels(key, project, includeSearchScope), processor)) return;
       }
     }
 
@@ -175,10 +174,8 @@ abstract class M68kMacrocallDirectiveMixIn extends ASTWrapperPsiElement {
       return GlobalSearchScope.allScope(project).intersectWith(notCurrentFile);
     }
 
-    // todo dedicated macro stub index
-    private Collection<M68kLabel> getStubLabels(String key, Project project, GlobalSearchScope scope) {
-      final Collection<M68kLabel> labels = StubIndex.getElements(M68kLabelStubIndex.KEY, key, project, scope, M68kLabel.class);
-      return ContainerUtil.filter(labels, m68kLabel -> PsiTreeUtil.getParentOfType(m68kLabel, M68kMacroDirective.class) != null);
+    private Collection<M68kLabel> getMacroStubLabels(String key, Project project, GlobalSearchScope scope) {
+      return StubIndex.getElements(M68kMacroStubIndex.KEY, key, project, scope, M68kLabel.class);
     }
   }
 }

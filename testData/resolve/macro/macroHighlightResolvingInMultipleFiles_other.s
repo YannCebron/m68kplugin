@@ -3,3 +3,6 @@ otherMacro macro
 
 yetAnotherMacro macro
   endm
+
+yetNotAMacroLabel
+otherMacro ; not a macro

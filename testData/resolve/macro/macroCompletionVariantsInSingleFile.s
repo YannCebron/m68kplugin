@@ -8,3 +8,6 @@ macro2 macro
 
 macro3 macro
   endm
+
+notAMacroLabel
+macro1 ; not a macro

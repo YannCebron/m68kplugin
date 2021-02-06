@@ -52,6 +52,11 @@ public class M68kMacroResolveTest extends BasePlatformTestCase {
     myFixture.testCompletionVariants("macroCompletionVariantsInMultipleFiles.s",
       "macro1", "macro2", "otherMacro", "yetAnotherMacro");
 
+    final LookupElement myMacro = findLookupElement("macro1");
+    final LookupElementPresentation myPresentation = LookupElementPresentation.renderElement(myMacro);
+    assertTrue(myPresentation.isItemTextBold());
+    assertEmpty(myPresentation.getTypeText());
+
     final LookupElement otherLabel = findLookupElement("otherMacro");
     final LookupElementPresentation otherLabelPresentation = LookupElementPresentation.renderElement(otherLabel);
     assertEquals("macroHighlightResolvingInMultipleFiles_other.s", otherLabelPresentation.getTypeText());

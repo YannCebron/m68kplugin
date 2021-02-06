@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,11 @@ import com.intellij.psi.impl.source.tree.LightTreeUtil;
 import com.intellij.psi.stubs.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
+import com.yanncebron.m68kplugin.lang.psi.M68kTypes;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelImpl;
 import com.yanncebron.m68kplugin.lang.stubs.impl.M68kLabelStubImpl;
 import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
+import com.yanncebron.m68kplugin.lang.stubs.index.M68kMacroStubIndex;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -39,18 +41,21 @@ public interface M68kStubElementTypesHolder {
       @Override
       public M68kLabelStub createStub(@NotNull LighterAST tree, @NotNull LighterASTNode node, @NotNull StubElement parentStub) {
         final LighterASTNode idNode = LightTreeUtil.requiredChildOfType(tree, node, M68kTokenTypes.ID);
-        return new M68kLabelStubImpl(parentStub, this, LightTreeUtil.toFilteredString(tree, idNode, null));
+        final LighterASTNode parent = tree.getParent(node);
+        boolean isMacro = parent != null && parent.getTokenType() == M68kTypes.MACRO_DIRECTIVE;
+        return new M68kLabelStubImpl(parentStub, this, LightTreeUtil.toFilteredString(tree, idNode, null), isMacro);
       }
 
       @Override
       public void serialize(@NotNull M68kLabelStub stub, @NotNull StubOutputStream dataStream) throws IOException {
         dataStream.writeName(stub.getName());
+        dataStream.writeBoolean(stub.isMacro());
       }
 
       @NotNull
       @Override
       public M68kLabelStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-        return new M68kLabelStubImpl(parentStub, this, dataStream.readNameString());
+        return new M68kLabelStubImpl(parentStub, this, dataStream.readNameString(), dataStream.readBoolean());
       }
 
       @Override
@@ -65,6 +70,10 @@ public interface M68kStubElementTypesHolder {
             return;
           }
           sink.occurrence(M68kLabelStubIndex.KEY, name);
+
+          if (stub.isMacro()) {
+            sink.occurrence(M68kMacroStubIndex.KEY, name);
+          }
         }
       }
 

@@ -48,6 +48,7 @@
         externalIdPrefix="M68k."
         class="com.yanncebron.m68kplugin.lang.stubs.M68kStubElementTypesHolder"/>
     <stubIndex implementation="com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex"/>
+    <stubIndex implementation="com.yanncebron.m68kplugin.lang.stubs.index.M68kMacroStubIndex"/>
 
     <lang.quoteHandler
         language="M68k"
