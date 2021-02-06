@@ -193,6 +193,7 @@ public final class M68kTokenGroups {
     EQUR,
     EREM,
     EVEN,
+    FAIL,
     INCBIN,
     INCDIR,
     INCLUDE,

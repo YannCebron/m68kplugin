@@ -140,6 +140,7 @@ public interface M68kTypes {
   IElementType EXPRESSION = new M68kCompositeElementType("EXPRESSION");
   IElementType EXP_EXPRESSION = new M68kCompositeElementType("EXP_EXPRESSION");
   IElementType EXT_INSTRUCTION = new M68kCompositeElementType("EXT_INSTRUCTION");
+  IElementType FAIL_DIRECTIVE = new M68kCompositeElementType("FAIL_DIRECTIVE");
   IElementType IFB_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("IFB_CONDITIONAL_ASSEMBLY_DIRECTIVE");
   IElementType IFC_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("IFC_CONDITIONAL_ASSEMBLY_DIRECTIVE");
   IElementType IFD_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("IFD_CONDITIONAL_ASSEMBLY_DIRECTIVE");
@@ -610,6 +611,9 @@ public interface M68kTypes {
       }
       else if (type == EXT_INSTRUCTION) {
         return new M68kExtInstructionImpl(node);
+      }
+      else if (type == FAIL_DIRECTIVE) {
+        return new M68kFailDirectiveImpl(node);
       }
       else if (type == IFB_CONDITIONAL_ASSEMBLY_DIRECTIVE) {
         return new M68kIfbConditionalAssemblyDirectiveImpl(node);

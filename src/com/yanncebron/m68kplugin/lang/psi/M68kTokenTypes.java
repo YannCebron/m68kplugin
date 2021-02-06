@@ -136,6 +136,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType EXCLAMATION = new M68kTokenType("!");
   public static final IElementType EXG = new M68kTokenType("exg");
   public static final IElementType EXT = new M68kTokenType("ext");
+  public static final IElementType FAIL= new M68kTokenType("fail");
   public static final IElementType HASH = new M68kTokenType("#");
   public static final IElementType HEX_NUMBER = new M68kTokenType("hex_number");
   public static final IElementType ID = new M68kTokenType("id");

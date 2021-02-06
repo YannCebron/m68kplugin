@@ -62,3 +62,4 @@ label set 42
  xdef label,anotherLabel
  xref label
  xref label,anotherLabel
+ fail

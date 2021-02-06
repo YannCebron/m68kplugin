@@ -25,7 +25,6 @@ title: Known Issues
   - `mask2` (no-op)
   - `dx.*`
   - `dr.*`
-  - `fail`
   - `idnt`
   - `ttl`
   - `module`
