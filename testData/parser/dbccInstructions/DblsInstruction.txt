@@ -7,4 +7,4 @@ M68k.FILE
       PsiElement(data_register)('d0')
     PsiElement(,)(',')
     M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
-      PsiElement(id)('label')
+      PsiElement(id)('.localLabel')

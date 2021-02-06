@@ -11,7 +11,8 @@ label
  dbls d0,label
  dblt d0,label
  dbra d0,label
- dbt d0,label
+.s
+ dbt d0,.s
  dbcc d0,label
  dbra.l d0,label
  dbra.s d0,label

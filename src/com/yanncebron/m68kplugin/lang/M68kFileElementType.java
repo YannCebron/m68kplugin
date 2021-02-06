@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ public class M68kFileElementType extends ILightStubFileElementType<PsiFileStub<M
   @NonNls
   public static final String STUB_EXTERNAL_ID_PREFIX = "M68k.";
 
-  public static final int STUB_VERSION = 4;
+  public static final int STUB_VERSION = 5;
 
   @NonNls
   private static final String EXTERNAL_ID = STUB_EXTERNAL_ID_PREFIX + "FILE";

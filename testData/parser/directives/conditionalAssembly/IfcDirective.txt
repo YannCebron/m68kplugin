@@ -7,4 +7,4 @@ M68k.FILE
       PsiElement(id)('arg1')
     PsiElement(,)(',')
     M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
-      PsiElement(id)('arg2')
+      PsiElement(id)('bpl')

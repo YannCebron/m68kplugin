@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,17 +62,5 @@ public class M68kSanityTest extends CodeInsightFixtureTestCase {
         return matches;
       }, fileActions);
   }
-
-// To re-run the minimal failing case, run
-//   PropertyChecker.customized().rechecking("79CD8AHewNrHHRQMBQGtCyAgICAgICAgICAgAd0FASACLRkBAwFPAA==")
-//     .checkScenarios(...)
-// To re-run the test with all intermediate shrinking steps, use `recheckingIteration(1080991659748708382L, 20)` instead for last iteration, or `withSeed(-3580336954505201945L)` for all iterations
-//
-// Caused by: org.junit.ComparisonFailure: expected:<[Full lexer highlighter:
-// 0 id ('0]00O')
-// 4 LINEFEED ('\...> but was:<[Incremental lexer highlighter:
-// 0 BAD_CHARACTER ('0')
-// 1 id (']00O')
-// 4 LINEFEED ('\...>
 
 }

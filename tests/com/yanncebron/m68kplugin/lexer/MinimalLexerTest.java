@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,6 +51,19 @@ public class MinimalLexerTest extends M68kLexerTestCase {
       "id ('label')\n" +
         ": (':')\n" +
         "LINEFEED ('\\n')");
+  }
+
+  public void testLabelFollowedByWhitespace() {
+    doTest("label   ",
+      "id ('label')\n" +
+        "WHITE_SPACE ('   ')");
+  }
+
+  public void testLabelWithColonFollowedByWhitespace() {
+    doTest("label:   ",
+      "id ('label')\n" +
+        ": (':')\n" +
+        "WHITE_SPACE ('   ')");
   }
 
   public void testLabelWithColonFollowedByInstruction() {
@@ -108,6 +121,18 @@ public class MinimalLexerTest extends M68kLexerTestCase {
         "id ('.s')");
   }
 
+  public void testLocalLabelDotDataSizeNameAfterComma() {
+    doTest(".s dbf d0,.s",
+      ". ('.')\n" +
+        "id ('s')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "dbf ('dbf')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "data_register ('d0')\n" +
+        ", (',')\n" +
+        "id ('.s')");
+  }
+
   public void testLocalLabelWithColonDotDataSizeName() {
     doTest(".s: bra .s",
       ". ('.')\n" +
@@ -154,6 +179,19 @@ public class MinimalLexerTest extends M68kLexerTestCase {
         ".l ('.l')\n" +
         ", (',')\n" +
         "address_register ('a0')");
+  }
+
+  public void testExpressionUsingLabelsWithMnemonicName() {
+    doTest(" dc.b bpl*4/trap",
+      "WHITE_SPACE (' ')\n" +
+        "dc ('dc')\n" +
+        ".b ('.b')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "id ('bpl')\n" +
+        "* ('*')\n" +
+        "dec_number ('4')\n" +
+        "/ ('/')\n" +
+        "id ('trap')");
   }
 
 }

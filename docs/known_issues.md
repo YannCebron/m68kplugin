@@ -50,12 +50,11 @@ title: Known Issues
   - allow `.`
   - allow `@` (Devpac)
   - local label ending with `$`
-  - local label in `=`/`equ`/`equr` directive  
+  - local label in `=`/`equ`/`equr` directive
   - ending with double-colon `::` -> automatically exported (`xdef`)
   - allow referencing `global_name\local_name` syntax (PhxAss)
+  - ending with colon followed by comment: `label: ****`
 - `include`/`incbin` path without quotes
-- in expressions, identifier parsed as token (`size = (bpls*bpl)`)
-- in directive, identifier parsed as token (`SECTION code,code`)
 - add missing expression operators
   - XOR?
 - do not allow spaces (?!)

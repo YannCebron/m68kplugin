@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ public class ConditionalAssemblyDirectivesParsingTest extends M68kParsingTestCas
   }
 
   public void testIfcDirective() throws Exception {
-    doCodeTest(" ifc arg1,arg2");
+    doCodeTest(" ifc arg1,bpl");
   }
 
   public void testIfncDirective() throws Exception {
@@ -90,7 +90,7 @@ public class ConditionalAssemblyDirectivesParsingTest extends M68kParsingTestCas
   }
 
   public void testIfndDirective() throws Exception {
-    doCodeTest(" ifnd NAME");
+    doCodeTest(" ifnd trap");
   }
 
   public void testElseDirective() throws Exception {

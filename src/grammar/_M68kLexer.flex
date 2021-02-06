@@ -27,23 +27,21 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 %%
 
 %{
-  private int branchIdMode;
-
   public _M68kLexer() {
     this((java.io.Reader)null);
   }
 
-  public boolean isBranchIdMode() {
-    return branchIdMode > 1;
+  private char previousChar() {
+    int loc = getTokenStart() - 1;
+    return 0 <= loc && loc < zzBuffer.length() ? zzBuffer.charAt(loc) : (char) -1;
   }
 
-  public void clearBranchIdMode(){
-    branchIdMode = 0;
+  private boolean afterSpaceOrComma(){
+    char previousChar = previousChar();
+    return Character.isSpaceChar(previousChar) || previousChar == ',';
   }
 
-  public void incBranchIdMode() {
-    branchIdMode++;
-  }
+  int operandSpaceCount = 0;
 %}
 
 %public
@@ -97,56 +95,64 @@ X=[xX]
 Y=[yY]
 Z=[zZ]
 
-%state IN_LABEL
+%state AFTER_LABEL
 %state IN_INSTRUCTION
-%state IN_COMMENT
+%state AFTER_INSTRUCTION
+%state IN_OPERAND
+%state AFTER_OPERAND
 
 %%
+<YYINITIAL, AFTER_LABEL, IN_INSTRUCTION, AFTER_INSTRUCTION, IN_OPERAND, AFTER_OPERAND> {
+  {CRLF}         { operandSpaceCount = 0; yybegin(YYINITIAL); return LINEFEED; }
+}
+
 <YYINITIAL> {
-  "."    { return DOT; }
-  {LABEL}   { yybegin(IN_LABEL); return ID; }
+  "."            { operandSpaceCount = 0; return DOT; }
+  {LABEL}        { operandSpaceCount = 0; yybegin(AFTER_LABEL); return ID; }
 
-  {WHITE_SPACE}* {COMMENT} { yybegin(IN_COMMENT); return COMMENT; }
-  {WHITE_SPACE}+ { clearBranchIdMode(); yybegin(IN_INSTRUCTION); return WHITE_SPACE; }
+  {WHITE_SPACE}* {COMMENT} { return COMMENT; }
+  {WHITE_SPACE}+ { operandSpaceCount = 0; yybegin(IN_INSTRUCTION); return WHITE_SPACE; }
 }
 
-<YYINITIAL, IN_LABEL, IN_COMMENT, IN_INSTRUCTION> {
-  {CRLF} { yybegin(YYINITIAL); return LINEFEED; }
+
+<AFTER_LABEL> {
+  ":"            { yybegin(IN_INSTRUCTION); return COLON; }
+  "="            { yybegin(IN_OPERAND); return EQ; } // duplicated in IN_INSTRUCTION
+
+// should be here instead of IN_INSTRUCTION - they must follow label (whitespace switching problem)
+//  {M}{A}{C}{R}{O}             { yybegin(AFTER_OPERAND); return MACRO; }
+//  {E}{Q}{U}                   { yybegin(IN_OPERAND); return EQU; }
+//  {E}{Q}{U}{R}                { yybegin(IN_OPERAND); return EQUR; }
+
+  {WHITE_SPACE}* {COMMENT}      { return COMMENT; }
+  {WHITE_SPACE}+ { yybegin(IN_INSTRUCTION); return WHITE_SPACE; }
 }
 
-<IN_LABEL> {
-  ":" { clearBranchIdMode(); yybegin(IN_INSTRUCTION); return COLON; }
-  "=" { clearBranchIdMode(); yybegin(IN_INSTRUCTION); return EQ; }
 
-  {WHITE_SPACE}+ {COMMENT} { yybegin(IN_COMMENT); return COMMENT; }
-  {WHITE_SPACE}+ { clearBranchIdMode(); yybegin(IN_INSTRUCTION); return WHITE_SPACE; }
+// after M68kDataSized instruction: data_size || WHITE_SPACE + operand
+<AFTER_INSTRUCTION> {
+  {WHITE_SPACE}+ { operandSpaceCount = 1; yybegin(IN_OPERAND); return WHITE_SPACE; }
+
+  "." {S}        { operandSpaceCount = 0; yybegin(IN_OPERAND); return DOT_S; }
+  "." {B}        { operandSpaceCount = 0; yybegin(IN_OPERAND); return DOT_B; }
+  "." {W}        { operandSpaceCount = 0; yybegin(IN_OPERAND); return DOT_W; }
+  "." {L}        { operandSpaceCount = 0; yybegin(IN_OPERAND); return DOT_L; }
 }
 
-<IN_INSTRUCTION> {
-  {WHITE_SPACE}+  { incBranchIdMode();  return WHITE_SPACE; }
 
-  "."  { return DOT; }
-  ":"  { return COLON; }
-  ","  { return COMMA; }
-  "+"  { return PLUS; }
-  "-"  { return MINUS; }
-  "*"  { return MUL; }
-  "/"  { return DIV; }
-  "="  { return EQ; }
-  "^"  { return POW; }
-  "#"  { clearBranchIdMode(); return HASH; }
-  "~"  { return TILDE; }
-  "!"  { return EXCLAMATION; }
-  "%"  { return PERCENT; }
-  "&"  { return AMPERSAND; }
-  "\\" { return BACKSLASH; }
-  "|"  { return PIPE; }
-  "<<" { return SHIFT_L; }
-  ">>" { return SHIFT_R; }
-  "("  { clearBranchIdMode(); return L_PAREN; }
-  ")"  { return R_PAREN; }
-  "["  { clearBranchIdMode(); return L_BRACKET; }
-  "]"  { return R_BRACKET; }
+// after all operands (if any): only whitespace/automatic comment
+<AFTER_OPERAND> {
+  {WHITE_SPACE}+ { return WHITE_SPACE; }
+  .+             { return COMMENT; }
+}
+
+
+<IN_OPERAND> {
+  // after 2nd WHITE_SPACE -> AFTER_OPERAND for automatic comment
+  {WHITE_SPACE}+           { if (operandSpaceCount++ == 1) { yybegin(AFTER_OPERAND); } return WHITE_SPACE; }
+
+  {WHITE_SPACE}+ {COMMENT} { return COMMENT; }
+  {EOL_COMMENT}            { return COMMENT; }
 
   {S}{P}     { return SP; }
   {S}{S}{P}  { return SSP; }
@@ -157,239 +163,281 @@ Z=[zZ]
   {D}[0-7]   { return DATA_REGISTER; }
   {A}[0-7]   { return ADDRESS_REGISTER; }
 
-  {N}{O}{P}                   { return NOP; }
-  {I}{L}{L}{E}{G}{A}{L}       { return ILLEGAL; }
-  {R}{E}{S}{E}{T}             { return RESET; }
-  {S}{T}{O}{P}                { return STOP; }
-  {T}{R}{A}{P}                { return TRAP; }
-  {T}{R}{A}{P}{V}             { return TRAPV; }
-  {L}{I}{N}{K}                { return LINK; }
-  {U}{N}{L}{K}                { return UNLK; }
+  // distinguish 'd6.l'/'$4000.l' vs. 'bra .l'/'dbf d0,.s'
+  "." {B}    { if (afterSpaceOrComma()) { return ID; } return DOT_B; }
+  "." {S}    { if (afterSpaceOrComma()) { return ID; } return DOT_S; }
+  "." {W}    { if (afterSpaceOrComma()) { return ID; } return DOT_W; }
+  "." {L}    { if (afterSpaceOrComma()) { return ID; } return DOT_L; }
 
-  {M}{O}{V}{E}                { return MOVE; }
-  {M}{O}{V}{E}{A}             { return MOVEA; }
-  {M}{O}{V}{E}{M}             { return MOVEM; }
-  {M}{O}{V}{E}{P}             { return MOVEP; }
-  {M}{O}{V}{E}{Q}             { return MOVEQ; }
+  // must be after all register names
+  {ID}       { return ID; }
 
-  {T}{S}{T}                   { return TST; }
-  {T}{A}{S}                   { return TAS; }
-  {L}{E}{A}                   { return LEA; }
-  {P}{E}{A}                   { return PEA; }
-  {C}{L}{R}                   { return CLR; }
+  "."  { return DOT; }
+  ","  { return COMMA; }
+  "+"  { return PLUS; }
+  "-"  { return MINUS; }
+  "*"  { return MUL; }
+  "/"  { return DIV; }
+  "^"  { return POW; }
+  "#"  { return HASH; }
+  "~"  { return TILDE; }
+  "!"  { return EXCLAMATION; }
+  "%"  { return PERCENT; }
+  "&"  { return AMPERSAND; }
+  "\\" { return BACKSLASH; }
+  "|"  { return PIPE; }
+  "<<" { return SHIFT_L; }
+  ">>" { return SHIFT_R; }
+  "("  { return L_PAREN; }
+  ")"  { return R_PAREN; }
+  "["  { return L_BRACKET; }
+  "]"  { return R_BRACKET; }
 
-  {J}{M}{P}                   { return JMP; }
-  {J}{S}{R}                   { return JSR; }
-  {B}{S}{R}                   { return BSR; }
-  {R}{T}{S}                   { return RTS; }
-  {R}{T}{E}                   { return RTE; }
-  {R}{T}{R}                   { return RTR; }
+  {DECNUMBER}                 { return DEC_NUMBER; }
+  {HEXNUMBER}                 { return HEX_NUMBER; }
+  {OCTNUMBER}                 { return OCT_NUMBER; }
+  {BINNUMBER}                 { return BIN_NUMBER; }
 
-  {A}{D}{D}                   { return ADD; }
-  {A}{D}{D}{A}                { return ADDA; }
-  {A}{D}{D}{I}                { return ADDI; }
-  {A}{D}{D}{Q}                { return ADDQ; }
-  {A}{D}{D}{X}                { return ADDX; }
-  {S}{U}{B}                   { return SUB; }
-  {S}{U}{B}{A}                { return SUBA; }
-  {S}{U}{B}{I}                { return SUBI; }
-  {S}{U}{B}{Q}                { return SUBQ; }
-  {S}{U}{B}{X}                { return SUBX; }
-  {M}{U}{L}{S}                { return MULS; }
-  {M}{U}{L}{U}                { return MULU; }
-  {D}{I}{V}{S}                { return DIVS; }
-  {D}{I}{V}{U}                { return DIVU; }
-
-  {A}{B}{C}{D}                { return ABCD; }
-  {N}{B}{C}{D}                { return NBCD; }
-  {S}{B}{C}{D}                { return SBCD; }
-
-  {A}{N}{D}                   { return AND; }
-  {A}{N}{D}{I}                { return ANDI; }
-  {O}{R}                      { return OR; }
-  {O}{R}{I}                   { return ORI; }
-  {E}{O}{R}                   { return EOR; }
-  {E}{O}{R}{I}                { return EORI; }
-
-  {E}{X}{T}                   { return EXT; }
-  {N}{E}{G}                   { return NEG; }
-  {N}{E}{G}{X}                { return NEGX; }
-  {S}{W}{A}{P}                { return SWAP; }
-  {N}{O}{T}                   { return NOT; }
-  {C}{H}{K}                   { return CHK; }
-  {E}{X}{G}                   { return EXG; }
-
-  {C}{M}{P}                   { return CMP; }
-  {C}{M}{P}{A}                { return CMPA; }
-  {C}{M}{P}{I}                { return CMPI; }
-  {C}{M}{P}{M}                { return CMPM; }
-
-  {B}{C}{H}{G}                { return BCHG; }
-  {B}{C}{L}{R}                { return BCLR; }
-  {B}{S}{E}{T}                { return BSET; }
-  {B}{T}{S}{T}                { return BTST; }
-
-  {B}{R}{A}                   { incBranchIdMode(); return BRA; }
-  {B}{C}{S}                   { incBranchIdMode(); return BCS; }
-  {B}{L}{O}                   { incBranchIdMode(); return BLO; }
-  {B}{L}{S}                   { incBranchIdMode(); return BLS; }
-  {B}{E}{Q}                   { incBranchIdMode(); return BEQ; }
-  {B}{N}{E}                   { incBranchIdMode(); return BNE; }
-  {B}{H}{I}                   { incBranchIdMode(); return BHI; }
-  {B}{C}{C}                   { incBranchIdMode(); return BCC; }
-  {B}{H}{S}                   { incBranchIdMode(); return BHS; }
-  {B}{P}{L}                   { incBranchIdMode(); return BPL; }
-  {B}{V}{C}                   { incBranchIdMode(); return BVC; }
-  {B}{L}{T}                   { incBranchIdMode(); return BLT; }
-  {B}{L}{E}                   { incBranchIdMode(); return BLE; }
-  {B}{G}{T}                   { incBranchIdMode(); return BGT; }
-  {B}{G}{E}                   { incBranchIdMode(); return BGE; }
-  {B}{M}{I}                   { incBranchIdMode(); return BMI; }
-  {B}{V}{S}                   { incBranchIdMode(); return BVS; }
-
-  {D}{B}{R}{A}                { incBranchIdMode(); return DBRA; }
-  {D}{B}{C}{S}                { incBranchIdMode(); return DBCS; }
-  {D}{B}{L}{O}                { incBranchIdMode(); return DBLO; }
-  {D}{B}{L}{S}                { incBranchIdMode(); return DBLS; }
-  {D}{B}{E}{Q}                { incBranchIdMode(); return DBEQ; }
-  {D}{B}{N}{E}                { incBranchIdMode(); return DBNE; }
-  {D}{B}{H}{I}                { incBranchIdMode(); return DBHI; }
-  {D}{B}{C}{C}                { incBranchIdMode(); return DBCC; }
-  {D}{B}{H}{S}                { incBranchIdMode(); return DBHS; }
-  {D}{B}{P}{L}                { incBranchIdMode(); return DBPL; }
-  {D}{B}{V}{C}                { incBranchIdMode(); return DBVC; }
-  {D}{B}{L}{T}                { incBranchIdMode(); return DBLT; }
-  {D}{B}{L}{E}                { incBranchIdMode(); return DBLE; }
-  {D}{B}{G}{T}                { incBranchIdMode(); return DBGT; }
-  {D}{B}{G}{E}                { incBranchIdMode(); return DBGE; }
-  {D}{B}{M}{I}                { incBranchIdMode(); return DBMI; }
-  {D}{B}{V}{S}                { incBranchIdMode(); return DBVS; }
-  {D}{B}{F}                   { incBranchIdMode(); return DBF; }
-  {D}{B}{T}                   { incBranchIdMode(); return DBT; }
-
-  {S}{E}{Q}                   { return SEQ; }
-  {S}{N}{E}                   { return SNE; }
-  {S}{P}{L}                   { return SPL; }
-  {S}{M}{I}                   { return SMI; }
-  {S}{V}{C}                   { return SVC; }
-  {S}{V}{S}                   { return SVS; }
-  {S}{T}                      { return ST; }
-  {S}{F}                      { return SF; }
-  {S}{G}{E}                   { return SGE; }
-  {S}{G}{T}                   { return SGT; }
-  {S}{L}{E}                   { return SLE; }
-  {S}{L}{T}                   { return SLT; }
-  {S}{C}{C}                   { return SCC; }
-  {S}{H}{I}                   { return SHI; }
-  {S}{L}{S}                   { return SLS; }
-  {S}{C}{S}                   { return SCS; }
-  {S}{H}{S}                   { return SHS; }
-  {S}{L}{O}                   { return SLO; }
-
-  {A}{S}{L}                   { return ASL; }
-  {A}{S}{R}                   { return ASR; }
-  {L}{S}{L}                   { return LSL; }
-  {L}{S}{R}                   { return LSR; }
-  {R}{O}{L}                   { return ROL; }
-  {R}{O}{R}                   { return ROR; }
-  {R}{O}{X}{L}                { return ROXL; }
-  {R}{O}{X}{R}                { return ROXR; }
-
-
-  "." {B}                     { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_B; }
-  "." {S}                     { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_S; }
-  "." {W}                     { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_W; }
-  "." {L}                     { if (isBranchIdMode()) return ID; incBranchIdMode(); return DOT_L; }
-
-
-  {A}{D}{D}{W}{A}{T}{C}{H}    { return ADDWATCH; }
-  {A}{L}{I}{G}{N}             { return ALIGN; }
-  {B}{L}{K}                   { return BLK; }
-  {B}{S}{S}                   { return BSS; }
-  {B}{S}{S}_{C}               { return BSS_C; }
-  {B}{S}{S}_{F}               { return BSS_F; }
-  {C}{O}{D}{E}                { return CODE; }
-  {C}{O}{D}{E}_{C}            { return CODE_C; }
-  {C}{O}{D}{E}_{F}            { return CODE_F; }
-  {C}{N}{O}{P}                { return CNOP; }
-  {C}{S}{E}{G}                { return CSEG; }
-  {D}{A}{T}{A}                { return DATA; }
-  {D}{A}{T}{A}_{C}            { return DATA_C; }
-  {D}{A}{T}{A}_{F}            { return DATA_F; }
-  {D}{C}                      { return DC; }
-  {D}{C}{B}                   { return DCB; }
-  {D}{S}                      { return DS; }
-  {D}{S}{E}{G}                { return DSEG; }
-  {E}{N}{D}                   { return END; }
-  {E}{N}{D}{R}                { return ENDR; }
-  {E}{I}{N}{L}{I}{N}{E}       { return EINLINE; }
-  {E}{Q}{U}                   { return EQU; }
-  {E}{Q}{U}{R}                { return EQUR; }
-  {E}{R}{E}{M}                { return EREM; }
-  {E}{V}{E}{N}                { return EVEN; }
-  {I}{N}{C}{B}{I}{N}          { return INCBIN; }
-  {I}{N}{C}{D}{I}{R}          { return INCDIR; }
-  {I}{N}{C}{L}{U}{D}{E}       { return INCLUDE; }
-  {I}{N}{L}{I}{N}{E}          { return INLINE; }
-  {J}{U}{M}{P}{E}{R}{R}       { return JUMPERR; }
-  {J}{U}{M}{P}{P}{T}{R}       { return JUMPPTR; }
-  {L}{L}{E}{N}                { return LLEN; }
-  {L}{I}{S}{T}                { return LIST; }
-  {O}{D}{D}                   { return ODD; }
-  {O}{P}{T}                   { return OPT; }
-  {O}{R}{G}                   { return ORG; }
-  {P}{A}{G}{E}                { return PAGE; }
-  {P}{L}{E}{N}                { return PLEN; }
-  {N}{O}{L}{I}{S}{T}          { return NOLIST; }
-  {N}{O}{P}{A}{G}{E}          { return NOPAGE; }
-  {R}{E}{M}                   { return REM; }
-  {R}{E}{P}{T}                { return REPT; }
-  {R}{S}                      { return RS; }
-  {R}{S}{S}{E}{T}             { return RSSET; }
-  {R}{S}{R}{E}{S}{E}{T}       { return RSRESET; }
-  {S}{E}{C}{T}{I}{O}{N}       { return SECTION; }
-  {S}{E}{T}                   { return SET; }
-  {S}{P}{C}                   { return SPC; }
-  {T}{E}{X}{T}                { return TEXT; }
-  {X}{D}{E}{F}                { return XDEF; }
-  {X}{R}{E}{F}                { return XREF; }
-
-  {M}{A}{C}{R}{O}             { return MACRO; }
-  {E}{N}{D}{M}                { return ENDM; }
-  {M}{E}{X}{I}{T}             { return MEXIT; }
-
-  {I}{F}                      { return IF; }
-  {I}{F}{B}                   { return IFB; }
-  {I}{F}{N}{B}                { return IFNB; }
-  {I}{F}{C}                   { return IFC; }
-  {I}{F}{N}{C}                { return IFNC; }
-  {I}{F}{D}                   { return IFD; }
-  {I}{F}{E}{Q}                { return IFEQ; }
-  {I}{F}{G}{E}                { return IFGE; }
-  {I}{F}{P}{L}                { return IFPL; }
-  {I}{F}{G}{T}                { return IFGT; }
-  {I}{F}{M}{A}{C}{R}{O}{D}    { return IFMACROD; }
-  {I}{F}{M}{A}{C}{R}{O}{N}{D} { return IFMACROND; }
-  {I}{F}{N}{D}                { return IFND; }
-  {I}{F}{N}{E}                { return IFNE; }
-  {I}{F}{L}{E}                { return IFLE; }
-  {I}{F}{L}{T}                { return IFLT; }
-  {I}{F}{M}{I}                { return IFMI; }
-  {E}{N}{D}{C}                { return ENDC; }
-  {E}{N}{D}{I}{F}             { return ENDIF; }
-  {E}{L}{S}{E}                { return ELSE; }
-  {E}{L}{S}{E}{I}{F}          { return ELSEIF; }
-
-  {EOL_COMMENT}               { yybegin(IN_COMMENT); return COMMENT; }
-
-  {DECNUMBER}                 { clearBranchIdMode(); return DEC_NUMBER; }
-  {HEXNUMBER}                 { clearBranchIdMode(); return HEX_NUMBER; }
-  {OCTNUMBER}                 { clearBranchIdMode(); return OCT_NUMBER; }
-  {BINNUMBER}                 { clearBranchIdMode(); return BIN_NUMBER; }
-
-  {ID}                        { return ID; }
   {SINGLE_QUOTED_STRING}      { return STRING; }
   {DOUBLE_QUOTED_STRING}      { return STRING; }
+}
+
+
+// Instructions must switch to:
+// - AFTER_INSTRUCTION - if M68kDataSized
+// - IN_OPERAND - if >=1 operand
+// - AFTER_OPERAND - if no operands
+<IN_INSTRUCTION> {
+  {WHITE_SPACE}+              { return WHITE_SPACE; }
+
+  // instruction itself can be macro param inside macro block
+  "\\"                        { yybegin(IN_OPERAND); return BACKSLASH; }
+
+  // after label+whitespaces switching problems
+  "="                         { yybegin(IN_OPERAND); return EQ; }
+
+  {N}{O}{P}                   { yybegin(AFTER_OPERAND); return NOP; }
+  {I}{L}{L}{E}{G}{A}{L}       { yybegin(AFTER_OPERAND); return ILLEGAL; }
+  {R}{E}{S}{E}{T}             { yybegin(AFTER_OPERAND); return RESET; }
+  {S}{T}{O}{P}                { yybegin(IN_OPERAND); return STOP; }
+  {T}{R}{A}{P}                { yybegin(IN_OPERAND); return TRAP; }
+  {T}{R}{A}{P}{V}             { yybegin(AFTER_OPERAND); return TRAPV; }
+  {L}{I}{N}{K}                { yybegin(IN_OPERAND); return LINK; }
+  {U}{N}{L}{K}                { yybegin(IN_OPERAND); return UNLK; }
+
+  {M}{O}{V}{E}                { yybegin(AFTER_INSTRUCTION); return MOVE; }
+  {M}{O}{V}{E}{A}             { yybegin(AFTER_INSTRUCTION); return MOVEA; }
+  {M}{O}{V}{E}{M}             { yybegin(AFTER_INSTRUCTION); return MOVEM; }
+  {M}{O}{V}{E}{P}             { yybegin(AFTER_INSTRUCTION); return MOVEP; }
+  {M}{O}{V}{E}{Q}             { yybegin(AFTER_INSTRUCTION); return MOVEQ; }
+
+  {T}{S}{T}                   { yybegin(AFTER_INSTRUCTION); return TST; }
+  {T}{A}{S}                   { yybegin(AFTER_INSTRUCTION); return TAS; }
+  {L}{E}{A}                   { yybegin(AFTER_INSTRUCTION); return LEA; }
+  {P}{E}{A}                   { yybegin(AFTER_INSTRUCTION); return PEA; }
+  {C}{L}{R}                   { yybegin(AFTER_INSTRUCTION); return CLR; }
+
+  {J}{M}{P}                   { yybegin(AFTER_INSTRUCTION); return JMP; }
+  {J}{S}{R}                   { yybegin(IN_OPERAND); return JSR; }
+  {B}{S}{R}                   { yybegin(AFTER_INSTRUCTION); return BSR; }
+
+  {R}{T}{S}                   { yybegin(AFTER_OPERAND); return RTS; }
+  {R}{T}{E}                   { yybegin(AFTER_OPERAND); return RTE; }
+  {R}{T}{R}                   { yybegin(AFTER_OPERAND); return RTR; }
+
+
+  {A}{D}{D}                   { yybegin(AFTER_INSTRUCTION); return ADD; }
+  {A}{D}{D}{A}                { yybegin(AFTER_INSTRUCTION); return ADDA; }
+  {A}{D}{D}{I}                { yybegin(AFTER_INSTRUCTION); return ADDI; }
+  {A}{D}{D}{Q}                { yybegin(AFTER_INSTRUCTION); return ADDQ; }
+  {A}{D}{D}{X}                { yybegin(AFTER_INSTRUCTION); return ADDX; }
+  {S}{U}{B}                   { yybegin(AFTER_INSTRUCTION); return SUB; }
+  {S}{U}{B}{A}                { yybegin(AFTER_INSTRUCTION); return SUBA; }
+  {S}{U}{B}{I}                { yybegin(AFTER_INSTRUCTION); return SUBI; }
+  {S}{U}{B}{Q}                { yybegin(AFTER_INSTRUCTION); return SUBQ; }
+  {S}{U}{B}{X}                { yybegin(AFTER_INSTRUCTION); return SUBX; }
+  {M}{U}{L}{S}                { yybegin(AFTER_INSTRUCTION); return MULS; }
+  {M}{U}{L}{U}                { yybegin(AFTER_INSTRUCTION); return MULU; }
+  {D}{I}{V}{S}                { yybegin(AFTER_INSTRUCTION); return DIVS; }
+  {D}{I}{V}{U}                { yybegin(AFTER_INSTRUCTION); return DIVU; }
+
+  {A}{B}{C}{D}                { yybegin(AFTER_INSTRUCTION); return ABCD; }
+  {N}{B}{C}{D}                { yybegin(AFTER_INSTRUCTION); return NBCD; }
+  {S}{B}{C}{D}                { yybegin(AFTER_INSTRUCTION); return SBCD; }
+
+  {A}{N}{D}                   { yybegin(AFTER_INSTRUCTION); return AND; }
+  {A}{N}{D}{I}                { yybegin(AFTER_INSTRUCTION); return ANDI; }
+  {O}{R}                      { yybegin(AFTER_INSTRUCTION); return OR; }
+  {O}{R}{I}                   { yybegin(AFTER_INSTRUCTION); return ORI; }
+  {E}{O}{R}                   { yybegin(AFTER_INSTRUCTION); return EOR; }
+  {E}{O}{R}{I}                { yybegin(AFTER_INSTRUCTION); return EORI; }
+
+  {E}{X}{T}                   { yybegin(AFTER_INSTRUCTION); return EXT; }
+  {N}{E}{G}                   { yybegin(AFTER_INSTRUCTION); return NEG; }
+  {N}{E}{G}{X}                { yybegin(AFTER_INSTRUCTION); return NEGX; }
+  {S}{W}{A}{P}                { yybegin(AFTER_INSTRUCTION); return SWAP; }
+  {N}{O}{T}                   { yybegin(AFTER_INSTRUCTION); return NOT; }
+  {C}{H}{K}                   { yybegin(AFTER_INSTRUCTION); return CHK; }
+  {E}{X}{G}                   { yybegin(AFTER_INSTRUCTION); return EXG; }
+
+  {C}{M}{P}                   { yybegin(AFTER_INSTRUCTION); return CMP; }
+  {C}{M}{P}{A}                { yybegin(AFTER_INSTRUCTION); return CMPA; }
+  {C}{M}{P}{I}                { yybegin(AFTER_INSTRUCTION); return CMPI; }
+  {C}{M}{P}{M}                { yybegin(AFTER_INSTRUCTION); return CMPM; }
+
+  {B}{C}{H}{G}                { yybegin(AFTER_INSTRUCTION); return BCHG; }
+  {B}{C}{L}{R}                { yybegin(AFTER_INSTRUCTION); return BCLR; }
+  {B}{S}{E}{T}                { yybegin(AFTER_INSTRUCTION); return BSET; }
+  {B}{T}{S}{T}                { yybegin(AFTER_INSTRUCTION); return BTST; }
+
+  {B}{R}{A}                   { yybegin(AFTER_INSTRUCTION); return BRA; }
+  {B}{C}{S}                   { yybegin(AFTER_INSTRUCTION); return BCS; }
+  {B}{L}{O}                   { yybegin(AFTER_INSTRUCTION); return BLO; }
+  {B}{L}{S}                   { yybegin(AFTER_INSTRUCTION); return BLS; }
+  {B}{E}{Q}                   { yybegin(AFTER_INSTRUCTION); return BEQ; }
+  {B}{N}{E}                   { yybegin(AFTER_INSTRUCTION); return BNE; }
+  {B}{H}{I}                   { yybegin(AFTER_INSTRUCTION); return BHI; }
+  {B}{C}{C}                   { yybegin(AFTER_INSTRUCTION); return BCC; }
+  {B}{H}{S}                   { yybegin(AFTER_INSTRUCTION); return BHS; }
+  {B}{P}{L}                   { yybegin(AFTER_INSTRUCTION); return BPL; }
+  {B}{V}{C}                   { yybegin(AFTER_INSTRUCTION); return BVC; }
+  {B}{L}{T}                   { yybegin(AFTER_INSTRUCTION); return BLT; }
+  {B}{L}{E}                   { yybegin(AFTER_INSTRUCTION); return BLE; }
+  {B}{G}{T}                   { yybegin(AFTER_INSTRUCTION); return BGT; }
+  {B}{G}{E}                   { yybegin(AFTER_INSTRUCTION); return BGE; }
+  {B}{M}{I}                   { yybegin(AFTER_INSTRUCTION); return BMI; }
+  {B}{V}{S}                   { yybegin(AFTER_INSTRUCTION); return BVS; }
+
+  {D}{B}{R}{A}                { yybegin(AFTER_INSTRUCTION); return DBRA; }
+  {D}{B}{C}{S}                { yybegin(AFTER_INSTRUCTION); return DBCS; }
+  {D}{B}{L}{O}                { yybegin(AFTER_INSTRUCTION); return DBLO; }
+  {D}{B}{L}{S}                { yybegin(AFTER_INSTRUCTION); return DBLS; }
+  {D}{B}{E}{Q}                { yybegin(AFTER_INSTRUCTION); return DBEQ; }
+  {D}{B}{N}{E}                { yybegin(AFTER_INSTRUCTION); return DBNE; }
+  {D}{B}{H}{I}                { yybegin(AFTER_INSTRUCTION); return DBHI; }
+  {D}{B}{C}{C}                { yybegin(AFTER_INSTRUCTION); return DBCC; }
+  {D}{B}{H}{S}                { yybegin(AFTER_INSTRUCTION); return DBHS; }
+  {D}{B}{P}{L}                { yybegin(AFTER_INSTRUCTION); return DBPL; }
+  {D}{B}{V}{C}                { yybegin(AFTER_INSTRUCTION); return DBVC; }
+  {D}{B}{L}{T}                { yybegin(AFTER_INSTRUCTION); return DBLT; }
+  {D}{B}{L}{E}                { yybegin(AFTER_INSTRUCTION); return DBLE; }
+  {D}{B}{G}{T}                { yybegin(AFTER_INSTRUCTION); return DBGT; }
+  {D}{B}{G}{E}                { yybegin(AFTER_INSTRUCTION); return DBGE; }
+  {D}{B}{M}{I}                { yybegin(AFTER_INSTRUCTION); return DBMI; }
+  {D}{B}{V}{S}                { yybegin(AFTER_INSTRUCTION); return DBVS; }
+  {D}{B}{F}                   { yybegin(AFTER_INSTRUCTION); return DBF; }
+  {D}{B}{T}                   { yybegin(AFTER_INSTRUCTION); return DBT; }
+
+  {S}{E}{Q}                   { yybegin(AFTER_INSTRUCTION); return SEQ; }
+  {S}{N}{E}                   { yybegin(AFTER_INSTRUCTION); return SNE; }
+  {S}{P}{L}                   { yybegin(AFTER_INSTRUCTION); return SPL; }
+  {S}{M}{I}                   { yybegin(AFTER_INSTRUCTION); return SMI; }
+  {S}{V}{C}                   { yybegin(AFTER_INSTRUCTION); return SVC; }
+  {S}{V}{S}                   { yybegin(AFTER_INSTRUCTION); return SVS; }
+  {S}{T}                      { yybegin(AFTER_INSTRUCTION); return ST; }
+  {S}{F}                      { yybegin(AFTER_INSTRUCTION); return SF; }
+  {S}{G}{E}                   { yybegin(AFTER_INSTRUCTION); return SGE; }
+  {S}{G}{T}                   { yybegin(AFTER_INSTRUCTION); return SGT; }
+  {S}{L}{E}                   { yybegin(AFTER_INSTRUCTION); return SLE; }
+  {S}{L}{T}                   { yybegin(AFTER_INSTRUCTION); return SLT; }
+  {S}{C}{C}                   { yybegin(AFTER_INSTRUCTION); return SCC; }
+  {S}{H}{I}                   { yybegin(AFTER_INSTRUCTION); return SHI; }
+  {S}{L}{S}                   { yybegin(AFTER_INSTRUCTION); return SLS; }
+  {S}{C}{S}                   { yybegin(AFTER_INSTRUCTION); return SCS; }
+  {S}{H}{S}                   { yybegin(AFTER_INSTRUCTION); return SHS; }
+  {S}{L}{O}                   { yybegin(AFTER_INSTRUCTION); return SLO; }
+
+  {A}{S}{L}                   { yybegin(AFTER_INSTRUCTION); return ASL; }
+  {A}{S}{R}                   { yybegin(AFTER_INSTRUCTION); return ASR; }
+  {L}{S}{L}                   { yybegin(AFTER_INSTRUCTION); return LSL; }
+  {L}{S}{R}                   { yybegin(AFTER_INSTRUCTION); return LSR; }
+  {R}{O}{L}                   { yybegin(AFTER_INSTRUCTION); return ROL; }
+  {R}{O}{R}                   { yybegin(AFTER_INSTRUCTION); return ROR; }
+  {R}{O}{X}{L}                { yybegin(AFTER_INSTRUCTION); return ROXL; }
+  {R}{O}{X}{R}                { yybegin(AFTER_INSTRUCTION); return ROXR; }
+
+  {A}{D}{D}{W}{A}{T}{C}{H}    { yybegin(IN_OPERAND); return ADDWATCH; }
+  {A}{L}{I}{G}{N}             { yybegin(IN_OPERAND); return ALIGN; }
+  {B}{L}{K}                   { yybegin(AFTER_INSTRUCTION); return BLK; }
+  {B}{S}{S}                   { yybegin(AFTER_OPERAND); return BSS; }
+  {B}{S}{S}_{C}               { yybegin(AFTER_OPERAND); return BSS_C; }
+  {B}{S}{S}_{F}               { yybegin(AFTER_OPERAND); return BSS_F; }
+  {C}{O}{D}{E}                { yybegin(AFTER_OPERAND); return CODE; }
+  {C}{O}{D}{E}_{C}            { yybegin(AFTER_OPERAND); return CODE_C; }
+  {C}{O}{D}{E}_{F}            { yybegin(AFTER_OPERAND); return CODE_F; }
+  {C}{N}{O}{P}                { yybegin(IN_OPERAND); return CNOP; }
+  {C}{S}{E}{G}                { yybegin(AFTER_OPERAND); return CSEG; }
+  {D}{A}{T}{A}                { yybegin(AFTER_OPERAND); return DATA; }
+  {D}{A}{T}{A}_{C}            { yybegin(AFTER_OPERAND); return DATA_C; }
+  {D}{A}{T}{A}_{F}            { yybegin(AFTER_OPERAND); return DATA_F; }
+  {D}{C}                      { yybegin(AFTER_INSTRUCTION); return DC; }
+  {D}{C}{B}                   { yybegin(AFTER_INSTRUCTION); return DCB; }
+  {D}{S}                      { yybegin(AFTER_INSTRUCTION); return DS; }
+  {D}{S}{E}{G}                { yybegin(AFTER_INSTRUCTION); return DSEG; }
+  {E}{N}{D}                   { yybegin(AFTER_OPERAND); return END; }
+  {E}{N}{D}{R}                { yybegin(AFTER_OPERAND); return ENDR; }
+  {E}{I}{N}{L}{I}{N}{E}       { yybegin(AFTER_OPERAND); return EINLINE; }
+  {E}{Q}{U}                   { yybegin(IN_OPERAND); return EQU; }
+  {E}{Q}{U}{R}                { yybegin(IN_OPERAND); return EQUR; }
+  {E}{R}{E}{M}                { yybegin(AFTER_OPERAND); return EREM; }
+  {E}{V}{E}{N}                { yybegin(AFTER_OPERAND); return EVEN; }
+  {I}{N}{C}{B}{I}{N}          { yybegin(IN_OPERAND); return INCBIN; }
+  {I}{N}{C}{D}{I}{R}          { yybegin(IN_OPERAND); return INCDIR; }
+  {I}{N}{C}{L}{U}{D}{E}       { yybegin(IN_OPERAND); return INCLUDE; }
+  {I}{N}{L}{I}{N}{E}          { yybegin(AFTER_OPERAND); return INLINE; }
+  {J}{U}{M}{P}{E}{R}{R}       { yybegin(IN_OPERAND); return JUMPERR; }
+  {J}{U}{M}{P}{P}{T}{R}       { yybegin(IN_OPERAND); return JUMPPTR; }
+  {L}{L}{E}{N}                { yybegin(IN_OPERAND); return LLEN; }
+  {L}{I}{S}{T}                { yybegin(AFTER_OPERAND); return LIST; }
+  {O}{D}{D}                   { yybegin(AFTER_OPERAND); return ODD; }
+  {O}{P}{T}                   { yybegin(IN_OPERAND); return OPT; }
+  {O}{R}{G}                   { yybegin(IN_OPERAND); return ORG; }
+  {P}{A}{G}{E}                { yybegin(AFTER_OPERAND); return PAGE; }
+  {P}{L}{E}{N}                { yybegin(IN_OPERAND); return PLEN; }
+  {N}{O}{L}{I}{S}{T}          { yybegin(AFTER_OPERAND); return NOLIST; }
+  {N}{O}{P}{A}{G}{E}          { yybegin(AFTER_OPERAND); return NOPAGE; }
+  {R}{E}{M}                   { yybegin(AFTER_OPERAND); return REM; }
+  {R}{E}{P}{T}                { yybegin(IN_OPERAND); return REPT; }
+  {R}{S}                      { yybegin(AFTER_INSTRUCTION); return RS; }
+  {R}{S}{S}{E}{T}             { yybegin(IN_OPERAND); return RSSET; }
+  {R}{S}{R}{E}{S}{E}{T}       { yybegin(AFTER_OPERAND); return RSRESET; }
+  {S}{E}{C}{T}{I}{O}{N}       { yybegin(IN_OPERAND); return SECTION; }
+  {S}{E}{T}                   { yybegin(IN_OPERAND); return SET; }
+  {S}{P}{C}                   { yybegin(IN_OPERAND); return SPC; }
+  {T}{E}{X}{T}                { yybegin(AFTER_OPERAND); return TEXT; }
+  {X}{D}{E}{F}                { yybegin(IN_OPERAND); return XDEF; }
+  {X}{R}{E}{F}                { yybegin(IN_OPERAND); return XREF; }
+
+  {M}{A}{C}{R}{O}             { yybegin(AFTER_OPERAND); return MACRO; }
+  {E}{N}{D}{M}                { yybegin(AFTER_OPERAND); return ENDM; }
+  {M}{E}{X}{I}{T}             { yybegin(AFTER_OPERAND); return MEXIT; }
+
+  {I}{F}                      { yybegin(IN_OPERAND); return IF; }
+  {I}{F}{B}                   { yybegin(IN_OPERAND); return IFB; }
+  {I}{F}{N}{B}                { yybegin(IN_OPERAND); return IFNB; }
+  {I}{F}{C}                   { yybegin(IN_OPERAND); return IFC; }
+  {I}{F}{N}{C}                { yybegin(IN_OPERAND); return IFNC; }
+  {I}{F}{D}                   { yybegin(IN_OPERAND); return IFD; }
+  {I}{F}{E}{Q}                { yybegin(IN_OPERAND); return IFEQ; }
+  {I}{F}{G}{E}                { yybegin(IN_OPERAND); return IFGE; }
+  {I}{F}{P}{L}                { yybegin(IN_OPERAND); return IFPL; }
+  {I}{F}{G}{T}                { yybegin(IN_OPERAND); return IFGT; }
+  {I}{F}{M}{A}{C}{R}{O}{D}    { yybegin(IN_OPERAND); return IFMACROD; }
+  {I}{F}{M}{A}{C}{R}{O}{N}{D} { yybegin(IN_OPERAND); return IFMACROND; }
+  {I}{F}{N}{D}                { yybegin(IN_OPERAND); return IFND; }
+  {I}{F}{N}{E}                { yybegin(IN_OPERAND); return IFNE; }
+  {I}{F}{L}{E}                { yybegin(IN_OPERAND); return IFLE; }
+  {I}{F}{L}{T}                { yybegin(IN_OPERAND); return IFLT; }
+  {I}{F}{M}{I}                { yybegin(IN_OPERAND); return IFMI; }
+  {E}{N}{D}{C}                { yybegin(AFTER_OPERAND); return ENDC; }
+  {E}{N}{D}{I}{F}             { yybegin(AFTER_OPERAND); return ENDIF; }
+  {E}{L}{S}{E}                { yybegin(AFTER_OPERAND); return ELSE; }
+  {E}{L}{S}{E}{I}{F}          { yybegin(AFTER_OPERAND); return ELSEIF; }
+
+  // anything else is macro name - todo separate token?
+  {ID}                        { yybegin(IN_OPERAND); return ID; }
+
+  {EOL_COMMENT}               { return COMMENT; }
 }
 
 [^] { return BAD_CHARACTER; }

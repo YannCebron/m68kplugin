@@ -1070,7 +1070,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // SECTION ID (COMMA section_type)? (COMMA ID)?
+  // SECTION ID (COMMA ID)? (COMMA ID)?
   public static boolean section_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "section_directive")) return false;
     if (!nextTokenIs(b, "<directive>", SECTION)) return false;
@@ -1084,20 +1084,19 @@ public class M68kDirectivesParser {
     return r || p;
   }
 
-  // (COMMA section_type)?
+  // (COMMA ID)?
   private static boolean section_directive_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "section_directive_2")) return false;
     section_directive_2_0(b, l + 1);
     return true;
   }
 
-  // COMMA section_type
+  // COMMA ID
   private static boolean section_directive_2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "section_directive_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, COMMA);
-    r = r && section_type(b, l + 1);
+    r = consumeTokens(b, 0, COMMA, ID);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1116,24 +1115,6 @@ public class M68kDirectivesParser {
     Marker m = enter_section_(b);
     r = consumeTokens(b, 0, COMMA, ID);
     exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // CODE | CODE_C | CODE_F | TEXT | DATA | DATA_C | DATA_F | BSS | BSS_C | BSS_F
-  static boolean section_type(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "section_type")) return false;
-    boolean r;
-    r = consumeToken(b, CODE);
-    if (!r) r = consumeToken(b, CODE_C);
-    if (!r) r = consumeToken(b, CODE_F);
-    if (!r) r = consumeToken(b, TEXT);
-    if (!r) r = consumeToken(b, DATA);
-    if (!r) r = consumeToken(b, DATA_C);
-    if (!r) r = consumeToken(b, DATA_F);
-    if (!r) r = consumeToken(b, BSS);
-    if (!r) r = consumeToken(b, BSS_C);
-    if (!r) r = consumeToken(b, BSS_F);
     return r;
   }
 

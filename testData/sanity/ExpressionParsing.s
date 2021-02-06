@@ -18,7 +18,7 @@
  dc [1]
  dc 1^2
  dc 1234
- dc 1*2
+ dc 1*2/trap*bpl
  dc 'string'
  dc 1/2
  dc "string"

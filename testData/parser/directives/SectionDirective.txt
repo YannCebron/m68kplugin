@@ -5,6 +5,6 @@ M68k.FILE
     PsiWhiteSpace(' ')
     PsiElement(id)('tos')
     PsiElement(,)(',')
-    PsiElement(code)('code')
+    PsiElement(id)('code')
     PsiElement(,)(',')
     PsiElement(id)('chip')
