@@ -29,6 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
+// todo add tests for filters
 public class M68kStructureViewTest extends BasePlatformTestCase {
 
   public void testStructureView() {
