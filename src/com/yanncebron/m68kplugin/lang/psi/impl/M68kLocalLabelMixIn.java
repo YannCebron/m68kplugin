@@ -17,27 +17,33 @@
 package com.yanncebron.m68kplugin.lang.psi.impl;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
-import com.intellij.icons.AllIcons;
+import com.intellij.ide.projectView.PresentationData;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.presentation.java.SymbolPresentationUtil;
 import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.util.IncorrectOperationException;
+import com.yanncebron.m68kplugin.lang.M68kIcons;
 import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
+import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-abstract class M68kLocalLabelMixIn extends ASTWrapperPsiElement implements PsiNamedElement {
+abstract class M68kLocalLabelMixIn extends ASTWrapperPsiElement implements M68kLabelBase {
 
   protected M68kLocalLabelMixIn(@NotNull ASTNode node) {
     super(node);
+  }
+
+  @Override
+  public LabelKind getLabelKind() {
+    return LabelKind.LOCAL;
   }
 
   @Override
@@ -45,10 +51,9 @@ abstract class M68kLocalLabelMixIn extends ASTWrapperPsiElement implements PsiNa
     return getNode().getStartOffset() + 1;
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(int flags) {
-    return AllIcons.Nodes.AbstractMethod;
+  protected @Nullable Icon getElementIcon(int flags) {
+    return M68kIcons.LABEL_LOCAL;
   }
 
   @NotNull
@@ -59,25 +64,9 @@ abstract class M68kLocalLabelMixIn extends ASTWrapperPsiElement implements PsiNa
 
   @Override
   public ItemPresentation getPresentation() {
-    return new ItemPresentation() {
-      @Nullable
-      @Override
-      public String getPresentableText() {
-        return getName();
-      }
-
-      @Nullable
-      @Override
-      public String getLocationString() {
-        return SymbolPresentationUtil.getFilePathPresentation(M68kLocalLabelMixIn.this.getContainingFile());
-      }
-
-      @Nullable
-      @Override
-      public Icon getIcon(boolean unused) {
-        return M68kLocalLabelMixIn.this.getIcon(0);
-      }
-    };
+    return new PresentationData(getName(),
+      SymbolPresentationUtil.getFilePathPresentation(getContainingFile()),
+      getIcon(0), null);
   }
 
   @Nullable

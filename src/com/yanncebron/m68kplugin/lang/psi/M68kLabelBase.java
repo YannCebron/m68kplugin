@@ -20,4 +20,16 @@ import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiNamedElement;
 
 public interface M68kLabelBase extends PsiNamedElement, NavigatablePsiElement, M68kPsiElement {
+
+  enum LabelKind {
+    GLOBAL,
+    LOCAL,
+    EQU,
+    EQUALS,
+    SET,
+    EQUR,
+    MACRO
+  }
+
+  LabelKind getLabelKind();
 }

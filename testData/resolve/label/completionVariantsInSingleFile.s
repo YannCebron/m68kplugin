@@ -6,3 +6,7 @@ topLevelLabel
 
 anotherTopLevelLabel
 .localLabelNotVisible
+
+setLabel set 2
+equLabel equ 42
+equalsLabel = 33

@@ -19,14 +19,17 @@ package com.yanncebron.m68kplugin.lang.resolve;
 import com.intellij.codeInsight.completion.PrioritizedLookupElement;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementPresentation;
-import com.intellij.icons.AllIcons;
 import com.intellij.psi.PsiReference;
 import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
+import com.intellij.ui.DeferredIcon;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.inspections.M68kUnresolvedLabelReferenceInspection;
+import com.yanncebron.m68kplugin.lang.M68kIcons;
 import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
 import org.jetbrains.annotations.NotNull;
+
+import javax.swing.*;
 
 @TestDataPath("$PROJECT_ROOT/testData/resolve/label")
 public class M68kLabelResolveTest extends BasePlatformTestCase {
@@ -43,21 +46,43 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
 
   public void testCompletionVariantsInSingleFile() {
     myFixture.testCompletionVariants("completionVariantsInSingleFile.s",
-      "topLevelLabel", "anotherTopLevelLabel", ".localLabel", ".localLabel2");
+      "topLevelLabel", "anotherTopLevelLabel", ".localLabel", ".localLabel2",
+      "setLabel", "equLabel", "equalsLabel");
 
     final LookupElement anotherTopLevelLabel = findLookupElement("anotherTopLevelLabel");
     final LookupElementPresentation anotherTopLevelPresentation = LookupElementPresentation.renderElement(anotherTopLevelLabel);
-    assertEquals(AllIcons.Nodes.Method, anotherTopLevelPresentation.getIcon());
+    assertLookupIcon(anotherTopLevelPresentation, M68kIcons.LABEL_GLOBAL);
     assertTrue(anotherTopLevelPresentation.isItemTextBold());
     assertEmpty(anotherTopLevelPresentation.getTypeText());
     assertPrioritizedLookupElement(anotherTopLevelLabel, 30.0);
 
     final LookupElement localLabelLookupElement = findLookupElement(".localLabel");
     final LookupElementPresentation localLabelPresentation = LookupElementPresentation.renderElement(localLabelLookupElement);
-    assertEquals(AllIcons.Nodes.AbstractMethod, localLabelPresentation.getIcon());
+    assertLookupIcon(localLabelPresentation, M68kIcons.LABEL_LOCAL);
     assertTrue(localLabelPresentation.isItemTextBold());
     assertEmpty(anotherTopLevelPresentation.getTypeText());
     assertPrioritizedLookupElement(localLabelLookupElement, 50.0);
+
+    final LookupElement setLabel = findLookupElement("setLabel");
+    final LookupElementPresentation setLabelPresentation = LookupElementPresentation.renderElement(setLabel);
+    assertLookupIcon(setLabelPresentation, M68kIcons.LABEL_SET);
+    assertTrue(setLabelPresentation.isItemTextBold());
+    assertEmpty(setLabelPresentation.getTypeText());
+    assertPrioritizedLookupElement(setLabel, 30.0);
+
+    final LookupElement equLabel = findLookupElement("equLabel");
+    final LookupElementPresentation equLabelPresentation = LookupElementPresentation.renderElement(equLabel);
+    assertLookupIcon(equLabelPresentation, M68kIcons.LABEL_EQU);
+    assertTrue(equLabelPresentation.isItemTextBold());
+    assertEmpty(equLabelPresentation.getTypeText());
+    assertPrioritizedLookupElement(equLabel, 30.0);
+
+    final LookupElement equalsLabel = findLookupElement("equalsLabel");
+    final LookupElementPresentation equalsLabelPresentation = LookupElementPresentation.renderElement(equalsLabel);
+    assertLookupIcon(equalsLabelPresentation, M68kIcons.LABEL_EQU);
+    assertTrue(equalsLabelPresentation.isItemTextBold());
+    assertEmpty(equalsLabelPresentation.getTypeText());
+    assertPrioritizedLookupElement(equalsLabel, 30.0);
   }
 
   public void testResolveLocalLabelInCorrectScope() {
@@ -94,9 +119,15 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     return lookupElement;
   }
 
-  private void assertPrioritizedLookupElement(LookupElement element, double expectedPriority) {
+  static void assertPrioritizedLookupElement(LookupElement element, double expectedPriority) {
     final PrioritizedLookupElement<?> prioritizedLookupElement = element.as(PrioritizedLookupElement.CLASS_CONDITION_KEY);
     assertNotNull(prioritizedLookupElement);
     assertEquals(expectedPriority, prioritizedLookupElement.getPriority());
   }
+
+  static void assertLookupIcon(LookupElementPresentation presentation, Icon expectedIcon) {
+    final DeferredIcon deferredIcon = assertInstanceOf(presentation.getIcon(), DeferredIcon.class);
+    assertEquals(expectedIcon, deferredIcon.evaluate());
+  }
+
 }

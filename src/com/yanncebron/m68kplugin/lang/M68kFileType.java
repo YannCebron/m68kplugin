@@ -16,7 +16,6 @@
 
 package com.yanncebron.m68kplugin.lang;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.yanncebron.m68kplugin.M68kBundle;
 import org.jetbrains.annotations.NotNull;
@@ -53,6 +52,6 @@ public class M68kFileType extends LanguageFileType {
   @Nullable
   @Override
   public Icon getIcon() {
-    return AllIcons.FileTypes.Custom;
+    return M68kIcons.FILE;
   }
 }

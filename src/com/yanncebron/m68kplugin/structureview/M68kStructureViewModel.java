@@ -16,7 +16,6 @@
 
 package com.yanncebron.m68kplugin.structureview;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.ide.structureView.StructureViewModel;
 import com.intellij.ide.structureView.StructureViewModelBase;
 import com.intellij.ide.structureView.StructureViewTreeElement;
@@ -27,23 +26,23 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.BooleanFunction;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.M68kFile;
+import com.yanncebron.m68kplugin.lang.M68kIcons;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
 import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kEquDirectiveBase;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncbinDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncludeDirective;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.util.EnumSet;
 
 public class M68kStructureViewModel extends StructureViewModelBase implements StructureViewModel.ElementInfoProvider {
 
   public M68kStructureViewModel(M68kFile psiFile, Editor editor) {
     super(psiFile, editor, new M68kRootStructureViewTreeElement(psiFile));
     withSorters(Sorter.ALPHA_SORTER);
-    withSuitableClasses(M68kLabelBase.class, M68kEquDirectiveBase.class,
-      M68kIncludeDirective.class, M68kIncbinDirective.class);
+    withSuitableClasses(M68kLabelBase.class, M68kIncludeDirective.class, M68kIncbinDirective.class);
   }
 
   @Override
@@ -54,8 +53,11 @@ public class M68kStructureViewModel extends StructureViewModelBase implements St
   @Override
   public boolean isAlwaysLeaf(StructureViewTreeElement element) {
     final Object value = element.getValue();
-    return value instanceof M68kLocalLabel || value instanceof M68kEquDirectiveBase ||
-      value instanceof M68kIncludeDirective || value instanceof M68kIncbinDirective;
+    if (value instanceof M68kLabel) {
+      return ((M68kLabel) value).getLabelKind() != M68kLabelBase.LabelKind.GLOBAL;
+    }
+    return value instanceof M68kIncludeDirective ||
+      value instanceof M68kIncbinDirective;
   }
 
   @NotNull
@@ -63,13 +65,28 @@ public class M68kStructureViewModel extends StructureViewModelBase implements St
   public Filter @NotNull [] getFilters() {
     return new Filter[]{
       createFilter(psiElement -> psiElement instanceof M68kIncludeDirective || psiElement instanceof M68kIncbinDirective,
-        M68kBundle.message("structureview.filter.includes"), AllIcons.Graph.Layout, "SHOW_INCLUDES"),
-      createFilter(psiElement -> psiElement instanceof M68kLabel,
-        M68kBundle.message("structureview.filter.labels"), AllIcons.Nodes.Method, "SHOW_LABELS"),
+        M68kBundle.message("structureview.filter.includes"), M68kIcons.INCLUDE, "SHOW_INCLUDES"),
+      createFilter(createLabelFilteringFunction(EnumSet.of(M68kLabelBase.LabelKind.GLOBAL)),
+        M68kBundle.message("structureview.filter.labels"), M68kIcons.LABEL_GLOBAL, "SHOW_LABELS"),
       createFilter(psiElement -> psiElement instanceof M68kLocalLabel,
-        M68kBundle.message("structureview.filter.local.labels"), AllIcons.Nodes.AbstractMethod, "SHOW_LOCAL_LABELS"),
-      createFilter(psiElement -> psiElement instanceof M68kEquDirectiveBase,
-        M68kBundle.message("structureview.filter.equ"), AllIcons.Nodes.Constant, "SHOW_EQU_DIRECTIVES")
+        M68kBundle.message("structureview.filter.local.labels"), M68kIcons.LABEL_LOCAL, "SHOW_LOCAL_LABELS"),
+      createFilter(createLabelFilteringFunction(EnumSet.of(M68kLabelBase.LabelKind.MACRO)),
+        M68kBundle.message("structureview.filter.macros"), M68kIcons.LABEL_MACRO, "SHOW_MACROS"),
+      createFilter(createLabelFilteringFunction(
+        EnumSet.of(M68kLabelBase.LabelKind.EQU, M68kLabelBase.LabelKind.EQUALS,
+          M68kLabelBase.LabelKind.SET, M68kLabelBase.LabelKind.EQUR)),
+        M68kBundle.message("structureview.filter.assignments"), M68kIcons.LABEL_EQU, "SHOW_ASSIGNMENTS")
+    };
+  }
+
+  private static BooleanFunction<PsiElement> createLabelFilteringFunction(EnumSet<M68kLabelBase.LabelKind> kinds) {
+    return psiElement -> {
+      if (!(psiElement instanceof M68kLabel)) {
+        return false;
+      }
+
+      M68kLabel label = (M68kLabel) psiElement;
+      return kinds.contains(label.getLabelKind());
     };
   }
 

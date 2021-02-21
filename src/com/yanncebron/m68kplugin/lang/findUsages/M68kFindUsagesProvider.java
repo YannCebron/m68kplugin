@@ -61,6 +61,10 @@ public class M68kFindUsagesProvider implements FindUsagesProvider {
   @Override
   public String getType(@NotNull PsiElement element) {
     if (element instanceof M68kLabel) {
+      M68kLabel label = (M68kLabel) element;
+      if (label.getLabelKind() == M68kLabelBase.LabelKind.MACRO) {
+        return M68kBundle.message("term.macro");
+      }
       return M68kBundle.message("term.label");
     }
 

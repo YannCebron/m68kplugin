@@ -27,6 +27,10 @@ public class M68kStructureViewTest extends BasePlatformTestCase {
     myFixture.configureByText("a.s",
       "myEqu EQU 2\n" +
         "myEquals = 42\n" +
+        "mySet set 1\n" +
+        "myEqur equr d0\n" +
+        "myMacro macro\n" +
+        " endm\n" +
         " include \"include.s\"\n" +
         " incbin \"incbin_file\"\n" +
         "label\n" +
@@ -40,6 +44,9 @@ public class M68kStructureViewTest extends BasePlatformTestCase {
         "-a.s\n" +
           " myEqu\n" +
           " myEquals\n" +
+          " mySet\n" +
+          " myEqur\n" +
+          " myMacro\n" +
           " include.s\n" +
           " incbin_file\n" +
           " -label\n" +

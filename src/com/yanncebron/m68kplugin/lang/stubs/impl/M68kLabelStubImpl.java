@@ -20,24 +20,30 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.NamedStubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
+import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
 import com.yanncebron.m68kplugin.lang.stubs.M68kLabelStub;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class M68kLabelStubImpl extends NamedStubBase<M68kLabel> implements M68kLabelStub {
 
-  private final boolean isMacro;
+  private final M68kLabelBase.LabelKind labelKind;
 
   public M68kLabelStubImpl(StubElement parent,
                            @NotNull IStubElementType elementType,
                            @Nullable String name,
-                           boolean isMacro) {
+                           M68kLabelBase.LabelKind labelKind) {
     super(parent, elementType, name);
-    this.isMacro = isMacro;
+    this.labelKind = labelKind;
   }
 
   @Override
-  public boolean isMacro() {
-    return isMacro;
+  public M68kLabelBase.LabelKind getLabelKind() {
+    return labelKind;
+  }
+
+  @Override
+  public String toString() {
+    return "M68kLabelStubImpl['" + getName() + "', " + getLabelKind() + "]";
   }
 }

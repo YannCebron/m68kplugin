@@ -18,8 +18,9 @@ package com.yanncebron.m68kplugin.lang.stubs;
 
 import com.intellij.psi.stubs.NamedStub;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
+import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
 
 public interface M68kLabelStub extends NamedStub<M68kLabel> {
 
-  boolean isMacro();
+  M68kLabelBase.LabelKind getLabelKind();
 }

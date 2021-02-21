@@ -16,7 +16,6 @@
 
 package com.yanncebron.m68kplugin.structureview;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.structureView.impl.common.PsiTreeElementBase;
 import com.intellij.navigation.ItemPresentation;
@@ -25,19 +24,14 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.M68kFile;
+import com.yanncebron.m68kplugin.lang.M68kIcons;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kEquDirectiveBase;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncbinDirective;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncludeDirective;
-import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
+import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 class M68kRootStructureViewTreeElement extends PsiTreeElementBase<M68kFile> {
   M68kRootStructureViewTreeElement(M68kFile psiFile) {
@@ -55,7 +49,8 @@ class M68kRootStructureViewTreeElement extends PsiTreeElementBase<M68kFile> {
   @Override
   public Collection<StructureViewTreeElement> getChildrenBase() {
     final List<PsiElement> children = PsiTreeUtil.getChildrenOfAnyType(getValue(),
-      M68kLabel.class, M68kEquDirectiveBase.class,
+      M68kLabel.class, M68kMacroDirective.class,
+      M68kEquDirectiveBase.class, M68kEqurDirective.class,
       M68kIncludeDirective.class, M68kIncbinDirective.class);
 
     Collection<StructureViewTreeElement> nodes = new ArrayList<>();
@@ -68,32 +63,15 @@ class M68kRootStructureViewTreeElement extends PsiTreeElementBase<M68kFile> {
             return ContainerUtil.map2List(m68kLabel.getLocalLabels(), M68kStructureViewNode::new);
           }
         });
-      } else if (child instanceof M68kEquDirectiveBase) {  // todo refactor to mixin + itemPresentation
+      } else if (child instanceof M68kMacroDirective) {
+        M68kMacroDirective macroDirective = (M68kMacroDirective) child;
+        nodes.add(new M68kStructureViewNode(macroDirective.getLabel()));
+      } else if (child instanceof M68kEquDirectiveBase) {
         M68kEquDirectiveBase equDirective = (M68kEquDirectiveBase) child;
-        nodes.add(new PsiTreeElementBase<M68kEquDirectiveBase>(equDirective) {
-          @Nullable
-          @Override
-          public String getPresentableText() {
-            return equDirective.getLabel().getText();
-          }
-
-          @Override
-          public String getLocationString() {
-            final M68kExpression expression = equDirective.getExpression();
-            return expression != null ? expression.getText() : null;
-          }
-
-          @Override
-          public Icon getIcon(boolean open) {
-            return AllIcons.Nodes.Constant;
-          }
-
-          @NotNull
-          @Override
-          public Collection<StructureViewTreeElement> getChildrenBase() {
-            return Collections.emptyList();
-          }
-        });
+        nodes.add(new M68kStructureViewNode(equDirective.getLabel(), equDirective.getExpression()));
+      } else if (child instanceof M68kEqurDirective) {
+        M68kEqurDirective equrDirective = (M68kEqurDirective) child;
+        nodes.add(new M68kStructureViewNode(equrDirective.getLabel(), equrDirective.getAdmRrd()));
       } else if (child instanceof M68kIncludeDirective) {
         M68kIncludeDirective includeDirective = (M68kIncludeDirective) child;
         nodes.add(new PsiTreeElementBase<M68kIncludeDirective>(includeDirective) {
@@ -105,7 +83,7 @@ class M68kRootStructureViewTreeElement extends PsiTreeElementBase<M68kFile> {
 
           @Override
           public Icon getIcon(boolean open) {
-            return AllIcons.Graph.Layout;
+            return M68kIcons.INCLUDE;
           }
 
           @Override
@@ -125,7 +103,7 @@ class M68kRootStructureViewTreeElement extends PsiTreeElementBase<M68kFile> {
 
           @Override
           public Icon getIcon(boolean open) {
-            return AllIcons.FileTypes.Archive;
+            return M68kIcons.INCBIN;
           }
 
           @Override
@@ -140,32 +118,41 @@ class M68kRootStructureViewTreeElement extends PsiTreeElementBase<M68kFile> {
     return nodes;
   }
 
+
   private static class M68kStructureViewNode extends PsiTreeElementBase<PsiElement> {
 
+    private final String location;
+
     M68kStructureViewNode(PsiElement element) {
+      this(element, null);
+    }
+    
+    M68kStructureViewNode(PsiElement element, @Nullable PsiElement locationElement) {
       super(element);
+      this.location = locationElement == null ? null : locationElement.getText();
+    }
+
+    @Override
+    public String getLocationString() {
+      return location;
     }
 
     @Nullable
     @Override
     public String getPresentableText() {
-      final ItemPresentation itemPresentation = getItemPresentation();
-      return itemPresentation != null ? itemPresentation.getPresentableText() : null;
+      return getItemPresentation().getPresentableText();
     }
 
     @Override
     public Icon getIcon(boolean open) {
-      final ItemPresentation itemPresentation = getItemPresentation();
-      return itemPresentation != null ? itemPresentation.getIcon(false) : null;
+      return getItemPresentation().getIcon(false);
     }
 
-    @Nullable
+    @NotNull
     private ItemPresentation getItemPresentation() {
       PsiElement element = getElement();
-      if (element instanceof NavigationItem) {
-        return ((NavigationItem) element).getPresentation();
-      }
-      return null;
+      assert element instanceof NavigationItem : element;
+      return Objects.requireNonNull(((NavigationItem) element).getPresentation());
     }
 
     @NotNull

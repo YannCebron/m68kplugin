@@ -22,6 +22,7 @@ import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.inspections.M68kUnresolvedLabelReferenceInspection;
+import com.yanncebron.m68kplugin.lang.M68kIcons;
 import org.jetbrains.annotations.NotNull;
 
 @TestDataPath("$PROJECT_ROOT/testData/resolve/macro")
@@ -55,10 +56,14 @@ public class M68kMacroResolveTest extends BasePlatformTestCase {
     final LookupElement myMacro = findLookupElement("macro1");
     final LookupElementPresentation myPresentation = LookupElementPresentation.renderElement(myMacro);
     assertTrue(myPresentation.isItemTextBold());
+    M68kLabelResolveTest.assertLookupIcon(myPresentation, M68kIcons.LABEL_MACRO);
     assertEmpty(myPresentation.getTypeText());
+    M68kLabelResolveTest.assertPrioritizedLookupElement(myMacro, 30.0);
 
     final LookupElement otherLabel = findLookupElement("otherMacro");
     final LookupElementPresentation otherLabelPresentation = LookupElementPresentation.renderElement(otherLabel);
+    assertFalse(otherLabelPresentation.isItemTextBold());
+    M68kLabelResolveTest.assertLookupIcon(myPresentation, M68kIcons.LABEL_MACRO);
     assertEquals("macroHighlightResolvingInMultipleFiles_other.s", otherLabelPresentation.getTypeText());
   }
 

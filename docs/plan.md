@@ -86,9 +86,6 @@
 ## Navigation
 
 - **WIP** goto symbol for labels/macros/EQUs (?) --> Stubs
-- **WIP** structure view
-  - `equr` "location"
-  - macros
 - breadcrumbs
 - Quick Definition: better range for labels/"code-blocks"
 - Goto Related: `.i`/binary file -> including files
