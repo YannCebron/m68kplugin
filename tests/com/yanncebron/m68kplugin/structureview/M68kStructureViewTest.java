@@ -16,8 +16,16 @@
 
 package com.yanncebron.m68kplugin.structureview;
 
+import com.intellij.ide.util.treeView.smartTree.TreeElement;
+import com.intellij.ide.util.treeView.smartTree.TreeElementWrapper;
+import com.intellij.navigation.ItemPresentation;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
+import com.intellij.ui.DeferredIcon;
+import com.intellij.util.ui.tree.TreeUtil;
+import com.yanncebron.m68kplugin.lang.M68kIcons;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
@@ -52,6 +60,39 @@ public class M68kStructureViewTest extends BasePlatformTestCase {
           " -label\n" +
           "  localLabel\n" +
           " anotherLabel");
+
+
+      TreeElementWrapper root = (TreeElementWrapper) TreeUtil.getUserObject(component.getTree().getModel().getRoot());
+      assertNotNull(root);
+      TreeElement[] topLevelNodes = root.getValue().getChildren();
+      assertNodePresentation(topLevelNodes, 0, M68kIcons.LABEL_EQU, "2");
+      assertNodePresentation(topLevelNodes, 1, M68kIcons.LABEL_EQU, "42");
+      assertNodePresentation(topLevelNodes, 2, M68kIcons.LABEL_SET, "1");
+      assertNodePresentation(topLevelNodes, 3, M68kIcons.LABEL_EQUR, "d0");
+      assertNodePresentation(topLevelNodes, 4, M68kIcons.LABEL_MACRO, null);
+      assertNodePresentation(topLevelNodes, 5, M68kIcons.INCLUDE, null);
+      assertNodePresentation(topLevelNodes, 6, M68kIcons.INCBIN, null);
+      assertNodePresentation(topLevelNodes, 7, M68kIcons.LABEL_GLOBAL, null);
+
+      final TreeElement[] labelNodeChildren = topLevelNodes[7].getChildren();
+      assertSize(1, labelNodeChildren);
+      assertNodePresentation(labelNodeChildren, 0, M68kIcons.LABEL_LOCAL, null);
     });
+  }
+
+  private static void assertNodePresentation(TreeElement[] nodes, int index,
+                                             @NotNull Icon expectedIcon,
+                                             @Nullable String expectedLocationString) {
+    final ItemPresentation presentation = nodes[index].getPresentation();
+
+    Icon actualIcon = presentation.getIcon(false);
+    if (actualIcon instanceof DeferredIcon) {
+      actualIcon = ((DeferredIcon) actualIcon).evaluate();
+    }
+    assertEquals(expectedIcon, actualIcon);
+
+    if (expectedLocationString != null) {
+      assertEquals(expectedLocationString, presentation.getLocationString());
+    }
   }
 }
