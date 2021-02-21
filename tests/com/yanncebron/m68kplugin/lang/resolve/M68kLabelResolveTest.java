@@ -22,7 +22,7 @@ import com.intellij.codeInsight.lookup.LookupElementPresentation;
 import com.intellij.psi.PsiReference;
 import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
-import com.intellij.ui.DeferredIcon;
+import com.intellij.testFramework.fixtures.TestLookupElementPresentation;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.inspections.M68kUnresolvedLabelReferenceInspection;
 import com.yanncebron.m68kplugin.lang.M68kIcons;
@@ -126,8 +126,7 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
   }
 
   static void assertLookupIcon(LookupElementPresentation presentation, Icon expectedIcon) {
-    final DeferredIcon deferredIcon = assertInstanceOf(presentation.getIcon(), DeferredIcon.class);
-    assertEquals(expectedIcon, deferredIcon.evaluate());
+    assertEquals(expectedIcon, TestLookupElementPresentation.unwrapIcon(presentation.getIcon()));
   }
 
 }

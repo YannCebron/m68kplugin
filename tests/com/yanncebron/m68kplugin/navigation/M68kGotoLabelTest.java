@@ -23,7 +23,7 @@ import com.intellij.openapi.vfs.VirtualFileFilter;
 import com.intellij.psi.impl.PsiManagerEx;
 import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
-import com.intellij.ui.DeferredIcon;
+import com.intellij.testFramework.fixtures.TestLookupElementPresentation;
 import com.yanncebron.m68kplugin.lang.M68kIcons;
 
 import javax.swing.*;
@@ -73,11 +73,7 @@ public class M68kGotoLabelTest extends BasePlatformTestCase {
       if (Objects.equals(navigationItem.getName(), elementName)) {
         final ItemPresentation presentation = navigationItem.getPresentation();
         assertNotNull(presentation);
-        Icon actualIcon = presentation.getIcon(false);
-        if (actualIcon instanceof DeferredIcon) {
-          actualIcon = ((DeferredIcon) actualIcon).evaluate();
-        }
-        assertEquals(expectedIcon, actualIcon);
+        assertEquals(expectedIcon, TestLookupElementPresentation.unwrapIcon(presentation.getIcon(false)));
         assertEquals(elementName, presentation.getPresentableText());
         assertEquals(expectedLocation, presentation.getLocationString());
         return;

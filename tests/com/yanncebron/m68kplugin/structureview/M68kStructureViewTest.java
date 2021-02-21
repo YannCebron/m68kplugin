@@ -21,7 +21,7 @@ import com.intellij.ide.util.treeView.smartTree.TreeElementWrapper;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
-import com.intellij.ui.DeferredIcon;
+import com.intellij.testFramework.fixtures.TestLookupElementPresentation;
 import com.intellij.util.ui.tree.TreeUtil;
 import com.yanncebron.m68kplugin.lang.M68kIcons;
 import org.jetbrains.annotations.NotNull;
@@ -85,11 +85,7 @@ public class M68kStructureViewTest extends BasePlatformTestCase {
                                              @Nullable String expectedLocationString) {
     final ItemPresentation presentation = nodes[index].getPresentation();
 
-    Icon actualIcon = presentation.getIcon(false);
-    if (actualIcon instanceof DeferredIcon) {
-      actualIcon = ((DeferredIcon) actualIcon).evaluate();
-    }
-    assertEquals(expectedIcon, actualIcon);
+    assertEquals(expectedIcon, TestLookupElementPresentation.unwrapIcon(presentation.getIcon(false)));
 
     if (expectedLocationString != null) {
       assertEquals(expectedLocationString, presentation.getLocationString());
