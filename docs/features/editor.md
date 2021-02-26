@@ -16,7 +16,9 @@ nav_order: 1
 
 ## Documentation
 
-*View \| Quick Documentation* for mnemonics
+*View \| Quick Documentation* for mnemonics 
+
+Show type and value tooltip for labels on <kbd>CTRL/Command + Click</kbd>
 
 ## Labels
 

@@ -131,6 +131,9 @@
     <lang.documentationProvider
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.documentation.M68kInstructionDocumentationProvider"/>
+    <lang.documentationProvider
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.documentation.M68kLabelDocumentationProvider"/>
 
     <problemFileHighlightFilter
         implementation="com.yanncebron.m68kplugin.lang.M68kProblemFileHighlightFilter"/>

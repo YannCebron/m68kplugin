@@ -53,7 +53,6 @@
 - formatter
 - documentation:
   - quick doc/hover for number literals: dec/hex/oct/bin/ASCII
-  - quick doc/hover for `equ`/`equr`/`set`/`=` directives
   - render mode for comments before label
 - **WIP** code folding with settings for:
   - `movem` push/pop
