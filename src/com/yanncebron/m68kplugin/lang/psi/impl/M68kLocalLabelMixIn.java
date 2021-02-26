@@ -21,7 +21,6 @@ import com.intellij.ide.projectView.PresentationData;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.presentation.java.SymbolPresentationUtil;
 import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.util.IncorrectOperationException;
@@ -47,6 +46,11 @@ abstract class M68kLocalLabelMixIn extends ASTWrapperPsiElement implements M68kL
   }
 
   @Override
+  public @Nullable String getValue() {
+    return null;
+  }
+
+  @Override
   public int getTextOffset() {
     return getNode().getStartOffset() + 1;
   }
@@ -64,9 +68,7 @@ abstract class M68kLocalLabelMixIn extends ASTWrapperPsiElement implements M68kL
 
   @Override
   public ItemPresentation getPresentation() {
-    return new PresentationData(getName(),
-      SymbolPresentationUtil.getFilePathPresentation(getContainingFile()),
-      getIcon(0), null);
+    return new PresentationData(getName(), getValue(), getIcon(0), null);
   }
 
   @Nullable

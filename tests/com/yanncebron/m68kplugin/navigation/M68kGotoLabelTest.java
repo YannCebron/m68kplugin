@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.navigation;
 
+import com.intellij.ide.util.ModuleRendererFactory;
 import com.intellij.ide.util.gotoByName.GotoSymbolModel2;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
@@ -56,17 +57,19 @@ public class M68kGotoLabelTest extends BasePlatformTestCase {
       "aEqur",
       "bLabel");
 
-    assertPresentation(model, "aLabel", M68kIcons.LABEL_GLOBAL, "gotoLabelA.s");
-    assertPresentation(model, "aMacro", M68kIcons.LABEL_MACRO, "gotoLabelA.s");
-    assertPresentation(model, "aEqu", M68kIcons.LABEL_EQU, "gotoLabelA.s");
-    assertPresentation(model, "aEquals", M68kIcons.LABEL_EQU, "gotoLabelA.s");
-    assertPresentation(model, "aSet", M68kIcons.LABEL_SET, "gotoLabelA.s");
-    assertPresentation(model, "aEqur", M68kIcons.LABEL_EQUR, "gotoLabelA.s");
+    assertPresentation(model, "aLabel", M68kIcons.LABEL_GLOBAL, null, "gotoLabelA.s");
+    assertPresentation(model, "aMacro", M68kIcons.LABEL_MACRO, null, "gotoLabelA.s");
+    assertPresentation(model, "aEqu", M68kIcons.LABEL_EQU, "42", "gotoLabelA.s");
+    assertPresentation(model, "aEquals", M68kIcons.LABEL_EQU, "1", "gotoLabelA.s");
+    assertPresentation(model, "aSet", M68kIcons.LABEL_SET, "2", "gotoLabelA.s");
+    assertPresentation(model, "aEqur", M68kIcons.LABEL_EQUR, "d0", "gotoLabelA.s");
 
-    assertPresentation(model, "bLabel", M68kIcons.LABEL_GLOBAL, "gotoLabelB.s");
+    assertPresentation(model, "bLabel", M68kIcons.LABEL_GLOBAL, null, "gotoLabelB.s");
   }
 
-  private void assertPresentation(GotoSymbolModel2 model, String elementName, Icon expectedIcon, String expectedLocation) {
+  private void assertPresentation(GotoSymbolModel2 model, String elementName,
+                                  Icon expectedIcon, String expectedLocation,
+                                  String expectedFileLocation) {
     final Object[] elements = model.getElementsByName(elementName, false, "");
     for (Object element : elements) {
       final NavigationItem navigationItem = assertInstanceOf(element, NavigationItem.class);
@@ -76,6 +79,12 @@ public class M68kGotoLabelTest extends BasePlatformTestCase {
         assertEquals(expectedIcon, TestLookupElementPresentation.unwrapIcon(presentation.getIcon(false)));
         assertEquals(elementName, presentation.getPresentableText());
         assertEquals(expectedLocation, presentation.getLocationString());
+
+        final ModuleRendererFactory moduleRendererFactory = ModuleRendererFactory.findInstance(navigationItem);
+        assertInstanceOf(moduleRendererFactory, M68kModuleRendererFactory.class);
+        final DefaultListCellRenderer renderer = moduleRendererFactory.getModuleRenderer();
+        renderer.getListCellRendererComponent(new JList<>(), navigationItem, 0, false, false);
+        assertEquals(expectedFileLocation, renderer.getText());
         return;
       }
     }

@@ -18,18 +18,38 @@ package com.yanncebron.m68kplugin.lang.psi;
 
 import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiNamedElement;
+import org.jetbrains.annotations.Nullable;
 
 public interface M68kLabelBase extends PsiNamedElement, NavigatablePsiElement, M68kPsiElement {
 
   enum LabelKind {
-    GLOBAL,
-    LOCAL,
-    EQU,
-    EQUALS,
-    SET,
-    EQUR,
-    MACRO
+    GLOBAL(false),
+    LOCAL(false),
+    EQU(true),
+    EQUALS(true),
+    SET(true),
+    EQUR(true),
+    MACRO(false);
+
+    private final boolean hasValue;
+
+    LabelKind(boolean hasValue) {
+      this.hasValue = hasValue;
+    }
+
+    public boolean hasValue() {
+      return hasValue;
+    }
   }
 
   LabelKind getLabelKind();
+
+  /**
+   * Associated value for assignments.
+   *
+   * @return {@code null} if not {@link LabelKind#hasValue} is {@code false} or value is undefined.
+   */
+  @Nullable
+  String getValue();
+
 }

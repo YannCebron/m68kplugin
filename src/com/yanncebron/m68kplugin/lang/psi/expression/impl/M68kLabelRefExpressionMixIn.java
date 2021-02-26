@@ -114,6 +114,7 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
 
         processLabels(label -> {
           final LookupElementBuilder builder = LookupElementBuilder.createWithIcon(label)
+            .withTailText(getTailText(label), true)
             .bold();
           variants.add(PrioritizedLookupElement.withPriority(builder, 30));
           return true;
@@ -122,12 +123,20 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
         processIncludeLabels(label -> {
           final PsiFile containingFile = label.getContainingFile();
           final LookupElementBuilder builder = LookupElementBuilder.createWithIcon(label)
+            .withTailText(getTailText(label), true)
             .withTypeText(SymbolPresentationUtil.getFilePathPresentation(containingFile), true);
           variants.add(builder);
           return true;
         }, null);
 
         return variants.toArray();
+      }
+
+      @NotNull
+      private String getTailText(M68kLabel label) {
+        final String value = label.getValue();
+        if (value == null) return "";
+        return " " + value;
       }
 
       private void processLabels(Processor<M68kLabel> processor) {

@@ -29,43 +29,49 @@ public class M68kStubBuilderTest extends LightPlatformTestCase {
   public void testLabel() {
     doTest("label",
       "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', GLOBAL]\n");
+        "  LABEL:M68kLabelStubImpl['label', GLOBAL, '']\n");
   }
 
   public void testLabelWithColon() {
     doTest("label:",
       "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', GLOBAL]\n");
+        "  LABEL:M68kLabelStubImpl['label', GLOBAL, '']\n");
   }
 
   public void testLabelWithMacro() {
     doTest("label macro",
       "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', MACRO]\n");
+        "  LABEL:M68kLabelStubImpl['label', MACRO, '']\n");
   }
 
   public void testLabelWithEqu() {
-    doTest("label equ 42",
+    doTest("label equ 42 comment",
       "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', EQU]\n");
+        "  LABEL:M68kLabelStubImpl['label', EQU, '42']\n");
+  }
+
+  public void testLabelWithEquNoValue() {
+    doTest("labelEquNoValue equ ",
+      "PsiFileStubImpl\n" +
+        "  LABEL:M68kLabelStubImpl['labelEquNoValue', EQU, '']\n");
   }
 
   public void testLabelWithEquals() {
-    doTest("label = 42",
+    doTest("label = 42*something",
       "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', EQUALS]\n");
+        "  LABEL:M68kLabelStubImpl['label', EQUALS, '42*something']\n");
   }
 
   public void testLabelWithSet() {
     doTest("label set 42",
       "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', SET]\n");
+        "  LABEL:M68kLabelStubImpl['label', SET, '42']\n");
   }
 
   public void testLabelWithEqur() {
     doTest("label equr d7",
       "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', EQUR]\n");
+        "  LABEL:M68kLabelStubImpl['label', EQUR, 'd7']\n");
   }
 
   public void testLocalLabelNotStubbed() {

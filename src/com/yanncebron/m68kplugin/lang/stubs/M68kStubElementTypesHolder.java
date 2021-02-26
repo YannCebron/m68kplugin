@@ -22,6 +22,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.psi.impl.source.tree.LightTreeUtil;
 import com.intellij.psi.stubs.*;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.yanncebron.m68kplugin.lang.M68kFileElementType;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
@@ -48,31 +49,42 @@ public interface M68kStubElementTypesHolder {
         assert parent != null;
 
         M68kLabelBase.LabelKind kind;
+        String value = "";
 
         final IElementType tokenType = parent.getTokenType();
         if (tokenType == M68kFileElementType.INSTANCE) {
           kind = M68kLabelBase.LabelKind.GLOBAL;
         } else if (tokenType == M68kTypes.EQU_DIRECTIVE) {
           kind = M68kLabelBase.LabelKind.EQU;
+          value = parseValue(tree, parent, M68kTokenTypes.EQU);
         } else if (tokenType == M68kTypes.EQUALS_DIRECTIVE) {
           kind = M68kLabelBase.LabelKind.EQUALS;
+          value = parseValue(tree, parent, M68kTokenTypes.EQ);
         } else if (tokenType == M68kTypes.MACRO_DIRECTIVE) {
           kind = M68kLabelBase.LabelKind.MACRO;
         } else if (tokenType == M68kTypes.SET_DIRECTIVE) {
           kind = M68kLabelBase.LabelKind.SET;
+          value = parseValue(tree, parent, M68kTokenTypes.SET);
         } else if (tokenType == M68kTypes.EQUR_DIRECTIVE) {
           kind = M68kLabelBase.LabelKind.EQUR;
+          value = parseValue(tree, parent, M68kTokenTypes.EQUR);
         } else {
           throw new IllegalArgumentException("unknown parent token type: " + tokenType);
         }
 
-        return new M68kLabelStubImpl(parentStub, this, LightTreeUtil.toFilteredString(tree, idNode, null), kind);
+        return new M68kLabelStubImpl(parentStub, this,
+          LightTreeUtil.toFilteredString(tree, idNode, null),
+          kind, value);
       }
 
       @Override
       public void serialize(@NotNull M68kLabelStub stub, @NotNull StubOutputStream dataStream) throws IOException {
         dataStream.writeName(stub.getName());
-        dataStream.writeByte(stub.getLabelKind().ordinal());
+        final M68kLabelBase.LabelKind labelKind = stub.getLabelKind();
+        dataStream.writeByte(labelKind.ordinal());
+        if (labelKind.hasValue()) {
+          dataStream.writeUTFFast(stub.getValue());
+        }
       }
 
       @NotNull
@@ -90,7 +102,8 @@ public interface M68kStubElementTypesHolder {
         }
         assert kind != null : ordinal;
 
-        return new M68kLabelStubImpl(parentStub, this, name, kind);
+        String value = kind.hasValue() ? dataStream.readUTFFast() : "";
+        return new M68kLabelStubImpl(parentStub, this, name, kind, value);
       }
 
       @Override
@@ -115,6 +128,22 @@ public interface M68kStubElementTypesHolder {
       @Override
       public M68kLabel createPsi(@NotNull M68kLabelStub stub) {
         return new M68kLabelImpl(stub, this);
+      }
+
+      @NotNull
+      private String parseValue(@NotNull LighterAST tree,
+                                @NotNull LighterASTNode node,
+                                IElementType valueDelimiterTokenType) {
+        boolean expectingInit = false;
+        for (LighterASTNode child : tree.getChildren(node)) {
+          final IElementType type = child.getTokenType();
+          if (type == valueDelimiterTokenType) {
+            expectingInit = true;
+          } else if (expectingInit && !TokenSet.WHITE_SPACE.contains(type)) {
+            return LightTreeUtil.toFilteredString(tree, child, null);
+          }
+        }
+        return "";
       }
 
     };

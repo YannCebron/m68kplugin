@@ -137,6 +137,8 @@
 
     <gotoSymbolContributor
         implementation="com.yanncebron.m68kplugin.navigation.M68kGotoLabelChooseByNameContributor"/>
+    <moduleRendererFactory
+        implementation="com.yanncebron.m68kplugin.navigation.M68kModuleRendererFactory"/>
 
     <spellchecker.support
         language="M68k"

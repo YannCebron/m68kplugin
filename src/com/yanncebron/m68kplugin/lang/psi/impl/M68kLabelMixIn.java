@@ -21,16 +21,13 @@ import com.intellij.ide.projectView.PresentationData;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.presentation.java.SymbolPresentationUtil;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.M68kIcons;
-import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
-import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
+import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 import com.yanncebron.m68kplugin.lang.stubs.M68kLabelStub;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -78,6 +75,34 @@ abstract class M68kLabelMixIn extends StubBasedPsiElementBase<M68kLabelStub> imp
   }
 
   @Override
+  public @Nullable String getValue() {
+    final M68kLabelStub stub = getGreenStub();
+    if (stub != null) {
+      return stub.getValue();
+    }
+
+    final LabelKind labelKind = getLabelKind();
+    if (!labelKind.hasValue()) return null;
+
+    switch (labelKind) {
+      case EQUALS:
+      case EQU:
+      case SET:
+        final PsiElement parent = getParent();
+        assert parent instanceof M68kEquDirectiveBase;
+        final M68kExpression expression = ((M68kEquDirectiveBase) parent).getExpression();
+        return expression != null ? expression.getText() : null;
+      case EQUR:
+        final PsiElement equrParent = getParent();
+        assert equrParent instanceof M68kEqurDirective;
+        final M68kAdmRrd register = ((M68kEqurDirective) equrParent).getAdmRrd();
+        return register != null ? register.getText() : null;
+      default:
+        throw new IllegalArgumentException("cannot determine value for '" + labelKind + "' " + this);
+    }
+  }
+
+  @Override
   protected @Nullable Icon getElementIcon(int flags) {
     final LabelKind labelKind = getLabelKind();
     switch (labelKind) {
@@ -99,8 +124,7 @@ abstract class M68kLabelMixIn extends StubBasedPsiElementBase<M68kLabelStub> imp
 
   @Override
   public ItemPresentation getPresentation() {
-    return new PresentationData(getName(), SymbolPresentationUtil.getFilePathPresentation(getContainingFile()),
-      getIcon(0), null);
+    return new PresentationData(getName(), getValue(), getIcon(0), null);
   }
 
   @Nullable

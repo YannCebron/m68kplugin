@@ -68,10 +68,10 @@ class M68kRootStructureViewTreeElement extends PsiTreeElementBase<M68kFile> {
         nodes.add(new M68kStructureViewNode(macroDirective.getLabel()));
       } else if (child instanceof M68kEquDirectiveBase) {
         M68kEquDirectiveBase equDirective = (M68kEquDirectiveBase) child;
-        nodes.add(new M68kStructureViewNode(equDirective.getLabel(), equDirective.getExpression()));
+        nodes.add(new M68kStructureViewNode(equDirective.getLabel()));
       } else if (child instanceof M68kEqurDirective) {
         M68kEqurDirective equrDirective = (M68kEqurDirective) child;
-        nodes.add(new M68kStructureViewNode(equrDirective.getLabel(), equrDirective.getAdmRrd()));
+        nodes.add(new M68kStructureViewNode(equrDirective.getLabel()));
       } else if (child instanceof M68kIncludeDirective) {
         M68kIncludeDirective includeDirective = (M68kIncludeDirective) child;
         nodes.add(new PsiTreeElementBase<M68kIncludeDirective>(includeDirective) {
@@ -121,20 +121,13 @@ class M68kRootStructureViewTreeElement extends PsiTreeElementBase<M68kFile> {
 
   private static class M68kStructureViewNode extends PsiTreeElementBase<PsiElement> {
 
-    private final String location;
-
     M68kStructureViewNode(PsiElement element) {
-      this(element, null);
-    }
-    
-    M68kStructureViewNode(PsiElement element, @Nullable PsiElement locationElement) {
       super(element);
-      this.location = locationElement == null ? null : locationElement.getText();
     }
 
     @Override
     public String getLocationString() {
-      return location;
+      return getItemPresentation().getLocationString();
     }
 
     @Nullable

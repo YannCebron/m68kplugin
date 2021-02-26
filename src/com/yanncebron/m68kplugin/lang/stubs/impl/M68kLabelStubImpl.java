@@ -28,13 +28,16 @@ import org.jetbrains.annotations.Nullable;
 public class M68kLabelStubImpl extends NamedStubBase<M68kLabel> implements M68kLabelStub {
 
   private final M68kLabelBase.LabelKind labelKind;
+  private final String value;
 
   public M68kLabelStubImpl(StubElement parent,
                            @NotNull IStubElementType elementType,
                            @Nullable String name,
-                           M68kLabelBase.LabelKind labelKind) {
+                           M68kLabelBase.LabelKind labelKind,
+                           @NotNull String value) {
     super(parent, elementType, name);
     this.labelKind = labelKind;
+    this.value = value;
   }
 
   @Override
@@ -43,7 +46,12 @@ public class M68kLabelStubImpl extends NamedStubBase<M68kLabel> implements M68kL
   }
 
   @Override
+  public @NotNull String getValue() {
+    return value;
+  }
+
+  @Override
   public String toString() {
-    return "M68kLabelStubImpl['" + getName() + "', " + getLabelKind() + "]";
+    return "M68kLabelStubImpl['" + getName() + "', " + getLabelKind() + ", '" + getValue() + "']";
   }
 }

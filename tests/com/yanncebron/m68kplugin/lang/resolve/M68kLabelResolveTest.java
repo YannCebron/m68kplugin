@@ -53,6 +53,7 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     final LookupElementPresentation anotherTopLevelPresentation = LookupElementPresentation.renderElement(anotherTopLevelLabel);
     assertLookupIcon(anotherTopLevelPresentation, M68kIcons.LABEL_GLOBAL);
     assertTrue(anotherTopLevelPresentation.isItemTextBold());
+    assertEmpty(anotherTopLevelPresentation.getTailText());
     assertEmpty(anotherTopLevelPresentation.getTypeText());
     assertPrioritizedLookupElement(anotherTopLevelLabel, 30.0);
 
@@ -60,13 +61,14 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     final LookupElementPresentation localLabelPresentation = LookupElementPresentation.renderElement(localLabelLookupElement);
     assertLookupIcon(localLabelPresentation, M68kIcons.LABEL_LOCAL);
     assertTrue(localLabelPresentation.isItemTextBold());
-    assertEmpty(anotherTopLevelPresentation.getTypeText());
+    assertEmpty(localLabelPresentation.getTypeText());
     assertPrioritizedLookupElement(localLabelLookupElement, 50.0);
 
     final LookupElement setLabel = findLookupElement("setLabel");
     final LookupElementPresentation setLabelPresentation = LookupElementPresentation.renderElement(setLabel);
     assertLookupIcon(setLabelPresentation, M68kIcons.LABEL_SET);
     assertTrue(setLabelPresentation.isItemTextBold());
+    assertEquals(" 2", setLabelPresentation.getTailText());
     assertEmpty(setLabelPresentation.getTypeText());
     assertPrioritizedLookupElement(setLabel, 30.0);
 
@@ -74,6 +76,7 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     final LookupElementPresentation equLabelPresentation = LookupElementPresentation.renderElement(equLabel);
     assertLookupIcon(equLabelPresentation, M68kIcons.LABEL_EQU);
     assertTrue(equLabelPresentation.isItemTextBold());
+    assertEquals(" 42", equLabelPresentation.getTailText());
     assertEmpty(equLabelPresentation.getTypeText());
     assertPrioritizedLookupElement(equLabel, 30.0);
 
@@ -81,6 +84,7 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     final LookupElementPresentation equalsLabelPresentation = LookupElementPresentation.renderElement(equalsLabel);
     assertLookupIcon(equalsLabelPresentation, M68kIcons.LABEL_EQU);
     assertTrue(equalsLabelPresentation.isItemTextBold());
+    assertEquals(" 33", equalsLabelPresentation.getTailText());
     assertEmpty(equalsLabelPresentation.getTypeText());
     assertPrioritizedLookupElement(equalsLabel, 30.0);
   }
