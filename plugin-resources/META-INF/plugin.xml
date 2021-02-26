@@ -126,11 +126,12 @@
     <lang.implementationTextSelectioner
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.editor.M68kImplementationTextSelectioner"/>
+
     <lang.foldingBuilder
         language="M68k"
-        implementationClass="com.yanncebron.m68kplugin.editor.M68kFoldingBuilder"/>
+        implementationClass="com.yanncebron.m68kplugin.editor.folding.M68kFoldingBuilder"/>
     <codeFoldingOptionsProvider
-        instance="com.yanncebron.m68kplugin.editor.M68kFoldingOptionsProvider"/>
+        instance="com.yanncebron.m68kplugin.editor.folding.M68kFoldingOptionsProvider"/>
 
     <lang.documentationProvider
         language="M68k"
