@@ -13,7 +13,7 @@
 - unpaired conditional assembly directives, missing `endc`/`endif`
 - highlight static conditional assembly directives status, e.g., `IFD`/`IFND`
 - macro call: parameter count mismatch
-- `ReadWriteAccessDetector` for registers
+- `ReadWriteAccessDetector` for registers/label references
 - method separators:
   - "detected" subroutines
 - color-picker/inlays: copper list colors
@@ -31,7 +31,6 @@
   - local label: in-place rename
   - find usages
   - highlight usages
-  - eventually `UsageTargetProvider`
   - safe delete
   - rename `RenameInputValidator`
   - `NameSuggestionProvider` ?  
@@ -49,7 +48,7 @@
 - `EnterHandlerDelegate` smart indent? or `LineIndentProvider`
 - expand/shrink selection:
   - **WIP** "blocks" - stop at branch instructions
-  - macro/conditional assembly blocks
+  - macro/conditional assembly blocks (automatically via `CodeBlockSupportHandler`?)
 - `M68kCommaFlipper`: swap src\|dest if valid
 - formatter
 - documentation:
