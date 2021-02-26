@@ -60,6 +60,10 @@
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.lang.M68kCommenter"/>
 
+    <intentionAction>
+  <categoryKey>intentions.category</categoryKey>
+        <className>com.yanncebron.m68kplugin.codeInsight.M68kShowUsedRegistersIntention</className>
+    </intentionAction>
 
     <lang.syntaxHighlighterFactory
         language="M68k"
@@ -182,9 +186,5 @@
   <actions>
     <action id="M68kProjectStatisticsAction"
             class="com.yanncebron.m68kplugin.internal.M68kProjectStatisticsAction"/>
-
-    <action id="M68kShowUsedRegistersAction"
-            icon="AllIcons.Actions.Properties"
-            class="com.yanncebron.m68kplugin.codeInsight.M68kShowUsedRegistersAction"/>
   </actions>
 </idea-plugin>

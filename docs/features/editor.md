@@ -16,7 +16,7 @@ nav_order: 1
 
 ## Documentation
 
-*View \| Quick Documentation* for mnemonics 
+*View \| Quick Documentation* for mnemonics
 
 Show type and value tooltip for labels on <kbd>CTRL/Command + Click</kbd>
 
@@ -36,7 +36,9 @@ Show type and value tooltip for labels on <kbd>CTRL/Command + Click</kbd>
   * Custom regions via enclosing `* region [placeholderText]` / `* endregion` comments
 * Live Templates
 * Code Style Settings: Tab Size, Visual Guides
-                         
+
 ## Code Insight
 
-* *Show Used/Free Registers* for selection
+### Intentions
+
+*Show Used/Free Registers* for selection

@@ -16,8 +16,8 @@
 
 package com.yanncebron.m68kplugin.codeInsight;
 
-import com.intellij.codeInsight.actions.SimpleCodeInsightAction;
 import com.intellij.codeInsight.hint.HintManager;
+import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
@@ -28,20 +28,41 @@ import com.intellij.xml.util.XmlStringUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public class M68kShowUsedRegistersAction extends SimpleCodeInsightAction {
+public class M68kShowUsedRegistersIntention implements IntentionAction {
+
+  @Override
+  public @Nls(capitalization = Nls.Capitalization.Sentence) @NotNull String getText() {
+    return getFamilyName();
+  }
+
+  @Override
+  public @NotNull @Nls(capitalization = Nls.Capitalization.Sentence) String getFamilyName() {
+    return M68kBundle.message("intention.M68kShowUsedRegistersIntention.text");
+  }
+
+  @Override
+  public boolean isAvailable(@NotNull Project project, Editor editor, PsiFile file) {
+    return file instanceof M68kFile && editor.getSelectionModel().hasSelection();
+  }
+
+  @Override
+  public boolean startInWriteAction() {
+    return false;
+  }
 
   @Override
   public void invoke(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
     Set<M68kRegister> used = getUsedRegisters(editor, file);
 
     if (used.isEmpty()) {
-      HintManager.getInstance().showInformationHint(editor, M68kBundle.message("action.M68kShowUsedRegistersAction.hint.no.registers"));
+      HintManager.getInstance().showInformationHint(editor, M68kBundle.message("intention.M68kShowUsedRegistersIntention.hint.no.registers"));
       return;
     }
 
@@ -136,15 +157,5 @@ public class M68kShowUsedRegistersAction extends SimpleCodeInsightAction {
       return true;
     });
     return used;
-  }
-
-  @Override
-  protected boolean isValidForFile(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
-    return file instanceof M68kFile && editor.getSelectionModel().hasSelection();
-  }
-
-  @Override
-  public boolean startInWriteAction() {
-    return false;
   }
 }
