@@ -10,7 +10,7 @@
 - `rem` sections: treat as real comment
 - unpaired directives:
   - `struct`/`estruct`
-- unpaired conditional assembly directives, missing `endc`/`endif`
+- unpaired conditional assembly directives (nesting!), missing `endc`/`endif`
 - highlight static conditional assembly directives status, e.g., `IFD`/`IFND`
 - macro call: parameter count mismatch
 - `ReadWriteAccessDetector` for registers/label references
