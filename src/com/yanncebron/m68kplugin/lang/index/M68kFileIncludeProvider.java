@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import com.intellij.util.Consumer;
 import com.intellij.util.PathUtilRt;
 import com.intellij.util.SmartList;
 import com.intellij.util.indexing.FileContent;
-import com.intellij.util.text.StringSearcher;
+import com.intellij.util.text.CharArrayUtil;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncbinDirective;
@@ -54,8 +54,8 @@ public class M68kFileIncludeProvider extends FileIncludeProvider {
   @Override
   public @NotNull FileIncludeInfo @NotNull [] getIncludeInfos(FileContent content) {
     CharSequence contentAsText = content.getContentAsText();
-    if (new StringSearcher("include", false, true).scan(contentAsText) == -1 &&
-      new StringSearcher("incbin", false, true).scan(contentAsText) == -1) {
+    if (CharArrayUtil.indexOf(contentAsText, "include", 0) == -1 &&
+      CharArrayUtil.indexOf(contentAsText, "incbin", 0) == -1) {
       return FileIncludeInfo.EMPTY;
     }
 
