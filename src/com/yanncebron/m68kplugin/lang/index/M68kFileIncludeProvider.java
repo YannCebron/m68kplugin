@@ -42,12 +42,12 @@ public class M68kFileIncludeProvider extends FileIncludeProvider {
   }
 
   @Override
-  public boolean acceptFile(VirtualFile file) {
+  public boolean acceptFile(@NotNull VirtualFile file) {
     return FileTypeRegistry.getInstance().isFileOfType(file, M68kFileType.INSTANCE);
   }
 
   @Override
-  public void registerFileTypesUsedForIndexing(@NotNull Consumer<FileType> fileTypeSink) {
+  public void registerFileTypesUsedForIndexing(@NotNull Consumer<? super FileType> fileTypeSink) {
     fileTypeSink.consume(M68kFileType.INSTANCE);
   }
 

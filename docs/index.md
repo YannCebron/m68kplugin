@@ -16,7 +16,7 @@ in [IntelliJ](https://www.jetbrains.org/intellij/sdk/docs/intro/intellij_platfor
 
 There are currently no published releases, snapshot artifacts for manual installation are available via [GitHub CI](https://github.com/YannCebron/m68kplugin/actions?query=workflow%3A%22Build+%26+Test%22).
 
-Plugin is compatible with IDE version 2020.1 and later.              
+Plugin is compatible with IDE version 2020.2.4 and later.              
                
 ---
 

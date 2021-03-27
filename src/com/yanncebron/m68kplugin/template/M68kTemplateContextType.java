@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@
 
 package com.yanncebron.m68kplugin.template;
 
+import com.intellij.codeInsight.template.TemplateActionContext;
 import com.intellij.codeInsight.template.TemplateContextType;
-import com.intellij.psi.PsiFile;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +29,8 @@ public class M68kTemplateContextType extends TemplateContextType {
   }
 
   @Override
-  public boolean isInContext(@NotNull PsiFile file, int offset) {
-    return file instanceof M68kFile;
+  public boolean isInContext(@NotNull TemplateActionContext templateActionContext) {
+    return templateActionContext.getFile() instanceof M68kFile;
   }
+
 }
