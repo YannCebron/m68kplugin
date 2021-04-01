@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,9 @@ package com.yanncebron.m68kplugin.lang.psi;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
+import com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective;
+import org.jetbrains.annotations.Nullable;
 
 public final class M68kPsiTreeUtil {
 
@@ -60,6 +63,14 @@ public final class M68kPsiTreeUtil {
                                            Class<? extends M68kPsiElement> matchingElement,
                                            Class<? extends M68kPsiElement>... stopAtElements) {
     return !processSiblingsForwards(element, m68kPsiElement -> !matchingElement.isInstance(m68kPsiElement), stopAtElements);
+  }
+
+  @Nullable
+  public static M68kPsiElement getContainingInstructionOrDirective(PsiElement element) {
+    return PsiTreeUtil.getParentOfType(element,
+      M68kInstruction.class,
+      M68kDirective.class,
+      M68kConditionalAssemblyDirective.class);
   }
 
 }

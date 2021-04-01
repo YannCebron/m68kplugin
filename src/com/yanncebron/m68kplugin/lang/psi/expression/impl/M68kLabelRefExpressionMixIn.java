@@ -29,14 +29,14 @@ import com.intellij.psi.PsiReferenceBase;
 import com.intellij.psi.presentation.java.SymbolPresentationUtil;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.CommonProcessors;
 import com.intellij.util.Processor;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
-import com.yanncebron.m68kplugin.lang.psi.*;
-import com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective;
+import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
+import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
+import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
+import com.yanncebron.m68kplugin.lang.psi.M68kPsiTreeUtil;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kEquDirectiveBase;
 import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
 import org.jetbrains.annotations.NotNull;
@@ -167,11 +167,7 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
       @SafeVarargs
       private final void processCurrentFileLabels(Processor<M68kPsiElement> labelProcessor,
                                                   Class<? extends M68kPsiElement>... stopAtElements) {
-        PsiElement startElement =
-          PsiTreeUtil.getParentOfType(getElement(),
-            M68kInstruction.class,
-            M68kDirective.class,
-            M68kConditionalAssemblyDirective.class);
+        final M68kPsiElement startElement = M68kPsiTreeUtil.getContainingInstructionOrDirective(getElement());
         assert startElement != null : getElement().getText();
 
         if (!M68kPsiTreeUtil.processSiblingsBackwards(startElement, labelProcessor, stopAtElements)) return;
