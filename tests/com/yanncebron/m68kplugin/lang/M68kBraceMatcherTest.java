@@ -21,9 +21,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
-import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 
 public class M68kBraceMatcherTest extends BasePlatformTestCase {
 
@@ -53,36 +51,6 @@ public class M68kBraceMatcherTest extends BasePlatformTestCase {
   public void testReptEndr() {
     doTest(" <caret>rept 5\n" +
       " endr");
-  }
-
-  public void testConditionalAssembly() {
-    doConditionalTest(M68kTokenTypes.IF);
-    doConditionalTest(M68kTokenTypes.IFB);
-    doConditionalTest(M68kTokenTypes.IFNB);
-    doConditionalTest(M68kTokenTypes.IFC);
-    doConditionalTest(M68kTokenTypes.IFNC);
-    doConditionalTest(M68kTokenTypes.IFD);
-    doConditionalTest(M68kTokenTypes.IFND);
-    doConditionalTest(M68kTokenTypes.IFEQ);
-    doConditionalTest(M68kTokenTypes.IFNE);
-    doConditionalTest(M68kTokenTypes.IFGE);
-    doConditionalTest(M68kTokenTypes.IFGT);
-    doConditionalTest(M68kTokenTypes.IFLE);
-    doConditionalTest(M68kTokenTypes.IFLT);
-    doConditionalTest(M68kTokenTypes.IFMI);
-    doConditionalTest(M68kTokenTypes.IFPL);
-    doConditionalTest(M68kTokenTypes.ELSE);
-    doConditionalTest(M68kTokenTypes.ELSEIF);
-    doConditionalTest(M68kTokenTypes.IFMACROD);
-    doConditionalTest(M68kTokenTypes.IFMACROND);
-  }
-
-  private void doConditionalTest(IElementType startElement) {
-    doTest(" <caret>" + startElement.toString() + "\n" +
-      " endc");
-
-    doTest(" <caret>" + startElement + "\n" +
-      " endif");
   }
 
   private void doTest(String source) {

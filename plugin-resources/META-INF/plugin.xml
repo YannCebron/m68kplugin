@@ -59,6 +59,9 @@
     <lang.commenter
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.lang.M68kCommenter"/>
+    <codeBlockSupportHandler
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.lang.M68kConditionalAssemblyCodeBlockSupportHandler"/>
 
     <intentionAction>
       <!--suppress PluginXmlCapitalization -->

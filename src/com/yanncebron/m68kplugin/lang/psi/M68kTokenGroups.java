@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -224,11 +224,7 @@ public final class M68kTokenGroups {
     XREF
   );
 
-  public static final TokenSet CONDITIONAL_ASSEMBLY_DIRECTIVES = TokenSet.create(
-    ELSE,
-    ELSEIF,
-    ENDC,
-    ENDIF,
+  public static final TokenSet CONDITIONAL_ASSEMBLY_START_DIRECTIVES = TokenSet.create(
     IF,
     IFB,
     IFC,
@@ -247,6 +243,23 @@ public final class M68kTokenGroups {
     IFNE,
     IFPL
   );
+
+  public static final TokenSet CONDITIONAL_ASSEMBLY_STRUCTURE_DIRECTIVES = TokenSet.create(
+    ELSE,
+    ELSEIF
+  );
+
+  public static final TokenSet CONDITIONAL_ASSEMBLY_END_DIRECTIVES = TokenSet.create(
+    ENDC,
+    ENDIF
+  );
+
+  public static final TokenSet CONDITIONAL_ASSEMBLY_DIRECTIVES =
+    TokenSet.orSet(
+      CONDITIONAL_ASSEMBLY_START_DIRECTIVES,
+      CONDITIONAL_ASSEMBLY_END_DIRECTIVES,
+      CONDITIONAL_ASSEMBLY_STRUCTURE_DIRECTIVES
+    );
 
   public static final TokenSet OPERATORS = TokenSet.create(
     AMPERSAND,

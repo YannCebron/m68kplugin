@@ -30,6 +30,7 @@ Show type and value tooltip for labels on <kbd>CTRL/Command + Click</kbd>
 
 * Smart *Edit \| Extend/Shrink Selection*
 * *Code \| Move Element Left/Right* for `exg`, binary expressions, register list, `dc` values
+* *Move Caret to Code Block Start/End* for Conditional Assembly Directives
 * Spellchecker with bundled dictionaries (M68k/Amiga)
 * Code Folding
   * Zero-terminated string literal (`dc.b "a text",0`)

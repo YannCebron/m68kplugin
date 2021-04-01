@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,17 +20,16 @@ import com.intellij.lang.BracePair;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.util.ArrayUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * @see M68kConditionalAssemblyCodeBlockSupportHandler for conditional assembly structure
+ */
 public class M68kBraceMatcher implements PairedBraceMatcher {
 
-  private final BracePair[] pairs = ArrayUtil.mergeArrays(
+  private final BracePair[] pairs =
     new BracePair[]{
       new BracePair(M68kTokenTypes.L_PAREN, M68kTokenTypes.R_PAREN, false),
       new BracePair(M68kTokenTypes.L_BRACKET, M68kTokenTypes.R_BRACKET, false),
@@ -39,28 +38,7 @@ public class M68kBraceMatcher implements PairedBraceMatcher {
       new BracePair(M68kTokenTypes.INLINE, M68kTokenTypes.EINLINE, true),
       new BracePair(M68kTokenTypes.REM, M68kTokenTypes.EREM, true),
       new BracePair(M68kTokenTypes.REPT, M68kTokenTypes.ENDR, true),
-    },
-    createConditionalAssemblyBracePairs(
-      M68kTokenTypes.IF,
-      M68kTokenTypes.IFB, M68kTokenTypes.IFNB,
-      M68kTokenTypes.IFC, M68kTokenTypes.IFNC,
-      M68kTokenTypes.IFD, M68kTokenTypes.IFND,
-      M68kTokenTypes.IFEQ, M68kTokenTypes.IFNE,
-      M68kTokenTypes.IFGE, M68kTokenTypes.IFGT,
-      M68kTokenTypes.IFLE, M68kTokenTypes.IFLT,
-      M68kTokenTypes.IFMI, M68kTokenTypes.IFPL,
-      M68kTokenTypes.ELSE, M68kTokenTypes.ELSEIF,
-      M68kTokenTypes.IFMACROD, M68kTokenTypes.IFMACROND)
-  );
-
-  private BracePair[] createConditionalAssemblyBracePairs(IElementType... tokenTypes) {
-    List<BracePair> pairs = new ArrayList<>();
-    for (IElementType tokenType : tokenTypes) {
-      pairs.add(new BracePair(tokenType, M68kTokenTypes.ENDC, true));
-      pairs.add(new BracePair(tokenType, M68kTokenTypes.ENDIF, true));
-    }
-    return pairs.toArray(new BracePair[0]);
-  }
+    };
 
   @NotNull
   @Override
