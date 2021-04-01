@@ -31,9 +31,9 @@
   - find usages
   - highlight usages
   - safe delete
-  - rename `RenameInputValidator`
-  - `NameSuggestionProvider` ?
-  - detect rename conflicts `RenamePsiElementProcessor`  
+  - rename:
+    - `RenameInputValidatorEx`
+    - `NameSuggestionProvider` ?
   - unresolved: quick-fix to add `include` for existing label
 - register:
   - shift up/down through available ones
