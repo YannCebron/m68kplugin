@@ -24,9 +24,7 @@ public class M68kRefactoringSupportProvider extends RefactoringSupportProvider {
 
   @Override
   public boolean isInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context) {
-//    System.out.println("M68kRefactoringSupportProvider.isInplaceRenameAvailable " + element + ": " + context);
-//    return element instanceof M68kLabelBase;
-    return false;
+    return false; // todo return element instanceof M68kLocalLabel;
   }
 
 }
