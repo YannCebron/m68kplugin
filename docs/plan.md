@@ -26,7 +26,6 @@
 ## Resolve/Refactor
 
 - labels:
-  - resolve references
   - local label: in-place rename
   - find usages
   - highlight usages

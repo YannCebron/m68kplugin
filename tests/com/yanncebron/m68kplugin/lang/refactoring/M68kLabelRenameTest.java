@@ -40,4 +40,8 @@ public class M68kLabelRenameTest extends BasePlatformTestCase {
     myFixture.checkResultByFile("multipleFiles.s", "multipleFiles_after.s", true);
   }
 
+  public void testLocal() {
+    myFixture.testRenameUsingHandler("local.s", "local_after.s", "newName");
+  }
+
 }

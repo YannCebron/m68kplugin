@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,21 @@
 package com.yanncebron.m68kplugin.lang.psi.expression.impl;
 
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.AbstractElementManipulator;
 import com.intellij.util.IncorrectOperationException;
-import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
 import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-// todo inline in LabelReference#handleRename?
 public class M68kLabelRefExpressionElementManipulator extends AbstractElementManipulator<M68kLabelRefExpression> {
 
   @Nullable
   @Override
   public M68kLabelRefExpression handleContentChange(@NotNull M68kLabelRefExpression element, @NotNull TextRange range, String newContent) throws IncorrectOperationException {
-    final M68kLabelRefExpression labelReference = M68kElementFactory.createLabelRefExpression(element.getProject(), newContent);
+    String labelName = StringUtil.startsWithChar(element.getText(), '.') ? "." + newContent : newContent; // todo hack for local labels, extract to M68kLabelRefExpression#isLocal?
+    final M68kLabelRefExpression labelReference = M68kElementFactory.createLabelRefExpression(element.getProject(), labelName);
     element.replace(labelReference);
     return element;
   }
