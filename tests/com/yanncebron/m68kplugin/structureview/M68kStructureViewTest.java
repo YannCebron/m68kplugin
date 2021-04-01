@@ -90,6 +90,8 @@ public class M68kStructureViewTest extends BasePlatformTestCase {
 
     if (expectedLocationString != null) {
       assertEquals(expectedLocationString, presentation.getLocationString());
+    } else {
+      assertNull(presentation.getLocationString());
     }
   }
 }
