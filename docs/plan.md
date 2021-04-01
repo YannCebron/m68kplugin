@@ -72,7 +72,7 @@
 - string in `dc.b` not terminated with `,0`
 - check optimizations from vasm/DevPac
 - multiple `opt` directives (?)
-- label naming conventions
+- label naming conventions (`AbstractNamingConventionInspection`)
 - cyclic `include`
 - expression:
   - type check
