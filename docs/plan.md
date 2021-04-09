@@ -29,7 +29,8 @@
   - local label: in-place rename
   - find usages
   - highlight usages
-  - safe delete
+  - safe delete (quickfix via `M68kUnusedLabelInspection`)
+  - highlight duplicated names (conditional!)  
   - rename:
     - `RenameInputValidatorEx`
     - `NameSuggestionProvider` ?
