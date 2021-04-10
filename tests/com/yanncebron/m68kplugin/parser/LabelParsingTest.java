@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -95,13 +95,12 @@ public class LabelParsingTest extends M68kParsingTestCase {
     doCodeTest(".s bra.s .s");
   }
 
-  // todo does not work without '\n' after label
   public void testLocalLabelWithColonWithDataSizeName() throws IOException {
-    doCodeTest(".s: \n bra.s .s");
+    doCodeTest(".s:  bra.s .s");
   }
 
   public void testLocalLabelWithColonWithDataSizeNameMultipleSpaces() throws IOException {
-    doCodeTest(".s: \n   bra.s   .s");
+    doCodeTest(".s:  bra.s   .s");
   }
 
 }
