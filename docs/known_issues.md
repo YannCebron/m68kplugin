@@ -7,7 +7,8 @@ title: Known Issues
 ## Resolving
 
 - `include` directives not evaluated, resolving across all project files
-                     
+- respects only first match for symbols defined more than once (e.g., wrapped using conditional assembly directives)
+
 ## Editor
 
 - Code block handling of nested conditional assembly directives
