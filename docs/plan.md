@@ -22,6 +22,7 @@
   - loop ranges
 - unreachable code `ControlFlowProvider`
 - `section` directive: smarter highlighting/codeinsight
+- inspections: suppress via comment
 
 ## Resolve/Refactor
 
@@ -30,7 +31,7 @@
   - find usages
   - highlight usages
   - safe delete (quickfix via `M68kUnusedLabelInspection`)
-  - highlight duplicated names (conditional!)  
+  - highlight duplicated names (conditional!)
   - rename:
     - `RenameInputValidatorEx`
     - `NameSuggestionProvider` ?
@@ -88,7 +89,9 @@
 - Goto Related: `.i`/binary file -> including files
 - Gutter Icon: `include` all included files (recursively)
 - `include` UML visualization
-- structure view: `section`
+- structure view:
+  - `section`
+  - macro: # of parameters
 
 ## IDE
 
