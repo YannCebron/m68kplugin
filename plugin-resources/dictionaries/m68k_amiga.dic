@@ -23,7 +23,6 @@ bbusy
 beamcon
 beamsync
 bitplane
-bitplane
 bitplanes
 bitsperbyte
 bitsperlong
@@ -207,7 +206,6 @@ menuhelp
 metacomco
 minint
 minterm
-minterm
 minterms
 modulos
 mousebutton
@@ -287,7 +285,6 @@ strlong
 strn
 strnicmp
 strvbl
-sysbase
 sysbase
 taglist
 tanh
