@@ -88,6 +88,7 @@
 - Goto Related: `.i`/binary file -> including files
 - Gutter Icon: `include` all included files (recursively)
 - `include` UML visualization
+- structure view: `section`
 
 ## IDE
 
