@@ -7,8 +7,12 @@ title: Known Issues
 ## Resolving
 
 - `include` directives not evaluated, resolving across all project files
+                     
+## Editor
 
-## Broken Lexing/Parsing
+- Code block handling of nested conditional assembly directives
+
+## Lexing/Parsing
 
 ### Directives
 
