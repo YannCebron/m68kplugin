@@ -17,8 +17,10 @@
 package com.yanncebron.m68kplugin.lang.psi.expression.impl;
 
 import com.intellij.codeInsight.completion.PrioritizedLookupElement;
+import com.intellij.codeInsight.daemon.EmptyResolveMessageProvider;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.codeInspection.util.InspectionMessage;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.project.Project;
@@ -34,6 +36,7 @@ import com.intellij.util.Processor;
 import com.intellij.util.Processors;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
+import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
@@ -72,7 +75,7 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
     return new LabelReference(this);
   }
 
-  private static class LabelReference extends PsiReferenceBase<M68kLabelRefExpressionMixIn> {
+  private static class LabelReference extends PsiReferenceBase<M68kLabelRefExpressionMixIn> implements EmptyResolveMessageProvider {
 
     LabelReference(M68kLabelRefExpressionMixIn element) {
       super(element);
@@ -210,5 +213,9 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
       return StubIndex.getElements(M68kLabelStubIndex.KEY, key, project, scope, M68kLabel.class);
     }
 
+    @Override
+    public @InspectionMessage @NotNull String getUnresolvedMessagePattern() {
+      return M68kBundle.message("label.cannot.resolve", getValue());
+    }
   }
 }
