@@ -18,13 +18,13 @@ title: Known Issues
 ### Unsupported CPUs
 
 Currently, only 68000 instructions are supported. Others will display false positive
-> _"Cannot resolve macro $MNEMONIC$"_
+> _"Cannot resolve macro '$MNEMONIC$'"_
 
 ### Directives
 
 Unsupported directives ([VASM](http://sun.hasenbraten.de/vasm/release/vasm_4.html#Mot-Syntax-Module)) will display
 false positive
-> _"Cannot resolve macro $DIRECTIVE$"_
+> _"Cannot resolve macro '$DIRECTIVE$'"_
 
 - `rorg`
 - `offset` (Devpac)
