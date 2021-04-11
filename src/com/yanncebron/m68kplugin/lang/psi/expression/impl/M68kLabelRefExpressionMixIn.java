@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,15 +50,15 @@ import java.util.List;
 /**
  * Provides reference to label.
  * <ol>
- *   <li>if local label, search backwards, then forwards for local labels only - until encountering label ("parent scope")</li>
+ *   <li>if local label, search backwards, then forwards for local labels only - until encountering global label ("parent scope")</li>
  *   <li>if label, search backwards, then forwards in the current file</li>
- *   <li>if label, search in related files (includes), TODO: currently "all files"</li>
+ *   <li>if label, search in related files (includes), TODO: currently "all other files"</li>
  * </ol>
  * <p>
  * This allows for both correct scoping of local labels and optimal performance, as resolving can be optimized for each type.
  * </p>
  * <p>
- * In completion, local labels and labels from the current file are prioritized and shown in bold.
+ * In completion variants, local labels and labels from the current file are prioritized and shown in bold.
  * </p>
  */
 abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
