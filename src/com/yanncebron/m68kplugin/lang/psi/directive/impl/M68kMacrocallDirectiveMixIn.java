@@ -33,10 +33,7 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiModificationTracker;
-import com.intellij.util.CommonProcessors;
-import com.intellij.util.IncorrectOperationException;
-import com.intellij.util.Processor;
-import com.intellij.util.SmartList;
+import com.intellij.util.*;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
@@ -162,7 +159,7 @@ abstract class M68kMacrocallDirectiveMixIn extends ASTWrapperPsiElement {
       }
 
       List<String> allKeys = new ArrayList<>();
-      StubIndex.getInstance().processAllKeys(M68kMacroStubIndex.KEY, new CommonProcessors.CollectProcessor<>(allKeys), includeSearchScope, null);
+      StubIndex.getInstance().processAllKeys(M68kMacroStubIndex.KEY, Processors.cancelableCollectProcessor(allKeys), includeSearchScope, null);
       for (String key : allKeys) {
         if (!ContainerUtil.process(getMacroStubLabels(key, project, includeSearchScope), processor)) return;
       }

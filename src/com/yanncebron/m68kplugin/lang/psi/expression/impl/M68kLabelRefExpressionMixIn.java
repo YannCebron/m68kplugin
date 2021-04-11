@@ -31,6 +31,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.CommonProcessors;
 import com.intellij.util.Processor;
+import com.intellij.util.Processors;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
@@ -185,7 +186,7 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
         }
 
         List<String> allKeys = new ArrayList<>(500);
-        StubIndex.getInstance().processAllKeys(M68kLabelStubIndex.KEY, new CommonProcessors.CollectProcessor<>(allKeys), includeSearchScope, null);
+        StubIndex.getInstance().processAllKeys(M68kLabelStubIndex.KEY, Processors.cancelableCollectProcessor(allKeys), includeSearchScope, null);
         for (String key : allKeys) {
           if (!ContainerUtil.process(getStubLabels(key, project, includeSearchScope), processor)) return;
         }
