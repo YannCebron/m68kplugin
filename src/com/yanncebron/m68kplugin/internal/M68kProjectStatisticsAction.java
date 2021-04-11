@@ -31,9 +31,11 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiErrorElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.include.FileIncludeManager;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.M68kFile;
@@ -43,6 +45,8 @@ import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -93,11 +97,40 @@ public class M68kProjectStatisticsAction extends AnAction {
           final VirtualFile[] recursiveInclude = fileIncludeManager.getIncludedFiles(virtualFile, true, true);
           final VirtualFile[] incbinInclude = fileIncludeManager.getIncludedFiles(virtualFile, false);
 
-          String info = StringUtils.rightPad(virtualFile.getName(), 40) +
-            StringUtils.leftPad(String.valueOf(errors.length), 8) + " | "
-            + directInclude.length + " (" + (recursiveInclude.length - 1) + ") [" + incbinInclude.length + "]";
-          fileInfos.add(info);
+          int labelRefs = 0;
+          int labelRefsUnresolved = 0;
+          int macroCalls = 0;
+          int macroCallsUnresolved = 0;
+          for (M68kPsiElement element : m68kPsiFile.findChildrenByClass(M68kPsiElement.class)) {
+            if (element instanceof M68kMacroCallDirective) {
+              final PsiReference reference = element.getReference();
+              assert reference != null;
+              if (reference.resolve() == null) {
+                macroCallsUnresolved++;
+              }
+              macroCalls++;
+            }
 
+            for (M68kPsiElement m68kPsiElement : PsiTreeUtil.getChildrenOfTypeAsList(element, M68kPsiElement.class)) {
+              if (!(m68kPsiElement instanceof M68kLabelRefExpression)) continue;
+
+              try {
+                final PsiReference reference = m68kPsiElement.getReference();
+                assert reference != null;
+                if (reference.resolve() == null) {
+                  labelRefsUnresolved++;
+                }
+                labelRefs++;
+              } catch (AssertionError ignored) {
+              }
+            }
+          }
+          String info = StringUtils.rightPad(virtualFile.getName(), 30) +
+            StringUtils.leftPad(String.valueOf(errors.length), 8) +
+            " | " + StringUtils.rightPad(labelRefsUnresolved + "/" + labelRefs, 7) +
+            " | " + StringUtils.rightPad(macroCallsUnresolved + "/" + macroCalls, 7) +
+            " | " + directInclude.length + " (" + (recursiveInclude.length - 1) + ") [" + incbinInclude.length + "]";
+          fileInfos.add(info);
 
           M68kInstruction[] computeInstructions = m68kPsiFile.findChildrenByClass(M68kInstruction.class);
           countByClass(instructions, computeInstructions);
@@ -108,12 +141,12 @@ public class M68kProjectStatisticsAction extends AnAction {
           countByClass(directives, m68kPsiFile.findChildrenByClass(M68kDirective.class));
           countByClass(conditional, m68kPsiFile.findChildrenByClass(M68kConditionalAssemblyDirective.class));
         }
-      }), "Scanning Files...", true, project);
+      }), "Scanning files...", true, project);
 
     StringBuilder sb = new StringBuilder();
     sb.append("Total files: ").append(fileInfos.size()).append("  Total Errors: ").append(totalErrors[0]).append("\n\n");
     Collections.sort(fileInfos);
-    sb.append("File                                      Errors | include (recursive) [incbin]\n");
+    sb.append("File                            Errors | Label   | Macro   | include (recursive) [incbin] \n");
     sb.append(StringUtil.join(fileInfos, "\n"));
 
     appendClasses(labels, sb);
