@@ -69,140 +69,146 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
 
   @Override
   public PsiReference getReference() {
-    return new PsiReferenceBase<M68kLabelRefExpressionMixIn>(this) {
-      @Nullable
-      @Override
-      public PsiElement resolve() {
-        final String labelName = getValue();
-        if (labelName.startsWith(".")) {
-          final CommonProcessors.FindProcessor<M68kLocalLabel> findLocalProcessor = new CommonProcessors.FindProcessor<M68kLocalLabel>() {
-            @Override
-            protected boolean accept(M68kLocalLabel localLabel) {
-              return labelName.equals("." + localLabel.getName());
-            }
-          };
-          processLocalLabels(findLocalProcessor);
-          return findLocalProcessor.getFoundValue();
-        }
+    return new LabelReference(this);
+  }
 
-        final CommonProcessors.FindProcessor<M68kLabel> findProcessor = new CommonProcessors.FindProcessor<M68kLabel>() {
+  private static class LabelReference extends PsiReferenceBase<M68kLabelRefExpressionMixIn> {
+
+    LabelReference(M68kLabelRefExpressionMixIn element) {
+      super(element);
+    }
+
+    @Nullable
+    @Override
+    public PsiElement resolve() {
+      final String labelName = getValue();
+      if (labelName.startsWith(".")) {
+        final CommonProcessors.FindProcessor<M68kLocalLabel> findLocalProcessor = new CommonProcessors.FindProcessor<M68kLocalLabel>() {
           @Override
-          protected boolean accept(M68kLabel label) {
-            return labelName.equals(label.getName());
+          protected boolean accept(M68kLocalLabel localLabel) {
+            return labelName.equals("." + localLabel.getName());
           }
         };
-        processLabels(findProcessor);
-        if (findProcessor.isFound()) {
-          return findProcessor.getFoundValue();
-        }
+        processLocalLabels(findLocalProcessor);
+        return findLocalProcessor.getFoundValue();
+      }
 
-        processIncludeLabels(findProcessor, labelName);
+      final CommonProcessors.FindProcessor<M68kLabel> findProcessor = new CommonProcessors.FindProcessor<M68kLabel>() {
+        @Override
+        protected boolean accept(M68kLabel label) {
+          return labelName.equals(label.getName());
+        }
+      };
+      processLabels(findProcessor);
+      if (findProcessor.isFound()) {
         return findProcessor.getFoundValue();
       }
 
-      @NotNull
-      @Override
-      public Object @NotNull [] getVariants() {
-        List<LookupElement> variants = new SmartList<>();
+      processIncludeLabels(findProcessor, labelName);
+      return findProcessor.getFoundValue();
+    }
 
-        processLocalLabels(localLabel -> {
-          final LookupElementBuilder builder = LookupElementBuilder.create(localLabel, "." + localLabel.getName())
-            .withIcon(localLabel.getIcon(0))
-            .bold();
-          variants.add(PrioritizedLookupElement.withPriority(builder, 50));
-          return true;
-        });
+    @NotNull
+    @Override
+    public Object @NotNull [] getVariants() {
+      List<LookupElement> variants = new SmartList<>();
 
-        processLabels(label -> {
-          final LookupElementBuilder builder = LookupElementBuilder.createWithIcon(label)
-            .withTailText(getTailText(label), true)
-            .bold();
-          variants.add(PrioritizedLookupElement.withPriority(builder, 30));
-          return true;
-        });
+      processLocalLabels(localLabel -> {
+        final LookupElementBuilder builder = LookupElementBuilder.create(localLabel, "." + localLabel.getName())
+          .withIcon(localLabel.getIcon(0))
+          .bold();
+        variants.add(PrioritizedLookupElement.withPriority(builder, 50));
+        return true;
+      });
 
-        processIncludeLabels(label -> {
-          final PsiFile containingFile = label.getContainingFile();
-          final LookupElementBuilder builder = LookupElementBuilder.createWithIcon(label)
-            .withTailText(getTailText(label), true)
-            .withTypeText(SymbolPresentationUtil.getFilePathPresentation(containingFile), true);
-          variants.add(builder);
-          return true;
-        }, null);
+      processLabels(label -> {
+        final LookupElementBuilder builder = LookupElementBuilder.createWithIcon(label)
+          .withTailText(getTailText(label), true)
+          .bold();
+        variants.add(PrioritizedLookupElement.withPriority(builder, 30));
+        return true;
+      });
 
-        return variants.toArray();
-      }
+      processIncludeLabels(label -> {
+        final PsiFile containingFile = label.getContainingFile();
+        final LookupElementBuilder builder = LookupElementBuilder.createWithIcon(label)
+          .withTailText(getTailText(label), true)
+          .withTypeText(SymbolPresentationUtil.getFilePathPresentation(containingFile), true);
+        variants.add(builder);
+        return true;
+      }, null);
 
-      @NotNull
-      private String getTailText(M68kLabel label) {
-        final String value = label.getValue();
-        if (value == null) return "";
-        return " " + value;
-      }
+      return variants.toArray();
+    }
 
-      private void processLabels(Processor<M68kLabel> processor) {
-        Processor<M68kPsiElement> labelProcessor = m68kPsiElement -> {
-          if (m68kPsiElement instanceof M68kLabel) {
-            return processor.process((M68kLabel) m68kPsiElement);
-          }
-          if (m68kPsiElement instanceof M68kEquDirectiveBase) {
-            return processor.process(((M68kEquDirectiveBase) m68kPsiElement).getLabel());
-          }
-          return true;
-        };
+    @NotNull
+    private String getTailText(M68kLabel label) {
+      final String value = label.getValue();
+      if (value == null) return "";
+      return " " + value;
+    }
 
-        processCurrentFileLabels(labelProcessor);
-      }
-
-      private void processLocalLabels(Processor<M68kLocalLabel> processor) {
-        Processor<M68kPsiElement> localLabelProcessor = m68kPsiElement -> {
-          if (m68kPsiElement instanceof M68kLocalLabel) {
-            return processor.process((M68kLocalLabel) m68kPsiElement);
-          }
-          return true;
-        };
-
-        processCurrentFileLabels(localLabelProcessor, M68kLabel.class);
-      }
-
-      @SafeVarargs
-      private final void processCurrentFileLabels(Processor<M68kPsiElement> labelProcessor,
-                                                  Class<? extends M68kPsiElement>... stopAtElements) {
-        final M68kPsiElement startElement = M68kPsiTreeUtil.getContainingInstructionOrDirective(getElement());
-        assert startElement != null : getElement().getText();
-
-        if (!M68kPsiTreeUtil.processSiblingsBackwards(startElement, labelProcessor, stopAtElements)) return;
-        M68kPsiTreeUtil.processSiblingsForwards(startElement, labelProcessor, stopAtElements);
-      }
-
-
-      private void processIncludeLabels(Processor<M68kLabel> processor, @Nullable String labelName) {
-        final Project project = getProject();
-        final GlobalSearchScope includeSearchScope = getIncludeSearchScope(project);
-
-        if (labelName != null) {
-          ContainerUtil.process(getStubLabels(labelName, project, includeSearchScope), processor);
-          return;
+    private void processLabels(Processor<M68kLabel> processor) {
+      Processor<M68kPsiElement> labelProcessor = m68kPsiElement -> {
+        if (m68kPsiElement instanceof M68kLabel) {
+          return processor.process((M68kLabel) m68kPsiElement);
         }
-
-        List<String> allKeys = new ArrayList<>(500);
-        StubIndex.getInstance().processAllKeys(M68kLabelStubIndex.KEY, Processors.cancelableCollectProcessor(allKeys), includeSearchScope, null);
-        for (String key : allKeys) {
-          if (!ContainerUtil.process(getStubLabels(key, project, includeSearchScope), processor)) return;
+        if (m68kPsiElement instanceof M68kEquDirectiveBase) {
+          return processor.process(((M68kEquDirectiveBase) m68kPsiElement).getLabel());
         }
+        return true;
+      };
+
+      processCurrentFileLabels(labelProcessor);
+    }
+
+    private void processLocalLabels(Processor<M68kLocalLabel> processor) {
+      Processor<M68kPsiElement> localLabelProcessor = m68kPsiElement -> {
+        if (m68kPsiElement instanceof M68kLocalLabel) {
+          return processor.process((M68kLocalLabel) m68kPsiElement);
+        }
+        return true;
+      };
+
+      processCurrentFileLabels(localLabelProcessor, M68kLabel.class);
+    }
+
+    @SafeVarargs
+    private final void processCurrentFileLabels(Processor<M68kPsiElement> labelProcessor,
+                                                Class<? extends M68kPsiElement>... stopAtElements) {
+      final M68kPsiElement startElement = M68kPsiTreeUtil.getContainingInstructionOrDirective(getElement());
+      assert startElement != null : getElement().getText();
+
+      if (!M68kPsiTreeUtil.processSiblingsBackwards(startElement, labelProcessor, stopAtElements)) return;
+      M68kPsiTreeUtil.processSiblingsForwards(startElement, labelProcessor, stopAtElements);
+    }
+
+
+    private void processIncludeLabels(Processor<M68kLabel> processor, @Nullable String labelName) {
+      final Project project = getElement().getProject();
+      final GlobalSearchScope includeSearchScope = getIncludeSearchScope(project);
+
+      if (labelName != null) {
+        ContainerUtil.process(getStubLabels(labelName, project, includeSearchScope), processor);
+        return;
       }
 
-      private GlobalSearchScope getIncludeSearchScope(Project project) {
-        final PsiFile containingFile = getContainingFile().getOriginalFile();
-        final GlobalSearchScope notCurrentFile = GlobalSearchScope.notScope(GlobalSearchScope.fileScope(containingFile));
-        return GlobalSearchScope.allScope(project).intersectWith(notCurrentFile);
+      List<String> allKeys = new ArrayList<>(500);
+      StubIndex.getInstance().processAllKeys(M68kLabelStubIndex.KEY, Processors.cancelableCollectProcessor(allKeys), includeSearchScope, null);
+      for (String key : allKeys) {
+        if (!ContainerUtil.process(getStubLabels(key, project, includeSearchScope), processor)) return;
       }
+    }
 
-      private Collection<M68kLabel> getStubLabels(String key, Project project, GlobalSearchScope scope) {
-        return StubIndex.getElements(M68kLabelStubIndex.KEY, key, project, scope, M68kLabel.class);
-      }
+    private GlobalSearchScope getIncludeSearchScope(Project project) {
+      final PsiFile containingFile = getElement().getContainingFile().getOriginalFile();
+      final GlobalSearchScope notCurrentFile = GlobalSearchScope.notScope(GlobalSearchScope.fileScope(containingFile));
+      return GlobalSearchScope.allScope(project).intersectWith(notCurrentFile);
+    }
 
-    };
+    private Collection<M68kLabel> getStubLabels(String key, Project project, GlobalSearchScope scope) {
+      return StubIndex.getElements(M68kLabelStubIndex.KEY, key, project, scope, M68kLabel.class);
+    }
+
   }
-
 }
