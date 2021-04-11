@@ -37,7 +37,7 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
     createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.comma", M68kTextAttributes.COMMA),
     createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.dot", M68kTextAttributes.DOT),
     createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.hash", M68kTextAttributes.HASH),
-    createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.operators", M68kTextAttributes.OPERATORS),
+    createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.operation.sign", M68kTextAttributes.OPERATION_SIGN),
     createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.parentheses", M68kTextAttributes.PARENTHESES),
     createDescriptor("color.settings.group.root", "attribute.descriptor.comment", M68kTextAttributes.COMMENT),
     createDescriptor("color.settings.group.root", "attribute.descriptor.data.size", M68kTextAttributes.DATA_SIZES),

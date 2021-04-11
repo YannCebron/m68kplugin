@@ -73,8 +73,8 @@ public class M68kTextAttributes {
     createTextAttributesKey("M68K_HASH", DefaultLanguageHighlighterColors.COMMA);
   public static final TextAttributesKey PARENTHESES =
     createTextAttributesKey("M68K_PARENTHESES", DefaultLanguageHighlighterColors.PARENTHESES);
-  public static final TextAttributesKey OPERATORS =
-    createTextAttributesKey("M68K_OPERATORS", DefaultLanguageHighlighterColors.OPERATION_SIGN);
+  public static final TextAttributesKey OPERATION_SIGN =
+    createTextAttributesKey("M68K_OPERATION_SIGN", DefaultLanguageHighlighterColors.OPERATION_SIGN);
 
   public static final TextAttributesKey COMMENT =
     createTextAttributesKey("M68K_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
