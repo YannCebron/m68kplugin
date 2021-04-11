@@ -38,10 +38,8 @@ import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.psi.M68kPsiTreeUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroDirective;
 import com.yanncebron.m68kplugin.lang.stubs.index.M68kMacroStubIndex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -55,7 +53,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Provides reference to macro.
  * <ol>
- *   <li>search backwards in current file</li>
+ *   <li>search in current file, must precede current element</li>
  *   <li>search in related files (includes), TODO: currently "all files"</li>
  * </ol>
  */
@@ -78,31 +76,32 @@ abstract class M68kMacrocallDirectiveMixIn extends ASTWrapperPsiElement {
 
   private class MacroCallReference extends PsiReferenceBase<M68kMacrocallDirectiveMixIn> implements EmptyResolveMessageProvider {
 
-    public MacroCallReference(ASTNode idNode) {
+    MacroCallReference(ASTNode idNode) {
       super(M68kMacrocallDirectiveMixIn.this, idNode.getTextRange().shiftLeft(M68kMacrocallDirectiveMixIn.this.getTextOffset()));
     }
 
     @Nullable
     @Override
     public PsiElement resolve() {
-      String name = getValue();
+      String macroName = getValue();
 
-      final CommonProcessors.FindProcessor<M68kLabel> findProcessor = new CommonProcessors.FindProcessor<M68kLabel>() {
+      final CommonProcessors.FindProcessor<M68kLabel> localFindProcessor = new CommonProcessors.FindProcessor<M68kLabel>() {
         @Override
         protected boolean accept(M68kLabel m68kLabel) {
-          return name.equals(m68kLabel.getName());
+          return m68kLabel.getTextOffset() < getElement().getTextOffset();
         }
       };
-      processLocalMacros(findProcessor);
-      if (findProcessor.isFound()) {
-        return findProcessor.getFoundValue();
+      processMacrosInScope(localFindProcessor, getCurrentFileSearchScope(), macroName);
+      if (localFindProcessor.isFound()) {
+        return localFindProcessor.getFoundValue();
       }
 
       // cache result from other files to speedup highlighting
       final Map<String, PsiElement> cachedValue = CachedValuesManager.getCachedValue(getContainingFile(), MACRO_NAME_CV_PROVIDER);
-      return cachedValue.computeIfAbsent(name, s -> {
-        processIncludeMacros(findProcessor, name);
-        return findProcessor.getFoundValue();
+      return cachedValue.computeIfAbsent(macroName, s -> {
+        final CommonProcessors.FindProcessor<M68kLabel> processor = new CommonProcessors.FindFirstProcessor<>();
+        processMacrosInScope(processor, getIncludeSearchScope(), macroName);
+        return processor.getFoundValue();
       });
     }
 
@@ -119,18 +118,19 @@ abstract class M68kMacrocallDirectiveMixIn extends ASTWrapperPsiElement {
     @Override
     public Object @NotNull [] getVariants() {
       List<LookupElement> variants = new SmartList<>();
-      processLocalMacros(m68kLabel -> {
+      processMacrosInScope(m68kLabel -> {
+        if (!(m68kLabel.getTextOffset() < getElement().getOriginalElement().getTextOffset())) return true;
         variants.add(PrioritizedLookupElement.withPriority(LookupElementBuilder.createWithIcon(m68kLabel).bold(), 30));
         return true;
-      });
+      }, getCurrentFileSearchScope(), null);
 
-      processIncludeMacros(m68kLabel -> {
+      processMacrosInScope(m68kLabel -> {
         final PsiFile containingFile = m68kLabel.getContainingFile();
         final LookupElementBuilder builder = LookupElementBuilder.createWithIcon(m68kLabel)
           .withTypeText(SymbolPresentationUtil.getFilePathPresentation(containingFile), true);
         variants.add(builder);
         return true;
-      }, null);
+      }, getIncludeSearchScope(), null);
       return variants.toArray();
     }
 
@@ -140,35 +140,28 @@ abstract class M68kMacrocallDirectiveMixIn extends ASTWrapperPsiElement {
       return M68kBundle.message("macrocall.directive.cannot.resolve", getValue());
     }
 
-    private void processLocalMacros(Processor<M68kLabel> processor) {
-      M68kPsiTreeUtil.processSiblingsBackwards(getElement(), m68kPsiElement -> {
-        if (m68kPsiElement instanceof M68kMacroDirective) {
-          return processor.process(((M68kMacroDirective) m68kPsiElement).getLabel());
-        }
-        return true;
-      });
-    }
-
-    private void processIncludeMacros(Processor<M68kLabel> processor, @Nullable String macroName) {
+    private void processMacrosInScope(Processor<M68kLabel> processor, GlobalSearchScope scope, @Nullable String macroName) {
       final Project project = getProject();
-      final GlobalSearchScope includeSearchScope = getIncludeSearchScope(project);
 
       if (macroName != null) {
-        ContainerUtil.process(getMacroStubLabels(macroName, project, includeSearchScope), processor);
+        ContainerUtil.process(getMacroStubLabels(macroName, project, scope), processor);
         return;
       }
 
       List<String> allKeys = new ArrayList<>();
-      StubIndex.getInstance().processAllKeys(M68kMacroStubIndex.KEY, Processors.cancelableCollectProcessor(allKeys), includeSearchScope, null);
+      StubIndex.getInstance().processAllKeys(M68kMacroStubIndex.KEY, Processors.cancelableCollectProcessor(allKeys), scope, null);
       for (String key : allKeys) {
-        if (!ContainerUtil.process(getMacroStubLabels(key, project, includeSearchScope), processor)) return;
+        if (!ContainerUtil.process(getMacroStubLabels(key, project, scope), processor)) return;
       }
     }
 
-    private GlobalSearchScope getIncludeSearchScope(Project project) {
-      final PsiFile containingFile = getContainingFile().getOriginalFile();
-      final GlobalSearchScope notCurrentFile = GlobalSearchScope.notScope(GlobalSearchScope.fileScope(containingFile));
-      return GlobalSearchScope.allScope(project).intersectWith(notCurrentFile);
+    private GlobalSearchScope getIncludeSearchScope() {
+      final GlobalSearchScope notCurrentFile = GlobalSearchScope.notScope(getCurrentFileSearchScope());
+      return GlobalSearchScope.allScope(getProject()).intersectWith(notCurrentFile);
+    }
+
+    private GlobalSearchScope getCurrentFileSearchScope() {
+      return GlobalSearchScope.fileScope(getContainingFile().getOriginalFile());
     }
 
     private Collection<M68kLabel> getMacroStubLabels(String key, Project project, GlobalSearchScope scope) {
