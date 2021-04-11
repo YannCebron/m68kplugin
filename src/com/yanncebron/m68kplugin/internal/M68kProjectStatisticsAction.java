@@ -70,6 +70,8 @@ public class M68kProjectStatisticsAction extends AnAction {
 
     List<String> fileInfos = new ArrayList<>();
     final int[] totalErrors = {0};
+    final int[] totalResolve = {0};
+    final int[] totalResolveErrors = {0};
 
     ProgressManager.getInstance().runProcessWithProgressSynchronously(() ->
       ApplicationManager.getApplication().runReadAction(() -> {
@@ -125,6 +127,9 @@ public class M68kProjectStatisticsAction extends AnAction {
               }
             }
           }
+          totalResolve[0] = totalResolve[0] + macroCalls + labelRefs;
+          totalResolveErrors[0] = totalResolveErrors[0] + macroCallsUnresolved + labelRefsUnresolved;
+
           String info = StringUtils.rightPad(virtualFile.getName(), 30) +
             StringUtils.leftPad(String.valueOf(errors.length), 8) +
             " | " + StringUtils.rightPad(labelRefsUnresolved + "/" + labelRefs, 7) +
@@ -144,7 +149,12 @@ public class M68kProjectStatisticsAction extends AnAction {
       }), "Scanning files...", true, project);
 
     StringBuilder sb = new StringBuilder();
-    sb.append("Total files: ").append(fileInfos.size()).append("  Total Errors: ").append(totalErrors[0]).append("\n\n");
+    sb.append("Files: ").append(fileInfos.size())
+      .append("\n")
+      .append("Total Errors: ").append(totalErrors[0])
+      .append("\n")
+      .append("Total Resolve Errors: ").append(totalResolveErrors[0]).append("/").append(totalResolve[0])
+      .append("\n\n");
     Collections.sort(fileInfos);
     sb.append("File                            Errors | Label   | Macro   | include (recursive) [incbin]\n");
     sb.append("=========================================================================================\n");
