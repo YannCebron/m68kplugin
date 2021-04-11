@@ -146,7 +146,8 @@ public class M68kProjectStatisticsAction extends AnAction {
     StringBuilder sb = new StringBuilder();
     sb.append("Total files: ").append(fileInfos.size()).append("  Total Errors: ").append(totalErrors[0]).append("\n\n");
     Collections.sort(fileInfos);
-    sb.append("File                            Errors | Label   | Macro   | include (recursive) [incbin] \n");
+    sb.append("File                            Errors | Label   | Macro   | include (recursive) [incbin]\n");
+    sb.append("=========================================================================================\n");
     sb.append(StringUtil.join(fileInfos, "\n"));
 
     appendClasses(labels, sb);
