@@ -7,7 +7,7 @@ title: Known Issues
 ## Resolving
 
 - `include` directives not evaluated, resolving across all project files
-- respects only first match for symbols defined more than once (e.g., wrapped using conditional assembly directives)
+- respects only first match for symbols defined more than once (e.g., inside conditional assembly directives)
 
 ## Editor
 
@@ -18,7 +18,8 @@ title: Known Issues
 ### Directives
 
 Missing directives ([VASM](http://sun.hasenbraten.de/vasm/release/vasm_4.html#Mot-Syntax-Module)), these will currently
-display false positive _"Cannot resolve macro $DIRECTIVE$"_
+display false positive 
+> _"Cannot resolve macro $DIRECTIVE$"_
 
 - `rorg`
 - `offset` (Devpac)
@@ -70,7 +71,7 @@ display false positive _"Cannot resolve macro $DIRECTIVE$"_
 - Macros
   - `CARG`
   - `NARG`
-- Devpac:
+- Devpac
   - `__G2`
   - `__LK`
   - `__RS`, `__SO`, `__FO`
@@ -85,7 +86,7 @@ display false positive _"Cannot resolve macro $DIRECTIVE$"_
 
 - support `macro <macroName>` notation
 - macro call with register list `myMacro d0/d7`
-- special symbols:
+- special symbols
   - `\@` unique ID
   - `\@!`
   - `\@?`
