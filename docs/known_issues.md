@@ -66,7 +66,7 @@ display false positive
 ### Builtin Symbols
 
 - `*`
-- `REPTN`
+- `REPTN` (inside `rept`)
 - `__LINE__`
 - Macros
   - `CARG`
