@@ -31,6 +31,9 @@ import com.intellij.psi.PsiReferenceBase;
 import com.intellij.psi.presentation.java.SymbolPresentationUtil;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
+import com.intellij.psi.util.PsiModificationTracker;
 import com.intellij.util.CommonProcessors;
 import com.intellij.util.Processor;
 import com.intellij.util.Processors;
@@ -41,7 +44,6 @@ import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiTreeUtil;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kEquDirectiveBase;
 import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -49,13 +51,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Provides reference to label.
  * <ol>
  *   <li>if local label, search backwards, then forwards for local labels only - until encountering global label ("parent scope")</li>
- *   <li>if label, search backwards, then forwards in the current file</li>
- *   <li>if label, search in related files (includes), TODO: currently "all other files"</li>
+ *   <li>if label, search in the current file, then in included (TODO: currently "all other files")</li>
  * </ol>
  * <p>
  * This allows for both correct scoping of local labels and optimal performance, as resolving can be optimized for each type.
@@ -65,6 +68,9 @@ import java.util.List;
  * </p>
  */
 abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
+
+  private static final CachedValueProvider<Map<String, PsiElement>> LABEL_NAME_CV_PROVIDER = () ->
+    CachedValueProvider.Result.create(new ConcurrentHashMap<>(), PsiModificationTracker.MODIFICATION_COUNT);
 
   protected M68kLabelRefExpressionMixIn(@NotNull ASTNode node) {
     super(node);
@@ -96,19 +102,17 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
         return findLocalProcessor.getFoundValue();
       }
 
-      final CommonProcessors.FindProcessor<M68kLabel> findProcessor = new CommonProcessors.FindProcessor<M68kLabel>() {
-        @Override
-        protected boolean accept(M68kLabel label) {
-          return labelName.equals(label.getName());
+      final Map<String, PsiElement> cachedValue = CachedValuesManager.getCachedValue(getElement().getContainingFile(), LABEL_NAME_CV_PROVIDER);
+      return cachedValue.computeIfAbsent(labelName, s -> {
+        final CommonProcessors.FindProcessor<M68kLabel> processor = new CommonProcessors.FindFirstProcessor<>();
+        processLabelsInScope(processor, getCurrentFileSearchScope(), labelName);
+        if (processor.isFound()) {
+          return processor.getFoundValue();
         }
-      };
-      processLabels(findProcessor);
-      if (findProcessor.isFound()) {
-        return findProcessor.getFoundValue();
-      }
 
-      processIncludeLabels(findProcessor, labelName);
-      return findProcessor.getFoundValue();
+        processLabelsInScope(processor, getIncludeSearchScope(), labelName);
+        return processor.getFoundValue();
+      });
     }
 
     @NotNull
@@ -124,22 +128,22 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
         return true;
       });
 
-      processLabels(label -> {
+      processLabelsInScope(label -> {
         final LookupElementBuilder builder = LookupElementBuilder.createWithIcon(label)
           .withTailText(getTailText(label), true)
           .bold();
         variants.add(PrioritizedLookupElement.withPriority(builder, 30));
         return true;
-      });
+      }, getCurrentFileSearchScope(), null);
 
-      processIncludeLabels(label -> {
+      processLabelsInScope(label -> {
         final PsiFile containingFile = label.getContainingFile();
         final LookupElementBuilder builder = LookupElementBuilder.createWithIcon(label)
           .withTailText(getTailText(label), true)
           .withTypeText(SymbolPresentationUtil.getFilePathPresentation(containingFile), true);
         variants.add(builder);
         return true;
-      }, null);
+      }, getIncludeSearchScope(), null);
 
       return variants.toArray();
     }
@@ -151,20 +155,6 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
       return " " + value;
     }
 
-    private void processLabels(Processor<M68kLabel> processor) {
-      Processor<M68kPsiElement> labelProcessor = m68kPsiElement -> {
-        if (m68kPsiElement instanceof M68kLabel) {
-          return processor.process((M68kLabel) m68kPsiElement);
-        }
-        if (m68kPsiElement instanceof M68kEquDirectiveBase) {
-          return processor.process(((M68kEquDirectiveBase) m68kPsiElement).getLabel());
-        }
-        return true;
-      };
-
-      processCurrentFileLabels(labelProcessor);
-    }
-
     private void processLocalLabels(Processor<M68kLocalLabel> processor) {
       Processor<M68kPsiElement> localLabelProcessor = m68kPsiElement -> {
         if (m68kPsiElement instanceof M68kLocalLabel) {
@@ -173,40 +163,36 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
         return true;
       };
 
-      processCurrentFileLabels(localLabelProcessor, M68kLabel.class);
-    }
-
-    @SafeVarargs
-    private final void processCurrentFileLabels(Processor<M68kPsiElement> labelProcessor,
-                                                Class<? extends M68kPsiElement>... stopAtElements) {
+      @SuppressWarnings("unchecked") Class<? extends M68kPsiElement>[] stopAtElements = new Class[]{M68kLabel.class};
       final M68kPsiElement startElement = M68kPsiTreeUtil.getContainingInstructionOrDirective(getElement());
       assert startElement != null : getElement().getText();
 
-      if (!M68kPsiTreeUtil.processSiblingsBackwards(startElement, labelProcessor, stopAtElements)) return;
-      M68kPsiTreeUtil.processSiblingsForwards(startElement, labelProcessor, stopAtElements);
+      if (!M68kPsiTreeUtil.processSiblingsBackwards(startElement, localLabelProcessor, stopAtElements)) return;
+      M68kPsiTreeUtil.processSiblingsForwards(startElement, localLabelProcessor, stopAtElements);
     }
 
-
-    private void processIncludeLabels(Processor<M68kLabel> processor, @Nullable String labelName) {
+    private void processLabelsInScope(Processor<M68kLabel> processor, GlobalSearchScope scope, @Nullable String labelName) {
       final Project project = getElement().getProject();
-      final GlobalSearchScope includeSearchScope = getIncludeSearchScope(project);
 
       if (labelName != null) {
-        ContainerUtil.process(getStubLabels(labelName, project, includeSearchScope), processor);
+        ContainerUtil.process(getStubLabels(labelName, project, scope), processor);
         return;
       }
 
       List<String> allKeys = new ArrayList<>(500);
-      StubIndex.getInstance().processAllKeys(M68kLabelStubIndex.KEY, Processors.cancelableCollectProcessor(allKeys), includeSearchScope, null);
+      StubIndex.getInstance().processAllKeys(M68kLabelStubIndex.KEY, Processors.cancelableCollectProcessor(allKeys), scope, null);
       for (String key : allKeys) {
-        if (!ContainerUtil.process(getStubLabels(key, project, includeSearchScope), processor)) return;
+        if (!ContainerUtil.process(getStubLabels(key, project, scope), processor)) return;
       }
     }
 
-    private GlobalSearchScope getIncludeSearchScope(Project project) {
-      final PsiFile containingFile = getElement().getContainingFile().getOriginalFile();
-      final GlobalSearchScope notCurrentFile = GlobalSearchScope.notScope(GlobalSearchScope.fileScope(containingFile));
-      return GlobalSearchScope.allScope(project).intersectWith(notCurrentFile);
+    private GlobalSearchScope getIncludeSearchScope() {
+      final GlobalSearchScope notCurrentFile = GlobalSearchScope.notScope(getCurrentFileSearchScope());
+      return GlobalSearchScope.allScope(getElement().getProject()).intersectWith(notCurrentFile);
+    }
+
+    private GlobalSearchScope getCurrentFileSearchScope() {
+      return GlobalSearchScope.fileScope(getElement().getContainingFile().getOriginalFile());
     }
 
     private Collection<M68kLabel> getStubLabels(String key, Project project, GlobalSearchScope scope) {
