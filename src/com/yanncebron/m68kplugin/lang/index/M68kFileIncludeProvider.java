@@ -25,7 +25,7 @@ import com.intellij.util.Consumer;
 import com.intellij.util.PathUtilRt;
 import com.intellij.util.SmartList;
 import com.intellij.util.indexing.FileContent;
-import com.intellij.util.text.CharArrayUtil;
+import com.intellij.util.text.StringSearcher;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncbinDirective;
@@ -42,6 +42,11 @@ public class M68kFileIncludeProvider extends FileIncludeProvider {
   }
 
   @Override
+  public int getVersion() {
+    return 1;
+  }
+
+  @Override
   public boolean acceptFile(@NotNull VirtualFile file) {
     return FileTypeRegistry.getInstance().isFileOfType(file, M68kFileType.INSTANCE);
   }
@@ -54,8 +59,8 @@ public class M68kFileIncludeProvider extends FileIncludeProvider {
   @Override
   public @NotNull FileIncludeInfo @NotNull [] getIncludeInfos(FileContent content) {
     CharSequence contentAsText = content.getContentAsText();
-    if (CharArrayUtil.indexOf(contentAsText, "include", 0) == -1 &&
-      CharArrayUtil.indexOf(contentAsText, "incbin", 0) == -1) {
+    if (new StringSearcher("include", false, true).scan(contentAsText) == -1 &&
+      new StringSearcher("incbin", false, true).scan(contentAsText) == -1) {
       return FileIncludeInfo.EMPTY;
     }
 

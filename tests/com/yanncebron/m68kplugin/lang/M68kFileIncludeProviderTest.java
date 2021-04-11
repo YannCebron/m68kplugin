@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ public class M68kFileIncludeProviderTest extends BasePlatformTestCase {
 
   public void testIncludeSingleResolvedFileRecursively() {
     final PsiFile testRecursiveFile = myFixture.addFileToProject("recursive.i", "");
-    final PsiFile testIncludedFile = myFixture.addFileToProject("test.i", " include 'recursive.i'");
+    final PsiFile testIncludedFile = myFixture.addFileToProject("test.i", " inCLUde 'recursive.i'");
     final PsiFile testFile = myFixture.configureByText("test.s", " include 'test.i'");
 
     final VirtualFile[] includedFiles = getIncludedFiles(true, true);
@@ -54,7 +54,7 @@ public class M68kFileIncludeProviderTest extends BasePlatformTestCase {
     myFixture.addFileToProject("test.i", "");
     final PsiFile testIncludedFile = myFixture.addFileToProject("dir/test.dat", "");
     myFixture.configureByText("test.s",
-      " incbin 'dir/test.dat'\n" +
+      " INCBIN 'dir/test.dat'\n" +
         " include 'test.i'");
 
     final VirtualFile[] includedFiles = getIncludedFiles(false, false);
