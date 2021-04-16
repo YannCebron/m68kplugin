@@ -101,6 +101,7 @@
 ## Tools
 
 - http://deadliners.net/gradientmaster/
+- show cycles/size in editor https://68kcounter-web.vercel.app/
 
 ## Resources
 
