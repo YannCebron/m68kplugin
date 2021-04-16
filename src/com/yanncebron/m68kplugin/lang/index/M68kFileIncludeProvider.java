@@ -27,6 +27,7 @@ import com.intellij.util.SmartList;
 import com.intellij.util.indexing.FileContent;
 import com.intellij.util.text.StringSearcher;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
+import com.yanncebron.m68kplugin.lang.psi.M68kPsiTreeUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncbinDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncludeDirective;
@@ -64,7 +65,7 @@ public class M68kFileIncludeProvider extends FileIncludeProvider {
       return FileIncludeInfo.EMPTY;
     }
 
-    // todo get from light tree (PsiDependentFileContent.getLighterAST)
+    // todo get from light tree (JavaFunctionalExpressionIndex)
     final List<FileIncludeInfo> result = new SmartList<>();
     content.getPsiFile().acceptChildren(new M68kVisitor() {
 
