@@ -17,8 +17,13 @@ title: Known Issues
 
 ### Unsupported CPUs
 
-Currently, only 68000 instructions are supported. Others will display false positive
+Currently, only 68000 CPU is supported.                     
+
+Non-supported instructions will display false positive
 > _"Cannot resolve macro '$MNEMONIC$'"_
+
+Non-supported registers will display false positive
+> _"Cannot resolve label '$REGISTER$'"
 
 ### Directives
 
