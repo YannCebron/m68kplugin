@@ -34,7 +34,6 @@ Unsupported directives, these will display false positive
 - `weak`
 - `comm`
 - `common`
-- `load`
 - `mask2` (no-op)
 - `dx.*`
 - `dr.*`

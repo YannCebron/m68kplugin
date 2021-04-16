@@ -389,4 +389,8 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" printv ");
   }
 
+  public void testLoadDirective() throws Exception {
+    doCodeTest(" load label");
+  }
+
 }

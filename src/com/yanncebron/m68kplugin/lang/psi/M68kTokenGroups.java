@@ -202,6 +202,7 @@ public final class M68kTokenGroups {
     JUMPPTR,
     LIST,
     LLEN,
+    LOAD,
     MACRO,
     MEXIT,
     NOLIST,

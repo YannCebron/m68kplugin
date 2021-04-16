@@ -378,6 +378,7 @@ public class M68kDirectivesParser {
   //                        endr_directive |
   //                        printt_directive |
   //                        printv_directive |
+  //                        load_directive |
   //                        fail_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
@@ -441,6 +442,7 @@ public class M68kDirectivesParser {
     if (!r) r = endr_directive(b, l + 1);
     if (!r) r = printt_directive(b, l + 1);
     if (!r) r = printv_directive(b, l + 1);
+    if (!r) r = load_directive(b, l + 1);
     if (!r) r = fail_directive(b, l + 1);
     return r;
   }
@@ -757,6 +759,20 @@ public class M68kDirectivesParser {
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, LLEN_DIRECTIVE, "<directive>");
     r = consumeToken(b, LLEN);
+    p = r; // pin = 1
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // LOAD expression
+  public static boolean load_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "load_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", LOAD)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, LOAD_DIRECTIVE, "<directive>");
+    r = consumeToken(b, LOAD);
     p = r; // pin = 1
     r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, l, m, r, p, null);

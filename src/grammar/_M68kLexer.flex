@@ -405,6 +405,7 @@ Z=[zZ]
   {J}{U}{M}{P}{P}{T}{R}       { yybegin(IN_OPERAND); return JUMPPTR; }
   {L}{I}{S}{T}                { yybegin(AFTER_OPERAND); return LIST; }
   {L}{L}{E}{N}                { yybegin(IN_OPERAND); return LLEN; }
+  {L}{O}{A}{D}                { yybegin(IN_OPERAND); return LOAD; }
   {N}{O}{L}{I}{S}{T}          { yybegin(AFTER_OPERAND); return NOLIST; }
   {N}{O}{P}{A}{G}{E}          { yybegin(AFTER_OPERAND); return NOPAGE; }
   {O}{D}{D}                   { yybegin(AFTER_OPERAND); return ODD; }
