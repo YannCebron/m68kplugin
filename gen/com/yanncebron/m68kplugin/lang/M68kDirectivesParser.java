@@ -377,6 +377,7 @@ public class M68kDirectivesParser {
   //                        rept_directive |
   //                        endr_directive |
   //                        printt_directive |
+  //                        printv_directive |
   //                        fail_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
@@ -439,6 +440,7 @@ public class M68kDirectivesParser {
     if (!r) r = rept_directive(b, l + 1);
     if (!r) r = endr_directive(b, l + 1);
     if (!r) r = printt_directive(b, l + 1);
+    if (!r) r = printv_directive(b, l + 1);
     if (!r) r = fail_directive(b, l + 1);
     return r;
   }
@@ -1023,6 +1025,43 @@ public class M68kDirectivesParser {
     if (!recursion_guard_(b, l, "printt_directive_1")) return false;
     consumeToken(b, STRING);
     return true;
+  }
+
+  /* ********************************************************** */
+  // PRINTV expression (COMMA expression)*
+  public static boolean printv_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "printv_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", PRINTV)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, PRINTV_DIRECTIVE, "<directive>");
+    r = consumeToken(b, PRINTV);
+    p = r; // pin = 1
+    r = r && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1));
+    r = p && printv_directive_2(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // (COMMA expression)*
+  private static boolean printv_directive_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "printv_directive_2")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!printv_directive_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "printv_directive_2", c)) break;
+    }
+    return true;
+  }
+
+  // COMMA expression
+  private static boolean printv_directive_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "printv_directive_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COMMA);
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, m, null, r);
+    return r;
   }
 
   /* ********************************************************** */

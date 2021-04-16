@@ -208,6 +208,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType PLUS = new M68kTokenType("+");
   public static final IElementType POW = new M68kTokenType("^");
   public static final IElementType PRINTT = new M68kTokenType("printt");
+  public static final IElementType PRINTV = new M68kTokenType("printv");
   public static final IElementType REM = new M68kTokenType("rem");
   public static final IElementType REPT = new M68kTokenType("rept");
   public static final IElementType RESET = new M68kTokenType("reset");

@@ -22,8 +22,7 @@ Currently, only 68000 instructions are supported. Others will display false posi
 
 ### Directives
 
-Unsupported directives ([VASM](http://sun.hasenbraten.de/vasm/release/vasm_4.html#Mot-Syntax-Module)) will display
-false positive
+Unsupported directives, these will display false positive
 > _"Cannot resolve macro '$DIRECTIVE$'"_
 
 - `rorg`
@@ -52,7 +51,6 @@ false positive
 - `fo.*`, `clrfo`/`setfo`
 - `cargs` (Devpac)
 - `echo` (PhxAss)
-- `printv` (AsmOne)
 - `auto`
 - `struct`/`estruct`
 - `reg`

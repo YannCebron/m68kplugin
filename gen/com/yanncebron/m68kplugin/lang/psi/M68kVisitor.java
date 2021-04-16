@@ -837,6 +837,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitDirective(o);
   }
 
+  public void visitPrintvDirective(@NotNull M68kPrintvDirective o) {
+    visitDirective(o);
+  }
+
   public void visitRegisterList(@NotNull M68kRegisterList o) {
     visitPsiElement(o);
   }

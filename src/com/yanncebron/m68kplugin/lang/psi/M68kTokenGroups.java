@@ -212,6 +212,7 @@ public final class M68kTokenGroups {
     PAGE,
     PLEN,
     PRINTT,
+    PRINTV,
     REM,
     REPT,
     RS,

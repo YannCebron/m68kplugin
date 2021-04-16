@@ -377,4 +377,16 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" printt 'Some text:'");
   }
 
+  public void testPrintvDirective() throws Exception {
+    doCodeTest(" printv 2+4");
+  }
+
+  public void testPrintvDirectiveMultipleExpressions() throws Exception {
+    doCodeTest(" printv 2+4,label");
+  }
+
+  public void testPrintvDirectiveMissingExpression() throws Exception {
+    doCodeTest(" printv ");
+  }
+
 }
