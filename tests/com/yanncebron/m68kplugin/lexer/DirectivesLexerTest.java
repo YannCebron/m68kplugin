@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -72,7 +72,7 @@ public class DirectivesLexerTest extends M68kLexerTestCase {
         "string (''logo.raw'')");
   }
 
-  public void testIncdirDirective() {
+  public void testIncdirDirectiveWithDoubleQuotes() {
     doTest(" incdir \"dir\"",
       "WHITE_SPACE (' ')\n" +
         "incdir ('incdir')\n" +
@@ -80,7 +80,39 @@ public class DirectivesLexerTest extends M68kLexerTestCase {
         "string ('\"dir\"')");
   }
 
+  public void testIncdirDirectiveNoQuotes() {
+    doTest(" incdir df0:",
+      "WHITE_SPACE (' ')\n" +
+        "incdir ('incdir')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "string ('df0:')");
+  }
+
   public void testIncludeDirective() {
+    doTest(" include path.i",
+      "WHITE_SPACE (' ')\n" +
+        "include ('include')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "string ('path.i')");
+  }
+
+  public void testIncludeDirectiveSlashPath() {
+    doTest(" include path/file.i",
+      "WHITE_SPACE (' ')\n" +
+        "include ('include')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "string ('path/file.i')");
+  }
+
+  public void testIncludeDirectiveWithSingleQuotes() {
+    doTest(" include 'path'",
+      "WHITE_SPACE (' ')\n" +
+        "include ('include')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "string (''path'')");
+  }
+
+  public void testIncludeDirectiveWithDoubleQuotes() {
     doTest(" include \"path\"",
       "WHITE_SPACE (' ')\n" +
         "include ('include')\n" +

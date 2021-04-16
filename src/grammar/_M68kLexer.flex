@@ -64,6 +64,7 @@ BINNUMBER=%[0|1]+
 
 SINGLE_QUOTED_STRING='([^\\'\r\n]|\\[^\r\n])*'?
 DOUBLE_QUOTED_STRING=\"([^\\\"\r\n]|\\[^\r\n])*\"?
+UNQUOTED_STRING=([^\\\r\n\ \t\f'\"])+
 
 ID=[.]?[_]*[:digit:]*[a-zA-Z][[a-zA-Z][:digit:]_]*
 LABEL=[_]*[:digit:]*[a-zA-Z][[a-zA-Z][:digit:]_]*  // without "." first char
@@ -98,11 +99,12 @@ Z=[zZ]
 %state AFTER_LABEL
 %state IN_INSTRUCTION
 %state AFTER_INSTRUCTION
+%state STRING_DIRECTIVE
 %state IN_OPERAND
 %state AFTER_OPERAND
 
 %%
-<YYINITIAL, AFTER_LABEL, IN_INSTRUCTION, AFTER_INSTRUCTION, IN_OPERAND, AFTER_OPERAND> {
+<YYINITIAL, AFTER_LABEL, IN_INSTRUCTION, AFTER_INSTRUCTION, STRING_DIRECTIVE, IN_OPERAND, AFTER_OPERAND> {
   {CRLF}         { operandSpaceCount = 0; yybegin(YYINITIAL); return LINEFEED; }
 }
 
@@ -202,10 +204,23 @@ Z=[zZ]
   {DOUBLE_QUOTED_STRING}      { return STRING; }
 }
 
+// 1st operand==STRING, optionally followed by IN_OPERAND
+<STRING_DIRECTIVE> {
+  // after 2nd WHITE_SPACE -> AFTER_OPERAND for automatic comment
+  {WHITE_SPACE}+           { operandSpaceCount++; return WHITE_SPACE; }
+
+  {WHITE_SPACE}+ {COMMENT} { return COMMENT; }
+  {EOL_COMMENT}            { return COMMENT; }
+
+  {SINGLE_QUOTED_STRING}   { yybegin(IN_OPERAND); return STRING; }
+  {DOUBLE_QUOTED_STRING}   { yybegin(IN_OPERAND); return STRING; }
+  {UNQUOTED_STRING}        { yybegin(IN_OPERAND); return STRING; }
+}
 
 // Instructions must switch to:
 // - AFTER_INSTRUCTION - if M68kDataSized
 // - IN_OPERAND - if >=1 operand
+// - STRING_DIRECTIVE - if 1st operand==STRING
 // - AFTER_OPERAND - if no operands
 <IN_INSTRUCTION> {
   {WHITE_SPACE}+              { return WHITE_SPACE; }
@@ -382,9 +397,9 @@ Z=[zZ]
   {E}{R}{E}{M}                { yybegin(AFTER_OPERAND); return EREM; }
   {E}{V}{E}{N}                { yybegin(AFTER_OPERAND); return EVEN; }
   {F}{A}{I}{L}                { yybegin(AFTER_OPERAND); return FAIL; }
-  {I}{N}{C}{B}{I}{N}          { yybegin(IN_OPERAND); return INCBIN; }
-  {I}{N}{C}{D}{I}{R}          { yybegin(IN_OPERAND); return INCDIR; }
-  {I}{N}{C}{L}{U}{D}{E}       { yybegin(IN_OPERAND); return INCLUDE; }
+  {I}{N}{C}{B}{I}{N}          { yybegin(STRING_DIRECTIVE); return INCBIN; }
+  {I}{N}{C}{D}{I}{R}          { yybegin(STRING_DIRECTIVE); return INCDIR; }
+  {I}{N}{C}{L}{U}{D}{E}       { yybegin(STRING_DIRECTIVE); return INCLUDE; }
   {I}{N}{L}{I}{N}{E}          { yybegin(AFTER_OPERAND); return INLINE; }
   {J}{U}{M}{P}{E}{R}{R}       { yybegin(IN_OPERAND); return JUMPERR; }
   {J}{U}{M}{P}{P}{T}{R}       { yybegin(IN_OPERAND); return JUMPPTR; }

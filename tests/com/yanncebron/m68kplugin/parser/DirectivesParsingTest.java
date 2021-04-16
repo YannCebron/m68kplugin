@@ -73,6 +73,10 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" incbin \"path\"");
   }
 
+  public void testIncbinDirectiveNoQuotes() throws Exception {
+    doCodeTest(" incbin \"path\"");
+  }
+
   public void testIncbinDirectiveOffsetLength() throws Exception {
     doCodeTest(" incbin \"path\",offset,42");
   }
@@ -90,7 +94,11 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
   }
 
   public void testIncludeDirective() throws Exception {
-    doCodeTest(" include \"includeFile\"");
+    doCodeTest(" include \"includeFile.i\"");
+  }
+
+  public void testIncludeDirectiveNoQuotes() throws Exception {
+    doCodeTest(" include path/includeFile.i");
   }
 
   public void testIncludeDirectiveMissingPath() throws Exception {

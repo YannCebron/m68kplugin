@@ -154,4 +154,28 @@ public class CommentLexerTest extends M68kLexerTestCase {
         "comment ('comment')");
   }
 
+  public void testCommentWithoutPrefixAfterIncludeDirective() {
+    doTest(" include path.i comment",
+      "WHITE_SPACE (' ')\n" +
+        "include ('include')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "string ('path.i')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "comment ('comment')");
+  }
+
+  public void testCommentWithoutPrefixAfterIncbinDirectiveWithOffsetLength() {
+    doTest(" incbin 'x.bin',42,666 comment",
+      "WHITE_SPACE (' ')\n" +
+        "incbin ('incbin')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "string (''x.bin'')\n" +
+        ", (',')\n" +
+        "dec_number ('42')\n" +
+        ", (',')\n" +
+        "dec_number ('666')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "comment ('comment')");
+  }
+
 }

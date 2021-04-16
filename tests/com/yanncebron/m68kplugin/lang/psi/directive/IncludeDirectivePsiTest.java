@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,20 @@ public class IncludeDirectivePsiTest extends M68kPsiTestCase {
     assertNull(directive.getIncludePath());
   }
 
-  public void testWithQuotes() {
+  public void testWithNoQuotes() {
+    final M68kIncludeDirective directive = parse("include test.i");
+
+    assertEquals("test.i", directive.getIncludePath());
+  }
+
+  public void testWithDoubleQuotes() {
     final M68kIncludeDirective directive = parse("include \"test.i\"");
+
+    assertEquals("test.i", directive.getIncludePath());
+  }
+
+  public void testWithSingleQuotes() {
+    final M68kIncludeDirective directive = parse("include 'test.i'");
 
     assertEquals("test.i", directive.getIncludePath());
   }

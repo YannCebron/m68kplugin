@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,13 +28,25 @@ public class IncbinDirectivePsiTest extends M68kPsiTestCase {
     assertNull(directive.getIncludePath());
   }
 
-  public void testWithQuotes() {
+  public void testWithNoQuotes() {
+    final M68kIncbinDirective directive = parse("incbin test.i");
+
+    assertEquals("test.i", directive.getIncludePath());
+  }
+
+  public void testWithDoubleQuotes() {
     final M68kIncbinDirective directive = parse("incbin \"test.i\"");
 
     assertEquals("test.i", directive.getIncludePath());
   }
 
-  public void testWithQuotesOffsetLength() {
+  public void testWithSingleQuotes() {
+    final M68kIncbinDirective directive = parse("incbin 'test.i'");
+
+    assertEquals("test.i", directive.getIncludePath());
+  }
+
+  public void testWithDoubleQuotesOffsetLength() {
     final M68kIncbinDirective directive = parse("incbin \"test.i\",0,42");
 
     assertEquals("test.i", directive.getIncludePath());

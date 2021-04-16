@@ -108,7 +108,6 @@ false positive
 
 ### Misc
 
-- `include`/`incbin` path without quotes
 - add missing expression operators
   - XOR?
 - do not allow spaces (?!)

@@ -3,4 +3,4 @@ M68k.FILE
   M68kIncludeDirectiveImpl(INCLUDE_DIRECTIVE)
     PsiElement(include)('include')
     PsiWhiteSpace(' ')
-    PsiElement(string)('"includeFile.i"')
+    PsiElement(string)('path/includeFile.i')
