@@ -20,6 +20,7 @@
 - highlight returns
 - highlight/navigate control structures `CodeBlockSupportHandler`:
   - loop ranges
+- rainbow highlighter - macros? labels? 
 - unreachable code `ControlFlowProvider`
 - `section` directive: smarter highlighting/codeinsight
 - inspections: suppress via comment
