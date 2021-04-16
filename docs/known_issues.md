@@ -23,7 +23,7 @@ Non-supported instructions will display false positive
 > _"Cannot resolve macro '$MNEMONIC$'"_
 
 Non-supported registers will display false positive
-> _"Cannot resolve label '$REGISTER$'"
+> _"Cannot resolve label '$REGISTER$'"_
 
 ### Directives
 
