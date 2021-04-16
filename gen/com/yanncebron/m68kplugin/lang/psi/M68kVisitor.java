@@ -833,6 +833,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitBinaryExpression(o);
   }
 
+  public void visitPrinttDirective(@NotNull M68kPrinttDirective o) {
+    visitDirective(o);
+  }
+
   public void visitRegisterList(@NotNull M68kRegisterList o) {
     visitPsiElement(o);
   }

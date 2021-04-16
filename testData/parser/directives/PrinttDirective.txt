@@ -1,0 +1,6 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kPrinttDirectiveImpl(PRINTT_DIRECTIVE)
+    PsiElement(printt)('printt')
+    PsiWhiteSpace(' ')
+    PsiElement(string)(''Some text:'')

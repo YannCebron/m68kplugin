@@ -211,6 +211,7 @@ public interface M68kTypes {
   IElementType PEA_INSTRUCTION = new M68kCompositeElementType("PEA_INSTRUCTION");
   IElementType PLEN_DIRECTIVE = new M68kCompositeElementType("PLEN_DIRECTIVE");
   IElementType PLUS_EXPRESSION = new M68kCompositeElementType("PLUS_EXPRESSION");
+  IElementType PRINTT_DIRECTIVE = new M68kCompositeElementType("PRINTT_DIRECTIVE");
   IElementType REGISTER_LIST = new M68kCompositeElementType("REGISTER_LIST");
   IElementType REGISTER_RANGE = new M68kCompositeElementType("REGISTER_RANGE");
   IElementType REM_DIRECTIVE = new M68kCompositeElementType("REM_DIRECTIVE");
@@ -824,6 +825,9 @@ public interface M68kTypes {
       }
       else if (type == PLUS_EXPRESSION) {
         return new M68kPlusExpressionImpl(node);
+      }
+      else if (type == PRINTT_DIRECTIVE) {
+        return new M68kPrinttDirectiveImpl(node);
       }
       else if (type == REGISTER_LIST) {
         return new M68kRegisterListImpl(node);

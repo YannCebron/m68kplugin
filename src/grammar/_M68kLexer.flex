@@ -412,6 +412,7 @@ Z=[zZ]
   {O}{R}{G}                   { yybegin(IN_OPERAND); return ORG; }
   {P}{A}{G}{E}                { yybegin(AFTER_OPERAND); return PAGE; }
   {P}{L}{E}{N}                { yybegin(IN_OPERAND); return PLEN; }
+  {P}{R}{I}{N}{T}{T}          { yybegin(STRING_DIRECTIVE); return PRINTT; }
   {R}{E}{M}                   { yybegin(AFTER_OPERAND); return REM; }
   {R}{E}{P}{T}                { yybegin(IN_OPERAND); return REPT; }
   {R}{S}                      { yybegin(AFTER_INSTRUCTION); return RS; }

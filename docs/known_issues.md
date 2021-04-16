@@ -52,13 +52,16 @@ false positive
 - `fo.*`, `clrfo`/`setfo`
 - `cargs` (Devpac)
 - `echo` (PhxAss)
-- `printt`/`printv` (AsmOne)
+- `printv` (AsmOne)
 - `auto`
 - `struct`/`estruct`
 - `reg`
 - `optc`
 - `near code`
 - `iif` (Devpac)
+                         
+
+- `printt`: multiple strings
 
 ### Labels
 

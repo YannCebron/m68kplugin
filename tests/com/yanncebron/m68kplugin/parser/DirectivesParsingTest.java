@@ -373,4 +373,8 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" fail");
   }
 
+  public void testPrinttDirective() throws Exception {
+    doCodeTest(" printt 'Some text:'");
+  }
+
 }
