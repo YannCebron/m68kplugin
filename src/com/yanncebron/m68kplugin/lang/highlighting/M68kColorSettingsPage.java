@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,26 +90,29 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
   @NotNull
   @Override
   public String getDemoText() {
-    return "<label>label</label>:\n" +
-      "  lea $dff000,a6\n" +
+    return "CALL_MACRO macro\n" +
+      "        movea.l <macroParameter>\\1</macroParameter>,a6\n" +
+      "        jsr <macroParameter>\\2</macroParameter>(a6)\n" +
+      "        endm\n" +
+      "\n" +
+      "<label>label</label>\n" +
+      "        lea $dff000,a6\n" +
       "* line comment\n" +
-      "  <privilegedInstruction>stop</privilegedInstruction>\n" +
-      "  moveq #1>>2,d0\n" +
+      "        <privilegedInstruction>stop #2</privilegedInstruction>\n" +
+      "        moveq #1>>2,d0\n" +
       "<localLabel>.local</localLabel>:\n" +
-      "  CALL_MACRO 42,OpenLibrary\n" +
-      "  moveq %0101+$FF,d1\n" +
-      "  move.l d0,(a1) ;comment\n" +
-      "  rts\n" +
+      "        CALL_MACRO _LibPtr,-42\n" +
+      "        moveq #%0101+$FF,d1\n" +
+      "        move.l d0,(a1) ;comment\n" +
+      "        rts\n" +
       "\n" +
-      "CALL_MACRO macro\n" +
-      "  jsr <macroParameter>\\2</macroParameter>(a6)\n" +
-      "  endm\n" +
-      "\n" +
-      "  IFND LABEL\n" +
+      "        IFND LABEL\n" +
       "<label>FLAG</label> SET 1\n" +
-      "  ENDC\n" +
+      "        ENDC\n" +
+      "\n" +
       "<label>DATA</label> equ @42\n" +
-      "  dc.b 'some text',0\n";
+      "<label>_LibPtr</label> dc.l 0\n" +
+      "<label>text</label>    dc.b 'some text',0\n";
   }
 
   @Nullable
