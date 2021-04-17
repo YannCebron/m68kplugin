@@ -13,6 +13,7 @@
 - unpaired conditional assembly directives (nesting!), missing `endc`/`endif`
 - highlight static conditional assembly directives status, e.g., `IFD`/`IFND`
 - macro call: parameter count mismatch
+- macro block: non-sequential parameter `\n` numbering
 - `ReadWriteAccessDetector` for registers/label references
 - method separators:
   - "detected" subroutines
@@ -20,7 +21,7 @@
 - highlight returns
 - highlight/navigate control structures `CodeBlockSupportHandler`:
   - loop ranges
-- rainbow highlighter - macros? labels? 
+- rainbow highlighter - macros? labels?
 - unreachable code `ControlFlowProvider`
 - `section` directive: smarter highlighting/codeinsight
 - inspections: suppress via comment
@@ -59,6 +60,7 @@
 - **WIP** code folding with settings for:
   - `movem` push/pop
 - macro call: parameter info/preview referring place
+- macro block: complete existing/n+1 `\n` everywhere
 - `dc`:
   - join lines
   - smart enter handler to split value list
