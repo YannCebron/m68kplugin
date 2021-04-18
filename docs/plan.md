@@ -80,10 +80,11 @@
 - label naming conventions (`AbstractNamingConventionInspection`)
 - cyclic `include`
 - expression:
+  - unnecessary parentheses
   - type check
   - range check
   - simplify
-  - convert numeric literal to other bases
+  - intention: convert numeric literal to other bases
 
 ## Navigation
 
