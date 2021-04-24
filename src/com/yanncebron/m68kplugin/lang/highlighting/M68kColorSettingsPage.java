@@ -93,6 +93,7 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
     return "CALL_MACRO macro\n" +
       "        movea.l <macroParameter>\\1</macroParameter>,a6\n" +
       "        jsr <macroParameter>\\2</macroParameter>(a6)\n" +
+      ".localMacroLabel<macroParameter>\\@</macroParameter>\n" +
       "        endm\n" +
       "\n" +
       "<label>label</label>\n" +

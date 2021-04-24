@@ -38,7 +38,10 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
   public void testLabels() {
     myFixture.configureByText("test.s",
       ".<info descr=\"M68K_LOCAL_LABEL\">localLabel</info>\n" +
-        "<info descr=\"M68K_LABEL\">globalLabel</info>");
+        ".<info descr=\"M68K_LOCAL_LABEL\">localMacroLabel<info descr=\"M68K_MACRO_PARAMETER\">\\@</info></info>\n" +
+        "<info descr=\"M68K_LABEL\">globalLabel</info>\n" +
+        "<info descr=\"M68K_LABEL\">globalMacroLabel<info descr=\"M68K_MACRO_PARAMETER\">\\@</info></info>\n"
+    );
     myFixture.testHighlighting(false, true, false);
   }
 
@@ -46,7 +49,8 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
     myFixture.configureByText("test.s",
       "<info descr=\"M68K_LABEL\">macroName</info> macro\n" +
         "  <info descr=\"M68K_MACRO_PARAMETER\">\\1</info>\n" +
-        " endm");
+        " endm"
+    );
     myFixture.testHighlighting(false, true, false);
   }
 

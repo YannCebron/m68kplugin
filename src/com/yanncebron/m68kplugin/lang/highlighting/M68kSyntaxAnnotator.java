@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import com.intellij.lang.annotation.Annotator;
 import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
@@ -45,26 +46,39 @@ public class M68kSyntaxAnnotator implements Annotator {
           .textAttributes(M68kTextAttributes.PRIVILEGED_INSTRUCTION).create();
       }
     } else if (element instanceof M68kLabel) {
-      doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LABEL);
+      doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LABEL, true);
     } else if (element instanceof M68kLocalLabel) {
-      doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LOCAL_LABEL);
+      doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LOCAL_LABEL, true);
     } else if (element instanceof M68kMacroParameterDirective) {
-      doAnnotate(holder, element.getNode(), M68kTextAttributes.MACRO_PARAMETER);
+      doAnnotate(holder, element.getNode(), M68kTextAttributes.MACRO_PARAMETER, false);
     }
   }
 
-  private static void doAnnotate(AnnotationHolder holder, @Nullable ASTNode node, TextAttributesKey key) {
+  private static void doAnnotate(AnnotationHolder holder,
+                                 @Nullable ASTNode node,
+                                 TextAttributesKey key,
+                                 boolean highlightMacroParameters) {
     if (node == null) {
       return; // todo workaround for non-supported label ID
     }
 
-    final AnnotationBuilder builder;
-    if (DEBUG_MODE) {
-      builder = holder.newAnnotation(HighlightSeverity.INFORMATION, key.getExternalName());
-    } else {
-      builder = holder.newSilentAnnotation(HighlightSeverity.INFORMATION);
+    createBuilder(holder, key).range(node).textAttributes(key).create();
+
+    if (highlightMacroParameters && node.textContains('@')) {
+      int idx = node.getText().indexOf("\\@");
+      if (idx == -1) return;
+
+      createBuilder(holder, M68kTextAttributes.MACRO_PARAMETER)
+        .range(TextRange.from(node.getStartOffset() + idx, 2))
+        .textAttributes(M68kTextAttributes.MACRO_PARAMETER).create();
     }
-    builder.range(node).textAttributes(key).create();
+  }
+
+  private static AnnotationBuilder createBuilder(AnnotationHolder holder, TextAttributesKey key) {
+    if (DEBUG_MODE) {
+      return holder.newAnnotation(HighlightSeverity.INFORMATION, key.getExternalName());
+    }
+    return holder.newSilentAnnotation(HighlightSeverity.INFORMATION);
   }
 
 }
