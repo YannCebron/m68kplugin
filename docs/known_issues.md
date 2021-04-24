@@ -12,12 +12,13 @@ title: Known Issues
 ## Editor
 
 - Code block handling of nested conditional assembly directives
+- Missing directive inspection: nesting
 
 ## Lexing/Parsing
 
 ### Unsupported CPUs
 
-Currently, only 68000 CPU is supported.                     
+Currently, only 68000 CPU is supported.
 
 Non-supported instructions will display false positive
 > _"Cannot resolve macro '$MNEMONIC$'"_
@@ -61,7 +62,7 @@ Unsupported directives, these will display false positive
 - `optc`
 - `near code`
 - `iif` (Devpac)
-                         
+
 
 - `printt`: multiple strings
 
