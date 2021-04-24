@@ -8,6 +8,9 @@ title: Known Issues
 
 - `include` directives not evaluated, resolving across all project files
 - respects only first match for symbols defined more than once (e.g., inside conditional assembly directives)
+- macro block: 
+  - do not highlight `jsr _LVO\1(a6)` as unresolved label 
+  - resolve label inside current first
 
 ## Editor
 
@@ -109,6 +112,8 @@ Unsupported directives, these will display false positive
   - `\-`
   - `\<symbolname>`
   - `\@<symbolname>`
+- valid label: `\1`
+- support parameters `addq.\0 #1,\1` with `macroName.\0` call syntax
 - allow `a`-`z` for macro parameters
 - `ifmacrod`/`ifmacrond` code insight
 
