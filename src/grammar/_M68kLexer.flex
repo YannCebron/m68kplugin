@@ -57,7 +57,7 @@ WHITE_SPACE=[\ \t\f]
 COMMENT=;.*|\*.* // todo leading "*" only on empty line
 EOL_COMMENT=;.*
 
-DECNUMBER=[0-9]+
+DECNUMBER=[\d]+
 HEXNUMBER=\$\p{XDigit}+
 OCTNUMBER=@[0-7]+
 BINNUMBER=%[0|1]+
@@ -66,7 +66,7 @@ SINGLE_QUOTED_STRING='([^\\'\r\n]|\\[^\r\n])*'?
 DOUBLE_QUOTED_STRING=\"([^\\\"\r\n]|\\[^\r\n])*\"?
 UNQUOTED_STRING=([^\\\r\n\ \t\f'\"])+
 
-LABEL=[_]*[:digit:]*[a-zA-Z][[a-zA-Z][:digit:]_]*  // without "." first char
+LABEL=[_\d]*[\p{Alpha}] [\p{Alpha}\d_]*  // without "." first char
 ID=[.]?{LABEL}
 
 A=[aA]
