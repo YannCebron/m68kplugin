@@ -34,7 +34,7 @@ public class M68kLabelStubImpl extends NamedStubBase<M68kLabel> implements M68kL
                            @NotNull IStubElementType elementType,
                            @Nullable String name,
                            M68kLabelBase.LabelKind labelKind,
-                           @NotNull String value) {
+                           @Nullable String value) {
     super(parent, elementType, name);
     this.labelKind = labelKind;
     this.value = value;
@@ -46,7 +46,7 @@ public class M68kLabelStubImpl extends NamedStubBase<M68kLabel> implements M68kL
   }
 
   @Override
-  public @NotNull String getValue() {
+  public @Nullable String getValue() {
     return value;
   }
 

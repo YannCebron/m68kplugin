@@ -19,12 +19,12 @@ package com.yanncebron.m68kplugin.lang.stubs;
 import com.intellij.psi.stubs.NamedStub;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface M68kLabelStub extends NamedStub<M68kLabel> {
 
   M68kLabelBase.LabelKind getLabelKind();
 
-  @NotNull
+  @Nullable
   String getValue();
 }

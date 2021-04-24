@@ -19,6 +19,7 @@ package com.yanncebron.m68kplugin.lang.stubs;
 import com.intellij.lang.LighterAST;
 import com.intellij.lang.LighterASTNode;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.util.text.StringUtilRt;
 import com.intellij.psi.impl.source.tree.LightTreeUtil;
 import com.intellij.psi.stubs.*;
 import com.intellij.psi.tree.IElementType;
@@ -33,6 +34,7 @@ import com.yanncebron.m68kplugin.lang.stubs.impl.M68kLabelStubImpl;
 import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
 import com.yanncebron.m68kplugin.lang.stubs.index.M68kMacroStubIndex;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
@@ -49,7 +51,7 @@ public interface M68kStubElementTypesHolder {
         assert parent != null;
 
         M68kLabelBase.LabelKind kind;
-        String value = "";
+        String value = null;
 
         final IElementType tokenType = parent.getTokenType();
         if (tokenType == M68kFileElementType.INSTANCE) {
@@ -83,7 +85,7 @@ public interface M68kStubElementTypesHolder {
         final M68kLabelBase.LabelKind labelKind = stub.getLabelKind();
         dataStream.writeByte(labelKind.ordinal());
         if (labelKind.hasValue()) {
-          dataStream.writeUTFFast(stub.getValue());
+          dataStream.writeUTFFast(StringUtilRt.notNullize(stub.getValue()));
         }
       }
 
@@ -102,7 +104,7 @@ public interface M68kStubElementTypesHolder {
         }
         assert kind != null : ordinal;
 
-        String value = kind.hasValue() ? dataStream.readUTFFast() : "";
+        String value = kind.hasValue() ? dataStream.readUTFFast() : null;
         return new M68kLabelStubImpl(parentStub, this, name, kind, value);
       }
 
@@ -130,7 +132,7 @@ public interface M68kStubElementTypesHolder {
         return new M68kLabelImpl(stub, this);
       }
 
-      @NotNull
+      @Nullable
       private String parseValue(@NotNull LighterAST tree,
                                 @NotNull LighterASTNode node,
                                 IElementType valueDelimiterTokenType) {
@@ -143,7 +145,7 @@ public interface M68kStubElementTypesHolder {
             return LightTreeUtil.toFilteredString(tree, child, null);
           }
         }
-        return "";
+        return null;
       }
 
     };

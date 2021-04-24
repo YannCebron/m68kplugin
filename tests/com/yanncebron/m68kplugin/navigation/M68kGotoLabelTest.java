@@ -55,11 +55,13 @@ public class M68kGotoLabelTest extends BasePlatformTestCase {
       "aEquals",
       "aSet",
       "aEqur",
+      "aEquWithoutValue",
       "bLabel");
 
     assertPresentation(model, "aLabel", M68kIcons.LABEL_GLOBAL, null, "gotoLabelA.s");
     assertPresentation(model, "aMacro", M68kIcons.LABEL_MACRO, null, "gotoLabelA.s");
     assertPresentation(model, "aEqu", M68kIcons.LABEL_EQU, "42", "gotoLabelA.s");
+    assertPresentation(model, "aEquWithoutValue", M68kIcons.LABEL_EQU, null, "gotoLabelA.s");
     assertPresentation(model, "aEquals", M68kIcons.LABEL_EQU, "1", "gotoLabelA.s");
     assertPresentation(model, "aSet", M68kIcons.LABEL_SET, "2", "gotoLabelA.s");
     assertPresentation(model, "aEqur", M68kIcons.LABEL_EQUR, "d0", "gotoLabelA.s");

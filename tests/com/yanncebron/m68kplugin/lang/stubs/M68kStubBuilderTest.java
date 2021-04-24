@@ -29,31 +29,31 @@ public class M68kStubBuilderTest extends LightPlatformTestCase {
   public void testLabel() {
     doTest("label",
       "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', GLOBAL, '']\n");
+        "  LABEL:M68kLabelStubImpl['label', GLOBAL, 'null']\n");
   }
 
   public void testLabelWithColon() {
     doTest("label:",
       "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', GLOBAL, '']\n");
+        "  LABEL:M68kLabelStubImpl['label', GLOBAL, 'null']\n");
   }
 
   public void testLabelWithBackslashAt() {
     doTest("label\\@",
       "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label\\@', GLOBAL, '']\n");
+        "  LABEL:M68kLabelStubImpl['label\\@', GLOBAL, 'null']\n");
   }
 
   public void testLabelWithBackslashAtBegin() {
     doTest("\\@label",
       "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['\\@label', GLOBAL, '']\n");
+        "  LABEL:M68kLabelStubImpl['\\@label', GLOBAL, 'null']\n");
   }
 
   public void testLabelWithMacro() {
     doTest("label macro",
       "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', MACRO, '']\n");
+        "  LABEL:M68kLabelStubImpl['label', MACRO, 'null']\n");
   }
 
   public void testLabelWithEqu() {
