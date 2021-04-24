@@ -2300,14 +2300,13 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // !<<afterWhitespace>> DOT labelIdentifier
   public static boolean localLabel(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "localLabel")) return false;
-    boolean r, p;
+    boolean r;
     Marker m = enter_section_(b, l, _NONE_, LOCAL_LABEL, "<local label>");
     r = localLabel_0(b, l + 1);
     r = r && consumeToken(b, DOT);
-    p = r; // pin = 2
     r = r && labelIdentifier(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+    exit_section_(b, l, m, r, false, null);
+    return r;
   }
 
   // !<<afterWhitespace>>

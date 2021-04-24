@@ -85,7 +85,6 @@ label ::= !<<afterWhitespace>> labelIdentifier
 // todo full name is: DevPac. prefixed with last non-local label
 localLabel ::= !<<afterWhitespace>> DOT labelIdentifier
 {
-  pin = 2
   name = "local label"
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kLabelBase"
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLocalLabelMixIn"
