@@ -13,7 +13,9 @@
 - unpaired conditional assembly directives (nesting!), missing `endc`/`endif`
 - highlight static conditional assembly directives status, e.g., `IFD`/`IFND`
 - macro call: parameter count mismatch
-- macro block: non-sequential parameter `\n` numbering
+- macro block: 
+  - non-sequential parameter `\n` numbering
+  - highlight parameters in labels `jsr _LVO\1(a6)`
 - `ReadWriteAccessDetector` for registers/label references
 - method separators:
   - "detected" subroutines
