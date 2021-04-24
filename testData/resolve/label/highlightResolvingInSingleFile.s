@@ -32,6 +32,16 @@ DECADE equ YEAR*10
 INVALID_REFERENCE equ <error descr="Cannot resolve label 'INVALID_LABEL'">INVALID_LABEL</error>
 
 
+* Macro labels
+
+myMacro macro
+
+macroLabel\@
+  bsr macroLabel\@
+
+  endm
+
+
 * conditional assembly directives referring potentially undefined label - weak highlighting
 
   ifd <weak_warning descr="Cannot resolve label 'INVALID_VALUE'">INVALID_VALUE</weak_warning>

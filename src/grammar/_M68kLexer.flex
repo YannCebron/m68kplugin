@@ -66,7 +66,7 @@ SINGLE_QUOTED_STRING='([^\\'\r\n]|\\[^\r\n])*'?
 DOUBLE_QUOTED_STRING=\"([^\\\"\r\n]|\\[^\r\n])*\"?
 UNQUOTED_STRING=([^\\\r\n\ \t\f'\"])+
 
-LABEL=[_\d]*[\p{Alpha}] [\p{Alpha}\d_]*  // without "." first char
+LABEL=[_\d[\\@]]*[\p{Alpha}] [\p{Alpha}\d_[\\@]]*  // without "." first char
 ID=[.]?{LABEL}
 
 A=[aA]

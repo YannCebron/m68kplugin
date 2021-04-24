@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,6 +36,18 @@ public class M68kStubBuilderTest extends LightPlatformTestCase {
     doTest("label:",
       "PsiFileStubImpl\n" +
         "  LABEL:M68kLabelStubImpl['label', GLOBAL, '']\n");
+  }
+
+  public void testLabelWithBackslashAt() {
+    doTest("label\\@",
+      "PsiFileStubImpl\n" +
+        "  LABEL:M68kLabelStubImpl['label\\@', GLOBAL, '']\n");
+  }
+
+  public void testLabelWithBackslashAtBegin() {
+    doTest("\\@label",
+      "PsiFileStubImpl\n" +
+        "  LABEL:M68kLabelStubImpl['\\@label', GLOBAL, '']\n");
   }
 
   public void testLabelWithMacro() {

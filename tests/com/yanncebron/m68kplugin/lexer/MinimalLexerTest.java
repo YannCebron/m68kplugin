@@ -194,4 +194,13 @@ public class MinimalLexerTest extends M68kLexerTestCase {
         "id ('trap')");
   }
 
+  public void testMacroLabelBackslashAt() {
+    doTest("label\\@",
+      "id ('label\\@')");
+  }
+
+  public void testMacroLabelBackslashAtBegin() {
+    doTest("\\@label",
+      "id ('\\@label')");
+  }
 }

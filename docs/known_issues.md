@@ -101,7 +101,6 @@ Unsupported directives, these will display false positive
 - support `macro <macroName>` notation
 - macro call with register list `myMacro d0/d7`
 - special symbols
-  - `\@` unique ID
   - `\@!`
   - `\@?`
   - `\@@`
