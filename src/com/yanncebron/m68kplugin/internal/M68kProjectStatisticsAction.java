@@ -28,15 +28,13 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Comparing;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiErrorElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.PsiReference;
+import com.intellij.psi.*;
 import com.intellij.psi.impl.include.FileIncludeManager;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.LightVirtualFile;
+import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
@@ -123,9 +121,9 @@ public class M68kProjectStatisticsAction extends AnAction {
               if (!(m68kPsiElement instanceof M68kLabelRefExpression)) continue;
 
               try {
-                final PsiReference reference = m68kPsiElement.getReference();
+                final PsiPolyVariantReference reference = ObjectUtils.tryCast(m68kPsiElement.getReference(), PsiPolyVariantReference.class);
                 assert reference != null;
-                if (reference.resolve() == null) {
+                if (reference.multiResolve(false).length == 0) {
                   labelRefsUnresolved++;
                 }
                 labelRefs++;
