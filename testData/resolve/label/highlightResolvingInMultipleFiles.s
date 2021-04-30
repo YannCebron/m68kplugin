@@ -1,5 +1,5 @@
 myLabel
-  bra myLabel
+  bra my<caret>Label
 
   bra <error descr="Cannot resolve label 'INVALID_LABEL'">INVALID_LABEL</error>
 

@@ -1,4 +1,5 @@
 topLevelLabel
+topLevelLabel   ; 2nd variant
   bra <caret>
 
 .localLabel

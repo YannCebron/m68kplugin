@@ -3,6 +3,7 @@
 _underscoreTopLevelLabel
 
 topLevelLabel
+topLevelLabel  ; redefined
   bra topLevelLabel
   bra anotherTopLevelLabel
   bra .localLabel

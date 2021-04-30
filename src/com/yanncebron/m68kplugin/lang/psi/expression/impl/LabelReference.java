@@ -52,8 +52,8 @@ import java.util.List;
  * <p>
  * Resolve mechanism (all results cached):
  * <ol>
- *   <li>if local label, search backwards, then forwards for local labels only - until encountering global label/macro boundary ("parent scope")</li>
- *   <li>if label, search in the current file, then in included (TODO: currently "all other files")</li>
+ *   <li>local label: search backwards, then forwards for local labels only - until encountering global label/macro boundary ("parent scope"); first match</li>
+ *   <li>global label: search in current file, if not found in included (currently "all other files"); all matches</li>
  * </ol>
  * <p>
  * This allows for both correct scoping of local labels and optimal performance, as resolving can be optimized for each type.
@@ -87,17 +87,15 @@ class LabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMixIn> 
         return ResolveResult.EMPTY_ARRAY;
       }
 
-      final CommonProcessors.FindProcessor<M68kLabel> processor = new CommonProcessors.FindFirstProcessor<>();
+      List<M68kLabel> resolveResults = new SmartList<>();
+      final CommonProcessors.CollectProcessor<M68kLabel> processor = new CommonProcessors.CollectProcessor<>(resolveResults);
       processLabelsInScope(processor, getCurrentFileSearchScope(psiElement), labelName);
-      if (processor.isFound()) {
-        return PsiElementResolveResult.createResults(processor.getFoundValue());
+      if (!resolveResults.isEmpty()) {
+        return PsiElementResolveResult.createResults(resolveResults);
       }
 
       processLabelsInScope(processor, getIncludeSearchScope(psiElement), labelName);
-      if (processor.isFound()) {
-        return PsiElementResolveResult.createResults(processor.getFoundValue());
-      }
-      return ResolveResult.EMPTY_ARRAY;
+      return PsiElementResolveResult.createResults(resolveResults);
     }
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.codeInspection.LocalInspectionToolSession;
 import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiPolyVariantReference;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
@@ -51,7 +52,12 @@ public class M68kUnresolvedLabelReferenceInspection extends LocalInspectionTool 
 
   private void highlightReference(@NotNull M68kPsiElement psiElement, @NotNull ProblemsHolder holder) {
     final PsiReference reference = psiElement.getReference();
-    if (reference != null && reference.resolve() == null) {
+    assert reference != null : psiElement;
+    
+    boolean unresolved = reference instanceof PsiPolyVariantReference
+      ? ((PsiPolyVariantReference) reference).multiResolve(false).length == 0
+      : reference.resolve() == null;
+    if (unresolved) {
       if (isUsageInPotentiallyNonResolvingConditionalAssemblyDirective(psiElement)) {
         holder.registerProblem(reference, ProblemHighlightType.WEAK_WARNING);
       } else {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,11 @@ package com.yanncebron.m68kplugin.lang.resolve;
 import com.intellij.codeInsight.completion.PrioritizedLookupElement;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementPresentation;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiPolyVariantReference;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.ResolveResult;
 import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.intellij.testFramework.fixtures.TestLookupElementPresentation;
@@ -30,6 +34,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.util.Objects;
 
 @TestDataPath("$PROJECT_ROOT/testData/resolve/label")
 public class M68kLabelResolveTest extends BasePlatformTestCase {
@@ -48,6 +53,13 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     myFixture.testCompletionVariants("completionVariantsInSingleFile.s",
       "topLevelLabel", "anotherTopLevelLabel", ".localLabel", ".localLabel2",
       "setLabel", "equLabel", "equalsLabel");
+
+    final LookupElement topLevelLabel1 = findLookupElement("topLevelLabel", 0);
+    final LookupElementPresentation topLevelPresentation1 = LookupElementPresentation.renderElement(topLevelLabel1);
+    assertLookupIcon(topLevelPresentation1, M68kIcons.LABEL_GLOBAL);
+    final LookupElement topLevelLabel2 = findLookupElement("topLevelLabel", 14);
+    final LookupElementPresentation topLevelPresentation2 = LookupElementPresentation.renderElement(topLevelLabel2);
+    assertLookupIcon(topLevelPresentation2, M68kIcons.LABEL_GLOBAL);
 
     final LookupElement anotherTopLevelLabel = findLookupElement("anotherTopLevelLabel");
     final LookupElementPresentation anotherTopLevelPresentation = LookupElementPresentation.renderElement(anotherTopLevelLabel);
@@ -98,14 +110,24 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
   }
 
   public void testHighlightResolveInMultipleFiles() {
+    final String[] testDataPaths = {"highlightResolvingInMultipleFiles.s", "highlightResolvingInMultipleFiles_other.s"};
     myFixture.enableInspections(new M68kUnresolvedLabelReferenceInspection());
-    myFixture.testHighlighting("highlightResolvingInMultipleFiles.s", "highlightResolvingInMultipleFiles_other.s");
+    myFixture.testHighlighting(testDataPaths);
+
+    // resolve in current file (2nd declaration in _other.s)
+    final PsiReference referenceAtCaretPositionWithAssertion = myFixture.getReferenceAtCaretPositionWithAssertion(testDataPaths);
+    final PsiPolyVariantReference polyVariantReference = assertInstanceOf(referenceAtCaretPositionWithAssertion, PsiPolyVariantReference.class);
+    final ResolveResult resolveResult = assertOneElement(polyVariantReference.multiResolve(false));
+    final PsiElement resolvePsiElement = resolveResult.getElement();
+    assertNotNull(resolvePsiElement);
+    assertEquals("highlightResolvingInMultipleFiles.s", resolvePsiElement.getContainingFile().getName());
+    assertEquals(0, resolvePsiElement.getTextOffset());
   }
 
   public void testCompletionVariantsInMultipleFiles() {
     myFixture.copyFileToProject("highlightResolvingInMultipleFiles_other.s");
     myFixture.testCompletionVariants("completionVariantsInMultipleFiles.s",
-      "topLevelLabel", "anotherTopLevelLabel", "otherLabel", "otherLabel2");
+      "topLevelLabel", "anotherTopLevelLabel", "otherLabel", "otherLabel2", "myLabel");
 
     final LookupElement otherLabel = findLookupElement("otherLabel");
     final LookupElementPresentation otherLabelPresentation = LookupElementPresentation.renderElement(otherLabel);
@@ -115,11 +137,19 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
 
   @NotNull
   private LookupElement findLookupElement(String lookupString) {
+    return findLookupElement(lookupString, -1);
+  }
+
+  @NotNull
+  private LookupElement findLookupElement(String lookupString, int textOffset) {
     final LookupElement[] lookupElements = myFixture.getLookupElements();
     assertNotNull(lookupElements);
-    final LookupElement lookupElement = ContainerUtil.find(lookupElements,
-      element -> element.getLookupString().equals(lookupString));
-    assertNotNull(lookupString, lookupElement);
+    final LookupElement lookupElement = ContainerUtil.find(lookupElements, element ->
+      element.getLookupString().equals(lookupString) &&
+        (textOffset == -1 || textOffset == Objects.requireNonNull(element.getPsiElement()).getTextOffset()));
+
+    assertNotNull(StringUtil.join(lookupElements, element -> element.getLookupString() + ":" + Objects.requireNonNull(element.getPsiElement()).getTextOffset(), "\n"),
+      lookupElement);
     return lookupElement;
   }
 

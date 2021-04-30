@@ -7,7 +7,6 @@ title: Known Issues
 ## Resolving
 
 - `include` directives not evaluated, resolving across all project files
-- respects only first match for symbols defined more than once (e.g., inside conditional assembly directives)
 - macro block: 
   - do not highlight `jsr _LVO\1(a6)` as unresolved label 
   - resolve global label inside current first
