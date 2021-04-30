@@ -44,6 +44,8 @@ import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiTreeUtil;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kEndmDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroDirective;
 import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -57,7 +59,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Provides reference to label.
  * <ol>
- *   <li>if local label, search backwards, then forwards for local labels only - until encountering global label ("parent scope")</li>
+ *   <li>if local label, search backwards, then forwards for local labels only - until encountering global label/macro boundary ("parent scope")</li>
  *   <li>if label, search in the current file, then in included (TODO: currently "all other files")</li>
  * </ol>
  * <p>
@@ -163,12 +165,15 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
         return true;
       };
 
-      @SuppressWarnings("unchecked") Class<? extends M68kPsiElement>[] stopAtElements = new Class[]{M68kLabel.class};
       final M68kPsiElement startElement = M68kPsiTreeUtil.getContainingInstructionOrDirective(getElement());
       assert startElement != null : getElement().getText();
 
-      if (!M68kPsiTreeUtil.processSiblingsBackwards(startElement, localLabelProcessor, stopAtElements)) return;
-      M68kPsiTreeUtil.processSiblingsForwards(startElement, localLabelProcessor, stopAtElements);
+      if (!M68kPsiTreeUtil.processSiblingsBackwards(
+        startElement, localLabelProcessor, M68kLabel.class, M68kMacroDirective.class)) {
+        return;
+      }
+      M68kPsiTreeUtil.processSiblingsForwards(startElement, localLabelProcessor,
+        M68kLabel.class, M68kEndmDirective.class);
     }
 
     private void processLabelsInScope(Processor<M68kLabel> processor, GlobalSearchScope scope, @Nullable String labelName) {
