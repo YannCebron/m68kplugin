@@ -23,6 +23,7 @@
 
 - macro call: parameter count mismatch
 - macro block:
+  - highlight usages of parameter at caret
   - usage of parameters outside of macro block
   - non-sequential parameter `\n` numbering
   - highlight parameters in labels `jsr _LVO\1(a6)`
