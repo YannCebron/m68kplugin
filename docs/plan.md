@@ -1,5 +1,7 @@
 # Plans
 
+> Suggest features missing in this list in [GitHub tracker](https://github.com/YannCebron/m68kplugin/issues)
+
 ## Instruction Sets
 
 * 680x0 variants
