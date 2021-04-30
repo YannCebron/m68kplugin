@@ -94,13 +94,16 @@ public class M68kProjectStatisticsAction extends AnAction {
 
           final M68kFile m68kPsiFile = (M68kFile) psiFile;
 
+          pi.setText2("Errors");
           final PsiErrorElement[] errors = m68kPsiFile.findChildrenByClass(PsiErrorElement.class);
           totalErrors[0] = totalErrors[0] + errors.length;
 
+          pi.setText2("Includes");
           final VirtualFile[] directInclude = fileIncludeManager.getIncludedFiles(virtualFile, true);
           final VirtualFile[] recursiveInclude = fileIncludeManager.getIncludedFiles(virtualFile, true, true);
           final VirtualFile[] incbinInclude = fileIncludeManager.getIncludedFiles(virtualFile, false);
 
+          pi.setText2("Resolves");
           int labelRefs = 0;
           int labelRefsUnresolved = 0;
           int macroCalls = 0;
@@ -141,6 +144,7 @@ public class M68kProjectStatisticsAction extends AnAction {
             " | " + directInclude.length + " (" + (recursiveInclude.length - 1) + ") [" + incbinInclude.length + "]";
           fileInfos.add(info);
 
+          pi.setText2("Instruction count");
           M68kInstruction[] computeInstructions = m68kPsiFile.findChildrenByClass(M68kInstruction.class);
           countByClass(instructions, computeInstructions);
 
