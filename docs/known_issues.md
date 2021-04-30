@@ -114,7 +114,6 @@ Unsupported directives, these will display false positive
 - valid label: `\1`
 - support parameters `addq.\0 #1,\1` with `macroName.\0` call syntax
 - allow `a`-`z` for macro parameters
-- `ifmacrod`/`ifmacrond` code insight
 
 ### Misc
 

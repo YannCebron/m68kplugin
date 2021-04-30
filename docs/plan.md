@@ -7,43 +7,57 @@
 
 ## Highlighting
 
+### Directives
+
 - `rem` sections: treat as real comment
 - unpaired directives:
   - `struct`/`estruct`
 - unpaired conditional assembly directives (nesting!), missing `endc`/`endif`
 - highlight static conditional assembly directives status, e.g., `IFD`/`IFND`
+- `section` directive: smarter highlighting/code insight
+- `ifmacrod`/`ifmacrond` code insight
+
+### Macros
+
 - macro call: parameter count mismatch
-- macro block: 
-  - usage of macro parameters outside macro block
+- macro block:
+  - usage of parameters outside of macro block
   - non-sequential parameter `\n` numbering
   - highlight parameters in labels `jsr _LVO\1(a6)`
-- `ReadWriteAccessDetector` for registers/label references
+
+### Other
+
+- `ReadWriteAccessDetector`
+  - registers
+  - label references
 - method separators:
   - "detected" subroutines
-- color-picker/inlays: copper list colors
 - highlight returns
 - highlight/navigate control structures `CodeBlockSupportHandler`:
   - loop ranges
-- rainbow highlighter - macros? labels?
+- rainbow highlighter: macros? labels?
 - unreachable code `ControlFlowProvider`
-- `section` directive: smarter highlighting/codeinsight
-- inspections: suppress via comment
 
 ## Resolve/Refactor
 
-- labels:
-  - local label: in-place rename
-  - find usages
-  - highlight usages
-  - safe delete (quickfix via `M68kUnusedLabelInspection`)
-  - highlight duplicated names (conditional!)
-  - rename:
-    - `RenameInputValidatorEx`
-    - `NameSuggestionProvider` ?
-  - unresolved: quick-fix to add `include` for existing label
-- register:
-  - shift up/down through available ones
-  - change/cycle through address mode by typing/intention/...?
+### Labels
+
+- local label: in-place rename
+- find usages
+- highlight usages
+- safe delete (quickfix via `M68kUnusedLabelInspection`)
+- rename:
+  - `RenameInputValidatorEx`
+  - `NameSuggestionProvider` ?
+- unresolved: quick-fix to add `include` for existing label
+
+### Register
+
+- shift up/down through available ones
+- change/cycle through address mode by typing/intention/...?
+
+### Extract/Duplicates
+
 - `refactoring.extractIncludeHandler`
 - duplicates detection:
   - textual duplicate -> wrap in `rept`/`endr`
@@ -59,7 +73,8 @@
 - formatter
 - documentation:
   - quick doc/hover for number literals: dec/hex/oct/bin/ASCII
-  - render mode for comments before label
+  - quick doc for comments preceding label
+  - render mode for comments preceding label
 - **WIP** code folding with settings for:
   - `movem` push/pop
 - macro call: parameter info/preview referring place
@@ -67,38 +82,48 @@
 - `dc`:
   - join lines
   - smart enter handler to split value list
-- Surround Descriptors?
+- surround descriptors?
 - `FocusModeProvider`
 
 ## Inspections
 
+- ability to suppress via comment
 - nonsensical `move` (?!)
 - `movem` non-symmetrical register ranges
-- unused label: global - located in non-include files only?
 - register list:
   - sort/optimize
 - string in `dc.b` not terminated with `,0`
 - check optimizations from vasm/DevPac
 - multiple `opt` directives (?)
+
+### Labels
+
+- unused label: global - located in non-include files only?
+- highlight duplicated names (conditional!)
 - label naming conventions (`AbstractNamingConventionInspection`)
-- cyclic `include`
-- expression:
-  - unnecessary parentheses
-  - type check
-  - range check
-  - simplify
-  - intention: convert numeric literal to other bases
+
+### Expression
+
+- unnecessary parentheses
+- type check
+- range check
+- simplify
+- intention: convert numeric literal to other bases
 
 ## Navigation
 
 - breadcrumbs
-- Quick Definition: better range for labels/"code-blocks"
-- Goto Related: `.i`/binary file -> including files
-- Gutter Icon: `include` all included files (recursively)
-- `include` UML visualization
+- quick definition: better range for labels/"code-blocks"
 - structure view:
   - `section`
   - macro: # of parameters
+
+### Include
+
+- goto related: `.i`/binary file -> including files
+- gutter icon: `include` all included files (recursively)
+- UML visualization
+- highlight cycles
 
 ## IDE
 
@@ -107,8 +132,14 @@
 
 ## Tools
 
-- http://deadliners.net/gradientmaster/
 - show cycles/size in editor https://68kcounter-web.vercel.app/
+
+## Amiga
+
+- copper list:
+  - color-picker/inlays
+  - register name inlay
+  - http://deadliners.net/gradientmaster/
 
 ## Resources
 
