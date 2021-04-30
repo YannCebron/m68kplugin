@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -72,7 +72,9 @@ public class M68kProjectStatisticsAction extends AnAction {
     final int[] totalErrors = {0};
     final int[] totalResolve = {0};
     final int[] totalResolveErrors = {0};
+    final long[] totalResolveTime = {0};
 
+    long startTime = System.currentTimeMillis();
     ProgressManager.getInstance().runProcessWithProgressSynchronously(() ->
       ApplicationManager.getApplication().runReadAction(() -> {
         final Collection<VirtualFile> files =
@@ -103,6 +105,7 @@ public class M68kProjectStatisticsAction extends AnAction {
           int labelRefsUnresolved = 0;
           int macroCalls = 0;
           int macroCallsUnresolved = 0;
+          long resolveStart = System.currentTimeMillis();
           for (M68kPsiElement element : m68kPsiFile.findChildrenByClass(M68kPsiElement.class)) {
             if (element instanceof M68kMacroCallDirective) {
               final PsiReference reference = element.getReference();
@@ -127,6 +130,7 @@ public class M68kProjectStatisticsAction extends AnAction {
               }
             }
           }
+          totalResolveTime[0] = totalResolveTime[0] + (System.currentTimeMillis() - resolveStart);
           totalResolve[0] = totalResolve[0] + macroCalls + labelRefs;
           totalResolveErrors[0] = totalResolveErrors[0] + macroCallsUnresolved + labelRefsUnresolved;
 
@@ -150,10 +154,12 @@ public class M68kProjectStatisticsAction extends AnAction {
 
     StringBuilder sb = new StringBuilder();
     sb.append("Files: ").append(fileInfos.size())
+      .append(" (").append(StringUtil.formatDuration(System.currentTimeMillis() - startTime)).append(")")
       .append("\n")
       .append("Total Errors: ").append(totalErrors[0])
       .append("\n")
       .append("Total Resolve Errors: ").append(totalResolveErrors[0]).append("/").append(totalResolve[0])
+      .append(" (").append(StringUtil.formatDuration(totalResolveTime[0])).append(")")
       .append("\n\n");
     Collections.sort(fileInfos);
     sb.append("File                            Errors | Label   | Macro   | include (recursive) [incbin]\n");
