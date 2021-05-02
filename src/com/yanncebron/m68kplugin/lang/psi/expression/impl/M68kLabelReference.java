@@ -62,16 +62,16 @@ import java.util.List;
  * In completion variants, local labels and labels from the current file are prioritized and shown in bold.
  * </p>
  */
-class LabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMixIn> implements EmptyResolveMessageProvider {
+class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMixIn> implements EmptyResolveMessageProvider {
 
-  private static class Resolver implements ResolveCache.PolyVariantResolver<LabelReference> {
+  private static class Resolver implements ResolveCache.PolyVariantResolver<M68kLabelReference> {
 
     private static final Resolver INSTANCE = new Resolver();
 
     @Override
-    public ResolveResult @NotNull [] resolve(@NotNull LabelReference labelReference, boolean incompleteCode) {
-      PsiElement psiElement = labelReference.getElement();
-      String labelName = labelReference.getValue();
+    public ResolveResult @NotNull [] resolve(@NotNull M68kLabelReference m68kLabelReference, boolean incompleteCode) {
+      PsiElement psiElement = m68kLabelReference.getElement();
+      String labelName = m68kLabelReference.getValue();
 
       if (labelName.startsWith(".")) {
         final CommonProcessors.FindProcessor<M68kLocalLabel> findLocalProcessor = new CommonProcessors.FindProcessor<M68kLocalLabel>() {
@@ -99,7 +99,7 @@ class LabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMixIn> 
     }
   }
 
-  LabelReference(M68kLabelRefExpressionMixIn element) {
+  M68kLabelReference(M68kLabelRefExpressionMixIn element) {
     super(element);
   }
 

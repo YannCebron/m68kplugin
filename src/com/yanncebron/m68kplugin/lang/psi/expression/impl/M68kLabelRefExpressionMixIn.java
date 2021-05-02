@@ -32,7 +32,7 @@ abstract class M68kLabelRefExpressionMixIn extends ASTWrapperPsiElement {
 
   @Override
   public PsiReference getReference() {
-    return new LabelReference(this);
+    return new M68kLabelReference(this);
   }
 
 }
