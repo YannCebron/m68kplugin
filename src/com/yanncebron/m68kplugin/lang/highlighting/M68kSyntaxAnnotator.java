@@ -28,6 +28,7 @@ import com.intellij.psi.PsiElement;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroParameterDirective;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,8 +50,24 @@ public class M68kSyntaxAnnotator implements Annotator {
       doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LABEL, true);
     } else if (element instanceof M68kLocalLabel) {
       doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LOCAL_LABEL, true);
+    } else if (element instanceof M68kLabelRefExpression) {
+      annotateMacroParameters(holder, element);
     } else if (element instanceof M68kMacroParameterDirective) {
       doAnnotate(holder, element.getNode(), M68kTextAttributes.MACRO_PARAMETER, false);
+    }
+  }
+
+  private void annotateMacroParameters(AnnotationHolder holder, PsiElement element) {
+    if (!element.textContains('\\')) return;
+    final String text = element.getText();
+
+    int idx = 0;
+    while (true) {
+      idx = text.indexOf('\\', idx);
+      if (idx == -1 || idx > text.length() - 2) break;
+
+      createMacroParameterAnnotation(holder, element.getTextOffset(), idx);
+      idx += 2;
     }
   }
 
@@ -62,23 +79,27 @@ public class M68kSyntaxAnnotator implements Annotator {
       return; // todo workaround for non-supported label ID
     }
 
-    createBuilder(holder, key).range(node).textAttributes(key).create();
+    createBuilder(holder, key).range(node).create();
 
     if (highlightMacroParameters && node.textContains('@')) {
       int idx = node.getText().indexOf("\\@");
       if (idx == -1) return;
 
-      createBuilder(holder, M68kTextAttributes.MACRO_PARAMETER)
-        .range(TextRange.from(node.getStartOffset() + idx, 2))
-        .textAttributes(M68kTextAttributes.MACRO_PARAMETER).create();
+      createMacroParameterAnnotation(holder, node.getStartOffset(), idx);
     }
+  }
+
+  private static void createMacroParameterAnnotation(AnnotationHolder holder, int startOffset, int idx) {
+    createBuilder(holder, M68kTextAttributes.MACRO_PARAMETER)
+      .range(TextRange.from(startOffset + idx, 2))
+      .create();
   }
 
   private static AnnotationBuilder createBuilder(AnnotationHolder holder, TextAttributesKey key) {
     if (DEBUG_MODE) {
-      return holder.newAnnotation(HighlightSeverity.INFORMATION, key.getExternalName());
+      return holder.newAnnotation(HighlightSeverity.INFORMATION, key.getExternalName()).textAttributes(key);
     }
-    return holder.newSilentAnnotation(HighlightSeverity.INFORMATION);
+    return holder.newSilentAnnotation(HighlightSeverity.INFORMATION).textAttributes(key);
   }
 
 }

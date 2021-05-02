@@ -8,7 +8,7 @@ title: Known Issues
 
 - `include` directives not evaluated, resolving across all project files
 - macro block:
-  - do not highlight `jsr _LVO\1(a6)` as unresolved label
+  - highlight `jsr _LVO\1(a6)` as unresolved outside of macro
   - resolve global label inside current first
 
 ## Editor

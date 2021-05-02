@@ -40,24 +40,31 @@ public class M68kUnresolvedLabelReferenceInspection extends LocalInspectionTool 
     return new M68kVisitor() {
       @Override
       public void visitLabelRefExpression(@NotNull M68kLabelRefExpression o) {
-        highlightReference(o, holder);
+        highlightReference(holder, o, true);
       }
 
       @Override
       public void visitMacroCallDirective(@NotNull M68kMacroCallDirective o) {
-        highlightReference(o, holder);
+        highlightReference(holder, o, false);
       }
     };
   }
 
-  private void highlightReference(@NotNull M68kPsiElement psiElement, @NotNull ProblemsHolder holder) {
+  private void highlightReference(@NotNull ProblemsHolder holder,
+                                  @NotNull M68kPsiElement psiElement,
+                                  boolean suppressMacroParameters) {
     final PsiReference reference = psiElement.getReference();
     assert reference != null : psiElement;
-    
+
     boolean unresolved = reference instanceof PsiPolyVariantReference
       ? ((PsiPolyVariantReference) reference).multiResolve(false).length == 0
       : reference.resolve() == null;
     if (unresolved) {
+      // skip '\1' in labelRef
+      if (suppressMacroParameters && psiElement.textContains('\\') && !(psiElement.textContains('@'))) {
+        return;
+      }
+
       if (isUsageInPotentiallyNonResolvingConditionalAssemblyDirective(psiElement)) {
         holder.registerProblem(reference, ProblemHighlightType.WEAK_WARNING);
       } else {

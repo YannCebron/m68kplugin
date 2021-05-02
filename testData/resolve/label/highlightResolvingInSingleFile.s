@@ -39,6 +39,7 @@ myMacro macro
 
 macroLabel\@
   bsr macroLabel\@
+  jsr _LVO\1(a6)
   endm
 
 * local macro label: inside current macro scope ------------------------------------------------------------------------

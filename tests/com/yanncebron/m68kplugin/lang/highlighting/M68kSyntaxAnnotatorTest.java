@@ -49,6 +49,8 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
     myFixture.configureByText("test.s",
       "<info descr=\"M68K_LABEL\">macroName</info> macro\n" +
         "  <info descr=\"M68K_MACRO_PARAMETER\">\\1</info>\n" +
+        " jsr _LVO<info descr=\"M68K_MACRO_PARAMETER\">\\1</info>(a6)\n" +
+        " jsr _<info descr=\"M68K_MACRO_PARAMETER\">\\1</info>_TwoMacroParams_<info descr=\"M68K_MACRO_PARAMETER\">\\2</info>(a6)\n" +
         " endm"
     );
     myFixture.testHighlighting(false, true, false);
