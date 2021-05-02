@@ -1,6 +1,9 @@
 macro1 macro
   endm
 
+macro1 macro ; redefine
+  endm
+
 macro2 macro
   endm
 

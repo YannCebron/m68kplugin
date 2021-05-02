@@ -26,6 +26,7 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
+import com.intellij.testFramework.fixtures.CodeInsightTestFixture;
 import com.intellij.testFramework.fixtures.TestLookupElementPresentation;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.inspections.M68kUnresolvedLabelReferenceInspection;
@@ -54,10 +55,10 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
       "topLevelLabel", "anotherTopLevelLabel", ".localLabel", ".localLabel2",
       "setLabel", "equLabel", "equalsLabel");
 
-    final LookupElement topLevelLabel1 = findLookupElement("topLevelLabel", 0);
+    final LookupElement topLevelLabel1 = findLookupElement(myFixture, "topLevelLabel", 0);
     final LookupElementPresentation topLevelPresentation1 = LookupElementPresentation.renderElement(topLevelLabel1);
     assertLookupIcon(topLevelPresentation1, M68kIcons.LABEL_GLOBAL);
-    final LookupElement topLevelLabel2 = findLookupElement("topLevelLabel", 14);
+    final LookupElement topLevelLabel2 = findLookupElement(myFixture, "topLevelLabel", 14);
     final LookupElementPresentation topLevelPresentation2 = LookupElementPresentation.renderElement(topLevelLabel2);
     assertLookupIcon(topLevelPresentation2, M68kIcons.LABEL_GLOBAL);
 
@@ -118,10 +119,7 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     final PsiReference referenceAtCaretPositionWithAssertion = myFixture.getReferenceAtCaretPositionWithAssertion(testDataPaths);
     final PsiPolyVariantReference polyVariantReference = assertInstanceOf(referenceAtCaretPositionWithAssertion, PsiPolyVariantReference.class);
     final ResolveResult resolveResult = assertOneElement(polyVariantReference.multiResolve(false));
-    final PsiElement resolvePsiElement = resolveResult.getElement();
-    assertNotNull(resolvePsiElement);
-    assertEquals("highlightResolvingInMultipleFiles.s", resolvePsiElement.getContainingFile().getName());
-    assertEquals(0, resolvePsiElement.getTextOffset());
+    assertResolveResultPsiElement(resolveResult, "myLabel", "highlightResolvingInMultipleFiles.s", 0);
   }
 
   public void testCompletionVariantsInMultipleFiles() {
@@ -137,13 +135,18 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
 
   @NotNull
   private LookupElement findLookupElement(String lookupString) {
-    return findLookupElement(lookupString, -1);
+    return findLookupElement(myFixture, lookupString);
   }
 
   @NotNull
-  private LookupElement findLookupElement(String lookupString, int textOffset) {
-    final LookupElement[] lookupElements = myFixture.getLookupElements();
-    assertNotNull(lookupElements);
+  static LookupElement findLookupElement(CodeInsightTestFixture fixture, String lookupString) {
+    return findLookupElement(fixture, lookupString, -1);
+  }
+
+  @NotNull
+  static LookupElement findLookupElement(CodeInsightTestFixture fixture, String lookupString, int textOffset) {
+    final LookupElement[] lookupElements = fixture.getLookupElements();
+    assertNotNull(lookupString, lookupElements);
     final LookupElement lookupElement = ContainerUtil.find(lookupElements, element ->
       element.getLookupString().equals(lookupString) &&
         (textOffset == -1 || textOffset == Objects.requireNonNull(element.getPsiElement()).getTextOffset()));
@@ -151,6 +154,14 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     assertNotNull(StringUtil.join(lookupElements, element -> element.getLookupString() + ":" + Objects.requireNonNull(element.getPsiElement()).getTextOffset(), "\n"),
       lookupElement);
     return lookupElement;
+  }
+
+  static void assertResolveResultPsiElement(ResolveResult resolveResult, String text, String filename, int offset) {
+    final PsiElement element = resolveResult.getElement();
+    assertNotNull(text, element);
+    assertEquals(text, element.getText());
+    assertEquals(filename, element.getContainingFile().getName());
+    assertEquals(offset, element.getTextOffset());
   }
 
   static void assertPrioritizedLookupElement(LookupElement element, double expectedPriority) {

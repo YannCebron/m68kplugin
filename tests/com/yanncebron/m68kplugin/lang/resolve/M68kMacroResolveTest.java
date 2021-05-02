@@ -18,12 +18,16 @@ package com.yanncebron.m68kplugin.lang.resolve;
 
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementPresentation;
+import com.intellij.psi.PsiPolyVariantReference;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.ResolveResult;
 import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
-import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.inspections.M68kUnresolvedLabelReferenceInspection;
 import com.yanncebron.m68kplugin.lang.M68kIcons;
 import org.jetbrains.annotations.NotNull;
+
+import static com.yanncebron.m68kplugin.lang.resolve.M68kLabelResolveTest.*;
 
 @TestDataPath("$PROJECT_ROOT/testData/resolve/macro")
 public class M68kMacroResolveTest extends BasePlatformTestCase {
@@ -41,11 +45,27 @@ public class M68kMacroResolveTest extends BasePlatformTestCase {
   public void testCompletionVariantsInSingleFile() {
     myFixture.testCompletionVariants("macroCompletionVariantsInSingleFile.s",
       "macro1", "macro2");
+
+    final LookupElement firstMacro1 = M68kLabelResolveTest.findLookupElement(myFixture, "macro1", 0);
+    final LookupElementPresentation firstMacro1Presentation = LookupElementPresentation.renderElement(firstMacro1);
+    assertLookupIcon(firstMacro1Presentation, M68kIcons.LABEL_MACRO);
+    final LookupElement secondMacro1 = M68kLabelResolveTest.findLookupElement(myFixture, "macro1", 21);
+    final LookupElementPresentation secondMacro1Presentation = LookupElementPresentation.renderElement(secondMacro1);
+    assertLookupIcon(secondMacro1Presentation, M68kIcons.LABEL_MACRO);
   }
 
   public void testHighlightResolveInMultipleFiles() {
+    final String[] testDataPaths = {"macroHighlightResolvingInMultipleFiles.s", "macroHighlightResolvingInMultipleFiles_other.s"};
     myFixture.enableInspections(new M68kUnresolvedLabelReferenceInspection());
-    myFixture.testHighlighting("macroHighlightResolvingInMultipleFiles.s", "macroHighlightResolvingInMultipleFiles_other.s");
+    myFixture.testHighlighting(testDataPaths);
+
+    final PsiReference referenceAtCaretPositionWithAssertion = myFixture.getReferenceAtCaretPositionWithAssertion(testDataPaths);
+    final PsiPolyVariantReference polyVariantReference = assertInstanceOf(referenceAtCaretPositionWithAssertion, PsiPolyVariantReference.class);
+    final ResolveResult[] resolveResults = polyVariantReference.multiResolve(false);
+    assertSize(2, resolveResults);
+
+    assertResolveResultPsiElement(resolveResults[0], "yetAnotherMacro", "macroHighlightResolvingInMultipleFiles_other.s", 846);
+    assertResolveResultPsiElement(resolveResults[1], "yetAnotherMacro", "macroHighlightResolvingInMultipleFiles_other.s", 876);
   }
 
   public void testCompletionVariantsInMultipleFiles() {
@@ -54,17 +74,24 @@ public class M68kMacroResolveTest extends BasePlatformTestCase {
       "macro1", "macro2", "otherMacro", "yetAnotherMacro");
 
     final LookupElement myMacro = findLookupElement("macro1");
-    final LookupElementPresentation myPresentation = LookupElementPresentation.renderElement(myMacro);
-    assertTrue(myPresentation.isItemTextBold());
-    M68kLabelResolveTest.assertLookupIcon(myPresentation, M68kIcons.LABEL_MACRO);
-    assertEmpty(myPresentation.getTypeText());
-    M68kLabelResolveTest.assertPrioritizedLookupElement(myMacro, 30.0);
+    final LookupElementPresentation myMacroPresentation = LookupElementPresentation.renderElement(myMacro);
+    assertTrue(myMacroPresentation.isItemTextBold());
+    assertLookupIcon(myMacroPresentation, M68kIcons.LABEL_MACRO);
+    assertEmpty(myMacroPresentation.getTypeText());
+    assertPrioritizedLookupElement(myMacro, 30.0);
 
-    final LookupElement otherLabel = findLookupElement("otherMacro");
-    final LookupElementPresentation otherLabelPresentation = LookupElementPresentation.renderElement(otherLabel);
-    assertFalse(otherLabelPresentation.isItemTextBold());
-    M68kLabelResolveTest.assertLookupIcon(myPresentation, M68kIcons.LABEL_MACRO);
-    assertEquals("macroHighlightResolvingInMultipleFiles_other.s", otherLabelPresentation.getTypeText());
+    final LookupElement otherMacro = findLookupElement("otherMacro");
+    final LookupElementPresentation otherMacroPresentation = LookupElementPresentation.renderElement(otherMacro);
+    assertFalse(otherMacroPresentation.isItemTextBold());
+    assertLookupIcon(otherMacroPresentation, M68kIcons.LABEL_MACRO);
+    assertEquals("macroHighlightResolvingInMultipleFiles_other.s", otherMacroPresentation.getTypeText());
+
+    final LookupElement firstYetAnotherMacro = M68kLabelResolveTest.findLookupElement(myFixture, "yetAnotherMacro", 846);
+    final LookupElementPresentation firstYetAnotherMacroPresentation = LookupElementPresentation.renderElement(firstYetAnotherMacro);
+    assertLookupIcon(firstYetAnotherMacroPresentation, M68kIcons.LABEL_MACRO);
+    final LookupElement secondYetAnotherMacro = M68kLabelResolveTest.findLookupElement(myFixture, "yetAnotherMacro", 876);
+    final LookupElementPresentation secondYetAnotherMacroPresentation = LookupElementPresentation.renderElement(secondYetAnotherMacro);
+    assertLookupIcon(secondYetAnotherMacroPresentation, M68kIcons.LABEL_MACRO);
   }
 
   public void testRenameMacrocall() {
@@ -73,12 +100,7 @@ public class M68kMacroResolveTest extends BasePlatformTestCase {
 
   @NotNull
   private LookupElement findLookupElement(String lookupString) {
-    final LookupElement[] lookupElements = myFixture.getLookupElements();
-    assertNotNull(lookupElements);
-    final LookupElement lookupElement = ContainerUtil.find(lookupElements,
-      element -> element.getLookupString().equals(lookupString));
-    assertNotNull(lookupString, lookupElement);
-    return lookupElement;
+    return M68kLabelResolveTest.findLookupElement(myFixture, lookupString);
   }
 
 }

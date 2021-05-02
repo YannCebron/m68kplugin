@@ -28,7 +28,10 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Comparing;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiErrorElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.PsiPolyVariantReference;
 import com.intellij.psi.impl.include.FileIncludeManager;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -109,9 +112,9 @@ public class M68kProjectStatisticsAction extends AnAction {
           long resolveStart = System.currentTimeMillis();
           for (M68kPsiElement element : m68kPsiFile.findChildrenByClass(M68kPsiElement.class)) {
             if (element instanceof M68kMacroCallDirective) {
-              final PsiReference reference = element.getReference();
+              final PsiPolyVariantReference reference = ObjectUtils.tryCast(element.getReference(), PsiPolyVariantReference.class);
               assert reference != null;
-              if (reference.resolve() == null) {
+              if (reference.multiResolve(false).length == 0) {
                 macroCallsUnresolved++;
               }
               macroCalls++;
