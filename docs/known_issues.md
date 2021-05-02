@@ -7,8 +7,8 @@ title: Known Issues
 ## Resolving
 
 - `include` directives not evaluated, resolving across all project files
-- macro block: 
-  - do not highlight `jsr _LVO\1(a6)` as unresolved label 
+- macro block:
+  - do not highlight `jsr _LVO\1(a6)` as unresolved label
   - resolve global label inside current first
 
 ## Editor
@@ -120,5 +120,8 @@ Unsupported directives, these will display false positive
   - XOR?
 - do not allow spaces (?!)
 - allow `equr`/`reg` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
-- Internal tasks:
-  - `LexerTestCase.checkCorrectRestartOnEveryToken`
+
+### Internal Notes
+
+- `LexerTestCase.checkCorrectRestartOnEveryToken`
+- FBI tracking macro/conditional assembly scopes
