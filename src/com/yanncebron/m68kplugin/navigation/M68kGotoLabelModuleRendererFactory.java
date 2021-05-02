@@ -17,21 +17,21 @@
 package com.yanncebron.m68kplugin.navigation;
 
 import com.intellij.ide.util.ModuleRendererFactory;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.presentation.java.SymbolPresentationUtil;
 import com.intellij.util.ui.UIUtil;
-import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * Show containing file on right instead of "Module".
+ * Goto symbol: show containing file on right instead of "Module".
  */
-public class M68kModuleRendererFactory extends ModuleRendererFactory {
+public class M68kGotoLabelModuleRendererFactory extends ModuleRendererFactory {
 
   @Override
   protected boolean handles(Object element) {
-    return element instanceof M68kPsiElement;
+    return element instanceof M68kGotoLabelNavigationItem;
   }
 
   @Override
@@ -46,9 +46,10 @@ public class M68kModuleRendererFactory extends ModuleRendererFactory {
       public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         final Component component = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
-        M68kPsiElement psiElement = (M68kPsiElement) value;
+        M68kGotoLabelNavigationItem navigationItem = (M68kGotoLabelNavigationItem) value;
 
-        setText(SymbolPresentationUtil.getFilePathPresentation(psiElement.getContainingFile()));
+        final PsiElement targetElement = navigationItem.getNavigationElement();
+        setText(SymbolPresentationUtil.getFilePathPresentation(targetElement.getContainingFile()));
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, UIUtil.getListCellHPadding()));
         setHorizontalTextPosition(SwingConstants.RIGHT);
         setBackground(isSelected ? UIUtil.getListSelectionBackground(true) : UIUtil.getListBackground());

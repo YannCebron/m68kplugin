@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +38,8 @@ public class M68kGotoLabelChooseByNameContributor implements ChooseByNameContrib
   @Override
   public void processElementsWithName(@NotNull String name, @NotNull Processor<? super NavigationItem> processor, @NotNull FindSymbolParameters parameters) {
     StubIndex.getInstance().processElements(M68kLabelStubIndex.KEY, name,
-      parameters.getProject(), parameters.getSearchScope(), parameters.getIdFilter(), M68kLabel.class, processor);
+      parameters.getProject(), parameters.getSearchScope(), parameters.getIdFilter(), M68kLabel.class,
+      label -> processor.process(new M68kGotoLabelNavigationItem(label)));
   }
+
 }

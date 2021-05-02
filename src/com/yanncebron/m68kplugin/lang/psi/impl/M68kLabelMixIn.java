@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.ide.projectView.PresentationData;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.presentation.java.SymbolPresentationUtil;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.yanncebron.m68kplugin.lang.M68kFile;
@@ -124,7 +125,7 @@ abstract class M68kLabelMixIn extends StubBasedPsiElementBase<M68kLabelStub> imp
 
   @Override
   public ItemPresentation getPresentation() {
-    return new PresentationData(getName(), getValue(), getIcon(0), null);
+    return new PresentationData(getName(), SymbolPresentationUtil.getFilePathPresentation(getContainingFile()), getIcon(0), null);
   }
 
   @Nullable

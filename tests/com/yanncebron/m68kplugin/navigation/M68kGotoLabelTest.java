@@ -83,7 +83,7 @@ public class M68kGotoLabelTest extends BasePlatformTestCase {
         assertEquals(expectedLocation, presentation.getLocationString());
 
         final ModuleRendererFactory moduleRendererFactory = ModuleRendererFactory.findInstance(navigationItem);
-        assertInstanceOf(moduleRendererFactory, M68kModuleRendererFactory.class);
+        assertInstanceOf(moduleRendererFactory, M68kGotoLabelModuleRendererFactory.class);
         final DefaultListCellRenderer renderer = moduleRendererFactory.getModuleRenderer();
         renderer.getListCellRendererComponent(new JList<>(), navigationItem, 0, false, false);
         assertEquals(expectedFileLocation, renderer.getText());

@@ -150,7 +150,7 @@
     <gotoSymbolContributor
         implementation="com.yanncebron.m68kplugin.navigation.M68kGotoLabelChooseByNameContributor"/>
     <moduleRendererFactory
-        implementation="com.yanncebron.m68kplugin.navigation.M68kModuleRendererFactory"/>
+        implementation="com.yanncebron.m68kplugin.navigation.M68kGotoLabelModuleRendererFactory"/>
 
     <spellchecker.support
         language="M68k"

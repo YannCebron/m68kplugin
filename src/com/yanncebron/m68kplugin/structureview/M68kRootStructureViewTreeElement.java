@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -127,7 +127,11 @@ class M68kRootStructureViewTreeElement extends PsiTreeElementBase<M68kFile> {
 
     @Override
     public String getLocationString() {
-      return getItemPresentation().getLocationString();
+      final PsiElement element = getElement();
+      if (element instanceof M68kLabel) {
+        return ((M68kLabel) element).getValue();
+      }
+      return null;
     }
 
     @Nullable
