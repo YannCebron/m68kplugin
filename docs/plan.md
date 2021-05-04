@@ -143,6 +143,7 @@
   - color-picker/inlays
   - register name inlay
   - http://deadliners.net/gradientmaster/
+- support IFF images in IDE https://github.com/haraldk/TwelveMonkeys
 
 ## Resources
 
