@@ -18,6 +18,7 @@
 - highlight static conditional assembly directives status, e.g., `IFD`/`IFND`
 - `section` directive: smarter highlighting/code insight
 - `ifmacrod`/`ifmacrond` code insight
+- closing conditional assembly directive: inlay showing opening condition expression 
 
 ### Macros
 
