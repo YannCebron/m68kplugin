@@ -97,7 +97,7 @@
 - register list:
   - sort/optimize
 - string in `dc.b` not terminated with `,0`
-- check optimizations from vasm/DevPac
+- check optimizations from vasm/DevPac http://sun.hasenbraten.de/vasm/release/vasm_17.html _17.6_
 - multiple `opt` directives (?)
 
 ### Labels
