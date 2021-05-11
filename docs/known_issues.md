@@ -6,9 +6,9 @@ title: Known Issues
 
 ## Resolving
 
-- `include` directives not evaluated, resolving across all project files
+- `include` directives not evaluated, resolving symbols across all project files
 - macro block:
-  - highlight `jsr _LVO\1(a6)` as unresolved outside of macro
+  - highlight `jsr _LVO\1(a6)` as invalid outside of macro
   - resolve global label inside current first
 
 ## Editor
@@ -32,41 +32,54 @@ Non-supported registers will display false positive
 
 Unsupported directives, these will display false positive
 > _"Cannot resolve macro '$DIRECTIVE$'"_
-                                
+
 http://sun.hasenbraten.de/vasm/release/vasm_17.html _17.5_
 
-- `rorg`
-- `offset` (Devpac)
-- `public`
-- `nref` (PhxAss)
-- `entry`, `extrn`, `global`, `export` == `xdef`
-- `import` == `xref`
-- `weak`
-- `comm`
-- `common`
-- `mask2` (no-op)
-- `dx.*`
-- `dr.*`
-- `idnt`
-- `ttl`
-- `module`
-- `output`
-- `symdebug`
-- `dsource`
-- `debug`
-- `comment`
-- `image`
-- `so.*`, `clrso`/`setso`
-- `fo.*`, `clrfo`/`setfo`
-- `cargs` (Devpac)
-- `echo` (PhxAss)
+- `.sdreg`
 - `auto`
-- `struct`/`estruct`
-- `reg`
-- `optc`
-- `near code`
+- `basereg`/`endb`
+- `cargs` (Devpac)
+- `comm`
+- `comment`
+- `common`
+- `cpu32`
+- `debug`
+- `dr.*`
+- `dsource`
+- `dx.*`
+- `echo` (PhxAss)
+- `entry`, `extrn`, `global`, `export` == `xdef`
+- `equrl`
+- `far`
+- `fequr`
+- `fequrl`
+- `fo.*`, `clrfo`/`setfo`
+- `fpu`
+- `freg`
+- `idnt`
 - `iif` (Devpac)
+- `image`
+- `import` == `xref`
+- `initnear`
+- `machine`
+- `mask2` (no-op)
+- `mc68XXX`/`ac68060`/`mcf5XXX`
+- `module`
+- `near code`
+- `nref` (PhxAss)
+- `offset` (Devpac)
+- `optc`
+- `output`
+- `public`
+- `reg`
+- `rorg`
+- `so.*`, `clrso`/`setso`
+- `struct`/`estruct`
+- `symdebug`
+- `ttl`
+- `weak`
 
+#### Directives with known limitations
 
 - `printt`: multiple strings
 - `opt` parameters
@@ -122,9 +135,9 @@ http://sun.hasenbraten.de/vasm/release/vasm_17.html _17.5_
 - add missing expression operators
   - XOR?
 - do not allow spaces (?!)
-- allow `equr`/`reg` replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
+- allow `equr`/`reg` etc. replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
 
 ### Internal Notes
 
 - `LexerTestCase.checkCorrectRestartOnEveryToken`
-- FBI tracking macro/conditional assembly scopes
+- FBI tracking macro/conditional assembly/target machine scopes
