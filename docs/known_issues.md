@@ -70,7 +70,6 @@ Unsupported directives, these will display false positive
 - `optc`
 - `output`
 - `public`
-- `reg`
 - `rorg`
 - `so.*`, `clrso`/`setso`
 - `struct`/`estruct`

@@ -1,0 +1,9 @@
+M68k.FILE
+  M68kRegDirectiveImpl(REG_DIRECTIVE)
+    M68kLabelImpl(LABEL)
+      PsiElement(id)('label')
+    PsiWhiteSpace(' ')
+    PsiElement(reg)('reg')
+    PsiErrorElement:<data|address register> expected
+      <empty list>
+  PsiWhiteSpace(' ')

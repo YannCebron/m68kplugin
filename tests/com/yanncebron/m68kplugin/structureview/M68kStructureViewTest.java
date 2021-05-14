@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +38,7 @@ public class M68kStructureViewTest extends BasePlatformTestCase {
         "myEquals = 42\n" +
         "mySet set 1\n" +
         "myEqur equr d0\n" +
+        "myReg reg d0-d7/a0\n" +
         "myMacro macro\n" +
         " endm\n" +
         " include \"include.s\"\n" +
@@ -55,6 +56,7 @@ public class M68kStructureViewTest extends BasePlatformTestCase {
           " myEquals\n" +
           " mySet\n" +
           " myEqur\n" +
+          " myReg\n" +
           " myMacro\n" +
           " include.s\n" +
           " incbin_file\n" +
@@ -70,12 +72,13 @@ public class M68kStructureViewTest extends BasePlatformTestCase {
       assertNodePresentation(topLevelNodes, 1, M68kIcons.LABEL_EQU, "42");
       assertNodePresentation(topLevelNodes, 2, M68kIcons.LABEL_SET, "1");
       assertNodePresentation(topLevelNodes, 3, M68kIcons.LABEL_EQUR, "d0");
-      assertNodePresentation(topLevelNodes, 4, M68kIcons.LABEL_MACRO, null);
-      assertNodePresentation(topLevelNodes, 5, M68kIcons.INCLUDE, null);
-      assertNodePresentation(topLevelNodes, 6, M68kIcons.INCBIN, null);
-      assertNodePresentation(topLevelNodes, 7, M68kIcons.LABEL_GLOBAL, null);
+      assertNodePresentation(topLevelNodes, 4, M68kIcons.LABEL_REG, "d0-d7/a0");
+      assertNodePresentation(topLevelNodes, 5, M68kIcons.LABEL_MACRO, null);
+      assertNodePresentation(topLevelNodes, 6, M68kIcons.INCLUDE, null);
+      assertNodePresentation(topLevelNodes, 7, M68kIcons.INCBIN, null);
+      assertNodePresentation(topLevelNodes, 8, M68kIcons.LABEL_GLOBAL, null);
 
-      final TreeElement[] labelNodeChildren = topLevelNodes[7].getChildren();
+      final TreeElement[] labelNodeChildren = topLevelNodes[8].getChildren();
       assertSize(1, labelNodeChildren);
       assertNodePresentation(labelNodeChildren, 0, M68kIcons.LABEL_LOCAL, null);
     });

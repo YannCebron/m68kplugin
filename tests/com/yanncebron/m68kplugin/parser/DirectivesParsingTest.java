@@ -61,6 +61,14 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest("label equr ");
   }
 
+  public void testRegDirective() throws Exception {
+    doCodeTest("label reg d0-d7/a0");
+  }
+
+  public void testRegDirectiveMissingRegisterList() throws Exception {
+    doCodeTest("label reg ");
+  }
+
   public void testEvenDirective() throws Exception {
     doCodeTest(" even");
   }

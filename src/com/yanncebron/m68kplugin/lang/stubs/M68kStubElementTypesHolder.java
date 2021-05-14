@@ -70,6 +70,9 @@ public interface M68kStubElementTypesHolder {
         } else if (tokenType == M68kTypes.EQUR_DIRECTIVE) {
           kind = M68kLabelBase.LabelKind.EQUR;
           value = parseValue(tree, parent, M68kTokenTypes.EQUR);
+        } else if (tokenType == M68kTypes.REG_DIRECTIVE) {
+          kind = M68kLabelBase.LabelKind.REG;
+          value = parseValue(tree, parent, M68kTokenTypes.REG);
         } else {
           throw new IllegalArgumentException("unknown parent token type: " + tokenType);
         }

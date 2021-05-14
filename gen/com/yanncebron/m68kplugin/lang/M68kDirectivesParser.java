@@ -324,6 +324,7 @@ public class M68kDirectivesParser {
   //                        equals_directive |
   //                        set_directive |
   //                        equr_directive |
+  //                        reg_directive |
   //                        even_directive |
   //                        odd_directive |
   //                        dc_directive |
@@ -391,6 +392,7 @@ public class M68kDirectivesParser {
     if (!r) r = equals_directive(b, l + 1);
     if (!r) r = set_directive(b, l + 1);
     if (!r) r = equr_directive(b, l + 1);
+    if (!r) r = reg_directive(b, l + 1);
     if (!r) r = even_directive(b, l + 1);
     if (!r) r = odd_directive(b, l + 1);
     if (!r) r = dc_directive(b, l + 1);
@@ -1188,6 +1190,20 @@ public class M68kDirectivesParser {
     r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, m, null, r);
     return r;
+  }
+
+  /* ********************************************************** */
+  // label REG register_list
+  public static boolean reg_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "reg_directive")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, REG_DIRECTIVE, "<directive>");
+    r = label(b, l + 1);
+    r = r && consumeToken(b, REG);
+    p = r; // pin = 2
+    r = r && register_list(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */

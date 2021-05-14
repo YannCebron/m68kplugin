@@ -86,6 +86,12 @@ public class M68kStubBuilderTest extends LightPlatformTestCase {
         "  LABEL:M68kLabelStubImpl['label', EQUR, 'd7']\n");
   }
 
+  public void testLabelWithReg() {
+    doTest("label reg d0-d7/a0",
+      "PsiFileStubImpl\n" +
+        "  LABEL:M68kLabelStubImpl['label', REG, 'd0-d7/a0']\n");
+  }
+
   public void testLocalLabelNotStubbed() {
     doTest(".localLabel",
       "PsiFileStubImpl\n");

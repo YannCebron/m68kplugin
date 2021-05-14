@@ -29,6 +29,7 @@ public interface M68kLabelBase extends PsiNamedElement, NavigatablePsiElement, M
     EQUALS(true),
     SET(true),
     EQUR(true),
+    REG(true),
     MACRO(false);
 
     private final boolean hasValue;

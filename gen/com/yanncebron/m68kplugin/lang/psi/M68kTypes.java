@@ -218,6 +218,7 @@ public interface M68kTypes {
   IElementType PRINTV_DIRECTIVE = new M68kCompositeElementType("PRINTV_DIRECTIVE");
   IElementType REGISTER_LIST = new M68kCompositeElementType("REGISTER_LIST");
   IElementType REGISTER_RANGE = new M68kCompositeElementType("REGISTER_RANGE");
+  IElementType REG_DIRECTIVE = new M68kCompositeElementType("REG_DIRECTIVE");
   IElementType REM_DIRECTIVE = new M68kCompositeElementType("REM_DIRECTIVE");
   IElementType REPT_DIRECTIVE = new M68kCompositeElementType("REPT_DIRECTIVE");
   IElementType RESET_INSTRUCTION = new M68kCompositeElementType("RESET_INSTRUCTION");
@@ -851,6 +852,9 @@ public interface M68kTypes {
       }
       else if (type == REGISTER_RANGE) {
         return new M68kRegisterRangeImpl(node);
+      }
+      else if (type == REG_DIRECTIVE) {
+        return new M68kRegDirectiveImpl(node);
       }
       else if (type == REM_DIRECTIVE) {
         return new M68kRemDirectiveImpl(node);

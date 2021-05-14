@@ -29,7 +29,9 @@ public final class M68kIcons {
   public static final Icon LABEL_EQU = AllIcons.Nodes.ClassInitializer;
   public static final Icon LABEL_MACRO = AllIcons.Nodes.Function;
   public static final Icon LABEL_SET = AllIcons.Nodes.Variable;
-  public static final Icon LABEL_EQUR = AllIcons.Nodes.Gvariable;
+
+  public static final Icon LABEL_EQUR = AllIcons.Nodes.Artifact;
+  public static final Icon LABEL_REG = AllIcons.Nodes.Target;
 
   public static final Icon INCLUDE = AllIcons.Graph.Layout;
   public static final Icon INCBIN = AllIcons.FileTypes.Archive;
