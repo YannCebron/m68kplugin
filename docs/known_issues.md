@@ -33,7 +33,8 @@ Non-supported registers will display false positive
 Unsupported directives, these will display false positive
 > _"Cannot resolve macro '$DIRECTIVE$'"_
 
-[vasm Docs](http://sun.hasenbraten.de/vasm/release/vasm_18.html)
+[vasm Docs 1](http://sun.hasenbraten.de/vasm/release/vasm_4.html)
+[vasm Docs 2](http://sun.hasenbraten.de/vasm/release/vasm_18.html)
 
 - `.sdreg`
 - `auto`
