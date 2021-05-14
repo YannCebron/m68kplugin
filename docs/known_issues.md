@@ -57,7 +57,6 @@ Unsupported directives, these will display false positive
 - `fo.*`, `clrfo`/`setfo`
 - `fpu`
 - `freg`
-- `idnt`
 - `iif` (Devpac)
 - `image`
 - `import` == `xref`

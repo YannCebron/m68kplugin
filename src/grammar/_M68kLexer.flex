@@ -398,6 +398,7 @@ Z=[zZ]
   {E}{R}{E}{M}                { yybegin(AFTER_OPERAND); return EREM; }
   {E}{V}{E}{N}                { yybegin(AFTER_OPERAND); return EVEN; }
   {F}{A}{I}{L}                { yybegin(AFTER_OPERAND); return FAIL; }
+  {I}{D}{N}{T}                { yybegin(STRING_DIRECTIVE); return IDNT; }
   {I}{N}{C}{B}{I}{N}          { yybegin(STRING_DIRECTIVE); return INCBIN; }
   {I}{N}{C}{D}{I}{R}          { yybegin(STRING_DIRECTIVE); return INCDIR; }
   {I}{N}{C}{L}{U}{D}{E}       { yybegin(STRING_DIRECTIVE); return INCLUDE; }

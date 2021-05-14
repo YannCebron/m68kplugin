@@ -1,0 +1,6 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kIdntDirectiveImpl(IDNT_DIRECTIVE)
+    PsiElement(idnt)('idnt')
+    PsiWhiteSpace(' ')
+    PsiElement(string)('"myName"')

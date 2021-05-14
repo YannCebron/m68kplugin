@@ -409,4 +409,8 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" ttl \"myName\"");
   }
 
+  public void testIdntDirective() throws Exception {
+    doCodeTest(" idnt \"myName\"");
+  }
+
 }

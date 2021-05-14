@@ -140,6 +140,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType HASH = new M68kTokenType("#");
   public static final IElementType HEX_NUMBER = new M68kTokenType("hex_number");
   public static final IElementType ID = new M68kTokenType("id");
+  public static final IElementType IDNT = new M68kTokenType("idnt");
   public static final IElementType IF = new M68kTokenType("if");
   public static final IElementType IFB = new M68kTokenType("ifb");
   public static final IElementType IFC = new M68kTokenType("ifc");
