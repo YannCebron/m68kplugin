@@ -9,20 +9,21 @@ nav_order: 1
 ## Syntax Highlighting
 
 * Fully customizable via *Settings/Preferences \| Editor \| Color Scheme \| M68k Assembler*
+* Parsing with semantic error highlighting
 * Method separator for `macro`/`endm`, `section` blocks
 * Highlight privileged instructions
 * Highlight matching brace/paired directives
-* Parsing with semantic error highlighting
 
 ## Documentation
 
 *View \| Quick Documentation* for mnemonics
 
-Show type and value tooltip for labels on <kbd>CTRL/Command + Click</kbd>
+Show type and value tooltip for labels on <kbd>Ctrl/Command+Click</kbd>
 
 ## Labels
 
 * *Navigate \| Declaration or Usages*
+* *View \| Quick Definition*
 * *Edit \| Find Usages* (grouped by type)
 * *Refactor \| Rename*
 
