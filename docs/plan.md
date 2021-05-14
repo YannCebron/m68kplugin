@@ -98,7 +98,7 @@
 - register list:
   - sort/optimize
 - string in `dc.b` not terminated with `,0`
-- check optimizations from vasm/DevPac http://sun.hasenbraten.de/vasm/release/vasm_17.html _17.6_
+- check optimizations from vasm/DevPac [18.6 vasm Docs](http://sun.hasenbraten.de/vasm/release/vasm_18.html)
 
 ### Labels
 
