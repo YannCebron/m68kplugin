@@ -173,6 +173,18 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" opt w+,u+");
   }
 
+  public void testOptDirectiveWithoutPlusMinus() throws Exception {
+    doCodeTest(" opt debug");
+  }
+
+  public void testOptDirectivePAndCpuType() throws Exception{
+    doCodeTest( " opt p=68000");
+  }
+
+  public void testOptDirectivePAndCpuFpuType() throws Exception{
+    doCodeTest( " opt p=68020/68881");
+  }
+
   public void testOptDirectiveMissingParameter() throws Exception {
     doCodeTest(" opt ");
   }

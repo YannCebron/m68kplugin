@@ -1,0 +1,10 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kOptDirectiveImpl(OPT_DIRECTIVE)
+    PsiElement(opt)('opt')
+    PsiWhiteSpace(' ')
+    PsiElement(id)('p')
+    PsiElement(=)('=')
+    PsiElement(dec_number)('68020')
+    PsiElement(/)('/')
+    PsiElement(dec_number)('68881')

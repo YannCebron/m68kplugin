@@ -960,22 +960,68 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // ID (PLUS | MINUS)
+  // (ID EQ DEC_NUMBER (DIV DEC_NUMBER)?) |
+  //                         (ID (PLUS | MINUS)?)
   static boolean opt_element(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "opt_element")) return false;
-    if (!nextTokenIs(b, "<option(+|-)>", ID)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, null, "<option(+|-)>");
+    if (!nextTokenIs(b, "<option>", ID)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<option>");
+    r = opt_element_0(b, l + 1);
+    if (!r) r = opt_element_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // ID EQ DEC_NUMBER (DIV DEC_NUMBER)?
+  private static boolean opt_element_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "opt_element_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, ID, EQ, DEC_NUMBER);
+    r = r && opt_element_0_3(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (DIV DEC_NUMBER)?
+  private static boolean opt_element_0_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "opt_element_0_3")) return false;
+    opt_element_0_3_0(b, l + 1);
+    return true;
+  }
+
+  // DIV DEC_NUMBER
+  private static boolean opt_element_0_3_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "opt_element_0_3_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, DIV, DEC_NUMBER);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ID (PLUS | MINUS)?
+  private static boolean opt_element_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "opt_element_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
     r = consumeToken(b, ID);
-    p = r; // pin = 1
-    r = r && opt_element_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+    r = r && opt_element_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (PLUS | MINUS)?
+  private static boolean opt_element_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "opt_element_1_1")) return false;
+    opt_element_1_1_0(b, l + 1);
+    return true;
   }
 
   // PLUS | MINUS
-  private static boolean opt_element_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "opt_element_1")) return false;
+  private static boolean opt_element_1_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "opt_element_1_1_0")) return false;
     boolean r;
     r = consumeToken(b, PLUS);
     if (!r) r = consumeToken(b, MINUS);

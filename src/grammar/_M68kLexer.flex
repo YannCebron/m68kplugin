@@ -194,6 +194,7 @@ Z=[zZ]
   ")"  { return R_PAREN; }
   "["  { return L_BRACKET; }
   "]"  { return R_BRACKET; }
+  "="  { return EQ; }
 
   {DECNUMBER}                 { return DEC_NUMBER; }
   {HEXNUMBER}                 { return HEX_NUMBER; }

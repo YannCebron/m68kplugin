@@ -82,7 +82,6 @@ http://sun.hasenbraten.de/vasm/release/vasm_17.html _17.5_
 #### Directives with known limitations
 
 - `printt`: multiple strings
-- `opt` parameters
 
 ### Labels
 
