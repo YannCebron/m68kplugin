@@ -128,6 +128,7 @@ Unsupported directives, these will display false positive
 
 ### Misc
 
+- `'\'` is valid string literal
 - add missing expression operators
   - XOR?
 - do not allow spaces (?!)
