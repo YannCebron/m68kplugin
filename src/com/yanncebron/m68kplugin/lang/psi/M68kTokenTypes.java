@@ -116,6 +116,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType DOT_L = new M68kTokenType(".l");
   public static final IElementType DOT_S = new M68kTokenType(".s");
   public static final IElementType DOT_W = new M68kTokenType(".w");
+  public static final IElementType DR = new M68kTokenType("dr");
   public static final IElementType DS = new M68kTokenType("ds");
   public static final IElementType DSEG = new M68kTokenType("dseg");
   public static final IElementType EINLINE = new M68kTokenType("einline");

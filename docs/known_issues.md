@@ -45,7 +45,6 @@ Unsupported directives, these will display false positive
 - `common`
 - `cpu32`
 - `debug`
-- `dr.*`
 - `dsource`
 - `dx.*`
 - `echo` (PhxAss)

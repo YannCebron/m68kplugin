@@ -182,6 +182,7 @@ public final class M68kTokenGroups {
     DATA_F,
     DC,
     DCB,
+    DR,
     DS,
     DSEG,
     EINLINE,

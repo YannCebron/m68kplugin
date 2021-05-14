@@ -119,6 +119,7 @@ public interface M68kTypes {
   IElementType DIVS_INSTRUCTION = new M68kCompositeElementType("DIVS_INSTRUCTION");
   IElementType DIVU_INSTRUCTION = new M68kCompositeElementType("DIVU_INSTRUCTION");
   IElementType DIV_EXPRESSION = new M68kCompositeElementType("DIV_EXPRESSION");
+  IElementType DR_DIRECTIVE = new M68kCompositeElementType("DR_DIRECTIVE");
   IElementType DSEG_DIRECTIVE = new M68kCompositeElementType("DSEG_DIRECTIVE");
   IElementType DS_DIRECTIVE = new M68kCompositeElementType("DS_DIRECTIVE");
   IElementType EINLINE_DIRECTIVE = new M68kCompositeElementType("EINLINE_DIRECTIVE");
@@ -556,6 +557,9 @@ public interface M68kTypes {
       }
       else if (type == DIV_EXPRESSION) {
         return new M68kDivExpressionImpl(node);
+      }
+      else if (type == DR_DIRECTIVE) {
+        return new M68kDrDirectiveImpl(node);
       }
       else if (type == DSEG_DIRECTIVE) {
         return new M68kDsegDirectiveImpl(node);

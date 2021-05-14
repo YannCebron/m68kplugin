@@ -388,6 +388,7 @@ Z=[zZ]
   {D}{A}{T}{A}_{F}            { yybegin(AFTER_OPERAND); return DATA_F; }
   {D}{C}                      { yybegin(AFTER_INSTRUCTION); return DC; }
   {D}{C}{B}                   { yybegin(AFTER_INSTRUCTION); return DCB; }
+  {D}{R}                      { yybegin(AFTER_INSTRUCTION); return DR; }
   {D}{S}                      { yybegin(AFTER_INSTRUCTION); return DS; }
   {D}{S}{E}{G}                { yybegin(AFTER_INSTRUCTION); return DSEG; }
   {E}{I}{N}{L}{I}{N}{E}       { yybegin(AFTER_OPERAND); return EINLINE; }
