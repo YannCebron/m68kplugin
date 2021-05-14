@@ -266,6 +266,7 @@ public interface M68kTypes {
   IElementType TRAPV_INSTRUCTION = new M68kCompositeElementType("TRAPV_INSTRUCTION");
   IElementType TRAP_INSTRUCTION = new M68kCompositeElementType("TRAP_INSTRUCTION");
   IElementType TST_INSTRUCTION = new M68kCompositeElementType("TST_INSTRUCTION");
+  IElementType TTL_DIRECTIVE = new M68kCompositeElementType("TTL_DIRECTIVE");
   IElementType UNARY_COMPLEMENT_EXPRESSION = new M68kCompositeElementType("UNARY_COMPLEMENT_EXPRESSION");
   IElementType UNARY_MINUS_EXPRESSION = new M68kCompositeElementType("UNARY_MINUS_EXPRESSION");
   IElementType UNARY_PLUS_EXPRESSION = new M68kCompositeElementType("UNARY_PLUS_EXPRESSION");
@@ -992,6 +993,9 @@ public interface M68kTypes {
       }
       else if (type == TST_INSTRUCTION) {
         return new M68kTstInstructionImpl(node);
+      }
+      else if (type == TTL_DIRECTIVE) {
+        return new M68kTtlDirectiveImpl(node);
       }
       else if (type == UNARY_COMPLEMENT_EXPRESSION) {
         return new M68kUnaryComplementExpressionImpl(node);

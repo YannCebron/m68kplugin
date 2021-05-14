@@ -1,0 +1,6 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kTtlDirectiveImpl(TTL_DIRECTIVE)
+    PsiElement(ttl)('ttl')
+    PsiWhiteSpace(' ')
+    PsiElement(string)('"myName"')

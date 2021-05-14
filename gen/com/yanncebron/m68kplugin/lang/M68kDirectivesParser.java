@@ -379,7 +379,8 @@ public class M68kDirectivesParser {
   //                        printt_directive |
   //                        printv_directive |
   //                        load_directive |
-  //                        fail_directive
+  //                        fail_directive |
+  //                        ttl_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -444,6 +445,7 @@ public class M68kDirectivesParser {
     if (!r) r = printv_directive(b, l + 1);
     if (!r) r = load_directive(b, l + 1);
     if (!r) r = fail_directive(b, l + 1);
+    if (!r) r = ttl_directive(b, l + 1);
     return r;
   }
 
@@ -1294,6 +1296,19 @@ public class M68kDirectivesParser {
     r = consumeToken(b, TEXT);
     exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  /* ********************************************************** */
+  // TTL STRING
+  public static boolean ttl_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ttl_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", TTL)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, TTL_DIRECTIVE, "<directive>");
+    r = consumeTokens(b, 1, TTL, STRING);
+    p = r; // pin = 1
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */

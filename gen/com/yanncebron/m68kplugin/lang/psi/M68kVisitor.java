@@ -1072,6 +1072,10 @@ public class M68kVisitor extends PsiElementVisitor {
     // visitInstruction(o);
   }
 
+  public void visitTtlDirective(@NotNull M68kTtlDirective o) {
+    visitDirective(o);
+  }
+
   public void visitUnaryComplementExpression(@NotNull M68kUnaryComplementExpression o) {
     visitExpression(o);
   }

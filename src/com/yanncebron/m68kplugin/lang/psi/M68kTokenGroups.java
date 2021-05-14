@@ -223,6 +223,7 @@ public final class M68kTokenGroups {
     SET,
     SPC,
     TEXT,
+    TTL,
     XDEF,
     XREF
   );

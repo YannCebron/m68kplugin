@@ -425,6 +425,7 @@ Z=[zZ]
   {S}{E}{T}                   { yybegin(IN_OPERAND); return SET; }
   {S}{P}{C}                   { yybegin(IN_OPERAND); return SPC; }
   {T}{E}{X}{T}                { yybegin(AFTER_OPERAND); return TEXT; }
+  {T}{T}{L}                   { yybegin(STRING_DIRECTIVE); return TTL; }
   {X}{D}{E}{F}                { yybegin(IN_OPERAND); return XDEF; }
   {X}{R}{E}{F}                { yybegin(IN_OPERAND); return XREF; }
 

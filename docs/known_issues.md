@@ -77,7 +77,6 @@ Unsupported directives, these will display false positive
 - `so.*`, `clrso`/`setso`
 - `struct`/`estruct`
 - `symdebug`
-- `ttl`
 - `weak`
 
 #### Directives with known limitations
