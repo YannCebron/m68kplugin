@@ -92,7 +92,6 @@
 
 ## Inspections
 
-- ability to suppress via comment
 - nonsensical `move` (?!)
 - `movem` non-symmetrical register ranges
 - register list:

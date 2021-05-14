@@ -67,7 +67,7 @@ public final class M68kPsiTreeUtil {
 
   @Nullable
   public static M68kPsiElement getContainingInstructionOrDirective(PsiElement element) {
-    return PsiTreeUtil.getParentOfType(element,
+    return PsiTreeUtil.getNonStrictParentOfType(element,
       M68kInstruction.class,
       M68kDirective.class,
       M68kConditionalAssemblyDirective.class);

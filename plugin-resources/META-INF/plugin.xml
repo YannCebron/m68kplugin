@@ -159,6 +159,9 @@
         implementation="com.yanncebron.m68kplugin.lang.spellchecker.M68kBundledDictionaryProvider"/>
 
 
+    <lang.inspectionSuppressor
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.inspections.M68kInspectionSuppressor"/>
     <localInspection
         language="M68k" enabledByDefault="true" level="ERROR"
         key="inspection.directives.name" groupKey="inspection.group.name"
