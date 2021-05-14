@@ -15,8 +15,8 @@
 - unpaired directives:
   - `struct`/`estruct`
 - unpaired conditional assembly directives (nesting!), missing `endc`/`endif`
-- highlight static conditional assembly directives status, e.g., `IFD`/`IFND`
-- smarter highlighting/code insight
+- highlight static conditional assembly directives status, e.g., `ifd`/`ifnd`
+- smarter highlighting/code insight:
   - `section`
   - `opt`
   - `ifmacrod`/`ifmacrond`
@@ -99,7 +99,6 @@
   - sort/optimize
 - string in `dc.b` not terminated with `,0`
 - check optimizations from vasm/DevPac http://sun.hasenbraten.de/vasm/release/vasm_17.html _17.6_
-- multiple `opt` directives (?)
 
 ### Labels
 
