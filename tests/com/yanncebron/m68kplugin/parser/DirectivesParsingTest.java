@@ -49,15 +49,15 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest("label set 42");
   }
 
-  public void testEqrDirectiveDataRegister() throws Exception {
+  public void testEqurDirectiveDataRegister() throws Exception {
     doCodeTest("label equr d6");
   }
 
-  public void testEqrDirectiveAddressRegister() throws Exception {
+  public void testEqurDirectiveAddressRegister() throws Exception {
     doCodeTest("label equr a4");
   }
 
-  public void testEqrDirectiveMissingRegister() throws Exception {
+  public void testEqurDirectiveMissingRegister() throws Exception {
     doCodeTest("label equr ");
   }
 
