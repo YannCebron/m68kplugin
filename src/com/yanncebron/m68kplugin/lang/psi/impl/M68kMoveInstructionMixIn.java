@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,10 +33,15 @@ abstract class M68kMoveInstructionMixIn extends M68kMoveInstructionBaseImpl impl
     if (getAdmUsp() != null) return true;
 
     final M68kAdmSr admSr = getAdmSr();
-    if (admSr != null) {
-      return M68kPsiImplUtil.isDest(this, admSr);
+    if (admSr == null) {
+      return false;
     }
 
-    return false;
+    if ((m68kCpu == M68kCpu.M_68000 || m68kCpu == M68kCpu.M_68010) &&
+      M68kPsiImplUtil.isSrc(this, admSr)) {
+      return false;
+    }
+
+    return true;
   }
 }

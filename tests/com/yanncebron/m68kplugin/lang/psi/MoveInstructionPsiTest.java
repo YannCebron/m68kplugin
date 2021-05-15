@@ -41,6 +41,10 @@ public class MoveInstructionPsiTest extends M68kPsiTestCase {
     final M68kMoveInstruction instruction = parse("move.w SR,d6");
 
     assertFalse(instruction.isPrivileged(M68kCpu.M_68000));
+    assertFalse(instruction.isPrivileged(M68kCpu.M_68010));
+    for (M68kCpu m68kCpu : M68kCpu.GROUP_68020_UP) {
+      assertTrue(instruction.isPrivileged(m68kCpu));
+    }
 
     final M68kAdmSr admSr = instruction.getAdmSr();
     assertNotNull(admSr);
@@ -56,7 +60,9 @@ public class MoveInstructionPsiTest extends M68kPsiTestCase {
   public void testAdmSrDest() {
     final M68kMoveInstruction instruction = parse("move.w d6,SR");
 
-    assertTrue(instruction.isPrivileged(M68kCpu.M_68000));
+    for (M68kCpu m68kCpu : M68kCpu.GROUP_68000_UP) {
+      assertTrue(instruction.isPrivileged(m68kCpu));
+    }
   }
 
   private M68kMoveInstruction parse(String text) {
