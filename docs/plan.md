@@ -6,6 +6,7 @@
 
 * 680x0 variants
 * 68881 FPU
+* 68851 MMU
 
 ## Highlighting
 
@@ -54,7 +55,9 @@
 - rename:
   - `RenameInputValidatorEx`
   - `NameSuggestionProvider` ?
-- unresolved: quick-fix to add `include` for existing label
+- unresolved:
+  - quick-fix to add `include` for existing label
+  - exclusion list setting to filter out dynamic label names
 
 ### Register
 
@@ -80,6 +83,8 @@
   - quick doc/hover for number literals: dec/hex/oct/bin/ASCII
   - quick doc for comments preceding label
   - render mode for comments preceding label
+  - quick doc for directives
+  - quick doc for `opt` flags
 - **WIP** code folding with settings for:
   - `movem` push/pop
 - macro call: parameter info/preview referring place
@@ -154,5 +159,4 @@
 - https://amigasourcecodepreservation.gitlab.io/mc680x0-reference/
 - https://amigasourcecodepreservation.gitlab.io/total-amiga-assembler/
 - http://eab.abime.net/showthread.php?t=21516
-- http://tigcc.ticalc.org/doc/a68k.html
 - http://obligement.free.fr/programmation.php
