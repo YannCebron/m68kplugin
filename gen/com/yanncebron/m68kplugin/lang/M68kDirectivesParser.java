@@ -389,7 +389,8 @@ public class M68kDirectivesParser {
   //                        near_code_directive |
   //                        init_near_directive |
   //                        popsection_directive |
-  //                        pushsection_directive
+  //                        pushsection_directive |
+  //                        echo_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -464,6 +465,7 @@ public class M68kDirectivesParser {
     if (!r) r = init_near_directive(b, l + 1);
     if (!r) r = popsection_directive(b, l + 1);
     if (!r) r = pushsection_directive(b, l + 1);
+    if (!r) r = echo_directive(b, l + 1);
     return r;
   }
 
@@ -544,6 +546,19 @@ public class M68kDirectivesParser {
     r = consumeToken(b, DSEG);
     exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  /* ********************************************************** */
+  // ECHO STRING
+  public static boolean echo_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "echo_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", ECHO)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, ECHO_DIRECTIVE, "<directive>");
+    r = consumeTokens(b, 1, ECHO, STRING);
+    p = r; // pin = 1
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */

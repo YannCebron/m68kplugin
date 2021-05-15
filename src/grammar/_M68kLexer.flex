@@ -391,6 +391,7 @@ Z=[zZ]
   {D}{R}                      { yybegin(AFTER_INSTRUCTION); return DR; }
   {D}{S}                      { yybegin(AFTER_INSTRUCTION); return DS; }
   {D}{S}{E}{G}                { yybegin(AFTER_INSTRUCTION); return DSEG; }
+  {E}{C}{H}{O}                { yybegin(STRING_DIRECTIVE); return ECHO; }
   {E}{I}{N}{L}{I}{N}{E}       { yybegin(AFTER_OPERAND); return EINLINE; }
   {E}{N}{D}                   { yybegin(AFTER_OPERAND); return END; }
   {E}{N}{D}{R}                { yybegin(AFTER_OPERAND); return ENDR; }

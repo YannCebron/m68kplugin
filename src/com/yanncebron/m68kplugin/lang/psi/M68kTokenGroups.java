@@ -185,6 +185,7 @@ public final class M68kTokenGroups {
     DR,
     DS,
     DSEG,
+    ECHO,
     EINLINE,
     END,
     ENDM,

@@ -47,7 +47,6 @@ Unsupported directives, these will display false positive
 - `debug`
 - `dsource`
 - `dx.*`
-- `echo` (PhxAss)
 - `entry`, `extrn`, `global`, `export` == `xdef`
 - `equrl`
 - `fequr`

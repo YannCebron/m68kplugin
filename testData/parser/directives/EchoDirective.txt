@@ -1,0 +1,6 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kEchoDirectiveImpl(ECHO_DIRECTIVE)
+    PsiElement(echo)('echo')
+    PsiWhiteSpace(' ')
+    PsiElement(string)('"some text"')

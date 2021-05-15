@@ -119,6 +119,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType DR = new M68kTokenType("dr");
   public static final IElementType DS = new M68kTokenType("ds");
   public static final IElementType DSEG = new M68kTokenType("dseg");
+  public static final IElementType ECHO = new M68kTokenType("echo");
   public static final IElementType EINLINE = new M68kTokenType("einline");
   public static final IElementType ELSE = new M68kTokenType("else");
   public static final IElementType ELSEIF = new M68kTokenType("elseif");

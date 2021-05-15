@@ -453,4 +453,8 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" pushsection");
   }
 
+  public void testEchoDirective() throws Exception {
+    doCodeTest(" echo \"some text\"");
+  }
+
 }
