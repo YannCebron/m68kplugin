@@ -195,6 +195,7 @@ public final class M68kTokenGroups {
     EREM,
     EVEN,
     FAIL,
+    FAR,
     IDNT,
     INCBIN,
     INCDIR,

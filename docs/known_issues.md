@@ -50,7 +50,6 @@ Unsupported directives, these will display false positive
 - `echo` (PhxAss)
 - `entry`, `extrn`, `global`, `export` == `xdef`
 - `equrl`
-- `far`
 - `fequr`
 - `fequrl`
 - `fo.*`, `clrfo`/`setfo`
