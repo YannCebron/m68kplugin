@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kNearCodeDirectiveImpl(NEAR_CODE_DIRECTIVE)
+    PsiElement(near code)('near code')

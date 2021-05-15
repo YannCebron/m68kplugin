@@ -770,6 +770,14 @@ public class M68kVisitor extends PsiElementVisitor {
     visitBcdInstructionBase(o);
   }
 
+  public void visitNearCodeDirective(@NotNull M68kNearCodeDirective o) {
+    visitDirective(o);
+  }
+
+  public void visitNearDirective(@NotNull M68kNearDirective o) {
+    visitDirective(o);
+  }
+
   public void visitNegInstruction(@NotNull M68kNegInstruction o) {
     visitDataSized(o);
     // visitInstruction(o);

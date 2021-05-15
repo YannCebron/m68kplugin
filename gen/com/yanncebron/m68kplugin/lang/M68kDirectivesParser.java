@@ -384,7 +384,9 @@ public class M68kDirectivesParser {
   //                        fail_directive |
   //                        ttl_directive |
   //                        idnt_directive |
-  //                        far_directive
+  //                        far_directive |
+  //                        near_directive |
+  //                        near_code_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -454,6 +456,8 @@ public class M68kDirectivesParser {
     if (!r) r = ttl_directive(b, l + 1);
     if (!r) r = idnt_directive(b, l + 1);
     if (!r) r = far_directive(b, l + 1);
+    if (!r) r = near_directive(b, l + 1);
+    if (!r) r = near_code_directive(b, l + 1);
     return r;
   }
 
@@ -964,6 +968,39 @@ public class M68kDirectivesParser {
     r = consumeToken(b, MEXIT);
     exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  /* ********************************************************** */
+  // NEAR_CODE
+  public static boolean near_code_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "near_code_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", NEAR_CODE)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, NEAR_CODE_DIRECTIVE, "<directive>");
+    r = consumeToken(b, NEAR_CODE);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // NEAR adm_ard?
+  public static boolean near_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "near_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", NEAR)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, NEAR_DIRECTIVE, "<directive>");
+    r = consumeToken(b, NEAR);
+    p = r; // pin = 1
+    r = r && near_directive_1(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // adm_ard?
+  private static boolean near_directive_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "near_directive_1")) return false;
+    adm_ard(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */

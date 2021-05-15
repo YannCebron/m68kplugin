@@ -196,6 +196,8 @@ public interface M68kTypes {
   IElementType MULU_INSTRUCTION = new M68kCompositeElementType("MULU_INSTRUCTION");
   IElementType MUL_EXPRESSION = new M68kCompositeElementType("MUL_EXPRESSION");
   IElementType NBCD_INSTRUCTION = new M68kCompositeElementType("NBCD_INSTRUCTION");
+  IElementType NEAR_CODE_DIRECTIVE = new M68kCompositeElementType("NEAR_CODE_DIRECTIVE");
+  IElementType NEAR_DIRECTIVE = new M68kCompositeElementType("NEAR_DIRECTIVE");
   IElementType NEGX_INSTRUCTION = new M68kCompositeElementType("NEGX_INSTRUCTION");
   IElementType NEG_INSTRUCTION = new M68kCompositeElementType("NEG_INSTRUCTION");
   IElementType NOLIST_DIRECTIVE = new M68kCompositeElementType("NOLIST_DIRECTIVE");
@@ -787,6 +789,12 @@ public interface M68kTypes {
       }
       else if (type == NBCD_INSTRUCTION) {
         return new M68kNbcdInstructionImpl(node);
+      }
+      else if (type == NEAR_CODE_DIRECTIVE) {
+        return new M68kNearCodeDirectiveImpl(node);
+      }
+      else if (type == NEAR_DIRECTIVE) {
+        return new M68kNearDirectiveImpl(node);
       }
       else if (type == NEGX_INSTRUCTION) {
         return new M68kNegxInstructionImpl(node);

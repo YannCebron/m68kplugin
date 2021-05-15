@@ -208,6 +208,8 @@ public final class M68kTokenGroups {
     LOAD,
     MACRO,
     MEXIT,
+    NEAR,
+    NEAR_CODE,
     NOLIST,
     NOPAGE,
     ODD,

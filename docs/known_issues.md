@@ -63,7 +63,6 @@ Unsupported directives, these will display false positive
 - `mask2` (no-op)
 - `mc68XXX`/`ac68060`/`mcf5XXX`
 - `module`
-- `near code`
 - `nref` (PhxAss)
 - `offset` (Devpac)
 - `optc`

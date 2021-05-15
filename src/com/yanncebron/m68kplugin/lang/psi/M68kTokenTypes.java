@@ -191,6 +191,8 @@ public abstract class M68kTokenTypes {
   public static final IElementType MULS = new M68kTokenType("muls");
   public static final IElementType MULU = new M68kTokenType("mulu");
   public static final IElementType NBCD = new M68kTokenType("nbcd");
+  public static final IElementType NEAR = new M68kTokenType("near");
+  public static final IElementType NEAR_CODE = new M68kTokenType("near code");
   public static final IElementType NEG = new M68kTokenType("neg");
   public static final IElementType NEGX = new M68kTokenType("negx");
   public static final IElementType NOLIST = new M68kTokenType("nolist");

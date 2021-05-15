@@ -428,4 +428,17 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
   public void testFarDirective() throws Exception {
     doCodeTest(" far");
   }
+
+  public void testNearDirective() throws Exception {
+    doCodeTest(" near a0");
+  }
+
+  public void testNearDirectiveWithoutRegister() throws Exception {
+    doCodeTest(" near");
+  }
+
+  public void testNearCodeDirective() throws Exception {
+    doCodeTest(" near code");
+  }
+
 }
