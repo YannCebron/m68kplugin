@@ -2628,7 +2628,7 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 541: break;
           case 270: 
-            { yybegin(IN_OPERAND); return NEAR_CODE;
+            { yybegin(AFTER_OPERAND); return NEAR_CODE;
             } 
             // fall through
           case 542: break;

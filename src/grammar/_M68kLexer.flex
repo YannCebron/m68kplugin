@@ -412,7 +412,7 @@ Z=[zZ]
   {L}{L}{E}{N}                { yybegin(IN_OPERAND); return LLEN; }
   {L}{O}{A}{D}                { yybegin(IN_OPERAND); return LOAD; }
   {N}{E}{A}{R}                { yybegin(IN_OPERAND); return NEAR; }
-  {N}{E}{A}{R}{WHITE_SPACE}{C}{O}{D}{E} { yybegin(IN_OPERAND); return NEAR_CODE; }
+  {N}{E}{A}{R}{WHITE_SPACE}{C}{O}{D}{E} { yybegin(AFTER_OPERAND); return NEAR_CODE; }
   {N}{O}{L}{I}{S}{T}          { yybegin(AFTER_OPERAND); return NOLIST; }
   {N}{O}{P}{A}{G}{E}          { yybegin(AFTER_OPERAND); return NOPAGE; }
   {O}{D}{D}                   { yybegin(AFTER_OPERAND); return ODD; }
