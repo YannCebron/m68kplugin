@@ -18,6 +18,7 @@ package com.yanncebron.m68kplugin.lang.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmSr;
+import com.yanncebron.m68kplugin.lang.psi.M68kCpu;
 import com.yanncebron.m68kplugin.lang.psi.M68kMoveInstruction;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,7 +29,7 @@ abstract class M68kMoveInstructionMixIn extends M68kMoveInstructionBaseImpl impl
   }
 
   @Override
-  public boolean isPrivileged() {
+  public boolean isPrivileged(@NotNull M68kCpu m68kCpu) {
     if (getAdmUsp() != null) return true;
 
     final M68kAdmSr admSr = getAdmSr();

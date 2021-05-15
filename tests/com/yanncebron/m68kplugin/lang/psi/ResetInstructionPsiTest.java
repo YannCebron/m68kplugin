@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ public class ResetInstructionPsiTest extends M68kPsiTestCase {
 
   public void testResetInstruction() {
     final M68kResetInstruction instruction = parse("reset");
-    assertTrue(instruction.isPrivileged());
+    assertTrue(instruction.isPrivileged(M68kCpu.M_68000));
   }
 
   private @NotNull M68kResetInstruction parse(String text) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,18 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Base interface for all M68k Instructions.
  */
 public interface M68kInstruction extends M68kPsiElement {
 
   /**
-   * @return {@code true} if the instruction requires supervisor privilege, {@code false} otherwise.
+   * @param m68kCpu target machine
+   * @return {@code true} if the instruction requires supervisor privilege for the given target machine, {@code false} otherwise.
    */
-  default boolean isPrivileged() {
+  default boolean isPrivileged(@NotNull M68kCpu m68kCpu) {
     return false;
   }
 }

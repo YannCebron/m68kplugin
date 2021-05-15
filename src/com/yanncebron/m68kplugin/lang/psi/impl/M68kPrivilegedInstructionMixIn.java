@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.yanncebron.m68kplugin.lang.psi.impl;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
+import com.yanncebron.m68kplugin.lang.psi.M68kCpu;
 import com.yanncebron.m68kplugin.lang.psi.M68kInstruction;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,7 +29,7 @@ abstract class M68kPrivilegedInstructionMixIn extends ASTWrapperPsiElement imple
   }
 
   @Override
-  public final boolean isPrivileged() {
+  public final boolean isPrivileged(@NotNull M68kCpu m68kCpu) {
     return true;
   }
 }

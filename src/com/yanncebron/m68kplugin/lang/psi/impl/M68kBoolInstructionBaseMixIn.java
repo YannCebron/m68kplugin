@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.yanncebron.m68kplugin.lang.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.yanncebron.m68kplugin.lang.psi.M68kBoolInstructionBase;
+import com.yanncebron.m68kplugin.lang.psi.M68kCpu;
 import org.jetbrains.annotations.NotNull;
 
 abstract class M68kBoolInstructionBaseMixIn extends M68kDataSizedImpl implements M68kBoolInstructionBase {
@@ -27,7 +28,7 @@ abstract class M68kBoolInstructionBaseMixIn extends M68kDataSizedImpl implements
   }
 
   @Override
-  public boolean isPrivileged() {
+  public boolean isPrivileged(@NotNull M68kCpu m68kCpu) {
     return getAdmSr() != null;
   }
 }

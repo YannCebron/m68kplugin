@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ public class MoveInstructionPsiTest extends M68kPsiTestCase {
   public void testAdmSrSource() {
     final M68kMoveInstruction instruction = parse("move.w SR,d6");
 
-    assertFalse(instruction.isPrivileged());
+    assertFalse(instruction.isPrivileged(M68kCpu.M_68000));
 
     final M68kAdmSr admSr = instruction.getAdmSr();
     assertNotNull(admSr);
@@ -56,7 +56,7 @@ public class MoveInstructionPsiTest extends M68kPsiTestCase {
   public void testAdmSrDest() {
     final M68kMoveInstruction instruction = parse("move.w d6,SR");
 
-    assertTrue(instruction.isPrivileged());
+    assertTrue(instruction.isPrivileged(M68kCpu.M_68000));
   }
 
   private M68kMoveInstruction parse(String text) {

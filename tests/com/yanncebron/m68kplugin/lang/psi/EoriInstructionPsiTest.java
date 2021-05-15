@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ public class EoriInstructionPsiTest extends M68kPsiTestCase {
   public void testSRPrivileged() {
     final M68kEoriInstruction instruction = parse("eori #1,SR");
 
-    assertTrue(instruction.isPrivileged());
+    assertTrue(instruction.isPrivileged(M68kCpu.M_68000));
   }
 
   private M68kEoriInstruction parse(String text) {

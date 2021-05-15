@@ -42,7 +42,7 @@ public class M68kSyntaxAnnotator implements Annotator {
 
     if (element instanceof M68kInstruction) {
       M68kInstruction instruction = (M68kInstruction) element;
-      if (instruction.isPrivileged()) {
+      if (instruction.isPrivileged(M68kCpu.M_68000)) {
         holder.newAnnotation(HighlightSeverity.INFORMATION, M68kBundle.message("highlight.privileged.instruction"))
           .textAttributes(M68kTextAttributes.PRIVILEGED_INSTRUCTION).create();
       }
