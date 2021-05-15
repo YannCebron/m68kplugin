@@ -16,6 +16,8 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
+import org.jetbrains.annotations.NonNls;
+
 import java.util.EnumSet;
 import java.util.Set;
 
@@ -46,6 +48,7 @@ public enum M68kCpu {
     this.displayName = displayName;
   }
 
+  @NonNls
   public String getDisplayName() {
     return displayName;
   }
