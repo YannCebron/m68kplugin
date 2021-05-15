@@ -387,7 +387,9 @@ public class M68kDirectivesParser {
   //                        far_directive |
   //                        near_directive |
   //                        near_code_directive |
-  //                        init_near_directive
+  //                        init_near_directive |
+  //                        popsection_directive |
+  //                        pushsection_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -460,6 +462,8 @@ public class M68kDirectivesParser {
     if (!r) r = near_directive(b, l + 1);
     if (!r) r = near_code_directive(b, l + 1);
     if (!r) r = init_near_directive(b, l + 1);
+    if (!r) r = popsection_directive(b, l + 1);
+    if (!r) r = pushsection_directive(b, l + 1);
     return r;
   }
 
@@ -1200,6 +1204,18 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
+  // POPSECTION
+  public static boolean popsection_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "popsection_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", POPSECTION)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, POPSECTION_DIRECTIVE, "<directive>");
+    r = consumeToken(b, POPSECTION);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // PRINTT STRING?
   public static boolean printt_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "printt_directive")) return false;
@@ -1254,6 +1270,18 @@ public class M68kDirectivesParser {
     r = consumeToken(b, COMMA);
     r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // PUSHSECTION
+  public static boolean pushsection_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "pushsection_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", PUSHSECTION)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, PUSHSECTION_DIRECTIVE, "<directive>");
+    r = consumeToken(b, PUSHSECTION);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 

@@ -445,4 +445,12 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" initnear");
   }
 
+  public void testPopsectionDirective() throws Exception {
+    doCodeTest(" popsection");
+  }
+
+  public void testPushsectionDirective() throws Exception {
+    doCodeTest(" pushsection");
+  }
+
 }

@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kPushsectionDirectiveImpl(PUSHSECTION_DIRECTIVE)
+    PsiElement(pushsection)('pushsection')

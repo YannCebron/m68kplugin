@@ -218,8 +218,10 @@ public interface M68kTypes {
   IElementType PEA_INSTRUCTION = new M68kCompositeElementType("PEA_INSTRUCTION");
   IElementType PLEN_DIRECTIVE = new M68kCompositeElementType("PLEN_DIRECTIVE");
   IElementType PLUS_EXPRESSION = new M68kCompositeElementType("PLUS_EXPRESSION");
+  IElementType POPSECTION_DIRECTIVE = new M68kCompositeElementType("POPSECTION_DIRECTIVE");
   IElementType PRINTT_DIRECTIVE = new M68kCompositeElementType("PRINTT_DIRECTIVE");
   IElementType PRINTV_DIRECTIVE = new M68kCompositeElementType("PRINTV_DIRECTIVE");
+  IElementType PUSHSECTION_DIRECTIVE = new M68kCompositeElementType("PUSHSECTION_DIRECTIVE");
   IElementType REGISTER_LIST = new M68kCompositeElementType("REGISTER_LIST");
   IElementType REGISTER_RANGE = new M68kCompositeElementType("REGISTER_RANGE");
   IElementType REG_DIRECTIVE = new M68kCompositeElementType("REG_DIRECTIVE");
@@ -857,11 +859,17 @@ public interface M68kTypes {
       else if (type == PLUS_EXPRESSION) {
         return new M68kPlusExpressionImpl(node);
       }
+      else if (type == POPSECTION_DIRECTIVE) {
+        return new M68kPopsectionDirectiveImpl(node);
+      }
       else if (type == PRINTT_DIRECTIVE) {
         return new M68kPrinttDirectiveImpl(node);
       }
       else if (type == PRINTV_DIRECTIVE) {
         return new M68kPrintvDirectiveImpl(node);
+      }
+      else if (type == PUSHSECTION_DIRECTIVE) {
+        return new M68kPushsectionDirectiveImpl(node);
       }
       else if (type == REGISTER_LIST) {
         return new M68kRegisterListImpl(node);
