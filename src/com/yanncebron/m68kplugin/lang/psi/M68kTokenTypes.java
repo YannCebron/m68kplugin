@@ -164,6 +164,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType INCBIN = new M68kTokenType("incbin");
   public static final IElementType INCDIR = new M68kTokenType("incdir");
   public static final IElementType INCLUDE = new M68kTokenType("include");
+  public static final IElementType INITNEAR = new M68kTokenType("initnear");
   public static final IElementType INLINE = new M68kTokenType("inline");
   public static final IElementType JMP = new M68kTokenType("jmp");
   public static final IElementType JSR = new M68kTokenType("jsr");

@@ -441,4 +441,8 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" near code");
   }
 
+  public void testInitNearDirective() throws Exception {
+    doCodeTest(" initnear");
+  }
+
 }

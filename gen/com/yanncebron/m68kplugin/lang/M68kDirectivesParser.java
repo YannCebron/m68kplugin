@@ -386,7 +386,8 @@ public class M68kDirectivesParser {
   //                        idnt_directive |
   //                        far_directive |
   //                        near_directive |
-  //                        near_code_directive
+  //                        near_code_directive |
+  //                        init_near_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -458,6 +459,7 @@ public class M68kDirectivesParser {
     if (!r) r = far_directive(b, l + 1);
     if (!r) r = near_directive(b, l + 1);
     if (!r) r = near_code_directive(b, l + 1);
+    if (!r) r = init_near_directive(b, l + 1);
     return r;
   }
 
@@ -779,6 +781,18 @@ public class M68kDirectivesParser {
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, null, "<include path>");
     r = consumeToken(b, STRING);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // INITNEAR
+  public static boolean init_near_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "init_near_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", INITNEAR)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, INIT_NEAR_DIRECTIVE, "<directive>");
+    r = consumeToken(b, INITNEAR);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

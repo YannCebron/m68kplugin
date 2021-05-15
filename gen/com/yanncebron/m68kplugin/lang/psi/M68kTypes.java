@@ -165,6 +165,7 @@ public interface M68kTypes {
   IElementType INCBIN_DIRECTIVE = new M68kCompositeElementType("INCBIN_DIRECTIVE");
   IElementType INCDIR_DIRECTIVE = new M68kCompositeElementType("INCDIR_DIRECTIVE");
   IElementType INCLUDE_DIRECTIVE = new M68kCompositeElementType("INCLUDE_DIRECTIVE");
+  IElementType INIT_NEAR_DIRECTIVE = new M68kCompositeElementType("INIT_NEAR_DIRECTIVE");
   IElementType INLINE_DIRECTIVE = new M68kCompositeElementType("INLINE_DIRECTIVE");
   IElementType JMP_INSTRUCTION = new M68kCompositeElementType("JMP_INSTRUCTION");
   IElementType JSR_INSTRUCTION = new M68kCompositeElementType("JSR_INSTRUCTION");
@@ -696,6 +697,9 @@ public interface M68kTypes {
       }
       else if (type == INCLUDE_DIRECTIVE) {
         return new M68kIncludeDirectiveImpl(node);
+      }
+      else if (type == INIT_NEAR_DIRECTIVE) {
+        return new M68kInitNearDirectiveImpl(node);
       }
       else if (type == INLINE_DIRECTIVE) {
         return new M68kInlineDirectiveImpl(node);

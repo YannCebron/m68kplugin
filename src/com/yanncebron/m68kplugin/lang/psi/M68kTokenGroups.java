@@ -200,6 +200,7 @@ public final class M68kTokenGroups {
     INCBIN,
     INCDIR,
     INCLUDE,
+    INITNEAR,
     INLINE,
     JUMPERR,
     JUMPPTR,

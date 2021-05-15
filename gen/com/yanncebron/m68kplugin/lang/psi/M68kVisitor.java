@@ -638,6 +638,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitDirective(o);
   }
 
+  public void visitInitNearDirective(@NotNull M68kInitNearDirective o) {
+    visitDirective(o);
+  }
+
   public void visitInlineDirective(@NotNull M68kInlineDirective o) {
     visitDirective(o);
   }

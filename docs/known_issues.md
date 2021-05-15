@@ -58,7 +58,6 @@ Unsupported directives, these will display false positive
 - `iif` (Devpac)
 - `image`
 - `import` == `xref`
-- `initnear`
 - `machine`
 - `mask2` (no-op)
 - `mc68XXX`/`ac68060`/`mcf5XXX`

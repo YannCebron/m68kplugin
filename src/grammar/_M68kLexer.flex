@@ -404,6 +404,7 @@ Z=[zZ]
   {I}{N}{C}{B}{I}{N}          { yybegin(STRING_DIRECTIVE); return INCBIN; }
   {I}{N}{C}{D}{I}{R}          { yybegin(STRING_DIRECTIVE); return INCDIR; }
   {I}{N}{C}{L}{U}{D}{E}       { yybegin(STRING_DIRECTIVE); return INCLUDE; }
+  {I}{N}{I}{T}{N}{E}{A}{R}    { yybegin(AFTER_OPERAND); return INITNEAR; }
   {I}{N}{L}{I}{N}{E}          { yybegin(AFTER_OPERAND); return INLINE; }
   {J}{U}{M}{P}{E}{R}{R}       { yybegin(IN_OPERAND); return JUMPERR; }
   {J}{U}{M}{P}{P}{T}{R}       { yybegin(IN_OPERAND); return JUMPPTR; }

@@ -49,6 +49,7 @@ ifnd
 ifne
 incbin
 incdir
+initnear
 jumperr
 jumpptr
 llen

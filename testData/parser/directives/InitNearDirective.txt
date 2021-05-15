@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kInitNearDirectiveImpl(INIT_NEAR_DIRECTIVE)
+    PsiElement(initnear)('initnear')

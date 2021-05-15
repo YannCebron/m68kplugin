@@ -59,6 +59,7 @@
       <w>ifpl</w>
       <w>incbin</w>
       <w>incdir</w>
+      <w>initnear</w>
       <w>jumperr</w>
       <w>jumpptr</w>
       <w>kplugin</w>
