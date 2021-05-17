@@ -31,7 +31,7 @@ repositories {
 
 dependencies {
   implementation group: 'org.commonmark', name: 'commonmark', version: '0.17.1'
-  implementation group: 'org.commonmark', name: 'commonmark-ext-gfm-tables', version: '0.17.1'
+  implementation group: 'org.commonmark', name: 'commonmark-ext-gfm-tables', version: '0.17.2'
   testImplementation group: 'junit', name: 'junit', version: '4.13.2'
 }
 
