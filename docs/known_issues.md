@@ -14,7 +14,6 @@ title: Known Issues
 ## Editor
 
 - Code block handling of nested conditional assembly directives
-- Missing directive inspection: nesting
 
 ## Lexing/Parsing
 

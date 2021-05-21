@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,10 @@ package com.yanncebron.m68kplugin.inspections;
 import com.intellij.codeInspection.LocalInspectionTool;
 import com.intellij.codeInspection.LocalInspectionToolSession;
 import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.psi.PsiElement;
+import com.intellij.openapi.util.Ref;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.Processor;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiTreeUtil;
@@ -76,49 +77,89 @@ public class M68kDirectivesInspection extends LocalInspectionTool {
 
       @Override
       public void visitReptDirective(@NotNull M68kReptDirective element) {
-        checkUnmatchedOpeningDirective(element, holder, M68kEndrDirective.class, "endr", M68kReptDirective.class);
+        checkUnmatchedDirectiveWithNesting(element, M68kReptDirective.class, holder, true, M68kEndrDirective.class, "endr");
       }
 
       @Override
-      public void visitEndrDirective(@NotNull M68kEndrDirective o) {
-        checkUnmatchedClosingDirective(o, holder, M68kReptDirective.class, "rept", M68kEndrDirective.class);
+      public void visitEndrDirective(@NotNull M68kEndrDirective element) {
+        checkUnmatchedDirectiveWithNesting(element, M68kEndrDirective.class, holder, false, M68kReptDirective.class, "rept");
       }
     };
   }
 
-  @SuppressWarnings("UnusedReturnValue")
-  @SafeVarargs
-  private final boolean checkUnmatchedOpeningDirective(PsiElement element, ProblemsHolder holder,
-                                                       Class<? extends M68kDirective> matchingDirective,
-                                                       @NonNls String matchingDirectiveText,
-                                                       Class<? extends M68kDirective>... stopAtDirectives) {
-    return checkUnmatchedDirective(element, holder, true, matchingDirective, matchingDirectiveText, stopAtDirectives);
+  private void checkUnmatchedDirectiveWithNesting(M68kDirective m68kDirective, Class<? extends M68kDirective> directiveClass,
+                                                  ProblemsHolder holder, boolean forwards,
+                                                  Class<? extends M68kDirective> matchingDirective,
+                                                  String matchingDirectiveText) {
+    Ref<Boolean> unmatched = Ref.create(Boolean.TRUE);
+    final Processor<M68kPsiElement> nestingProcessor = new Processor<M68kPsiElement>() {
+
+      int unmatchedCount = 1;
+
+      @Override
+      public boolean process(M68kPsiElement m68kPsiElement) {
+        if (PsiTreeUtil.instanceOf(m68kPsiElement, directiveClass)) {
+          unmatchedCount++;
+        } else if (PsiTreeUtil.instanceOf(m68kPsiElement, matchingDirective)) {
+          unmatchedCount--;
+        } else {
+          return true;
+        }
+
+        final boolean matchStatus = unmatchedCount != 0;
+        unmatched.set(matchStatus);
+        return matchStatus;
+      }
+    };
+
+    if (forwards) {
+      M68kPsiTreeUtil.processSiblingsForwards(m68kDirective, nestingProcessor);
+    } else {
+      M68kPsiTreeUtil.processSiblingsBackwards(m68kDirective, nestingProcessor);
+    }
+
+    if (unmatched.get()) {
+      addUnmatchedProblem(m68kDirective, holder, forwards, matchingDirectiveText);
+    }
   }
 
   @SuppressWarnings("UnusedReturnValue")
   @SafeVarargs
-  private final boolean checkUnmatchedClosingDirective(PsiElement element, ProblemsHolder holder,
+  private final boolean checkUnmatchedOpeningDirective(M68kDirective m68kDirective, ProblemsHolder holder,
                                                        Class<? extends M68kDirective> matchingDirective,
                                                        @NonNls String matchingDirectiveText,
                                                        Class<? extends M68kDirective>... stopAtDirectives) {
-    return checkUnmatchedDirective(element, holder, false, matchingDirective, matchingDirectiveText, stopAtDirectives);
+    return checkUnmatchedDirective(m68kDirective, holder, true, matchingDirective, matchingDirectiveText, stopAtDirectives);
+  }
+
+  @SuppressWarnings("UnusedReturnValue")
+  @SafeVarargs
+  private final boolean checkUnmatchedClosingDirective(M68kDirective m68kDirective, ProblemsHolder holder,
+                                                       Class<? extends M68kDirective> matchingDirective,
+                                                       @NonNls String matchingDirectiveText,
+                                                       Class<? extends M68kDirective>... stopAtDirectives) {
+    return checkUnmatchedDirective(m68kDirective, holder, false, matchingDirective, matchingDirectiveText, stopAtDirectives);
   }
 
   @SafeVarargs
-  private final boolean checkUnmatchedDirective(PsiElement element, ProblemsHolder holder,
+  private final boolean checkUnmatchedDirective(M68kDirective m68kDirective, ProblemsHolder holder,
                                                 boolean forwards,
                                                 Class<? extends M68kDirective> matchingDirective,
                                                 @NonNls String matchingDirectiveText,
                                                 Class<? extends M68kDirective>... stopAtDirectives) {
     if (forwards) {
-      if (M68kPsiTreeUtil.hasSiblingForwards(element, matchingDirective, stopAtDirectives)) return false;
+      if (M68kPsiTreeUtil.hasSiblingForwards(m68kDirective, matchingDirective, stopAtDirectives)) return false;
     } else {
-      if (M68kPsiTreeUtil.hasSiblingBackwards(element, matchingDirective, stopAtDirectives)) return false;
+      if (M68kPsiTreeUtil.hasSiblingBackwards(m68kDirective, matchingDirective, stopAtDirectives)) return false;
     }
 
-    final String key = forwards ? "highlight.unmatched.directive.missing.closing" : "highlight.unmatched.directive.missing.opening";
-    holder.registerProblem(element, M68kBundle.message(key, matchingDirectiveText));
+    addUnmatchedProblem(m68kDirective, holder, forwards, matchingDirectiveText);
     return true;
+  }
+
+  private void addUnmatchedProblem(M68kDirective m68kDirective, ProblemsHolder holder, boolean forwards, @NonNls String matchingDirectiveText) {
+    final String key = forwards ? "highlight.unmatched.directive.missing.closing" : "highlight.unmatched.directive.missing.opening";
+    holder.registerProblem(m68kDirective, M68kBundle.message(key, matchingDirectiveText));
   }
 
 }

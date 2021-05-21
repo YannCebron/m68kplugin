@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -87,6 +87,40 @@ public class M68kDirectivesInspectionTest extends BasePlatformTestCase {
   public void testUnmatchedDirectiveEndrMissingRept() {
     myFixture.configureByText("test.s",
       " <error descr=\"Missing matching 'rept' opening directive\">endr</error>");
+    myFixture.testHighlighting();
+  }
+
+  public void testNestedRept() {
+    myFixture.configureByText("test.s",
+      "  rept 1\n" +
+        "  rept 2\n" +
+        "  rept 3\n" +
+        "  endr\n" +
+        "  endr\n" +
+        "  endr\n" +
+        "\n" +
+        "  rept 1\n" +
+        "  rept 2\n" +
+        "  endr\n" +
+        "  rept 3\n" +
+        "  endr\n" +
+        "  endr");
+    myFixture.testHighlighting();
+  }
+
+  public void testNestedReptMissingEndr() {
+    myFixture.configureByText("test.s",
+      "  <error descr=\"Missing matching 'endr' closing directive\">rept 1</error>\n" +
+        "  rept 2\n" +
+        "  endr");
+    myFixture.testHighlighting();
+  }
+
+  public void testNestedReptMissingRept() {
+    myFixture.configureByText("test.s",
+      "  rept 1\n" +
+        "  endr\n" +
+        "  <error descr=\"Missing matching 'rept' opening directive\">endr</error>");
     myFixture.testHighlighting();
   }
 
