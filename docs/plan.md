@@ -153,6 +153,7 @@
 ## Resources
 
 - https://www.nxp.com/files-static/archives/doc/ref_manual/M68000PRM.pdf
+- https://github.com/tonioni/WinUAE/blob/master/table68k
 - http://mrjester.hapisan.com/04_MC68/Index.html
 - https://github.com/alpine9000/amiga_examples
 - https://amigasourcepres.gitlab.io/page/books/assembler/
