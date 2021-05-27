@@ -77,7 +77,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2.2.3
         with:
-          name: ${{ needs.build.outputs.artifact }}
+          name: plugin-artifact
           path: ./build/distributions/${{ needs.build.outputs.artifact }}
 
 
