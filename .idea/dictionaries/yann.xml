@@ -9,6 +9,7 @@
       <w>bclr</w>
       <w>bset</w>
       <w>btst</w>
+      <w>carg</w>
       <w>cmpa</w>
       <w>cmpi</w>
       <w>cmpm</w>
@@ -68,20 +69,26 @@
       <w>mexit</w>
       <w>movea</w>
       <w>movem</w>
+      <w>movembytes</w>
+      <w>movemregs</w>
       <w>movep</w>
       <w>moveq</w>
       <w>muls</w>
       <w>mulu</w>
+      <w>narg</w>
       <w>nbcd</w>
       <w>negx</w>
       <w>nolist</w>
       <w>nopage</w>
+      <w>optc</w>
+      <w>phxass</w>
       <w>plen</w>
       <w>popsection</w>
       <w>printt</w>
       <w>printv</w>
       <w>pushsection</w>
       <w>rept</w>
+      <w>reptn</w>
       <w>roxl</w>
       <w>roxr</w>
       <w>rsreset</w>
