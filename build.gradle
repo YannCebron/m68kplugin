@@ -91,10 +91,8 @@ patchPluginXml {
 
 
 // Lexer generation ===========================================================
-apply plugin: 'org.jetbrains.grammarkit'
-
 import org.jetbrains.grammarkit.tasks.GenerateLexer
-import org.jetbrains.intellij.tasks.RunPluginVerifierTask.FailureLevel
+apply plugin: 'org.jetbrains.grammarkit'
 
 grammarKit {
   jflexRelease = '1.7.0-2'
@@ -110,6 +108,7 @@ task generateM68KLexer(type: GenerateLexer) {
 //compileJava.dependsOn generateM68KLexer
 
 // Plugin verification ===========================================================
+import org.jetbrains.intellij.tasks.RunPluginVerifierTask.FailureLevel
 
 runPluginVerifier {
   ideVersions = intellij_platform_verification_versions.split(',') as List
