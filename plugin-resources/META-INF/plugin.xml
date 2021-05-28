@@ -101,6 +101,14 @@
         forClass="com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression"
         implementationClass="com.yanncebron.m68kplugin.lang.psi.expression.impl.M68kLabelRefExpressionElementManipulator"/>
 
+    <psi.symbolReferenceProvider
+        hostLanguage="M68k"
+        hostElementClass="com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression"
+        targetClass="com.yanncebron.m68kplugin.lang.symbol.M68kBuiltinSymbol"
+        referenceClass="com.yanncebron.m68kplugin.lang.symbol.M68kBuiltinSymbolReferenceProvider$M68kBuiltinSymbolReference"
+        implementationClass="com.yanncebron.m68kplugin.lang.symbol.M68kBuiltinSymbolReferenceProvider"/>
+    <registryKey defaultValue="false" description="M68k: enable builtin symbols" key="m68k.builtin.symbols" />
+
     <codeStyleSettingsProvider
         implementation="com.yanncebron.m68kplugin.settings.codestyle.M68kCodeStyleSettingsProvider"/>
     <langCodeStyleSettingsProvider

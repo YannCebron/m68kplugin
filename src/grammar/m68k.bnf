@@ -1367,6 +1367,7 @@ label_ref_expression ::= ID
 {
   mixin = "com.yanncebron.m68kplugin.lang.psi.expression.impl.M68kLabelRefExpressionMixIn"
   name = "label"
+  implements = "com.intellij.model.psi.PsiExternalReferenceHost"
 }
 
 
