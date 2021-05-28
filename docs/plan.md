@@ -81,8 +81,8 @@
 - formatter
 - documentation:
   - quick doc/hover for number literals: dec/hex/oct/bin/ASCII
-  - quick doc for comments preceding label
-  - render mode for comments preceding label
+  - quick doc for preceding label/EOL comments
+  - render mode for preceding label/EOL comments
   - quick doc for directives
   - quick doc for `opt` flags
 - **WIP** code folding with settings for:
