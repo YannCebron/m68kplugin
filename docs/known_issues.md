@@ -74,7 +74,6 @@ Unsupported directives, these will display false positive
 #### Directives with known limitations
 
 - `printt`: multiple strings
-- `SECTION	"code",CODE_C`: id expected
 
 ### Labels
 

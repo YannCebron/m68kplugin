@@ -1,0 +1,10 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kSectionDirectiveImpl(SECTION_DIRECTIVE)
+    PsiElement(section)('section')
+    PsiWhiteSpace(' ')
+    PsiElement(string)('"tos"')
+    PsiElement(,)(',')
+    PsiElement(id)('code')
+    PsiElement(,)(',')
+    PsiElement(id)('chip')

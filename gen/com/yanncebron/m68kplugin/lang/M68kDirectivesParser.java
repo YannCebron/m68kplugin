@@ -1396,18 +1396,28 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // SECTION ID (COMMA ID)? (COMMA ID)?
+  // SECTION (ID | STRING) (COMMA ID)? (COMMA ID)?
   public static boolean section_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "section_directive")) return false;
     if (!nextTokenIs(b, "<directive>", SECTION)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, SECTION_DIRECTIVE, "<directive>");
-    r = consumeTokens(b, 1, SECTION, ID);
+    r = consumeToken(b, SECTION);
     p = r; // pin = 1
-    r = r && report_error_(b, section_directive_2(b, l + 1));
+    r = r && report_error_(b, section_directive_1(b, l + 1));
+    r = p && report_error_(b, section_directive_2(b, l + 1)) && r;
     r = p && section_directive_3(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  // ID | STRING
+  private static boolean section_directive_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "section_directive_1")) return false;
+    boolean r;
+    r = consumeToken(b, ID);
+    if (!r) r = consumeToken(b, STRING);
+    return r;
   }
 
   // (COMMA ID)?
