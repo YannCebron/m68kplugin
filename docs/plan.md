@@ -82,7 +82,7 @@
 - documentation:
   - quick doc/hover for number literals: dec/hex/oct/bin/ASCII
   - quick doc for preceding label/EOL comments
-  - render mode for preceding label/EOL comments
+  - render mode for preceding label comments
   - quick doc for directives
   - quick doc for `opt` flags
 - **WIP** code folding with settings for:
@@ -94,6 +94,8 @@
   - smart enter handler to split value list
 - surround descriptors?
 - `FocusModeProvider`
+- string literal: support language injection, `UrlReferenceHost`
+- comment: smart enter
 
 ## Inspections
 
