@@ -14,6 +14,10 @@ nav_order: 3
 ## External Tools
 
 Navigate to _file:lineNumber_ location or label from vasm console message
+             
+## Version Control
+
+Completion of label names in _Commit Message_
 
 ## Other
 

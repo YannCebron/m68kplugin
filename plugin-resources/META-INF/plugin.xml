@@ -107,7 +107,7 @@
         targetClass="com.yanncebron.m68kplugin.lang.symbol.M68kBuiltinSymbol"
         referenceClass="com.yanncebron.m68kplugin.lang.symbol.M68kBuiltinSymbolReferenceProvider$M68kBuiltinSymbolReference"
         implementationClass="com.yanncebron.m68kplugin.lang.symbol.M68kBuiltinSymbolReferenceProvider"/>
-    <registryKey defaultValue="false" description="M68k: enable builtin symbols" key="m68k.builtin.symbols" />
+    <registryKey defaultValue="false" description="M68k: enable builtin symbols" key="m68k.builtin.symbols"/>
 
     <codeStyleSettingsProvider
         implementation="com.yanncebron.m68kplugin.settings.codestyle.M68kCodeStyleSettingsProvider"/>
@@ -159,6 +159,10 @@
         implementation="com.yanncebron.m68kplugin.navigation.M68kGotoLabelChooseByNameContributor"/>
     <moduleRendererFactory
         implementation="com.yanncebron.m68kplugin.navigation.M68kGotoLabelModuleRendererFactory"/>
+
+    <completion.plainTextSymbol
+        language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.lang.completion.M68kPlainTextSymbolCompletionContributor"/>
 
     <spellchecker.support
         language="M68k"

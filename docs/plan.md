@@ -138,7 +138,6 @@
 ## IDE
 
 - support copyright plugin
-- symbol names in commit dialog (`PlainTextSymbolCompletionContributor`)
 
 ## Tools
 
