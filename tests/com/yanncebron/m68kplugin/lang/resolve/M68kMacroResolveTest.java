@@ -25,9 +25,11 @@ import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.yanncebron.m68kplugin.inspections.M68kUnresolvedLabelReferenceInspection;
 import com.yanncebron.m68kplugin.lang.M68kIcons;
-import org.jetbrains.annotations.NotNull;
+import com.yanncebron.m68kplugin.lang.M68kLookupElementTestUtil;
 
-import static com.yanncebron.m68kplugin.lang.resolve.M68kLabelResolveTest.*;
+import static com.yanncebron.m68kplugin.lang.M68kLookupElementTestUtil.assertLookupIcon;
+import static com.yanncebron.m68kplugin.lang.M68kLookupElementTestUtil.findLookupElement;
+import static com.yanncebron.m68kplugin.lang.resolve.M68kLabelResolveTest.assertResolveResultPsiElement;
 
 @TestDataPath("$PROJECT_ROOT/testData/resolve/macro")
 public class M68kMacroResolveTest extends BasePlatformTestCase {
@@ -46,10 +48,10 @@ public class M68kMacroResolveTest extends BasePlatformTestCase {
     myFixture.testCompletionVariants("macroCompletionVariantsInSingleFile.s",
       "macro1", "macro2");
 
-    final LookupElement firstMacro1 = M68kLabelResolveTest.findLookupElement(myFixture, "macro1", 0);
+    final LookupElement firstMacro1 = findLookupElement(myFixture, "macro1", 0);
     final LookupElementPresentation firstMacro1Presentation = LookupElementPresentation.renderElement(firstMacro1);
     assertLookupIcon(firstMacro1Presentation, M68kIcons.LABEL_MACRO);
-    final LookupElement secondMacro1 = M68kLabelResolveTest.findLookupElement(myFixture, "macro1", 21);
+    final LookupElement secondMacro1 = findLookupElement(myFixture, "macro1", 21);
     final LookupElementPresentation secondMacro1Presentation = LookupElementPresentation.renderElement(secondMacro1);
     assertLookupIcon(secondMacro1Presentation, M68kIcons.LABEL_MACRO);
   }
@@ -73,34 +75,29 @@ public class M68kMacroResolveTest extends BasePlatformTestCase {
     myFixture.testCompletionVariants("macroCompletionVariantsInMultipleFiles.s",
       "macro1", "macro2", "otherMacro", "yetAnotherMacro");
 
-    final LookupElement myMacro = findLookupElement("macro1");
+    final LookupElement myMacro = findLookupElement(myFixture, "macro1");
     final LookupElementPresentation myMacroPresentation = LookupElementPresentation.renderElement(myMacro);
     assertTrue(myMacroPresentation.isItemTextBold());
     assertLookupIcon(myMacroPresentation, M68kIcons.LABEL_MACRO);
     assertEmpty(myMacroPresentation.getTypeText());
-    assertPrioritizedLookupElement(myMacro, 30.0);
+    M68kLookupElementTestUtil.assertPrioritizedLookupElement(myMacro, 30.0);
 
-    final LookupElement otherMacro = findLookupElement("otherMacro");
+    final LookupElement otherMacro = findLookupElement(myFixture, "otherMacro");
     final LookupElementPresentation otherMacroPresentation = LookupElementPresentation.renderElement(otherMacro);
     assertFalse(otherMacroPresentation.isItemTextBold());
     assertLookupIcon(otherMacroPresentation, M68kIcons.LABEL_MACRO);
     assertEquals("macroHighlightResolvingInMultipleFiles_other.s", otherMacroPresentation.getTypeText());
 
-    final LookupElement firstYetAnotherMacro = M68kLabelResolveTest.findLookupElement(myFixture, "yetAnotherMacro", 846);
+    final LookupElement firstYetAnotherMacro = findLookupElement(myFixture, "yetAnotherMacro", 846);
     final LookupElementPresentation firstYetAnotherMacroPresentation = LookupElementPresentation.renderElement(firstYetAnotherMacro);
     assertLookupIcon(firstYetAnotherMacroPresentation, M68kIcons.LABEL_MACRO);
-    final LookupElement secondYetAnotherMacro = M68kLabelResolveTest.findLookupElement(myFixture, "yetAnotherMacro", 876);
+    final LookupElement secondYetAnotherMacro = findLookupElement(myFixture, "yetAnotherMacro", 876);
     final LookupElementPresentation secondYetAnotherMacroPresentation = LookupElementPresentation.renderElement(secondYetAnotherMacro);
     assertLookupIcon(secondYetAnotherMacroPresentation, M68kIcons.LABEL_MACRO);
   }
 
   public void testRenameMacrocall() {
     myFixture.testRename("macroRename_before.s", "macroRename_after.s", "macroNewName");
-  }
-
-  @NotNull
-  private LookupElement findLookupElement(String lookupString) {
-    return M68kLabelResolveTest.findLookupElement(myFixture, lookupString);
   }
 
 }

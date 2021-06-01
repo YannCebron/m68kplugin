@@ -16,26 +16,19 @@
 
 package com.yanncebron.m68kplugin.lang.resolve;
 
-import com.intellij.codeInsight.completion.PrioritizedLookupElement;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementPresentation;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiPolyVariantReference;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
-import com.intellij.testFramework.fixtures.CodeInsightTestFixture;
-import com.intellij.testFramework.fixtures.TestLookupElementPresentation;
-import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.inspections.M68kUnresolvedLabelReferenceInspection;
 import com.yanncebron.m68kplugin.lang.M68kIcons;
 import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
-import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
-import java.util.Objects;
+import static com.yanncebron.m68kplugin.lang.M68kLookupElementTestUtil.*;
 
 @TestDataPath("$PROJECT_ROOT/testData/resolve/label")
 public class M68kLabelResolveTest extends BasePlatformTestCase {
@@ -62,7 +55,7 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     final LookupElementPresentation topLevelPresentation2 = LookupElementPresentation.renderElement(topLevelLabel2);
     assertLookupIcon(topLevelPresentation2, M68kIcons.LABEL_GLOBAL);
 
-    final LookupElement anotherTopLevelLabel = findLookupElement("anotherTopLevelLabel");
+    final LookupElement anotherTopLevelLabel = findLookupElement(myFixture, "anotherTopLevelLabel");
     final LookupElementPresentation anotherTopLevelPresentation = LookupElementPresentation.renderElement(anotherTopLevelLabel);
     assertLookupIcon(anotherTopLevelPresentation, M68kIcons.LABEL_GLOBAL);
     assertTrue(anotherTopLevelPresentation.isItemTextBold());
@@ -70,14 +63,14 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     assertEmpty(anotherTopLevelPresentation.getTypeText());
     assertPrioritizedLookupElement(anotherTopLevelLabel, 30.0);
 
-    final LookupElement localLabelLookupElement = findLookupElement(".localLabel");
+    final LookupElement localLabelLookupElement = findLookupElement(myFixture, ".localLabel");
     final LookupElementPresentation localLabelPresentation = LookupElementPresentation.renderElement(localLabelLookupElement);
     assertLookupIcon(localLabelPresentation, M68kIcons.LABEL_LOCAL);
     assertTrue(localLabelPresentation.isItemTextBold());
     assertEmpty(localLabelPresentation.getTypeText());
     assertPrioritizedLookupElement(localLabelLookupElement, 50.0);
 
-    final LookupElement setLabel = findLookupElement("setLabel");
+    final LookupElement setLabel = findLookupElement(myFixture, "setLabel");
     final LookupElementPresentation setLabelPresentation = LookupElementPresentation.renderElement(setLabel);
     assertLookupIcon(setLabelPresentation, M68kIcons.LABEL_SET);
     assertTrue(setLabelPresentation.isItemTextBold());
@@ -85,7 +78,7 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     assertEmpty(setLabelPresentation.getTypeText());
     assertPrioritizedLookupElement(setLabel, 30.0);
 
-    final LookupElement equLabel = findLookupElement("equLabel");
+    final LookupElement equLabel = findLookupElement(myFixture, "equLabel");
     final LookupElementPresentation equLabelPresentation = LookupElementPresentation.renderElement(equLabel);
     assertLookupIcon(equLabelPresentation, M68kIcons.LABEL_EQU);
     assertTrue(equLabelPresentation.isItemTextBold());
@@ -93,7 +86,7 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     assertEmpty(equLabelPresentation.getTypeText());
     assertPrioritizedLookupElement(equLabel, 30.0);
 
-    final LookupElement equalsLabel = findLookupElement("equalsLabel");
+    final LookupElement equalsLabel = findLookupElement(myFixture, "equalsLabel");
     final LookupElementPresentation equalsLabelPresentation = LookupElementPresentation.renderElement(equalsLabel);
     assertLookupIcon(equalsLabelPresentation, M68kIcons.LABEL_EQU);
     assertTrue(equalsLabelPresentation.isItemTextBold());
@@ -127,33 +120,10 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     myFixture.testCompletionVariants("completionVariantsInMultipleFiles.s",
       "topLevelLabel", "anotherTopLevelLabel", "otherLabel", "otherLabel2", "myLabel");
 
-    final LookupElement otherLabel = findLookupElement("otherLabel");
+    final LookupElement otherLabel = findLookupElement(myFixture, "otherLabel");
     final LookupElementPresentation otherLabelPresentation = LookupElementPresentation.renderElement(otherLabel);
     assertFalse(otherLabelPresentation.isItemTextBold());
     assertEquals("highlightResolvingInMultipleFiles_other.s", otherLabelPresentation.getTypeText());
-  }
-
-  @NotNull
-  private LookupElement findLookupElement(String lookupString) {
-    return findLookupElement(myFixture, lookupString);
-  }
-
-  @NotNull
-  static LookupElement findLookupElement(CodeInsightTestFixture fixture, String lookupString) {
-    return findLookupElement(fixture, lookupString, -1);
-  }
-
-  @NotNull
-  static LookupElement findLookupElement(CodeInsightTestFixture fixture, String lookupString, int textOffset) {
-    final LookupElement[] lookupElements = fixture.getLookupElements();
-    assertNotNull(lookupString, lookupElements);
-    final LookupElement lookupElement = ContainerUtil.find(lookupElements, element ->
-      element.getLookupString().equals(lookupString) &&
-        (textOffset == -1 || textOffset == Objects.requireNonNull(element.getPsiElement()).getTextOffset()));
-
-    assertNotNull(StringUtil.join(lookupElements, element -> element.getLookupString() + ":" + Objects.requireNonNull(element.getPsiElement()).getTextOffset(), "\n"),
-      lookupElement);
-    return lookupElement;
   }
 
   static void assertResolveResultPsiElement(ResolveResult resolveResult, String text, String filename, int offset) {
@@ -162,16 +132,6 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     assertEquals(text, element.getText());
     assertEquals(filename, element.getContainingFile().getName());
     assertEquals(offset, element.getTextOffset());
-  }
-
-  static void assertPrioritizedLookupElement(LookupElement element, double expectedPriority) {
-    final PrioritizedLookupElement<?> prioritizedLookupElement = element.as(PrioritizedLookupElement.CLASS_CONDITION_KEY);
-    assertNotNull(prioritizedLookupElement);
-    assertEquals(expectedPriority, prioritizedLookupElement.getPriority());
-  }
-
-  static void assertLookupIcon(LookupElementPresentation presentation, Icon expectedIcon) {
-    assertEquals(expectedIcon, TestLookupElementPresentation.unwrapIcon(presentation.getIcon()));
   }
 
 }
