@@ -95,7 +95,7 @@
 - surround descriptors?
 - `FocusModeProvider`
 - string literal: support language injection, `UrlReferenceHost`
-- comment: smart enter
+- comment: smart enter `CodeDocumentationAwareCommenter`
 
 ## Inspections
 
