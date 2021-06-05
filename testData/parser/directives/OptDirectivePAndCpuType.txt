@@ -1,7 +1,7 @@
 M68k.FILE
   PsiWhiteSpace(' ')
   M68kOptDirectiveImpl(OPT_DIRECTIVE)
-    PsiElement(opt)('opt')
+    PsiElement(opt)('OPT')
     PsiWhiteSpace(' ')
     PsiElement(id)('p')
     PsiElement(=)('=')

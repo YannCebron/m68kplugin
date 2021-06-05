@@ -3,7 +3,7 @@ M68k.FILE
     M68kLabelImpl(LABEL)
       PsiElement(id)('label')
     PsiWhiteSpace(' ')
-    PsiElement(equr)('equr')
+    PsiElement(equr)('equR')
     PsiWhiteSpace(' ')
     M68kAdmRrdImpl(ADM_RRD)
       M68kAdmArdImpl(ADM_ARD)

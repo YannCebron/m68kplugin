@@ -1,7 +1,7 @@
 M68k.FILE
   PsiWhiteSpace(' ')
   M68kDcDirectiveImpl(DC_DIRECTIVE)
-    PsiElement(dc)('dc')
+    PsiElement(dc)('DC')
     PsiWhiteSpace(' ')
     M68kNumberExpressionImpl(NUMBER_EXPRESSION)
       PsiElement(dec_number)('42')

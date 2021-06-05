@@ -46,7 +46,7 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
   }
 
   public void testSetDirective() throws Exception {
-    doCodeTest("label set 42");
+    doCodeTest("label sEt 42");
   }
 
   public void testEqurDirectiveDataRegister() throws Exception {
@@ -54,7 +54,7 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
   }
 
   public void testEqurDirectiveAddressRegister() throws Exception {
-    doCodeTest("label equr a4");
+    doCodeTest("label equR a4");
   }
 
   public void testEqurDirectiveMissingRegister() throws Exception {
@@ -66,7 +66,7 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
   }
 
   public void testRegDirectiveMissingRegisterList() throws Exception {
-    doCodeTest("label reg ");
+    doCodeTest("label REG ");
   }
 
   public void testEvenDirective() throws Exception {
@@ -122,7 +122,7 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
   }
 
   public void testDcDirectiveWithoutDataSize() throws Exception {
-    doCodeTest(" dc 42");
+    doCodeTest(" DC 42");
   }
 
   public void testDcDirectiveMultipleValues() throws Exception {
@@ -174,7 +174,7 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
   }
 
   public void testBlkDirectiveWithoutValue() throws Exception {
-    doCodeTest(" blk 42");
+    doCodeTest(" BLK 42");
   }
 
   public void testOptDirective() throws Exception {
@@ -190,7 +190,7 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
   }
 
   public void testOptDirectivePAndCpuType() throws Exception {
-    doCodeTest(" opt p=68000");
+    doCodeTest(" OPT p=68000");
   }
 
   public void testOptDirectivePAndCpuFpuType() throws Exception {

@@ -3,7 +3,7 @@ M68k.FILE
     M68kLabelImpl(LABEL)
       PsiElement(id)('label')
     PsiWhiteSpace(' ')
-    PsiElement(reg)('reg')
+    PsiElement(reg)('REG')
     PsiErrorElement:<data|address register> expected
       <empty list>
   PsiWhiteSpace(' ')
