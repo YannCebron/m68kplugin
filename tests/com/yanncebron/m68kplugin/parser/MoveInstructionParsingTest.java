@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ public class MoveInstructionParsingTest extends M68kParsingTestCase {
   }
 
   public void testMoveInstructionImmDrd() throws Exception {
-    doCodeTest(" move #1,d1");
+    doCodeTest(" mOvE #1,D1");
   }
 
   public void testMoveInstructionDrdAbs() throws Exception {
@@ -66,7 +66,7 @@ public class MoveInstructionParsingTest extends M68kParsingTestCase {
   }
 
   public void testMoveInstructionArdArd() throws Exception {
-    doCodeTest(" move a0,a1");
+    doCodeTest(" move a0,A1");
   }
 
   public void testMoveInstructionAbsArd() throws Exception {
@@ -74,7 +74,7 @@ public class MoveInstructionParsingTest extends M68kParsingTestCase {
   }
 
   public void testMoveInstructionPciDataSizeDrd() throws Exception {
-    doCodeTest(" move.b 42(PC,d6.w),d6");
+    doCodeTest(" move.b 42(PC,d6.W),d6");
   }
 
   public void testMoveInstructionPciLabelDataSizeDrd() throws Exception {
@@ -88,7 +88,7 @@ public class MoveInstructionParsingTest extends M68kParsingTestCase {
   }
 
   public void testMoveInstructionDataSizeUspArd() throws Exception {
-    doCodeTest(" move.l usp,a0");
+    doCodeTest(" move.L usp,a0");
   }
 
   public void testMoveInstructionDataSizeWrongUspArd() throws Exception {
@@ -100,7 +100,7 @@ public class MoveInstructionParsingTest extends M68kParsingTestCase {
   }
 
   public void testMoveInstructionDataSizeArdUsp() throws Exception {
-    doCodeTest(" move.l a0,usp");
+    doCodeTest(" move.l a0,USP");
   }
 
   public void testMoveInstructionDataSizeWrongArdUsp() throws Exception {
@@ -118,7 +118,7 @@ public class MoveInstructionParsingTest extends M68kParsingTestCase {
   }
 
   public void testMoveInstructionDataSizeWrongDrdCcr() throws Exception {
-    doCodeTest(" move.b d0,ccr");
+    doCodeTest(" move.b d0,cCr");
   }
 
   public void testMoveInstructionAdiSr() throws Exception {
@@ -126,7 +126,7 @@ public class MoveInstructionParsingTest extends M68kParsingTestCase {
   }
 
   public void testMoveInstructionDataSizeAbsSr() throws Exception {
-    doCodeTest(" move.w 42,sr");
+    doCodeTest(" move.w 42,SR");
   }
 
   public void testMoveInstructionSrAdi() throws Exception {

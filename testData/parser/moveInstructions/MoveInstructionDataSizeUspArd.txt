@@ -2,7 +2,7 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kMoveInstructionImpl(MOVE_INSTRUCTION)
     PsiElement(move)('move')
-    PsiElement(.l)('.l')
+    PsiElement(.l)('.L')
     PsiWhiteSpace(' ')
     M68kAdmUspImpl(ADM_USP)
       PsiElement(usp)('usp')

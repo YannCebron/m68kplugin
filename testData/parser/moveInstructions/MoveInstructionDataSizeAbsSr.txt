@@ -9,4 +9,4 @@ M68k.FILE
         PsiElement(dec_number)('42')
     PsiElement(,)(',')
     M68kAdmSrImpl(ADM_SR)
-      PsiElement(sr)('sr')
+      PsiElement(sr)('SR')

@@ -9,4 +9,4 @@ M68k.FILE
     PsiElement(,)(',')
     PsiErrorElement:'(', '-', <address register>, <data register> or <expression> expected, got 'ccr'
       <empty list>
-  PsiElement(ccr)('ccr')
+  PsiElement(ccr)('cCr')

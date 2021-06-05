@@ -1,7 +1,7 @@
 M68k.FILE
   PsiWhiteSpace(' ')
   M68kMoveInstructionImpl(MOVE_INSTRUCTION)
-    PsiElement(move)('move')
+    PsiElement(move)('mOvE')
     PsiWhiteSpace(' ')
     M68kAdmImmImpl(ADM_IMM)
       PsiElement(#)('#')
@@ -9,4 +9,4 @@ M68k.FILE
         PsiElement(dec_number)('1')
     PsiElement(,)(',')
     M68kAdmDrdImpl(ADM_DRD)
-      PsiElement(data_register)('d1')
+      PsiElement(data_register)('D1')

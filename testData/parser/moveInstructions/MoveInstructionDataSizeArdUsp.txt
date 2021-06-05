@@ -8,4 +8,4 @@ M68k.FILE
       PsiElement(address_register)('a0')
     PsiElement(,)(',')
     M68kAdmUspImpl(ADM_USP)
-      PsiElement(usp)('usp')
+      PsiElement(usp)('USP')

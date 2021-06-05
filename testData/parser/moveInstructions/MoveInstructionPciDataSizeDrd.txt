@@ -13,7 +13,7 @@ M68k.FILE
       M68kAdmRrdIndexImpl(ADM_RRD_INDEX)
         M68kAdmDrdImpl(ADM_DRD)
           PsiElement(data_register)('d6')
-        PsiElement(.w)('.w')
+        PsiElement(.w)('.W')
       PsiElement())(')')
     PsiElement(,)(',')
     M68kAdmDrdImpl(ADM_DRD)
