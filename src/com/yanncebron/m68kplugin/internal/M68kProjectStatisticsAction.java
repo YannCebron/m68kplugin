@@ -26,6 +26,8 @@ import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Comparing;
+import com.intellij.openapi.util.Condition;
+import com.intellij.openapi.util.Conditions;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiErrorElement;
@@ -41,6 +43,7 @@ import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
+import com.yanncebron.m68kplugin.lang.psi.M68kDataSized;
 import com.yanncebron.m68kplugin.lang.psi.M68kInstruction;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
@@ -55,6 +58,13 @@ import java.util.*;
 
 public class M68kProjectStatisticsAction extends AnAction {
 
+  private static final Condition<M68kPsiElement> NO_DATA_SIZE_CONDITION = m68kPsiElement -> {
+    if (m68kPsiElement instanceof M68kDataSized) {
+      return ((M68kDataSized) m68kPsiElement).getDataSize() == null;
+    }
+    return false;
+  };
+
   @Override
   public void update(@NotNull AnActionEvent e) {
     e.getPresentation().setEnabledAndVisible(e.getProject() != null);
@@ -65,6 +75,7 @@ public class M68kProjectStatisticsAction extends AnAction {
     final Project project = e.getRequiredData(CommonDataKeys.PROJECT);
 
     Map<Class<? extends M68kPsiElement>, Integer> instructions = createMap();
+    Map<Class<? extends M68kPsiElement>, Integer> withoutDataSize = createMap();
     Map<Class<? extends M68kPsiElement>, Integer> labels = createMap();
     Map<Class<? extends M68kPsiElement>, Integer> directives = createMap();
     Map<Class<? extends M68kPsiElement>, Integer> conditional = createMap();
@@ -148,11 +159,15 @@ public class M68kProjectStatisticsAction extends AnAction {
           pi.setText2("Instruction count");
           M68kInstruction[] computeInstructions = m68kPsiFile.findChildrenByClass(M68kInstruction.class);
           countByClass(instructions, computeInstructions);
+          countByClass(withoutDataSize, computeInstructions, NO_DATA_SIZE_CONDITION);
 
           M68kLabelBase[] computeLabels = m68kPsiFile.findChildrenByClass(M68kLabelBase.class);
           countByClass(labels, computeLabels);
 
-          countByClass(directives, m68kPsiFile.findChildrenByClass(M68kDirective.class));
+          final M68kDirective[] computeDirectives = m68kPsiFile.findChildrenByClass(M68kDirective.class);
+          countByClass(directives, computeDirectives);
+          countByClass(withoutDataSize, computeDirectives, NO_DATA_SIZE_CONDITION);
+
           countByClass(conditional, m68kPsiFile.findChildrenByClass(M68kConditionalAssemblyDirective.class));
         }
       }), "Scanning files...", true, project);
@@ -171,10 +186,11 @@ public class M68kProjectStatisticsAction extends AnAction {
     sb.append("=========================================================================================\n");
     sb.append(StringUtil.join(fileInfos, "\n"));
 
-    appendClasses(labels, sb);
-    appendClasses(instructions, sb);
-    appendClasses(directives, sb);
-    appendClasses(conditional, sb);
+    appendClasses(labels, sb, "Labels");
+    appendClasses(instructions, sb, "Instructions");
+    appendClasses(directives, sb, "Directives");
+    appendClasses(withoutDataSize, sb, "Instructions/Directives w/o specified DataSize");
+    appendClasses(conditional, sb, "Conditional Assembly Directives");
 
     VirtualFile file = new LightVirtualFile("M68k Project Statistics.txt", sb.toString());
     OpenFileDescriptor descriptor = new OpenFileDescriptor(project, file);
@@ -186,11 +202,11 @@ public class M68kProjectStatisticsAction extends AnAction {
     return new TreeMap<>((o1, o2) -> Comparing.compare(o1.getSimpleName(), o2.getSimpleName()));
   }
 
-  private void appendClasses(Map<Class<? extends M68kPsiElement>, Integer> instructions, StringBuilder sb) {
+  private void appendClasses(Map<Class<? extends M68kPsiElement>, Integer> instructions, StringBuilder sb, String title) {
     int total = instructions.values().stream().mapToInt(value -> value).sum();
     sb.append("\n");
     sb.append(StringUtil.repeatSymbol('-', 80));
-    sb.append("\n#").append(total).append("\n");
+    sb.append("\n#").append(total).append(" --- ").append(title).append("\n\n");
 
     for (Map.Entry<Class<? extends M68kPsiElement>, Integer> entry : instructions.entrySet()) {
       final String fqn = entry.getKey().getSimpleName();
@@ -200,10 +216,16 @@ public class M68kProjectStatisticsAction extends AnAction {
     }
   }
 
-  private void countByClass(Map<Class<? extends M68kPsiElement>, Integer> instructions, M68kPsiElement[] compute) {
+  private void countByClass(Map<Class<? extends M68kPsiElement>, Integer> map, M68kPsiElement[] compute) {
+    countByClass(map, compute, Conditions.alwaysTrue());
+  }
+
+  private void countByClass(Map<Class<? extends M68kPsiElement>, Integer> map, M68kPsiElement[] compute, Condition<M68kPsiElement> filterCondition) {
     for (M68kPsiElement byClass : compute) {
-      Integer count = ContainerUtil.getOrCreate(instructions, byClass.getClass(), 0);
-      instructions.replace(byClass.getClass(), count + 1);
+      if (!filterCondition.value(byClass)) continue;
+      Integer count = ContainerUtil.getOrCreate(map, byClass.getClass(), 0);
+      map.replace(byClass.getClass(), count + 1);
     }
   }
+
 }
