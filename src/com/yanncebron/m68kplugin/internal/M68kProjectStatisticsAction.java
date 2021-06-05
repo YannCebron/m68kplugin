@@ -115,7 +115,7 @@ public class M68kProjectStatisticsAction extends AnAction {
           final VirtualFile[] recursiveInclude = fileIncludeManager.getIncludedFiles(virtualFile, true, true);
           final VirtualFile[] incbinInclude = fileIncludeManager.getIncludedFiles(virtualFile, false);
 
-          pi.setText2("Resolves");
+          pi.setText2("Label resolving");
           int labelRefs = 0;
           int labelRefsUnresolved = 0;
           int macroCalls = 0;
@@ -161,13 +161,16 @@ public class M68kProjectStatisticsAction extends AnAction {
           countByClass(instructions, computeInstructions);
           countByClass(withoutDataSize, computeInstructions, NO_DATA_SIZE_CONDITION);
 
+          pi.setText2("Label count");
           M68kLabelBase[] computeLabels = m68kPsiFile.findChildrenByClass(M68kLabelBase.class);
           countByClass(labels, computeLabels);
 
+          pi.setText2("Directive count");
           final M68kDirective[] computeDirectives = m68kPsiFile.findChildrenByClass(M68kDirective.class);
           countByClass(directives, computeDirectives);
           countByClass(withoutDataSize, computeDirectives, NO_DATA_SIZE_CONDITION);
 
+          pi.setText2("Conditional assembly directive count");
           countByClass(conditional, m68kPsiFile.findChildrenByClass(M68kConditionalAssemblyDirective.class));
         }
       }), "Scanning files...", true, project);
@@ -189,7 +192,7 @@ public class M68kProjectStatisticsAction extends AnAction {
     appendClasses(labels, sb, "Labels");
     appendClasses(instructions, sb, "Instructions");
     appendClasses(directives, sb, "Directives");
-    appendClasses(withoutDataSize, sb, "Instructions/Directives w/o specified DataSize");
+    appendClasses(withoutDataSize, sb, "Instructions|Directives w/o specified DataSize");
     appendClasses(conditional, sb, "Conditional Assembly Directives");
 
     VirtualFile file = new LightVirtualFile("M68k Project Statistics.txt", sb.toString());
