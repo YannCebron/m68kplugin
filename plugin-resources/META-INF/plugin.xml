@@ -204,7 +204,7 @@
   </extensions>
 
   <actions>
-    <action id="M68kProjectStatisticsAction"
+    <action id="M68kProjectStatisticsAction" icon="AllIcons.Actions.Lightning"
             class="com.yanncebron.m68kplugin.internal.M68kProjectStatisticsAction"/>
   </actions>
 </idea-plugin>
