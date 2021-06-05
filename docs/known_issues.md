@@ -77,7 +77,6 @@ Unsupported directives, these will display false positive
 
 ### Labels
 
-- allow `.`
 - allow `@` (Devpac)
 - local label ending with `$`
 - ending with double-colon `::` -> automatically exported (`xdef`)

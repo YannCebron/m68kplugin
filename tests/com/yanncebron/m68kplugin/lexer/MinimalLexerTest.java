@@ -92,6 +92,11 @@ public class MinimalLexerTest extends M68kLexerTestCase {
       "id ('_label')");
   }
 
+  public void testLabelContainingDot() {
+    doTest("label.suffix",
+      "id ('label.suffix')");
+  }
+
   public void testUnderscoreTwiceLabel() {
     doTest("__label",
       "id ('__label')");

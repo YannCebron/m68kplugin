@@ -5,7 +5,7 @@ topLevelLabel   ; 2nd variant
 .localLabel
 .localLabel2
 
-anotherTopLevelLabel
+anotherTopLevel.Label
 .localLabelNotVisible
 
 setLabel set 2

@@ -1,6 +1,7 @@
 * "plain" labels -------------------------------------------------------------------------------------------------------
 
 _underscoreTopLevelLabel
+label.with.dots
 
 topLevelLabel
 topLevelLabel  ; redefined
@@ -8,6 +9,7 @@ topLevelLabel  ; redefined
   bra anotherTopLevelLabel
   bra .localLabel
   bra _underscoreTopLevelLabel
+  bra label.with.dots
 
 .localLabel
   bra .localLabel

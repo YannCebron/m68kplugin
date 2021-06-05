@@ -50,6 +50,12 @@ public class M68kStubBuilderTest extends LightPlatformTestCase {
         "  LABEL:M68kLabelStubImpl['\\@label', GLOBAL, 'null']\n");
   }
 
+  public void testLabelWithDot() {
+    doTest("label.suffix",
+      "PsiFileStubImpl\n" +
+        "  LABEL:M68kLabelStubImpl['label.suffix', GLOBAL, 'null']\n");
+  }
+
   public void testLabelWithMacro() {
     doTest("label macro",
       "PsiFileStubImpl\n" +
