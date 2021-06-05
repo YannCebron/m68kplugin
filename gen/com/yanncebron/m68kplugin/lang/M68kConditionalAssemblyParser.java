@@ -26,12 +26,13 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 public class M68kConditionalAssemblyParser {
 
   /* ********************************************************** */
-  // if_conditional_assembly_directive |
+  // ifnd_conditional_assembly_directive |
+  //                                             endc_conditional_assembly_directive |
+  //                                             if_conditional_assembly_directive |
   //                                             ifd_conditional_assembly_directive |
   //                                             ifeq_conditional_assembly_directive |
   //                                             ifge_conditional_assembly_directive |
   //                                             ifgt_conditional_assembly_directive |
-  //                                             ifnd_conditional_assembly_directive |
   //                                             ifle_conditional_assembly_directive |
   //                                             iflt_conditional_assembly_directive |
   //                                             ifne_conditional_assembly_directive |
@@ -43,19 +44,19 @@ public class M68kConditionalAssemblyParser {
   //                                             ifnc_conditional_assembly_directive |
   //                                             else_conditional_assembly_directive |
   //                                             elseif_conditional_assembly_directive |
-  //                                             endc_conditional_assembly_directive |
   //                                             endif_conditional_assembly_directive |
   //                                             ifmacrod_conditional_assembly_directive |
   //                                             ifmacrond_conditional_assembly_directive
   static boolean conditional_assembly_directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "conditional_assembly_directives")) return false;
     boolean r;
-    r = if_conditional_assembly_directive(b, l + 1);
+    r = ifnd_conditional_assembly_directive(b, l + 1);
+    if (!r) r = endc_conditional_assembly_directive(b, l + 1);
+    if (!r) r = if_conditional_assembly_directive(b, l + 1);
     if (!r) r = ifd_conditional_assembly_directive(b, l + 1);
     if (!r) r = ifeq_conditional_assembly_directive(b, l + 1);
     if (!r) r = ifge_conditional_assembly_directive(b, l + 1);
     if (!r) r = ifgt_conditional_assembly_directive(b, l + 1);
-    if (!r) r = ifnd_conditional_assembly_directive(b, l + 1);
     if (!r) r = ifle_conditional_assembly_directive(b, l + 1);
     if (!r) r = iflt_conditional_assembly_directive(b, l + 1);
     if (!r) r = ifne_conditional_assembly_directive(b, l + 1);
@@ -67,7 +68,6 @@ public class M68kConditionalAssemblyParser {
     if (!r) r = ifnc_conditional_assembly_directive(b, l + 1);
     if (!r) r = else_conditional_assembly_directive(b, l + 1);
     if (!r) r = elseif_conditional_assembly_directive(b, l + 1);
-    if (!r) r = endc_conditional_assembly_directive(b, l + 1);
     if (!r) r = endif_conditional_assembly_directive(b, l + 1);
     if (!r) r = ifmacrod_conditional_assembly_directive(b, l + 1);
     if (!r) r = ifmacrond_conditional_assembly_directive(b, l + 1);

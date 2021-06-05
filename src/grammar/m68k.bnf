@@ -1379,12 +1379,13 @@ label_ref_expression ::= ID
   implements(".*_conditional_assembly_directive") = "com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective"
   pin(".*_conditional_assembly_directive") = 1
 }
-private conditional_assembly_directives ::= if_conditional_assembly_directive |
+private conditional_assembly_directives ::= ifnd_conditional_assembly_directive |
+                                            endc_conditional_assembly_directive |
+                                            if_conditional_assembly_directive |
                                             ifd_conditional_assembly_directive |
                                             ifeq_conditional_assembly_directive |
                                             ifge_conditional_assembly_directive |
                                             ifgt_conditional_assembly_directive |
-                                            ifnd_conditional_assembly_directive |
                                             ifle_conditional_assembly_directive |
                                             iflt_conditional_assembly_directive |
                                             ifne_conditional_assembly_directive |
@@ -1396,7 +1397,6 @@ private conditional_assembly_directives ::= if_conditional_assembly_directive |
                                             ifnc_conditional_assembly_directive |
                                             else_conditional_assembly_directive |
                                             elseif_conditional_assembly_directive |
-                                            endc_conditional_assembly_directive |
                                             endif_conditional_assembly_directive |
                                             ifmacrod_conditional_assembly_directive |
                                             ifmacrond_conditional_assembly_directive
