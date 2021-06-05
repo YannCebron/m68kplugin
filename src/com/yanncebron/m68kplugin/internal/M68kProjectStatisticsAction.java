@@ -28,6 +28,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Comparing;
 import com.intellij.openapi.util.Condition;
 import com.intellij.openapi.util.Conditions;
+import com.intellij.openapi.util.text.NaturalComparator;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiErrorElement;
@@ -81,6 +82,7 @@ public class M68kProjectStatisticsAction extends AnAction {
     Map<Class<? extends M68kPsiElement>, Integer> conditional = createMap();
 
     List<String> fileInfos = new ArrayList<>();
+    final int[] totalElements = {0};
     final int[] totalErrors = {0};
     final int[] totalResolve = {0};
     final int[] totalResolveErrors = {0};
@@ -149,13 +151,6 @@ public class M68kProjectStatisticsAction extends AnAction {
           totalResolve[0] = totalResolve[0] + macroCalls + labelRefs;
           totalResolveErrors[0] = totalResolveErrors[0] + macroCallsUnresolved + labelRefsUnresolved;
 
-          String info = StringUtils.rightPad(virtualFile.getName(), 30) +
-            StringUtils.leftPad(String.valueOf(errors.length), 8) +
-            " | " + StringUtils.rightPad(labelRefsUnresolved + "/" + labelRefs, 7) +
-            " | " + StringUtils.rightPad(macroCallsUnresolved + "/" + macroCalls, 7) +
-            " | " + directInclude.length + " (" + (recursiveInclude.length - 1) + ") [" + incbinInclude.length + "]";
-          fileInfos.add(info);
-
           pi.setText2("Instruction count");
           M68kInstruction[] computeInstructions = m68kPsiFile.findChildrenByClass(M68kInstruction.class);
           countByClass(instructions, computeInstructions);
@@ -171,7 +166,19 @@ public class M68kProjectStatisticsAction extends AnAction {
           countByClass(withoutDataSize, computeDirectives, NO_DATA_SIZE_CONDITION);
 
           pi.setText2("Conditional assembly directive count");
-          countByClass(conditional, m68kPsiFile.findChildrenByClass(M68kConditionalAssemblyDirective.class));
+          final M68kConditionalAssemblyDirective[] computeConditional = m68kPsiFile.findChildrenByClass(M68kConditionalAssemblyDirective.class);
+          countByClass(conditional, computeConditional);
+
+          int elements = computeInstructions.length + computeLabels.length + computeDirectives.length + computeConditional.length;
+          totalElements[0] = totalElements[0] + elements;
+
+          String info =
+            StringUtils.rightPad(virtualFile.getName(), 20) +
+              StringUtils.leftPad(errors.length + "/" + elements, 18) +
+              " | " + StringUtils.rightPad(labelRefsUnresolved + "/" + labelRefs, 7) +
+              " | " + StringUtils.rightPad(macroCallsUnresolved + "/" + macroCalls, 7) +
+              " | " + directInclude.length + " (" + (recursiveInclude.length - 1) + ") [" + incbinInclude.length + "]";
+          fileInfos.add(info);
         }
       }), "Scanning files...", true, project);
 
@@ -179,14 +186,15 @@ public class M68kProjectStatisticsAction extends AnAction {
     sb.append("Files: ").append(fileInfos.size())
       .append(" (").append(StringUtil.formatDuration(System.currentTimeMillis() - startTime)).append(")")
       .append("\n")
-      .append("Total Errors: ").append(totalErrors[0])
+      .append("Total Errors: ").append(totalErrors[0]).append("/").append(totalElements[0])
       .append("\n")
       .append("Total Resolve Errors: ").append(totalResolveErrors[0]).append("/").append(totalResolve[0])
       .append(" (").append(StringUtil.formatDuration(totalResolveTime[0])).append(")")
       .append("\n\n");
-    Collections.sort(fileInfos);
+
     sb.append("File                            Errors | Label   | Macro   | include (recursive) [incbin]\n");
     sb.append("=========================================================================================\n");
+    fileInfos.sort(NaturalComparator.INSTANCE);
     sb.append(StringUtil.join(fileInfos, "\n"));
 
     appendClasses(labels, sb, "Labels");
