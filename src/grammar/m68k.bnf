@@ -924,15 +924,18 @@ roxr_instruction ::= ROXR shift_tail
   name(".*_directive") = "directive"
 }
 
-private directives ::= equ_directive |
-                       blk_directive |
+private directives ::= dc_directive |
+                       equ_directive |
                        equals_directive |
+                       macro_call_directive |
+                       macro_directive |
+                       rs_directive |
+                       include_directive |
+                       blk_directive |
                        set_directive |
                        equr_directive |
                        reg_directive |
                        even_directive |
-                       odd_directive |
-                       dc_directive |
                        dcb_directive |
                        dr_directive |
                        ds_directive |
@@ -940,17 +943,13 @@ private directives ::= equ_directive |
                        cnop_directive |
                        incbin_directive |
                        incdir_directive |
-                       include_directive |
                        rsset_directive |
                        rsreset_directive |
-                       rs_directive |
                        opt_directive |
                        org_directive |
-                       macro_directive |
                        endm_directive |
                        mexit_directive |
                        macro_parameter_directive |
-                       macro_call_directive |
                        end_directive |
                        section_directive |
                        text_directive |
@@ -995,6 +994,7 @@ private directives ::= equ_directive |
                        init_near_directive |
                        popsection_directive |
                        pushsection_directive |
+                       odd_directive |
                        echo_directive
 
 fake equ_directive_base ::= label expression?

@@ -319,15 +319,18 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // equ_directive |
-  //                        blk_directive |
+  // dc_directive |
+  //                        equ_directive |
   //                        equals_directive |
+  //                        macro_call_directive |
+  //                        macro_directive |
+  //                        rs_directive |
+  //                        include_directive |
+  //                        blk_directive |
   //                        set_directive |
   //                        equr_directive |
   //                        reg_directive |
   //                        even_directive |
-  //                        odd_directive |
-  //                        dc_directive |
   //                        dcb_directive |
   //                        dr_directive |
   //                        ds_directive |
@@ -335,17 +338,13 @@ public class M68kDirectivesParser {
   //                        cnop_directive |
   //                        incbin_directive |
   //                        incdir_directive |
-  //                        include_directive |
   //                        rsset_directive |
   //                        rsreset_directive |
-  //                        rs_directive |
   //                        opt_directive |
   //                        org_directive |
-  //                        macro_directive |
   //                        endm_directive |
   //                        mexit_directive |
   //                        macro_parameter_directive |
-  //                        macro_call_directive |
   //                        end_directive |
   //                        section_directive |
   //                        text_directive |
@@ -390,19 +389,23 @@ public class M68kDirectivesParser {
   //                        init_near_directive |
   //                        popsection_directive |
   //                        pushsection_directive |
+  //                        odd_directive |
   //                        echo_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
-    r = equ_directive(b, l + 1);
-    if (!r) r = blk_directive(b, l + 1);
+    r = dc_directive(b, l + 1);
+    if (!r) r = equ_directive(b, l + 1);
     if (!r) r = equals_directive(b, l + 1);
+    if (!r) r = macro_call_directive(b, l + 1);
+    if (!r) r = macro_directive(b, l + 1);
+    if (!r) r = rs_directive(b, l + 1);
+    if (!r) r = include_directive(b, l + 1);
+    if (!r) r = blk_directive(b, l + 1);
     if (!r) r = set_directive(b, l + 1);
     if (!r) r = equr_directive(b, l + 1);
     if (!r) r = reg_directive(b, l + 1);
     if (!r) r = even_directive(b, l + 1);
-    if (!r) r = odd_directive(b, l + 1);
-    if (!r) r = dc_directive(b, l + 1);
     if (!r) r = dcb_directive(b, l + 1);
     if (!r) r = dr_directive(b, l + 1);
     if (!r) r = ds_directive(b, l + 1);
@@ -410,17 +413,13 @@ public class M68kDirectivesParser {
     if (!r) r = cnop_directive(b, l + 1);
     if (!r) r = incbin_directive(b, l + 1);
     if (!r) r = incdir_directive(b, l + 1);
-    if (!r) r = include_directive(b, l + 1);
     if (!r) r = rsset_directive(b, l + 1);
     if (!r) r = rsreset_directive(b, l + 1);
-    if (!r) r = rs_directive(b, l + 1);
     if (!r) r = opt_directive(b, l + 1);
     if (!r) r = org_directive(b, l + 1);
-    if (!r) r = macro_directive(b, l + 1);
     if (!r) r = endm_directive(b, l + 1);
     if (!r) r = mexit_directive(b, l + 1);
     if (!r) r = macro_parameter_directive(b, l + 1);
-    if (!r) r = macro_call_directive(b, l + 1);
     if (!r) r = end_directive(b, l + 1);
     if (!r) r = section_directive(b, l + 1);
     if (!r) r = text_directive(b, l + 1);
@@ -465,6 +464,7 @@ public class M68kDirectivesParser {
     if (!r) r = init_near_directive(b, l + 1);
     if (!r) r = popsection_directive(b, l + 1);
     if (!r) r = pushsection_directive(b, l + 1);
+    if (!r) r = odd_directive(b, l + 1);
     if (!r) r = echo_directive(b, l + 1);
     return r;
   }
