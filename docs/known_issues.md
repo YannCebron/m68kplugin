@@ -123,7 +123,7 @@ Unsupported directives, these will display false positive
 
 ### Misc
 
-- `'\'` is valid string literal
+- `'\'` and `''''` are valid string literals
 - add missing expression operators
   - XOR?
 - do not allow spaces (?!)
