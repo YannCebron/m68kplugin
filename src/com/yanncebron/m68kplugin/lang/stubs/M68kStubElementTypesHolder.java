@@ -18,6 +18,7 @@ package com.yanncebron.m68kplugin.lang.stubs;
 
 import com.intellij.lang.LighterAST;
 import com.intellij.lang.LighterASTNode;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.util.text.StringUtilRt;
 import com.intellij.psi.impl.source.tree.LightTreeUtil;
 import com.intellij.psi.stubs.*;
@@ -114,6 +115,13 @@ public interface M68kStubElementTypesHolder {
       public void indexStub(@NotNull M68kLabelStub stub, @NotNull IndexSink sink) {
         final String name = stub.getName();
         if (name != null) {
+          // todo do not put broken parsing results into index
+          if (name.startsWith(".")) {
+            if (!ApplicationManager.getApplication().isUnitTestMode()) {
+              System.out.println("skipping wrong label '" + name + "'");
+            }
+            return;
+          }
           sink.occurrence(M68kLabelStubIndex.KEY, name);
 
           if (stub.getLabelKind() == M68kLabelBase.LabelKind.MACRO) {
