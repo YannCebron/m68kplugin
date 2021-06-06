@@ -23,22 +23,22 @@ import com.yanncebron.m68kplugin.lang.psi.directive.M68kDcDirective;
 public class NumberExpressionPsiTest extends M68kPsiTestCase {
 
   public void testGetValueInteger() {
-    doTestGetValue("1234", 1234);
+    doTestGetValue("1234", 1234L);
   }
 
   public void testGetValueHex() {
-    doTestGetValue("$a", 10);
+    doTestGetValue("$fffffffe", 4294967294L);
   }
 
   public void testGetValueOctal() {
-    doTestGetValue("@123", 83);
+    doTestGetValue("@123", 83L);
   }
 
   public void testGetValueBinary() {
-    doTestGetValue("%01011", 11);
+    doTestGetValue("%01011", 11L);
   }
 
-  private void doTestGetValue(String numberValue, Integer expectedValue) {
+  private void doTestGetValue(String numberValue, Long expectedValue) {
     final M68kExpression expression = parse(numberValue);
     final M68kNumberExpression numberExpression = assertInstanceOf(expression, M68kNumberExpression.class);
     assertEquals(numberValue, expectedValue, numberExpression.getValue());

@@ -34,14 +34,14 @@ public class M68kNumberExpressionDocumentationProvider extends AbstractDocumenta
     if (!(element instanceof M68kNumberExpression)) return null;
 
     M68kNumberExpression numberExpression = (M68kNumberExpression) element;
-    Integer originalValue = ObjectUtils.tryCast(numberExpression.getValue(), Integer.class);
-    assert originalValue != null;
+    Long originalValue = ObjectUtils.tryCast(numberExpression.getValue(), Long.class);
+    assert originalValue != null : numberExpression.getText();
 
     return "<code>" +
-      doGetValueText(element, Integer.toString(originalValue)) + "<br>" +
-      doGetValueText(element, "$" + Integer.toHexString(originalValue)) + "<br>" +
-      doGetValueText(element, "@" + Integer.toOctalString(originalValue)) + "<br>" +
-      doGetValueText(element, "%" + Integer.toBinaryString(originalValue)) + "<br>" + "</code>";
+      doGetValueText(element, Long.toString(originalValue)) + "<br>" +
+      doGetValueText(element, "$" + Long.toHexString(originalValue)) + "<br>" +
+      doGetValueText(element, "@" + Long.toOctalString(originalValue)) + "<br>" +
+      doGetValueText(element, "%" + Long.toBinaryString(originalValue)) + "<br>" + "</code>";
   }
 
   @Override

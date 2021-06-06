@@ -35,16 +35,16 @@ abstract class M68kNumberExpressionMixIn extends ASTWrapperPsiElement implements
 
     IElementType elementType = getFirstChild().getNode().getElementType();
     if (elementType == M68kTokenTypes.DEC_NUMBER) {
-      return Integer.parseInt(text);
+      return Long.parseLong(text);
     }
     if (elementType == M68kTokenTypes.HEX_NUMBER) {
-      return Integer.parseInt(text.substring(1), 16);
+      return Long.parseLong(text.substring(1), 16);
     }
     if (elementType == M68kTokenTypes.OCT_NUMBER) {
-      return Integer.parseInt(text.substring(1), 8);
+      return Long.parseLong(text.substring(1), 8);
     }
     if (elementType == M68kTokenTypes.BIN_NUMBER) {
-      return Integer.parseInt(text.substring(1), 2);
+      return Long.parseLong(text.substring(1), 2);
     }
 
     throw new IllegalArgumentException("could not determine getValue() for " + elementType + ", '" + text + "'");

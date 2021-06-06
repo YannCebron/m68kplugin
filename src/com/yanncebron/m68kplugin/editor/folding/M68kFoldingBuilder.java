@@ -68,7 +68,7 @@ public class M68kFoldingBuilder extends CustomFoldingBuilder {
 
     final M68kExpression secondExpression = expressions.get(1);
     if (!(secondExpression instanceof M68kNumberExpression)) return null;
-    if (!Comparing.equal(((M68kNumberExpression) secondExpression).getValue(), 0)) return null;
+    if (!Comparing.equal(((M68kNumberExpression) secondExpression).getValue(), 0L)) return null;
 
     return firstExpression.getText();
   }
