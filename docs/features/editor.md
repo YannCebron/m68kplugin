@@ -21,6 +21,8 @@ nav_order: 1
 
 Show type and value tooltip for labels on <kbd>Ctrl/Command+Click</kbd>
 
+*View \| Quick Documentation* for number literal: show in decimal, hexadecimal, octal, and binary notation
+
 ## Labels
 
 * *Navigate \| Declaration or Usages*

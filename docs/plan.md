@@ -80,7 +80,7 @@
 - `M68kCommaFlipper`: swap src\|dest if valid
 - formatter
 - documentation:
-  - quick doc/hover for number literals: dec/hex/oct/bin/ASCII
+  - quick doc for string literal: length
   - quick doc for preceding label/EOL comments
   - render mode for preceding label comments
   - quick doc for directives

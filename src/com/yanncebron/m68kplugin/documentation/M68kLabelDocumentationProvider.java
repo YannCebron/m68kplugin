@@ -66,9 +66,9 @@ public class M68kLabelDocumentationProvider extends AbstractDocumentationProvide
   }
 
   @NotNull
-  private String doGetValueText(M68kLabelBase labelBase, String prefix, String value) {
+  static String doGetValueText(PsiElement element, String prefix, String value) {
     final String text = prefix + value;
-    final M68kFile dummyFile = M68kElementFactory.createFile(labelBase.getProject(), text);
+    final M68kFile dummyFile = M68kElementFactory.createFile(element.getProject(), text);
     EditorColorsScheme scheme = EditorColorsManager.getInstance().getGlobalScheme();
     CharSequence htmlValue = HtmlSyntaxInfoUtil.getHtmlContent(dummyFile, text, null, scheme, 4, text.length());
     return htmlValue != null ? htmlValue.toString() : value;
