@@ -94,7 +94,7 @@
   - smart enter handler to split value list
 - surround descriptors?
 - `FocusModeProvider`
-- string literal: support language injection, `UrlReferenceHost`
+- string literal: support language injection
 - comment: smart enter `CodeDocumentationAwareCommenter`
 
 ## Inspections

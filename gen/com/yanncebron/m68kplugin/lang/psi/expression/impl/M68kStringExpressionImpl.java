@@ -26,13 +26,12 @@ import com.yanncebron.m68kplugin.lang.psi.expression.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
 
-public class M68kStringExpressionImpl extends M68kExpressionImpl implements M68kStringExpression {
+public class M68kStringExpressionImpl extends M68kStringExpressionMixIn implements M68kStringExpression {
 
   public M68kStringExpressionImpl(@NotNull ASTNode node) {
     super(node);
   }
 
-  @Override
   public void accept(@NotNull M68kVisitor visitor) {
     visitor.visitStringExpression(this);
   }
