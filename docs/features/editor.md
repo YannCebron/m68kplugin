@@ -13,6 +13,7 @@ nav_order: 1
 * Method separator for `macro`/`endm`, `section` blocks
 * Highlight privileged instructions
 * Highlight matching brace/paired directives
+* Highlight/navigate URLs in comments and string literals
 
 ## Documentation
 
