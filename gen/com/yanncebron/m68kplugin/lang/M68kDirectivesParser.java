@@ -40,7 +40,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // ALIGN expression COMMA expression
+  // ALIGN expression
   public static boolean align_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "align_directive")) return false;
     if (!nextTokenIs(b, "<directive>", ALIGN)) return false;
@@ -48,9 +48,7 @@ public class M68kDirectivesParser {
     Marker m = enter_section_(b, l, _NONE_, ALIGN_DIRECTIVE, "<directive>");
     r = consumeToken(b, ALIGN);
     p = r; // pin = 1
-    r = r && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1));
-    r = p && report_error_(b, consumeToken(b, COMMA)) && r;
-    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

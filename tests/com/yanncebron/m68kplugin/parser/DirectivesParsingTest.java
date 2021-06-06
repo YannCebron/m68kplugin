@@ -286,11 +286,7 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
   }
 
   public void testAlignDirective() throws Exception {
-    doCodeTest(" align 0,4");
-  }
-
-  public void testAlignDirectiveMissingSecondExpression() throws Exception {
-    doCodeTest(" align 0,");
+    doCodeTest(" align 4");
   }
 
   public void testCnopDirective() throws Exception {

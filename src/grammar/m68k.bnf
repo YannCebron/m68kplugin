@@ -1033,13 +1033,11 @@ reg_directive ::= label REG register_list
 even_directive ::= EVEN
 odd_directive ::= ODD
 
-align_directive ::= ALIGN expression COMMA expression
+align_directive ::= ALIGN expression
 {
   pin = 1
   methods = [
-    expression = ""
-    divisor = "expression[1]"
-    offset = "expression[0]"
+    offset = "expression"
   ]
 }
 cnop_directive ::= CNOP expression COMMA expression

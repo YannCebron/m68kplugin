@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,10 +22,7 @@ import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
 public class AlignDirectivePsiTest extends M68kPsiTestCase {
 
   public void testWithValues() {
-    final M68kAlignDirective directive = parse("align 0,4");
-
-    final M68kNumberExpression divisor = assertInstanceOf(directive.getDivisor(), M68kNumberExpression.class);
-    assertEquals("4", divisor.getText());
+    final M68kAlignDirective directive = parse("align 0");
 
     final M68kNumberExpression offset = assertInstanceOf(directive.getOffset(), M68kNumberExpression.class);
     assertEquals("0", offset.getText());

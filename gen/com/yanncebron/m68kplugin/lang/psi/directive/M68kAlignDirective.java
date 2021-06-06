@@ -23,9 +23,6 @@ import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 public interface M68kAlignDirective extends M68kDirective {
 
   @Nullable
-  M68kExpression getDivisor();
-
-  @Nullable
   M68kExpression getOffset();
 
 }

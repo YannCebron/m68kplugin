@@ -27,7 +27,6 @@ import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
-import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
 public class M68kAlignDirectiveImpl extends ASTWrapperPsiElement implements M68kAlignDirective {
 
@@ -47,16 +46,8 @@ public class M68kAlignDirectiveImpl extends ASTWrapperPsiElement implements M68k
 
   @Override
   @Nullable
-  public M68kExpression getDivisor() {
-    List<M68kExpression> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
-    return p1.size() < 2 ? null : p1.get(1);
-  }
-
-  @Override
-  @Nullable
   public M68kExpression getOffset() {
-    List<M68kExpression> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
-    return p1.size() < 1 ? null : p1.get(0);
+    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
   }
 
 }
