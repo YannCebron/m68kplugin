@@ -114,10 +114,9 @@
 
 ### Expression
 
-- unnecessary parentheses
 - type check
 - range check
-- simplify
+- **WIP** simplify, unnecessary parentheses
 - intention: convert numeric literal to other bases
 
 ## Navigation
