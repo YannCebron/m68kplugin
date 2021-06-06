@@ -48,7 +48,7 @@ public class M68kLabelDocumentationProvider extends AbstractDocumentationProvide
 
     if (labelBase.getLabelKind().hasValue()) {
       String valueText = getValueText(labelBase);
-      return typeName + " " + name + location + "<br>" + valueText;
+      return typeName + " " + name + location + "<br><code>" + valueText + "</code>";
     }
 
     return typeName + " " + name + location;
@@ -70,7 +70,7 @@ public class M68kLabelDocumentationProvider extends AbstractDocumentationProvide
     final String text = prefix + value;
     final M68kFile dummyFile = M68kElementFactory.createFile(element.getProject(), text);
     EditorColorsScheme scheme = EditorColorsManager.getInstance().getGlobalScheme();
-    CharSequence htmlValue = HtmlSyntaxInfoUtil.getHtmlContent(dummyFile, text, null, scheme, 4, text.length());
+    CharSequence htmlValue = HtmlSyntaxInfoUtil.getHtmlContent(dummyFile, text, null, scheme, prefix.length(), text.length());
     return htmlValue != null ? htmlValue.toString() : value;
   }
 

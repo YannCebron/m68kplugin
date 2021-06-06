@@ -33,27 +33,27 @@ public class M68kLabelDocumentationProviderTest extends BasePlatformTestCase {
 
   public void testEquLabelQuickDoc() {
     doTestQuickNavigateInfo("equ<caret>Label equ 42",
-      "label \"equLabel\" [a.s]<br><span style=\"color:#0000ff;\">42</span>");
+      "label \"equLabel\" [a.s]<br><code><span style=\"color:#0000ff;\">42</span></code>");
   }
 
   public void testEquLabelUndefinedValueQuickDoc() {
     doTestQuickNavigateInfo("equ<caret>Label equ ",
-      "label \"equLabel\" [a.s]<br>undefined value");
+      "label \"equLabel\" [a.s]<br><code>undefined value</code>");
   }
 
   public void testEqualsLabelQuickDoc() {
     doTestQuickNavigateInfo("equ<caret>Label = 42",
-      "label \"equLabel\" [a.s]<br><span style=\"color:#0000ff;\">42</span>");
+      "label \"equLabel\" [a.s]<br><code><span style=\"color:#0000ff;\">42</span></code>");
   }
 
   public void testSetLabelQuickDoc() {
     doTestQuickNavigateInfo("set<caret>Label set 42",
-      "label \"setLabel\" [a.s]<br><span style=\"color:#0000ff;\">42</span>");
+      "label \"setLabel\" [a.s]<br><code><span style=\"color:#0000ff;\">42</span></code>");
   }
 
   public void testEqurLabelQuickDoc() {
     doTestQuickNavigateInfo("equr<caret>Label equr d7",
-      "label \"equrLabel\" [a.s]<br>&#32;<span style=\"\">d7</span>");
+      "label \"equrLabel\" [a.s]<br><code><span style=\"\">d7</span></code>");
   }
 
   public void testMacroLabelQuickDoc() {
