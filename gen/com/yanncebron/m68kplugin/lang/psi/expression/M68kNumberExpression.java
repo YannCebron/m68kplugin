@@ -18,7 +18,8 @@ package com.yanncebron.m68kplugin.lang.psi.expression;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiLiteralValue;
 
-public interface M68kNumberExpression extends M68kExpression {
+public interface M68kNumberExpression extends M68kExpression, PsiLiteralValue {
 
 }

@@ -1348,6 +1348,10 @@ not_expression ::= expression EXCLAMATION expression
 
 private primary_group ::= number_expression | string_expression | paren_expression | label_ref_expression
 number_expression ::= DEC_NUMBER | HEX_NUMBER | OCT_NUMBER | BIN_NUMBER
+{
+  implements = "com.intellij.psi.PsiLiteralValue"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.expression.impl.M68kNumberExpressionMixIn"
+}
 string_expression ::= STRING
 {
   implements = "com.intellij.psi.PsiLiteralValue"

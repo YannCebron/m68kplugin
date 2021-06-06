@@ -822,6 +822,7 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitNumberExpression(@NotNull M68kNumberExpression o) {
     visitExpression(o);
+    // visitPsiLiteralValue(o);
   }
 
   public void visitOddDirective(@NotNull M68kOddDirective o) {
