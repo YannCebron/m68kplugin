@@ -63,15 +63,15 @@ private root_item_recover ::= !instruction_or_label
   consumeTokenMethod = "consumeTokenFast"
 }
 
-private labels ::= label | localLabel
+private labels ::= localLabel | label
 
-private labelIdentifier ::= ID COLON?
+private labelIdentifier ::= ID
 {
   name = "label identifier"
 }
 
 // todo must start on newline? usually not, but not required
-label ::= !<<afterWhitespace>> labelIdentifier
+label ::= !<<afterWhitespace>> labelIdentifier COLON?
 {
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kLabelBase"
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelMixIn"
@@ -82,8 +82,7 @@ label ::= !<<afterWhitespace>> labelIdentifier
   ]
 }
 
-// todo full name is: DevPac. prefixed with last non-local label
-localLabel ::= !<<afterWhitespace>> DOT labelIdentifier
+localLabel ::= !<<afterWhitespace>> ((DOT labelIdentifier) | (labelIdentifier DOLLAR)) COLON?
 {
   name = "local label"
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kLabelBase"

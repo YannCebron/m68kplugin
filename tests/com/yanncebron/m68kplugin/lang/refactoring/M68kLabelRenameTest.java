@@ -44,4 +44,16 @@ public class M68kLabelRenameTest extends BasePlatformTestCase {
     myFixture.testRenameUsingHandler("local.s", "local_after.s", "newName");
   }
 
+  public void testLocalColon() {
+    myFixture.testRenameUsingHandler("localColon.s", "localColon_after.s", "newName");
+  }
+
+  public void testLocalDollar() {
+    myFixture.testRenameUsingHandler("localDollar.s", "localDollar_after.s", "newName");
+  }
+
+  public void testLocalDollarColon() {
+    myFixture.testRenameUsingHandler("localDollarColon.s", "localDollarColon_after.s", "newName");
+  }
+
 }

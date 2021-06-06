@@ -103,4 +103,20 @@ public class LabelParsingTest extends M68kParsingTestCase {
     doCodeTest(".s:  bra.s   .s");
   }
 
+  public void testLocalLabelDollar() throws IOException {
+    doCodeTest("localLabel$");
+  }
+
+  public void testLocalLabelDollarWithColon() throws IOException {
+    doCodeTest("localLabel$:");
+  }
+
+  public void testLocalLabelDollarWithColonInstruction() throws IOException {
+    doCodeTest("localLabel$: nop");
+  }
+
+  public void testLocalLabelDollarWithColonInstructionNoWhitespace() throws IOException {
+    doCodeTest("localLabel$:nop");
+  }
+
 }

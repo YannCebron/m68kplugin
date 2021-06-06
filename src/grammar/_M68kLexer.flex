@@ -85,7 +85,7 @@ DOUBLE_QUOTED_STRING=\"([^\\\"\r\n]|\\[^\r\n])*\"?
 UNQUOTED_STRING=([^\\\r\n\ \t\f'\"])+
 
 LABEL=[_\d[\\@]]*[\p{Alpha}] [\p{Alpha}\d[.]_[\\@]]*  // without "." first char
-ID=[.]?{LABEL}
+ID=[.]?{LABEL}[\$]?
 
 DATA_SIZE=[.][[sS]|[bB]|[wW]|[lL]]
 
@@ -138,6 +138,7 @@ Z=[zZ]
 
 
 <AFTER_LABEL> {
+  "$"            { return DOLLAR; }
   ":"            { yybegin(IN_INSTRUCTION); return COLON; }
   "="            { yybegin(IN_OPERAND); return EQ; } // duplicated in IN_INSTRUCTION
 

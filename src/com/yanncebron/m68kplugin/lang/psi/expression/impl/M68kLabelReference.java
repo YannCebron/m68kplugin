@@ -33,10 +33,7 @@ import com.intellij.util.Processors;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
-import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
-import com.yanncebron.m68kplugin.lang.psi.M68kPsiTreeUtil;
+import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kEndmDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroDirective;
 import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
@@ -73,14 +70,15 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
       PsiElement psiElement = m68kLabelReference.getElement();
       String labelName = m68kLabelReference.getValue();
 
-      if (labelName.startsWith(".")) {
+      final M68kLocalLabelMode localLabelMode = M68kLocalLabelMode.find(labelName);
+      if (localLabelMode != null) {
         final CommonProcessors.FindProcessor<M68kLocalLabel> findLocalProcessor = new CommonProcessors.FindProcessor<M68kLocalLabel>() {
           @Override
           protected boolean accept(M68kLocalLabel localLabel) {
-            return labelName.equals("." + localLabel.getName());
+            return labelName.equals(localLabelMode.getPatchedName(localLabel));
           }
         };
-        processLocalLabels(psiElement, findLocalProcessor);
+        processLocalLabels(psiElement, localLabelMode, findLocalProcessor);
         if (findLocalProcessor.isFound()) {
           return PsiElementResolveResult.createResults(findLocalProcessor.getFoundValue());
         }
@@ -113,13 +111,8 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
   public Object @NotNull [] getVariants() {
     List<LookupElement> variants = new SmartList<>();
 
-    processLocalLabels(getElement(), localLabel -> {
-      final LookupElementBuilder builder = LookupElementBuilder.create(localLabel, "." + localLabel.getName())
-        .withIcon(localLabel.getIcon(0))
-        .bold();
-      variants.add(PrioritizedLookupElement.withPriority(builder, 50));
-      return true;
-    });
+    createLocalLabelVariants(variants, M68kLocalLabelMode.DOT);
+    createLocalLabelVariants(variants, M68kLocalLabelMode.DOLLAR);
 
     processLabelsInScope(label -> {
       final LookupElementBuilder builder = LookupElementBuilder.createWithIcon(label)
@@ -141,6 +134,16 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
     return variants.toArray();
   }
 
+  private void createLocalLabelVariants(List<LookupElement> variants, M68kLocalLabelMode localLabelMode) {
+    processLocalLabels(getElement(), localLabelMode, localLabel -> {
+      final LookupElementBuilder builder = LookupElementBuilder.create(localLabel, localLabelMode.getPatchedName(localLabel))
+        .withIcon(localLabel.getIcon(0))
+        .bold();
+      variants.add(PrioritizedLookupElement.withPriority(builder, 50));
+      return true;
+    });
+  }
+
   @NotNull
   private String getTailText(M68kLabel label) {
     final String value = label.getValue();
@@ -148,9 +151,10 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
     return " " + value;
   }
 
-  private static void processLocalLabels(PsiElement element, Processor<M68kLocalLabel> processor) {
+  private static void processLocalLabels(PsiElement element, M68kLocalLabelMode localLabelMode, Processor<M68kLocalLabel> processor) {
     Processor<M68kPsiElement> localLabelProcessor = m68kPsiElement -> {
-      if (m68kPsiElement instanceof M68kLocalLabel) {
+      if (m68kPsiElement instanceof M68kLocalLabel &&
+        localLabelMode.matches(m68kPsiElement.getText())) {
         return processor.process((M68kLocalLabel) m68kPsiElement);
       }
       return true;

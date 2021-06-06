@@ -77,8 +77,8 @@ Unsupported directives, these will display false positive
 
 ### Labels
 
+- single-digit local label `1$`
 - allow `@` (Devpac)
-- local label ending with `$`
 - ending with double-colon `::` -> automatically exported (`xdef`)
 - allow referencing `global_name\local_name` syntax (PhxAss)
 

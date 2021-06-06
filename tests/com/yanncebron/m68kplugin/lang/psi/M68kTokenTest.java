@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,6 +36,7 @@ public class M68kTokenTest extends BasePlatformTestCase {
     M68kTokenTypes.COLON,
     M68kTokenTypes.COMMA,
     M68kTokenTypes.COMMENT,
+    M68kTokenTypes.DOLLAR,
     M68kTokenTypes.DOT,
     M68kTokenTypes.HASH,
     M68kTokenTypes.ID,

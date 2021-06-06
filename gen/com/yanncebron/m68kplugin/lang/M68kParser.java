@@ -2172,13 +2172,14 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // !<<afterWhitespace>> labelIdentifier
+  // !<<afterWhitespace>> labelIdentifier COLON?
   public static boolean label(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "label")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, LABEL, "<label>");
     r = label_0(b, l + 1);
     r = r && labelIdentifier(b, l + 1);
+    r = r && label_2(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -2193,33 +2194,32 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r;
   }
 
+  // COLON?
+  private static boolean label_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "label_2")) return false;
+    consumeToken(b, COLON);
+    return true;
+  }
+
   /* ********************************************************** */
-  // ID COLON?
+  // ID
   static boolean labelIdentifier(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "labelIdentifier")) return false;
     if (!nextTokenIs(b, "<label identifier>", ID)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, null, "<label identifier>");
     r = consumeToken(b, ID);
-    r = r && labelIdentifier_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // COLON?
-  private static boolean labelIdentifier_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "labelIdentifier_1")) return false;
-    consumeToken(b, COLON);
-    return true;
-  }
-
   /* ********************************************************** */
-  // label | localLabel
+  // localLabel | label
   static boolean labels(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "labels")) return false;
     boolean r;
-    r = label(b, l + 1);
-    if (!r) r = localLabel(b, l + 1);
+    r = localLabel(b, l + 1);
+    if (!r) r = label(b, l + 1);
     return r;
   }
 
@@ -2297,14 +2297,14 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // !<<afterWhitespace>> DOT labelIdentifier
+  // !<<afterWhitespace>> ((DOT labelIdentifier) | (labelIdentifier DOLLAR)) COLON?
   public static boolean localLabel(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "localLabel")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, LOCAL_LABEL, "<local label>");
     r = localLabel_0(b, l + 1);
-    r = r && consumeToken(b, DOT);
-    r = r && labelIdentifier(b, l + 1);
+    r = r && localLabel_1(b, l + 1);
+    r = r && localLabel_2(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -2317,6 +2317,46 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = !afterWhitespace(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  // (DOT labelIdentifier) | (labelIdentifier DOLLAR)
+  private static boolean localLabel_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "localLabel_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = localLabel_1_0(b, l + 1);
+    if (!r) r = localLabel_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // DOT labelIdentifier
+  private static boolean localLabel_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "localLabel_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, DOT);
+    r = r && labelIdentifier(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // labelIdentifier DOLLAR
+  private static boolean localLabel_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "localLabel_1_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = labelIdentifier(b, l + 1);
+    r = r && consumeToken(b, DOLLAR);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COLON?
+  private static boolean localLabel_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "localLabel_2")) return false;
+    consumeToken(b, COLON);
+    return true;
   }
 
   /* ********************************************************** */

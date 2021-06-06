@@ -45,7 +45,9 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
 
   public void testCompletionVariantsInSingleFile() {
     myFixture.testCompletionVariants("completionVariantsInSingleFile.s",
-      "topLevelLabel", "anotherTopLevel.Label", ".localLabel", ".localLabel2",
+      "topLevelLabel", "anotherTopLevel.Label",
+      ".localLabel", ".localLabel2", ".localLabelWithColon",
+      "localLabelDollar$", "localLabelDollarWithColon$",
       "setLabel", "equLabel", "equalsLabel");
 
     final LookupElement topLevelLabel1 = findLookupElement(myFixture, "topLevelLabel", 0);
@@ -69,6 +71,13 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     assertTrue(localLabelPresentation.isItemTextBold());
     assertEmpty(localLabelPresentation.getTypeText());
     assertPrioritizedLookupElement(localLabelLookupElement, 50.0);
+
+    final LookupElement localLabelDollarLookupElement = findLookupElement(myFixture, "localLabelDollar$");
+    final LookupElementPresentation localLabelDollarPresentation = LookupElementPresentation.renderElement(localLabelDollarLookupElement);
+    assertLookupIcon(localLabelDollarPresentation, M68kIcons.LABEL_LOCAL);
+    assertTrue(localLabelDollarPresentation.isItemTextBold());
+    assertEmpty(localLabelDollarPresentation.getTypeText());
+    assertPrioritizedLookupElement(localLabelDollarLookupElement, 50.0);
 
     final LookupElement setLabel = findLookupElement(myFixture, "setLabel");
     final LookupElementPresentation setLabelPresentation = LookupElementPresentation.renderElement(setLabel);

@@ -26,10 +26,7 @@ import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.util.IncorrectOperationException;
 import com.yanncebron.m68kplugin.lang.M68kIcons;
-import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
-import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
+import com.yanncebron.m68kplugin.lang.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,7 +50,10 @@ abstract class M68kLocalLabelMixIn extends ASTWrapperPsiElement implements M68kL
 
   @Override
   public int getTextOffset() {
-    return getNode().getStartOffset() + 1;
+    if (M68kLocalLabelMode.DOT.matches(getText())) {
+      return getNode().getStartOffset() + 1;
+    }
+    return super.getTextOffset();
   }
 
   @Override

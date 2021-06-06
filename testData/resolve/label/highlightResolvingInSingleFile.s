@@ -3,10 +3,13 @@
 _underscoreTopLevelLabel
 label.with.dots
 
+topLevelLabelWithColon:
+
 topLevelLabel
 topLevelLabel  ; redefined
   bra topLevelLabel
   bra anotherTopLevelLabel
+  bra topLevelLabelWithColon
   bra .localLabel
   bra _underscoreTopLevelLabel
   bra label.with.dots
@@ -14,6 +17,13 @@ topLevelLabel  ; redefined
 .localLabel
   bra .localLabel
   jmp .localLabel
+.localLabelWithColon:
+  jmp .localLabelWithColon
+
+localLabelWithDollar$
+  bra localLabelWithDollar$
+localLabelWithDollarColon$:
+  bra localLabelWithDollarColon$
 
 anotherTopLevelLabel
   bra <error descr="Cannot resolve label 'INVALID_LABEL'">INVALID_LABEL</error>

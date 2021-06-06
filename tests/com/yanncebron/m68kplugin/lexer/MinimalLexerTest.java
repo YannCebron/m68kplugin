@@ -174,6 +174,19 @@ public class MinimalLexerTest extends M68kLexerTestCase {
         "id ('.s')");
   }
 
+  public void testLocalLabelDollar() {
+    doTest("localLabel$",
+      "id ('localLabel')\n" +
+        "$ ('$')");
+  }
+
+  public void testLocalLabelDollarColon() {
+    doTest("localLabel$:",
+      "id ('localLabel')\n" +
+        "$ ('$')\n" +
+        ": (':')");
+  }
+
   public void testInstructionAdmAbsWithDataSize() {
     doTest("  movea.l 4.l,a0",
       "WHITE_SPACE ('  ')\n" +

@@ -111,6 +111,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType DIV = new M68kTokenType("/");
   public static final IElementType DIVS = new M68kTokenType("divs");
   public static final IElementType DIVU = new M68kTokenType("divu");
+  public static final IElementType DOLLAR = new M68kTokenType("$");
   public static final IElementType DOT = new M68kTokenType(".");
   public static final IElementType DOT_B = new M68kTokenType(".b");
   public static final IElementType DOT_L = new M68kTokenType(".l");

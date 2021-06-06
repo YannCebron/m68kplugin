@@ -17,10 +17,10 @@
 package com.yanncebron.m68kplugin.lang.psi.expression.impl;
 
 import com.intellij.openapi.util.TextRange;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.AbstractElementManipulator;
 import com.intellij.util.IncorrectOperationException;
 import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
+import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabelMode;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,7 +30,14 @@ public class M68kLabelRefExpressionElementManipulator extends AbstractElementMan
   @Nullable
   @Override
   public M68kLabelRefExpression handleContentChange(@NotNull M68kLabelRefExpression element, @NotNull TextRange range, String newContent) throws IncorrectOperationException {
-    String labelName = StringUtil.startsWithChar(element.getText(), '.') ? "." + newContent : newContent; // todo hack for local labels, extract to M68kLabelRefExpression#isLocal?
+    String labelName = newContent;
+
+    // todo hack for local labels, extract to M68kLabelRefExpression#isLocal?
+    final M68kLocalLabelMode localLabelMode = M68kLocalLabelMode.find(element.getText());
+    if (localLabelMode != null) {
+      labelName = localLabelMode.getPatchedName(newContent);
+    }
+
     final M68kLabelRefExpression labelReference = M68kElementFactory.createLabelRefExpression(element.getProject(), labelName);
     element.replace(labelReference);
     return element;

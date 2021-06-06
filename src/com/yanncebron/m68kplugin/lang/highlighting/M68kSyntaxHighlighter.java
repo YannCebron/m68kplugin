@@ -38,6 +38,7 @@ public class M68kSyntaxHighlighter extends SyntaxHighlighterBase {
     keys.put(TokenType.BAD_CHARACTER, HighlighterColors.BAD_CHARACTER);
 
     keys.put(M68kTokenTypes.DOT, M68kTextAttributes.DOT);
+    keys.put(M68kTokenTypes.DOLLAR, M68kTextAttributes.DOT);
     keys.put(M68kTokenTypes.COLON, M68kTextAttributes.COLON);
     keys.put(M68kTokenTypes.COMMA, M68kTextAttributes.COMMA);
     keys.put(M68kTokenTypes.HASH, M68kTextAttributes.HASH);

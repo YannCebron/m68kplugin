@@ -1,0 +1,7 @@
+M68k.FILE
+  M68kLocalLabelImpl(LOCAL_LABEL)
+    PsiElement(id)('localLabel')
+    PsiElement($)('$')
+    PsiElement(:)(':')
+  M68kNopInstructionImpl(NOP_INSTRUCTION)
+    PsiElement(nop)('nop')

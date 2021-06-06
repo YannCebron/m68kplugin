@@ -4,8 +4,11 @@ topLevelLabel   ; 2nd variant
 
 .localLabel
 .localLabel2
+.localLabelWithColon:
+localLabelDollar$
+localLabelDollarWithColon$:
 
-anotherTopLevel.Label
+anotherTopLevel.Label:
 .localLabelNotVisible
 
 setLabel set 2
