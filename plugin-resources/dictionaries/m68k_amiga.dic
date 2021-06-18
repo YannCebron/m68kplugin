@@ -3,6 +3,14 @@ absreloc
 acos
 activewindow
 addr
+adfcopy
+adfcreate
+adffile
+adfgenerator
+adfinst
+adfinstall
+adfmakedir
+adftools
 adkcon
 adkconr
 agnus
@@ -138,11 +146,16 @@ execname
 extrahalfbrite
 fastmem
 fastmemory
+fbin
+fdos
+fexec
+fhunk
 fieee
 filehandle
 fileio
 freemem
 freemsg
+fsuae
 gadgetdown
 gadgetup
 gadtools
@@ -322,3 +335,4 @@ wbgarbage
 wbkick
 wbproject
 wbtool
+winuae
