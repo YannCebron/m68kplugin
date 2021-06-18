@@ -1299,6 +1299,7 @@ pushsection_directive ::= PUSHSECTION
   psiPackage = "com.yanncebron.m68kplugin.lang.psi.expression"
   psiImplPackage="com.yanncebron.m68kplugin.lang.psi.expression.impl"
   extends("(plus|minus|mul|div|mod|exp|shift.*|or|and|not)_expression") = binary_expression
+  extends("unary_(plus|minus|complement)_expression") = unary_expression
   extends(".*expression") = expression
   consumeTokenMethod(".*expression")="consumeTokenFast"
 }
@@ -1319,6 +1320,14 @@ fake binary_expression ::= expression+
     right = "expression[1]"
   ]
   pin = 2
+}
+
+fake unary_expression ::= expression?
+{
+  methods = [
+    expression = ""
+    operand = "expression"
+  ]
 }
 
 private add_group ::= plus_expression | minus_expression

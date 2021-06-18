@@ -26,7 +26,7 @@ import com.yanncebron.m68kplugin.lang.psi.expression.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
 
-public class M68kUnaryMinusExpressionImpl extends M68kExpressionImpl implements M68kUnaryMinusExpression {
+public class M68kUnaryMinusExpressionImpl extends M68kUnaryExpressionImpl implements M68kUnaryMinusExpression {
 
   public M68kUnaryMinusExpressionImpl(@NotNull ASTNode node) {
     super(node);
@@ -41,12 +41,6 @@ public class M68kUnaryMinusExpressionImpl extends M68kExpressionImpl implements 
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public M68kExpression getExpression() {
-    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
   }
 
 }

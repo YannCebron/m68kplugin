@@ -26,21 +26,27 @@ import com.yanncebron.m68kplugin.lang.psi.expression.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
 
-public class M68kUnaryPlusExpressionImpl extends M68kUnaryExpressionImpl implements M68kUnaryPlusExpression {
+public class M68kUnaryExpressionImpl extends M68kExpressionImpl implements M68kUnaryExpression {
 
-  public M68kUnaryPlusExpressionImpl(@NotNull ASTNode node) {
+  public M68kUnaryExpressionImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   @Override
   public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitUnaryPlusExpression(this);
+    visitor.visitUnaryExpression(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @Nullable
+  public M68kExpression getOperand() {
+    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
   }
 
 }

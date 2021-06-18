@@ -130,7 +130,7 @@ public class M68kSimplifiableExpressionInspection extends LocalInspectionTool {
 
   private boolean isMinusOne(M68kExpression expression) {
     return expression instanceof M68kUnaryMinusExpression &&
-      isNumberLiteral(((M68kUnaryMinusExpression) expression).getExpression(), 1L);
+      isNumberLiteral(((M68kUnaryMinusExpression) expression).getOperand(), 1L);
   }
 
   private boolean isNumberLiteral(M68kExpression expression, long expectedValue) {
@@ -140,14 +140,11 @@ public class M68kSimplifiableExpressionInspection extends LocalInspectionTool {
 
   @Nullable
   private M68kExpression unwrapExpression(@Nullable M68kExpression o) {
-    if (o == null) return null;
     if (o instanceof M68kParenExpression) {
       return unwrapExpression(((M68kParenExpression) o).getExpression());
     }
-    if (o instanceof M68kUnaryMinusExpression) {
-      return unwrapExpression(((M68kUnaryMinusExpression) o).getExpression());
-    } else if (o instanceof M68kUnaryPlusExpression) {
-      return unwrapExpression(((M68kUnaryPlusExpression) o).getExpression());
+    if (o instanceof M68kUnaryExpression) {
+      return unwrapExpression(((M68kUnaryExpression) o).getOperand());
     }
     return o;
   }

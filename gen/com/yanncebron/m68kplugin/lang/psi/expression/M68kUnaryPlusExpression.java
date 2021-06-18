@@ -19,9 +19,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kUnaryPlusExpression extends M68kExpression {
-
-  @Nullable
-  M68kExpression getExpression();
+public interface M68kUnaryPlusExpression extends M68kUnaryExpression {
 
 }

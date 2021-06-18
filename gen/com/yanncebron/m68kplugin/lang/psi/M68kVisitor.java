@@ -1123,15 +1123,19 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitUnaryComplementExpression(@NotNull M68kUnaryComplementExpression o) {
+    visitUnaryExpression(o);
+  }
+
+  public void visitUnaryExpression(@NotNull M68kUnaryExpression o) {
     visitExpression(o);
   }
 
   public void visitUnaryMinusExpression(@NotNull M68kUnaryMinusExpression o) {
-    visitExpression(o);
+    visitUnaryExpression(o);
   }
 
   public void visitUnaryPlusExpression(@NotNull M68kUnaryPlusExpression o) {
-    visitExpression(o);
+    visitUnaryExpression(o);
   }
 
   public void visitUnlkInstruction(@NotNull M68kUnlkInstruction o) {
