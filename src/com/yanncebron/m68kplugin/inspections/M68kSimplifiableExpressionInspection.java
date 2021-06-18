@@ -23,7 +23,6 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.codeInspection.util.IntentionFamilyName;
 import com.intellij.codeInspection.util.IntentionName;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Comparing;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
@@ -32,7 +31,6 @@ import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.expression.*;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class M68kSimplifiableExpressionInspection extends LocalInspectionTool {
 
@@ -44,7 +42,7 @@ public class M68kSimplifiableExpressionInspection extends LocalInspectionTool {
 
       @Override
       public void visitParenExpression(@NotNull M68kParenExpression o) {
-        M68kExpression expression = unwrapExpression(o);
+        M68kExpression expression = M68kExpressionUtil.unwrapExpression(o);
         if (expression instanceof PsiLiteralValue) {
           holder.registerProblem(o,
             M68kBundle.message("inspection.simplifiable.expression.unnecessary.parentheses.message"),
@@ -102,51 +100,31 @@ public class M68kSimplifiableExpressionInspection extends LocalInspectionTool {
   }
 
   private void reportSuperfluousZero(ProblemsHolder holder, M68kExpression expression) {
-    if (isZero(expression)) {
+    if (M68kExpressionUtil.isZeroNumberValue(expression)) {
       holder.registerProblem(expression, M68kBundle.message("inspection.simplifiable.expression.message"));
     }
   }
 
   private void reportSuperfluousOne(ProblemsHolder holder, M68kExpression expression) {
-    if (isOne(expression)) {
+    if (isOneNumberValue(expression)) {
       holder.registerProblem(expression, M68kBundle.message("inspection.simplifiable.expression.message"));
     }
   }
 
   private void reportSuperfluousMinusOne(ProblemsHolder holder, M68kExpression expression) {
-    if (isMinusOne(expression)) {
+    if (isMinusOneNumberValue(expression)) {
       holder.registerProblem(expression, M68kBundle.message("inspection.simplifiable.expression.message"));
     }
   }
 
-  private boolean isZero(M68kExpression expression) {
-    return isNumberLiteral(unwrapExpression(expression), 0L);
-  }
-
-  private boolean isOne(M68kExpression expression) {
+  private boolean isOneNumberValue(M68kExpression expression) {
     if (expression instanceof M68kUnaryMinusExpression) return false;
-    return isNumberLiteral(unwrapExpression(expression), 1L);
+    return M68kExpressionUtil.isNumberValue(expression, 1L);
   }
 
-  private boolean isMinusOne(M68kExpression expression) {
+  private boolean isMinusOneNumberValue(M68kExpression expression) {
     return expression instanceof M68kUnaryMinusExpression &&
-      isNumberLiteral(((M68kUnaryMinusExpression) expression).getOperand(), 1L);
-  }
-
-  private boolean isNumberLiteral(M68kExpression expression, long expectedValue) {
-    return expression instanceof M68kNumberExpression &&
-      Comparing.equal(((M68kNumberExpression) expression).getValue(), expectedValue);
-  }
-
-  @Nullable
-  private M68kExpression unwrapExpression(@Nullable M68kExpression o) {
-    if (o instanceof M68kParenExpression) {
-      return unwrapExpression(((M68kParenExpression) o).getExpression());
-    }
-    if (o instanceof M68kUnaryExpression) {
-      return unwrapExpression(((M68kUnaryExpression) o).getOperand());
-    }
-    return o;
+      M68kExpressionUtil.isNumberValue(((M68kUnaryMinusExpression) expression).getOperand(), 1L);
   }
 
 

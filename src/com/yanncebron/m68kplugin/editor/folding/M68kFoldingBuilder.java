@@ -20,14 +20,13 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.CustomFoldingBuilder;
 import com.intellij.lang.folding.FoldingDescriptor;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.util.Comparing;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kDataSize;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDcDirective;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
-import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpressionUtil;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kStringExpression;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -67,8 +66,7 @@ public class M68kFoldingBuilder extends CustomFoldingBuilder {
     if (!(firstExpression instanceof M68kStringExpression)) return null;
 
     final M68kExpression secondExpression = expressions.get(1);
-    if (!(secondExpression instanceof M68kNumberExpression)) return null;
-    if (!Comparing.equal(((M68kNumberExpression) secondExpression).getValue(), 0L)) return null;
+    if (!M68kExpressionUtil.isZeroNumberValue(secondExpression)) return null;
 
     return firstExpression.getText();
   }
