@@ -44,7 +44,7 @@ public class M68kSimplifiableExpressionInspection extends LocalInspectionTool {
 
       @Override
       public void visitParenExpression(@NotNull M68kParenExpression o) {
-        M68kExpression expression = unwrapParenExpression(o);
+        M68kExpression expression = unwrapExpression(o);
         if (expression instanceof PsiLiteralValue) {
           holder.registerProblem(o,
             M68kBundle.message("inspection.simplifiable.expression.unnecessary.parentheses.message"),
@@ -54,12 +54,14 @@ public class M68kSimplifiableExpressionInspection extends LocalInspectionTool {
 
       @Override
       public void visitUnaryMinusExpression(@NotNull M68kUnaryMinusExpression o) {
-        reportSuperfluousZero(holder, o.getExpression());
+        if (o.getParent() instanceof M68kExpression) return;
+        reportSuperfluousZero(holder, o);
       }
 
       @Override
       public void visitUnaryPlusExpression(@NotNull M68kUnaryPlusExpression o) {
-        reportSuperfluousZero(holder, o.getExpression());
+        if (o.getParent() instanceof M68kExpression) return;
+        reportSuperfluousZero(holder, o);
       }
 
       @Override
@@ -118,11 +120,12 @@ public class M68kSimplifiableExpressionInspection extends LocalInspectionTool {
   }
 
   private boolean isZero(M68kExpression expression) {
-    return isNumberLiteral(expression, 0L);
+    return isNumberLiteral(unwrapExpression(expression), 0L);
   }
 
   private boolean isOne(M68kExpression expression) {
-    return isNumberLiteral(expression, 1L);
+    if (expression instanceof M68kUnaryMinusExpression) return false;
+    return isNumberLiteral(unwrapExpression(expression), 1L);
   }
 
   private boolean isMinusOne(M68kExpression expression) {
@@ -130,20 +133,23 @@ public class M68kSimplifiableExpressionInspection extends LocalInspectionTool {
       isNumberLiteral(((M68kUnaryMinusExpression) expression).getExpression(), 1L);
   }
 
-  private boolean isNumberLiteral(M68kExpression expression, long l) {
+  private boolean isNumberLiteral(M68kExpression expression, long expectedValue) {
     return expression instanceof M68kNumberExpression &&
-      Comparing.equal(((M68kNumberExpression) expression).getValue(), l);
+      Comparing.equal(((M68kNumberExpression) expression).getValue(), expectedValue);
   }
 
   @Nullable
-  private M68kExpression unwrapParenExpression(@NotNull M68kParenExpression o) {
-    M68kExpression expression = o.getExpression();
-    if (expression instanceof M68kUnaryMinusExpression) {
-      expression = ((M68kUnaryMinusExpression) expression).getExpression();
-    } else if (expression instanceof M68kUnaryPlusExpression) {
-      expression = ((M68kUnaryPlusExpression) expression).getExpression();
+  private M68kExpression unwrapExpression(@Nullable M68kExpression o) {
+    if (o == null) return null;
+    if (o instanceof M68kParenExpression) {
+      return unwrapExpression(((M68kParenExpression) o).getExpression());
     }
-    return expression;
+    if (o instanceof M68kUnaryMinusExpression) {
+      return unwrapExpression(((M68kUnaryMinusExpression) o).getExpression());
+    } else if (o instanceof M68kUnaryPlusExpression) {
+      return unwrapExpression(((M68kUnaryPlusExpression) o).getExpression());
+    }
+    return o;
   }
 
 
