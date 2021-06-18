@@ -57,7 +57,7 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
     "h1 { font-weight: bold; font-size: 120%; } " +
     "h2 { padding-top: 13px; font-weight: bold; font-size: 110%; } " +
     "h3 { padding-top: 10px; font-weight: bold; } " +
-    "table { padding-bottom: 10px; } " +
+    "table { padding-bottom: 10px; white-space: nowrap } " +
     "td { margin: 5px;} " +
     "em { font-style: italic;}" +
     "</style>";
