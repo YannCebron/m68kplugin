@@ -89,7 +89,12 @@ localLabel ::= !<<afterWhitespace>> ((DOT labelIdentifier) | (labelIdentifier DO
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLocalLabelMixIn"
 }
 
-private instructions ::= move_instructions |
+private instructions ::= m68000_instructions |
+                         directives |
+                         conditional_assembly_directives
+
+private m68000_instructions ::=
+                         move_instructions |
                          data_movement_instructions |
                          jump_instructions |
 
@@ -107,10 +112,7 @@ private instructions ::= move_instructions |
 
                          bCC_instructions |
                          dbCC_instructions |
-                         sCC_instructions |
-
-                         directives |
-                         conditional_assembly_directives
+                         sCC_instructions
 
 
 // data size  _______=====================================================
