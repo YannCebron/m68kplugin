@@ -18,14 +18,21 @@ package com.yanncebron.m68kplugin.inspections;
 
 import com.intellij.codeInspection.LocalInspectionTool;
 import com.intellij.codeInspection.LocalInspectionToolSession;
+import com.intellij.codeInspection.LocalQuickFixOnPsiElement;
 import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.codeInspection.util.IntentionFamilyName;
+import com.intellij.codeInspection.util.IntentionName;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Comparing;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiLiteralValue;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.expression.*;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class M68kSimplifiableExpressionInspection extends LocalInspectionTool {
 
@@ -37,14 +44,11 @@ public class M68kSimplifiableExpressionInspection extends LocalInspectionTool {
 
       @Override
       public void visitParenExpression(@NotNull M68kParenExpression o) {
-        M68kExpression expression = o.getExpression();
-        if (expression instanceof M68kUnaryMinusExpression) {
-          expression = ((M68kUnaryMinusExpression) expression).getExpression();
-        } else if (expression instanceof M68kUnaryPlusExpression) {
-          expression = ((M68kUnaryPlusExpression) expression).getExpression();
-        }
+        M68kExpression expression = unwrapParenExpression(o);
         if (expression instanceof PsiLiteralValue) {
-          holder.registerProblem(o, M68kBundle.message("inspection.simplifiable.expression.unnecessary.parentheses.message"));
+          holder.registerProblem(o,
+            M68kBundle.message("inspection.simplifiable.expression.unnecessary.parentheses.message"),
+            new RemoveParenthesesQuickFix(o));
         }
       }
 
@@ -129,6 +133,43 @@ public class M68kSimplifiableExpressionInspection extends LocalInspectionTool {
   private boolean isNumberLiteral(M68kExpression expression, long l) {
     return expression instanceof M68kNumberExpression &&
       Comparing.equal(((M68kNumberExpression) expression).getValue(), l);
+  }
+
+  @Nullable
+  private M68kExpression unwrapParenExpression(@NotNull M68kParenExpression o) {
+    M68kExpression expression = o.getExpression();
+    if (expression instanceof M68kUnaryMinusExpression) {
+      expression = ((M68kUnaryMinusExpression) expression).getExpression();
+    } else if (expression instanceof M68kUnaryPlusExpression) {
+      expression = ((M68kUnaryPlusExpression) expression).getExpression();
+    }
+    return expression;
+  }
+
+
+  private static class RemoveParenthesesQuickFix extends LocalQuickFixOnPsiElement {
+
+    private RemoveParenthesesQuickFix(@NotNull M68kParenExpression element) {
+      super(element);
+    }
+
+    @Override
+    public @IntentionFamilyName @NotNull String getFamilyName() {
+      return M68kBundle.message("inspection.simplifiable.expression.unnecessary.parentheses.fix.family.name");
+    }
+
+    @Override
+    public @IntentionName @NotNull String getText() {
+      return M68kBundle.message("inspection.simplifiable.expression.unnecessary.parentheses.fix.name");
+    }
+
+    @Override
+    public void invoke(@NotNull Project project, @NotNull PsiFile file, @NotNull PsiElement startElement, @NotNull PsiElement endElement) {
+      assert startElement instanceof M68kParenExpression;
+      final M68kExpression replacement = ((M68kParenExpression) startElement).getExpression();
+      startElement.replace(replacement);
+    }
+
   }
 
 }

@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.inspections;
 
+import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 
 public class M68KSimplifiableExpressionInspectionTest extends BasePlatformTestCase {
@@ -54,6 +55,13 @@ public class M68KSimplifiableExpressionInspectionTest extends BasePlatformTestCa
 
     doTest("<warning descr=\"Unnecessary parentheses\">(+22)</warning>");
     doTest("<warning descr=\"Unnecessary parentheses\">(-22)</warning>");
+  }
+
+  public void testRemoveUnnecessaryParenthesesLiteral() {
+    doTest("<warning descr=\"Unnecessary parentheses\">(<caret>22)</warning>");
+    final IntentionAction intention = myFixture.findSingleIntention("Remove parentheses");
+    myFixture.launchAction(intention);
+    myFixture.checkResult(" dc 22");
   }
 
   private void doTest(String text) {
