@@ -29,7 +29,6 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.CommonProcessors;
 import com.intellij.util.Processor;
-import com.intellij.util.Processors;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
@@ -40,7 +39,6 @@ import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -161,7 +159,8 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
     assert startElement != null : element.getText();
 
     if (!M68kPsiTreeUtil.processSiblingsBackwards(
-      startElement, localLabelProcessor, M68kLabel.class, M68kMacroDirective.class)) {
+      startElement, localLabelProcessor,
+      M68kLabel.class, M68kMacroDirective.class)) {
       return;
     }
     M68kPsiTreeUtil.processSiblingsForwards(
@@ -177,11 +176,11 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
       return;
     }
 
-    List<String> allKeys = new ArrayList<>(500);
-    StubIndex.getInstance().processAllKeys(M68kLabelStubIndex.KEY, Processors.cancelableCollectProcessor(allKeys), scope, null);
-    for (String key : allKeys) {
-      if (!ContainerUtil.process(getStubLabels(key, project, scope), processor)) return;
-    }
+    StubIndex.getInstance().processAllKeys(M68kLabelStubIndex.KEY,
+      key -> {
+        final Collection<M68kLabel> labels = getStubLabels(key, project, scope);
+        return ContainerUtil.process(labels, processor);
+      }, scope, null);
   }
 
   private static Collection<M68kLabel> getStubLabels(String key, Project project, GlobalSearchScope scope) {
