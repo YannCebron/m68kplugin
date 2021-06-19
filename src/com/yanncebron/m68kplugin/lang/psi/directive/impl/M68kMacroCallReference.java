@@ -27,10 +27,7 @@ import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.presentation.java.SymbolPresentationUtil;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
-import com.intellij.util.CommonProcessors;
-import com.intellij.util.IncorrectOperationException;
-import com.intellij.util.Processor;
-import com.intellij.util.SmartList;
+import com.intellij.util.*;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
@@ -58,14 +55,15 @@ class M68kMacroCallReference extends PsiReferenceBase.Poly<M68kMacrocallDirectiv
   private static class Resolver implements ResolveCache.PolyVariantResolver<M68kMacroCallReference> {
     @Override
     public ResolveResult @NotNull [] resolve(@NotNull M68kMacroCallReference m68kMacroCallReference, boolean incompleteCode) {
-      final M68kMacrocallDirectiveMixIn element = m68kMacroCallReference.getElement();
+      M68kMacrocallDirectiveMixIn element = m68kMacroCallReference.getElement();
       String macroName = m68kMacroCallReference.getValue();
+      int currentTextOffset = element.getTextOffset();
 
       List<M68kLabel> resolveResults = new SmartList<>();
       final CommonProcessors.CollectProcessor<M68kLabel> findLocalProcessor = new CommonProcessors.CollectProcessor<M68kLabel>(resolveResults) {
         @Override
         protected boolean accept(M68kLabel m68kLabel) {
-          return m68kLabel.getTextOffset() < element.getTextOffset();
+          return m68kLabel.getTextOffset() < currentTextOffset;
         }
       };
       processMacrosInScope(findLocalProcessor, getCurrentFileSearchScope(element), macroName);
@@ -73,7 +71,7 @@ class M68kMacroCallReference extends PsiReferenceBase.Poly<M68kMacrocallDirectiv
         return PsiElementResolveResult.createResults(resolveResults);
       }
 
-      final CommonProcessors.CollectProcessor<M68kLabel> findIncludeProcessor = new CommonProcessors.CollectProcessor<>(resolveResults);
+      final Processor<M68kLabel> findIncludeProcessor = Processors.cancelableCollectProcessor(resolveResults);
       processMacrosInScope(findIncludeProcessor, getIncludeSearchScope(element), macroName);
       return PsiElementResolveResult.createResults(resolveResults);
     }
@@ -102,8 +100,10 @@ class M68kMacroCallReference extends PsiReferenceBase.Poly<M68kMacrocallDirectiv
   @Override
   public Object @NotNull [] getVariants() {
     List<LookupElement> variants = new SmartList<>();
+
+    final int currentTextOffset = getElement().getOriginalElement().getTextOffset();
     processMacrosInScope(m68kLabel -> {
-      if (!(m68kLabel.getTextOffset() < getElement().getOriginalElement().getTextOffset())) return true;
+      if (!(m68kLabel.getTextOffset() < currentTextOffset)) return true;
       variants.add(PrioritizedLookupElement.withPriority(LookupElementBuilder.createWithIcon(m68kLabel).bold(), 30));
       return true;
     }, getCurrentFileSearchScope(getElement()), null);
