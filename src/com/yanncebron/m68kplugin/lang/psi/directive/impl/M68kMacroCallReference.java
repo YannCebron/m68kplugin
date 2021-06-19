@@ -27,7 +27,10 @@ import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.presentation.java.SymbolPresentationUtil;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
-import com.intellij.util.*;
+import com.intellij.util.CommonProcessors;
+import com.intellij.util.IncorrectOperationException;
+import com.intellij.util.Processor;
+import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
@@ -38,7 +41,6 @@ import com.yanncebron.m68kplugin.lang.stubs.index.M68kMacroStubIndex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -130,11 +132,11 @@ class M68kMacroCallReference extends PsiReferenceBase.Poly<M68kMacrocallDirectiv
       return;
     }
 
-    List<String> allKeys = new ArrayList<>();
-    StubIndex.getInstance().processAllKeys(M68kMacroStubIndex.KEY, Processors.cancelableCollectProcessor(allKeys), scope, null);
-    for (String key : allKeys) {
-      if (!ContainerUtil.process(getMacroStubLabels(key, project, scope), processor)) return;
-    }
+    StubIndex.getInstance().processAllKeys(M68kMacroStubIndex.KEY,
+      key -> {
+        final Collection<M68kLabel> labels = getMacroStubLabels(key, project, scope);
+        return ContainerUtil.process(labels, processor);
+      }, scope, null);
   }
 
   private static GlobalSearchScope getIncludeSearchScope(PsiElement element) {
