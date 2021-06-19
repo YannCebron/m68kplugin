@@ -101,20 +101,22 @@ class M68kMacroCallReference extends PsiReferenceBase.Poly<M68kMacrocallDirectiv
   public Object @NotNull [] getVariants() {
     List<LookupElement> variants = new SmartList<>();
 
+    final PsiFile currentFile = getElement().getContainingFile().getOriginalFile();
     final int currentTextOffset = getElement().getOriginalElement().getTextOffset();
-    processMacrosInScope(m68kLabel -> {
-      if (!(m68kLabel.getTextOffset() < currentTextOffset)) return true;
-      variants.add(PrioritizedLookupElement.withPriority(LookupElementBuilder.createWithIcon(m68kLabel).bold(), 30));
-      return true;
-    }, getCurrentFileSearchScope(getElement()), null);
+    processMacrosInScope(label -> {
+      final PsiFile containingFile = label.getContainingFile();
+      boolean inCurrentFile = containingFile == currentFile;
 
-    processMacrosInScope(m68kLabel -> {
-      final PsiFile containingFile = m68kLabel.getContainingFile();
-      final LookupElementBuilder builder = LookupElementBuilder.createWithIcon(m68kLabel)
-        .withTypeText(SymbolPresentationUtil.getFilePathPresentation(containingFile), true);
-      variants.add(builder);
+      LookupElementBuilder builder = LookupElementBuilder.createWithIcon(label);
+      if (inCurrentFile) {
+        if (!(label.getTextOffset() < currentTextOffset)) return true;
+        variants.add(PrioritizedLookupElement.withPriority(builder.bold(), 30));
+      } else {
+        variants.add(builder.withTypeText(SymbolPresentationUtil.getFilePathPresentation(containingFile), true));
+      }
       return true;
-    }, getIncludeSearchScope(getElement()), null);
+    }, GlobalSearchScope.projectScope(getElement().getProject()), null);
+
     return variants.toArray();
   }
 
@@ -141,7 +143,7 @@ class M68kMacroCallReference extends PsiReferenceBase.Poly<M68kMacrocallDirectiv
 
   private static GlobalSearchScope getIncludeSearchScope(PsiElement element) {
     final GlobalSearchScope notCurrentFile = GlobalSearchScope.notScope(getCurrentFileSearchScope(element));
-    return GlobalSearchScope.allScope(element.getProject()).intersectWith(notCurrentFile);
+    return GlobalSearchScope.projectScope(element.getProject()).intersectWith(notCurrentFile);
   }
 
   private static GlobalSearchScope getCurrentFileSearchScope(PsiElement element) {
