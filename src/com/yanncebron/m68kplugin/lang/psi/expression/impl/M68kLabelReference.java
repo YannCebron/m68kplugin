@@ -122,22 +122,20 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
       return true;
     });
 
-    processLabelsInScope(label -> {
-      final LookupElementBuilder builder = LookupElementBuilder.createWithIcon(label)
-        .withTailText(getTailText(label), true)
-        .bold();
-      variants.add(PrioritizedLookupElement.withPriority(builder, 30));
-      return true;
-    }, getCurrentFileSearchScope(getElement()), null);
-
+    final PsiFile currentFile = getElement().getContainingFile().getOriginalFile();
     processLabelsInScope(label -> {
       final PsiFile containingFile = label.getContainingFile();
-      final LookupElementBuilder builder = LookupElementBuilder.createWithIcon(label)
-        .withTailText(getTailText(label), true)
-        .withTypeText(SymbolPresentationUtil.getFilePathPresentation(containingFile), true);
-      variants.add(builder);
+      boolean inCurrentFile = containingFile == currentFile;
+
+      LookupElementBuilder builder = LookupElementBuilder.createWithIcon(label)
+        .withTailText(getTailText(label), true);
+      if (inCurrentFile) {
+        variants.add(PrioritizedLookupElement.withPriority(builder.bold(), 30));
+      } else {
+        variants.add(builder.withTypeText(SymbolPresentationUtil.getFilePathPresentation(containingFile), true));
+      }
       return true;
-    }, getIncludeSearchScope(getElement()), null);
+    }, GlobalSearchScope.projectScope(getElement().getProject()), null);
 
     return variants.toArray();
   }
