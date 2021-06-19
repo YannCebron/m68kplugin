@@ -22,6 +22,11 @@ import com.yanncebron.m68kplugin.lang.M68kFileElementType;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Separate index for {@code macro} labels to speedup resolve.
+ *
+ * @see M68kLabelStubIndex
+ */
 public class M68kMacroStubIndex extends StringStubIndexExtension<M68kLabel> {
 
   public static final StubIndexKey<String, M68kLabel> KEY = StubIndexKey.createIndexKey("m68k.macro.index");

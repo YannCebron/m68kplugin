@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,9 @@ import com.yanncebron.m68kplugin.lang.M68kFileElementType;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * @see M68kMacroStubIndex
+ */
 public class M68kLabelStubIndex extends StringStubIndexExtension<M68kLabel> {
 
   public static final StubIndexKey<String, M68kLabel> KEY = StubIndexKey.createIndexKey("m68k.label.index");
