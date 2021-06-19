@@ -29,6 +29,11 @@ anotherTopLevelLabel
   bra <error descr="Cannot resolve label 'INVALID_LABEL'">INVALID_LABEL</error>
   bra <error descr="Cannot resolve label '.INVALID_LABEL'">.INVALID_LABEL</error>
 
+equrLabel equr d7
+  bra <error descr="Cannot resolve label 'equrLabel'">equrLabel</error>
+
+regLabel reg d0-d7
+  bra <error descr="Cannot resolve label 'regLabel'">regLabel</error>
 
 * M68kEquDirectiveBase -------------------------------------------------------------------------------------------------
 
@@ -53,6 +58,8 @@ macroLabel\@
   bsr macroLabel\@
   jsr _LVO\1(a6)
   endm
+
+  bra <error descr="Cannot resolve label 'myMacro'">myMacro</error>
 
 * local macro label: inside current macro scope ------------------------------------------------------------------------
 

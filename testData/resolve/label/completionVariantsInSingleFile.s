@@ -14,3 +14,10 @@ anotherTopLevel.Label:
 setLabel set 2
 equLabel equ 42
 equalsLabel = 33
+
+; not showing --------------
+equrLabel equr d7
+regLabel reg d0-d7
+
+myMacro macro
+  endm

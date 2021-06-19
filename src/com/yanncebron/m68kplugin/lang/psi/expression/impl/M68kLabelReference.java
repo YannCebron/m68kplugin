@@ -22,6 +22,7 @@ import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.codeInspection.util.InspectionMessage;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Condition;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.presentation.java.SymbolPresentationUtil;
@@ -41,6 +42,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.List;
 
 /**
@@ -184,8 +186,11 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
       }, scope, null);
   }
 
+  private static final EnumSet<M68kLabelBase.LabelKind> NON_RELEVANT_LABEL_KINDS = EnumSet.of(M68kLabelBase.LabelKind.EQUR, M68kLabelBase.LabelKind.REG, M68kLabelBase.LabelKind.MACRO);
+  private static final Condition<M68kLabel> RELEVANT_LABEL_CONDITION = m68kLabel -> !NON_RELEVANT_LABEL_KINDS.contains(m68kLabel.getLabelKind());
+
   private static Collection<M68kLabel> getStubLabels(String key, Project project, GlobalSearchScope scope) {
-    return StubIndex.getElements(M68kLabelStubIndex.KEY, key, project, scope, M68kLabel.class);
+    return ContainerUtil.filter(StubIndex.getElements(M68kLabelStubIndex.KEY, key, project, scope, M68kLabel.class), RELEVANT_LABEL_CONDITION);
   }
 
   private static GlobalSearchScope getIncludeSearchScope(PsiElement element) {
