@@ -29,6 +29,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.CommonProcessors;
 import com.intellij.util.Processor;
+import com.intellij.util.Processors;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
@@ -84,7 +85,7 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
       }
 
       List<M68kLabel> resolveResults = new SmartList<>();
-      final CommonProcessors.CollectProcessor<M68kLabel> processor = new CommonProcessors.CollectProcessor<>(resolveResults);
+      final Processor<M68kLabel> processor = Processors.cancelableCollectProcessor(resolveResults);
       processLabelsInScope(processor, getCurrentFileSearchScope(psiElement), labelName);
       if (!resolveResults.isEmpty()) {
         return PsiElementResolveResult.createResults(resolveResults);
