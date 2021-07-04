@@ -122,6 +122,7 @@ Unsupported directives, these will display false positive
 
 ### Misc
 
+- EOL comment: do not include preceding WS in PSI
 - `'\'` and `''''` are valid string literals
 - add missing expression operators
   - XOR?
