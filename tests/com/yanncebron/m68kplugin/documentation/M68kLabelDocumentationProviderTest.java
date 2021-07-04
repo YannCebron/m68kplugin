@@ -17,7 +17,6 @@
 package com.yanncebron.m68kplugin.documentation;
 
 import com.intellij.codeInsight.documentation.DocumentationManager;
-import com.intellij.lang.documentation.DocumentationProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 
@@ -60,15 +59,77 @@ public class M68kLabelDocumentationProviderTest extends BasePlatformTestCase {
     doTestQuickNavigateInfo("macro<caret>Label macro", "macro \"macroLabel\" [a.s]");
   }
 
+  public void testLabelDoc() {
+    doTestDoc("" +
+        "* not relevant doc" +
+        "\n\n" +
+        "*************************************************************************\n" +
+        "*\t\t\t\t\t\t\t\t\t*\n" +
+        "***       Set default function key definitions:\t\t\t\t\t***\n" +
+        "*\t\t\t\t\t\t\t\t\t*\n" +
+        "*\n" +
+        "* newline before\n" +
+        "*************************************************************************\n" +
+        "\n" +
+        "la<caret>bel",
+      "<div class='definition'><pre>label</pre></div><div class='content'>Set default function key definitions:<br><br>newline before</div>");
+  }
+
+  public void testLabelNoCommentDoc() {
+    doTestDoc("" +
+        "la<caret>bel",
+      "<div class='definition'><pre>label</pre></div><div class='content'></div>");
+  }
+
+  public void testLabelIrrelevantCommentDoc() {
+    doTestDoc("" +
+        "* ******\n" +
+        "la<caret>bel",
+      "<div class='definition'><pre>label</pre></div><div class='content'></div>");
+  }
+
+  public void testLabelNoEOLCommentDoc() {
+    doTestDoc("" +
+        " rte ; EOL comment\n" +
+        "\n" +
+        "la<caret>bel",
+      "<div class='definition'><pre>label</pre></div><div class='content'></div>");
+  }
+
+  public void testEquLabelDoc() {
+    doTestDoc("" +
+        "* doc\n" +
+        "la<caret>bel equ 42",
+      "<div class='definition'><pre>label<br><span style=\"color:#0000ff;\">42</span></pre></div><div class='content'>doc</div>");
+  }
+
+  public void testLabelDocSemicolonEOLComment() {
+    doTestDoc("" +
+        "la<caret>bel ; comment",
+      "<div class='definition'><pre>label</pre></div><div class='content'>comment</div>");
+  }
+
+  public void testLabelDocStarEOLComment() {
+    doTestDoc("" +
+        "la<caret>bel * comment",
+      "<div class='definition'><pre>label</pre></div><div class='content'>comment</div>");
+  }
+
+  private void doTestDoc(String source, String docText) {
+    final PsiElement docElement = getDocElement(source);
+    final String doc = DocumentationManager.getProviderFromElement(docElement).generateDoc(docElement, getOriginalElement());
+    assertEquals(docText, doc);
+  }
+
   private void doTestQuickNavigateInfo(String source, String quickNavigateInfoText) {
-    myFixture.configureByText("a.s", source);
-
-    final PsiElement docElement =
-      DocumentationManager.getInstance(getProject()).findTargetElement(myFixture.getEditor(), myFixture.getFile());
-    DocumentationProvider provider = DocumentationManager.getProviderFromElement(docElement);
-
-    final String doc = provider.getQuickNavigateInfo(docElement, getOriginalElement());
+    final PsiElement docElement = getDocElement(source);
+    final String doc = DocumentationManager.getProviderFromElement(docElement).getQuickNavigateInfo(docElement, getOriginalElement());
     assertEquals(quickNavigateInfoText, doc);
+  }
+
+  private PsiElement getDocElement(String source) {
+    myFixture.configureByText("a.s", source);
+    return DocumentationManager.getInstance(getProject()).findTargetElement(myFixture.getEditor(), myFixture.getFile());
   }
 
   private PsiElement getOriginalElement() {

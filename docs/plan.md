@@ -81,7 +81,6 @@
 - formatter
 - documentation:
   - quick doc for string literal: length
-  - quick doc for preceding label/EOL comments
   - render mode for preceding label comments
   - quick doc for directives
   - quick doc for `opt` flags
