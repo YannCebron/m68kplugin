@@ -111,6 +111,7 @@ task generateM68KLexer(type: GenerateLexer) {
 import org.jetbrains.intellij.tasks.RunPluginVerifierTask.FailureLevel
 
 runPluginVerifier {
+  verifierVersion = "1.258"
   ideVersions = intellij_platform_verification_versions.split(',') as List
   failureLevel = [FailureLevel.COMPATIBILITY_PROBLEMS]
 }
