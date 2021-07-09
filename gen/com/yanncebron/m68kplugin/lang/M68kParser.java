@@ -3434,11 +3434,13 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // shift_tail_drd |
+  //      shift_tail_drd_single |
   //      shift_tail_other
   static boolean shift_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "shift_tail")) return false;
     boolean r;
     r = shift_tail_drd(b, l + 1);
+    if (!r) r = shift_tail_drd_single(b, l + 1);
     if (!r) r = shift_tail_other(b, l + 1);
     return r;
   }
@@ -3451,9 +3453,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_);
     r = shift_tail_drd_0(b, l + 1);
     r = r && shift_tail_drd_1(b, l + 1);
-    p = r; // pin = 2
-    r = r && report_error_(b, consumeToken(b, COMMA));
-    r = p && adm_drd(b, l + 1) && r;
+    r = r && consumeToken(b, COMMA);
+    p = r; // pin = 3
+    r = r && adm_drd(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -3472,6 +3474,25 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = adm_drd(b, l + 1);
     if (!r) r = adm_imm(b, l + 1);
     return r;
+  }
+
+  /* ********************************************************** */
+  // data_size_all? adm_drd
+  static boolean shift_tail_drd_single(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "shift_tail_drd_single")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = shift_tail_drd_single_0(b, l + 1);
+    r = r && adm_drd(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_all?
+  private static boolean shift_tail_drd_single_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "shift_tail_drd_single_0")) return false;
+    data_size_all(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */

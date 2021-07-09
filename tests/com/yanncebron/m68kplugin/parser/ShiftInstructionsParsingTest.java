@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,6 +45,10 @@ public class ShiftInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" asl d1,d0");
   }
 
+  public void testAslInstructionDrdSingle() throws Exception {
+    doCodeTest(" asl d1");
+  }
+
   public void testAslInstructionMissingSource() throws Exception {
     doCodeTest(" asl ");
   }
@@ -67,6 +71,10 @@ public class ShiftInstructionsParsingTest extends M68kParsingTestCase {
 
   public void testRolInstructionImmDrd() throws Exception {
     doCodeTest(" rol #1,d0");
+  }
+
+  public void testRolInstructionDrdSingle() throws Exception {
+    doCodeTest(" rol.b d1");
   }
 
   public void testRorInstructionImmDrd() throws Exception {

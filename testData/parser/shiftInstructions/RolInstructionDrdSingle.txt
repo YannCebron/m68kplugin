@@ -1,0 +1,8 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kRolInstructionImpl(ROL_INSTRUCTION)
+    PsiElement(rol)('rol')
+    PsiElement(.b)('.b')
+    PsiWhiteSpace(' ')
+    M68kAdmDrdImpl(ADM_DRD)
+      PsiElement(data_register)('d1')
