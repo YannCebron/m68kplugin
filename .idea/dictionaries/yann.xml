@@ -94,12 +94,14 @@
       <w>rsreset</w>
       <w>rsset</w>
       <w>sbcd</w>
+      <w>sbwl</w>
       <w>suba</w>
       <w>subi</w>
       <w>subq</w>
       <w>subx</w>
       <w>trapv</w>
       <w>unlk</w>
+      <w>unsized</w>
       <w>vasm</w>
       <w>vlink</w>
       <w>xdef</w>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,10 +22,15 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 public enum M68kDataSize {
 
-  BYTE(".b", M68kTokenTypes.DOT_B),
+  UNSIZED("<unsized>", null),
+
   SHORT(".s", M68kTokenTypes.DOT_S),
+  BYTE(".b", M68kTokenTypes.DOT_B),
   WORD(".w", M68kTokenTypes.DOT_W),
   LONGWORD(".l", M68kTokenTypes.DOT_L);
 
@@ -33,7 +38,7 @@ public enum M68kDataSize {
   private final String text;
   private final IElementType elementType;
 
-  M68kDataSize(@NonNls String text, IElementType elementType) {
+  M68kDataSize(@NonNls String text, @Nullable IElementType elementType) {
     this.text = text;
     this.elementType = elementType;
   }
@@ -43,6 +48,7 @@ public enum M68kDataSize {
     return text;
   }
 
+  @Nullable
   public IElementType getElementType() {
     return elementType;
   }
@@ -62,4 +68,16 @@ public enum M68kDataSize {
     }
     return null;
   }
+
+  public static final Set<M68kDataSize> GROUP_SBWL = EnumSet.of(SHORT, BYTE, WORD, LONGWORD);
+  public static final Set<M68kDataSize> GROUP_SBW = EnumSet.of(SHORT, BYTE, WORD);
+  public static final Set<M68kDataSize> GROUP_BWL = EnumSet.of(BYTE, WORD, LONGWORD);
+  public static final Set<M68kDataSize> GROUP_WL = EnumSet.of(WORD, LONGWORD);
+
+  public static final Set<M68kDataSize> GROUP_UNSIZED = EnumSet.of(UNSIZED);
+  public static final Set<M68kDataSize> GROUP_S = EnumSet.of(SHORT);
+  public static final Set<M68kDataSize> GROUP_B = EnumSet.of(BYTE);
+  public static final Set<M68kDataSize> GROUP_W = EnumSet.of(WORD);
+  public static final Set<M68kDataSize> GROUP_L = EnumSet.of(LONGWORD);
+
 }
