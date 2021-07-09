@@ -19,7 +19,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kLinkInstruction extends M68kInstruction {
+public interface M68kLinkInstruction extends M68kDataSized, M68kInstruction {
 
   @Nullable
   M68kAdmArd getAdmArd();

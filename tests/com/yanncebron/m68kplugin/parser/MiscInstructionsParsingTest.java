@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,6 +57,10 @@ public class MiscInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" link a0,#1");
   }
 
+  public void testLinkInstructionDataSize() throws Exception {
+    doCodeTest(" link.w a0,#1");
+  }
+
   public void testLinkInstructionMissingSource() throws Exception {
     doCodeTest(" link ");
   }
@@ -85,7 +89,7 @@ public class MiscInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" lea.l src,a0");
   }
 
-  public void testLeaInstructionAixDataSize() throws  Exception {
+  public void testLeaInstructionAixDataSize() throws Exception {
     doCodeTest(" lea 8(a0,d1.w),a0");
   }
 

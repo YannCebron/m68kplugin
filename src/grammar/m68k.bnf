@@ -388,7 +388,10 @@ pea_instruction ::= PEA data_size_long?
   extends = data_sized
 }
 
-link_instruction ::= LINK adm_ard COMMA adm_imm
+link_instruction ::= LINK data_size_word? adm_ard COMMA adm_imm
+{
+  extends = data_sized
+}
 unlk_instruction ::= UNLK adm_ard
 
 

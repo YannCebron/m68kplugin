@@ -74,19 +74,19 @@ public class M68kParser implements PsiParser, LightPsiParser {
       DBRA_INSTRUCTION, DBT_INSTRUCTION, DBVC_INSTRUCTION, DBVS_INSTRUCTION,
       DCB_DIRECTIVE, DC_DIRECTIVE, DIVS_INSTRUCTION, DIVU_INSTRUCTION,
       DR_DIRECTIVE, DS_DIRECTIVE, EORI_INSTRUCTION, EOR_INSTRUCTION,
-      EXG_INSTRUCTION, EXT_INSTRUCTION, LEA_INSTRUCTION, LSL_INSTRUCTION,
-      LSR_INSTRUCTION, MOVEA_INSTRUCTION, MOVEM_INSTRUCTION, MOVEP_INSTRUCTION,
-      MOVEQ_INSTRUCTION, MOVE_INSTRUCTION, MULS_INSTRUCTION, MULU_INSTRUCTION,
-      NBCD_INSTRUCTION, NEGX_INSTRUCTION, NEG_INSTRUCTION, NOT_INSTRUCTION,
-      ORI_INSTRUCTION, OR_INSTRUCTION, PEA_INSTRUCTION, ROL_INSTRUCTION,
-      ROR_INSTRUCTION, ROXL_INSTRUCTION, ROXR_INSTRUCTION, RS_DIRECTIVE,
-      SBCD_INSTRUCTION, SCC_INSTRUCTION, SCS_INSTRUCTION, SEQ_INSTRUCTION,
-      SF_INSTRUCTION, SGE_INSTRUCTION, SGT_INSTRUCTION, SHI_INSTRUCTION,
-      SHS_INSTRUCTION, SLE_INSTRUCTION, SLO_INSTRUCTION, SLS_INSTRUCTION,
-      SLT_INSTRUCTION, SMI_INSTRUCTION, SNE_INSTRUCTION, SPL_INSTRUCTION,
-      ST_INSTRUCTION, SUBA_INSTRUCTION, SUBI_INSTRUCTION, SUBQ_INSTRUCTION,
-      SUBX_INSTRUCTION, SUB_INSTRUCTION, SVC_INSTRUCTION, SVS_INSTRUCTION,
-      SWAP_INSTRUCTION, TAS_INSTRUCTION, TST_INSTRUCTION),
+      EXG_INSTRUCTION, EXT_INSTRUCTION, LEA_INSTRUCTION, LINK_INSTRUCTION,
+      LSL_INSTRUCTION, LSR_INSTRUCTION, MOVEA_INSTRUCTION, MOVEM_INSTRUCTION,
+      MOVEP_INSTRUCTION, MOVEQ_INSTRUCTION, MOVE_INSTRUCTION, MULS_INSTRUCTION,
+      MULU_INSTRUCTION, NBCD_INSTRUCTION, NEGX_INSTRUCTION, NEG_INSTRUCTION,
+      NOT_INSTRUCTION, ORI_INSTRUCTION, OR_INSTRUCTION, PEA_INSTRUCTION,
+      ROL_INSTRUCTION, ROR_INSTRUCTION, ROXL_INSTRUCTION, ROXR_INSTRUCTION,
+      RS_DIRECTIVE, SBCD_INSTRUCTION, SCC_INSTRUCTION, SCS_INSTRUCTION,
+      SEQ_INSTRUCTION, SF_INSTRUCTION, SGE_INSTRUCTION, SGT_INSTRUCTION,
+      SHI_INSTRUCTION, SHS_INSTRUCTION, SLE_INSTRUCTION, SLO_INSTRUCTION,
+      SLS_INSTRUCTION, SLT_INSTRUCTION, SMI_INSTRUCTION, SNE_INSTRUCTION,
+      SPL_INSTRUCTION, ST_INSTRUCTION, SUBA_INSTRUCTION, SUBI_INSTRUCTION,
+      SUBQ_INSTRUCTION, SUBX_INSTRUCTION, SUB_INSTRUCTION, SVC_INSTRUCTION,
+      SVS_INSTRUCTION, SWAP_INSTRUCTION, TAS_INSTRUCTION, TST_INSTRUCTION),
   };
 
   /* ********************************************************** */
@@ -2255,7 +2255,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // LINK adm_ard COMMA adm_imm
+  // LINK data_size_word? adm_ard COMMA adm_imm
   public static boolean link_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "link_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", LINK)) return false;
@@ -2263,11 +2263,19 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, LINK_INSTRUCTION, "<instruction>");
     r = consumeToken(b, LINK);
     p = r; // pin = 1
-    r = r && report_error_(b, adm_ard(b, l + 1));
+    r = r && report_error_(b, link_instruction_1(b, l + 1));
+    r = p && report_error_(b, adm_ard(b, l + 1)) && r;
     r = p && report_error_(b, consumeToken(b, COMMA)) && r;
     r = p && adm_imm(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  // data_size_word?
+  private static boolean link_instruction_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "link_instruction_1")) return false;
+    data_size_word(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */
