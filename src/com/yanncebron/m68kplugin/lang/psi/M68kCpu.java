@@ -22,7 +22,7 @@ import java.util.EnumSet;
 import java.util.Set;
 
 /**
- * All known CPUs in terms of instruction sets.
+ * All known CPUs architectures.
  * <p>
  * <em>NB</em> Not all are (or will be) supported.
  * </p>
