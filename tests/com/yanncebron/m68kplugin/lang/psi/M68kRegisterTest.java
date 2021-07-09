@@ -71,6 +71,13 @@ public class M68kRegisterTest extends TestCase {
     assertFalse(M68kRegister.D0.isSameKind(M68kRegister.A1));
   }
 
+  public void testIsCpuSupported() {
+    assertTrue(M68kRegister.D0.isSupported(M68kCpu.M_68000));
+    assertTrue(M68kRegister.D0.isSupported(M68kCpu.GROUP_68020_UP));
+
+    assertFalse(M68kRegister.SR.isSupported(M68kCpu.M_68851));
+  }
+
   private void doTest(IElementType elementType, String text, M68kRegister expected) {
     assertEquals(expected, M68kRegister.find(elementType, text));
   }
