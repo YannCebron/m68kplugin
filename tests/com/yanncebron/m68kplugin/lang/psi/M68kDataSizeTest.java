@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,15 +36,15 @@ public class M68kDataSizeTest extends TestCase {
   }
 
   public void testFindByElementType() {
-    assertDataSize2(M68kDataSize.BYTE, M68kTokenTypes.DOT_B);
-    assertDataSize2(M68kDataSize.SHORT, M68kTokenTypes.DOT_S);
-    assertDataSize2(M68kDataSize.WORD, M68kTokenTypes.DOT_W);
-    assertDataSize2(M68kDataSize.LONGWORD, M68kTokenTypes.DOT_L);
+    assertDataSize(M68kDataSize.BYTE, M68kTokenTypes.DOT_B);
+    assertDataSize(M68kDataSize.SHORT, M68kTokenTypes.DOT_S);
+    assertDataSize(M68kDataSize.WORD, M68kTokenTypes.DOT_W);
+    assertDataSize(M68kDataSize.LONGWORD, M68kTokenTypes.DOT_L);
 
-    assertDataSize2(null, M68kTokenTypes.ABCD);
+    assertDataSize(null, M68kTokenTypes.ABCD);
   }
 
-  private void assertDataSize2(M68kDataSize expected, IElementType elementType) {
+  private void assertDataSize(M68kDataSize expected, IElementType elementType) {
     assertEquals(expected, M68kDataSize.findByElementType(elementType));
   }
 
