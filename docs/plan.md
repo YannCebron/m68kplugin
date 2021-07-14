@@ -1,4 +1,7 @@
 # Plans
+   
+1. TOC
+{:toc}
 
 > Suggest features missing in this list in [GitHub issues](https://github.com/YannCebron/m68kplugin/issues)
 

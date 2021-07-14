@@ -4,6 +4,9 @@ title: Known Issues
 
 # Known Issues
 
+1. TOC
+{:toc}
+
 ## Resolving
 
 - `include` directives not evaluated, resolving symbols across all project files
