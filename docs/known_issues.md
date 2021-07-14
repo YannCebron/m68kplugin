@@ -3,6 +3,7 @@ title: Known Issues
 ---
 
 # Known Issues
+{: .no_toc }
 
 1. TOC
 {:toc}
