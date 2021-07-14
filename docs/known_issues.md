@@ -19,13 +19,10 @@ title: Known Issues
 
 ### Unsupported CPUs
 
-Currently, only 68000 CPU is supported.
+Currently, only 68000 architecture is supported.
 
-Non-supported instructions will display false positive
-> _"Cannot resolve macro '$MNEMONIC$'"_
-
-Non-supported registers will display false positive
-> _"Cannot resolve label '$REGISTER$'"_
+Non-supported instructions/registers will display false positive
+> _"Cannot resolve macro '$MNEMONIC$ | $REGISTER$'"_
 
 ### Directives
 
@@ -127,9 +124,9 @@ Unsupported directives, these will display false positive
 - add missing expression operators
   - XOR?
 - do not allow spaces (?!)
-- allow `equr`/`reg` etc. replacement names everywhere `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
+- support `equr`/`reg` etc. replacement names `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
 
 ### Internal Notes
 
 - `LexerTestCase.checkCorrectRestartOnEveryToken`
-- FBI tracking macro/conditional assembly/target machine scopes
+- FBI tracking macro/conditional assembly/target architecture scopes
