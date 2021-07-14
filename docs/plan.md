@@ -1,8 +1,8 @@
 # Plans
 
-> Suggest features missing in this list in [GitHub tracker](https://github.com/YannCebron/m68kplugin/issues)
+> Suggest features missing in this list in [GitHub issues](https://github.com/YannCebron/m68kplugin/issues)
 
-## Instruction Sets
+## Target Architecture
 
 * 680x0 variants
 * 68881 FPU
@@ -98,11 +98,11 @@
 
 ## Inspections
 
-- nonsensical `move` (?!)
 - `movem` non-symmetrical register ranges
 - register list:
-  - sort/optimize
-- string in `dc.b` not terminated with `,0`
+  - sort
+  - optimize notation: `d0/d1/d2` &rarr; `d0-d2`
+- string literal not terminated with `,0`
 - check optimizations from vasm/DevPac [18.6 vasm Docs](http://sun.hasenbraten.de/vasm/release/vasm_18.html)
 
 ### Labels
