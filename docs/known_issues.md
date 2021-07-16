@@ -10,7 +10,10 @@ title: Known Issues
 
 ## Resolving
 
-- `include` directives not evaluated, resolving symbols across all project files
+- `include` directives
+  - not evaluated
+  - symbols are resolved across all files
+  - all included files must be located inside project (or added as separate content root)
 - macro block:
   - highlight `jsr _LVO\1(a6)` as invalid outside of macro
   - resolve global label inside current first
@@ -73,14 +76,15 @@ Unsupported directives, these will display false positive
 - `weak`
 
 #### Directives with known limitations
-
+                    
+- conditional assembly directives: relational expressions `if LABEL>0`
 - `printt`: multiple strings
 
 ### Labels
 
 - single-digit local label `1$`
 - allow `@` (Devpac)
-- ending with double-colon `::` -> automatically exported (`xdef`)
+- ending with double-colon `::` &rarr; automatically exported (`xdef`)
 - allow referencing `global_name\local_name` syntax (PhxAss)
 
 ### Builtin Symbols
@@ -104,7 +108,9 @@ Unsupported directives, these will display false positive
 
 ### Macros
 
-- support `macro <macroName>` notation
+- macro declaration variants:
+  - `macro $macroName$`
+  - `macro<$macroName$>`
 - macro call with register list `myMacro d0/d7`
 - special symbols
   - `\@!`
@@ -117,7 +123,9 @@ Unsupported directives, these will display false positive
   - `\-`
   - `\<symbolname>`
   - `\@<symbolname>`
-- valid label: `\1`
+- valid label
+  - `\1`
+  - `\1\3\2 equ \4`
 - support parameters `addq.\0 #1,\1` with `macroName.\0` call syntax
 - allow `a`-`z` for macro parameters
 
