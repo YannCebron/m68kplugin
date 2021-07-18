@@ -15,12 +15,16 @@ Please visit the [Documentation site](https://yanncebron.github.io/m68kplugin/) 
 
 Plugin Logo from [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Motorola_M_symbol_blue.svg)
 
+Mnemonic documentation taken from [m68k-instructions-documentation](https://github.com/prb28/m68k-instructions-documentation)
+
+Mnemonic data generated using [vasm](http://sun.hasenbraten.de/vasm/) sources, thanks to Frank Wille and Dr. Volker Barthelmann for granting permission
+
+## Tooling
+
 Language support built using [Grammar-Kit](https://github.com/JetBrains/Grammar-Kit)
 
 Gradle setup uses [gradle-intellij-plugin](https://github.com/JetBrains/gradle-intellij-plugin/)
  and [gradle-grammar-kit-plugin](https://github.com/JetBrains/gradle-grammar-kit-plugin)
-
-Mnemonic documentation taken from [m68k-instructions-documentation](https://github.com/prb28/m68k-instructions-documentation)
 
 ## License
 

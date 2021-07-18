@@ -5,6 +5,7 @@
       <w>addq</w>
       <w>addwatch</w>
       <w>addx</w>
+      <w>barthelmann</w>
       <w>bchg</w>
       <w>bclr</w>
       <w>bset</w>
@@ -104,6 +105,7 @@
       <w>unsized</w>
       <w>vasm</w>
       <w>vlink</w>
+      <w>wille</w>
       <w>xdef</w>
       <w>yanncebron</w>
     </words>
