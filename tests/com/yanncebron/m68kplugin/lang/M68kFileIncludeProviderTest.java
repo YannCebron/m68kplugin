@@ -51,14 +51,25 @@ public class M68kFileIncludeProviderTest extends BasePlatformTestCase {
   }
 
   public void testIncbinSingleResolvedFile() {
-    myFixture.addFileToProject("test.i", "");
-    final PsiFile testIncludedFile = myFixture.addFileToProject("dir/test.dat", "");
+    final PsiFile testIncludeFile = myFixture.addFileToProject("test.i", "");
+    final PsiFile testIncbinFile = myFixture.addFileToProject("dir/test.dat", "");
     myFixture.configureByText("test.s",
       " INCBIN 'dir/test.dat'\n" +
         " include 'test.i'");
 
     final VirtualFile[] includedFiles = getIncludedFiles(false, false);
-    assertSameElements(includedFiles, testIncludedFile.getVirtualFile());
+    assertSameElements(includedFiles, testIncbinFile.getVirtualFile());
+    assertDirectiveOffset(testIncbinFile, 1);
+
+    assertDirectiveOffset(testIncludeFile, 24);
+  }
+
+  private void assertDirectiveOffset(PsiFile testIncludedFile, int expectedOffset) {
+    FileIncludeManager.getManager(getProject()).processIncludingFiles(testIncludedFile, pair -> {
+      final int offset = pair.second.offset;
+      assertEquals(pair.second.toString(), expectedOffset, offset);
+      return false;
+    });
   }
 
   private VirtualFile[] getIncludedFiles(boolean compileTimeOnly, boolean recursively) {

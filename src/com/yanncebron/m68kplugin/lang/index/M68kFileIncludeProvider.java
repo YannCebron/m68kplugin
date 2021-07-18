@@ -16,21 +16,25 @@
 
 package com.yanncebron.m68kplugin.lang.index;
 
+import com.intellij.lang.LighterAST;
+import com.intellij.lang.LighterASTNode;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeRegistry;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.impl.include.FileIncludeInfo;
 import com.intellij.psi.impl.include.FileIncludeProvider;
+import com.intellij.psi.impl.source.tree.LightTreeUtil;
+import com.intellij.util.ArrayUtil;
 import com.intellij.util.Consumer;
 import com.intellij.util.PathUtilRt;
 import com.intellij.util.SmartList;
 import com.intellij.util.indexing.FileContent;
+import com.intellij.util.indexing.PsiDependentFileContent;
 import com.intellij.util.text.StringSearcher;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
-import com.yanncebron.m68kplugin.lang.psi.M68kPsiTreeUtil;
-import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncbinDirective;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncludeDirective;
+import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
+import com.yanncebron.m68kplugin.lang.psi.M68kTypes;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -44,7 +48,7 @@ public class M68kFileIncludeProvider extends FileIncludeProvider {
 
   @Override
   public int getVersion() {
-    return 2;
+    return 3;
   }
 
   @Override
@@ -59,38 +63,32 @@ public class M68kFileIncludeProvider extends FileIncludeProvider {
 
   @Override
   public @NotNull FileIncludeInfo @NotNull [] getIncludeInfos(FileContent content) {
-    CharSequence contentAsText = content.getContentAsText();
-    if (new StringSearcher("include", false, true).scan(contentAsText) == -1 &&
-      new StringSearcher("incbin", false, true).scan(contentAsText) == -1) {
-      return FileIncludeInfo.EMPTY;
-    }
+    CharSequence text = content.getContentAsText();
+    int[] offsets = ArrayUtil.mergeArrays(
+      new StringSearcher("include", false, true).findAllOccurrences(text),
+      new StringSearcher("incbin", false, true).findAllOccurrences(text));
+    if (offsets.length == 0) return FileIncludeInfo.EMPTY;
 
-    // todo get from light tree (JavaFunctionalExpressionIndex)
     final List<FileIncludeInfo> result = new SmartList<>();
-    content.getPsiFile().acceptChildren(new M68kVisitor() {
 
-      @Override
-      public void visitIncbinDirective(@NotNull M68kIncbinDirective o) {
-        super.visitIncbinDirective(o);
+    LighterAST tree = ((PsiDependentFileContent) content).getLighterAST();
+    LightTreeUtil.processLeavesAtOffsets(offsets, tree, (leaf, offset) -> {
+      LighterASTNode element = tree.getParent(leaf);
+      if (element == null) return;
 
-        final String includePath = o.getIncludePath();
-        if (includePath != null) {
-          String filename = PathUtilRt.getFileName(includePath);
-          final FileIncludeInfo includeInfo = new FileIncludeInfo(filename, includePath, -1, true);
-          result.add(includeInfo);
-        }
-      }
+      final LighterASTNode pathNode = LightTreeUtil.firstChildOfType(tree, element, M68kTokenTypes.STRING);
+      if (pathNode == null) return;
 
-      @Override
-      public void visitIncludeDirective(@NotNull M68kIncludeDirective o) {
-        super.visitIncludeDirective(o);
+      final String path = StringUtil.unquoteString(LightTreeUtil.toFilteredString(tree, pathNode, null));
 
-        final String includePath = o.getIncludePath();
-        if (includePath != null) {
-          result.add(new FileIncludeInfo(includePath));
-        }
+      if (element.getTokenType() == M68kTypes.INCLUDE_DIRECTIVE) {
+        result.add(new FileIncludeInfo(path, offset));
+      } else if (element.getTokenType() == M68kTypes.INCBIN_DIRECTIVE) {
+        String filename = PathUtilRt.getFileName(path);
+        result.add(new FileIncludeInfo(filename, path, offset, true));
       }
     });
+
     return result.toArray(FileIncludeInfo.EMPTY);
   }
 }
