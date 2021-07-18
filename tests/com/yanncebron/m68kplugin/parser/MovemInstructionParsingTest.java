@@ -33,6 +33,10 @@ public class MovemInstructionParsingTest extends M68kParsingTestCase {
     doCodeTest(" movem d1,");
   }
 
+  public void testMovemInstructionImmediate() throws Exception {
+    doCodeTest(" movem #123,(a7)");
+  }
+
   public void testMovemInstructionSingleRegister() throws Exception {
     doCodeTest(" movem d1,(a7)");
   }

@@ -2624,17 +2624,26 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // register_list COMMA (adm_ari | adm_apd | adm_adi | adm_aix | adm_abs)
+  // (register_list | adm_imm) COMMA (adm_ari | adm_apd | adm_adi | adm_aix | adm_abs)
   static boolean movem_from_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "movem_from_tail")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_);
-    r = register_list(b, l + 1);
+    r = movem_from_tail_0(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, consumeToken(b, COMMA));
     r = p && movem_from_tail_2(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  // register_list | adm_imm
+  private static boolean movem_from_tail_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movem_from_tail_0")) return false;
+    boolean r;
+    r = register_list(b, l + 1);
+    if (!r) r = adm_imm(b, l + 1);
+    return r;
   }
 
   // adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
@@ -2686,7 +2695,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA register_list
+  // (adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA (register_list | adm_imm)
   static boolean movem_to_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "movem_to_tail")) return false;
     boolean r, p;
@@ -2694,7 +2703,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = movem_to_tail_0(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, consumeToken(b, COMMA));
-    r = p && register_list(b, l + 1) && r;
+    r = p && movem_to_tail_2(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -2710,6 +2719,15 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = adm_adi(b, l + 1);
     if (!r) r = adm_aix(b, l + 1);
     if (!r) r = adm_abs(b, l + 1);
+    return r;
+  }
+
+  // register_list | adm_imm
+  private static boolean movem_to_tail_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movem_to_tail_2")) return false;
+    boolean r;
+    r = register_list(b, l + 1);
+    if (!r) r = adm_imm(b, l + 1);
     return r;
   }
 
