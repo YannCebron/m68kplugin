@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.inspections;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 
 public class M68kRegisterListRangeInspectionTest extends BasePlatformTestCase {
@@ -40,22 +41,24 @@ public class M68kRegisterListRangeInspectionTest extends BasePlatformTestCase {
   }
 
   public void testRegisterRangeReversedRange() {
-    doTest(" movem.l d7-a0,(a7)");
-    doTest(" movem.l <error descr=\"Reversed range\">d7-d6</error>,(a7)");
+    doTest(
+      " movem.l d7-a0,(a7)",
+      " movem.l <error descr=\"Reversed range\">d7-d6</error>,(a7)");
   }
 
   public void testRegisterListDuplicatedRegisterSingle() {
-    // d0/d0
-    doTest(" movem.l <error descr=\"Duplicated register D0\">d0</error>/<error descr=\"Duplicated register D0\">d0</error>,(a7)");
+    doTest(
+      // d0/d0
+      " movem.l <error descr=\"Duplicated register D0\">d0</error>/<error descr=\"Duplicated register D0\">d0</error>,(a7)",
 
-    // d0/d0-d1
-    doTest(" movem.l <error descr=\"Duplicated register D0\">d0</error>/<error descr=\"Duplicated register D0\">d0-d1</error>,(a7)");
+      // d0/d0-d1
+      " movem.l <error descr=\"Duplicated register D0\">d0</error>/<error descr=\"Duplicated register D0\">d0-d1</error>,(a7)",
 
-    // d0-d1/d1-d2
-    doTest(" movem.l <error descr=\"Duplicated register D1\">d0-d1</error>/<error descr=\"Duplicated register D1\">d1-d2</error>,(a7)");
+      // d0-d1/d1-d2
+      " movem.l <error descr=\"Duplicated register D1\">d0-d1</error>/<error descr=\"Duplicated register D1\">d1-d2</error>,(a7)",
 
-    // a0/d0-a1
-    doTest("  movem.l <error descr=\"Duplicated register A0\">a0</error>/<error descr=\"Duplicated register A0\">d0-a1</error>,(a7)");
+      // a0/d0-a1
+      "  movem.l <error descr=\"Duplicated register A0\">a0</error>/<error descr=\"Duplicated register A0\">d0-a1</error>,(a7)");
   }
 
   public void testRegisterListDuplicatedRegisterMultiple() {
@@ -67,8 +70,8 @@ public class M68kRegisterListRangeInspectionTest extends BasePlatformTestCase {
     doTest(" movem.l <error descr=\"Reversed range\">d1-d0</error>/d0,(a7)");
   }
 
-  private void doTest(String text) {
-    myFixture.configureByText("a.s", text);
+  private void doTest(String... text) {
+    myFixture.configureByText("a.s", StringUtil.join(text, "\n"));
     myFixture.testHighlighting();
   }
 }
