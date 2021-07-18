@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,6 @@ package com.yanncebron.m68kplugin.inspections;
 
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
-
-import java.util.List;
 
 public class M68kUnusedLabelInspectionTest extends BasePlatformTestCase {
 
@@ -44,8 +42,7 @@ public class M68kUnusedLabelInspectionTest extends BasePlatformTestCase {
         "<warning descr=\"Unused local label 'unused'\">.un<caret>used</warning>\n" +
         "  nop\n");
     myFixture.testHighlighting();
-    final List<IntentionAction> intentions = myFixture.filterAvailableIntentions("Remove unused label 'unused'");
-    final IntentionAction intention = assertOneElement(intentions);
+    final IntentionAction intention = myFixture.findSingleIntention("Remove unused label 'unused'");
     myFixture.launchAction(intention);
     myFixture.checkResult(
       "  nop\n" +
