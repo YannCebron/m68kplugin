@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,6 @@ package com.yanncebron.m68kplugin.inspections;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
-
-import java.util.List;
 
 @TestDataPath("$PROJECT_ROOT/testData/inspections/usageA7Register")
 public class M68KUsageA7RegisterInspectionTest extends BasePlatformTestCase {
@@ -44,8 +42,7 @@ public class M68KUsageA7RegisterInspectionTest extends BasePlatformTestCase {
     myFixture.configureByText("a.s",
       "  jmp 4(pc,<warning descr=\"Usage of A7 register\">a<caret>7</warning>.l)");
     myFixture.testHighlighting();
-    final List<IntentionAction> intentions = myFixture.filterAvailableIntentions("Replace with SP");
-    final IntentionAction intention = assertOneElement(intentions);
+    final IntentionAction intention = myFixture.findSingleIntention("Replace with SP");
     myFixture.launchAction(intention);
     myFixture.checkResult("  jmp 4(pc,sp.l)");
   }
