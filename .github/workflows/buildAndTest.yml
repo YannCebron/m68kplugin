@@ -24,7 +24,7 @@ jobs:
     needs: gradleValidation
     runs-on: ubuntu-latest
     container:
-      image: gradle:jdk8
+      image: gradle:jdk11
     outputs:
       version: ${{ steps.properties.outputs.version }}
       changelog: ${{ steps.properties.outputs.changelog }}
