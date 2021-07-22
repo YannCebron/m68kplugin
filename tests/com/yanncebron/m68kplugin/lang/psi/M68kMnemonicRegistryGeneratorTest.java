@@ -278,6 +278,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     if (!"cpu32".equals(parseCpuText) &&
       !"mgas".equals(parseCpuText) &&
       !"malias".equals(parseCpuText) &&
+      !"mbanked".equals(parseCpuText) &&
       !StringUtil.startsWith(parseCpuText, "mcf")) {
       throw new IllegalArgumentException("cannot parse CPU '" + parseCpuText + "'");
     }
