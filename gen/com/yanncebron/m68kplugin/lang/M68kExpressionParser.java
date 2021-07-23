@@ -116,7 +116,7 @@ public class M68kExpressionParser {
         r = expression(b, l, 3);
         exit_section_(b, l, m, SHIFT_RIGHT_EXPRESSION, r, true, null);
       }
-      else if (g < 4 && consumeTokenSmart(b, PIPE)) {
+      else if (g < 4 && or_expression_0(b, l + 1)) {
         r = expression(b, l, 4);
         exit_section_(b, l, m, OR_EXPRESSION, r, true, null);
       }
@@ -191,6 +191,15 @@ public class M68kExpressionParser {
     r = p && expression(b, l, 2);
     exit_section_(b, l, m, UNARY_NOT_EXPRESSION, r, p, null);
     return r || p;
+  }
+
+  // PIPE | EXCLAMATION
+  private static boolean or_expression_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "or_expression_0")) return false;
+    boolean r;
+    r = consumeTokenSmart(b, PIPE);
+    if (!r) r = consumeTokenSmart(b, EXCLAMATION);
+    return r;
   }
 
   // DEC_NUMBER | HEX_NUMBER | OCT_NUMBER | BIN_NUMBER

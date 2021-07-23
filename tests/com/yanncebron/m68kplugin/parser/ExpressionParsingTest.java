@@ -177,6 +177,10 @@ public class ExpressionParsingTest extends M68kParsingTestCase {
     doCodeTest(" dc 1|2");
   }
 
+  public void testOrExclamationExpression() throws Exception {
+    doCodeTest(" dc 1!2");
+  }
+
   public void testOrExpressionMissingRightExpression() throws Exception {
     doCodeTest(" dc 1|");
   }
