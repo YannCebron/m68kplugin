@@ -61,10 +61,9 @@ public class M68kExpressionParser {
   // 0: BINARY(plus_expression) BINARY(minus_expression)
   // 1: BINARY(mul_expression) BINARY(div_expression) BINARY(mod_expression)
   // 2: PREFIX(unary_plus_expression) PREFIX(unary_minus_expression) PREFIX(unary_complement_expression)
-  // 3: BINARY(exp_expression)
-  // 4: BINARY(shift_left_expression) BINARY(shift_right_expression)
-  // 5: BINARY(or_expression) BINARY(and_expression) BINARY(not_expression)
-  // 6: ATOM(number_expression) ATOM(string_expression) ATOM(paren_expression) ATOM(label_ref_expression)
+  // 3: BINARY(shift_left_expression) BINARY(shift_right_expression)
+  // 4: BINARY(or_expression) BINARY(xor_expression) BINARY(and_expression) BINARY(not_expression)
+  // 5: ATOM(number_expression) ATOM(string_expression) ATOM(paren_expression) ATOM(label_ref_expression)
   public static boolean expression(PsiBuilder b, int l, int g) {
     if (!recursion_guard_(b, l, "expression")) return false;
     addVariant(b, "<expression>");
@@ -108,28 +107,28 @@ public class M68kExpressionParser {
         r = expression(b, l, 1);
         exit_section_(b, l, m, MOD_EXPRESSION, r, true, null);
       }
-      else if (g < 3 && consumeTokenSmart(b, POW)) {
+      else if (g < 3 && consumeTokenSmart(b, SHIFT_L)) {
         r = expression(b, l, 3);
-        exit_section_(b, l, m, EXP_EXPRESSION, r, true, null);
-      }
-      else if (g < 4 && consumeTokenSmart(b, SHIFT_L)) {
-        r = expression(b, l, 4);
         exit_section_(b, l, m, SHIFT_LEFT_EXPRESSION, r, true, null);
       }
-      else if (g < 4 && consumeTokenSmart(b, SHIFT_R)) {
-        r = expression(b, l, 4);
+      else if (g < 3 && consumeTokenSmart(b, SHIFT_R)) {
+        r = expression(b, l, 3);
         exit_section_(b, l, m, SHIFT_RIGHT_EXPRESSION, r, true, null);
       }
-      else if (g < 5 && consumeTokenSmart(b, PIPE)) {
-        r = expression(b, l, 5);
+      else if (g < 4 && consumeTokenSmart(b, PIPE)) {
+        r = expression(b, l, 4);
         exit_section_(b, l, m, OR_EXPRESSION, r, true, null);
       }
-      else if (g < 5 && consumeTokenSmart(b, AMPERSAND)) {
-        r = expression(b, l, 5);
+      else if (g < 4 && consumeTokenSmart(b, POW)) {
+        r = expression(b, l, 4);
+        exit_section_(b, l, m, XOR_EXPRESSION, r, true, null);
+      }
+      else if (g < 4 && consumeTokenSmart(b, AMPERSAND)) {
+        r = expression(b, l, 4);
         exit_section_(b, l, m, AND_EXPRESSION, r, true, null);
       }
-      else if (g < 5 && consumeTokenSmart(b, EXCLAMATION)) {
-        r = expression(b, l, 5);
+      else if (g < 4 && consumeTokenSmart(b, EXCLAMATION)) {
+        r = expression(b, l, 4);
         exit_section_(b, l, m, NOT_EXPRESSION, r, true, null);
       }
       else {

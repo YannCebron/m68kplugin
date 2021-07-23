@@ -1306,7 +1306,7 @@ pushsection_directive ::= PUSHSECTION
   parserClass = "com.yanncebron.m68kplugin.lang.M68kExpressionParser"
   psiPackage = "com.yanncebron.m68kplugin.lang.psi.expression"
   psiImplPackage="com.yanncebron.m68kplugin.lang.psi.expression.impl"
-  extends("(plus|minus|mul|div|mod|exp|shift.*|or|and|not)_expression") = binary_expression
+  extends("(plus|minus|mul|div|mod|shift.*|or|xor|and|not)_expression") = binary_expression
   extends("unary_(plus|minus|complement)_expression") = unary_expression
   extends(".*expression") = expression
   consumeTokenMethod(".*expression")="consumeTokenFast"
@@ -1315,7 +1315,6 @@ pushsection_directive ::= PUSHSECTION
 expression ::= add_group |
                mul_group |
                unary_group |
-               exp_expression |
                shift_group |
                bool_group |
                primary_group
@@ -1352,14 +1351,14 @@ unary_plus_expression ::= PLUS expression
 unary_minus_expression ::= MINUS expression
 unary_complement_expression ::= TILDE expression
 
-exp_expression ::= expression POW expression  // todo is this XOR?
 
 private shift_group ::= shift_left_expression | shift_right_expression
 shift_left_expression ::= expression SHIFT_L expression
 shift_right_expression ::= expression SHIFT_R expression
 
-private bool_group ::= or_expression | and_expression | not_expression
+private bool_group ::= or_expression | xor_expression | and_expression | not_expression
 or_expression ::= expression PIPE expression
+xor_expression ::= expression POW expression
 and_expression ::= expression AMPERSAND expression
 not_expression ::= expression EXCLAMATION expression
 

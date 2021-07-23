@@ -535,10 +535,6 @@ public class M68kVisitor extends PsiElementVisitor {
     // visitInstruction(o);
   }
 
-  public void visitExpExpression(@NotNull M68kExpExpression o) {
-    visitBinaryExpression(o);
-  }
-
   public void visitExpression(@NotNull M68kExpression o) {
     visitPsiElement(o);
   }
@@ -1145,6 +1141,10 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitXdefDirective(@NotNull M68kXdefDirective o) {
     visitDirective(o);
+  }
+
+  public void visitXorExpression(@NotNull M68kXorExpression o) {
+    visitBinaryExpression(o);
   }
 
   public void visitXrefDirective(@NotNull M68kXrefDirective o) {

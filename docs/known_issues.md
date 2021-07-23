@@ -134,7 +134,6 @@ Unsupported directives, these will display false positive
 - EOL comment: do not include preceding WS in PSI
 - `'\'` and `''''` are valid string literals
 - add missing expression operators
-  - XOR?
 - do not allow spaces (?!)
 - support `equr`/`reg` etc. replacement names `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
 

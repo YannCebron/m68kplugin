@@ -140,7 +140,6 @@ public interface M68kTypes {
   IElementType EVEN_DIRECTIVE = new M68kCompositeElementType("EVEN_DIRECTIVE");
   IElementType EXG_INSTRUCTION = new M68kCompositeElementType("EXG_INSTRUCTION");
   IElementType EXPRESSION = new M68kCompositeElementType("EXPRESSION");
-  IElementType EXP_EXPRESSION = new M68kCompositeElementType("EXP_EXPRESSION");
   IElementType EXT_INSTRUCTION = new M68kCompositeElementType("EXT_INSTRUCTION");
   IElementType FAIL_DIRECTIVE = new M68kCompositeElementType("FAIL_DIRECTIVE");
   IElementType FAR_DIRECTIVE = new M68kCompositeElementType("FAR_DIRECTIVE");
@@ -282,6 +281,7 @@ public interface M68kTypes {
   IElementType UNARY_PLUS_EXPRESSION = new M68kCompositeElementType("UNARY_PLUS_EXPRESSION");
   IElementType UNLK_INSTRUCTION = new M68kCompositeElementType("UNLK_INSTRUCTION");
   IElementType XDEF_DIRECTIVE = new M68kCompositeElementType("XDEF_DIRECTIVE");
+  IElementType XOR_EXPRESSION = new M68kCompositeElementType("XOR_EXPRESSION");
   IElementType XREF_DIRECTIVE = new M68kCompositeElementType("XREF_DIRECTIVE");
 
   class Factory {
@@ -625,9 +625,6 @@ public interface M68kTypes {
       }
       else if (type == EXG_INSTRUCTION) {
         return new M68kExgInstructionImpl(node);
-      }
-      else if (type == EXP_EXPRESSION) {
-        return new M68kExpExpressionImpl(node);
       }
       else if (type == EXT_INSTRUCTION) {
         return new M68kExtInstructionImpl(node);
@@ -1051,6 +1048,9 @@ public interface M68kTypes {
       }
       else if (type == XDEF_DIRECTIVE) {
         return new M68kXdefDirectiveImpl(node);
+      }
+      else if (type == XOR_EXPRESSION) {
+        return new M68kXorExpressionImpl(node);
       }
       else if (type == XREF_DIRECTIVE) {
         return new M68kXrefDirectiveImpl(node);
