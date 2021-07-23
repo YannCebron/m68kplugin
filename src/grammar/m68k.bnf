@@ -1358,7 +1358,7 @@ shift_right_expression ::= expression SHIFT_R expression
 
 private bool_group ::= or_expression | xor_expression | and_expression
 or_expression ::= expression (PIPE | EXCLAMATION) expression
-xor_expression ::= expression POW expression
+xor_expression ::= expression (POW | TILDE) expression
 and_expression ::= expression AMPERSAND expression
 
 private primary_group ::= number_expression | string_expression | paren_expression | label_ref_expression

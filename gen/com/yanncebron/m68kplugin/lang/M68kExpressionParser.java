@@ -120,7 +120,7 @@ public class M68kExpressionParser {
         r = expression(b, l, 4);
         exit_section_(b, l, m, OR_EXPRESSION, r, true, null);
       }
-      else if (g < 4 && consumeTokenSmart(b, POW)) {
+      else if (g < 4 && xor_expression_0(b, l + 1)) {
         r = expression(b, l, 4);
         exit_section_(b, l, m, XOR_EXPRESSION, r, true, null);
       }
@@ -199,6 +199,15 @@ public class M68kExpressionParser {
     boolean r;
     r = consumeTokenSmart(b, PIPE);
     if (!r) r = consumeTokenSmart(b, EXCLAMATION);
+    return r;
+  }
+
+  // POW | TILDE
+  private static boolean xor_expression_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "xor_expression_0")) return false;
+    boolean r;
+    r = consumeTokenSmart(b, POW);
+    if (!r) r = consumeTokenSmart(b, TILDE);
     return r;
   }
 
