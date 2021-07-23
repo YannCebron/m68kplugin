@@ -19,6 +19,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kNotExpression extends M68kBinaryExpression {
+public interface M68kUnaryNotExpression extends M68kUnaryExpression {
 
 }

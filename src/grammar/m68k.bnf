@@ -1307,7 +1307,7 @@ pushsection_directive ::= PUSHSECTION
   psiPackage = "com.yanncebron.m68kplugin.lang.psi.expression"
   psiImplPackage="com.yanncebron.m68kplugin.lang.psi.expression.impl"
   extends("(plus|minus|mul|div|mod|shift.*|or|xor|and|not)_expression") = binary_expression
-  extends("unary_(plus|minus|complement)_expression") = unary_expression
+  extends("unary_(plus|minus|complement|not)_expression") = unary_expression
   extends(".*expression") = expression
   consumeTokenMethod(".*expression")="consumeTokenFast"
 }
@@ -1346,21 +1346,20 @@ mul_expression ::= expression MUL expression
 div_expression ::= expression DIV expression
 mod_expression ::= expression (PERCENT | SLASH_SLASH) expression
 
-private unary_group ::= unary_plus_expression | unary_minus_expression | unary_complement_expression
+private unary_group ::= unary_plus_expression | unary_minus_expression | unary_complement_expression | unary_not_expression
 unary_plus_expression ::= PLUS expression
 unary_minus_expression ::= MINUS expression
 unary_complement_expression ::= TILDE expression
-
+unary_not_expression ::= EXCLAMATION expression
 
 private shift_group ::= shift_left_expression | shift_right_expression
 shift_left_expression ::= expression SHIFT_L expression
 shift_right_expression ::= expression SHIFT_R expression
 
-private bool_group ::= or_expression | xor_expression | and_expression | not_expression
+private bool_group ::= or_expression | xor_expression | and_expression
 or_expression ::= expression PIPE expression
 xor_expression ::= expression POW expression
 and_expression ::= expression AMPERSAND expression
-not_expression ::= expression EXCLAMATION expression
 
 private primary_group ::= number_expression | string_expression | paren_expression | label_ref_expression
 number_expression ::= DEC_NUMBER | HEX_NUMBER | OCT_NUMBER | BIN_NUMBER

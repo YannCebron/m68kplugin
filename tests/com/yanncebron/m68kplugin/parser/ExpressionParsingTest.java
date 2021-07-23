@@ -77,6 +77,10 @@ public class ExpressionParsingTest extends M68kParsingTestCase {
     doCodeTest(" dc ~");
   }
 
+  public void testUnaryNotExpression() throws Exception {
+    doCodeTest(" dc !2");
+  }
+
   public void testDecNumberExpression() throws Exception {
     doCodeTest(" dc 1234");
   }
@@ -179,14 +183,6 @@ public class ExpressionParsingTest extends M68kParsingTestCase {
 
   public void testXorExpression() throws Exception {
     doCodeTest(" dc 1^2");
-  }
-
-  public void testNotExpression() throws Exception {
-    doCodeTest(" dc 1!2");
-  }
-
-  public void testNotExpressionMissingRightExpression() throws Exception {
-    doCodeTest(" dc 1!");
   }
 
   public void testComplexExpression() throws Exception {

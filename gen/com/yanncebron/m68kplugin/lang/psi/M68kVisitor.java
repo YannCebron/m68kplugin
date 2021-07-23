@@ -808,10 +808,6 @@ public class M68kVisitor extends PsiElementVisitor {
     visitDirective(o);
   }
 
-  public void visitNotExpression(@NotNull M68kNotExpression o) {
-    visitBinaryExpression(o);
-  }
-
   public void visitNotInstruction(@NotNull M68kNotInstruction o) {
     visitDataSized(o);
     // visitInstruction(o);
@@ -1128,6 +1124,10 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitUnaryMinusExpression(@NotNull M68kUnaryMinusExpression o) {
+    visitUnaryExpression(o);
+  }
+
+  public void visitUnaryNotExpression(@NotNull M68kUnaryNotExpression o) {
     visitUnaryExpression(o);
   }
 

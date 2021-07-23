@@ -60,9 +60,9 @@ public class M68kExpressionParser {
   // Operator priority table:
   // 0: BINARY(plus_expression) BINARY(minus_expression)
   // 1: BINARY(mul_expression) BINARY(div_expression) BINARY(mod_expression)
-  // 2: PREFIX(unary_plus_expression) PREFIX(unary_minus_expression) PREFIX(unary_complement_expression)
+  // 2: PREFIX(unary_plus_expression) PREFIX(unary_minus_expression) PREFIX(unary_complement_expression) PREFIX(unary_not_expression)
   // 3: BINARY(shift_left_expression) BINARY(shift_right_expression)
-  // 4: BINARY(or_expression) BINARY(xor_expression) BINARY(and_expression) BINARY(not_expression)
+  // 4: BINARY(or_expression) BINARY(xor_expression) BINARY(and_expression)
   // 5: ATOM(number_expression) ATOM(string_expression) ATOM(paren_expression) ATOM(label_ref_expression)
   public static boolean expression(PsiBuilder b, int l, int g) {
     if (!recursion_guard_(b, l, "expression")) return false;
@@ -72,6 +72,7 @@ public class M68kExpressionParser {
     r = unary_plus_expression(b, l + 1);
     if (!r) r = unary_minus_expression(b, l + 1);
     if (!r) r = unary_complement_expression(b, l + 1);
+    if (!r) r = unary_not_expression(b, l + 1);
     if (!r) r = number_expression(b, l + 1);
     if (!r) r = string_expression(b, l + 1);
     if (!r) r = paren_expression(b, l + 1);
@@ -127,10 +128,6 @@ public class M68kExpressionParser {
         r = expression(b, l, 4);
         exit_section_(b, l, m, AND_EXPRESSION, r, true, null);
       }
-      else if (g < 4 && consumeTokenSmart(b, EXCLAMATION)) {
-        r = expression(b, l, 4);
-        exit_section_(b, l, m, NOT_EXPRESSION, r, true, null);
-      }
       else {
         exit_section_(b, l, m, null, false, false, null);
         break;
@@ -181,6 +178,18 @@ public class M68kExpressionParser {
     p = r;
     r = p && expression(b, l, 2);
     exit_section_(b, l, m, UNARY_COMPLEMENT_EXPRESSION, r, p, null);
+    return r || p;
+  }
+
+  public static boolean unary_not_expression(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "unary_not_expression")) return false;
+    if (!nextTokenIsSmart(b, EXCLAMATION)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, null);
+    r = consumeTokenSmart(b, EXCLAMATION);
+    p = r;
+    r = p && expression(b, l, 2);
+    exit_section_(b, l, m, UNARY_NOT_EXPRESSION, r, p, null);
     return r || p;
   }
 

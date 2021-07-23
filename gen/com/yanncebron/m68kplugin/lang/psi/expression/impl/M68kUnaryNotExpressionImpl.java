@@ -26,15 +26,15 @@ import com.yanncebron.m68kplugin.lang.psi.expression.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
 
-public class M68kNotExpressionImpl extends M68kBinaryExpressionImpl implements M68kNotExpression {
+public class M68kUnaryNotExpressionImpl extends M68kUnaryExpressionImpl implements M68kUnaryNotExpression {
 
-  public M68kNotExpressionImpl(@NotNull ASTNode node) {
+  public M68kUnaryNotExpressionImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   @Override
   public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitNotExpression(this);
+    visitor.visitUnaryNotExpression(this);
   }
 
   @Override

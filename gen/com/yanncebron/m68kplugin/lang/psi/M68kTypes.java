@@ -204,7 +204,6 @@ public interface M68kTypes {
   IElementType NOLIST_DIRECTIVE = new M68kCompositeElementType("NOLIST_DIRECTIVE");
   IElementType NOPAGE_DIRECTIVE = new M68kCompositeElementType("NOPAGE_DIRECTIVE");
   IElementType NOP_INSTRUCTION = new M68kCompositeElementType("NOP_INSTRUCTION");
-  IElementType NOT_EXPRESSION = new M68kCompositeElementType("NOT_EXPRESSION");
   IElementType NOT_INSTRUCTION = new M68kCompositeElementType("NOT_INSTRUCTION");
   IElementType NUMBER_EXPRESSION = new M68kCompositeElementType("NUMBER_EXPRESSION");
   IElementType ODD_DIRECTIVE = new M68kCompositeElementType("ODD_DIRECTIVE");
@@ -278,6 +277,7 @@ public interface M68kTypes {
   IElementType TTL_DIRECTIVE = new M68kCompositeElementType("TTL_DIRECTIVE");
   IElementType UNARY_COMPLEMENT_EXPRESSION = new M68kCompositeElementType("UNARY_COMPLEMENT_EXPRESSION");
   IElementType UNARY_MINUS_EXPRESSION = new M68kCompositeElementType("UNARY_MINUS_EXPRESSION");
+  IElementType UNARY_NOT_EXPRESSION = new M68kCompositeElementType("UNARY_NOT_EXPRESSION");
   IElementType UNARY_PLUS_EXPRESSION = new M68kCompositeElementType("UNARY_PLUS_EXPRESSION");
   IElementType UNLK_INSTRUCTION = new M68kCompositeElementType("UNLK_INSTRUCTION");
   IElementType XDEF_DIRECTIVE = new M68kCompositeElementType("XDEF_DIRECTIVE");
@@ -818,9 +818,6 @@ public interface M68kTypes {
       else if (type == NOP_INSTRUCTION) {
         return new M68kNopInstructionImpl(node);
       }
-      else if (type == NOT_EXPRESSION) {
-        return new M68kNotExpressionImpl(node);
-      }
       else if (type == NOT_INSTRUCTION) {
         return new M68kNotInstructionImpl(node);
       }
@@ -1039,6 +1036,9 @@ public interface M68kTypes {
       }
       else if (type == UNARY_MINUS_EXPRESSION) {
         return new M68kUnaryMinusExpressionImpl(node);
+      }
+      else if (type == UNARY_NOT_EXPRESSION) {
+        return new M68kUnaryNotExpressionImpl(node);
       }
       else if (type == UNARY_PLUS_EXPRESSION) {
         return new M68kUnaryPlusExpressionImpl(node);
