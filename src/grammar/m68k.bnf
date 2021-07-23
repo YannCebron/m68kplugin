@@ -1345,7 +1345,7 @@ minus_expression ::= expression MINUS expression
 private mul_group ::= mul_expression | div_expression | mod_expression
 mul_expression ::= expression MUL expression
 div_expression ::= expression DIV expression
-mod_expression ::= expression PERCENT expression
+mod_expression ::= expression (PERCENT | SLASH_SLASH) expression
 
 private unary_group ::= unary_plus_expression | unary_minus_expression | unary_complement_expression
 unary_plus_expression ::= PLUS expression

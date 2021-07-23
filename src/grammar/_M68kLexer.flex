@@ -203,6 +203,7 @@ Z=[zZ]
   "+"  { return PLUS; }
   "-"  { return MINUS; }
   "*"  { return MUL; }
+  "//" { return SLASH_SLASH; }
   "/"  { return DIV; }
   "^"  { return POW; }
   "#"  { return HASH; }

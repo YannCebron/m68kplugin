@@ -49,6 +49,10 @@ public class ExpressionParsingTest extends M68kParsingTestCase {
     doCodeTest(" dc 10%3");
   }
 
+  public void testModSlashSlashExpression() throws Exception {
+    doCodeTest(" dc 10//3");
+  }
+
   public void testUnaryPlusExpression() throws Exception {
     doCodeTest(" dc +1");
   }

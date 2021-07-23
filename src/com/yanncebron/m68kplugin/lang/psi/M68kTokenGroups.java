@@ -288,6 +288,7 @@ public final class M68kTokenGroups {
     PLUS,
     SHIFT_L,
     SHIFT_R,
+    SLASH_SLASH,
     TILDE
   );
 

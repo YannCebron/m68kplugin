@@ -104,7 +104,7 @@ public class M68kExpressionParser {
         r = expression(b, l, 1);
         exit_section_(b, l, m, DIV_EXPRESSION, r, true, null);
       }
-      else if (g < 1 && consumeTokenSmart(b, PERCENT)) {
+      else if (g < 1 && mod_expression_0(b, l + 1)) {
         r = expression(b, l, 1);
         exit_section_(b, l, m, MOD_EXPRESSION, r, true, null);
       }
@@ -162,6 +162,15 @@ public class M68kExpressionParser {
     r = p && expression(b, l, 2);
     exit_section_(b, l, m, UNARY_MINUS_EXPRESSION, r, p, null);
     return r || p;
+  }
+
+  // PERCENT | SLASH_SLASH
+  private static boolean mod_expression_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "mod_expression_0")) return false;
+    boolean r;
+    r = consumeTokenSmart(b, PERCENT);
+    if (!r) r = consumeTokenSmart(b, SLASH_SLASH);
+    return r;
   }
 
   public static boolean unary_complement_expression(PsiBuilder b, int l) {

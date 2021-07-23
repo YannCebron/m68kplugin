@@ -249,6 +249,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType SHIFT_L = new M68kTokenType("<<");
   public static final IElementType SHIFT_R = new M68kTokenType(">>");
   public static final IElementType SHS = new M68kTokenType("shs");
+  public static final IElementType SLASH_SLASH = new M68kTokenType("//");
   public static final IElementType SLE = new M68kTokenType("sle");
   public static final IElementType SLO = new M68kTokenType("slo");
   public static final IElementType SLS = new M68kTokenType("sls");
