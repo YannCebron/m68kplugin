@@ -1310,6 +1310,7 @@ pushsection_directive ::= PUSHSECTION
   extends("logical_(or|and)_expression") = binary_expression
   extends("(plus|minus|mul|div|mod)_expression") = binary_expression
   extends("(shift.*|or|xor|and|not)_expression") = binary_expression
+  extends("(equals|not_equals)_expression") = binary_expression
   extends("unary_.*_expression") = unary_expression
   extends(".*expression") = expression
 
@@ -1319,6 +1320,7 @@ pushsection_directive ::= PUSHSECTION
 expression ::=
                logical_or_expression |
                logical_and_expression |
+               equality_group |
                add_group |
                mul_group |
                unary_group |
@@ -1346,6 +1348,10 @@ fake unary_expression ::= expression?
 
 logical_or_expression ::= expression PIPE_PIPE expression
 logical_and_expression ::= expression AMPERSAND_AMPERSAND expression
+
+private equality_group ::= equals_expression | not_equals_expression
+equals_expression ::= expression (EQ | EQ_EQ) expression
+not_equals_expression ::= expression (EXCLAMATION_EQ | LT_GT) expression
 
 private add_group ::= plus_expression | minus_expression
 plus_expression ::= expression PLUS expression

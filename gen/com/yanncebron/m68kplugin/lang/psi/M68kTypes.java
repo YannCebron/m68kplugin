@@ -134,6 +134,7 @@ public interface M68kTypes {
   IElementType EORI_INSTRUCTION = new M68kCompositeElementType("EORI_INSTRUCTION");
   IElementType EOR_INSTRUCTION = new M68kCompositeElementType("EOR_INSTRUCTION");
   IElementType EQUALS_DIRECTIVE = new M68kCompositeElementType("EQUALS_DIRECTIVE");
+  IElementType EQUALS_EXPRESSION = new M68kCompositeElementType("EQUALS_EXPRESSION");
   IElementType EQUR_DIRECTIVE = new M68kCompositeElementType("EQUR_DIRECTIVE");
   IElementType EQU_DIRECTIVE = new M68kCompositeElementType("EQU_DIRECTIVE");
   IElementType EREM_DIRECTIVE = new M68kCompositeElementType("EREM_DIRECTIVE");
@@ -206,6 +207,7 @@ public interface M68kTypes {
   IElementType NOLIST_DIRECTIVE = new M68kCompositeElementType("NOLIST_DIRECTIVE");
   IElementType NOPAGE_DIRECTIVE = new M68kCompositeElementType("NOPAGE_DIRECTIVE");
   IElementType NOP_INSTRUCTION = new M68kCompositeElementType("NOP_INSTRUCTION");
+  IElementType NOT_EQUALS_EXPRESSION = new M68kCompositeElementType("NOT_EQUALS_EXPRESSION");
   IElementType NOT_INSTRUCTION = new M68kCompositeElementType("NOT_INSTRUCTION");
   IElementType NUMBER_EXPRESSION = new M68kCompositeElementType("NUMBER_EXPRESSION");
   IElementType ODD_DIRECTIVE = new M68kCompositeElementType("ODD_DIRECTIVE");
@@ -613,6 +615,9 @@ public interface M68kTypes {
       else if (type == EQUALS_DIRECTIVE) {
         return new M68kEqualsDirectiveImpl(node);
       }
+      else if (type == EQUALS_EXPRESSION) {
+        return new M68kEqualsExpressionImpl(node);
+      }
       else if (type == EQUR_DIRECTIVE) {
         return new M68kEqurDirectiveImpl(node);
       }
@@ -825,6 +830,9 @@ public interface M68kTypes {
       }
       else if (type == NOP_INSTRUCTION) {
         return new M68kNopInstructionImpl(node);
+      }
+      else if (type == NOT_EQUALS_EXPRESSION) {
+        return new M68kNotEqualsExpressionImpl(node);
       }
       else if (type == NOT_INSTRUCTION) {
         return new M68kNotInstructionImpl(node);

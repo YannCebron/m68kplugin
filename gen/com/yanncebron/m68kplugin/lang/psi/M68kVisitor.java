@@ -518,6 +518,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitEquDirectiveBase(o);
   }
 
+  public void visitEqualsExpression(@NotNull M68kEqualsExpression o) {
+    visitBinaryExpression(o);
+  }
+
   public void visitEqurDirective(@NotNull M68kEqurDirective o) {
     visitDirective(o);
   }
@@ -814,6 +818,10 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitNopageDirective(@NotNull M68kNopageDirective o) {
     visitDirective(o);
+  }
+
+  public void visitNotEqualsExpression(@NotNull M68kNotEqualsExpression o) {
+    visitBinaryExpression(o);
   }
 
   public void visitNotInstruction(@NotNull M68kNotInstruction o) {

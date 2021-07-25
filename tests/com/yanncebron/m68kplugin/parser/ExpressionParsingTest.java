@@ -201,6 +201,22 @@ public class ExpressionParsingTest extends M68kParsingTestCase {
     doCodeTest(" dc 1&&2");
   }
 
+  public void testEqualsExpression() throws Exception {
+    doCodeTest(" dc 1=2");
+  }
+
+  public void testEqualsEqEqExpression() throws Exception {
+    doCodeTest(" dc 1==2");
+  }
+
+  public void testNotEqualsExpression() throws Exception {
+    doCodeTest(" dc 1!=2");
+  }
+
+  public void testNotEqualsLtGtExpression() throws Exception {
+    doCodeTest(" dc 1<>2");
+  }
+
   public void testComplexExpression() throws Exception {
     doCodeTest(" dc 1+(2+3)/-5");
   }

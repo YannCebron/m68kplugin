@@ -208,6 +208,11 @@ Z=[zZ]
   "^"  { return POW; }
   "#"  { return HASH; }
   "~"  { return TILDE; }
+  "("  { return L_PAREN; }
+  ")"  { return R_PAREN; }
+  "["  { return L_BRACKET; }
+  "]"  { return R_BRACKET; }
+  "!=" { return EXCLAMATION_EQ; }
   "!"  { return EXCLAMATION; }
   "%"  { return PERCENT; }
   "&&" { return AMPERSAND_AMPERSAND; }
@@ -215,12 +220,14 @@ Z=[zZ]
   "\\" { return BACKSLASH; }
   "||" { return PIPE_PIPE; }
   "|"  { return PIPE; }
+  "<>" { return LT_GT; }
   "<<" { return LT_LT; }
+  "<=" { return LT_EQ; }
+  "<"  { return LT; }
   ">>" { return GT_GT; }
-  "("  { return L_PAREN; }
-  ")"  { return R_PAREN; }
-  "["  { return L_BRACKET; }
-  "]"  { return R_BRACKET; }
+  ">=" { return GT_EQ; }
+  ">"  { return GT; }
+  "==" { return EQ_EQ; }
   "="  { return EQ; }
 
   {DECNUMBER}                 { return DEC_NUMBER; }
