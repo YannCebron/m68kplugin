@@ -104,6 +104,7 @@ Unsupported directives, these will display false positive
   - `__OPTC`
 - vasm
   - `__VASM`
+  - `__UNIXFS`, `__MSDOSFS`, `__AMIGAFS`
 
 ### Macros
 
