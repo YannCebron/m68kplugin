@@ -61,12 +61,13 @@ public class M68kExpressionParser {
   // 0: BINARY(logical_or_expression)
   // 1: BINARY(logical_and_expression)
   // 2: BINARY(equals_expression) BINARY(not_equals_expression)
-  // 3: BINARY(plus_expression) BINARY(minus_expression)
-  // 4: BINARY(mul_expression) BINARY(div_expression) BINARY(mod_expression)
-  // 5: PREFIX(unary_plus_expression) PREFIX(unary_minus_expression) PREFIX(unary_complement_expression) PREFIX(unary_not_expression)
-  // 6: BINARY(shift_left_expression) BINARY(shift_right_expression)
-  // 7: BINARY(or_expression) BINARY(xor_expression) BINARY(and_expression)
-  // 8: ATOM(number_expression) ATOM(string_expression) ATOM(paren_expression) ATOM(label_ref_expression)
+  // 3: BINARY(lt_expression) BINARY(lt_eq_expression) BINARY(gt_expression) BINARY(gt_eq_expression)
+  // 4: BINARY(plus_expression) BINARY(minus_expression)
+  // 5: BINARY(mul_expression) BINARY(div_expression) BINARY(mod_expression)
+  // 6: PREFIX(unary_plus_expression) PREFIX(unary_minus_expression) PREFIX(unary_complement_expression) PREFIX(unary_not_expression)
+  // 7: BINARY(shift_left_expression) BINARY(shift_right_expression)
+  // 8: BINARY(or_expression) BINARY(xor_expression) BINARY(and_expression)
+  // 9: ATOM(number_expression) ATOM(string_expression) ATOM(paren_expression) ATOM(label_ref_expression)
   public static boolean expression(PsiBuilder b, int l, int g) {
     if (!recursion_guard_(b, l, "expression")) return false;
     addVariant(b, "<expression>");
@@ -107,44 +108,60 @@ public class M68kExpressionParser {
         r = expression(b, l, 2);
         exit_section_(b, l, m, NOT_EQUALS_EXPRESSION, r, true, null);
       }
-      else if (g < 3 && consumeTokenSmart(b, PLUS)) {
+      else if (g < 3 && consumeTokenSmart(b, LT)) {
         r = expression(b, l, 3);
+        exit_section_(b, l, m, LT_EXPRESSION, r, true, null);
+      }
+      else if (g < 3 && consumeTokenSmart(b, LT_EQ)) {
+        r = expression(b, l, 3);
+        exit_section_(b, l, m, LT_EQ_EXPRESSION, r, true, null);
+      }
+      else if (g < 3 && consumeTokenSmart(b, GT)) {
+        r = expression(b, l, 3);
+        exit_section_(b, l, m, GT_EXPRESSION, r, true, null);
+      }
+      else if (g < 3 && consumeTokenSmart(b, GT_EQ)) {
+        r = expression(b, l, 3);
+        exit_section_(b, l, m, GT_EQ_EXPRESSION, r, true, null);
+      }
+      else if (g < 4 && consumeTokenSmart(b, PLUS)) {
+        r = expression(b, l, 4);
         exit_section_(b, l, m, PLUS_EXPRESSION, r, true, null);
       }
-      else if (g < 3 && consumeTokenSmart(b, MINUS)) {
-        r = expression(b, l, 3);
+      else if (g < 4 && consumeTokenSmart(b, MINUS)) {
+        r = expression(b, l, 4);
         exit_section_(b, l, m, MINUS_EXPRESSION, r, true, null);
       }
-      else if (g < 4 && consumeTokenSmart(b, MUL)) {
-        r = expression(b, l, 4);
+      else if (g < 5 && consumeTokenSmart(b, MUL)) {
+        r = expression(b, l, 5);
         exit_section_(b, l, m, MUL_EXPRESSION, r, true, null);
       }
-      else if (g < 4 && consumeTokenSmart(b, DIV)) {
-        r = expression(b, l, 4);
+      else if (g < 5 && consumeTokenSmart(b, DIV)) {
+        r = expression(b, l, 5);
         exit_section_(b, l, m, DIV_EXPRESSION, r, true, null);
       }
-      else if (g < 4 && mod_expression_0(b, l + 1)) {
-        r = expression(b, l, 4);
+      else if (g < 5 && mod_expression_0(b, l + 1)) {
+        r = expression(b, l, 5);
         exit_section_(b, l, m, MOD_EXPRESSION, r, true, null);
       }
-      else if (g < 6 && consumeTokenSmart(b, LT_LT)) {
-        r = expression(b, l, 6);
+      else if (g < 7 && consumeTokenSmart(b, LT_LT)) {
+        r = expression(b, l, 7);
         exit_section_(b, l, m, SHIFT_LEFT_EXPRESSION, r, true, null);
       }
-      else if (g < 6 && consumeTokenSmart(b, GT_GT)) {
-        r = expression(b, l, 6);
+      else if (g < 7 && consumeTokenSmart(b, GT_GT)) {
+        r = expression(b, l, 7);
         exit_section_(b, l, m, SHIFT_RIGHT_EXPRESSION, r, true, null);
       }
-      else if (g < 7 && or_expression_0(b, l + 1)) {
-        r = expression(b, l, 7);
+      else if (g < 8 && or_expression_0(b, l + 1)) {
+        r = expression(b, l, 8);
         exit_section_(b, l, m, OR_EXPRESSION, r, true, null);
       }
-      else if (g < 7 && xor_expression_0(b, l + 1)) {
-        r = expression(b, l, 7);
+      else if (g < 8 && xor_expression_0(b, l + 1)) {
+        r = expression(b, l, 8);
         exit_section_(b, l, m, XOR_EXPRESSION, r, true, null);
       }
-      else if (g < 7 && consumeTokenSmart(b, AMPERSAND)) {
-        r = expression(b, l, 7);
+      else if (g < 8 && consumeTokenSmart(b, AMPERSAND)) {
+        r = expression(b, l, 8);
         exit_section_(b, l, m, AND_EXPRESSION, r, true, null);
       }
       else {
@@ -180,7 +197,7 @@ public class M68kExpressionParser {
     Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeTokenSmart(b, PLUS);
     p = r;
-    r = p && expression(b, l, 5);
+    r = p && expression(b, l, 6);
     exit_section_(b, l, m, UNARY_PLUS_EXPRESSION, r, p, null);
     return r || p;
   }
@@ -192,7 +209,7 @@ public class M68kExpressionParser {
     Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeTokenSmart(b, MINUS);
     p = r;
-    r = p && expression(b, l, 5);
+    r = p && expression(b, l, 6);
     exit_section_(b, l, m, UNARY_MINUS_EXPRESSION, r, p, null);
     return r || p;
   }
@@ -213,7 +230,7 @@ public class M68kExpressionParser {
     Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeTokenSmart(b, TILDE);
     p = r;
-    r = p && expression(b, l, 5);
+    r = p && expression(b, l, 6);
     exit_section_(b, l, m, UNARY_COMPLEMENT_EXPRESSION, r, p, null);
     return r || p;
   }
@@ -225,7 +242,7 @@ public class M68kExpressionParser {
     Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeTokenSmart(b, EXCLAMATION);
     p = r;
-    r = p && expression(b, l, 5);
+    r = p && expression(b, l, 6);
     exit_section_(b, l, m, UNARY_NOT_EXPRESSION, r, p, null);
     return r || p;
   }

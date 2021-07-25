@@ -144,6 +144,8 @@ public interface M68kTypes {
   IElementType EXT_INSTRUCTION = new M68kCompositeElementType("EXT_INSTRUCTION");
   IElementType FAIL_DIRECTIVE = new M68kCompositeElementType("FAIL_DIRECTIVE");
   IElementType FAR_DIRECTIVE = new M68kCompositeElementType("FAR_DIRECTIVE");
+  IElementType GT_EQ_EXPRESSION = new M68kCompositeElementType("GT_EQ_EXPRESSION");
+  IElementType GT_EXPRESSION = new M68kCompositeElementType("GT_EXPRESSION");
   IElementType IDNT_DIRECTIVE = new M68kCompositeElementType("IDNT_DIRECTIVE");
   IElementType IFB_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("IFB_CONDITIONAL_ASSEMBLY_DIRECTIVE");
   IElementType IFC_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("IFC_CONDITIONAL_ASSEMBLY_DIRECTIVE");
@@ -184,6 +186,8 @@ public interface M68kTypes {
   IElementType LOGICAL_OR_EXPRESSION = new M68kCompositeElementType("LOGICAL_OR_EXPRESSION");
   IElementType LSL_INSTRUCTION = new M68kCompositeElementType("LSL_INSTRUCTION");
   IElementType LSR_INSTRUCTION = new M68kCompositeElementType("LSR_INSTRUCTION");
+  IElementType LT_EQ_EXPRESSION = new M68kCompositeElementType("LT_EQ_EXPRESSION");
+  IElementType LT_EXPRESSION = new M68kCompositeElementType("LT_EXPRESSION");
   IElementType MACRO_CALL_DIRECTIVE = new M68kCompositeElementType("MACRO_CALL_DIRECTIVE");
   IElementType MACRO_CALL_PARAMETER = new M68kCompositeElementType("MACRO_CALL_PARAMETER");
   IElementType MACRO_DIRECTIVE = new M68kCompositeElementType("MACRO_DIRECTIVE");
@@ -642,6 +646,12 @@ public interface M68kTypes {
       else if (type == FAR_DIRECTIVE) {
         return new M68kFarDirectiveImpl(node);
       }
+      else if (type == GT_EQ_EXPRESSION) {
+        return new M68kGtEqExpressionImpl(node);
+      }
+      else if (type == GT_EXPRESSION) {
+        return new M68kGtExpressionImpl(node);
+      }
       else if (type == IDNT_DIRECTIVE) {
         return new M68kIdntDirectiveImpl(node);
       }
@@ -761,6 +771,12 @@ public interface M68kTypes {
       }
       else if (type == LSR_INSTRUCTION) {
         return new M68kLsrInstructionImpl(node);
+      }
+      else if (type == LT_EQ_EXPRESSION) {
+        return new M68kLtEqExpressionImpl(node);
+      }
+      else if (type == LT_EXPRESSION) {
+        return new M68kLtExpressionImpl(node);
       }
       else if (type == MACRO_CALL_DIRECTIVE) {
         return new M68kMacroCallDirectiveImpl(node);

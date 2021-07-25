@@ -556,6 +556,14 @@ public class M68kVisitor extends PsiElementVisitor {
     visitDirective(o);
   }
 
+  public void visitGtEqExpression(@NotNull M68kGtEqExpression o) {
+    visitBinaryExpression(o);
+  }
+
+  public void visitGtExpression(@NotNull M68kGtExpression o) {
+    visitBinaryExpression(o);
+  }
+
   public void visitIdntDirective(@NotNull M68kIdntDirective o) {
     visitDirective(o);
   }
@@ -717,6 +725,14 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitLsrInstruction(@NotNull M68kLsrInstruction o) {
     visitShiftRotateInstructionBase(o);
+  }
+
+  public void visitLtEqExpression(@NotNull M68kLtEqExpression o) {
+    visitBinaryExpression(o);
+  }
+
+  public void visitLtExpression(@NotNull M68kLtExpression o) {
+    visitBinaryExpression(o);
   }
 
   public void visitMacroCallDirective(@NotNull M68kMacroCallDirective o) {
