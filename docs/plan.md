@@ -152,6 +152,7 @@
   - register name inlay
   - http://deadliners.net/gradientmaster/
 - support IFF images in IDE https://github.com/haraldk/TwelveMonkeys
+- FS-UAE [configuration files](https://fs-uae.net/configuration-files)                         
 
 ## Resources
 
