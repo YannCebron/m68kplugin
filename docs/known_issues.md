@@ -77,7 +77,6 @@ Unsupported directives, these will display false positive
 
 #### Directives with known limitations
                     
-- conditional assembly directives: relational expressions `if LABEL>0`
 - `printt`: multiple strings
 
 ### Labels

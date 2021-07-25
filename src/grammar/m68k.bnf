@@ -1302,6 +1302,7 @@ popsection_directive ::= POPSECTION
 pushsection_directive ::= PUSHSECTION
 
 // Expressions  ============================================================
+// http://sun.hasenbraten.de/vasm/release/vasm_2.html#Expressions
 ;{
   parserClass = "com.yanncebron.m68kplugin.lang.M68kExpressionParser"
   psiPackage = "com.yanncebron.m68kplugin.lang.psi.expression"
@@ -1318,16 +1319,17 @@ pushsection_directive ::= PUSHSECTION
   consumeTokenMethod(".*expression")="consumeTokenFast"
 }
 
-expression ::=
-               logical_or_expression |
+expression ::= logical_or_expression |
                logical_and_expression |
                equality_group |
                relational_group |
                add_group |
                mul_group |
-               unary_group |
+               or_expression |
+               xor_expression |
+               and_expression |
                shift_group |
-               bool_group |
+               unary_group |
                primary_group
 
 fake binary_expression ::= expression+
@@ -1370,7 +1372,7 @@ mul_expression ::= expression MUL expression
 div_expression ::= expression DIV expression
 mod_expression ::= expression (PERCENT | SLASH_SLASH) expression
 
-private unary_group ::= unary_plus_expression | unary_minus_expression | unary_complement_expression | unary_not_expression
+private unary_group ::= unary_plus_expression | unary_minus_expression | unary_not_expression | unary_complement_expression
 unary_plus_expression ::= PLUS expression
 unary_minus_expression ::= MINUS expression
 unary_complement_expression ::= TILDE expression
@@ -1380,13 +1382,12 @@ private shift_group ::= shift_left_expression | shift_right_expression
 shift_left_expression ::= expression LT_LT expression
 shift_right_expression ::= expression GT_GT expression
 
-private bool_group ::= or_expression | xor_expression | and_expression
 or_expression ::= expression (PIPE | EXCLAMATION) expression
 xor_expression ::= expression (POW | TILDE) expression
 and_expression ::= expression AMPERSAND expression
 
-private primary_group ::= number_expression | string_expression | paren_expression | label_ref_expression
-number_expression ::= DEC_NUMBER | HEX_NUMBER | OCT_NUMBER | BIN_NUMBER
+private primary_group ::= number_expression | string_expression | label_ref_expression | paren_expression
+number_expression ::= DEC_NUMBER | BIN_NUMBER | HEX_NUMBER | OCT_NUMBER
 {
   implements = "com.intellij.psi.PsiLiteralValue"
   mixin = "com.yanncebron.m68kplugin.lang.psi.expression.impl.M68kNumberExpressionMixIn"
