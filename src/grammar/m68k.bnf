@@ -1306,10 +1306,13 @@ pushsection_directive ::= PUSHSECTION
   parserClass = "com.yanncebron.m68kplugin.lang.M68kExpressionParser"
   psiPackage = "com.yanncebron.m68kplugin.lang.psi.expression"
   psiImplPackage="com.yanncebron.m68kplugin.lang.psi.expression.impl"
+
   extends("logical_(or|and)_expression") = binary_expression
-  extends("(plus|minus|mul|div|mod|shift.*|or|xor|and|not)_expression") = binary_expression
-  extends("unary_(plus|minus|complement|not)_expression") = unary_expression
+  extends("(plus|minus|mul|div|mod)_expression") = binary_expression
+  extends("(shift.*|or|xor|and|not)_expression") = binary_expression
+  extends("unary_.*_expression") = unary_expression
   extends(".*expression") = expression
+
   consumeTokenMethod(".*expression")="consumeTokenFast"
 }
 
