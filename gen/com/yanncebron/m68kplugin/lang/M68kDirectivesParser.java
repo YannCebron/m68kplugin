@@ -622,13 +622,13 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // label EQ expression
+  // label EQ_DIRECTIVE expression
   public static boolean equals_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "equals_directive")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, EQUALS_DIRECTIVE, "<directive>");
     r = label(b, l + 1);
-    r = r && consumeToken(b, EQ);
+    r = r && consumeToken(b, EQ_DIRECTIVE);
     p = r; // pin = 2
     r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, l, m, r, p, null);

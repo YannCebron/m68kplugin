@@ -1015,7 +1015,7 @@ equ_directive ::= label EQU expression
   extends = equ_directive_base
 }
 
-equals_directive ::= label EQ expression
+equals_directive ::= label EQ_DIRECTIVE expression
 {
   pin = 2
   extends = equ_directive_base

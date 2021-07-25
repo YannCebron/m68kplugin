@@ -140,7 +140,7 @@ Z=[zZ]
 <AFTER_LABEL> {
   "$"            { return DOLLAR; }
   ":"            { yybegin(IN_INSTRUCTION); return COLON; }
-  "="            { yybegin(IN_OPERAND); return EQ; } // duplicated in IN_INSTRUCTION
+  "="            { yybegin(IN_OPERAND); return EQ_DIRECTIVE; } // duplicated in IN_INSTRUCTION
 
 // should be here instead of IN_INSTRUCTION - they must follow label (whitespace switching problem)
 //  {M}{A}{C}{R}{O}             { yybegin(AFTER_OPERAND); return MACRO; }
@@ -263,8 +263,8 @@ Z=[zZ]
   // instruction itself can be macro param inside macro block
   "\\"                         { yybegin(IN_OPERAND); return BACKSLASH; }
 
-  // after label+whitespaces switching problems
-  "="                          { yybegin(IN_OPERAND); return EQ; }
+  // after label+whitespaces switching problems, duplicated in AFTER_LABEL
+  "="                          { yybegin(IN_OPERAND); return EQ_DIRECTIVE; }
 
   {N}{O}{P}                    { yybegin(AFTER_OPERAND); return NOP; }
   {I}{L}{L}{E}{G}{A}{L}        { yybegin(AFTER_OPERAND); return ILLEGAL; }

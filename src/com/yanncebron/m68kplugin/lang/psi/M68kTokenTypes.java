@@ -133,6 +133,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType EOR = new M68kTokenType("eor");
   public static final IElementType EORI = new M68kTokenType("eori");
   public static final IElementType EQ = new M68kTokenType("=");
+  public static final IElementType EQ_DIRECTIVE = new M68kTokenType("=");
   public static final IElementType EQU = new M68kTokenType("equ");
   public static final IElementType EQUR = new M68kTokenType("equr");
   public static final IElementType EQ_EQ = new M68kTokenType("==");

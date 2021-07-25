@@ -61,7 +61,7 @@ public interface M68kStubElementTypesHolder {
           value = parseValue(tree, parent, M68kTokenTypes.EQU);
         } else if (tokenType == M68kTypes.EQUALS_DIRECTIVE) {
           kind = M68kLabelBase.LabelKind.EQUALS;
-          value = parseValue(tree, parent, M68kTokenTypes.EQ);
+          value = parseValue(tree, parent, M68kTokenTypes.EQ_DIRECTIVE);
         } else if (tokenType == M68kTypes.MACRO_DIRECTIVE) {
           kind = M68kLabelBase.LabelKind.MACRO;
         } else if (tokenType == M68kTypes.SET_DIRECTIVE) {

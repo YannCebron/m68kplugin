@@ -1757,7 +1757,7 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 296: break;
           case 10: 
-            { yybegin(IN_OPERAND); return EQ;
+            { yybegin(IN_OPERAND); return EQ_DIRECTIVE;
             } 
             // fall through
           case 297: break;
