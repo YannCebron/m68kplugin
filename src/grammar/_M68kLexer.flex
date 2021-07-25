@@ -210,8 +210,10 @@ Z=[zZ]
   "~"  { return TILDE; }
   "!"  { return EXCLAMATION; }
   "%"  { return PERCENT; }
+  "&&" { return AMPERSAND_AMPERSAND; }
   "&"  { return AMPERSAND; }
   "\\" { return BACKSLASH; }
+  "||" { return PIPE_PIPE; }
   "|"  { return PIPE; }
   "<<" { return LT_LT; }
   ">>" { return GT_GT; }

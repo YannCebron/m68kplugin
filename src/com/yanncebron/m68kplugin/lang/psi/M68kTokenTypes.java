@@ -35,6 +35,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType ADDX = new M68kTokenType("addx");
   public static final IElementType ALIGN = new M68kTokenType("align");
   public static final IElementType AMPERSAND = new M68kTokenType("&");
+  public static final IElementType AMPERSAND_AMPERSAND = new M68kTokenType("&&");
   public static final IElementType AND = new M68kTokenType("and");
   public static final IElementType ANDI = new M68kTokenType("andi");
   public static final IElementType ASL = new M68kTokenType("asl");
@@ -215,6 +216,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType PEA = new M68kTokenType("pea");
   public static final IElementType PERCENT = new M68kTokenType("%");
   public static final IElementType PIPE = new M68kTokenType("|");
+  public static final IElementType PIPE_PIPE = new M68kTokenType("||");
   public static final IElementType PLEN = new M68kTokenType("plen");
   public static final IElementType PLUS = new M68kTokenType("+");
   public static final IElementType POPSECTION = new M68kTokenType("popsection");

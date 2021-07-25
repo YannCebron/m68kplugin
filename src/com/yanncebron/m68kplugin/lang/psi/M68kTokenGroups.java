@@ -277,6 +277,7 @@ public final class M68kTokenGroups {
 
   public static final TokenSet OPERATION_SIGN = TokenSet.create(
     AMPERSAND,
+    AMPERSAND_AMPERSAND,
     BACKSLASH,
     DIV,
     EXCLAMATION,
@@ -284,6 +285,7 @@ public final class M68kTokenGroups {
     MUL,
     PERCENT,
     PIPE,
+    PIPE_PIPE,
     POW,
     PLUS,
     LT_LT,

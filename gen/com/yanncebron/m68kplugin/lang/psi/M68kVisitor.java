@@ -699,6 +699,14 @@ public class M68kVisitor extends PsiElementVisitor {
     visitLabelBase(o);
   }
 
+  public void visitLogicalAndExpression(@NotNull M68kLogicalAndExpression o) {
+    visitBinaryExpression(o);
+  }
+
+  public void visitLogicalOrExpression(@NotNull M68kLogicalOrExpression o) {
+    visitBinaryExpression(o);
+  }
+
   public void visitLslInstruction(@NotNull M68kLslInstruction o) {
     visitShiftRotateInstructionBase(o);
   }

@@ -179,6 +179,8 @@ public interface M68kTypes {
   IElementType LLEN_DIRECTIVE = new M68kCompositeElementType("LLEN_DIRECTIVE");
   IElementType LOAD_DIRECTIVE = new M68kCompositeElementType("LOAD_DIRECTIVE");
   IElementType LOCAL_LABEL = new M68kCompositeElementType("LOCAL_LABEL");
+  IElementType LOGICAL_AND_EXPRESSION = new M68kCompositeElementType("LOGICAL_AND_EXPRESSION");
+  IElementType LOGICAL_OR_EXPRESSION = new M68kCompositeElementType("LOGICAL_OR_EXPRESSION");
   IElementType LSL_INSTRUCTION = new M68kCompositeElementType("LSL_INSTRUCTION");
   IElementType LSR_INSTRUCTION = new M68kCompositeElementType("LSR_INSTRUCTION");
   IElementType MACRO_CALL_DIRECTIVE = new M68kCompositeElementType("MACRO_CALL_DIRECTIVE");
@@ -742,6 +744,12 @@ public interface M68kTypes {
       }
       else if (type == LOCAL_LABEL) {
         return new M68kLocalLabelImpl(node);
+      }
+      else if (type == LOGICAL_AND_EXPRESSION) {
+        return new M68kLogicalAndExpressionImpl(node);
+      }
+      else if (type == LOGICAL_OR_EXPRESSION) {
+        return new M68kLogicalOrExpressionImpl(node);
       }
       else if (type == LSL_INSTRUCTION) {
         return new M68kLslInstructionImpl(node);
