@@ -141,6 +141,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType EXT = new M68kTokenType("ext");
   public static final IElementType FAIL= new M68kTokenType("fail");
   public static final IElementType FAR= new M68kTokenType("far");
+  public static final IElementType GT_GT = new M68kTokenType(">>");
   public static final IElementType HASH = new M68kTokenType("#");
   public static final IElementType HEX_NUMBER = new M68kTokenType("hex_number");
   public static final IElementType ID = new M68kTokenType("id");
@@ -179,6 +180,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType LOAD = new M68kTokenType("list");
   public static final IElementType LSL = new M68kTokenType("lsl");
   public static final IElementType LSR = new M68kTokenType("lsr");
+  public static final IElementType LT_LT = new M68kTokenType("<<");
   public static final IElementType L_BRACKET = new M68kTokenType("[");
   public static final IElementType L_PAREN = new M68kTokenType("(");
   public static final IElementType MACRO = new M68kTokenType("macro");
@@ -246,8 +248,6 @@ public abstract class M68kTokenTypes {
   public static final IElementType SGE = new M68kTokenType("sge");
   public static final IElementType SGT = new M68kTokenType("sgt");
   public static final IElementType SHI = new M68kTokenType("shi");
-  public static final IElementType SHIFT_L = new M68kTokenType("<<");
-  public static final IElementType SHIFT_R = new M68kTokenType(">>");
   public static final IElementType SHS = new M68kTokenType("shs");
   public static final IElementType SLASH_SLASH = new M68kTokenType("//");
   public static final IElementType SLE = new M68kTokenType("sle");

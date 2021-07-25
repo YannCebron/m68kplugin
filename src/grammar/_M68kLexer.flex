@@ -213,8 +213,8 @@ Z=[zZ]
   "&"  { return AMPERSAND; }
   "\\" { return BACKSLASH; }
   "|"  { return PIPE; }
-  "<<" { return SHIFT_L; }
-  ">>" { return SHIFT_R; }
+  "<<" { return LT_LT; }
+  ">>" { return GT_GT; }
   "("  { return L_PAREN; }
   ")"  { return R_PAREN; }
   "["  { return L_BRACKET; }

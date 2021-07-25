@@ -108,11 +108,11 @@ public class M68kExpressionParser {
         r = expression(b, l, 1);
         exit_section_(b, l, m, MOD_EXPRESSION, r, true, null);
       }
-      else if (g < 3 && consumeTokenSmart(b, SHIFT_L)) {
+      else if (g < 3 && consumeTokenSmart(b, LT_LT)) {
         r = expression(b, l, 3);
         exit_section_(b, l, m, SHIFT_LEFT_EXPRESSION, r, true, null);
       }
-      else if (g < 3 && consumeTokenSmart(b, SHIFT_R)) {
+      else if (g < 3 && consumeTokenSmart(b, GT_GT)) {
         r = expression(b, l, 3);
         exit_section_(b, l, m, SHIFT_RIGHT_EXPRESSION, r, true, null);
       }

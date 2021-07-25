@@ -1353,8 +1353,8 @@ unary_complement_expression ::= TILDE expression
 unary_not_expression ::= EXCLAMATION expression
 
 private shift_group ::= shift_left_expression | shift_right_expression
-shift_left_expression ::= expression SHIFT_L expression
-shift_right_expression ::= expression SHIFT_R expression
+shift_left_expression ::= expression LT_LT expression
+shift_right_expression ::= expression GT_GT expression
 
 private bool_group ::= or_expression | xor_expression | and_expression
 or_expression ::= expression (PIPE | EXCLAMATION) expression

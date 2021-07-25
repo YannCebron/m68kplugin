@@ -286,8 +286,8 @@ public final class M68kTokenGroups {
     PIPE,
     POW,
     PLUS,
-    SHIFT_L,
-    SHIFT_R,
+    LT_LT,
+    GT_GT,
     SLASH_SLASH,
     TILDE
   );

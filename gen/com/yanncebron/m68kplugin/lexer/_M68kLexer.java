@@ -2030,12 +2030,12 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 342: break;
           case 65: 
-            { return SHIFT_L;
+            { return LT_LT;
             } 
             // fall through
           case 343: break;
           case 66: 
-            { return SHIFT_R;
+            { return GT_GT;
             } 
             // fall through
           case 344: break;
