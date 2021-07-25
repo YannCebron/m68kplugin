@@ -2,6 +2,6 @@ M68k.FILE
   M68kEqualsDirectiveImpl(EQUALS_DIRECTIVE)
     M68kLabelImpl(LABEL)
       PsiElement(id)('label')
-    PsiElement(=)('=')
+    PsiElement(= (DIRECTIVE))('=')
     M68kNumberExpressionImpl(NUMBER_EXPRESSION)
       PsiElement(dec_number)('42')

@@ -31,7 +31,7 @@ public class DirectivesLexerTest extends M68kLexerTestCase {
     doTest("label = 42",
       "id ('label')\n" +
         "WHITE_SPACE (' ')\n" +
-        "= ('=')\n" +
+        "= (DIRECTIVE) ('=')\n" +
         "WHITE_SPACE (' ')\n" +
         "dec_number ('42')");
   }
@@ -39,7 +39,7 @@ public class DirectivesLexerTest extends M68kLexerTestCase {
   public void testEqDirectiveWithoutWhitespace() {
     doTest("A=42",
       "id ('A')\n" +
-        "= ('=')\n" +
+        "= (DIRECTIVE) ('=')\n" +
         "dec_number ('42')");
   }
 

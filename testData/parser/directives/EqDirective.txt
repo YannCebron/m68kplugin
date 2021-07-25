@@ -3,7 +3,7 @@ M68k.FILE
     M68kLabelImpl(LABEL)
       PsiElement(id)('label')
     PsiWhiteSpace(' ')
-    PsiElement(=)('=')
+    PsiElement(= (DIRECTIVE))('=')
     PsiWhiteSpace(' ')
     M68kNumberExpressionImpl(NUMBER_EXPRESSION)
       PsiElement(dec_number)('42')
