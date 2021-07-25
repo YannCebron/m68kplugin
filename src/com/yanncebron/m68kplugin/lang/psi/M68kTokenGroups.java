@@ -275,7 +275,7 @@ public final class M68kTokenGroups {
       CONDITIONAL_ASSEMBLY_STRUCTURE_DIRECTIVES
     );
 
-  public static final TokenSet OPERATION_SIGN = TokenSet.create(
+  public static final TokenSet OPERATION_SIGNS = TokenSet.create(
     AMPERSAND,
     AMPERSAND_AMPERSAND,
     BACKSLASH,

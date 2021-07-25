@@ -58,7 +58,7 @@ public class M68kTokenTest extends BasePlatformTestCase {
     M68kTokenGroups.INSTRUCTIONS,
     M68kTokenGroups.DIRECTIVES,
     M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES,
-    M68kTokenGroups.OPERATION_SIGN,
+    M68kTokenGroups.OPERATION_SIGNS,
     M68kTokenGroups.NUMBERS,
     M68kTokenGroups.DATA_SIZES
   };
