@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package com.yanncebron.m68kplugin.lang.refactoring;
 import com.intellij.lang.refactoring.NamesValidator;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
@@ -36,7 +35,7 @@ public class M68kNamesValidator implements NamesValidator {
         M68kTokenGroups.INSTRUCTIONS.getTypes(),
         M68kTokenGroups.DIRECTIVES.getTypes(),
         M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES.getTypes()),
-      StringUtil.createToStringFunction(IElementType.class));
+      Object::toString);
 
   @Override
   public boolean isKeyword(@NotNull String name, Project project) {
