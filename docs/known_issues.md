@@ -10,7 +10,7 @@ title: Known Issues
 
 ## Resolving
 
-- `include` directives
+- `include` directives:
   - not evaluated
   - symbols are resolved across all files
   - all included files must be located inside project (or added as separate content root)
@@ -76,7 +76,7 @@ Unsupported directives, these will display false positive
 - `weak`
 
 #### Directives with known limitations
-                    
+
 - `printt`: multiple strings
 
 ### Labels
