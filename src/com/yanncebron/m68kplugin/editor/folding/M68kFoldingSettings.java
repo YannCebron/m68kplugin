@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.editor.folding;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.*;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +36,7 @@ public final class M68kFoldingSettings implements PersistentStateComponent<M68kF
   }
 
   public static M68kFoldingSettings getInstance() {
-    return ServiceManager.getService(M68kFoldingSettings.class);
+    return ApplicationManager.getApplication().getService(M68kFoldingSettings.class);
   }
 
   @Override
