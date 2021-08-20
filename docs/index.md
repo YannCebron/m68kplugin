@@ -27,7 +27,7 @@ Plugin is compatible with IDE version 2020.2.4 and later.
 This guide uses the following notations to distinguish certain items:
 
 - *Main Menu \| Sub Menu \| Menu Item* - menu item/action
-- *Settings/Preferences \| Settings Page* - page in [Settings/Preferences](https://www.jetbrains.com/help/idea/configuring-project-and-ide-settings.html) dialog
+- *Settings/Preferences \| Settings Page* - page in _Settings/Preferences_ dialog
 - `monospaced text` - assembly code
 - <kbd>F10</kbd> - keyboard shortcut or input
 
