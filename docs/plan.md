@@ -4,7 +4,7 @@
 1. TOC
 {:toc}
 
-> Suggest features missing in this list in [GitHub issues](https://github.com/YannCebron/m68kplugin/issues)
+> Please see [Contributing](https://github.com/YannCebron/m68kplugin/blob/main/CONTRIBUTING.md) on how to submit feature ideas and contribute to this project.
 
 ## Target Architecture
 
