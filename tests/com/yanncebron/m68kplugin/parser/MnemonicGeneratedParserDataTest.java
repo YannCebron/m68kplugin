@@ -74,7 +74,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
     dump("* Instructions count: " + M68kTokenGroups.INSTRUCTIONS.getTypes().length);
 
-    assertEquals(4590, total);
+    assertEquals(4650, total);
     assertEmpty(failedVariants);
     assertEquals(630, deprecated);
   }
@@ -184,7 +184,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
     .put(M68kAddressMode.LABEL, ContainerUtil.immutableList("label"))
     .put(M68kAddressMode.IMMEDIATE, ContainerUtil.immutableList("#42"))
     .put(M68kAddressMode.QUICK_IMMEDIATE, ContainerUtil.immutableList("#1"))
-    .put(M68kAddressMode.REGISTER_LIST, ContainerUtil.immutableList("d0/a0-a2"))
+    .put(M68kAddressMode.REGISTER_LIST, ContainerUtil.immutableList("d0/a0-a2", "#1"))
     .put(M68kAddressMode.SPECIAL_REGISTER_SR, ContainerUtil.immutableList("SR"))
     .put(M68kAddressMode.SPECIAL_REGISTER_USP, ContainerUtil.immutableList("USP"))
     .put(M68kAddressMode.SPECIAL_REGISTER_CCR, ContainerUtil.immutableList("CCR"))
