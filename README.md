@@ -5,13 +5,15 @@
 
 Adds support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_68000_series) assembly language
 in [IntelliJ](https://plugins.jetbrains.com/docs/intellij/intellij-platform.html#ides-based-on-the-intellij-platform) based IDEs
-(including [IntelliJ IDEA](https://www.jetbrains.com/idea/), [Android Studio](https://developer.android.com/studio/) and many more).
+(including [IntelliJ IDEA](https://www.jetbrains.com/idea/), [Android Studio](https://developer.android.com/studio/), and many more).
          
 ![m68plugin](docs/assets/m68kplugin_landing.png)
 
 ## Installation and Features
 
-Please visit the [Documentation site](https://yanncebron.github.io/m68kplugin/) for more information.
+**Please visit the [Documentation site](https://yanncebron.github.io/m68kplugin/) for user guide.** 
+
+Please see [Contributing](CONTRIBUTING.md) on how to submit feedback and contribute to this project.
 
 ## Credits
 
