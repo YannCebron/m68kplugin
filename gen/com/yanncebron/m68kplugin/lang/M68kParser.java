@@ -553,14 +553,38 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // expression L_PAREN PC R_PAREN
+  // (expression L_PAREN PC R_PAREN) |
+  //             (L_PAREN expression COMMA PC R_PAREN)
   public static boolean adm_pcd(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_pcd")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ADM_PCD, "<adm pcd>");
+    Marker m = enter_section_(b, l, _NONE_, ADM_PCD, "<program counter indirect with displacement>");
+    r = adm_pcd_0(b, l + 1);
+    if (!r) r = adm_pcd_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // expression L_PAREN PC R_PAREN
+  private static boolean adm_pcd_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_pcd_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
     r = M68kExpressionParser.expression(b, l + 1, -1);
     r = r && consumeTokens(b, 0, L_PAREN, PC, R_PAREN);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // L_PAREN expression COMMA PC R_PAREN
+  private static boolean adm_pcd_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_pcd_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, L_PAREN);
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    r = r && consumeTokens(b, 0, COMMA, PC, R_PAREN);
+    exit_section_(b, m, null, r);
     return r;
   }
 

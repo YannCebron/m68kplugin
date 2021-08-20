@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kCmpInstructionImpl(CMP_INSTRUCTION)
     PsiElement(cmp)('cmp')
-    PsiErrorElement:'(', '-', <address register indirect with displacement>, <address register>, <data register>, <expression> or <immediate data> expected
+    PsiErrorElement:'(', '-', <address register indirect with displacement>, <address register>, <data register>, <expression>, <immediate data> or <program counter indirect with displacement> expected
       <empty list>
   PsiWhiteSpace(' ')

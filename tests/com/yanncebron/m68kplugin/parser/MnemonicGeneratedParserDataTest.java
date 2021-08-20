@@ -74,9 +74,9 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
     dump("* Instructions count: " + M68kTokenGroups.INSTRUCTIONS.getTypes().length);
 
-    assertEquals(3838, total);
+    assertEquals(3984, total);
     assertEmpty(failedVariants);
-    assertEquals(459, deprecated);
+    assertEquals(495, deprecated);
   }
 
   private void doParserTest(IElementType instructionsType) {
@@ -179,7 +179,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
     .put(M68kAddressMode.ADDRESS_REGISTER_INDEX_DISPLACEMENT, ContainerUtil.immutableList("12(a0,d0)"))
     .put(M68kAddressMode.ABSOLUTE_SHORT, ContainerUtil.immutableList("$4000"))
     .put(M68kAddressMode.ABSOLUTE_LONG, ContainerUtil.immutableList("$4000.L"))
-    .put(M68kAddressMode.PC_REGISTER_DISPLACEMENT, ContainerUtil.immutableList("66(PC)"))
+    .put(M68kAddressMode.PC_REGISTER_DISPLACEMENT, ContainerUtil.immutableList("66(PC)","(-66,PC)"))
     .put(M68kAddressMode.PC_REGISTER_INDEX_DISPLACEMENT, ContainerUtil.immutableList("66(PC,d0)"))
     .put(M68kAddressMode.LABEL, ContainerUtil.immutableList("label"))
     .put(M68kAddressMode.IMMEDIATE, ContainerUtil.immutableList("#42"))

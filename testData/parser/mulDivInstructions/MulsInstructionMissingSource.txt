@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kMulsInstructionImpl(MULS_INSTRUCTION)
     PsiElement(muls)('muls')
-    PsiErrorElement:'(', '-', <address register indirect with displacement>, <data register>, <expression> or <immediate data> expected
+    PsiErrorElement:'(', '-', <address register indirect with displacement>, <data register>, <expression>, <immediate data> or <program counter indirect with displacement> expected
       <empty list>
   PsiWhiteSpace(' ')

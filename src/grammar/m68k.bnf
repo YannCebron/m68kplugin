@@ -237,8 +237,12 @@ adm_abs ::= expression data_size_word_long?
   extends = data_sized
 }
 
-// index(pc)
-adm_pcd ::= expression L_PAREN PC R_PAREN
+// Ref 2.2.11: d16(PC) | (d16,PC)
+adm_pcd ::= (expression L_PAREN PC R_PAREN) |
+            (L_PAREN expression COMMA PC R_PAREN)
+{
+  name = "program counter indirect with displacement"
+}
 
 // index(pc,d0)
 adm_pci ::= expression? L_PAREN PC COMMA adm_rrd_index R_PAREN

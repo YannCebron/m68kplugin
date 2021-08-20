@@ -30,7 +30,7 @@ public enum M68kAddressMode {
   ADDRESS_REGISTER_INDIRECT_POST_INCREMENT,
   ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT,
   /**
-   * Ref 2.2.6, {@link M68kAdmAdi }
+   * Ref 2.2.6, {@link M68kAdmAdi}
    */
   ADDRESS_REGISTER_DISPLACEMENT,
   ADDRESS_REGISTER_INDEX_DISPLACEMENT,
@@ -40,6 +40,9 @@ public enum M68kAddressMode {
 
   LABEL,
 
+  /**
+   * Ref 2.2.11, {@link M68kAdmPcd}
+   */
   PC_REGISTER_DISPLACEMENT,
   PC_REGISTER_INDEX_DISPLACEMENT,
 
