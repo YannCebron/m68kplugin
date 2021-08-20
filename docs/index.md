@@ -14,7 +14,7 @@ in [IntelliJ](https://plugins.jetbrains.com/docs/intellij/intellij-platform.html
 
 > **NOTE:** This plugin is at a very early stage and provided "as-is", please see also [Known Issues](known_issues.md).
 
-### Installation
+## Installation
 
 There are currently no published releases, snapshot artifacts for [manual installation](https://www.jetbrains.com/help/idea/plugins-settings.html) are available via [GitHub CI](https://github.com/YannCebron/m68kplugin/actions?query=workflow%3A%22Build+%26+Test%22).
 
@@ -22,7 +22,7 @@ Plugin is compatible with IDE version 2020.2.4 and later.
 
 > **TIP:** Not familiar with IntelliJ-based IDEs? See [Getting Started Guide](https://www.jetbrains.com/help/idea/getting-started.html).
                
-### Notation
+## About this guide
      
 This guide uses the following notations to distinguish certain items:
 
