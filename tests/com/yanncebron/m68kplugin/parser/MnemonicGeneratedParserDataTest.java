@@ -37,7 +37,8 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
   private static final String INDENT = "         ";
   private int labelCount = 0;
-  private int total = 0, failed = 0, deprecated = 0;
+  private int total = 0, deprecated = 0;
+  private final List<String> failedVariants = new SmartList<>();
 
   public MnemonicGeneratedParserDataTest() {
     super("DUMMY_NOT_USED");
@@ -49,8 +50,8 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
     labelCount = 0;
     total = 0;
-    failed = 0;
     deprecated = 0;
+    failedVariants.clear();
   }
 
   @Override
@@ -58,7 +59,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
     try {
       super.tearDown();
     } finally {
-      dump("\n* " + failed + "/" + total + " deprecated: " + deprecated);
+      dump("\n* " + failedVariants.size() + "/" + total + " deprecated: " + deprecated);
     }
   }
 
@@ -74,7 +75,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
     dump("* Instructions count: " + M68kTokenGroups.INSTRUCTIONS.getTypes().length);
 
     assertEquals(3404, total);
-    assertEquals(0, failed);
+    assertEmpty(failedVariants);
     assertEquals(376, deprecated);
   }
 
@@ -101,8 +102,9 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
             continue;
           }
 
-          failed++;
-          dump(variant + " ; FAILED " + StringUtil.splitByLines(e.getMessage())[0]);
+          final String failedVariantText = variant + " ; FAILED " + StringUtil.splitByLines(e.getMessage())[0];
+          failedVariants.add(failedVariantText);
+          dump(failedVariantText);
         }
       }
     }
@@ -167,25 +169,25 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
     generated.add(fullText);
   }
 
-  private static final Map<M68kAddressMode, String> ADDRESS_MODE_TEXT = ContainerUtil.<M68kAddressMode, String>immutableMapBuilder()
-    .put(M68kAddressMode.DATA_REGISTER, "d0")
-    .put(M68kAddressMode.ADDRESS_REGISTER, "a0")
-    .put(M68kAddressMode.ADDRESS_REGISTER_INDIRECT, "(a0)")
-    .put(M68kAddressMode.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT, "(a0)+")
-    .put(M68kAddressMode.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT, "-(a0)")
-    .put(M68kAddressMode.ADDRESS_REGISTER_DISPLACEMENT, "42(a0)")
-    .put(M68kAddressMode.ADDRESS_REGISTER_INDEX_DISPLACEMENT, "12(a0,d0)")
-    .put(M68kAddressMode.ABSOLUTE_SHORT, "$4000")
-    .put(M68kAddressMode.ABSOLUTE_LONG, "$4000.L")
-    .put(M68kAddressMode.PC_REGISTER_DISPLACEMENT, "66(PC)")
-    .put(M68kAddressMode.PC_REGISTER_INDEX_DISPLACEMENT, "66(PC,d0)")
-    .put(M68kAddressMode.LABEL, "label")
-    .put(M68kAddressMode.IMMEDIATE, "#42")
-    .put(M68kAddressMode.QUICK_IMMEDIATE, "#1")
-    .put(M68kAddressMode.REGISTER_LIST, "d0/a0-a2")
-    .put(M68kAddressMode.SPECIAL_REGISTER_SR, "SR")
-    .put(M68kAddressMode.SPECIAL_REGISTER_USP, "USP")
-    .put(M68kAddressMode.SPECIAL_REGISTER_CCR, "CCR")
+  private static final Map<M68kAddressMode, List<String>> ADDRESS_MODE_TEXT = ContainerUtil.<M68kAddressMode, List<String>>immutableMapBuilder()
+    .put(M68kAddressMode.DATA_REGISTER, ContainerUtil.immutableList("d0"))
+    .put(M68kAddressMode.ADDRESS_REGISTER, ContainerUtil.immutableList("a0"))
+    .put(M68kAddressMode.ADDRESS_REGISTER_INDIRECT, ContainerUtil.immutableList("(a0)"))
+    .put(M68kAddressMode.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT, ContainerUtil.immutableList("(a0)+"))
+    .put(M68kAddressMode.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT, ContainerUtil.immutableList("-(a0)"))
+    .put(M68kAddressMode.ADDRESS_REGISTER_DISPLACEMENT, ContainerUtil.immutableList("42(a0)"))
+    .put(M68kAddressMode.ADDRESS_REGISTER_INDEX_DISPLACEMENT, ContainerUtil.immutableList("12(a0,d0)"))
+    .put(M68kAddressMode.ABSOLUTE_SHORT, ContainerUtil.immutableList("$4000"))
+    .put(M68kAddressMode.ABSOLUTE_LONG, ContainerUtil.immutableList("$4000.L"))
+    .put(M68kAddressMode.PC_REGISTER_DISPLACEMENT, ContainerUtil.immutableList("66(PC)"))
+    .put(M68kAddressMode.PC_REGISTER_INDEX_DISPLACEMENT, ContainerUtil.immutableList("66(PC,d0)"))
+    .put(M68kAddressMode.LABEL, ContainerUtil.immutableList("label"))
+    .put(M68kAddressMode.IMMEDIATE, ContainerUtil.immutableList("#42"))
+    .put(M68kAddressMode.QUICK_IMMEDIATE, ContainerUtil.immutableList("#1"))
+    .put(M68kAddressMode.REGISTER_LIST, ContainerUtil.immutableList("d0/a0-a2"))
+    .put(M68kAddressMode.SPECIAL_REGISTER_SR, ContainerUtil.immutableList("SR"))
+    .put(M68kAddressMode.SPECIAL_REGISTER_USP, ContainerUtil.immutableList("USP"))
+    .put(M68kAddressMode.SPECIAL_REGISTER_CCR, ContainerUtil.immutableList("CCR"))
     .build();
 
   @NotNull
@@ -194,9 +196,10 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
     List<String> texts = new SmartList<>();
     for (M68kAddressMode addressMode : operand.getAddressModes()) {
-      final String operandText = ADDRESS_MODE_TEXT.get(addressMode);
-      assertNotNull(addressMode.toString(), operandText);
-      texts.add(operandText);
+      for (String operandText : ADDRESS_MODE_TEXT.get(addressMode)) {
+        assertNotNull(addressMode.toString(), operandText);
+        texts.add(operandText);
+      }
     }
     return texts;
   }
