@@ -135,9 +135,13 @@ private data_size_all ::= !<<afterWhitespace>> (DOT_B | DOT_W | DOT_L)
 }
 
 
-// "d0-d7/a1/a4"
-register_range ::= adm_rrd (MINUS adm_rrd)? {
-  pin(".*") = 1
+private register_range_real ::= adm_rrd MINUS adm_rrd
+{
+  pin = 2
+}
+// Rn-Rn | Rn
+register_range ::= register_range_real | adm_rrd {
+  name = "register range"
   methods = [
     adm_rrd= ""
     from = "adm_rrd[0]"

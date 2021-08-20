@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kMovemInstructionImpl(MOVEM_INSTRUCTION)
     PsiElement(movem)('movem')
-    PsiErrorElement:<address register indirect with displacement>, <address register indirect with index>, <address register indirect with postincrement>, <address register indirect>, <data|address register>, <expression>, <immediate data>, <program counter indirect with displacement> or <program counter indirect with index> expected
+    PsiErrorElement:<address register indirect with displacement>, <address register indirect with index>, <address register indirect with postincrement>, <address register indirect>, <expression>, <immediate data>, <program counter indirect with displacement>, <program counter indirect with index> or <register range> expected
       <empty list>
   PsiWhiteSpace(' ')

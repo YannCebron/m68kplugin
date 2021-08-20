@@ -3214,32 +3214,26 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // adm_rrd (MINUS adm_rrd)?
+  // register_range_real | adm_rrd
   public static boolean register_range(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "register_range")) return false;
-    boolean r, p;
+    boolean r;
     Marker m = enter_section_(b, l, _NONE_, REGISTER_RANGE, "<register range>");
-    r = adm_rrd(b, l + 1);
-    p = r; // pin = 1
-    r = r && register_range_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+    r = register_range_real(b, l + 1);
+    if (!r) r = adm_rrd(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
   }
 
-  // (MINUS adm_rrd)?
-  private static boolean register_range_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "register_range_1")) return false;
-    register_range_1_0(b, l + 1);
-    return true;
-  }
-
-  // MINUS adm_rrd
-  private static boolean register_range_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "register_range_1_0")) return false;
+  /* ********************************************************** */
+  // adm_rrd MINUS adm_rrd
+  static boolean register_range_real(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "register_range_real")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_);
-    r = consumeToken(b, MINUS);
-    p = r; // pin = 1
+    r = adm_rrd(b, l + 1);
+    r = r && consumeToken(b, MINUS);
+    p = r; // pin = 2
     r = r && adm_rrd(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
