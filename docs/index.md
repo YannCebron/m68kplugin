@@ -8,7 +8,7 @@ permalink: /
                                   
 Adds support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_68000_series) assembly language
 in [IntelliJ](https://plugins.jetbrains.com/docs/intellij/intellij-platform.html#ides-based-on-the-intellij-platform) based IDEs
-(including [IntelliJ IDEA](https://www.jetbrains.com/idea/), [Android Studio](https://developer.android.com/studio/) and many more).
+(including [IntelliJ IDEA](https://www.jetbrains.com/idea/), [Android Studio](https://developer.android.com/studio/), and many more).
 
 ![m68kplugin](assets/m68kplugin_landing.png)
 
@@ -16,7 +16,7 @@ in [IntelliJ](https://plugins.jetbrains.com/docs/intellij/intellij-platform.html
 
 ### Installation
 
-There are currently no published releases, snapshot artifacts for manual installation are available via [GitHub CI](https://github.com/YannCebron/m68kplugin/actions?query=workflow%3A%22Build+%26+Test%22).
+There are currently no published releases, snapshot artifacts for [manual installation](https://www.jetbrains.com/help/idea/plugins-settings.html) are available via [GitHub CI](https://github.com/YannCebron/m68kplugin/actions?query=workflow%3A%22Build+%26+Test%22).
 
 Plugin is compatible with IDE version 2020.2.4 and later.              
                
