@@ -4,7 +4,7 @@
 1. TOC
 {:toc}
 
-> Please see [Contributing](https://github.com/YannCebron/m68kplugin/blob/main/CONTRIBUTING.md) on how to submit feature ideas and contribute to this project.
+> 💡 Please see [Contributing](https://github.com/YannCebron/m68kplugin/blob/main/CONTRIBUTING.md) on how to submit feature ideas and contribute to this project.
 
 ## Target Architecture
 
