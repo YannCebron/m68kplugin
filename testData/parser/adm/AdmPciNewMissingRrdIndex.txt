@@ -1,0 +1,14 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kPeaInstructionImpl(PEA_INSTRUCTION)
+    PsiElement(pea)('pea')
+    PsiWhiteSpace(' ')
+    M68kAdmPciImpl(ADM_PCI)
+      PsiElement(()('(')
+      M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+        PsiElement(dec_number)('42')
+      PsiElement(,)(',')
+      PsiElement(pc)('pc')
+      PsiElement(,)(',')
+      PsiErrorElement:<data|address register> expected
+        <empty list>

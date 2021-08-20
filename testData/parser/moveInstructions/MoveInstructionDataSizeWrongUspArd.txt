@@ -4,7 +4,7 @@ M68k.FILE
     PsiElement(move)('move')
   PsiElement(.b)('.b')
   PsiWhiteSpace(' ')
-  PsiErrorElement:'(', '-', <address register indirect with displacement>, <address register>, <data register>, <expression>, <immediate data> or <program counter indirect with displacement> expected, got 'usp'
+  PsiErrorElement:'(', '-', <address register indirect with displacement>, <address register>, <data register>, <expression>, <immediate data>, <program counter indirect with displacement> or <program counter indirect with index> expected, got 'usp'
     PsiElement(usp)('usp')
   PsiElement(,)(',')
   PsiElement(address_register)('a0')

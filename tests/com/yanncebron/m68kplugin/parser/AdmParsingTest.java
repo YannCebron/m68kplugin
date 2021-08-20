@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,5 +48,9 @@ public class AdmParsingTest extends M68kParsingTestCase {
 
   public void testAdmPciMissingRrdIndex() throws IOException {
     doCodeTest(" pea 42(pc,");
+  }
+
+  public void testAdmPciNewMissingRrdIndex() throws IOException {
+    doCodeTest(" pea (42,pc,");
   }
 }

@@ -244,11 +244,19 @@ adm_pcd ::= (expression L_PAREN PC R_PAREN) |
   name = "program counter indirect with displacement"
 }
 
-// index(pc,d0)
-adm_pci ::= expression? L_PAREN PC COMMA adm_rrd_index R_PAREN
+// Ref 2.2.13: bd(PC,Xn.SIZE) | (bd,PC,Xn.SIZE)
+private adm_pci_old ::= expression? L_PAREN PC COMMA adm_rrd_index R_PAREN
 {
   pin = "COMMA"
-  name = "expression"
+}
+private adm_pci_new ::= L_PAREN (expression COMMA)? PC COMMA adm_rrd_index R_PAREN
+{
+  pin = "COMMA"
+}
+adm_pci ::= adm_pci_old |
+            adm_pci_new
+{
+  name = "program counter indirect with index"
 }
 
 // #4000 | #4000.w | #4000.l

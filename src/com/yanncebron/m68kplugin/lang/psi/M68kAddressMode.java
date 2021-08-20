@@ -44,6 +44,9 @@ public enum M68kAddressMode {
    * Ref 2.2.11, {@link M68kAdmPcd}
    */
   PC_REGISTER_DISPLACEMENT,
+  /**
+   * Ref 2.2.13, {@link M68kAdmPci}
+   */
   PC_REGISTER_INDEX_DISPLACEMENT,
 
   IMMEDIATE,

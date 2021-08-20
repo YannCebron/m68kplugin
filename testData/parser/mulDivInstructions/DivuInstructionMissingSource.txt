@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kDivuInstructionImpl(DIVU_INSTRUCTION)
     PsiElement(divu)('divu')
-    PsiErrorElement:'(', '-', <address register indirect with displacement>, <data register>, <expression>, <immediate data> or <program counter indirect with displacement> expected
+    PsiErrorElement:'(', '-', <address register indirect with displacement>, <data register>, <expression>, <immediate data>, <program counter indirect with displacement> or <program counter indirect with index> expected
       <empty list>
   PsiWhiteSpace(' ')

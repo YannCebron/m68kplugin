@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kJmpInstructionImpl(JMP_INSTRUCTION)
     PsiElement(jmp)('jmp')
-    PsiErrorElement:'(', <address register indirect with displacement>, <expression> or <program counter indirect with displacement> expected
+    PsiErrorElement:'(', <address register indirect with displacement>, <expression>, <program counter indirect with displacement> or <program counter indirect with index> expected
       <empty list>
   PsiWhiteSpace(' ')
