@@ -74,6 +74,18 @@ Unsupported directives, these will display false positive
 - `symdebug`
 - `weak`
 
+MadMac assembler specific (all directives may be optionally preceded by a dot):
+- `abs`
+- `assert`
+- `dphrase`
+- `globl`
+- `long`
+- `macundef`
+- `nlist`
+- `offset`
+- `phrase`
+- `qphrase`
+
 #### Directives with known limitations
 
 - `printt`: multiple strings
