@@ -359,12 +359,61 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // expression? L_PAREN adm_ard COMMA adm_rrd_index R_PAREN
+  // adm_aix_old |
+  //             adm_aix_new
   public static boolean adm_aix(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_aix")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, ADM_AIX, "<address register indirect with index>");
+    r = adm_aix_old(b, l + 1);
+    if (!r) r = adm_aix_new(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // L_PAREN (expression COMMA)? adm_ard COMMA adm_rrd_index R_PAREN
+  static boolean adm_aix_new(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_aix_new")) return false;
+    if (!nextTokenIs(b, L_PAREN)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, ADM_AIX, "<expression>");
-    r = adm_aix_0(b, l + 1);
+    Marker m = enter_section_(b, l, _NONE_);
+    r = consumeToken(b, L_PAREN);
+    r = r && adm_aix_new_1(b, l + 1);
+    r = r && adm_ard(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    p = r; // pin = COMMA
+    r = r && report_error_(b, adm_rrd_index(b, l + 1));
+    r = p && consumeToken(b, R_PAREN) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // (expression COMMA)?
+  private static boolean adm_aix_new_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_aix_new_1")) return false;
+    adm_aix_new_1_0(b, l + 1);
+    return true;
+  }
+
+  // expression COMMA
+  private static boolean adm_aix_new_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_aix_new_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = M68kExpressionParser.expression(b, l + 1, -1);
+    r = r && consumeToken(b, COMMA);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // expression? L_PAREN adm_ard COMMA adm_rrd_index R_PAREN
+  static boolean adm_aix_old(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_aix_old")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
+    r = adm_aix_old_0(b, l + 1);
     r = r && consumeToken(b, L_PAREN);
     r = r && adm_ard(b, l + 1);
     r = r && consumeToken(b, COMMA);
@@ -376,8 +425,8 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   // expression?
-  private static boolean adm_aix_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "adm_aix_0")) return false;
+  private static boolean adm_aix_old_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_aix_old_0")) return false;
     M68kExpressionParser.expression(b, l + 1, -1);
     return true;
   }

@@ -74,9 +74,9 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
     dump("* Instructions count: " + M68kTokenGroups.INSTRUCTIONS.getTypes().length);
 
-    assertEquals(4130, total);
+    assertEquals(4590, total);
     assertEmpty(failedVariants);
-    assertEquals(531, deprecated);
+    assertEquals(630, deprecated);
   }
 
   private void doParserTest(IElementType instructionsType) {
@@ -176,11 +176,11 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
     .put(M68kAddressMode.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT, ContainerUtil.immutableList("(a0)+"))
     .put(M68kAddressMode.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT, ContainerUtil.immutableList("-(a0)"))
     .put(M68kAddressMode.ADDRESS_REGISTER_DISPLACEMENT, ContainerUtil.immutableList("42(a0)", "(-42,a0)"))
-    .put(M68kAddressMode.ADDRESS_REGISTER_INDEX_DISPLACEMENT, ContainerUtil.immutableList("12(a0,d0)"))
+    .put(M68kAddressMode.ADDRESS_REGISTER_INDEX_DISPLACEMENT, ContainerUtil.immutableList("12(a0,d0)", "(12,a0,d0)"))
     .put(M68kAddressMode.ABSOLUTE_SHORT, ContainerUtil.immutableList("$4000"))
     .put(M68kAddressMode.ABSOLUTE_LONG, ContainerUtil.immutableList("$4000.L"))
-    .put(M68kAddressMode.PC_REGISTER_DISPLACEMENT, ContainerUtil.immutableList("66(PC)","(-66,PC)"))
-    .put(M68kAddressMode.PC_REGISTER_INDEX_DISPLACEMENT, ContainerUtil.immutableList("66(PC,d0)","(66,PC,d0)"))
+    .put(M68kAddressMode.PC_REGISTER_DISPLACEMENT, ContainerUtil.immutableList("66(PC)", "(-66,PC)"))
+    .put(M68kAddressMode.PC_REGISTER_INDEX_DISPLACEMENT, ContainerUtil.immutableList("66(PC,d0)", "(66,PC,d0)"))
     .put(M68kAddressMode.LABEL, ContainerUtil.immutableList("label"))
     .put(M68kAddressMode.IMMEDIATE, ContainerUtil.immutableList("#42"))
     .put(M68kAddressMode.QUICK_IMMEDIATE, ContainerUtil.immutableList("#1"))

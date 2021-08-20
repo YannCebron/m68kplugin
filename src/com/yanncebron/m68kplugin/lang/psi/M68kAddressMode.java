@@ -33,6 +33,9 @@ public enum M68kAddressMode {
    * Ref 2.2.6, {@link M68kAdmAdi}
    */
   ADDRESS_REGISTER_DISPLACEMENT,
+  /**
+   * Ref 2.2.8, {@link M68kAdmAix}
+   */
   ADDRESS_REGISTER_INDEX_DISPLACEMENT,
 
   ABSOLUTE_SHORT,

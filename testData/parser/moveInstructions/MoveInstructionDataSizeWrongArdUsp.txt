@@ -7,6 +7,6 @@ M68k.FILE
     M68kAdmArdImpl(ADM_ARD)
       PsiElement(address_register)('a0')
     PsiElement(,)(',')
-    PsiErrorElement:'(', '-', <address register indirect with displacement>, <address register>, <data register> or <expression> expected, got 'usp'
+    PsiErrorElement:'(', '-', <address register indirect with displacement>, <address register indirect with index>, <address register>, <data register> or <expression> expected, got 'usp'
       <empty list>
   PsiElement(usp)('usp')

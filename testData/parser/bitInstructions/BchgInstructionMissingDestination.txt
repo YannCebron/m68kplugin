@@ -5,5 +5,5 @@ M68k.FILE
   PsiWhiteSpace(' ')
   PsiElement(data_register)('d0')
   PsiElement(,)(',')
-  PsiErrorElement:'(', '-', <address register indirect with displacement>, <data register> or <expression> expected
+  PsiErrorElement:'(', '-', <address register indirect with displacement>, <address register indirect with index>, <data register> or <expression> expected
     <empty list>

@@ -224,11 +224,19 @@ adm_adi ::= (expression L_PAREN adm_ard R_PAREN) |
   name = "address register indirect with displacement"
 }
 
-// index(a0,d0)
-adm_aix ::= expression? L_PAREN adm_ard COMMA adm_rrd_index R_PAREN
+// Ref 2.2.8: bd(An,Xn.SIZE) | (bd,An,Xn.SIZE)
+private adm_aix_old ::= expression? L_PAREN adm_ard COMMA adm_rrd_index R_PAREN
 {
   pin = "COMMA"
-  name = "expression"
+}
+private adm_aix_new ::= L_PAREN (expression COMMA)? adm_ard COMMA adm_rrd_index R_PAREN
+{
+  pin = "COMMA"
+}
+adm_aix ::= adm_aix_old |
+            adm_aix_new
+{
+  name = "address register indirect with index"
 }
 
 // 4000 | 4000.w | 4000.l
