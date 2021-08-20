@@ -506,6 +506,7 @@ Z=[zZ]
   {M}{C}68040                  { yybegin(AFTER_OPERAND); return MC68040; }
   {M}{C}68060                  { yybegin(AFTER_OPERAND); return MC68060; }
   {A}{C}68080                  { yybegin(AFTER_OPERAND); return AC68080; }
+  {M}{A}{C}{H}{I}{N}{E}        { yybegin(IN_OPERAND); return MACHINE; }
 
   // anything else is macro name
   {ID}                         { yybegin(IN_OPERAND); return MACRO_CALL_ID; }

@@ -739,6 +739,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitBinaryExpression(o);
   }
 
+  public void visitMachineDirective(@NotNull M68kMachineDirective o) {
+    visitDirective(o);
+  }
+
   public void visitMacroCallDirective(@NotNull M68kMacroCallDirective o) {
     visitDirective(o);
   }

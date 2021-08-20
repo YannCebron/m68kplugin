@@ -25,6 +25,7 @@
   - `section`
   - `opt`
   - `ifmacrod`/`ifmacrond`
+  - `machine`
 
 ### Macros
 

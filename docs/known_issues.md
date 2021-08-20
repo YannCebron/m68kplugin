@@ -60,7 +60,6 @@ Unsupported directives, these will display false positive
 - `iif` (Devpac)
 - `image`
 - `import` == `xref`
-- `machine`
 - `mask2` (no-op)
 - `mcf5XXX`
 - `module`

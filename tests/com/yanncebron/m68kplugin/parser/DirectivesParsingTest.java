@@ -485,4 +485,12 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" ac68080");
   }
 
+  public void testMachineDirective() throws  Exception {
+    doCodeTest(" machine 68000");
+  }
+
+  public void testMachineDirectiveMissingCpuType() throws  Exception {
+    doCodeTest(" machine ");
+  }
+
 }

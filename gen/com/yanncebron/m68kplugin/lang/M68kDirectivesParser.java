@@ -407,7 +407,8 @@ public class M68kDirectivesParser {
   //                        mc68030_directive |
   //                        mc68040_directive |
   //                        mc68060_directive |
-  //                        ac68080_directive
+  //                        ac68080_directive |
+  //                        machine_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -490,6 +491,7 @@ public class M68kDirectivesParser {
     if (!r) r = mc68040_directive(b, l + 1);
     if (!r) r = mc68060_directive(b, l + 1);
     if (!r) r = ac68080_directive(b, l + 1);
+    if (!r) r = machine_directive(b, l + 1);
     return r;
   }
 
@@ -916,6 +918,32 @@ public class M68kDirectivesParser {
     r = consumeToken(b, LOAD);
     p = r; // pin = 1
     r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // DEC_NUMBER
+  static boolean machine_cpu_type(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "machine_cpu_type")) return false;
+    if (!nextTokenIs(b, "<cpu type>", DEC_NUMBER)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<cpu type>");
+    r = consumeToken(b, DEC_NUMBER);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // machine machine_cpu_type
+  public static boolean machine_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "machine_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", MACHINE)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, MACHINE_DIRECTIVE, "<directive>");
+    r = consumeToken(b, MACHINE);
+    p = r; // pin = 1
+    r = r && machine_cpu_type(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

@@ -209,6 +209,7 @@ public final class M68kTokenGroups {
     LIST,
     LLEN,
     LOAD,
+    MACHINE,
     MACRO,
     MC68000,
     MC68010,

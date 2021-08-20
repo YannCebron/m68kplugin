@@ -189,6 +189,7 @@ public interface M68kTypes {
   IElementType LSR_INSTRUCTION = new M68kCompositeElementType("LSR_INSTRUCTION");
   IElementType LT_EQ_EXPRESSION = new M68kCompositeElementType("LT_EQ_EXPRESSION");
   IElementType LT_EXPRESSION = new M68kCompositeElementType("LT_EXPRESSION");
+  IElementType MACHINE_DIRECTIVE = new M68kCompositeElementType("MACHINE_DIRECTIVE");
   IElementType MACRO_CALL_DIRECTIVE = new M68kCompositeElementType("MACRO_CALL_DIRECTIVE");
   IElementType MACRO_CALL_PARAMETER = new M68kCompositeElementType("MACRO_CALL_PARAMETER");
   IElementType MACRO_DIRECTIVE = new M68kCompositeElementType("MACRO_DIRECTIVE");
@@ -787,6 +788,9 @@ public interface M68kTypes {
       }
       else if (type == LT_EXPRESSION) {
         return new M68kLtExpressionImpl(node);
+      }
+      else if (type == MACHINE_DIRECTIVE) {
+        return new M68kMachineDirectiveImpl(node);
       }
       else if (type == MACRO_CALL_DIRECTIVE) {
         return new M68kMacroCallDirectiveImpl(node);
