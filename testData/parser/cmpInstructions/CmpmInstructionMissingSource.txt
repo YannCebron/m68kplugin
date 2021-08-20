@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kCmpmInstructionImpl(CMPM_INSTRUCTION)
     PsiElement(cmpm)('cmpm')
-    PsiErrorElement:'(' expected
+    PsiErrorElement:<address register indirect with postincrement> expected
       <empty list>
   PsiWhiteSpace(' ')

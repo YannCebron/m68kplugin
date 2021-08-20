@@ -152,7 +152,7 @@ register_list ::= register_range (DIV register_range)* {
 
 // addressing modes  =====================================================
 
-// d0
+// Dn
 adm_drd ::= DATA_REGISTER
 {
   name = "data register"
@@ -161,7 +161,7 @@ adm_drd ::= DATA_REGISTER
   ]
 }
 
-// a0 | sp
+// An | SP
 adm_ard ::= ADDRESS_REGISTER | SP
 {
   name = "address register"
@@ -170,7 +170,7 @@ adm_ard ::= ADDRESS_REGISTER | SP
   ]
 }
 
-// R0
+// Rn
 adm_rrd ::= adm_drd | adm_ard
 {
   name = "data|address register"
@@ -179,7 +179,7 @@ adm_rrd ::= adm_drd | adm_ard
   ]
 }
 
-// R0[.bwl] used in adm_ix/adm_pci / duplicates adm_rrd to avoid nesting
+// Rn[.SIZE] used in adm_ix/adm_pci / duplicates adm_rrd to avoid nesting
 adm_rrd_index ::= (adm_drd data_size_all?) | (adm_ard data_size_word_long?)
 {
   name = "data|address register"
@@ -189,25 +189,28 @@ adm_rrd_index ::= (adm_drd data_size_all?) | (adm_ard data_size_word_long?)
   extends = data_sized
 }
 
-// (a0)
+// Ref 2.2.3: (An)
 adm_ari ::= L_PAREN adm_ard R_PAREN
 {
+  name = "address register indirect"
   methods = [
     getRegister
   ]
 }
 
-// (a0)+
+// Ref 2.2.4: (An)+
 adm_api ::= L_PAREN adm_ard R_PAREN PLUS
 {
+  name = "address register indirect with postincrement"
   methods = [
     getRegister
   ]
 }
 
-// -(a0)
+// Ref 2.2.5: -(An)
 adm_apd ::= MINUS L_PAREN adm_ard R_PAREN
 {
+  name = "address register indirect with predecrement"
   pin = 3
   methods = [
     getRegister

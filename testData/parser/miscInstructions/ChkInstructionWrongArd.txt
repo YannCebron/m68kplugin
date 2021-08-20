@@ -2,7 +2,7 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kChkInstructionImpl(CHK_INSTRUCTION)
     PsiElement(chk)('chk')
-    PsiErrorElement:'(', '-', <address register indirect with displacement>, <address register indirect with index>, <data register>, <expression>, <immediate data>, <program counter indirect with displacement> or <program counter indirect with index> expected, got 'a0'
+    PsiErrorElement:<address register indirect with displacement>, <address register indirect with index>, <address register indirect with postincrement>, <address register indirect with predecrement>, <address register indirect>, <data register>, <expression>, <immediate data>, <program counter indirect with displacement> or <program counter indirect with index> expected, got 'a0'
       <empty list>
   PsiWhiteSpace(' ')
   PsiElement(address_register)('a0')

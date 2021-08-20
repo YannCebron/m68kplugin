@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kAslInstructionImpl(ASL_INSTRUCTION)
     PsiElement(asl)('asl')
-    PsiErrorElement:'(', '-', <address register indirect with displacement>, <address register indirect with index>, <data register>, <expression> or <immediate data> expected
+    PsiErrorElement:<address register indirect with displacement>, <address register indirect with index>, <address register indirect with postincrement>, <address register indirect with predecrement>, <address register indirect>, <data register>, <expression> or <immediate data> expected
       <empty list>
   PsiWhiteSpace(' ')

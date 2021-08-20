@@ -85,6 +85,8 @@
       <w>phxass</w>
       <w>plen</w>
       <w>popsection</w>
+      <w>postincrement</w>
+      <w>predecrement</w>
       <w>printt</w>
       <w>printv</w>
       <w>pushsection</w>

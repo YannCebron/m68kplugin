@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kMoveaInstructionImpl(MOVEA_INSTRUCTION)
     PsiElement(movea)('movea')
-    PsiErrorElement:'(', '-', <address register indirect with displacement>, <address register indirect with index>, <address register>, <data register>, <expression>, <immediate data>, <program counter indirect with displacement> or <program counter indirect with index> expected
+    PsiErrorElement:<address register indirect with displacement>, <address register indirect with index>, <address register indirect with postincrement>, <address register indirect with predecrement>, <address register indirect>, <address register>, <data register>, <expression>, <immediate data>, <program counter indirect with displacement> or <program counter indirect with index> expected
       <empty list>
   PsiWhiteSpace(' ')

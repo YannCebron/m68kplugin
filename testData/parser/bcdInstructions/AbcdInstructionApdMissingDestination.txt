@@ -10,5 +10,5 @@ M68k.FILE
         PsiElement(address_register)('a0')
       PsiElement())(')')
     PsiElement(,)(',')
-    PsiErrorElement:'-' expected
+    PsiErrorElement:<address register indirect with predecrement> expected
       <empty list>

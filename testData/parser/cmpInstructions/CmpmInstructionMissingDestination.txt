@@ -10,5 +10,5 @@ M68k.FILE
       PsiElement())(')')
       PsiElement(+)('+')
     PsiElement(,)(',')
-    PsiErrorElement:'(' expected
+    PsiErrorElement:<address register indirect with postincrement> expected
       <empty list>

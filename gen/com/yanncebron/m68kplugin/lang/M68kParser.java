@@ -435,9 +435,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // MINUS L_PAREN adm_ard R_PAREN
   public static boolean adm_apd(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_apd")) return false;
-    if (!nextTokenIs(b, MINUS)) return false;
+    if (!nextTokenIs(b, "<address register indirect with predecrement>", MINUS)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, ADM_APD, null);
+    Marker m = enter_section_(b, l, _NONE_, ADM_APD, "<address register indirect with predecrement>");
     r = consumeTokens(b, 0, MINUS, L_PAREN);
     r = r && adm_ard(b, l + 1);
     p = r; // pin = 3
@@ -450,13 +450,13 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // L_PAREN adm_ard R_PAREN PLUS
   public static boolean adm_api(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_api")) return false;
-    if (!nextTokenIs(b, L_PAREN)) return false;
+    if (!nextTokenIs(b, "<address register indirect with postincrement>", L_PAREN)) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, ADM_API, "<address register indirect with postincrement>");
     r = consumeToken(b, L_PAREN);
     r = r && adm_ard(b, l + 1);
     r = r && consumeTokens(b, 0, R_PAREN, PLUS);
-    exit_section_(b, m, ADM_API, r);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -477,13 +477,13 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // L_PAREN adm_ard R_PAREN
   public static boolean adm_ari(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_ari")) return false;
-    if (!nextTokenIs(b, L_PAREN)) return false;
+    if (!nextTokenIs(b, "<address register indirect>", L_PAREN)) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, ADM_ARI, "<address register indirect>");
     r = consumeToken(b, L_PAREN);
     r = r && adm_ard(b, l + 1);
     r = r && consumeToken(b, R_PAREN);
-    exit_section_(b, m, ADM_ARI, r);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 

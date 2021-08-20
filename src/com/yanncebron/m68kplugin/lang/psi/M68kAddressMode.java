@@ -23,11 +23,26 @@ package com.yanncebron.m68kplugin.lang.psi;
  */
 public enum M68kAddressMode {
 
+  /**
+   * Ref 2.2.1, {@link M68kAdmDrd}
+   */
   DATA_REGISTER,
+  /**
+   * Ref 2.2.2, {@link M68kAdmArd}
+   */
   ADDRESS_REGISTER,
 
+  /**
+   * Ref 2.2.3, {@link M68kAdmAri}
+   */
   ADDRESS_REGISTER_INDIRECT,
+  /**
+   * Ref 2.2.4, {@link M68kAdmApi}
+   */
   ADDRESS_REGISTER_INDIRECT_POST_INCREMENT,
+  /**
+   * Ref 2.2.5, {@link M68kAdmApd}
+   */
   ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT,
   /**
    * Ref 2.2.6, {@link M68kAdmAdi}

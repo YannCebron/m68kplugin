@@ -2,7 +2,7 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kMoveInstructionImpl(MOVE_INSTRUCTION)
     PsiElement(move)('move')
-    PsiErrorElement:'(', '-', <address register indirect with displacement>, <address register indirect with index>, <address register>, <data register>, <expression>, <immediate data>, <program counter indirect with displacement>, <program counter indirect with index>, sr or usp expected
+    PsiErrorElement:<address register indirect with displacement>, <address register indirect with index>, <address register indirect with postincrement>, <address register indirect with predecrement>, <address register indirect>, <address register>, <data register>, <expression>, <immediate data>, <program counter indirect with displacement>, <program counter indirect with index>, sr or usp expected
       <empty list>
   PsiWhiteSpace(' ')
   PsiElement(LINEFEED)('\n')

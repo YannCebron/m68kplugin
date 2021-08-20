@@ -8,5 +8,5 @@ M68k.FILE
       M68kNumberExpressionImpl(NUMBER_EXPRESSION)
         PsiElement(dec_number)('1')
     PsiElement(,)(',')
-    PsiErrorElement:'(', '-', <address register indirect with displacement>, <address register indirect with index>, <address register>, <data register>, <expression>, ccr or sr expected
+    PsiErrorElement:<address register indirect with displacement>, <address register indirect with index>, <address register indirect with postincrement>, <address register indirect with predecrement>, <address register indirect>, <address register>, <data register>, <expression>, ccr or sr expected
       <empty list>
