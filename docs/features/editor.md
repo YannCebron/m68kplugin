@@ -21,7 +21,7 @@ nav_order: 1
 
 *View \| Quick Documentation* for labels: show preceding lines or EOL comment(s)
 
-Show type and value tooltip for labels on <kbd>Ctrl/Command+Click</kbd>
+Show type and value tooltip for labels on mouse hover (enable _Show quick documentation on hover_ in *Settings/Preferences \| Editor \| Code Editing*)
 
 *View \| Quick Documentation* for number literal: show in decimal, hexadecimal, octal, and binary notation
 
@@ -42,8 +42,10 @@ Show type and value tooltip for labels on <kbd>Ctrl/Command+Click</kbd>
 * Code Folding (*Settings/Preferences \| Editor \| General \| Code Folding*)
   * Zero-terminated string literal (`dc.b "a text",0`)
   * Custom regions via enclosing `* region [placeholderText]` / `* endregion` comments
-* Live Templates
-* Code Style Settings: Tab Size, Visual Guides
+* Live Templates (*Settings/Preferences \| Editor \| Live Templates*)
+* Code Style Settings (*Settings/Preferences \| Editor \| Code Style \| M68k Assembler*)
+  * Tab Size
+  * Visual Guides
 
 ## Code Insight
 
