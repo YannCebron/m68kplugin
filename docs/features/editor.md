@@ -35,10 +35,11 @@ Show type and value tooltip for labels on <kbd>Ctrl/Command+Click</kbd>
 ## Editing
 
 * Smart *Edit \| Extend/Shrink Selection*
+* *Code \| Comment with Line Comment*
 * *Code \| Move Element Left/Right* for `exg`, binary expressions, register list, `dc` values
 * *Move Caret to Code Block Start/End* for matching directives
 * Spellchecker with bundled dictionaries (M68k/Amiga)
-* Code Folding
+* Code Folding (*Settings/Preferences | Editor | General | Code Folding*)
   * Zero-terminated string literal (`dc.b "a text",0`)
   * Custom regions via enclosing `* region [placeholderText]` / `* endregion` comments
 * Live Templates
