@@ -20,3 +20,6 @@ Markdown using [Just the Docs](https://pmarsceill.github.io/just-the-docs/) site
 
 Please provide [Pull Request](https://github.com/YannCebron/m68kplugin/pulls). Anything but cosmetic changes should be
 accompanied by corresponding test/test data.
+
+_Ref x.y.z_ in source code refers
+to [M68000 Family Programmer’s Reference Manual](https://www.nxp.com/files-static/archives/doc/ref_manual/M68000PRM.pdf)
