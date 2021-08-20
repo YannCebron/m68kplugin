@@ -491,11 +491,11 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // CCR
   public static boolean adm_ccr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_ccr")) return false;
-    if (!nextTokenIs(b, CCR)) return false;
+    if (!nextTokenIs(b, "<CCR>", CCR)) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, ADM_CCR, "<CCR>");
     r = consumeToken(b, CCR);
-    exit_section_(b, m, ADM_CCR, r);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -771,11 +771,11 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // SR
   public static boolean adm_sr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_sr")) return false;
-    if (!nextTokenIs(b, SR)) return false;
+    if (!nextTokenIs(b, "<SR>", SR)) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, ADM_SR, "<SR>");
     r = consumeToken(b, SR);
-    exit_section_(b, m, ADM_SR, r);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -783,11 +783,11 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // USP
   public static boolean adm_usp(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_usp")) return false;
-    if (!nextTokenIs(b, USP)) return false;
+    if (!nextTokenIs(b, "<USP>", USP)) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, ADM_USP, "<USP>");
     r = consumeToken(b, USP);
-    exit_section_(b, m, ADM_USP, r);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 

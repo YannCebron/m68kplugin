@@ -279,8 +279,17 @@ adm_imm ::= HASH expression data_size_word_long?
 }
 
 adm_sr ::= SR
+{
+  name = "SR"
+}
 adm_ccr ::= CCR
+{
+  name = "CCR"
+}
 adm_usp ::= USP
+{
+  name = "USP"
+}
 
 // ATTN: ordering in groups
 private adm_group_all ::=                   adm_drd | adm_ard | adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
