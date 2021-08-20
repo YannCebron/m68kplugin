@@ -19,7 +19,18 @@ in [IntelliJ](https://plugins.jetbrains.com/docs/intellij/intellij-platform.html
 There are currently no published releases, snapshot artifacts for [manual installation](https://www.jetbrains.com/help/idea/plugins-settings.html) are available via [GitHub CI](https://github.com/YannCebron/m68kplugin/actions?query=workflow%3A%22Build+%26+Test%22).
 
 Plugin is compatible with IDE version 2020.2.4 and later.              
+
+> **TIP:** Not familiar with IntelliJ-based IDEs? See [Getting Started Guide](https://www.jetbrains.com/help/idea/getting-started.html).
                
+### Notation
+     
+This guide uses the following notations to distinguish certain items:
+
+- *Main Menu \| Sub Menu \| Menu Item* - menu item/action
+- *Settings/Preferences \| Settings Page* - page in [Settings/Preferences](https://www.jetbrains.com/help/idea/configuring-project-and-ide-settings.html) dialog
+- `monospaced text` - assembly code
+- <kbd>F10</kbd> - keyboard shortcut or input
+
 ---
 
 Please visit the [Project Homepage on GitHub](https://github.com/YannCebron/m68kplugin) for Credits, License and Code of Conduct.
