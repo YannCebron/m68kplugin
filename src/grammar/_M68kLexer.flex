@@ -499,6 +499,14 @@ Z=[zZ]
   {E}{L}{S}{E}                 { yybegin(AFTER_OPERAND); return ELSE; }
   {E}{L}{S}{E}{I}{F}           { yybegin(AFTER_OPERAND); return ELSEIF; }
 
+  {M}{C}68000                  { yybegin(AFTER_OPERAND); return MC68000; }
+  {M}{C}68010                  { yybegin(AFTER_OPERAND); return MC68010; }
+  {M}{C}68020                  { yybegin(AFTER_OPERAND); return MC68020; }
+  {M}{C}68030                  { yybegin(AFTER_OPERAND); return MC68030; }
+  {M}{C}68040                  { yybegin(AFTER_OPERAND); return MC68040; }
+  {M}{C}68060                  { yybegin(AFTER_OPERAND); return MC68060; }
+  {A}{C}68080                  { yybegin(AFTER_OPERAND); return AC68080; }
+
   // anything else is macro name
   {ID}                         { yybegin(IN_OPERAND); return MACRO_CALL_ID; }
 

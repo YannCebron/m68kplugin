@@ -166,6 +166,7 @@ public final class M68kTokenGroups {
   );
 
   public static final TokenSet DIRECTIVES = TokenSet.create(
+    AC68080,
     ADDWATCH,
     ALIGN,
     BLK,
@@ -190,9 +191,9 @@ public final class M68kTokenGroups {
     END,
     ENDM,
     ENDR,
-    EQ_DIRECTIVE,
     EQU,
     EQUR,
+    EQ_DIRECTIVE,
     EREM,
     EVEN,
     FAIL,
@@ -209,6 +210,12 @@ public final class M68kTokenGroups {
     LLEN,
     LOAD,
     MACRO,
+    MC68000,
+    MC68010,
+    MC68020,
+    MC68030,
+    MC68040,
+    MC68060,
     MEXIT,
     NEAR,
     NEAR_CODE,

@@ -26,6 +26,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType LINEFEED = new M68kTokenType("LINEFEED");
 
   public static final IElementType ABCD = new M68kTokenType("abcd");
+  public static final IElementType AC68080 = new M68kTokenType("ac68080");
   public static final IElementType ADD = new M68kTokenType("add");
   public static final IElementType ADDA = new M68kTokenType("adda");
   public static final IElementType ADDI = new M68kTokenType("addi");
@@ -133,9 +134,9 @@ public abstract class M68kTokenTypes {
   public static final IElementType EOR = new M68kTokenType("eor");
   public static final IElementType EORI = new M68kTokenType("eori");
   public static final IElementType EQ = new M68kTokenType("=");
-  public static final IElementType EQ_DIRECTIVE = new M68kTokenType("= (DIRECTIVE)");
   public static final IElementType EQU = new M68kTokenType("equ");
   public static final IElementType EQUR = new M68kTokenType("equr");
+  public static final IElementType EQ_DIRECTIVE = new M68kTokenType("= (DIRECTIVE)");
   public static final IElementType EQ_EQ = new M68kTokenType("==");
   public static final IElementType EREM = new M68kTokenType("erem");
   public static final IElementType EVEN = new M68kTokenType("even");
@@ -194,6 +195,12 @@ public abstract class M68kTokenTypes {
   public static final IElementType L_PAREN = new M68kTokenType("(");
   public static final IElementType MACRO = new M68kTokenType("macro");
   public static final IElementType MACRO_CALL_ID = new M68kTokenType("macro_call_id");
+  public static final IElementType MC68000 = new M68kTokenType("mc68000");
+  public static final IElementType MC68010 = new M68kTokenType("mc68010");
+  public static final IElementType MC68020 = new M68kTokenType("mc68020");
+  public static final IElementType MC68030 = new M68kTokenType("mc68040");
+  public static final IElementType MC68040 = new M68kTokenType("mc68040");
+  public static final IElementType MC68060 = new M68kTokenType("mc68060");
   public static final IElementType MEXIT = new M68kTokenType("mexit");
   public static final IElementType MINUS = new M68kTokenType("-");
   public static final IElementType MOVE = new M68kTokenType("move");

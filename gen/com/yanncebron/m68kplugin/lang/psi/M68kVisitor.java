@@ -29,6 +29,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitBcdInstructionBase(o);
   }
 
+  public void visitAc68080Directive(@NotNull M68kAc68080Directive o) {
+    visitDirective(o);
+  }
+
   public void visitAddInstruction(@NotNull M68kAddInstruction o) {
     visitDataSized(o);
     // visitInstruction(o);
@@ -748,6 +752,30 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitMacroParameterDirective(@NotNull M68kMacroParameterDirective o) {
+    visitDirective(o);
+  }
+
+  public void visitMc68000Directive(@NotNull M68kMc68000Directive o) {
+    visitDirective(o);
+  }
+
+  public void visitMc68010Directive(@NotNull M68kMc68010Directive o) {
+    visitDirective(o);
+  }
+
+  public void visitMc68020Directive(@NotNull M68kMc68020Directive o) {
+    visitDirective(o);
+  }
+
+  public void visitMc68030Directive(@NotNull M68kMc68030Directive o) {
+    visitDirective(o);
+  }
+
+  public void visitMc68040Directive(@NotNull M68kMc68040Directive o) {
+    visitDirective(o);
+  }
+
+  public void visitMc68060Directive(@NotNull M68kMc68060Directive o) {
     visitDirective(o);
   }
 

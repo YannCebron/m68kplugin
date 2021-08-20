@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kMc68000DirectiveImpl(MC_68000_DIRECTIVE)
+    PsiElement(mc68000)('mc68000')

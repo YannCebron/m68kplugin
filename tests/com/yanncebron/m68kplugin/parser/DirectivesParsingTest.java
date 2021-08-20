@@ -457,4 +457,32 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" echo \"some text\"");
   }
 
+  public void testMc68000Directive() throws Exception {
+    doCodeTest(" mc68000");
+  }
+
+  public void testMc68010Directive() throws Exception {
+    doCodeTest(" mc68010");
+  }
+
+  public void testMc68020Directive() throws Exception {
+    doCodeTest(" mc68020");
+  }
+
+  public void testMc68030Directive() throws Exception {
+    doCodeTest(" mc68030");
+  }
+
+  public void testMc68040Directive() throws Exception {
+    doCodeTest(" mc68040");
+  }
+
+  public void testMc68060Directive() throws Exception {
+    doCodeTest(" mc68060");
+  }
+
+  public void testAc68080Directive() throws Exception {
+    doCodeTest(" ac68080");
+  }
+
 }

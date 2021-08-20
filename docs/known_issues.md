@@ -62,7 +62,7 @@ Unsupported directives, these will display false positive
 - `import` == `xref`
 - `machine`
 - `mask2` (no-op)
-- `mc68XXX`/`ac68060`/`mcf5XXX`
+- `mcf5XXX`
 - `module`
 - `nref` (PhxAss)
 - `offset` (Devpac)

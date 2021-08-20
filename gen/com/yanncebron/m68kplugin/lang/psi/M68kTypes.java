@@ -27,6 +27,7 @@ import com.yanncebron.m68kplugin.lang.psi.impl.*;
 public interface M68kTypes {
 
   IElementType ABCD_INSTRUCTION = new M68kCompositeElementType("ABCD_INSTRUCTION");
+  IElementType AC_68080_DIRECTIVE = new M68kCompositeElementType("AC_68080_DIRECTIVE");
   IElementType ADDA_INSTRUCTION = new M68kCompositeElementType("ADDA_INSTRUCTION");
   IElementType ADDI_INSTRUCTION = new M68kCompositeElementType("ADDI_INSTRUCTION");
   IElementType ADDQ_INSTRUCTION = new M68kCompositeElementType("ADDQ_INSTRUCTION");
@@ -192,6 +193,12 @@ public interface M68kTypes {
   IElementType MACRO_CALL_PARAMETER = new M68kCompositeElementType("MACRO_CALL_PARAMETER");
   IElementType MACRO_DIRECTIVE = new M68kCompositeElementType("MACRO_DIRECTIVE");
   IElementType MACRO_PARAMETER_DIRECTIVE = new M68kCompositeElementType("MACRO_PARAMETER_DIRECTIVE");
+  IElementType MC_68000_DIRECTIVE = new M68kCompositeElementType("MC_68000_DIRECTIVE");
+  IElementType MC_68010_DIRECTIVE = new M68kCompositeElementType("MC_68010_DIRECTIVE");
+  IElementType MC_68020_DIRECTIVE = new M68kCompositeElementType("MC_68020_DIRECTIVE");
+  IElementType MC_68030_DIRECTIVE = new M68kCompositeElementType("MC_68030_DIRECTIVE");
+  IElementType MC_68040_DIRECTIVE = new M68kCompositeElementType("MC_68040_DIRECTIVE");
+  IElementType MC_68060_DIRECTIVE = new M68kCompositeElementType("MC_68060_DIRECTIVE");
   IElementType MEXIT_DIRECTIVE = new M68kCompositeElementType("MEXIT_DIRECTIVE");
   IElementType MINUS_EXPRESSION = new M68kCompositeElementType("MINUS_EXPRESSION");
   IElementType MOD_EXPRESSION = new M68kCompositeElementType("MOD_EXPRESSION");
@@ -297,6 +304,9 @@ public interface M68kTypes {
       IElementType type = node.getElementType();
       if (type == ABCD_INSTRUCTION) {
         return new M68kAbcdInstructionImpl(node);
+      }
+      else if (type == AC_68080_DIRECTIVE) {
+        return new M68kAc68080DirectiveImpl(node);
       }
       else if (type == ADDA_INSTRUCTION) {
         return new M68kAddaInstructionImpl(node);
@@ -789,6 +799,24 @@ public interface M68kTypes {
       }
       else if (type == MACRO_PARAMETER_DIRECTIVE) {
         return new M68kMacroParameterDirectiveImpl(node);
+      }
+      else if (type == MC_68000_DIRECTIVE) {
+        return new M68kMc68000DirectiveImpl(node);
+      }
+      else if (type == MC_68010_DIRECTIVE) {
+        return new M68kMc68010DirectiveImpl(node);
+      }
+      else if (type == MC_68020_DIRECTIVE) {
+        return new M68kMc68020DirectiveImpl(node);
+      }
+      else if (type == MC_68030_DIRECTIVE) {
+        return new M68kMc68030DirectiveImpl(node);
+      }
+      else if (type == MC_68040_DIRECTIVE) {
+        return new M68kMc68040DirectiveImpl(node);
+      }
+      else if (type == MC_68060_DIRECTIVE) {
+        return new M68kMc68060DirectiveImpl(node);
       }
       else if (type == MEXIT_DIRECTIVE) {
         return new M68kMexitDirectiveImpl(node);

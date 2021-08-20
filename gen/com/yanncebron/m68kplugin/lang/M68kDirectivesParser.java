@@ -26,6 +26,18 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 public class M68kDirectivesParser {
 
   /* ********************************************************** */
+  // ac68080
+  public static boolean ac68080_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ac68080_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", AC68080)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, AC_68080_DIRECTIVE, "<directive>");
+    r = consumeToken(b, AC68080);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // ADDWATCH expression
   public static boolean addwatch_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "addwatch_directive")) return false;
@@ -388,7 +400,14 @@ public class M68kDirectivesParser {
   //                        popsection_directive |
   //                        pushsection_directive |
   //                        odd_directive |
-  //                        echo_directive
+  //                        echo_directive |
+  //                        mc68000_directive |
+  //                        mc68010_directive |
+  //                        mc68020_directive |
+  //                        mc68030_directive |
+  //                        mc68040_directive |
+  //                        mc68060_directive |
+  //                        ac68080_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -464,6 +483,13 @@ public class M68kDirectivesParser {
     if (!r) r = pushsection_directive(b, l + 1);
     if (!r) r = odd_directive(b, l + 1);
     if (!r) r = echo_directive(b, l + 1);
+    if (!r) r = mc68000_directive(b, l + 1);
+    if (!r) r = mc68010_directive(b, l + 1);
+    if (!r) r = mc68020_directive(b, l + 1);
+    if (!r) r = mc68030_directive(b, l + 1);
+    if (!r) r = mc68040_directive(b, l + 1);
+    if (!r) r = mc68060_directive(b, l + 1);
+    if (!r) r = ac68080_directive(b, l + 1);
     return r;
   }
 
@@ -985,6 +1011,78 @@ public class M68kDirectivesParser {
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, null, "<index>");
     r = consumeToken(b, DEC_NUMBER);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // mc68000
+  public static boolean mc68000_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "mc68000_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", MC68000)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, MC_68000_DIRECTIVE, "<directive>");
+    r = consumeToken(b, MC68000);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // mc68010
+  public static boolean mc68010_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "mc68010_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", MC68010)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, MC_68010_DIRECTIVE, "<directive>");
+    r = consumeToken(b, MC68010);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // mc68020
+  public static boolean mc68020_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "mc68020_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", MC68020)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, MC_68020_DIRECTIVE, "<directive>");
+    r = consumeToken(b, MC68020);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // mc68030
+  public static boolean mc68030_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "mc68030_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", MC68030)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, MC_68030_DIRECTIVE, "<directive>");
+    r = consumeToken(b, MC68030);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // mc68040
+  public static boolean mc68040_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "mc68040_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", MC68040)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, MC_68040_DIRECTIVE, "<directive>");
+    r = consumeToken(b, MC68040);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // mc68060
+  public static boolean mc68060_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "mc68060_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", MC68060)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, MC_68060_DIRECTIVE, "<directive>");
+    r = consumeToken(b, MC68060);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
