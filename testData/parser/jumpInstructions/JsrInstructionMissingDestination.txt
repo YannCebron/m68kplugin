@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kJsrInstructionImpl(JSR_INSTRUCTION)
     PsiElement(jsr)('jsr')
-    PsiErrorElement:'(' or <expression> expected
+    PsiErrorElement:'(', <address register indirect with displacement> or <expression> expected
       <empty list>
   PsiWhiteSpace(' ')

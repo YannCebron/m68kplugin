@@ -214,12 +214,14 @@ adm_apd ::= MINUS L_PAREN adm_ard R_PAREN
   ]
 }
 
-// index(a0)
-adm_adi ::= expression L_PAREN adm_ard R_PAREN
+// Ref 2.2.6: d16(An) | (d16,An)
+adm_adi ::= (expression L_PAREN adm_ard R_PAREN) |
+            (L_PAREN expression COMMA adm_ard R_PAREN)
 {
   methods = [
     getRegister
   ]
+  name = "address register indirect with displacement"
 }
 
 // index(a0,d0)

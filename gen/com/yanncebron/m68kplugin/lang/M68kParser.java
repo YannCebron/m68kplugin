@@ -319,16 +319,42 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // expression L_PAREN adm_ard R_PAREN
+  // (expression L_PAREN adm_ard R_PAREN) |
+  //             (L_PAREN expression COMMA adm_ard R_PAREN)
   public static boolean adm_adi(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_adi")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ADM_ADI, "<adm adi>");
+    Marker m = enter_section_(b, l, _NONE_, ADM_ADI, "<address register indirect with displacement>");
+    r = adm_adi_0(b, l + 1);
+    if (!r) r = adm_adi_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // expression L_PAREN adm_ard R_PAREN
+  private static boolean adm_adi_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_adi_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
     r = M68kExpressionParser.expression(b, l + 1, -1);
     r = r && consumeToken(b, L_PAREN);
     r = r && adm_ard(b, l + 1);
     r = r && consumeToken(b, R_PAREN);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // L_PAREN expression COMMA adm_ard R_PAREN
+  private static boolean adm_adi_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_adi_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, L_PAREN);
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_ard(b, l + 1);
+    r = r && consumeToken(b, R_PAREN);
+    exit_section_(b, m, null, r);
     return r;
   }
 

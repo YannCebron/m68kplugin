@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,10 @@ public class MovepInstructionParsingTest extends M68kParsingTestCase {
 
   public void testMovepInstructionDrdAdi() throws Exception {
     doCodeTest(" movep d0,42(a0)");
+  }
+
+  public void testMovepInstructionDrdAdiNew() throws Exception {
+    doCodeTest(" movep d0,(42,a0)");
   }
 
   public void testMovepInstructionDrdMissingDestination() throws Exception {

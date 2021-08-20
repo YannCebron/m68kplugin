@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kAddInstructionImpl(ADD_INSTRUCTION)
     PsiElement(add)('add')
-    PsiErrorElement:'(', '-', <address register>, <data register>, <expression> or <immediate data> expected
+    PsiErrorElement:'(', '-', <address register indirect with displacement>, <address register>, <data register>, <expression> or <immediate data> expected
       <empty list>
   PsiWhiteSpace(' ')

@@ -6,5 +6,5 @@ M68k.FILE
     M68kAdmDrdImpl(ADM_DRD)
       PsiElement(data_register)('d0')
     PsiElement(,)(',')
-    PsiErrorElement:<expression> expected
+    PsiErrorElement:<address register indirect with displacement> expected
       <empty list>
