@@ -135,7 +135,7 @@
 
 - goto related: `.i`/binary file -> including files
 - gutter icon: `include` all included files (recursively)
-- UML visualization
+- graph visualization
 - highlight cycles
 
 ## IDE
@@ -144,7 +144,7 @@
 
 ## Tools
 
-- show cycles/size in editor https://68kcounter-web.vercel.app/
+- show cycles/size in editor [https://68kcounter-web.vercel.app/](https://68kcounter-web.vercel.app/)
 
 ## Amiga
 
@@ -152,17 +152,5 @@
   - color-picker/inlays
   - register name inlay
   - http://deadliners.net/gradientmaster/
-- support IFF images in IDE https://github.com/haraldk/TwelveMonkeys
+- support IFF images in IDE [https://github.com/haraldk/TwelveMonkeys](https://github.com/haraldk/TwelveMonkeys)
 - FS-UAE [configuration files](https://fs-uae.net/configuration-files)                         
-
-## Resources
-
-- https://www.nxp.com/files-static/archives/doc/ref_manual/M68000PRM.pdf
-- https://github.com/tonioni/WinUAE/blob/master/table68k
-- http://mrjester.hapisan.com/04_MC68/Index.html
-- https://github.com/alpine9000/amiga_examples
-- https://amigasourcepres.gitlab.io/page/books/assembler/
-- https://amigasourcecodepreservation.gitlab.io/mc680x0-reference/
-- https://amigasourcecodepreservation.gitlab.io/total-amiga-assembler/
-- http://eab.abime.net/showthread.php?t=21516
-- http://obligement.free.fr/programmation.php
