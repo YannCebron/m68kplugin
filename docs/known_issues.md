@@ -11,9 +11,10 @@ title: Known Issues
 ## Resolving
 
 - `include` directives:
-  - not evaluated
-  - symbols are resolved across all files
+  - not evaluated, symbols are resolved across all files
+  - navigation to symbol declared multiple times (possibly in multiple files) will show popup chooser
   - all included files must be located inside project (or added as separate content root)
+- conditional assembly directives are not evaluated
 - macro block:
   - highlight `jsr _LVO\1(a6)` as invalid outside of macro
   - resolve global label inside current first
@@ -75,6 +76,7 @@ Unsupported directives, these will display false positive
 - `weak`
 
 MadMac assembler specific (all directives may be optionally preceded by a dot):
+
 - `abs`
 - `assert`
 - `dphrase`
