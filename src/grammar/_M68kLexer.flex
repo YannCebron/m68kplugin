@@ -72,7 +72,7 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 CRLF=[\r\n]
 WHITE_SPACE=[\ \t\f]
 
-COMMENT=;.*|\*.* // todo leading "*" only on empty line
+COMMENT=;.*|\*.*
 EOL_COMMENT=;.*
 
 DECNUMBER=[\d]+
