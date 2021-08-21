@@ -1610,15 +1610,18 @@ public class _M68kLexer implements FlexLexer {
   }
 
   private void beginDataSized() {
-    pushbackDataSize();
+    pushbackDataSize(false);
     yybegin(AFTER_INSTRUCTION);
   }
 
   /**
    * Pushes back (optional) DATA_SIZE token if present.
    */
-  private void pushbackDataSize() {
-    if (charAt(yylength() - 2) == '.') {
+  private void pushbackDataSize(boolean required) {
+    if (required) {
+      yypushback(2);
+    }
+    else if (charAt(yylength() - 2) == '.') {
       char previousChar = charAt(yylength() - 1);
       if (previousChar == 's' || previousChar == 'b' || previousChar == 'w' || previousChar == 'l' ||
           previousChar == 'S' || previousChar == 'B' || previousChar == 'W' || previousChar == 'L') {
@@ -3105,17 +3108,17 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 540: break;
           case 246: 
-            { pushbackDataSize(); return SP;
+            { pushbackDataSize(false); return SP;
             } 
             // fall through
           case 541: break;
           case 247: 
-            { pushbackDataSize(); return ADDRESS_REGISTER;
+            { pushbackDataSize(false); return ADDRESS_REGISTER;
             } 
             // fall through
           case 542: break;
           case 248: 
-            { pushbackDataSize(); return DATA_REGISTER;
+            { pushbackDataSize(false); return DATA_REGISTER;
             } 
             // fall through
           case 543: break;

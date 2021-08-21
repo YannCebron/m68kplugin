@@ -37,15 +37,18 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
   }
 
   private void beginDataSized() {
-    pushbackDataSize();
+    pushbackDataSize(false);
     yybegin(AFTER_INSTRUCTION);
   }
 
   /**
    * Pushes back (optional) DATA_SIZE token if present.
    */
-  private void pushbackDataSize() {
-    if (charAt(yylength() - 2) == '.') {
+  private void pushbackDataSize(boolean required) {
+    if (required) {
+      yypushback(2);
+    }
+    else if (charAt(yylength() - 2) == '.') {
       char previousChar = charAt(yylength() - 1);
       if (previousChar == 's' || previousChar == 'b' || previousChar == 'w' || previousChar == 'l' ||
           previousChar == 'S' || previousChar == 'B' || previousChar == 'W' || previousChar == 'L') {
@@ -178,16 +181,16 @@ Z=[zZ]
   {EOL_COMMENT}            { return COMMENT; }
 
   {S}{P}                   { return SP; }
-  {S}{P} {DATA_SIZE}?      { pushbackDataSize(); return SP; }
+  {S}{P} {DATA_SIZE}       { pushbackDataSize(false); return SP; }
   {S}{S}{P}                { return SSP; }
   {U}{S}{P}                { return USP; }
   {P}{C}                   { return PC; }
   {S}{R}                   { return SR; }
   {C}{C}{R}                { return CCR; }
   {D}[0-7]                 { return DATA_REGISTER; }
-  {D}[0-7] {DATA_SIZE}?    { pushbackDataSize(); return DATA_REGISTER; }
+  {D}[0-7] {DATA_SIZE}     { pushbackDataSize(false); return DATA_REGISTER; }
   {A}[0-7]                 { return ADDRESS_REGISTER; }
-  {A}[0-7] {DATA_SIZE}?    { pushbackDataSize(); return ADDRESS_REGISTER; }
+  {A}[0-7] {DATA_SIZE}     { pushbackDataSize(false); return ADDRESS_REGISTER; }
 
   // distinguish 'd6.l'/'$4000.l' vs. 'bra .l'/'dbf d0,.s'
   "." {B}    { if (afterSpaceOrComma()) { return ID; } return DOT_B; }
