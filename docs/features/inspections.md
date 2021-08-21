@@ -6,9 +6,7 @@ nav_order: 2
 
 # Inspections
 
-Inspection settings and descriptions can be accessed under *M68k assembler* group in *Settings/Preferences \| Editor \| Inspections*.
-                                    
-### Suppression
+## Suppression
 
 A "special" line comment followed by the inspection ID to disable can be used to suppress false positives for specific places.
 
@@ -22,16 +20,20 @@ In the following snippet, `a7` will no longer be highlighted by _Usage of A7 reg
 To insert these for given highlighting, use <kbd>Alt+Enter</kbd> quick fix menu:
 - _Suppress for element_ adds suppression comment in preceding line
 - _Suppress for file_  adds suppression comment to begin of the file (must occur before first instruction/directive)
+  
+## Inspections
 
-## Unresolved label reference
+Inspection settings and descriptions can be accessed under *M68k assembler* group in *Settings/Preferences \| Editor \| Inspections*.
 
-## Unused local label
+### Unresolved label reference
 
-## Directives problems
+### Unused local label
 
-## Register list/range problems
+### Directives problems
 
-## Usage of A7 register
+### Register list/range problems
 
-## Simplifiable expression
+### Usage of A7 register
+
+### Simplifiable expression
 
