@@ -13,7 +13,7 @@ A "special" line comment followed by the inspection ID to disable can be used to
 In the following snippet, `a7` will no longer be highlighted by _Usage of A7 register_ inspection:
 
 ```
-* @@@suppress_inspection@@@ M68kUsageA7Register`
+* @@@suppress_inspection@@@ M68kUsageA7Register
    jmp (a7)
 ```
 
