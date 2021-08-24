@@ -96,6 +96,8 @@ MadMac assembler specific (all directives may be optionally preceded by a dot):
 
 - single-digit local label `1$`
 - allow `@` (Devpac)
+- `-ldots` option: allow dots within identifiers
+- `-localu` option: allow local labels starting with `_` instead of `.` (Devpac)
 - ending with double-colon `::` &rarr; automatically exported (`xdef`)
 - allow referencing `global_name\local_name` syntax (PhxAss)
 
