@@ -31,6 +31,9 @@ Currently, only 68000 architecture is supported.
 
 Non-supported instructions/registers will display false positive
 > _"Cannot resolve macro '$MNEMONIC$ \| $REGISTER$'"_
+                     
+Using non-supported address mode will result in syntax error or
+> _"<$ADDRESS_MODE$> expected, got $TEXT$"_
 
 ### Directives
 
