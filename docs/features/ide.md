@@ -13,13 +13,13 @@ nav_order: 3
 
 ## External Tools
 
-Navigate to _file:lineNumber_ location or label from vasm console message
-             
+Navigate to _file:lineNumber_ location or label(s) from vasm console message
+
 ## Version Control
 
 Completion of label names in _Commit Message_
 
 ## Other
 
-Register `FILE_ID.DIZ` and `*.NFO` files as plain text
+Register `FILE_ID.DIZ`, `startup-sequence`, and `*.NFO` files as plain text
 

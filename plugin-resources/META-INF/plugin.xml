@@ -206,7 +206,7 @@
         implementation="com.yanncebron.m68kplugin.compiler.M68kVasmConsoleFilterProvider"/>
 
 
-    <fileType name="PLAIN_TEXT" fileNames="FILE_ID.DIZ" extensions="nfo"/>
+    <fileType name="PLAIN_TEXT" fileNames="FILE_ID.DIZ" fileNamesCaseInsensitive="startup-sequence" extensions="nfo"/>
   </extensions>
 
   <actions>
