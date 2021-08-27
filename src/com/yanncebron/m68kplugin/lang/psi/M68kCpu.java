@@ -29,28 +29,35 @@ import java.util.Set;
  */
 public enum M68kCpu {
 
-  M_68000("Motorola 68000"),
-  M_68010("Motorola 68010"),
-  M_68020("Motorola 68020"),
-  M_68030("Motorola 68030"),
-  M_68040("Motorola 68040"),
-  M_68060("Motorola 68060"),
+  M_68000("Motorola 68000", "MC68000"),
+  M_68010("Motorola 68010", "MC68010"),
+  M_68020("Motorola 68020", "MC68020"),
+  M_68030("Motorola 68030", "MC68030"),
+  M_68040("Motorola 68040", "MC68040"),
+  M_68060("Motorola 68060", "MC68060"),
 
-  M_68881("Motorola 68881"),
+  M_68881("Motorola 68881", "MC68881"),
 
-  M_68851("Motorola 68851"),
+  M_68851("Motorola 68851", "MC68851"),
 
-  AC_68080("Apollo Core 68080");
+  AC_68080("Apollo Core 68080", "AC68080");
 
   private final String displayName;
+  private final String cpuName;
 
-  M68kCpu(String displayName) {
+  M68kCpu(String displayName, String cpuName) {
     this.displayName = displayName;
+    this.cpuName = cpuName;
   }
 
   @NonNls
   public String getDisplayName() {
     return displayName;
+  }
+
+  @NonNls
+  public String getCpuName() {
+    return cpuName;
   }
 
   public static final Set<M68kCpu> MOTOROLA = EnumSet.of(M_68000, M_68010, M_68020, M_68030, M_68040, M_68060);
