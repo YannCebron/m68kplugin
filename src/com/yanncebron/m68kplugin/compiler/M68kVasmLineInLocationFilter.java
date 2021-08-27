@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
+import com.intellij.util.PathUtilRt;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
@@ -91,7 +92,7 @@ class M68kVasmLineInLocationFilter implements Filter {
     int initialOffset = entireLength - line.length();
 
     final Collection<VirtualFile> matchingFiles =
-      FilenameIndex.getVirtualFilesByName(project, location, GlobalSearchScope.allScope(project));
+      FilenameIndex.getVirtualFilesByName(project, PathUtilRt.getFileName(location), GlobalSearchScope.allScope(project));
     if (!matchingFiles.isEmpty()) {
       final HyperlinkInfo filesHyperlinkInfo = HyperlinkInfoFactory.getInstance()
         .createMultipleFilesHyperlinkInfo(new ArrayList<>(matchingFiles), lineNumber, project);
