@@ -27,6 +27,8 @@ Inspection settings and descriptions can be accessed under *M68k assembler* grou
 
 ### Unresolved label reference
 
+### Unresolved macro reference
+
 ### Unused local label
 
 ### Directives problems

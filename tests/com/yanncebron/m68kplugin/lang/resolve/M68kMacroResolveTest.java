@@ -23,7 +23,7 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
-import com.yanncebron.m68kplugin.inspections.M68kUnresolvedLabelReferenceInspection;
+import com.yanncebron.m68kplugin.inspections.M68kUnresolvedMacroReferenceInspection;
 import com.yanncebron.m68kplugin.lang.M68kIcons;
 import com.yanncebron.m68kplugin.lang.M68kLookupElementTestUtil;
 
@@ -40,7 +40,7 @@ public class M68kMacroResolveTest extends BasePlatformTestCase {
   }
 
   public void testHighlightResolvingInSingleFile() {
-    myFixture.enableInspections(new M68kUnresolvedLabelReferenceInspection());
+    myFixture.enableInspections(new M68kUnresolvedMacroReferenceInspection());
     myFixture.testHighlighting("macroHighlightResolvingInSingleFile.s");
   }
 
@@ -58,7 +58,7 @@ public class M68kMacroResolveTest extends BasePlatformTestCase {
 
   public void testHighlightResolveInMultipleFiles() {
     final String[] testDataPaths = {"macroHighlightResolvingInMultipleFiles.s", "macroHighlightResolvingInMultipleFiles_other.s"};
-    myFixture.enableInspections(new M68kUnresolvedLabelReferenceInspection());
+    myFixture.enableInspections(new M68kUnresolvedMacroReferenceInspection());
     myFixture.testHighlighting(testDataPaths);
 
     final PsiReference referenceAtCaretPositionWithAssertion = myFixture.getReferenceAtCaretPositionWithAssertion(testDataPaths);

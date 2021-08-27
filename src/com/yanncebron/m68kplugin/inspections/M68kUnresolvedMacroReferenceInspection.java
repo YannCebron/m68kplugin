@@ -18,19 +18,16 @@ package com.yanncebron.m68kplugin.inspections;
 
 import com.intellij.codeInspection.LocalInspectionTool;
 import com.intellij.codeInspection.LocalInspectionToolSession;
-import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiPolyVariantReference;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ObjectUtils;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
-import com.yanncebron.m68kplugin.lang.psi.conditional.*;
-import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import org.jetbrains.annotations.NotNull;
 
-public class M68kUnresolvedLabelReferenceInspection extends LocalInspectionTool {
+public class M68kUnresolvedMacroReferenceInspection extends LocalInspectionTool {
 
   @NotNull
   @Override
@@ -38,7 +35,7 @@ public class M68kUnresolvedLabelReferenceInspection extends LocalInspectionTool 
                                         @NotNull LocalInspectionToolSession session) {
     return new M68kVisitor() {
       @Override
-      public void visitLabelRefExpression(@NotNull M68kLabelRefExpression o) {
+      public void visitMacroCallDirective(@NotNull M68kMacroCallDirective o) {
         highlightReference(holder, o);
       }
     };
@@ -51,25 +48,8 @@ public class M68kUnresolvedLabelReferenceInspection extends LocalInspectionTool 
 
     boolean unresolved = reference.multiResolve(false).length == 0;
     if (unresolved) {
-      // skip '\1' in labelRef
-      if (psiElement.textContains('\\') && !(psiElement.textContains('@'))) {
-        return;
-      }
-
-      if (isUsageInPotentiallyNonResolvingConditionalAssemblyDirective(psiElement)) {
-        holder.registerProblem(reference, ProblemHighlightType.WEAK_WARNING);
-      } else {
-        holder.registerProblem(reference);
-      }
+      holder.registerProblem(reference);
     }
   }
 
-  private boolean isUsageInPotentiallyNonResolvingConditionalAssemblyDirective(M68kPsiElement psiElement) {
-    final M68kConditionalAssemblyDirective conditionalAssemblyDirective =
-      PsiTreeUtil.getParentOfType(psiElement, M68kConditionalAssemblyDirective.class);
-    return conditionalAssemblyDirective instanceof M68kIfdConditionalAssemblyDirective ||
-      conditionalAssemblyDirective instanceof M68kIfndConditionalAssemblyDirective ||
-      conditionalAssemblyDirective instanceof M68kIfmacrodConditionalAssemblyDirective ||
-      conditionalAssemblyDirective instanceof M68kIfmacrondConditionalAssemblyDirective;
-  }
 }
