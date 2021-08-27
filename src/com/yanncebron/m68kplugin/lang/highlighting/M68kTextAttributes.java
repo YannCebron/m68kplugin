@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 package com.yanncebron.m68kplugin.lang.highlighting;
 
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
-import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
@@ -27,7 +26,7 @@ public class M68kTextAttributes {
   public static final TextAttributesKey INSTRUCTION =
     createTextAttributesKey("M68K_INSTRUCTION", DefaultLanguageHighlighterColors.KEYWORD);
   public static final TextAttributesKey PRIVILEGED_INSTRUCTION =
-    createTextAttributesKey("M68K_PRIVILEGED_INSTRUCTION", CodeInsightColors.RUNTIME_ERROR);
+    createTextAttributesKey("M68K_PRIVILEGED_INSTRUCTION", DefaultLanguageHighlighterColors.HIGHLIGHTED_REFERENCE);
 
   public static final TextAttributesKey MACRO_CALL =
     createTextAttributesKey("M68K_MACRO_CALL", DefaultLanguageHighlighterColors.FUNCTION_CALL);
