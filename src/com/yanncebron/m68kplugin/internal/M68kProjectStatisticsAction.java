@@ -89,7 +89,7 @@ public class M68kProjectStatisticsAction extends AnAction {
     final long[] totalResolveTime = {0};
 
     long startTime = System.currentTimeMillis();
-    ProgressManager.getInstance().runProcessWithProgressSynchronously(() ->
+    boolean completed = ProgressManager.getInstance().runProcessWithProgressSynchronously(() ->
       ApplicationManager.getApplication().runReadAction(() -> {
         final Collection<VirtualFile> files =
           FileTypeIndex.getFiles(M68kFileType.INSTANCE, GlobalSearchScope.allScope(project));
@@ -181,6 +181,8 @@ public class M68kProjectStatisticsAction extends AnAction {
           fileInfos.add(info);
         }
       }), "Scanning files...", true, project);
+
+    if (!completed) return;
 
     StringBuilder sb = new StringBuilder();
     sb.append("Files: ").append(fileInfos.size())
