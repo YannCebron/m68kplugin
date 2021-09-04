@@ -80,7 +80,7 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: ~/.pluginVerifier
-          key: ${{ runner.os }}-plugin-verifier-${{ steps.properties.outputs.ideVersions }}
+          key: ${{ runner.os }}-plugin-verifier-ides-${{ steps.properties.outputs.ideVersions }}
 
       - name: Verify Plugin
         run: gradle runPluginVerifier
