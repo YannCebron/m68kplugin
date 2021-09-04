@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,10 @@
 package com.yanncebron.m68kplugin.lang.psi;
 
 import com.intellij.psi.NavigatablePsiElement;
-import com.intellij.psi.PsiNamedElement;
+import com.intellij.psi.PsiNameIdentifierOwner;
 import org.jetbrains.annotations.Nullable;
 
-public interface M68kLabelBase extends PsiNamedElement, NavigatablePsiElement, M68kPsiElement {
+public interface M68kLabelBase extends PsiNameIdentifierOwner, NavigatablePsiElement, M68kPsiElement {
 
   enum LabelKind {
     GLOBAL(false),

@@ -44,6 +44,11 @@ abstract class M68kLocalLabelMixIn extends ASTWrapperPsiElement implements M68kL
   }
 
   @Override
+  public @Nullable PsiElement getNameIdentifier() {
+    return findIdNode(this).getPsi();
+  }
+
+  @Override
   public @Nullable String getValue() {
     return null;
   }

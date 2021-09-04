@@ -46,6 +46,11 @@ abstract class M68kLabelMixIn extends StubBasedPsiElementBase<M68kLabelStub> imp
   }
 
   @Override
+  public @Nullable PsiElement getNameIdentifier() {
+    return findIdNode(this).getPsi();
+  }
+
+  @Override
   public LabelKind getLabelKind() {
     final M68kLabelStub stub = getGreenStub();
     if (stub != null) {
