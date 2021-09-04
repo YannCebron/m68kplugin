@@ -16,7 +16,6 @@
 
 package com.yanncebron.m68kplugin.lang.findUsages;
 
-import com.intellij.codeInsight.highlighting.HighlightUsagesHandler;
 import com.intellij.openapi.editor.markup.RangeHighlighter;
 import com.intellij.openapi.util.Comparing;
 import com.intellij.testFramework.TestDataPath;
@@ -57,10 +56,7 @@ public class M68kHighlightUsagesTest extends BasePlatformTestCase {
   }
 
   private void doHighlightUsagesTest(String filePath, String... expectedHighlights) {
-    myFixture.configureByFile(filePath);
-    HighlightUsagesHandler.invoke(getProject(), myFixture.getEditor(), myFixture.getFile());
-
-    final RangeHighlighter[] allHighlighters = myFixture.getEditor().getMarkupModel().getAllHighlighters();
+    final RangeHighlighter[] allHighlighters = myFixture.testHighlightUsages(filePath);
     ContainerUtil.sort(allHighlighters, (o1, o2) -> Comparing.compare(o1.getStartOffset(), o2.getStartOffset()));
 
     final List<String> highlightData = ContainerUtil.map2List(allHighlighters, rangeHighlighter -> {
