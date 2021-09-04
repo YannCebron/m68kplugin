@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,10 @@ package com.yanncebron.m68kplugin.documentation;
 import com.intellij.codeInsight.documentation.DocumentationManager;
 import com.intellij.lang.documentation.DocumentationProvider;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.twelvemonkeys.lang.StringUtil;
+import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 
 public class M68kInstructionDocumentationProviderTest extends BasePlatformTestCase {
 
@@ -42,6 +44,13 @@ public class M68kInstructionDocumentationProviderTest extends BasePlatformTestCa
 
   public void testBccInstruction() {
     doTestGenerateDoc(" b<caret>hs", "<h1>Bcc - Branch on condition cc</h1>");
+  }
+
+  public void testAllInstructionsHaveReferenceDocs() {
+    for (IElementType elementType : M68kTokenGroups.INSTRUCTIONS.getTypes()) {
+      final String mnemonic = elementType.toString();
+      doTestGenerateDoc(" " + mnemonic.charAt(0) + "<caret>" + mnemonic.substring(1), " - "); // [mnemonic] - [description]
+    }
   }
 
   private void doTestGenerateDoc(String source, String docTextContains) {
