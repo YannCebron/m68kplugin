@@ -55,7 +55,6 @@
 
 - local label: in-place rename
 - find usages
-- highlight usages
 - safe delete (quickfix via `M68kUnusedLabelInspection`)
 - rename:
   - `RenameInputValidatorEx`
