@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,22 @@
 
 package com.yanncebron.m68kplugin.documentation;
 
+import com.intellij.codeInsight.documentation.DocumentationManagerProtocol;
 import com.intellij.lang.documentation.AbstractDocumentationProvider;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.io.StreamUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.io.URLUtil;
+import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kInstruction;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
@@ -57,9 +61,9 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
     "h1 { font-weight: bold; font-size: 120%; } " +
     "h2 { padding-top: 13px; font-weight: bold; font-size: 110%; } " +
     "h3 { padding-top: 10px; font-weight: bold; } " +
-    "table { padding-bottom: 10px; white-space: nowrap } " +
-    "td { margin: 5px;} " +
-    "em { font-style: italic;}" +
+    "table { padding-bottom: 10px; white-space: nowrap; } " +
+    "th { margin: 2px; } " +
+    "em { font-style: italic; }" +
     "</style>";
 
 
@@ -75,14 +79,42 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
     .put("scc", M68kTokenGroups.SCC_INSTRUCTIONS)
     .build();
 
-  @NotNull
-  private static String findDocMnemonic(IElementType originalMnemonic) {
-    for (Map.Entry<String, TokenSet> entry : MNEMONIC_MAP.entrySet()) {
-      if (entry.getValue().contains(originalMnemonic)) {
-        return entry.getKey();
-      }
+  private static final String LINK_INSTRUCTION_REFERENCE_DOCS = "m68k_instruction_reference_docs";
+
+  @Override
+  public @Nullable String generateHoverDoc(@NotNull PsiElement element, @Nullable PsiElement originalElement) {
+    if (!(element instanceof M68kInstruction)) return null;
+
+    M68kInstruction instruction = (M68kInstruction) element;
+    final IElementType originalMnemonic = instruction.getNode().getFirstChildNode().getElementType();
+
+    String hoverDoc = new M68kInstructionMnemonicDocsGenerator(originalMnemonic).generateHtmlDoc();
+
+    final Pair<String, String> markdownContents = getMarkdownContents(originalMnemonic);
+
+    String referenceLink = markdownContents.getFirst() != null ?
+      "<a href=\"" + DocumentationManagerProtocol.PSI_ELEMENT_PROTOCOL +
+        M68kInstructionDocumentationProvider.LINK_INSTRUCTION_REFERENCE_DOCS + "\">" +
+        M68kBundle.message("documentation.hover.reference.doc.link.title") + "</a>"
+      : "";
+
+    String referenceHeading = markdownContents.getFirst() != null ?
+      StringUtil.substringAfter(StringUtil.splitByLines(markdownContents.getFirst())[0], "# ") : originalMnemonic.toString();
+
+    return CSS +
+      "<h1>" + referenceHeading + "</h1>" +
+      referenceLink +
+      "<br>" +
+      "<br>" +
+      hoverDoc;
+  }
+
+  @Override
+  public @Nullable PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context) {
+    if (LINK_INSTRUCTION_REFERENCE_DOCS.equals(link)) {
+      return context;
     }
-    return StringUtil.toLowerCase(originalMnemonic.toString());
+    return null;
   }
 
   @Override
@@ -104,23 +136,14 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
     M68kInstruction instruction = (M68kInstruction) element;
 
     final IElementType originalMnemonic = instruction.getNode().getFirstChildNode().getElementType();
-    String docMnemonic = findDocMnemonic(originalMnemonic);
-
-    final InputStream resource = getClass().getResourceAsStream(DOCS_MNEMONIC_ROOT + docMnemonic + ".md");
-    if (resource == null) {
-      return "No documentation for '" + docMnemonic + "' ('" + originalMnemonic + "')";
-    }
-
-    final String text;
-    try {
-      text = FileUtil.loadTextAndClose(resource);
-    } catch (IOException e) {
-      return "Error loading documentation for '" + docMnemonic + "': " + e.getMessage();
+    final Pair<String, String> markdownContents = getMarkdownContents(originalMnemonic);
+    if (markdownContents.getFirst() == null) {
+      return markdownContents.getSecond();
     }
 
     List<Extension> extensions = Collections.singletonList(TablesExtension.create());
     Parser parser = Parser.builder().extensions(extensions).build();
-    Node document = parser.parse(text);
+    Node document = parser.parse(markdownContents.getFirst());
     HtmlRenderer renderer = HtmlRenderer.builder()
       .extensions(extensions)
       .urlSanitizer(new DefaultUrlSanitizer() {
@@ -143,6 +166,31 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
       .build();
     final String html = renderer.render(document);
     return CSS + html;
+  }
+
+  private Pair<String, String> getMarkdownContents(IElementType originalMnemonic) {
+    String docMnemonic = findDocMnemonic(originalMnemonic);
+
+    final InputStream resource = getClass().getResourceAsStream(DOCS_MNEMONIC_ROOT + docMnemonic + ".md");
+    if (resource == null) {
+      return Pair.create(null, M68kBundle.message("documentation.no.reference.doc", docMnemonic, originalMnemonic));
+    }
+
+    try {
+      return Pair.create(FileUtil.loadTextAndClose(resource), null);
+    } catch (IOException e) {
+      return Pair.create(null, M68kBundle.message("documentation.error.loading.reference.doc", docMnemonic, e.getMessage()));
+    }
+  }
+
+  @NotNull
+  private static String findDocMnemonic(IElementType originalMnemonic) {
+    for (Map.Entry<String, TokenSet> entry : MNEMONIC_MAP.entrySet()) {
+      if (entry.getValue().contains(originalMnemonic)) {
+        return entry.getKey();
+      }
+    }
+    return StringUtil.toLowerCase(originalMnemonic.toString());
   }
 
 }

@@ -17,11 +17,21 @@ nav_order: 1
 
 ## Documentation
 
-*View \| Quick Documentation* for mnemonics
+_Hover_: enable _Show quick documentation on hover_ in *Settings/Preferences \| Editor \| Code Editing*
+
+### Mnemonics
+
+*View \| Quick Documentation* reference documentation for mnemonics
+
+_Hover_: Show mnemonic reference overview on mouse hover with link to reference documentation
+
+### Labels
 
 *View \| Quick Documentation* for labels: show preceding lines or EOL comment(s)
 
-Show type and value tooltip for labels on mouse hover (enable _Show quick documentation on hover_ in *Settings/Preferences \| Editor \| Code Editing*)
+_Hover_: Show type and value tooltip for labels on mouse hover
+
+### Literals
 
 *View \| Quick Documentation* for number literal: show in decimal, hexadecimal, octal, and binary notation
 
