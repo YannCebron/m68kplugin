@@ -16,6 +16,8 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
+
 /**
  * Translates to {@code Adm*} PSI.
  *
@@ -26,53 +28,90 @@ public enum M68kAddressMode {
   /**
    * Ref 2.2.1, {@link M68kAdmDrd}
    */
-  DATA_REGISTER,
+  DATA_REGISTER("Dn"),
   /**
    * Ref 2.2.2, {@link M68kAdmArd}
    */
-  ADDRESS_REGISTER,
+  ADDRESS_REGISTER("An"),
 
   /**
    * Ref 2.2.3, {@link M68kAdmAri}
    */
-  ADDRESS_REGISTER_INDIRECT,
+  ADDRESS_REGISTER_INDIRECT("(An)"),
   /**
    * Ref 2.2.4, {@link M68kAdmApi}
    */
-  ADDRESS_REGISTER_INDIRECT_POST_INCREMENT,
+  ADDRESS_REGISTER_INDIRECT_POST_INCREMENT("(An)+"),
   /**
    * Ref 2.2.5, {@link M68kAdmApd}
    */
-  ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT,
+  ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT("-(An)"),
   /**
    * Ref 2.2.6, {@link M68kAdmAdi}
    */
-  ADDRESS_REGISTER_DISPLACEMENT,
+  ADDRESS_REGISTER_DISPLACEMENT("(d,An)"),
   /**
    * Ref 2.2.8, {@link M68kAdmAix}
    */
-  ADDRESS_REGISTER_INDEX_DISPLACEMENT,
+  ADDRESS_REGISTER_INDEX_DISPLACEMENT("(d,An,Xi)"),
 
-  ABSOLUTE_SHORT,
-  ABSOLUTE_LONG,
+  /**
+   * Ref 2.2.16, {@link M68kAdmAbs}
+   */
+  ABSOLUTE_SHORT("ABS.W"),
+  /**
+   * Ref 2.2.17, {@link M68kAdmAbs}
+   */
+  ABSOLUTE_LONG("ABS.L"),
 
-  LABEL,
+  /**
+   * {@link M68kAdmAbs} -> {@link M68kLabelRefExpression}
+   */
+  LABEL("label"),
 
   /**
    * Ref 2.2.11, {@link M68kAdmPcd}
    */
-  PC_REGISTER_DISPLACEMENT,
+  PC_REGISTER_DISPLACEMENT("(d,PC)"),
   /**
    * Ref 2.2.13, {@link M68kAdmPci}
    */
-  PC_REGISTER_INDEX_DISPLACEMENT,
+  PC_REGISTER_INDEX_DISPLACEMENT("(d,PC,Xn)"),
 
-  IMMEDIATE,
-  QUICK_IMMEDIATE,
-  REGISTER_LIST,
+  /**
+   * Ref 2.2.18, {@link M68kAdmImm}
+   */
+  IMMEDIATE("imm"),
+  /**
+   * Ref 2.2.18, {@link M68kAdmImm}
+   */
+  QUICK_IMMEDIATE("quick"),
 
-  SPECIAL_REGISTER_SR,
-  SPECIAL_REGISTER_USP,
-  SPECIAL_REGISTER_CCR
+  /**
+   * {@link M68kRegisterList}
+   */
+  REGISTER_LIST("Rn list"),
 
+  /**
+   * {@link M68kAdmSr}
+   */
+  SPECIAL_REGISTER_SR("SR"),
+  /**
+   * {@link M68kAdmUsp}
+   */
+  SPECIAL_REGISTER_USP("USP"),
+  /**
+   * {@link M68kAdmCcr}
+   */
+  SPECIAL_REGISTER_CCR("CCR");
+
+  private final String notation;
+
+  M68kAddressMode(String notation) {
+    this.notation = notation;
+  }
+
+  public String getNotation() {
+    return notation;
+  }
 }
