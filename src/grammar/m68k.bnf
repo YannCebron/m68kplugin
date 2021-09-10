@@ -517,7 +517,7 @@ private add_sub_instructions ::= add_instruction |
                                  subq_instruction |
                                  subx_instruction
 
-private add_sub_q_tail ::= data_size_all? adm_imm COMMA adm_group_all_except_pc_imm
+private add_sub_q_tail ::= data_size_all? adm_quick COMMA adm_group_all_except_pc_imm
 {
   pin = 2
 }

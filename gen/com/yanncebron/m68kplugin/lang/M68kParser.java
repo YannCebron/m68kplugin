@@ -159,13 +159,13 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_all? adm_imm COMMA adm_group_all_except_pc_imm
+  // data_size_all? adm_quick COMMA adm_group_all_except_pc_imm
   static boolean add_sub_q_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "add_sub_q_tail")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_);
     r = add_sub_q_tail_0(b, l + 1);
-    r = r && adm_imm(b, l + 1);
+    r = r && adm_quick(b, l + 1);
     p = r; // pin = 2
     r = r && report_error_(b, consumeToken(b, COMMA));
     r = p && adm_group_all_except_pc_imm(b, l + 1) && r;

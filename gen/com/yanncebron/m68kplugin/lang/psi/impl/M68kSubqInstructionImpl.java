@@ -91,8 +91,8 @@ public class M68kSubqInstructionImpl extends M68kDataSizedImpl implements M68kSu
 
   @Override
   @Nullable
-  public M68kAdmImm getAdmImm() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmImm.class);
+  public M68kAdmQuick getAdmQuick() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmQuick.class);
   }
 
 }

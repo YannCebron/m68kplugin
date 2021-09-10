@@ -95,10 +95,6 @@ public class AddSubInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" addq #1,d0");
   }
 
-  public void testAddqInstructionDataSizeDrd() throws IOException {
-    doCodeTest(" addq #1.w,d0");
-  }
-
   public void testAddqInstructionArd() throws IOException {
     doCodeTest(" addq #1,a0");
   }

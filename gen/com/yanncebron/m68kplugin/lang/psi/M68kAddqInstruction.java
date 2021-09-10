@@ -46,6 +46,6 @@ public interface M68kAddqInstruction extends M68kDataSized, M68kInstruction {
   M68kAdmDrd getAdmDrd();
 
   @Nullable
-  M68kAdmImm getAdmImm();
+  M68kAdmQuick getAdmQuick();
 
 }
