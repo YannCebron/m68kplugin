@@ -43,6 +43,6 @@ public interface M68kAslInstruction extends M68kShiftRotateInstructionBase {
   List<M68kAdmDrd> getAdmDrdList();
 
   @Nullable
-  M68kAdmImm getAdmImm();
+  M68kAdmQuick getAdmQuick();
 
 }

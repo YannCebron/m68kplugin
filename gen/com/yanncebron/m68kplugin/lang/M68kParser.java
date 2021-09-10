@@ -3621,7 +3621,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_all? (adm_drd | adm_imm) COMMA adm_drd
+  // data_size_all? (adm_drd | adm_quick) COMMA adm_drd
   static boolean shift_tail_drd(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "shift_tail_drd")) return false;
     boolean r, p;
@@ -3642,12 +3642,12 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // adm_drd | adm_imm
+  // adm_drd | adm_quick
   private static boolean shift_tail_drd_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "shift_tail_drd_1")) return false;
     boolean r;
     r = adm_drd(b, l + 1);
-    if (!r) r = adm_imm(b, l + 1);
+    if (!r) r = adm_quick(b, l + 1);
     return r;
   }
 

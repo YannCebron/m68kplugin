@@ -85,8 +85,8 @@ public class M68kAslInstructionImpl extends M68kShiftRotateInstructionBaseImpl i
 
   @Override
   @Nullable
-  public M68kAdmImm getAdmImm() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmImm.class);
+  public M68kAdmQuick getAdmQuick() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmQuick.class);
   }
 
 }

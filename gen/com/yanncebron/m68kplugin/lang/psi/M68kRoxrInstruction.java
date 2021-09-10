@@ -43,6 +43,6 @@ public interface M68kRoxrInstruction extends M68kShiftRotateInstructionBase {
   List<M68kAdmDrd> getAdmDrdList();
 
   @Nullable
-  M68kAdmImm getAdmImm();
+  M68kAdmQuick getAdmQuick();
 
 }

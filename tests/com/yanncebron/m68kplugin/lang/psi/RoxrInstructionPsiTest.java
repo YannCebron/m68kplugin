@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ public class RoxrInstructionPsiTest extends M68kPsiTestCase {
 
     assertNull(instruction.getDataSize());
 
-    assertNotNull(instruction.getAdmImm());
+    assertNotNull(instruction.getAdmQuick());
   }
 
   public void testWithDataSize() {
@@ -31,7 +31,7 @@ public class RoxrInstructionPsiTest extends M68kPsiTestCase {
 
     assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
 
-    assertNotNull(instruction.getAdmImm());
+    assertNotNull(instruction.getAdmQuick());
   }
 
   private M68kRoxrInstruction parse(String text) {
