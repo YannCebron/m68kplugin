@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,9 @@
 
 package com.yanncebron.m68kplugin.parser;
 
+import com.intellij.openapi.util.Ref;
+import com.intellij.psi.PsiErrorElement;
+import com.intellij.psi.PsiRecursiveElementVisitor;
 import com.intellij.testFramework.ParsingTestCase;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
 import com.yanncebron.m68kplugin.lang.M68kParserDefinition;
@@ -37,9 +40,22 @@ abstract class M68kParsingTestCase extends ParsingTestCase {
     ensureCorrectReparse(myFile);
 
     final String testName = getTestName();
-    if (!testName.contains("Missing") && !testName.contains("Wrong")) {
+    if (testName.contains("Missing") || testName.contains("Wrong")) {
+      ensureErrorElement();
+    } else {
       ensureNoErrorElements();
     }
+  }
+
+  private void ensureErrorElement() {
+    Ref<Boolean> foundErrorElement = Ref.create();
+    myFile.accept(new PsiRecursiveElementVisitor() {
+      @Override
+      public void visitErrorElement(@NotNull PsiErrorElement element) {
+        foundErrorElement.set(true);
+      }
+    });
+    assertTrue(foundErrorElement.get());
   }
 
   @Override
