@@ -3829,7 +3829,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // STOP adm_imm
+  // STOP adm_quick
   public static boolean stop_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stop_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", STOP)) return false;
@@ -3837,7 +3837,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, STOP_INSTRUCTION, "<instruction>");
     r = consumeToken(b, STOP);
     p = r; // pin = 1
-    r = r && adm_imm(b, l + 1);
+    r = r && adm_quick(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

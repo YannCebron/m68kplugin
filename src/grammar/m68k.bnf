@@ -641,7 +641,7 @@ reset_instruction ::= RESET
 {
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kPrivilegedInstructionMixIn"
 }
-stop_instruction ::= STOP adm_imm
+stop_instruction ::= STOP adm_quick
 {
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kPrivilegedInstructionMixIn"
 }

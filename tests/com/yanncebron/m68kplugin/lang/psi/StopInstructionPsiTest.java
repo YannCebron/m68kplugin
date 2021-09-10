@@ -24,9 +24,9 @@ public class StopInstructionPsiTest extends M68kPsiTestCase {
     final M68kStopInstruction instruction = parse("stop #2");
     assertTrue(instruction.isPrivileged(M68kCpu.M_68000));
 
-    final M68kAdmImm admImm = instruction.getAdmImm();
-    assertNotNull(admImm);
-    final M68kNumberExpression m68kNumberExpression = assertInstanceOf(admImm.getExpression(), M68kNumberExpression.class);
+    final M68kAdmQuick admQuick = instruction.getAdmQuick();
+    assertNotNull(admQuick);
+    final M68kNumberExpression m68kNumberExpression = assertInstanceOf(admQuick.getExpression(), M68kNumberExpression.class);
     assertEquals("2", m68kNumberExpression.getText());
   }
 

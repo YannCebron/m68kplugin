@@ -42,8 +42,8 @@ public class M68kStopInstructionImpl extends M68kPrivilegedInstructionMixIn impl
 
   @Override
   @Nullable
-  public M68kAdmImm getAdmImm() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmImm.class);
+  public M68kAdmQuick getAdmQuick() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmQuick.class);
   }
 
 }

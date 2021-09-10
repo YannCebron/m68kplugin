@@ -22,6 +22,6 @@ import com.intellij.psi.PsiElement;
 public interface M68kStopInstruction extends M68kInstruction {
 
   @Nullable
-  M68kAdmImm getAdmImm();
+  M68kAdmQuick getAdmQuick();
 
 }
