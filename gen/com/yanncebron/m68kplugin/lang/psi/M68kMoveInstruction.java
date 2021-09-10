@@ -19,7 +19,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kMoveInstruction extends M68kMoveInstructionBase {
+public interface M68kMoveInstruction extends M68kMoveInstructionBase, M68kPrivilegedInstruction {
 
   @Nullable
   M68kAdmAbs getAdmAbs();

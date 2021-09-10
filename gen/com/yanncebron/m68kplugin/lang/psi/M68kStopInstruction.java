@@ -19,7 +19,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kStopInstruction extends M68kInstruction {
+public interface M68kStopInstruction extends M68kPrivilegedInstruction, M68kInstruction {
 
   @Nullable
   M68kAdmQuick getAdmQuick();

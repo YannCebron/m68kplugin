@@ -40,9 +40,9 @@ public class M68kSyntaxAnnotator implements Annotator {
   public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
     if (!(element instanceof M68kPsiElement)) return;
 
-    if (element instanceof M68kInstruction) {
-      M68kInstruction instruction = (M68kInstruction) element;
-      if (instruction.isPrivileged(M68kCpu.M_68000)) {
+    if (element instanceof M68kPrivilegedInstruction) {
+      M68kPrivilegedInstruction privilegedInstruction = (M68kPrivilegedInstruction) element;
+      if (privilegedInstruction.isPrivileged(M68kCpu.M_68000)) {
         holder.newAnnotation(HighlightSeverity.INFORMATION, M68kBundle.message("highlight.privileged.instruction"))
           .textAttributes(M68kTextAttributes.PRIVILEGED_INSTRUCTION).create();
       }

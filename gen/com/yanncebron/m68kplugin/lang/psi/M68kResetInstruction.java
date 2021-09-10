@@ -19,6 +19,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kResetInstruction extends M68kInstruction {
+public interface M68kResetInstruction extends M68kPrivilegedInstruction, M68kInstruction {
 
 }

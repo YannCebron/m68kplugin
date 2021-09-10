@@ -240,6 +240,7 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitBoolInstructionBase(@NotNull M68kBoolInstructionBase o) {
     visitDataSized(o);
+    // visitPrivilegedInstruction(o);
     // visitInstruction(o);
   }
 
@@ -801,6 +802,7 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitMoveInstruction(@NotNull M68kMoveInstruction o) {
     visitMoveInstructionBase(o);
+    // visitPrivilegedInstruction(o);
   }
 
   public void visitMoveInstructionBase(@NotNull M68kMoveInstructionBase o) {
@@ -968,7 +970,8 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitResetInstruction(@NotNull M68kResetInstruction o) {
-    visitInstruction(o);
+    visitPrivilegedInstruction(o);
+    // visitInstruction(o);
   }
 
   public void visitRolInstruction(@NotNull M68kRolInstruction o) {
@@ -1001,7 +1004,8 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitRteInstruction(@NotNull M68kRteInstruction o) {
-    visitInstruction(o);
+    visitPrivilegedInstruction(o);
+    // visitInstruction(o);
   }
 
   public void visitRtrInstruction(@NotNull M68kRtrInstruction o) {
@@ -1111,7 +1115,8 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitStopInstruction(@NotNull M68kStopInstruction o) {
-    visitInstruction(o);
+    visitPrivilegedInstruction(o);
+    // visitInstruction(o);
   }
 
   public void visitStringExpression(@NotNull M68kStringExpression o) {
@@ -1224,6 +1229,10 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitLabelBase(@NotNull M68kLabelBase o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPrivilegedInstruction(@NotNull M68kPrivilegedInstruction o) {
     visitPsiElement(o);
   }
 

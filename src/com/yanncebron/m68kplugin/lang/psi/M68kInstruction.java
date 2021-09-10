@@ -16,18 +16,11 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * Base interface for all M68k Instructions.
+ *
+ * @see M68kPrivilegedInstruction
  */
 public interface M68kInstruction extends M68kPsiElement {
 
-  /**
-   * @param m68kCpu target machine
-   * @return {@code true} if the instruction requires supervisor privilege for the given target machine, {@code false} otherwise.
-   */
-  default boolean isPrivileged(@NotNull M68kCpu m68kCpu) {
-    return false;
-  }
 }

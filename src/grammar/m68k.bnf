@@ -362,6 +362,7 @@ move_instruction ::= MOVE
                      )
 {
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kMoveInstructionMixIn"
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kPrivilegedInstruction"
 }
 
 movea_instruction ::= MOVEA tail_data_size_word_long___all__ard
@@ -464,7 +465,7 @@ jsr_instruction ::= JSR jmp_jsr_tail
 rts_instruction ::= RTS
 rte_instruction ::= RTE
 {
-  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kPrivilegedInstructionMixIn"
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kPrivilegedInstruction"
 }
 
 rtr_instruction ::= RTR
@@ -587,6 +588,7 @@ fake bool_instruction_base ::= bool_tail
 {
   extends = data_sized
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kBoolInstructionBaseMixIn"
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kPrivilegedInstruction"
 }
 
 private bool_tail ::= data_size_all?
@@ -639,11 +641,11 @@ nop_instruction ::= NOP
 illegal_instruction ::= ILLEGAL
 reset_instruction ::= RESET
 {
-  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kPrivilegedInstructionMixIn"
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kPrivilegedInstruction"
 }
 stop_instruction ::= STOP adm_quick
 {
-  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kPrivilegedInstructionMixIn"
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kPrivilegedInstruction"
 }
 trap_instruction ::= TRAP adm_quick
 trapv_instruction ::= TRAPV

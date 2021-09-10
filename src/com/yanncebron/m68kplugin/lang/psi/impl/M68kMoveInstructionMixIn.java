@@ -20,9 +20,10 @@ import com.intellij.lang.ASTNode;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmSr;
 import com.yanncebron.m68kplugin.lang.psi.M68kCpu;
 import com.yanncebron.m68kplugin.lang.psi.M68kMoveInstruction;
+import com.yanncebron.m68kplugin.lang.psi.M68kPrivilegedInstruction;
 import org.jetbrains.annotations.NotNull;
 
-abstract class M68kMoveInstructionMixIn extends M68kMoveInstructionBaseImpl implements M68kMoveInstruction {
+abstract class M68kMoveInstructionMixIn extends M68kMoveInstructionBaseImpl implements M68kPrivilegedInstruction, M68kMoveInstruction {
 
   protected M68kMoveInstructionMixIn(@NotNull ASTNode node) {
     super(node);

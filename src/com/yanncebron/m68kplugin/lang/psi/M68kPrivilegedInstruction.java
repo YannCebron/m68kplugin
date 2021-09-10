@@ -14,22 +14,23 @@
  * limitations under the License.
  */
 
-package com.yanncebron.m68kplugin.lang.psi.impl;
+package com.yanncebron.m68kplugin.lang.psi;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
-import com.intellij.lang.ASTNode;
-import com.yanncebron.m68kplugin.lang.psi.M68kCpu;
-import com.yanncebron.m68kplugin.lang.psi.M68kInstruction;
 import org.jetbrains.annotations.NotNull;
 
-abstract class M68kPrivilegedInstructionMixIn extends ASTWrapperPsiElement implements M68kInstruction {
+/**
+ * An instruction possibly requiring supervisor privilege.
+ * <p>
+ * Use mix-in if privileged status is dynamic.
+ */
+public interface M68kPrivilegedInstruction extends M68kInstruction {
 
-  protected M68kPrivilegedInstructionMixIn(@NotNull ASTNode node) {
-    super(node);
-  }
-
-  @Override
-  public final boolean isPrivileged(@NotNull M68kCpu m68kCpu) {
+  /**
+   * @param m68kCpu target machine
+   * @return {@code true} if this instruction requires supervisor privilege for the given target machine, {@code false} otherwise.
+   */
+  default boolean isPrivileged(@NotNull M68kCpu m68kCpu) {
     return true;
   }
+
 }
