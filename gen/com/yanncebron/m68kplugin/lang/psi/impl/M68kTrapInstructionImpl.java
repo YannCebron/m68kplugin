@@ -43,8 +43,8 @@ public class M68kTrapInstructionImpl extends ASTWrapperPsiElement implements M68
 
   @Override
   @Nullable
-  public M68kAdmImm getAdmImm() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmImm.class);
+  public M68kAdmQuick getAdmQuick() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmQuick.class);
   }
 
 }

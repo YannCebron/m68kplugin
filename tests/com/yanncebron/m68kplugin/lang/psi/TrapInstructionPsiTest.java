@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,9 @@ public class TrapInstructionPsiTest extends M68kPsiTestCase {
   public void testTrapInstruction() {
     final M68kTrapInstruction instruction = parse("trap #2");
 
-    final M68kAdmImm admImm = instruction.getAdmImm();
-    assertNotNull(admImm);
-    final M68kNumberExpression m68kNumberExpression = assertInstanceOf(admImm.getExpression(), M68kNumberExpression.class);
+    final M68kAdmQuick admQuick = instruction.getAdmQuick();
+    assertNotNull(admQuick);
+    final M68kNumberExpression m68kNumberExpression = assertInstanceOf(admQuick.getExpression(), M68kNumberExpression.class);
     assertEquals("2", m68kNumberExpression.getText());
   }
 

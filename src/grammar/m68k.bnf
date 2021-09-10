@@ -645,7 +645,7 @@ stop_instruction ::= STOP adm_quick
 {
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kPrivilegedInstructionMixIn"
 }
-trap_instruction ::= TRAP adm_imm
+trap_instruction ::= TRAP adm_quick
 trapv_instruction ::= TRAPV
 
 clr_instruction ::= CLR tail_data_size_all___all_except_ard_pc_imm
