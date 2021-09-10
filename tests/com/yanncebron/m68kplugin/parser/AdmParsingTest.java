@@ -46,6 +46,10 @@ public class AdmParsingTest extends M68kParsingTestCase {
     doCodeTest(" move.l 3,42(a0,");
   }
 
+  public void testAdmAixNewMissingRrdIndex() throws IOException {
+    doCodeTest(" move.l 3,(42,a0,");
+  }
+
   public void testAdmPciMissingRrdIndex() throws IOException {
     doCodeTest(" pea 42(pc,");
   }
