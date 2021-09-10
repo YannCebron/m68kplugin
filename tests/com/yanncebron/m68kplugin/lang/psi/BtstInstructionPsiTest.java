@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ public class BtstInstructionPsiTest extends M68kPsiTestCase {
     final M68kBtstInstruction instruction = parse("btst #1,d0");
 
     assertNull(instruction.getDataSize());
+    assertNotNull(instruction.getSourceQuick());
   }
 
   public void testWithDataSize() {
@@ -29,7 +30,7 @@ public class BtstInstructionPsiTest extends M68kPsiTestCase {
 
     assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
 
-    assertNull(instruction.getSourceImm());
+    assertNull(instruction.getSourceQuick());
     final M68kAdmDrd sourceDrd = instruction.getSourceDrd();
     assertNotNull(sourceDrd);
     assertEquals(M68kRegister.D1, sourceDrd.getRegister());

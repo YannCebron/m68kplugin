@@ -84,9 +84,9 @@ public class M68kBtstInstructionImpl extends M68kBitManipulationInstructionBaseI
   }
 
   @Override
-  @NotNull
-  public List<M68kAdmImm> getAdmImmList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmImm.class);
+  @Nullable
+  public M68kAdmImm getAdmImm() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmImm.class);
   }
 
   @Override

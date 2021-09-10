@@ -1150,7 +1150,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // bit_data_size?
-  //                      (adm_drd | adm_imm) COMMA adm_group_all_except_ard_pc_imm
+  //                      (adm_drd | adm_quick) COMMA adm_group_all_except_ard_pc_imm
   static boolean bit_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bit_tail")) return false;
     boolean r;
@@ -1170,12 +1170,12 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // adm_drd | adm_imm
+  // adm_drd | adm_quick
   private static boolean bit_tail_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bit_tail_1")) return false;
     boolean r;
     r = adm_drd(b, l + 1);
-    if (!r) r = adm_imm(b, l + 1);
+    if (!r) r = adm_quick(b, l + 1);
     return r;
   }
 
@@ -1429,7 +1429,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // BTST bit_data_size?
-  //                      (adm_drd | adm_imm) COMMA adm_group_all_except_ard
+  //                      (adm_drd | adm_quick) COMMA adm_group_all_except_ard
   public static boolean btst_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "btst_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", BTST)) return false;
@@ -1452,12 +1452,12 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // adm_drd | adm_imm
+  // adm_drd | adm_quick
   private static boolean btst_instruction_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "btst_instruction_2")) return false;
     boolean r;
     r = adm_drd(b, l + 1);
-    if (!r) r = adm_imm(b, l + 1);
+    if (!r) r = adm_quick(b, l + 1);
     return r;
   }
 

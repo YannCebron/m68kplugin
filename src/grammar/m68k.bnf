@@ -891,12 +891,12 @@ private bit_manipulation_instructions ::= bchg_instruction |
                                           bset_instruction |
                                           btst_instruction
 
-fake bit_manipulation_instruction_base ::= (adm_drd | adm_imm)
+fake bit_manipulation_instruction_base ::= (adm_drd | adm_quick)
 {
   extends = data_sized
   methods = [
     sourceDrd = "adm_drd"
-    sourceImm = "adm_imm"
+    sourceQuick = "adm_quick"
   ]
 }
 
@@ -905,7 +905,7 @@ private bit_data_size ::= data_size_byte | data_size_long
   name = ".b|l"
 }
 private bit_tail ::= bit_data_size?
-                     (adm_drd | adm_imm) COMMA adm_group_all_except_ard_pc_imm
+                     (adm_drd | adm_quick) COMMA adm_group_all_except_ard_pc_imm
 
 bchg_instruction ::= BCHG bit_tail
 
@@ -914,7 +914,7 @@ bclr_instruction ::= BCLR bit_tail
 bset_instruction ::= BSET bit_tail
 
 btst_instruction ::= BTST bit_data_size?
-                     (adm_drd | adm_imm) COMMA adm_group_all_except_ard
+                     (adm_drd | adm_quick) COMMA adm_group_all_except_ard
 
 
 // Shift/Rotate ============================================================

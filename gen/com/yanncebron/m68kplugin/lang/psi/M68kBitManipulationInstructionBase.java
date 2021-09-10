@@ -25,6 +25,6 @@ public interface M68kBitManipulationInstructionBase extends M68kDataSized, M68kI
   M68kAdmDrd getSourceDrd();
 
   @Nullable
-  M68kAdmImm getSourceImm();
+  M68kAdmQuick getSourceQuick();
 
 }
