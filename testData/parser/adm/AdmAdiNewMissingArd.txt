@@ -1,0 +1,13 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kMoveInstructionImpl(MOVE_INSTRUCTION)
+    PsiElement(move)('move')
+    PsiWhiteSpace(' ')
+    M68kAdmArdImpl(ADM_ARD)
+      PsiElement(address_register)('a0')
+    PsiElement(,)(',')
+  PsiElement(()('(')
+  PsiElement(dec_number)('16')
+  PsiElement(,)(',')
+  PsiErrorElement:<address register> expected, got ')'
+    PsiElement())(')')
