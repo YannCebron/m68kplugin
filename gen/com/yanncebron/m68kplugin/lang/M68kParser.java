@@ -602,7 +602,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (expression L_PAREN PC R_PAREN) |
+  // (expression? L_PAREN PC R_PAREN) |
   //             (L_PAREN expression COMMA PC R_PAREN)
   public static boolean adm_pcd(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_pcd")) return false;
@@ -614,15 +614,22 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // expression L_PAREN PC R_PAREN
+  // expression? L_PAREN PC R_PAREN
   private static boolean adm_pcd_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_pcd_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = M68kExpressionParser.expression(b, l + 1, -1);
+    r = adm_pcd_0_0(b, l + 1);
     r = r && consumeTokens(b, 0, L_PAREN, PC, R_PAREN);
     exit_section_(b, m, null, r);
     return r;
+  }
+
+  // expression?
+  private static boolean adm_pcd_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_pcd_0_0")) return false;
+    M68kExpressionParser.expression(b, l + 1, -1);
+    return true;
   }
 
   // L_PAREN expression COMMA PC R_PAREN

@@ -65,4 +65,8 @@ public class AdmParsingTest extends M68kParsingTestCase {
   public void testAdmPciNewMissingRrdIndex() throws IOException {
     doCodeTest(" pea (42,pc,");
   }
+
+  public void testAdmPcdWithNoDisplacement() throws IOException {
+    doCodeTest(" add (PC),d0");
+  }
 }

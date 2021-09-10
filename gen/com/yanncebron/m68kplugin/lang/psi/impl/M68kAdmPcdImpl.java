@@ -43,9 +43,9 @@ public class M68kAdmPcdImpl extends ASTWrapperPsiElement implements M68kAdmPcd {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public M68kExpression getExpression() {
-    return notNullChild(PsiTreeUtil.getChildOfType(this, M68kExpression.class));
+    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
   }
 
 }

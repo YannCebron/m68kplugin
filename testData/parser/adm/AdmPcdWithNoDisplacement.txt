@@ -1,0 +1,12 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kAddInstructionImpl(ADD_INSTRUCTION)
+    PsiElement(add)('add')
+    PsiWhiteSpace(' ')
+    M68kAdmPcdImpl(ADM_PCD)
+      PsiElement(()('(')
+      PsiElement(pc)('PC')
+      PsiElement())(')')
+    PsiElement(,)(',')
+    M68kAdmDrdImpl(ADM_DRD)
+      PsiElement(data_register)('d0')

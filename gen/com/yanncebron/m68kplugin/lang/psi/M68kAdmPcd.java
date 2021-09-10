@@ -22,7 +22,7 @@ import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
 public interface M68kAdmPcd extends M68kPsiElement {
 
-  @NotNull
+  @Nullable
   M68kExpression getExpression();
 
 }

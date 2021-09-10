@@ -253,7 +253,7 @@ adm_abs ::= expression data_size_word_long?
 }
 
 // Ref 2.2.11: d16(PC) | (d16,PC)
-adm_pcd ::= (expression L_PAREN PC R_PAREN) |
+adm_pcd ::= (expression? L_PAREN PC R_PAREN) |
             (L_PAREN expression COMMA PC R_PAREN)
 {
   name = "program counter indirect with displacement"
