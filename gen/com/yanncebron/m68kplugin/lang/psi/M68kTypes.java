@@ -46,6 +46,7 @@ public interface M68kTypes {
   IElementType ADM_IMM = new M68kCompositeElementType("ADM_IMM");
   IElementType ADM_PCD = new M68kCompositeElementType("ADM_PCD");
   IElementType ADM_PCI = new M68kCompositeElementType("ADM_PCI");
+  IElementType ADM_QUICK = new M68kCompositeElementType("ADM_QUICK");
   IElementType ADM_RRD = new M68kCompositeElementType("ADM_RRD");
   IElementType ADM_RRD_INDEX = new M68kCompositeElementType("ADM_RRD_INDEX");
   IElementType ADM_SR = new M68kCompositeElementType("ADM_SR");
@@ -362,6 +363,9 @@ public interface M68kTypes {
       }
       else if (type == ADM_PCI) {
         return new M68kAdmPciImpl(node);
+      }
+      else if (type == ADM_QUICK) {
+        return new M68kAdmQuickImpl(node);
       }
       else if (type == ADM_RRD) {
         return new M68kAdmRrdImpl(node);

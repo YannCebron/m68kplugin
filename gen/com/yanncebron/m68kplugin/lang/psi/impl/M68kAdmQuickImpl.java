@@ -22,17 +22,18 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
-public class M68kMoveqInstructionImpl extends M68kMoveInstructionBaseImpl implements M68kMoveqInstruction {
+public class M68kAdmQuickImpl extends ASTWrapperPsiElement implements M68kAdmQuick {
 
-  public M68kMoveqInstructionImpl(@NotNull ASTNode node) {
+  public M68kAdmQuickImpl(@NotNull ASTNode node) {
     super(node);
   }
 
-  @Override
   public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitMoveqInstruction(this);
+    visitor.visitAdmQuick(this);
   }
 
   @Override
@@ -43,14 +44,8 @@ public class M68kMoveqInstructionImpl extends M68kMoveInstructionBaseImpl implem
 
   @Override
   @Nullable
-  public M68kAdmQuick getSource() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmQuick.class);
-  }
-
-  @Override
-  @Nullable
-  public M68kAdmDrd getDestination() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmDrd.class);
+  public M68kExpression getExpression() {
+    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
   }
 
 }

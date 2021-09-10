@@ -282,6 +282,13 @@ adm_imm ::= HASH expression data_size_word_long?
 //  extends = data_sized todo
 }
 
+// #42 (0..255)
+adm_quick ::= HASH expression
+{
+  pin = 1
+  name = "quick immediate"
+}
+
 adm_sr ::= SR
 {
   name = "SR"
@@ -360,10 +367,10 @@ move_instruction ::= MOVE
 movea_instruction ::= MOVEA tail_data_size_word_long___all__ard
 
 moveq_instruction ::= MOVEQ data_size_long?
-                      adm_imm COMMA adm_drd
+                      adm_quick COMMA adm_drd
 {
   methods = [
-    source = "adm_imm"
+    source = "adm_quick"
     destination = "adm_drd"
   ]
 }

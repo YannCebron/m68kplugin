@@ -708,6 +708,20 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // HASH expression
+  public static boolean adm_quick(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_quick")) return false;
+    if (!nextTokenIs(b, "<quick immediate>", HASH)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, ADM_QUICK, "<quick immediate>");
+    r = consumeToken(b, HASH);
+    p = r; // pin = 1
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
   // adm_drd | adm_ard
   public static boolean adm_rrd(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_rrd")) return false;
@@ -2947,7 +2961,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // MOVEQ data_size_long?
-  //                       adm_imm COMMA adm_drd
+  //                       adm_quick COMMA adm_drd
   public static boolean moveq_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "moveq_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", MOVEQ)) return false;
@@ -2956,7 +2970,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, MOVEQ);
     p = r; // pin = 1
     r = r && report_error_(b, moveq_instruction_1(b, l + 1));
-    r = p && report_error_(b, adm_imm(b, l + 1)) && r;
+    r = p && report_error_(b, adm_quick(b, l + 1)) && r;
     r = p && report_error_(b, consumeToken(b, COMMA)) && r;
     r = p && adm_drd(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);

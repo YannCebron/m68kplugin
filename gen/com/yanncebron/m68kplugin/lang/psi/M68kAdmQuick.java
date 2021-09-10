@@ -18,13 +18,11 @@ package com.yanncebron.m68kplugin.lang.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
-public interface M68kMoveqInstruction extends M68kMoveInstructionBase {
-
-  @Nullable
-  M68kAdmQuick getSource();
+public interface M68kAdmQuick extends M68kPsiElement {
 
   @Nullable
-  M68kAdmDrd getDestination();
+  M68kExpression getExpression();
 
 }

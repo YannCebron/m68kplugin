@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,9 @@ public class MoveqInstructionPsiTest extends M68kPsiTestCase {
 
     assertNull(instruction.getDataSize());
 
-    final M68kAdmImm admImm = assertInstanceOf(instruction.getSource(), M68kAdmImm.class);
-    assertEquals("#1", admImm.getText());
-    assertInstanceOf(admImm.getExpression(), M68kNumberExpression.class);
+    final M68kAdmQuick admQuick = assertInstanceOf(instruction.getSource(), M68kAdmQuick.class);
+    assertEquals("#1", admQuick.getText());
+    assertInstanceOf(admQuick.getExpression(), M68kNumberExpression.class);
 
     final M68kAdmDrd destination = instruction.getDestination();
     assertNotNull(destination);

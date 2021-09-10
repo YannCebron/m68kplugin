@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kMoveqInstructionImpl(MOVEQ_INSTRUCTION)
     PsiElement(moveq)('moveq')
-    PsiErrorElement:<immediate data> expected
+    PsiErrorElement:<quick immediate> expected
       <empty list>
   PsiWhiteSpace(' ')

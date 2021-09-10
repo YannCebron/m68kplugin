@@ -83,7 +83,7 @@ public enum M68kAddressMode {
    */
   IMMEDIATE("imm"),
   /**
-   * Ref 2.2.18, {@link M68kAdmImm}
+   * Ref 2.2.18, {@link M68kAdmQuick}
    */
   QUICK_IMMEDIATE("quick"),
 
