@@ -35,7 +35,7 @@ public class M68kNamesValidator implements NamesValidator {
         M68kTokenGroups.INSTRUCTIONS.getTypes(),
         M68kTokenGroups.DIRECTIVES.getTypes(),
         M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES.getTypes()),
-      Object::toString);
+      elementType -> StringUtil.toLowerCase(elementType.toString()));
 
   @Override
   public boolean isKeyword(@NotNull String name, Project project) {
