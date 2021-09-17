@@ -26,4 +26,4 @@ Currently, there is no dedicated support for configuring or creating a specific 
 
 All sources and include files must be located in the same project to be resolved.
 
-By default, all files with extension `.s`, `.asm`, `.i`, and `.x68` are treated as *. See *Motorola 68000 Assembler* in *Settings/Preferences \| Editor \| File Types* to customize. 
+By default, all files with extension `.s`, `.asm`, `.i`, and `.x68` are treated as M68k assembly sources. See *Motorola 68000 Assembler* in *Settings/Preferences \| Editor \| File Types* to customize. 
