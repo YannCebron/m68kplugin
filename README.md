@@ -6,11 +6,7 @@
 Adds support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_68000_series) assembly language
 in [IntelliJ](https://plugins.jetbrains.com/docs/intellij/intellij-platform.html#ides-based-on-the-intellij-platform) based IDEs.
 
-<div style="text-align: center; font-size: 1.25em;">
-
 **Please visit the [Documentation site](https://yanncebron.github.io/m68kplugin/) for user guide.** 
-
-</div>
 
 ![m68plugin](docs/assets/m68kplugin_landing.png)
 
