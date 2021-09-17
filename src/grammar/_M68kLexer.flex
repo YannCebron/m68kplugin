@@ -181,16 +181,16 @@ Z=[zZ]
   {EOL_COMMENT}            { return COMMENT; }
 
   {S}{P}                   { return SP; }
-  {S}{P} {DATA_SIZE}       { pushbackDataSize(false); return SP; }
+  {S}{P} {DATA_SIZE}       { pushbackDataSize(true); return SP; }
   {S}{S}{P}                { return SSP; }
   {U}{S}{P}                { return USP; }
   {P}{C}                   { return PC; }
   {S}{R}                   { return SR; }
   {C}{C}{R}                { return CCR; }
   {D}[0-7]                 { return DATA_REGISTER; }
-  {D}[0-7] {DATA_SIZE}     { pushbackDataSize(false); return DATA_REGISTER; }
+  {D}[0-7] {DATA_SIZE}     { pushbackDataSize(true); return DATA_REGISTER; }
   {A}[0-7]                 { return ADDRESS_REGISTER; }
-  {A}[0-7] {DATA_SIZE}     { pushbackDataSize(false); return ADDRESS_REGISTER; }
+  {A}[0-7] {DATA_SIZE}     { pushbackDataSize(true); return ADDRESS_REGISTER; }
 
   // distinguish 'd6.l'/'$4000.l' vs. 'bra .l'/'dbf d0,.s'
   "." {B}    { if (afterSpaceOrComma()) { return ID; } return DOT_B; }

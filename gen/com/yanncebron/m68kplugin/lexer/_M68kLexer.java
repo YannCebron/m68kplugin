@@ -3108,17 +3108,17 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 540: break;
           case 246: 
-            { pushbackDataSize(false); return SP;
+            { pushbackDataSize(true); return SP;
             } 
             // fall through
           case 541: break;
           case 247: 
-            { pushbackDataSize(false); return ADDRESS_REGISTER;
+            { pushbackDataSize(true); return ADDRESS_REGISTER;
             } 
             // fall through
           case 542: break;
           case 248: 
-            { pushbackDataSize(false); return DATA_REGISTER;
+            { pushbackDataSize(true); return DATA_REGISTER;
             } 
             // fall through
           case 543: break;
