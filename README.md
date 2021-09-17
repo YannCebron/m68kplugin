@@ -1,17 +1,18 @@
 [![Build & Test](https://github.com/YannCebron/m68kplugin/workflows/Build%20&%20Test/badge.svg)](https://github.com/YannCebron/m68kplugin/actions?query=workflow%3A%22Build+%26+Test%22)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 
-## Motorola 68000 Series Assembly Language Support for IntelliJ-based IDEs
-
+## Motorola 68000 Series Assembly Language Support for IntelliJ based IDEs
+                                            
 Adds support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_68000_series) assembly language
-in [IntelliJ](https://plugins.jetbrains.com/docs/intellij/intellij-platform.html#ides-based-on-the-intellij-platform) based IDEs
-(including [IntelliJ IDEA](https://www.jetbrains.com/idea/), [Android Studio](https://developer.android.com/studio/), and many more).
-         
-![m68plugin](docs/assets/m68kplugin_landing.png)
+in [IntelliJ](https://plugins.jetbrains.com/docs/intellij/intellij-platform.html#ides-based-on-the-intellij-platform) based IDEs.
 
-## Installation and Features
+<div style="text-align: center; font-size: 1.25em;">
 
 **Please visit the [Documentation site](https://yanncebron.github.io/m68kplugin/) for user guide.** 
+
+</div>
+
+![m68plugin](docs/assets/m68kplugin_landing.png)
 
 Please see [Contributing](CONTRIBUTING.md) on how to submit feedback and contribute to this project.
 
@@ -22,13 +23,6 @@ Plugin Logo from [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Mot
 Mnemonic documentation taken from [m68k-instructions-documentation](https://github.com/prb28/m68k-instructions-documentation)
 
 Mnemonic data generated using [vasm](http://sun.hasenbraten.de/vasm/) sources, thanks to Frank Wille and Dr. Volker Barthelmann for granting permission
-
-## Tooling
-
-Language support built using [Grammar-Kit](https://github.com/JetBrains/Grammar-Kit)
-
-Gradle setup uses [gradle-intellij-plugin](https://github.com/JetBrains/gradle-intellij-plugin/)
- and [gradle-grammar-kit-plugin](https://github.com/JetBrains/gradle-grammar-kit-plugin)
 
 ## License
 
