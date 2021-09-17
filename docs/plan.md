@@ -87,6 +87,7 @@
   - render mode for preceding label comments
   - quick doc for directives
   - quick doc for `opt` flags
+  - quick doc for builtin symbols
 - **WIP** code folding with settings for:
   - `movem` push/pop
 - macro call: parameter info/preview referring place
