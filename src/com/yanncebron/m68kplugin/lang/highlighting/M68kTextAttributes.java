@@ -33,6 +33,8 @@ public class M68kTextAttributes {
   public static final TextAttributesKey MACRO_PARAMETER =
     createTextAttributesKey("M68K_MACRO_PARAMETER", DefaultLanguageHighlighterColors.INLINE_PARAMETER_HINT_CURRENT);
 
+  public static final TextAttributesKey BUILTIN_SYMBOL =
+    createTextAttributesKey("M68K_BUILTIN_SYMBOL", DefaultLanguageHighlighterColors.PREDEFINED_SYMBOL);
   public static final TextAttributesKey LABEL =
     createTextAttributesKey("M68K_LABEL", DefaultLanguageHighlighterColors.STATIC_METHOD);
   public static final TextAttributesKey LOCAL_LABEL =

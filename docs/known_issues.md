@@ -106,23 +106,8 @@ MadMac assembler specific (all directives may be optionally preceded by a dot):
 
 ### Builtin Symbols
 
-- `*`
-- `REPTN` (inside `rept`)
-- `__LINE__`
-- Macros
-  - `CARG`
-  - `NARG`
-- Devpac
-  - `__G2`
-  - `__LK`
-  - `__RS`, `__SO`, `__FO`
-- PhxAss
-  - `_PHXASS_`
-  - `__CPU`, `__FPU`, `__MMU`
-  - `__OPTC`
-- vasm
-  - `__VASM`
-  - `__UNIXFS`, `__MSDOSFS`, `__AMIGAFS`
+- `REPTN`: only valid inside `rept`
+- `CARG`, `NARG`: only valid inside `macro`
 
 ### Macros
 

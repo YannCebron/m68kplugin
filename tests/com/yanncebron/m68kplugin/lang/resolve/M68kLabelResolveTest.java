@@ -18,14 +18,20 @@ package com.yanncebron.m68kplugin.lang.resolve;
 
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementPresentation;
+import com.intellij.icons.AllIcons;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiPolyVariantReference;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
+import com.intellij.util.ArrayUtil;
+import com.intellij.util.containers.ContainerUtil;
+import com.intellij.util.xml.ElementPresentationManager;
 import com.yanncebron.m68kplugin.inspections.M68kUnresolvedLabelReferenceInspection;
 import com.yanncebron.m68kplugin.lang.M68kIcons;
+import com.yanncebron.m68kplugin.lang.psi.M68kBuiltinSymbol;
+import com.yanncebron.m68kplugin.lang.psi.M68kBuiltinSymbolPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
 
 import static com.yanncebron.m68kplugin.lang.M68kLookupElementTestUtil.*;
@@ -38,6 +44,20 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     return "testData/resolve/label";
   }
 
+  private static String[] getCompletionVariants(String... labels) {
+    return ArrayUtil.mergeArrays(labels,
+      ContainerUtil.map2Array(M68kBuiltinSymbol.values(), String.class, M68kBuiltinSymbol::getName));
+  }
+
+  public void testResolveBuiltinSymbol() {
+    myFixture.configureByText("a.s",
+      "MY_CPU equ __C<caret>PU");
+    final ResolveResult result = getSingleResolveResultAtCaret();
+    final M68kBuiltinSymbolPsiElement m68kBuiltinSymbolPsiElement = assertInstanceOf(result.getElement(), M68kBuiltinSymbolPsiElement.class);
+    assertEquals(M68kBuiltinSymbol.__CPU.getDescription(), m68kBuiltinSymbolPsiElement.getName());
+    assertEquals("Builtin Symbol", ElementPresentationManager.getTypeNameForObject(m68kBuiltinSymbolPsiElement));
+  }
+
   public void testHighlightResolvingInSingleFile() {
     myFixture.enableInspections(new M68kUnresolvedLabelReferenceInspection());
     myFixture.testHighlighting("highlightResolvingInSingleFile.s");
@@ -45,10 +65,12 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
 
   public void testCompletionVariantsInSingleFile() {
     myFixture.testCompletionVariants("completionVariantsInSingleFile.s",
-      "topLevelLabel", "anotherTopLevel.Label",
-      ".localLabel", ".localLabel2", ".localLabelWithColon",
-      "localLabelDollar$", "localLabelDollarWithColon$",
-      "setLabel", "equLabel", "equalsLabel");
+      getCompletionVariants(
+        "topLevelLabel", "anotherTopLevel.Label",
+        ".localLabel", ".localLabel2", ".localLabelWithColon",
+        "localLabelDollar$", "localLabelDollarWithColon$",
+        "setLabel", "equLabel", "equalsLabel")
+    );
 
     final LookupElement topLevelLabel1 = findLookupElement(myFixture, "topLevelLabel", 0);
     final LookupElementPresentation topLevelPresentation1 = LookupElementPresentation.renderElement(topLevelLabel1);
@@ -102,6 +124,13 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     assertEquals(" 33", equalsLabelPresentation.getTailText());
     assertEmpty(equalsLabelPresentation.getTypeText());
     assertPrioritizedLookupElement(equalsLabel, 30.0);
+
+    final LookupElement builtinSymbol = findLookupElement(myFixture, "*");
+    final LookupElementPresentation builtinSymbolPresentation = LookupElementPresentation.renderElement(builtinSymbol);
+    assertLookupIcon(builtinSymbolPresentation, AllIcons.Debugger.ShowCurrentFrame);
+    assertTrue(builtinSymbolPresentation.isItemTextItalic());
+    assertEquals(" Current PC", builtinSymbolPresentation.getTailText());
+    assertEquals("any", builtinSymbolPresentation.getTypeText());
   }
 
   public void testResolveLocalLabelInCorrectScope() {
@@ -118,21 +147,25 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     myFixture.testHighlighting(testDataPaths);
 
     // resolve in current file (2nd declaration in _other.s)
-    final PsiReference referenceAtCaretPositionWithAssertion = myFixture.getReferenceAtCaretPositionWithAssertion(testDataPaths);
-    final PsiPolyVariantReference polyVariantReference = assertInstanceOf(referenceAtCaretPositionWithAssertion, PsiPolyVariantReference.class);
-    final ResolveResult resolveResult = assertOneElement(polyVariantReference.multiResolve(false));
+    final ResolveResult resolveResult = getSingleResolveResultAtCaret();
     assertResolveResultPsiElement(resolveResult, "myLabel", "highlightResolvingInMultipleFiles.s", 0);
   }
 
   public void testCompletionVariantsInMultipleFiles() {
     myFixture.copyFileToProject("highlightResolvingInMultipleFiles_other.s");
     myFixture.testCompletionVariants("completionVariantsInMultipleFiles.s",
-      "topLevelLabel", "anotherTopLevelLabel", "otherLabel", "otherLabel2", "myLabel");
+      getCompletionVariants("topLevelLabel", "anotherTopLevelLabel", "otherLabel", "otherLabel2", "myLabel"));
 
     final LookupElement otherLabel = findLookupElement(myFixture, "otherLabel");
     final LookupElementPresentation otherLabelPresentation = LookupElementPresentation.renderElement(otherLabel);
     assertFalse(otherLabelPresentation.isItemTextBold());
     assertEquals("highlightResolvingInMultipleFiles_other.s", otherLabelPresentation.getTypeText());
+  }
+
+  private ResolveResult getSingleResolveResultAtCaret(String... testDataPaths) {
+    final PsiReference referenceAtCaretPositionWithAssertion = myFixture.getReferenceAtCaretPositionWithAssertion(testDataPaths);
+    final PsiPolyVariantReference polyVariantReference = assertInstanceOf(referenceAtCaretPositionWithAssertion, PsiPolyVariantReference.class);
+    return assertOneElement(polyVariantReference.multiResolve(false));
   }
 
   static void assertResolveResultPsiElement(ResolveResult resolveResult, String text, String filename, int offset) {

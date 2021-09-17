@@ -236,4 +236,16 @@ public class ExpressionParsingTest extends M68kParsingTestCase {
   public void testComplexExpression() throws Exception {
     doCodeTest(" dc 1+(2+3)/-5");
   }
+
+  public void testCurrentPcSymbol() throws Exception {
+    doCodeTest(" dc *-42");
+  }
+
+  public void testCurrentPcSymbolAfterMinusOperator() throws Exception {
+    doCodeTest(" dc.l 42-*");
+  }
+
+  public void testCurrentPcSymbolMultipleExpressions() throws Exception {
+    doCodeTest(" dc.l 42-*,*+42");
+  }
 }

@@ -105,7 +105,8 @@ public class CommentLexerTest extends M68kLexerTestCase {
         "data_register ('d0')\n" +
         ", (',')\n" +
         "data_register ('d1')\n" +
-        "comment (' * comment')");
+        "WHITE_SPACE (' ')\n" +
+        "comment ('* comment')");
   }
 
   public void testCommentAfterInstructionWithOperandsWithoutWhitespace() {

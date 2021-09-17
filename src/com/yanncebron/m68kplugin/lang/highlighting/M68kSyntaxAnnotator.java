@@ -25,6 +25,9 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiPolyVariantReference;
+import com.intellij.psi.ResolveResult;
+import com.intellij.util.ObjectUtils;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroParameterDirective;
@@ -52,8 +55,18 @@ public class M68kSyntaxAnnotator implements Annotator {
       doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LOCAL_LABEL, true);
     } else if (element instanceof M68kLabelRefExpression) {
       annotateMacroParameters(holder, element);
+      annotateBuiltinSymbol(element, holder);
     } else if (element instanceof M68kMacroParameterDirective) {
       doAnnotate(holder, element.getNode(), M68kTextAttributes.MACRO_PARAMETER, false);
+    }
+  }
+
+  private void annotateBuiltinSymbol(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
+    PsiPolyVariantReference reference = ObjectUtils.tryCast(element.getReference(), PsiPolyVariantReference.class);
+    assert reference != null : element;
+    final ResolveResult[] resolveResults = reference.multiResolve(false);
+    if (resolveResults.length == 1 && resolveResults[0].getElement() instanceof M68kBuiltinSymbolPsiElement) {
+      doAnnotate(holder, element.getNode(), M68kTextAttributes.BUILTIN_SYMBOL, false);
     }
   }
 

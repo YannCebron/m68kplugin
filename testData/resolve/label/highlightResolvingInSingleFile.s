@@ -92,3 +92,10 @@ anotherLocalMacro macro
 
   ifmacrond <weak_warning descr="Cannot resolve label 'INVALID_VALUE'">INVALID_VALUE</weak_warning>
   endif
+
+
+* builtin symbols ------------------------------------------------------------------------------------------------------
+
+MY_CPU equ __CPU
+
+offsetLabel dc.l *-4

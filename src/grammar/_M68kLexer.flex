@@ -37,10 +37,20 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
   }
 
   /**
+   * Whether given {@code '*'} is "current PC" symbol instead of {@link MUL}.
+   */
+  private boolean isCurrentPcSymbol(){
+    if (afterSpaceOrComma()) return true;
+    
+    char previousChar = charAt(-1);
+    return previousChar == '-' || previousChar == '+';
+  }
+
+  /**
    * Push back DATA_SIZE token.
    */
   private void pushbackDataSize() {
-      yypushback(2);
+    yypushback(2);
   }
 
   private char charAt(final int offset) {
@@ -163,7 +173,6 @@ Z=[zZ]
   // after 2nd WHITE_SPACE -> AFTER_OPERAND for automatic comment
   {WHITE_SPACE}+           { if (operandSpaceCount++ == 1) { yybegin(AFTER_OPERAND); } return WHITE_SPACE; }
 
-  {WHITE_SPACE}+ {COMMENT} { return COMMENT; }
   {EOL_COMMENT}            { return COMMENT; }
 
   {S}{P}                   { return SP; }
@@ -191,7 +200,7 @@ Z=[zZ]
   ","  { return COMMA; }
   "+"  { return PLUS; }
   "-"  { return MINUS; }
-  "*"  { return MUL; }
+  "*"  { if (isCurrentPcSymbol()) { return ID; } return MUL; }
   "//" { return SLASH_SLASH; }
   "/"  { return DIV; }
   "^"  { return POW; }

@@ -14,69 +14,74 @@
  * limitations under the License.
  */
 
-package com.yanncebron.m68kplugin.lang.symbol;
+package com.yanncebron.m68kplugin.lang.psi;
 
+import com.intellij.icons.AllIcons;
 import com.yanncebron.m68kplugin.compiler.M68kCompiler;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-enum M68kBuiltinSymbolRegistry {
+/**
+ * Builtin compiler symbols.
+ *
+ * @see M68kBuiltinSymbolPsiElement
+ */
+public enum M68kBuiltinSymbol {
 
-  STAR(M68kCompiler.ANY, null, "*", ""),
-  __LINE__(M68kCompiler.ANY, null, "__LINE__", "Current line number"),
+  CURRENT_PC(M68kCompiler.ANY, AllIcons.Debugger.ShowCurrentFrame, "*", "Current PC"),
+  __LINE__(M68kCompiler.ANY, AllIcons.General.LayoutEditorOnly, "__LINE__", "Current line number"),
 
-  // todo inside `rept` only
   REPTN(M68kCompiler.ANY, null, "REPTN", "Repeat Count"),
 
-  // todo inside `macro` only
-  CARG(M68kCompiler.ANY, null, "CARG", ""),
+  CARG(M68kCompiler.ANY, null, "CARG", "Current macro argument"),
   NARG(M68kCompiler.ANY, null, "NARG", "Number of macro arguments"),
+
+  __RS(M68kCompiler.ANY, null, "__RS", "RS-counter value"),
+  __SO(M68kCompiler.ANY, null, "__SO", "SO-counter value"),
+  __FO(M68kCompiler.ANY, null, "__FO", "FO-counter value"),
 
   __G2(M68kCompiler.DEVPAC, null, "__G2", ""),
   _LK(M68kCompiler.DEVPAC, null, "_LK", ""),
-  __RS(M68kCompiler.DEVPAC, null, "__RS", ""),
-  __SO(M68kCompiler.DEVPAC, null, "__SO", ""),
-  __FO(M68kCompiler.DEVPAC, null, "__FO", ""),
 
   _MOVEMBYTES(M68kCompiler.BASM, null, "_MOVEMBYTES", ""),
   __MOVEMREGS(M68kCompiler.BASM, null, "__MOVEMREGS", ""),
 
-  _PHXASS_(M68kCompiler.PHX_ASS, null, "_PHXASS_", ""),
-  __CPU(M68kCompiler.PHX_ASS, null, "__CPU", ""),
-  __FPU(M68kCompiler.PHX_ASS, null, "__FPU", ""),
-  __MMU(M68kCompiler.PHX_ASS, null, "__MMU", ""),
-  __OPTC(M68kCompiler.PHX_ASS, null, "__OPTC", ""),
+  _PHXASS_(M68kCompiler.PHX_ASS, null, "_PHXASS_", "Set to 1 if PhxAss"),
+  __CPU(M68kCompiler.PHX_ASS, null, "__CPU", "Current CPU type"),
+  __FPU(M68kCompiler.PHX_ASS, null, "__FPU", "Current FPU type"),
+  __MMU(M68kCompiler.PHX_ASS, null, "__MMU", "PMMU Generation allowed"),
+  __OPTC(M68kCompiler.PHX_ASS, null, "__OPTC", "Optimization flags"),
 
-  __VASM(M68kCompiler.VASM, null, "__VASM", "");
+  __VASM(M68kCompiler.VASM, null, "__VASM", "CPU type");
 
   private final M68kCompiler compiler;
   private final Icon icon;
   private final String name;
   private final String description;
 
-  M68kBuiltinSymbolRegistry(M68kCompiler compiler, @Nullable Icon icon, @NonNls String name, String description) {
+  M68kBuiltinSymbol(M68kCompiler compiler, @Nullable Icon icon, @NonNls String name, String description) {
     this.compiler = compiler;
     this.icon = icon;
     this.name = name;
     this.description = description;
   }
 
-  M68kCompiler getCompiler() {
+  public M68kCompiler getCompiler() {
     return compiler;
   }
 
-  String getName() {
+  public String getName() {
     return name;
   }
 
-  String getDescription() {
+  public String getDescription() {
     return description;
   }
 
   @Nullable
-  Icon getIcon() {
+  public Icon getIcon() {
     return icon;
   }
 }

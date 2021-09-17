@@ -47,6 +47,7 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
     createDescriptor("color.settings.group.directives", "attribute.descriptor.macro.parameter", M68kTextAttributes.MACRO_PARAMETER),
     createDescriptor("color.settings.group.instructions", "attribute.descriptor.instruction", M68kTextAttributes.INSTRUCTION),
     createDescriptor("color.settings.group.instructions", "attribute.descriptor.privileged.instruction", M68kTextAttributes.PRIVILEGED_INSTRUCTION),
+    createDescriptor("color.settings.group.labels", "attribute.descriptor.builtin.symbol", M68kTextAttributes.BUILTIN_SYMBOL),
     createDescriptor("color.settings.group.labels", "attribute.descriptor.label", M68kTextAttributes.LABEL),
     createDescriptor("color.settings.group.labels", "attribute.descriptor.local.label", M68kTextAttributes.LOCAL_LABEL),
     createDescriptor("color.settings.group.literals", "attribute.descriptor.binary.number", M68kTextAttributes.BIN_NUMBER),
@@ -107,12 +108,12 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
       "        move.l d0,(a1) ;comment\n" +
       "        rts\n" +
       "\n" +
-      "        IFND LABEL\n" +
-      "<label>FLAG</label> SET 1\n" +
+      "        IFGE <builtinSymbol>__CPU</builtinSymbol>-68010\n" +
+      "<label>CPU_FLAG</label> SET 1\n" +
       "        ENDC\n" +
       "\n" +
       "<label>DATA</label> equ @42\n" +
-      "<label>_LibPtr</label> dc.l 0\n" +
+      "<label>_LibPtr</label> dc.l <builtinSymbol>*</builtinSymbol>-4\n" +
       "<label>text</label>    dc.b 'some text',0\n";
   }
 
@@ -120,6 +121,7 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
   @Override
   public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
     Map<String, TextAttributesKey> additionalMap = new HashMap<>();
+    additionalMap.put("builtinSymbol", M68kTextAttributes.BUILTIN_SYMBOL);
     additionalMap.put("label", M68kTextAttributes.LABEL);
     additionalMap.put("localLabel", M68kTextAttributes.LOCAL_LABEL);
     additionalMap.put("macroParameter", M68kTextAttributes.MACRO_PARAMETER);

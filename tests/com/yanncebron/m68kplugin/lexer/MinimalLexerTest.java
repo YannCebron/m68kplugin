@@ -221,4 +221,49 @@ public class MinimalLexerTest extends M68kLexerTestCase {
     doTest("\\@label",
       "id ('\\@label')");
   }
+
+  public void testCurrentPcSymbol() {
+    doTest(" dc *-4",
+      "WHITE_SPACE (' ')\n" +
+        "dc ('dc')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "id ('*')\n" +
+        "- ('-')\n" +
+        "dec_number ('4')");
+  }
+
+  public void testCurrentPcSymbolAfterDataSize() {
+    doTest(" dc.b *-4",
+      "WHITE_SPACE (' ')\n" +
+        "dc ('dc')\n" +
+        ".b ('.b')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "id ('*')\n" +
+        "- ('-')\n" +
+        "dec_number ('4')");
+  }
+
+  public void testCurrentPcSymbolAfterMinusOperator() {
+    doTest(" dc.b 42-*",
+      "WHITE_SPACE (' ')\n" +
+        "dc ('dc')\n" +
+        ".b ('.b')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "dec_number ('42')\n" +
+        "- ('-')\n" +
+        "id ('*')");
+  }
+
+  public void testCurrentPcSymbolAfterComma() {
+    doTest(" dc.b 1,*-42",
+      "WHITE_SPACE (' ')\n" +
+        "dc ('dc')\n" +
+        ".b ('.b')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "dec_number ('1')\n" +
+        ", (',')\n" +
+        "id ('*')\n" +
+        "- ('-')\n" +
+        "dec_number ('42')");
+  }
 }

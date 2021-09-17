@@ -51,7 +51,9 @@ public class M68kLookupElementTestUtil {
       element.getLookupString().equals(lookupString) &&
         (textOffset == -1 || textOffset == Objects.requireNonNull(element.getPsiElement()).getTextOffset()));
 
-    assertNotNull(StringUtil.join(lookupElements, element -> element.getLookupString() + ":" + Objects.requireNonNull(element.getPsiElement()).getTextOffset(), "\n"),
+    assertNotNull(StringUtil.join(lookupElements, element ->
+          element.getLookupString() + ":" + (element.getPsiElement() == null ? "" : element.getPsiElement().getTextOffset()),
+        "\n"),
       lookupElement);
     return lookupElement;
   }

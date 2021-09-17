@@ -41,15 +41,14 @@ import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.List;
+import java.util.*;
 
 /**
- * Reference to label.
+ * Reference to label or builtin symbol.
  * <p>
  * Resolve mechanism (all results cached):
  * <ol>
+ *   <li>builtin symbol: lookup known {@link M68kBuiltinSymbol} by hardcoded name</li>
  *   <li>local label: search backwards, then forwards for local labels only - until encountering global label/macro boundary ("parent scope"); first match</li>
  *   <li>global label: search in current file, if not found in included (currently "all other files"); all matches</li>
  * </ol>
@@ -58,6 +57,7 @@ import java.util.List;
  * </p>
  * <p>
  * In completion variants, local labels and labels from the current file are prioritized and shown in bold.
+ * Builtin symbols have lowest priority.
  * </p>
  */
 class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMixIn> implements EmptyResolveMessageProvider {
@@ -66,10 +66,23 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
 
     private static final Resolver INSTANCE = new Resolver();
 
+    private static final Map<String, M68kBuiltinSymbol> builtinSymbols = new HashMap<>();
+
+    static {
+      for (M68kBuiltinSymbol value : M68kBuiltinSymbol.values()) {
+        builtinSymbols.put(value.getName(), value);
+      }
+    }
+
     @Override
     public ResolveResult @NotNull [] resolve(@NotNull M68kLabelReference m68kLabelReference, boolean incompleteCode) {
       PsiElement psiElement = m68kLabelReference.getElement();
       String labelName = m68kLabelReference.getValue();
+
+      final M68kBuiltinSymbol builtinSymbol = builtinSymbols.get(labelName);
+      if (builtinSymbol != null) {
+        return PsiElementResolveResult.createResults(new M68kBuiltinSymbolPsiElement(psiElement, builtinSymbol));
+      }
 
       final M68kLocalLabelMode localLabelMode = M68kLocalLabelMode.find(labelName);
       if (localLabelMode != null) {
@@ -96,6 +109,7 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
       processLabelsInScope(processor, getIncludeSearchScope(psiElement), labelName);
       return PsiElementResolveResult.createResults(resolveResults);
     }
+
   }
 
   M68kLabelReference(M68kLabelRefExpressionMixIn element) {
@@ -111,6 +125,15 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
   @Override
   public Object @NotNull [] getVariants() {
     List<LookupElement> variants = new SmartList<>();
+
+    for (M68kBuiltinSymbol value : M68kBuiltinSymbol.values()) {
+      final LookupElementBuilder builder = LookupElementBuilder.create(value.getName())
+        .withItemTextItalic(true)
+        .withIcon(value.getIcon())
+        .withTailText(" " + value.getDescription())
+        .withTypeText(value.getCompiler().getDisplayName());
+      variants.add(PrioritizedLookupElement.withPriority(builder, -1));
+    }
 
     processLocalLabels(getElement(), null, localLabel -> {
       M68kLocalLabelMode localLabelMode = M68kLocalLabelMode.find(localLabel.getText());

@@ -45,6 +45,13 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
     myFixture.testHighlighting(false, true, false);
   }
 
+  public void testBuiltinSymbol() {
+    myFixture.configureByText("test.s",
+      " dc.l <info descr=\"M68K_BUILTIN_SYMBOL\">*</info>-42\n" +
+        " IFGE <info descr=\"M68K_BUILTIN_SYMBOL\">__CPU</info>-68010\n");
+    myFixture.testHighlighting(false, true, false);
+  }
+
   public void testMacroParameter() {
     myFixture.configureByText("test.s",
       "<info descr=\"M68K_LABEL\">macroName</info> macro\n" +
