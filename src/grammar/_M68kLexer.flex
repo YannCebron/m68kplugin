@@ -36,25 +36,11 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
     return Character.isSpaceChar(previousChar) || previousChar == ',';
   }
 
-  private void beginDataSized() {
-    pushbackDataSize(false);
-    yybegin(AFTER_INSTRUCTION);
-  }
-
   /**
-   * Pushes back (optional) DATA_SIZE token if present.
+   * Push back DATA_SIZE token.
    */
-  private void pushbackDataSize(boolean required) {
-    if (required) {
+  private void pushbackDataSize() {
       yypushback(2);
-    }
-    else if (charAt(yylength() - 2) == '.') {
-      char previousChar = charAt(yylength() - 1);
-      if (previousChar == 's' || previousChar == 'b' || previousChar == 'w' || previousChar == 'l' ||
-          previousChar == 'S' || previousChar == 'B' || previousChar == 'W' || previousChar == 'L') {
-        yypushback(2);
-      }
-    }
   }
 
   private char charAt(final int offset) {
@@ -181,16 +167,16 @@ Z=[zZ]
   {EOL_COMMENT}            { return COMMENT; }
 
   {S}{P}                   { return SP; }
-  {S}{P} {DATA_SIZE}       { pushbackDataSize(true); return SP; }
+  {S}{P} {DATA_SIZE}       { pushbackDataSize(); return SP; }
   {S}{S}{P}                { return SSP; }
   {U}{S}{P}                { return USP; }
   {P}{C}                   { return PC; }
   {S}{R}                   { return SR; }
   {C}{C}{R}                { return CCR; }
   {D}[0-7]                 { return DATA_REGISTER; }
-  {D}[0-7] {DATA_SIZE}     { pushbackDataSize(true); return DATA_REGISTER; }
+  {D}[0-7] {DATA_SIZE}     { pushbackDataSize(); return DATA_REGISTER; }
   {A}[0-7]                 { return ADDRESS_REGISTER; }
-  {A}[0-7] {DATA_SIZE}     { pushbackDataSize(true); return ADDRESS_REGISTER; }
+  {A}[0-7] {DATA_SIZE}     { pushbackDataSize(); return ADDRESS_REGISTER; }
 
   // distinguish 'd6.l'/'$4000.l' vs. 'bra .l'/'dbf d0,.s'
   "." {B}    { if (afterSpaceOrComma()) { return ID; } return DOT_B; }
@@ -256,7 +242,7 @@ Z=[zZ]
 }
 
 // Instructions must switch to:
-// - AFTER_INSTRUCTION (beginDataSized()) - if M68kDataSized, must have '{DATA_SIZE}?' suffix
+// - AFTER_INSTRUCTION - if M68kDataSized, must have '/ {DATA_SIZE}?' lookahead suffix
 // - IN_OPERAND - if >=1 operand
 // - STRING_DIRECTIVE - if 1st operand==STRING
 // - AFTER_OPERAND - if no operands
@@ -275,143 +261,143 @@ Z=[zZ]
   {S}{T}{O}{P}                 { yybegin(IN_OPERAND); return STOP; }
   {T}{R}{A}{P}                 { yybegin(IN_OPERAND); return TRAP; }
   {T}{R}{A}{P}{V}              { yybegin(AFTER_OPERAND); return TRAPV; }
-  {L}{I}{N}{K}    {DATA_SIZE}? { beginDataSized(); return LINK; }
+  {L}{I}{N}{K}  / {DATA_SIZE}? { yybegin(AFTER_INSTRUCTION); return LINK; }
   {U}{N}{L}{K}                 { yybegin(IN_OPERAND); return UNLK; }
 
-  {M}{O}{V}{E}    {DATA_SIZE}? { beginDataSized(); return MOVE; }
-  {M}{O}{V}{E}{A} {DATA_SIZE}? { beginDataSized(); return MOVEA; }
-  {M}{O}{V}{E}{M} {DATA_SIZE}? { beginDataSized(); return MOVEM; }
-  {M}{O}{V}{E}{P} {DATA_SIZE}? { beginDataSized(); return MOVEP; }
-  {M}{O}{V}{E}{Q} {DATA_SIZE}? { beginDataSized(); return MOVEQ; }
+  {M}{O}{V}{E}    / {DATA_SIZE}? { yybegin(AFTER_INSTRUCTION); return MOVE; }
+  {M}{O}{V}{E}{A} / {DATA_SIZE}? { yybegin(AFTER_INSTRUCTION); return MOVEA; }
+  {M}{O}{V}{E}{M} / {DATA_SIZE}? { yybegin(AFTER_INSTRUCTION); return MOVEM; }
+  {M}{O}{V}{E}{P} / {DATA_SIZE}? { yybegin(AFTER_INSTRUCTION); return MOVEP; }
+  {M}{O}{V}{E}{Q} / {DATA_SIZE}? { yybegin(AFTER_INSTRUCTION); return MOVEQ; }
 
-  {T}{S}{T} {DATA_SIZE}?       { beginDataSized(); return TST; }
-  {T}{A}{S} {DATA_SIZE}?       { beginDataSized(); return TAS; }
-  {L}{E}{A} {DATA_SIZE}?       { beginDataSized(); return LEA; }
-  {P}{E}{A} {DATA_SIZE}?       { beginDataSized(); return PEA; }
-  {C}{L}{R} {DATA_SIZE}?       { beginDataSized(); return CLR; }
+  {T}{S}{T} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return TST; }
+  {T}{A}{S} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return TAS; }
+  {L}{E}{A} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return LEA; }
+  {P}{E}{A} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return PEA; }
+  {C}{L}{R} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return CLR; }
 
-  {J}{M}{P} {DATA_SIZE}?       { beginDataSized(); return JMP; }
+  {J}{M}{P} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return JMP; }
   {J}{S}{R}                    { yybegin(IN_OPERAND); return JSR; }
-  {B}{S}{R} {DATA_SIZE}?       { beginDataSized(); return BSR; }
+  {B}{S}{R} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BSR; }
 
   {R}{T}{S}                    { yybegin(AFTER_OPERAND); return RTS; }
   {R}{T}{E}                    { yybegin(AFTER_OPERAND); return RTE; }
   {R}{T}{R}                    { yybegin(AFTER_OPERAND); return RTR; }
 
 
-  {A}{D}{D}    {DATA_SIZE}?    { beginDataSized(); return ADD; }
-  {A}{D}{D}{A} {DATA_SIZE}?    { beginDataSized(); return ADDA; }
-  {A}{D}{D}{I} {DATA_SIZE}?    { beginDataSized(); return ADDI; }
-  {A}{D}{D}{Q} {DATA_SIZE}?    { beginDataSized(); return ADDQ; }
-  {A}{D}{D}{X} {DATA_SIZE}?    { beginDataSized(); return ADDX; }
-  {S}{U}{B}    {DATA_SIZE}?    { beginDataSized(); return SUB; }
-  {S}{U}{B}{A} {DATA_SIZE}?    { beginDataSized(); return SUBA; }
-  {S}{U}{B}{I} {DATA_SIZE}?    { beginDataSized(); return SUBI; }
-  {S}{U}{B}{Q} {DATA_SIZE}?    { beginDataSized(); return SUBQ; }
-  {S}{U}{B}{X} {DATA_SIZE}?    { beginDataSized(); return SUBX; }
-  {M}{U}{L}{S} {DATA_SIZE}?    { beginDataSized(); return MULS; }
-  {M}{U}{L}{U} {DATA_SIZE}?    { beginDataSized(); return MULU; }
-  {D}{I}{V}{S} {DATA_SIZE}?    { beginDataSized(); return DIVS; }
-  {D}{I}{V}{U} {DATA_SIZE}?    { beginDataSized(); return DIVU; }
+  {A}{D}{D}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return ADD; }
+  {A}{D}{D}{A} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return ADDA; }
+  {A}{D}{D}{I} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return ADDI; }
+  {A}{D}{D}{Q} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return ADDQ; }
+  {A}{D}{D}{X} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return ADDX; }
+  {S}{U}{B}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return SUB; }
+  {S}{U}{B}{A} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return SUBA; }
+  {S}{U}{B}{I} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return SUBI; }
+  {S}{U}{B}{Q} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return SUBQ; }
+  {S}{U}{B}{X} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return SUBX; }
+  {M}{U}{L}{S} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return MULS; }
+  {M}{U}{L}{U} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return MULU; }
+  {D}{I}{V}{S} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DIVS; }
+  {D}{I}{V}{U} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DIVU; }
 
-  {A}{B}{C}{D} {DATA_SIZE}?    { beginDataSized(); return ABCD; }
-  {N}{B}{C}{D} {DATA_SIZE}?    { beginDataSized(); return NBCD; }
-  {S}{B}{C}{D} {DATA_SIZE}?    { beginDataSized(); return SBCD; }
+  {A}{B}{C}{D} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return ABCD; }
+  {N}{B}{C}{D} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return NBCD; }
+  {S}{B}{C}{D} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return SBCD; }
 
-  {A}{N}{D}    {DATA_SIZE}?    { beginDataSized(); return AND; }
-  {A}{N}{D}{I} {DATA_SIZE}?    { beginDataSized(); return ANDI; }
-  {O}{R}       {DATA_SIZE}?    { beginDataSized(); return OR; }
-  {O}{R}{I}    {DATA_SIZE}?    { beginDataSized(); return ORI; }
-  {E}{O}{R}    {DATA_SIZE}?    { beginDataSized(); return EOR; }
-  {E}{O}{R}{I} {DATA_SIZE}?    { beginDataSized(); return EORI; }
+  {A}{N}{D}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return AND; }
+  {A}{N}{D}{I} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return ANDI; }
+  {O}{R}       / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return OR; }
+  {O}{R}{I}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return ORI; }
+  {E}{O}{R}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return EOR; }
+  {E}{O}{R}{I} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return EORI; }
 
-  {E}{X}{T}    {DATA_SIZE}?    { beginDataSized(); return EXT; }
-  {N}{E}{G}    {DATA_SIZE}?    { beginDataSized(); return NEG; }
-  {N}{E}{G}{X} {DATA_SIZE}?    { beginDataSized(); return NEGX; }
-  {S}{W}{A}{P} {DATA_SIZE}?    { beginDataSized(); return SWAP; }
-  {N}{O}{T}    {DATA_SIZE}?    { beginDataSized(); return NOT; }
-  {C}{H}{K}    {DATA_SIZE}?    { beginDataSized(); return CHK; }
-  {E}{X}{G}    {DATA_SIZE}?    { beginDataSized(); return EXG; }
+  {E}{X}{T}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return EXT; }
+  {N}{E}{G}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return NEG; }
+  {N}{E}{G}{X} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return NEGX; }
+  {S}{W}{A}{P} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return SWAP; }
+  {N}{O}{T}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return NOT; }
+  {C}{H}{K}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return CHK; }
+  {E}{X}{G}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return EXG; }
 
-  {C}{M}{P}    {DATA_SIZE}?    { beginDataSized(); return CMP; }
-  {C}{M}{P}{A} {DATA_SIZE}?    { beginDataSized(); return CMPA; }
-  {C}{M}{P}{I} {DATA_SIZE}?    { beginDataSized(); return CMPI; }
-  {C}{M}{P}{M} {DATA_SIZE}?    { beginDataSized(); return CMPM; }
+  {C}{M}{P}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return CMP; }
+  {C}{M}{P}{A} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return CMPA; }
+  {C}{M}{P}{I} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return CMPI; }
+  {C}{M}{P}{M} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return CMPM; }
 
-  {B}{C}{H}{G} {DATA_SIZE}?    { beginDataSized(); return BCHG; }
-  {B}{C}{L}{R} {DATA_SIZE}?    { beginDataSized(); return BCLR; }
-  {B}{S}{E}{T} {DATA_SIZE}?    { beginDataSized(); return BSET; }
-  {B}{T}{S}{T} {DATA_SIZE}?    { beginDataSized(); return BTST; }
+  {B}{C}{H}{G} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return BCHG; }
+  {B}{C}{L}{R} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return BCLR; }
+  {B}{S}{E}{T} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return BSET; }
+  {B}{T}{S}{T} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return BTST; }
 
-  {B}{R}{A} {DATA_SIZE}?       { beginDataSized(); return BRA; }
-  {B}{C}{S} {DATA_SIZE}?       { beginDataSized(); return BCS; }
-  {B}{L}{O} {DATA_SIZE}?       { beginDataSized(); return BLO; }
-  {B}{L}{S} {DATA_SIZE}?       { beginDataSized(); return BLS; }
-  {B}{E}{Q} {DATA_SIZE}?       { beginDataSized(); return BEQ; }
-  {B}{N}{E} {DATA_SIZE}?       { beginDataSized(); return BNE; }
-  {B}{H}{I} {DATA_SIZE}?       { beginDataSized(); return BHI; }
-  {B}{C}{C} {DATA_SIZE}?       { beginDataSized(); return BCC; }
-  {B}{H}{S} {DATA_SIZE}?       { beginDataSized(); return BHS; }
-  {B}{P}{L} {DATA_SIZE}?       { beginDataSized(); return BPL; }
-  {B}{V}{C} {DATA_SIZE}?       { beginDataSized(); return BVC; }
-  {B}{L}{T} {DATA_SIZE}?       { beginDataSized(); return BLT; }
-  {B}{L}{E} {DATA_SIZE}?       { beginDataSized(); return BLE; }
-  {B}{G}{T} {DATA_SIZE}?       { beginDataSized(); return BGT; }
-  {B}{G}{E} {DATA_SIZE}?       { beginDataSized(); return BGE; }
-  {B}{M}{I} {DATA_SIZE}?       { beginDataSized(); return BMI; }
-  {B}{V}{S} {DATA_SIZE}?       { beginDataSized(); return BVS; }
+  {B}{R}{A} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BRA; }
+  {B}{C}{S} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BCS; }
+  {B}{L}{O} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BLO; }
+  {B}{L}{S} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BLS; }
+  {B}{E}{Q} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BEQ; }
+  {B}{N}{E} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BNE; }
+  {B}{H}{I} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BHI; }
+  {B}{C}{C} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BCC; }
+  {B}{H}{S} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BHS; }
+  {B}{P}{L} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BPL; }
+  {B}{V}{C} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BVC; }
+  {B}{L}{T} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BLT; }
+  {B}{L}{E} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BLE; }
+  {B}{G}{T} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BGT; }
+  {B}{G}{E} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BGE; }
+  {B}{M}{I} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BMI; }
+  {B}{V}{S} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BVS; }
 
-  {D}{B}{R}{A} {DATA_SIZE}?    { beginDataSized(); return DBRA; }
-  {D}{B}{C}{S} {DATA_SIZE}?    { beginDataSized(); return DBCS; }
-  {D}{B}{L}{O} {DATA_SIZE}?    { beginDataSized(); return DBLO; }
-  {D}{B}{L}{S} {DATA_SIZE}?    { beginDataSized(); return DBLS; }
-  {D}{B}{E}{Q} {DATA_SIZE}?    { beginDataSized(); return DBEQ; }
-  {D}{B}{N}{E} {DATA_SIZE}?    { beginDataSized(); return DBNE; }
-  {D}{B}{H}{I} {DATA_SIZE}?    { beginDataSized(); return DBHI; }
-  {D}{B}{C}{C} {DATA_SIZE}?    { beginDataSized(); return DBCC; }
-  {D}{B}{H}{S} {DATA_SIZE}?    { beginDataSized(); return DBHS; }
-  {D}{B}{P}{L} {DATA_SIZE}?    { beginDataSized(); return DBPL; }
-  {D}{B}{V}{C} {DATA_SIZE}?    { beginDataSized(); return DBVC; }
-  {D}{B}{L}{T} {DATA_SIZE}?    { beginDataSized(); return DBLT; }
-  {D}{B}{L}{E} {DATA_SIZE}?    { beginDataSized(); return DBLE; }
-  {D}{B}{G}{T} {DATA_SIZE}?    { beginDataSized(); return DBGT; }
-  {D}{B}{G}{E} {DATA_SIZE}?    { beginDataSized(); return DBGE; }
-  {D}{B}{M}{I} {DATA_SIZE}?    { beginDataSized(); return DBMI; }
-  {D}{B}{V}{S} {DATA_SIZE}?    { beginDataSized(); return DBVS; }
-  {D}{B}{F}    {DATA_SIZE}?    { beginDataSized(); return DBF; }
-  {D}{B}{T}    {DATA_SIZE}?    { beginDataSized(); return DBT; }
+  {D}{B}{R}{A} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBRA; }
+  {D}{B}{C}{S} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBCS; }
+  {D}{B}{L}{O} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBLO; }
+  {D}{B}{L}{S} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBLS; }
+  {D}{B}{E}{Q} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBEQ; }
+  {D}{B}{N}{E} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBNE; }
+  {D}{B}{H}{I} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBHI; }
+  {D}{B}{C}{C} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBCC; }
+  {D}{B}{H}{S} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBHS; }
+  {D}{B}{P}{L} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBPL; }
+  {D}{B}{V}{C} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBVC; }
+  {D}{B}{L}{T} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBLT; }
+  {D}{B}{L}{E} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBLE; }
+  {D}{B}{G}{T} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBGT; }
+  {D}{B}{G}{E} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBGE; }
+  {D}{B}{M}{I} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBMI; }
+  {D}{B}{V}{S} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBVS; }
+  {D}{B}{F}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBF; }
+  {D}{B}{T}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DBT; }
 
-  {S}{E}{Q} {DATA_SIZE}?       { beginDataSized(); return SEQ; }
-  {S}{N}{E} {DATA_SIZE}?       { beginDataSized(); return SNE; }
-  {S}{P}{L} {DATA_SIZE}?       { beginDataSized(); return SPL; }
-  {S}{M}{I} {DATA_SIZE}?       { beginDataSized(); return SMI; }
-  {S}{V}{C} {DATA_SIZE}?       { beginDataSized(); return SVC; }
-  {S}{V}{S} {DATA_SIZE}?       { beginDataSized(); return SVS; }
-  {S}{T}    {DATA_SIZE}?       { beginDataSized(); return ST; }
-  {S}{F}    {DATA_SIZE}?       { beginDataSized(); return SF; }
-  {S}{G}{E} {DATA_SIZE}?       { beginDataSized(); return SGE; }
-  {S}{G}{T} {DATA_SIZE}?       { beginDataSized(); return SGT; }
-  {S}{L}{E} {DATA_SIZE}?       { beginDataSized(); return SLE; }
-  {S}{L}{T} {DATA_SIZE}?       { beginDataSized(); return SLT; }
-  {S}{C}{C} {DATA_SIZE}?       { beginDataSized(); return SCC; }
-  {S}{H}{I} {DATA_SIZE}?       { beginDataSized(); return SHI; }
-  {S}{L}{S} {DATA_SIZE}?       { beginDataSized(); return SLS; }
-  {S}{C}{S} {DATA_SIZE}?       { beginDataSized(); return SCS; }
-  {S}{H}{S} {DATA_SIZE}?       { beginDataSized(); return SHS; }
-  {S}{L}{O} {DATA_SIZE}?       { beginDataSized(); return SLO; }
+  {S}{E}{Q} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return SEQ; }
+  {S}{N}{E} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return SNE; }
+  {S}{P}{L} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return SPL; }
+  {S}{M}{I} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return SMI; }
+  {S}{V}{C} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return SVC; }
+  {S}{V}{S} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return SVS; }
+  {S}{T}    / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return ST; }
+  {S}{F}    / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return SF; }
+  {S}{G}{E} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return SGE; }
+  {S}{G}{T} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return SGT; }
+  {S}{L}{E} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return SLE; }
+  {S}{L}{T} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return SLT; }
+  {S}{C}{C} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return SCC; }
+  {S}{H}{I} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return SHI; }
+  {S}{L}{S} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return SLS; }
+  {S}{C}{S} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return SCS; }
+  {S}{H}{S} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return SHS; }
+  {S}{L}{O} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return SLO; }
 
-  {A}{S}{L}    {DATA_SIZE}?    { beginDataSized(); return ASL; }
-  {A}{S}{R}    {DATA_SIZE}?    { beginDataSized(); return ASR; }
-  {L}{S}{L}    {DATA_SIZE}?    { beginDataSized(); return LSL; }
-  {L}{S}{R}    {DATA_SIZE}?    { beginDataSized(); return LSR; }
-  {R}{O}{L}    {DATA_SIZE}?    { beginDataSized(); return ROL; }
-  {R}{O}{R}    {DATA_SIZE}?    { beginDataSized(); return ROR; }
-  {R}{O}{X}{L} {DATA_SIZE}?    { beginDataSized(); return ROXL; }
-  {R}{O}{X}{R} {DATA_SIZE}?    { beginDataSized(); return ROXR; }
+  {A}{S}{L}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return ASL; }
+  {A}{S}{R}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return ASR; }
+  {L}{S}{L}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return LSL; }
+  {L}{S}{R}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return LSR; }
+  {R}{O}{L}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return ROL; }
+  {R}{O}{R}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return ROR; }
+  {R}{O}{X}{L} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return ROXL; }
+  {R}{O}{X}{R} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return ROXR; }
 
   {A}{D}{D}{W}{A}{T}{C}{H}     { yybegin(IN_OPERAND); return ADDWATCH; }
   {A}{L}{I}{G}{N}              { yybegin(IN_OPERAND); return ALIGN; }
-  {B}{L}{K} {DATA_SIZE}?       { beginDataSized(); return BLK; }
+  {B}{L}{K} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BLK; }
   {B}{S}{S}                    { yybegin(AFTER_OPERAND); return BSS; }
   {B}{S}{S}_{C}                { yybegin(AFTER_OPERAND); return BSS_C; }
   {B}{S}{S}_{F}                { yybegin(AFTER_OPERAND); return BSS_F; }
@@ -423,11 +409,11 @@ Z=[zZ]
   {D}{A}{T}{A}                 { yybegin(AFTER_OPERAND); return DATA; }
   {D}{A}{T}{A}_{C}             { yybegin(AFTER_OPERAND); return DATA_C; }
   {D}{A}{T}{A}_{F}             { yybegin(AFTER_OPERAND); return DATA_F; }
-  {D}{C}       {DATA_SIZE}?    { beginDataSized(); return DC; }
-  {D}{C}{B}    {DATA_SIZE}?    { beginDataSized(); return DCB; }
-  {D}{R}       {DATA_SIZE}?    { beginDataSized(); return DR; }
-  {D}{S}       {DATA_SIZE}?    { beginDataSized(); return DS; }
-  {D}{S}{E}{G} {DATA_SIZE}?    { beginDataSized(); return DSEG; }
+  {D}{C}       / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DC; }
+  {D}{C}{B}    / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DCB; }
+  {D}{R}       / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DR; }
+  {D}{S}       / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DS; }
+  {D}{S}{E}{G} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DSEG; }
   {E}{C}{H}{O}                 { yybegin(STRING_DIRECTIVE); return ECHO; }
   {E}{I}{N}{L}{I}{N}{E}        { yybegin(AFTER_OPERAND); return EINLINE; }
   {E}{N}{D}                    { yybegin(AFTER_OPERAND); return END; }
@@ -465,7 +451,7 @@ Z=[zZ]
   {R}{E}{G}                    { yybegin(IN_OPERAND); return REG; }
   {R}{E}{M}                    { yybegin(AFTER_OPERAND); return REM; }
   {R}{E}{P}{T}                 { yybegin(IN_OPERAND); return REPT; }
-  {R}{S} {DATA_SIZE}?          { beginDataSized(); return RS; }
+  {R}{S} / {DATA_SIZE}?        { yybegin(AFTER_INSTRUCTION); return RS; }
   {R}{S}{R}{E}{S}{E}{T}        { yybegin(AFTER_OPERAND); return RSRESET; }
   {R}{S}{S}{E}{T}              { yybegin(IN_OPERAND); return RSSET; }
   {S}{E}{C}{T}{I}{O}{N}        { yybegin(IN_OPERAND); return SECTION; }

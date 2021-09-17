@@ -1609,25 +1609,11 @@ public class _M68kLexer implements FlexLexer {
     return Character.isSpaceChar(previousChar) || previousChar == ',';
   }
 
-  private void beginDataSized() {
-    pushbackDataSize(false);
-    yybegin(AFTER_INSTRUCTION);
-  }
-
   /**
-   * Pushes back (optional) DATA_SIZE token if present.
+   * Push back DATA_SIZE token.
    */
-  private void pushbackDataSize(boolean required) {
-    if (required) {
+  private void pushbackDataSize() {
       yypushback(2);
-    }
-    else if (charAt(yylength() - 2) == '.') {
-      char previousChar = charAt(yylength() - 1);
-      if (previousChar == 's' || previousChar == 'b' || previousChar == 'w' || previousChar == 'l' ||
-          previousChar == 'S' || previousChar == 'B' || previousChar == 'W' || previousChar == 'L') {
-        yypushback(2);
-      }
-    }
   }
 
   private char charAt(final int offset) {
@@ -2088,27 +2074,42 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 336: break;
           case 42: 
-            { beginDataSized(); return SF;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 2);
+            { yybegin(AFTER_INSTRUCTION); return SF;
             } 
             // fall through
           case 337: break;
           case 43: 
-            { beginDataSized(); return ST;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 2);
+            { yybegin(AFTER_INSTRUCTION); return ST;
             } 
             // fall through
           case 338: break;
           case 44: 
-            { beginDataSized(); return DS;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 2);
+            { yybegin(AFTER_INSTRUCTION); return DS;
             } 
             // fall through
           case 339: break;
           case 45: 
-            { beginDataSized(); return DC;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 2);
+            { yybegin(AFTER_INSTRUCTION); return DC;
             } 
             // fall through
           case 340: break;
           case 46: 
-            { beginDataSized(); return DR;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 2);
+            { yybegin(AFTER_INSTRUCTION); return DR;
             } 
             // fall through
           case 341: break;
@@ -2118,12 +2119,18 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 342: break;
           case 48: 
-            { beginDataSized(); return OR;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 2);
+            { yybegin(AFTER_INSTRUCTION); return OR;
             } 
             // fall through
           case 343: break;
           case 49: 
-            { beginDataSized(); return RS;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 2);
+            { yybegin(AFTER_INSTRUCTION); return RS;
             } 
             // fall through
           case 344: break;
@@ -2258,37 +2265,58 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 370: break;
           case 76: 
-            { beginDataSized(); return SLS;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return SLS;
             } 
             // fall through
           case 371: break;
           case 77: 
-            { beginDataSized(); return SLE;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return SLE;
             } 
             // fall through
           case 372: break;
           case 78: 
-            { beginDataSized(); return SLO;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return SLO;
             } 
             // fall through
           case 373: break;
           case 79: 
-            { beginDataSized(); return SLT;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return SLT;
             } 
             // fall through
           case 374: break;
           case 80: 
-            { beginDataSized(); return SCS;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return SCS;
             } 
             // fall through
           case 375: break;
           case 81: 
-            { beginDataSized(); return SCC;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return SCC;
             } 
             // fall through
           case 376: break;
           case 82: 
-            { beginDataSized(); return SEQ;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return SEQ;
             } 
             // fall through
           case 377: break;
@@ -2298,37 +2326,58 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 378: break;
           case 84: 
-            { beginDataSized(); return SGE;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return SGE;
             } 
             // fall through
           case 379: break;
           case 85: 
-            { beginDataSized(); return SGT;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return SGT;
             } 
             // fall through
           case 380: break;
           case 86: 
-            { beginDataSized(); return SHS;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return SHS;
             } 
             // fall through
           case 381: break;
           case 87: 
-            { beginDataSized(); return SHI;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return SHI;
             } 
             // fall through
           case 382: break;
           case 88: 
-            { beginDataSized(); return SMI;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return SMI;
             } 
             // fall through
           case 383: break;
           case 89: 
-            { beginDataSized(); return SNE;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return SNE;
             } 
             // fall through
           case 384: break;
           case 90: 
-            { beginDataSized(); return SPL;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return SPL;
             } 
             // fall through
           case 385: break;
@@ -2338,17 +2387,26 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 386: break;
           case 92: 
-            { beginDataSized(); return SUB;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return SUB;
             } 
             // fall through
           case 387: break;
           case 93: 
-            { beginDataSized(); return SVS;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return SVS;
             } 
             // fall through
           case 388: break;
           case 94: 
-            { beginDataSized(); return SVC;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return SVC;
             } 
             // fall through
           case 389: break;
@@ -2358,162 +2416,258 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 390: break;
           case 96: 
-            { beginDataSized(); return BSR;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BSR;
             } 
             // fall through
           case 391: break;
           case 97: 
-            { beginDataSized(); return BLS;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BLS;
             } 
             // fall through
           case 392: break;
           case 98: 
-            { beginDataSized(); return BLE;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BLE;
             } 
             // fall through
           case 393: break;
           case 99: 
-            { beginDataSized(); return BLK;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BLK;
             } 
             // fall through
           case 394: break;
           case 100: 
-            { beginDataSized(); return BLO;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BLO;
             } 
             // fall through
           case 395: break;
           case 101: 
-            { beginDataSized(); return BLT;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BLT;
             } 
             // fall through
           case 396: break;
           case 102: 
-            { beginDataSized(); return BCS;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BCS;
             } 
             // fall through
           case 397: break;
           case 103: 
-            { beginDataSized(); return BCC;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BCC;
             } 
             // fall through
           case 398: break;
           case 104: 
-            { beginDataSized(); return BEQ;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BEQ;
             } 
             // fall through
           case 399: break;
           case 105: 
-            { beginDataSized(); return BGE;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BGE;
             } 
             // fall through
           case 400: break;
           case 106: 
-            { beginDataSized(); return BGT;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BGT;
             } 
             // fall through
           case 401: break;
           case 107: 
-            { beginDataSized(); return BHS;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BHS;
             } 
             // fall through
           case 402: break;
           case 108: 
-            { beginDataSized(); return BHI;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BHI;
             } 
             // fall through
           case 403: break;
           case 109: 
-            { beginDataSized(); return BMI;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BMI;
             } 
             // fall through
           case 404: break;
           case 110: 
-            { beginDataSized(); return BNE;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BNE;
             } 
             // fall through
           case 405: break;
           case 111: 
-            { beginDataSized(); return BPL;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BPL;
             } 
             // fall through
           case 406: break;
           case 112: 
-            { beginDataSized(); return BRA;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BRA;
             } 
             // fall through
           case 407: break;
           case 113: 
-            { beginDataSized(); return BVS;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BVS;
             } 
             // fall through
           case 408: break;
           case 114: 
-            { beginDataSized(); return BVC;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return BVC;
             } 
             // fall through
           case 409: break;
           case 115: 
-            { beginDataSized(); return LSL;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return LSL;
             } 
             // fall through
           case 410: break;
           case 116: 
-            { beginDataSized(); return LSR;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return LSR;
             } 
             // fall through
           case 411: break;
           case 117: 
-            { beginDataSized(); return LEA;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return LEA;
             } 
             // fall through
           case 412: break;
           case 118: 
-            { beginDataSized(); return ASL;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return ASL;
             } 
             // fall through
           case 413: break;
           case 119: 
-            { beginDataSized(); return ASR;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return ASR;
             } 
             // fall through
           case 414: break;
           case 120: 
-            { beginDataSized(); return ADD;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return ADD;
             } 
             // fall through
           case 415: break;
           case 121: 
-            { beginDataSized(); return AND;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return AND;
             } 
             // fall through
           case 416: break;
           case 122: 
-            { beginDataSized(); return CLR;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return CLR;
             } 
             // fall through
           case 417: break;
           case 123: 
-            { beginDataSized(); return CHK;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return CHK;
             } 
             // fall through
           case 418: break;
           case 124: 
-            { beginDataSized(); return CMP;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return CMP;
             } 
             // fall through
           case 419: break;
           case 125: 
-            { beginDataSized(); return DBF;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return DBF;
             } 
             // fall through
           case 420: break;
           case 126: 
-            { beginDataSized(); return DBT;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return DBT;
             } 
             // fall through
           case 421: break;
           case 127: 
-            { beginDataSized(); return DCB;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return DCB;
             } 
             // fall through
           case 422: break;
@@ -2523,7 +2677,10 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 423: break;
           case 129: 
-            { beginDataSized(); return EOR;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return EOR;
             } 
             // fall through
           case 424: break;
@@ -2533,12 +2690,18 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 425: break;
           case 131: 
-            { beginDataSized(); return EXG;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return EXG;
             } 
             // fall through
           case 426: break;
           case 132: 
-            { beginDataSized(); return EXT;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return EXT;
             } 
             // fall through
           case 427: break;
@@ -2568,12 +2731,18 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 432: break;
           case 138: 
-            { beginDataSized(); return JMP;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return JMP;
             } 
             // fall through
           case 433: break;
           case 139: 
-            { beginDataSized(); return NEG;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return NEG;
             } 
             // fall through
           case 434: break;
@@ -2583,7 +2752,10 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 435: break;
           case 141: 
-            { beginDataSized(); return NOT;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return NOT;
             } 
             // fall through
           case 436: break;
@@ -2603,12 +2775,18 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 439: break;
           case 145: 
-            { beginDataSized(); return ORI;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return ORI;
             } 
             // fall through
           case 440: break;
           case 146: 
-            { beginDataSized(); return PEA;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return PEA;
             } 
             // fall through
           case 441: break;
@@ -2623,12 +2801,18 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 443: break;
           case 149: 
-            { beginDataSized(); return ROL;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return ROL;
             } 
             // fall through
           case 444: break;
           case 150: 
-            { beginDataSized(); return ROR;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return ROR;
             } 
             // fall through
           case 445: break;
@@ -2648,12 +2832,18 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 448: break;
           case 154: 
-            { beginDataSized(); return TST;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return TST;
             } 
             // fall through
           case 449: break;
           case 155: 
-            { beginDataSized(); return TAS;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
+            { yybegin(AFTER_INSTRUCTION); return TAS;
             } 
             // fall through
           case 450: break;
@@ -2678,12 +2868,18 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 454: break;
           case 160: 
-            { beginDataSized(); return SBCD;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return SBCD;
             } 
             // fall through
           case 455: break;
           case 161: 
-            { beginDataSized(); return SWAP;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return SWAP;
             } 
             // fall through
           case 456: break;
@@ -2693,42 +2889,66 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 457: break;
           case 163: 
-            { beginDataSized(); return SUBA;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return SUBA;
             } 
             // fall through
           case 458: break;
           case 164: 
-            { beginDataSized(); return SUBI;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return SUBI;
             } 
             // fall through
           case 459: break;
           case 165: 
-            { beginDataSized(); return SUBQ;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return SUBQ;
             } 
             // fall through
           case 460: break;
           case 166: 
-            { beginDataSized(); return SUBX;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return SUBX;
             } 
             // fall through
           case 461: break;
           case 167: 
-            { beginDataSized(); return BSET;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return BSET;
             } 
             // fall through
           case 462: break;
           case 168: 
-            { beginDataSized(); return BCLR;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return BCLR;
             } 
             // fall through
           case 463: break;
           case 169: 
-            { beginDataSized(); return BCHG;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return BCHG;
             } 
             // fall through
           case 464: break;
           case 170: 
-            { beginDataSized(); return BTST;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return BTST;
             } 
             // fall through
           case 465: break;
@@ -2743,7 +2963,10 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 467: break;
           case 173: 
-            { beginDataSized(); return LINK;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return LINK;
             } 
             // fall through
           case 468: break;
@@ -2753,32 +2976,50 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 469: break;
           case 175: 
-            { beginDataSized(); return ABCD;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return ABCD;
             } 
             // fall through
           case 470: break;
           case 176: 
-            { beginDataSized(); return ADDA;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return ADDA;
             } 
             // fall through
           case 471: break;
           case 177: 
-            { beginDataSized(); return ADDI;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return ADDI;
             } 
             // fall through
           case 472: break;
           case 178: 
-            { beginDataSized(); return ADDQ;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return ADDQ;
             } 
             // fall through
           case 473: break;
           case 179: 
-            { beginDataSized(); return ADDX;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return ADDX;
             } 
             // fall through
           case 474: break;
           case 180: 
-            { beginDataSized(); return ANDI;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return ANDI;
             } 
             // fall through
           case 475: break;
@@ -2788,17 +3029,26 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 476: break;
           case 182: 
-            { beginDataSized(); return CMPA;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return CMPA;
             } 
             // fall through
           case 477: break;
           case 183: 
-            { beginDataSized(); return CMPI;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return CMPI;
             } 
             // fall through
           case 478: break;
           case 184: 
-            { beginDataSized(); return CMPM;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return CMPM;
             } 
             // fall through
           case 479: break;
@@ -2813,92 +3063,146 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 481: break;
           case 187: 
-            { beginDataSized(); return DSEG;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DSEG;
             } 
             // fall through
           case 482: break;
           case 188: 
-            { beginDataSized(); return DBLS;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DBLS;
             } 
             // fall through
           case 483: break;
           case 189: 
-            { beginDataSized(); return DBLE;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DBLE;
             } 
             // fall through
           case 484: break;
           case 190: 
-            { beginDataSized(); return DBLO;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DBLO;
             } 
             // fall through
           case 485: break;
           case 191: 
-            { beginDataSized(); return DBLT;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DBLT;
             } 
             // fall through
           case 486: break;
           case 192: 
-            { beginDataSized(); return DBCS;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DBCS;
             } 
             // fall through
           case 487: break;
           case 193: 
-            { beginDataSized(); return DBCC;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DBCC;
             } 
             // fall through
           case 488: break;
           case 194: 
-            { beginDataSized(); return DBEQ;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DBEQ;
             } 
             // fall through
           case 489: break;
           case 195: 
-            { beginDataSized(); return DBGE;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DBGE;
             } 
             // fall through
           case 490: break;
           case 196: 
-            { beginDataSized(); return DBGT;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DBGT;
             } 
             // fall through
           case 491: break;
           case 197: 
-            { beginDataSized(); return DBHS;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DBHS;
             } 
             // fall through
           case 492: break;
           case 198: 
-            { beginDataSized(); return DBHI;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DBHI;
             } 
             // fall through
           case 493: break;
           case 199: 
-            { beginDataSized(); return DBMI;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DBMI;
             } 
             // fall through
           case 494: break;
           case 200: 
-            { beginDataSized(); return DBNE;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DBNE;
             } 
             // fall through
           case 495: break;
           case 201: 
-            { beginDataSized(); return DBPL;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DBPL;
             } 
             // fall through
           case 496: break;
           case 202: 
-            { beginDataSized(); return DBRA;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DBRA;
             } 
             // fall through
           case 497: break;
           case 203: 
-            { beginDataSized(); return DBVS;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DBVS;
             } 
             // fall through
           case 498: break;
           case 204: 
-            { beginDataSized(); return DBVC;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DBVC;
             } 
             // fall through
           case 499: break;
@@ -2908,12 +3212,18 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 500: break;
           case 206: 
-            { beginDataSized(); return DIVS;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DIVS;
             } 
             // fall through
           case 501: break;
           case 207: 
-            { beginDataSized(); return DIVU;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return DIVU;
             } 
             // fall through
           case 502: break;
@@ -2943,7 +3253,10 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 507: break;
           case 213: 
-            { beginDataSized(); return EORI;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return EORI;
             } 
             // fall through
           case 508: break;
@@ -3028,22 +3341,34 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 524: break;
           case 230: 
-            { beginDataSized(); return MOVE;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return MOVE;
             } 
             // fall through
           case 525: break;
           case 231: 
-            { beginDataSized(); return MULS;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return MULS;
             } 
             // fall through
           case 526: break;
           case 232: 
-            { beginDataSized(); return MULU;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return MULU;
             } 
             // fall through
           case 527: break;
           case 233: 
-            { beginDataSized(); return NBCD;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return NBCD;
             } 
             // fall through
           case 528: break;
@@ -3053,7 +3378,10 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 529: break;
           case 235: 
-            { beginDataSized(); return NEGX;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return NEGX;
             } 
             // fall through
           case 530: break;
@@ -3073,12 +3401,18 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 533: break;
           case 239: 
-            { beginDataSized(); return ROXL;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return ROXL;
             } 
             // fall through
           case 534: break;
           case 240: 
-            { beginDataSized(); return ROXR;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 4);
+            { yybegin(AFTER_INSTRUCTION); return ROXR;
             } 
             // fall through
           case 535: break;
@@ -3108,17 +3442,17 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 540: break;
           case 246: 
-            { pushbackDataSize(true); return SP;
+            { pushbackDataSize(); return SP;
             } 
             // fall through
           case 541: break;
           case 247: 
-            { pushbackDataSize(true); return ADDRESS_REGISTER;
+            { pushbackDataSize(); return ADDRESS_REGISTER;
             } 
             // fall through
           case 542: break;
           case 248: 
-            { pushbackDataSize(true); return DATA_REGISTER;
+            { pushbackDataSize(); return DATA_REGISTER;
             } 
             // fall through
           case 543: break;
@@ -3153,22 +3487,34 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 549: break;
           case 255: 
-            { beginDataSized(); return MOVEA;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 5);
+            { yybegin(AFTER_INSTRUCTION); return MOVEA;
             } 
             // fall through
           case 550: break;
           case 256: 
-            { beginDataSized(); return MOVEM;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 5);
+            { yybegin(AFTER_INSTRUCTION); return MOVEM;
             } 
             // fall through
           case 551: break;
           case 257: 
-            { beginDataSized(); return MOVEP;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 5);
+            { yybegin(AFTER_INSTRUCTION); return MOVEP;
             } 
             // fall through
           case 552: break;
           case 258: 
-            { beginDataSized(); return MOVEQ;
+            // lookahead expression with fixed base length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 5);
+            { yybegin(AFTER_INSTRUCTION); return MOVEQ;
             } 
             // fall through
           case 553: break;
