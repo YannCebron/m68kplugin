@@ -2,6 +2,6 @@
 
 ## [Unreleased]
 
-### General
+### Added
 
 - Initial public release

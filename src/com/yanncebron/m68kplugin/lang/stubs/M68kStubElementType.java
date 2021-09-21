@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,9 +35,8 @@ abstract class M68kStubElementType<StubT extends StubElement<? extends M68kPsiEl
     return M68kFileElementType.STUB_EXTERNAL_ID_PREFIX + this;
   }
 
-  @NotNull
   @Override
-  public final StubT createStub(@NotNull PsiT psi, StubElement parentStub) {
+  public @NotNull StubT createStub(@NotNull PsiT psi, StubElement<?> parentStub) {
     final String message = "Should not be called. Element=" + psi + "; class" + psi.getClass() + "; file=" + (psi.isValid() ? psi.getContainingFile() : "-");
     throw new UnsupportedOperationException(message);
   }

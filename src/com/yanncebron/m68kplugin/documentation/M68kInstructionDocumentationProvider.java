@@ -155,7 +155,7 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
             assert resourceUrl != null : sanitizedUrl;
             final InputStream is = URLUtil.openStream(resourceUrl);
             final File tempFile = FileUtil.createTempFile("m68k", ".png", true);
-            StreamUtil.copyStreamContent(is, new FileOutputStream(tempFile));
+            StreamUtil.copy(is, new FileOutputStream(tempFile));
             return FileUtil.getUrl(tempFile);
           } catch (IOException e) {
             return sanitizedUrl;

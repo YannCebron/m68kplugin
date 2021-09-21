@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,10 +49,10 @@ public class M68kErrorReportSubmitter extends ErrorReportSubmitter {
   }
 
   @Override
-  public boolean submit(@NotNull IdeaLoggingEvent @NotNull [] events,
+  public boolean submit(IdeaLoggingEvent @NotNull [] events,
                         @Nullable String additionalInfo,
                         @NotNull Component parentComponent,
-                        @NotNull Consumer<SubmittedReportInfo> consumer) {
+                        @NotNull Consumer<? super SubmittedReportInfo> consumer) {
     IdeaLoggingEvent event = events[0];
     final String throwableText = event.getThrowableText();
 
