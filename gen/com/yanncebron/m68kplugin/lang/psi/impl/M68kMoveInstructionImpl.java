@@ -30,6 +30,7 @@ public class M68kMoveInstructionImpl extends M68kMoveInstructionMixIn implements
     super(node);
   }
 
+  @Override
   public void accept(@NotNull M68kVisitor visitor) {
     visitor.visitMoveInstruction(this);
   }

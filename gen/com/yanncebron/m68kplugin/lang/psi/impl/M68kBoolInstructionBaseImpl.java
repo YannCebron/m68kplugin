@@ -30,6 +30,7 @@ public class M68kBoolInstructionBaseImpl extends M68kBoolInstructionBaseMixIn im
     super(node);
   }
 
+  @Override
   public void accept(@NotNull M68kVisitor visitor) {
     visitor.visitBoolInstructionBase(this);
   }
