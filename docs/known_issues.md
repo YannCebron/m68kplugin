@@ -128,10 +128,13 @@ MadMac assembler specific (all directives may be optionally preceded by a dot):
 - valid label
   - `\1`
   - `\1\3\2 equ \4`
+- highlight illegal macro parameter names: `\X`, `\123`                         
 
 ### Misc
 
-- `'\'` and `''''` are valid string literals
+- string literals
+  - support escape sequence
+  - `'\'` and `''''` are valid
 - do not allow spaces (?!)
 - support `equr`/`reg` etc. replacement names `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
 
