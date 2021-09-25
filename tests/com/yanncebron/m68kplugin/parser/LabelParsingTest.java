@@ -51,6 +51,10 @@ public class LabelParsingTest extends M68kParsingTestCase {
     doCodeTest("4");
   }
 
+  public void testLabelAfterWhitespaceWithColon() throws IOException {
+    doCodeTest("  label:");
+  }
+
   public void testLabelInstruction() throws IOException {
     doCodeTest("label nop");
   }
@@ -73,6 +77,14 @@ public class LabelParsingTest extends M68kParsingTestCase {
 
   public void testLocalLabelWithColon() throws IOException {
     doCodeTest(".localLabel:");
+  }
+
+  public void testLocalLabelAfterWhitespaceWithColon() throws IOException {
+    doCodeTest("  .label:");
+  }
+
+  public void testLocalLabelDollarAfterWhitespaceWithColon() throws IOException {
+    doCodeTest("  label$:");
   }
 
   public void testLocalLabelStartingWithDecimal() throws IOException {

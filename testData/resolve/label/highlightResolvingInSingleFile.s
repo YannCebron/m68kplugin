@@ -4,12 +4,14 @@ _underscoreTopLevelLabel
 label.with.dots
 
 topLevelLabelWithColon:
+  topLevelLabelAfterSpaceWithColon:
 
 topLevelLabel
 topLevelLabel  ; redefined
   bra topLevelLabel
   bra anotherTopLevelLabel
   bra topLevelLabelWithColon
+  bra topLevelLabelAfterSpaceWithColon
   bra .localLabel
   bra _underscoreTopLevelLabel
   bra label.with.dots
@@ -20,6 +22,11 @@ topLevelLabel  ; redefined
 .localLabelWithColon:
   jmp .localLabelWithColon
 
+  .localLabelAfterSpaceWithColon:
+    bra .localLabelAfterSpaceWithColon
+  localLabelDollarAfterSpaceWithColon$:
+    bra localLabelDollarAfterSpaceWithColon$
+                                           
 localLabelWithDollar$
   bra localLabelWithDollar$
 localLabelWithDollarColon$:

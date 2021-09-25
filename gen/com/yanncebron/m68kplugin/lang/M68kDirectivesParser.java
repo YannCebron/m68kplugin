@@ -639,6 +639,7 @@ public class M68kDirectivesParser {
   // label EQU expression
   public static boolean equ_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "equ_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", ID)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, EQU_DIRECTIVE, "<directive>");
     r = label(b, l + 1);
@@ -653,6 +654,7 @@ public class M68kDirectivesParser {
   // label EQ_DIRECTIVE expression
   public static boolean equals_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "equals_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", ID)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, EQUALS_DIRECTIVE, "<directive>");
     r = label(b, l + 1);
@@ -667,6 +669,7 @@ public class M68kDirectivesParser {
   // label EQUR adm_rrd
   public static boolean equr_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "equr_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", ID)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, EQUR_DIRECTIVE, "<directive>");
     r = label(b, l + 1);
@@ -1009,6 +1012,7 @@ public class M68kDirectivesParser {
   // label MACRO
   public static boolean macro_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "macro_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", ID)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, MACRO_DIRECTIVE, "<directive>");
     r = label(b, l + 1);
@@ -1428,6 +1432,7 @@ public class M68kDirectivesParser {
   // label REG register_list
   public static boolean reg_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "reg_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", ID)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, REG_DIRECTIVE, "<directive>");
     r = label(b, l + 1);
@@ -1582,6 +1587,7 @@ public class M68kDirectivesParser {
   // label SET expression
   public static boolean set_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "set_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", ID)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, SET_DIRECTIVE, "<directive>");
     r = label(b, l + 1);

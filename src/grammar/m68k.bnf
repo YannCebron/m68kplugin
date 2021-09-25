@@ -70,8 +70,7 @@ private labelIdentifier ::= ID
   name = "label identifier"
 }
 
-// todo must start on newline? usually not, but not required
-label ::= !<<afterWhitespace>> labelIdentifier COLON?
+label ::= labelIdentifier COLON?
 {
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kLabelBase"
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelMixIn"
@@ -82,7 +81,12 @@ label ::= !<<afterWhitespace>> labelIdentifier COLON?
   ]
 }
 
-localLabel ::= !<<afterWhitespace>> ((DOT labelIdentifier) | (labelIdentifier DOLLAR)) COLON?
+private dot_local_label ::= DOT labelIdentifier
+{
+  pin = 1
+}
+private dollar_local_label ::= labelIdentifier DOLLAR
+localLabel ::= (dot_local_label | dollar_local_label) COLON?
 {
   name = "local label"
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kLabelBase"

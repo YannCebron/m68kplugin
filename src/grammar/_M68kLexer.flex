@@ -131,7 +131,8 @@ Z=[zZ]
   "."            { operandSpaceCount = 0; return DOT; }
   {LABEL}        { operandSpaceCount = 0; yybegin(AFTER_LABEL); return ID; }
 
-  {WHITE_SPACE}* {COMMENT} { return COMMENT; }
+  {WHITE_SPACE}+ / {ID} ":"    { return WHITE_SPACE; }
+  {WHITE_SPACE}* {COMMENT}     { return COMMENT; }
   {WHITE_SPACE}+ { operandSpaceCount = 0; yybegin(IN_INSTRUCTION); return WHITE_SPACE; }
 }
 

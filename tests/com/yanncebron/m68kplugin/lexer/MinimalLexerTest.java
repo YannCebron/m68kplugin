@@ -97,6 +97,13 @@ public class MinimalLexerTest extends M68kLexerTestCase {
       "id ('label.suffix')");
   }
 
+  public void testLabelAfterWhitespaceWithColon() {
+    doTest("  label:",
+      "WHITE_SPACE ('  ')\n" +
+        "id ('label')\n" +
+        ": (':')\n");
+  }
+
   public void testUnderscoreTwiceLabel() {
     doTest("__label",
       "id ('__label')");
@@ -184,6 +191,14 @@ public class MinimalLexerTest extends M68kLexerTestCase {
     doTest("localLabel$:",
       "id ('localLabel')\n" +
         "$ ('$')\n" +
+        ": (':')");
+  }
+
+  public void testLocalLabelAfterWhitespaceWithColon() {
+    doTest("  .label:",
+      "WHITE_SPACE ('  ')\n" +
+        ". ('.')\n" +
+        "id ('label')\n" +
         ": (':')");
   }
 

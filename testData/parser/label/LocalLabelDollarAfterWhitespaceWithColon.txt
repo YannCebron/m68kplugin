@@ -1,0 +1,6 @@
+M68k.FILE
+  PsiWhiteSpace('  ')
+  M68kLocalLabelImpl(LOCAL_LABEL)
+    PsiElement(id)('label')
+    PsiElement($)('$')
+    PsiElement(:)(':')
