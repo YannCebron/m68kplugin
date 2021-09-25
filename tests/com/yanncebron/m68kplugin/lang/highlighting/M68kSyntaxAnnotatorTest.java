@@ -57,7 +57,7 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
       "<info descr=\"M68K_LABEL\">macroName</info> macro\n" +
         "  <info descr=\"M68K_MACRO_PARAMETER\">\\1</info>\n" +
         " move.<info descr=\"M68K_MACRO_PARAMETER\">\\0</info> d0,d1\n" +
-        " jsr _LVO<info descr=\"M68K_MACRO_PARAMETER\">\\1</info>(a6)\n" +
+        " jsr _LVO<info descr=\"M68K_MACRO_PARAMETER\">\\a</info>(a6)\n" +
         " jsr _<info descr=\"M68K_MACRO_PARAMETER\">\\1</info>_TwoMacroParams_<info descr=\"M68K_MACRO_PARAMETER\">\\2</info>(a6)\n" +
         " endm"
     );

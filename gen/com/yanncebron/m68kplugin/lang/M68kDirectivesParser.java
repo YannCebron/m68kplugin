@@ -1044,13 +1044,14 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // DEC_NUMBER
+  // DEC_NUMBER | ID
   static boolean macro_parameter_index_parameter(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "macro_parameter_index_parameter")) return false;
-    if (!nextTokenIs(b, "<index>", DEC_NUMBER)) return false;
+    if (!nextTokenIs(b, "<index>", DEC_NUMBER, ID)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, null, "<index>");
     r = consumeToken(b, DEC_NUMBER);
+    if (!r) r = consumeToken(b, ID);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

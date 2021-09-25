@@ -38,6 +38,12 @@ public class MacroParsingTest extends M68kParsingTestCase {
       " ENDM");
   }
 
+  public void testMacroParameterAlpha() throws Exception {
+    doCodeTest("macroName MACRO\n" +
+      " \\a\n" +
+      " ENDM");
+  }
+
   public void testMacroParameterMissingIndex() throws Exception {
     doCodeTest("macroName MACRO\n" +
       " \\\n" +

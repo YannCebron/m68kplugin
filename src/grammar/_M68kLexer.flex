@@ -86,7 +86,7 @@ UNQUOTED_STRING=([^\\\r\n\ \t\f'\"])+
 LABEL=[_\d[\\@]]*[\p{Alpha}] [\p{Alpha}\d[.]_[\\@]]*  // without "." first char
 ID=[.]?{LABEL}[\$]?
 
-MACRO_NAME=[_\d[\\@]]*[\p{Alpha}] [\p{Alpha}\d_[\\@]]* // without '.'
+MACRO_NAME=[_\d]*[\p{Alpha}] [\p{Alpha}\d_]*
 
 DATA_SIZE=[.][[sS]|[bB]|[wW]|[lL]|[\\0]]
 
@@ -122,10 +122,11 @@ Z=[zZ]
 %state AFTER_INSTRUCTION
 %state STRING_DIRECTIVE
 %state IN_OPERAND
+%state MACRO_PARAMETER
 %state AFTER_OPERAND
 
 %%
-<YYINITIAL, AFTER_LABEL, IN_INSTRUCTION, AFTER_INSTRUCTION, STRING_DIRECTIVE, IN_OPERAND, AFTER_OPERAND> {
+<YYINITIAL, AFTER_LABEL, IN_INSTRUCTION, AFTER_INSTRUCTION, STRING_DIRECTIVE, IN_OPERAND, MACRO_PARAMETER, AFTER_OPERAND> {
   {CRLF}         { operandSpaceCount = 0; yybegin(YYINITIAL); return LINEFEED; }
 }
 
@@ -223,7 +224,7 @@ Z=[zZ]
   "%"  { return PERCENT; }
   "&&" { return AMPERSAND_AMPERSAND; }
   "&"  { return AMPERSAND; }
-  "\\" { return BACKSLASH; }
+  "\\" { yybegin(MACRO_PARAMETER); return BACKSLASH; }
   "||" { return PIPE_PIPE; }
   "|"  { return PIPE; }
   "<>" { return LT_GT; }
@@ -243,6 +244,12 @@ Z=[zZ]
 
   {SINGLE_QUOTED_STRING}      { return STRING; }
   {DOUBLE_QUOTED_STRING}      { return STRING; }
+}
+
+// '\0' or '\a'
+<MACRO_PARAMETER> {
+  \d    { yybegin(IN_OPERAND); return DEC_NUMBER; }
+  [a-z] { yybegin(IN_OPERAND); return ID; }
 }
 
 // 1st operand==STRING, optionally followed by IN_OPERAND
