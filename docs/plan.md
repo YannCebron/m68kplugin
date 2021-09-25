@@ -107,7 +107,7 @@
   - sort
   - optimize notation: `d0/d1/d2` &rarr; `d0-d2`
 - string literal not terminated with `,0`
-- check optimizations from vasm/DevPac [18.6 vasm Docs](http://sun.hasenbraten.de/vasm/release/vasm_18.html)
+- check optimizations from vasm/DevPac [19.6 vasm Docs](http://sun.hasenbraten.de/vasm/release/vasm_19.html)
 
 ### Labels
 
