@@ -26,6 +26,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.presentation.java.SymbolPresentationUtil;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
@@ -107,7 +108,7 @@ public class M68kLabelDocumentationProvider extends AbstractDocumentationProvide
 
     // EOL comment
     if (comments.isEmpty()) {
-      final PsiElement nextSibling = startElement.getNextSibling();
+      final PsiElement nextSibling = PsiTreeUtil.skipWhitespacesForward(startElement);
       if (nextSibling instanceof PsiComment) {
         final String commentText = nextSibling.getText();
         final int commentTextIdx = StringUtil.indexOfAny(commentText, ";*");

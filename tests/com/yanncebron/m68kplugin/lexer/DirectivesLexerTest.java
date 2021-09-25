@@ -65,27 +65,33 @@ public class DirectivesLexerTest extends M68kLexerTestCase {
   }
 
   public void testIncbinDirective() {
-    doTest(" incbin 'logo.raw'",
+    doTest(" incbin 'logo.raw' ; comment",
       "WHITE_SPACE (' ')\n" +
         "incbin ('incbin')\n" +
         "WHITE_SPACE (' ')\n" +
-        "string (''logo.raw'')");
+        "string (''logo.raw'')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "comment ('; comment')");
   }
 
   public void testIncdirDirectiveWithDoubleQuotes() {
-    doTest(" incdir \"dir\"",
+    doTest(" incdir \"dir\" comment",
       "WHITE_SPACE (' ')\n" +
         "incdir ('incdir')\n" +
         "WHITE_SPACE (' ')\n" +
-        "string ('\"dir\"')");
+        "string ('\"dir\"')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "comment ('comment')");
   }
 
   public void testIncdirDirectiveNoQuotes() {
-    doTest(" incdir df0:",
+    doTest(" incdir df0: comment",
       "WHITE_SPACE (' ')\n" +
         "incdir ('incdir')\n" +
         "WHITE_SPACE (' ')\n" +
-        "string ('df0:')");
+        "string ('df0:')\n" +
+        "WHITE_SPACE (' ')\n" +
+        "comment ('comment')");
   }
 
   public void testIncludeDirective() {

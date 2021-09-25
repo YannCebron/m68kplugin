@@ -130,9 +130,11 @@ Z=[zZ]
 <YYINITIAL> {
   "."            { operandSpaceCount = 0; return DOT; }
   {LABEL}        { operandSpaceCount = 0; yybegin(AFTER_LABEL); return ID; }
+  {COMMENT}      { return COMMENT; }
 
   {WHITE_SPACE}+ / {ID} ":"    { return WHITE_SPACE; }
-  {WHITE_SPACE}* {COMMENT}     { return COMMENT; }
+  {WHITE_SPACE}+ / {COMMENT}   { return WHITE_SPACE; }
+
   {WHITE_SPACE}+ { operandSpaceCount = 0; yybegin(IN_INSTRUCTION); return WHITE_SPACE; }
 }
 
@@ -147,7 +149,9 @@ Z=[zZ]
 //  {E}{Q}{U}                   { yybegin(IN_OPERAND); return EQU; }
 //  {E}{Q}{U}{R}                { yybegin(IN_OPERAND); return EQUR; }
 
-  {WHITE_SPACE}* {COMMENT}      { return COMMENT; }
+  {WHITE_SPACE}+ / {COMMENT}  { return WHITE_SPACE; }
+  {COMMENT}      { return COMMENT; }
+
   {WHITE_SPACE}+ { yybegin(IN_INSTRUCTION); return WHITE_SPACE; }
 }
 
@@ -243,7 +247,7 @@ Z=[zZ]
   // after 2nd WHITE_SPACE -> AFTER_OPERAND for automatic comment
   {WHITE_SPACE}+           { operandSpaceCount++; return WHITE_SPACE; }
 
-  {WHITE_SPACE}+ {COMMENT} { return COMMENT; }
+  {COMMENT}                { return COMMENT; }
   {EOL_COMMENT}            { return COMMENT; }
 
   {SINGLE_QUOTED_STRING}   { yybegin(IN_OPERAND); return STRING; }

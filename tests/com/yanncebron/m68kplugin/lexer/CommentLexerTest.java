@@ -31,6 +31,12 @@ public class CommentLexerTest extends M68kLexerTestCase {
       "comment (';')");
   }
 
+  public void testCommentAfterWhitespace() {
+    doTest("    ; comment",
+      "WHITE_SPACE ('    ')\n" +
+        "comment ('; comment')");
+  }
+
   // todo "*"-prefix label
 
   public void testCommentLineFeedComment() {
@@ -44,7 +50,8 @@ public class CommentLexerTest extends M68kLexerTestCase {
   public void testCommentAfterLabel() {
     doTest("label ; comment",
       "id ('label')\n" +
-        "comment (' ; comment')");
+        "WHITE_SPACE (' ')\n" +
+        "comment ('; comment')");
   }
 
   public void testCommentAfterLabelWithoutWhitespace() {
@@ -56,7 +63,8 @@ public class CommentLexerTest extends M68kLexerTestCase {
   public void testStarCommentAfterLabel() {
     doTest("label * comment",
       "id ('label')\n" +
-        "comment (' * comment')");
+        "WHITE_SPACE (' ')\n" +
+        "comment ('* comment')");
   }
 
   public void testCommentAfterLabelWithColon() {
