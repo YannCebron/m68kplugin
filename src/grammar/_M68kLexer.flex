@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.lexer;
 
 import com.intellij.psi.tree.IElementType;
+import com.intellij.lexer.FlexLexer;
 
 import static com.intellij.psi.TokenType.BAD_CHARACTER;
 import static com.intellij.psi.TokenType.WHITE_SPACE;
@@ -149,19 +150,20 @@ Z=[zZ]
 }
 
 <AFTER_LABEL> {
-  "$"            { return DOLLAR; }
-  ":"            { yybegin(IN_INSTRUCTION); return COLON; }
-  "="            { yybegin(IN_OPERAND); return EQ_DIRECTIVE; } // duplicated in IN_INSTRUCTION
+  {COMMENT}       { return COMMENT; }
 
-// should be here instead of IN_INSTRUCTION - they must follow label (whitespace switching problem)
-//  {M}{A}{C}{R}{O}             { yybegin(AFTER_OPERAND); return MACRO; }
-//  {E}{Q}{U}                   { yybegin(IN_OPERAND); return EQU; }
-//  {E}{Q}{U}{R}                { yybegin(IN_OPERAND); return EQUR; }
+  "$"             { return DOLLAR; }
+  ":"             { yybegin(IN_INSTRUCTION); return COLON; }
+  "="             { yybegin(IN_OPERAND); return EQ_DIRECTIVE; } // EQ in <IN_INSTRUCTION>
 
-  {WHITE_SPACE}+ / {COMMENT}  { return WHITE_SPACE; }
-  {COMMENT}      { return COMMENT; }
+  {M}{A}{C}{R}{O} { yybegin(AFTER_OPERAND); return MACRO; }
+  {E}{Q}{U}       { yybegin(IN_OPERAND); return EQU; }
+  {E}{Q}{U}{R}    { yybegin(IN_OPERAND); return EQUR; }
 
-  {WHITE_SPACE}+ { yybegin(IN_INSTRUCTION); return WHITE_SPACE; }
+  // whitespace followed NOT by instruction variants
+  {WHITE_SPACE}+ / ({COMMENT} | {E}{Q}{U} | {E}{Q}{U}{R} | {M}{A}{C}{R}{O})  { return WHITE_SPACE; }
+
+  {WHITE_SPACE}+  { yybegin(IN_INSTRUCTION); return WHITE_SPACE; }
 }
 
 
@@ -448,8 +450,6 @@ Z=[zZ]
   {E}{I}{N}{L}{I}{N}{E}        { yybegin(AFTER_OPERAND); return EINLINE; }
   {E}{N}{D}                    { yybegin(AFTER_OPERAND); return END; }
   {E}{N}{D}{R}                 { yybegin(AFTER_OPERAND); return ENDR; }
-  {E}{Q}{U}                    { yybegin(IN_OPERAND); return EQU; }
-  {E}{Q}{U}{R}                 { yybegin(IN_OPERAND); return EQUR; }
   {E}{R}{E}{M}                 { yybegin(AFTER_OPERAND); return EREM; }
   {E}{V}{E}{N}                 { yybegin(AFTER_OPERAND); return EVEN; }
   {F}{A}{I}{L}                 { yybegin(AFTER_OPERAND); return FAIL; }
@@ -492,7 +492,6 @@ Z=[zZ]
   {X}{D}{E}{F}                 { yybegin(IN_OPERAND); return XDEF; }
   {X}{R}{E}{F}                 { yybegin(IN_OPERAND); return XREF; }
 
-  {M}{A}{C}{R}{O}              { yybegin(AFTER_OPERAND); return MACRO; }
   {E}{N}{D}{M}                 { yybegin(AFTER_OPERAND); return ENDM; }
   {M}{E}{X}{I}{T}              { yybegin(AFTER_OPERAND); return MEXIT; }
 
