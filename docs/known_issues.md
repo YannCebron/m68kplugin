@@ -41,7 +41,7 @@ Unsupported directives, these will display false positive
 > _"Cannot resolve macro '$DIRECTIVE$'"_
 
 [vasm Docs 1](http://sun.hasenbraten.de/vasm/release/vasm_4.html)
-[vasm Docs 2](http://sun.hasenbraten.de/vasm/release/vasm_18.html)
+[vasm Docs 2](http://sun.hasenbraten.de/vasm/release/vasm_19.html)
 
 - `.sdreg`
 - `auto`
