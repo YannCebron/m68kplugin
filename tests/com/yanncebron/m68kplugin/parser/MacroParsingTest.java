@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,13 @@ public class MacroParsingTest extends M68kParsingTestCase {
   public void testMacroParameterMissingIndex() throws Exception {
     doCodeTest("macroName MACRO\n" +
       " \\\n" +
+      " ENDM");
+  }
+
+  // inserts fake '.w' token
+  public void testMacroParameterAsDataSize() throws Exception {
+    doCodeTest("macroName MACRO\n" +
+      " move.\\0 d0,d1\n" +
       " ENDM");
   }
 

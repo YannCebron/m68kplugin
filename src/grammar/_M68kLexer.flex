@@ -86,7 +86,9 @@ UNQUOTED_STRING=([^\\\r\n\ \t\f'\"])+
 LABEL=[_\d[\\@]]*[\p{Alpha}] [\p{Alpha}\d[.]_[\\@]]*  // without "." first char
 ID=[.]?{LABEL}[\$]?
 
-DATA_SIZE=[.][[sS]|[bB]|[wW]|[lL]]
+MACRO_NAME=[_\d[\\@]]*[\p{Alpha}] [\p{Alpha}\d_[\\@]]* // without '.'
+
+DATA_SIZE=[.][[sS]|[bB]|[wW]|[lL]|[\\0]]
 
 A=[aA]
 B=[bB]
@@ -164,6 +166,7 @@ Z=[zZ]
   "." {B}        { operandSpaceCount = 0; yybegin(IN_OPERAND); return DOT_B; }
   "." {W}        { operandSpaceCount = 0; yybegin(IN_OPERAND); return DOT_W; }
   "." {L}        { operandSpaceCount = 0; yybegin(IN_OPERAND); return DOT_L; }
+  ".\\0"         { operandSpaceCount = 0; yybegin(IN_OPERAND); return DOT_W; } // fake for macro parameter
 }
 
 
@@ -512,7 +515,7 @@ Z=[zZ]
   {M}{A}{C}{H}{I}{N}{E}        { yybegin(IN_OPERAND); return MACHINE; }
 
   // anything else is macro name
-  {ID}                         { yybegin(IN_OPERAND); return MACRO_CALL_ID; }
+  {MACRO_NAME} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return MACRO_CALL_ID; }
 
   {COMMENT}                    { return COMMENT; }
 }

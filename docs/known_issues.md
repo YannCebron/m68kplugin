@@ -129,7 +129,6 @@ MadMac assembler specific (all directives may be optionally preceded by a dot):
 - valid label
   - `\1`
   - `\1\3\2 equ \4`
-- support parameters `addq.\0 #1,\1` with `macroName.\0` call syntax
 - allow `a`-`z` for macro parameters
 
 ### Misc

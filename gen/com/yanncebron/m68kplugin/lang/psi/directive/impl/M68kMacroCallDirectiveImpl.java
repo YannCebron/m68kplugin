@@ -32,6 +32,7 @@ public class M68kMacroCallDirectiveImpl extends M68kMacrocallDirectiveMixIn impl
     super(node);
   }
 
+  @Override
   public void accept(@NotNull M68kVisitor visitor) {
     visitor.visitMacroCallDirective(this);
   }

@@ -47,4 +47,8 @@ public class MacrocallParsingTest extends M68kParsingTestCase {
     doCodeTest(" MACRO_NAME d7,");
   }
 
+  public void testMacroCallDataSizedSingleArg() throws IOException {
+    doCodeTest(" MACRO_NAME.l arg");
+  }
+
 }

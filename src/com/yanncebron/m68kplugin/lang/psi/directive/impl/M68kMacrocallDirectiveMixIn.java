@@ -16,13 +16,13 @@
 
 package com.yanncebron.m68kplugin.lang.psi.directive.impl;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiReference;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
+import com.yanncebron.m68kplugin.lang.psi.impl.M68kDataSizedImpl;
 import org.jetbrains.annotations.NotNull;
 
-abstract class M68kMacrocallDirectiveMixIn extends ASTWrapperPsiElement {
+abstract class M68kMacrocallDirectiveMixIn extends M68kDataSizedImpl {
 
   protected M68kMacrocallDirectiveMixIn(@NotNull ASTNode node) {
     super(node);

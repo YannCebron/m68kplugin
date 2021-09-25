@@ -1,0 +1,10 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kMacroCallDirectiveImpl(MACRO_CALL_DIRECTIVE)
+    PsiElement(macro_call_id)('MACRO_NAME')
+    PsiElement(.l)('.l')
+    PsiWhiteSpace(' ')
+    M68kMacroCallParameterImpl(MACRO_CALL_PARAMETER)
+      M68kAdmAbsImpl(ADM_ABS)
+        M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
+          PsiElement(id)('arg')

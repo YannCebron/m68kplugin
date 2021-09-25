@@ -49,6 +49,10 @@ public class M68kSyntaxAnnotator implements Annotator {
         holder.newAnnotation(HighlightSeverity.INFORMATION, M68kBundle.message("highlight.privileged.instruction"))
           .textAttributes(M68kTextAttributes.PRIVILEGED_INSTRUCTION).create();
       }
+    }
+
+    if (element instanceof M68kInstruction && element instanceof M68kDataSized) {
+      annotateMacroParameters(holder, element);
     } else if (element instanceof M68kLabel) {
       doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LABEL, true);
     } else if (element instanceof M68kLocalLabel) {

@@ -92,7 +92,7 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
   @Override
   public String getDemoText() {
     return "CALL_MACRO macro\n" +
-      "        movea.l <macroParameter>\\1</macroParameter>,a6\n" +
+      "        move.<macroParameter>\\0</macroParameter> <macroParameter>\\1</macroParameter>,a6\n" +
       "        jsr _LVO<macroParameter>\\2</macroParameter>(a6)\n" +
       ".localMacroLabel<macroParameter>\\@</macroParameter>\n" +
       "        endm\n" +
@@ -103,7 +103,7 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
       "        <privilegedInstruction>stop #2</privilegedInstruction>\n" +
       "        moveq #1>>2,d0\n" +
       "<localLabel>.local</localLabel>:\n" +
-      "        CALL_MACRO _LibPtr,-42\n" +
+      "        CALL_MACRO.l _LibPtr,-42\n" +
       "        moveq #%0101+$FF,d1\n" +
       "        move.l d0,(a1) ;comment\n" +
       "        rts\n" +

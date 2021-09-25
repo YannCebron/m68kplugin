@@ -1255,8 +1255,9 @@ macro_call_parameter ::= adm_group_all | adm_sr | adm_ccr | adm_usp
 {
   name = "macro parameter"
 }
-macro_call_directive ::= MACRO_CALL_ID macro_call_parameter? (COMMA macro_call_parameter)*
+macro_call_directive ::= MACRO_CALL_ID data_size_all? macro_call_parameter? (COMMA macro_call_parameter)*
 {
+  extends = data_sized
   mixin = "com.yanncebron.m68kplugin.lang.psi.directive.impl.M68kMacrocallDirectiveMixIn"
 }
 
