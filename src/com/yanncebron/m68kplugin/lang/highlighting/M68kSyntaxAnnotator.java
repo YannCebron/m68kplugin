@@ -59,13 +59,13 @@ public class M68kSyntaxAnnotator implements Annotator {
       doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LOCAL_LABEL, true);
     } else if (element instanceof M68kLabelRefExpression) {
       annotateMacroParameters(holder, element);
-      annotateBuiltinSymbol(element, holder);
+      annotateBuiltinSymbol(holder, element);
     } else if (element instanceof M68kMacroParameterDirective) {
       doAnnotate(holder, element.getNode(), M68kTextAttributes.MACRO_PARAMETER, false);
     }
   }
 
-  private void annotateBuiltinSymbol(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
+  private void annotateBuiltinSymbol(@NotNull AnnotationHolder holder, @NotNull PsiElement element) {
     PsiPolyVariantReference reference = ObjectUtils.tryCast(element.getReference(), PsiPolyVariantReference.class);
     assert reference != null : element;
     final ResolveResult[] resolveResults = reference.multiResolve(false);
