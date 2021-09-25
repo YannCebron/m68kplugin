@@ -138,7 +138,6 @@ Z=[zZ]
   // whitespace followed NOT by instruction variants
   {WHITE_SPACE}+ / {ID} ":"          { return WHITE_SPACE; }
   {WHITE_SPACE}+ / {M}{A}{C}{R}{O} {WHITE_SPACE}+  { yybegin(MACRO_DECLARATION); return WHITE_SPACE; }
-  {WHITE_SPACE}+ / {COMMENT}         { return WHITE_SPACE; }
 
   {WHITE_SPACE}+ { operandSpaceCount = 0; yybegin(IN_INSTRUCTION); return WHITE_SPACE; }
 }
