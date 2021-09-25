@@ -112,7 +112,6 @@ MadMac assembler specific (all directives may be optionally preceded by a dot):
 ### Macros
 
 - macro declaration variants:
-  - `macro $macroName$`
   - `macro<$macroName$>`
 - macro call with register list `myMacro d0/d7`
 - special symbols

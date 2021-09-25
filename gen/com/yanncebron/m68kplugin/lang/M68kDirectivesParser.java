@@ -1017,15 +1017,37 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // label MACRO
+  // (label MACRO) | (MACRO label)
   public static boolean macro_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "macro_directive")) return false;
-    if (!nextTokenIs(b, "<directive>", ID)) return false;
+    if (!nextTokenIs(b, "<directive>", ID, MACRO)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, MACRO_DIRECTIVE, "<directive>");
+    r = macro_directive_0(b, l + 1);
+    if (!r) r = macro_directive_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // label MACRO
+  private static boolean macro_directive_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "macro_directive_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
     r = label(b, l + 1);
     r = r && consumeToken(b, MACRO);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // MACRO label
+  private static boolean macro_directive_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "macro_directive_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, MACRO);
+    r = r && label(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
   }
 

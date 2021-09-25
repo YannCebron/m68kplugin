@@ -1,0 +1,11 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kMacroDirectiveImpl(MACRO_DIRECTIVE)
+    PsiElement(macro)('MACRO')
+    PsiWhiteSpace(' ')
+    M68kLabelImpl(LABEL)
+      PsiElement(id)('macroName')
+  PsiElement(LINEFEED)('\n')
+  PsiWhiteSpace(' ')
+  M68kEndmDirectiveImpl(ENDM_DIRECTIVE)
+    PsiElement(endm)('ENDM')

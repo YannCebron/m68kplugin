@@ -1235,7 +1235,7 @@ org_directive ::= ORG expression
   pin = 1
 }
 
-macro_directive ::= label MACRO
+macro_directive ::= (label MACRO) | (MACRO label)
 endm_directive ::= ENDM
 mexit_directive ::= MEXIT
 

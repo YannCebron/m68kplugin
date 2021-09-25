@@ -18,8 +18,6 @@ package com.yanncebron.m68kplugin.lexer;
 
 import com.intellij.psi.tree.IElementType;
 
-import com.intellij.lexer.FlexLexer;
-
 import static com.intellij.psi.TokenType.BAD_CHARACTER;
 import static com.intellij.psi.TokenType.WHITE_SPACE;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
@@ -117,6 +115,7 @@ X=[xX]
 Y=[yY]
 Z=[zZ]
 
+%state MACRO_DECLARATION
 %state AFTER_LABEL
 %state IN_INSTRUCTION
 %state AFTER_INSTRUCTION
@@ -126,21 +125,29 @@ Z=[zZ]
 %state AFTER_OPERAND
 
 %%
-<YYINITIAL, AFTER_LABEL, IN_INSTRUCTION, AFTER_INSTRUCTION, STRING_DIRECTIVE, IN_OPERAND, MACRO_PARAMETER, AFTER_OPERAND> {
+<YYINITIAL, MACRO_DECLARATION, AFTER_LABEL, IN_INSTRUCTION, AFTER_INSTRUCTION, STRING_DIRECTIVE, IN_OPERAND, MACRO_PARAMETER, AFTER_OPERAND> {
   {CRLF}         { operandSpaceCount = 0; yybegin(YYINITIAL); return LINEFEED; }
 }
 
 <YYINITIAL> {
   "."            { operandSpaceCount = 0; return DOT; }
+
   {LABEL}        { operandSpaceCount = 0; yybegin(AFTER_LABEL); return ID; }
   {COMMENT}      { return COMMENT; }
 
-  {WHITE_SPACE}+ / {ID} ":"    { return WHITE_SPACE; }
-  {WHITE_SPACE}+ / {COMMENT}   { return WHITE_SPACE; }
+  // whitespace followed NOT by instruction variants
+  {WHITE_SPACE}+ / {ID} ":"          { return WHITE_SPACE; }
+  {WHITE_SPACE}+ / {M}{A}{C}{R}{O} {WHITE_SPACE}+  { yybegin(MACRO_DECLARATION); return WHITE_SPACE; }
+  {WHITE_SPACE}+ / {COMMENT}         { return WHITE_SPACE; }
 
   {WHITE_SPACE}+ { operandSpaceCount = 0; yybegin(IN_INSTRUCTION); return WHITE_SPACE; }
 }
 
+<MACRO_DECLARATION> {
+  {WHITE_SPACE}+  { return WHITE_SPACE; }
+  {M}{A}{C}{R}{O} { return MACRO; }
+  {MACRO_NAME}    { operandSpaceCount = 0; yybegin(AFTER_LABEL); return ID; }
+}
 
 <AFTER_LABEL> {
   "$"            { return DOLLAR; }
