@@ -38,6 +38,12 @@ public class M68kStubBuilderTest extends LightPlatformTestCase {
         "  LABEL:M68kLabelStubImpl['label', GLOBAL, 'null']\n");
   }
 
+  public void testLabelAfterWhitespaceWithColon() {
+    doTest("  label:",
+      "PsiFileStubImpl\n" +
+        "  LABEL:M68kLabelStubImpl['label', GLOBAL, 'null']\n");
+  }
+
   public void testLabelWithBackslashAt() {
     doTest("label\\@",
       "PsiFileStubImpl\n" +
