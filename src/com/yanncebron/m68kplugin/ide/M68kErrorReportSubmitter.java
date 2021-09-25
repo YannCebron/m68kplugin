@@ -32,10 +32,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import static com.intellij.openapi.vfs.CharsetToolkit.UTF8;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class M68kErrorReportSubmitter extends ErrorReportSubmitter {
 
@@ -57,37 +56,32 @@ public class M68kErrorReportSubmitter extends ErrorReportSubmitter {
     final String throwableText = event.getThrowableText();
 
     final StringBuilder sb = new StringBuilder(REPORT_URL);
-    try {
 
-      sb.append(URLEncoder.encode(StringUtil.splitByLines(throwableText)[0], UTF8));
-      sb.append("&body=");
+    sb.append(URLEncoder.encode(StringUtil.splitByLines(throwableText)[0], UTF_8));
+    sb.append("&body=");
 
 
-      sb.append(URLEncoder.encode("\n\n### Description\n", UTF8));
-      sb.append(URLEncoder.encode(StringUtil.defaultIfEmpty(additionalInfo, ""), UTF8));
+    sb.append(URLEncoder.encode("\n\n### Description\n", UTF_8));
+    sb.append(URLEncoder.encode(StringUtil.defaultIfEmpty(additionalInfo, ""), UTF_8));
 
-      sb.append(URLEncoder.encode("\n\n### Steps to Reproduce\n", UTF8));
-      sb.append(URLEncoder.encode("Please provide code sample if applicable", UTF8));
+    sb.append(URLEncoder.encode("\n\n### Steps to Reproduce\n", UTF_8));
+    sb.append(URLEncoder.encode("Please provide code sample if applicable", UTF_8));
 
-      sb.append(URLEncoder.encode("\n\n### Message\n", UTF8));
-      sb.append(URLEncoder.encode(StringUtil.defaultIfEmpty(event.getMessage(), ""), UTF8));
+    sb.append(URLEncoder.encode("\n\n### Message\n", UTF_8));
+    sb.append(URLEncoder.encode(StringUtil.defaultIfEmpty(event.getMessage(), ""), UTF_8));
 
-      sb.append(URLEncoder.encode("\n\n### Runtime Information\n", UTF8));
-      final IdeaPluginDescriptor descriptor = PluginManagerCore.getPlugin(getPluginDescriptor().getPluginId());
-      assert descriptor != null;
-      sb.append(URLEncoder.encode("Plugin version : " + descriptor.getVersion() + "\n", UTF8));
-      sb.append(URLEncoder.encode("IDE: " + ApplicationInfo.getInstance().getFullApplicationName() +
-        " (" + ApplicationInfo.getInstance().getBuild().asString() + ")\n", UTF8));
-      sb.append(URLEncoder.encode("OS: " + SystemInfo.getOsNameAndVersion(), UTF8));
+    sb.append(URLEncoder.encode("\n\n### Runtime Information\n", UTF_8));
+    final IdeaPluginDescriptor descriptor = PluginManagerCore.getPlugin(getPluginDescriptor().getPluginId());
+    assert descriptor != null;
+    sb.append(URLEncoder.encode("Plugin version : " + descriptor.getVersion() + "\n", UTF_8));
+    sb.append(URLEncoder.encode("IDE: " + ApplicationInfo.getInstance().getFullApplicationName() +
+      " (" + ApplicationInfo.getInstance().getBuild().asString() + ")\n", UTF_8));
+    sb.append(URLEncoder.encode("OS: " + SystemInfo.getOsNameAndVersion(), UTF_8));
 
-      sb.append(URLEncoder.encode("\n\n### Stacktrace\n", UTF8));
-      sb.append(URLEncoder.encode("```\n", UTF8));
-      sb.append(URLEncoder.encode(throwableText, UTF8));
-      sb.append(URLEncoder.encode("```\n", UTF8));
-    } catch (UnsupportedEncodingException e) {
-      consumer.consume(new SubmittedReportInfo(SubmittedReportInfo.SubmissionStatus.FAILED));
-      return false;
-    }
+    sb.append(URLEncoder.encode("\n\n### Stacktrace\n", UTF_8));
+    sb.append(URLEncoder.encode("```\n", UTF_8));
+    sb.append(URLEncoder.encode(throwableText, UTF_8));
+    sb.append(URLEncoder.encode("```\n", UTF_8));
 
     BrowserUtil.browse(sb.toString());
 
