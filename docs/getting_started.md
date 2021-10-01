@@ -17,8 +17,6 @@ This guide uses the following notations to distinguish certain items:
 | `monospaced text` | Assembly code |
 | <kbd>F10</kbd> | Keyboard shortcut or input |
 
----
-
 ## Installation
 
 Latest GA release: Open [Plugin Homepage](https://plugins.jetbrains.com/plugin/17712-motorola-68000-series-assembler/) and click *Install to...* button on upper right.
