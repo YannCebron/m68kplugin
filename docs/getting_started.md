@@ -7,13 +7,15 @@ nav_order: 2
    
 
 #### About this guide
-     
+
 This guide uses the following notations to distinguish certain items:
 
-- *Main Menu \| Sub Menu \| Menu Item* - menu item/action
-- *Settings/Preferences \| Settings Page* - page in _Settings/Preferences_ dialog
-- `monospaced text` - assembly code
-- <kbd>F10</kbd> - keyboard shortcut or input
+| Notation | Meaning |
+|----------|---------|
+| *Main Menu &#124; Sub Menu &#124; Menu Item* | Menu item/Action |
+| *Settings/Preferences &#124; Settings Page* | Page in _Settings/Preferences_ dialog |
+| `monospaced text` | Assembly code |
+| <kbd>F10</kbd> | Keyboard shortcut or input |
 
 ---
 
