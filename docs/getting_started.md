@@ -19,7 +19,9 @@ This guide uses the following notations to distinguish certain items:
 
 ## Installation
 
-There are currently no published releases, snapshot artifacts for [manual installation](https://www.jetbrains.com/help/idea/plugins-settings.html) are available via [GitHub CI](https://github.com/YannCebron/m68kplugin/actions/workflows/build.yml) in IDE version 2020.3 and higher.              
+Latest GA release: Open [Plugin Homepage](https://plugins.jetbrains.com/plugin/17712-motorola-68000-series-assembler/) and click *Install to...* button on upper right.
+
+Snapshot release: `m68kplugin-x.y.z.zip` artifacts for [manual installation](https://www.jetbrains.com/help/idea/plugins-settings.html) are available via [GitHub CI](https://github.com/YannCebron/m68kplugin/actions/workflows/build.yml).              
 
 > 🧐 Not familiar with IntelliJ-based IDEs? See [IntelliJ IDEA - Getting Started](https://www.jetbrains.com/help/idea/getting-started.html).
                
