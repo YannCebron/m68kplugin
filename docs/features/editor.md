@@ -8,7 +8,10 @@ nav_order: 1
 
 ## Syntax Highlighting
 
-* Fully customizable via *Settings/Preferences \| Editor \| Color Scheme \| M68k Assembler*
+Fully customizable via *Settings/Preferences \| Editor \| Color Scheme \| M68k Assembler*
+
+![Color Scheme](../assets/editor/color_scheme.png)
+
 * Parsing with semantic error highlighting
 * Method separator for `macro`/`endm`, `section` blocks
 * Highlight privileged instructions
@@ -39,7 +42,13 @@ _Hover_: Show type and value tooltip for labels on mouse hover
 
 * *Navigate \| Declaration or Usages*
 * *View \| Quick Definition*
-* *Edit \| Find Usages* (grouped by type)
+
+### Find Usages 
+
+*Edit \| Find Usages* (grouped by type)
+
+![Find Usages](../assets/editor/find_usages.png)
+
 * *Refactor \| Rename*
 
 ## Editing
