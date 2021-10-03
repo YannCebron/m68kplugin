@@ -36,6 +36,6 @@ By default, all files with extension `.s`, `.asm`, `.i`, and `.x68` are treated 
 ## Building
 
 [vasm](http://sun.hasenbraten.de/vasm/) executable can easily be invoked via [External Tools](https://www.jetbrains.com/help/idea/configuring-third-party-tools.html) and mapped to a keyboard shortcut for convenience.
-Warning/error messages in the console provide navigation links to the _file:lineNumber_ or _label name_ source.                  
+Warning/error messages in the console provide navigation links to the _file:lineNumber_ or _label name_ source (see [IDE](features/ide.md)).                  
 
 Alternatively, any supported build system can be used, e.g., [Makefile](https://plugins.jetbrains.com/plugin/9333-makefile-language).
