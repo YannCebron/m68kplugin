@@ -7,6 +7,8 @@ nav_order: 1
 # Editor
 
 ## Syntax Highlighting
+ 
+### Settings
 
 Fully customizable via *Settings/Preferences \| Editor \| Color Scheme \| M68k Assembler*
 
@@ -26,17 +28,28 @@ _Hover_: enable _Show quick documentation on hover_ in *Settings/Preferences \| 
 
 *View \| Quick Documentation* reference documentation for mnemonics
 
-_Hover_: Show mnemonic reference overview on mouse hover with link to reference documentation
+![Reference doc](../assets/editor/reference_doc.png)
+
+
+_Hover_: Show mnemonic reference overview on mouse hover; link to reference documentation
+
+![Mnemonic reference](../assets/editor/hover_doc.png)
 
 ### Labels
 
 *View \| Quick Documentation* for labels: show preceding lines or EOL comment(s)
+                      
+![Label doc](../assets/editor/label_doc.png)
 
 _Hover_: Show type and value tooltip for labels on mouse hover
+
+![Label hover](../assets/editor/label_hover.png)
 
 ### Literals
 
 *View \| Quick Documentation* for number literal: show in decimal, hexadecimal, octal, and binary notation
+
+![Number doc](../assets/editor/number_doc.png)
 
 ## Labels
 
