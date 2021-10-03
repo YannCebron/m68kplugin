@@ -14,7 +14,12 @@ Fully customizable via *Settings/Preferences \| Editor \| Color Scheme \| M68k A
 
 ![Color Scheme](../assets/editor/color_scheme.png)
 
-* Parsing with semantic error highlighting
+### Parser Highlighting
+
+Detailed on-the-fly semantic error highlighting
+
+![Parser error](../assets/editor/parser_error.png)
+
 * Method separator for `macro`/`endm`, `section` blocks
 * Highlight privileged instructions
 * Highlight matching brace/paired directives
@@ -29,7 +34,6 @@ _Hover_: enable _Show quick documentation on hover_ in *Settings/Preferences \| 
 *View \| Quick Documentation* reference documentation for mnemonics
 
 ![Reference doc](../assets/editor/reference_doc.png)
-
 
 _Hover_: Show mnemonic reference overview on mouse hover; link to reference documentation
 
@@ -53,8 +57,13 @@ _Hover_: Show type and value tooltip for labels on mouse hover
 
 ## Labels
 
-* *Navigate \| Declaration or Usages*
-* *View \| Quick Definition*
+*Navigate \| Declaration or Usages* - <kbd>Ctrl+Click</kbd>
+
+### Quick Definition 
+
+*View \| Quick Definition* to inspect label at caret in popup
+
+![Quick definition](../assets/editor/quick_definition.png)
 
 ### Find Usages 
 
@@ -62,8 +71,12 @@ _Hover_: Show type and value tooltip for labels on mouse hover
 
 ![Find Usages](../assets/editor/find_usages.png)
 
-* *Refactor \| Rename*
+### Rename Refactoring
 
+Rename labels using *Refactor \| Rename* across whole project with usages preview
+
+![Rename preview](../assets/editor/rename_preview.png)
+                     
 ## Editing
 
 * Smart *Edit \| Extend/Shrink Selection*
@@ -83,4 +96,8 @@ _Hover_: Show type and value tooltip for labels on mouse hover
 
 ### Intentions
 
+Invoke intention via <kbd>Alt</kbd>+<kbd>Enter</kbd>
+
 *Show Used/Free Registers* for selection
+
+![Used registers](../assets/editor/used_registers.png)
