@@ -18,7 +18,7 @@ nav_order: 3
 
 *Navigate \| Symbol* for labels
 
-![Label hover](../assets/ide/goto_symbol.png)
+![Goto symbol](../assets/ide/goto_symbol.png)
 
 ## External Tools
 
