@@ -21,7 +21,6 @@ import com.intellij.lang.annotation.AnnotationBuilder;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.lang.annotation.HighlightSeverity;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
@@ -36,8 +35,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class M68kSyntaxAnnotator implements Annotator {
-
-  private static final boolean DEBUG_MODE = ApplicationManager.getApplication().isUnitTestMode();
 
   @Override
   public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
@@ -113,9 +110,6 @@ public class M68kSyntaxAnnotator implements Annotator {
   }
 
   private static AnnotationBuilder createBuilder(AnnotationHolder holder, TextAttributesKey key) {
-    if (DEBUG_MODE) {
-      return holder.newAnnotation(HighlightSeverity.INFORMATION, key.getExternalName()).textAttributes(key);
-    }
     return holder.newSilentAnnotation(HighlightSeverity.INFORMATION).textAttributes(key);
   }
 
