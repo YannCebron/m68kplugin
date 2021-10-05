@@ -18,8 +18,7 @@ package com.yanncebron.m68kplugin.lang.psi.expression;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
-import com.intellij.model.psi.PsiExternalReferenceHost;
 
-public interface M68kLabelRefExpression extends M68kExpression, PsiExternalReferenceHost {
+public interface M68kLabelRefExpression extends M68kExpression {
 
 }

@@ -21,7 +21,6 @@ import com.yanncebron.m68kplugin.lang.psi.conditional.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.expression.*;
 import com.intellij.psi.PsiLiteralValue;
-import com.intellij.model.psi.PsiExternalReferenceHost;
 
 public class M68kVisitor extends PsiElementVisitor {
 
@@ -691,7 +690,6 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitLabelRefExpression(@NotNull M68kLabelRefExpression o) {
     visitExpression(o);
-    // visitPsiExternalReferenceHost(o);
   }
 
   public void visitLeaInstruction(@NotNull M68kLeaInstruction o) {
