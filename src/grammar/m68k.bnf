@@ -297,8 +297,13 @@ adm_imm ::= HASH expression data_size_word_long?
 {
   pin = 1
   name = "immediate data"
-//  extends = data_sized todo
-  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdm"
+  methods = [
+    getDataSize
+  ]
+  implements = [
+    "com.yanncebron.m68kplugin.lang.psi.M68kAdm"
+    "com.yanncebron.m68kplugin.lang.psi.M68kDataSized"
+  ]
 }
 
 // #42 (0..255)

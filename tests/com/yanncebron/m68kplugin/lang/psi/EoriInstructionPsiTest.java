@@ -25,9 +25,13 @@ public class EoriInstructionPsiTest extends M68kPsiTestCase {
   }
 
   public void testWithDataSize() {
-    final M68kEoriInstruction instruction = parse("eori.b #1,d1");
+    final M68kEoriInstruction instruction = parse("eori.b #1.W,d1");
 
     assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
+
+    final M68kAdmImm admImm = instruction.getAdmImm();
+    assertNotNull(admImm);
+    assertEquals(M68kDataSize.WORD, admImm.getDataSize());
   }
 
   public void testSRPrivileged() {

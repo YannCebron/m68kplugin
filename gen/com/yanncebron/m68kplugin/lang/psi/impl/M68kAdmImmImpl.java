@@ -25,6 +25,7 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
+import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
 public class M68kAdmImmImpl extends ASTWrapperPsiElement implements M68kAdmImm {
 
@@ -46,6 +47,11 @@ public class M68kAdmImmImpl extends ASTWrapperPsiElement implements M68kAdmImm {
   @Nullable
   public M68kExpression getExpression() {
     return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
+  }
+
+  @Override
+  public @Nullable M68kDataSize getDataSize() {
+    return M68kPsiImplUtil.getDataSize(this);
   }
 
 }
