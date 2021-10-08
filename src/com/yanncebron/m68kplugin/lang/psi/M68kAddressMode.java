@@ -21,6 +21,7 @@ import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
 /**
  * Translates to {@code Adm*} PSI.
  *
+ * @see M68kAdm
  * @see M68kOperand
  */
 public enum M68kAddressMode {

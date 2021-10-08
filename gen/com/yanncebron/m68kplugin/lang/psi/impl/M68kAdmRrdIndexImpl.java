@@ -25,13 +25,12 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
-public class M68kAdmRrdIndexImpl extends M68kDataSizedImpl implements M68kAdmRrdIndex {
+public class M68kAdmRrdIndexImpl extends M68kAdmWithRrdMixIn implements M68kAdmRrdIndex {
 
   public M68kAdmRrdIndexImpl(@NotNull ASTNode node) {
     super(node);
   }
 
-  @Override
   public void accept(@NotNull M68kVisitor visitor) {
     visitor.visitAdmRrdIndex(this);
   }
@@ -55,8 +54,8 @@ public class M68kAdmRrdIndexImpl extends M68kDataSizedImpl implements M68kAdmRrd
   }
 
   @Override
-  public @NotNull M68kRegister getRegister() {
-    return M68kPsiImplUtil.getRegister(this);
+  public @Nullable M68kDataSize getDataSize() {
+    return M68kPsiImplUtil.getDataSize(this);
   }
 
 }

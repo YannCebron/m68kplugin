@@ -20,7 +20,7 @@ import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
-public interface M68kAdmImm extends M68kPsiElement {
+public interface M68kAdmImm extends M68kAdm {
 
   @Nullable
   M68kExpression getExpression();

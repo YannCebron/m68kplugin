@@ -161,27 +161,24 @@ register_list ::= register_range (DIV register_range)* {
 adm_drd ::= DATA_REGISTER
 {
   name = "data register"
-  methods = [
-    getRegister
-  ]
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
 }
 
 // An | SP
 adm_ard ::= ADDRESS_REGISTER | SP
 {
   name = "address register"
-  methods = [
-    getRegister
-  ]
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
 }
 
 // Rn
 adm_rrd ::= adm_drd | adm_ard
 {
   name = "data|address register"
-  methods = [
-    getRegister
-  ]
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRrd"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRrdMixIn"
 }
 
 // Rn[.SIZE] used in adm_ix/adm_pci / duplicates adm_rrd to avoid nesting
@@ -189,27 +186,27 @@ adm_rrd_index ::= (adm_drd data_size_all?) | (adm_ard data_size_word_long?)
 {
   name = "data|address register"
   methods = [
-    getRegister
+    getDataSize
   ]
   extends = data_sized
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRrd"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRrdMixIn"
 }
 
 // Ref 2.2.3: (An)
 adm_ari ::= L_PAREN adm_ard R_PAREN
 {
   name = "address register indirect"
-  methods = [
-    getRegister
-  ]
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithIndirectAddressRegister"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithIndirectAddressRegisterMixIn"
 }
 
 // Ref 2.2.4: (An)+
 adm_api ::= L_PAREN adm_ard R_PAREN PLUS
 {
   name = "address register indirect with postincrement"
-  methods = [
-    getRegister
-  ]
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithIndirectAddressRegister"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithIndirectAddressRegisterMixIn"
 }
 
 // Ref 2.2.5: -(An)
@@ -217,9 +214,8 @@ adm_apd ::= MINUS L_PAREN adm_ard R_PAREN
 {
   name = "address register indirect with predecrement"
   pin = 3
-  methods = [
-    getRegister
-  ]
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithIndirectAddressRegister"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithIndirectAddressRegisterMixIn"
 }
 
 // Ref 2.2.6: d16(An) | (d16,An)
@@ -227,9 +223,14 @@ adm_adi ::= (expression L_PAREN adm_ard R_PAREN) |
             (L_PAREN expression COMMA adm_ard R_PAREN)
 {
   methods = [
-    getRegister
+    displacement = "expression"
   ]
   name = "address register indirect with displacement"
+  implements = [
+    "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithDisplacement"
+    "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithIndirectAddressRegister"
+  ]
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithIndirectAddressRegisterMixIn"
 }
 
 // Ref 2.2.8: bd(An,Xn.SIZE) | (bd,An,Xn.SIZE)
@@ -245,12 +246,20 @@ adm_aix ::= adm_aix_old |
             adm_aix_new
 {
   name = "address register indirect with index"
-}
+  methods = [
+    displacement = "expression"
+  ]
+  implements = [
+    "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithDisplacement"
+    "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithIndirectAddressRegister"
+  ]
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithIndirectAddressRegisterMixIn"}
 
 // 4000 | 4000.w | 4000.l
 adm_abs ::= expression data_size_word_long?
 {
   extends = data_sized
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdm"
 }
 
 // Ref 2.2.11: d16(PC) | (d16,PC)
@@ -258,6 +267,10 @@ adm_pcd ::= (expression? L_PAREN PC R_PAREN) |
             (L_PAREN expression COMMA PC R_PAREN)
 {
   name = "program counter indirect with displacement"
+  methods = [
+    displacement = "expression"
+  ]
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithDisplacement"
 }
 
 // Ref 2.2.13: bd(PC,Xn.SIZE) | (bd,PC,Xn.SIZE)
@@ -273,6 +286,10 @@ adm_pci ::= adm_pci_old |
             adm_pci_new
 {
   name = "program counter indirect with index"
+  methods = [
+    displacement = "expression"
+  ]
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithDisplacement"
 }
 
 // #4000 | #4000.w | #4000.l
@@ -281,6 +298,7 @@ adm_imm ::= HASH expression data_size_word_long?
   pin = 1
   name = "immediate data"
 //  extends = data_sized todo
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdm"
 }
 
 // #42 (0..255)
@@ -288,19 +306,26 @@ adm_quick ::= HASH expression
 {
   pin = 1
   name = "quick immediate"
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdm"
 }
 
 adm_sr ::= SR
 {
   name = "SR"
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
 }
 adm_ccr ::= CCR
 {
   name = "CCR"
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
 }
 adm_usp ::= USP
 {
   name = "USP"
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
 }
 
 // ATTN: ordering in groups

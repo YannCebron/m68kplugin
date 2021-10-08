@@ -22,11 +22,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
-import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
-public class M68kAdmAriImpl extends ASTWrapperPsiElement implements M68kAdmAri {
+public class M68kAdmAriImpl extends M68kAdmWithIndirectAddressRegisterMixIn implements M68kAdmAri {
 
   public M68kAdmAriImpl(@NotNull ASTNode node) {
     super(node);
@@ -46,11 +44,6 @@ public class M68kAdmAriImpl extends ASTWrapperPsiElement implements M68kAdmAri {
   @NotNull
   public M68kAdmArd getAdmArd() {
     return notNullChild(PsiTreeUtil.getChildOfType(this, M68kAdmArd.class));
-  }
-
-  @Override
-  public @NotNull M68kRegister getRegister() {
-    return M68kPsiImplUtil.getRegister(this);
   }
 
 }

@@ -13,31 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.yanncebron.m68kplugin.lang.psi.impl;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.util.PsiTreeUtil;
-import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.yanncebron.m68kplugin.lang.psi.*;
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmWithIndirectAddressRegister;
+import com.yanncebron.m68kplugin.lang.psi.M68kRegister;
+import org.jetbrains.annotations.NotNull;
 
-public class M68kAdmCcrImpl extends M68kAdmWithRegisterMixIn implements M68kAdmCcr {
+abstract class M68kAdmWithIndirectAddressRegisterMixIn extends ASTWrapperPsiElement implements M68kAdmWithIndirectAddressRegister {
 
-  public M68kAdmCcrImpl(@NotNull ASTNode node) {
+  protected M68kAdmWithIndirectAddressRegisterMixIn(@NotNull ASTNode node) {
     super(node);
   }
 
-  public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitAdmCcr(this);
-  }
-
   @Override
-  public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
-    else super.accept(visitor);
+  public @NotNull M68kRegister getRegister() {
+    return getAdmArd().getRegister();
   }
-
 }

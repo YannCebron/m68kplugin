@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.yanncebron.m68kplugin.lang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.NotNull;
 
-public interface M68kAdmUsp extends M68kAdmWithRegister {
+public interface M68kAdmWithRegister extends M68kAdm {
+
+  @NotNull
+  M68kRegister getRegister();
 
 }

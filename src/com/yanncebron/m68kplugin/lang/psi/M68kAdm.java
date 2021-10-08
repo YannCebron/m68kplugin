@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.yanncebron.m68kplugin.lang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
-
-public interface M68kAdmUsp extends M68kAdmWithRegister {
-
+/**
+ * Base interface for all addressing modes.
+ */
+public interface M68kAdm extends M68kPsiElement {
 }

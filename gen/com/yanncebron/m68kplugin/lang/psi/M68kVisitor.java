@@ -63,70 +63,74 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitAdmAbs(@NotNull M68kAdmAbs o) {
     visitDataSized(o);
+    // visitAdm(o);
   }
 
   public void visitAdmAdi(@NotNull M68kAdmAdi o) {
-    visitPsiElement(o);
+    visitAdmWithDisplacement(o);
+    // visitAdmWithIndirectAddressRegister(o);
   }
 
   public void visitAdmAix(@NotNull M68kAdmAix o) {
-    visitPsiElement(o);
+    visitAdmWithDisplacement(o);
+    // visitAdmWithIndirectAddressRegister(o);
   }
 
   public void visitAdmApd(@NotNull M68kAdmApd o) {
-    visitPsiElement(o);
+    visitAdmWithIndirectAddressRegister(o);
   }
 
   public void visitAdmApi(@NotNull M68kAdmApi o) {
-    visitPsiElement(o);
+    visitAdmWithIndirectAddressRegister(o);
   }
 
   public void visitAdmArd(@NotNull M68kAdmArd o) {
-    visitPsiElement(o);
+    visitAdmWithRegister(o);
   }
 
   public void visitAdmAri(@NotNull M68kAdmAri o) {
-    visitPsiElement(o);
+    visitAdmWithIndirectAddressRegister(o);
   }
 
   public void visitAdmCcr(@NotNull M68kAdmCcr o) {
-    visitPsiElement(o);
+    visitAdmWithRegister(o);
   }
 
   public void visitAdmDrd(@NotNull M68kAdmDrd o) {
-    visitPsiElement(o);
+    visitAdmWithRegister(o);
   }
 
   public void visitAdmImm(@NotNull M68kAdmImm o) {
-    visitPsiElement(o);
+    visitAdm(o);
   }
 
   public void visitAdmPcd(@NotNull M68kAdmPcd o) {
-    visitPsiElement(o);
+    visitAdmWithDisplacement(o);
   }
 
   public void visitAdmPci(@NotNull M68kAdmPci o) {
-    visitPsiElement(o);
+    visitAdmWithDisplacement(o);
   }
 
   public void visitAdmQuick(@NotNull M68kAdmQuick o) {
-    visitPsiElement(o);
+    visitAdm(o);
   }
 
   public void visitAdmRrd(@NotNull M68kAdmRrd o) {
-    visitPsiElement(o);
+    visitAdmWithRrd(o);
   }
 
   public void visitAdmRrdIndex(@NotNull M68kAdmRrdIndex o) {
     visitDataSized(o);
+    // visitAdmWithRrd(o);
   }
 
   public void visitAdmSr(@NotNull M68kAdmSr o) {
-    visitPsiElement(o);
+    visitAdmWithRegister(o);
   }
 
   public void visitAdmUsp(@NotNull M68kAdmUsp o) {
-    visitPsiElement(o);
+    visitAdmWithRegister(o);
   }
 
   public void visitAlignDirective(@NotNull M68kAlignDirective o) {
@@ -1221,6 +1225,26 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitXrefDirective(@NotNull M68kXrefDirective o) {
     visitDirective(o);
+  }
+
+  public void visitAdm(@NotNull M68kAdm o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAdmWithDisplacement(@NotNull M68kAdmWithDisplacement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAdmWithIndirectAddressRegister(@NotNull M68kAdmWithIndirectAddressRegister o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAdmWithRegister(@NotNull M68kAdmWithRegister o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAdmWithRrd(@NotNull M68kAdmWithRrd o) {
+    visitPsiElement(o);
   }
 
   public void visitInstruction(@NotNull M68kInstruction o) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
+
 public class MovepInstructionPsiTest extends M68kPsiTestCase {
 
   public void testWithDataSize() {
@@ -29,6 +31,8 @@ public class MovepInstructionPsiTest extends M68kPsiTestCase {
     final M68kAdmAdi admAdi = instruction.getAdmAdi();
     assertNotNull(admAdi);
     assertEquals(M68kRegister.A0, admAdi.getRegister());
+    final M68kNumberExpression displacementExpression = assertInstanceOf(admAdi.getDisplacement(), M68kNumberExpression.class);
+    assertEquals(42L, displacementExpression.getValue());
   }
 
   private M68kMovepInstruction parse(String text) {

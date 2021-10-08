@@ -19,14 +19,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface M68kAdmRrd extends M68kPsiElement {
+public interface M68kAdmRrd extends M68kAdmWithRrd {
 
   @Nullable
   M68kAdmArd getAdmArd();
 
   @Nullable
   M68kAdmDrd getAdmDrd();
-
-  @NotNull M68kRegister getRegister();
 
 }

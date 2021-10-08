@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package com.yanncebron.m68kplugin.lang.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.util.ObjectUtils;
 import com.intellij.util.SmartList;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncbinDirective;
@@ -29,7 +28,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Objects;
 
 public class M68kPsiImplUtil {
 
@@ -54,12 +52,12 @@ public class M68kPsiImplUtil {
   }
 
   // TODO extract M68kInstructionWithSrcAndDest
-  public static boolean isDest(M68kInstruction instruction, @NotNull M68kPsiElement sourceOrDestElement) {
+  public static boolean isDest(M68kInstruction instruction, @NotNull M68kAdm sourceOrDestElement) {
     final ASTNode commaNode = instruction.getNode().findChildByType(M68kTokenTypes.COMMA);
     return commaNode != null && commaNode.getStartOffset() < sourceOrDestElement.getNode().getStartOffset();
   }
 
-  public static boolean isSrc(M68kInstruction instruction, @NotNull M68kPsiElement sourceOrDestElement) {
+  public static boolean isSrc(M68kInstruction instruction, @NotNull M68kAdm sourceOrDestElement) {
     final ASTNode commaNode = instruction.getNode().findChildByType(M68kTokenTypes.COMMA);
     return commaNode != null && commaNode.getStartOffset() > sourceOrDestElement.getNode().getStartOffset();
   }
@@ -79,53 +77,6 @@ public class M68kPsiImplUtil {
     }
 
     return EnumSet.range(fromRegister, toRegister);
-  }
-
-  @NotNull
-  public static M68kRegister getRegister(M68kAdmDrd admElement) {
-    return _getRegister(admElement);
-  }
-
-  @NotNull
-  public static M68kRegister getRegister(M68kAdmArd admElement) {
-    return _getRegister(admElement);
-  }
-
-  @NotNull
-  public static M68kRegister getRegister(M68kAdmAri admElement) {
-    return _getRegister(admElement.getAdmArd());
-  }
-
-  @NotNull
-  public static M68kRegister getRegister(M68kAdmApi admElement) {
-    return _getRegister(admElement.getAdmArd());
-  }
-
-  @NotNull
-  public static M68kRegister getRegister(M68kAdmApd admElement) {
-    return _getRegister(admElement.getAdmArd());
-  }
-
-  @NotNull
-  public static M68kRegister getRegister(M68kAdmAdi admElement) {
-    return _getRegister(admElement.getAdmArd());
-  }
-
-  @NotNull
-  public static M68kRegister getRegister(M68kAdmRrd admElement) {
-    final M68kPsiElement registerElement = ObjectUtils.chooseNotNull(admElement.getAdmArd(), admElement.getAdmDrd());
-    return _getRegister(Objects.requireNonNull(registerElement));
-  }
-
-  @NotNull
-  public static M68kRegister getRegister(M68kAdmRrdIndex admElement) {
-    final M68kPsiElement registerElement = ObjectUtils.chooseNotNull(admElement.getAdmArd(), admElement.getAdmDrd());
-    return _getRegister(Objects.requireNonNull(registerElement));
-  }
-
-  @NotNull
-  private static M68kRegister _getRegister(M68kPsiElement admElement) {
-    return M68kRegister.find(admElement.getFirstChild().getNode().getElementType(), admElement.getText());
   }
 
   @Nullable
