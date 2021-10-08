@@ -18,3 +18,6 @@ label3:nop
 4la_bel123
 _label
 .localLabel:nop
+
+ labelWithIndent:
+ labelWithIndentAndInstruction: nop
