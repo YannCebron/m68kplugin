@@ -82,9 +82,6 @@ label ::= labelIdentifier COLON?
 }
 
 private dot_local_label ::= DOT labelIdentifier
-{
-  pin = 1
-}
 private dollar_local_label ::= labelIdentifier DOLLAR
 localLabel ::= (dot_local_label | dollar_local_label) COLON?
 {

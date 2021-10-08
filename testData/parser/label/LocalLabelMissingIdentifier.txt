@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiElement(.)('.')
+  PsiErrorElement:<label identifier> expected
+    <empty list>

@@ -79,6 +79,10 @@ public class LabelParsingTest extends M68kParsingTestCase {
     doCodeTest(".localLabel:");
   }
 
+  public void testLocalLabelMissingIdentifier() throws IOException {
+    doCodeTest(".");
+  }
+
   public void testLocalLabelAfterWhitespaceWithColon() throws IOException {
     doCodeTest("  .label:");
   }
