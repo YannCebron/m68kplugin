@@ -41,7 +41,6 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.ObjectUtils;
-import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
 import com.yanncebron.m68kplugin.lang.psi.M68kDataSized;
@@ -236,7 +235,7 @@ public class M68kProjectStatisticsAction extends AnAction {
   private void countByClass(Map<Class<? extends M68kPsiElement>, Integer> map, M68kPsiElement[] compute, Condition<M68kPsiElement> filterCondition) {
     for (M68kPsiElement byClass : compute) {
       if (!filterCondition.value(byClass)) continue;
-      Integer count = ContainerUtil.getOrCreate(map, byClass.getClass(), 0);
+      Integer count = map.computeIfAbsent(byClass.getClass(), __ -> 0);
       map.replace(byClass.getClass(), count + 1);
     }
   }
