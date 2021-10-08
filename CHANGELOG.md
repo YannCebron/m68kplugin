@@ -6,7 +6,7 @@
 
 ### Changed
 
-- `.` without following identifier wrongly recognized as valid local label
+- fixed: `.` without following identifier wrongly recognized as valid local label
           
 
 ## 0.1.0
