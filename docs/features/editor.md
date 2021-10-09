@@ -10,19 +10,29 @@ nav_order: 1
  
 ### Settings
 
-Fully customizable via *Settings/Preferences \| Editor \| Color Scheme \| M68k Assembler*
+Fully customizable via *Settings/Preferences \| Editor \| Color Scheme \| M68k Assembler*.
+
+Virtually every syntax element can be configured separately.
+Additional semantic highlighting is performed for privileged instructions (possibly depending on operands).
 
 ![Color Scheme](../assets/editor/color_scheme.png)
 
 ### Parser Highlighting
 
-Detailed on-the-fly semantic error highlighting
+Detailed on-the-fly semantic error highlighting for all instructions and directives
 
 ![Parser error](../assets/editor/parser_error.png)
 
-* Method separator for `macro`/`endm`, `section` blocks
-* Highlight privileged instructions
-* Highlight matching brace/paired directives
+### Method Separator
+
+For `macro`/`endm` and `section` via *Show method separators* option in *Settings/Preferences \| Editor \| General \| Appearance*
+ 
+### Highlight matching brace and directives
+
+![Matching directive](../assets/editor/matching_directive.png)
+                            
+### Highlight Misc
+ 
 * Highlight/navigate URLs in comments and string literals
 
 ## Documentation
@@ -35,7 +45,7 @@ _Hover_: enable _Show quick documentation on hover_ in *Settings/Preferences \| 
 
 ![Reference doc](../assets/editor/reference_doc.png)
 
-_Hover_: Show mnemonic reference overview on mouse hover; link to reference documentation
+_Hover_: Show mnemonic reference overview on mouse hover; link to reference documentation (only 68000)
 
 ![Mnemonic reference](../assets/editor/hover_doc.png)
 
@@ -58,6 +68,16 @@ _Hover_: Show type and value tooltip for labels on mouse hover
 ## Labels
 
 *Navigate \| Declaration or Usages* - <kbd>Ctrl+Click</kbd>
+                
+### Completion
+
+Smart completion for labels, e.g., ranking current local labels and labels from the current file higher in suggestions
+ 
+### Builtin Symbols 
+
+Completion and hover information
+
+![Builtin symbol](../assets/editor/builtin_symbol.png)
 
 ### Quick Definition 
 
