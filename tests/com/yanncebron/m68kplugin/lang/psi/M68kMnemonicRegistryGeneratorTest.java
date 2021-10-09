@@ -47,11 +47,14 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
   private static final boolean SKIP_UNSUPPORTED_CPUS = true;
 
+  private static final Set<M68kCpu> SUPPORTED_CPUS = EnumSet.of(M68kCpu.M_68000, M68kCpu.M_68010);
+
   private static final String VASM_OPCODES_H_PATH = "/Users/yann/idea-ultimate/vasm/cpus/m68k/opcodes.h";
 
   public void testGenerateMnemonicRegistryData() throws IOException {
     if (!ENABLED) return;
 
+    Set<String> unknownMnemonics = new HashSet<>();
     List<M68kMnemonic> mnemonics = new ArrayList<>();
 
     final List<String> strings = Files.readAllLines(Paths.get(VASM_OPCODES_H_PATH));
@@ -65,8 +68,9 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
       IElementType elementType = ContainerUtil.find(M68kTokenGroups.INSTRUCTIONS.getTypes(),
         iElementType -> iElementType.toString().equals(mnemonic));
-      if (elementType == null && LOG_UNKNOWN_MNEMONICS) {
+      if (elementType == null && LOG_UNKNOWN_MNEMONICS && unknownMnemonics.add(mnemonic)) {
         System.out.println("unknown mnemonic '" + mnemonic + "'");
+        continue;
       }
 
       final List<String> split = StringUtil.split(trim, "{");
@@ -100,7 +104,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       String cpuText = StringUtil.substringBefore(lastSplit.get(3), "}");
       final Set<M68kCpu> m68kCpus = mapCpuSet(cpuText);
       if (m68kCpus == null || m68kCpus.size() == 0) {
-        if (LOG_UNKNOWN_MNEMONICS || elementType != null)
+        if (!SKIP_UNSUPPORTED_CPUS && elementType != null)
           System.out.println("skip entry for unknown CPU '" + cpuText + "': " + trim);
         continue;
       }
@@ -126,10 +130,8 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     dumpCode(mnemonics);
   }
 
-  private static final Set<M68kCpu> supportedCpus = EnumSet.of(M68kCpu.M_68000, M68kCpu.M_68010);
-
   private boolean isSupportedCpu(Set<M68kCpu> cpus) {
-    return ContainerUtil.intersects(cpus, supportedCpus);
+    return ContainerUtil.intersects(cpus, SUPPORTED_CPUS);
   }
 
   private void dumpCode(List<M68kMnemonic> mnemonics) {
