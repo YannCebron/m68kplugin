@@ -31,7 +31,7 @@ Currently, only 68000/68010 architecture is supported.
 
 Non-supported instructions/registers will display false positive
 > _"Cannot resolve macro '$MNEMONIC$ \| $REGISTER$'"_
-                     
+
 Using non-supported address mode will result in syntax error or
 > _"<$ADDRESS_MODE$> expected, got $TEXT$"_
 
@@ -113,7 +113,9 @@ MadMac assembler specific (all directives may be optionally preceded by a dot):
 
 - macro declaration variants:
   - `macro<$macroName$>`
-- macro call with register list `myMacro d0/d7`
+- macro calls:
+  - register list `myMacro d0/d7`
+  - enclosed in `< ... >` for parameter containing `,`
 - special symbols
   - `\@!`
   - `\@?`
@@ -128,7 +130,7 @@ MadMac assembler specific (all directives may be optionally preceded by a dot):
 - valid label
   - `\1`
   - `\1\3\2 equ \4`
-- highlight illegal macro parameter names: `\X`, `\123`                         
+- highlight illegal macro parameter names: `\X`, `\123`
 
 ### Misc
 
