@@ -74,9 +74,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       }
 
       final List<String> split = StringUtil.split(trim, "{");
-      if (split.size() != 4) {
-        throw new IllegalArgumentException(split.size() + " parts: cannot parse '" + trim + "'");
-      }
+      assertEquals(split.size() + " parts: cannot parse '" + trim + "'", 4, split.size());
 
       // Operands ----------------------------
       M68kOperand sourceOperand;
@@ -289,7 +287,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       !"malias".equals(parseCpuText) &&
       !"mbanked".equals(parseCpuText) &&
       !StringUtil.startsWith(parseCpuText, "mcf")) {
-      throw new IllegalArgumentException("cannot parse CPU '" + parseCpuText + "'");
+      fail("cannot parse CPU '" + parseCpuText + "'");
     }
     return null;
   }
