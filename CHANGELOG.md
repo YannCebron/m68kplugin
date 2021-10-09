@@ -11,7 +11,7 @@
 
 - fixed: dot without following identifier wrongly recognized as valid local label
 - fixed: directives after label with colon, e.g. "MACRO_NAME: macro"
-- Editor | Color Scheme settings: group "Supervisor Registers"            
+- Editor Color Scheme settings: group "Supervisor Registers"            
 
 ## 0.1.0
 
