@@ -8,9 +8,10 @@
 
 ## Target Architecture
 
-* 680x0 variants
+* 68020/30/40/60
 * 68881 FPU
 * 68851 MMU
+* Apollo Core 68080
 
 ## Highlighting
 

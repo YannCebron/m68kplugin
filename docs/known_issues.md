@@ -27,7 +27,7 @@ title: Known Issues
 
 ### Unsupported CPUs
 
-Currently, only 68000 architecture is supported.
+Currently, only 68000/68010 architecture is supported.
 
 Non-supported instructions/registers will display false positive
 > _"Cannot resolve macro '$MNEMONIC$ \| $REGISTER$'"_

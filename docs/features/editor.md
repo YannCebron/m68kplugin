@@ -31,7 +31,7 @@ _Hover_: enable _Show quick documentation on hover_ in *Settings/Preferences \| 
 
 ### Mnemonics
 
-*View \| Quick Documentation* reference documentation for mnemonics
+*View \| Quick Documentation* reference documentation for mnemonics (only 68000)
 
 ![Reference doc](../assets/editor/reference_doc.png)
 
