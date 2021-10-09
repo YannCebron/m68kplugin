@@ -1,5 +1,3 @@
-label
-
 ********************************************************************************
 
 * M68kMnemonic{abcd, deprecated=false, src=DATA_REGISTER, dst=DATA_REGISTER, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
@@ -949,6 +947,12 @@ label06: bhs         label06
          bhs.s       label06
          bhs.b       label06
          bhs.w       label06
+
+
+********************************************************************************
+
+* M68kMnemonic{bkpt, deprecated=false, src=QUICK_IMMEDIATE, dst=NONE, [UNSIZED], [M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         bkpt      #1
 
 
 ********************************************************************************
@@ -3093,6 +3097,34 @@ label17: bvs         label17
          move.w      (66,PC,a0),$4000.L
          move.l      (66,PC,a0),$4000.L
 
+* M68kMnemonic{move, deprecated=false, src=CCR_REGISTER, dst=DATA_REGISTER, [WORD], [M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         move        CCR,d0
+         move.w      CCR,d0
+
+* M68kMnemonic{move, deprecated=false, src=CCR_REGISTER, dst=ALTERABLE_DATA, [WORD], [M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         move        CCR,d0
+         move.w      CCR,d0
+         move        CCR,(a0)
+         move.w      CCR,(a0)
+         move        CCR,(a0)+
+         move.w      CCR,(a0)+
+         move        CCR,-(a0)
+         move.w      CCR,-(a0)
+         move        CCR,42(a0)
+         move.w      CCR,42(a0)
+         move        CCR,(-42,a0)
+         move.w      CCR,(-42,a0)
+         move        CCR,12(a0,d0)
+         move.w      CCR,12(a0,d0)
+         move        CCR,(12,a0,a0)
+         move.w      CCR,(12,a0,a0)
+         move        CCR,$4000
+         move.w      CCR,$4000
+         move        CCR,$4000.W
+         move.w      CCR,$4000.W
+         move        CCR,$4000.L
+         move.w      CCR,$4000.L
+
 * M68kMnemonic{move, deprecated=false, src=SR_REGISTER, dst=DATA_REGISTER, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          move        SR,d0
          move.w      SR,d0
@@ -4067,6 +4099,37 @@ label17: bvs         label17
 
 ********************************************************************************
 
+* M68kMnemonic{movec, deprecated=false, src=CTRL_REGISTER, dst=DATA_OR_ADDRESS_REGISTER, [LONGWORD], [M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         movec       DFC,d0
+         movec.l     DFC,d0
+         movec       DFC,a0
+         movec.l     DFC,a0
+         movec       SFC,d0
+         movec.l     SFC,d0
+         movec       SFC,a0
+         movec.l     SFC,a0
+         movec       VBR,d0
+         movec.l     VBR,d0
+         movec       VBR,a0
+         movec.l     VBR,a0
+
+* M68kMnemonic{movec, deprecated=false, src=DATA_OR_ADDRESS_REGISTER, dst=CTRL_REGISTER, [LONGWORD], [M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         movec       d0,DFC
+         movec.l     d0,DFC
+         movec       d0,SFC
+         movec.l     d0,SFC
+         movec       d0,VBR
+         movec.l     d0,VBR
+         movec       a0,DFC
+         movec.l     a0,DFC
+         movec       a0,SFC
+         movec.l     a0,SFC
+         movec       a0,VBR
+         movec.l     a0,VBR
+
+
+********************************************************************************
+
 * M68kMnemonic{movem, deprecated=false, src=DATA_OR_ADDRESS_REGISTER_LIST, dst=ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT, [WORD, LONGWORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          movem       d0/a0-a2,-(a0)
          movem.w     d0/a0-a2,-(a0)
@@ -4311,6 +4374,173 @@ label17: bvs         label17
 * M68kMnemonic{moveq, deprecated=false, src=QUICK_IMMEDIATE, dst=DATA_REGISTER, [LONGWORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          moveq       #1,d0
          moveq.l     #1,d0
+
+
+********************************************************************************
+
+* M68kMnemonic{moves, deprecated=false, src=ALTERABLE_MEMORY, dst=DATA_OR_ADDRESS_REGISTER, [BYTE, WORD, LONGWORD], [M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         moves       (a0),d0
+         moves.b     (a0),d0
+         moves.w     (a0),d0
+         moves.l     (a0),d0
+         moves       (a0),a0
+         moves.b     (a0),a0
+         moves.w     (a0),a0
+         moves.l     (a0),a0
+         moves       (a0)+,d0
+         moves.b     (a0)+,d0
+         moves.w     (a0)+,d0
+         moves.l     (a0)+,d0
+         moves       (a0)+,a0
+         moves.b     (a0)+,a0
+         moves.w     (a0)+,a0
+         moves.l     (a0)+,a0
+         moves       -(a0),d0
+         moves.b     -(a0),d0
+         moves.w     -(a0),d0
+         moves.l     -(a0),d0
+         moves       -(a0),a0
+         moves.b     -(a0),a0
+         moves.w     -(a0),a0
+         moves.l     -(a0),a0
+         moves       42(a0),d0
+         moves.b     42(a0),d0
+         moves.w     42(a0),d0
+         moves.l     42(a0),d0
+         moves       42(a0),a0
+         moves.b     42(a0),a0
+         moves.w     42(a0),a0
+         moves.l     42(a0),a0
+         moves       (-42,a0),d0
+         moves.b     (-42,a0),d0
+         moves.w     (-42,a0),d0
+         moves.l     (-42,a0),d0
+         moves       (-42,a0),a0
+         moves.b     (-42,a0),a0
+         moves.w     (-42,a0),a0
+         moves.l     (-42,a0),a0
+         moves       12(a0,d0),d0
+         moves.b     12(a0,d0),d0
+         moves.w     12(a0,d0),d0
+         moves.l     12(a0,d0),d0
+         moves       12(a0,d0),a0
+         moves.b     12(a0,d0),a0
+         moves.w     12(a0,d0),a0
+         moves.l     12(a0,d0),a0
+         moves       (12,a0,a0),d0
+         moves.b     (12,a0,a0),d0
+         moves.w     (12,a0,a0),d0
+         moves.l     (12,a0,a0),d0
+         moves       (12,a0,a0),a0
+         moves.b     (12,a0,a0),a0
+         moves.w     (12,a0,a0),a0
+         moves.l     (12,a0,a0),a0
+         moves       $4000,d0
+         moves.b     $4000,d0
+         moves.w     $4000,d0
+         moves.l     $4000,d0
+         moves       $4000,a0
+         moves.b     $4000,a0
+         moves.w     $4000,a0
+         moves.l     $4000,a0
+         moves       $4000.W,d0
+         moves.b     $4000.W,d0
+         moves.w     $4000.W,d0
+         moves.l     $4000.W,d0
+         moves       $4000.W,a0
+         moves.b     $4000.W,a0
+         moves.w     $4000.W,a0
+         moves.l     $4000.W,a0
+         moves       $4000.L,d0
+         moves.b     $4000.L,d0
+         moves.w     $4000.L,d0
+         moves.l     $4000.L,d0
+         moves       $4000.L,a0
+         moves.b     $4000.L,a0
+         moves.w     $4000.L,a0
+         moves.l     $4000.L,a0
+
+* M68kMnemonic{moves, deprecated=false, src=DATA_OR_ADDRESS_REGISTER, dst=ALTERABLE_MEMORY, [BYTE, WORD, LONGWORD], [M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         moves       d0,(a0)
+         moves.b     d0,(a0)
+         moves.w     d0,(a0)
+         moves.l     d0,(a0)
+         moves       d0,(a0)+
+         moves.b     d0,(a0)+
+         moves.w     d0,(a0)+
+         moves.l     d0,(a0)+
+         moves       d0,-(a0)
+         moves.b     d0,-(a0)
+         moves.w     d0,-(a0)
+         moves.l     d0,-(a0)
+         moves       d0,42(a0)
+         moves.b     d0,42(a0)
+         moves.w     d0,42(a0)
+         moves.l     d0,42(a0)
+         moves       d0,(-42,a0)
+         moves.b     d0,(-42,a0)
+         moves.w     d0,(-42,a0)
+         moves.l     d0,(-42,a0)
+         moves       d0,12(a0,d0)
+         moves.b     d0,12(a0,d0)
+         moves.w     d0,12(a0,d0)
+         moves.l     d0,12(a0,d0)
+         moves       d0,(12,a0,a0)
+         moves.b     d0,(12,a0,a0)
+         moves.w     d0,(12,a0,a0)
+         moves.l     d0,(12,a0,a0)
+         moves       d0,$4000
+         moves.b     d0,$4000
+         moves.w     d0,$4000
+         moves.l     d0,$4000
+         moves       d0,$4000.W
+         moves.b     d0,$4000.W
+         moves.w     d0,$4000.W
+         moves.l     d0,$4000.W
+         moves       d0,$4000.L
+         moves.b     d0,$4000.L
+         moves.w     d0,$4000.L
+         moves.l     d0,$4000.L
+         moves       a0,(a0)
+         moves.b     a0,(a0)
+         moves.w     a0,(a0)
+         moves.l     a0,(a0)
+         moves       a0,(a0)+
+         moves.b     a0,(a0)+
+         moves.w     a0,(a0)+
+         moves.l     a0,(a0)+
+         moves       a0,-(a0)
+         moves.b     a0,-(a0)
+         moves.w     a0,-(a0)
+         moves.l     a0,-(a0)
+         moves       a0,42(a0)
+         moves.b     a0,42(a0)
+         moves.w     a0,42(a0)
+         moves.l     a0,42(a0)
+         moves       a0,(-42,a0)
+         moves.b     a0,(-42,a0)
+         moves.w     a0,(-42,a0)
+         moves.l     a0,(-42,a0)
+         moves       a0,12(a0,d0)
+         moves.b     a0,12(a0,d0)
+         moves.w     a0,12(a0,d0)
+         moves.l     a0,12(a0,d0)
+         moves       a0,(12,a0,a0)
+         moves.b     a0,(12,a0,a0)
+         moves.w     a0,(12,a0,a0)
+         moves.l     a0,(12,a0,a0)
+         moves       a0,$4000
+         moves.b     a0,$4000
+         moves.w     a0,$4000
+         moves.l     a0,$4000
+         moves       a0,$4000.W
+         moves.b     a0,$4000.W
+         moves.w     a0,$4000.W
+         moves.l     a0,$4000.W
+         moves       a0,$4000.L
+         moves.b     a0,$4000.L
+         moves.w     a0,$4000.L
+         moves.l     a0,$4000.L
 
 
 ********************************************************************************
@@ -6175,6 +6405,6 @@ label17: bvs         label17
 
 * M68kMnemonic{unlk, deprecated=false, src=ADDRESS_REGISTER, dst=NONE, [UNSIZED], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          unlk      a0
-* Instructions count: 124
+* Instructions count: 127
 
-* 0/5297 deprecated: 781
+* 0/5506 deprecated: 781
