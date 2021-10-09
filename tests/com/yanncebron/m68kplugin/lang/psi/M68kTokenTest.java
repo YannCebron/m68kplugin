@@ -52,6 +52,7 @@ public class M68kTokenTest extends BasePlatformTestCase {
     M68kTokenTypes.SR,
     M68kTokenTypes.SSP,
     M68kTokenTypes.STRING,
+    M68kTokenTypes.VBR,
     M68kTokenTypes.USP,
     M68kFileElementType.INSTANCE
   );

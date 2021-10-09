@@ -201,6 +201,7 @@ Z=[zZ]
   {C}{C}{R}                { return CCR; }
   {D}{F}{C}                { return DFC; }
   {S}{F}{C}                { return SFC; }
+  {V}{B}{R}                { return VBR; }
 
   {D}[0-7]                 { return DATA_REGISTER; }
   {D}[0-7] {DATA_SIZE}     { pushbackDataSize(); return DATA_REGISTER; }

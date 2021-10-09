@@ -5,6 +5,7 @@
 ### Added
 
 - 68010 support: BKPT, MOVE from CCR
+- 68010 support: DFC, SFC, VBR register
 
 ### Changed
 

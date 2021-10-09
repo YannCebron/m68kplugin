@@ -302,6 +302,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType TTL = new M68kTokenType("ttl");
   public static final IElementType UNLK = new M68kTokenType("unlk");
   public static final IElementType USP = new M68kTokenType("usp");
+  public static final IElementType VBR = new M68kTokenType("vbr");
   public static final IElementType XDEF = new M68kTokenType("xdef");
   public static final IElementType XREF = new M68kTokenType("xref");
 
