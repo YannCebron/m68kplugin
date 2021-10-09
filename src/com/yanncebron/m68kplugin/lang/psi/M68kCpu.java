@@ -63,7 +63,7 @@ public enum M68kCpu {
   public static final Set<M68kCpu> MOTOROLA = EnumSet.of(M_68000, M_68010, M_68020, M_68030, M_68040, M_68060);
   public static final Set<M68kCpu> APOLLO = EnumSet.of(AC_68080);
 
-  public static final Set<M68kCpu> FLOAT = EnumSet.of(M_68881, M_68040, M_68060);
+  public static final Set<M68kCpu> FLOAT = EnumSet.of(M_68881, M_68040, M_68060, AC_68080);
   public static final Set<M68kCpu> MMU = EnumSet.of(M_68851, M_68030, M_68040, M_68060);
 
   public static final Set<M68kCpu> GROUP_68000_UP = EnumSet.of(M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080);
