@@ -123,6 +123,7 @@ public final class M68kTokenGroups {
     LSR,
     MOVE,
     MOVEA,
+    MOVEC,
     MOVEM,
     MOVEP,
     MOVEQ,

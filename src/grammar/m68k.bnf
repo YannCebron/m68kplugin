@@ -333,12 +333,35 @@ adm_usp ::= USP
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
 }
 
+adm_dfc ::= DFC
+{
+  name = "DFC"
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
+}
+adm_sfc ::= SFC
+{
+  name = "SFC"
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
+}
+adm_vbr ::= VBR
+{
+  name = "VBR"
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
+}
+
 // ATTN: ordering in groups
 private adm_group_all ::=                   adm_drd | adm_ard | adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
 private adm_group_all_except_ard ::=        adm_drd |           adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
 private adm_group_all_except_pc_imm ::=     adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
 private adm_group_all_except_ard_pc_imm ::= adm_drd |                     adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
 
+private adm_group_ctrl_registers ::= adm_dfc | adm_sfc | adm_vbr
+{
+  name = "control register"
+}
 
 // Common tails
 private tail_data_size_all___all__all_except_pc_imm ::=     data_size_all?       adm_group_all COMMA adm_group_all_except_pc_imm
@@ -366,7 +389,8 @@ private move_instructions ::= move_instruction |
                               movea_instruction |
                               moveq_instruction |
                               movem_instruction |
-                              movep_instruction
+                              movep_instruction |
+                              movec_instruction
 
 fake move_instruction_base ::=
 {
@@ -440,6 +464,16 @@ movep_instruction ::= MOVEP data_size_word_long?
                         movep_tail_adi_drd
                       )
 
+private movec_from_ctrl_tail ::= adm_group_ctrl_registers COMMA adm_rrd
+private movec_to_ctrl_tail ::= adm_rrd COMMA adm_group_ctrl_registers
+movec_instruction ::= MOVEC data_size_long?
+                      (
+                        movec_from_ctrl_tail |
+                        movec_to_ctrl_tail
+                      )
+{
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kPrivilegedInstruction"
+}
 
 // Data Movement =========================================================
 private data_movement_instructions ::= exg_instruction |

@@ -1,0 +1,12 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kMovecInstructionImpl(MOVEC_INSTRUCTION)
+    PsiElement(movec)('movec')
+    PsiElement(.l)('.l')
+    PsiWhiteSpace(' ')
+    M68kAdmVbrImpl(ADM_VBR)
+      PsiElement(vbr)('vbr')
+    PsiElement(,)(',')
+    M68kAdmRrdImpl(ADM_RRD)
+      M68kAdmArdImpl(ADM_ARD)
+        PsiElement(address_register)('a1')

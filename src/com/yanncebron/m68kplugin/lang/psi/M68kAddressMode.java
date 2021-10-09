@@ -104,7 +104,14 @@ public enum M68kAddressMode {
   /**
    * {@link M68kAdmCcr}
    */
-  SPECIAL_REGISTER_CCR("CCR");
+  SPECIAL_REGISTER_CCR("CCR"),
+
+  /**
+   * {@link M68kAdmDfc}
+   * {@link M68kAdmSfc}
+   * {@link M68kAdmVbr}
+   */
+  CONTROL_REGISTER("CTRL");
 
   private final String notation;
 

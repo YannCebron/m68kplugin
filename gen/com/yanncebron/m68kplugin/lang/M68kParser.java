@@ -78,18 +78,18 @@ public class M68kParser implements PsiParser, LightPsiParser {
       DR_DIRECTIVE, DS_DIRECTIVE, EORI_INSTRUCTION, EOR_INSTRUCTION,
       EXG_INSTRUCTION, EXT_INSTRUCTION, LEA_INSTRUCTION, LINK_INSTRUCTION,
       LSL_INSTRUCTION, LSR_INSTRUCTION, MACRO_CALL_DIRECTIVE, MOVEA_INSTRUCTION,
-      MOVEM_INSTRUCTION, MOVEP_INSTRUCTION, MOVEQ_INSTRUCTION, MOVE_INSTRUCTION,
-      MULS_INSTRUCTION, MULU_INSTRUCTION, NBCD_INSTRUCTION, NEGX_INSTRUCTION,
-      NEG_INSTRUCTION, NOT_INSTRUCTION, ORI_INSTRUCTION, OR_INSTRUCTION,
-      PEA_INSTRUCTION, ROL_INSTRUCTION, ROR_INSTRUCTION, ROXL_INSTRUCTION,
-      ROXR_INSTRUCTION, RS_DIRECTIVE, SBCD_INSTRUCTION, SCC_INSTRUCTION,
-      SCS_INSTRUCTION, SEQ_INSTRUCTION, SF_INSTRUCTION, SGE_INSTRUCTION,
-      SGT_INSTRUCTION, SHI_INSTRUCTION, SHS_INSTRUCTION, SLE_INSTRUCTION,
-      SLO_INSTRUCTION, SLS_INSTRUCTION, SLT_INSTRUCTION, SMI_INSTRUCTION,
-      SNE_INSTRUCTION, SPL_INSTRUCTION, ST_INSTRUCTION, SUBA_INSTRUCTION,
-      SUBI_INSTRUCTION, SUBQ_INSTRUCTION, SUBX_INSTRUCTION, SUB_INSTRUCTION,
-      SVC_INSTRUCTION, SVS_INSTRUCTION, SWAP_INSTRUCTION, TAS_INSTRUCTION,
-      TST_INSTRUCTION),
+      MOVEC_INSTRUCTION, MOVEM_INSTRUCTION, MOVEP_INSTRUCTION, MOVEQ_INSTRUCTION,
+      MOVE_INSTRUCTION, MULS_INSTRUCTION, MULU_INSTRUCTION, NBCD_INSTRUCTION,
+      NEGX_INSTRUCTION, NEG_INSTRUCTION, NOT_INSTRUCTION, ORI_INSTRUCTION,
+      OR_INSTRUCTION, PEA_INSTRUCTION, ROL_INSTRUCTION, ROR_INSTRUCTION,
+      ROXL_INSTRUCTION, ROXR_INSTRUCTION, RS_DIRECTIVE, SBCD_INSTRUCTION,
+      SCC_INSTRUCTION, SCS_INSTRUCTION, SEQ_INSTRUCTION, SF_INSTRUCTION,
+      SGE_INSTRUCTION, SGT_INSTRUCTION, SHI_INSTRUCTION, SHS_INSTRUCTION,
+      SLE_INSTRUCTION, SLO_INSTRUCTION, SLS_INSTRUCTION, SLT_INSTRUCTION,
+      SMI_INSTRUCTION, SNE_INSTRUCTION, SPL_INSTRUCTION, ST_INSTRUCTION,
+      SUBA_INSTRUCTION, SUBI_INSTRUCTION, SUBQ_INSTRUCTION, SUBX_INSTRUCTION,
+      SUB_INSTRUCTION, SVC_INSTRUCTION, SVS_INSTRUCTION, SWAP_INSTRUCTION,
+      TAS_INSTRUCTION, TST_INSTRUCTION),
   };
 
   /* ********************************************************** */
@@ -501,6 +501,18 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // DFC
+  public static boolean adm_dfc(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_dfc")) return false;
+    if (!nextTokenIs(b, "<DFC>", DFC)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, ADM_DFC, "<DFC>");
+    r = consumeToken(b, DFC);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // DATA_REGISTER
   public static boolean adm_drd(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_drd")) return false;
@@ -577,6 +589,19 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = adm_adi(b, l + 1);
     if (!r) r = adm_aix(b, l + 1);
     if (!r) r = adm_abs(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // adm_dfc | adm_sfc | adm_vbr
+  static boolean adm_group_ctrl_registers(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_group_ctrl_registers")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<control register>");
+    r = adm_dfc(b, l + 1);
+    if (!r) r = adm_sfc(b, l + 1);
+    if (!r) r = adm_vbr(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -790,6 +815,18 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // SFC
+  public static boolean adm_sfc(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_sfc")) return false;
+    if (!nextTokenIs(b, "<SFC>", SFC)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, ADM_SFC, "<SFC>");
+    r = consumeToken(b, SFC);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // SR
   public static boolean adm_sr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_sr")) return false;
@@ -809,6 +846,18 @@ public class M68kParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ADM_USP, "<USP>");
     r = consumeToken(b, USP);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // VBR
+  public static boolean adm_vbr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_vbr")) return false;
+    if (!nextTokenIs(b, "<VBR>", VBR)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, ADM_VBR, "<VBR>");
+    r = consumeToken(b, VBR);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -2675,7 +2724,8 @@ public class M68kParser implements PsiParser, LightPsiParser {
   //                               movea_instruction |
   //                               moveq_instruction |
   //                               movem_instruction |
-  //                               movep_instruction
+  //                               movep_instruction |
+  //                               movec_instruction
   static boolean move_instructions(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "move_instructions")) return false;
     boolean r;
@@ -2684,6 +2734,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = moveq_instruction(b, l + 1);
     if (!r) r = movem_instruction(b, l + 1);
     if (!r) r = movep_instruction(b, l + 1);
+    if (!r) r = movec_instruction(b, l + 1);
     return r;
   }
 
@@ -2816,6 +2867,68 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = r && tail_data_size_word_long___all__ard(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  /* ********************************************************** */
+  // adm_group_ctrl_registers COMMA adm_rrd
+  static boolean movec_from_ctrl_tail(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movec_from_ctrl_tail")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = adm_group_ctrl_registers(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_rrd(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // MOVEC data_size_long?
+  //                       (
+  //                         movec_from_ctrl_tail |
+  //                         movec_to_ctrl_tail
+  //                       )
+  public static boolean movec_instruction(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movec_instruction")) return false;
+    if (!nextTokenIs(b, "<instruction>", MOVEC)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, MOVEC_INSTRUCTION, "<instruction>");
+    r = consumeToken(b, MOVEC);
+    p = r; // pin = 1
+    r = r && report_error_(b, movec_instruction_1(b, l + 1));
+    r = p && movec_instruction_2(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // data_size_long?
+  private static boolean movec_instruction_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movec_instruction_1")) return false;
+    data_size_long(b, l + 1);
+    return true;
+  }
+
+  // movec_from_ctrl_tail |
+  //                         movec_to_ctrl_tail
+  private static boolean movec_instruction_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movec_instruction_2")) return false;
+    boolean r;
+    r = movec_from_ctrl_tail(b, l + 1);
+    if (!r) r = movec_to_ctrl_tail(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // adm_rrd COMMA adm_group_ctrl_registers
+  static boolean movec_to_ctrl_tail(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movec_to_ctrl_tail")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = adm_rrd(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_group_ctrl_registers(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
   }
 
   /* ********************************************************** */

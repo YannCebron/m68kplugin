@@ -1,0 +1,7 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kMovecInstructionImpl(MOVEC_INSTRUCTION)
+    PsiElement(movec)('movec')
+    PsiErrorElement:<control register> or <data|address register> expected
+      <empty list>
+  PsiWhiteSpace(' ')

@@ -147,7 +147,9 @@ public enum M68kOperand {
 
   SR_REGISTER(M68kAddressMode.SPECIAL_REGISTER_SR),
   USP_REGISTER(M68kAddressMode.SPECIAL_REGISTER_USP),
-  CCR_REGISTER(M68kAddressMode.SPECIAL_REGISTER_CCR);
+  CCR_REGISTER(M68kAddressMode.SPECIAL_REGISTER_CCR),
+
+  CTRL_REGISTER(M68kAddressMode.CONTROL_REGISTER);
 
   private final M68kAddressMode[] addressModes;
 

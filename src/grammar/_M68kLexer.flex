@@ -303,6 +303,7 @@ Z=[zZ]
 
   {M}{O}{V}{E}    / {DATA_SIZE}? { yybegin(AFTER_INSTRUCTION); return MOVE; }
   {M}{O}{V}{E}{A} / {DATA_SIZE}? { yybegin(AFTER_INSTRUCTION); return MOVEA; }
+  {M}{O}{V}{E}{C} / {DATA_SIZE}? { yybegin(AFTER_INSTRUCTION); return MOVEC; }
   {M}{O}{V}{E}{M} / {DATA_SIZE}? { yybegin(AFTER_INSTRUCTION); return MOVEM; }
   {M}{O}{V}{E}{P} / {DATA_SIZE}? { yybegin(AFTER_INSTRUCTION); return MOVEP; }
   {M}{O}{V}{E}{Q} / {DATA_SIZE}? { yybegin(AFTER_INSTRUCTION); return MOVEQ; }

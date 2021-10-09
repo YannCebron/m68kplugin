@@ -96,6 +96,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitAdmWithRegister(o);
   }
 
+  public void visitAdmDfc(@NotNull M68kAdmDfc o) {
+    visitAdmWithRegister(o);
+  }
+
   public void visitAdmDrd(@NotNull M68kAdmDrd o) {
     visitAdmWithRegister(o);
   }
@@ -126,11 +130,19 @@ public class M68kVisitor extends PsiElementVisitor {
     // visitAdmWithRrd(o);
   }
 
+  public void visitAdmSfc(@NotNull M68kAdmSfc o) {
+    visitAdmWithRegister(o);
+  }
+
   public void visitAdmSr(@NotNull M68kAdmSr o) {
     visitAdmWithRegister(o);
   }
 
   public void visitAdmUsp(@NotNull M68kAdmUsp o) {
+    visitAdmWithRegister(o);
+  }
+
+  public void visitAdmVbr(@NotNull M68kAdmVbr o) {
     visitAdmWithRegister(o);
   }
 
@@ -820,6 +832,11 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitMoveaInstruction(@NotNull M68kMoveaInstruction o) {
     visitMoveInstructionBase(o);
+  }
+
+  public void visitMovecInstruction(@NotNull M68kMovecInstruction o) {
+    visitMoveInstructionBase(o);
+    // visitPrivilegedInstruction(o);
   }
 
   public void visitMovemInstruction(@NotNull M68kMovemInstruction o) {

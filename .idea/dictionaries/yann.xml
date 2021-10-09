@@ -70,6 +70,7 @@
       <w>macrocall</w>
       <w>mexit</w>
       <w>movea</w>
+      <w>movec</w>
       <w>movem</w>
       <w>movembytes</w>
       <w>movemregs</w>

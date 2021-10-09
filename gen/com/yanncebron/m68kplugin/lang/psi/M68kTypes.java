@@ -42,6 +42,7 @@ public interface M68kTypes {
   IElementType ADM_ARD = new M68kCompositeElementType("ADM_ARD");
   IElementType ADM_ARI = new M68kCompositeElementType("ADM_ARI");
   IElementType ADM_CCR = new M68kCompositeElementType("ADM_CCR");
+  IElementType ADM_DFC = new M68kCompositeElementType("ADM_DFC");
   IElementType ADM_DRD = new M68kCompositeElementType("ADM_DRD");
   IElementType ADM_IMM = new M68kCompositeElementType("ADM_IMM");
   IElementType ADM_PCD = new M68kCompositeElementType("ADM_PCD");
@@ -49,8 +50,10 @@ public interface M68kTypes {
   IElementType ADM_QUICK = new M68kCompositeElementType("ADM_QUICK");
   IElementType ADM_RRD = new M68kCompositeElementType("ADM_RRD");
   IElementType ADM_RRD_INDEX = new M68kCompositeElementType("ADM_RRD_INDEX");
+  IElementType ADM_SFC = new M68kCompositeElementType("ADM_SFC");
   IElementType ADM_SR = new M68kCompositeElementType("ADM_SR");
   IElementType ADM_USP = new M68kCompositeElementType("ADM_USP");
+  IElementType ADM_VBR = new M68kCompositeElementType("ADM_VBR");
   IElementType ALIGN_DIRECTIVE = new M68kCompositeElementType("ALIGN_DIRECTIVE");
   IElementType ANDI_INSTRUCTION = new M68kCompositeElementType("ANDI_INSTRUCTION");
   IElementType AND_EXPRESSION = new M68kCompositeElementType("AND_EXPRESSION");
@@ -206,6 +209,7 @@ public interface M68kTypes {
   IElementType MINUS_EXPRESSION = new M68kCompositeElementType("MINUS_EXPRESSION");
   IElementType MOD_EXPRESSION = new M68kCompositeElementType("MOD_EXPRESSION");
   IElementType MOVEA_INSTRUCTION = new M68kCompositeElementType("MOVEA_INSTRUCTION");
+  IElementType MOVEC_INSTRUCTION = new M68kCompositeElementType("MOVEC_INSTRUCTION");
   IElementType MOVEM_INSTRUCTION = new M68kCompositeElementType("MOVEM_INSTRUCTION");
   IElementType MOVEP_INSTRUCTION = new M68kCompositeElementType("MOVEP_INSTRUCTION");
   IElementType MOVEQ_INSTRUCTION = new M68kCompositeElementType("MOVEQ_INSTRUCTION");
@@ -353,6 +357,9 @@ public interface M68kTypes {
       else if (type == ADM_CCR) {
         return new M68kAdmCcrImpl(node);
       }
+      else if (type == ADM_DFC) {
+        return new M68kAdmDfcImpl(node);
+      }
       else if (type == ADM_DRD) {
         return new M68kAdmDrdImpl(node);
       }
@@ -374,11 +381,17 @@ public interface M68kTypes {
       else if (type == ADM_RRD_INDEX) {
         return new M68kAdmRrdIndexImpl(node);
       }
+      else if (type == ADM_SFC) {
+        return new M68kAdmSfcImpl(node);
+      }
       else if (type == ADM_SR) {
         return new M68kAdmSrImpl(node);
       }
       else if (type == ADM_USP) {
         return new M68kAdmUspImpl(node);
+      }
+      else if (type == ADM_VBR) {
+        return new M68kAdmVbrImpl(node);
       }
       else if (type == ALIGN_DIRECTIVE) {
         return new M68kAlignDirectiveImpl(node);
@@ -841,6 +854,9 @@ public interface M68kTypes {
       }
       else if (type == MOVEA_INSTRUCTION) {
         return new M68kMoveaInstructionImpl(node);
+      }
+      else if (type == MOVEC_INSTRUCTION) {
+        return new M68kMovecInstructionImpl(node);
       }
       else if (type == MOVEM_INSTRUCTION) {
         return new M68kMovemInstructionImpl(node);
