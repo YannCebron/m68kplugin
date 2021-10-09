@@ -64,6 +64,7 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
     createDescriptor("color.settings.group.registers", "attribute.descriptor.ssp.register", M68kTextAttributes.SSP_REGISTER),
     createDescriptor("color.settings.group.registers", "attribute.descriptor.usp.register", M68kTextAttributes.USP_REGISTER),
     createDescriptor("color.settings.group.registers", "attribute.descriptor.dfc.register", M68kTextAttributes.DFC_REGISTER),
+    createDescriptor("color.settings.group.registers", "attribute.descriptor.sfc.register", M68kTextAttributes.SFC_REGISTER),
   };
 
   private static AttributesDescriptor createDescriptor(String groupKey, String typeKey, TextAttributesKey textAttributesKey) {

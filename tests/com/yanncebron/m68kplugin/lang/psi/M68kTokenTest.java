@@ -47,6 +47,7 @@ public class M68kTokenTest extends BasePlatformTestCase {
     M68kTokenTypes.R_PAREN,
     M68kTokenTypes.R_BRACKET,
     M68kTokenTypes.PC,
+    M68kTokenTypes.SFC,
     M68kTokenTypes.SP,
     M68kTokenTypes.SR,
     M68kTokenTypes.SSP,

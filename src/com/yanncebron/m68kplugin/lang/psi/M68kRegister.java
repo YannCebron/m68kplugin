@@ -52,7 +52,8 @@ public enum M68kRegister {
   CCR(M68kTokenTypes.CCR, null, M68kCpu.GROUP_68000_UP),
 
   
-  DFC(M68kTokenTypes.DFC, null, M68kCpu.GROUP_68010_UP);
+  DFC(M68kTokenTypes.DFC, null, M68kCpu.GROUP_68010_UP),
+  SFC(M68kTokenTypes.SFC, null, M68kCpu.GROUP_68010_UP);
 
   private final IElementType elementType;
   private final String text;

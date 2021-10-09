@@ -265,6 +265,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType SEQ = new M68kTokenType("seq");
   public static final IElementType SET = new M68kTokenType("set");
   public static final IElementType SF = new M68kTokenType("sf");
+  public static final IElementType SFC = new M68kTokenType("sfc");
   public static final IElementType SGE = new M68kTokenType("sge");
   public static final IElementType SGT = new M68kTokenType("sgt");
   public static final IElementType SHI = new M68kTokenType("shi");
