@@ -29,12 +29,20 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest("label equ 42");
   }
 
+  public void testEquLabelWithColonDirective() throws Exception {
+    doCodeTest("label: equ 42");
+  }
+
   public void testEquDirectiveMissingExpression() throws Exception {
     doCodeTest("label equ ");
   }
 
   public void testEqDirective() throws Exception {
     doCodeTest("label = 42");
+  }
+
+  public void testEqLabelWithColonDirective() throws Exception {
+    doCodeTest("label: = 42");
   }
 
   public void testEqDirectiveWithoutWhitespace() throws Exception {
@@ -53,6 +61,10 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest("label equr d6");
   }
 
+  public void testEqurDirectiveLabelColonDataRegister() throws Exception {
+    doCodeTest("label: equr d6");
+  }
+
   public void testEqurDirectiveAddressRegister() throws Exception {
     doCodeTest("label equR a4");
   }
@@ -63,6 +75,10 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
 
   public void testRegDirective() throws Exception {
     doCodeTest("label reg d0-d7/a0");
+  }
+
+  public void testRegDirectiveLabelColon() throws Exception {
+    doCodeTest("label: reg d0-d7/a0");
   }
 
   public void testRegDirectiveMissingRegisterList() throws Exception {
@@ -485,11 +501,11 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" ac68080");
   }
 
-  public void testMachineDirective() throws  Exception {
+  public void testMachineDirective() throws Exception {
     doCodeTest(" machine 68000");
   }
 
-  public void testMachineDirectiveMissingCpuType() throws  Exception {
+  public void testMachineDirectiveMissingCpuType() throws Exception {
     doCodeTest(" machine ");
   }
 

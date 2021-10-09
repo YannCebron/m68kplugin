@@ -32,6 +32,11 @@ public class MacroParsingTest extends M68kParsingTestCase {
       " ENDM");
   }
 
+  public void testEmptyMacroColon() throws IOException {
+    doCodeTest("macroName: MACRO\n" +
+      " ENDM");
+  }
+
   public void testEmptyMacroMacroKeywordFirst() throws IOException {
     doCodeTest(" MACRO macroName\n" +
       " ENDM");

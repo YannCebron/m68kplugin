@@ -4,13 +4,13 @@
 macro1 macro
   endm
 
-macro1 macro      ; redefine
+macro1: macro      ; redefine
   endm
 
 macro2 macro
   endm
 
-  macro macro3
+  macro macro3:
   endm
 
   macro1

@@ -21,3 +21,9 @@ _label
 
  labelWithIndent:
  labelWithIndentAndInstruction: nop
+
+colon: equ 3
+colon2: = 2
+
+regList: reg d0/d7
+myReg: equr d0

@@ -288,9 +288,6 @@ Z=[zZ]
   // instruction itself can be macro param inside macro block
   "\\"                         { yybegin(IN_OPERAND); return BACKSLASH; }
 
-  // after label+whitespaces switching problems, duplicated in AFTER_LABEL
-  "="                          { yybegin(IN_OPERAND); return EQ_DIRECTIVE; }
-
   {N}{O}{P}                    { yybegin(AFTER_OPERAND); return NOP; }
   {I}{L}{L}{E}{G}{A}{L}        { yybegin(AFTER_OPERAND); return ILLEGAL; }
   {R}{E}{S}{E}{T}              { yybegin(AFTER_OPERAND); return RESET; }
@@ -532,6 +529,12 @@ Z=[zZ]
   {M}{C}68060                  { yybegin(AFTER_OPERAND); return MC68060; }
   {A}{C}68080                  { yybegin(AFTER_OPERAND); return AC68080; }
   {M}{A}{C}{H}{I}{N}{E}        { yybegin(IN_OPERAND); return MACHINE; }
+
+  // after 'label:', duplicated from <AFTER_LABEL>
+  {M}{A}{C}{R}{O}              { yybegin(AFTER_OPERAND); return MACRO; }
+  {E}{Q}{U}                    { yybegin(IN_OPERAND); return EQU; }
+  {E}{Q}{U}{R}                 { yybegin(IN_OPERAND); return EQUR; }
+  "="                          { yybegin(IN_OPERAND); return EQ_DIRECTIVE; }
 
   // anything else is macro name
   {MACRO_NAME} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return MACRO_CALL_ID; }
