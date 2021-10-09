@@ -139,8 +139,3 @@ MadMac assembler specific (all directives may be optionally preceded by a dot):
   - `'\'` and `''''` are valid
 - do not allow spaces (?!)
 - support `equr`/`reg` etc. replacement names `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
-
-### Internal Notes
-
-- `LexerTestCase.checkCorrectRestartOnEveryToken`
-- FBI tracking macro/conditional assembly/target architecture scopes
