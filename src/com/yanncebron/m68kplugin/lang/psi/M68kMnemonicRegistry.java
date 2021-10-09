@@ -43,7 +43,7 @@ public final class M68kMnemonicRegistry {
   }
 
   private M68kMnemonicRegistry() {
-// Total mnemonics: 308
+    // Total mnemonics: 311
     mnemonics.putValue(M68kTokenTypes.ABCD,
       new M68kMnemonic(M68kTokenTypes.ABCD,
         M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER,
@@ -844,6 +844,16 @@ public final class M68kMnemonicRegistry {
         M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER,
         M68kDataSize.GROUP_L,
         M68kCpu.GROUP_68000_UP));
+    mnemonics.putValue(M68kTokenTypes.MOVES,
+      new M68kMnemonic(M68kTokenTypes.MOVES,
+        M68kOperand.ALTERABLE_MEMORY, M68kOperand.DATA_OR_ADDRESS_REGISTER,
+        M68kDataSize.GROUP_BWL,
+        M68kCpu.GROUP_68010_UP));
+    mnemonics.putValue(M68kTokenTypes.MOVES,
+      new M68kMnemonic(M68kTokenTypes.MOVES,
+        M68kOperand.DATA_OR_ADDRESS_REGISTER, M68kOperand.ALTERABLE_MEMORY,
+        M68kDataSize.GROUP_BWL,
+        M68kCpu.GROUP_68010_UP));
     mnemonics.putValue(M68kTokenTypes.MULS,
       new M68kMnemonic(M68kTokenTypes.MULS,
         M68kOperand.ALTERABLE_DATA_CF, M68kOperand.DATA_REGISTER,

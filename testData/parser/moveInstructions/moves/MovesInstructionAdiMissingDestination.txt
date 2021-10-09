@@ -1,0 +1,12 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kMovesInstructionImpl(MOVES_INSTRUCTION)
+    PsiElement(moves)('moves')
+  PsiWhiteSpace(' ')
+  PsiElement(dec_number)('42')
+  PsiElement(()('(')
+  PsiElement(address_register)('a0')
+  PsiElement())(')')
+  PsiElement(,)(',')
+  PsiErrorElement:<data|address register> expected
+    <empty list>

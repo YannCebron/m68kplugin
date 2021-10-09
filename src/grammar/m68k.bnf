@@ -390,7 +390,8 @@ private move_instructions ::= move_instruction |
                               moveq_instruction |
                               movem_instruction |
                               movep_instruction |
-                              movec_instruction
+                              movec_instruction |
+                              moves_instruction
 
 fake move_instruction_base ::=
 {
@@ -470,6 +471,17 @@ movec_instruction ::= MOVEC data_size_long?
                       (
                         movec_from_ctrl_tail |
                         movec_to_ctrl_tail
+                      )
+{
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kPrivilegedInstruction"
+}
+
+private moves_tail_from ::= adm_group_all_except_ard COMMA adm_rrd
+private moves_tail_to ::= adm_rrd COMMA adm_group_all_except_ard
+moves_instruction ::= MOVES data_size_all?
+                      (
+                        moves_tail_from |
+                        moves_tail_to
                       )
 {
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kPrivilegedInstruction"

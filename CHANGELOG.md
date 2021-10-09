@@ -4,7 +4,7 @@
 
 ### Added
 
-- 68010 support instructions: BKPT, MOVE from CCR, MOVEC
+- 68010 support instructions: BKPT, MOVE from CCR, MOVEC, MOVES
 - 68010 support registers: DFC, SFC, VBR
 
 ### Changed

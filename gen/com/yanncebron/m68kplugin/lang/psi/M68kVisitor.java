@@ -851,6 +851,11 @@ public class M68kVisitor extends PsiElementVisitor {
     visitMoveInstructionBase(o);
   }
 
+  public void visitMovesInstruction(@NotNull M68kMovesInstruction o) {
+    visitMoveInstructionBase(o);
+    // visitPrivilegedInstruction(o);
+  }
+
   public void visitMulExpression(@NotNull M68kMulExpression o) {
     visitBinaryExpression(o);
   }

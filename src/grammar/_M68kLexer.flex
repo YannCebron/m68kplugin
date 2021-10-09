@@ -307,6 +307,7 @@ Z=[zZ]
   {M}{O}{V}{E}{M} / {DATA_SIZE}? { yybegin(AFTER_INSTRUCTION); return MOVEM; }
   {M}{O}{V}{E}{P} / {DATA_SIZE}? { yybegin(AFTER_INSTRUCTION); return MOVEP; }
   {M}{O}{V}{E}{Q} / {DATA_SIZE}? { yybegin(AFTER_INSTRUCTION); return MOVEQ; }
+  {M}{O}{V}{E}{S} / {DATA_SIZE}? { yybegin(AFTER_INSTRUCTION); return MOVES; }
 
   {T}{S}{T} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return TST; }
   {T}{A}{S} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return TAS; }

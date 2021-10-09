@@ -31,7 +31,8 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
         " <info descr=\"Privileged instruction\" textAttributesKey=\"M68K_PRIVILEGED_INSTRUCTION\">eori #2,SR</info>\n" +
         " <info descr=\"Privileged instruction\" textAttributesKey=\"M68K_PRIVILEGED_INSTRUCTION\">move.l usp,a0</info>\n" +
         " <info descr=\"Privileged instruction\" textAttributesKey=\"M68K_PRIVILEGED_INSTRUCTION\">move.w d0,sr</info>\n" +
-        " <info descr=\"Privileged instruction\" textAttributesKey=\"M68K_PRIVILEGED_INSTRUCTION\">movec.l d0,VBR</info>\n"
+        " <info descr=\"Privileged instruction\" textAttributesKey=\"M68K_PRIVILEGED_INSTRUCTION\">movec.l d0,VBR</info>\n"  +
+        " <info descr=\"Privileged instruction\" textAttributesKey=\"M68K_PRIVILEGED_INSTRUCTION\">moves (a0),d0</info>\n"
     );
     myFixture.testHighlighting(false, true, false);
   }
