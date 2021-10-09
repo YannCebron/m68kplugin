@@ -4,7 +4,7 @@
 
 ### Added
 
-- 68010 support: bkpt
+- 68010 support: BKPT, MOVE from CCR
 
 ### Changed
 

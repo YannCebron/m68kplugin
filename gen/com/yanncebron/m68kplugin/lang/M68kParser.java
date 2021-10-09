@@ -2635,6 +2635,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   //                      (
   //                        move_tail_usp_ard |
   //                        move_tail_sr |
+  //                        move_tail_from_ccr |
   //                        move_tail_to_ccr_sr |
   //                        move_tail_ard_usp |
   //                        tail_data_size_all___all__all_except_pc_imm
@@ -2653,6 +2654,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   // move_tail_usp_ard |
   //                        move_tail_sr |
+  //                        move_tail_from_ccr |
   //                        move_tail_to_ccr_sr |
   //                        move_tail_ard_usp |
   //                        tail_data_size_all___all__all_except_pc_imm
@@ -2661,6 +2663,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     boolean r;
     r = move_tail_usp_ard(b, l + 1);
     if (!r) r = move_tail_sr(b, l + 1);
+    if (!r) r = move_tail_from_ccr(b, l + 1);
     if (!r) r = move_tail_to_ccr_sr(b, l + 1);
     if (!r) r = move_tail_ard_usp(b, l + 1);
     if (!r) r = tail_data_size_all___all__all_except_pc_imm(b, l + 1);
@@ -2702,6 +2705,28 @@ public class M68kParser implements PsiParser, LightPsiParser {
   private static boolean move_tail_ard_usp_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "move_tail_ard_usp_0")) return false;
     data_size_long(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // data_size_word? adm_ccr COMMA adm_group_all_except_ard
+  static boolean move_tail_from_ccr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_from_ccr")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
+    r = move_tail_from_ccr_0(b, l + 1);
+    r = r && adm_ccr(b, l + 1);
+    p = r; // pin = 2
+    r = r && report_error_(b, consumeToken(b, COMMA));
+    r = p && adm_group_all_except_ard(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // data_size_word?
+  private static boolean move_tail_from_ccr_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_from_ccr_0")) return false;
+    data_size_word(b, l + 1);
     return true;
   }
 
