@@ -45,8 +45,7 @@ public class MoveInstructionPsiTest extends M68kPsiTestCase {
     final M68kMoveInstruction instruction = parse("move.w SR,d6");
 
     assertFalse(instruction.isPrivileged(M68kCpu.M_68000));
-    assertFalse(instruction.isPrivileged(M68kCpu.M_68010));
-    for (M68kCpu m68kCpu : M68kCpu.GROUP_68020_UP) {
+    for (M68kCpu m68kCpu : M68kCpu.GROUP_68010_UP) {
       assertTrue(instruction.isPrivileged(m68kCpu));
     }
 

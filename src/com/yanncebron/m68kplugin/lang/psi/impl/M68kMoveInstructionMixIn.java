@@ -38,7 +38,7 @@ abstract class M68kMoveInstructionMixIn extends M68kMoveInstructionBaseImpl impl
       return false;
     }
 
-    if ((m68kCpu == M68kCpu.M_68000 || m68kCpu == M68kCpu.M_68010) &&
+    if (m68kCpu == M68kCpu.M_68000 &&
       M68kPsiImplUtil.isSrc(this, admSr)) {
       return false;
     }
