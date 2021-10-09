@@ -70,12 +70,14 @@ public class M68kShowUsedRegistersIntention implements IntentionAction {
     sb.append("<table cellpadding=3>");
     final Iterator<M68kRegister> dataRegIt = EnumSet.range(M68kRegister.D0, M68kRegister.D7).iterator();
     final Iterator<M68kRegister> addrRegIt = EnumSet.range(M68kRegister.A0, M68kRegister.A7).iterator();
-    final Iterator<M68kRegister> specialRegIt = EnumSet.complementOf(EnumSet.range(M68kRegister.D0, M68kRegister.A7)).iterator();
+    final Iterator<M68kRegister> specialRegIt = EnumSet.range(M68kRegister.SP, M68kRegister.CCR).iterator();
+    final Iterator<M68kRegister> controlRegIt = EnumSet.range(M68kRegister.DFC, M68kRegister.VBR).iterator();
     while (dataRegIt.hasNext()) {
       sb.append("<tr>");
       printRegister(sb, used, dataRegIt);
       printRegister(sb, used, addrRegIt);
       printRegister(sb, used, specialRegIt);
+      printRegister(sb, used, controlRegIt);
       sb.append("</tr>");
     }
     sb.append("</table>");
@@ -116,21 +118,6 @@ public class M68kShowUsedRegistersIntention implements IntentionAction {
       }
 
       @Override
-      public void visitAdmSr(@NotNull M68kAdmSr o) {
-        addIfInside(o, M68kRegister.SR);
-      }
-
-      @Override
-      public void visitAdmCcr(@NotNull M68kAdmCcr o) {
-        addIfInside(o, M68kRegister.CCR);
-      }
-
-      @Override
-      public void visitAdmUsp(@NotNull M68kAdmUsp o) {
-        addIfInside(o, M68kRegister.USP);
-      }
-
-      @Override
       public void visitAdmPcd(@NotNull M68kAdmPcd o) {
         addIfInside(o, M68kRegister.PC);
       }
@@ -141,12 +128,7 @@ public class M68kShowUsedRegistersIntention implements IntentionAction {
       }
 
       @Override
-      public void visitAdmDrd(@NotNull M68kAdmDrd o) {
-        addIfInside(o, o.getRegister());
-      }
-
-      @Override
-      public void visitAdmArd(@NotNull M68kAdmArd o) {
+      public void visitAdmWithRegister(@NotNull M68kAdmWithRegister o) {
         addIfInside(o, o.getRegister());
       }
     };
