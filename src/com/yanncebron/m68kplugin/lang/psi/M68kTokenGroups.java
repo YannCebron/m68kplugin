@@ -98,6 +98,7 @@ public final class M68kTokenGroups {
     ASR,
     BCHG,
     BCLR,
+    BKPT,
     BSET,
     BSR,
     BTST,

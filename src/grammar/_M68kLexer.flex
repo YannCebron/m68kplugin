@@ -292,6 +292,7 @@ Z=[zZ]
   {R}{E}{S}{E}{T}              { yybegin(AFTER_OPERAND); return RESET; }
   {S}{T}{O}{P}                 { yybegin(IN_OPERAND); return STOP; }
   {T}{R}{A}{P}                 { yybegin(IN_OPERAND); return TRAP; }
+  {B}{K}{P}{T}                 { yybegin(IN_OPERAND); return BKPT; }
   {T}{R}{A}{P}{V}              { yybegin(AFTER_OPERAND); return TRAPV; }
   {L}{I}{N}{K}  / {DATA_SIZE}? { yybegin(AFTER_INSTRUCTION); return LINK; }
   {U}{N}{L}{K}                 { yybegin(IN_OPERAND); return UNLK; }

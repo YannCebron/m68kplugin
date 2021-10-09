@@ -23,7 +23,12 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.intellij.util.PairConsumer;
 import com.twelvemonkeys.lang.StringUtil;
+import com.yanncebron.m68kplugin.lang.psi.M68kCpu;
+import com.yanncebron.m68kplugin.lang.psi.M68kMnemonic;
+import com.yanncebron.m68kplugin.lang.psi.M68kMnemonicRegistry;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
+
+import java.util.Collection;
 
 public class M68kInstructionDocumentationProviderTest extends BasePlatformTestCase {
 
@@ -49,6 +54,16 @@ public class M68kInstructionDocumentationProviderTest extends BasePlatformTestCa
 
   public void testAllInstructionsHaveReferenceDocs() {
     for (IElementType elementType : M68kTokenGroups.INSTRUCTIONS.getTypes()) {
+      final Collection<M68kMnemonic> mnemonics = M68kMnemonicRegistry.getInstance().findAll(elementType);
+      boolean found68000 = false;
+      for (M68kMnemonic mnemonic : mnemonics) {
+        if (mnemonic.getCpus().contains(M68kCpu.M_68000)) {
+          found68000 = true;
+          break;
+        }
+      }
+      if (!found68000) continue;
+
       final String mnemonic = elementType.toString();
       doTestGenerateDoc(" " + mnemonic.charAt(0) + "<caret>" + mnemonic.substring(1), " - "); // [mnemonic] - [description]
     }

@@ -1188,6 +1188,20 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // BKPT adm_quick
+  public static boolean bkpt_instruction(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bkpt_instruction")) return false;
+    if (!nextTokenIs(b, "<instruction>", BKPT)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, BKPT_INSTRUCTION, "<instruction>");
+    r = consumeToken(b, BKPT);
+    p = r; // pin = 1
+    r = r && adm_quick(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
   // BLE bCC_tail
   public static boolean ble_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ble_instruction")) return false;
@@ -2589,6 +2603,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   //                               stop_instruction |
   //                               trap_instruction |
   //                               trapv_instruction |
+  //                               bkpt_instruction |
   //                               ext_instruction |
   //                               neg_instruction |
   //                               negx_instruction |
@@ -2606,6 +2621,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = stop_instruction(b, l + 1);
     if (!r) r = trap_instruction(b, l + 1);
     if (!r) r = trapv_instruction(b, l + 1);
+    if (!r) r = bkpt_instruction(b, l + 1);
     if (!r) r = ext_instruction(b, l + 1);
     if (!r) r = neg_instruction(b, l + 1);
     if (!r) r = negx_instruction(b, l + 1);

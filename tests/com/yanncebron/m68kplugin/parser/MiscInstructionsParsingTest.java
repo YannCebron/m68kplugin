@@ -53,6 +53,10 @@ public class MiscInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" trapv");
   }
 
+  public void testBkptInstruction() throws Exception {
+    doCodeTest(" bkpt #2");
+  }
+
   public void testLinkInstruction() throws Exception {
     doCodeTest(" link a0,#1");
   }

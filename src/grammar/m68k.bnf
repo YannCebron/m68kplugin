@@ -659,7 +659,7 @@ private misc_instructions ::= tst_instruction |
                               stop_instruction |
                               trap_instruction |
                               trapv_instruction |
-
+                              bkpt_instruction |
 
                               ext_instruction |
                               neg_instruction |
@@ -680,6 +680,8 @@ stop_instruction ::= STOP adm_quick
 }
 trap_instruction ::= TRAP adm_quick
 trapv_instruction ::= TRAPV
+
+bkpt_instruction ::= BKPT adm_quick
 
 clr_instruction ::= CLR tail_data_size_all___all_except_ard_pc_imm
 {
