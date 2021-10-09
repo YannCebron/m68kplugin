@@ -60,12 +60,13 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
     createDescriptor("color.settings.group.registers", "attribute.descriptor.data.register", M68kTextAttributes.DATA_REGISTER),
     createDescriptor("color.settings.group.registers", "attribute.descriptor.pc.register", M68kTextAttributes.PC_REGISTER),
     createDescriptor("color.settings.group.registers", "attribute.descriptor.sp.register", M68kTextAttributes.SP_REGISTER),
-    createDescriptor("color.settings.group.registers", "attribute.descriptor.sr.register", M68kTextAttributes.SR_REGISTER),
-    createDescriptor("color.settings.group.registers", "attribute.descriptor.ssp.register", M68kTextAttributes.SSP_REGISTER),
     createDescriptor("color.settings.group.registers", "attribute.descriptor.usp.register", M68kTextAttributes.USP_REGISTER),
-    createDescriptor("color.settings.group.registers", "attribute.descriptor.dfc.register", M68kTextAttributes.DFC_REGISTER),
-    createDescriptor("color.settings.group.registers", "attribute.descriptor.sfc.register", M68kTextAttributes.SFC_REGISTER),
-    createDescriptor("color.settings.group.registers", "attribute.descriptor.vbr.register", M68kTextAttributes.SFC_REGISTER),
+
+    createDescriptor("color.settings.group.supervisor.registers", "attribute.descriptor.dfc.register", M68kTextAttributes.DFC_REGISTER),
+    createDescriptor("color.settings.group.supervisor.registers", "attribute.descriptor.sfc.register", M68kTextAttributes.SFC_REGISTER),
+    createDescriptor("color.settings.group.supervisor.registers", "attribute.descriptor.sr.register", M68kTextAttributes.SR_REGISTER),
+    createDescriptor("color.settings.group.supervisor.registers", "attribute.descriptor.ssp.register", M68kTextAttributes.SSP_REGISTER),
+    createDescriptor("color.settings.group.supervisor.registers", "attribute.descriptor.vbr.register", M68kTextAttributes.SFC_REGISTER),
   };
 
   private static AttributesDescriptor createDescriptor(String groupKey, String typeKey, TextAttributesKey textAttributesKey) {

@@ -10,6 +10,7 @@
 ### Changed
 
 - fixed: dot without following identifier wrongly recognized as valid local label
+- Editor | Color Scheme settings: group "Supervisor Registers"            
 
 ## 0.1.0
 
