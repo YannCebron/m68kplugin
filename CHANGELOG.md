@@ -7,10 +7,13 @@
 - 68010 support: instructions BKPT, MOVE from CCR, MOVEC, MOVES
 - 68010 support: registers DFC, SFC, VBR
 
+### Fixed
+
+- single dot without following identifier recognized as valid local label
+- directives after label with colon
+
 ### Changed
 
-- fixed: dot without following identifier wrongly recognized as valid local label
-- fixed: directives after label with colon
 - Editor Color Scheme settings: group 'Supervisor Registers'
 - Instruction hover documentation: improve layout
 
