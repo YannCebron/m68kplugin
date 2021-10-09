@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.intentions;
 
 import com.intellij.codeInsight.hint.HintManager;
+import com.intellij.codeInsight.intention.HighPriorityAction;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
@@ -35,7 +36,7 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public class M68kShowUsedRegistersIntention implements IntentionAction {
+public class M68kShowUsedRegistersIntention implements IntentionAction, HighPriorityAction {
 
   @Override
   public @Nls(capitalization = Nls.Capitalization.Sentence) @NotNull String getText() {
