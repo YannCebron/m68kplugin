@@ -27,7 +27,7 @@ public class M68kMnemonicTest extends TestCase {
     int totalDeprecated = 0;
     for (IElementType instructionsType : M68kTokenGroups.INSTRUCTIONS.getTypes()) {
       final Collection<M68kMnemonic> mnemonics = M68kMnemonicRegistry.getInstance().findAll(instructionsType);
-      assertFalse(mnemonics.isEmpty());
+      assertFalse(instructionsType.toString(), mnemonics.isEmpty());
       for (M68kMnemonic mnemonic : mnemonics) {
         if (mnemonic.getElementType() != M68kTokenTypes.MOVEA) {
           assertFalse(mnemonic.toString(), mnemonic.isDeprecated());
