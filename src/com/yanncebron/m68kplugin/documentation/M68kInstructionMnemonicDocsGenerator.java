@@ -24,6 +24,7 @@ import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 class M68kInstructionMnemonicDocsGenerator {
@@ -56,6 +57,12 @@ class M68kInstructionMnemonicDocsGenerator {
       appendBreak();
     }
 
+    Set<M68kAddressMode> allUsedAddressModes = new HashSet<>();
+    for (M68kMnemonic mnemonic : mnemonics) {
+      ContainerUtil.addAll(allUsedAddressModes, mnemonic.getSourceOperand().getAddressModes());
+      ContainerUtil.addAll(allUsedAddressModes, mnemonic.getDestinationOperand().getAddressModes());
+    }
+
     for (M68kMnemonic mnemonic : mnemonics) {
       sb.append("<h2>");
       final String mnemonicText = elementType + StringUtil.join(mnemonic.getDataSizes(), M68kDataSize::getText, "|");
@@ -83,17 +90,19 @@ class M68kInstructionMnemonicDocsGenerator {
 
 
       appendBreak();
-      sb.append("<table><tr>");
+      sb.append("<table style=\"width: 100%;\"><tr>");
       sb.append("<th></th>");
       for (M68kAddressMode value : M68kAddressMode.values()) {
-        sb.append("<th>");
+        if (!allUsedAddressModes.contains(value)) continue;
+
+        sb.append("<th style=\"text-align:center;\">");
         sb.append(value.getNotation());
         sb.append("</th>");
       }
       sb.append("</tr>");
 
-      appendAddressModes(M68kBundle.message("documentation.hover.source"), sourceAddressModes);
-      appendAddressModes(M68kBundle.message("documentation.hover.destination"), destinationAddressModes);
+      appendAddressModes(M68kBundle.message("documentation.hover.source"), allUsedAddressModes, sourceAddressModes);
+      appendAddressModes(M68kBundle.message("documentation.hover.destination"), allUsedAddressModes, destinationAddressModes);
       sb.append("</table>");
 
       appendBreak();
@@ -147,12 +156,16 @@ class M68kInstructionMnemonicDocsGenerator {
     }
   }
 
-  private void appendAddressModes(String label, M68kAddressMode[] addressModes) {
+  private void appendAddressModes(String label,
+                                  Set<M68kAddressMode> allPossibleAddressModes,
+                                  M68kAddressMode[] addressModes) {
     if (addressModes.length <= 1) return;
 
     sb.append("<tr>");
-    sb.append("<td>").append(label).append("</td>");
+    sb.append("<td style=\"width: 15%;\">").append(label).append("</td>");
     for (M68kAddressMode value : M68kAddressMode.values()) {
+      if (!allPossibleAddressModes.contains(value)) continue;
+
       sb.append("<td style=\"text-align:center;\">");
       if (ArrayUtil.contains(value, addressModes)) {
         sb.append("✓");

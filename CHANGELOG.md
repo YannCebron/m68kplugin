@@ -12,6 +12,7 @@
 - fixed: dot without following identifier wrongly recognized as valid local label
 - fixed: directives after label with colon
 - Editor Color Scheme settings: group 'Supervisor Registers'
+- Instruction hover documentation: improve layout
 
 ## 0.1.0
 
