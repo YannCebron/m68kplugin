@@ -1,6 +1,11 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+
+### Fixed
+
+### Changed
 
 ## [0.1.1]
 ### Added
@@ -15,6 +20,6 @@
 - Editor Color Scheme settings: group 'Supervisor Registers'
 - Instruction hover documentation: improve layout
 
-## 0.1.0
+## [0.1.0]
 ### Added
 - Initial public release
