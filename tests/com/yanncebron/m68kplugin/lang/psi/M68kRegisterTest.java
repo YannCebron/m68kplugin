@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,6 +60,12 @@ public class M68kRegisterTest extends TestCase {
     doTest(M68kTokenTypes.CCR, "DOESNT_MATTER", M68kRegister.CCR);
   }
 
+  public void testCtrlRegisters() {
+    doTest(M68kTokenTypes.DFC, "DOESNT_MATTER", M68kRegister.DFC);
+    doTest(M68kTokenTypes.SFC, "DOESNT_MATTER", M68kRegister.SFC);
+    doTest(M68kTokenTypes.VBR, "DOESNT_MATTER", M68kRegister.VBR);
+  }
+
   public void testIsSameKind() {
     assertTrue(M68kRegister.D0.isSameKind(M68kRegister.D0));
     assertTrue(M68kRegister.D0.isSameKind(M68kRegister.D1));
@@ -75,6 +81,7 @@ public class M68kRegisterTest extends TestCase {
     assertTrue(M68kRegister.D0.isSupported(M68kCpu.M_68000));
     assertTrue(M68kRegister.D0.isSupported(M68kCpu.GROUP_68020_UP));
 
+    assertFalse(M68kRegister.VBR.isSupported(M68kCpu.M_68000));
     assertFalse(M68kRegister.SR.isSupported(M68kCpu.M_68851));
   }
 
