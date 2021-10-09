@@ -36,6 +36,7 @@ public class M68kTokenTest extends BasePlatformTestCase {
     M68kTokenTypes.COLON,
     M68kTokenTypes.COMMA,
     M68kTokenTypes.COMMENT,
+    M68kTokenTypes.DFC,
     M68kTokenTypes.DOLLAR,
     M68kTokenTypes.DOT,
     M68kTokenTypes.HASH,

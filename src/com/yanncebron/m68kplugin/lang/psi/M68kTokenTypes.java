@@ -110,6 +110,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType DBVS = new M68kTokenType("dbvs");
   public static final IElementType DC = new M68kTokenType("dc");
   public static final IElementType DCB = new M68kTokenType("dcb");
+  public static final IElementType DFC = new M68kTokenType("dfc");
   public static final IElementType DEC_NUMBER = new M68kTokenType("dec_number");
   public static final IElementType DIV = new M68kTokenType("/");
   public static final IElementType DIVS = new M68kTokenType("divs");

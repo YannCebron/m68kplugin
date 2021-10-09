@@ -63,6 +63,8 @@ public class M68kTextAttributes {
     createTextAttributesKey("M68K_SR_REGISTER", DefaultLanguageHighlighterColors.GLOBAL_VARIABLE);
   public static final TextAttributesKey CCR_REGISTER =
     createTextAttributesKey("M68K_CCR_REGISTER", DefaultLanguageHighlighterColors.GLOBAL_VARIABLE);
+  public static final TextAttributesKey DFC_REGISTER =
+    createTextAttributesKey("M68K_DFC_REGISTER", DefaultLanguageHighlighterColors.GLOBAL_VARIABLE);
 
   public static final TextAttributesKey DOT =
     createTextAttributesKey("M68K_DOT", DefaultLanguageHighlighterColors.DOT);

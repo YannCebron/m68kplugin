@@ -199,6 +199,8 @@ Z=[zZ]
   {P}{C}                   { return PC; }
   {S}{R}                   { return SR; }
   {C}{C}{R}                { return CCR; }
+  {D}{F}{C}                { return DFC; }
+
   {D}[0-7]                 { return DATA_REGISTER; }
   {D}[0-7] {DATA_SIZE}     { pushbackDataSize(); return DATA_REGISTER; }
   {A}[0-7]                 { return ADDRESS_REGISTER; }
