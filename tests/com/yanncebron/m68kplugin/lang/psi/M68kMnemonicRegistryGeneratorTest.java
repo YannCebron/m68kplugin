@@ -45,7 +45,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
   private static final boolean LOG_UNKNOWN_MNEMONICS = false;
 
-  private static final boolean SKIP_NON_68000 = true;
+  private static final boolean SKIP_UNSUPPORTED_CPUS = true;
 
   private static final String VASM_OPCODES_H_PATH = "/Users/yann/idea-ultimate/vasm/cpus/m68k/opcodes.h";
 
@@ -105,7 +105,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
         continue;
       }
 
-      if (elementType != null && m68kCpus.contains(M68kCpu.M_68000)) {
+      if (elementType != null && isSupportedCpu(m68kCpus)) {
         if (sourceOperand == null) {
           System.out.println("unknown source operand: " + trim);
         }
@@ -126,13 +126,19 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     dumpCode(mnemonics);
   }
 
+  private static final Set<M68kCpu> supportedCpus = EnumSet.of(M68kCpu.M_68000, M68kCpu.M_68010);
+
+  private boolean isSupportedCpu(Set<M68kCpu> cpus) {
+    return ContainerUtil.intersects(cpus, supportedCpus);
+  }
+
   private void dumpCode(List<M68kMnemonic> mnemonics) {
     System.out.println(StringUtil.repeat("-", 80));
     System.out.println("// Total mnemonics: " + mnemonics.size());
 
     for (M68kMnemonic mnemonic : mnemonics) {
       Set<M68kCpu> cpus = mnemonic.getCpus();
-      if (SKIP_NON_68000 && !cpus.contains(M68kCpu.M_68000)) continue;
+      if (SKIP_UNSUPPORTED_CPUS && !isSupportedCpu(cpus)) continue;
 
       String cpuText;
       if (M68kCpu.GROUP_68000_UP.equals(cpus)) {
@@ -213,6 +219,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     .put("_SR", M68kOperand.SR_REGISTER)
     .put("_USP", M68kOperand.USP_REGISTER)
     .put("_CCR", M68kOperand.CCR_REGISTER)
+    .put("_CTRL", M68kOperand.CTRL_REGISTER)
     .build();
 
   private static M68kOperand mapOperand(String operandText) {
