@@ -20,42 +20,44 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
-import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.M68kFileElementType;
 import com.yanncebron.m68kplugin.lang.M68kLanguage;
 
-import java.util.Set;
-
 public class M68kTokenTest extends BasePlatformTestCase {
 
-  private static final Set<IElementType> IGNORE_TYPES = ContainerUtil.set(
-    M68kTokenTypes.LINEFEED,
-    M68kTokenTypes.ADDRESS_REGISTER,
-    M68kTokenTypes.DATA_REGISTER,
-    M68kTokenTypes.CCR,
+  private static final TokenSet IGNORE_TYPES = TokenSet.create(
+    M68kFileElementType.INSTANCE,
     M68kTokenTypes.COLON,
     M68kTokenTypes.COMMA,
     M68kTokenTypes.COMMENT,
-    M68kTokenTypes.DFC,
     M68kTokenTypes.DOLLAR,
     M68kTokenTypes.DOT,
     M68kTokenTypes.HASH,
     M68kTokenTypes.ID,
-    M68kTokenTypes.MACRO_CALL_ID,
-    M68kTokenTypes.L_PAREN,
+    M68kTokenTypes.LINEFEED,
     M68kTokenTypes.L_BRACKET,
-    M68kTokenTypes.R_PAREN,
+    M68kTokenTypes.L_PAREN,
+    M68kTokenTypes.MACRO_CALL_ID,
     M68kTokenTypes.R_BRACKET,
+    M68kTokenTypes.R_PAREN,
+    M68kTokenTypes.STRING
+  );
+
+  private static final TokenSet IGNORE_REGISTERS = TokenSet.create(
+    M68kTokenTypes.ADDRESS_REGISTER,
+    M68kTokenTypes.CCR,
+    M68kTokenTypes.DATA_REGISTER,
+    M68kTokenTypes.DFC,
     M68kTokenTypes.PC,
     M68kTokenTypes.SFC,
     M68kTokenTypes.SP,
     M68kTokenTypes.SR,
     M68kTokenTypes.SSP,
-    M68kTokenTypes.STRING,
-    M68kTokenTypes.VBR,
     M68kTokenTypes.USP,
-    M68kFileElementType.INSTANCE
+    M68kTokenTypes.VBR
   );
+
+  private static final TokenSet ALL_IGNORES = TokenSet.orSet(IGNORE_TYPES, IGNORE_REGISTERS);
 
   private static final TokenSet[] GROUPS = new TokenSet[]{
     M68kTokenGroups.INSTRUCTIONS,
@@ -71,7 +73,7 @@ public class M68kTokenTest extends BasePlatformTestCase {
       type.getLanguage() == M68kLanguage.INSTANCE &&
         !(type instanceof M68kCompositeElementType) &&
         !(type instanceof IStubElementType))) {
-      if (IGNORE_TYPES.contains(type)) continue;
+      if (ALL_IGNORES.contains(type)) continue;
 
       int groupMatch = 0;
       for (TokenSet group : GROUPS) {
