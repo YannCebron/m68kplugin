@@ -78,6 +78,30 @@ public final class M68kMnemonic {
   }
 
   @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof M68kMnemonic)) return false;
+
+    M68kMnemonic that = (M68kMnemonic) o;
+
+    if (!elementType.equals(that.elementType)) return false;
+    if (sourceOperand != that.sourceOperand) return false;
+    if (destinationOperand != that.destinationOperand) return false;
+    if (!dataSizes.equals(that.dataSizes)) return false;
+    return cpus.equals(that.cpus);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = elementType.hashCode();
+    result = 31 * result + sourceOperand.hashCode();
+    result = 31 * result + destinationOperand.hashCode();
+    result = 31 * result + dataSizes.hashCode();
+    result = 31 * result + cpus.hashCode();
+    return result;
+  }
+
+  @Override
   public String toString() {
     return "M68kMnemonic{" +
       "" + elementType +
