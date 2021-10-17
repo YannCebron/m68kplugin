@@ -53,7 +53,6 @@ Unsupported directives, these will display false positive
 - `cpu32`
 - `debug`
 - `dsource`
-- `dx.*`
 - `entry`, `extrn`, `global`, `export` == `xdef`
 - `equrl`
 - `fequr`

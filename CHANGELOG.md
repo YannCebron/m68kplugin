@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Added
+- support DX directive
 
 ### Fixed
 

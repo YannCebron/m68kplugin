@@ -450,6 +450,7 @@ Z=[zZ]
   {D}{R}       / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DR; }
   {D}{S}       / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DS; }
   {D}{S}{E}{G} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DSEG; }
+  {D}{X}       / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return DX; }
   {E}{C}{H}{O}                 { yybegin(STRING_DIRECTIVE); return ECHO; }
   {E}{I}{N}{L}{I}{N}{E}        { yybegin(AFTER_OPERAND); return EINLINE; }
   {E}{N}{D}                    { yybegin(AFTER_OPERAND); return END; }

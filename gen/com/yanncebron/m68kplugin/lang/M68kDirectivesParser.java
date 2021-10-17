@@ -344,6 +344,7 @@ public class M68kDirectivesParser {
   //                        dcb_directive |
   //                        dr_directive |
   //                        ds_directive |
+  //                        dx_directive |
   //                        align_directive |
   //                        cnop_directive |
   //                        incbin_directive |
@@ -427,6 +428,7 @@ public class M68kDirectivesParser {
     if (!r) r = dcb_directive(b, l + 1);
     if (!r) r = dr_directive(b, l + 1);
     if (!r) r = ds_directive(b, l + 1);
+    if (!r) r = dx_directive(b, l + 1);
     if (!r) r = align_directive(b, l + 1);
     if (!r) r = cnop_directive(b, l + 1);
     if (!r) r = incbin_directive(b, l + 1);
@@ -572,6 +574,28 @@ public class M68kDirectivesParser {
     r = consumeToken(b, DSEG);
     exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  /* ********************************************************** */
+  // DX data_size_all? expression
+  public static boolean dx_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "dx_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", DX)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, DX_DIRECTIVE, "<directive>");
+    r = consumeToken(b, DX);
+    p = r; // pin = 1
+    r = r && report_error_(b, dx_directive_1(b, l + 1));
+    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // data_size_all?
+  private static boolean dx_directive_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "dx_directive_1")) return false;
+    data_size_all(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */

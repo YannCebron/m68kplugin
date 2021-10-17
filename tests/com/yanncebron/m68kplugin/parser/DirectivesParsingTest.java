@@ -161,6 +161,10 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" dr label1,label2");
   }
 
+  public void testDxDirective() throws Exception {
+    doCodeTest(" dx.l 42");
+  }
+
   public void testRssetDirective() throws Exception {
     doCodeTest(" rsset 0");
   }
