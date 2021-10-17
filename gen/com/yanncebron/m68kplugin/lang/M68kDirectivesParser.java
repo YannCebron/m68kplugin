@@ -1460,7 +1460,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // label REG register_list
+  // label REG adm_register_list
   public static boolean reg_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "reg_directive")) return false;
     if (!nextTokenIs(b, "<directive>", ID)) return false;
@@ -1469,7 +1469,7 @@ public class M68kDirectivesParser {
     r = label(b, l + 1);
     r = r && consumeToken(b, REG);
     p = r; // pin = 2
-    r = r && register_list(b, l + 1);
+    r = r && adm_register_list(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

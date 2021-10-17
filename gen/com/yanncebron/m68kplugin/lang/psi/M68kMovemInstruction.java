@@ -49,6 +49,6 @@ public interface M68kMovemInstruction extends M68kMoveInstructionBase {
   M68kAdmPci getAdmPci();
 
   @Nullable
-  M68kRegisterList getRegisterList();
+  M68kAdmRegisterList getAdmRegisterList();
 
 }

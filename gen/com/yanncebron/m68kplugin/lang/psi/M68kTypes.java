@@ -48,6 +48,7 @@ public interface M68kTypes {
   IElementType ADM_PCD = new M68kCompositeElementType("ADM_PCD");
   IElementType ADM_PCI = new M68kCompositeElementType("ADM_PCI");
   IElementType ADM_QUICK = new M68kCompositeElementType("ADM_QUICK");
+  IElementType ADM_REGISTER_LIST = new M68kCompositeElementType("ADM_REGISTER_LIST");
   IElementType ADM_RRD = new M68kCompositeElementType("ADM_RRD");
   IElementType ADM_RRD_INDEX = new M68kCompositeElementType("ADM_RRD_INDEX");
   IElementType ADM_SFC = new M68kCompositeElementType("ADM_SFC");
@@ -244,7 +245,6 @@ public interface M68kTypes {
   IElementType PRINTT_DIRECTIVE = new M68kCompositeElementType("PRINTT_DIRECTIVE");
   IElementType PRINTV_DIRECTIVE = new M68kCompositeElementType("PRINTV_DIRECTIVE");
   IElementType PUSHSECTION_DIRECTIVE = new M68kCompositeElementType("PUSHSECTION_DIRECTIVE");
-  IElementType REGISTER_LIST = new M68kCompositeElementType("REGISTER_LIST");
   IElementType REGISTER_RANGE = new M68kCompositeElementType("REGISTER_RANGE");
   IElementType REG_DIRECTIVE = new M68kCompositeElementType("REG_DIRECTIVE");
   IElementType REM_DIRECTIVE = new M68kCompositeElementType("REM_DIRECTIVE");
@@ -375,6 +375,9 @@ public interface M68kTypes {
       }
       else if (type == ADM_QUICK) {
         return new M68kAdmQuickImpl(node);
+      }
+      else if (type == ADM_REGISTER_LIST) {
+        return new M68kAdmRegisterListImpl(node);
       }
       else if (type == ADM_RRD) {
         return new M68kAdmRrdImpl(node);
@@ -960,9 +963,6 @@ public interface M68kTypes {
       }
       else if (type == PUSHSECTION_DIRECTIVE) {
         return new M68kPushsectionDirectiveImpl(node);
-      }
-      else if (type == REGISTER_LIST) {
-        return new M68kRegisterListImpl(node);
       }
       else if (type == REGISTER_RANGE) {
         return new M68kRegisterRangeImpl(node);

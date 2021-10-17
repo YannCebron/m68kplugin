@@ -25,14 +25,14 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-public class M68kRegisterListImpl extends ASTWrapperPsiElement implements M68kRegisterList {
+public class M68kAdmRegisterListImpl extends ASTWrapperPsiElement implements M68kAdmRegisterList {
 
-  public M68kRegisterListImpl(@NotNull ASTNode node) {
+  public M68kAdmRegisterListImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitRegisterList(this);
+    visitor.visitAdmRegisterList(this);
   }
 
   @Override

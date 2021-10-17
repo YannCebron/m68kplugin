@@ -121,6 +121,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitAdm(o);
   }
 
+  public void visitAdmRegisterList(@NotNull M68kAdmRegisterList o) {
+    visitAdm(o);
+  }
+
   public void visitAdmRrd(@NotNull M68kAdmRrd o) {
     visitAdmWithRrd(o);
   }
@@ -981,10 +985,6 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitRegDirective(@NotNull M68kRegDirective o) {
     visitDirective(o);
-  }
-
-  public void visitRegisterList(@NotNull M68kRegisterList o) {
-    visitPsiElement(o);
   }
 
   public void visitRegisterRange(@NotNull M68kRegisterRange o) {

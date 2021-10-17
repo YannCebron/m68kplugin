@@ -109,7 +109,7 @@ abstract class M68kLabelMixIn extends StubBasedPsiElementBase<M68kLabelStub> imp
       case REG:
         final PsiElement regParent = getParent();
         assert regParent instanceof M68kRegDirective;
-        final M68kRegisterList registerList = ((M68kRegDirective) regParent).getRegisterList();
+        final M68kAdmRegisterList registerList = ((M68kRegDirective) regParent).getAdmRegisterList();
         return registerList != null ? registerList.getText() : null;
       default:
         throw new IllegalArgumentException("cannot determine value for '" + labelKind + "' " + this);

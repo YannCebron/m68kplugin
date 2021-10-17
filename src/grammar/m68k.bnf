@@ -135,26 +135,6 @@ private data_size_all ::= !<<afterWhitespace>> (DOT_B | DOT_W | DOT_L)
   name = ".b|w|l"
 }
 
-
-private register_range_real ::= adm_rrd MINUS adm_rrd
-{
-  pin = 2
-}
-// Rn-Rn | Rn
-register_range ::= register_range_real | adm_rrd {
-  name = "register range"
-  methods = [
-    adm_rrd= ""
-    from = "adm_rrd[0]"
-    to = "adm_rrd[1]"
-    getRegisters
-  ]
-}
-register_list ::= register_range (DIV register_range)* {
-  pin(".*") = 1
-}
-
-
 // addressing modes  =====================================================
 
 // Dn
@@ -352,6 +332,27 @@ adm_vbr ::= VBR
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
 }
 
+// register list
+private register_range_real ::= adm_rrd MINUS adm_rrd
+{
+  pin = 2
+}
+// Rn-Rn | Rn
+register_range ::= register_range_real | adm_rrd {
+  name = "register range"
+  methods = [
+    adm_rrd= ""
+    from = "adm_rrd[0]"
+    to = "adm_rrd[1]"
+    getRegisters
+  ]
+}
+adm_register_list ::= register_range (DIV register_range)* {
+  pin(".*") = 1
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdm"
+}
+
+
 // ATTN: ordering in groups
 private adm_group_all ::=                   adm_drd | adm_ard | adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
 private adm_group_all_except_ard ::=        adm_drd |           adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
@@ -437,11 +438,11 @@ moveq_instruction ::= MOVEQ data_size_long?
   ]
 }
 
-private movem_from_tail ::= (register_list | adm_imm) COMMA (adm_ari | adm_apd | adm_adi | adm_aix | adm_abs)
+private movem_from_tail ::= (adm_register_list | adm_imm) COMMA (adm_ari | adm_apd | adm_adi | adm_aix | adm_abs)
 {
   pin = 1
 }
-private movem_to_tail ::= (adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA (register_list | adm_imm)
+private movem_to_tail ::= (adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA (adm_register_list | adm_imm)
 {
   pin = 1
 }
@@ -1172,7 +1173,7 @@ equr_directive ::= label EQUR adm_rrd
   pin = 2
 }
 
-reg_directive ::= label REG register_list
+reg_directive ::= label REG adm_register_list
 {
   pin = 2
 }

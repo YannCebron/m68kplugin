@@ -18,15 +18,15 @@ package com.yanncebron.m68kplugin.lang.psi.directive;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmRegisterList;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.psi.M68kRegisterList;
 
 public interface M68kRegDirective extends M68kDirective {
 
+  @Nullable
+  M68kAdmRegisterList getAdmRegisterList();
+
   @NotNull
   M68kLabel getLabel();
-
-  @Nullable
-  M68kRegisterList getRegisterList();
 
 }

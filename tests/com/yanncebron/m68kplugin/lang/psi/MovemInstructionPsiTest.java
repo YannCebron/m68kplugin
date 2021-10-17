@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ public class MovemInstructionPsiTest extends M68kPsiTestCase {
 
     assertEquals(M68kDataSize.LONGWORD, instruction.getDataSize());
 
-    final M68kRegisterList registerList = instruction.getRegisterList();
+    final M68kAdmRegisterList registerList = instruction.getAdmRegisterList();
     assertNotNull(registerList);
     final List<M68kRegisterRange> registerRangeList = registerList.getRegisterRangeList();
     assertSize(3, registerRangeList);

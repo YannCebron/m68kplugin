@@ -97,8 +97,8 @@ public class M68kMovemInstructionImpl extends M68kMoveInstructionBaseImpl implem
 
   @Override
   @Nullable
-  public M68kRegisterList getRegisterList() {
-    return PsiTreeUtil.getChildOfType(this, M68kRegisterList.class);
+  public M68kAdmRegisterList getAdmRegisterList() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmRegisterList.class);
   }
 
 }

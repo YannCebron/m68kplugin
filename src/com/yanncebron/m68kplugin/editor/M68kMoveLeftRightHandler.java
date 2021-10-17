@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@ package com.yanncebron.m68kplugin.editor;
 
 import com.intellij.codeInsight.editorActions.moveLeftRight.MoveElementLeftRightHandler;
 import com.intellij.psi.PsiElement;
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmRegisterList;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmRrd;
 import com.yanncebron.m68kplugin.lang.psi.M68kExgInstruction;
-import com.yanncebron.m68kplugin.lang.psi.M68kRegisterList;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDcDirective;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kBinaryExpression;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
@@ -41,8 +41,8 @@ public class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
       if (right != null) return new PsiElement[]{binaryExpression.getLeft(), right};
     }
 
-    if (element instanceof M68kRegisterList) {
-      M68kRegisterList registerList = (M68kRegisterList) element;
+    if (element instanceof M68kAdmRegisterList) {
+      M68kAdmRegisterList registerList = (M68kAdmRegisterList) element;
       return registerList.getRegisterRangeList().toArray(PsiElement.EMPTY_ARRAY);
     }
 

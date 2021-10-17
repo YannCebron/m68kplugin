@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,7 +65,7 @@ public class M68kRegisterListRangeInspection extends LocalInspectionTool {
       }
 
       @Override
-      public void visitRegisterList(@NotNull M68kRegisterList list) {
+      public void visitAdmRegisterList(@NotNull M68kAdmRegisterList list) {
         final MultiMap<M68kRegister, M68kRegisterRange> all = MultiMap.create();
         for (M68kRegisterRange range : list.getRegisterRangeList()) {
           for (M68kRegister register : range.getRegisters()) {

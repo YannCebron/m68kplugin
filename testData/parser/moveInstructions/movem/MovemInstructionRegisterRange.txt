@@ -3,7 +3,7 @@ M68k.FILE
   M68kMovemInstructionImpl(MOVEM_INSTRUCTION)
     PsiElement(movem)('movem')
     PsiWhiteSpace(' ')
-    M68kRegisterListImpl(REGISTER_LIST)
+    M68kAdmRegisterListImpl(ADM_REGISTER_LIST)
       M68kRegisterRangeImpl(REGISTER_RANGE)
         M68kAdmRrdImpl(ADM_RRD)
           M68kAdmDrdImpl(ADM_DRD)

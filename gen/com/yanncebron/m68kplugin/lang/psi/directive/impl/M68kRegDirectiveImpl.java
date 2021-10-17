@@ -26,8 +26,8 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmRegisterList;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.psi.M68kRegisterList;
 
 public class M68kRegDirectiveImpl extends ASTWrapperPsiElement implements M68kRegDirective {
 
@@ -46,15 +46,15 @@ public class M68kRegDirectiveImpl extends ASTWrapperPsiElement implements M68kRe
   }
 
   @Override
-  @NotNull
-  public M68kLabel getLabel() {
-    return notNullChild(PsiTreeUtil.getChildOfType(this, M68kLabel.class));
+  @Nullable
+  public M68kAdmRegisterList getAdmRegisterList() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmRegisterList.class);
   }
 
   @Override
-  @Nullable
-  public M68kRegisterList getRegisterList() {
-    return PsiTreeUtil.getChildOfType(this, M68kRegisterList.class);
+  @NotNull
+  public M68kLabel getLabel() {
+    return notNullChild(PsiTreeUtil.getChildOfType(this, M68kLabel.class));
   }
 
 }
