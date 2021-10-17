@@ -16,11 +16,16 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
+import com.intellij.openapi.util.Comparing;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.MultiMap;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Registry of all supported mnemonics.
@@ -38,8 +43,106 @@ public final class M68kMnemonicRegistry {
     return INSTANCE;
   }
 
+  /**
+   * Returns all registered mnemonics for given element type.
+   *
+   * @return empty list if none registered or elementType is not instruction.
+   */
   public Collection<M68kMnemonic> findAll(@NotNull IElementType elementType) {
     return mnemonics.get(elementType);
+  }
+
+  /**
+   * Returns (most specific) mnemonic for given instruction.
+   *
+   * @return {@code null} if none matching (e.g., contains parsing error or input is invalid); if multiple candidates, most specific one.
+   */
+  @Nullable
+  public M68kMnemonic find(M68kInstruction instruction) {
+    if (PsiTreeUtil.hasErrorElements(instruction)) {
+      return null;
+    }
+
+    final IElementType originalMnemonic = instruction.getNode().getFirstChildNode().getElementType();
+    final Collection<M68kMnemonic> all = findAll(originalMnemonic);
+    assert !all.isEmpty() : instruction.getText();
+
+    final List<M68kAdm> operands = PsiTreeUtil.getChildrenOfTypeAsList(instruction, M68kAdm.class);
+    int operandsCount = operands.size();
+
+    // operand count
+    List<M68kMnemonic> filtered = ContainerUtil.filter(all, mnemonic -> {
+      boolean hasSource = mnemonic.getSourceOperand() != M68kOperand.NONE;
+      boolean hasDestination = mnemonic.getDestinationOperand() != M68kOperand.NONE;
+      if (!hasSource && !hasDestination && operandsCount == 0) {
+        return true;
+      }
+
+      if (hasSource && !hasDestination && operandsCount == 1) {
+        return true;
+      }
+
+      return hasSource && hasDestination && operandsCount == 2;
+    });
+
+    // data size (optional)
+    if (instruction instanceof M68kDataSized) {
+      M68kDataSized dataSized = (M68kDataSized) instruction;
+      final M68kDataSize dataSize = dataSized.getDataSize();
+      if (dataSize != null) {
+        filtered = ContainerUtil.filter(filtered, mnemonic -> mnemonic.getDataSizes().contains(dataSize));
+      }
+    }
+
+    // addressing modes
+    filtered = ContainerUtil.filter(filtered, mnemonic -> {
+        if (operandsCount == 0) {
+          return mnemonic.getSourceOperand() == M68kOperand.NONE &&
+            mnemonic.getDestinationOperand() == M68kOperand.NONE;
+        }
+
+        if (operandsCount == 1) {
+          return operandAddressModeMatches(mnemonic.getSourceOperand(), operands.get(0));
+        }
+
+        if (operandsCount == 2) {
+          return operandAddressModeMatches(mnemonic.getSourceOperand(), operands.get(0)) &&
+            operandAddressModeMatches(mnemonic.getDestinationOperand(), operands.get(1));
+        }
+
+        return false;
+      }
+    );
+
+    if (filtered.size() == 1) {
+      return filtered.get(0);
+    }
+
+    // multiple matches: rank by min(addressMode.count)
+    filtered.sort((o1, o2) -> {
+      final int o1Source = o1.getSourceOperand().getAddressModes().length;
+      final int o2Source = o2.getSourceOperand().getAddressModes().length;
+      if (o1Source != o2Source) {
+        return Comparing.compare(o1Source, o2Source);
+      }
+
+      final int o1Dest = o1.getDestinationOperand().getAddressModes().length;
+      final int o2Dest = o2.getDestinationOperand().getAddressModes().length;
+      return Comparing.compare(o1Dest, o2Dest);
+    });
+
+    return ContainerUtil.getFirstItem(filtered);
+  }
+
+  private static boolean operandAddressModeMatches(M68kOperand operand, M68kAdm givenAdm) {
+    for (M68kAddressMode addressMode : operand.getAddressModes()) {
+      for (Class<? extends M68kAdm> adm : addressMode.getAdmClasses()) {
+        if (adm.isInstance(givenAdm)) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   private M68kMnemonicRegistry() {

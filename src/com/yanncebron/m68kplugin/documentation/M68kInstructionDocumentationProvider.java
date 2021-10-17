@@ -88,7 +88,7 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
     M68kInstruction instruction = (M68kInstruction) element;
     final IElementType originalMnemonic = instruction.getNode().getFirstChildNode().getElementType();
 
-    String hoverDoc = new M68kInstructionMnemonicDocsGenerator(originalMnemonic).generateHtmlDoc();
+    String hoverDoc = new M68kInstructionMnemonicDocsGenerator(instruction, originalMnemonic).generateHtmlDoc();
 
     final Pair<String, String> markdownContents = getMarkdownContents(originalMnemonic);
 

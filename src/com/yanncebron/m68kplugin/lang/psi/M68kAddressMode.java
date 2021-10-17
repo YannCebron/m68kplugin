@@ -29,97 +29,104 @@ public enum M68kAddressMode {
   /**
    * Ref 2.2.1, {@link M68kAdmDrd}
    */
-  DATA_REGISTER("Dn"),
+  DATA_REGISTER("Dn", M68kAdmDrd.class),
   /**
    * Ref 2.2.2, {@link M68kAdmArd}
    */
-  ADDRESS_REGISTER("An"),
+  ADDRESS_REGISTER("An", M68kAdmArd.class),
 
   /**
    * Ref 2.2.3, {@link M68kAdmAri}
    */
-  ADDRESS_REGISTER_INDIRECT("(An)"),
+  ADDRESS_REGISTER_INDIRECT("(An)", M68kAdmAri.class),
   /**
    * Ref 2.2.4, {@link M68kAdmApi}
    */
-  ADDRESS_REGISTER_INDIRECT_POST_INCREMENT("(An)+"),
+  ADDRESS_REGISTER_INDIRECT_POST_INCREMENT("(An)+", M68kAdmApi.class),
   /**
    * Ref 2.2.5, {@link M68kAdmApd}
    */
-  ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT("-(An)"),
+  ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT("-(An)", M68kAdmApd.class),
   /**
    * Ref 2.2.6, {@link M68kAdmAdi}
    */
-  ADDRESS_REGISTER_DISPLACEMENT("(d,An)"),
+  ADDRESS_REGISTER_DISPLACEMENT("(d,An)", M68kAdmAdi.class),
   /**
    * Ref 2.2.8, {@link M68kAdmAix}
    */
-  ADDRESS_REGISTER_INDEX_DISPLACEMENT("(d,An,Xi)"),
+  ADDRESS_REGISTER_INDEX_DISPLACEMENT("(d,An,Xi)", M68kAdmAix.class),
 
   /**
    * Ref 2.2.16, {@link M68kAdmAbs}
    */
-  ABSOLUTE_SHORT("ABS.W"),
+  ABSOLUTE_SHORT("ABS.W", M68kAdmAbs.class),
   /**
    * Ref 2.2.17, {@link M68kAdmAbs}
    */
-  ABSOLUTE_LONG("ABS.L"),
+  ABSOLUTE_LONG("ABS.L", M68kAdmAbs.class),
 
   /**
    * {@link M68kAdmAbs} -> {@link M68kLabelRefExpression}
    */
-  LABEL("label"),
+  LABEL("label", M68kAdmAbs.class),
 
   /**
    * Ref 2.2.11, {@link M68kAdmPcd}
    */
-  PC_REGISTER_DISPLACEMENT("(d,PC)"),
+  PC_REGISTER_DISPLACEMENT("(d,PC)", M68kAdmPcd.class),
   /**
    * Ref 2.2.13, {@link M68kAdmPci}
    */
-  PC_REGISTER_INDEX_DISPLACEMENT("(d,PC,Xn)"),
+  PC_REGISTER_INDEX_DISPLACEMENT("(d,PC,Xn)", M68kAdmPci.class),
 
   /**
    * Ref 2.2.18, {@link M68kAdmImm}
    */
-  IMMEDIATE("imm"),
+  IMMEDIATE("imm", M68kAdmImm.class),
   /**
    * Ref 2.2.18, {@link M68kAdmQuick}
    */
-  QUICK_IMMEDIATE("quick"),
+  QUICK_IMMEDIATE("quick", M68kAdmQuick.class),
 
   /**
-   * {@link M68kRegisterList}
+   * {@link M68kAdmRegisterList}
    */
-  REGISTER_LIST("Rn list"),
+  REGISTER_LIST("Rn list", M68kAdmRegisterList.class),
 
   /**
    * {@link M68kAdmSr}
    */
-  SPECIAL_REGISTER_SR("SR"),
+  SPECIAL_REGISTER_SR("SR", M68kAdmSr.class),
   /**
    * {@link M68kAdmUsp}
    */
-  SPECIAL_REGISTER_USP("USP"),
+  SPECIAL_REGISTER_USP("USP", M68kAdmUsp.class),
   /**
    * {@link M68kAdmCcr}
    */
-  SPECIAL_REGISTER_CCR("CCR"),
+  SPECIAL_REGISTER_CCR("CCR", M68kAdmCcr.class),
 
   /**
    * {@link M68kAdmDfc}
    * {@link M68kAdmSfc}
    * {@link M68kAdmVbr}
    */
-  CONTROL_REGISTER("CTRL");
+  CONTROL_REGISTER("CTRL", M68kAdmDfc.class, M68kAdmSfc.class, M68kAdmVbr.class);
 
   private final String notation;
+  private final Class<? extends M68kAdm>[] adms;
 
-  M68kAddressMode(String notation) {
+  @SafeVarargs
+  M68kAddressMode(String notation, Class<? extends M68kAdm>... admClasses) {
     this.notation = notation;
+    this.adms = admClasses;
   }
 
   public String getNotation() {
     return notation;
+  }
+
+  public Class<? extends M68kAdm>[] getAdmClasses() {
+    return adms;
   }
 }

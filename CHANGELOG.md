@@ -6,6 +6,7 @@
 ### Fixed
 
 ### Changed
+- Instruction hover documentation: underline matching variant if multiple
 
 ## [0.1.1]
 ### Added

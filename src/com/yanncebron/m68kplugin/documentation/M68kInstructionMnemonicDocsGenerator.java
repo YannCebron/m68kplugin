@@ -29,22 +29,27 @@ import java.util.Set;
 
 class M68kInstructionMnemonicDocsGenerator {
 
+  private final M68kInstruction instruction;
   private final IElementType elementType;
+
   private StringBuilder sb;
 
-  M68kInstructionMnemonicDocsGenerator(IElementType elementType) {
+  M68kInstructionMnemonicDocsGenerator(M68kInstruction instruction, IElementType elementType) {
+    this.instruction = instruction;
     this.elementType = elementType;
   }
 
   String generateHtmlDoc() {
-    final Collection<M68kMnemonic> mnemonics = M68kMnemonicRegistry.getInstance().findAll(elementType);
-    assert !mnemonics.isEmpty() : elementType;
+    final Collection<M68kMnemonic> allMnemonics = M68kMnemonicRegistry.getInstance().findAll(elementType);
+    assert !allMnemonics.isEmpty() : elementType;
+
+    M68kMnemonic specific = allMnemonics.size() > 1 ? M68kMnemonicRegistry.getInstance().find(instruction) : null;
 
     sb = new StringBuilder();
 
     boolean allCpusSame = true;
     Set<M68kCpu> previousCpus = null;
-    for (M68kMnemonic mnemonic : mnemonics) {
+    for (M68kMnemonic mnemonic : allMnemonics) {
       final Set<M68kCpu> cpus = mnemonic.getCpus();
       if (previousCpus != null && !previousCpus.equals(cpus)) {
         allCpusSame = false;
@@ -53,18 +58,22 @@ class M68kInstructionMnemonicDocsGenerator {
       previousCpus = cpus;
     }
     if (allCpusSame) {
-      appendCpus(ContainerUtil.getFirstItem(mnemonics));
+      appendCpus(ContainerUtil.getFirstItem(allMnemonics));
       appendBreak();
     }
 
     Set<M68kAddressMode> allUsedAddressModes = new HashSet<>();
-    for (M68kMnemonic mnemonic : mnemonics) {
+    for (M68kMnemonic mnemonic : allMnemonics) {
       ContainerUtil.addAll(allUsedAddressModes, mnemonic.getSourceOperand().getAddressModes());
       ContainerUtil.addAll(allUsedAddressModes, mnemonic.getDestinationOperand().getAddressModes());
     }
 
-    for (M68kMnemonic mnemonic : mnemonics) {
-      sb.append("<h2>");
+    for (M68kMnemonic mnemonic : allMnemonics) {
+      if (specific == mnemonic) {
+        sb.append("<h2 style=\"text-decoration: underline;\"> ");
+      } else {
+        sb.append("<h2>");
+      }
       final String mnemonicText = elementType + StringUtil.join(mnemonic.getDataSizes(), M68kDataSize::getText, "|");
       sb.append("<code>").append(mnemonicText);
       sb.append(StringUtil.repeat("&nbsp;", 15 - mnemonicText.length()));
