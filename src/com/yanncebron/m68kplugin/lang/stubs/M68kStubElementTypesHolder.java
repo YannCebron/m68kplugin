@@ -41,7 +41,7 @@ import java.io.IOException;
 public interface M68kStubElementTypesHolder {
 
   IStubElementType<M68kLabelStub, M68kLabel> LABEL =
-    new M68kStubElementType<M68kLabelStub, M68kLabel>("LABEL") {
+    new M68kStubElementType<>("LABEL") {
 
       @NotNull
       @Override

@@ -114,12 +114,12 @@ public enum M68kAddressMode {
   CONTROL_REGISTER("CTRL", M68kAdmDfc.class, M68kAdmSfc.class, M68kAdmVbr.class);
 
   private final String notation;
-  private final Class<? extends M68kAdm>[] adms;
+  private final Class<? extends M68kAdm>[] admClasses;
 
   @SafeVarargs
   M68kAddressMode(String notation, Class<? extends M68kAdm>... admClasses) {
     this.notation = notation;
-    this.adms = admClasses;
+    this.admClasses = admClasses;
   }
 
   public String getNotation() {
@@ -127,6 +127,6 @@ public enum M68kAddressMode {
   }
 
   public Class<? extends M68kAdm>[] getAdmClasses() {
-    return adms;
+    return admClasses;
   }
 }

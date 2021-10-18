@@ -86,7 +86,7 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
 
       final M68kLocalLabelMode localLabelMode = M68kLocalLabelMode.find(labelName);
       if (localLabelMode != null) {
-        final CommonProcessors.FindProcessor<M68kLocalLabel> findLocalProcessor = new CommonProcessors.FindProcessor<M68kLocalLabel>() {
+        final CommonProcessors.FindProcessor<M68kLocalLabel> findLocalProcessor = new CommonProcessors.FindProcessor<>() {
           @Override
           protected boolean accept(M68kLocalLabel localLabel) {
             return labelName.equals(localLabelMode.getPatchedName(localLabel));

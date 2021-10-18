@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,7 +60,7 @@ public class M68kCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
           protected void addWrappingAndBracesTab(CodeStyleSettings settings) {
             addTab(new MyWrappingAndBracesPanel(settings) {
               @Override
-              protected String getTabTitle() {
+              protected @NotNull String getTabTitle() {
                 return M68kBundle.message("codestyle.settings.tab.other");
               }
             });

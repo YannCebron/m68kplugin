@@ -60,7 +60,7 @@ class M68kMacroCallReference extends PsiReferenceBase.Poly<M68kMacrocallDirectiv
       int currentTextOffset = element.getTextOffset();
 
       List<M68kLabel> resolveResults = new SmartList<>();
-      final CommonProcessors.CollectProcessor<M68kLabel> findLocalProcessor = new CommonProcessors.CollectProcessor<M68kLabel>(resolveResults) {
+      final CommonProcessors.CollectProcessor<M68kLabel> findLocalProcessor = new CommonProcessors.CollectProcessor<>(resolveResults) {
         @Override
         protected boolean accept(M68kLabel m68kLabel) {
           return m68kLabel.getTextOffset() < currentTextOffset;
