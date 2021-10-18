@@ -10,12 +10,12 @@ nav_order: 2
 
 This guide uses the following notations to distinguish certain items:
 
-| Notation | Meaning |
-|----------|---------|
-| *Main Menu &#124; Sub Menu &#124; Menu Item* | Menu item/Action |
-| *Settings/Preferences &#124; Settings Page* | Page in _Settings/Preferences_ dialog |
-| `monospaced text` | Assembly code/Filename |
-| <kbd>F10</kbd> | Keyboard shortcut or input |
+| Notation                                     | Meaning                               |
+|----------------------------------------------|---------------------------------------|
+| *Main Menu &#124; Sub Menu &#124; Menu Item* | Menu item/Action                      |
+| *Settings/Preferences &#124; Settings Page*  | Page in _Settings/Preferences_ dialog |
+| `monospaced text`                            | Assembly code/Filename                |
+| <kbd>F10</kbd>                               | Keyboard shortcut or input            |
 
 ## Installation
 
