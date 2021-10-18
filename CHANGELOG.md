@@ -4,6 +4,7 @@
 ### Added
 - support DX directive
 - support IF1/IF2/IFP1 directives
+- add inspection: Conditional assembly directives problems 
 
 ### Fixed
 
