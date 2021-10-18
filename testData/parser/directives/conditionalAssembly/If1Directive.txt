@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kIf1ConditionalAssemblyDirectiveImpl(IF_1_CONDITIONAL_ASSEMBLY_DIRECTIVE)
+    PsiElement(if1)('if1')

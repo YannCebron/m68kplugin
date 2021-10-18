@@ -252,6 +252,8 @@ public final class M68kTokenGroups {
 
   public static final TokenSet CONDITIONAL_ASSEMBLY_START_DIRECTIVES = TokenSet.create(
     IF,
+    IF1,
+    IF2,
     IFB,
     IFC,
     IFD,
@@ -267,6 +269,7 @@ public final class M68kTokenGroups {
     IFNC,
     IFND,
     IFNE,
+    IFP1,
     IFPL
   );
 

@@ -117,4 +117,16 @@ public class ConditionalAssemblyDirectivesParsingTest extends M68kParsingTestCas
     doCodeTest(" ifmacrond name");
   }
 
+  public void testIf1Directive() throws Exception {
+    doCodeTest(" if1");
+  }
+
+  public void testIf2Directive() throws Exception {
+    doCodeTest(" if2");
+  }
+
+  public void testIfp1Directive() throws Exception {
+    doCodeTest(" ifp1");
+  }
+
 }

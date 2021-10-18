@@ -501,6 +501,8 @@ Z=[zZ]
   {M}{E}{X}{I}{T}              { yybegin(AFTER_OPERAND); return MEXIT; }
 
   {I}{F}                       { yybegin(IN_OPERAND); return IF; }
+  {I}{F}1                      { yybegin(IN_OPERAND); return IF1; }
+  {I}{F}2                      { yybegin(IN_OPERAND); return IF2; }
   {I}{F}{B}                    { yybegin(IN_OPERAND); return IFB; }
   {I}{F}{N}{B}                 { yybegin(IN_OPERAND); return IFNB; }
   {I}{F}{C}                    { yybegin(IN_OPERAND); return IFC; }
@@ -508,6 +510,7 @@ Z=[zZ]
   {I}{F}{D}                    { yybegin(IN_OPERAND); return IFD; }
   {I}{F}{E}{Q}                 { yybegin(IN_OPERAND); return IFEQ; }
   {I}{F}{G}{E}                 { yybegin(IN_OPERAND); return IFGE; }
+  {I}{F}{P}1                   { yybegin(IN_OPERAND); return IFP1; }
   {I}{F}{P}{L}                 { yybegin(IN_OPERAND); return IFPL; }
   {I}{F}{G}{T}                 { yybegin(IN_OPERAND); return IFGT; }
   {I}{F}{M}{A}{C}{R}{O}{D}     { yybegin(IN_OPERAND); return IFMACROD; }

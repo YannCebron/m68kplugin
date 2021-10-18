@@ -1602,7 +1602,10 @@ private conditional_assembly_directives ::= ifnd_conditional_assembly_directive 
                                             elseif_conditional_assembly_directive |
                                             endif_conditional_assembly_directive |
                                             ifmacrod_conditional_assembly_directive |
-                                            ifmacrond_conditional_assembly_directive
+                                            ifmacrond_conditional_assembly_directive |
+                                            if1_conditional_assembly_directive |
+                                            if2_conditional_assembly_directive |
+                                            ifp1_conditional_assembly_directive
 
 
 if_conditional_assembly_directive ::= IF expression
@@ -1642,3 +1645,7 @@ elseif_conditional_assembly_directive ::= ELSEIF
 else_conditional_assembly_directive ::= ELSE
 endc_conditional_assembly_directive ::= ENDC
 endif_conditional_assembly_directive ::= ENDIF
+
+if1_conditional_assembly_directive ::= IF1
+if2_conditional_assembly_directive ::= IF2
+ifp1_conditional_assembly_directive ::= IFP1

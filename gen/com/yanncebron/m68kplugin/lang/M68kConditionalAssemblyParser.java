@@ -46,7 +46,10 @@ public class M68kConditionalAssemblyParser {
   //                                             elseif_conditional_assembly_directive |
   //                                             endif_conditional_assembly_directive |
   //                                             ifmacrod_conditional_assembly_directive |
-  //                                             ifmacrond_conditional_assembly_directive
+  //                                             ifmacrond_conditional_assembly_directive |
+  //                                             if1_conditional_assembly_directive |
+  //                                             if2_conditional_assembly_directive |
+  //                                             ifp1_conditional_assembly_directive
   static boolean conditional_assembly_directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "conditional_assembly_directives")) return false;
     boolean r;
@@ -71,6 +74,9 @@ public class M68kConditionalAssemblyParser {
     if (!r) r = endif_conditional_assembly_directive(b, l + 1);
     if (!r) r = ifmacrod_conditional_assembly_directive(b, l + 1);
     if (!r) r = ifmacrond_conditional_assembly_directive(b, l + 1);
+    if (!r) r = if1_conditional_assembly_directive(b, l + 1);
+    if (!r) r = if2_conditional_assembly_directive(b, l + 1);
+    if (!r) r = ifp1_conditional_assembly_directive(b, l + 1);
     return r;
   }
 
@@ -118,6 +124,30 @@ public class M68kConditionalAssemblyParser {
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ENDIF_CONDITIONAL_ASSEMBLY_DIRECTIVE, "<directive>");
     r = consumeToken(b, ENDIF);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IF1
+  public static boolean if1_conditional_assembly_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "if1_conditional_assembly_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", IF1)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, IF_1_CONDITIONAL_ASSEMBLY_DIRECTIVE, "<directive>");
+    r = consumeToken(b, IF1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IF2
+  public static boolean if2_conditional_assembly_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "if2_conditional_assembly_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", IF2)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, IF_2_CONDITIONAL_ASSEMBLY_DIRECTIVE, "<directive>");
+    r = consumeToken(b, IF2);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -348,6 +378,18 @@ public class M68kConditionalAssemblyParser {
     r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  /* ********************************************************** */
+  // IFP1
+  public static boolean ifp1_conditional_assembly_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ifp1_conditional_assembly_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", IFP1)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, IFP_1_CONDITIONAL_ASSEMBLY_DIRECTIVE, "<directive>");
+    r = consumeToken(b, IFP1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
   }
 
   /* ********************************************************** */
