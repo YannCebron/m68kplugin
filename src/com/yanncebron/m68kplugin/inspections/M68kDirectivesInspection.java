@@ -87,12 +87,12 @@ public class M68kDirectivesInspection extends LocalInspectionTool {
     };
   }
 
-  private void checkUnmatchedDirectiveWithNesting(M68kDirective m68kDirective, Class<? extends M68kDirective> directiveClass,
-                                                  ProblemsHolder holder, boolean forwards,
-                                                  Class<? extends M68kDirective> matchingDirective,
-                                                  String matchingDirectiveText) {
+  private static void checkUnmatchedDirectiveWithNesting(M68kDirective m68kDirective, Class<? extends M68kDirective> directiveClass,
+                                                         ProblemsHolder holder, boolean forwards,
+                                                         Class<? extends M68kDirective> matchingDirective,
+                                                         String matchingDirectiveText) {
     Ref<Boolean> unmatched = Ref.create(Boolean.TRUE);
-    final Processor<M68kPsiElement> nestingProcessor = new Processor<M68kPsiElement>() {
+    final Processor<M68kPsiElement> nestingProcessor = new Processor<>() {
 
       int unmatchedCount = 1;
 
@@ -125,28 +125,28 @@ public class M68kDirectivesInspection extends LocalInspectionTool {
 
   @SuppressWarnings("UnusedReturnValue")
   @SafeVarargs
-  private final void checkUnmatchedOpeningDirective(M68kDirective m68kDirective, ProblemsHolder holder,
-                                                    Class<? extends M68kDirective> matchingDirective,
-                                                    @NonNls String matchingDirectiveText,
-                                                    Class<? extends M68kDirective>... stopAtDirectives) {
+  private static void checkUnmatchedOpeningDirective(M68kDirective m68kDirective, ProblemsHolder holder,
+                                                     Class<? extends M68kDirective> matchingDirective,
+                                                     @NonNls String matchingDirectiveText,
+                                                     Class<? extends M68kDirective>... stopAtDirectives) {
     checkUnmatchedDirective(m68kDirective, holder, true, matchingDirective, matchingDirectiveText, stopAtDirectives);
   }
 
   @SuppressWarnings("UnusedReturnValue")
   @SafeVarargs
-  private final void checkUnmatchedClosingDirective(M68kDirective m68kDirective, ProblemsHolder holder,
-                                                    Class<? extends M68kDirective> matchingDirective,
-                                                    @NonNls String matchingDirectiveText,
-                                                    Class<? extends M68kDirective>... stopAtDirectives) {
+  private static void checkUnmatchedClosingDirective(M68kDirective m68kDirective, ProblemsHolder holder,
+                                                     Class<? extends M68kDirective> matchingDirective,
+                                                     @NonNls String matchingDirectiveText,
+                                                     Class<? extends M68kDirective>... stopAtDirectives) {
     checkUnmatchedDirective(m68kDirective, holder, false, matchingDirective, matchingDirectiveText, stopAtDirectives);
   }
 
   @SafeVarargs
-  private final void checkUnmatchedDirective(M68kDirective m68kDirective, ProblemsHolder holder,
-                                             boolean forwards,
-                                             Class<? extends M68kDirective> matchingDirective,
-                                             @NonNls String matchingDirectiveText,
-                                             Class<? extends M68kDirective>... stopAtDirectives) {
+  private static void checkUnmatchedDirective(M68kDirective m68kDirective, ProblemsHolder holder,
+                                              boolean forwards,
+                                              Class<? extends M68kDirective> matchingDirective,
+                                              @NonNls String matchingDirectiveText,
+                                              Class<? extends M68kDirective>... stopAtDirectives) {
     if (forwards) {
       if (M68kPsiTreeUtil.hasSiblingForwards(m68kDirective, matchingDirective, stopAtDirectives)) return;
     } else {
@@ -156,8 +156,8 @@ public class M68kDirectivesInspection extends LocalInspectionTool {
     addUnmatchedProblem(m68kDirective, holder, forwards, matchingDirectiveText);
   }
 
-  private void addUnmatchedProblem(M68kDirective m68kDirective, ProblemsHolder holder,
-                                   boolean forwards, @NonNls String matchingDirectiveText) {
+  private static void addUnmatchedProblem(M68kDirective m68kDirective, ProblemsHolder holder,
+                                          boolean forwards, @NonNls String matchingDirectiveText) {
     final String key = forwards ? "highlight.unmatched.directive.missing.closing" : "highlight.unmatched.directive.missing.opening";
     holder.registerProblem(m68kDirective, M68kBundle.message(key, matchingDirectiveText));
   }
