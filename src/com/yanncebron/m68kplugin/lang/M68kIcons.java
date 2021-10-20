@@ -32,7 +32,9 @@ public final class M68kIcons {
 
   public static final Icon LABEL_EQUR = AllIcons.Nodes.Artifact;
   public static final Icon LABEL_REG = AllIcons.Nodes.Target;
+  
   public static final Icon LABEL_FO = AllIcons.Nodes.Field;
+  public static final Icon LABEL_SO = AllIcons.Nodes.Static;
 
   public static final Icon INCLUDE = AllIcons.Graph.Layout;
   public static final Icon INCBIN = AllIcons.FileTypes.Archive;

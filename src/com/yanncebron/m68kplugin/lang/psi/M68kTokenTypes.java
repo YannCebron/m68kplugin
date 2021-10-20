@@ -74,6 +74,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType CHK = new M68kTokenType("chk");
   public static final IElementType CLR = new M68kTokenType("clr");
   public static final IElementType CLRFO = new M68kTokenType("clrfo");
+  public static final IElementType CLRSO = new M68kTokenType("clrso");
   public static final IElementType CMP = new M68kTokenType("cmp");
   public static final IElementType CMPA = new M68kTokenType("cmpa");
   public static final IElementType CMPI = new M68kTokenType("cmpi");
@@ -273,6 +274,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType SEQ = new M68kTokenType("seq");
   public static final IElementType SET = new M68kTokenType("set");
   public static final IElementType SETFO = new M68kTokenType("setfo");
+  public static final IElementType SETSO = new M68kTokenType("setso");
   public static final IElementType SF = new M68kTokenType("sf");
   public static final IElementType SFC = new M68kTokenType("sfc");
   public static final IElementType SGE = new M68kTokenType("sge");
@@ -286,6 +288,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType SLT = new M68kTokenType("slt");
   public static final IElementType SMI = new M68kTokenType("smi");
   public static final IElementType SNE = new M68kTokenType("sne");
+  public static final IElementType SO = new M68kTokenType("so");
   public static final IElementType SP = new M68kTokenType("sp");
   public static final IElementType SPC = new M68kTokenType("spc");
   public static final IElementType SPL = new M68kTokenType("spl");

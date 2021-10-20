@@ -438,6 +438,7 @@ Z=[zZ]
   {B}{S}{S}_{C}                { yybegin(AFTER_OPERAND); return BSS_C; }
   {B}{S}{S}_{F}                { yybegin(AFTER_OPERAND); return BSS_F; }
   {C}{L}{R}{F}{O}              { yybegin(IN_OPERAND); return CLRFO; }
+  {C}{L}{R}{S}{O}              { yybegin(IN_OPERAND); return CLRSO; }
   {C}{N}{O}{P}                 { yybegin(IN_OPERAND); return CNOP; }
   {C}{O}{D}{E}                 { yybegin(AFTER_OPERAND); return CODE; }
   {C}{O}{D}{E}_{C}             { yybegin(AFTER_OPERAND); return CODE_C; }
@@ -494,7 +495,9 @@ Z=[zZ]
   {S}{E}{C}{T}{I}{O}{N}        { yybegin(IN_OPERAND); return SECTION; }
   {S}{E}{T}                    { yybegin(IN_OPERAND); return SET; }
   {S}{E}{T}{F}{O}              { yybegin(IN_OPERAND); return SETFO; }
+  {S}{E}{T}{S}{O}              { yybegin(IN_OPERAND); return SETSO; }
   {S}{P}{C}                    { yybegin(IN_OPERAND); return SPC; }
+  {S}{O}       / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return SO; }
   {T}{E}{X}{T}                 { yybegin(AFTER_OPERAND); return TEXT; }
   {T}{T}{L}                    { yybegin(STRING_DIRECTIVE); return TTL; }
   {X}{D}{E}{F}                 { yybegin(IN_OPERAND); return XDEF; }

@@ -116,6 +116,18 @@ public class M68kStubBuilderTest extends LightPlatformTestCase {
         "  LABEL:M68kLabelStubImpl['label', FO, '42']\n");
   }
 
+  public void testLabelWithSoDataSize() {
+    doTest("label so.w 42",
+      "PsiFileStubImpl\n" +
+        "  LABEL:M68kLabelStubImpl['label', SO, '42']\n");
+  }
+
+  public void testLabelWithSo() {
+    doTest("label so 42",
+      "PsiFileStubImpl\n" +
+        "  LABEL:M68kLabelStubImpl['label', SO, '42']\n");
+  }
+
   public void testLocalLabelNotStubbed() {
     doTest(".localLabel",
       "PsiFileStubImpl\n");

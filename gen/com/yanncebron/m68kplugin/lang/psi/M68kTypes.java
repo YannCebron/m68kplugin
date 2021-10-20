@@ -90,6 +90,7 @@ public interface M68kTypes {
   IElementType BVS_INSTRUCTION = new M68kCompositeElementType("BVS_INSTRUCTION");
   IElementType CHK_INSTRUCTION = new M68kCompositeElementType("CHK_INSTRUCTION");
   IElementType CLRFO_DIRECTIVE = new M68kCompositeElementType("CLRFO_DIRECTIVE");
+  IElementType CLRSO_DIRECTIVE = new M68kCompositeElementType("CLRSO_DIRECTIVE");
   IElementType CLR_INSTRUCTION = new M68kCompositeElementType("CLR_INSTRUCTION");
   IElementType CMPA_INSTRUCTION = new M68kCompositeElementType("CMPA_INSTRUCTION");
   IElementType CMPI_INSTRUCTION = new M68kCompositeElementType("CMPI_INSTRUCTION");
@@ -272,6 +273,7 @@ public interface M68kTypes {
   IElementType SECTION_DIRECTIVE = new M68kCompositeElementType("SECTION_DIRECTIVE");
   IElementType SEQ_INSTRUCTION = new M68kCompositeElementType("SEQ_INSTRUCTION");
   IElementType SETFO_DIRECTIVE = new M68kCompositeElementType("SETFO_DIRECTIVE");
+  IElementType SETSO_DIRECTIVE = new M68kCompositeElementType("SETSO_DIRECTIVE");
   IElementType SET_DIRECTIVE = new M68kCompositeElementType("SET_DIRECTIVE");
   IElementType SF_INSTRUCTION = new M68kCompositeElementType("SF_INSTRUCTION");
   IElementType SGE_INSTRUCTION = new M68kCompositeElementType("SGE_INSTRUCTION");
@@ -286,6 +288,7 @@ public interface M68kTypes {
   IElementType SLT_INSTRUCTION = new M68kCompositeElementType("SLT_INSTRUCTION");
   IElementType SMI_INSTRUCTION = new M68kCompositeElementType("SMI_INSTRUCTION");
   IElementType SNE_INSTRUCTION = new M68kCompositeElementType("SNE_INSTRUCTION");
+  IElementType SO_DIRECTIVE = new M68kCompositeElementType("SO_DIRECTIVE");
   IElementType SPC_DIRECTIVE = new M68kCompositeElementType("SPC_DIRECTIVE");
   IElementType SPL_INSTRUCTION = new M68kCompositeElementType("SPL_INSTRUCTION");
   IElementType STOP_INSTRUCTION = new M68kCompositeElementType("STOP_INSTRUCTION");
@@ -508,6 +511,9 @@ public interface M68kTypes {
       }
       else if (type == CLRFO_DIRECTIVE) {
         return new M68kClrfoDirectiveImpl(node);
+      }
+      else if (type == CLRSO_DIRECTIVE) {
+        return new M68kClrsoDirectiveImpl(node);
       }
       else if (type == CLR_INSTRUCTION) {
         return new M68kClrInstructionImpl(node);
@@ -1052,6 +1058,9 @@ public interface M68kTypes {
       else if (type == SETFO_DIRECTIVE) {
         return new M68kSetfoDirectiveImpl(node);
       }
+      else if (type == SETSO_DIRECTIVE) {
+        return new M68kSetsoDirectiveImpl(node);
+      }
       else if (type == SET_DIRECTIVE) {
         return new M68kSetDirectiveImpl(node);
       }
@@ -1093,6 +1102,9 @@ public interface M68kTypes {
       }
       else if (type == SNE_INSTRUCTION) {
         return new M68kSneInstructionImpl(node);
+      }
+      else if (type == SO_DIRECTIVE) {
+        return new M68kSoDirectiveImpl(node);
       }
       else if (type == SPC_DIRECTIVE) {
         return new M68kSpcDirectiveImpl(node);

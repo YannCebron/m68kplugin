@@ -73,7 +73,6 @@ Unsupported directives, these will display false positive
 - `public`
 - `rorg`
 - `showoffset` (PhxAss)
-- `so.*`, `clrso`/`setso`
 - `struct`/`estruct`
 - `symdebug`
 - `weak`

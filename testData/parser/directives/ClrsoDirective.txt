@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kClrsoDirectiveImpl(CLRSO_DIRECTIVE)
+    PsiElement(clrso)('clrso')

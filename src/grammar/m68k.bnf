@@ -1061,6 +1061,7 @@ roxr_instruction ::= ROXR shift_tail
   implements("(text|cseg|code|code_c|code_f|data|dseg|data_c|data_f|bss|bss_c|bss_f)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(machine|(mc68|ac68).*)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(.*)fo_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
+  implements("(.*)so_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("equ_directive_base") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   name(".*_directive") = "directive"
 }
@@ -1148,7 +1149,10 @@ private directives ::= dc_directive |
                        machine_directive |
                        fo_directive |
                        clrfo_directive |
-                       setfo_directive
+                       setfo_directive |
+                       so_directive |
+                       clrso_directive |
+                       setso_directive
 
 fake equ_directive_base ::= label expression?
 {
@@ -1479,6 +1483,20 @@ fo_directive ::= label FO data_size_all? expression?
 clrfo_directive ::= CLRFO
 
 setfo_directive ::= SETFO expression
+{
+  pin = 1
+}
+
+
+so_directive ::= label SO data_size_all? expression?
+{
+  extends = data_sized
+  pin = 2
+}
+
+clrso_directive ::= CLRSO
+
+setso_directive ::= SETSO expression
 {
   pin = 1
 }

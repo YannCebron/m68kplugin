@@ -75,7 +75,7 @@ public class M68kStructureViewModel extends StructureViewModelBase implements St
       createFilter(createLabelFilteringFunction(
         EnumSet.of(M68kLabelBase.LabelKind.EQU, M68kLabelBase.LabelKind.EQUALS,
           M68kLabelBase.LabelKind.SET, M68kLabelBase.LabelKind.EQUR,
-          M68kLabelBase.LabelKind.FO)),
+          M68kLabelBase.LabelKind.FO, M68kLabelBase.LabelKind.SO)),
         M68kBundle.message("structureview.filter.assignments"), M68kIcons.LABEL_EQU, "SHOW_ASSIGNMENTS")
     };
   }

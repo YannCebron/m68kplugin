@@ -13,6 +13,7 @@
       <w>carg</w>
       <w>cebron</w>
       <w>clrfo</w>
+      <w>clrso</w>
       <w>cmpa</w>
       <w>cmpi</w>
       <w>cmpm</w>
@@ -103,6 +104,7 @@
       <w>sbcd</w>
       <w>sbwl</w>
       <w>setfo</w>
+      <w>setso</w>
       <w>suba</w>
       <w>subi</w>
       <w>subq</w>

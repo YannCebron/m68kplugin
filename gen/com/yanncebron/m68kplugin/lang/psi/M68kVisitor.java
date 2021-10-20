@@ -323,6 +323,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitDirective(o);
   }
 
+  public void visitClrsoDirective(@NotNull M68kClrsoDirective o) {
+    visitDirective(o);
+  }
+
   public void visitCmpInstruction(@NotNull M68kCmpInstruction o) {
     visitCmpInstructionBase(o);
   }
@@ -1105,6 +1109,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitDirective(o);
   }
 
+  public void visitSetsoDirective(@NotNull M68kSetsoDirective o) {
+    visitDirective(o);
+  }
+
   public void visitSfInstruction(@NotNull M68kSfInstruction o) {
     visitSccInstructionBase(o);
   }
@@ -1160,6 +1168,11 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitSneInstruction(@NotNull M68kSneInstruction o) {
     visitSccInstructionBase(o);
+  }
+
+  public void visitSoDirective(@NotNull M68kSoDirective o) {
+    visitDataSized(o);
+    // visitDirective(o);
   }
 
   public void visitSpcDirective(@NotNull M68kSpcDirective o) {

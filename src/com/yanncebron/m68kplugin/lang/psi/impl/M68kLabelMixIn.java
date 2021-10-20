@@ -82,6 +82,9 @@ abstract class M68kLabelMixIn extends StubBasedPsiElementBase<M68kLabelStub> imp
     if (parent instanceof M68kFoDirective) {
       return LabelKind.FO;
     }
+    if (parent instanceof M68kSoDirective) {
+      return LabelKind.SO;
+    }
 
     throw new IllegalArgumentException("cannot determine labelKind for '" + getName() + "' " + this);
   }
@@ -119,6 +122,11 @@ abstract class M68kLabelMixIn extends StubBasedPsiElementBase<M68kLabelStub> imp
         assert foParent instanceof M68kFoDirective;
         final M68kExpression foExpression = ((M68kFoDirective) foParent).getExpression();
         return foExpression != null ? foExpression.getText() : null;
+      case SO:
+        final PsiElement soParent = getParent();
+        assert soParent instanceof M68kSoDirective;
+        final M68kExpression soExpression = ((M68kSoDirective) soParent).getExpression();
+        return soExpression != null ? soExpression.getText() : null;
       default:
         throw new IllegalArgumentException("cannot determine value for '" + labelKind + "' " + this);
     }
@@ -143,6 +151,8 @@ abstract class M68kLabelMixIn extends StubBasedPsiElementBase<M68kLabelStub> imp
         return M68kIcons.LABEL_REG;
       case FO:
         return M68kIcons.LABEL_FO;
+      case SO:
+        return M68kIcons.LABEL_SO;
       default:
         throw new IllegalArgumentException("unknown labelKind " + labelKind + "for '" + getName() + "' " + this);
     }
