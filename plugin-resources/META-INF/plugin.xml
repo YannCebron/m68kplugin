@@ -204,6 +204,13 @@
         key="inspection.simplifiable.expression.name" groupKey="inspection.group.name"
         implementationClass="com.yanncebron.m68kplugin.inspections.M68kSimplifiableExpressionInspection"/>
 
+
+    <toolWindow
+        id="M68kBrowser"
+        anchor="right"
+        factoryClass="com.yanncebron.m68kplugin.browser.M68kBrowserToolwindowFactory"/>
+
+    
     <consoleFilterProvider
         implementation="com.yanncebron.m68kplugin.compiler.M68kVasmConsoleFilterProvider"/>
 

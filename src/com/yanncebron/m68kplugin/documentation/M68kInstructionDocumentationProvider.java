@@ -16,7 +16,6 @@
 
 package com.yanncebron.m68kplugin.documentation;
 
-import com.intellij.codeInsight.documentation.DocumentationManagerProtocol;
 import com.intellij.lang.documentation.AbstractDocumentationProvider;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.Pair;
@@ -25,7 +24,6 @@ import com.intellij.openapi.util.io.StreamUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -57,12 +55,13 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
 
   private static final String DOCS_MNEMONIC_ROOT = "/docs/mnemonic/";
 
-  private static final String CSS = "<style>" +
+  public static final String CSS = "<style>" +
     "h1 { font-weight: bold; font-size: 120%; } " +
     "h2 { padding-top: 13px; font-weight: bold; font-size: 110%; } " +
     "h3 { padding-top: 10px; font-weight: bold; } " +
     "table { padding-bottom: 10px; white-space: nowrap; } " +
-    "th { margin: 2px; } " +
+    "td { margin: 4px 0 0 0; padding: 0 0 0 0; }" +
+    "th { text-align: left; margin: 2px; } " +
     "em { font-style: italic; }" +
     "</style>";
 
@@ -78,44 +77,6 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
     .put("roxl_roxr", TokenSet.create(M68kTokenTypes.ROXL, M68kTokenTypes.ROXR))
     .put("scc", M68kTokenGroups.SCC_INSTRUCTIONS)
     .build();
-
-  private static final String LINK_INSTRUCTION_REFERENCE_DOCS = "m68k_instruction_reference_docs";
-
-  @Override
-  public @Nullable String generateHoverDoc(@NotNull PsiElement element, @Nullable PsiElement originalElement) {
-    if (!(element instanceof M68kInstruction)) return null;
-
-    M68kInstruction instruction = (M68kInstruction) element;
-    final IElementType originalMnemonic = instruction.getNode().getFirstChildNode().getElementType();
-
-    String hoverDoc = new M68kInstructionMnemonicDocsGenerator(instruction, originalMnemonic).generateHtmlDoc();
-
-    final Pair<String, String> markdownContents = getMarkdownContents(originalMnemonic);
-
-    String referenceLink = markdownContents.getFirst() != null ?
-      "<a href=\"" + DocumentationManagerProtocol.PSI_ELEMENT_PROTOCOL +
-        M68kInstructionDocumentationProvider.LINK_INSTRUCTION_REFERENCE_DOCS + "\">" +
-        M68kBundle.message("documentation.hover.reference.doc.link.title") + "</a>"
-      : "";
-
-    String referenceHeading = markdownContents.getFirst() != null ?
-      StringUtil.substringAfter(StringUtil.splitByLines(markdownContents.getFirst())[0], "# ") : originalMnemonic.toString();
-
-    return CSS +
-      "<h1>" + referenceHeading + "</h1>" +
-      referenceLink +
-      "<br>" +
-      "<br>" +
-      hoverDoc;
-  }
-
-  @Override
-  public @Nullable PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context) {
-    if (LINK_INSTRUCTION_REFERENCE_DOCS.equals(link)) {
-      return context;
-    }
-    return null;
-  }
 
   @Override
   public @Nullable PsiElement getCustomDocumentationElement(@NotNull Editor editor,
@@ -134,8 +95,24 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
     if (!(element instanceof M68kInstruction)) return null;
 
     M68kInstruction instruction = (M68kInstruction) element;
-
     final IElementType originalMnemonic = instruction.getNode().getFirstChildNode().getElementType();
+
+    return CSS + getMnemonicDoc(originalMnemonic, instruction);
+  }
+
+  @NotNull
+  public static String getMnemonicDoc(IElementType originalMnemonic, @Nullable M68kInstruction instruction) {
+    String mnemonicDoc = new M68kInstructionMnemonicDocsGenerator(originalMnemonic, instruction).generateHtmlDoc();
+
+    final Pair<String, String> markdownContents = getMarkdownContents(originalMnemonic);
+
+    String referenceHeading = markdownContents.getFirst() != null ?
+      StringUtil.substringAfter(StringUtil.splitByLines(markdownContents.getFirst())[0], "# ") : StringUtil.toUpperCase(originalMnemonic.toString());
+
+    return "<h1>" + referenceHeading + "</h1><br>" + mnemonicDoc;
+  }
+
+  public static String getInstructionReferenceDoc(IElementType originalMnemonic) {
     final Pair<String, String> markdownContents = getMarkdownContents(originalMnemonic);
     if (markdownContents.getFirst() == null) {
       return markdownContents.getSecond();
@@ -151,7 +128,7 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
         public String sanitizeImageUrl(String url) {
           final String sanitizedUrl = super.sanitizeImageUrl(url);
           try {
-            final URL resourceUrl = getClass().getResource(DOCS_MNEMONIC_ROOT + sanitizedUrl);
+            final URL resourceUrl = M68kInstructionDocumentationProvider.class.getResource(DOCS_MNEMONIC_ROOT + sanitizedUrl);
             assert resourceUrl != null : sanitizedUrl;
             final InputStream is = URLUtil.openStream(resourceUrl);
             final File tempFile = FileUtil.createTempFile("m68k", ".png", true);
@@ -164,14 +141,13 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
       })
       .sanitizeUrls(true)
       .build();
-    final String html = renderer.render(document);
-    return CSS + html;
+    return renderer.render(document);
   }
 
-  private Pair<String, String> getMarkdownContents(IElementType originalMnemonic) {
+  private static Pair<String, String> getMarkdownContents(IElementType originalMnemonic) {
     String docMnemonic = findDocMnemonic(originalMnemonic);
 
-    final InputStream resource = getClass().getResourceAsStream(DOCS_MNEMONIC_ROOT + docMnemonic + ".md");
+    final InputStream resource = M68kInstructionDocumentationProvider.class.getResourceAsStream(DOCS_MNEMONIC_ROOT + docMnemonic + ".md");
     if (resource == null) {
       return Pair.create(null, M68kBundle.message("documentation.no.reference.doc", docMnemonic, originalMnemonic));
     }

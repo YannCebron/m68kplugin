@@ -4,13 +4,16 @@
 ### Added
 - support DX directive
 - support IF1/IF2/IFP1 directives
-- add inspection: Conditional assembly directives problems 
-- 68010 support: add reference documention for BKPT, MOVEC, MOVES instructions
+- add inspection: Conditional assembly directives problems
+- 68010 support: add reference documentation for BKPT, MOVEC, MOVES instructions
+- "M68k Browser": new tool window to browse instructions and (reference) docs
 
 ### Fixed
+- instruction documentation: show UNSIZED
 
 ### Changed
-- Instruction hover documentation: underline matching variant if multiple
+- instruction documentation: underline matching variant if multiple
+- instruction documentation: move reference documentation to new "M68k Browser" tool window
 
 ## [0.1.1]
 ### Added

@@ -22,6 +22,7 @@ import com.intellij.util.ArrayUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -29,21 +30,21 @@ import java.util.Set;
 
 class M68kInstructionMnemonicDocsGenerator {
 
-  private final M68kInstruction instruction;
   private final IElementType elementType;
+  private final @Nullable M68kInstruction instruction;
 
   private StringBuilder sb;
 
-  M68kInstructionMnemonicDocsGenerator(M68kInstruction instruction, IElementType elementType) {
-    this.instruction = instruction;
+  M68kInstructionMnemonicDocsGenerator(IElementType elementType, @Nullable M68kInstruction instruction) {
     this.elementType = elementType;
+    this.instruction = instruction;
   }
 
   String generateHtmlDoc() {
     final Collection<M68kMnemonic> allMnemonics = M68kMnemonicRegistry.getInstance().findAll(elementType);
     assert !allMnemonics.isEmpty() : elementType;
 
-    M68kMnemonic specific = allMnemonics.size() > 1 ? M68kMnemonicRegistry.getInstance().find(instruction) : null;
+    M68kMnemonic specific = instruction != null && allMnemonics.size() > 1 ? M68kMnemonicRegistry.getInstance().find(instruction) : null;
 
     sb = new StringBuilder();
 
@@ -74,9 +75,9 @@ class M68kInstructionMnemonicDocsGenerator {
       } else {
         sb.append("<h2>");
       }
-      final String mnemonicText = elementType + StringUtil.join(mnemonic.getDataSizes(), M68kDataSize::getText, "|");
-      sb.append("<code>").append(mnemonicText);
-      sb.append(StringUtil.repeat("&nbsp;", 15 - mnemonicText.length()));
+      final String mnemonicText = StringUtil.toUpperCase(StringUtil.toUpperCase(elementType.toString())) + StringUtil.join(mnemonic.getDataSizes(), M68kDataSize::getText, "|");
+      sb.append("<code>").append(StringUtil.escapeXmlEntities(mnemonicText));
+      sb.append(StringUtil.repeat("&nbsp;", Math.max(1, 18 - mnemonicText.length())));
 
       appendOperand(mnemonic.getSourceOperand(), "");
       appendOperand(mnemonic.getDestinationOperand(), ",");
