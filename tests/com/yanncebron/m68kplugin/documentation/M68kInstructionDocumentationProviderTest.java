@@ -55,15 +55,6 @@ public class M68kInstructionDocumentationProviderTest extends BasePlatformTestCa
   public void testAllInstructionsHaveReferenceDocs() {
     for (IElementType elementType : M68kTokenGroups.INSTRUCTIONS.getTypes()) {
       final Collection<M68kMnemonic> mnemonics = M68kMnemonicRegistry.getInstance().findAll(elementType);
-      boolean found68000 = false;
-      for (M68kMnemonic mnemonic : mnemonics) {
-        if (mnemonic.getCpus().contains(M68kCpu.M_68000)) {
-          found68000 = true;
-          break;
-        }
-      }
-      if (!found68000) continue;
-
       final String mnemonic = elementType.toString();
       doTestGenerateDoc(" " + mnemonic.charAt(0) + "<caret>" + mnemonic.substring(1), " - "); // [mnemonic] - [description]
     }
