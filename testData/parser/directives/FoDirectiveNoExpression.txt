@@ -1,0 +1,6 @@
+M68k.FILE
+  M68kFoDirectiveImpl(FO_DIRECTIVE)
+    M68kLabelImpl(LABEL)
+      PsiElement(id)('label')
+    PsiWhiteSpace(' ')
+    PsiElement(fo)('fo')

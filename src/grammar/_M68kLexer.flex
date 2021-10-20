@@ -437,6 +437,7 @@ Z=[zZ]
   {B}{S}{S}                    { yybegin(AFTER_OPERAND); return BSS; }
   {B}{S}{S}_{C}                { yybegin(AFTER_OPERAND); return BSS_C; }
   {B}{S}{S}_{F}                { yybegin(AFTER_OPERAND); return BSS_F; }
+  {C}{L}{R}{F}{O}              { yybegin(IN_OPERAND); return CLRFO; }
   {C}{N}{O}{P}                 { yybegin(IN_OPERAND); return CNOP; }
   {C}{O}{D}{E}                 { yybegin(AFTER_OPERAND); return CODE; }
   {C}{O}{D}{E}_{C}             { yybegin(AFTER_OPERAND); return CODE_C; }
@@ -459,6 +460,7 @@ Z=[zZ]
   {E}{V}{E}{N}                 { yybegin(AFTER_OPERAND); return EVEN; }
   {F}{A}{I}{L}                 { yybegin(AFTER_OPERAND); return FAIL; }
   {F}{A}{R}                    { yybegin(AFTER_OPERAND); return FAR; }
+  {F}{O}       / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return FO; }
   {I}{D}{N}{T}                 { yybegin(STRING_DIRECTIVE); return IDNT; }
   {I}{N}{C}{B}{I}{N}           { yybegin(STRING_DIRECTIVE); return INCBIN; }
   {I}{N}{C}{D}{I}{R}           { yybegin(STRING_DIRECTIVE); return INCDIR; }
@@ -491,6 +493,7 @@ Z=[zZ]
   {R}{S}{S}{E}{T}              { yybegin(IN_OPERAND); return RSSET; }
   {S}{E}{C}{T}{I}{O}{N}        { yybegin(IN_OPERAND); return SECTION; }
   {S}{E}{T}                    { yybegin(IN_OPERAND); return SET; }
+  {S}{E}{T}{F}{O}              { yybegin(IN_OPERAND); return SETFO; }
   {S}{P}{C}                    { yybegin(IN_OPERAND); return SPC; }
   {T}{E}{X}{T}                 { yybegin(AFTER_OPERAND); return TEXT; }
   {T}{T}{L}                    { yybegin(STRING_DIRECTIVE); return TTL; }

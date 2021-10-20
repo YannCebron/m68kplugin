@@ -1060,6 +1060,7 @@ roxr_instruction ::= ROXR shift_tail
   implements("(opt|org|macro|endm|mexit|macro_parameter|macro_call|end|section|addwatch|jumperr|jumpptr|list|nolist|page|nopage|plen|llen|spc|inline|einline|rem|erem|xdef|xref|rept|endr|fail|printt|printv|load|ttl|idnt|far|near|near_code|init_near|popsection|pushsection|echo)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(text|cseg|code|code_c|code_f|data|dseg|data_c|data_f|bss|bss_c|bss_f)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(machine|(mc68|ac68).*)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
+  implements("(.*)fo_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("equ_directive_base") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   name(".*_directive") = "directive"
 }
@@ -1144,7 +1145,10 @@ private directives ::= dc_directive |
                        mc68040_directive |
                        mc68060_directive |
                        ac68080_directive |
-                       machine_directive
+                       machine_directive |
+                       fo_directive |
+                       clrfo_directive |
+                       setfo_directive
 
 fake equ_directive_base ::= label expression?
 {
@@ -1462,6 +1466,19 @@ private machine_cpu_type ::= DEC_NUMBER
   name = "cpu type"
 }
 machine_directive ::= machine machine_cpu_type
+{
+  pin = 1
+}
+
+fo_directive ::= label FO data_size_all? expression?
+{
+  extends = data_sized
+  pin = 2
+}
+
+clrfo_directive ::= CLRFO
+
+setfo_directive ::= SETFO expression
 {
   pin = 1
 }

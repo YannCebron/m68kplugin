@@ -30,7 +30,8 @@ public interface M68kLabelBase extends PsiNameIdentifierOwner, NavigatablePsiEle
     SET(true),
     EQUR(true),
     REG(true),
-    MACRO(false);
+    MACRO(false),
+    FO(true);
 
     private final boolean hasValue;
 

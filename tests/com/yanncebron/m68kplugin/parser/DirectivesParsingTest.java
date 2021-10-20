@@ -513,4 +513,24 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" machine ");
   }
 
+  public void testClrfoDirective() throws Exception {
+    doCodeTest(" clrfo");
+  }
+
+  public void testSetfoDirective() throws Exception {
+    doCodeTest(" setfo 42");
+  }
+
+  public void testFoDirective() throws Exception {
+    doCodeTest("label fo.w 42");
+  }
+
+  public void testFoDirectiveNoDataSize() throws Exception {
+    doCodeTest("label fo 42");
+  }
+
+  public void testFoDirectiveNoExpression() throws Exception {
+    doCodeTest("label fo");
+  }
+
 }

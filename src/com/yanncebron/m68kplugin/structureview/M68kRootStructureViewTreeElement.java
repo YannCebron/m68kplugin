@@ -52,6 +52,7 @@ class M68kRootStructureViewTreeElement extends PsiTreeElementBase<M68kFile> {
       M68kLabel.class, M68kMacroDirective.class,
       M68kEquDirectiveBase.class,
       M68kEqurDirective.class, M68kRegDirective.class,
+      M68kFoDirective.class,
       M68kIncludeDirective.class, M68kIncbinDirective.class);
 
     Collection<StructureViewTreeElement> nodes = new ArrayList<>();
@@ -76,6 +77,9 @@ class M68kRootStructureViewTreeElement extends PsiTreeElementBase<M68kFile> {
       } else if (child instanceof M68kRegDirective) {
         M68kRegDirective regDirective = (M68kRegDirective) child;
         nodes.add(new M68kStructureViewNode(regDirective.getLabel()));
+      } else if (child instanceof M68kFoDirective) {
+        M68kFoDirective foDirective = (M68kFoDirective) child;
+        nodes.add(new M68kStructureViewNode(foDirective.getLabel()));
       } else if (child instanceof M68kIncludeDirective) {
         M68kIncludeDirective includeDirective = (M68kIncludeDirective) child;
         nodes.add(new PsiTreeElementBase<>(includeDirective) {

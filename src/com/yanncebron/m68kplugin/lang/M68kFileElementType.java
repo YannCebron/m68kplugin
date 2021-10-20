@@ -28,7 +28,7 @@ public class M68kFileElementType extends ILightStubFileElementType<PsiFileStub<M
   @NonNls
   public static final String STUB_EXTERNAL_ID_PREFIX = "M68k.";
 
-  public static final int STUB_VERSION = 19;
+  public static final int STUB_VERSION = 20;
 
   @NonNls
   private static final String EXTERNAL_ID = STUB_EXTERNAL_ID_PREFIX + "FILE";

@@ -73,6 +73,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType CCR = new M68kTokenType("ccr");
   public static final IElementType CHK = new M68kTokenType("chk");
   public static final IElementType CLR = new M68kTokenType("clr");
+  public static final IElementType CLRFO = new M68kTokenType("clrfo");
   public static final IElementType CMP = new M68kTokenType("cmp");
   public static final IElementType CMPA = new M68kTokenType("cmpa");
   public static final IElementType CMPI = new M68kTokenType("cmpi");
@@ -149,6 +150,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType EXT = new M68kTokenType("ext");
   public static final IElementType FAIL = new M68kTokenType("fail");
   public static final IElementType FAR = new M68kTokenType("far");
+  public static final IElementType FO = new M68kTokenType("fo");
   public static final IElementType GT = new M68kTokenType(">");
   public static final IElementType GT_EQ = new M68kTokenType(">=");
   public static final IElementType GT_GT = new M68kTokenType(">>");
@@ -270,6 +272,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType SECTION = new M68kTokenType("section");
   public static final IElementType SEQ = new M68kTokenType("seq");
   public static final IElementType SET = new M68kTokenType("set");
+  public static final IElementType SETFO = new M68kTokenType("setfo");
   public static final IElementType SF = new M68kTokenType("sf");
   public static final IElementType SFC = new M68kTokenType("sfc");
   public static final IElementType SGE = new M68kTokenType("sge");

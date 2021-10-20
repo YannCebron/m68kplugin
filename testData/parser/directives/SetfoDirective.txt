@@ -1,0 +1,7 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kSetfoDirectiveImpl(SETFO_DIRECTIVE)
+    PsiElement(setfo)('setfo')
+    PsiWhiteSpace(' ')
+    M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+      PsiElement(dec_number)('42')

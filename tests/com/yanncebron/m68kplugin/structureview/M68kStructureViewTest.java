@@ -45,7 +45,8 @@ public class M68kStructureViewTest extends BasePlatformTestCase {
         " incbin \"incbin_file\"\n" +
         "label\n" +
         ".localLabel\n" +
-        "anotherLabel\n"
+        "anotherLabel\n" +
+        "foLabel fo 42"
     );
     myFixture.testStructureView(component -> {
       final JTree tree = component.getTree();
@@ -62,7 +63,8 @@ public class M68kStructureViewTest extends BasePlatformTestCase {
           " incbin_file\n" +
           " -label\n" +
           "  localLabel\n" +
-          " anotherLabel");
+          " anotherLabel\n" +
+          " foLabel");
 
 
       TreeElementWrapper root = (TreeElementWrapper) TreeUtil.getUserObject(component.getTree().getModel().getRoot());
@@ -81,6 +83,8 @@ public class M68kStructureViewTest extends BasePlatformTestCase {
       final TreeElement[] labelNodeChildren = topLevelNodes[8].getChildren();
       assertSize(1, labelNodeChildren);
       assertNodePresentation(labelNodeChildren, 0, M68kIcons.LABEL_LOCAL, null);
+
+      assertNodePresentation(topLevelNodes, 10, M68kIcons.LABEL_FO, "42");
     });
   }
 

@@ -12,6 +12,7 @@
       <w>btst</w>
       <w>carg</w>
       <w>cebron</w>
+      <w>clrfo</w>
       <w>cmpa</w>
       <w>cmpi</w>
       <w>cmpm</w>
@@ -101,6 +102,7 @@
       <w>rsset</w>
       <w>sbcd</w>
       <w>sbwl</w>
+      <w>setfo</w>
       <w>suba</w>
       <w>subi</w>
       <w>subq</w>

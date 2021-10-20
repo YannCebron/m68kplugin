@@ -57,7 +57,6 @@ Unsupported directives, these will display false positive
 - `equrl`
 - `fequr`
 - `fequrl`
-- `fo.*`, `clrfo`/`setfo`
 - `fpu`
 - `freg`
 - `iif` (Devpac)

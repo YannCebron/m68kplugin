@@ -25,10 +25,7 @@ import com.intellij.psi.stubs.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.yanncebron.m68kplugin.lang.M68kFileElementType;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
-import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
-import com.yanncebron.m68kplugin.lang.psi.M68kTypes;
+import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelImpl;
 import com.yanncebron.m68kplugin.lang.stubs.impl.M68kLabelStubImpl;
 import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
@@ -73,6 +70,9 @@ public interface M68kStubElementTypesHolder {
         } else if (tokenType == M68kTypes.REG_DIRECTIVE) {
           kind = M68kLabelBase.LabelKind.REG;
           value = parseValue(tree, parent, M68kTokenTypes.REG);
+        } else if (tokenType == M68kTypes.FO_DIRECTIVE) {
+          kind = M68kLabelBase.LabelKind.FO;
+          value = parseValue(tree, parent, M68kTokenTypes.FO);
         } else {
           throw new IllegalArgumentException("unknown parent token type: " + tokenType);
         }
@@ -144,7 +144,9 @@ public interface M68kStubElementTypesHolder {
           final IElementType type = child.getTokenType();
           if (type == valueDelimiterTokenType) {
             expectingInit = true;
-          } else if (expectingInit && !TokenSet.WHITE_SPACE.contains(type)) {
+          } else if (expectingInit &&
+            !TokenSet.WHITE_SPACE.contains(type) &&
+            !M68kTokenGroups.DATA_SIZES.contains(type)) {
             return LightTreeUtil.toFilteredString(tree, child, null);
           }
         }

@@ -143,6 +143,18 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
+  // CLRFO
+  public static boolean clrfo_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "clrfo_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", CLRFO)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, CLRFO_DIRECTIVE, "<directive>");
+    r = consumeToken(b, CLRFO);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // CNOP expression COMMA expression
   public static boolean cnop_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cnop_directive")) return false;
@@ -409,7 +421,10 @@ public class M68kDirectivesParser {
   //                        mc68040_directive |
   //                        mc68060_directive |
   //                        ac68080_directive |
-  //                        machine_directive
+  //                        machine_directive |
+  //                        fo_directive |
+  //                        clrfo_directive |
+  //                        setfo_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -494,6 +509,9 @@ public class M68kDirectivesParser {
     if (!r) r = mc68060_directive(b, l + 1);
     if (!r) r = ac68080_directive(b, l + 1);
     if (!r) r = machine_directive(b, l + 1);
+    if (!r) r = fo_directive(b, l + 1);
+    if (!r) r = clrfo_directive(b, l + 1);
+    if (!r) r = setfo_directive(b, l + 1);
     return r;
   }
 
@@ -750,6 +768,36 @@ public class M68kDirectivesParser {
     r = consumeToken(b, FAR);
     exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  /* ********************************************************** */
+  // label FO data_size_all? expression?
+  public static boolean fo_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "fo_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", ID)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, FO_DIRECTIVE, "<directive>");
+    r = label(b, l + 1);
+    r = r && consumeToken(b, FO);
+    p = r; // pin = 2
+    r = r && report_error_(b, fo_directive_2(b, l + 1));
+    r = p && fo_directive_3(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // data_size_all?
+  private static boolean fo_directive_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "fo_directive_2")) return false;
+    data_size_all(b, l + 1);
+    return true;
+  }
+
+  // expression?
+  private static boolean fo_directive_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "fo_directive_3")) return false;
+    M68kExpressionParser.expression(b, l + 1, -1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -1648,6 +1696,20 @@ public class M68kDirectivesParser {
     r = label(b, l + 1);
     r = r && consumeToken(b, SET);
     p = r; // pin = 2
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // SETFO expression
+  public static boolean setfo_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "setfo_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", SETFO)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, SETFO_DIRECTIVE, "<directive>");
+    r = consumeToken(b, SETFO);
+    p = r; // pin = 1
     r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, l, m, r, p, null);
     return r || p;

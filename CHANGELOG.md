@@ -4,6 +4,7 @@
 ### Added
 - support DX directive
 - support IF1/IF2/IFP1 directives
+- support FO, CLRFO, SETFO directives
 - add inspection: Conditional assembly directives problems
 - 68010 support: add reference documentation for BKPT, MOVEC, MOVES instructions
 - "M68k Browser": new tool window to browse instructions and (reference) docs
