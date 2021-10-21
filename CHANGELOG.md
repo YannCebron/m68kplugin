@@ -9,6 +9,7 @@
 
 ### Fixed
 - Show used/free registers: handle register-list/range, PC indirect with index
+- FAIL directive: support optional message
 
 ### Changed
 

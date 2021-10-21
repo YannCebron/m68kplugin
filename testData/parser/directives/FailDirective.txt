@@ -2,3 +2,5 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kFailDirectiveImpl(FAIL_DIRECTIVE)
     PsiElement(fail)('fail')
+    PsiWhiteSpace(' ')
+    PsiElement(string)(''A MESSAGE TO FAIL'')

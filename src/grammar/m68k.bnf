@@ -1428,7 +1428,7 @@ load_directive ::= LOAD expression
   pin = 1
 }
 
-fail_directive ::= FAIL
+fail_directive ::= FAIL STRING?
 
 far_directive ::= FAR
 

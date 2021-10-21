@@ -460,7 +460,7 @@ Z=[zZ]
   {E}{N}{D}{R}                 { yybegin(AFTER_OPERAND); return ENDR; }
   {E}{R}{E}{M}                 { yybegin(AFTER_OPERAND); return EREM; }
   {E}{V}{E}{N}                 { yybegin(AFTER_OPERAND); return EVEN; }
-  {F}{A}{I}{L}                 { yybegin(AFTER_OPERAND); return FAIL; }
+  {F}{A}{I}{L}                 { yybegin(STRING_DIRECTIVE); return FAIL; }
   {F}{A}{R}                    { yybegin(AFTER_OPERAND); return FAR; }
   {F}{O}       / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return FO; }
   {I}{D}{N}{T}                 { yybegin(STRING_DIRECTIVE); return IDNT; }

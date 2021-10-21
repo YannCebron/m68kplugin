@@ -785,15 +785,23 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // FAIL
+  // FAIL STRING?
   public static boolean fail_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "fail_directive")) return false;
     if (!nextTokenIs(b, "<directive>", FAIL)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, FAIL_DIRECTIVE, "<directive>");
     r = consumeToken(b, FAIL);
+    r = r && fail_directive_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  // STRING?
+  private static boolean fail_directive_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "fail_directive_1")) return false;
+    consumeToken(b, STRING);
+    return true;
   }
 
   /* ********************************************************** */

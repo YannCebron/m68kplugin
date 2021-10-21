@@ -414,7 +414,7 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
   }
 
   public void testFailDirective() throws Exception {
-    doCodeTest(" fail");
+    doCodeTest(" fail 'A MESSAGE TO FAIL'");
   }
 
   public void testPrinttDirective() throws Exception {

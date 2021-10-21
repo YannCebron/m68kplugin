@@ -3674,7 +3674,7 @@ public class _M68kLexer implements FlexLexer {
             // fall through
           case 551: break;
           case 231: 
-            { yybegin(AFTER_OPERAND); return FAIL;
+            { yybegin(STRING_DIRECTIVE); return FAIL;
             } 
             // fall through
           case 552: break;
