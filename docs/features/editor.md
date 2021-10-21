@@ -41,7 +41,7 @@ _Hover_: enable _Show quick documentation on hover_ in *Settings/Preferences \| 
 
 ### Mnemonics
 
-Show mnemonic documentation on mouse hover, current variant is underlined
+_View \| View Quick Documentation_ Show mnemonic documentation (or on mouse hover), current variant is underlined
 
 ![Mnemonic documentation](../assets/editor/hover_doc.png)
 
@@ -55,7 +55,7 @@ _M68k Browser_ tool window lists all supported mnemonics with additional referen
                       
 ![Label doc](../assets/editor/label_doc.png)
 
-_Hover_: Show type and value tooltip for labels on mouse hover
+<kbd>Ctrl+Click</kbd>: Show type and value tooltip for labels
 
 ![Label hover](../assets/editor/label_hover.png)
 
@@ -75,13 +75,13 @@ Smart completion for labels, e.g., ranking current local labels and labels from 
  
 ### Builtin Symbols 
 
-Completion and hover information
+Completion and <kbd>Ctrl+Click</kbd> hover information
 
 ![Builtin symbol](../assets/editor/builtin_symbol.png)
 
 ### Quick Definition 
 
-*View \| Quick Definition* to inspect label at caret in popup
+*View \| Quick Definition* to inspect label at caret in popup without leaving current editor
 
 ![Quick definition](../assets/editor/quick_definition.png)
 
@@ -100,6 +100,7 @@ Rename labels using *Refactor \| Rename* across whole project with usages previe
 ## Editing
 
 * Smart *Edit \| Extend/Shrink Selection*
+* Smart braces/quote handling
 * *Code \| Comment with Line Comment*
 * *Code \| Move Element Left/Right* for `exg`, binary expressions, register list, `dc` values
 * *Move Caret to Code Block Start/End* for matching directives
