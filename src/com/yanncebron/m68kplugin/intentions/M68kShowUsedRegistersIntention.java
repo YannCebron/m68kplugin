@@ -100,7 +100,7 @@ public class M68kShowUsedRegistersIntention implements IntentionAction, HighPrio
   }
 
   @NotNull
-  private Set<M68kRegister> getUsedRegisters(@NotNull Editor editor, @NotNull PsiFile file) {
+  static Set<M68kRegister> getUsedRegisters(@NotNull Editor editor, @NotNull PsiFile file) {
     final SelectionModel selectionModel = editor.getSelectionModel();
     TextRange selectionRange = TextRange.create(selectionModel.getSelectionStart(), selectionModel.getSelectionEnd());
 
@@ -126,11 +126,21 @@ public class M68kShowUsedRegistersIntention implements IntentionAction, HighPrio
       @Override
       public void visitAdmPci(@NotNull M68kAdmPci o) {
         addIfInside(o, M68kRegister.PC);
+        o.acceptChildren(this);
       }
 
       @Override
       public void visitAdmWithRegister(@NotNull M68kAdmWithRegister o) {
         addIfInside(o, o.getRegister());
+      }
+
+      @Override
+      public void visitAdmRegisterList(@NotNull M68kAdmRegisterList o) {
+        for (M68kRegisterRange registerRange : o.getRegisterRangeList()) {
+          for (M68kRegister register : registerRange.getRegisters()) {
+            addIfInside(o, register);
+          }
+        }
       }
     };
 

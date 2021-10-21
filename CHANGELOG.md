@@ -4,6 +4,7 @@
 ### Added
 
 ### Fixed
+- Show used/free registers: handle register-list/range, PC indirect with index
 
 ### Changed
 
