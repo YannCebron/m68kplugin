@@ -452,7 +452,8 @@ public class M68kDirectivesParser {
   //                        so_directive |
   //                        clrso_directive |
   //                        setso_directive |
-  //                        auto_directive
+  //                        auto_directive |
+  //                        msource_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -544,6 +545,7 @@ public class M68kDirectivesParser {
     if (!r) r = clrso_directive(b, l + 1);
     if (!r) r = setso_directive(b, l + 1);
     if (!r) r = auto_directive(b, l + 1);
+    if (!r) r = msource_directive(b, l + 1);
     return r;
   }
 
@@ -1262,6 +1264,34 @@ public class M68kDirectivesParser {
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, MEXIT_DIRECTIVE, "<directive>");
     r = consumeToken(b, MEXIT);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // MSOURCE msource_param
+  public static boolean msource_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "msource_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", MSOURCE)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, MSOURCE_DIRECTIVE, "<directive>");
+    r = consumeToken(b, MSOURCE);
+    p = r; // pin = 1
+    r = r && msource_param(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // "on" | "off" | "ON" | "OFF"
+  static boolean msource_param(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "msource_param")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<on/off>");
+    r = consumeToken(b, "on");
+    if (!r) r = consumeToken(b, "off");
+    if (!r) r = consumeToken(b, "ON");
+    if (!r) r = consumeToken(b, "OFF");
     exit_section_(b, l, m, r, false, null);
     return r;
   }

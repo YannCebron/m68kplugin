@@ -78,6 +78,7 @@
       <w>movemregs</w>
       <w>movep</w>
       <w>moveq</w>
+      <w>msource</w>
       <w>muls</w>
       <w>mulu</w>
       <w>narg</w>

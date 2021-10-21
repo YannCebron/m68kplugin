@@ -894,6 +894,10 @@ public class M68kVisitor extends PsiElementVisitor {
     // visitPrivilegedInstruction(o);
   }
 
+  public void visitMsourceDirective(@NotNull M68kMsourceDirective o) {
+    visitDirective(o);
+  }
+
   public void visitMulExpression(@NotNull M68kMulExpression o) {
     visitBinaryExpression(o);
   }

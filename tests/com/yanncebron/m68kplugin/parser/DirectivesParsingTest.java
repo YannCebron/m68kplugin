@@ -557,4 +557,16 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" auto");
   }
 
+  public void testMsourceDirective() throws Exception {
+    doCodeTest(" msource on");
+  }
+
+  public void testMsourceDirectiveOffParameter() throws Exception {
+    doCodeTest(" msource OFF");
+  }
+
+  public void testMsourceDirectiveMissingParameter() throws Exception {
+    doCodeTest(" msource");
+  }
+
 }

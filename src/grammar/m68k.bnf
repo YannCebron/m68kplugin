@@ -1057,7 +1057,7 @@ roxr_instruction ::= ROXR shift_tail
   psiImplPackage = "com.yanncebron.m68kplugin.lang.psi.directive.impl"
   parserClass = "com.yanncebron.m68kplugin.lang.M68kDirectivesParser"
   implements("(blk|set|equr|reg|even|odd|dc|dcb|dr|ds|dx|align|cnop|incbin|incdir|include|rsset|rsreset|rs)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
-  implements("(opt|org|macro|endm|mexit|macro_parameter|macro_call|end|section|addwatch|jumperr|jumpptr|list|nolist|page|nopage|plen|llen|spc|inline|einline|rem|erem|xdef|xref|rept|endr|fail|printt|printv|load|ttl|idnt|far|near|near_code|init_near|popsection|pushsection|echo|auto)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
+  implements("(opt|org|macro|endm|mexit|macro_parameter|macro_call|end|section|addwatch|jumperr|jumpptr|list|nolist|page|nopage|plen|llen|spc|inline|einline|rem|erem|xdef|xref|rept|endr|fail|printt|printv|load|ttl|idnt|far|near|near_code|init_near|popsection|pushsection|echo|auto|msource)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(text|cseg|code|code_c|code_f|data|dseg|data_c|data_f|bss|bss_c|bss_f)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(machine|(mc68|ac68).*)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(.*)fo_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
@@ -1153,7 +1153,8 @@ private directives ::= dc_directive |
                        so_directive |
                        clrso_directive |
                        setso_directive |
-                       auto_directive
+                       auto_directive |
+                       msource_directive
 
 fake equ_directive_base ::= label expression?
 {
@@ -1504,6 +1505,15 @@ setso_directive ::= SETSO expression
 
 
 auto_directive ::= AUTO
+
+private msource_param ::= "on" | "off" | "ON" | "OFF"
+{
+  name = "on/off"
+}
+msource_directive ::= MSOURCE msource_param
+{
+  pin = 1
+}
 
 // Expressions  ============================================================
 // http://sun.hasenbraten.de/vasm/release/vasm_2.html#Expressions

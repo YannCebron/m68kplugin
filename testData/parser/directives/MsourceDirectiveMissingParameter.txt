@@ -1,0 +1,6 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kMsourceDirectiveImpl(MSOURCE_DIRECTIVE)
+    PsiElement(msource)('msource')
+    PsiErrorElement:<on/off> expected
+      <empty list>

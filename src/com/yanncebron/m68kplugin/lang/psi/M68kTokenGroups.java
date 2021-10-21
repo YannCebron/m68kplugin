@@ -226,6 +226,7 @@ public final class M68kTokenGroups {
     MC68040,
     MC68060,
     MEXIT,
+    MSOURCE,
     NEAR,
     NEAR_CODE,
     NOLIST,
