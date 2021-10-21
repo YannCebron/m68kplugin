@@ -14,14 +14,16 @@ macroName MACRO
  data
  code
  opt w+,u+
-label=42
+label2=42
  section tos,code,chip
  dc.l 1,2,3
 label equ 42
  end
 label equr a4
  erem
+ dr label,label2
  ds 42
+ dx.l 42
  plen 22
  einline
  list
@@ -63,3 +65,19 @@ label set 42
  xref label
  xref label,anotherLabel
  fail
+
+ clrfo
+ setfo 42
+
+ clrso
+ setso 44
+
+ auto
+ msource on
+ msource off
+
+ offset 42
+ offset
+
+ mask2
+ auto

@@ -1,3 +1,4 @@
+label
  dc -1
  dc 10%3
  dc 1+2
@@ -22,3 +23,5 @@
  dc 'string'
  dc 1/2
  dc "string"
+ dc *-42
+ dc.b ((2/(1+2)*3)+label)/2

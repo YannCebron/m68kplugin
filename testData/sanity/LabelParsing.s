@@ -27,3 +27,11 @@ colon2: = 2
 
 regList: reg d0/d7
 myReg: equr d0
+
+fo_label  fo.w 42
+fo_label2 fo 42
+fo_label3 fo
+
+so_label  so.w 42
+so_label2 so 42
+so_label3 so
