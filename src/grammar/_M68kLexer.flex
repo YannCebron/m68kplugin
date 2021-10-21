@@ -480,6 +480,7 @@ Z=[zZ]
   {N}{O}{L}{I}{S}{T}           { yybegin(AFTER_OPERAND); return NOLIST; }
   {N}{O}{P}{A}{G}{E}           { yybegin(AFTER_OPERAND); return NOPAGE; }
   {O}{D}{D}                    { yybegin(AFTER_OPERAND); return ODD; }
+  {O}{F}{F}{S}{E}{T}           { yybegin(IN_OPERAND); return OFFSET; }
   {O}{P}{T}                    { yybegin(IN_OPERAND); return OPT; }
   {O}{R}{G}                    { yybegin(IN_OPERAND); return ORG; }
   {P}{A}{G}{E}                 { yybegin(AFTER_OPERAND); return PAGE; }

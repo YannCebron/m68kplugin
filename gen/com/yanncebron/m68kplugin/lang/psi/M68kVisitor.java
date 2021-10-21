@@ -964,6 +964,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitDirective(o);
   }
 
+  public void visitOffsetDirective(@NotNull M68kOffsetDirective o) {
+    visitDirective(o);
+  }
+
   public void visitOptDirective(@NotNull M68kOptDirective o) {
     visitDirective(o);
   }

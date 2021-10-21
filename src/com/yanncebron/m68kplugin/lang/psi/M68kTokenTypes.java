@@ -236,6 +236,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType NOT = new M68kTokenType("not");
   public static final IElementType OCT_NUMBER = new M68kTokenType("oct_number");
   public static final IElementType ODD = new M68kTokenType("odd");
+  public static final IElementType OFFSET = new M68kTokenType("offset");
   public static final IElementType OPT = new M68kTokenType("opt");
   public static final IElementType OR = new M68kTokenType("or");
   public static final IElementType ORG = new M68kTokenType("org");

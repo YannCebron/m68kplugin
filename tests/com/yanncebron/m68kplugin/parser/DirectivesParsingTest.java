@@ -569,4 +569,12 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" msource");
   }
 
+  public void testOffsetDirective() throws Exception {
+    doCodeTest(" offset 42");
+  }
+
+  public void testOffsetDirectiveWithoutExpression() throws Exception {
+    doCodeTest(" offset");
+  }
+
 }

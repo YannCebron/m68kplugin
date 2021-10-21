@@ -4,6 +4,7 @@
 ### Added
 - support AUTO directive, highlight as unsupported
 - support MSOURCE directive
+- support OFFSET directive
 
 ### Fixed
 - Show used/free registers: handle register-list/range, PC indirect with index

@@ -232,6 +232,7 @@ public final class M68kTokenGroups {
     NOLIST,
     NOPAGE,
     ODD,
+    OFFSET,
     OPT,
     ORG,
     PAGE,

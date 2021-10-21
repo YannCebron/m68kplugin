@@ -65,7 +65,6 @@ Unsupported directives, these will display false positive
 - `mcf5XXX`
 - `module`
 - `nref` (PhxAss)
-- `offset` (Devpac)
 - `optc`
 - `output`
 - `public`

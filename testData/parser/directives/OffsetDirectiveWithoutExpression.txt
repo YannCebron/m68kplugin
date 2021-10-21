@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kOffsetDirectiveImpl(OFFSET_DIRECTIVE)
+    PsiElement(offset)('offset')

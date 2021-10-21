@@ -453,7 +453,8 @@ public class M68kDirectivesParser {
   //                        clrso_directive |
   //                        setso_directive |
   //                        auto_directive |
-  //                        msource_directive
+  //                        msource_directive |
+  //                        offset_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -546,6 +547,7 @@ public class M68kDirectivesParser {
     if (!r) r = setso_directive(b, l + 1);
     if (!r) r = auto_directive(b, l + 1);
     if (!r) r = msource_directive(b, l + 1);
+    if (!r) r = offset_directive(b, l + 1);
     return r;
   }
 
@@ -1363,6 +1365,27 @@ public class M68kDirectivesParser {
     r = consumeToken(b, ODD);
     exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  /* ********************************************************** */
+  // OFFSET expression?
+  public static boolean offset_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "offset_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", OFFSET)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, OFFSET_DIRECTIVE, "<directive>");
+    r = consumeToken(b, OFFSET);
+    p = r; // pin = 1
+    r = r && offset_directive_1(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // expression?
+  private static boolean offset_directive_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "offset_directive_1")) return false;
+    M68kExpressionParser.expression(b, l + 1, -1);
+    return true;
   }
 
   /* ********************************************************** */
