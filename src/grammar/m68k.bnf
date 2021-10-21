@@ -1563,7 +1563,6 @@ fake binary_expression ::= expression+
     left = "expression[0]"
     right = "expression[1]"
   ]
-  pin = 2
 }
 
 fake unary_expression ::= expression?
