@@ -17,12 +17,15 @@
 package icons;
 
 import com.intellij.icons.AllIcons;
+import com.intellij.openapi.util.IconLoader;
 
 import javax.swing.*;
 
 public final class M68kIcons {
 
   public static final Icon FILE = AllIcons.FileTypes.Custom;
+
+  public static final Icon TOOL_WINDOW = IconLoader.findIcon("/icons/browserToolWindow.svg", M68kIcons.class);
 
   public static final Icon LABEL_GLOBAL = AllIcons.Nodes.Method;
   public static final Icon LABEL_LOCAL = AllIcons.Nodes.AbstractMethod;
