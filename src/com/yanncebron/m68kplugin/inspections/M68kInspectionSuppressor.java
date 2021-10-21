@@ -100,7 +100,7 @@ public class M68kInspectionSuppressor implements InspectionSuppressor {
 
     @Override
     public boolean isAvailable(@NotNull Project project, @NotNull PsiElement context) {
-      return true;
+      return context.isValid() && M68kPsiTreeUtil.getContainingInstructionOrDirective(context) != null;
     }
 
     @Override
