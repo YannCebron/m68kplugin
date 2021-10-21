@@ -454,7 +454,8 @@ public class M68kDirectivesParser {
   //                        setso_directive |
   //                        auto_directive |
   //                        msource_directive |
-  //                        offset_directive
+  //                        offset_directive |
+  //                        mask2_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -548,6 +549,7 @@ public class M68kDirectivesParser {
     if (!r) r = auto_directive(b, l + 1);
     if (!r) r = msource_directive(b, l + 1);
     if (!r) r = offset_directive(b, l + 1);
+    if (!r) r = mask2_directive(b, l + 1);
     return r;
   }
 
@@ -1182,6 +1184,18 @@ public class M68kDirectivesParser {
     Marker m = enter_section_(b, l, _NONE_, null, "<index>");
     r = consumeToken(b, DEC_NUMBER);
     if (!r) r = consumeToken(b, ID);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // MASK2
+  public static boolean mask2_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "mask2_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", MASK2)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, MASK_2_DIRECTIVE, "<directive>");
+    r = consumeToken(b, MASK2);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

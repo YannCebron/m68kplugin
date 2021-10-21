@@ -130,4 +130,10 @@ public class M68kDirectivesInspectionTest extends BasePlatformTestCase {
     myFixture.testHighlighting();
   }
 
+  public void testMask2Directive() {
+    myFixture.configureByText("a.s",
+      " <error descr=\"Unsupported directive\">mask2</error>");
+    myFixture.testHighlighting();
+  }
+
 }

@@ -37,11 +37,12 @@ Using non-supported address mode will result in syntax error or
 
 ### Directives
 
+[vasm Docs 1](http://sun.hasenbraten.de/vasm/release/vasm_4.html)
+[vasm Docs 2](http://sun.hasenbraten.de/vasm/release/vasm_19.html)
+
 Unsupported directives, these will display false positive
 > _"Cannot resolve macro '$DIRECTIVE$'"_
 
-[vasm Docs 1](http://sun.hasenbraten.de/vasm/release/vasm_4.html)
-[vasm Docs 2](http://sun.hasenbraten.de/vasm/release/vasm_19.html)
 
 - `.sdreg`
 - `basereg`/`endb`
@@ -61,7 +62,6 @@ Unsupported directives, these will display false positive
 - `iif` (Devpac)
 - `image`
 - `import` == `xref`
-- `mask2` (no-op)
 - `mcf5XXX`
 - `module`
 - `nref` (PhxAss)

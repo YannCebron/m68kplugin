@@ -5,6 +5,7 @@
 - support AUTO directive, highlight as unsupported
 - support MSOURCE directive
 - support OFFSET directive
+- support MASK2 directive, highlight as unsupported
 
 ### Fixed
 - Show used/free registers: handle register-list/range, PC indirect with index

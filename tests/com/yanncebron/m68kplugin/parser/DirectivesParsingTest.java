@@ -577,4 +577,8 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" offset");
   }
 
+  public void testMask2Directive() throws Exception {
+    doCodeTest(" mask2");
+  }
+
 }

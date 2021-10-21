@@ -208,6 +208,7 @@ public interface M68kTypes {
   IElementType MACRO_CALL_PARAMETER = new M68kCompositeElementType("MACRO_CALL_PARAMETER");
   IElementType MACRO_DIRECTIVE = new M68kCompositeElementType("MACRO_DIRECTIVE");
   IElementType MACRO_PARAMETER_DIRECTIVE = new M68kCompositeElementType("MACRO_PARAMETER_DIRECTIVE");
+  IElementType MASK_2_DIRECTIVE = new M68kCompositeElementType("MASK_2_DIRECTIVE");
   IElementType MC_68000_DIRECTIVE = new M68kCompositeElementType("MC_68000_DIRECTIVE");
   IElementType MC_68010_DIRECTIVE = new M68kCompositeElementType("MC_68010_DIRECTIVE");
   IElementType MC_68020_DIRECTIVE = new M68kCompositeElementType("MC_68020_DIRECTIVE");
@@ -865,6 +866,9 @@ public interface M68kTypes {
       }
       else if (type == MACRO_PARAMETER_DIRECTIVE) {
         return new M68kMacroParameterDirectiveImpl(node);
+      }
+      else if (type == MASK_2_DIRECTIVE) {
+        return new M68kMask2DirectiveImpl(node);
       }
       else if (type == MC_68000_DIRECTIVE) {
         return new M68kMc68000DirectiveImpl(node);

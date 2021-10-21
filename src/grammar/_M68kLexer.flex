@@ -475,6 +475,7 @@ Z=[zZ]
   {L}{L}{E}{N}                 { yybegin(IN_OPERAND); return LLEN; }
   {L}{O}{A}{D}                 { yybegin(IN_OPERAND); return LOAD; }
   {M}{S}{O}{U}{R}{C}{E}        { yybegin(IN_OPERAND); return MSOURCE; }
+  {M}{A}{S}{K}2                { yybegin(AFTER_OPERAND); return MASK2; }
   {N}{E}{A}{R}                 { yybegin(IN_OPERAND); return NEAR; }
   {N}{E}{A}{R}{WHITE_SPACE}{C}{O}{D}{E} { yybegin(AFTER_OPERAND); return NEAR_CODE; }
   {N}{O}{L}{I}{S}{T}           { yybegin(AFTER_OPERAND); return NOLIST; }

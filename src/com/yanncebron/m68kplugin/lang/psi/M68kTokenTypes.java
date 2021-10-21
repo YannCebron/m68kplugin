@@ -206,6 +206,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType MACHINE = new M68kTokenType("machine");
   public static final IElementType MACRO = new M68kTokenType("macro");
   public static final IElementType MACRO_CALL_ID = new M68kTokenType("macro_call_id");
+  public static final IElementType MASK2 = new M68kTokenType("mask2");
   public static final IElementType MC68000 = new M68kTokenType("mc68000");
   public static final IElementType MC68010 = new M68kTokenType("mc68010");
   public static final IElementType MC68020 = new M68kTokenType("mc68020");

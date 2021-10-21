@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kMask2DirectiveImpl(MASK_2_DIRECTIVE)
+    PsiElement(mask2)('mask2')

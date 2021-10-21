@@ -43,6 +43,11 @@ public class M68kDirectivesInspection extends LocalInspectionTool {
       }
 
       @Override
+      public void visitMask2Directive(@NotNull M68kMask2Directive element) {
+        holder.registerProblem(element, M68kBundle.message("inspection.directives.unsupported"));
+      }
+
+      @Override
       public void visitEndDirective(@NotNull M68kEndDirective element) {
         final M68kPsiElement nextSibling = PsiTreeUtil.getNextSiblingOfType(element, M68kPsiElement.class);
         if (nextSibling != null) {
