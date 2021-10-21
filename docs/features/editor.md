@@ -41,13 +41,13 @@ _Hover_: enable _Show quick documentation on hover_ in *Settings/Preferences \| 
 
 ### Mnemonics
 
-*View \| Quick Documentation* reference documentation for mnemonics (only 68000)
+Show mnemonic documentation on mouse hover, current variant is underlined
 
-![Reference doc](../assets/editor/reference_doc.png)
+![Mnemonic documentation](../assets/editor/hover_doc.png)
 
-_Hover_: Show mnemonic reference overview on mouse hover; link to reference documentation (only 68000)
+_M68k Browser_ tool window lists all supported mnemonics with additional reference documentation
 
-![Mnemonic reference](../assets/editor/hover_doc.png)
+![Mnemonic reference documentation](../assets/editor/reference_doc.png)
 
 ### Labels
 
