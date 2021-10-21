@@ -23,7 +23,7 @@ import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.intellij.testFramework.fixtures.TestLookupElementPresentation;
 import com.intellij.util.ui.tree.TreeUtil;
-import com.yanncebron.m68kplugin.lang.M68kIcons;
+import icons.M68kIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

@@ -24,7 +24,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.M68kFile;
-import com.yanncebron.m68kplugin.lang.M68kIcons;
+import icons.M68kIcons;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import org.jetbrains.annotations.NotNull;

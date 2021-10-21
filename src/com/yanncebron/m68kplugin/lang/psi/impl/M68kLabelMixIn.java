@@ -25,7 +25,7 @@ import com.intellij.psi.presentation.java.SymbolPresentationUtil;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.yanncebron.m68kplugin.lang.M68kFile;
-import com.yanncebron.m68kplugin.lang.M68kIcons;
+import icons.M68kIcons;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;

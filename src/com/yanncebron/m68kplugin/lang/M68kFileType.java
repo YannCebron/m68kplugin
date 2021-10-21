@@ -18,6 +18,7 @@ package com.yanncebron.m68kplugin.lang;
 
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.yanncebron.m68kplugin.M68kBundle;
+import icons.M68kIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

@@ -24,7 +24,7 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.yanncebron.m68kplugin.inspections.M68kUnresolvedMacroReferenceInspection;
-import com.yanncebron.m68kplugin.lang.M68kIcons;
+import icons.M68kIcons;
 import com.yanncebron.m68kplugin.lang.M68kLookupElementTestUtil;
 
 import static com.yanncebron.m68kplugin.lang.M68kLookupElementTestUtil.assertLookupIcon;

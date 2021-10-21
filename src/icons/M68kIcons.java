@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.yanncebron.m68kplugin.lang;
+package icons;
 
 import com.intellij.icons.AllIcons;
 
@@ -32,7 +32,7 @@ public final class M68kIcons {
 
   public static final Icon LABEL_EQUR = AllIcons.Nodes.Artifact;
   public static final Icon LABEL_REG = AllIcons.Nodes.Target;
-  
+
   public static final Icon LABEL_FO = AllIcons.Nodes.Field;
   public static final Icon LABEL_SO = AllIcons.Nodes.Static;
 

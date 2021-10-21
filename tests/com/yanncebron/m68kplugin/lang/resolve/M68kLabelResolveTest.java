@@ -29,7 +29,7 @@ import com.intellij.util.ArrayUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.xml.ElementPresentationManager;
 import com.yanncebron.m68kplugin.inspections.M68kUnresolvedLabelReferenceInspection;
-import com.yanncebron.m68kplugin.lang.M68kIcons;
+import icons.M68kIcons;
 import com.yanncebron.m68kplugin.lang.psi.M68kBuiltinSymbol;
 import com.yanncebron.m68kplugin.lang.psi.M68kBuiltinSymbolPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
