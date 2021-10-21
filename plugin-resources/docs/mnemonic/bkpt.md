@@ -25,7 +25,7 @@ bus cycle accesses the CPU space, addressing type 0, and provides the breakpoint
 address lines A2 – A4. If the external hardware terminates the cycle with DSACKx or STERM, the data on the bus (an
 instruction word) is inserted into the instruction pipe and is executed after the breakpoint instruction. The breakpoint
 instruction requires a word to be transferred so, if the first bus cycle accesses an 8- bit port, a second bus cycle is
-required. If the external logic terminates the breakpoint acknowl- edge bus cycle with BERR (i.e., no instruction word
+required. If the external logic terminates the breakpoint acknowledge bus cycle with BERR (i.e., no instruction word
 available), the processor takes an illegal instruction exception.
 
 For the MC68040, this instruction executes a breakpoint acknowledge bus cycle. Regardless of the cycle termination, the
