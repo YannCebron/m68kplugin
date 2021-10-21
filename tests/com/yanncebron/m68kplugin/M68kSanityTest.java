@@ -16,11 +16,13 @@
 
 package com.yanncebron.m68kplugin;
 
+import com.intellij.codeInsight.lookup.LookupElement;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.fixtures.CodeInsightFixtureTestCase;
-import com.intellij.testFramework.propertyBased.CheckHighlighterConsistency;
-import com.intellij.testFramework.propertyBased.MadTestingAction;
-import com.intellij.testFramework.propertyBased.MadTestingUtil;
+import com.intellij.testFramework.propertyBased.*;
+import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.jetCheck.Generator;
 import org.jetbrains.jetCheck.PropertyChecker;
 
@@ -51,6 +53,24 @@ public class M68kSanityTest extends CodeInsightFixtureTestCase {
       .checkScenarios(actionsOnAsmFiles(MadTestingUtil::randomEditsWithReparseChecks));
   }
 
+  public void testRandomActivity() {
+    MadTestingUtil.enableAllInspections(getProject());
+
+    Function<PsiFile, Generator<? extends MadTestingAction>> actions =
+      file -> Generator.sampledFrom(
+        new InvokeIntention(file, new IntentionPolicy() {
+          @Override
+          protected boolean shouldSkipByFamilyName(@NotNull String familyName) {
+            return "Remove unused label".equals(familyName); // fails for '.local <instruction>'
+          }
+        }),
+        new InvokeCompletion(file, new MyCompletionPolicy()),
+        new DeleteRange(file),
+        new ResolveAllReferences(file));
+    PropertyChecker
+      .checkScenarios(actionsOnAsmFiles(actions));
+  }
+
   private Supplier<MadTestingAction> actionsOnAsmFiles(Function<PsiFile, Generator<? extends MadTestingAction>> fileActions) {
     return MadTestingUtil.actionsOnFileContents(myFixture,
       "testData/sanity",
@@ -63,4 +83,22 @@ public class M68kSanityTest extends CodeInsightFixtureTestCase {
       }, fileActions);
   }
 
+
+  private static class MyCompletionPolicy extends CompletionPolicy {
+
+    @Override
+    public String getPossibleSelectionCharacters() {
+      return "\n\t\r ";
+    }
+
+    @Override
+    public boolean areDuplicatesOk(@NotNull LookupElement item1, @NotNull LookupElement item2) {
+      return item1.getPsiElement() instanceof M68kLabelBase && item2.getPsiElement() instanceof M68kLabelBase;
+    }
+
+    @Override
+    protected boolean shouldSuggestNonReferenceLeafText(@NotNull PsiElement leaf) {
+      return false;
+    }
+  }
 }
