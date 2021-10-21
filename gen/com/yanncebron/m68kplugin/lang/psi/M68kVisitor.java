@@ -174,6 +174,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitShiftRotateInstructionBase(o);
   }
 
+  public void visitAutoDirective(@NotNull M68kAutoDirective o) {
+    visitDirective(o);
+  }
+
   public void visitBccInstruction(@NotNull M68kBccInstruction o) {
     visitBccInstructionBase(o);
   }

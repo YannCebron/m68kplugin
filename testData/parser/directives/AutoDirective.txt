@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kAutoDirectiveImpl(AUTO_DIRECTIVE)
+    PsiElement(auto)('auto')

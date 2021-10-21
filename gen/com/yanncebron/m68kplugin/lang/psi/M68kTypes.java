@@ -61,6 +61,7 @@ public interface M68kTypes {
   IElementType AND_INSTRUCTION = new M68kCompositeElementType("AND_INSTRUCTION");
   IElementType ASL_INSTRUCTION = new M68kCompositeElementType("ASL_INSTRUCTION");
   IElementType ASR_INSTRUCTION = new M68kCompositeElementType("ASR_INSTRUCTION");
+  IElementType AUTO_DIRECTIVE = new M68kCompositeElementType("AUTO_DIRECTIVE");
   IElementType BCC_INSTRUCTION = new M68kCompositeElementType("BCC_INSTRUCTION");
   IElementType BCHG_INSTRUCTION = new M68kCompositeElementType("BCHG_INSTRUCTION");
   IElementType BCLR_INSTRUCTION = new M68kCompositeElementType("BCLR_INSTRUCTION");
@@ -424,6 +425,9 @@ public interface M68kTypes {
       }
       else if (type == ASR_INSTRUCTION) {
         return new M68kAsrInstructionImpl(node);
+      }
+      else if (type == AUTO_DIRECTIVE) {
+        return new M68kAutoDirectiveImpl(node);
       }
       else if (type == BCC_INSTRUCTION) {
         return new M68kBccInstructionImpl(node);

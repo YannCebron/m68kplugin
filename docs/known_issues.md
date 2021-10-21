@@ -44,7 +44,6 @@ Unsupported directives, these will display false positive
 [vasm Docs 2](http://sun.hasenbraten.de/vasm/release/vasm_19.html)
 
 - `.sdreg`
-- `auto`
 - `basereg`/`endb`
 - `cargs` (Devpac)
 - `comm`

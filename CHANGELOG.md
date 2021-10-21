@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Added
+- support AUTO directive, highlight as unsupported
 
 ### Fixed
 - Show used/free registers: handle register-list/range, PC indirect with index

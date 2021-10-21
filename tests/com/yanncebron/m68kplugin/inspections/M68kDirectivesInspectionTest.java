@@ -124,4 +124,10 @@ public class M68kDirectivesInspectionTest extends BasePlatformTestCase {
     myFixture.testHighlighting();
   }
 
+  public void testAutoDirective() {
+    myFixture.configureByText("a.s",
+      " <error descr=\"Unsupported directive\">auto</error>");
+    myFixture.testHighlighting();
+  }
+
 }

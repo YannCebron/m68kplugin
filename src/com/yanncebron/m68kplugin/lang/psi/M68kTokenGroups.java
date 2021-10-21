@@ -172,6 +172,7 @@ public final class M68kTokenGroups {
     AC68080,
     ADDWATCH,
     ALIGN,
+    AUTO,
     BLK,
     BSS,
     BSS_C,

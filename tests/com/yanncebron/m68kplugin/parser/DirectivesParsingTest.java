@@ -553,4 +553,8 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest("label so");
   }
 
+  public void testAutoDirective() throws Exception {
+    doCodeTest(" auto");
+  }
+
 }

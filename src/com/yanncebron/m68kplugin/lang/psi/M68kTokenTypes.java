@@ -41,6 +41,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType ANDI = new M68kTokenType("andi");
   public static final IElementType ASL = new M68kTokenType("asl");
   public static final IElementType ASR = new M68kTokenType("asr");
+  public static final IElementType AUTO = new M68kTokenType("auto");
   public static final IElementType BACKSLASH = new M68kTokenType("\\");
   public static final IElementType BCC = new M68kTokenType("bcc");
   public static final IElementType BCHG = new M68kTokenType("bchg");
