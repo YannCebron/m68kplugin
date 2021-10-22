@@ -1,2 +1,8 @@
-/.gradle/
 /.idea/workspace.xml
+/.gradle/
+/build/
+/.sandbox/
+/buildSrc/.gradle/
+/buildSrc/build/
+/platforms/amiga/build/
+.DS_Store
