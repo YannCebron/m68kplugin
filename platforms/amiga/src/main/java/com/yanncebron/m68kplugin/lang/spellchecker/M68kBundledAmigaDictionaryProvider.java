@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,10 @@ package com.yanncebron.m68kplugin.lang.spellchecker;
 
 import com.intellij.spellchecker.BundledDictionaryProvider;
 
-public class M68kBundledDictionaryProvider implements BundledDictionaryProvider {
+public class M68kBundledAmigaDictionaryProvider implements BundledDictionaryProvider {
+
   @Override
   public String[] getBundledDictionaries() {
-    return new String[]{"/dictionaries/m68k.dic"};
+    return new String[]{"/dictionaries/m68k_amiga.dic"};
   }
 }

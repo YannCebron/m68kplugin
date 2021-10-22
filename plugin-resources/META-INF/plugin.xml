@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin url="https://github.com/YannCebron/m68kplugin">
+<idea-plugin url="https://github.com/YannCebron/m68kplugin" xmlns:xi="http://www.w3.org/2001/XInclude">
   <id>com.yanncebron.m68kplugin</id>
   <name>Motorola 68000 Series Assembler</name>
   <vendor email="yann.cebron@gmail.com" url="https://www.yanncebron.com">Yann Cébron</vendor>
@@ -29,6 +29,8 @@
     ]]></description>
 
   <depends>com.intellij.modules.platform</depends>
+
+  <xi:include href="m68kplugin-amiga.xml"/>
 
   <resource-bundle>messages.M68kBundle</resource-bundle>
 
@@ -211,7 +213,7 @@
         anchor="right"
         factoryClass="com.yanncebron.m68kplugin.browser.M68kBrowserToolwindowFactory"/>
 
-    
+
     <consoleFilterProvider
         implementation="com.yanncebron.m68kplugin.compiler.M68kVasmConsoleFilterProvider"/>
 

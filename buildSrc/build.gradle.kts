@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2021 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-package com.yanncebron.m68kplugin.lang.spellchecker;
+plugins {
+    `kotlin-dsl`
+}
 
-import com.intellij.spellchecker.BundledDictionaryProvider;
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+}
 
-public class M68kBundledDictionaryProvider implements BundledDictionaryProvider {
-  @Override
-  public String[] getBundledDictionaries() {
-    return new String[]{"/dictionaries/m68k.dic"};
-  }
+dependencies {
+    // Gradle IntelliJ Plugin
+    implementation("org.jetbrains.intellij.plugins", "gradle-intellij-plugin", "1.2.0")
 }

@@ -19,11 +19,8 @@ import org.jetbrains.intellij.tasks.RunPluginVerifierTask.FailureLevel
 fun properties(key: String) = project.findProperty(key).toString()
 
 plugins {
-    // Java support
-    id("java")
-    id("idea")
-    // Gradle IntelliJ Plugin
-    id("org.jetbrains.intellij") version "1.2.0"
+    // generic Java setup
+    id("m68kplugin.java-conventions")
     // Gradle Changelog Plugin
     id("org.jetbrains.changelog") version "1.3.1"
     // GrammarKit
@@ -31,12 +28,12 @@ plugins {
 }
 
 group = properties("pluginGroup")
-version = properties("pluginVersion")
 
 dependencies {
     implementation("org.commonmark", "commonmark", "0.18.0")
     implementation("org.commonmark", "commonmark-ext-gfm-tables", "0.18.0")
-    testImplementation("junit", "junit", "4.13.2")
+
+    implementation(project("amiga"))
 }
 
 // Configure project's dependencies
@@ -85,18 +82,10 @@ grammarKit {
 }
 
 tasks {
-    // Set the JVM compatibility versions
-    properties("javaVersion").let {
-        withType<JavaCompile> {
-            sourceCompatibility = it
-            targetCompatibility = it
-        }
-    }
 
     wrapper {
         gradleVersion = properties("gradleVersion")
     }
-
 
     task<GenerateLexer>("generateM68KLexer") {
         source = "src/grammar/_M68kLexer.flex"
@@ -106,11 +95,16 @@ tasks {
         purgeOldFiles = true
     }
 
-    buildSearchableOptions {
-        enabled = false
+    prepareSandbox {
+        enabled = true
+    }
+
+    verifyPlugin {
+        enabled = true
     }
 
     patchPluginXml {
+        enabled = true
         version.set(properties("pluginVersion"))
         sinceBuild.set(properties("pluginSinceBuild"))
         untilBuild.set(properties("pluginUntilBuild"))
@@ -124,6 +118,7 @@ tasks {
     }
 
     runIde {
+        enabled = true
         if (project.hasProperty("ideDir")) {
             ideDir.set(file(project.property("ideDir")!!))
             jbrVersion.set(project.property("ideJBR")!! as String)
@@ -132,6 +127,7 @@ tasks {
     }
 
     runPluginVerifier {
+        enabled = true
         ideVersions.set(properties("pluginVerifierIdeVersions").split(',').map(String::trim).filter(String::isNotEmpty))
         failureLevel.set(listOf(FailureLevel.COMPATIBILITY_PROBLEMS))
     }
@@ -139,6 +135,7 @@ tasks {
     // Configure UI tests plugin
     // Read more: https://github.com/JetBrains/intellij-ui-test-robot
     runIdeForUiTests {
+        enabled = true
         systemProperty("robot-server.port", "8082")
         systemProperty("ide.mac.message.dialogs.as.sheets", "false")
         systemProperty("jb.privacy.policy.text", "<!--999.999-->")
@@ -146,12 +143,14 @@ tasks {
     }
 
     signPlugin {
+        enabled = true
         certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
         privateKey.set(System.getenv("PRIVATE_KEY"))
         password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
     }
 
     publishPlugin {
+        enabled = true
         dependsOn("patchChangelog")
         token.set(System.getenv("PUBLISH_TOKEN"))
         // pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels, like 2.1.7-alpha.3
