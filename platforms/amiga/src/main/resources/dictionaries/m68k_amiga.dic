@@ -72,6 +72,13 @@ bootnode
 bpl1mod
 bpl2mod
 bplcon
+bplhdat
+bplhmod
+bplhpth
+bplhptl
+bplhstop
+bplhstrt
+bptdpth
 bptr
 bstr
 bytesperlong
@@ -168,6 +175,7 @@ fieee
 filehandle
 fileio
 floodfill
+fmode
 freemem
 freemsg
 fsuae
@@ -187,6 +195,8 @@ hblank
 hbstop
 hbstrt
 hcenter
+hhposr
+hhposw
 hpos
 hsstop
 hsstrt
@@ -224,6 +234,7 @@ lamiga
 layerrefresh
 lbutton
 leftedge
+lisaid
 lshift
 lvoieeedp
 lvoieeesp
@@ -277,6 +288,7 @@ pot0dat
 pot1dat
 potgo
 potgor
+potinp
 prefs
 progbeam
 propgadget
@@ -323,6 +335,11 @@ sigtask
 sincos
 sinh
 softint
+sprhdat
+sprhpth
+sprhptl
+sprhstop
+sprhstrt
 spriteimage
 strequ
 strgadget
