@@ -23,6 +23,7 @@ import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.editor.colors.EditorColorsUtil;
 import com.intellij.openapi.options.FontSize;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.openapi.ui.Splitter;
 import com.intellij.ui.*;
@@ -41,14 +42,14 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.awt.*;
 
-abstract class M68kListWithDocsPanelBase<T> extends SimpleToolWindowPanel {
+public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel {
 
   private final JBSplitter splitter;
 
   private final JBList<T> list = new JBList<>();
   private JEditorPane docEditorPane;
 
-  M68kListWithDocsPanelBase() {
+  protected M68kBrowserPaneBase() {
     super(true, true);
 
     splitter = new OnePixelSplitter(false, getClass().getSimpleName() + ".splitter.proportion", getInitialSplitProportion());
@@ -78,6 +79,10 @@ abstract class M68kListWithDocsPanelBase<T> extends SimpleToolWindowPanel {
 
   protected JComponent getFocusComponent() {
     return list;
+  }
+
+  public boolean isAvailable(Project project) {
+    return true;
   }
 
   @Nullable

@@ -38,7 +38,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
-class M68kMnemonicsPanel extends M68kListWithDocsPanelBase<M68kMnemonicsPanel.MnemonicEntry> {
+public class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonicsBrowserPane.MnemonicEntry> {
 
   private static final String SHOW_REFERENCE_DOCS_SETTINGS_KEY = "M68kMnemonicsPanel.show.ref.docs";
   private static final String SHOW_MC68010_SETTINGS_KEY = "M68kMnemonicsPanel.show.mc68010";
@@ -94,7 +94,7 @@ class M68kMnemonicsPanel extends M68kListWithDocsPanelBase<M68kMnemonicsPanel.Mn
   @Override
   protected void initList() {
     final M68kMnemonicRegistry instance = M68kMnemonicRegistry.getInstance();
-    CollectionListModel<M68kMnemonicsPanel.MnemonicEntry> model = new CollectionListModel<>();
+    CollectionListModel<M68kMnemonicsBrowserPane.MnemonicEntry> model = new CollectionListModel<>();
     for (IElementType type : M68kTokenGroups.INSTRUCTIONS.getTypes()) {
       final Collection<M68kMnemonic> all = instance.findAll(type);
       final M68kMnemonic mnemonic = ContainerUtil.getFirstItem(all);
@@ -103,14 +103,14 @@ class M68kMnemonicsPanel extends M68kListWithDocsPanelBase<M68kMnemonicsPanel.Mn
         continue;
       }
 
-      model.add(new M68kMnemonicsPanel.MnemonicEntry(mnemonic));
+      model.add(new M68kMnemonicsBrowserPane.MnemonicEntry(mnemonic));
     }
     setListModel(model);
   }
 
   @Override
   protected Function<? super MnemonicEntry, String> getListItemNamer() {
-    return M68kMnemonicsPanel.MnemonicEntry::getListName;
+    return M68kMnemonicsBrowserPane.MnemonicEntry::getListName;
   }
 
   protected @NotNull String getDocFor(@NotNull MnemonicEntry selected) {

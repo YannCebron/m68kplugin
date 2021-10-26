@@ -17,6 +17,8 @@
 package com.yanncebron.m68kplugin.browser;
 
 import com.intellij.openapi.actionSystem.ActionGroup;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.ui.CollectionListModel;
 import com.intellij.util.Function;
@@ -25,7 +27,12 @@ import com.yanncebron.m68kplugin.documentation.M68kInstructionDocumentationProvi
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import org.jetbrains.annotations.NotNull;
 
-class M68kDirectivesPanel extends M68kListWithDocsPanelBase<M68kDirectivesPanel.DirectiveEntry> {
+public class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<M68kDirectivesBrowserPane.DirectiveEntry> {
+
+  @Override
+  public boolean isAvailable(Project project) {
+    return ApplicationManager.getApplication().isInternal();
+  }
 
   @Override
   protected void initList() {
@@ -47,7 +54,7 @@ class M68kDirectivesPanel extends M68kListWithDocsPanelBase<M68kDirectivesPanel.
   }
 
   @Override
-  protected @NotNull String getDocFor(@NotNull M68kDirectivesPanel.DirectiveEntry selectedValue) {
+  protected @NotNull String getDocFor(@NotNull M68kDirectivesBrowserPane.DirectiveEntry selectedValue) {
     return M68kInstructionDocumentationProvider.CSS +
       "<h1>" + selectedValue.getListName() + "</h1>" +
       "<em>TODO</em> documentation for this directive ";

@@ -16,36 +16,32 @@
 
 package com.yanncebron.m68kplugin.browser;
 
-import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.extensions.ExtensionPointName;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
-import com.intellij.openapi.wm.ToolWindowContentUiType;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentManager;
-import com.yanncebron.m68kplugin.M68kBundle;
 import org.jetbrains.annotations.NotNull;
 
 public class M68kBrowserToolwindowFactory implements ToolWindowFactory, DumbAware {
 
+  private static final ExtensionPointName<M68kBrowserPaneEP> BROWSER_PANE_EP = ExtensionPointName.create("com.yanncebron.m68kplugin.browserPane");
+
   @Override
   public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
-    toolWindow.setContentUiType(ToolWindowContentUiType.TABBED, null);
-
     final ContentManager contentManager = toolWindow.getContentManager();
 
-    final M68kMnemonicsPanel mnemonicsPanel = new M68kMnemonicsPanel();
-    final Content mnemonics = contentManager.getFactory().createContent(mnemonicsPanel, M68kBundle.message("toolwindow.tab.mnemonic"), false);
-    mnemonics.setPreferredFocusableComponent(mnemonicsPanel.getFocusComponent());
-    contentManager.addContent(mnemonics);
+    for (M68kBrowserPaneEP extension : BROWSER_PANE_EP.getExtensions()) {
+      final M68kBrowserPaneBase<?> pane = extension.getInstance();
+      if (!pane.isAvailable(project)) continue;
 
-    if (!ApplicationManager.getApplication().isInternal()) return;
+      final Content content = contentManager.getFactory().createContent(pane, extension.getDisplayName(), false);
+      content.setPreferredFocusableComponent(pane.getFocusComponent());
+      contentManager.addContent(content);
+    }
 
-    final M68kDirectivesPanel directivesPanel = new M68kDirectivesPanel();
-    final Content directives = contentManager.getFactory().createContent(directivesPanel, M68kBundle.message("toolwindow.tab.directives"), false);
-    directives.setPreferredFocusableComponent(directivesPanel.getFocusComponent());
-    contentManager.addContent(directives);
   }
 
 }
