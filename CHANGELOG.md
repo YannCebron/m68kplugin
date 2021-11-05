@@ -12,6 +12,7 @@
 - FAIL directive: support optional message
 
 ### Changed
+- added many terms to Amiga dictionary           
 
 ## [0.1.2]
 ### Added
