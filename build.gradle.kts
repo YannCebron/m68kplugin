@@ -88,9 +88,9 @@ tasks {
     }
 
     task<GenerateLexerTask>("generateM68KLexer") {
-        source.set( "src/grammar/_M68kLexer.flex")
+        source.set("src/grammar/_M68kLexer.flex")
         skeleton.set(file("src/grammar/idea-flex.skeleton"))
-        targetDir.set( "gen/com/yanncebron/m68kplugin/lexer/")
+        targetDir.set("gen/com/yanncebron/m68kplugin/lexer/")
         targetClass.set("_M68kLexer")
         purgeOldFiles.set(true)
     }
