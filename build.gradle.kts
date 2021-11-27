@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import org.jetbrains.grammarkit.tasks.GenerateLexer
+import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 import org.jetbrains.intellij.tasks.RunPluginVerifierTask.FailureLevel
 
 fun properties(key: String) = project.findProperty(key).toString()
@@ -24,7 +24,7 @@ plugins {
     // Gradle Changelog Plugin
     id("org.jetbrains.changelog") version "1.3.1"
     // GrammarKit
-    id("org.jetbrains.grammarkit") version "2021.1.3"
+    id("org.jetbrains.grammarkit") version "2021.2"
 }
 
 group = properties("pluginGroup")
@@ -78,7 +78,7 @@ changelog {
 }
 
 grammarKit {
-    jflexRelease = "1.7.0-2"
+    jflexRelease.set("1.7.0-2")
 }
 
 tasks {
@@ -87,12 +87,12 @@ tasks {
         gradleVersion = properties("gradleVersion")
     }
 
-    task<GenerateLexer>("generateM68KLexer") {
-        source = "src/grammar/_M68kLexer.flex"
-        skeleton = "src/grammar/idea-flex.skeleton"
-        targetDir = "gen/com/yanncebron/m68kplugin/lexer/"
-        targetClass = "_M68kLexer"
-        purgeOldFiles = true
+    task<GenerateLexerTask>("generateM68KLexer") {
+        source.set( "src/grammar/_M68kLexer.flex")
+        skeleton.set(file("src/grammar/idea-flex.skeleton"))
+        targetDir.set( "gen/com/yanncebron/m68kplugin/lexer/")
+        targetClass.set("_M68kLexer")
+        purgeOldFiles.set(true)
     }
 
     prepareSandbox {
