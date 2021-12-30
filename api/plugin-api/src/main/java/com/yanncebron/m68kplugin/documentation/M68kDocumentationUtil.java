@@ -16,8 +16,11 @@
 
 package com.yanncebron.m68kplugin.documentation;
 
+import org.jetbrains.annotations.NonNls;
+
 public final class M68kDocumentationUtil {
 
+  @NonNls
   public static final String CSS = "<style>" +
     "h1 { font-weight: bold; font-size: 120%; } " +
     "h2 { padding-top: 13px; font-weight: bold; font-size: 110%; } " +
@@ -28,4 +31,7 @@ public final class M68kDocumentationUtil {
     "em { font-style: italic; }" +
     "code { white-space: nowrap; }" +
     "</style>";
+
+  @NonNls
+  public static final String CHECK_MARK = "✓";
 }

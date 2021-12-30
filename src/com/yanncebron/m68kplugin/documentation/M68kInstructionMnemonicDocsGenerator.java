@@ -143,7 +143,7 @@ class M68kInstructionMnemonicDocsGenerator {
       for (M68kCpu value : M68kCpu.GROUP_68000_UP) {
         sb.append("<td style=\"text-align:center;\">");
         if (cpus.contains(value)) {
-          sb.append("✓");
+          sb.append(M68kDocumentationUtil.CHECK_MARK);
         }
         sb.append("</td>");
       }
@@ -178,7 +178,7 @@ class M68kInstructionMnemonicDocsGenerator {
 
       sb.append("<td style=\"text-align:center;\">");
       if (ArrayUtil.contains(value, addressModes)) {
-        sb.append("✓");
+        sb.append(M68kDocumentationUtil.CHECK_MARK);
       }
       sb.append("</td>");
     }
