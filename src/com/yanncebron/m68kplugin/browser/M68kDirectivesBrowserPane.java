@@ -23,7 +23,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.ui.CollectionListModel;
 import com.intellij.util.Function;
 import com.twelvemonkeys.lang.StringUtil;
-import com.yanncebron.m68kplugin.documentation.M68kInstructionDocumentationProvider;
+import com.yanncebron.m68kplugin.documentation.M68kDocumentationUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import org.jetbrains.annotations.NotNull;
 
@@ -55,7 +55,7 @@ public class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<M68kDirective
 
   @Override
   protected @NotNull String getDocFor(@NotNull M68kDirectivesBrowserPane.DirectiveEntry selectedValue) {
-    return M68kInstructionDocumentationProvider.CSS +
+    return M68kDocumentationUtil.CSS +
       "<h1>" + selectedValue.getListName() + "</h1>" +
       "<em>TODO</em> documentation for this directive ";
   }

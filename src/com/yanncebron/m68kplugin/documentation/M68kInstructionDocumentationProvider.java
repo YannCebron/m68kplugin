@@ -55,17 +55,6 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
 
   private static final String DOCS_MNEMONIC_ROOT = "/docs/mnemonic/";
 
-  public static final String CSS = "<style>" +
-    "h1 { font-weight: bold; font-size: 120%; } " +
-    "h2 { padding-top: 13px; font-weight: bold; font-size: 110%; } " +
-    "h3 { padding-top: 10px; font-weight: bold; } " +
-    "table { padding-bottom: 10px; white-space: nowrap; } " +
-    "td { margin: 4px 0 0 0; padding: 0 0 0 0; }" +
-    "th { text-align: left; white-space: nowrap; margin: 2px; } " +
-    "em { font-style: italic; }" +
-    "code { white-space: nowrap; }" +
-    "</style>";
-
 
   private static final Map<String, TokenSet> MNEMONIC_MAP = ContainerUtil.<String, TokenSet>immutableMapBuilder()
     .put("asl_asr", TokenSet.create(M68kTokenTypes.ASL, M68kTokenTypes.ASR))
@@ -98,7 +87,7 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
     M68kInstruction instruction = (M68kInstruction) element;
     final IElementType originalMnemonic = instruction.getNode().getFirstChildNode().getElementType();
 
-    return CSS + getMnemonicDoc(originalMnemonic, instruction);
+    return M68kDocumentationUtil.CSS + getMnemonicDoc(originalMnemonic, instruction);
   }
 
   @NotNull

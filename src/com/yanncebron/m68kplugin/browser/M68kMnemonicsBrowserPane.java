@@ -29,6 +29,7 @@ import com.intellij.util.IconUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.twelvemonkeys.lang.StringUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
+import com.yanncebron.m68kplugin.documentation.M68kDocumentationUtil;
 import com.yanncebron.m68kplugin.documentation.M68kInstructionDocumentationProvider;
 import com.yanncebron.m68kplugin.lang.psi.M68kCpu;
 import com.yanncebron.m68kplugin.lang.psi.M68kMnemonic;
@@ -118,7 +119,7 @@ public class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonicsB
     final String referenceDoc = isShowReferenceDocs ?
       "<hr/>" + M68kInstructionDocumentationProvider.getInstructionReferenceDoc(selected.mnemonic.getElementType()) : "";
 
-    return M68kInstructionDocumentationProvider.CSS + mnemonicDoc + referenceDoc;
+    return M68kDocumentationUtil.CSS + mnemonicDoc + referenceDoc;
   }
 
 
