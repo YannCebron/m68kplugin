@@ -34,6 +34,7 @@ dependencies {
     implementation("org.commonmark", "commonmark-ext-gfm-tables", "0.18.0")
 
     implementation(project("amiga"))
+    implementation(project("plugin-api"))
 }
 
 // Configure project's dependencies

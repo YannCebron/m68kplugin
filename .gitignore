@@ -5,4 +5,5 @@
 /buildSrc/.gradle/
 /buildSrc/build/
 /platforms/amiga/build/
+/api/plugin-api/build/
 .DS_Store
