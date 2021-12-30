@@ -331,15 +331,35 @@ public enum M68kAmigaHardwareRegister {
   }
 
   enum Access {
-    WRITE,
-    READ,
-    EARLY_READ,
-    STROBE
+    WRITE("Write"),
+    READ("Read"),
+    EARLY_READ("Early read"),
+    STROBE("Strobe");
+
+    private final String displayName;
+
+    Access(String displayName) {
+      this.displayName = displayName;
+    }
+
+    public String getDisplayName() {
+      return displayName;
+    }
   }
 
   enum Chip {
-    AGNUS_ALICE,
-    DENISE_LISA,
-    PAULA
+    AGNUS_ALICE("Agnus/Alice"),
+    DENISE_LISA("Denise/Lisa"),
+    PAULA("Paula");
+
+    private final String displayName;
+
+    Chip(String displayName) {
+      this.displayName = displayName;
+    }
+
+    public String getDisplayName() {
+      return displayName;
+    }
   }
 }
