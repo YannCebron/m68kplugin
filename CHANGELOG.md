@@ -2,14 +2,14 @@
 
 ## [Unreleased]
 ### Added
-- support AUTO directive, highlight as unsupported
-- support MSOURCE directive
-- support OFFSET directive
-- support MASK2 directive, highlight as unsupported
+- support `AUTO` directive, highlight as unsupported
+- support `MSOURCE` directive
+- support `OFFSET` directive
+- support `MASK2` directive, highlight as unsupported
 
 ### Fixed
 - Show used/free registers: handle register-list/range, PC indirect with index
-- FAIL directive: support optional message
+- `FAIL` directive: support optional message
 
 ### Changed
 - added many terms to Amiga dictionary     
