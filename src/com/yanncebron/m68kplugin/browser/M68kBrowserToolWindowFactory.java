@@ -25,7 +25,7 @@ import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentManager;
 import org.jetbrains.annotations.NotNull;
 
-public class M68kBrowserToolwindowFactory implements ToolWindowFactory, DumbAware {
+public class M68kBrowserToolWindowFactory implements ToolWindowFactory, DumbAware {
 
   private static final ExtensionPointName<M68kBrowserPaneEP> BROWSER_PANE_EP = ExtensionPointName.create("com.yanncebron.m68kplugin.browserPane");
 
@@ -33,7 +33,7 @@ public class M68kBrowserToolwindowFactory implements ToolWindowFactory, DumbAwar
   public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
     final ContentManager contentManager = toolWindow.getContentManager();
 
-    for (M68kBrowserPaneEP extension : BROWSER_PANE_EP.getExtensions()) {
+    for (M68kBrowserPaneEP extension : BROWSER_PANE_EP.getExtensionList()) {
       final M68kBrowserPaneBase<?> pane = extension.getInstance();
       if (!pane.isAvailable(project)) continue;
 

@@ -217,7 +217,7 @@
         id="M68kBrowser"
         icon="M68kIcons.TOOL_WINDOW"
         anchor="right"
-        factoryClass="com.yanncebron.m68kplugin.browser.M68kBrowserToolwindowFactory"/>
+        factoryClass="com.yanncebron.m68kplugin.browser.M68kBrowserToolWindowFactory"/>
 
 
     <consoleFilterProvider
