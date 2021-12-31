@@ -45,7 +45,7 @@ public class M68kAmigaHardwareRegisterTest extends UsefulTestCase {
       assertNotNull(register.name(), register.getAccess());
       assertFalse(register.name(), register.getChips().isEmpty());
 
-      final M68kAmigaHardwareRegister.Chipset chipset = register.getRevision();
+      final M68kAmigaHardwareRegister.Chipset chipset = register.getChipset();
       if (chipset == M68kAmigaHardwareRegister.Chipset.ECS) {
         countRevisionEcs++;
       } else if (chipset == M68kAmigaHardwareRegister.Chipset.AGA) {

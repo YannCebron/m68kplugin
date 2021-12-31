@@ -308,7 +308,7 @@ public enum M68kAmigaHardwareRegister {
     return descriptionFileName;
   }
 
-  public Chipset getRevision() {
+  public Chipset getChipset() {
     return chipset;
   }
 
