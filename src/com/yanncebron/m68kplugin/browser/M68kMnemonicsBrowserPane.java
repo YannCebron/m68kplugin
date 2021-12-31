@@ -75,7 +75,7 @@ public class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonicsB
 
     isShowReferenceDocs = PropertiesComponent.getInstance().getBoolean(SHOW_REFERENCE_DOCS_SETTINGS_KEY, true);
     actionGroup.addAction(new DumbAwareToggleAction(
-      M68kBundle.message("toolwindow.tab.mnemonic.show.reference.docs"), null, AllIcons.Actions.Preview) {
+      M68kBundle.message("toolwindow.tab.mnemonic.show.reference.docs"), null, AllIcons.General.ReaderMode) {
       @Override
       public boolean isSelected(@NotNull AnActionEvent e) {
         return isShowReferenceDocs;
