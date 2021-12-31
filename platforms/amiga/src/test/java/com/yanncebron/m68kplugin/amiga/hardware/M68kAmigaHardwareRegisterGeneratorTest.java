@@ -69,11 +69,11 @@ public class M68kAmigaHardwareRegisterGeneratorTest extends TestCase {
 
       String earlyFlags = string.substring(string.indexOf('}') + 1, addressMatcher.start());
       boolean copperDanger = StringUtil.containsChar(earlyFlags, '~');
-      M68kAmigaHardwareRegister.Revision revision = M68kAmigaHardwareRegister.Revision.OCS;
+      M68kAmigaHardwareRegister.Chipset chipset = M68kAmigaHardwareRegister.Chipset.OCS;
       if (StringUtil.containsChar(earlyFlags, 'h')) {
-        revision = M68kAmigaHardwareRegister.Revision.ECS;
+        chipset = M68kAmigaHardwareRegister.Chipset.ECS;
       } else if (StringUtil.containsChar(earlyFlags, 'p')) {
-        revision = M68kAmigaHardwareRegister.Revision.AGA;
+        chipset = M68kAmigaHardwareRegister.Chipset.AGA;
       }
 
       final int beforeDescription = string.lastIndexOf("   ");
@@ -106,7 +106,7 @@ public class M68kAmigaHardwareRegisterGeneratorTest extends TestCase {
       }
       assertFalse(name + " " + flags, chips.isEmpty());
 
-      RegisterData registerData = new RegisterData(name, descriptionNodeName, address, description, revision, copperDanger, access, chips);
+      RegisterData registerData = new RegisterData(name, descriptionNodeName, address, description, chipset, copperDanger, access, chips);
       registers.add(registerData);
     }
 
@@ -117,7 +117,7 @@ public class M68kAmigaHardwareRegisterGeneratorTest extends TestCase {
       String chipsText = "EnumSet.of(" + chipsData + ")";
       System.out.println(register.name + "(\"" + register.name + "\", \"DFF" + register.address + "\", " +
         "\"" + register.description + "\", \"" + register.descriptionNodeName + "\", " +
-        "Revision." + register.revision.name() + ", " +
+        "Chipset." + register.chipset.name() + ", " +
         register.copperDanger + ", " +
         "Access." + register.access.name() + ", " +
         chipsText +
@@ -147,14 +147,14 @@ public class M68kAmigaHardwareRegisterGeneratorTest extends TestCase {
     private final String descriptionNodeName;
     private final String address;
     private final String description;
-    private final M68kAmigaHardwareRegister.Revision revision;
+    private final M68kAmigaHardwareRegister.Chipset chipset;
     private final boolean copperDanger;
     private final M68kAmigaHardwareRegister.Access access;
     private final Set<M68kAmigaHardwareRegister.Chip> chips;
 
     RegisterData(String name, String descriptionNodeName, String address,
                  String description,
-                 M68kAmigaHardwareRegister.Revision revision,
+                 M68kAmigaHardwareRegister.Chipset chipset,
                  boolean copperDanger,
                  M68kAmigaHardwareRegister.Access access,
                  Set<M68kAmigaHardwareRegister.Chip> chips) {
@@ -162,7 +162,7 @@ public class M68kAmigaHardwareRegisterGeneratorTest extends TestCase {
       this.descriptionNodeName = descriptionNodeName;
       this.address = address;
       this.description = description;
-      this.revision = revision;
+      this.chipset = chipset;
       this.copperDanger = copperDanger;
       this.access = access;
       this.chips = chips;

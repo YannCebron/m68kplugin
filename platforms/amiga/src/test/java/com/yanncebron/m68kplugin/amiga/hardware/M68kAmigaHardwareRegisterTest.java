@@ -45,10 +45,10 @@ public class M68kAmigaHardwareRegisterTest extends UsefulTestCase {
       assertNotNull(register.name(), register.getAccess());
       assertFalse(register.name(), register.getChips().isEmpty());
 
-      final M68kAmigaHardwareRegister.Revision revision = register.getRevision();
-      if (revision == M68kAmigaHardwareRegister.Revision.ECS) {
+      final M68kAmigaHardwareRegister.Chipset chipset = register.getRevision();
+      if (chipset == M68kAmigaHardwareRegister.Chipset.ECS) {
         countRevisionEcs++;
-      } else if (revision == M68kAmigaHardwareRegister.Revision.AGA) {
+      } else if (chipset == M68kAmigaHardwareRegister.Chipset.AGA) {
         countRevisionAga++;
       } else {
         countRevisionOcs++;
