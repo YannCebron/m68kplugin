@@ -42,6 +42,9 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @param <T> must implement {@link #equals(Object)} to keep current selection upon list model update
+ */
 public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel {
 
   private final JBSplitter splitter;
@@ -110,7 +113,11 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel {
   }
 
   protected void setListModel(ListModel<T> model) {
+    T selectedValue = list.getSelectedValue();
+
     list.setModel(model);
+
+    list.setSelectedValue(selectedValue, true);
   }
 
   protected void updateDoc() {
