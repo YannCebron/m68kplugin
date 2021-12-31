@@ -259,9 +259,8 @@ public enum M68kAmigaHardwareRegister {
   SPRHPTL("SPRHPTL", "DFF1EA", "UHRES sprite pointer (low 15 bits)", "SPRHPTH", Revision.ECS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
   BPLHPTH("BPLHPTH", "DFF1EC", "VRam (UHRES) bitplane pointer (hi 5 bits)", "BPLHPTH", Revision.ECS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
   BPLHPTL("BPLHPTL", "DFF1EE", "VRam (UHRES) bitplane pointer (lo 15 bits)", "BPLHPTH", Revision.ECS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
-  FMODE("FMODE", "DFF1FC", "Fetch mode register", "FMODE", Revision.AGA, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE, Chip.DENISE_LISA))
-  ;
-  
+  FMODE("FMODE", "DFF1FC", "Fetch mode register", "FMODE", Revision.AGA, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE, Chip.DENISE_LISA));
+
   private final String name;
   private final String address;
   private final String description;
@@ -325,9 +324,25 @@ public enum M68kAmigaHardwareRegister {
   }
 
   enum Revision {
-    OCS,
-    ECS,
-    AGA
+    OCS("OCS", "Original Chip Set"),
+    ECS("ECS", "Enhanced Chip Set"),
+    AGA("AGA", "Advanced Graphics Architecture");
+
+    private final String displayName;
+    private final String fullName;
+
+    Revision(String displayName, String fullName) {
+      this.displayName = displayName;
+      this.fullName = fullName;
+    }
+
+    public String getDisplayName() {
+      return displayName;
+    }
+
+    public String getFullName() {
+      return fullName;
+    }
   }
 
   enum Access {
