@@ -10,10 +10,10 @@
 ### Fixed
 - Show used/free registers: handle register-list/range, PC indirect with index
 - `FAIL` directive: support optional message
+- "M68k Browser" keeps currently selected item upon filter changes
 
 ### Changed
 - added many terms to Amiga dictionary     
-- "M68k Browser" keeps currently selected item upon filter changes
 
 ## [0.1.2]
 ### Added
