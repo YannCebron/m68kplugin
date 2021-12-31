@@ -58,9 +58,9 @@ public class M68kAmigaHardwareRegisterTest extends UsefulTestCase {
       if (register.isCopperDanger()) countCopperDanger++;
     }
 
-    assertEquals(201, countRevisionOcs);
+    assertEquals(197, countRevisionOcs);
     assertEquals(30, countRevisionEcs);
-    assertEquals(5, countRevisionAga);
+    assertEquals(9, countRevisionAga);
 
     assertEquals(58, countCopperDanger);
   }
