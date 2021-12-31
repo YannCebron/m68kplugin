@@ -12,7 +12,8 @@
 - FAIL directive: support optional message
 
 ### Changed
-- added many terms to Amiga dictionary           
+- added many terms to Amiga dictionary     
+- "M68k Browser" keeps currently selected item upon filter changes
 
 ## [0.1.2]
 ### Added

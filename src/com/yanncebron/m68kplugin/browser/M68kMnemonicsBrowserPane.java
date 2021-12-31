@@ -39,7 +39,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
-public class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonicsBrowserPane.MnemonicEntry> {
+public class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
 
   private static final String SHOW_REFERENCE_DOCS_SETTINGS_KEY = "M68kMnemonicsPanel.show.ref.docs";
   private static final String SHOW_MC68010_SETTINGS_KEY = "M68kMnemonicsPanel.show.mc68010";
@@ -95,7 +95,7 @@ public class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonicsB
   @Override
   protected void initList() {
     final M68kMnemonicRegistry instance = M68kMnemonicRegistry.getInstance();
-    CollectionListModel<M68kMnemonicsBrowserPane.MnemonicEntry> model = new CollectionListModel<>();
+    CollectionListModel<M68kMnemonic> model = new CollectionListModel<>();
     for (IElementType type : M68kTokenGroups.INSTRUCTIONS.getTypes()) {
       final Collection<M68kMnemonic> all = instance.findAll(type);
       final M68kMnemonic mnemonic = ContainerUtil.getFirstItem(all);
@@ -104,36 +104,22 @@ public class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonicsB
         continue;
       }
 
-      model.add(new M68kMnemonicsBrowserPane.MnemonicEntry(mnemonic));
+      model.add(mnemonic);
     }
     setListModel(model);
   }
 
   @Override
-  protected Function<? super MnemonicEntry, String> getListItemNamer() {
-    return M68kMnemonicsBrowserPane.MnemonicEntry::getListName;
+  protected Function<? super M68kMnemonic, String> getListItemNamer() {
+    return (Function<M68kMnemonic, String>) mnemonic -> StringUtil.toUpperCase(mnemonic.getElementType().toString());
   }
 
-  protected @NotNull String getDocFor(@NotNull MnemonicEntry selected) {
-    final String mnemonicDoc = M68kInstructionDocumentationProvider.getMnemonicDoc(selected.mnemonic.getElementType(), null);
+  protected @NotNull String getDocFor(@NotNull M68kMnemonic mnemonic) {
+    final String mnemonicDoc = M68kInstructionDocumentationProvider.getMnemonicDoc(mnemonic.getElementType(), null);
     final String referenceDoc = isShowReferenceDocs ?
-      "<hr/>" + M68kInstructionDocumentationProvider.getInstructionReferenceDoc(selected.mnemonic.getElementType()) : "";
+      "<hr/>" + M68kInstructionDocumentationProvider.getInstructionReferenceDoc(mnemonic.getElementType()) : "";
 
     return M68kDocumentationUtil.CSS + mnemonicDoc + referenceDoc;
-  }
-
-
-  protected static class MnemonicEntry {
-
-    private final M68kMnemonic mnemonic;
-
-    MnemonicEntry(M68kMnemonic mnemonic) {
-      this.mnemonic = mnemonic;
-    }
-
-    String getListName() {
-      return StringUtil.toUpperCase(mnemonic.getElementType().toString());
-    }
   }
 
 }
