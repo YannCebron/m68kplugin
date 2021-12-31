@@ -18,14 +18,15 @@ package com.yanncebron.m68kplugin.browser;
 
 import com.intellij.codeInsight.documentation.DocumentationComponent;
 import com.intellij.ide.IdeBundle;
-import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.actionSystem.ActionManager;
-import com.intellij.openapi.actionSystem.ActionToolbar;
+import com.intellij.ide.util.PropertiesComponent;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.editor.colors.EditorColorsUtil;
 import com.intellij.openapi.options.FontSize;
+import com.intellij.openapi.project.DumbAwareToggleAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.openapi.ui.Splitter;
+import com.intellij.openapi.util.Ref;
 import com.intellij.ui.*;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBPanelWithEmptyText;
@@ -41,6 +42,8 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 /**
  * @param <T> must implement {@link #equals(Object)} to keep current selection upon list model update
@@ -88,6 +91,9 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel {
     return true;
   }
 
+  /**
+   * @see #createToggleAction
+   */
   @Nullable
   protected abstract ActionGroup getToolbarActionGroup();
 
@@ -176,4 +182,36 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel {
     return scrollPane;
   }
 
+  protected final AnAction createToggleAction(String text, Icon icon,
+                                              Ref<Boolean> settingField, String settingKey,
+                                              @NotNull BiConsumer<AnActionEvent, Boolean> setSelectedConsumer,
+                                              @Nullable Consumer<AnActionEvent> updateConsumer) {
+    assert settingField != null;
+    settingField.set(PropertiesComponent.getInstance().getBoolean(settingKey, true));
+
+    return new DumbAwareToggleAction(text, null, icon) {
+
+      @Override
+      public void update(@NotNull AnActionEvent e) {
+        super.update(e);
+
+        if (updateConsumer != null) {
+          updateConsumer.accept(e);
+        }
+      }
+
+      @Override
+      public boolean isSelected(@NotNull AnActionEvent e) {
+        return settingField.get();
+      }
+
+      @Override
+      public void setSelected(@NotNull AnActionEvent e, boolean state) {
+        settingField.set(state);
+        PropertiesComponent.getInstance().setValue(settingKey, settingField.get(), true);
+
+        setSelectedConsumer.accept(e, state);
+      }
+    };
+  }
 }

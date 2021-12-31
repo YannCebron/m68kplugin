@@ -17,11 +17,9 @@
 package com.yanncebron.m68kplugin.browser;
 
 import com.intellij.icons.AllIcons;
-import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.project.DumbAwareToggleAction;
+import com.intellij.openapi.util.Ref;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.ui.CollectionListModel;
 import com.intellij.util.Function;
@@ -41,53 +39,36 @@ import java.util.Collection;
 
 public class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
 
-  private static final String SHOW_REFERENCE_DOCS_SETTINGS_KEY = "M68kMnemonicsPanel.show.ref.docs";
-  private static final String SHOW_MC68010_SETTINGS_KEY = "M68kMnemonicsPanel.show.mc68010";
+  private Ref<Boolean> isShowMc68010;
 
-  private boolean isShowMc68010;
-
-  private boolean isShowReferenceDocs;
+  private Ref<Boolean> isShowReferenceDocs;
 
   protected ActionGroup getToolbarActionGroup() {
     DefaultActionGroup actionGroup = new DefaultActionGroup();
 
-    isShowMc68010 = PropertiesComponent.getInstance().getBoolean(SHOW_MC68010_SETTINGS_KEY, true);
-    actionGroup.addAction(new DumbAwareToggleAction(
-      M68kBundle.message("toolwindow.tab.mnemonic.include.cpu.only.mnemonics", M68kCpu.M_68010.getCpuName()),
-      null,
-      IconUtil.addText(AllIcons.Actions.PreviewDetails, M68kCpu.M_68010.getCpuCode())
-    ) {
-
-      @Override
-      public boolean isSelected(@NotNull AnActionEvent e) {
-        return isShowMc68010;
-      }
-
-      @Override
-      public void setSelected(@NotNull AnActionEvent e, boolean state) {
-        isShowMc68010 = state;
-        PropertiesComponent.getInstance().setValue(SHOW_MC68010_SETTINGS_KEY, isShowMc68010, true);
-        initList();
-      }
-    });
+    isShowMc68010 = Ref.create(Boolean.TRUE);
+    actionGroup.add(
+      createToggleAction(
+        M68kBundle.message("toolwindow.tab.mnemonic.include.cpu.only.mnemonics", M68kCpu.M_68010.getCpuName()),
+        IconUtil.addText(AllIcons.Actions.PreviewDetails, M68kCpu.M_68010.getCpuCode()),
+        isShowMc68010,
+        "M68kMnemonicsPanel.show.mc68010",
+        (anActionEvent, state) -> initList(),
+        null
+      ));
 
     actionGroup.addSeparator();
 
-    isShowReferenceDocs = PropertiesComponent.getInstance().getBoolean(SHOW_REFERENCE_DOCS_SETTINGS_KEY, true);
-    actionGroup.addAction(new DumbAwareToggleAction(
-      M68kBundle.message("toolwindow.tab.mnemonic.show.reference.docs"), null, AllIcons.General.ReaderMode) {
-      @Override
-      public boolean isSelected(@NotNull AnActionEvent e) {
-        return isShowReferenceDocs;
-      }
-
-      @Override
-      public void setSelected(@NotNull AnActionEvent e, boolean state) {
-        isShowReferenceDocs = state;
-        PropertiesComponent.getInstance().setValue(SHOW_REFERENCE_DOCS_SETTINGS_KEY, isShowReferenceDocs, true);
-        updateDoc();
-      }
-    });
+    isShowReferenceDocs = Ref.create(Boolean.TRUE);
+    actionGroup.add(
+      createToggleAction(
+        M68kBundle.message("toolwindow.tab.mnemonic.show.reference.docs"),
+        AllIcons.General.ReaderMode,
+        isShowReferenceDocs,
+        "M68kMnemonicsPanel.show.ref.docs",
+        (anActionEvent, aBoolean) -> updateDoc(),
+        null
+      ));
 
     return actionGroup;
   }
@@ -100,7 +81,7 @@ public class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> 
       final Collection<M68kMnemonic> all = instance.findAll(type);
       final M68kMnemonic mnemonic = ContainerUtil.getFirstItem(all);
 
-      if (!isShowMc68010 && !mnemonic.getCpus().contains(M68kCpu.M_68000)) {
+      if (!isShowMc68010.get() && !mnemonic.getCpus().contains(M68kCpu.M_68000)) {
         continue;
       }
 
@@ -116,7 +97,7 @@ public class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> 
 
   protected @NotNull String getDocFor(@NotNull M68kMnemonic mnemonic) {
     final String mnemonicDoc = M68kInstructionDocumentationProvider.getMnemonicDoc(mnemonic.getElementType(), null);
-    final String referenceDoc = isShowReferenceDocs ?
+    final String referenceDoc = isShowReferenceDocs.get() ?
       "<hr/>" + M68kInstructionDocumentationProvider.getInstructionReferenceDoc(mnemonic.getElementType()) : "";
 
     return M68kDocumentationUtil.CSS + mnemonicDoc + referenceDoc;
