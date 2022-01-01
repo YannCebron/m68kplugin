@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileEditor.OpenFileDescriptor;
+import com.intellij.openapi.fileEditor.UniqueVFilePathBuilder;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
@@ -172,7 +173,7 @@ public class M68kProjectStatisticsAction extends AnAction {
           totalElements[0] = totalElements[0] + elements;
 
           String info =
-            StringUtils.rightPad(virtualFile.getName(), 20) +
+            StringUtils.rightPad(UniqueVFilePathBuilder.getInstance().getUniqueVirtualFilePath(project, virtualFile), 25) +
               StringUtils.leftPad(errors.length + "/" + elements, 18) +
               " | " + StringUtils.rightPad(labelRefsUnresolved + "/" + labelRefs, 7) +
               " | " + StringUtils.rightPad(macroCallsUnresolved + "/" + macroCalls, 7) +
