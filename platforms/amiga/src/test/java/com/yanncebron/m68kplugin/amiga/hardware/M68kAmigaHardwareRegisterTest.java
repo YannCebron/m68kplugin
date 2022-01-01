@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,10 +19,14 @@ package com.yanncebron.m68kplugin.amiga.hardware;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.testFramework.UsefulTestCase;
 
+import java.util.regex.Pattern;
+
 public class M68kAmigaHardwareRegisterTest extends UsefulTestCase {
 
   public void testConsistency() {
     assertSize(236, M68kAmigaHardwareRegister.values());
+
+    Pattern validName = Pattern.compile("[A-Z0-9]{5,8}");
 
     int lastAddress = 0;
     int countRevisionOcs = 0;
@@ -31,6 +35,7 @@ public class M68kAmigaHardwareRegisterTest extends UsefulTestCase {
     int countCopperDanger = 0;
     for (M68kAmigaHardwareRegister register : M68kAmigaHardwareRegister.values()) {
       assertFalse(register.name(), StringUtil.containsWhitespaces(register.getName()));
+      assertTrue(register.name(), validName.matcher(register.getName()).matches());
 
       String address = register.getAddress();
       assertFalse(register.name(), StringUtil.containsWhitespaces(address));
