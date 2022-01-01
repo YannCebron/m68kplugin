@@ -21,7 +21,6 @@ import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.util.Ref;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.ui.CollectionListModel;
 import com.intellij.util.Function;
 import com.intellij.util.IconUtil;
 import com.intellij.util.containers.ContainerUtil;
@@ -35,7 +34,9 @@ import com.yanncebron.m68kplugin.lang.psi.M68kMnemonicRegistry;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
 
@@ -76,7 +77,7 @@ public class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> 
   @Override
   protected void initList() {
     final M68kMnemonicRegistry instance = M68kMnemonicRegistry.getInstance();
-    CollectionListModel<M68kMnemonic> model = new CollectionListModel<>();
+    List<M68kMnemonic> items = new ArrayList<>();
     for (IElementType type : M68kTokenGroups.INSTRUCTIONS.getTypes()) {
       final Collection<M68kMnemonic> all = instance.findAll(type);
       final M68kMnemonic mnemonic = ContainerUtil.getFirstItem(all);
@@ -85,9 +86,9 @@ public class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> 
         continue;
       }
 
-      model.add(mnemonic);
+      items.add(mnemonic);
     }
-    setListModel(model);
+    setListItems(items);
   }
 
   @Override

@@ -20,12 +20,14 @@ import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.ui.CollectionListModel;
 import com.intellij.util.Function;
 import com.twelvemonkeys.lang.StringUtil;
 import com.yanncebron.m68kplugin.documentation.M68kDocumentationUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<M68kDirectivesBrowserPane.DirectiveEntry> {
 
@@ -36,11 +38,11 @@ public class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<M68kDirective
 
   @Override
   protected void initList() {
-    CollectionListModel<DirectiveEntry> model = new CollectionListModel<>();
+    List<DirectiveEntry> items = new ArrayList<>();
     for (IElementType type : M68kTokenGroups.DIRECTIVES.getTypes()) {
-      model.add(new DirectiveEntry(type));
+      items.add(new DirectiveEntry(type));
     }
-    setListModel(model);
+    setListItems(items);
   }
 
   @Override

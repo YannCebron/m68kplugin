@@ -42,6 +42,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -98,7 +99,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel {
   protected abstract ActionGroup getToolbarActionGroup();
 
   /**
-   * Populate list items and call {@link #setListModel(ListModel)}.
+   * Populate list items and call {@link #setListItems(List)}.
    */
   protected abstract void initList();
 
@@ -118,10 +119,10 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel {
     };
   }
 
-  protected void setListModel(ListModel<T> model) {
+  protected void setListItems(List<T> items) {
     T selectedValue = list.getSelectedValue();
 
-    list.setModel(model);
+    list.setModel(new CollectionListModel<T>(items));
 
     list.setSelectedValue(selectedValue, true);
   }
