@@ -36,6 +36,8 @@ Mnemonic documentation taken from [m68k-instructions-documentation](https://gith
 
 Mnemonic data generated using [vasm](http://sun.hasenbraten.de/vasm/) sources, thanks to Frank Wille and Dr. Volker Barthelmann for granting permission
 
+Amiga hardware register documentation generated from [AGA.guide](https://github.com/rkrajnc/minimig-mist/blob/master/doc/amiga/aga/AGA.guide)
+
 ## License
 
 Licensed under the Apache License, Version 2.0 (the "License"), see [LICENCE](LICENCE)

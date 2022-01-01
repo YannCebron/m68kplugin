@@ -22,4 +22,12 @@
         implementation="com.yanncebron.m68kplugin.lang.spellchecker.M68kBundledAmigaDictionaryProvider"/>
 
   </extensions>
+
+  <extensions defaultExtensionNs="com.yanncebron.m68kplugin">
+    <browserPane id="amigaHardware"
+                 order="last"
+                 bundle="messages.M68kAmigaBundle"
+                 displayName="toolwindow.tab.amiga.hardware"
+                 implementation="com.yanncebron.m68kplugin.amiga.hardware.M68kAmigaHardwareBrowserPane"/>
+  </extensions>
 </idea-plugin>

@@ -18,3 +18,7 @@
 plugins {
     id("m68kplugin.java-conventions")
 }
+
+dependencies {
+    implementation(project(":plugin-api"))
+}

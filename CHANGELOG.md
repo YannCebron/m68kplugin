@@ -6,6 +6,7 @@
 - support `MSOURCE` directive
 - support `OFFSET` directive
 - support `MASK2` directive, highlight as unsupported
+- "M68k Browser": new tab "Amiga Hardware"
 
 ### Fixed
 - Show used/free registers: handle register-list/range, PC indirect with index
