@@ -366,13 +366,13 @@ NAME        ADDR   R/W CHIP(s)   FUNCTION
 @{"BLTCON1" link BLTCON0}     ~042   W  A          Blitter control reg 1
 @{"BLTAFWM" link BLTALWM}     ~044   W  A          Blitter first word mask for source A
 @{"BLTALWM" link BLTALWM}     ~046   W  A          Blitter last word mask for source A
-@{"BLTCPTH" link BLTxPTH}   + ~048   W  A          Blitter pointer to source C (high 5 bits)
+@{"BLTCPTH" link BLTxPTL}   + ~048   W  A          Blitter pointer to source C (high 5 bits)
 @{"BLTCPTL" link BLTxPTL}   + ~04A   W  A          Blitter pointer to source C (low 15 bits)
-@{"BLTBPTH" link BLTxPTH}   + ~04C   W  A          Blitter pointer to source B (high 5 bits)
+@{"BLTBPTH" link BLTxPTL}   + ~04C   W  A          Blitter pointer to source B (high 5 bits)
 @{"BLTBPTL" link BLTxPTL}   + ~04E   W  A          Blitter pointer to source B (low 15 bits)
-@{"BLTAPTH" link BLTxPTH}   + ~050   W  A          Blitter pointer to source A (high 5 bits)
+@{"BLTAPTH" link BLTxPTL}   + ~050   W  A          Blitter pointer to source A (high 5 bits)
 @{"BLTAPTL" link BLTxPTL}   + ~052   W  A          Blitter pointer to source A (low 15 bits)
-@{"BPTDPTH" link BLTxPTH}   + ~054   W  A          Blitter pointer to destn  D (high 5 bits)
+@{"BPTDPTH" link BLTxPTL}   + ~054   W  A          Blitter pointer to destn  D (high 5 bits)
 @{"BLTDPTL" link BLTxPTL}   + ~056   W  A          Blitter pointer to destn  D (low 15 bits)
 @{"BLTSIZE" link BLTSIZE}     ~058   W  A          Blitter start and size (win/width,height)
 @{"BLTCON0L" link BLTCON0}  h ~05A   W  A          Blitter control 0 lower 8 bits (minterms)
