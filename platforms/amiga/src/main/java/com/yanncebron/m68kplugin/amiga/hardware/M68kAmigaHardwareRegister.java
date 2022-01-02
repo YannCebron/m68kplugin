@@ -87,7 +87,7 @@ public enum M68kAmigaHardwareRegister {
   COP1LCL("COP1LCL", "DFF082", "Coprocessor first location reg (low 15 bits)", "COP1LCH", Chipset.OCS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
   COP2LCH("COP2LCH", "DFF084", "Coprocessor second reg (high 5 bits)", "COP1LCH", Chipset.OCS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
   COP2LCL("COP2LCL", "DFF086", "Coprocessor second reg (low 15 bits)", "COP1LCH", Chipset.OCS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
-  COPJMP1("COPJMP1", "DFF088", "Coprocessor restart at first location", "COPJMP1", Chipset.OCS, false, Access.STROBE, EnumSet.of(Chip.AGNUS_ALICE)),
+  COPJMP1("COPJMP1", "DFF088", "Coprocessor restart at first location", "COPJMP2", Chipset.OCS, false, Access.STROBE, EnumSet.of(Chip.AGNUS_ALICE)),
   COPJMP2("COPJMP2", "DFF08A", "Coprocessor restart at second location", "COPJMP2", Chipset.OCS, false, Access.STROBE, EnumSet.of(Chip.AGNUS_ALICE)),
   COPINS("COPINS", "DFF08C", "Coprocessor inst fetch identify", "COPINS", Chipset.OCS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
   DIWSTRT("DIWSTRT", "DFF08E", "Display window start (upper left vert-hor pos)", "DIWSTRT", Chipset.OCS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE, Chip.DENISE_LISA)),

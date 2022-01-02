@@ -74,7 +74,7 @@ public class M68kAmigaHardwareRegisterTest extends UsefulTestCase {
 
     assertEquals(58, countCopperDanger);
 
-    assertEquals(79, descriptionFileNames.size());
+    assertEquals(78, descriptionFileNames.size());
   }
 
 }

@@ -398,7 +398,7 @@ NAME        ADDR   R/W CHIP(s)   FUNCTION
 @{"COP1LCL" link COP1LCH}   +  082   W  A          Coprocessor first location reg (low 15 bits)
 @{"COP2LCH" link COP1LCH}   +  084   W  A          Coprocessor second reg (high 5 bits)
 @{"COP2LCL" link COP1LCH}   +  086   W  A          Coprocessor second reg (low 15 bits)
-@{"COPJMP1" link COPJMP1}      088   S  A          Coprocessor restart at first location
+@{"COPJMP1" link COPJMP2}      088   S  A          Coprocessor restart at first location
 @{"COPJMP2" link COPJMP2}      08A   S  A          Coprocessor restart at second location
 @{"COPINS"  link COPINS}       08C   W  A          Coprocessor inst fetch identify
 @{"DIWSTRT" link DIWSTRT}      08E   W  A  D       Display window start (upper left vert-hor pos)
@@ -1534,10 +1534,10 @@ NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
 COPJMP2   08A  S    A     Coprocessor restart at second location
 
-         These address are strobe address, that when written to cause the
+         These addresses are strobe addresses, that when written to cause the
          coprocessor to jump indirect using the address contained in the
          first or second location regs described below. The coprocessor itself
-         can write to these address, causing its own jump indirect.
+         can write to these addresses, causing its own jump indirectly.
 @endnode
 
 @node COP1LCH COP1LCH
