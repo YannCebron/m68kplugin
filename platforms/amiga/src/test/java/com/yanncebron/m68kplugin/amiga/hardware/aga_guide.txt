@@ -1180,11 +1180,12 @@ BPLCON0 p  100  W    D    Bit plane control reg. (misc, control bits)
  +------+---------+---------------------------------------------------------+
  | BIT# | BPLCON0 | DESCRIPTION                                             |
  +------+---------+---------------------------------------------------------+
- | 15   | HIRES   | HIRES = High resolution (640*200/640*400 interlace)    |
- |      |         | mode                                                    |
+ | 15   | HIRES   | HIRES = High resolution (640*200/640*400 interlace) mode|
+ |      |         |                                                         |
  | 14   | BPU2    | Bit plane use code 0000-1000 (NODE thru 8 inclusive)    |
  | 13   | BPU1    |                                                         |
  | 12   | BPU0    |                                                         |
+ |      |         |                                                         |
  | 11   | HAM     | Hold and modify mode, now using either 6 or 8 bit       |
  |      |         | planes.                                                 |
  | 10   | DPF     | Double playfield (PF1=odd / PF2=even bit planes)        |
@@ -1223,6 +1224,7 @@ BPLCON0 p  100  W    D    Bit plane control reg. (misc, control bits)
 NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
 BPLCON1 p  102  W       D Bit plane control reg. (horiz, scroll counter)
+
  +------+---------+---------------------------------------------------------+
  | BIT# | BPLCON1 | DESCRIPTION                                             |
  +------+---------+---------------------------------------------------------+
@@ -1255,11 +1257,11 @@ BPLCON2 p 104   W    D    Bit plane control reg. (new control bits)
  | BIT# | BPLCON2  | DESCRIPTION                                            |
  +------+----------+--------------------------------------------------------+
  | 15   | X        | Don't care - but drive to 0 for upward compatibility!  |
+ |      |          |                                                        |
  | 14   | ZDBPSEL2 | 3 bit field which selects which bitplane is to be used |
- |      |          | for ZD when ZDBBPEN is set - 000 selects BB1 and 111   |
- |      |          | selects BP8.                                           |
- | 13   | ZDBPSEL1 |                                                        |
- | 12   | ZDBPSEL0 |                                                        |
+ | 13   | ZDBPSEL1 | for ZD when ZDBBPEN is set - 000 selects BB1 and 111   |
+ | 12   | ZDBPSEL0 | selects BP8.                                           |
+ |      |          |                                                        |
  | 11   | ZDBPEN   | Causes ZD pin to mirror bitplane selected by ZDBPSELx  |
  |      |          | bits. This does not disable the ZD mode defined by     |
  |      |          | ZDCTEN, but rather is "ored" with it.                  |
@@ -1271,9 +1273,11 @@ BPLCON2 p 104   W    D    Bit plane control reg. (new control bits)
  |      |          | instead of writing to it.                              |
  | 07   | SOGEN=0  | When set causes SOG output pin to go high.             |
  | 06   | PF2PRI   | Gives playfield 2 priority over playfield 1.           |
+ |      |          |                                                        |
  | 05   | PF2P2    | Playfield 2 priority code (with resp. to sprites).     |
  | 04   | PF2P1    |                                                        |
  | 03   | PF2P0    |                                                        |
+ |      |          |                                                        |
  | 02   | PF1P2    | Playfield 1 priority code (with resp. to sprites).     |
  | 01   | PF1P1    |                                                        |
  | 00   | PF1P0    |                                                        |
@@ -1349,26 +1353,22 @@ BPLCON4 p 10c  W       D  Bit plane control reg. (display masks)
  | BIT# | BPLCON4  | DESCRIPTION                                              |
  +------+----------+----------------------------------------------------------+
  | 15   | BPLAM7=0 | This 8 bit field is XOR'ed with the 8 bit plane color    |
- |      |          | address, thereby altering the color address sent to the  |
- |      |          | color table (x=1-8)                                      |
- | 14   | BPLAM6=0 |                                                          |
- | 13   | BPLAM5=0 |                                                          |
+ | 14   | BPLAM6=0 | address, thereby altering the color address sent to the  |
+ | 13   | BPLAM5=0 | color table (x=1-8).                                     |
  | 12   | BPLAM4=0 |                                                          |
  | 11   | BPLAM3=0 |                                                          |
  | 10   | BPLAM2=0 |                                                          |
  | 09   | BPLAM1=0 |                                                          |
  | 08   | BPLAM0=0 |                                                          |
+ |      |          |                                                          |
  | 07   | ESPRM7=0 | 4 Bit field provides the 4 high order color table address|
- |      |          | bits for even sprites: SPR0,SPR2,SPR4,SPR6. Default value|
- |      |          | is 0001 binary. (x=7-4)                                  |
- | 06   | ESPRM6=0 |                                                          |
- | 05   | ESPRM5=0 |                                                          |
+ | 06   | ESPRM6=0 | bits for even sprites: SPR0,SPR2,SPR4,SPR6. Default value|
+ | 05   | ESPRM5=0 | is 0001 binary. (x=7-4)                                  |
  | 04   | ESPRM4=1 |                                                          |
+ |      |          |                                                          |
  | 03   | OSPRM7=0 | 4 Bit field provides the 4 high order color table address|
- |      |          | bits for odd sprites: SPR1,SPR3,SPR5,SPR7. Default value |
- |      |          | is 0001 binary. (x=7-4)                                  |
- | 02   | OSPRM6=0 |                                                          |
- | 01   | OSPRM5=0 |                                                          |
+ | 02   | OSPRM6=0 | bits for odd sprites: SPR1,SPR3,SPR5,SPR7. Default value |
+ | 01   | OSPRM5=0 | is 0001 binary. (x=7-4)                                  |
  | 00   | OSPRM4=1 |                                                          |
  +------+----------+----------------------------------------------------------+
 @endnode
@@ -1422,16 +1422,14 @@ CLXCON2 P  10C  W    D    Extended collision control
          | BIT#  | FUNCTION | DESCRIPTION                                   |
          +-------+----------+-----------------------------------------------+
          | 15-08 |          | (unused)                                      |
-         | 07    | ENBP8    | Enable bit plane 8 (match reqd. for           |
-         |       |          | collision)                                    |
-         | 06    | ENBP7    | Enable bit plane 7 (match reqd. for           |
-         |       |          | collision)                                    |
+         | 07    | ENBP8    | Enable bit plane 8 (match reqd. for collision)|
+         | 06    | ENBP7    | Enable bit plane 7 (match reqd. for collision)|
          | 05-02 |          | (unused)                                      |
          | 01    | MVBP8    | Match value for bit plane 8 collision         |
          | 00    | MVBP7    | Match value for bit plane 7 collision         |
          +-------+----------+-----------------------------------------------+
 
-   Note: Disable bit planes cannot prevent collisions. Therefore if all
+   Note: Disabled bit planes cannot prevent collisions. Therefore if all
          bitplanes are disabled, collision will be continuous, regardless
          of the match values.
 @endnode
@@ -1474,7 +1472,7 @@ NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
 COLORxx  180-1BE  W       COLOR table xx
 
-         There 32 of these registers (xx=00-31) and together with the banking
+         There are 32 of these registers (xx=00-31) and together with the banking
          bits they address the 256 locations in the color palette. There are
          actually two sets of color regs, selection of which is controlled by
          the LOCT reg bit. When LOCT=0 the 4 MSB of red, green and blue
@@ -1659,7 +1657,7 @@ DDFSTOP  094  W  A  Display data fetch stop (horiz. position)
 	Register bit assignment
 	
 	BIT# 15  14  13  12  11  10  09  08  07  06  05  04  03  02  01  00
-	USE  XX   X   X   X   X   X   X  H8  H7  H6  H5  H4  H3  H2   X
+	USE   X   X   X   X   X   X   X   X  H8  H7  H6  H5  H4  H3  H2   X
 
 	  (X bits should always be driven with 0 to maintain upward
 	   compatibility)
@@ -1687,7 +1685,7 @@ DDFSTOP  094  W  A  Display data fetch stop (horiz. position)
          +------------------+----+----+----+----+----+
 
          Note that these numbers will vary with variable beam counter
-         mode set: (The maxes and mins, that is)
+         mode set (the maxes and mins, that is).
 @endnode
 
 @node DIWSTRT DIWSTRT
@@ -2408,6 +2406,7 @@ NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
 VBSTOP H 1CE   W    A    Vertical line for VBLANK stop
 VBSTRT H 1CC   W    A    Vertical line for VBLANK start
+
 		(V10-0 <- D10-0) Affects CSY pin if BLAKEN=1 and VSY pin
 		if CSCBEN=1 (see @{"BEAMCON0" link BEAMCON0}).
 @endnode
