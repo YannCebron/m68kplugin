@@ -30,7 +30,7 @@ public enum M68kAmigaHardwareRegister {
   VHPOSR("VHPOSR", "DFF006", "Read vert and horiz position of beam", "VHPOSR", Chipset.OCS, true, Access.READ, EnumSet.of(Chip.AGNUS_ALICE)),
   DSKDATR("DSKDATR", "DFF008", "Disk data early read (dummy address)", "DSKDATR", Chipset.OCS, true, Access.READ, EnumSet.of(Chip.PAULA)),
   JOY0DAT("JOY0DAT", "DFF00A", "Joystick-mouse 0 data (vert,horiz)", "JOYxDAT", Chipset.OCS, true, Access.READ, EnumSet.of(Chip.DENISE_LISA)),
-  JOT1DAT("JOT1DAT", "DFF00C", "Joystick-mouse 1 data (vert,horiz)", "JOYxDAT", Chipset.OCS, true, Access.READ, EnumSet.of(Chip.DENISE_LISA)),
+  JOY1DAT("JOY1DAT", "DFF00C", "Joystick-mouse 1 data (vert,horiz)", "JOYxDAT", Chipset.OCS, true, Access.READ, EnumSet.of(Chip.DENISE_LISA)),
   CLXDAT("CLXDAT", "DFF00E", "Collision data reg. (read and clear)", "CLXDAT", Chipset.OCS, true, Access.READ, EnumSet.of(Chip.DENISE_LISA)),
   ADKCONR("ADKCONR", "DFF010", "Audio,disk control register read", "ADKCON", Chipset.OCS, true, Access.READ, EnumSet.of(Chip.PAULA)),
   POT0DAT("POT0DAT", "DFF012", "Pot counter pair 0 data (vert,horiz)", "POTxDAT", Chipset.OCS, true, Access.READ, EnumSet.of(Chip.PAULA)),
