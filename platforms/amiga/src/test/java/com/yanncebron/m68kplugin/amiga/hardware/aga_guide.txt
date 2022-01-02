@@ -331,7 +331,7 @@ MOD = 15 bit Modulo. A number that is automatically added to the memory
 NAME        ADDR   R/W CHIP(s)   FUNCTION
 ---------------------------------------------------------------------------
 @{"BLTDDAT" link BLTDDAT}   & ~000   ER  A         Blitter dest. early read (dummy address)
-@{"DMACONR" link DMACON}     ~002   R   A     P   DMA control (and blitter status) read
+@{"DMACONR" link DMACON}     ~002   R   A     P   DMA control (and Blitter status) read
 @{"VPOSR"   link VPOSR}       ~004   R   A         Read vert most sig. bits (and frame flop)
 @{"VHPOSR"  link VHPOSR}      ~006   R   A         Read vert and horiz position of beam
 @{"DSKDATR" link DSKDATR}   & ~008   ER        P   Disk data early read (dummy address)
@@ -403,8 +403,8 @@ NAME        ADDR   R/W CHIP(s)   FUNCTION
 @{"COPINS"  link COPINS}       08C   W  A          Coprocessor inst fetch identify
 @{"DIWSTRT" link DIWSTRT}      08E   W  A  D       Display window start (upper left vert-hor pos)
 @{"DIWSTOP" link DIWSTRT}      090   W  A  D       Display window stop (lower right vert-hor pos)
-@{"DDFSTRT" link DDFSTRT}      092   W  A          Display bit plane data fetch start.hor pos
-@{"DDFSTOP" link DDFSTRT}      094   W  A          Display bit plane data fetch stop.hor pos
+@{"DDFSTRT" link DDFSTRT}      092   W  A          Display bit plane data fetch start. hor pos
+@{"DDFSTOP" link DDFSTRT}      094   W  A          Display bit plane data fetch stop. hor pos
 @{"DMACON" link DMACON}       096   W  A      P   DMA control write (clear or set)
 @{"CLXCON" link CLXCON}       098   W     D       Collision control
 @{"INTENA" link INTENA}       09A   W         P   Interrupt enable bits (clear or set bits)
@@ -618,8 +618,8 @@ ADKCONR    010   R   P    Audio,Disk,Uart,Control read
          +-------+-------------+-------------------------------------------+
          | BITS  | USE         | DESCRIPTION                               |
          +-------+-------------+-------------------------------------------+
-         | 15    | SET/CLEAR   | Set/clear control bit.determines if bits  |
-         |       |             | written with a 1 get set or cleared.bits  |
+         | 15    | SET/CLEAR   | Set/clear control bit. Determines if bits |
+         |       |             | written with a 1 get set or cleared. Bits |
          |       |             | written with a zero are always unchanged. |
          |       |             |                                           |
          | 14-13 | PRECOMP 1-0 | 00=none, 01=140 ns, 10=280 ns, 11=560 ns  |
@@ -628,12 +628,12 @@ ADKCONR    010   R   P    Audio,Disk,Uart,Control read
          | 11    | UARTBRK     | Forces a UART break (clears TXD) if true  |
          | 10    | WORDSYNC    | Enables disk read synchronizing on a word |
          |       |             | equal to DISK SYNC CODE, Located in       |
-         |       |             | address @{"DSKSYNC" link DSKSYNC} (7E).   |                  |
+         |       |             | address @{"DSKSYNC" link DSKSYNC} (7E).   |
          | 09    | MSBSYNC     | Enables disk read synchronizing on the    |
          |       |             | MSB (most signif bit) appl type GCR       |
          | 08    | FAST        | Disk data clock rate control 1=fast(2us)  |
          |       |             | 0=slow(4us)                               |
-         |       |             | (Fast for MFM or 2us,slow for 4us GCR)    |
+         |       |             | (Fast for MFM or 2us, slow for 4us GCR)   |
          | 07    | USE3PN      | Use audio channel 3 to modulate nothing   |
          | 06    | USE2P3      | Use audio channel 2 to modulate period    |
          |       |             | of channel 3                              |
@@ -705,8 +705,8 @@ AUDxVOL   0A8    W   P    Audio channel x volume
          +--------+--------------------------------------------------+
          | BITS   | USE                                              |
          +--------+--------------------------------------------------+
-         | -15-07 | Not used                                         |
-         |  06    | Forces volume to max (64 ones,no zeros)          |
+         | 15-07  | Not used                                         |
+         |  06    | Forces volume to max (64 ones, no zeros)         |
          | 05-00  | Sets one of the 64 levels (000000 = no output,   |
          |        | 111111 = 63 ones, one zero)                      |
          +--------+--------------------------------------------------+
@@ -721,13 +721,13 @@ AUDxDAT   0AA    W   P    Audio channel x data
          data buffer. It contains 2 bytes of data (each
          byte is a twos complement signed integer) that
          are outputted sequentially (with digital to analog
-         conversion)to the audio output pins. With maximum
+         conversion) to the audio output pins. With maximum
          volume, each byte can drive the audio outputs
-         with 0.8 volts(peak to peak,typ). The audio DMA
+         with 0.8 volts (peak to peak,typ). The audio DMA
          channel controller automatically transfers data
          to this reg from RAM. The processor can also
          write directly to this reg. When the DMA data is
-         finished (words outputted=length)and the data in
+         finished (words outputted=length) and the data in
          this reg has been used, an audio channel interrupt
          request is set.
 @endnode
@@ -762,7 +762,7 @@ HARDDIS = This bit is used to disable the hardwired vertical horizontal
           window limits. It is cleared upon reset.
 
 LPENDIS = When this bit is a low and LPE (@{"BPLCON0" link BPLCON0},BIT 3) is enabled, the
-          light-pen latched value(beam hit position) will be read by
+          light-pen latched value (beam hit position) will be read by
           @{"VHPOSR" link VHPOSR}, @{"VPOSR" link VPOSR} and @{"HHPOSR" link HHPOSR}. When
           the bit is a high the light-pen latched value is ignored and
           the actual beam counter position is read by VHPOSR, VPOSR, and
@@ -770,7 +770,7 @@ LPENDIS = When this bit is a low and LPE (@{"BPLCON0" link BPLCON0},BIT 3) is en
 
 VARVBEN = Use the comparator generated vertical blank (from @{"VBSTRT" link VBSTOP}, @{"VBSTOP" link VBSTOP})           
           to run the internal chip stuff-sending RGA signals to Denise,
-          starting sprites,resetting light pen. It also disables the hard
+          starting sprites, resetting light pen. It also disables the hard
           stop on the vertical display window.
 
 LOLDIS  = Disable long line/short toggle. This is useful for DUAL mode
@@ -781,20 +781,20 @@ CSCBEN  = The variable composite sync comes out on the HSY pin, and the
           variable composite blank comes out on the VSY pin. The idea is
           to allow all the information to come out of the chip for a
           DUAL mode display. The normal monitor uses the normal composite
-          sync, and the variable composite sync &blank come out the HSY &
+          sync, and the variable composite sync & blank come out the HSY &
           VSY pins. The bits VARVSYEN & VARHSYEN (below) have priority over
           this control bit.
 
-VARVSYEN= Comparator VSY -> VSY pin. The variable VSY is set vertically on
+VARVSYEN = Comparator VSY -> VSY pin. The variable VSY is set vertically on
           @{"VSSTRT" link HSSTRT}, reset vertically on @{"VSSTOP" link VSSTOP}, with the horizontal position
           for set set & reset @{"HSSTRT" link HSSTRT} on short fields (all fields are short
           if LACE = 0) and @{"HCENTER" link HCENTER} on long fields (every other field if
           LACE = 1).
 
-VARHSYEN= Comparator HSY -> HSY pin. Set on HSSTRT value, reset on @{"HSSTOP" link HSSTOP}
+VARHSYEN = Comparator HSY -> HSY pin. Set on HSSTRT value, reset on @{"HSSTOP" link HSSTOP}
           value.
 
-VARBEAMEN=Enables the variable beam counter comparators to operate
+VARBEAMEN = Enables the variable beam counter comparators to operate
           (allowing different beam counter total values) on the main horiz
           counter. It also disables hard display stops on both horizontal
           and vertical.
@@ -804,7 +804,7 @@ DUAL    = Run the horizontal comparators with the alternate horizontal beam
           this counter rather than the normal one. This allows the UHRES
           pointers to come out more than once in a horizontal line,
           assuming there is some memory bandwidth left (it doesn't work in
-          640*400*4 interlace mode) also, to keep the two displays synced,
+          640*400*4 interlace mode). Also, to keep the two displays synced,
           the horizontal line lengths should be multiples of each other.
           If you are amazingly clever, you might not need to do this.
 
@@ -840,7 +840,7 @@ BLTxPTL  h 052  W    A    Blitter Pointer to x (Low 15 bits)
          This pair of registers (see also: @{"BLTxPTH" link BLTxPTH})
          contains the 20 bit address of Blitter source (X=A,B,C) or dest.
          (x=D) DMA data. This pointer must be preloaded with the
-         starting address of the data to be processed by the blitter. After
+         starting address of the data to be processed by the Blitter. After
          the Blitter is finished it will contain the last data address
          (plus increment and modulo).
 @endnode
@@ -854,7 +854,7 @@ BLTxMOD    064  W    A    Blitter Modulo x
          or Dest (X=D). A Modulo is a number that is automatically
          added to the address at the end of each line, in order that
          the address then points to the start of the next line. Each
-         source or destination has it's own Modulo, allowing each
+         source or destination has its own Modulo, allowing each
          to be a different size, while an identical area of each is
          used in the Blitter operation.
 @endnode
@@ -905,7 +905,7 @@ NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
 BLTSIZE      058   W    A Blitter start and size (win/width, height)
 
-         This register contains the width and height of the blitter operation
+         This register contains the width and height of the Blitter operation
          (in line mode width must = 2, height = line length). Writing
          to this register will start the Blitter, and should be done last,
          after all pointers and control registers have been initialized.
@@ -913,8 +913,8 @@ BLTSIZE      058   W    A Blitter start and size (win/width, height)
          BIT# 15  14  13  12  11  10  09  08  07  06  05  04  03  02  01  00
          USE  H9  H8  H7  H6  H5  H4  H3  H2  H1  H0  W5  W4  W3  W2  W1  W0
 
-         H=Height=Vertical lines (10 bits=1024 lines max)
-         W=Width=Horiz pixels (6 bits=64 words=1024 pixels max)
+         H = Height = Vertical lines (10 bits=1024 lines max)
+         W = Width = Horiz pixels (6 bits = 64 words = 1024 pixels max)
 @endnode
 
 @node BLTCON0 BLTCON0
@@ -926,7 +926,7 @@ BLTCON0L H 05A  W    A    Blitter control register 0 (lower 8 bits)
                           often the same.
 BLTCON1  h 042  W    A    Blitter control register 1
 
-         These two control registers are used together to control blitter
+         These two control registers are used together to control Blitter
          operations. There are 2 basic modes, are and line, which are
          selected by bit 0 of BLTCON1, as shown below.
 
@@ -971,7 +971,7 @@ BLTCON1  h 042  W    A    Blitter control register 1
          SUL       Line draw, Sometimes up or left
          AUL       Line draw, Always up or left
          SING      line draw, Single bit per horiz line
-         DOFF      Disables the D output- for external ALUs
+         DOFF      Disables the D output for external ALUs.
                    The cycle occurs normally, but the data
                    bus is tristate (hires chips only)
 @endnode
@@ -995,10 +995,10 @@ BLTSIZV  h 05C  W    A    Blitter V size (15 bit height)
          BIT# 15  14  13  12  11  10  09  08  07  06  05  04  03  02  01  00
          USE  x  h14  h13  h12  h11  h10  h9  h8  h7  h6  h5  h4  h3  h2  h1  h0
 
-         These are the blitter size regs for blits larger than the earlier
+         These are the Blitter size regs for blits larger than the earlier
          chips could accept. The original commands are retained for
          compatibility. BLTSIZV should be written first, followed by @{"BLTSIZH" link BLTSIZH},
-         which starts the blitter. BLTSIZV need not be rewritten for
+         which starts the Blitter. BLTSIZV need not be rewritten for
          subsequent bits if the vertical size is the same. Max size of
          blit 32k pixels * 32k lines, x's should be written to 0 for
          upward compatibility.
@@ -1032,10 +1032,10 @@ BPLHPTH  h 1EC  W    A    UHRES (VRAM) bit plane pntr (high 5 bits)
          When UHRES is enabled, this pointer comes out on the 2nd 'free' cycle
          after the start of each horizontal line. Its modulo is added every
          time it comes out. 'free' means priority above the copper and below
-         the fixed stuff (audio,sprites....).
+         the fixed stuff (audio, sprites, ...).
          @{"BPLHDAT" link BPLHDAT} comes out as an identifier on the RGA lines when the pointer
          address is valid so that external detectors can use this to do the
-         special cycle for the VRAMs, The SHRHDAT gets the first and third
+         special cycle for the VRAMs, the SHRHDAT gets the first and third
          free cycles.
 @endnode
 
@@ -1047,7 +1047,7 @@ BPLHPTL  h 1EE  W    A    UHRES (VRAM) bit plane pntr (low 15 bits)
          When UHRES is enabled, this pointer comes out on the 2nd 'free' cycle
          after the start of each horizontal line. Its modulo is added every
          time it comes out. 'free' means priority above the copper and below
-         the fixed stuff (audio,sprites....).
+         the fixed stuff (audio, sprites, ...).
          @{"BPLHDAT" link BPLHDAT} comes out as an identifier on the RGA lines when the pointer
          address is valid so that external detectors can use this to do the
          special cycle for the VRAMs, The SHRHDAT gets the first and third
@@ -1099,12 +1099,12 @@ NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
 BPLxPTL    0E2  W    A    Bit plane pointer (low 15 bits)
 
-           0EA        Address of bit plane x  (x=1,2,3,4,5,6,7,8) DMA data.
-           0EE        This pointer must be reinitialized by the processor or
-           0F2        coprocessor to point to the beginning of bit plane data
-           0F6        every vertical blank time.
-         p 0FA
-         p 0FE
+         Address of bit plane x (x=1,2,3,4,5,6,7,8) DMA data.
+         This pointer must be reinitialized by the processor or
+         coprocessor to point to the beginning of bit plane data
+         every vertical blank time.
+         
+         
 @endnode
 
 @node BPLxDAT BPLxDAT
@@ -1112,15 +1112,15 @@ NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
 BPLxDAT   110  W    A           Bit plane x data (parallel to serial convert)
 
-          112          These regs receive the DMA data fetched from RAM by the
-          114          bit plane address pointers described above.
-          116          They may also be rewritten by either micro.
-          118          they act as a 8 word parallel to serial buffer for up
-          11A          to 8 memory 'bit planes'. x=1-8 the parallel to serial
-        p 11C          conversion id triggered whenever bit plane #1 is
-        p 11E          written, inducing the completion of all bit planes for
-                       that word (16/32/64 pixels). The MSB is output first,
-                       and is therefore always on the left.
+         These regs receive the DMA data fetched from RAM by the
+         bit plane address pointers described above.
+         They may also be rewritten by either micro.
+         They act as a 8 word parallel to serial buffer for up
+         to 8 memory 'bit planes'. x=1-8 the parallel to serial
+         conversion id triggered whenever bit plane #1 is
+         written, inducing the completion of all bit planes for
+         that word (16/32/64 pixels). The MSB is output first,
+         and is therefore always on the left.
 @endnode
 
 @node BPLxMOD BPLxMOD
@@ -1159,7 +1159,7 @@ BPLCON0 p  100  W    D    Bit plane control reg. (misc, control bits)
  | 12   | BPU0    |                                                         |
  | 11   | HAM     | Hold and modify mode, now using either 6 or 8 bit       |
  |      |         | planes.                                                 |
- | 10   | DPF     | Double playfield (PF1=odd PF2=even bit planes)          |
+ | 10   | DPF     | Double playfield (PF1=odd / PF2=even bit planes)        |
  |      |         | now available in all resolutions.                       |
  |      |         | (If BPU=6 and HAM=0 and DPF=0 a special mode is         |
  |      |         | defined that allows bitplane 6 to cause an intensity    |
@@ -1183,9 +1183,9 @@ BPLCON0 p  100  W    D    Bit plane control reg. (misc, control bits)
  | 01   |  ERSY   | External resync (HSYNC, VSYNC pads become inputs)       |
  |      |         | (reset on power up)                                     |
  | 00   | ECSENA=0| When low (default), the following bits in @{"BPLCON3" link BPLCON3} are   |
- |      |         | disabled: BRDRBLNK,BRDNTRAN,ZDCLKEN,BRDSPRT, and        |
+ |      |         | disabled: BRDRBLNK, BRDNTRAN, ZDCLKEN, BRDSPRT, and     |
  |      |         | EXTBLKEN. These 5 bits can always be set by writing     |
- |      |         | to BPLCON3, however there effects are inhibited until   |
+ |      |         | to BPLCON3, however their effects are inhibited until   |
  |      |         | ECSENA goes high. This allows rapid context switching   |
  |      |         | between pre-ECS viewports and new ones.                 |
  +------+---------+---------------------------------------------------------+
@@ -1204,7 +1204,7 @@ BPLCON1 p  102  W       D Bit plane control reg. (horiz, scroll counter)
  | 12   | PF2H0=0 |                                                         |
  | 11   | PF1H7=0 | (PF1Hx =) Playfield 1 horizontal scroll code, x=0-7     |
  | 10   | PF1H6=0 | where PFyH0=LSB=35ns SHRES pixel (bits have been        |
- | 09   | PF1H1=0 | renamed, old PFyH0 now PFyH2, ect). Now that the scroll |
+ | 09   | PF1H1=0 | renamed, old PFyH0 now PFyH2, etc.). Now that the scroll |
  | 08   | PF1H0=0 | range has been quadrupled to allow for wider (32 or     |
  |      |         | 64 bits) bitplanes.                                     |
  | 07   | PF2H5   |                                                         |
@@ -1226,9 +1226,9 @@ BPLCON2 p 104   W    D    Bit plane control reg. (new control bits)
  +------+----------+--------------------------------------------------------+
  | BIT# | BPLCON2  | DESCRIPTION                                            |
  +------+----------+--------------------------------------------------------+
- | 15   | X        | don't care- but drive to 0 for upward compatibility!   |
+ | 15   | X        | Don't care - but drive to 0 for upward compatibility!  |
  | 14   | ZDBPSEL2 | 3 bit field which selects which bitplane is to be used |
- |      |          | for ZD when ZDBBPEN is set- 000 selects BB1 and 111    |
+ |      |          | for ZD when ZDBBPEN is set - 000 selects BB1 and 111   |
  |      |          | selects BP8.                                           |
  | 13   | ZDBPSEL1 |                                                        |
  | 12   | ZDBPSEL0 |                                                        |
@@ -1241,7 +1241,7 @@ BPLCON2 p 104   W    D    Bit plane control reg. (new control bits)
  | 09   | KILLEHB  | Disables extra half brite mode.                        |
  | 08   | RDRAM=0  | Causes color table address to read the color table     |
  |      |          | instead of writing to it.                              |
- | 07   | SOGEN=0  | When set causes SOG output pin to go high              |
+ | 07   | SOGEN=0  | When set causes SOG output pin to go high.             |
  | 06   | PF2PRI   | Gives playfield 2 priority over playfield 1.           |
  | 05   | PF2P2    | Playfield 2 priority code (with resp. to sprites).     |
  | 04   | PF2P1    |                                                        |
@@ -1288,7 +1288,7 @@ BPLCON3 p 106  W       D        Bit plane control reg. (enhanced features)
  |      |            | the RGB low minus order bits. Writes to the normal hi  |
  |      |            | minus order color palette automatically copied to the |
  |      |            | low order for backwards compatibility.                 |
- | 08   | X          |  don't care- but drive to 0 for upward compatibility!  |
+ | 08   | X          | Don't care - but drive to 0 for upward compatibility!  |
  | 07   | SPRES1=0   | Determine resolution of all 8 sprites (x=0,1):         |
  |      |                                                                     |
  |      |      +-------+--------+---------------------------------------------+
@@ -1305,13 +1305,13 @@ BPLCON3 p 106  W       D        Bit plane control reg. (enhanced features)
  |      |            | Disabled when ECSENA low.                              |
  | 04   | BRDNTRAN=0 | "Border area" is non minus transparent (ZD pin is low  |
  |      |            | when border is displayed). Disabled when ECSENA low.   |
- | 03   | X          | don't care- but drive to 0 for upward compatibility!   |
+ | 03   | X          | Don't care - but drive to 0 for upward compatibility!  |
  | 02   | ZDCLKEN=0  | ZD pin outputs a 14MHz clock whose falling edge        |
- |      |            | coincides with hires (7MHz) video data. this bit when  |
+ |      |            | coincides with hires (7MHz) video data. This bit when  |
  |      |            | set disables all other ZD functions.                   |
  |      |            | Disabled when ECSENA low.                              |
  | 01   | BRDSPRT=0  | Enables sprites outside the display window.            |
- |      |            | disabled when ECSENA low.                              |
+ |      |            | Disabled when ECSENA low.                              |
  | 00   | EXTBLKEN=0 | Causes BLANK output to be programmable instead of      |
  |      |            | reflecting internal fixed decodes.                     |
  |      |            | Disabled when ECSENA low.                              |
@@ -1359,8 +1359,8 @@ CLXCON    098   W   A     Collision control
          This register controls which bitplanes are included (enabled) in
          collision detection, and their required state if included. It also
          controls the individual inclusion of odd numbered sprites in the
-         collision detection, by logically ORing them with their correspond-
-         ing even numbered sprite. Writing to this register resets the bits
+         collision detection, by logically ORing them with their corresponding
+         even numbered sprite. Writing to this register resets the bits
          in @{"CLXCON2" link CLXCON2}.
 
          +------+----------+-----------------------------------------------+
@@ -1391,7 +1391,7 @@ NAME   rev ADDR type chip Description
 CLXCON2 P  10C  W    D    Extended collision control
 
          This reg controls when bit planes 7 and 8 are included in collision
-         detection, and there required state if included. Contents of this
+         detection, and their required state if included. Contents of this
          register are reset by a write to @{"CLXCON" link CLXCON}.
 
          BITS INITIALIZED BY RESET
@@ -1420,7 +1420,7 @@ NAME   rev ADDR type chip Description
 CLXDAT   00E  R     D     Collision data reg. (read and clear)
 
          This address reads (and clears) the collision detection reg. The bit
-         assignments are below
+         assignments are below.
 
    Note: Playfield 1 is all odd numbered enabled bit planes.
          Playfield 2 is all even numbered enabled bit planes.
@@ -1455,13 +1455,13 @@ COLORxx  180-1BE  W       COLOR table xx
          There 32 of these registers (xx=00-31) and together with the banking
          bits they address the 256 locations in the color palette. There are
          actually two sets of color regs, selection of which is controlled by
-         the LOCT reg bit. When LOCT = 0 the 4 MSB of red, green and blue
+         the LOCT reg bit. When LOCT=0 the 4 MSB of red, green and blue
          video data are selected along with the T bit for genlocks the low
          order set of registers is also selected as well, so that the 4 bits-
-         values are automatically extended to 8 bits.This provides
+         values are automatically extended to 8 bits. This provides
          compatibility with old software. If the full range of palette values
          are desired, then LOCT can be set high and independent values for
-         the 4 LSB of red, green  and blue can be written. The low order
+         the 4 LSB of red, green and blue can be written. The low order
          color registers do not contain a transparency (T) bit.
 
          The table below shows the color register bit usage.
@@ -1475,7 +1475,7 @@ COLORxx  180-1BE  W       COLOR table xx
 
          T = TRANSPARENCY, R = RED, G = GREEN, B = BLUE, X = UNUSED
 
-         T bit of COLOR00 thru COLOR31 sets ZD_pin HI, When that color is
+         T bit of COLOR00 thru COLOR31 sets ZD_pin HI, when that color is
          selected in all video modes.
 @endnode
 
@@ -1484,9 +1484,9 @@ NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
 COPCON h  02E  W     A    Coprocessor control register
 
-         This is a-1 bit register that when set true, allows the coprocessor
-         to access the blitter hardware. This bit is cleared power on reset,
-         so that the coprocessor cannot access the blitter hardware.
+         This is a 1 bit register that when set true, allows the coprocessor
+         to access the Blitter hardware. This bit is cleared power on reset,
+         so that the coprocessor cannot access the Blitter hardware.
 
          +------+-------+-------------------------------------------------+
          | BIT# | NAME  | FUNCTION                                        |
@@ -1495,7 +1495,7 @@ COPCON h  02E  W     A    Coprocessor control register
          |      |       | access to all RGA registers if true.            |
          |      |       | (if 0, access to RGA>7E)                        |
          |      |       | (On old chips access to only RGA>3E if CDANG=1) |
-         |      |       | (see @{"VPOSR" link VPOSR})                     |                |
+         |      |       | (see @{"VPOSR" link VPOSR})                     |
          +------+-------+-------------------------------------------------+
 @endnode
 
@@ -1530,7 +1530,7 @@ COP2LCH h 084  W    A         A Coprocessor second location reg
 COP2LCL   086  W    A         A Coprocessor second location reg
                                 (low 15 bits)
 
-         These regs contain the jump addresses described in @{"COPINS" link COPINS}
+         These regs contain the jump addresses described in @{"COPINS" link COPINS}.
 @endnode
 
 @node COPINS COPINS
@@ -1576,24 +1576,24 @@ COPINS    08C  W   A      Coprocessor inst. fetch identify
          | 00   | 0   | RD00 | 1   | 0   | 1   | 1   |
          +------+-----+------+-----+-----+-----+-----+
 
-         IR1=First instruction register
-         IR2=Second instruction register
+         IR1 = First instruction register
+         IR2 = Second instruction register
 
-         DA =Destination address for MOVE instruction.Fetched during
-             IR1 time,used during IR2 time on RGA bus.
+         DA = Destination address for MOVE instruction. Fetched during
+             IR1 time, used during IR2 time on RGA bus.
 
-         RD =RAM Data moved by MOVE instruction at IR2 time
+         RD = RAM Data moved by MOVE instruction at IR2 time
              directly from RAM to the address given by the DA field.
 
-         VP =Vertical beam position comparison bit.
-         HP =Horizontal beam position comparison bit.
+         VP = Vertical beam position comparison bit.
+         HP = Horizontal beam position comparison bit.
 
-         VE =Enable comparison (mask bit)
-         HE =Enable comparison (mask bit)
+         VE = Enable comparison (mask bit)
+         HE = Enable comparison (mask bit)
 
- Note: BFD = Blitter finished disable. When this bit is true, the blitter
+ Note: BFD = Blitter finished disable. When this bit is true, the Blitter
                finished flag will have no effect on the coprocessor. When this
-               bit is zero the blitter finished flag must be true (in addition
+               bit is zero the Blitter finished flag must be true (in addition
                to the rest of the bit comparisons) before the coprocessor can
                exit from its wait state, or skip over an instruction. Note
                that the V7 comparison cannot be masked.
@@ -1601,11 +1601,11 @@ COPINS    08C  W   A      Coprocessor inst. fetch identify
          The coprocessor is basically a 2 cycle machine that requests
          the bus only during odd memory cycles. (4 memory cycles per in)
 
-         It has priority over the blitter and micro.
+         It has priority over the Blitter and micro.
 
          There are only three types of instructions, MOVE immediate,
-         WAIT until ,and SKIP if. All instructions require 2 bus cycles
-         (and two instruction words).Since only the odd bus cycles are
+         WAIT until, and SKIP if. All instructions require 2 bus cycles
+         (and two instruction words). Since only the odd bus cycles are
          requested, 4 memory cycle times are required per instruction.
          (memory cycles are 280 ns)
 
@@ -1614,12 +1614,12 @@ COPINS    08C  W   A      Coprocessor inst. fetch identify
          program counter for initialization or jumps.
 
          They are transferred to the program counter whenever strobe address
-         @{"COPJMP1" link COPJMP1} or @{"COPJMP2" link COPJMP2} are written.In addition COP1LC is automatically
+         @{"COPJMP1" link COPJMP1} or @{"COPJMP2" link COPJMP2} are written. In addition COP1LC is automatically
          used at the beginning of each vertical blank time.
 
          It is important that one of the jump registers be initialized and its
          jump strobe address hit, after power up but before coprocessor DMA is
-         initialized.This insures a determined startup address, and state.
+         initialized. This insures a determined startup address, and state.
 @endnode
 
 @node DDFSTRT DDFSTRT
@@ -1650,11 +1650,8 @@ DDFSTOP  094  W  A  Display data fetch stop (horiz. position)
          | PURPOSE          | H8 | H7 | H6 | H5 | H4 |
          +------------------+----+----+----+----+----+
          | Extra wide (max) | 0  | 0  | 1  | 0  | 1  |
-         |                  |    |    |    |    |    |
          | wide             | 0  | 0  | 1  | 1  | 0  |
-         |                  |    |    |    |    |    |
          | normal           | 0  | 0  | 1  | 1  | 1  |
-         |                  |    |    |    |    |    |
          | narrow           | 0  | 1  | 0  | 0  | 0  |
          +------------------+----+----+----+----+----+
 
@@ -1663,9 +1660,7 @@ DDFSTOP  094  W  A  Display data fetch stop (horiz. position)
          | PURPOSE          | H8 | H7 | H6 | H5 | H4 |
          +------------------+----+----+----+----+----+
          | narrow           | 1  | 1  | 0  | 0  | 1  |
-         |                  |    |    |    |    |    |
          | normal           | 1  | 1  | 0  | 1  | 0  |
-         |                  |    |    |    |    |    |
          | wide (max)       | 1  | 1  | 0  | 1  | 1  |
          +------------------+----+----+----+----+----+
 
@@ -1685,7 +1680,7 @@ DIWSTOP 090  W  A D   Display window stop (lower right vert-hor pos)
 	USE  V7  V6  V5  V4  V3  V2  V1  V0  H9  H8  H7  H6  H5  H4  H3  H2
 
 	DIWSTRT is vertically restricted to the upper 2/3
-	of the display (v8=0),and horizontally restricted to the
+	of the display (v8=0), and horizontally restricted to the
 	left 3/4 of the display (H8=0).*
 	* Poof.. (see @{"DIWHIGH" link DIWHIGH} for exceptions)
 @endnode
@@ -1718,10 +1713,10 @@ DIWHIGH  p 1E4  W  A D Display window upper bits for start, stop
 NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
 DMACON  096  W  A D P DMA control write (clear or set)
-DMACONR 002  R  A   P DMA control (and blitter status) read
+DMACONR 002  R  A   P DMA control (and Blitter status) read
 
 	This register controls all of the DMA channels, and contains
-	blitter DMA status bits.
+	Blitter DMA status bits.
 
          +------+----------+--------------------------------------------+
          | BIT# | FUNCTION | DESCRIPTION                                |
@@ -1733,11 +1728,11 @@ DMACONR 002  R  A   P DMA control (and blitter status) read
          | 13   | BZERO    | Blitter logic zero status bit. (read only) |
          | 12   | X        |                                            |
          | 11   | X        |                                            |
-         | 10   | BLTPRI   | Blitter DMA priority (over CPU micro)       |
-         |      |          | (also called "blitter nasty")              |
+         | 10   | BLTPRI   | Blitter DMA priority (over CPU micro)      |
+         |      |          | (also called "Blitter nasty")              |
          |      |          | (disables /BLS pin, preventing micro       |
          |      |          | from stealing any bus cycles while         |
-         |      |          | blitter DMA is running)                    |
+         |      |          | Blitter DMA is running)                    |
          | 09   | DMAEN    | Enable all DMA below (also UHRES DMA)      |
          | 08   | BPLEN    | Bit plane DMA enable                       |
          | 07   | COPEN    | Coprocessor DMA enable                     |
@@ -1792,7 +1787,7 @@ NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
 DSKDATR 008 ER   P  Disk DMA  data read (early read dummy address)
 
-	This register is the disk-DMA data buffer.It contains 2
+	This register is the disk-DMA data buffer. It contains 2
 	bytes of data that are either sent to (write) or received
 	from (read) the disk. The DMA controller automatically
 	transfers data to or from this register and RAM, and when
@@ -1825,7 +1820,7 @@ DSKBYTR 01A  R  p Disk data byte and status read
 @node DSKSYNC DSKSYNC
 NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
-DSKSYNC  07E W  	P Disk sync register,the match code for disk
+DSKSYNC  07E W  	P Disk sync register, the match code for disk
 		          read synchronization. See @{"ADKCON" link ADKCON} bit 10
 @endnode
 
@@ -1876,8 +1871,8 @@ HBSTOP 1C6 W  D    Horizontal STOP position
 HBSTRT 1C4 W  D    Horizontal START position
 
 	 Bits 7-0 contain the stop and start positions,
-	 respectively, for programed horizontal blanking in
-	 280nS increments.Bits 10-8 provide a fine position
+	 respectively, for programmed horizontal blanking in
+	 280nS increments. Bits 10-8 provide a fine position
 	 control in 35nS increments.
 
 
@@ -1904,7 +1899,7 @@ NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
 HCENTER H 1E2  W  A  Horizontal position (CCKs) of VSYNC on long field
 
-	 this is necessary for interlace mode with variable beam
+	 This is necessary for interlace mode with variable beam
 	 counters. See @{"BEAMCON0" link BEAMCON0} for when it affects chip outputs.
 	 See @{"HTOTAL" link HTOTAL} for bits.
 @endnode
@@ -1918,7 +1913,7 @@ HHPOSW  H 1D8  W  A  DUAL mode hires Hbeam counter write
 	This the secondary beam counter for
 	the faster mode, triggering the UHRES pointers & doing the
 	comparisons for @{"HBSTRT" link HBSTOP}, STOP, HTOTAL, HSSTRT, @{"HSSTOP" link HSSTOP}
-	(See @{"HTOTAL" link HTOTAL} for bits)
+	(see @{"HTOTAL" link HTOTAL} for bits).
 @endnode
 
 @node HSSTOP HSSTOP
@@ -1934,7 +1929,7 @@ NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
 HSSTRT H  1DE  W  A  Horiz line position for HSYNC stop
 
-		Sets # of colour clocks for sync start (@{"HTOTAL" link HTOTAL} for bits)
+		Sets # of colour clocks for sync start (@{"HTOTAL" link HTOTAL} for bits).
 		See @{"BEAMCON0" link BEAMCON0} for details of when these 2 are active.
 @endnode
 
@@ -1948,7 +1943,7 @@ HTOTAL H  1C0  W  A    Highest colour clock count in horiz line
 	USE  x  x  x  x  x  x  x  x  h8  h7  h6  h5  h4  h3  h2  h1
 
 	(x's should be driven to 0 for upward compatibility)
-	Horiz line has theis many + 1 280nS increments. If the
+	Horiz line has these many + 1 280nS increments. If the
 	pal bit & LOLDIS are not high, long line/short line toggle
 	will occur, and there will be this many +2 every other line.
 	Active if VARBEAMEN=1 or DUAL+1.
@@ -1997,7 +1992,7 @@ INTENAR  01C  R        P Interrupt enable bits (read)
  | 05   |  VERTB   |   3   | Start of vertical blank                    |
  | 04   |  COPER   |   3   | Coprocessor                                |
  | 03   |  PORTS   |   2   | I/O Ports and timers                       |
- | 02   |  SOFT    |   1   | Reserved for software initiated interrupt.  |
+ | 02   |  SOFT    |   1   | Reserved for software initiated interrupt. |
  | 01   |  DSKBLK  |   1   | Disk block finished                        |
  | 00   |  TBE     |   1   | Serial port transmit buffer empty          |
  +------+----------+-------+--------------------------------------------+
@@ -2007,18 +2002,18 @@ INTENAR  01C  R        P Interrupt enable bits (read)
 NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
 JOY0DAT  00A R     D   Joystick-mouse 0 data (left vert, horiz)
-JOY1DAT  00C R     D   Joystick-mouse 1 data (right vert,horiz)
+JOY1DAT  00C R     D   Joystick-mouse 1 data (right vert, horiz)
 
 	These addresses each read a 16 bit register. These in turn
 	are loaded from the MDAT serial stream and are clocked in on
 	the rising edge of SCLK. MLD output is used to parallel load
-	the external parallel-to-serial converter.This in turn is
+	the external parallel-to-serial converter. This in turn is
 	loaded with the 4 quadrature inputs from each of two game
 	controller ports (8 total) plus 8 miscellaneous control bits
 	which are new for LISA and can be read in upper 8 bits of
 	@{"LISAID" link LISAID}.
 	Register bits are as follows:
-	Mouse counter usage (pins  1,3 =Yclock, pins 2,4 =Xclock)
+	Mouse counter usage (pins 1,3 = Yclock, pins 2,4 = Xclock)
 
     BIT# 15  14  13  12  11  10  09  08  07  06  05  04  03  02  01  00
 JOY0DAT  Y7  Y6  Y5  Y4  Y3  Y2  Y1  Y0  X7  X6  X5  X4  X3  X2  X1  X0
@@ -2026,7 +2021,7 @@ JOY1DAT  Y7  Y6  Y5  Y4  Y3  Y2  Y1  Y0  X7  X6  X5  X4  X3  X2  X1  X0
 
 
 	0=LEFT CONTROLLER PAIR, 1=RIGHT CONTROLLER PAIR.
-	(4 counters total).The bit usage for both left and right
+	(4 counters total). The bit usage for both left and right
 	addresses is shown below. Each 6 bit counter (Y7-Y2,X7-X2) is
 	clocked by 2 of the signals input from the mouse serial
 	stream. Starting with first bit received:
@@ -2065,7 +2060,8 @@ NAME   rev ADDR type chip Description
 JOYTEST  036 W   D     Write to all 4  joystick-mouse counters at once.
 
 		  Mouse counter write test data:
-     BIT# 15  14  13  12  11  10  09  08  07  06  05  04  03  02  01  00
+
+  BIT# 15  14  13  12  11  10  09  08  07  06  05  04  03  02  01  00
   @{"JOY0DAT" link JOYxDAT}  Y7  Y6  Y5  Y4  Y3  Y2  xx  xx  X7  X6  X5  X4  X3  X2  xx  xx
   @{"JOY1DAT" link JOYxDAT}  Y7  Y6  Y5  Y4  Y3  Y2  xx  xx  X7  X6  X5  X4  X3  X2  xx  xx
 @endnode
@@ -2078,7 +2074,7 @@ LISAID  H  07C  R   D    Denise/Lisa (video out chip) revision level
 	The original Denise (8362) does not have this register, so
 	whatever value is left over on the bus from the last cycle
 	will be there. ECS Denise (8373) returns hex (fc) in the lower
-	8 bits.Lisa returns hex (f8). The upper 8 bits of this
+	8 bits. Lisa returns hex (f8). The upper 8 bits of this
 	Register are loaded from the serial mouse bus, and are
 	reserved for future hardware implementation.
 
@@ -2142,20 +2138,20 @@ POTINP 016 R      P Pot pin data read
 	This register controls a 4 bit bi-direction I/O port
 	that shares the same 4 pins as the 4 pot counters above.
 
-         +-------+----------+---------------------------------------------+
-         | BIT#  | FUNCTION | DESCRIPTION                                 |
-         +-------+----------+---------------------------------------------+
-         | 15    | OUTRY    | Output enable for Paula pin 33              |
-         | 14    | DATRY    | I/O data Paula pin 33                       |
-         | 13    | OUTRX    | Output enable for Paula pin 32              |
-         | 12    | DATRX    | I/O data Paula pin 32                       |
-         | 11    | OUTLY    | Out put enable for Paula pin 36             |
-         | 10    | DATLY    | I/O data Paula pin 36                       |
-         | 09    | OUTLX    | Output enable for Paula pin 35              |
-         | 08    | DATLX    | I/O data  Paula pin 35                      |
-         | 07-01 |   X      | Not used                                    |
-         | 00    | START    | Start pots (dump capacitors,start counters) |
-         +-------+----------+---------------------------------------------+
+         +-------+----------+----------------------------------------------+
+         | BIT#  | FUNCTION | DESCRIPTION                                  |
+         +-------+----------+----------------------------------------------+
+         | 15    | OUTRY    | Output enable for Paula pin 33               |
+         | 14    | DATRY    | I/O data Paula pin 33                        |
+         | 13    | OUTRX    | Output enable for Paula pin 32               |
+         | 12    | DATRX    | I/O data Paula pin 32                        |
+         | 11    | OUTLY    | Out put enable for Paula pin 36              |
+         | 10    | DATLY    | I/O data Paula pin 36                        |
+         | 09    | OUTLX    | Output enable for Paula pin 35               |
+         | 08    | DATLX    | I/O data  Paula pin 35                       |
+         | 07-01 |   X      | Not used                                     |
+         | 00    | START    | Start pots (dump capacitors, start counters) |
+         +-------+----------+----------------------------------------------+
 @endnode
 
 @node REFPTR REFPTR
@@ -2164,7 +2160,7 @@ NAME   rev ADDR type chip Description
 REFPTR   028  W   A     Refresh pointer
 
 	This register is used as a dynamic RAM refresh address
-	generator. It is writeable for test purposes only,and
+	generator. It is writeable for test purposes only, and
 	should never be written by the microprocessor.
 @endnode
 
@@ -2175,8 +2171,8 @@ SERDAT  030  W      P   Serial port data and stop bits write.
 
 	This address writes data to a transmit data buffer.
 	Data from this buffer is moved into a serial shift register
-	for output transmission whenever it is empty.This sets the
-	interrupt request TBE  (transmit buffer empty). A stop bit
+	for output transmission whenever it is empty. This sets the
+	interrupt request TBE (transmit buffer empty). A stop bit
 	must be provided as part of the data word. The length
 	of the data word is set by the position of the stop bit.
 
@@ -2184,7 +2180,7 @@ SERDAT  030  W      P   Serial port data and stop bits write.
   BIT# 15  14  13  12  11  10  09  08  07  06  05  04  03  02  01  00
   USE  0  0  0  0  0  0  S  D8  D7  D6  D5  D4  D3  D2  D1  D0
 
-	Note:  S= Stop bit =1, D= data bits
+	Note: S= Stop bit =1, D= data bits
 @endnode
 
 @node SERDATR SERDATR
@@ -2228,7 +2224,7 @@ SERPER  032  W        P    Serial port period and control.
 
 	 This register contains the control bit LONG referred to
 	 above, and a 15 bit number defining the serial port
-	 Baud rate.If this number is N,then the baud rate is
+	 Baud rate. If this number is N, then the baud rate is
 	 1 bit every (N+1)*.2794 microseconds.
 
          +-------+----------+------------------------------------------------+
@@ -2255,7 +2251,7 @@ SPRHPTH  H  1E8  W   A    UHRES sprite pointer (high 5 bits)
 SPRHPTL  H  1EA  W   A    UHRES sprite pointer (low 15 bits)
 
 	This pointer is activated in the 1st and 3rd 'free' cycles
-	(see BPLHPTH,L) after horiz line start.It increments
+	(see BPLHPTH,L) after horiz line start. It increments
 	for the next line.
 @endnode
 
@@ -2269,7 +2265,7 @@ SPRHWRM  x   x   x   x   x  v10  v9  v8  v7  v6  v5  v4  v3  v2  v1  v0
 
 	SPRHWRM = Swaps the polarity of ARW* when the @{"SPRHDAT" link SPRHDAT} comes
 	out so that external devices can detect the RGA and put
-	things into memory.(ECS and later chips only)
+	things into memory. (ECS and later chips only)
 @endnode
 
 @node SPRHSTRT SPRHSTRT
@@ -2324,10 +2320,10 @@ SPRxCTL p 142 W     A  D   Sprite position and control data
          | 06    | SV9	    | Start vert value 10th bit.                     |
          | 05    | EV9      | End (stop) vert. value 10th bit                |
          | 04    | SH1=0    | Start horiz. value, 70nS increment             |
-         | 03    | SH0=0    | Start horiz. value 35nS increment              |
+         | 03    | SH0=0    | Start horiz. value, 35nS increment             |
          | 02    | SV8      | Start vert. value 9th bit                      |
          | 01    | EV8      | End (stop) vert. value 9th bit                 |
-         | 00    | SH2      | Start horiz.value,140nS increment              |
+         | 00    | SH2      | Start horiz. value, 140nS increment            |
          +-------+----------+------------------------------------------------+
 
          These 2 registers work together as position, size and
@@ -2387,7 +2383,7 @@ NAME   rev ADDR type chip Description
 VBSTOP H 1CE   W    A    Vertical line for VBLANK stop
 VBSTRT H 1CC   W    A    Vertical line for VBLANK start
 		(V10-0 <- D10-0) Affects CSY pin if BLAKEN=1 and VSY pin
-		if CSCBEN=1 (see @{"BEAMCON0" link BEAMCON0})
+		if CSCBEN=1 (see @{"BEAMCON0" link BEAMCON0}).
 @endnode
 
 @node VPOSR VPOSR
@@ -2424,6 +2420,7 @@ NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
 VHPOSR     006  R   A    Read vert and horiz position of beam, or lightpen
 VHPOSW     02C  W   A    Write vert horiz position of beam, or lightpen
+
  BIT# 15  14  13  12  11  10  09  08  07  06  05  04  03  02  01  00
  USE  V7  V6  V5  V4  V3  V2  V1  V0  H8  H7  H6  H5  H4  H3  H2  H1
 

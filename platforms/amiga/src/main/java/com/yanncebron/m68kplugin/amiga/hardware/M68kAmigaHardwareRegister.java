@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import java.util.Set;
 public enum M68kAmigaHardwareRegister {
 
   BLTDDAT("BLTDDAT", "DFF000", "Blitter dest. early read (dummy address)", "BLTDDAT", Chipset.OCS, true, Access.READ, EnumSet.of(Chip.AGNUS_ALICE)),
-  DMACONR("DMACONR", "DFF002", "DMA control (and blitter status) read", "DMACON", Chipset.OCS, true, Access.READ, EnumSet.of(Chip.AGNUS_ALICE, Chip.PAULA)),
+  DMACONR("DMACONR", "DFF002", "DMA control (and Blitter status) read", "DMACON", Chipset.OCS, true, Access.READ, EnumSet.of(Chip.AGNUS_ALICE, Chip.PAULA)),
   VPOSR("VPOSR", "DFF004", "Read vert most sig. bits (and frame flop)", "VPOSR", Chipset.OCS, true, Access.READ, EnumSet.of(Chip.AGNUS_ALICE)),
   VHPOSR("VHPOSR", "DFF006", "Read vert and horiz position of beam", "VHPOSR", Chipset.OCS, true, Access.READ, EnumSet.of(Chip.AGNUS_ALICE)),
   DSKDATR("DSKDATR", "DFF008", "Disk data early read (dummy address)", "DSKDATR", Chipset.OCS, true, Access.READ, EnumSet.of(Chip.PAULA)),
@@ -92,8 +92,8 @@ public enum M68kAmigaHardwareRegister {
   COPINS("COPINS", "DFF08C", "Coprocessor inst fetch identify", "COPINS", Chipset.OCS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
   DIWSTRT("DIWSTRT", "DFF08E", "Display window start (upper left vert-hor pos)", "DIWSTRT", Chipset.OCS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE, Chip.DENISE_LISA)),
   DIWSTOP("DIWSTOP", "DFF090", "Display window stop (lower right vert-hor pos)", "DIWSTRT", Chipset.OCS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE, Chip.DENISE_LISA)),
-  DDFSTRT("DDFSTRT", "DFF092", "Display bit plane data fetch start.hor pos", "DDFSTRT", Chipset.OCS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
-  DDFSTOP("DDFSTOP", "DFF094", "Display bit plane data fetch stop.hor pos", "DDFSTRT", Chipset.OCS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
+  DDFSTRT("DDFSTRT", "DFF092", "Display bit plane data fetch start. hor pos", "DDFSTRT", Chipset.OCS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
+  DDFSTOP("DDFSTOP", "DFF094", "Display bit plane data fetch stop. hor pos", "DDFSTRT", Chipset.OCS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
   DMACON("DMACON", "DFF096", "DMA control write (clear or set)", "DMACON", Chipset.OCS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE, Chip.PAULA)),
   CLXCON("CLXCON", "DFF098", "Collision control", "CLXCON", Chipset.OCS, false, Access.WRITE, EnumSet.of(Chip.DENISE_LISA)),
   INTENA("INTENA", "DFF09A", "Interrupt enable bits (clear or set bits)", "INTENA", Chipset.OCS, false, Access.WRITE, EnumSet.of(Chip.PAULA)),
