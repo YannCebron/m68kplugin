@@ -349,7 +349,7 @@ NAME        ADDR   R/W CHIP(s)   FUNCTION
 @{"DSKPTH"  link DSKPTH}    + ~020   W   A         Disk pointer (high 5 bits)
 @{"DSKPTL"  link DSKPTH}    + ~022   W   A         Disk pointer (low 15 bits)
 @{"DSKLEN"  link DSKLEN}      ~024   W         P   Disk length
-@{"DSKDAT"  link DSKDAT}    & ~026   W         P   Disk DMA data write
+@{"DSKDAT"  link DSKDATR}    & ~026   W         P   Disk DMA data write
 @{"REFPTR"  link REFPTR}    & ~028   W   A         Refresh pointer
 @{"VPOSW"   link VPOSR}       ~02A   W   A         Write vert most sig. bits (and frame flop)
 @{"VHPOSW"  link VHPOSR}      ~02C   W   A  D      Write vert and horiz pos of beam
@@ -410,7 +410,7 @@ NAME        ADDR   R/W CHIP(s)   FUNCTION
 @{"INTENA" link INTENA}       09A   W         P   Interrupt enable bits (clear or set bits)
 @{"INTREQ" link INTREQ}       09C   W         P   Interrupt request bits (clear or set bits)
 @{"ADKCON" link ADKCON}       09E   W         P   Audio,disk,UART,control
-@{"AUD0LCH" link AUDxLCH}   +  0A0   W  A          Audio channel 0 location (high 5 bits)
+@{"AUD0LCH" link AUDxLCL}   +  0A0   W  A          Audio channel 0 location (high 5 bits)
 @{"AUD0LCL" link AUDxLCL}   +  0A2   W  A          Audio channel 0 location (low 15 bits)
 @{"AUD0LEN" link AUDxLEN}      0A4   W         P   Audio channel 0 length
 @{"AUD0PER" link AUDxPER}      0A6   W         P   Audio channel 0 period
@@ -418,7 +418,7 @@ NAME        ADDR   R/W CHIP(s)   FUNCTION
 @{"AUD0DAT" link AUDxDAT}   &  0AA   W         P   Audio channel 0 data
              0AC
              0AE
-@{"AUD1LCH" link AUDxLCH}   +  0B0   W  A          Audio channel 1 location (high 5 bits)
+@{"AUD1LCH" link AUDxLCL}   +  0B0   W  A          Audio channel 1 location (high 5 bits)
 @{"AUD1LCL" link AUDxLCL}   +  0B2   W  A          Audio channel 1 location (low 15 bits)
 @{"AUD1LEN" link AUDxLEN}      0B4   W         P   Audio channel 1 length
 @{"AUD1PER" link AUDxPER}      0B6   W         P   Audio channel 1 period
@@ -426,7 +426,7 @@ NAME        ADDR   R/W CHIP(s)   FUNCTION
 @{"AUD1DAT" link AUDxDAT}   &  0BA   W         P   Audio channel 1 data
              0BC
              0BE
-@{"AUD2LCH" link AUDxLCH}   +  0C0   W  A          Audio channel 2 location (high 5 bits)
+@{"AUD2LCH" link AUDxLCL}   +  0C0   W  A          Audio channel 2 location (high 5 bits)
 @{"AUD2LCL" link AUDxLCL}   +  0C2   W  A          Audio channel 2 location (low 15 bits)
 @{"AUD2LEN" link AUDxLEN}      0C4   W         P   Audio channel 2 length
 @{"AUD2PER" link AUDxPER}      0C6   W         P   Audio channel 2 period
@@ -434,7 +434,7 @@ NAME        ADDR   R/W CHIP(s)   FUNCTION
 @{"AUD2DAT" link AUDxDAT}   &  0CA   W         P   Audio channel 2 data
              0CC
              0CE
-@{"AUD3LCH" link AUDxLCH}   +  0D0   W  A          Audio channel 3 location (high 5 bits)
+@{"AUD3LCH" link AUDxLCL}   +  0D0   W  A          Audio channel 3 location (high 5 bits)
 @{"AUD3LCL" link AUDxLCL}   +  0D2   W  A          Audio channel 3 location (low 15 bits)
 @{"AUD3LEN" link AUDxLEN}      0D4   W         P   Audio channel 3 length
 @{"AUD3PER" link AUDxPER}      0D6   W         P   Audio channel 3 period
@@ -442,21 +442,21 @@ NAME        ADDR   R/W CHIP(s)   FUNCTION
 @{"AUD3DAT" link AUDxDAT}   &  0DA   W         P   Audio channel 3 data
              0DC
              0DE
-@{"BPL1PTH" link BPLxPTH}   +  0E0   W  A          Bit plane pointer 1 (high 5 bits)
+@{"BPL1PTH" link BPLxPTL}   +  0E0   W  A          Bit plane pointer 1 (high 5 bits)
 @{"BPL1PTL" link BPLxPTL}   +  0E2   W  A          Bit plane pointer 1 (low 15 bits)
-@{"BPL2PTH" link BPLxPTH}   +  0E4   W  A          Bit plane pointer 2 (high 5 bits)
+@{"BPL2PTH" link BPLxPTL}   +  0E4   W  A          Bit plane pointer 2 (high 5 bits)
 @{"BPL2PTL" link BPLxPTL}   +  0E6   W  A          Bit plane pointer 2 (low 15 bits)
-@{"BPL3PTH" link BPLxPTH}   +  0E8   W  A          Bit plane pointer 3 (high 5 bits)
+@{"BPL3PTH" link BPLxPTL}   +  0E8   W  A          Bit plane pointer 3 (high 5 bits)
 @{"BPL3PTL" link BPLxPTL}   +  0EA   W  A          Bit plane pointer 3 (low 15 bits)
-@{"BPL4PTH" link BPLxPTH}   +  0EC   W  A          Bit plane pointer 4 (high 5 bits)
+@{"BPL4PTH" link BPLxPTL}   +  0EC   W  A          Bit plane pointer 4 (high 5 bits)
 @{"BPL4PTL" link BPLxPTL}   +  0EE   W  A          Bit plane pointer 4 (low 15 bits)
-@{"BPL5PTH" link BPLxPTH}   +  0F0   W  A          Bit plane pointer 5 (high 5 bits)
+@{"BPL5PTH" link BPLxPTL}   +  0F0   W  A          Bit plane pointer 5 (high 5 bits)
 @{"BPL5PTL" link BPLxPTL}   +  0F2   W  A          Bit plane pointer 5 (low 15 bits)
-@{"BPL6PTH" link BPLxPTH}   +  0F4   W  A          Bit plane pointer 6 (high 5 bits)
+@{"BPL6PTH" link BPLxPTL}   +  0F4   W  A          Bit plane pointer 6 (high 5 bits)
 @{"BPL6PTL" link BPLxPTL}   +  0F6   W  A          Bit plane pointer 6 (low 15 bits)
-@{"BPL7PTH" link BPLxPTH}   +p 0F8   W  A          Bit plane pointer 7 (high 5 bits)
+@{"BPL7PTH" link BPLxPTL}   +p 0F8   W  A          Bit plane pointer 7 (high 5 bits)
 @{"BPL7PTL" link BPLxPTL}   +p 0FA   W  A          Bit plane pointer 7 (low 15 bits)
-@{"BPL8PTH" link BPLxPTH}   +p 0FC   W  A          Bit plane pointer 8 (high 5 bits)
+@{"BPL8PTH" link BPLxPTL}   +p 0FC   W  A          Bit plane pointer 8 (high 5 bits)
 @{"BPL8PTL" link BPLxPTL}   +p 0FE   W  A          Bit plane pointer 8 (low 15 bits)
 @{"BPLCON0" link BPLCON0}      100   W  A  D       Bit plane control reg (misc control bits)
 @{"BPLCON1" link BPLCON1}      102   W     D       Bit plane control reg (scroll val PF1,PF2)
@@ -812,7 +812,7 @@ PAL     = Set appropriate decodes (in normal mode) for PAL. In variable
           beam counter mode this bit disables the long line/short line
           toggle- ends up short line.
 
-VARCSYEN= Enables CSY from the variable decoders to come out the CSY
+VARCSYEN = Enables CSY from the variable decoders to come out the CSY
           (VARCSY is set on @{"HSSTRT" link HSSTRT} match always, and also on @{"HCENTER" link HCENTER}
           match when in vertical sync. It is reset on @{"HSSTOP" link HSSTOP} match when VSY
           and on both @{"HBSTRT" link HBSTOP} & @{"HBSTOP" link HBSTOP} matches during VSY. A reasonable
@@ -851,7 +851,7 @@ NAME   rev ADDR type chip Description
 BLTxMOD    064  W    A    Blitter Modulo x
 
          This register contains the Modulo for Blitter source (x=A,B,C)
-         or Dest (X=D). A Modulo is a number that is automatically
+         or Dest (x=D). A Modulo is a number that is automatically
          added to the address at the end of each line, in order that
          the address then points to the start of the next line. Each
          source or destination has its own Modulo, allowing each
@@ -927,53 +927,81 @@ BLTCON0L H 05A  W    A    Blitter control register 0 (lower 8 bits)
 BLTCON1  h 042  W    A    Blitter control register 1
 
          These two control registers are used together to control Blitter
-         operations. There are 2 basic modes, are and line, which are
+         operations. There are 2 basic modes, area and line, which are
          selected by bit 0 of BLTCON1, as shown below.
 
-         +--------------------------+---------------------------+
-         | AREA MODE ("normal")     | LINE MODE (line draw)     |
-         +------+---------+---------+------+---------+----------+
-         | BIT# | BLTCON0 | BLTCON1 | BIT# | BLTCON0 | BLTCON1  |
-         +------+---------+---------+------+---------+----------+
-         | 15   | ASH3    | BSH3    | 15   | ASH3    | BSH3     |
-         | 14   | ASH2    | BSH2    | 14   | ASH2    | BSH2     |
-         | 13   | ASH1    | BSH1    | 13   | ASH1    | BSH1     |
-         | 12   | ASA0    | BSH0    | 12   | ASH0    | BSH0     |
-         | 11   | USEA    | 0       | 11   | 1       | 0        |
-         | 10   | USEB    | 0       | 10   | 0       | 0        |
-         | 09   | USEC    | 0       | 09   | 1       | 0        |
-         | 08   | USED    | 0       | 08   | 1       | 0        |
-         | 07   | LF7     | DOFF    | 07   | LF7     | DPFF     |
-         | 06   | LF6     | 0       | 06   | LF6     | SIGN     |
-         | 05   | LF5     | 0       | 05   | LF5     | OVF      |
-         | 04   | LF4     | EFE     | 04   | LF4     | SUD      |
-         | 03   | LF3     | IFE     | 03   | LF3     | SUL      |
-         | 02   | LF2     | FCI     | 02   | LF2     | AUL      |
-         | 01   | LF1     | DESC    | 01   | LF1     | SING     |
-         | 00   | LF0     | LINE(=0)| 00   | LF0     | LINE(=1) |
-         +------+---------+---------+------+---------+----------+
+         AREA MODE ("normal")
 
-         ASH3-0    Shift value of A source
-         BSH3-0    Shift value of B source and line texture
-         USEA      Mode control bit to use source A
-         USEB      Mode control bit to use source B
-         USEC      Mode control bit to use source C
-         USED      Mode control bit to use destination D
-         LF7-0     Logic function minterm select lines
-         EFE       Exclusive fill enable
-         IFE       Inclusive fill enable
-         FCI       Fill carry input
-         DESC      Descending (dec address)control bit
-         LINE      Line mode control bit
-         SIGN      Line draw sign flag
-         OVF       Line/draw r/l word overflow flag
-         SUD       Line draw, Sometimes up or down (=AUD)
-         SUL       Line draw, Sometimes up or left
-         AUL       Line draw, Always up or left
-         SING      Line draw, Single bit per horiz line
-         DOFF      Disables the D output for external ALUs.
-                   The cycle occurs normally, but the data
-                   bus is tristate (hires chips only)
+         +------+---------+---------+
+         | BIT# | BLTCON0 | BLTCON1 |
+         +------+---------+---------+
+         | 15   | ASH3    | BSH3    |
+         | 14   | ASH2    | BSH2    |
+         | 13   | ASH1    | BSH1    |
+         | 12   | ASA0    | BSH0    |
+         | 11   | USEA    | 0       |
+         | 10   | USEB    | 0       |
+         | 09   | USEC    | 0       |
+         | 08   | USED    | 0       |
+         | 07   | LF7     | DOFF    |
+         | 06   | LF6     | 0       |
+         | 05   | LF5     | 0       |
+         | 04   | LF4     | EFE     |
+         | 03   | LF3     | IFE     |
+         | 02   | LF2     | FCI     |
+         | 01   | LF1     | DESC    |
+         | 00   | LF0     | LINE(=0)|
+         +------+---------+---------+
+
+         LINE MODE (line draw)
+
+         +------+---------+----------+
+         | BIT# | BLTCON0 | BLTCON1  |
+         +------+---------+----------+
+         | 15   | ASH3    | BSH3     |
+         | 14   | ASH2    | BSH2     |
+         | 13   | ASH1    | BSH1     |
+         | 12   | ASH0    | BSH0     |
+         | 11   | 1       | 0        |
+         | 10   | 0       | 0        |
+         | 09   | 1       | 0        |
+         | 08   | 1       | 0        |
+         | 07   | LF7     | DPFF     |
+         | 06   | LF6     | SIGN     |
+         | 05   | LF5     | OVF      |
+         | 04   | LF4     | SUD      |
+         | 03   | LF3     | SUL      |
+         | 02   | LF2     | AUL      |
+         | 01   | LF1     | SING     |
+         | 00   | LF0     | LINE(=1) |
+         +------+---------+----------+
+
+         +----------+-------------------------------------------+
+         | NAME     | DESCRIPTION                               |
+         +----------+-------------------------------------------+
+         | ASH3-0   | Shift value of A source                   |
+         | BSH3-0   | Shift value of B source and line texture  |
+         | USEA     | Mode control bit to use source A          |
+         | USEB     | Mode control bit to use source B          |
+         | USEC     | Mode control bit to use source C          |
+         | USED     | Mode control bit to use destination D     |
+         | LF7-0    | Logic function minterm select lines       |
+         | EFE      | Exclusive fill enable                     |
+         | IFE      | Inclusive fill enable                     |
+         | FCI      | Fill carry input                          |
+         | DESC     | Descending (dec address) control bit      |
+         | LINE     | Line mode control bit                     |
+         | SIGN     | Line draw sign flag                       |
+         | OVF      | Line/draw r/l word overflow flag          |
+         | SUD      | Line draw, Sometimes up or down (=AUD)    |
+         | SUL      | Line draw, Sometimes up or left           |
+         | AUL      | Line draw, Always up or left              |
+         | SING     | Line draw, Single bit per horiz line      |
+         | DOFF     | Disables the D output for external ALUs.  |
+         |          | The cycle occurs normally, but the data   |
+         |          | bus is tristate (hires chips only).       |
+         +----------+-------------------------------------------+
+
 @endnode
 
 @node BLTSIZH BLTSIZH
@@ -1820,14 +1848,17 @@ DSKBYTR 01A  R  p Disk data byte and status read
 @node DSKSYNC DSKSYNC
 NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
-DSKSYNC  07E W  	P Disk sync register, the match code for disk
-		          read synchronization. See @{"ADKCON" link ADKCON} bit 10
+DSKSYNC  07E W  	P
+
+    Disk sync register, the match code for disk
+		read synchronization. See @{"ADKCON" link ADKCON} bit 10.
 @endnode
 
 @node FMODE FMODE
 NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
 FMODE P  1FC W 		  Memory Fetch Mode
+
 		This register controls the fetch mechanism for different
 		types of Chip RAM accesses:
 
@@ -2126,8 +2157,9 @@ RIGHT  Y7  Y6  Y5  Y4  Y3  Y2  Y1  Y0  X7  X6  X5  X4  X3  X2  X1  X0
 @node POTGO POTGO
 NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
-POTGO  034 W      P   Pot port (4 bit) bi-direction and data,
-                      and pot counter start.
+POTGO  034 W      P
+
+  Pot port (4 bit) bi-direction and data, and pot counter start.
 @endnode
 
 @node POTINP POTINP
