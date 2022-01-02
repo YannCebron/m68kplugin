@@ -364,7 +364,7 @@ NAME        ADDR   R/W CHIP(s)   FUNCTION
 @{"STRLONG" link STREQU}   & ~03E   S      D      Strobe for identification of long horiz line
 @{"BLTCON0" link BLTCON0}     ~040   W  A          Blitter control reg 0
 @{"BLTCON1" link BLTCON0}     ~042   W  A          Blitter control reg 1
-@{"BLTAFWM" link BLTAFWM}     ~044   W  A          Blitter first word mask for source A
+@{"BLTAFWM" link BLTALWM}     ~044   W  A          Blitter first word mask for source A
 @{"BLTALWM" link BLTALWM}     ~046   W  A          Blitter last word mask for source A
 @{"BLTCPTH" link BLTxPTH}   + ~048   W  A          Blitter pointer to source C (high 5 bits)
 @{"BLTCPTL" link BLTxPTL}   + ~04A   W  A          Blitter pointer to source C (low 15 bits)
@@ -705,7 +705,7 @@ AUDxVOL   0A8    W   P    Audio channel x volume
          +--------+--------------------------------------------------+
          | BITS   | USE                                              |
          +--------+--------------------------------------------------+
-         | 15-07  | Not used                                         |
+         | 15-07  | (unused)                                         |
          |  06    | Forces volume to max (64 ones, no zeros)         |
          | 05-00  | Sets one of the 64 levels (000000 = no output,   |
          |        | 111111 = 63 ones, one zero)                      |
@@ -1288,47 +1288,27 @@ BPLCON3 p 106  W       D        Bit plane control reg. (enhanced features)
  +------+------------+--------------------------------------------------------+
  | BIT# | BPLCON3    | DESCRIPTION                                            |
  +------+------------+--------------------------------------------------------+
- |      |            |                                                        |
  | 15   | BANK2=0    | BANKx = Selects one of eight color banks, x=0-2.       |
  | 14   | BANK1=0    |                                                        |
  | 13   | BANK0=0    |                                                        |
- | 12   | PF2OF2=0   | Determine bit plane color table offset when playfield 2|
- |      |            | has priority in dual playfield mode:                   |
- |      |            +-----------+-------------------------------+------------+
- |      |            | PF20F     | AFFECTED BITPLANE             | OFFSET     |
- |      |            +---+---+---+-------------------------------+------------+
- |      |            | 2 | 1 | 0 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | (decimal)  |
- |      |            +---+---+---+-------------------------------+------------+
- |      |            | 0 | 0 | 0 | - | - | - | - | - | - | - | - | none       |
- |      |            | 0 | 0 | 1 | - | - | - | - | - | - | 1 | - | 2          |
- |      |            | 0 | 1 | 0 | - | - | - | - | - | 1 | - | - | 4          |
- |      |            | 0 | 1 | 1 | - | - | - | - | - | 1 | - | - | 8 (default)|
- |      |            | 1 | 0 | 0 | - | - | - | 1 | - | - | - | - | 16         |
-        |            | 1 | 0 | 1 | - | - | 1 | - | - | - | - | - | 32         |
- |      |            | 1 | 1 | 0 | - | 1 | - | - | - | - | - | - | 64         |
- |      |            | 1 | 1 | 1 | 1 | - | - | - | - | - | - | - | 128        |
- |      |            +---+---+---+---+---+---+---+---+---+---+---+------------+
  |      |            |                                                        |
- | 11   | PF2OF1=1   |                                                        |
+ | 12   | PF2OF2=0   | Determine bit plane color table offset when playfield 2|
+ | 11   | PF2OF1=1   | has priority in dual playfield mode, see table below.  |
  | 10   | PF2OF0=1   |                                                        |
+ |      |            |                                                        |
  | 09   | LOCT=0     | Dictates that subsequent color palette values will be  |
  |      |            | written to a second 12- bit color palette, constituting|
  |      |            | the RGB low minus order bits. Writes to the normal hi  |
  |      |            | minus order color palette automatically copied to the |
  |      |            | low order for backwards compatibility.                 |
  | 08   | X          | Don't care - but drive to 0 for upward compatibility!  |
- | 07   | SPRES1=0   | Determine resolution of all 8 sprites (x=0,1):         |
- |      |                                                                     |
- |      |      +-------+--------+---------------------------------------------+
- |      |      |SPRES1 | SPRES0 | SPRITE RESOLUTION                           |
- |      |      +-------+--------+---------------------------------------------+
- |      |      |0      | 0      | ECS defaults (LORES,HIRES=140ns,SHRES=70ns) |
- |      |      |0      | 1      | LORES (140ns)                               |
- |      |      |1      | 0      | HIRES (70ns)                                |
- |      |      |1      | 1      | SHRES (35ns)                                |
- |      |      +-------+--------+---------------------------------------------+
- |      |                                                                     |
- | 06   | SPRES0=0   |                                                        |
+ |      |            |                                                        |
+ | 07   | SPRES1=0   | Determine resolution of all 8 sprites (SPRES1,SPRS0):  |
+ | 06   | SPRES0=0   | 0,0 = ECS defaults (LORES, HIRES=140ns, SHRES=70ns)    |
+ |      |            | 0,1 = LORES (140ns)                                    |
+ |      |            | 1,0 = HIRES (70ns)                                     |
+ |      |            | 1,1 = SHRES (35ns)                                     |
+ |      |            |                                                        |
  | 05   | BRDRBLNK=0 | "Border area" is blanked instead of color (0).         |
  |      |            | Disabled when ECSENA low.                              |
  | 04   | BRDNTRAN=0 | "Border area" is non minus transparent (ZD pin is low  |
@@ -1344,6 +1324,20 @@ BPLCON3 p 106  W       D        Bit plane control reg. (enhanced features)
  |      |            | reflecting internal fixed decodes.                     |
  |      |            | Disabled when ECSENA low.                              |
  +------+------------+--------------------------------------------------------+
+
+ PF20F2-0 // AFFECTED BITPLANE (8-1) // OFFSET
+ +--------+--------+--------+--+---+---+---+---+---+---+---+---+--+------------------+
+ | PF2OF2 | PF2OF1 | PF2OF0 |  | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 |  | OFFSET (decimal) |
+ +--------+--------+--------+--+---+---+---+---+---+---+---+---+--+------------------+
+ | 0      | 0      | 0      |  | - | - | - | - | - | - | - | - |  | none             |
+ | 0      | 0      | 1      |  | - | - | - | - | - | - | 1 | - |  | 2                |
+ | 0      | 1      | 0      |  | - | - | - | - | - | 1 | - | - |  | 4                |
+ | 0      | 1      | 1      |  | - | - | - | - | - | 1 | - | - |  | 8 (default)      |
+ | 1      | 0      | 0      |  | - | - | - | 1 | - | - | - | - |  | 16               |
+ | 1      | 0      | 1      |  | - | - | 1 | - | - | - | - | - |  | 32               |
+ | 1      | 1      | 0      |  | - | 1 | - | - | - | - | - | - |  | 64               |
+ | 1      | 1      | 1      |  | 1 | - | - | - | - | - | - | - |  | 128              |
+ +--------+--------+--------+--+---+---+---+---+---+---+---+---+--+------------------+
 @endnode
 
 @node BPLCON4 BPLCON4
@@ -1456,7 +1450,7 @@ CLXDAT   00E  R     D     Collision data reg. (read and clear)
          +------+----------------------------------------+
          | BIT# | COLLISIONS REGISTERED                  |
          +------+----------------------------------------+
-         | 15   | not used                               |
+         | 15   | unused                                 |
          | 14   | Sprite 4 (or 5) to Sprite 6 (or 7)     |
          | 13   | Sprite 2 (or 3) to Sprite 6 (or 7)     |
          | 12   | Sprite 2 (or 3) to Sprite 4 (or 5)     |
@@ -1840,7 +1834,7 @@ DSKBYTR 01A  R  p Disk data byte and status read
         | 13    | DISKWRITE| Mirror of bit 14 (WRITE) in DSKLEN               |
         | 12    | WORDEQUAL| This bit true only while @{"DSKSYNC" link DSKSYNC} register        |
         |       |          | equals the data from disk                        |
-        | 11-08 | 0        | Not used                                         |
+        | 11-08 | 0        | unused                                           |
         | 07-00 | DATA     | Disk byte data                                   |
         +-------+----------+--------------------------------------------------+
 @endnode
@@ -2023,7 +2017,7 @@ INTENAR  01C  R        P Interrupt enable bits (read)
  | 05   |  VERTB   |   3   | Start of vertical blank                    |
  | 04   |  COPER   |   3   | Coprocessor                                |
  | 03   |  PORTS   |   2   | I/O Ports and timers                       |
- | 02   |  SOFT    |   1   | Reserved for software initiated interrupt. |
+ | 02   |  SOFT    |   1   | Reserved for software initiated interrupt  |
  | 01   |  DSKBLK  |   1   | Disk block finished                        |
  | 00   |  TBE     |   1   | Serial port transmit buffer empty          |
  +------+----------+-------+--------------------------------------------+
@@ -2181,7 +2175,7 @@ POTINP 016 R      P Pot pin data read
          | 10    | DATLY    | I/O data Paula pin 36                        |
          | 09    | OUTLX    | Output enable for Paula pin 35               |
          | 08    | DATLX    | I/O data  Paula pin 35                       |
-         | 07-01 |   X      | Not used                                     |
+         | 07-01 |   X      | unused                                       |
          | 00    | START    | Start pots (dump capacitors, start counters) |
          +-------+----------+----------------------------------------------+
 @endnode
@@ -2235,7 +2229,7 @@ SERDATR  018  R      P  Serial port data and status read.
          | 12   | TSRE     | Serial port transmit shift reg. empty      |
          | 11   | RXD      | RXD pin receives UART serial data for      |
          |      |          | direct bit test by the micro.              |
-         | 10   | X        | Not used.                                  |
+         | 10   | X        | unused                                     |
          | 09   | STP      | Stop bit                                   |
          | 08   | STP-DB8  | Stop bit if LONG, data bit if not.         |
          | 07   | DB7      | Data bit.                                  |

@@ -19,6 +19,8 @@ package com.yanncebron.m68kplugin.amiga.hardware;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.testFramework.UsefulTestCase;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class M68kAmigaHardwareRegisterTest extends UsefulTestCase {
@@ -33,6 +35,8 @@ public class M68kAmigaHardwareRegisterTest extends UsefulTestCase {
     int countRevisionEcs = 0;
     int countRevisionAga = 0;
     int countCopperDanger = 0;
+
+    Set<String> descriptionFileNames = new HashSet<>();
     for (M68kAmigaHardwareRegister register : M68kAmigaHardwareRegister.values()) {
       assertFalse(register.name(), StringUtil.containsWhitespaces(register.getName()));
       assertTrue(register.name(), validName.matcher(register.getName()).matches());
@@ -46,6 +50,7 @@ public class M68kAmigaHardwareRegisterTest extends UsefulTestCase {
 
       assertFalse(register.name(), StringUtil.containsWhitespaces(register.getDescriptionFileName()));
       assertFalse(register.name(), register.getDescription().length() < 11);
+      descriptionFileNames.add(register.getDescriptionFileName());
 
       assertNotNull(register.name(), register.getAccess());
       assertFalse(register.name(), register.getChips().isEmpty());
@@ -68,6 +73,8 @@ public class M68kAmigaHardwareRegisterTest extends UsefulTestCase {
     assertEquals(9, countRevisionAga);
 
     assertEquals(58, countCopperDanger);
+
+    assertEquals(80, descriptionFileNames.size());
   }
 
 }

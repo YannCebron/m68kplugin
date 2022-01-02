@@ -58,7 +58,7 @@ public enum M68kAmigaHardwareRegister {
   STRLONG("STRLONG", "DFF03E", "Strobe for identification of long horiz line", "STREQU", Chipset.OCS, true, Access.STROBE, EnumSet.of(Chip.DENISE_LISA)),
   BLTCON0("BLTCON0", "DFF040", "Blitter control reg 0", "BLTCON0", Chipset.OCS, true, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
   BLTCON1("BLTCON1", "DFF042", "Blitter control reg 1", "BLTCON0", Chipset.OCS, true, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
-  BLTAFWM("BLTAFWM", "DFF044", "Blitter first word mask for source A", "BLTAFWM", Chipset.OCS, true, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
+  BLTAFWM("BLTAFWM", "DFF044", "Blitter first word mask for source A", "BLTALWM", Chipset.OCS, true, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
   BLTALWM("BLTALWM", "DFF046", "Blitter last word mask for source A", "BLTALWM", Chipset.OCS, true, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
   BLTCPTH("BLTCPTH", "DFF048", "Blitter pointer to source C (high 5 bits)", "BLTxPTH", Chipset.OCS, true, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
   BLTCPTL("BLTCPTL", "DFF04A", "Blitter pointer to source C (low 15 bits)", "BLTxPTL", Chipset.OCS, true, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
