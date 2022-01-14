@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [0.1.3]
 ### Added
 - M68k Browser: new tab "Amiga Hardware" showing register information/reference documentation
 - support `AUTO` directive, highlight as unsupported
@@ -15,7 +17,7 @@
 
 ### Changed
 - minimum IDE version raised to 2021.1 (from 2020.3)
-- added many terms to Amiga dictionary     
+- added many terms to Amiga dictionary
 
 ## [0.1.2]
 ### Added
@@ -39,11 +41,9 @@
 - 68010 support: instructions BKPT, MOVE from CCR, MOVEC, MOVES
 - 68010 support: registers DFC, SFC, VBR
 
-
 ### Fixed
 - single dot without following identifier recognized as valid local label
 - directives after label with colon
-
 
 ### Changed
 - Editor Color Scheme settings: group 'Supervisor Registers'
