@@ -25,6 +25,7 @@ import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.actionSystem.ex.ComboBoxAction;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.DumbAwareToggleAction;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.ColoredListCellRenderer;
@@ -45,7 +46,10 @@ import java.util.List;
 
 public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaHardwareRegister> {
 
+  private static final String DOC_ROOT = "/docs/amigaHardwareRegister/";
+
   private Ref<Boolean> isAnnotateChipset;
+  private Ref<Boolean> isShowReferenceDocs;
 
   @Override
   protected @Nullable ActionGroup getToolbarActionGroup() {
@@ -62,6 +66,20 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
         (anActionEvent, state) -> initList(),
         anActionEvent -> anActionEvent.getPresentation().setEnabled(getSelectedChipset() != M68kAmigaHardwareRegister.Chipset.OCS)
       ));
+
+    actionGroup.addSeparator();
+
+    isShowReferenceDocs = Ref.create(Boolean.TRUE);
+    actionGroup.add(
+      createToggleAction(
+        M68kAmigaBundle.message("toolwindow.tab.amiga.hardware.show.reference.docs"),
+        AllIcons.General.ReaderMode,
+        isShowReferenceDocs,
+        "M68kAmigaHardwareBrowserPane.show.ref.docs",
+        (anActionEvent, aBoolean) -> updateDoc(),
+        null
+      ));
+
     return actionGroup;
   }
 
@@ -98,9 +116,13 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
     String copperDanger = selectedValue.isCopperDanger() ? M68kDocumentationUtil.CHECK_MARK : "";
     String chips = StringUtil.join(selectedValue.getChips(), M68kAmigaHardwareRegister.Chip::getDisplayName, ",<br>");
 
+    String referenceDoc = isShowReferenceDocs.get() ? getReferenceDoc(selectedValue.getDescriptionFileName()) : "";
+
     return M68kDocumentationUtil.CSS +
       "<h1>" + selectedValue.getName() + "</h1>" +
-      "<h2><code>$" + selectedValue.getAddress() + " - $0" + selectedValue.getAddress().substring(3) + "" + "</code></h2>" +
+      "<b>" + selectedValue.getDescription() + "</b>" +
+      "<br>" +
+      "<h2><code>$" + selectedValue.getAddress() + " ($0" + selectedValue.getAddress().substring(3) + ")" + "</code></h2>" +
       "<table style=\"width: 100%;\">" +
       "<tr><th style=\"text-align:center;\">Chip Set</th><th style=\"text-align:center;\">Access</th><th style=\"text-align:center;\">Copper Danger</th><th style=\"text-align:center;\">Chips</th></tr>" +
       "<tr>" +
@@ -109,8 +131,16 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
       "<td style=\"text-align:center;\">" + copperDanger + "</td>" +
       "<td style=\"text-align:center;\">" + chips + "</td>" +
       "</tr></table>" +
-      "<br>" +
-      selectedValue.getDescription();
+      referenceDoc;
+  }
+
+  private static String getReferenceDoc(String markdownFileName) {
+    Pair<String, String> markdownContents = M68kDocumentationUtil.getMarkdownContents(DOC_ROOT, markdownFileName);
+    if (markdownContents.getFirst() == null) {
+      return markdownContents.getSecond();
+    }
+
+    return "<hr/><br>" + M68kDocumentationUtil.getHtmlForMarkdown(DOC_ROOT, markdownContents.getFirst());
   }
 
   @Override
