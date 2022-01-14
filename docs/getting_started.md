@@ -23,7 +23,7 @@ Latest GA release: Open [Plugin Homepage](https://plugins.jetbrains.com/plugin/1
 
 See [Changelog](https://github.com/YannCebron/m68kplugin/blob/main/CHANGELOG.md) for full changelog.
 
-Snapshot release: `m68kplugin-x.y.z.zip` artifacts for [manual installation](https://www.jetbrains.com/help/idea/plugins-settings.html) are available via [GitHub CI](https://github.com/YannCebron/m68kplugin/actions/workflows/build.yml).              
+Snapshot build artifacts (`m68kplugin-x.y.z.zip`) for [manual installation](https://www.jetbrains.com/help/idea/plugins-settings.html) are available via [GitHub CI](https://github.com/YannCebron/m68kplugin/actions/workflows/build.yml).              
 
 > 🧐 Not familiar with IntelliJ-based IDEs? See [IntelliJ IDEA - Getting Started](https://www.jetbrains.com/help/idea/getting-started.html).
                
