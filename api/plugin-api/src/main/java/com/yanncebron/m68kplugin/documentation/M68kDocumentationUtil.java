@@ -49,7 +49,7 @@ public final class M68kDocumentationUtil {
     "h3 { padding-top: 10px; font-weight: bold; } " +
     "table { padding-bottom: 10px; white-space: nowrap; } " +
     "td { margin: 4px 0 0 0; padding: 0 0 0 0; }" +
-    "th { text-align: left; white-space: nowrap; margin: 2px; } " +
+    "th { font-weight: bold; text-align: left; white-space: nowrap; margin: 2px; } " +
     "em { font-style: italic; }" +
     "code { white-space: nowrap; }" +
     "</style>";

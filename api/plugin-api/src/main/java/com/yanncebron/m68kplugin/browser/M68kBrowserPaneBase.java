@@ -146,7 +146,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel {
     if (docEditorPane == null) {
       docEditorPane = new JEditorPane();
       docEditorPane.setEditable(false);
-      docEditorPane.setBorder(JBUI.Borders.empty(0, UIUtil.getScrollBarWidth(), UIUtil.getScrollBarWidth(), UIUtil.getScrollBarWidth()));
+      docEditorPane.setBorder(JBUI.Borders.empty(UIUtil.getListCellHPadding(), UIUtil.getListCellHPadding(), UIUtil.getScrollBarWidth(), UIUtil.getScrollBarWidth()));
       docEditorPane.setEditorKit(new JBHtmlEditorKit(false));
     }
 
