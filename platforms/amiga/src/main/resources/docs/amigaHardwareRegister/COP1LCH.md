@@ -1,0 +1,1 @@
+These regs contain the jump addresses described in **COPINS**.

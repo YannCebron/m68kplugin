@@ -1,0 +1,1 @@
+Sets # of colour clocks for sync stop (**HTOTAL** for bits)
