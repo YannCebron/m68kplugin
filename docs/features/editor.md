@@ -47,7 +47,7 @@ _View \| View Quick Documentation_ Show mnemonic documentation (or on mouse hove
 
 _M68k Browser_ tool window lists all supported mnemonics with additional reference documentation
 
-![Mnemonic reference documentation](../assets/editor/reference_doc.png)
+![Mnemonic reference documentation](../assets/ide/reference_doc.png)
 
 ### Labels
 

@@ -20,6 +20,24 @@ nav_order: 3
 
 ![Goto symbol](../assets/ide/goto_symbol.png)
 
+## M68k Browser Tool Window
+
+Provides access to all reference documentation
+
+### Mnemonics
+
+Browse all supported mnemonics with additional reference documentation
+
+![Mnemonic reference documentation](../assets/ide/reference_doc.png)
+
+### Amiga Hardware
+
+Browse all hardware registers with additional reference documentation.
+
+Register list can be filtered by OCS, ECS, and AGA chip set.
+
+![Amiga hardware register documentation](../assets/ide/amiga_hardware_doc.png)
+
 ## External Tools
 
 Navigate to _file:lineNumber_ location or label(s) from vasm console message
