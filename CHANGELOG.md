@@ -2,19 +2,19 @@
 
 ## [Unreleased]
 ### Added
+- M68k Browser: new tab "Amiga Hardware" showing register information/reference documentation
 - support `AUTO` directive, highlight as unsupported
 - support `MSOURCE` directive
 - support `OFFSET` directive
 - support `MASK2` directive, highlight as unsupported
-- "M68k Browser": new tab "Amiga Hardware"
 
 ### Fixed
-- Show used/free registers: handle register-list/range, PC indirect with index
+- show used/free registers: handle register-list/range, PC indirect with index
 - `FAIL` directive: support optional message
-- "M68k Browser" keeps currently selected item upon filter changes
+- M68k Browser: keep currently selected item upon filter changes
 
 ### Changed
-- Minimum IDE version raised to 2021.1 (from 2020.3)
+- minimum IDE version raised to 2021.1 (from 2020.3)
 - added many terms to Amiga dictionary     
 
 ## [0.1.2]
