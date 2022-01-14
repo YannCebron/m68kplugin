@@ -26,12 +26,12 @@
 
 ## [0.1.2]
 ### Added
-- support DX directive
-- support IF1/IF2/IFP1 directives
-- support FO, CLRFO, SETFO directives
-- support SO, CLRSO, SETSO directives
+- support `DX` directive
+- support `IF1`/`IF2`/`IFP1` directives
+- support `FO`, `CLRFO`, `SETFO` directives
+- support `SO`, `CLRSO`, `SETSO` directives
 - add inspection: Conditional assembly directives problems
-- 68010 support: add reference documentation for BKPT, MOVEC, MOVES instructions
+- 68010 support: add reference documentation for `BKPT`, `MOVEC`, `MOVES` instructions
 - "M68k Browser": new tool window to browse instructions and (reference) docs
 
 ### Fixed
@@ -43,8 +43,8 @@
 
 ## [0.1.1]
 ### Added
-- 68010 support: instructions BKPT, MOVE from CCR, MOVEC, MOVES
-- 68010 support: registers DFC, SFC, VBR
+- 68010 support: instructions `BKPT`, `MOVE` from `CCR`, `MOVEC`, `MOVES`
+- 68010 support: registers `DFC`, `SFC`, `VBR`
 
 ### Fixed
 - single dot without following identifier recognized as valid local label
