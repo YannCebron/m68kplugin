@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.documentation;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.io.StreamUtil;
@@ -38,6 +39,8 @@ import java.util.Collections;
 import java.util.List;
 
 public final class M68kDocumentationUtil {
+
+  private static final Logger LOG = Logger.getInstance(M68kDocumentationUtil.class);
 
   @NonNls
   public static final String CSS = "<style>" +
@@ -63,7 +66,9 @@ public final class M68kDocumentationUtil {
     try {
       return Pair.create(FileUtil.loadTextAndClose(resource), null);
     } catch (IOException e) {
-      return Pair.create(null, M68kApiBundle.message("documentation.error.loading.reference.doc", markdownFileName, e.getMessage()));
+      String message = M68kApiBundle.message("documentation.error.loading.reference.doc", markdownFileName, e.getMessage());
+      LOG.error(message, e);
+      return Pair.create(null, message);
     }
   }
 
@@ -85,6 +90,7 @@ public final class M68kDocumentationUtil {
             StreamUtil.copy(is, new FileOutputStream(tempFile));
             return FileUtil.getUrl(tempFile);
           } catch (IOException e) {
+            LOG.error("Error sanitizing URL '" + url + "'", e);
             return sanitizedUrl;
           }
         }
