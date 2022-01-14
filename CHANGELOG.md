@@ -14,6 +14,7 @@
 - "M68k Browser" keeps currently selected item upon filter changes
 
 ### Changed
+- Minimum IDE version raised to 2021.1 (from 2020.3)
 - added many terms to Amiga dictionary     
 
 ## [0.1.2]
