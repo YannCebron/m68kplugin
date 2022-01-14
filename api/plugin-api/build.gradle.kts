@@ -18,3 +18,8 @@
 plugins {
     id("m68kplugin.java-conventions")
 }
+
+dependencies {
+    implementation("org.commonmark", "commonmark", "0.18.0")
+    implementation("org.commonmark", "commonmark-ext-gfm-tables", "0.18.0")
+}

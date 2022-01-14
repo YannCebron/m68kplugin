@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,6 @@ package com.yanncebron.m68kplugin.documentation;
 import com.intellij.lang.documentation.AbstractDocumentationProvider;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.util.io.StreamUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -28,27 +26,12 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.containers.ContainerUtil;
-import com.intellij.util.io.URLUtil;
-import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kInstruction;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
-import org.commonmark.Extension;
-import org.commonmark.ext.gfm.tables.TablesExtension;
-import org.commonmark.node.Node;
-import org.commonmark.parser.Parser;
-import org.commonmark.renderer.html.DefaultUrlSanitizer;
-import org.commonmark.renderer.html.HtmlRenderer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 public class M68kInstructionDocumentationProvider extends AbstractDocumentationProvider {
@@ -108,45 +91,13 @@ public class M68kInstructionDocumentationProvider extends AbstractDocumentationP
       return markdownContents.getSecond();
     }
 
-    List<Extension> extensions = Collections.singletonList(TablesExtension.create());
-    Parser parser = Parser.builder().extensions(extensions).build();
-    Node document = parser.parse(markdownContents.getFirst());
-    HtmlRenderer renderer = HtmlRenderer.builder()
-      .extensions(extensions)
-      .urlSanitizer(new DefaultUrlSanitizer() {
-        @Override
-        public String sanitizeImageUrl(String url) {
-          final String sanitizedUrl = super.sanitizeImageUrl(url);
-          try {
-            final URL resourceUrl = M68kInstructionDocumentationProvider.class.getResource(DOCS_MNEMONIC_ROOT + sanitizedUrl);
-            assert resourceUrl != null : sanitizedUrl;
-            final InputStream is = URLUtil.openStream(resourceUrl);
-            final File tempFile = FileUtil.createTempFile("m68k", ".png", true);
-            StreamUtil.copy(is, new FileOutputStream(tempFile));
-            return FileUtil.getUrl(tempFile);
-          } catch (IOException e) {
-            return sanitizedUrl;
-          }
-        }
-      })
-      .sanitizeUrls(true)
-      .build();
-    return renderer.render(document);
+    return M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, markdownContents.getFirst());
   }
 
   private static Pair<String, String> getMarkdownContents(IElementType originalMnemonic) {
     String docMnemonic = findDocMnemonic(originalMnemonic);
 
-    final InputStream resource = M68kInstructionDocumentationProvider.class.getResourceAsStream(DOCS_MNEMONIC_ROOT + docMnemonic + ".md");
-    if (resource == null) {
-      return Pair.create(null, M68kBundle.message("documentation.no.reference.doc", docMnemonic, originalMnemonic));
-    }
-
-    try {
-      return Pair.create(FileUtil.loadTextAndClose(resource), null);
-    } catch (IOException e) {
-      return Pair.create(null, M68kBundle.message("documentation.error.loading.reference.doc", docMnemonic, e.getMessage()));
-    }
+    return M68kDocumentationUtil.getMarkdownContents(DOCS_MNEMONIC_ROOT, docMnemonic);
   }
 
   @NotNull

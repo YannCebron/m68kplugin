@@ -16,7 +16,26 @@
 
 package com.yanncebron.m68kplugin.documentation;
 
+import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.util.io.StreamUtil;
+import com.intellij.util.io.URLUtil;
+import com.yanncebron.m68kplugin.M68kApiBundle;
+import org.commonmark.Extension;
+import org.commonmark.ext.gfm.tables.TablesExtension;
+import org.commonmark.node.Node;
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.DefaultUrlSanitizer;
+import org.commonmark.renderer.html.HtmlRenderer;
 import org.jetbrains.annotations.NonNls;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Collections;
+import java.util.List;
 
 public final class M68kDocumentationUtil {
 
@@ -34,4 +53,44 @@ public final class M68kDocumentationUtil {
 
   @NonNls
   public static final String CHECK_MARK = "✓";
+
+  public static Pair<String, String> getMarkdownContents(String docRoot, String markdownFileName) {
+    final InputStream resource = M68kDocumentationUtil.class.getResourceAsStream(docRoot + markdownFileName + ".md");
+    if (resource == null) {
+      return Pair.create(null, M68kApiBundle.message("documentation.no.reference.doc", markdownFileName));
+    }
+
+    try {
+      return Pair.create(FileUtil.loadTextAndClose(resource), null);
+    } catch (IOException e) {
+      return Pair.create(null, M68kApiBundle.message("documentation.error.loading.reference.doc", markdownFileName, e.getMessage()));
+    }
+  }
+
+  public static String getHtmlForMarkdown(String docRoot, String markdownText) {
+    List<Extension> extensions = Collections.singletonList(TablesExtension.create());
+    Parser parser = Parser.builder().extensions(extensions).build();
+    Node document = parser.parse(markdownText);
+    HtmlRenderer renderer = HtmlRenderer.builder()
+      .extensions(extensions)
+      .urlSanitizer(new DefaultUrlSanitizer() {
+        @Override
+        public String sanitizeImageUrl(String url) {
+          final String sanitizedUrl = super.sanitizeImageUrl(url);
+          try {
+            final URL resourceUrl = M68kDocumentationUtil.class.getResource(docRoot + sanitizedUrl);
+            assert resourceUrl != null : sanitizedUrl;
+            final InputStream is = URLUtil.openStream(resourceUrl);
+            final File tempFile = FileUtil.createTempFile("m68k", ".png", true);
+            StreamUtil.copy(is, new FileOutputStream(tempFile));
+            return FileUtil.getUrl(tempFile);
+          } catch (IOException e) {
+            return sanitizedUrl;
+          }
+        }
+      })
+      .sanitizeUrls(true)
+      .build();
+    return renderer.render(document);
+  }
 }
