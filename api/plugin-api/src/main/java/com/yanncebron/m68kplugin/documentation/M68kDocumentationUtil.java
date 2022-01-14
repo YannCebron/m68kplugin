@@ -52,6 +52,8 @@ public final class M68kDocumentationUtil {
     "th { font-weight: bold; text-align: left; white-space: nowrap; margin: 2px; } " +
     "em { font-style: italic; }" +
     "code { white-space: nowrap; }" +
+    "p { padding-top: 5px; } " +
+    "strong { font-weight: bold; }" +
     "</style>";
 
   @NonNls
