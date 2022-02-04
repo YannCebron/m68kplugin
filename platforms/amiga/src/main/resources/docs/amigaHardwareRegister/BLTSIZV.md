@@ -4,8 +4,8 @@
 
 These are the Blitter size regs for blits larger than the earlier
 chips could accept. The original commands are retained for
-compatibility. **BLTSIZV** should be written first, followed by **BLTSIZH**,
-which starts the Blitter. **BLTSIZV** need not be rewritten for
+compatibility. [BLTSIZV](BLTSIZV.md) should be written first, followed by [BLTSIZH](BLTSIZH.md),
+which starts the Blitter. [BLTSIZV](BLTSIZV.md) need not be rewritten for
 subsequent bits if the vertical size is the same. Max size of
 blit 32k pixels * 32k lines, x's should be written to 0 for
 upward compatibility.

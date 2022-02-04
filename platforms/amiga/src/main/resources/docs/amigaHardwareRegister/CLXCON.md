@@ -3,7 +3,7 @@ collision detection, and their required state if included. It also
 controls the individual inclusion of odd numbered sprites in the
 collision detection, by logically ORing them with their corresponding
 even numbered sprite. Writing to this register resets the bits
-in **CLXCON2**.
+in [CLXCON2](CLXCON2.md).
 
 
 | BIT# | FUNCTION | DESCRIPTION                                   |

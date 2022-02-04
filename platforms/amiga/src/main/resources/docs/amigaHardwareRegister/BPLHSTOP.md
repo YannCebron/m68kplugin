@@ -5,6 +5,6 @@
 | 10-0  | V10-V0  |
 
 
-BPLHWRM = Swaps the polarity of ARW* when the **BPLHDAT** comes out so
+BPLHWRM = Swaps the polarity of ARW* when the [BPLHDAT](BPLHDAT.md) comes out so
 that external devices can detect the RGA and put things into memory
 (ECS and later versions).

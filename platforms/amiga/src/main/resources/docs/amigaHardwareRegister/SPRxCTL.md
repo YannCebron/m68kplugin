@@ -15,4 +15,4 @@ These 2 registers work together as position, size and
 feature sprite control registers. They are usually loaded
 by the sprite DMA channel, during horizontal blank,
 however they may be loaded by either processor any time.
-Writing to **SPRxCTL** disables the corresponding sprite.
+Writing to [SPRxCTL](SPRxCTL.md) disables the corresponding sprite.

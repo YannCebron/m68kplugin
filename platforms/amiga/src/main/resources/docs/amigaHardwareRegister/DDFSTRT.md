@@ -10,7 +10,7 @@ compatibility)
 The tables below show the start and stop timing for
 different register contents
 
-**DDFSTRT** (Left edge of display data fetch)
+[DDFSTRT](DDFSTRT.md) (Left edge of display data fetch)
 
 | PURPOSE          | H8 | H7 | H6 | H5 | H4 |
 |---|---|---|---|---|---|
@@ -20,7 +20,7 @@ different register contents
 | narrow           | 0  | 1  | 0  | 0  | 0  |
 
 
-**DDFSTOP** (Right edge of display data fetch)
+[DDFSTOP](DDFSTRT.md) (Right edge of display data fetch)
 
 | PURPOSE          | H8 | H7 | H6 | H5 | H4 |
 |---|---|---|---|---|---|

@@ -1,4 +1,4 @@
-| BIT# | **BPLCON3**    | DESCRIPTION                                            |
+| BIT# | [BPLCON3](BPLCON3.md)    | DESCRIPTION                                            |
 |---|---|---|
 | 15   | BANK2=0    | BANKx = Selects one of eight color banks, x=0-2.       |
 | 14   | BANK1=0    |                                                        |

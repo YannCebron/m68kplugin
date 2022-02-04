@@ -10,7 +10,7 @@
 | 11    | UARTBRK     | Forces a UART break (clears TXD) if true  |
 | 10    | WORDSYNC    | Enables disk read synchronizing on a word |
 |       |             | equal to DISK SYNC CODE, Located in       |
-|       |             | address **DSKSYNC** (7E).   |
+|       |             | address [DSKSYNC](DSKSYNC.md) (7E).   |
 | 09    | MSBSYNC     | Enables disk read synchronizing on the    |
 |       |             | MSB (most signif bit) appl type GCR       |
 | 08    | FAST        | Disk data clock rate control 1=fast (2us) |
@@ -34,6 +34,6 @@
 
 
   > Note: If both period and volume are modulated on the same channel,
-the period and volume will be alternated. First **AUDxDAT** word
-is used for V6-V0 of **AUDxVOL**. Second **AUDxDAT** word is used for
-P15-P0 of **AUDxPER**. This alternating sequence is repeated.
+the period and volume will be alternated. First [AUDxDAT](AUDxDAT.md) word
+is used for V6-V0 of [AUDxVOL](AUDxVOL.md). Second [AUDxDAT](AUDxDAT.md) word is used for
+P15-P0 of [AUDxPER](AUDxPER.md). This alternating sequence is repeated.

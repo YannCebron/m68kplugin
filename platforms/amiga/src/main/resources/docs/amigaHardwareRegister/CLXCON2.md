@@ -1,6 +1,6 @@
 This reg controls when bit planes 7 and 8 are included in collision
 detection, and their required state if included. Contents of this
-register are reset by a write to **CLXCON**.
+register are reset by a write to [CLXCON](CLXCON.md).
 
 BITS INITIALIZED BY RESET
 

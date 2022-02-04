@@ -1,11 +1,11 @@
 These two control registers are used together to control Blitter
 operations. There are 2 basic modes, area and line, which are
-selected by bit 0 of **BLTCON1**, as shown below.
+selected by bit 0 of [BLTCON1](BLTCON0.md), as shown below.
 
 AREA MODE ("normal")
 
 
-| BIT# | **BLTCON0** | **BLTCON1** |
+| BIT# | [BLTCON0](BLTCON0.md) | [BLTCON1](BLTCON0.md) |
 |---|---|---|
 | 15   | ASH3    | BSH3    |
 | 14   | ASH2    | BSH2    |
@@ -28,7 +28,7 @@ AREA MODE ("normal")
 LINE MODE (line draw)
 
 
-| BIT# | **BLTCON0** | **BLTCON1**  |
+| BIT# | [BLTCON0](BLTCON0.md) | [BLTCON1](BLTCON0.md)  |
 |---|---|---|
 | 15   | ASH3    | BSH3     |
 | 14   | ASH2    | BSH2     |

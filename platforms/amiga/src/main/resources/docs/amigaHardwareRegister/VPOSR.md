@@ -2,7 +2,7 @@
 |------|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|
 | USE | LOF | I6 | I5 | I4 | I3 | I2 | I1 | I0 | LOL | -- | -- | -- | -- | V10 | V9 | V8 |
 
-LOF = Long frame (auto toggle control bit in **BPLCON0**)
+LOF = Long frame (auto toggle control bit in [BPLCON0](BPLCON0.md))
 
 I0-I6 Chip identification:
 

@@ -21,5 +21,5 @@ The table below shows the color register bit usage.
 
 T = TRANSPARENCY, R = RED, G = GREEN, B = BLUE, X = UNUSED
 
-T bit of **COLOR00** thru **COLOR31** sets ZD_pin HI, when that color is
+T bit of [COLOR00](COLORx.md) thru [COLOR31](COLORx.md) sets ZD_pin HI, when that color is
 selected in all video modes.

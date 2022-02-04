@@ -1,4 +1,4 @@
-| BIT# | **BPLCON4**  | DESCRIPTION                                              |
+| BIT# | [BPLCON4](BPLCON4.md)  | DESCRIPTION                                              |
 |---|---|---|
 | 15   | BPLAM7=0 | This 8 bit field is XOR'ed with the 8 bit plane color    |
 | 14   | BPLAM6=0 | address, thereby altering the color address sent to the  |

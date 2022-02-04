@@ -1,4 +1,4 @@
-| BIT# | **BPLCON2**  | DESCRIPTION                                            |
+| BIT# | [BPLCON2](BPLCON2.md)  | DESCRIPTION                                            |
 |---|---|---|
 | 15   | X        | Don't care - but drive to 0 for upward compatibility!  |
 |      |          |                                                        |

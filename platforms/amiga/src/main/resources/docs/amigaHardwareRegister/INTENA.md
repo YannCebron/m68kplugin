@@ -10,7 +10,7 @@ is given below.
 |      |          |       | written with a zero are always unchanged.  |
 | 14   |  INTEN   |       | Master interrupt (enable only, no request) |
 | 13   |  EXTER   |   6   | External interrupt                         |
-| 12   |  DSKSYN  |   5   | Disk sync register (**DSKSYNC**) matches disk  |
+| 12   |  DSKSYN  |   5   | Disk sync register ([DSKSYNC](DSKSYNC.md)) matches disk  |
 | 11   |  RBF     |   5   | Serial port receive buffer full            |
 | 10   |  AUD3    |   4   | Audio channel 3 block finished             |
 | 09   |  AUD2    |   4   | Audio channel 2 block finished             |

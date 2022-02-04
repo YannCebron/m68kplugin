@@ -9,4 +9,4 @@ so that the coprocessor cannot access the Blitter hardware.
 |      |       | access to all RGA registers if true.            |
 |      |       | (if 0, access to RGA>7E)                        |
 |      |       | (On old chips access to only RGA>3E if CDANG=1) |
-|      |       | (see **VPOSR**)                     |
+|      |       | (see [VPOSR](VPOSR.md))                     |

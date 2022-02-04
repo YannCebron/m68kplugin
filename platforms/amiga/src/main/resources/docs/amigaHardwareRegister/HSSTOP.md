@@ -1,1 +1,1 @@
-Sets # of colour clocks for sync stop (**HTOTAL** for bits)
+Sets # of colour clocks for sync stop ([HTOTAL](HTOTAL.md) for bits)

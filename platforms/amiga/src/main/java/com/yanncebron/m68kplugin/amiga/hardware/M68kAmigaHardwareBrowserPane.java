@@ -112,6 +112,19 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
   }
 
   @Override
+  protected String getListItemNameForLink(String link) {
+    if (StringUtil.containsChar(link, 'x')) {
+      String elementName = StringUtil.substringBefore(link, ".md");
+      for (M68kAmigaHardwareRegister value : M68kAmigaHardwareRegister.values()) {
+        if (value.getDescriptionFileName().equals(elementName)) {
+          return value.getName();
+        }
+      }
+    }
+    return super.getListItemNameForLink(link);
+  }
+
+  @Override
   protected @NotNull String getDocFor(@NotNull M68kAmigaHardwareRegister selectedValue) {
     String copperDanger = selectedValue.isCopperDanger() ? M68kDocumentationUtil.CHECK_MARK : "";
     String chips = StringUtil.join(selectedValue.getChips(), M68kAmigaHardwareRegister.Chip::getDisplayName, ",<br>");

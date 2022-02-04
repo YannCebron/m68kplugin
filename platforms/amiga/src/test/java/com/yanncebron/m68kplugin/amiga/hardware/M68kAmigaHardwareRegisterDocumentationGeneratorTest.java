@@ -16,7 +16,6 @@
 
 package com.yanncebron.m68kplugin.amiga.hardware;
 
-import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.containers.ContainerUtil;
 import junit.framework.TestCase;
@@ -154,11 +153,14 @@ public class M68kAmigaHardwareRegisterDocumentationGeneratorTest extends TestCas
     // format known register names and "REGx"
     Set<String> replacedNames = new HashSet<>();
     for (M68kAmigaHardwareRegister register : M68kAmigaHardwareRegister.values()) {
-      if (replacedNames.add(register.getName())) {
-        copyTrim = copyTrim.replaceAll("\\b" + register.getName() + "\\b", "**" + register.getName() + "**");
+      String fileName = register.getDescriptionFileName();
+      if (replacedNames.add(fileName)) {
+        copyTrim = copyTrim.replaceAll("\\b" + fileName + "\\b", "[" + fileName + "](" + fileName + ".md)");
       }
-      if (replacedNames.add(register.getDescriptionFileName())) {
-        copyTrim = StringUtil.replace(copyTrim, register.getDescriptionFileName(), "**" + register.getDescriptionFileName() + "**");
+
+      String registerName = register.getName();
+      if (replacedNames.add(registerName)) {
+        copyTrim = copyTrim.replaceAll("\\b" + registerName + "\\b", "[" + registerName + "](" + register.getDescriptionFileName() + ".md)");
       }
     }
     return copyTrim;
