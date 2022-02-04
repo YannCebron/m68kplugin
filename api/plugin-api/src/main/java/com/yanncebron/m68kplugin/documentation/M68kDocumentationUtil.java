@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,6 +54,7 @@ public final class M68kDocumentationUtil {
     "code { white-space: nowrap; }" +
     "p { padding-top: 5px; } " +
     "strong { font-weight: bold; }" +
+    "blockquote { padding-left: 10px; padding-right:10px; padding-bottom: 5px; }" +
     "</style>";
 
   @NonNls
