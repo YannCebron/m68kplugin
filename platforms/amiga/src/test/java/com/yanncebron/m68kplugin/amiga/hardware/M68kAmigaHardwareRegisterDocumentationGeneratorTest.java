@@ -76,7 +76,7 @@ public class M68kAmigaHardwareRegisterDocumentationGeneratorTest extends TestCas
       final String finishedDoc = processDoc(docLines);
 
       Path path = Path.of(OUTPUT_DIR, descriptionName + ".md");
-      Files.writeString(path, finishedDoc, StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+      Files.writeString(path, finishedDoc, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
     }
   }
 

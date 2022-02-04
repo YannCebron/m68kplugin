@@ -79,4 +79,4 @@ used at the beginning of each vertical blank time.
 
 It is important that one of the jump registers be initialized and its
 jump strobe address hit, after power up but before coprocessor DMA is
-initialized. This insures a determined startup address, and state.ss, and state.
+initialized. This insures a determined startup address, and state.

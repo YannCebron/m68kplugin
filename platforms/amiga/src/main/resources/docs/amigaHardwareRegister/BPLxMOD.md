@@ -10,4 +10,4 @@ If scan-doubling is enabled, [BPL1MOD](BPLxMOD.md) serves as the
 primary bitplane modulos and [BPL2MOD](BPLxMOD.md) serves as the
 alternate. Lines whose LSBs of beam counter and [DIWSTRT](DIWSTRT.md)
 match are designated primary, whereas lines whose LSBs
-don't match are designated alternate.ted alternate.
+don't match are designated alternate.

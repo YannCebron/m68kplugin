@@ -82,5 +82,4 @@ from [HSSTRT](HSSTRT.md), and [HBSTOP](HBSTOP.md) at ([HSSTOP](HSSTOP.md)-[HSSTR
 
 HSYTRUE, VSYTRUE, CSYTRUE = These change the polarity of the
 HSY*, VSY*, & CSY* pins to HSY, VSY, & CSY respectively for
-input & output. & CSY respectively for
 input & output.

@@ -45,5 +45,4 @@ Joystick switch closures can be deciphered as follows:
 | Forward    |  1   | Y1 xor Y0 (BIT#09 xor BIT#08)   |
 | Left       |  3   | Y1                              |
 | Back       |  2   | X1 xor X0 (BIT#01 xor BIT#00)   |
-| Right      |  4   | X1                              |or BIT#00)   |
 | Right      |  4   | X1                              |
