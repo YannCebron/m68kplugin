@@ -168,6 +168,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel {
             T element = list.getModel().getElementAt(i);
             if (StringUtil.equals(elementName, getListItemNamer().fun(element))) {
               list.setSelectedIndex(i);
+              list.ensureIndexIsVisible(i);
               return;
             }
           }
