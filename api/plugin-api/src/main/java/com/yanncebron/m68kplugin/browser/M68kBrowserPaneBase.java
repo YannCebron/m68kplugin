@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,10 +24,15 @@ import com.intellij.openapi.editor.colors.EditorColorsUtil;
 import com.intellij.openapi.options.FontSize;
 import com.intellij.openapi.project.DumbAwareToggleAction;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.openapi.ui.Splitter;
+import com.intellij.openapi.ui.popup.Balloon;
+import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.util.Ref;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.*;
+import com.intellij.ui.awt.RelativePoint;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBPanelWithEmptyText;
 import com.intellij.ui.components.JBScrollPane;
@@ -37,11 +42,14 @@ import com.intellij.util.Function;
 import com.intellij.util.ui.JBHtmlEditorKit;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.UIUtil;
+import com.yanncebron.m68kplugin.M68kApiBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import javax.swing.event.HyperlinkEvent;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -105,6 +113,10 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel {
 
   protected abstract Function<? super T, String> getListItemNamer();
 
+  protected String getListItemNameForLink(String link) {
+    return StringUtil.toUpperCase(StringUtil.substringBefore(link, ".md"));
+  }
+
   @NotNull
   protected abstract String getDocFor(@NotNull T selectedValue);
 
@@ -148,6 +160,27 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel {
       docEditorPane.setEditable(false);
       docEditorPane.setBorder(JBUI.Borders.empty(UIUtil.getListCellHPadding(), UIUtil.getListCellHPadding(), UIUtil.getScrollBarWidth(), UIUtil.getScrollBarWidth()));
       docEditorPane.setEditorKit(new JBHtmlEditorKit(false));
+      docEditorPane.addHyperlinkListener(new HyperlinkAdapter() {
+        @Override
+        protected void hyperlinkActivated(HyperlinkEvent e) {
+          String elementName = getListItemNameForLink(e.getDescription());
+          for (int i = 0; i < list.getItemsCount(); i++) {
+            T element = list.getModel().getElementAt(i);
+            if (StringUtil.equals(elementName, getListItemNamer().fun(element))) {
+              list.setSelectedIndex(i);
+              return;
+            }
+          }
+
+          RelativePoint target = new RelativePoint((MouseEvent) e.getInputEvent());
+          JBPopupFactory.getInstance().
+            createHtmlTextBalloonBuilder(
+              M68kApiBundle.message("documentation.error.cannot.show.item", elementName),
+              MessageType.WARNING, null)
+            .createBalloon()
+            .show(target, Balloon.Position.above);
+        }
+      });
     }
 
     docEditorPane.setBackground(EditorColorsUtil.getGlobalOrDefaultColor(DocumentationComponent.COLOR_KEY));
