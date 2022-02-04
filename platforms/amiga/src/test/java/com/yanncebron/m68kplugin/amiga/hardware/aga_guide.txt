@@ -2372,7 +2372,7 @@ SPRxDATB  146  W      D    Sprite x image data register B
 	registers and serially outputted to the display, MSB first
 	on the left.
 
-	NOTE: Writing to the A buffer enables (arms) the sprite.
+	Note: Writing to the A buffer enables (arms) the sprite.
 	Writing to the SPRxCTL registers disables the sprite.
 
 	If enabled, data in the A and B buffers will be output

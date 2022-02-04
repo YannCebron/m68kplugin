@@ -5,7 +5,7 @@ coincidence occurs the buffers are dumped into shift
 registers and serially outputted to the display, MSB first
 on the left.
 
-  > NOTE: Writing to the A buffer enables (arms) the sprite.
+  > Note: Writing to the A buffer enables (arms) the sprite.
 Writing to the [SPRxCTL](SPRxCTL.md) registers disables the sprite.
 
 If enabled, data in the A and B buffers will be output
