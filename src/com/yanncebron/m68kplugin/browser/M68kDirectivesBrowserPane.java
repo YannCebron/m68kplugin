@@ -19,11 +19,14 @@ package com.yanncebron.m68kplugin.browser;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Pair;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.Function;
+import com.intellij.util.ObjectUtils;
 import com.twelvemonkeys.lang.StringUtil;
 import com.yanncebron.m68kplugin.documentation.M68kDocumentationUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
+import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -31,15 +34,14 @@ import java.util.List;
 
 public class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<M68kDirectivesBrowserPane.DirectiveEntry> {
 
-  @Override
-  public boolean isAvailable(Project project) {
-    return ApplicationManager.getApplication().isInternal();
-  }
+  private static final String DOCS_MNEMONIC_ROOT = "/docs/directives/";
 
   @Override
   protected void initList() {
     List<DirectiveEntry> items = new ArrayList<>();
     for (IElementType type : M68kTokenGroups.DIRECTIVES.getTypes()) {
+      if (type == M68kTokenTypes.EQ_DIRECTIVE) continue;
+
       items.add(new DirectiveEntry(type));
     }
     setListItems(items);
@@ -57,9 +59,12 @@ public class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<M68kDirective
 
   @Override
   protected @NotNull String getDocFor(@NotNull M68kDirectivesBrowserPane.DirectiveEntry selectedValue) {
-    return M68kDocumentationUtil.CSS +
-      "<h1>" + selectedValue.getListName() + "</h1>" +
-      "<em>TODO</em> documentation for this directive ";
+    Pair<String, String> contents = M68kDocumentationUtil.getMarkdownContents(DOCS_MNEMONIC_ROOT, StringUtil.toLowerCase(selectedValue.getListName()));
+    if (contents.getFirst() == null) {
+      return M68kDocumentationUtil.CSS + "<h1>" + selectedValue.getListName() + "</h1><p>" + contents.getSecond();
+    }
+
+    return M68kDocumentationUtil.CSS + M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, contents.getFirst());
   }
 
   protected static class DirectiveEntry {

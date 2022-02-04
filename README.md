@@ -32,7 +32,7 @@ Please see [Contributing](CONTRIBUTING.md) on how to submit feedback and contrib
 
 Plugin Logo from [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Motorola_M_symbol_blue.svg)
 
-Mnemonic documentation taken from [m68k-instructions-documentation](https://github.com/prb28/m68k-instructions-documentation)
+Mnemonic and directives documentation taken from [m68k-instructions-documentation](https://github.com/prb28/m68k-instructions-documentation)
 
 Mnemonic data generated using [vasm](http://sun.hasenbraten.de/vasm/) sources, thanks to Frank Wille and Dr. Volker Barthelmann for granting permission
 

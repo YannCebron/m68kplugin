@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Added
+- M68k Browser: new tab "Directives" with reference documentation
 
 ### Fixed
 
