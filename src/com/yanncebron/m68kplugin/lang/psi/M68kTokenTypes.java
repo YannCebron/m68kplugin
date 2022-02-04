@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -210,7 +210,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType MC68000 = new M68kTokenType("mc68000");
   public static final IElementType MC68010 = new M68kTokenType("mc68010");
   public static final IElementType MC68020 = new M68kTokenType("mc68020");
-  public static final IElementType MC68030 = new M68kTokenType("mc68040");
+  public static final IElementType MC68030 = new M68kTokenType("mc68030");
   public static final IElementType MC68040 = new M68kTokenType("mc68040");
   public static final IElementType MC68060 = new M68kTokenType("mc68060");
   public static final IElementType MEXIT = new M68kTokenType("mexit");
