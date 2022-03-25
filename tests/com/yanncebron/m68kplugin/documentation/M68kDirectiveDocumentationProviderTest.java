@@ -27,6 +27,13 @@ import com.yanncebron.m68kplugin.lang.psi.directive.M68kSoDirective;
 @SuppressWarnings("SpellCheckingInspection")
 public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase {
 
+  public void testDcbDirectiveNoReferenceDocAvailable() {
+    doTest(" dc<caret>b", (psiElement, documentationProvider) -> {
+      String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
+      assertEquals("<style>h1 { font-weight: bold; font-size: 120%; } h2 { padding-top: 13px; font-weight: bold; font-size: 110%; } h3 { padding-top: 10px; font-weight: bold; } table { padding-bottom: 10px; white-space: nowrap; } td { margin: 4px 0 0 0; padding: 0 0 0 0; }th { font-weight: bold; text-align: left; white-space: nowrap; margin: 2px; } em { font-style: italic; }code { white-space: nowrap; }p { padding-top: 5px; } strong { font-weight: bold; }blockquote { padding-left: 10px; padding-right:10px; padding-bottom: 5px; }</style><h1>DCB</h1><p>No reference documentation available for 'dcb'<br><br><a href=\"https://github.com/prb28/m68k-instructions-documentation\">Contribute to m68k-instructions-documentation project</a>", doc);
+    });
+  }
+
   public void testEremDirectiveReferenceDoc() {
     doTest(" e<caret>rem", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());

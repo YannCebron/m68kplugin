@@ -80,7 +80,10 @@ public class M68kDirectiveDocumentationProvider extends AbstractDocumentationPro
     String directiveText = directiveType.toString();
     Pair<String, String> contents = M68kDocumentationUtil.getMarkdownContents(DOCS_MNEMONIC_ROOT, StringUtil.toLowerCase(directiveText));
     if (contents.getFirst() == null) {
-      return M68kDocumentationUtil.CSS + "<h1>" + StringUtil.toUpperCase(directiveText) + "</h1><p>" + contents.getSecond();
+      return M68kDocumentationUtil.CSS +
+        "<h1>" + StringUtil.toUpperCase(directiveText) + "</h1>" +
+        "<p>" + contents.getSecond() +
+        M68kDocumentationUtil.CONTRIBUTION_FOOTER;
     }
 
     if (forBrowserPane) {

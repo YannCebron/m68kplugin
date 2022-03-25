@@ -61,6 +61,9 @@ public final class M68kDocumentationUtil {
   @NonNls
   public static final String CHECK_MARK = "✓";
 
+  @NonNls
+  public static final String CONTRIBUTION_FOOTER = "<br><br><a href=\"https://github.com/prb28/m68k-instructions-documentation\">Contribute to m68k-instructions-documentation project</a>";
+
   public static Pair<String, String> getMarkdownContents(String docRoot, String markdownFileName) {
     final InputStream resource = M68kDocumentationUtil.class.getResourceAsStream(docRoot + markdownFileName + ".md");
     if (resource == null) {
