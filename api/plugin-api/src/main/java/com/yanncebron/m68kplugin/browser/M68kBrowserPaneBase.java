@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.browser;
 
 import com.intellij.codeInsight.documentation.DocumentationComponent;
+import com.intellij.ide.BrowserUtil;
 import com.intellij.ide.IdeBundle;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.actionSystem.*;
@@ -50,6 +51,7 @@ import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -163,6 +165,12 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel {
       docEditorPane.addHyperlinkListener(new HyperlinkAdapter() {
         @Override
         protected void hyperlinkActivated(HyperlinkEvent e) {
+          URL url = e.getURL();
+          if (url != null && BrowserUtil.isAbsoluteURL(url.toExternalForm())) {
+            BrowserUtil.browse(url);
+            return;
+          }
+
           String elementName = getListItemNameForLink(e.getDescription());
           for (int i = 0; i < list.getItemsCount(); i++) {
             T element = list.getModel().getElementAt(i);
