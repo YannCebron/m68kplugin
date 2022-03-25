@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,14 +17,10 @@
 package com.yanncebron.m68kplugin.browser;
 
 import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Pair;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.Function;
-import com.intellij.util.ObjectUtils;
 import com.twelvemonkeys.lang.StringUtil;
-import com.yanncebron.m68kplugin.documentation.M68kDocumentationUtil;
+import com.yanncebron.m68kplugin.documentation.M68kDirectiveDocumentationProvider;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import org.jetbrains.annotations.NotNull;
@@ -33,8 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<M68kDirectivesBrowserPane.DirectiveEntry> {
-
-  private static final String DOCS_MNEMONIC_ROOT = "/docs/directives/";
 
   @Override
   protected void initList() {
@@ -59,12 +53,7 @@ public class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<M68kDirective
 
   @Override
   protected @NotNull String getDocFor(@NotNull M68kDirectivesBrowserPane.DirectiveEntry selectedValue) {
-    Pair<String, String> contents = M68kDocumentationUtil.getMarkdownContents(DOCS_MNEMONIC_ROOT, StringUtil.toLowerCase(selectedValue.getListName()));
-    if (contents.getFirst() == null) {
-      return M68kDocumentationUtil.CSS + "<h1>" + selectedValue.getListName() + "</h1><p>" + contents.getSecond();
-    }
-
-    return M68kDocumentationUtil.CSS + M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, contents.getFirst());
+    return M68kDirectiveDocumentationProvider.getDirectiveDoc(selectedValue.directiveType);
   }
 
   protected static class DirectiveEntry {

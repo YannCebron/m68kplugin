@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Added
+- Reference documentation for directives
 - M68k Browser: new tab "Directives" with reference documentation
 - M68k Browser "Amiga Hardware" tab: add links between registers in reference documentation
 

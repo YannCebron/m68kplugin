@@ -152,6 +152,9 @@
         implementationClass="com.yanncebron.m68kplugin.documentation.M68kInstructionDocumentationProvider"/>
     <lang.documentationProvider
         language="M68k"
+        implementationClass="com.yanncebron.m68kplugin.documentation.M68kDirectiveDocumentationProvider"/>
+    <lang.documentationProvider
+        language="M68k"
         implementationClass="com.yanncebron.m68kplugin.documentation.M68kLabelDocumentationProvider"/>
     <lang.documentationProvider
         language="M68k"
