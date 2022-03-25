@@ -28,15 +28,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<M68kDirectivesBrowserPane.DirectiveEntry> {
+public class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<IElementType> {
 
   @Override
   protected void initList() {
-    List<DirectiveEntry> items = new ArrayList<>();
+    List<IElementType> items = new ArrayList<>();
     for (IElementType type : M68kTokenGroups.DIRECTIVES.getTypes()) {
       if (type == M68kTokenTypes.EQ_DIRECTIVE) continue;
 
-      items.add(new DirectiveEntry(type));
+      items.add(type);
     }
     setListItems(items);
   }
@@ -47,24 +47,13 @@ public class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<M68kDirective
   }
 
   @Override
-  protected Function<? super DirectiveEntry, String> getListItemNamer() {
-    return DirectiveEntry::getListName;
+  protected Function<? super IElementType, String> getListItemNamer() {
+    return (Function<IElementType, String>) elementType -> StringUtil.toUpperCase(elementType.toString());
   }
 
   @Override
-  protected @NotNull String getDocFor(@NotNull M68kDirectivesBrowserPane.DirectiveEntry selectedValue) {
-    return M68kDirectiveDocumentationProvider.getDirectiveDoc(selectedValue.directiveType);
+  protected @NotNull String getDocFor(@NotNull IElementType selectedValue) {
+    return M68kDirectiveDocumentationProvider.getDirectiveDoc(selectedValue);
   }
 
-  protected static class DirectiveEntry {
-    private final IElementType directiveType;
-
-    DirectiveEntry(IElementType directiveType) {
-      this.directiveType = directiveType;
-    }
-
-    String getListName() {
-      return StringUtil.toUpperCase(directiveType.toString());
-    }
-  }
 }
