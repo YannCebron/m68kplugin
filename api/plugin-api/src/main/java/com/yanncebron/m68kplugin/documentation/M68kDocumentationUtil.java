@@ -37,6 +37,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 
 public final class M68kDocumentationUtil {
 
@@ -76,12 +77,28 @@ public final class M68kDocumentationUtil {
   }
 
   public static String getHtmlForMarkdown(String docRoot, String markdownText) {
+    return getHtmlForMarkdown(docRoot, markdownText, Function.identity());
+  }
+
+  /**
+   * @param docRoot      Markdown files root.
+   * @param markdownText Markdown text to render.
+   * @param urlFunction  Used to modify existing links.
+   * @return HTML documentation text.
+   */
+  public static String getHtmlForMarkdown(String docRoot, String markdownText, Function<String, String> urlFunction) {
     List<Extension> extensions = Collections.singletonList(TablesExtension.create());
     Parser parser = Parser.builder().extensions(extensions).build();
     Node document = parser.parse(markdownText);
     HtmlRenderer renderer = HtmlRenderer.builder()
       .extensions(extensions)
       .urlSanitizer(new DefaultUrlSanitizer() {
+
+        @Override
+        public String sanitizeLinkUrl(String url) {
+          return urlFunction.apply(super.sanitizeLinkUrl(url));
+        }
+
         @Override
         public String sanitizeImageUrl(String url) {
           final String sanitizedUrl = super.sanitizeImageUrl(url);
