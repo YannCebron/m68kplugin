@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,19 +23,19 @@ import com.intellij.ide.structureView.impl.common.PsiTreeElementBase;
 import com.intellij.ide.util.treeView.smartTree.*;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
-import com.intellij.util.BooleanFunction;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.M68kFile;
-import icons.M68kIcons;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
 import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncbinDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncludeDirective;
+import icons.M68kIcons;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.util.EnumSet;
+import java.util.function.Predicate;
 
 public class M68kStructureViewModel extends StructureViewModelBase implements StructureViewModel.ElementInfoProvider {
 
@@ -80,7 +80,7 @@ public class M68kStructureViewModel extends StructureViewModelBase implements St
     };
   }
 
-  private static BooleanFunction<PsiElement> createLabelFilteringFunction(EnumSet<M68kLabelBase.LabelKind> kinds) {
+  private static Predicate<PsiElement> createLabelFilteringFunction(EnumSet<M68kLabelBase.LabelKind> kinds) {
     return psiElement -> {
       if (!(psiElement instanceof M68kLabel)) {
         return false;
@@ -91,14 +91,13 @@ public class M68kStructureViewModel extends StructureViewModelBase implements St
     };
   }
 
-  private static Filter createFilter(BooleanFunction<PsiElement> filter,
-                                     @NotNull String text, Icon icon, @NotNull String name) {
+  private static Filter createFilter(Predicate<PsiElement> filter, @NotNull String text, Icon icon, @NotNull String name) {
     return new Filter() {
       @Override
       public boolean isVisible(TreeElement treeNode) {
         if (!(treeNode instanceof PsiTreeElementBase)) return false;
 
-        return !filter.fun(((PsiTreeElementBase) treeNode).getElement());
+        return !filter.test(((PsiTreeElementBase<?>) treeNode).getElement());
       }
 
       @Override
