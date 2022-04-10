@@ -30,6 +30,10 @@ import java.util.List;
 
 public class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<IElementType> {
 
+  public M68kDirectivesBrowserPane() {
+    super(IElementType.class);
+  }
+
   @Override
   protected void initList() {
     List<IElementType> items = new ArrayList<>();

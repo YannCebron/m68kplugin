@@ -80,8 +80,12 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
 
   private final History history = new History(this);
 
-  protected M68kBrowserPaneBase() {
+  private final Class<T> clazz  ;
+
+  protected M68kBrowserPaneBase(Class<T> valueClazz) {
     super(true, true);
+
+    clazz = valueClazz;
 
     splitter = new OnePixelSplitter(false, getClass().getSimpleName() + ".splitter.proportion", getInitialSplitProportion());
     splitter.setDividerPositionStrategy(Splitter.DividerPositionStrategy.KEEP_FIRST_SIZE);
@@ -318,8 +322,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
 
     // list might not contain value anymore due to filtering, force update doc manually
     if (!list.getSelectedValue().equals(value)) {
-      //noinspection unchecked
-      updateDoc((T) value);
+      updateDoc((clazz.cast(value)));
     }
 
     return ActionCallback.DONE;

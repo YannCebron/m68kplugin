@@ -51,6 +51,10 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
   private Ref<Boolean> isAnnotateChipset;
   private Ref<Boolean> isShowReferenceDocs;
 
+  public M68kAmigaHardwareBrowserPane() {
+    super(M68kAmigaHardwareRegister.class);
+  }
+
   @Override
   protected @Nullable ActionGroup getToolbarActionGroup() {
     DefaultActionGroup actionGroup = new DefaultActionGroup();
