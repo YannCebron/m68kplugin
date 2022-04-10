@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,6 +39,8 @@ public class M68kBrowserToolWindowFactory implements ToolWindowFactory, DumbAwar
 
       final Content content = contentManager.getFactory().createContent(pane, extension.getDisplayName(), false);
       content.setPreferredFocusableComponent(pane.getFocusComponent());
+      content.setDisposer(pane);
+
       contentManager.addContent(content);
     }
 

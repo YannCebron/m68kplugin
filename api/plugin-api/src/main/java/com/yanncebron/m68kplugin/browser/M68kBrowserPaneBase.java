@@ -20,6 +20,7 @@ import com.intellij.codeInsight.documentation.DocumentationComponent;
 import com.intellij.ide.BrowserUtil;
 import com.intellij.ide.IdeBundle;
 import com.intellij.ide.util.PropertiesComponent;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.editor.colors.EditorColorsUtil;
 import com.intellij.openapi.options.FontSize;
@@ -30,6 +31,7 @@ import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.openapi.ui.Splitter;
 import com.intellij.openapi.ui.popup.Balloon;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
+import com.intellij.openapi.util.ActionCallback;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.*;
@@ -37,13 +39,19 @@ import com.intellij.ui.awt.RelativePoint;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBPanelWithEmptyText;
 import com.intellij.ui.components.JBScrollPane;
+import com.intellij.ui.navigation.BackAction;
+import com.intellij.ui.navigation.ForwardAction;
+import com.intellij.ui.navigation.History;
+import com.intellij.ui.navigation.Place;
 import com.intellij.ui.scale.JBUIScale;
 import com.intellij.ui.speedSearch.SpeedSearchUtil;
 import com.intellij.util.Function;
 import com.intellij.util.ui.JBHtmlEditorKit;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.UIUtil;
+import com.intellij.util.ui.components.BorderLayoutPanel;
 import com.yanncebron.m68kplugin.M68kApiBundle;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,18 +61,24 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 /**
  * @param <T> must implement {@link #equals(Object)} to keep current selection upon list model update
  */
-public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel {
+public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel implements Place.Navigator, Disposable {
 
   private final JBSplitter splitter;
 
   private final JBList<T> list = new JBList<>();
   private JEditorPane docEditorPane;
+
+  @NonNls
+  private static final String SELECTED_ITEM = "M68kBrowserPaneBase.selected.item";
+
+  private final History history = new History(this);
 
   protected M68kBrowserPaneBase() {
     super(true, true);
@@ -79,15 +93,36 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel {
 
     setContent(splitter);
 
-    final ActionGroup toolbarActionGroup = getToolbarActionGroup();
-    if (toolbarActionGroup != null) {
-      final ActionToolbar toolbar = ActionManager.getInstance().createActionToolbar(getClass().getSimpleName(), toolbarActionGroup, true);
-      toolbar.setTargetComponent(this);
-
-      setToolbar(toolbar.getComponent());
+    BorderLayoutPanel toolbarPanel = JBUI.Panels.simplePanel();
+    Component toolbarComponent = getToolbarComponent();
+    if (toolbarComponent != null) {
+      toolbarPanel.addToLeft(toolbarComponent);
     }
+    toolbarPanel.addToRight(getHistoryToolbarComponent());
+    setToolbar(toolbarPanel);
 
     initList();
+  }
+
+  @Nullable
+  private Component getToolbarComponent() {
+    final ActionGroup toolbarActionGroup = getToolbarActionGroup();
+    if (toolbarActionGroup == null) return null;
+
+    ActionToolbar toolbar = ActionManager.getInstance().createActionToolbar(getClass().getSimpleName(), toolbarActionGroup, true);
+    toolbar.setTargetComponent(this);
+    return toolbar.getComponent();
+  }
+
+  private Component getHistoryToolbarComponent() {
+    JComponent component = Objects.requireNonNull(getComponent());
+    DefaultActionGroup historyActionGroup = new DefaultActionGroup(
+      new BackAction(component, this),
+      new ForwardAction(component, this)
+    );
+    ActionToolbar historyToolbar = ActionManager.getInstance().createActionToolbar(getClass().getSimpleName() + ".History", historyActionGroup, true);
+    historyToolbar.setTargetComponent(this);
+    return historyToolbar.getComponent();
   }
 
   protected float getInitialSplitProportion() {
@@ -142,11 +177,16 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel {
   }
 
   protected void updateDoc() {
-    final T selectedValue = list.getSelectedValue();
+    updateDoc(list.getSelectedValue());
+  }
+
+  private void updateDoc(@Nullable T selectedValue) {
     if (selectedValue == null) {
       setNoSelection();
       return;
     }
+
+    history.pushQueryPlace();
 
     final String docText = getDocFor(selectedValue);
     updateDocText(docText);
@@ -256,5 +296,41 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel {
         setSelectedConsumer.accept(e, state);
       }
     };
+  }
+
+  @Override
+  public @Nullable Object getData(@NotNull @NonNls String dataId) {
+    if (History.KEY.is(dataId)) {
+      return history;
+    }
+
+    return super.getData(dataId);
+  }
+
+  @Override
+  public final @Nullable ActionCallback navigateTo(@Nullable Place place, boolean requestFocus) {
+    if (place == null) return ActionCallback.DONE;
+
+    Object value = place.getPath(SELECTED_ITEM);
+    if (value == null) return ActionCallback.REJECTED;
+
+    list.setSelectedValue(value, true);
+
+    // list might not contain value anymore due to filtering, force update doc manually
+    if (!list.getSelectedValue().equals(value)) {
+      //noinspection unchecked
+      updateDoc((T) value);
+    }
+
+    return ActionCallback.DONE;
+  }
+
+  @Override
+  public final void queryPlace(@NotNull Place place) {
+    place.putPath(SELECTED_ITEM, list.getSelectedValue());
+  }
+
+  @Override
+  public void dispose() {
   }
 }
