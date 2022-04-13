@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [0.1.4]
 ### Added
 - Reference documentation for directives
 - M68k Browser: new tab "Directives" with reference documentation
