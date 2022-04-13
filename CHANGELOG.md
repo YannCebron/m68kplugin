@@ -5,8 +5,6 @@
 - Reference documentation for directives
 - M68k Browser: new tab "Directives" with reference documentation
 
-### Fixed
-
 ### Changed
 - M68k Browser "Amiga Hardware" tab: add links between registers in reference documentation
 - M68k Browser: add _Back_/_Forward_ history navigation
