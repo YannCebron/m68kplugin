@@ -18,9 +18,7 @@ package com.yanncebron.m68kplugin.editor;
 
 import com.intellij.codeInsight.editorActions.moveLeftRight.MoveElementLeftRightHandler;
 import com.intellij.psi.PsiElement;
-import com.yanncebron.m68kplugin.lang.psi.M68kAdmRegisterList;
-import com.yanncebron.m68kplugin.lang.psi.M68kAdmRrd;
-import com.yanncebron.m68kplugin.lang.psi.M68kExgInstruction;
+import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.conditional.M68kIfcConditionalAssemblyDirective;
 import com.yanncebron.m68kplugin.lang.psi.conditional.M68kIfncConditionalAssemblyDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
@@ -79,9 +77,17 @@ public class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
 
     if (element instanceof M68kExgInstruction) {
       final M68kExgInstruction exgInstruction = (M68kExgInstruction) element;
-
       final M68kAdmRrd source = exgInstruction.getSource();
       final M68kAdmRrd destination = exgInstruction.getDestination();
+      if (source != null && destination != null) {
+        return new PsiElement[]{source, destination};
+      }
+    }
+
+    if (element instanceof M68kCmpmInstruction) {
+      M68kCmpmInstruction instruction = (M68kCmpmInstruction) element;
+      M68kAdmApi source = instruction.getSource();
+      M68kAdmApi destination = instruction.getDestination();
       if (source != null && destination != null) {
         return new PsiElement[]{source, destination};
       }

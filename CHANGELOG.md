@@ -7,6 +7,7 @@
 - support `OUTPUT` directive
 - support _Code | Move Element Left/Right_
   - macro call parameters
+  - `CMPM`
   - `DR` directive
   - `IFC`/`IFNC` conditional assembly directive
   - `PRINTV` directive
