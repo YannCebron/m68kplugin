@@ -29,7 +29,7 @@ title: Known Issues
 
 Currently, only 68000/68010 architecture is supported.
 
-Non-supported instructions/registers will display false positive
+Non-supported instructions/registers will yield false positive errors
 > _"Cannot resolve macro '$MNEMONIC$ \| $REGISTER$'"_
 
 Using non-supported address mode will result in syntax error or
@@ -106,8 +106,8 @@ MadMac assembler specific (all directives may be optionally preceded by a dot):
 
 - macro declaration variants:
   - `macro<$macroName$>`
-- macro calls:
-  - register list `myMacro d0/d7`
+- macro call parameters:
+  - register list `MACRO d0/d7`
   - enclosed in `< ... >` for parameter containing `,`
 - special symbols
   - `\@!`
@@ -127,7 +127,7 @@ MadMac assembler specific (all directives may be optionally preceded by a dot):
 
 ### Misc
 
-- string literals
+- string literals:
   - support escape sequence
   - `'\'` and `''''` are valid
 - do not allow spaces (?!)
