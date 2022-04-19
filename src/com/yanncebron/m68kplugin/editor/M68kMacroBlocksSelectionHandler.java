@@ -16,45 +16,16 @@
 
 package com.yanncebron.m68kplugin.editor;
 
-import com.intellij.codeInsight.editorActions.ExtendWordSelectionHandler;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kEndmDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroDirective;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Extend selection to preceding macro declaration start (or keep current one) (inclusive) up to closing endm (inclusive).
  */
-public class M68kMacroBlocksSelectionHandler implements ExtendWordSelectionHandler {
+class M68kMacroBlocksSelectionHandler extends M68kSelectionHandlerBase {
 
-  @Override
-  public boolean canSelect(@NotNull PsiElement e) {
-    return e instanceof M68kPsiElement;
+  M68kMacroBlocksSelectionHandler() {
+    super(M68kMacroDirective.class, true, M68kEndmDirective.class, true);
   }
 
-  @Override
-  public @Nullable List<TextRange> select(@NotNull PsiElement e, @NotNull CharSequence editorText, int cursorOffset, @NotNull Editor editor) {
-    final PsiElement startElement = e instanceof M68kMacroDirective ? e : PsiTreeUtil.getPrevSiblingOfType(e, M68kMacroDirective.class);
-    if (startElement == null) {
-      return Collections.emptyList();
-    }
-
-    final M68kEndmDirective endElement = PsiTreeUtil.getNextSiblingOfType(e, M68kEndmDirective.class);
-    if (endElement == null) {
-      return Collections.emptyList();
-    }
-
-    TextRange myRange = new TextRange(
-      startElement.getTextRange().getStartOffset(),
-      endElement.getTextRange().getEndOffset());
-    return Collections.singletonList(myRange);
-  }
 }

@@ -16,43 +16,14 @@
 
 package com.yanncebron.m68kplugin.editor;
 
-import com.intellij.codeInsight.editorActions.ExtendWordSelectionHandlerBase;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
-import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Extend selection to preceding label (or keep current one) (inclusive) up to subsequent label (exclusive).
  */
-public class M68kLabelBlocksSelectionHandler extends ExtendWordSelectionHandlerBase {
+class M68kLabelBlocksSelectionHandler extends M68kSelectionHandlerBase {
 
-  @Override
-  public boolean canSelect(@NotNull PsiElement e) {
-    return e instanceof M68kPsiElement;
-  }
-
-  @Override
-  public List<TextRange> select(@NotNull PsiElement e, @NotNull CharSequence editorText, int cursorOffset, @NotNull Editor editor) {
-    final PsiElement startElement = e instanceof M68kLabelBase ? e : PsiTreeUtil.getPrevSiblingOfType(e, M68kLabelBase.class);
-    if (startElement == null) {
-      return Collections.emptyList();
-    }
-
-    final M68kLabelBase endElement = PsiTreeUtil.getNextSiblingOfType(e, M68kLabelBase.class);
-    if (endElement == null) {
-      return Collections.emptyList();
-    }
-
-    TextRange myRange = new TextRange(
-      startElement.getTextRange().getStartOffset(),
-      endElement.getTextRange().getStartOffset());
-    return Collections.singletonList(myRange);
+  M68kLabelBlocksSelectionHandler() {
+    super(M68kLabelBase.class, true, M68kLabelBase.class, false);
   }
 }

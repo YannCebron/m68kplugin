@@ -16,45 +16,16 @@
 
 package com.yanncebron.m68kplugin.editor;
 
-import com.intellij.codeInsight.editorActions.ExtendWordSelectionHandler;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Extend selection to preceding conditional assembly directive (or keep current one) (inclusive)
  * up to subsequent conditional assembly directive (inclusive).
  */
-public class M68kConditionalAssemblyBlocksSelectionHandler implements ExtendWordSelectionHandler {
+ class M68kConditionalAssemblyBlocksSelectionHandler extends M68kSelectionHandlerBase {
 
-  @Override
-  public boolean canSelect(@NotNull PsiElement e) {
-    return e instanceof M68kPsiElement;
+   M68kConditionalAssemblyBlocksSelectionHandler() {
+    super(M68kConditionalAssemblyDirective.class,true,M68kConditionalAssemblyDirective.class,true);
   }
 
-  @Override
-  public @Nullable List<TextRange> select(@NotNull PsiElement e, @NotNull CharSequence editorText, int cursorOffset, @NotNull Editor editor) {
-    final PsiElement startElement = e instanceof M68kConditionalAssemblyDirective ? e : PsiTreeUtil.getPrevSiblingOfType(e, M68kConditionalAssemblyDirective.class);
-    if (startElement == null) {
-      return Collections.emptyList();
-    }
-
-    final M68kConditionalAssemblyDirective endElement = PsiTreeUtil.getNextSiblingOfType(e, M68kConditionalAssemblyDirective.class);
-    if (endElement == null) {
-      return Collections.emptyList();
-    }
-
-    TextRange myRange = new TextRange(
-      startElement.getTextRange().getStartOffset(),
-      endElement.getTextRange().getEndOffset());
-    return Collections.singletonList(myRange);
-  }
 }
