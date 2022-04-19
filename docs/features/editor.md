@@ -102,7 +102,7 @@ Rename labels using *Refactor \| Rename* across whole project with usages previe
 * Smart *Edit \| Extend/Shrink Selection*
 * Smart braces/quote handling
 * *Code \| Comment with Line Comment*
-* *Code \| Move Element Left/Right* for `exg`, binary expressions, register list, `dc` values
+* *Code \| Move Element Left/Right* for `exg`/`cmpm`, binary expressions, register list, macro call parameters, `dc`/`dr` values
 * *Move Caret to Code Block Start/End* for matching directives
 * Spellchecker with bundled dictionaries (M68k/Amiga)
 * Code Folding (*Settings/Preferences \| Editor \| General \| Code Folding*)
