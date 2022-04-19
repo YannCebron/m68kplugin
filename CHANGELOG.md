@@ -5,7 +5,9 @@
 - support `CPU32` directive
 - support `FPU` directive
 - support `OUTPUT` directive
-- macro call parameters: support _Code | Move Element Left/Right_
+- support _Code | Move Element Left/Right_
+  - macro call parameters
+  - `DR` directive
 
 ### Fixed
 - fix assertion via "Directives" reference documentation provider invoked on macro call [#44](https://github.com/YannCebron/m68kplugin/issues/44)

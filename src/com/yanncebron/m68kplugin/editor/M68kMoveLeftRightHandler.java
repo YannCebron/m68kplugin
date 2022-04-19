@@ -22,6 +22,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kAdmRegisterList;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmRrd;
 import com.yanncebron.m68kplugin.lang.psi.M68kExgInstruction;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDcDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kDrDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kBinaryExpression;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
@@ -34,6 +35,9 @@ public class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
   public PsiElement @NotNull [] getMovableSubElements(@NotNull PsiElement element) {
     if (element instanceof M68kDcDirective) {
       return ((M68kDcDirective) element).getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
+    }
+    if (element instanceof M68kDrDirective) {
+      return ((M68kDrDirective) element).getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
     }
 
     if (element instanceof M68kBinaryExpression) {
