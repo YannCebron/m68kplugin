@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kAdmRegisterList;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmRrd;
 import com.yanncebron.m68kplugin.lang.psi.M68kExgInstruction;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDcDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kBinaryExpression;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 import org.jetbrains.annotations.NotNull;
@@ -55,6 +56,11 @@ public class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
         return new PsiElement[]{source, destination};
       }
     }
+
+    if (element instanceof M68kMacroCallDirective) {
+      return ((M68kMacroCallDirective) element).getMacroCallParameterList().toArray(PsiElement.EMPTY_ARRAY);
+    }
+
     return PsiElement.EMPTY_ARRAY;
   }
 }
