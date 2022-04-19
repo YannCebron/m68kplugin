@@ -1,0 +1,6 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  PsiElement(fpu)('fpu')
+  PsiErrorElement:<cpID> expected
+    <empty list>
+  PsiWhiteSpace(' ')

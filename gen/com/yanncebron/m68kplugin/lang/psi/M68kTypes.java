@@ -157,6 +157,7 @@ public interface M68kTypes {
   IElementType FAIL_DIRECTIVE = new M68kCompositeElementType("FAIL_DIRECTIVE");
   IElementType FAR_DIRECTIVE = new M68kCompositeElementType("FAR_DIRECTIVE");
   IElementType FO_DIRECTIVE = new M68kCompositeElementType("FO_DIRECTIVE");
+  IElementType FPU_DIRECTIVE = new M68kCompositeElementType("FPU_DIRECTIVE");
   IElementType GT_EQ_EXPRESSION = new M68kCompositeElementType("GT_EQ_EXPRESSION");
   IElementType GT_EXPRESSION = new M68kCompositeElementType("GT_EXPRESSION");
   IElementType IDNT_DIRECTIVE = new M68kCompositeElementType("IDNT_DIRECTIVE");
@@ -715,6 +716,9 @@ public interface M68kTypes {
       }
       else if (type == FO_DIRECTIVE) {
         return new M68kFoDirectiveImpl(node);
+      }
+      else if (type == FPU_DIRECTIVE) {
+        return new M68kFpuDirectiveImpl(node);
       }
       else if (type == GT_EQ_EXPRESSION) {
         return new M68kGtEqExpressionImpl(node);

@@ -1,0 +1,7 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kFpuDirectiveImpl(FPU_DIRECTIVE)
+    PsiElement(fpu)('fpu')
+    PsiWhiteSpace(' ')
+    M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+      PsiElement(dec_number)('1')

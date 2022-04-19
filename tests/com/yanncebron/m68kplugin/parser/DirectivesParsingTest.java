@@ -477,6 +477,14 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" echo \"some text\"");
   }
 
+  public void testFpuDirective() throws Exception {
+    doCodeTest(" fpu 1");
+  }
+
+  public void testFpuDirectiveMissingCpID() throws Exception {
+    doCodeTest(" fpu ");
+  }
+
   public void testCpu32Directive() throws Exception {
     doCodeTest(" cpu32");
   }

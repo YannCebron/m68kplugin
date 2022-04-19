@@ -615,6 +615,10 @@ public class M68kVisitor extends PsiElementVisitor {
     // visitDirective(o);
   }
 
+  public void visitFpuDirective(@NotNull M68kFpuDirective o) {
+    visitDirective(o);
+  }
+
   public void visitGtEqExpression(@NotNull M68kGtEqExpression o) {
     visitBinaryExpression(o);
   }

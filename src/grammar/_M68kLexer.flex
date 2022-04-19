@@ -545,6 +545,7 @@ Z=[zZ]
   {M}{C}68060                  { yybegin(AFTER_OPERAND); return MC68060; }
   {A}{C}68080                  { yybegin(AFTER_OPERAND); return AC68080; }
   {M}{A}{C}{H}{I}{N}{E}        { yybegin(IN_OPERAND); return MACHINE; }
+  {F}{P}{U}                    { yybegin(IN_OPERAND); return FPU; }
 
   // after 'label:', duplicated from <AFTER_LABEL>
   {M}{A}{C}{R}{O}              { yybegin(AFTER_OPERAND); return MACRO; }

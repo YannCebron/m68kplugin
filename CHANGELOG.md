@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Added
 - support `CPU32` directive
+- support `FPU` directive
 - support `OUTPUT` directive
 
 ### Fixed

@@ -231,6 +231,17 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
+  // expression
+  static boolean cpID(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "cpID")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<cpID>");
+    r = M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // cpu32
   public static boolean cpu32_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cpu32_directive")) return false;
@@ -450,6 +461,7 @@ public class M68kDirectivesParser {
   //                        pushsection_directive |
   //                        odd_directive |
   //                        echo_directive |
+  //                        fpu_directive |
   //                        cpu32_directive |
   //                        mc68000_directive |
   //                        mc68010_directive |
@@ -546,6 +558,7 @@ public class M68kDirectivesParser {
     if (!r) r = pushsection_directive(b, l + 1);
     if (!r) r = odd_directive(b, l + 1);
     if (!r) r = echo_directive(b, l + 1);
+    if (!r) r = fpu_directive(b, l + 1);
     if (!r) r = cpu32_directive(b, l + 1);
     if (!r) r = mc68000_directive(b, l + 1);
     if (!r) r = mc68010_directive(b, l + 1);
@@ -860,6 +873,19 @@ public class M68kDirectivesParser {
     if (!recursion_guard_(b, l, "fo_directive_3")) return false;
     M68kExpressionParser.expression(b, l + 1, -1);
     return true;
+  }
+
+  /* ********************************************************** */
+  // fpu cpID
+  public static boolean fpu_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "fpu_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", FPU)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, FPU_DIRECTIVE, "<directive>");
+    r = consumeToken(b, FPU);
+    r = r && cpID(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
   }
 
   /* ********************************************************** */

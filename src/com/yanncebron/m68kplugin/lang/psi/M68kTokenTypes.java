@@ -154,6 +154,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType FAIL = new M68kTokenType("fail");
   public static final IElementType FAR = new M68kTokenType("far");
   public static final IElementType FO = new M68kTokenType("fo");
+  public static final IElementType FPU = new M68kTokenType("fpu");
   public static final IElementType GT = new M68kTokenType(">");
   public static final IElementType GT_EQ = new M68kTokenType(">=");
   public static final IElementType GT_GT = new M68kTokenType(">>");

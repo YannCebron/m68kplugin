@@ -207,6 +207,7 @@ public final class M68kTokenGroups {
     FAIL,
     FAR,
     FO,
+    FPU,
     IDNT,
     INCBIN,
     INCDIR,
