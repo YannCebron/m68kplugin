@@ -21,10 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmRegisterList;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmRrd;
 import com.yanncebron.m68kplugin.lang.psi.M68kExgInstruction;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kDcDirective;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kDrDirective;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kPrintvDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kBinaryExpression;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 import org.jetbrains.annotations.NotNull;
@@ -42,6 +39,12 @@ public class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
     }
     if (element instanceof M68kPrintvDirective) {
       return ((M68kPrintvDirective) element).getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
+    }
+    if (element instanceof M68kXdefDirective) {
+      return ((M68kXdefDirective) element).getLabelRefExpressionList().toArray(PsiElement.EMPTY_ARRAY);
+    }
+    if (element instanceof M68kXrefDirective) {
+      return ((M68kXrefDirective) element).getLabelRefExpressionList().toArray(PsiElement.EMPTY_ARRAY);
     }
 
     if (element instanceof M68kBinaryExpression) {

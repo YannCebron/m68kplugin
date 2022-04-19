@@ -9,6 +9,7 @@
   - macro call parameters
   - `DR` directive
   - `PRINTV` directive
+  - `XDEF`/`XREF` directive
 
 ### Fixed
 - fix assertion via "Directives" reference documentation provider invoked on macro call [#44](https://github.com/YannCebron/m68kplugin/issues/44)
