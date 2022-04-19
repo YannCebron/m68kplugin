@@ -78,8 +78,6 @@
 ## Editing
 
 - `EnterHandlerDelegate` smart indent? or `LineIndentProvider`
-- expand/shrink selection:
-  - **WIP** "blocks" - stop at branch instructions
 - `M68kCommaFlipper`: swap src\|dest if valid
 - formatter
 - documentation:
