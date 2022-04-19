@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Added
+- support `OUTPUT` directive
 
 ### Fixed
 - fix assertion in "Directives" documentation provider [#44](https://github.com/YannCebron/m68kplugin/issues/44)

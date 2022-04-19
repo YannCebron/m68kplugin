@@ -66,7 +66,6 @@ Unsupported directives, these will display false positive
 - `module`
 - `nref` (PhxAss)
 - `optc`
-- `output`
 - `public`
 - `rorg`
 - `showoffset` (PhxAss)

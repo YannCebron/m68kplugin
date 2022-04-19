@@ -992,6 +992,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitBoolInstructionBase(o);
   }
 
+  public void visitOutputDirective(@NotNull M68kOutputDirective o) {
+    visitDirective(o);
+  }
+
   public void visitPageDirective(@NotNull M68kPageDirective o) {
     visitDirective(o);
   }

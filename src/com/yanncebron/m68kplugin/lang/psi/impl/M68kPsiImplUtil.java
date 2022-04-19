@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncbinDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncdirDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncludeDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kOutputDirective;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -81,22 +82,27 @@ public class M68kPsiImplUtil {
 
   @Nullable
   public static String getIncludePath(M68kIncbinDirective includeDirective) {
-    return _getIncludePath(includeDirective);
+    return _getStringPath(includeDirective);
   }
 
   @Nullable
   public static String getIncludePath(M68kIncludeDirective includeDirective) {
-    return _getIncludePath(includeDirective);
+    return _getStringPath(includeDirective);
   }
 
   @Nullable
   public static String getIncludePath(M68kIncdirDirective includeDirective) {
-    return _getIncludePath(includeDirective);
+    return _getStringPath(includeDirective);
   }
 
   @Nullable
-  private static String _getIncludePath(M68kPsiElement includeDirective) {
-    final ASTNode node = includeDirective.getNode().findChildByType(M68kTokenTypes.STRING);
+  public static String getOutputPath(M68kOutputDirective outputDirective) {
+    return _getStringPath(outputDirective);
+  }
+
+  @Nullable
+  private static String _getStringPath(M68kPsiElement stringDirective) {
+    final ASTNode node = stringDirective.getNode().findChildByType(M68kTokenTypes.STRING);
     if (node == null) {
       return null;
     }

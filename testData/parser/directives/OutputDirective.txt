@@ -1,0 +1,6 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kOutputDirectiveImpl(OUTPUT_DIRECTIVE)
+    PsiElement(output)('output')
+    PsiWhiteSpace(' ')
+    PsiElement(string)('fileName')

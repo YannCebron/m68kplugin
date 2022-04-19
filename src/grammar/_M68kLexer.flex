@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -484,6 +484,7 @@ Z=[zZ]
   {O}{F}{F}{S}{E}{T}           { yybegin(IN_OPERAND); return OFFSET; }
   {O}{P}{T}                    { yybegin(IN_OPERAND); return OPT; }
   {O}{R}{G}                    { yybegin(IN_OPERAND); return ORG; }
+  {O}{U}{T}{P}{U}{T}           { yybegin(STRING_DIRECTIVE); return OUTPUT; }
   {P}{A}{G}{E}                 { yybegin(AFTER_OPERAND); return PAGE; }
   {P}{L}{E}{N}                 { yybegin(IN_OPERAND); return PLEN; }
   {P}{O}{P}{S}{E}{C}{T}{I}{O}{N}    { yybegin(AFTER_OPERAND); return POPSECTION; }

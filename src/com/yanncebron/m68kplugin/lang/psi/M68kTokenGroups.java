@@ -236,6 +236,7 @@ public final class M68kTokenGroups {
     OFFSET,
     OPT,
     ORG,
+    OUTPUT,
     PAGE,
     PLEN,
     POPSECTION,
