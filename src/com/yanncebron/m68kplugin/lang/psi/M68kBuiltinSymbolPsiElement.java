@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.SyntheticElement;
 import com.intellij.psi.impl.FakePsiElement;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Fake resolve element for {@link M68kBuiltinSymbol}.
@@ -36,6 +37,12 @@ public final class M68kBuiltinSymbolPsiElement extends FakePsiElement implements
 
   @Override
   public PsiElement getParent() {
+    return psiElement;
+  }
+
+  // navigate to itself
+  @Override
+  public @NotNull PsiElement getNavigationElement() {
     return psiElement;
   }
 
