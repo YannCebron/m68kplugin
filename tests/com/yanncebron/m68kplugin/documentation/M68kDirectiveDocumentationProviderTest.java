@@ -27,6 +27,13 @@ import com.yanncebron.m68kplugin.lang.psi.directive.M68kSoDirective;
 @SuppressWarnings("SpellCheckingInspection")
 public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase {
 
+  public void testMacroCallDirectiveNoReferenceDocAvailable() {
+    doTest(" macro<caret>Name param", (psiElement, documentationProvider) -> {
+      String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
+      assertNull(doc);
+    });
+  }
+
   public void testDcbDirectiveNoReferenceDocAvailable() {
     doTest(" dc<caret>b", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());

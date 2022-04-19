@@ -31,6 +31,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -55,6 +56,8 @@ public class M68kDirectiveDocumentationProvider extends AbstractDocumentationPro
     if (!(element instanceof M68kDirective)) return null;
 
     M68kDirective directive = (M68kDirective) element;
+    if (directive instanceof M68kMacroCallDirective) return null;
+
     ASTNode directiveNode = directive.getNode().findChildByType(M68kTokenGroups.DIRECTIVES);
     assert directiveNode != null : directive.getText();
 
