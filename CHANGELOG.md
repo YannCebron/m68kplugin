@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [0.1.5]
 ### Added
 - support `CPU32` directive
 - support `FPU` directive
