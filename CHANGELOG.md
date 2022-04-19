@@ -8,6 +8,7 @@
 - support _Code | Move Element Left/Right_
   - macro call parameters
   - `DR` directive
+  - `PRINTV` directive
 
 ### Fixed
 - fix assertion via "Directives" reference documentation provider invoked on macro call [#44](https://github.com/YannCebron/m68kplugin/issues/44)
