@@ -21,6 +21,8 @@ import com.intellij.psi.PsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmRegisterList;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmRrd;
 import com.yanncebron.m68kplugin.lang.psi.M68kExgInstruction;
+import com.yanncebron.m68kplugin.lang.psi.conditional.M68kIfcConditionalAssemblyDirective;
+import com.yanncebron.m68kplugin.lang.psi.conditional.M68kIfncConditionalAssemblyDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kBinaryExpression;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
@@ -45,6 +47,23 @@ public class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
     }
     if (element instanceof M68kXrefDirective) {
       return ((M68kXrefDirective) element).getLabelRefExpressionList().toArray(PsiElement.EMPTY_ARRAY);
+    }
+
+    if (element instanceof M68kIfcConditionalAssemblyDirective) {
+      M68kIfcConditionalAssemblyDirective directive = (M68kIfcConditionalAssemblyDirective) element;
+      M68kExpression arg1 = directive.getArg1();
+      M68kExpression arg2 = directive.getArg2();
+      if (arg1 != null && arg2 != null) {
+        return new PsiElement[]{arg1, arg2};
+      }
+    }
+    if (element instanceof M68kIfncConditionalAssemblyDirective) {
+      M68kIfncConditionalAssemblyDirective directive = (M68kIfncConditionalAssemblyDirective) element;
+      M68kExpression arg1 = directive.getArg1();
+      M68kExpression arg2 = directive.getArg2();
+      if (arg1 != null && arg2 != null) {
+        return new PsiElement[]{arg1, arg2};
+      }
     }
 
     if (element instanceof M68kBinaryExpression) {

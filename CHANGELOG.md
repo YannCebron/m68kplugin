@@ -8,6 +8,7 @@
 - support _Code | Move Element Left/Right_
   - macro call parameters
   - `DR` directive
+  - `IFC`/`IFNC` conditional assembly directive
   - `PRINTV` directive
   - `XDEF`/`XREF` directive
 
