@@ -1532,7 +1532,7 @@ msource_directive ::= MSOURCE msource_param
 
 offset_directive ::= OFFSET expression?
 {
-  pin =1
+  pin = 1
 }
 
 
