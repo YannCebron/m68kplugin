@@ -1469,6 +1469,7 @@ private cpID ::= expression
 }
 fpu_directive     ::= fpu cpID
 {
+  pin = 1
   methods = [
      cpID = "expression"
   ]

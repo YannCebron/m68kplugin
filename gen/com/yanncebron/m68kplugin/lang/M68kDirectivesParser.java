@@ -880,12 +880,13 @@ public class M68kDirectivesParser {
   public static boolean fpu_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "fpu_directive")) return false;
     if (!nextTokenIs(b, "<directive>", FPU)) return false;
-    boolean r;
+    boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, FPU_DIRECTIVE, "<directive>");
     r = consumeToken(b, FPU);
+    p = r; // pin = 1
     r = r && cpID(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */

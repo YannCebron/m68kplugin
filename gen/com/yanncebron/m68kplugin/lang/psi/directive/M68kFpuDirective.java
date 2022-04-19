@@ -22,7 +22,7 @@ import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
 public interface M68kFpuDirective extends M68kDirective {
 
-  @NotNull
+  @Nullable
   M68kExpression getCpID();
 
 }

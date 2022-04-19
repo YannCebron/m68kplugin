@@ -45,9 +45,9 @@ public class M68kFpuDirectiveImpl extends ASTWrapperPsiElement implements M68kFp
   }
 
   @Override
-  @NotNull
+  @Nullable
   public M68kExpression getCpID() {
-    return notNullChild(PsiTreeUtil.getChildOfType(this, M68kExpression.class));
+    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
   }
 
 }

@@ -23,9 +23,14 @@ import org.jetbrains.annotations.NotNull;
 public class FpuDirectivePsiTest extends M68kPsiTestCase {
 
   public void testCpID() {
-    M68kFpuDirective directive = parse(" fpu 1");
+    M68kFpuDirective directive = parse("fpu 1");
     M68kNumberExpression numberExpression = assertInstanceOf(directive.getCpID(), M68kNumberExpression.class);
     assertEquals("1", numberExpression.getText());
+  }
+
+  public void testMissingCpID() {
+    M68kFpuDirective directive = parse("fpu");
+    assertNull(directive.getCpID());
   }
 
   @NotNull
