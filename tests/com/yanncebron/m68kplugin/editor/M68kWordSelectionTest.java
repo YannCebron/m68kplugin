@@ -44,6 +44,10 @@ public class M68kWordSelectionTest extends BasePlatformTestCase {
     doExpandTest(4);
   }
 
+  public void testMacroInsideBlock() {
+    doExpandTest(4);
+  }
+
   private void doExpandTest(int times) {
     myFixture.configureByFile(getTestName(true) + ".s");
     for (int i = 0; i < times; i++) {

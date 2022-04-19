@@ -10,6 +10,7 @@
 - fix assertion in "Directives" documentation provider [#44](https://github.com/YannCebron/m68kplugin/issues/44)
 
 ### Changed
+- Improve _Edit | Extend/Shrink Selection_ for blocks inside conditional assembly/macro directives
 
 ## [0.1.4]
 ### Added

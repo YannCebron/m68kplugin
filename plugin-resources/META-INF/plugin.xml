@@ -139,6 +139,8 @@
         implementation="com.yanncebron.m68kplugin.editor.M68kLabelBlocksSelectionHandler"/>
     <extendWordSelectionHandler
         implementation="com.yanncebron.m68kplugin.editor.M68kConditionalAssemblyBlocksSelectionHandler"/>
+    <extendWordSelectionHandler
+        implementation="com.yanncebron.m68kplugin.editor.M68kMacroBlocksSelectionHandler"/>
     <lang.implementationTextSelectioner
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.editor.M68kImplementationTextSelectioner"/>
