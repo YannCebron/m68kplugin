@@ -7,7 +7,7 @@
 - support `OUTPUT` directive
 
 ### Fixed
-- fix assertion in "Directives" documentation provider [#44](https://github.com/YannCebron/m68kplugin/issues/44)
+- fix assertion via "Directives" reference documentation provider invoked on macro call [#44](https://github.com/YannCebron/m68kplugin/issues/44)
 
 ### Changed
 - Improve _Edit | Extend/Shrink Selection_ for blocks inside conditional assembly/macro directives
