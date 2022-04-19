@@ -80,7 +80,6 @@
 - `EnterHandlerDelegate` smart indent? or `LineIndentProvider`
 - expand/shrink selection:
   - **WIP** "blocks" - stop at branch instructions
-  - macro/conditional assembly blocks
 - `M68kCommaFlipper`: swap src\|dest if valid
 - formatter
 - documentation:
