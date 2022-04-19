@@ -231,6 +231,18 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
+  // cpu32
+  public static boolean cpu32_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "cpu32_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", CPU32)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, CPU_32_DIRECTIVE, "<directive>");
+    r = consumeToken(b, CPU32);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // CSEG
   public static boolean cseg_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cseg_directive")) return false;
@@ -438,6 +450,7 @@ public class M68kDirectivesParser {
   //                        pushsection_directive |
   //                        odd_directive |
   //                        echo_directive |
+  //                        cpu32_directive |
   //                        mc68000_directive |
   //                        mc68010_directive |
   //                        mc68020_directive |
@@ -533,6 +546,7 @@ public class M68kDirectivesParser {
     if (!r) r = pushsection_directive(b, l + 1);
     if (!r) r = odd_directive(b, l + 1);
     if (!r) r = echo_directive(b, l + 1);
+    if (!r) r = cpu32_directive(b, l + 1);
     if (!r) r = mc68000_directive(b, l + 1);
     if (!r) r = mc68010_directive(b, l + 1);
     if (!r) r = mc68020_directive(b, l + 1);

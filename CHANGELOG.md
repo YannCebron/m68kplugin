@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Added
+- support `CPU32` directive
 - support `OUTPUT` directive
 
 ### Fixed

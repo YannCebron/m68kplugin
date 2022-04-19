@@ -101,6 +101,7 @@ public interface M68kTypes {
   IElementType CODE_C_DIRECTIVE = new M68kCompositeElementType("CODE_C_DIRECTIVE");
   IElementType CODE_DIRECTIVE = new M68kCompositeElementType("CODE_DIRECTIVE");
   IElementType CODE_F_DIRECTIVE = new M68kCompositeElementType("CODE_F_DIRECTIVE");
+  IElementType CPU_32_DIRECTIVE = new M68kCompositeElementType("CPU_32_DIRECTIVE");
   IElementType CSEG_DIRECTIVE = new M68kCompositeElementType("CSEG_DIRECTIVE");
   IElementType DATA_C_DIRECTIVE = new M68kCompositeElementType("DATA_C_DIRECTIVE");
   IElementType DATA_DIRECTIVE = new M68kCompositeElementType("DATA_DIRECTIVE");
@@ -549,6 +550,9 @@ public interface M68kTypes {
       }
       else if (type == CODE_F_DIRECTIVE) {
         return new M68kCodeFDirectiveImpl(node);
+      }
+      else if (type == CPU_32_DIRECTIVE) {
+        return new M68kCpu32DirectiveImpl(node);
       }
       else if (type == CSEG_DIRECTIVE) {
         return new M68kCsegDirectiveImpl(node);

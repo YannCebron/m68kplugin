@@ -183,6 +183,7 @@ public final class M68kTokenGroups {
     CODE,
     CODE_C,
     CODE_F,
+    CPU32,
     CSEG,
     DATA,
     DATA_C,

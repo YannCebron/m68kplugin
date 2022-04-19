@@ -50,7 +50,6 @@ Unsupported directives, these will display false positive
 - `comm`
 - `comment`
 - `common`
-- `cpu32`
 - `debug`
 - `dsource`
 - `entry`, `extrn`, `global`, `export` == `xdef`

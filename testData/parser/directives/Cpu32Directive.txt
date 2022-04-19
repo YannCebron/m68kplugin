@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kCpu32DirectiveImpl(CPU_32_DIRECTIVE)
+    PsiElement(cpu32)('cpu32')

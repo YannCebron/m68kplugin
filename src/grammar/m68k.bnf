@@ -1059,7 +1059,7 @@ roxr_instruction ::= ROXR shift_tail
   implements("(blk|set|equr|reg|even|odd|dc|dcb|dr|ds|dx|align|cnop|incbin|incdir|include|rsset|rsreset|rs)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(opt|org|macro|endm|mexit|macro_parameter|macro_call|end|section|addwatch|jumperr|jumpptr|list|nolist|page|nopage|plen|llen|spc|inline|einline|rem|erem|xdef|xref|rept|endr|fail|printt|printv|load|ttl|idnt|far|near|near_code|init_near|popsection|pushsection|echo|auto|msource|offset|mask2|output)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(text|cseg|code|code_c|code_f|data|dseg|data_c|data_f|bss|bss_c|bss_f)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
-  implements("(machine|(mc68|ac68).*)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
+  implements("(machine|cpu32|(mc68|ac68).*)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(.*)fo_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(.*)so_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("equ_directive_base") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
@@ -1139,6 +1139,7 @@ private directives ::= dc_directive |
                        pushsection_directive |
                        odd_directive |
                        echo_directive |
+                       cpu32_directive |
                        mc68000_directive |
                        mc68010_directive |
                        mc68020_directive |
@@ -1461,7 +1462,7 @@ popsection_directive ::= POPSECTION
 
 pushsection_directive ::= PUSHSECTION
 
-
+cpu32_directive   ::= cpu32
 mc68000_directive ::= mc68000
 mc68010_directive ::= mc68010
 mc68020_directive ::= mc68020

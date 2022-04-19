@@ -368,6 +368,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitDirective(o);
   }
 
+  public void visitCpu32Directive(@NotNull M68kCpu32Directive o) {
+    visitDirective(o);
+  }
+
   public void visitCsegDirective(@NotNull M68kCsegDirective o) {
     visitDirective(o);
   }

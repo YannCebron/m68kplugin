@@ -536,6 +536,7 @@ Z=[zZ]
   {E}{L}{S}{E}                 { yybegin(AFTER_OPERAND); return ELSE; }
   {E}{L}{S}{E}{I}{F}           { yybegin(AFTER_OPERAND); return ELSEIF; }
 
+  {C}{P}{U}32                  { yybegin(AFTER_OPERAND); return CPU32; }
   {M}{C}68000                  { yybegin(AFTER_OPERAND); return MC68000; }
   {M}{C}68010                  { yybegin(AFTER_OPERAND); return MC68010; }
   {M}{C}68020                  { yybegin(AFTER_OPERAND); return MC68020; }

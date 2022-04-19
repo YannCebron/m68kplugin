@@ -87,6 +87,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType COLON = new M68kTokenType(":");
   public static final IElementType COMMA = new M68kTokenType(",");
   public static final IElementType COMMENT = new M68kTokenType("comment");
+  public static final IElementType CPU32 = new M68kTokenType("cpu32");
   public static final IElementType CSEG = new M68kTokenType("cseg");
   public static final IElementType DATA = new M68kTokenType("data");
   public static final IElementType DATA_C = new M68kTokenType("data_c");

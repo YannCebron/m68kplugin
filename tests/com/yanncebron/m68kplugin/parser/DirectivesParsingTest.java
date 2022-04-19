@@ -477,6 +477,10 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" echo \"some text\"");
   }
 
+  public void testCpu32Directive() throws Exception {
+    doCodeTest(" cpu32");
+  }
+
   public void testMc68000Directive() throws Exception {
     doCodeTest(" mc68000");
   }
