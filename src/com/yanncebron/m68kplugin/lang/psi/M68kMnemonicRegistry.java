@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -146,7 +146,7 @@ public final class M68kMnemonicRegistry {
   }
 
   private M68kMnemonicRegistry() {
-    // Total mnemonics: 311
+// Total mnemonics: 312
     mnemonics.putValue(M68kTokenTypes.ABCD,
       new M68kMnemonic(M68kTokenTypes.ABCD,
         M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER,
@@ -1152,6 +1152,11 @@ public final class M68kMnemonicRegistry {
         M68kOperand.DATA_REGISTER, M68kOperand.NONE,
         M68kDataSize.GROUP_BWL,
         M68kCpu.GROUP_68000_UP));
+    mnemonics.putValue(M68kTokenTypes.RTD,
+      new M68kMnemonic(M68kTokenTypes.RTD,
+        M68kOperand.QUICK_IMMEDIATE, M68kOperand.NONE,
+        M68kDataSize.GROUP_UNSIZED,
+        M68kCpu.GROUP_68010_UP));
     mnemonics.putValue(M68kTokenTypes.RTE,
       new M68kMnemonic(M68kTokenTypes.RTE,
         M68kOperand.NONE, M68kOperand.NONE,

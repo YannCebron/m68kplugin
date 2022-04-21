@@ -1091,6 +1091,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitDirective(o);
   }
 
+  public void visitRtdInstruction(@NotNull M68kRtdInstruction o) {
+    visitInstruction(o);
+  }
+
   public void visitRteInstruction(@NotNull M68kRteInstruction o) {
     visitPrivilegedInstruction(o);
     // visitInstruction(o);

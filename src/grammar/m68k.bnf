@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -529,6 +529,7 @@ private jump_instructions ::= jsr_instruction|
                               bsr_instruction |
                               jmp_instruction |
                               rts_instruction |
+                              rtd_instruction |
                               rte_instruction |
                               rtr_instruction
 
@@ -546,6 +547,19 @@ jmp_instruction ::= JMP jmp_jsr_tail
 jsr_instruction ::= JSR jmp_jsr_tail
 
 rts_instruction ::= RTS
+
+private rtd_displacement ::= HASH expression
+{
+  pin = 1
+  name = "#displacement"
+}
+rtd_instruction ::= RTD rtd_displacement
+{
+  methods = [
+    displacement = "expression"
+  ]
+}
+
 rte_instruction ::= RTE
 {
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kPrivilegedInstruction"

@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Added
+- support `RTD` instruction (68010+)
 
 ### Fixed
 

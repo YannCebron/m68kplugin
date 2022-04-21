@@ -269,6 +269,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType RS = new M68kTokenType("rs");
   public static final IElementType RSRESET = new M68kTokenType("rsreset");
   public static final IElementType RSSET = new M68kTokenType("rsset");
+  public static final IElementType RTD = new M68kTokenType("rtd");
   public static final IElementType RTE = new M68kTokenType("rte");
   public static final IElementType RTR = new M68kTokenType("rtr");
   public static final IElementType RTS = new M68kTokenType("rts");

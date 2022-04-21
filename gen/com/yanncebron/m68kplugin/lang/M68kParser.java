@@ -2428,6 +2428,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   //                               bsr_instruction |
   //                               jmp_instruction |
   //                               rts_instruction |
+  //                               rtd_instruction |
   //                               rte_instruction |
   //                               rtr_instruction
   static boolean jump_instructions(PsiBuilder b, int l) {
@@ -2437,6 +2438,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = bsr_instruction(b, l + 1);
     if (!r) r = jmp_instruction(b, l + 1);
     if (!r) r = rts_instruction(b, l + 1);
+    if (!r) r = rtd_instruction(b, l + 1);
     if (!r) r = rte_instruction(b, l + 1);
     if (!r) r = rtr_instruction(b, l + 1);
     return r;
@@ -3580,6 +3582,34 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, ROXR);
     p = r; // pin = 1
     r = r && shift_tail(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // HASH expression
+  static boolean rtd_displacement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "rtd_displacement")) return false;
+    if (!nextTokenIs(b, "<#displacement>", HASH)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, null, "<#displacement>");
+    r = consumeToken(b, HASH);
+    p = r; // pin = 1
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // RTD rtd_displacement
+  public static boolean rtd_instruction(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "rtd_instruction")) return false;
+    if (!nextTokenIs(b, "<instruction>", RTD)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, RTD_INSTRUCTION, "<instruction>");
+    r = consumeToken(b, RTD);
+    p = r; // pin = 1
+    r = r && rtd_displacement(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

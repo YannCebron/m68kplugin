@@ -1,0 +1,6 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kRtdInstructionImpl(RTD_INSTRUCTION)
+    PsiElement(rtd)('rtd')
+    PsiErrorElement:<#displacement> expected
+      <empty list>

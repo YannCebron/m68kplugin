@@ -5310,6 +5310,12 @@ label17: bvs         label17
 
 ********************************************************************************
 
+* M68kMnemonic{rtd, deprecated=false, src=QUICK_IMMEDIATE, dst=NONE, [UNSIZED], [M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         rtd       #1
+
+
+********************************************************************************
+
 * M68kMnemonic{rte, deprecated=false, src=NONE, dst=NONE, [UNSIZED], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          rte
 
@@ -6405,6 +6411,6 @@ label17: bvs         label17
 
 * M68kMnemonic{unlk, deprecated=false, src=ADDRESS_REGISTER, dst=NONE, [UNSIZED], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          unlk      a0
-* Instructions count: 127
+* Instructions count: 128
 
-* 0/5506 deprecated: 781
+* 0/5507 deprecated: 781

@@ -317,6 +317,7 @@ Z=[zZ]
   {B}{S}{R} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BSR; }
 
   {R}{T}{S}                    { yybegin(AFTER_OPERAND); return RTS; }
+  {R}{T}{D}                    { yybegin(IN_OPERAND); return RTD; }
   {R}{T}{E}                    { yybegin(AFTER_OPERAND); return RTE; }
   {R}{T}{R}                    { yybegin(AFTER_OPERAND); return RTR; }
 

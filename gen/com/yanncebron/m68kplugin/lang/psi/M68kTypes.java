@@ -271,6 +271,7 @@ public interface M68kTypes {
   IElementType RSRESET_DIRECTIVE = new M68kCompositeElementType("RSRESET_DIRECTIVE");
   IElementType RSSET_DIRECTIVE = new M68kCompositeElementType("RSSET_DIRECTIVE");
   IElementType RS_DIRECTIVE = new M68kCompositeElementType("RS_DIRECTIVE");
+  IElementType RTD_INSTRUCTION = new M68kCompositeElementType("RTD_INSTRUCTION");
   IElementType RTE_INSTRUCTION = new M68kCompositeElementType("RTE_INSTRUCTION");
   IElementType RTR_INSTRUCTION = new M68kCompositeElementType("RTR_INSTRUCTION");
   IElementType RTS_INSTRUCTION = new M68kCompositeElementType("RTS_INSTRUCTION");
@@ -1058,6 +1059,9 @@ public interface M68kTypes {
       }
       else if (type == RS_DIRECTIVE) {
         return new M68kRsDirectiveImpl(node);
+      }
+      else if (type == RTD_INSTRUCTION) {
+        return new M68kRtdInstructionImpl(node);
       }
       else if (type == RTE_INSTRUCTION) {
         return new M68kRteInstructionImpl(node);

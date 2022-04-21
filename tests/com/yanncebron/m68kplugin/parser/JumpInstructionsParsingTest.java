@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -87,6 +87,14 @@ public class JumpInstructionsParsingTest extends M68kParsingTestCase {
 
   public void testRtsInstruction() throws Exception {
     doCodeTest(" rts");
+  }
+
+  public void testRtdInstruction() throws Exception {
+    doCodeTest(" rtd #1");
+  }
+
+  public void testRtdInstructionMissingDisplacement() throws Exception {
+    doCodeTest(" rtd");
   }
 
   public void testRteInstruction() throws Exception {
