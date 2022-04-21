@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import java.util.*;
  */
 public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
+  // testData/sanity/AllInstructionsParsing.s
   private static final boolean DUMP = false;
 
   private static final String INDENT = "         ";
@@ -74,7 +75,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
     dump("* Instructions count: " + M68kTokenGroups.INSTRUCTIONS.getTypes().length);
 
-    assertEquals(5506, total);
+    assertEquals(5507, total);
     assertEmpty(failedVariants);
     assertEquals(781, deprecated);
   }
