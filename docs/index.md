@@ -12,6 +12,8 @@ in [IntelliJ](https://plugins.jetbrains.com/docs/intellij/intellij-platform.html
 ![m68kplugin](assets/m68kplugin_landing.png)
 
 > ⚠️ This plugin is at a very early stage and provided "as-is", please see also [Known Issues](known_issues.md).
+>
+> Please [leave a comment and rating](https://plugins.jetbrains.com/plugin/17712-motorola-68000-series-assembler/reviews) if you like this plugin 😀
 
 ---
 
