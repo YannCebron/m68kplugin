@@ -47,15 +47,16 @@ class M68kParserUtil extends GeneratedParserUtilBase {
   }
 
   /**
-   * Inside macro call parameters, do not parse standalone {@code Rn} (not preceded by {@code ',' or '/'})
+   * Inside macro call parameters, do not parse standalone {@code Rn} (not first after macro name, {@code ',' or '/'})
    * as {@link com.yanncebron.m68kplugin.lang.psi.M68kRegisterRange}
    * to avoid precedence conflict with {@link com.yanncebron.m68kplugin.lang.psi.M68kAdmRrd}.
    */
   static boolean registerRangeStandaloneRegisterValid(PsiBuilder b, @SuppressWarnings("UnusedParameters") int level) {
     if (!insideMacroCall(b, level)) return true;
 
-    IElementType previousElementType = b.rawLookup(-1);
-    return previousElementType == M68kTokenTypes.DIV || previousElementType == M68kTokenTypes.COMMA;
+    IElementType left = b.rawLookup(-1);
+    return  left == M68kTokenTypes.DIV || left == M68kTokenTypes.COMMA ||
+      (left == TokenType.WHITE_SPACE && b.lookAhead(1)== M68kTokenTypes.DIV);
   }
 
 }

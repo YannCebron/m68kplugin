@@ -43,6 +43,10 @@ public class MacroCallParsingTest extends M68kParsingTestCase {
     doCodeTest(" MACRO_NAME d7,d0-d1/a0");
   }
 
+  public void testMacroCallRegisterListStartingWithSlash() throws IOException {
+    doCodeTest(" MACRO_NAME d7/d2/d0-d1/a0");
+  }
+
   public void testMacroCallMultipleRegisterList() throws IOException {
     doCodeTest(" MACRO_NAME d7,d0-d1/a0,d0/d1/a0-a2");
   }
