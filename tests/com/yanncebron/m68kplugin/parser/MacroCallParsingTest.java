@@ -21,9 +21,9 @@ import com.intellij.testFramework.TestDataPath;
 import java.io.IOException;
 
 @TestDataPath("$PROJECT_ROOT/testData/parser/macrocall")
-public class MacrocallParsingTest extends M68kParsingTestCase {
+public class MacroCallParsingTest extends M68kParsingTestCase {
 
-  public MacrocallParsingTest() {
+  public MacroCallParsingTest() {
     super("macrocall");
   }
 

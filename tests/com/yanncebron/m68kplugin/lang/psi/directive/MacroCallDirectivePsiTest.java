@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class MacrocallDirectivePsiTest extends M68kPsiTestCase {
+public class MacroCallDirectivePsiTest extends M68kPsiTestCase {
 
   public void testNoArgs() {
     M68kMacroCallDirective directive = parse(" MACRO_NAME");
