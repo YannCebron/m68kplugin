@@ -130,5 +130,5 @@ MadMac assembler specific (all directives may be optionally preceded by a dot):
 - string literals:
   - support escape sequence
   - `'\'` and `''''` are valid
-- do not allow spaces (?!)
-- support `equr`/`reg` etc. replacement names `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
+- option: allow whitespaces
+- support `equr`/`reg` replacement names: `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
