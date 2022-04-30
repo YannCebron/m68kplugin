@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -88,12 +88,15 @@ public enum M68kRegister {
     return cpus.contains(cpu);
   }
 
+  /**
+   * @return if register is supported by <em>all</em> given CPUs
+   */
   public boolean isSupported(Set<M68kCpu> cpus) {
     for (M68kCpu m68kCpu : cpus) {
-      if (cpus.contains(m68kCpu)) {
-        return true;
+      if (!isSupported(m68kCpu)) {
+        return false;
       }
     }
-    return false;
+    return true;
   }
 }

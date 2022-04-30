@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -82,6 +82,7 @@ public class M68kRegisterTest extends TestCase {
     assertTrue(M68kRegister.D0.isSupported(M68kCpu.GROUP_68020_UP));
 
     assertFalse(M68kRegister.VBR.isSupported(M68kCpu.M_68000));
+    assertFalse(M68kRegister.VBR.isSupported(M68kCpu.GROUP_68000_UP));
     assertFalse(M68kRegister.SR.isSupported(M68kCpu.M_68851));
   }
 
