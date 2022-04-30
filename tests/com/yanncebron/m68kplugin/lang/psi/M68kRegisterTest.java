@@ -54,16 +54,16 @@ public class M68kRegisterTest extends TestCase {
 
   public void testSpecialRegisters() {
     doTest(M68kTokenTypes.SP, null, M68kRegister.SP);
-    doTest(M68kTokenTypes.SP, "DOESNT_MATTER", M68kRegister.SP);
-    doTest(M68kTokenTypes.USP, "DOESNT_MATTER", M68kRegister.USP);
-    doTest(M68kTokenTypes.SR, "DOESNT_MATTER", M68kRegister.SR);
-    doTest(M68kTokenTypes.CCR, "DOESNT_MATTER", M68kRegister.CCR);
+    doTest(M68kTokenTypes.SP, "DOES_NOT_MATTER", M68kRegister.SP);
+    doTest(M68kTokenTypes.USP, "DOES_NOT_MATTER", M68kRegister.USP);
+    doTest(M68kTokenTypes.SR, "DOES_NOT_MATTER", M68kRegister.SR);
+    doTest(M68kTokenTypes.CCR, "DOES_NOT_MATTER", M68kRegister.CCR);
   }
 
   public void testCtrlRegisters() {
-    doTest(M68kTokenTypes.DFC, "DOESNT_MATTER", M68kRegister.DFC);
-    doTest(M68kTokenTypes.SFC, "DOESNT_MATTER", M68kRegister.SFC);
-    doTest(M68kTokenTypes.VBR, "DOESNT_MATTER", M68kRegister.VBR);
+    doTest(M68kTokenTypes.DFC, "DOES_NOT_MATTER", M68kRegister.DFC);
+    doTest(M68kTokenTypes.SFC, "DOES_NOT_MATTER", M68kRegister.SFC);
+    doTest(M68kTokenTypes.VBR, "DOES_NOT_MATTER", M68kRegister.VBR);
   }
 
   public void testIsSameKind() {
