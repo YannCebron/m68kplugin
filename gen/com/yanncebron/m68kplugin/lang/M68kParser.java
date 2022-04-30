@@ -3440,14 +3440,26 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // register_range_real | adm_rrd
+  // register_range_real |
+  //                    <<registerRangeStandaloneRegisterValid>> adm_rrd
   public static boolean register_range(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "register_range")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, REGISTER_RANGE, "<register range>");
     r = register_range_real(b, l + 1);
-    if (!r) r = adm_rrd(b, l + 1);
+    if (!r) r = register_range_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // <<registerRangeStandaloneRegisterValid>> adm_rrd
+  private static boolean register_range_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "register_range_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = registerRangeStandaloneRegisterValid(b, l + 1);
+    r = r && adm_rrd(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
   }
 

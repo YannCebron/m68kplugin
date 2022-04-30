@@ -338,7 +338,9 @@ private register_range_real ::= adm_rrd MINUS adm_rrd
   pin = 2
 }
 // Rn-Rn | Rn
-register_range ::= register_range_real | adm_rrd {
+register_range ::= register_range_real |
+                   <<registerRangeStandaloneRegisterValid>> adm_rrd
+{
   name = "register range"
   methods = [
     adm_rrd= ""
@@ -1366,11 +1368,14 @@ macro_parameter_directive ::= BACKSLASH macro_parameter_index_parameter
   pin = 1
 }
 
-macro_call_parameter ::= adm_group_all | adm_sr | adm_ccr | adm_usp | adm_group_ctrl_registers
+macro_call_parameter ::= adm_register_list | adm_group_all | adm_sr | adm_ccr | adm_usp | adm_group_ctrl_registers
 {
   name = "macro parameter"
 }
-macro_call_directive ::= MACRO_CALL_ID data_size_all? macro_call_parameter? (COMMA macro_call_parameter)*
+macro_call_directive ::= MACRO_CALL_ID
+                         <<enterMacroCall>>
+                         data_size_all? macro_call_parameter? (COMMA macro_call_parameter)*
+                         <<exitMacroCall>>
 {
   extends = data_sized
   mixin = "com.yanncebron.m68kplugin.lang.psi.directive.impl.M68kMacrocallDirectiveMixIn"

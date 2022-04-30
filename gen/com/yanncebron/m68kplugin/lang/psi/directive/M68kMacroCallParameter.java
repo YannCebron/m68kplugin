@@ -32,6 +32,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kAdmDrd;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmImm;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmPcd;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmPci;
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmRegisterList;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmSfc;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmSr;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmUsp;
@@ -77,6 +78,9 @@ public interface M68kMacroCallParameter extends M68kPsiElement {
 
   @Nullable
   M68kAdmPci getAdmPci();
+
+  @Nullable
+  M68kAdmRegisterList getAdmRegisterList();
 
   @Nullable
   M68kAdmSfc getAdmSfc();

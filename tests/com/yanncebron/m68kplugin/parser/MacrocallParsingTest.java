@@ -39,8 +39,12 @@ public class MacrocallParsingTest extends M68kParsingTestCase {
     doCodeTest(" MACRO_NAME d7,arg,CCR,SFC");
   }
 
-  public void _testMacroCallRegisterList() throws IOException {
+  public void testMacroCallRegisterList() throws IOException {
     doCodeTest(" MACRO_NAME d7,d0-d1/a0");
+  }
+
+  public void testMacroCallMultipleRegisterList() throws IOException {
+    doCodeTest(" MACRO_NAME d7,d0-d1/a0,d0/d1/a0-a2");
   }
 
   public void testMacroCallMultipleArgsMissingArg() throws IOException {

@@ -5,7 +5,9 @@
 - support `RTD` instruction (68010+)
 
 ### Fixed
-- macro call parameters: support control registers (`DFC`, `SFC`, `VBR`)
+- macro call parameters: 
+  - support register lists (`PUSH D0/D3/A0-A2`)
+  - support control registers (`DFC`, `SFC`, `VBR`)
 
 ### Changed
 

@@ -39,6 +39,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kAdmDrd;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmImm;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmPcd;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmPci;
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmRegisterList;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmSfc;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmSr;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmUsp;
@@ -136,6 +137,12 @@ public class M68kMacroCallParameterImpl extends ASTWrapperPsiElement implements 
   @Nullable
   public M68kAdmPci getAdmPci() {
     return PsiTreeUtil.getChildOfType(this, M68kAdmPci.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmRegisterList getAdmRegisterList() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmRegisterList.class);
   }
 
   @Override
