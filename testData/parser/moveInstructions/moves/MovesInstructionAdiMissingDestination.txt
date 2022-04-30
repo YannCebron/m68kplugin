@@ -2,11 +2,14 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kMovesInstructionImpl(MOVES_INSTRUCTION)
     PsiElement(moves)('moves')
-  PsiWhiteSpace(' ')
-  PsiElement(dec_number)('42')
-  PsiElement(()('(')
-  PsiElement(address_register)('a0')
-  PsiElement())(')')
-  PsiElement(,)(',')
-  PsiErrorElement:<data|address register> expected
-    <empty list>
+    PsiWhiteSpace(' ')
+    M68kAdmAdiImpl(ADM_ADI)
+      M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+        PsiElement(dec_number)('42')
+      PsiElement(()('(')
+      M68kAdmArdImpl(ADM_ARD)
+        PsiElement(address_register)('a0')
+      PsiElement())(')')
+    PsiElement(,)(',')
+    PsiErrorElement:<data|address register> expected
+      <empty list>

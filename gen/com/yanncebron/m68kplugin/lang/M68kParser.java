@@ -594,6 +594,23 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+  static boolean adm_group_all_except_rrd(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_group_all_except_rrd")) return false;
+    boolean r;
+    r = adm_imm(b, l + 1);
+    if (!r) r = adm_api(b, l + 1);
+    if (!r) r = adm_ari(b, l + 1);
+    if (!r) r = adm_apd(b, l + 1);
+    if (!r) r = adm_pcd(b, l + 1);
+    if (!r) r = adm_pci(b, l + 1);
+    if (!r) r = adm_adi(b, l + 1);
+    if (!r) r = adm_aix(b, l + 1);
+    if (!r) r = adm_abs(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
   // adm_dfc | adm_sfc | adm_vbr
   static boolean adm_group_ctrl_registers(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_group_ctrl_registers")) return false;
@@ -3209,29 +3226,31 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // adm_group_all_except_ard COMMA adm_rrd
+  // adm_group_all_except_rrd COMMA adm_rrd
   static boolean moves_tail_from(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "moves_tail_from")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = adm_group_all_except_ard(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && adm_rrd(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
+    r = adm_group_all_except_rrd(b, l + 1);
+    p = r; // pin = 1
+    r = r && report_error_(b, consumeToken(b, COMMA));
+    r = p && adm_rrd(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */
   // adm_rrd COMMA adm_group_all_except_ard
   static boolean moves_tail_to(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "moves_tail_to")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
     r = adm_rrd(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && adm_group_all_except_ard(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
+    p = r; // pin = 1
+    r = r && report_error_(b, consumeToken(b, COMMA));
+    r = p && adm_group_all_except_ard(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */
