@@ -469,7 +469,13 @@ movep_instruction ::= MOVEP data_size_word_long?
                       )
 
 private movec_from_ctrl_tail ::= adm_group_ctrl_registers COMMA adm_rrd
+{
+  pin = 1
+}
 private movec_to_ctrl_tail ::= adm_rrd COMMA adm_group_ctrl_registers
+{
+  pin = 1
+}
 movec_instruction ::= MOVEC data_size_long?
                       (
                         movec_from_ctrl_tail |
