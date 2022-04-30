@@ -34,12 +34,15 @@ import com.yanncebron.m68kplugin.lang.psi.M68kAdmApi;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmArd;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmAri;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmCcr;
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmDfc;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmDrd;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmImm;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmPcd;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmPci;
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmSfc;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmSr;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmUsp;
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmVbr;
 
 public class M68kMacroCallParameterImpl extends ASTWrapperPsiElement implements M68kMacroCallParameter {
 
@@ -107,6 +110,12 @@ public class M68kMacroCallParameterImpl extends ASTWrapperPsiElement implements 
 
   @Override
   @Nullable
+  public M68kAdmDfc getAdmDfc() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmDfc.class);
+  }
+
+  @Override
+  @Nullable
   public M68kAdmDrd getAdmDrd() {
     return PsiTreeUtil.getChildOfType(this, M68kAdmDrd.class);
   }
@@ -131,6 +140,12 @@ public class M68kMacroCallParameterImpl extends ASTWrapperPsiElement implements 
 
   @Override
   @Nullable
+  public M68kAdmSfc getAdmSfc() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmSfc.class);
+  }
+
+  @Override
+  @Nullable
   public M68kAdmSr getAdmSr() {
     return PsiTreeUtil.getChildOfType(this, M68kAdmSr.class);
   }
@@ -139,6 +154,12 @@ public class M68kMacroCallParameterImpl extends ASTWrapperPsiElement implements 
   @Nullable
   public M68kAdmUsp getAdmUsp() {
     return PsiTreeUtil.getChildOfType(this, M68kAdmUsp.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmVbr getAdmVbr() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmVbr.class);
   }
 
 }

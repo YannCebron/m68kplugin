@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ public class MacrocallParsingTest extends M68kParsingTestCase {
   }
 
   public void testMacroCallMultipleArgs() throws IOException {
-    doCodeTest(" MACRO_NAME d7,arg,CCR");
+    doCodeTest(" MACRO_NAME d7,arg,CCR,SFC");
   }
 
   public void _testMacroCallRegisterList() throws IOException {

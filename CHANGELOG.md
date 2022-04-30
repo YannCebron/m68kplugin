@@ -5,6 +5,7 @@
 - support `RTD` instruction (68010+)
 
 ### Fixed
+- macro call parameters: support control registers (`DFC`, `SFC`, `VBR`)
 
 ### Changed
 

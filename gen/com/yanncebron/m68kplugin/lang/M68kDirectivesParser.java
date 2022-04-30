@@ -1164,7 +1164,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // adm_group_all | adm_sr | adm_ccr | adm_usp
+  // adm_group_all | adm_sr | adm_ccr | adm_usp | adm_group_ctrl_registers
   public static boolean macro_call_parameter(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "macro_call_parameter")) return false;
     boolean r;
@@ -1173,6 +1173,7 @@ public class M68kDirectivesParser {
     if (!r) r = adm_sr(b, l + 1);
     if (!r) r = adm_ccr(b, l + 1);
     if (!r) r = adm_usp(b, l + 1);
+    if (!r) r = adm_group_ctrl_registers(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

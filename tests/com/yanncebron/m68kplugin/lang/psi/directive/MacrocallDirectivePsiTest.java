@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,12 +32,14 @@ public class MacrocallDirectivePsiTest extends M68kPsiTestCase {
   }
 
   public void testArgs() {
-    M68kMacroCallDirective directive = parse(" MACRO_NAME d0,label");
+    M68kMacroCallDirective directive = parse(" MACRO_NAME d0,label,SR,VBR");
 
     final List<M68kMacroCallParameter> parameters = directive.getMacroCallParameterList();
-    assertSize(2, parameters);
+    assertSize(4, parameters);
     assertNotNull(parameters.get(0).getAdmDrd());
     assertNotNull(parameters.get(1).getAdmAbs());
+    assertNotNull(parameters.get(2).getAdmSr());
+    assertNotNull(parameters.get(3).getAdmVbr());
   }
 
   public void testDataSized() {

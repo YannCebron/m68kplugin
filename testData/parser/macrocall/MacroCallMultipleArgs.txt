@@ -15,3 +15,7 @@ M68k.FILE
     M68kMacroCallParameterImpl(MACRO_CALL_PARAMETER)
       M68kAdmCcrImpl(ADM_CCR)
         PsiElement(ccr)('CCR')
+    PsiElement(,)(',')
+    M68kMacroCallParameterImpl(MACRO_CALL_PARAMETER)
+      M68kAdmSfcImpl(ADM_SFC)
+        PsiElement(sfc)('SFC')
