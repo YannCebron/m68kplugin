@@ -1468,9 +1468,6 @@ fail_directive ::= FAIL STRING?
 far_directive ::= FAR
 
 near_directive ::= NEAR adm_ard?
-{
-  pin = 1
-}
 
 near_code_directive ::= NEAR_CODE
 

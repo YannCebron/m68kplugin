@@ -1387,13 +1387,12 @@ public class M68kDirectivesParser {
   public static boolean near_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "near_directive")) return false;
     if (!nextTokenIs(b, "<directive>", NEAR)) return false;
-    boolean r, p;
+    boolean r;
     Marker m = enter_section_(b, l, _NONE_, NEAR_DIRECTIVE, "<directive>");
     r = consumeToken(b, NEAR);
-    p = r; // pin = 1
     r = r && near_directive_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+    exit_section_(b, l, m, r, false, null);
+    return r;
   }
 
   // adm_ard?
