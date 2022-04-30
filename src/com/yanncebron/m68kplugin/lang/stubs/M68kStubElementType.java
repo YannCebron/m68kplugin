@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.lang.stubs;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.ILightStubElementType;
 import com.intellij.psi.stubs.StubElement;
 import com.yanncebron.m68kplugin.lang.M68kFileElementType;
@@ -36,7 +37,7 @@ abstract class M68kStubElementType<StubT extends StubElement<? extends M68kPsiEl
   }
 
   @Override
-  public @NotNull StubT createStub(@NotNull PsiT psi, StubElement<?> parentStub) {
+  public @NotNull StubT createStub(@NotNull PsiT psi, StubElement<? extends PsiElement> parentStub) {
     final String message = "Should not be called. Element=" + psi + "; class" + psi.getClass() + "; file=" + (psi.isValid() ? psi.getContainingFile() : "-");
     throw new UnsupportedOperationException(message);
   }
