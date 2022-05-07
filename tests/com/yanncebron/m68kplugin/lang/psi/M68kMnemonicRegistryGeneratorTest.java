@@ -109,10 +109,10 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
       if (elementType != null && isSupportedCpu(m68kCpus)) {
         if (sourceOperand == null) {
-          System.out.println("unknown source operand: " + trim);
+          fail("unknown source operand: " + trim);
         }
         if (destinationOperand == null) {
-          System.out.println("unknown destination operand: " + trim);
+          fail("unknown destination operand: " + trim);
         }
       }
 
