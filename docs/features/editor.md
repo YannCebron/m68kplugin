@@ -49,6 +49,10 @@ _M68k Browser_ tool window lists all supported mnemonics with additional referen
 
 ![Mnemonic reference documentation](../assets/ide/reference_doc.png)
 
+### Directives
+
+_View \| View Quick Documentation_ Show directive reference documentation
+
 ### Labels
 
 *View \| Quick Documentation* for labels: show preceding lines or EOL comment(s)
@@ -71,7 +75,7 @@ _M68k Browser_ tool window lists all supported mnemonics with additional referen
                 
 ### Completion
 
-Smart completion for labels, e.g., ranking current local labels and labels from the current file higher in suggestions
+Smart completion for labels, e.g., ranking current local labels and labels from the current file higher in completion popuop.
  
 ### Builtin Symbols 
 
@@ -93,7 +97,7 @@ Completion and <kbd>Ctrl+Click</kbd> hover information
 
 ### Rename Refactoring
 
-Rename labels using *Refactor \| Rename* across whole project with usages preview
+Rename labels using *Refactor \| Rename* across whole project with usage preview
 
 ![Rename preview](../assets/editor/rename_preview.png)
                      
@@ -106,7 +110,7 @@ Rename labels using *Refactor \| Rename* across whole project with usages previe
 * *Move Caret to Code Block Start/End* for matching directives
 * Spellchecker with bundled dictionaries (M68k/Amiga)
 * Code Folding (*Settings/Preferences \| Editor \| General \| Code Folding*)
-  * Zero-terminated string literal (`dc.b "a text",0`)
+  * Zero-terminated string literal (`dc.b "a text",0` &rarr; `"a text"`)
   * Custom regions via enclosing `* region [placeholderText]` / `* endregion` comments
 * Live Templates (*Settings/Preferences \| Editor \| Live Templates*)
 * Code Style Settings (*Settings/Preferences \| Editor \| Code Style \| M68k Assembler*)
