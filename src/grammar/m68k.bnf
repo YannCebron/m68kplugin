@@ -1391,7 +1391,7 @@ macro_call_directive ::= MACRO_CALL_ID
                          <<exitMacroCall>>
 {
   extends = data_sized
-  mixin = "com.yanncebron.m68kplugin.lang.psi.directive.impl.M68kMacrocallDirectiveMixIn"
+  mixin = "com.yanncebron.m68kplugin.lang.psi.directive.impl.M68kMacroCallDirectiveMixIn"
 }
 
 addwatch_directive ::= ADDWATCH expression

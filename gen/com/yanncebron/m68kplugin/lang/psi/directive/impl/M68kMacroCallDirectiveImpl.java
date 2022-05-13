@@ -26,7 +26,7 @@ import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
 
-public class M68kMacroCallDirectiveImpl extends M68kMacrocallDirectiveMixIn implements M68kMacroCallDirective {
+public class M68kMacroCallDirectiveImpl extends M68kMacroCallDirectiveMixIn implements M68kMacroCallDirective {
 
   public M68kMacroCallDirectiveImpl(@NotNull ASTNode node) {
     super(node);

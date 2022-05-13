@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,9 @@ import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kDataSizedImpl;
 import org.jetbrains.annotations.NotNull;
 
-abstract class M68kMacrocallDirectiveMixIn extends M68kDataSizedImpl {
+abstract class M68kMacroCallDirectiveMixIn extends M68kDataSizedImpl {
 
-  protected M68kMacrocallDirectiveMixIn(@NotNull ASTNode node) {
+  protected M68kMacroCallDirectiveMixIn(@NotNull ASTNode node) {
     super(node);
   }
 

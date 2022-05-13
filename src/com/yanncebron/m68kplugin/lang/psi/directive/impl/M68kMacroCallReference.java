@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,14 +48,14 @@ import java.util.List;
  *   <li>search in related files (includes), TODO: currently "all files"</li>
  * </ol>
  */
-class M68kMacroCallReference extends PsiReferenceBase.Poly<M68kMacrocallDirectiveMixIn> implements EmptyResolveMessageProvider {
+class M68kMacroCallReference extends PsiReferenceBase.Poly<M68kMacroCallDirectiveMixIn> implements EmptyResolveMessageProvider {
 
   private static final Resolver INSTANCE = new Resolver();
 
   private static class Resolver implements ResolveCache.PolyVariantResolver<M68kMacroCallReference> {
     @Override
     public ResolveResult @NotNull [] resolve(@NotNull M68kMacroCallReference m68kMacroCallReference, boolean incompleteCode) {
-      M68kMacrocallDirectiveMixIn element = m68kMacroCallReference.getElement();
+      M68kMacroCallDirectiveMixIn element = m68kMacroCallReference.getElement();
       String macroName = m68kMacroCallReference.getValue();
       int currentTextOffset = element.getTextOffset();
 
@@ -78,7 +78,7 @@ class M68kMacroCallReference extends PsiReferenceBase.Poly<M68kMacrocallDirectiv
   }
 
 
-  M68kMacroCallReference(M68kMacrocallDirectiveMixIn m68kMacrocallDirectiveMixIn, ASTNode idNode) {
+  M68kMacroCallReference(M68kMacroCallDirectiveMixIn m68kMacrocallDirectiveMixIn, ASTNode idNode) {
     super(m68kMacrocallDirectiveMixIn, idNode.getTextRange().shiftLeft(m68kMacrocallDirectiveMixIn.getTextOffset()), false);
   }
 
