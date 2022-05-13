@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,17 @@
 
 package com.yanncebron.m68kplugin.lang.highlighting;
 
+import com.intellij.codeHighlighting.RainbowHighlighter;
+import com.intellij.lang.Language;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.intellij.openapi.options.colors.ColorSettingsPage;
+import com.intellij.openapi.options.colors.RainbowColorSettingsPage;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
+import com.yanncebron.m68kplugin.lang.M68kLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,7 +34,7 @@ import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class M68kColorSettingsPage implements ColorSettingsPage {
+public class M68kColorSettingsPage implements ColorSettingsPage, RainbowColorSettingsPage {
 
   private static final AttributesDescriptor[] ourDescriptors = {
     createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.colon", M68kTextAttributes.COLON),
@@ -118,7 +122,10 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
       "\n" +
       "<label>DATA</label> equ @42\n" +
       "<label>_LibPtr</label> dc.l <builtinSymbol>*</builtinSymbol>-4\n" +
-      "<label>text</label>    dc.b 'some text',0\n";
+      "<label>text</label>    dc.b 'some text',0\n" +
+      "\n" +
+      "* 'Semantic highlighting' is applied to macro call names\n" +
+      RainbowHighlighter.generatePaletteExample("\n* ");
   }
 
   @Nullable
@@ -130,6 +137,9 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
     additionalMap.put("localLabel", M68kTextAttributes.LOCAL_LABEL);
     additionalMap.put("macroParameter", M68kTextAttributes.MACRO_PARAMETER);
     additionalMap.put("privilegedInstruction", M68kTextAttributes.PRIVILEGED_INSTRUCTION);
+
+    Map<String, TextAttributesKey> rainbowTagMap = RainbowHighlighter.createRainbowHLM();
+    additionalMap.putAll(rainbowTagMap);
     return additionalMap;
   }
 
@@ -143,5 +153,15 @@ public class M68kColorSettingsPage implements ColorSettingsPage {
   @Override
   public ColorDescriptor @NotNull [] getColorDescriptors() {
     return ColorDescriptor.EMPTY_ARRAY;
+  }
+
+  @Override
+  public boolean isRainbowType(TextAttributesKey type) {
+    return M68kTextAttributes.MACRO_CALL.equals(type);
+  }
+
+  @Override
+  public @Nullable Language getLanguage() {
+    return M68kLanguage.INSTANCE;
   }
 }

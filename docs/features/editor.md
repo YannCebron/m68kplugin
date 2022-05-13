@@ -13,7 +13,8 @@ nav_order: 1
 Fully customizable via *Settings/Preferences \| Editor \| Color Scheme \| M68k Assembler*.
 
 Virtually every syntax element can be configured separately.
-Additional semantic highlighting is performed for privileged instructions (possibly depending on operands).
+Additional highlighting is performed for privileged instructions (possibly depending on operands).
+Enable _Semantic highlighting_ to highlight macro call names using a configurable rainbow color scheme.
 
 ![Color Scheme](../assets/editor/color_scheme.png)
 

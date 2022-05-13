@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
         " <info descr=\"Privileged instruction\" textAttributesKey=\"M68K_PRIVILEGED_INSTRUCTION\">eori #2,SR</info>\n" +
         " <info descr=\"Privileged instruction\" textAttributesKey=\"M68K_PRIVILEGED_INSTRUCTION\">move.l usp,a0</info>\n" +
         " <info descr=\"Privileged instruction\" textAttributesKey=\"M68K_PRIVILEGED_INSTRUCTION\">move.w d0,sr</info>\n" +
-        " <info descr=\"Privileged instruction\" textAttributesKey=\"M68K_PRIVILEGED_INSTRUCTION\">movec.l d0,VBR</info>\n"  +
+        " <info descr=\"Privileged instruction\" textAttributesKey=\"M68K_PRIVILEGED_INSTRUCTION\">movec.l d0,VBR</info>\n" +
         " <info descr=\"Privileged instruction\" textAttributesKey=\"M68K_PRIVILEGED_INSTRUCTION\">moves (a0),d0</info>\n"
     );
     myFixture.testHighlighting(false, true, false);
@@ -64,6 +64,17 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
         " endm"
     );
     myFixture.testHighlighting(false, true, false);
+  }
+
+  public void testMacroCallRainbowHighlighting() {
+    myFixture.testRainbow("rainbow.s",
+      "macro1 macro\n" +
+        "  endm\n" +
+        "macro2 macro\n" +
+        "  endm\n" +
+        "  <rainbow color='ff000004'>macro1</rainbow>\n" +
+        "  <rainbow color='ff000001'>macro2</rainbow> 123,label",
+      true, true);
   }
 
 }

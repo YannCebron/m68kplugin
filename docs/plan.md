@@ -47,7 +47,6 @@
 - highlight returns
 - highlight/navigate control structures `CodeBlockSupportHandler`:
   - loop ranges
-- rainbow highlighter: macros? labels?
 - unreachable code `ControlFlowProvider`
 
 ## Resolve/Refactor
