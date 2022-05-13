@@ -25,4 +25,7 @@ public interface M68kMacroCallDirective extends M68kDataSized, M68kDirective {
   @NotNull
   List<M68kMacroCallParameter> getMacroCallParameterList();
 
+  @NotNull
+  PsiElement getMacroNameElement();
+
 }

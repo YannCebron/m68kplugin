@@ -1392,6 +1392,10 @@ macro_call_directive ::= MACRO_CALL_ID
 {
   extends = data_sized
   mixin = "com.yanncebron.m68kplugin.lang.psi.directive.impl.M68kMacroCallDirectiveMixIn"
+  methods =
+  [
+    macroNameElement = "MACRO_CALL_ID"
+  ]
 }
 
 addwatch_directive ::= ADDWATCH expression

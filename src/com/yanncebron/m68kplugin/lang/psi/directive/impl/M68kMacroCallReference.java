@@ -20,7 +20,6 @@ import com.intellij.codeInsight.completion.PrioritizedLookupElement;
 import com.intellij.codeInsight.daemon.EmptyResolveMessageProvider;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.lang.ASTNode;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
@@ -32,7 +31,6 @@ import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import com.yanncebron.m68kplugin.lang.stubs.index.M68kMacroStubIndex;
 import org.jetbrains.annotations.NotNull;
@@ -78,21 +76,19 @@ class M68kMacroCallReference extends PsiReferenceBase.Poly<M68kMacroCallDirectiv
   }
 
 
-  M68kMacroCallReference(M68kMacroCallDirectiveMixIn m68kMacrocallDirectiveMixIn, ASTNode idNode) {
-    super(m68kMacrocallDirectiveMixIn, idNode.getTextRange().shiftLeft(m68kMacrocallDirectiveMixIn.getTextOffset()), false);
+  M68kMacroCallReference(M68kMacroCallDirectiveMixIn m68kMacroCallDirectiveMixIn) {
+    super(m68kMacroCallDirectiveMixIn, m68kMacroCallDirectiveMixIn.getMacroNameElement().getTextRange().shiftLeft(m68kMacroCallDirectiveMixIn.getTextOffset()), false);
   }
 
   @Override
   public ResolveResult @NotNull [] multiResolve(boolean incompleteCode) {
-    return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, INSTANCE, false, incompleteCode);
+    return ResolveCache.getInstance(getElement().getProject()).resolveWithCaching(this, INSTANCE, false, incompleteCode);
   }
 
   @Override
   public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
-    final ASTNode idNode = getElement().getNode().findChildByType(M68kTokenTypes.MACRO_CALL_ID);
-    assert idNode != null;
     final M68kMacroCallDirective macroCallDirective = M68kElementFactory.createMacroCall(getElement().getProject(), newElementName);
-    getElement().getNode().replaceChild(idNode, macroCallDirective.getFirstChild().getNode());
+    getElement().getMacroNameElement().replace(macroCallDirective.getMacroNameElement());
     return getElement();
   }
 

@@ -25,6 +25,7 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
+import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
 public class M68kMacroCallDirectiveImpl extends M68kMacroCallDirectiveMixIn implements M68kMacroCallDirective {
 
@@ -47,6 +48,12 @@ public class M68kMacroCallDirectiveImpl extends M68kMacroCallDirectiveMixIn impl
   @NotNull
   public List<M68kMacroCallParameter> getMacroCallParameterList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kMacroCallParameter.class);
+  }
+
+  @Override
+  @NotNull
+  public PsiElement getMacroNameElement() {
+    return notNullChild(findChildByType(MACRO_CALL_ID));
   }
 
 }

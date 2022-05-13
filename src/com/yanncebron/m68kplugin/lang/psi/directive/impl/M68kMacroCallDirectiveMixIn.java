@@ -18,11 +18,11 @@ package com.yanncebron.m68kplugin.lang.psi.directive.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiReference;
-import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kDataSizedImpl;
 import org.jetbrains.annotations.NotNull;
 
-abstract class M68kMacroCallDirectiveMixIn extends M68kDataSizedImpl {
+abstract class M68kMacroCallDirectiveMixIn extends M68kDataSizedImpl implements M68kMacroCallDirective {
 
   protected M68kMacroCallDirectiveMixIn(@NotNull ASTNode node) {
     super(node);
@@ -30,10 +30,7 @@ abstract class M68kMacroCallDirectiveMixIn extends M68kDataSizedImpl {
 
   @Override
   public PsiReference getReference() {
-    final ASTNode idNode = getNode().findChildByType(M68kTokenTypes.MACRO_CALL_ID);
-    assert idNode != null;
-
-    return new M68kMacroCallReference(this, idNode);
+    return new M68kMacroCallReference(this);
   }
 
 }

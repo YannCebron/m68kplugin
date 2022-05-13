@@ -38,8 +38,8 @@ public class M68kRainbowVisitor extends RainbowVisitor {
   @Override
   public void visit(@NotNull PsiElement element) {
     if (element instanceof M68kMacroCallDirective) {
-      PsiElement idNode = element.getFirstChild();
-      HighlightInfo info = getInfo(element.getContainingFile(), idNode, idNode.getText(), M68kTextAttributes.MACRO_CALL);
+      PsiElement macroNameElement = ((M68kMacroCallDirective) element).getMacroNameElement();
+      HighlightInfo info = getInfo(element.getContainingFile(), macroNameElement, macroNameElement.getText(), M68kTextAttributes.MACRO_CALL);
       addInfo(info);
     }
   }
