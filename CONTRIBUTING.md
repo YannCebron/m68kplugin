@@ -14,7 +14,7 @@ Please check [Plans](https://m68kplugin.yanncebron.com/plan.html) before filing 
 ## Documentation
 
 [User documentation](http://m68kplugin.yanncebron.com) is located in [docs](docs) folder. Content is authored in
-Markdown using [Just the Docs](https://pmarsceill.github.io/just-the-docs/) site generator.
+Markdown using [Just the Docs](https://just-the-docs.github.io/just-the-docs/) site generator.
 
 ## Code
 
