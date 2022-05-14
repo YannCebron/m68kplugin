@@ -126,6 +126,7 @@ MadMac assembler specific (all directives may be optionally preceded by a dot):
 
 ### Misc
 
+- "current PC" for `(*-1)` expression
 - string literals:
   - support escape sequence
   - `'\'` and `''''` are valid
