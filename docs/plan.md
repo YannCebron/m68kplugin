@@ -79,6 +79,11 @@
 - `EnterHandlerDelegate` smart indent? or `LineIndentProvider`
 - `M68kCommaFlipper`: swap src\|dest if valid
 - formatter
+  - upper-/lowercase code style settings
+    - mnemonic/directive/conditional assembly
+    - data size
+    - register (An/Dn/special)
+    - hex number
 - documentation:
   - quick doc for string literal: length
   - render mode for preceding label comments
