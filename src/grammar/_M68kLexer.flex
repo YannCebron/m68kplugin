@@ -42,7 +42,7 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
     if (afterSpaceOrComma()) return true;
     
     char previousChar = charAt(-1);
-    return previousChar == '-' || previousChar == '+';
+    return previousChar == '-' || previousChar == '+' || previousChar == '(';
   }
 
   /**

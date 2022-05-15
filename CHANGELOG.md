@@ -9,6 +9,7 @@
 - macro call parameters: 
   - support register lists (`PUSH D0/D3/A0-A2`)
   - support control registers (`DFC`, `SFC`, `VBR`)
+- "current PC" for `(*-1)` expression
 
 ### Changed
 

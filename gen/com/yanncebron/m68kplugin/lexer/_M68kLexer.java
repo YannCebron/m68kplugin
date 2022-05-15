@@ -1871,7 +1871,7 @@ public class _M68kLexer implements FlexLexer {
     if (afterSpaceOrComma()) return true;
     
     char previousChar = charAt(-1);
-    return previousChar == '-' || previousChar == '+';
+    return previousChar == '-' || previousChar == '+' || previousChar == '(';
   }
 
   /**
