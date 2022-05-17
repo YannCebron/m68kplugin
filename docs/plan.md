@@ -84,6 +84,7 @@
     - data size
     - register (An/Dn/special)
     - hex number
+  - `:` after label code style setting
 - documentation:
   - quick doc for string literal: length
   - render mode for preceding label comments
