@@ -96,7 +96,7 @@
 - macro block: complete existing/n+1 `\n` everywhere
 - `dc`:
   - join lines
-  - smart enter handler to split value list
+  - smart enter handler to split value list / `ListSplitJoinContext`
 - surround descriptors?
 - `FocusModeProvider`
 - string literal: support language injection
@@ -104,7 +104,7 @@
 
 ## Inspections
 
-- `movem` non-symmetrical register ranges
+- paired `movem`'s with non-symmetrical register ranges
 - register list:
   - sort
   - optimize notation: `d0/d1/d2` &rarr; `d0-d2`
