@@ -3,7 +3,7 @@
 ## [Unreleased]
 ### Added
 - support `RTD` instruction (68010+)
-- optional semantic highlighting ("rainbow colors") for macro calls
+- macro calls: optional semantic highlighting ("rainbow colors")
 
 ### Fixed
 - macro call parameters: 
