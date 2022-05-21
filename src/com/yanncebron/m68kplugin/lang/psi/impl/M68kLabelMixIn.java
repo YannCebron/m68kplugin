@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,11 +25,11 @@ import com.intellij.psi.presentation.java.SymbolPresentationUtil;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.yanncebron.m68kplugin.lang.M68kFile;
-import icons.M68kIcons;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 import com.yanncebron.m68kplugin.lang.stubs.M68kLabelStub;
+import icons.M68kIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,8 +46,8 @@ abstract class M68kLabelMixIn extends StubBasedPsiElementBase<M68kLabelStub> imp
   }
 
   @Override
-  public @Nullable PsiElement getNameIdentifier() {
-    return findIdNode(this).getPsi();
+  public @NotNull PsiElement getNameIdentifier() {
+    return notNullChild(findChildByType(M68kTokenTypes.ID));
   }
 
   @Override
@@ -171,22 +171,14 @@ abstract class M68kLabelMixIn extends StubBasedPsiElementBase<M68kLabelStub> imp
       return stub.getName();
     }
 
-    final ASTNode idNode = findIdNode(this);
-    return idNode.getText();
+    return getNameIdentifier().getText();
   }
 
   @Override
   public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
     final M68kLabel newLabel = M68kElementFactory.createLabel(getProject(), name);
-    getNode().replaceChild(findIdNode(this), findIdNode(newLabel));
+    getNameIdentifier().replace(newLabel.getNameIdentifier());
     return this;
-  }
-
-  @NotNull
-  private static ASTNode findIdNode(PsiElement labelBase) {
-    final ASTNode idNode = labelBase.getNode().findChildByType(M68kTokenTypes.ID);
-    assert idNode != null;
-    return idNode;
   }
 
   @Override
