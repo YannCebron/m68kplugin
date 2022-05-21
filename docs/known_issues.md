@@ -106,8 +106,6 @@ MadMac assembler specific (all directives may be optionally preceded by a dot):
 
 - macro declaration variants:
   - `macro<$macroName$>`
-- macro call parameters:
-  - enclosed in `< ... >` for parameter containing `,`
 - special symbols
   - `\@!`
   - `\@?`

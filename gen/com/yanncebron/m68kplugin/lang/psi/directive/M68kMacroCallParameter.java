@@ -40,58 +40,58 @@ import com.yanncebron.m68kplugin.lang.psi.M68kAdmVbr;
 
 public interface M68kMacroCallParameter extends M68kPsiElement {
 
-  @Nullable
-  M68kAdmAbs getAdmAbs();
+  @NotNull
+  List<M68kAdmAbs> getAdmAbsList();
 
-  @Nullable
-  M68kAdmAdi getAdmAdi();
+  @NotNull
+  List<M68kAdmAdi> getAdmAdiList();
 
-  @Nullable
-  M68kAdmAix getAdmAix();
+  @NotNull
+  List<M68kAdmAix> getAdmAixList();
 
-  @Nullable
-  M68kAdmApd getAdmApd();
+  @NotNull
+  List<M68kAdmApd> getAdmApdList();
 
-  @Nullable
-  M68kAdmApi getAdmApi();
+  @NotNull
+  List<M68kAdmApi> getAdmApiList();
 
-  @Nullable
-  M68kAdmArd getAdmArd();
+  @NotNull
+  List<M68kAdmArd> getAdmArdList();
 
-  @Nullable
-  M68kAdmAri getAdmAri();
+  @NotNull
+  List<M68kAdmAri> getAdmAriList();
 
-  @Nullable
-  M68kAdmCcr getAdmCcr();
+  @NotNull
+  List<M68kAdmCcr> getAdmCcrList();
 
-  @Nullable
-  M68kAdmDfc getAdmDfc();
+  @NotNull
+  List<M68kAdmDfc> getAdmDfcList();
 
-  @Nullable
-  M68kAdmDrd getAdmDrd();
+  @NotNull
+  List<M68kAdmDrd> getAdmDrdList();
 
-  @Nullable
-  M68kAdmImm getAdmImm();
+  @NotNull
+  List<M68kAdmImm> getAdmImmList();
 
-  @Nullable
-  M68kAdmPcd getAdmPcd();
+  @NotNull
+  List<M68kAdmPcd> getAdmPcdList();
 
-  @Nullable
-  M68kAdmPci getAdmPci();
+  @NotNull
+  List<M68kAdmPci> getAdmPciList();
 
-  @Nullable
-  M68kAdmRegisterList getAdmRegisterList();
+  @NotNull
+  List<M68kAdmRegisterList> getAdmRegisterListList();
 
-  @Nullable
-  M68kAdmSfc getAdmSfc();
+  @NotNull
+  List<M68kAdmSfc> getAdmSfcList();
 
-  @Nullable
-  M68kAdmSr getAdmSr();
+  @NotNull
+  List<M68kAdmSr> getAdmSrList();
 
-  @Nullable
-  M68kAdmUsp getAdmUsp();
+  @NotNull
+  List<M68kAdmUsp> getAdmUspList();
 
-  @Nullable
-  M68kAdmVbr getAdmVbr();
+  @NotNull
+  List<M68kAdmVbr> getAdmVbrList();
 
 }

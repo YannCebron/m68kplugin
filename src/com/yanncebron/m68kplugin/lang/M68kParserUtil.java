@@ -22,6 +22,7 @@ import com.intellij.openapi.util.Key;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kGtExpression;
 
 class M68kParserUtil extends GeneratedParserUtilBase {
 
@@ -57,6 +58,24 @@ class M68kParserUtil extends GeneratedParserUtilBase {
     IElementType left = b.rawLookup(-1);
     return left == M68kTokenTypes.DIV || left == M68kTokenTypes.COMMA ||
       (left == TokenType.WHITE_SPACE && b.lookAhead(1) == M68kTokenTypes.DIV);
+  }
+
+  /**
+   * Inside macro call parameter {@code MACRO_NAME <1,d0,"param">} or {@code MACRO_NAME 1,<"text",10>,3}.
+   * Do not parse a '>' closing angle as {@link M68kGtExpression} if followed by
+   * comma (',') or whitespace/linefeed.
+   */
+  static boolean notClosingAngledMacroCallParameter(PsiBuilder b, int level) {
+    if (!insideMacroCall(b, level)) return true;
+
+    if (b.getTokenType() == M68kTokenTypes.COMMA) {
+      return false;
+    }
+
+    IElementType next = b.rawLookup(1);
+    return next != null &&
+      next != TokenType.WHITE_SPACE &&
+      next != M68kTokenTypes.LINEFEED;
   }
 
 }

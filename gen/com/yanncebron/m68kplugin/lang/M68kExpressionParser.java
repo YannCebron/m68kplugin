@@ -116,7 +116,7 @@ public class M68kExpressionParser {
         r = expression(b, l, 3);
         exit_section_(b, l, m, LT_EQ_EXPRESSION, r, true, null);
       }
-      else if (g < 3 && consumeTokenSmart(b, GT)) {
+      else if (g < 3 && gt_expression_0(b, l + 1)) {
         r = expression(b, l, 3);
         exit_section_(b, l, m, GT_EXPRESSION, r, true, null);
       }
@@ -187,6 +187,17 @@ public class M68kExpressionParser {
     boolean r;
     r = consumeTokenSmart(b, EXCLAMATION_EQ);
     if (!r) r = consumeTokenSmart(b, LT_GT);
+    return r;
+  }
+
+  // GT <<notClosingAngledMacroCallParameter>>
+  private static boolean gt_expression_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "gt_expression_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokenSmart(b, GT);
+    r = r && notClosingAngledMacroCallParameter(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
   }
 

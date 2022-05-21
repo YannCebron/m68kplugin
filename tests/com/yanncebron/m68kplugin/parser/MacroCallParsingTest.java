@@ -59,4 +59,27 @@ public class MacroCallParsingTest extends M68kParsingTestCase {
     doCodeTest(" MACRO_NAME.l arg");
   }
 
+  public void testMacroCallAngledParameters() throws IOException {
+    doCodeTest(" MACRO_NAME <1,2>");
+  }
+
+  public void testMacroCallAngledParametersFollowedByWhitespace() throws IOException {
+    doCodeTest(" MACRO_NAME <1,2> ");
+  }
+
+  public void testMacroCallAngledParametersFollowedByNewline() throws IOException {
+    doCodeTest(" MACRO_NAME <1,2>\n");
+  }
+
+  public void testMacroCallAngledParametersMissingAfterComma() throws IOException {
+    doCodeTest(" MACRO_NAME <1,");
+  }
+
+  public void testMacroCallAngledParametersBetweenRegular() throws IOException {
+    doCodeTest(" MACRO_NAME 1,<2,3>,4");
+  }
+
+  public void testMacroCallAngledParametersMissingAfterCommaBetweenRegular() throws IOException {
+    doCodeTest(" MACRO_NAME 1,<2,>,4");
+  }
 }

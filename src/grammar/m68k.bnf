@@ -1381,13 +1381,21 @@ macro_parameter_directive ::= BACKSLASH macro_parameter_index_parameter
   pin = 1
 }
 
-macro_call_parameter ::= adm_register_list | adm_group_all | adm_sr | adm_ccr | adm_usp | adm_group_ctrl_registers
+private macro_call_parameter_element ::= adm_register_list | adm_group_all | adm_sr | adm_ccr | adm_usp | adm_group_ctrl_registers
+private angled_macro_call_parameter_element ::= LT macro_call_parameter_element (COMMA macro_call_parameter_element)* GT
+{
+  pin = 1
+}
+macro_call_parameter ::= macro_call_parameter_element |
+                         angled_macro_call_parameter_element
 {
   name = "macro parameter"
 }
+
 macro_call_directive ::= MACRO_CALL_ID
                          <<enterMacroCall>>
-                         data_size_all? macro_call_parameter? (COMMA macro_call_parameter)*
+                         data_size_all?
+                         macro_call_parameter? (COMMA macro_call_parameter)*
                          <<exitMacroCall>>
 {
   extends = data_sized
@@ -1638,7 +1646,7 @@ not_equals_expression ::= expression (EXCLAMATION_EQ | LT_GT) expression
 private relational_group ::= lt_expression | lt_eq_expression | gt_expression | gt_eq_expression
 lt_expression ::= expression LT expression
 lt_eq_expression ::= expression LT_EQ expression
-gt_expression ::= expression GT expression
+gt_expression ::= expression  GT <<notClosingAngledMacroCallParameter>>  expression
 gt_eq_expression ::= expression GT_EQ expression
 
 private add_group ::= plus_expression | minus_expression

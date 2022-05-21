@@ -32,15 +32,15 @@ public class MacroCallDirectivePsiTest extends M68kPsiTestCase {
   }
 
   public void testArgs() {
-    M68kMacroCallDirective directive = parse(" MACRO_NAME d0,label,SR,VBR,d0-d2");
+    M68kMacroCallDirective directive = parse(" MACRO_NAME d0,<label,1,2>,SR,VBR,d0-d2");
 
     final List<M68kMacroCallParameter> parameters = directive.getMacroCallParameterList();
     assertSize(5, parameters);
-    assertNotNull(parameters.get(0).getAdmDrd());
-    assertNotNull(parameters.get(1).getAdmAbs());
-    assertNotNull(parameters.get(2).getAdmSr());
-    assertNotNull(parameters.get(3).getAdmVbr());
-    assertNotNull(parameters.get(4).getAdmRegisterList());
+    assertNotEmpty(parameters.get(0).getAdmDrdList());
+    assertSize(3, parameters.get(1).getAdmAbsList());
+    assertNotEmpty(parameters.get(2).getAdmSrList());
+    assertNotEmpty(parameters.get(3).getAdmVbrList());
+    assertNotEmpty(parameters.get(4).getAdmRegisterListList());
   }
 
   public void testDataSized() {

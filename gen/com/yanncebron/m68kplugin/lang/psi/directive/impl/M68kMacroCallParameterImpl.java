@@ -62,111 +62,111 @@ public class M68kMacroCallParameterImpl extends ASTWrapperPsiElement implements 
   }
 
   @Override
-  @Nullable
-  public M68kAdmAbs getAdmAbs() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmAbs.class);
+  @NotNull
+  public List<M68kAdmAbs> getAdmAbsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAbs.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmAdi getAdmAdi() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmAdi.class);
+  @NotNull
+  public List<M68kAdmAdi> getAdmAdiList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAdi.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmAix getAdmAix() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmAix.class);
+  @NotNull
+  public List<M68kAdmAix> getAdmAixList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAix.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmApd getAdmApd() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmApd.class);
+  @NotNull
+  public List<M68kAdmApd> getAdmApdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmApd.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmApi getAdmApi() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmApi.class);
+  @NotNull
+  public List<M68kAdmApi> getAdmApiList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmApi.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmArd getAdmArd() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmArd.class);
+  @NotNull
+  public List<M68kAdmArd> getAdmArdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmArd.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmAri getAdmAri() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmAri.class);
+  @NotNull
+  public List<M68kAdmAri> getAdmAriList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmAri.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmCcr getAdmCcr() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmCcr.class);
+  @NotNull
+  public List<M68kAdmCcr> getAdmCcrList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmCcr.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmDfc getAdmDfc() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmDfc.class);
+  @NotNull
+  public List<M68kAdmDfc> getAdmDfcList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmDfc.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmDrd getAdmDrd() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmDrd.class);
+  @NotNull
+  public List<M68kAdmDrd> getAdmDrdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmDrd.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmImm getAdmImm() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmImm.class);
+  @NotNull
+  public List<M68kAdmImm> getAdmImmList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmImm.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmPcd getAdmPcd() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmPcd.class);
+  @NotNull
+  public List<M68kAdmPcd> getAdmPcdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmPcd.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmPci getAdmPci() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmPci.class);
+  @NotNull
+  public List<M68kAdmPci> getAdmPciList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmPci.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmRegisterList getAdmRegisterList() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmRegisterList.class);
+  @NotNull
+  public List<M68kAdmRegisterList> getAdmRegisterListList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmRegisterList.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmSfc getAdmSfc() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmSfc.class);
+  @NotNull
+  public List<M68kAdmSfc> getAdmSfcList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmSfc.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmSr getAdmSr() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmSr.class);
+  @NotNull
+  public List<M68kAdmSr> getAdmSrList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmSr.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmUsp getAdmUsp() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmUsp.class);
+  @NotNull
+  public List<M68kAdmUsp> getAdmUspList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmUsp.class);
   }
 
   @Override
-  @Nullable
-  public M68kAdmVbr getAdmVbr() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmVbr.class);
+  @NotNull
+  public List<M68kAdmVbr> getAdmVbrList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmVbr.class);
   }
 
 }

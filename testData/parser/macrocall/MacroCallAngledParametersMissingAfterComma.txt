@@ -1,0 +1,13 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kMacroCallDirectiveImpl(MACRO_CALL_DIRECTIVE)
+    PsiElement(macro_call_id)('MACRO_NAME')
+    PsiWhiteSpace(' ')
+    M68kMacroCallParameterImpl(MACRO_CALL_PARAMETER)
+      PsiElement(<)('<')
+      M68kAdmAbsImpl(ADM_ABS)
+        M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+          PsiElement(dec_number)('1')
+    PsiErrorElement:'(', ',', <.w|l> or '>' expected, got ','
+      <empty list>
+  PsiElement(,)(',')

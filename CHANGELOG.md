@@ -6,12 +6,11 @@
 - macro calls: optional semantic highlighting ("rainbow colors")
 
 ### Fixed
-- macro call parameters: 
+- macro call parameters 
+  - support enclosed in `< ... >` for parameter containing `,` (`MESSAGE <"some text",10>`)
   - support register lists (`PUSH D0/D3/A0-A2`)
   - support control registers (`DFC`, `SFC`, `VBR`)
 - "current PC" for `(*-1)` expression
-
-### Changed
 
 ## [0.1.5]
 ### Added
