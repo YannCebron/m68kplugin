@@ -55,8 +55,8 @@ class M68kParserUtil extends GeneratedParserUtilBase {
     if (!insideMacroCall(b, level)) return true;
 
     IElementType left = b.rawLookup(-1);
-    return  left == M68kTokenTypes.DIV || left == M68kTokenTypes.COMMA ||
-      (left == TokenType.WHITE_SPACE && b.lookAhead(1)== M68kTokenTypes.DIV);
+    return left == M68kTokenTypes.DIV || left == M68kTokenTypes.COMMA ||
+      (left == TokenType.WHITE_SPACE && b.lookAhead(1) == M68kTokenTypes.DIV);
   }
 
 }
