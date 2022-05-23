@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [0.1.6]
 ### Added
 - support `RTD` instruction (68010+)
 - macro calls: optional semantic highlighting ("rainbow colors")
