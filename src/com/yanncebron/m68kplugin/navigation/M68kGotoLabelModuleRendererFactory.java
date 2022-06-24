@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,13 +19,11 @@ package com.yanncebron.m68kplugin.navigation;
 import com.intellij.ide.util.ModuleRendererFactory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.presentation.java.SymbolPresentationUtil;
-import com.intellij.util.ui.UIUtil;
-
-import javax.swing.*;
-import java.awt.*;
+import com.intellij.util.TextWithIcon;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Goto symbol: show containing file on right instead of "Module".
+ * Goto symbol: show containing file on the right instead of "Module".
  */
 public class M68kGotoLabelModuleRendererFactory extends ModuleRendererFactory {
 
@@ -40,23 +38,10 @@ public class M68kGotoLabelModuleRendererFactory extends ModuleRendererFactory {
   }
 
   @Override
-  public DefaultListCellRenderer getModuleRenderer() {
-    return new DefaultListCellRenderer() {
-      @Override
-      public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-        final Component component = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-
-        M68kGotoLabelNavigationItem navigationItem = (M68kGotoLabelNavigationItem) value;
-
-        final PsiElement targetElement = navigationItem.getNavigationElement();
-        setText(SymbolPresentationUtil.getFilePathPresentation(targetElement.getContainingFile()));
-        setBorder(BorderFactory.createEmptyBorder(0, 0, 0, UIUtil.getListCellHPadding()));
-        setHorizontalTextPosition(SwingConstants.RIGHT);
-        setBackground(isSelected ? UIUtil.getListSelectionBackground(true) : UIUtil.getListBackground());
-        setForeground(isSelected ? UIUtil.getListSelectionForeground(true) : UIUtil.getInactiveTextColor());
-
-        return component;
-      }
-    };
+  public @Nullable TextWithIcon getModuleTextWithIcon(Object element) {
+    M68kGotoLabelNavigationItem navigationItem = (M68kGotoLabelNavigationItem) element;
+    PsiElement targetElement = navigationItem.getNavigationElement();
+    return new TextWithIcon(SymbolPresentationUtil.getFilePathPresentation(targetElement.getContainingFile()), null);
   }
+
 }

@@ -25,6 +25,7 @@ import com.intellij.psi.impl.PsiManagerEx;
 import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.intellij.testFramework.fixtures.TestLookupElementPresentation;
+import com.intellij.util.TextWithIcon;
 import icons.M68kIcons;
 
 import javax.swing.*;
@@ -89,9 +90,9 @@ public class M68kGotoLabelTest extends BasePlatformTestCase {
 
         final ModuleRendererFactory moduleRendererFactory = ModuleRendererFactory.findInstance(navigationItem);
         assertInstanceOf(moduleRendererFactory, M68kGotoLabelModuleRendererFactory.class);
-        final DefaultListCellRenderer renderer = moduleRendererFactory.getModuleRenderer();
-        renderer.getListCellRendererComponent(new JList<>(), navigationItem, 0, false, false);
-        assertEquals(expectedFileLocation, renderer.getText());
+        final TextWithIcon textWithIcon = moduleRendererFactory.getModuleTextWithIcon(navigationItem);
+        assertNotNull(navigationItem.getName(),textWithIcon);
+        assertEquals(expectedFileLocation, textWithIcon.getText());
         return;
       }
     }
