@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -94,7 +94,7 @@ class M68kVasmLineInLocationFilter implements Filter {
     int initialOffset = entireLength - line.length();
 
     final Collection<VirtualFile> matchingFiles =
-      FilenameIndex.getVirtualFilesByName(project, PathUtilRt.getFileName(location), GlobalSearchScope.allScope(project));
+      FilenameIndex.getVirtualFilesByName(PathUtilRt.getFileName(location), GlobalSearchScope.allScope(project));
     if (!matchingFiles.isEmpty()) {
       final HyperlinkInfo filesHyperlinkInfo = HyperlinkInfoFactory.getInstance()
         .createMultipleFilesHyperlinkInfo(new ArrayList<>(matchingFiles), lineNumber, project);
