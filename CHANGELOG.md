@@ -6,6 +6,7 @@
 ### Fixed
 
 ### Changed
+- minimum IDE version raised to 2021.2 (from 2021.1)
 
 ## [0.1.6]
 ### Added

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,8 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.yanncebron.m68kplugin.inspections.M68kUnresolvedMacroReferenceInspection;
-import icons.M68kIcons;
 import com.yanncebron.m68kplugin.lang.M68kLookupElementTestUtil;
+import icons.M68kIcons;
 
 import static com.yanncebron.m68kplugin.lang.M68kLookupElementTestUtil.assertLookupIcon;
 import static com.yanncebron.m68kplugin.lang.M68kLookupElementTestUtil.findLookupElement;
@@ -37,6 +37,11 @@ public class M68kMacroResolveTest extends BasePlatformTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/resolve/macro";
+  }
+
+  @Override
+  protected boolean isIconRequired() {
+    return true;
   }
 
   public void testHighlightResolvingInSingleFile() {

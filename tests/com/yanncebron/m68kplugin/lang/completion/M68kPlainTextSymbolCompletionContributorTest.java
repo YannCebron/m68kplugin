@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,11 @@ import static com.yanncebron.m68kplugin.lang.M68kLookupElementTestUtil.findLooku
 
 public class M68kPlainTextSymbolCompletionContributorTest extends BasePlatformTestCase {
 
+  @Override
+  protected boolean isIconRequired() {
+    return true;
+  }
+
   public void testVariants() {
     final PsiFile psiFile = myFixture.configureByText("test.s",
       "label\n" +
@@ -44,7 +49,7 @@ public class M68kPlainTextSymbolCompletionContributorTest extends BasePlatformTe
     Collection<LookupElement> options = contributor.getLookupElements(psiFile, 0, "");
     assertNotEmpty(options);
     final LookupElement[] lookupElements = options.toArray(new LookupElement[0]);
-    
+
     final LookupElement label = findLookupElement(lookupElements, "label", -1);
     final LookupElementPresentation labelPresentation = LookupElementPresentation.renderElement(label);
     assertEquals("test.s", labelPresentation.getTypeText());
