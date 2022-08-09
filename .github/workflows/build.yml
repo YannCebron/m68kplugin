@@ -69,8 +69,6 @@ jobs:
           echo "::set-output name=changelog::$CHANGELOG"
           echo "::set-output name=pluginVerifierHomeDir::~/.pluginVerifier"
 
-          ./gradlew listProductsReleases # prepare list of IDEs for Plugin Verifier
-
       # Run tests
       - name: Run Tests
         run: ./gradlew clean test
@@ -82,13 +80,6 @@ jobs:
         with:
           name: tests-result
           path: ${{ github.workspace }}/build/reports/tests
-
-      # Cache Plugin Verifier IDEs
-      - name: Setup Plugin Verifier IDEs Cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.properties.outputs.pluginVerifierHomeDir }}/ides
-          key: plugin-verifier-${{ hashFiles('build/listProductsReleases.txt') }}
 
       # Run Verify Plugin task and IntelliJ Plugin Verifier tool
       - name: Run Plugin Verification tasks
