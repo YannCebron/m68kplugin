@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,15 +26,12 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
+import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import com.yanncebron.m68kplugin.lang.psi.M68kTypes;
 import com.yanncebron.m68kplugin.lexer.M68kLexer;
 import org.jetbrains.annotations.NotNull;
 
 public class M68kParserDefinition implements ParserDefinition {
-
-  public static final TokenSet COMMENTS = TokenSet.create(M68kTokenTypes.COMMENT);
-  public static final TokenSet STRING_LITERALS = TokenSet.create(M68kTokenTypes.STRING);
 
   @NotNull
   @Override
@@ -43,25 +40,25 @@ public class M68kParserDefinition implements ParserDefinition {
   }
 
   @Override
-  public PsiParser createParser(Project project) {
+  public @NotNull PsiParser createParser(Project project) {
     return new M68kParser();
   }
 
   @Override
-  public IFileElementType getFileNodeType() {
+  public @NotNull IFileElementType getFileNodeType() {
     return M68kFileElementType.INSTANCE;
   }
 
   @NotNull
   @Override
   public TokenSet getCommentTokens() {
-    return COMMENTS;
+    return M68kTokenGroups.COMMENTS;
   }
 
   @NotNull
   @Override
   public TokenSet getStringLiteralElements() {
-    return STRING_LITERALS;
+    return M68kTokenGroups.STRING_LITERALS;
   }
 
   @NotNull
@@ -71,7 +68,7 @@ public class M68kParserDefinition implements ParserDefinition {
   }
 
   @Override
-  public PsiFile createFile(FileViewProvider viewProvider) {
+  public @NotNull PsiFile createFile(@NotNull FileViewProvider viewProvider) {
     return new M68kFile(viewProvider);
   }
 }

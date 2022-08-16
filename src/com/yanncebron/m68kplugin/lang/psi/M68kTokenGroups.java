@@ -337,4 +337,8 @@ public final class M68kTokenGroups {
     HEX_NUMBER,
     OCT_NUMBER
   );
+
+  public static final TokenSet COMMENTS = TokenSet.create(COMMENT);
+
+  public static final TokenSet STRING_LITERALS = TokenSet.create(STRING);
 }
