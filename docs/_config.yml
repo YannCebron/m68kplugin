@@ -1,6 +1,6 @@
 title: "m68kplugin"
 description: Motorola 68000 Series Assembly Language Support for IntelliJ-based IDEs
-remote_theme: pmarsceill/just-the-docs
+remote_theme: just-the-docs/just-the-docs@v0.4.0.rc1
 
 aux_links:
   "GitHub":
