@@ -96,7 +96,7 @@
 - macro block: complete existing/n+1 `\n` everywhere
 - `dc`:
   - join lines
-  - smart enter handler to split value list / `ListSplitJoinContext`
+  - smart enter handler to split a value list / `ListSplitJoinContext`
 - surround descriptors?
 - `FocusModeProvider`
 - string literal: support language injection

@@ -13,7 +13,7 @@ title: Known Issues
 - `include` directives:
   - not evaluated, symbols are resolved across all files
   - navigation to symbol declared multiple times (possibly in multiple files) will show popup chooser
-  - all included files must be located inside project (or added as separate content root)
+  - all included files must be located inside the project (or added as separate content root)
 - conditional assembly directives are not evaluated
 - macro block:
   - highlight `jsr _LVO\1(a6)` as invalid outside of macro
@@ -32,7 +32,7 @@ Currently, only 68000/68010 architecture is supported.
 Non-supported instructions/registers will yield false positive errors
 > _"Cannot resolve macro '$MNEMONIC$ \| $REGISTER$'"_
 
-Using non-supported address mode will result in syntax error or
+Using a non-supported address mode will result in syntax error or
 > _"<$ADDRESS_MODE$> expected, got $TEXT$"_
 
 ### Directives
@@ -40,7 +40,7 @@ Using non-supported address mode will result in syntax error or
 [vasm Docs 1](http://sun.hasenbraten.de/vasm/release/vasm_4.html)
 [vasm Docs 2](http://sun.hasenbraten.de/vasm/release/vasm_19.html)
 
-Unsupported directives, these will display false positive
+Unsupported directives, these will display as a false positive
 > _"Cannot resolve macro '$DIRECTIVE$'"_
 
 
@@ -71,7 +71,7 @@ Unsupported directives, these will display false positive
 - `symdebug`
 - `weak`
 
-MadMac assembler specific (all directives may be optionally preceded by a dot):
+MadMac assembler specific (a dot may optionally precede all directives):
 
 - `abs`
 - `assert`
@@ -126,7 +126,7 @@ MadMac assembler specific (all directives may be optionally preceded by a dot):
 ### Misc
 
 - string literals:
-  - support escape sequence
+  - support escape sequences
   - `'\'` and `''''` are valid
-- option: allow whitespaces
+- add option: allow whitespaces
 - support `equr`/`reg` replacement names: `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`

@@ -76,7 +76,7 @@ _View \| View Quick Documentation_ Show directive reference documentation
                 
 ### Completion
 
-Smart completion for labels, e.g., ranking current local labels and labels from the current file higher in completion popuop.
+Smart completion for labels, e.g., ranking current local labels and labels from the current file higher in completion popup.
  
 ### Builtin Symbols 
 
@@ -86,7 +86,7 @@ Completion and <kbd>Ctrl+Click</kbd> hover information
 
 ### Quick Definition 
 
-*View \| Quick Definition* to inspect label at caret in popup without leaving current editor
+*View \| Quick Definition* to inspect label at caret in popup without leaving the current editor
 
 ![Quick definition](../assets/editor/quick_definition.png)
 
@@ -98,7 +98,7 @@ Completion and <kbd>Ctrl+Click</kbd> hover information
 
 ### Rename Refactoring
 
-Rename labels using *Refactor \| Rename* across whole project with usage preview
+Rename labels using *Refactor \| Rename* across the whole project with usage preview
 
 ![Rename preview](../assets/editor/rename_preview.png)
                      

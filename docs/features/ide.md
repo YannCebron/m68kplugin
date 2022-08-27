@@ -24,7 +24,7 @@ nav_order: 3
 
 Provides access to all reference documentation.
 
-> 💡To search for entries, simply start typing while focus is on element list on the left.
+> 💡To search for entries, simply start typing while focus is on the element list on the left.
 
 ### Mnemonics
 
@@ -43,13 +43,13 @@ Browse all supported directives with reference documentation
 Browse all hardware registers with additional reference documentation.
 
 Register list can be filtered by OCS, ECS, and AGA chip set.
-Use _i_ toggle button to show Chip Set information in list.
+Use _i_ toggle button to show Chip Set information in the list.
 
 ![Amiga hardware register documentation](../assets/ide/amiga_hardware_doc.png)
 
 ## External Tools
 
-Navigate to _file:lineNumber_ location or label(s) from vasm console message
+Navigate to _file:lineNumber_ location or label(s) from the vasm console message
                      
 ![vasm navigation](../assets/ide/vasm_navigation.png)
 

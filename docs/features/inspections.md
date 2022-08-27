@@ -19,7 +19,7 @@ In the following snippet, `a7` will no longer be highlighted by _Usage of A7 reg
 
 To insert these for given highlighting, use <kbd>Alt+Enter</kbd> quick fix menu:
 - _Suppress for element_ adds suppression comment in preceding line
-- _Suppress for file_  adds suppression comment to begin of the file (must occur before first instruction/directive)
+- _Suppress for file_ adds suppression comment to begin of the file (must occur before first instruction/directive)
   
 ## Inspections
 
