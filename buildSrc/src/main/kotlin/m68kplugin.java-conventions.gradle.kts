@@ -79,6 +79,10 @@ tasks {
         enabled = false
     }
 
+    verifyPluginConfiguration {
+        enabled = false
+    }
+
 }
 
 repositories {

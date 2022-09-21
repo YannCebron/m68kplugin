@@ -101,6 +101,10 @@ tasks {
         enabled = true
     }
 
+     verifyPluginConfiguration {
+        enabled = true
+    }
+
     patchPluginXml {
         enabled = true
         version.set(properties("pluginVersion"))
