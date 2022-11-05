@@ -1629,133 +1629,133 @@ label17: bvs         label17
 
 ********************************************************************************
 
-* M68kMnemonic{dbcc, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dbcc, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dbcc        d0,label
          dbcc.w      d0,label
 
 
 ********************************************************************************
 
-* M68kMnemonic{dbcs, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dbcs, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dbcs        d0,label
          dbcs.w      d0,label
 
 
 ********************************************************************************
 
-* M68kMnemonic{dbeq, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dbeq, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dbeq        d0,label
          dbeq.w      d0,label
 
 
 ********************************************************************************
 
-* M68kMnemonic{dbf, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dbf, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dbf         d0,label
          dbf.w       d0,label
 
 
 ********************************************************************************
 
-* M68kMnemonic{dbge, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dbge, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dbge        d0,label
          dbge.w      d0,label
 
 
 ********************************************************************************
 
-* M68kMnemonic{dbgt, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dbgt, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dbgt        d0,label
          dbgt.w      d0,label
 
 
 ********************************************************************************
 
-* M68kMnemonic{dbhi, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dbhi, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dbhi        d0,label
          dbhi.w      d0,label
 
 
 ********************************************************************************
 
-* M68kMnemonic{dbhs, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dbhs, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dbhs        d0,label
          dbhs.w      d0,label
 
 
 ********************************************************************************
 
-* M68kMnemonic{dble, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dble, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dble        d0,label
          dble.w      d0,label
 
 
 ********************************************************************************
 
-* M68kMnemonic{dblo, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dblo, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dblo        d0,label
          dblo.w      d0,label
 
 
 ********************************************************************************
 
-* M68kMnemonic{dbls, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dbls, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dbls        d0,label
          dbls.w      d0,label
 
 
 ********************************************************************************
 
-* M68kMnemonic{dblt, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dblt, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dblt        d0,label
          dblt.w      d0,label
 
 
 ********************************************************************************
 
-* M68kMnemonic{dbmi, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dbmi, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dbmi        d0,label
          dbmi.w      d0,label
 
 
 ********************************************************************************
 
-* M68kMnemonic{dbne, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dbne, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dbne        d0,label
          dbne.w      d0,label
 
 
 ********************************************************************************
 
-* M68kMnemonic{dbpl, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dbpl, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dbpl        d0,label
          dbpl.w      d0,label
 
 
 ********************************************************************************
 
-* M68kMnemonic{dbra, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dbra, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dbra        d0,label
          dbra.w      d0,label
 
 
 ********************************************************************************
 
-* M68kMnemonic{dbt, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dbt, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dbt         d0,label
          dbt.w       d0,label
 
 
 ********************************************************************************
 
-* M68kMnemonic{dbvc, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dbvc, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dbvc        d0,label
          dbvc.w      d0,label
 
 
 ********************************************************************************
 
-* M68kMnemonic{dbvs, deprecated=false, src=DATA_REGISTER, dst=BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
+* M68kMnemonic{dbvs, deprecated=false, src=DATA_REGISTER, dst=DBCC_BRANCH_DESTINATION, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          dbvs        d0,label
          dbvs.w      d0,label
 
@@ -3097,10 +3097,6 @@ label17: bvs         label17
          move.w      (66,PC,a0),$4000.L
          move.l      (66,PC,a0),$4000.L
 
-* M68kMnemonic{move, deprecated=false, src=CCR_REGISTER, dst=DATA_REGISTER, [WORD], [M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         move        CCR,d0
-         move.w      CCR,d0
-
 * M68kMnemonic{move, deprecated=false, src=CCR_REGISTER, dst=ALTERABLE_DATA, [WORD], [M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          move        CCR,d0
          move.w      CCR,d0
@@ -3125,10 +3121,6 @@ label17: bvs         label17
          move        CCR,$4000.L
          move.w      CCR,$4000.L
 
-* M68kMnemonic{move, deprecated=false, src=SR_REGISTER, dst=DATA_REGISTER, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         move        SR,d0
-         move.w      SR,d0
-
 * M68kMnemonic{move, deprecated=false, src=SR_REGISTER, dst=ALTERABLE_DATA, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          move        SR,d0
          move.w      SR,d0
@@ -3152,14 +3144,6 @@ label17: bvs         label17
          move.w      SR,$4000.W
          move        SR,$4000.L
          move.w      SR,$4000.L
-
-* M68kMnemonic{move, deprecated=false, src=DATA_REGISTER, dst=CCR_REGISTER, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         move        d0,CCR
-         move.w      d0,CCR
-
-* M68kMnemonic{move, deprecated=false, src=IMMEDIATE, dst=CCR_REGISTER, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         move        #42,CCR
-         move.w      #42,CCR
 
 * M68kMnemonic{move, deprecated=false, src=DATA, dst=CCR_REGISTER, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          move        d0,CCR
@@ -3196,14 +3180,6 @@ label17: bvs         label17
          move.w      66(PC,d0),CCR
          move        (66,PC,a0),CCR
          move.w      (66,PC,a0),CCR
-
-* M68kMnemonic{move, deprecated=false, src=DATA_REGISTER, dst=SR_REGISTER, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         move        d0,SR
-         move.w      d0,SR
-
-* M68kMnemonic{move, deprecated=false, src=IMMEDIATE, dst=SR_REGISTER, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         move        #42,SR
-         move.w      #42,SR
 
 * M68kMnemonic{move, deprecated=false, src=DATA, dst=SR_REGISTER, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          move        d0,SR
@@ -6413,4 +6389,4 @@ label17: bvs         label17
          unlk      a0
 * Instructions count: 128
 
-* 0/5507 deprecated: 781
+* 0/5495 deprecated: 781

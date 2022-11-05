@@ -134,7 +134,8 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
   private void dumpCode(List<M68kMnemonic> mnemonics) {
     System.out.println(StringUtil.repeat("-", 80));
-    System.out.println("// Total mnemonics: " + mnemonics.size());
+    int supportedMnemonics = ContainerUtil.filter(mnemonics, m68kMnemonic -> isSupportedCpu(m68kMnemonic.getCpus())).size();
+    System.out.println("// Total mnemonics: " + supportedMnemonics);
 
     for (M68kMnemonic mnemonic : mnemonics) {
       Set<M68kCpu> cpus = mnemonic.getCpus();
@@ -197,6 +198,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     .put("QI", M68kOperand.QUICK_IMMEDIATE)
     .put("MI", M68kOperand.MEMORY_WITHOUT_IMMEDIATE)
     .put("BR", M68kOperand.BRANCH_DESTINATION)
+    .put("DB", M68kOperand.DBCC_BRANCH_DESTINATION)
     .put("MR", M68kOperand.RESTORE_OPERANDS)
     .put("IR", M68kOperand.IMMEDIATE_REGISTER_LIST_VALUE)
     .put("DA", M68kOperand.DATA)

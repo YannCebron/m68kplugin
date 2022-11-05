@@ -146,7 +146,7 @@ public final class M68kMnemonicRegistry {
   }
 
   private M68kMnemonicRegistry() {
-// Total mnemonics: 312
+// Total mnemonics: 256
     mnemonics.putValue(M68kTokenTypes.ABCD,
       new M68kMnemonic(M68kTokenTypes.ABCD,
         M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER,
@@ -554,97 +554,97 @@ public final class M68kMnemonicRegistry {
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBT,
       new M68kMnemonic(M68kTokenTypes.DBT,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBF,
       new M68kMnemonic(M68kTokenTypes.DBF,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBRA,
       new M68kMnemonic(M68kTokenTypes.DBRA,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBHI,
       new M68kMnemonic(M68kTokenTypes.DBHI,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBLS,
       new M68kMnemonic(M68kTokenTypes.DBLS,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBCC,
       new M68kMnemonic(M68kTokenTypes.DBCC,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBHS,
       new M68kMnemonic(M68kTokenTypes.DBHS,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBCS,
       new M68kMnemonic(M68kTokenTypes.DBCS,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBLO,
       new M68kMnemonic(M68kTokenTypes.DBLO,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBNE,
       new M68kMnemonic(M68kTokenTypes.DBNE,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBEQ,
       new M68kMnemonic(M68kTokenTypes.DBEQ,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBVC,
       new M68kMnemonic(M68kTokenTypes.DBVC,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBVS,
       new M68kMnemonic(M68kTokenTypes.DBVS,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBPL,
       new M68kMnemonic(M68kTokenTypes.DBPL,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBMI,
       new M68kMnemonic(M68kTokenTypes.DBMI,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBGE,
       new M68kMnemonic(M68kTokenTypes.DBGE,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBLT,
       new M68kMnemonic(M68kTokenTypes.DBLT,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBGT,
       new M68kMnemonic(M68kTokenTypes.DBGT,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DBLE,
       new M68kMnemonic(M68kTokenTypes.DBLE,
-        M68kOperand.DATA_REGISTER, M68kOperand.BRANCH_DESTINATION,
+        M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.DIVS,
@@ -819,19 +819,9 @@ public final class M68kMnemonicRegistry {
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.MOVE,
       new M68kMnemonic(M68kTokenTypes.MOVE,
-        M68kOperand.CCR_REGISTER, M68kOperand.DATA_REGISTER,
-        M68kDataSize.GROUP_W,
-        M68kCpu.GROUP_68010_UP));
-    mnemonics.putValue(M68kTokenTypes.MOVE,
-      new M68kMnemonic(M68kTokenTypes.MOVE,
         M68kOperand.CCR_REGISTER, M68kOperand.ALTERABLE_DATA,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68010_UP));
-    mnemonics.putValue(M68kTokenTypes.MOVE,
-      new M68kMnemonic(M68kTokenTypes.MOVE,
-        M68kOperand.SR_REGISTER, M68kOperand.DATA_REGISTER,
-        M68kDataSize.GROUP_W,
-        M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.MOVE,
       new M68kMnemonic(M68kTokenTypes.MOVE,
         M68kOperand.SR_REGISTER, M68kOperand.ALTERABLE_DATA,
@@ -839,27 +829,7 @@ public final class M68kMnemonicRegistry {
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.MOVE,
       new M68kMnemonic(M68kTokenTypes.MOVE,
-        M68kOperand.DATA_REGISTER, M68kOperand.CCR_REGISTER,
-        M68kDataSize.GROUP_W,
-        M68kCpu.GROUP_68000_UP));
-    mnemonics.putValue(M68kTokenTypes.MOVE,
-      new M68kMnemonic(M68kTokenTypes.MOVE,
-        M68kOperand.IMMEDIATE, M68kOperand.CCR_REGISTER,
-        M68kDataSize.GROUP_W,
-        M68kCpu.GROUP_68000_UP));
-    mnemonics.putValue(M68kTokenTypes.MOVE,
-      new M68kMnemonic(M68kTokenTypes.MOVE,
         M68kOperand.DATA, M68kOperand.CCR_REGISTER,
-        M68kDataSize.GROUP_W,
-        M68kCpu.GROUP_68000_UP));
-    mnemonics.putValue(M68kTokenTypes.MOVE,
-      new M68kMnemonic(M68kTokenTypes.MOVE,
-        M68kOperand.DATA_REGISTER, M68kOperand.SR_REGISTER,
-        M68kDataSize.GROUP_W,
-        M68kCpu.GROUP_68000_UP));
-    mnemonics.putValue(M68kTokenTypes.MOVE,
-      new M68kMnemonic(M68kTokenTypes.MOVE,
-        M68kOperand.IMMEDIATE, M68kOperand.SR_REGISTER,
         M68kDataSize.GROUP_W,
         M68kCpu.GROUP_68000_UP));
     mnemonics.putValue(M68kTokenTypes.MOVE,

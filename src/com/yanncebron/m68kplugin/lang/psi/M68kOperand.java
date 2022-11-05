@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ public enum M68kOperand {
   QUICK_IMMEDIATE(M68kAddressMode.QUICK_IMMEDIATE),
 
   BRANCH_DESTINATION(M68kAddressMode.LABEL),
+  DBCC_BRANCH_DESTINATION(M68kAddressMode.LABEL),
 
   CONTROL(M68kAddressMode.ADDRESS_REGISTER_INDIRECT,
     M68kAddressMode.ADDRESS_REGISTER_DISPLACEMENT,
