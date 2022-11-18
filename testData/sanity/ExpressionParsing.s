@@ -18,7 +18,9 @@ label
  dc 1&2
  dc [1]
  dc 1^2
+bpl
  dc 1234
+trap
  dc 1*2/trap*bpl
  dc 'string'
  dc 1/2
