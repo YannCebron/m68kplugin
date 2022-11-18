@@ -1,11 +1,28 @@
 label
+ dc 0
  dc -1
  dc 10%3
  dc 1+2
  dc 1-2
+ dc 1-0
+ dc 0+1
+ dc 10//3
  dc (1+2)
  dc 1|2
  dc ~1
+ dc !1
+ dc 1!2
+ dc 1|2
+ dc 1||2
+ dc 1&&2
+ dc 1=2
+ dc 1==2
+ dc 1!=2
+ dc 1<>2
+ dc 1<2
+ dc 1<=2
+ dc 1>2
+ dc 1>=2
  dc label
  dc @0123
  dc 1+(2+3)/-5
@@ -26,5 +43,6 @@ trap
  dc 1/2
  dc "string"
  dc *-42
+ dc 42-*
 ; dc.b ((2/(1+2)*3)+label)/2 ; 'label' completion broken
  dc.b 2/1+2*3+label/2
