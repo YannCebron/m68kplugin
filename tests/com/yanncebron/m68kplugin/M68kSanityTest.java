@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2022 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.yanncebron.m68kplugin;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.CodeInsightFixtureTestCase;
 import com.intellij.testFramework.propertyBased.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
@@ -30,9 +31,10 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 @SuppressWarnings("rawtypes")
+@TestDataPath("$PROJECT_ROOT/testData/sanity")
 public class M68kSanityTest extends CodeInsightFixtureTestCase {
 
-  private static final int ITERATION_COUNT = 100;
+  private static final int ITERATION_COUNT = 1000;
 
   private static final boolean ENABLED = false;
 
@@ -67,7 +69,8 @@ public class M68kSanityTest extends CodeInsightFixtureTestCase {
         new InvokeCompletion(file, new MyCompletionPolicy()),
         new DeleteRange(file),
         new ResolveAllReferences(file));
-    PropertyChecker
+    PropertyChecker.customized()
+      .withIterationCount(ITERATION_COUNT)
       .checkScenarios(actionsOnAsmFiles(actions));
   }
 
