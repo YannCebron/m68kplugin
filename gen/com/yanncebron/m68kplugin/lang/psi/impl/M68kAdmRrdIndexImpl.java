@@ -54,7 +54,8 @@ public class M68kAdmRrdIndexImpl extends M68kAdmWithRrdMixIn implements M68kAdmR
   }
 
   @Override
-  public @Nullable M68kDataSize getDataSize() {
+  @Nullable
+  public M68kDataSize getDataSize() {
     return M68kPsiImplUtil.getDataSize(this);
   }
 

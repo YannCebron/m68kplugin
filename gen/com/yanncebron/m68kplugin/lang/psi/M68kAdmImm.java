@@ -25,6 +25,7 @@ public interface M68kAdmImm extends M68kAdm, M68kDataSized {
   @Nullable
   M68kExpression getExpression();
 
-  @Nullable M68kDataSize getDataSize();
+  @Nullable
+  M68kDataSize getDataSize();
 
 }

@@ -21,6 +21,7 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kIncludeDirective extends M68kDirective {
 
-  @Nullable String getIncludePath();
+  @Nullable
+  String getIncludePath();
 
 }

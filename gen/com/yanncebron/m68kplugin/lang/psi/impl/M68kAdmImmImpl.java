@@ -50,7 +50,8 @@ public class M68kAdmImmImpl extends ASTWrapperPsiElement implements M68kAdmImm {
   }
 
   @Override
-  public @Nullable M68kDataSize getDataSize() {
+  @Nullable
+  public M68kDataSize getDataSize() {
     return M68kPsiImplUtil.getDataSize(this);
   }
 

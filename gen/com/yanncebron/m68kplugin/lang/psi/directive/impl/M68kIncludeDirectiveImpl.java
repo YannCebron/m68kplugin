@@ -45,7 +45,8 @@ public class M68kIncludeDirectiveImpl extends ASTWrapperPsiElement implements M6
   }
 
   @Override
-  public @Nullable String getIncludePath() {
+  @Nullable
+  public String getIncludePath() {
     return M68kPsiImplUtil.getIncludePath(this);
   }
 

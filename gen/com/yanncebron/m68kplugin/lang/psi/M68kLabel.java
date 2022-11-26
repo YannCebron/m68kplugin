@@ -23,6 +23,7 @@ import com.yanncebron.m68kplugin.lang.stubs.M68kLabelStub;
 
 public interface M68kLabel extends M68kLabelBase, StubBasedPsiElement<M68kLabelStub> {
 
-  @NotNull List<M68kLocalLabel> getLocalLabels();
+  @NotNull
+  List<M68kLocalLabel> getLocalLabels();
 
 }

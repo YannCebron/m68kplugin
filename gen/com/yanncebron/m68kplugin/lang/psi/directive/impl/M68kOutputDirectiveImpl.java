@@ -45,7 +45,8 @@ public class M68kOutputDirectiveImpl extends ASTWrapperPsiElement implements M68
   }
 
   @Override
-  public @Nullable String getOutputPath() {
+  @Nullable
+  public String getOutputPath() {
     return M68kPsiImplUtil.getOutputPath(this);
   }
 

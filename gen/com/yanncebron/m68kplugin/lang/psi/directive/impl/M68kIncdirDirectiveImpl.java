@@ -45,7 +45,8 @@ public class M68kIncdirDirectiveImpl extends ASTWrapperPsiElement implements M68
   }
 
   @Override
-  public @Nullable String getIncludePath() {
+  @Nullable
+  public String getIncludePath() {
     return M68kPsiImplUtil.getIncludePath(this);
   }
 

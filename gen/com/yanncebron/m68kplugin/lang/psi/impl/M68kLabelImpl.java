@@ -48,7 +48,8 @@ public class M68kLabelImpl extends M68kLabelMixIn implements M68kLabel {
   }
 
   @Override
-  public @NotNull List<M68kLocalLabel> getLocalLabels() {
+  @NotNull
+  public List<M68kLocalLabel> getLocalLabels() {
     return M68kPsiImplUtil.getLocalLabels(this);
   }
 

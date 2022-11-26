@@ -43,7 +43,8 @@ public class M68kDataSizedImpl extends ASTWrapperPsiElement implements M68kDataS
   }
 
   @Override
-  public @Nullable M68kDataSize getDataSize() {
+  @Nullable
+  public M68kDataSize getDataSize() {
     return M68kPsiImplUtil.getDataSize(this);
   }
 

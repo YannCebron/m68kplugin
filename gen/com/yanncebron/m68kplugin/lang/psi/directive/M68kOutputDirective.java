@@ -21,6 +21,7 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kOutputDirective extends M68kDirective {
 
-  @Nullable String getOutputPath();
+  @Nullable
+  String getOutputPath();
 
 }

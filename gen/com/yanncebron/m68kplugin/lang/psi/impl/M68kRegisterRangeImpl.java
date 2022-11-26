@@ -58,7 +58,8 @@ public class M68kRegisterRangeImpl extends ASTWrapperPsiElement implements M68kR
   }
 
   @Override
-  public @NotNull EnumSet<M68kRegister> getRegisters() {
+  @NotNull
+  public EnumSet<M68kRegister> getRegisters() {
     return M68kPsiImplUtil.getRegisters(this);
   }
 
