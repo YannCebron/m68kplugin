@@ -7,7 +7,7 @@
 
 ### Changed
 - raise minimum IDE version to 2021.2 (from 2021.1)
-- mark compatible with 2022.3
+- mark plugin compatible with 2022.3 and 2023.1
 - regenerate mnemonic data from vasm 1.9a
 
 ## [0.1.6]
