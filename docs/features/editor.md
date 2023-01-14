@@ -10,7 +10,7 @@ nav_order: 1
  
 ### Settings
 
-Fully customizable via *Settings/Preferences \| Editor \| Color Scheme \| M68k Assembler*.
+Fully customizable via *Settings \| Editor \| Color Scheme \| M68k Assembler*.
 
 Virtually every syntax element can be configured separately.
 Additional highlighting is performed for privileged instructions (possibly depending on operands).
@@ -26,7 +26,7 @@ Detailed on-the-fly semantic error highlighting for all instructions and directi
 
 ### Method Separator
 
-For `macro`/`endm` and `section` via *Show method separators* option in *Settings/Preferences \| Editor \| General \| Appearance*
+For `macro`/`endm` and `section` via *Show method separators* option in *Settings \| Editor \| General \| Appearance*
  
 ### Highlight matching brace and directives
 
@@ -38,7 +38,7 @@ For `macro`/`endm` and `section` via *Show method separators* option in *Setting
 
 ## Documentation
 
-_Hover_: enable _Show quick documentation on hover_ in *Settings/Preferences \| Editor \| Code Editing*
+_Hover_: enable _Show quick documentation on hover_ in *Settings \| Editor \| Code Editing*
 
 ### Mnemonics
 
@@ -110,11 +110,11 @@ Rename labels using *Refactor \| Rename* across the whole project with usage pre
 * *Code \| Move Element Left/Right* for `exg`/`cmpm`, binary expressions, register list, macro call parameters, `dc`/`dr` values
 * *Move Caret to Code Block Start/End* for matching directives
 * Spellchecker with bundled dictionaries (M68k/Amiga)
-* Code Folding (*Settings/Preferences \| Editor \| General \| Code Folding*)
+* Code Folding (*Settings \| Editor \| General \| Code Folding*)
   * Zero-terminated string literal (`dc.b "a text",0` &rarr; `"a text"`)
   * Custom regions via enclosing `* region [placeholderText]` / `* endregion` comments
-* Live Templates (*Settings/Preferences \| Editor \| Live Templates*)
-* Code Style Settings (*Settings/Preferences \| Editor \| Code Style \| M68k Assembler*)
+* Live Templates (*Settings \| Editor \| Live Templates*)
+* Code Style Settings (*Settings \| Editor \| Code Style \| M68k Assembler*)
   * Tab Size
   * Visual Guides
 

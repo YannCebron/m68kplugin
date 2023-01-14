@@ -20,13 +20,13 @@ Please see [Contributing](CONTRIBUTING.md) on how to submit feedback and contrib
 
 - Using IDE built-in plugin system:
 
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "Motorola 68000 Series Assembler"</kbd> >  <kbd>Install Plugin</kbd>
+  <kbd>Settings</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "Motorola 68000 Series Assembler"</kbd> >  <kbd>Install Plugin</kbd>
 
 - Manually:
 
   Download the [latest release](https://github.com/YannCebron/m68kplugin/releases/latest) and install it manually
   using
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
+  <kbd>Settings</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
 
 ## Credits
 

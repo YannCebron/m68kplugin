@@ -10,12 +10,12 @@ nav_order: 2
 
 This guide uses the following notations to distinguish certain items:
 
-| Notation                                     | Meaning                               |
-|----------------------------------------------|---------------------------------------|
-| *Main Menu &#124; Sub Menu &#124; Menu Item* | Menu item/Action                      |
-| *Settings/Preferences &#124; Settings Page*  | Page in _Settings/Preferences_ dialog |
-| `monospaced text`                            | Assembly code/Filename                |
-| <kbd>F10</kbd>                               | Keyboard shortcut or input            |
+| Notation                                     | Meaning                    |
+|----------------------------------------------|----------------------------|
+| *Main Menu &#124; Sub Menu &#124; Menu Item* | Menu item/Action           |
+| *Settings &#124; Settings Page*              | Page in _Settings_ dialog  |
+| `monospaced text`                            | Assembly code/Filename     |
+| <kbd>F10</kbd>                               | Keyboard shortcut or input |
 
 ## Installation
 
@@ -33,7 +33,7 @@ There is no dedicated support for configuring or creating a specific variant for
 
 All sources and include files must be located in the same project to be resolved.
 
-By default, all files with extension `.s`, `.asm`, `.i`, `.inc`, and `.x68` are treated as M68k assembly sources. See *Motorola 68000 Assembler* entry in *Settings/Preferences \| Editor \| File Types* to customize.
+By default, all files with extension `.s`, `.asm`, `.i`, `.inc`, and `.x68` are treated as M68k assembly sources. See *Motorola 68000 Assembler* entry in *Settings \| Editor \| File Types* to customize.
                                      
 On initial opening of existing sources, or when many source files are changed, the IDE will _index_ changed files to track all relevant information.
 It should usually not take a noticeable amount of time, during which some functionality (e.g., resolving/navigation) is not fully available.
