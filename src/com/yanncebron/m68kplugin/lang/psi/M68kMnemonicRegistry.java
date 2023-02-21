@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-import com.intellij.openapi.util.Comparing;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.containers.ContainerUtil;
@@ -123,12 +122,12 @@ public final class M68kMnemonicRegistry {
       final int o1Source = o1.getSourceOperand().getAddressModes().length;
       final int o2Source = o2.getSourceOperand().getAddressModes().length;
       if (o1Source != o2Source) {
-        return Comparing.compare(o1Source, o2Source);
+        return Integer.compare(o1Source, o2Source);
       }
 
       final int o1Dest = o1.getDestinationOperand().getAddressModes().length;
       final int o2Dest = o2.getDestinationOperand().getAddressModes().length;
-      return Comparing.compare(o1Dest, o2Dest);
+      return Integer.compare(o1Dest, o2Dest);
     });
 
     return ContainerUtil.getFirstItem(filtered);
