@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.1.72 - 2023-02-21
+
 ### Changed
 - regenerate mnemonic data from vasm 1.9a
 - raise minimum IDE version to 2021.2 (from 2021.1)
