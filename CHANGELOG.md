@@ -16,7 +16,8 @@
 - macro calls: optional semantic highlighting ("rainbow colors")
 
 ### Fixed
-- - support enclosed in `< ... >` for parameter containing `,` (`MESSAGE <"some text",10>`)
+- macro call parameters
+  - support enclosed in `< ... >` for parameter containing `,` (`MESSAGE <"some text",10>`)
   - support register lists (`PUSH D0/D3/A0-A2`)
   - support control registers (`DFC`, `SFC`, `VBR`)
 - "current PC" for `(*-1)` expression
@@ -27,7 +28,8 @@
 - support `CPU32` directive
 - support `FPU` directive
 - support `OUTPUT` directive
-- - macro call parameters
+- support _Code | Move Element Left/Right_
+  - macro call parameters
   - `CMPM`
   - `DR` directive
   - `IFC`/`IFNC` conditional assembly directive
@@ -38,7 +40,8 @@
 - fix assertion via "Directives" reference documentation provider invoked on macro call [#44](https://github.com/YannCebron/m68kplugin/issues/44)
 
 ### Changed
-- - conditional assembly/macro directives
+- Improve _Edit | Extend/Shrink Selection_ for blocks inside
+  - conditional assembly/macro directives
   - `DBcc` loops
 
 ## 0.1.4
