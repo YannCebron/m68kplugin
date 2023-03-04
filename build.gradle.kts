@@ -32,6 +32,8 @@ group = properties("pluginGroup")
 
 dependencies {
     implementation(project("amiga", "instrumentedJar"))
+
+    compileOnly(project(":plugin-api"))
     implementation(project("plugin-api", "instrumentedJar"))
 }
 

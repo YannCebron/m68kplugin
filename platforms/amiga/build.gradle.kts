@@ -20,5 +20,5 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":plugin-api", "instrumentedJar"))
+    compileOnly(project(":plugin-api"))
 }
