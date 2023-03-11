@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,7 +65,6 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 %implements FlexLexer
 %function advance
 %type IElementType
-%unicode
 
 CRLF=[\r\n]
 WHITE_SPACE=[\ \t\f]
