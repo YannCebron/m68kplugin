@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kStringExpression;
 import org.jetbrains.annotations.NotNull;
 
-public class M68kSpellcheckerStrategy extends SpellcheckingStrategy {
+final class M68kSpellcheckerStrategy extends SpellcheckingStrategy {
 
   @Override
   public @NotNull Tokenizer getTokenizer(PsiElement element) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public class M68kShowUsedRegistersIntention implements IntentionAction, HighPriorityAction {
+final class M68kShowUsedRegistersIntention implements IntentionAction, HighPriorityAction {
 
   @Override
   public @Nls(capitalization = Nls.Capitalization.Sentence) @NotNull String getText() {

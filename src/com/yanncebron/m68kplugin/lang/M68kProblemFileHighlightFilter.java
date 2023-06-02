@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.yanncebron.m68kplugin.lang;
 import com.intellij.openapi.util.Condition;
 import com.intellij.openapi.vfs.VirtualFile;
 
-public class M68kProblemFileHighlightFilter implements Condition<VirtualFile> {
+final class M68kProblemFileHighlightFilter implements Condition<VirtualFile> {
 
   @Override
   public boolean value(VirtualFile virtualFile) {

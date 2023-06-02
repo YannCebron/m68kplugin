@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ import com.yanncebron.m68kplugin.lexer.M68kLexer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class M68kFindUsagesProvider implements FindUsagesProvider {
+final class M68kFindUsagesProvider implements FindUsagesProvider {
 
   @Nullable
   @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class M68kFileIncludeProvider extends FileIncludeProvider {
+final class M68kFileIncludeProvider extends FileIncludeProvider {
 
   @Override
   public @NotNull String getId() {

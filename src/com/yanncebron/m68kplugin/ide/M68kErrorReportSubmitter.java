@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ import java.net.URLEncoder;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-public class M68kErrorReportSubmitter extends ErrorReportSubmitter {
+final class M68kErrorReportSubmitter extends ErrorReportSubmitter {
 
   @NonNls
   private static final String REPORT_URL = "https://github.com/YannCebron/m68kplugin/issues/new?labels=crash-report&title=";

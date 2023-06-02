@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.yanncebron.m68kplugin.lang;
 import com.intellij.lang.Commenter;
 import org.jetbrains.annotations.Nullable;
 
-public class M68kCommenter implements Commenter {
+final class M68kCommenter implements Commenter {
 
   @Nullable
   @Override

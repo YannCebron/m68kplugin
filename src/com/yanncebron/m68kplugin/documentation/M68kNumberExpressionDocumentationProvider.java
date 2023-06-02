@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class M68kNumberExpressionDocumentationProvider extends AbstractDocumentationProvider {
+final class M68kNumberExpressionDocumentationProvider extends AbstractDocumentationProvider {
 
   @Override
   public @Nullable String generateDoc(PsiElement element, @Nullable PsiElement originalElement) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentManager;
 import org.jetbrains.annotations.NotNull;
 
-public class M68kBrowserToolWindowFactory implements ToolWindowFactory, DumbAware {
+final class M68kBrowserToolWindowFactory implements ToolWindowFactory, DumbAware {
 
   private static final ExtensionPointName<M68kBrowserPaneEP> BROWSER_PANE_EP = ExtensionPointName.create("com.yanncebron.m68kplugin.browserPane");
 

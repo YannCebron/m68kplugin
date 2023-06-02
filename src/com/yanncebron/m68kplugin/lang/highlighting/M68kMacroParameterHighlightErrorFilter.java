@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
  * Suppress parser error highlighting for macro parameter elements,
  * as these can occur at any position inside macro.
  */
-public class M68kMacroParameterHighlightErrorFilter extends HighlightErrorFilter {
+final class M68kMacroParameterHighlightErrorFilter extends HighlightErrorFilter {
 
   @Override
   public boolean shouldHighlightErrorElement(@NotNull PsiErrorElement element) {

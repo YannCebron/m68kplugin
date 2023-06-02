@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Goto symbol: show containing file on the right instead of "Module".
  */
-public class M68kGotoLabelModuleRendererFactory extends ModuleRendererFactory {
+final class M68kGotoLabelModuleRendererFactory extends ModuleRendererFactory {
 
   @Override
   protected boolean handles(Object element) {

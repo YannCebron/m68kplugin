@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
  * todo what about "code blocks"/dc.x blocks - until next label? max _n_ elements?
  * todo expand start offset to preceding docs until blank line?
  */
-public class M68kImplementationTextSelectioner implements ImplementationTextSelectioner {
+final class M68kImplementationTextSelectioner implements ImplementationTextSelectioner {
 
   @Override
   public int getTextStartOffset(@NotNull PsiElement element) {

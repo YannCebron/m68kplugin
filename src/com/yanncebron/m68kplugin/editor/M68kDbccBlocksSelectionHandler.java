@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
 /**
  * Extend selection to previous label (or keep current one) (inclusive) up to subsequent {@code dbCC} instruction (inclusive).
  */
-class M68kDbccBlocksSelectionHandler extends M68kSelectionHandlerBase {
+final class M68kDbccBlocksSelectionHandler extends M68kSelectionHandlerBase {
 
   M68kDbccBlocksSelectionHandler() {
     super(M68kLabelBase.class, true, M68kDbccInstructionBase.class, true);

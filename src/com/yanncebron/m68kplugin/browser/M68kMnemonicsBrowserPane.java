@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
+final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
 
   private Ref<Boolean> isShowMc68010;
 

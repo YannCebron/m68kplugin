@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import com.yanncebron.m68kplugin.lang.M68kFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class M68kStructureViewFactory implements PsiStructureViewFactory {
+final class M68kStructureViewFactory implements PsiStructureViewFactory {
 
   @Nullable
   @Override

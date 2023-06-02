@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import org.jetbrains.annotations.NotNull;
 
-public class M68kTemplateContextType extends TemplateContextType {
+final class M68kTemplateContextType extends TemplateContextType {
 
   @SuppressWarnings("DialogTitleCapitalization")
   public M68kTemplateContextType() {

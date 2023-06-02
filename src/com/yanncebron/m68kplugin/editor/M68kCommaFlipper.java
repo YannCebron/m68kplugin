@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 import org.jetbrains.annotations.NotNull;
 
-public class M68kCommaFlipper implements FlipCommaIntention.Flipper {
+final class M68kCommaFlipper implements FlipCommaIntention.Flipper {
 
   @Override
   public boolean flip(@NotNull PsiElement left, @NotNull PsiElement right) {

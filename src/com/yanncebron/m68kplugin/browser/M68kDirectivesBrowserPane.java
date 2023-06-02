@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<IElementType> {
+final class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<IElementType> {
 
   public M68kDirectivesBrowserPane() {
     super(IElementType.class);

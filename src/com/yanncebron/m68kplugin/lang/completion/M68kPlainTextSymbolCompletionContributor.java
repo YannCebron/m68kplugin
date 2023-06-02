@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class M68kPlainTextSymbolCompletionContributor implements PlainTextSymbolCompletionContributor {
+final class M68kPlainTextSymbolCompletionContributor implements PlainTextSymbolCompletionContributor {
 
   @Override
   public @NotNull Collection<LookupElement> getLookupElements(@NotNull PsiFile file, int invocationCount, @NotNull String prefix) {

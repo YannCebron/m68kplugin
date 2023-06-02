@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
 /**
  * Extend selection to preceding label (or keep current one) (inclusive) up to subsequent label (exclusive).
  */
-class M68kLabelBlocksSelectionHandler extends M68kSelectionHandlerBase {
+final class M68kLabelBlocksSelectionHandler extends M68kSelectionHandlerBase {
 
   M68kLabelBlocksSelectionHandler() {
     super(M68kLabelBase.class, true, M68kLabelBase.class, false);

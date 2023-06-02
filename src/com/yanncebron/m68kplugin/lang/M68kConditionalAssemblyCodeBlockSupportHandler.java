@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ import java.util.List;
  *
  * @see M68kBraceMatcher for simple 1:1 keyword "brace" matching
  */
-public class M68kConditionalAssemblyCodeBlockSupportHandler implements CodeBlockSupportHandler {
+final class M68kConditionalAssemblyCodeBlockSupportHandler implements CodeBlockSupportHandler {
 
   @Override
   public @NotNull List<TextRange> getCodeBlockMarkerRanges(@NotNull PsiElement elementAtCursor) {
