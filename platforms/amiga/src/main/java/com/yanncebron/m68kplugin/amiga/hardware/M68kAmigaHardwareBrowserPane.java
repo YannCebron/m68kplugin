@@ -25,7 +25,7 @@ import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.actionSystem.ex.ComboBoxAction;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.DumbAwareToggleAction;
-import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.ColoredListCellRenderer;
@@ -152,7 +152,7 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
   }
 
   private static String getReferenceDoc(String markdownFileName) {
-    Pair<String, String> markdownContents = M68kDocumentationUtil.getMarkdownContents(DOC_ROOT, markdownFileName);
+    Couple<String> markdownContents = M68kDocumentationUtil.getMarkdownContents(DOC_ROOT, markdownFileName);
     if (markdownContents.getFirst() == null) {
       return markdownContents.getSecond();
     }

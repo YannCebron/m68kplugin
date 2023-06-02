@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -101,7 +101,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       // CPU
       String cpuText = StringUtil.substringBefore(lastSplit.get(3), "}");
       final Set<M68kCpu> m68kCpus = mapCpuSet(cpuText);
-      if (m68kCpus == null || m68kCpus.size() == 0) {
+      if (m68kCpus == null || m68kCpus.isEmpty()) {
         if (!SKIP_UNSUPPORTED_CPUS && elementType != null)
           System.out.println("skip entry for unknown CPU '" + cpuText + "': " + trim);
         continue;

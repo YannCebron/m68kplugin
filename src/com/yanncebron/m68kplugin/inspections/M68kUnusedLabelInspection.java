@@ -42,8 +42,9 @@ final class M68kUnusedLabelInspection extends LocalInspectionTool implements Cle
           return;
         }
 
+        final String localLabelName = m68kLocalLabel.getName();
         holder.registerProblem(m68kLocalLabel,
-          M68kBundle.message("inspection.unused.label.message", m68kLocalLabel.getName()),
+          M68kBundle.message("inspection.unused.label.message", localLabelName),
           ProblemHighlightType.LIKE_UNUSED_SYMBOL,
 
           new LocalQuickFix() {
@@ -55,7 +56,7 @@ final class M68kUnusedLabelInspection extends LocalInspectionTool implements Cle
 
             @Override
             public @Nls(capitalization = Nls.Capitalization.Sentence) @NotNull String getName() {
-              return M68kBundle.message("inspection.unused.label.fix.name", m68kLocalLabel.getName());
+              return M68kBundle.message("inspection.unused.label.fix.name", localLabelName);
             }
 
             @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -104,7 +104,7 @@ public final class M68kMnemonic {
   @Override
   public String toString() {
     return "M68kMnemonic{" +
-      "" + elementType +
+      elementType +
       ", deprecated=" + isDeprecated() +
       ", src=" + sourceOperand +
       ", dst=" + destinationOperand +

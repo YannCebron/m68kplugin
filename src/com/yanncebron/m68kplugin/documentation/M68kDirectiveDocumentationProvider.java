@@ -20,7 +20,7 @@ import com.intellij.codeInsight.documentation.DocumentationManagerProtocol;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.documentation.AbstractDocumentationProvider;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -81,7 +81,7 @@ public final class M68kDirectiveDocumentationProvider extends AbstractDocumentat
     directiveType = directiveType == M68kTokenTypes.EQ_DIRECTIVE ? M68kTokenTypes.EQU : directiveType;
 
     String directiveText = directiveType.toString();
-    Pair<String, String> contents = M68kDocumentationUtil.getMarkdownContents(DOCS_MNEMONIC_ROOT, StringUtil.toLowerCase(directiveText));
+    Couple<String> contents = M68kDocumentationUtil.getMarkdownContents(DOCS_MNEMONIC_ROOT, StringUtil.toLowerCase(directiveText));
     if (contents.getFirst() == null) {
       return M68kDocumentationUtil.CSS +
         "<h1>" + StringUtil.toUpperCase(directiveText) + "</h1>" +

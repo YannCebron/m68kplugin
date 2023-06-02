@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -162,7 +162,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
   protected abstract String getDocFor(@NotNull T selectedValue);
 
   protected ColoredListCellRenderer<T> getListCellRenderer() {
-    return new ColoredListCellRenderer<T>() {
+    return new ColoredListCellRenderer<>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends T> list, T value, int index, boolean selected, boolean hasFocus) {
         append(getListItemNamer().fun(value));

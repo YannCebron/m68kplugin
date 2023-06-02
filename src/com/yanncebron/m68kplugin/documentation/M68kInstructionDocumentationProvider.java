@@ -18,7 +18,7 @@ package com.yanncebron.m68kplugin.documentation;
 
 import com.intellij.lang.documentation.AbstractDocumentationProvider;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -77,7 +77,7 @@ public final class M68kInstructionDocumentationProvider extends AbstractDocument
   public static String getMnemonicDoc(IElementType originalMnemonic, @Nullable M68kInstruction instruction) {
     String mnemonicDoc = new M68kInstructionMnemonicDocsGenerator(originalMnemonic, instruction).generateHtmlDoc();
 
-    final Pair<String, String> markdownContents = getMarkdownContents(originalMnemonic);
+    final Couple<String> markdownContents = getMarkdownContents(originalMnemonic);
 
     String referenceHeading = markdownContents.getFirst() != null ?
       StringUtil.substringAfter(StringUtil.splitByLines(markdownContents.getFirst())[0], "# ") : StringUtil.toUpperCase(originalMnemonic.toString());
@@ -86,7 +86,7 @@ public final class M68kInstructionDocumentationProvider extends AbstractDocument
   }
 
   public static String getInstructionReferenceDoc(IElementType originalMnemonic) {
-    final Pair<String, String> markdownContents = getMarkdownContents(originalMnemonic);
+    final Couple<String> markdownContents = getMarkdownContents(originalMnemonic);
     if (markdownContents.getFirst() == null) {
       return markdownContents.getSecond();
     }
@@ -94,7 +94,7 @@ public final class M68kInstructionDocumentationProvider extends AbstractDocument
     return M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, markdownContents.getFirst());
   }
 
-  private static Pair<String, String> getMarkdownContents(IElementType originalMnemonic) {
+  private static Couple<String> getMarkdownContents(IElementType originalMnemonic) {
     String docMnemonic = findDocMnemonic(originalMnemonic);
 
     return M68kDocumentationUtil.getMarkdownContents(DOCS_MNEMONIC_ROOT, docMnemonic);

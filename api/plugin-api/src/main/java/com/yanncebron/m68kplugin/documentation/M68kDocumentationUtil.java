@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2023 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.yanncebron.m68kplugin.documentation;
 
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.io.StreamUtil;
 import com.intellij.util.io.URLUtil;
@@ -64,18 +64,18 @@ public final class M68kDocumentationUtil {
   @NonNls
   public static final String CONTRIBUTION_FOOTER = "<br><br><a href=\"https://github.com/prb28/m68k-instructions-documentation\">Contribute to m68k-instructions-documentation project</a>";
 
-  public static Pair<String, String> getMarkdownContents(String docRoot, String markdownFileName) {
+  public static Couple<String> getMarkdownContents(String docRoot, String markdownFileName) {
     final InputStream resource = M68kDocumentationUtil.class.getResourceAsStream(docRoot + markdownFileName + ".md");
     if (resource == null) {
-      return Pair.create(null, M68kApiBundle.message("documentation.no.reference.doc", markdownFileName));
+      return Couple.of(null, M68kApiBundle.message("documentation.no.reference.doc", markdownFileName));
     }
 
     try {
-      return Pair.create(FileUtil.loadTextAndClose(resource), null);
+      return Couple.of(FileUtil.loadTextAndClose(resource), null);
     } catch (IOException e) {
       String message = M68kApiBundle.message("documentation.error.loading.reference.doc", markdownFileName, e.getMessage());
       LOG.error(message, e);
-      return Pair.create(null, message);
+      return Couple.of(null, message);
     }
   }
 
