@@ -25,5 +25,5 @@ repositories {
 
 dependencies {
     // Gradle IntelliJ Plugin
-    implementation("org.jetbrains.intellij.plugins", "gradle-intellij-plugin", "1.13.3")
+    implementation("org.jetbrains.intellij.plugins", "gradle-intellij-plugin", "1.14.0")
 }
