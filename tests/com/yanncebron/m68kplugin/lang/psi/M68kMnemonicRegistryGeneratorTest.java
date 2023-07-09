@@ -37,6 +37,7 @@ import java.util.*;
  *   <li>Set {@link #ENABLED} to {@code true}</li>
  *   <li>Run {@link #testGenerateMnemonicRegistryData()} and copy generated source output</li>
  * </ol>
+ * Last check: vasm 1.9d.
  */
 @SuppressWarnings("SpellCheckingInspection")
 public class M68kMnemonicRegistryGeneratorTest extends TestCase {
