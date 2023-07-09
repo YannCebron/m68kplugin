@@ -20,7 +20,6 @@ import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.yanncebron.m68kplugin.M68kBundle;
 import icons.M68kIcons;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
@@ -50,7 +49,6 @@ public final class M68kFileType extends LanguageFileType {
     return "s";
   }
 
-  @Nullable
   @Override
   public Icon getIcon() {
     return M68kIcons.FILE;

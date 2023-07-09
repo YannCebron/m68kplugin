@@ -32,11 +32,9 @@ import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import com.yanncebron.m68kplugin.lexer.M68kLexer;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 final class M68kFindUsagesProvider implements FindUsagesProvider {
 
-  @Nullable
   @Override
   public WordsScanner getWordsScanner() {
     return new DefaultWordsScanner(new M68kLexer(),
@@ -51,7 +49,6 @@ final class M68kFindUsagesProvider implements FindUsagesProvider {
     return psiElement instanceof M68kLabelBase;
   }
 
-  @Nullable
   @Override
   public String getHelpId(@NotNull PsiElement psiElement) {
     return HelpID.FIND_OTHER_USAGES;

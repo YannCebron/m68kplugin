@@ -21,7 +21,6 @@ import org.jetbrains.annotations.Nullable;
 
 final class M68kCommenter implements Commenter {
 
-  @Nullable
   @Override
   public String getLineCommentPrefix() {
     return ";";

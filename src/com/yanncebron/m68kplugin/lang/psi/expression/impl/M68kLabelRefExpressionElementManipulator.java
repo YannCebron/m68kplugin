@@ -23,11 +23,9 @@ import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
 import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabelMode;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 final class M68kLabelRefExpressionElementManipulator extends AbstractElementManipulator<M68kLabelRefExpression> {
 
-  @Nullable
   @Override
   public M68kLabelRefExpression handleContentChange(@NotNull M68kLabelRefExpression element, @NotNull TextRange range, String newContent) throws IncorrectOperationException {
     String labelName = newContent;

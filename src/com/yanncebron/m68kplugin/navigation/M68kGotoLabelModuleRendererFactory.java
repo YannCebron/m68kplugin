@@ -20,7 +20,6 @@ import com.intellij.ide.util.ModuleRendererFactory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.presentation.java.SymbolPresentationUtil;
 import com.intellij.util.TextWithIcon;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Goto symbol: show containing file on the right instead of "Module".
@@ -38,7 +37,7 @@ final class M68kGotoLabelModuleRendererFactory extends ModuleRendererFactory {
   }
 
   @Override
-  public @Nullable TextWithIcon getModuleTextWithIcon(Object element) {
+  public TextWithIcon getModuleTextWithIcon(Object element) {
     M68kGotoLabelNavigationItem navigationItem = (M68kGotoLabelNavigationItem) element;
     PsiElement targetElement = navigationItem.getNavigationElement();
     return new TextWithIcon(SymbolPresentationUtil.getFilePathPresentation(targetElement.getContainingFile()), null);

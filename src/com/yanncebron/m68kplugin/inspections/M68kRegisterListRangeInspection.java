@@ -25,7 +25,6 @@ import com.intellij.util.containers.MultiMap;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.Collection;
@@ -36,7 +35,6 @@ final class M68kRegisterListRangeInspection extends LocalInspectionTool {
   @SuppressWarnings("PublicField")
   public boolean allowMixedTypes = true;
 
-  @Nullable
   @Override
   public JComponent createOptionsPanel() {
     return new SingleCheckboxOptionsPanel(M68kBundle.message("inspection.register.list.range.mixed.types.option"), this, "allowMixedTypes");

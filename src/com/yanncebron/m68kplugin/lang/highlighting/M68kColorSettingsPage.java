@@ -128,7 +128,6 @@ final class M68kColorSettingsPage implements ColorSettingsPage, RainbowColorSett
       RainbowHighlighter.generatePaletteExample("\n* ");
   }
 
-  @Nullable
   @Override
   public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
     Map<String, TextAttributesKey> additionalMap = new HashMap<>();
@@ -161,7 +160,7 @@ final class M68kColorSettingsPage implements ColorSettingsPage, RainbowColorSett
   }
 
   @Override
-  public @Nullable Language getLanguage() {
+  public Language getLanguage() {
     return M68kLanguage.INSTANCE;
   }
 }
