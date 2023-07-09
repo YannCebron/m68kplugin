@@ -67,6 +67,30 @@ public final class M68kMnemonicRegistry {
     assert !all.isEmpty() : instruction.getText();
 
     final List<M68kAdm> operands = PsiTreeUtil.getChildrenOfTypeAsList(instruction, M68kAdm.class);
+    List<M68kMnemonic> filtered = getFilteredM68Mnemonics(instruction, operands, all);
+
+    if (filtered.size() == 1) {
+      return filtered.get(0);
+    }
+
+    // multiple matches: rank by min(addressMode.count)
+    filtered.sort((o1, o2) -> {
+      final int o1Source = o1.getSourceOperand().getAddressModes().length;
+      final int o2Source = o2.getSourceOperand().getAddressModes().length;
+      if (o1Source != o2Source) {
+        return Integer.compare(o1Source, o2Source);
+      }
+
+      final int o1Dest = o1.getDestinationOperand().getAddressModes().length;
+      final int o2Dest = o2.getDestinationOperand().getAddressModes().length;
+      return Integer.compare(o1Dest, o2Dest);
+    });
+
+    return ContainerUtil.getFirstItem(filtered);
+  }
+
+  @NotNull
+  private static List<M68kMnemonic> getFilteredM68Mnemonics(M68kInstruction instruction, List<M68kAdm> operands, Collection<M68kMnemonic> all) {
     int operandsCount = operands.size();
 
     // operand count
@@ -112,25 +136,7 @@ public final class M68kMnemonicRegistry {
         return false;
       }
     );
-
-    if (filtered.size() == 1) {
-      return filtered.get(0);
-    }
-
-    // multiple matches: rank by min(addressMode.count)
-    filtered.sort((o1, o2) -> {
-      final int o1Source = o1.getSourceOperand().getAddressModes().length;
-      final int o2Source = o2.getSourceOperand().getAddressModes().length;
-      if (o1Source != o2Source) {
-        return Integer.compare(o1Source, o2Source);
-      }
-
-      final int o1Dest = o1.getDestinationOperand().getAddressModes().length;
-      final int o2Dest = o2.getDestinationOperand().getAddressModes().length;
-      return Integer.compare(o1Dest, o2Dest);
-    });
-
-    return ContainerUtil.getFirstItem(filtered);
+    return filtered;
   }
 
   private static boolean operandAddressModeMatches(M68kOperand operand, M68kAdm givenAdm) {
