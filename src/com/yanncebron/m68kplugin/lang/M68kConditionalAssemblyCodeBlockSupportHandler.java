@@ -53,7 +53,7 @@ final class M68kConditionalAssemblyCodeBlockSupportHandler implements CodeBlockS
     ranges.add(elementAtCursor.getTextRange());
 
     final M68kConditionalAssemblyDirective startElement =
-      PsiTreeUtil.getParentOfType(elementAtCursor, M68kConditionalAssemblyDirective.class);
+      PsiTreeUtil.getParentOfType(elementAtCursor, M68kConditionalAssemblyDirective.class, false);
     assert startElement != null;
 
     // todo "hard" stop: where? section?

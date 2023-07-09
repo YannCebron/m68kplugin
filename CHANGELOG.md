@@ -5,6 +5,9 @@
 ### Changed
 - mark plugin compatible with 2023.2|3
 
+### Fixed
+- fix assertion in `M68kConditionalAssemblyCodeBlockSupportHandler` [#56](../../issues/56)
+
 ## 0.1.72 - 2023-02-21
 
 ### Changed
