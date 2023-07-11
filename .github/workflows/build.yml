@@ -47,16 +47,16 @@ jobs:
       - name: Gradle Wrapper Validation
         uses: gradle/wrapper-validation-action@v1.0.6
 
-      # Setup Gradle
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-
+      # Setup Java environment for the next steps
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
           distribution: zulu
-          java-version: 11
-          cache: gradle
+          java-version: 17
+
+      # Setup Gradle
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
 
       # Set environment variables
       - name: Export Properties
@@ -101,7 +101,7 @@ jobs:
   # Run tests and upload a code coverage report
   test:
     name: Test
-    needs: build
+    needs: [ build ]
     runs-on: ubuntu-latest
     steps:
 
@@ -109,16 +109,16 @@ jobs:
       - name: Fetch Sources
         uses: actions/checkout@v3
 
-      # Setup Gradle
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-
+      # Setup Java environment for the next steps
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
           distribution: zulu
-          java-version: 11
-          cache: gradle
+          java-version: 17
+
+      # Setup Gradle
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
 
       # Run tests
       - name: Run Tests
@@ -138,10 +138,38 @@ jobs:
         with:
           files: ${{ github.workspace }}/build/reports/kover/xml/report.xml
 
+  # Run Qodana inspections and provide report
+  inspectCode:
+    name: Inspect code
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      checks: write
+      pull-requests: write
+    steps:
+
+      # Check out current repository
+      - name: Fetch Sources
+        uses: actions/checkout@v3
+
+      # Setup Java environment for the next steps
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: zulu
+          java-version: 17
+
+      # Run Qodana inspections
+      - name: Qodana - Code Inspection
+        uses: JetBrains/qodana-action@v2023.1.5
+        with:
+          cache-default-branch-only: true
+
   # Run plugin structure verification along with IntelliJ Plugin Verifier
   verify:
     name: Verify plugin
-    needs: build
+    needs: [ build, test, inspectCode ]
     runs-on: ubuntu-latest
     steps:
 
@@ -149,16 +177,16 @@ jobs:
       - name: Fetch Sources
         uses: actions/checkout@v3
 
-      # Setup Gradle
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-
+      # Setup Java environment for the next steps
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
           distribution: zulu
-          java-version: 11
-          cache: gradle
+          java-version: 17
+
+      # Setup Gradle
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
 
       # Cache Plugin Verifier IDEs
       - name: Setup Plugin Verifier IDEs Cache
@@ -179,33 +207,12 @@ jobs:
           name: pluginVerifier-result
           path: ${{ github.workspace }}/build/reports/pluginVerifier
 
-  # Run Qodana inspections and provide report
-  inspectCode:
-    name: Inspect code
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      checks: write
-      pull-requests: write
-    steps:
-
-      # Check out current repository
-      - name: Fetch Sources
-        uses: actions/checkout@v3
-
-      # Run Qodana inspections
-      - name: Qodana - Code Inspection
-        uses: JetBrains/qodana-action@v2023.1.5
-        with:
-          cache-default-branch-only: true
-
   # Prepare a draft release for GitHub Releases page for the manual verification
   # If accepted and published, release workflow would be triggered
   releaseDraft:
     name: Release draft
     if: github.event_name != 'pull_request'
-    needs: [ build, test, verify, inspectCode ]
+    needs: [ build, verify ]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -214,6 +221,13 @@ jobs:
       # Check out current repository
       - name: Fetch Sources
         uses: actions/checkout@v3
+
+      # Setup Java environment for the next steps
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: zulu
+          java-version: 17
 
       # Remove old release drafts by using the curl request for the available releases with a draft flag
       - name: Remove Old Release Drafts
