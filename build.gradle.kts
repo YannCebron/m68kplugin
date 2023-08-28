@@ -23,7 +23,7 @@ plugins {
     // generic Java setup
     id("m68kplugin.java-conventions")
     // Gradle Changelog Plugin
-    id("org.jetbrains.changelog") version "2.1.2"
+    id("org.jetbrains.changelog") version "2.2.0"
     // GrammarKit
     id("org.jetbrains.grammarkit") version "2021.2.2"
 }
