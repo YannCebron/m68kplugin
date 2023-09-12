@@ -79,7 +79,7 @@ changelog {
 }
 
 grammarKit {
-    jflexRelease.set("1.9.1")
+    jflexRelease.set("1.9.2")
 }
 
 tasks {
