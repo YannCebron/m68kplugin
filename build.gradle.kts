@@ -25,7 +25,7 @@ plugins {
     // Gradle Changelog Plugin
     id("org.jetbrains.changelog") version "2.2.0"
     // GrammarKit
-    id("org.jetbrains.grammarkit") version "2021.2.2"
+    id("org.jetbrains.grammarkit") version "2022.3.2.1"
 }
 
 group = properties("pluginGroup")
