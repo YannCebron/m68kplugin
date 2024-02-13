@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2024 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,5 +25,5 @@ repositories {
 
 dependencies {
     // Gradle IntelliJ Plugin
-    implementation("org.jetbrains.intellij.plugins", "gradle-intellij-plugin", "1.16.1")
+    implementation("org.jetbrains.intellij.plugins", "gradle-intellij-plugin", "1.17.1")
 }
