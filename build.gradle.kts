@@ -25,7 +25,7 @@ plugins {
     // Gradle Changelog Plugin
     id("org.jetbrains.changelog") version "2.2.0"
     // GrammarKit
-    id("org.jetbrains.grammarkit") version "2021.2.2"
+    id("org.jetbrains.grammarkit") version "2022.3.2.2"
 }
 
 group = properties("pluginGroup")
@@ -78,21 +78,16 @@ changelog {
     groups.set(emptyList())
 }
 
-grammarKit {
-    jflexRelease.set("1.9.2")
-}
-
 tasks {
 
     wrapper {
         gradleVersion = properties("gradleVersion")
     }
 
-    task<GenerateLexerTask>("generateM68KLexer") {
-        source.set("src/grammar/_M68kLexer.flex")
+    generateLexer {
+        sourceFile.set(file("src/grammar/_M68kLexer.flex"))
         skeleton.set(file("src/grammar/idea-flex.skeleton"))
-        targetDir.set("gen/com/yanncebron/m68kplugin/lexer/")
-        targetClass.set("_M68kLexer")
+        targetOutputDir.set(file("gen/com/yanncebron/m68kplugin/lexer/"))
         purgeOldFiles.set(true)
     }
 
