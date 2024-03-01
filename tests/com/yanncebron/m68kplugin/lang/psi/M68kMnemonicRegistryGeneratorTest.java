@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2024 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ import java.util.*;
  *   <li>Set {@link #ENABLED} to {@code true}</li>
  *   <li>Run {@link #testGenerateMnemonicRegistryData()} and copy generated source output</li>
  * </ol>
- * Last check: vasm 1.9d.
+ * Last check: vasm 1.9f.
  */
 @SuppressWarnings("SpellCheckingInspection")
 public class M68kMnemonicRegistryGeneratorTest extends TestCase {
