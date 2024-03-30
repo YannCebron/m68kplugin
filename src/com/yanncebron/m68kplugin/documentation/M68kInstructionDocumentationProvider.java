@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2024 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kInstruction;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
@@ -39,17 +38,16 @@ public final class M68kInstructionDocumentationProvider extends AbstractDocument
   private static final String DOCS_MNEMONIC_ROOT = "/docs/mnemonic/";
 
 
-  private static final Map<String, TokenSet> MNEMONIC_MAP = ContainerUtil.<String, TokenSet>immutableMapBuilder()
-    .put("asl_asr", TokenSet.create(M68kTokenTypes.ASL, M68kTokenTypes.ASR))
-    .put("bcc", M68kTokenGroups.BCC_INSTRUCTIONS)
-    .put("dbcc", M68kTokenGroups.DBCC_INSTRUCTIONS)
-    .put("divs_divu", TokenSet.create(M68kTokenTypes.DIVS, M68kTokenTypes.DIVU))
-    .put("muls_mulu", TokenSet.create(M68kTokenTypes.MULS, M68kTokenTypes.MULU))
-    .put("lsl_lsr", TokenSet.create(M68kTokenTypes.LSL, M68kTokenTypes.LSR))
-    .put("rol_ror", TokenSet.create(M68kTokenTypes.ROL, M68kTokenTypes.ROR))
-    .put("roxl_roxr", TokenSet.create(M68kTokenTypes.ROXL, M68kTokenTypes.ROXR))
-    .put("scc", M68kTokenGroups.SCC_INSTRUCTIONS)
-    .build();
+  private static final Map<String, TokenSet> MNEMONIC_MAP = Map.of(
+    "asl_asr", TokenSet.create(M68kTokenTypes.ASL, M68kTokenTypes.ASR),
+    "bcc", M68kTokenGroups.BCC_INSTRUCTIONS,
+    "dbcc", M68kTokenGroups.DBCC_INSTRUCTIONS,
+    "divs_divu", TokenSet.create(M68kTokenTypes.DIVS, M68kTokenTypes.DIVU),
+    "muls_mulu", TokenSet.create(M68kTokenTypes.MULS, M68kTokenTypes.MULU),
+    "lsl_lsr", TokenSet.create(M68kTokenTypes.LSL, M68kTokenTypes.LSR),
+    "rol_ror", TokenSet.create(M68kTokenTypes.ROL, M68kTokenTypes.ROR),
+    "roxl_roxr", TokenSet.create(M68kTokenTypes.ROXL, M68kTokenTypes.ROXR),
+    "scc", M68kTokenGroups.SCC_INSTRUCTIONS);
 
   @Override
   public @Nullable PsiElement getCustomDocumentationElement(@NotNull Editor editor,
@@ -65,9 +63,8 @@ public final class M68kInstructionDocumentationProvider extends AbstractDocument
 
   @Override
   public @Nullable String generateDoc(PsiElement element, @Nullable PsiElement originalElement) {
-    if (!(element instanceof M68kInstruction)) return null;
+    if (!(element instanceof M68kInstruction instruction)) return null;
 
-    M68kInstruction instruction = (M68kInstruction) element;
     final IElementType originalMnemonic = instruction.getNode().getFirstChildNode().getElementType();
 
     return M68kDocumentationUtil.CSS + getMnemonicDoc(originalMnemonic, instruction);
