@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2024 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ public final class M68kBrowserPaneEP extends BaseKeyedLazyInstance<M68kBrowserPa
     String baseName = bundle != null ? bundle : getPluginDescriptor().getResourceBundleBaseName();
     assert baseName != null;
 
-    ResourceBundle bundle = DynamicBundle.INSTANCE.getResourceBundle(baseName, getLoaderForClass());
+    ResourceBundle bundle = DynamicBundle.getResourceBundle(getLoaderForClass(), baseName);
     return bundle.getString(displayName);
   }
 
