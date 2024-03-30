@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2024 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,34 +57,26 @@ class M68kRootStructureViewTreeElement extends PsiTreeElementBase<M68kFile> {
 
     Collection<StructureViewTreeElement> nodes = new ArrayList<>();
     for (PsiElement child : children) {
-      if (child instanceof M68kLabel) {
-        M68kLabel m68kLabel = (M68kLabel) child;
+      if (child instanceof M68kLabel m68kLabel) {
         nodes.add(new M68kStructureViewNode(m68kLabel) {
           @Override
           public @NotNull Collection<StructureViewTreeElement> getChildrenBase() {
-            return ContainerUtil.map2List(m68kLabel.getLocalLabels(), M68kStructureViewNode::new);
+            return ContainerUtil.map(m68kLabel.getLocalLabels(), M68kStructureViewNode::new);
           }
         });
-      } else if (child instanceof M68kMacroDirective) {
-        M68kMacroDirective macroDirective = (M68kMacroDirective) child;
+      } else if (child instanceof M68kMacroDirective macroDirective) {
         nodes.add(new M68kStructureViewNode(macroDirective.getLabel()));
-      } else if (child instanceof M68kEquDirectiveBase) {
-        M68kEquDirectiveBase equDirective = (M68kEquDirectiveBase) child;
+      } else if (child instanceof M68kEquDirectiveBase equDirective) {
         nodes.add(new M68kStructureViewNode(equDirective.getLabel()));
-      } else if (child instanceof M68kEqurDirective) {
-        M68kEqurDirective equrDirective = (M68kEqurDirective) child;
+      } else if (child instanceof M68kEqurDirective equrDirective) {
         nodes.add(new M68kStructureViewNode(equrDirective.getLabel()));
-      } else if (child instanceof M68kRegDirective) {
-        M68kRegDirective regDirective = (M68kRegDirective) child;
+      } else if (child instanceof M68kRegDirective regDirective) {
         nodes.add(new M68kStructureViewNode(regDirective.getLabel()));
-      } else if (child instanceof M68kFoDirective) {
-        M68kFoDirective foDirective = (M68kFoDirective) child;
+      } else if (child instanceof M68kFoDirective foDirective) {
         nodes.add(new M68kStructureViewNode(foDirective.getLabel()));
-      } else if (child instanceof M68kSoDirective) {
-        M68kSoDirective soDirective = (M68kSoDirective) child;
+      } else if (child instanceof M68kSoDirective soDirective) {
         nodes.add(new M68kStructureViewNode(soDirective.getLabel()));
-      } else if (child instanceof M68kIncludeDirective) {
-        M68kIncludeDirective includeDirective = (M68kIncludeDirective) child;
+      } else if (child instanceof M68kIncludeDirective includeDirective) {
         nodes.add(new PsiTreeElementBase<>(includeDirective) {
           @Override
           @Nullable
@@ -103,8 +95,7 @@ class M68kRootStructureViewTreeElement extends PsiTreeElementBase<M68kFile> {
             return Collections.emptyList();
           }
         });
-      } else if (child instanceof M68kIncbinDirective) {
-        M68kIncbinDirective incbinDirective = (M68kIncbinDirective) child;
+      } else if (child instanceof M68kIncbinDirective incbinDirective) {
         nodes.add(new PsiTreeElementBase<>(incbinDirective) {
           @Override
           @Nullable
