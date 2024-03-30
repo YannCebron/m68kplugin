@@ -46,7 +46,7 @@ import com.intellij.ui.navigation.History;
 import com.intellij.ui.navigation.Place;
 import com.intellij.ui.scale.JBUIScale;
 import com.intellij.ui.speedSearch.SpeedSearchUtil;
-import com.intellij.util.Function;
+import com.intellij.util.containers.Convertor;
 import com.intellij.util.ui.HTMLEditorKitBuilder;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.UIUtil;
@@ -153,7 +153,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
    */
   protected abstract void initList();
 
-  protected abstract Function<? super T, String> getListItemNamer();
+  protected abstract Convertor<? super T, String> getListItemNamer();
 
   protected String getListItemNameForLink(String link) {
     return StringUtil.toUpperCase(StringUtil.substringBefore(link, ".md"));
@@ -166,7 +166,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
     return new ColoredListCellRenderer<>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends T> list, T value, int index, boolean selected, boolean hasFocus) {
-        append(getListItemNamer().fun(value));
+        append(getListItemNamer().convert(value));
 
         SpeedSearchUtil.applySpeedSearchHighlighting(list, this, true, selected);
       }
@@ -219,7 +219,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
           String elementName = getListItemNameForLink(e.getDescription());
           for (int i = 0; i < list.getItemsCount(); i++) {
             T element = list.getModel().getElementAt(i);
-            if (StringUtil.equals(elementName, getListItemNamer().fun(element))) {
+            if (StringUtil.equals(elementName, getListItemNamer().convert(element))) {
               list.setSelectedIndex(i);
               list.ensureIndexIsVisible(i);
               return;
@@ -263,7 +263,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
       updateDoc();
     });
     ScrollingUtil.installActions(list);
-    new ListSpeedSearch<>(list, getListItemNamer());
+    TreeUIHelper.getInstance().installListSpeedSearch(list, getListItemNamer());
 
     JBScrollPane scrollPane = new JBScrollPane(list);
     scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

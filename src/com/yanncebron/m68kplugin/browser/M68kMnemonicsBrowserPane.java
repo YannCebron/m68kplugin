@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2024 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,9 @@ import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.util.Function;
 import com.intellij.util.IconUtil;
 import com.intellij.util.containers.ContainerUtil;
+import com.intellij.util.containers.Convertor;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.documentation.M68kDocumentationUtil;
 import com.yanncebron.m68kplugin.documentation.M68kInstructionDocumentationProvider;
@@ -96,8 +96,8 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
   }
 
   @Override
-  protected Function<? super M68kMnemonic, String> getListItemNamer() {
-    return (Function<M68kMnemonic, String>) mnemonic -> StringUtil.toUpperCase(mnemonic.getElementType().toString());
+  protected Convertor<? super M68kMnemonic, String> getListItemNamer() {
+    return (Convertor<M68kMnemonic, String>) mnemonic -> StringUtil.toUpperCase(mnemonic.getElementType().toString());
   }
 
   protected @NotNull String getDocFor(@NotNull M68kMnemonic mnemonic) {

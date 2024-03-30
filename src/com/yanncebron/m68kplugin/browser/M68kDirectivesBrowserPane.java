@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2024 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.yanncebron.m68kplugin.browser;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.util.Function;
+import com.intellij.util.containers.Convertor;
 import com.yanncebron.m68kplugin.documentation.M68kDirectiveDocumentationProvider;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
@@ -51,8 +51,8 @@ final class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<IElementType> 
   }
 
   @Override
-  protected Function<? super IElementType, String> getListItemNamer() {
-    return (Function<IElementType, String>) elementType -> StringUtil.toUpperCase(elementType.toString());
+  protected Convertor<? super IElementType, String> getListItemNamer() {
+    return (Convertor<IElementType, String>) elementType -> StringUtil.toUpperCase(elementType.toString());
   }
 
   @Override

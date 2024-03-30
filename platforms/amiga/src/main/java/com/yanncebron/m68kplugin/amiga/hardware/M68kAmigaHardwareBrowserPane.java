@@ -28,7 +28,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.ui.speedSearch.SpeedSearchUtil;
-import com.intellij.util.Function;
+import com.intellij.util.containers.Convertor;
 import com.yanncebron.m68kplugin.amiga.M68kAmigaBundle;
 import com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase;
 import com.yanncebron.m68kplugin.documentation.M68kDocumentationUtil;
@@ -108,7 +108,7 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
   }
 
   @Override
-  protected Function<? super M68kAmigaHardwareRegister, String> getListItemNamer() {
+  protected Convertor<? super M68kAmigaHardwareRegister, String> getListItemNamer() {
     return M68kAmigaHardwareRegister::getName;
   }
 
@@ -162,7 +162,7 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
     return new ColoredListCellRenderer<>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends M68kAmigaHardwareRegister> list, M68kAmigaHardwareRegister value, int index, boolean selected, boolean hasFocus) {
-        append(getListItemNamer().fun(value));
+        append(getListItemNamer().convert(value));
 
         if (isAnnotateChipset.get()) {
           M68kAmigaHardwareRegister.Chipset chipset = value.getChipset();
