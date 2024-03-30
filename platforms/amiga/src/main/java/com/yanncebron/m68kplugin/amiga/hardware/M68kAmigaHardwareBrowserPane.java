@@ -211,6 +211,11 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
       return new DumbAwareToggleAction(chipset.getDisplayName() + " (" + chipset.getFullName() + ")") {
 
         @Override
+        public @NotNull ActionUpdateThread getActionUpdateThread() {
+          return ActionUpdateThread.BGT;
+        }
+
+        @Override
         public boolean isSelected(@NotNull AnActionEvent e) {
           return getSelectedChipset().equals(chipset);
         }
