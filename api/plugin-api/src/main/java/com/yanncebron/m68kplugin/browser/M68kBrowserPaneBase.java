@@ -22,6 +22,7 @@ import com.intellij.ide.IdeBundle;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.editor.colors.EditorColors;
 import com.intellij.openapi.editor.colors.EditorColorsUtil;
 import com.intellij.openapi.options.FontSize;
 import com.intellij.openapi.project.DumbAwareToggleAction;
@@ -46,7 +47,7 @@ import com.intellij.ui.navigation.Place;
 import com.intellij.ui.scale.JBUIScale;
 import com.intellij.ui.speedSearch.SpeedSearchUtil;
 import com.intellij.util.Function;
-import com.intellij.util.ui.JBHtmlEditorKit;
+import com.intellij.util.ui.HTMLEditorKitBuilder;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.UIUtil;
 import com.intellij.util.ui.components.BorderLayoutPanel;
@@ -137,7 +138,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
     return list;
   }
 
-  public boolean isAvailable(Project project) {
+  public boolean isAvailable(@SuppressWarnings("unused") Project project) {
     return true;
   }
 
@@ -175,7 +176,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
   protected void setListItems(List<T> items) {
     T selectedValue = list.getSelectedValue();
 
-    list.setModel(new CollectionListModel<T>(items));
+    list.setModel(new CollectionListModel<>(items));
 
     list.setSelectedValue(selectedValue, true);
   }
@@ -205,10 +206,10 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
       docEditorPane = new JEditorPane();
       docEditorPane.setEditable(false);
       docEditorPane.setBorder(JBUI.Borders.empty(UIUtil.getListCellHPadding(), UIUtil.getListCellHPadding(), UIUtil.getScrollBarWidth(), UIUtil.getScrollBarWidth()));
-      docEditorPane.setEditorKit(new JBHtmlEditorKit(false));
+      docEditorPane.setEditorKit(new HTMLEditorKitBuilder().build());
       docEditorPane.addHyperlinkListener(new HyperlinkAdapter() {
         @Override
-        protected void hyperlinkActivated(HyperlinkEvent e) {
+        protected void hyperlinkActivated(@NotNull HyperlinkEvent e) {
           URL url = e.getURL();
           if (url != null && BrowserUtil.isAbsoluteURL(url.toExternalForm())) {
             BrowserUtil.browse(url);
@@ -236,7 +237,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
       });
     }
 
-    docEditorPane.setBackground(EditorColorsUtil.getGlobalOrDefaultColor(DocumentationComponent.COLOR_KEY));
+    docEditorPane.setBackground(EditorColorsUtil.getGlobalOrDefaultColor(EditorColors.DOCUMENTATION_COLOR));
     final FontSize fontSize = DocumentationComponent.getQuickDocFontSize();
     docEditorPane.setFont(UIUtil.getFontWithFallback(docEditorPane.getFont().getFontName(), Font.PLAIN, JBUIScale.scale(fontSize.getSize())));
 
