@@ -53,7 +53,7 @@ import com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDir
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -110,9 +110,7 @@ final class M68kProjectStatisticsAction extends AnAction {
           pi.setFraction((double) processed++ / files.size());
 
           final PsiFile psiFile = PsiManager.getInstance(project).findFile(virtualFile);
-          if (!(psiFile instanceof M68kFile)) return;
-
-          final M68kFile m68kPsiFile = (M68kFile) psiFile;
+          if (!(psiFile instanceof M68kFile m68kPsiFile)) return;
 
           pi.setText2("Errors");
           final PsiErrorElement[] errors = m68kPsiFile.findChildrenByClass(PsiErrorElement.class);
@@ -200,8 +198,8 @@ final class M68kProjectStatisticsAction extends AnAction {
       .append(" (").append(StringUtil.formatDuration(totalResolveTime[0])).append(")")
       .append("\n\n");
 
-    sb.append("File                            Errors | Label   | Macro   | include (recursive) [incbin]\n");
-    sb.append("=========================================================================================\n");
+    sb.append("File                                 Errors | Label   | Macro   | include (recursive) [incbin]\n");
+    sb.append("==============================================================================================\n");
     fileInfos.sort(NaturalComparator.INSTANCE);
     sb.append(StringUtil.join(fileInfos, "\n"));
 
