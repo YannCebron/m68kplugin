@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2024 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,7 +80,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
 
   private final History history = new History(this);
 
-  private final Class<T> clazz  ;
+  private final Class<T> clazz;
 
   protected M68kBrowserPaneBase(Class<T> valueClazz) {
     super(true, true);
@@ -277,6 +277,11 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
     settingField.set(PropertiesComponent.getInstance().getBoolean(settingKey, true));
 
     return new DumbAwareToggleAction(text, null, icon) {
+
+      @Override
+      public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return ActionUpdateThread.BGT;
+      }
 
       @Override
       public void update(@NotNull AnActionEvent e) {

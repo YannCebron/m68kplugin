@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2024 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.internal;
 
+import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -57,7 +58,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class M68kProjectStatisticsAction extends AnAction {
+final class M68kProjectStatisticsAction extends AnAction {
 
   private static final Condition<M68kPsiElement> NO_DATA_SIZE_CONDITION = m68kPsiElement -> {
     if (m68kPsiElement instanceof M68kDataSized) {
@@ -65,6 +66,11 @@ public class M68kProjectStatisticsAction extends AnAction {
     }
     return false;
   };
+
+  @Override
+  public @NotNull ActionUpdateThread getActionUpdateThread() {
+    return ActionUpdateThread.BGT;
+  }
 
   @Override
   public void update(@NotNull AnActionEvent e) {
