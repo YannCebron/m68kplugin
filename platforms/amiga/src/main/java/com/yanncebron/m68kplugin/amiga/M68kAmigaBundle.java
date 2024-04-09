@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2024 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +16,21 @@
 
 package com.yanncebron.m68kplugin.amiga;
 
-import com.intellij.AbstractBundle;
+import com.intellij.DynamicBundle;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.PropertyKey;
 
 import java.util.function.Supplier;
 
-public class M68kAmigaBundle extends AbstractBundle {
+public final class M68kAmigaBundle {
 
   @NonNls
   private static final String PATH_TO_BUNDLE = "messages.M68kAmigaBundle";
 
-  private static final M68kAmigaBundle INSTANCE = new M68kAmigaBundle();
+  private static final DynamicBundle INSTANCE = new DynamicBundle(M68kAmigaBundle.class, PATH_TO_BUNDLE);
 
   private M68kAmigaBundle() {
-    super(PATH_TO_BUNDLE);
   }
 
   public static String message(@NotNull @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key, Object @NotNull ... params) {
