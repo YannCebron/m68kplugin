@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,8 +58,7 @@ public class M68kRegisterRangeImpl extends ASTWrapperPsiElement implements M68kR
   }
 
   @Override
-  @NotNull
-  public EnumSet<M68kRegister> getRegisters() {
+  public @NotNull EnumSet<M68kRegister> getRegisters() {
     return M68kPsiImplUtil.getRegisters(this);
   }
 

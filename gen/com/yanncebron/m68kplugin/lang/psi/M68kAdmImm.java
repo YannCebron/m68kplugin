@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,6 @@ public interface M68kAdmImm extends M68kAdm, M68kDataSized {
   @Nullable
   M68kExpression getExpression();
 
-  @Nullable
-  M68kDataSize getDataSize();
+  @Nullable M68kDataSize getDataSize();
 
 }

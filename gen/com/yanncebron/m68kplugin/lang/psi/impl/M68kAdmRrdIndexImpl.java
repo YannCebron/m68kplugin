@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,8 +54,7 @@ public class M68kAdmRrdIndexImpl extends M68kAdmWithRrdMixIn implements M68kAdmR
   }
 
   @Override
-  @Nullable
-  public M68kDataSize getDataSize() {
+  public @Nullable M68kDataSize getDataSize() {
     return M68kPsiImplUtil.getDataSize(this);
   }
 

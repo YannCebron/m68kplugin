@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,8 +48,7 @@ public class M68kLabelImpl extends M68kLabelMixIn implements M68kLabel {
   }
 
   @Override
-  @NotNull
-  public List<M68kLocalLabel> getLocalLabels() {
+  public @NotNull List<M68kLocalLabel> getLocalLabels() {
     return M68kPsiImplUtil.getLocalLabels(this);
   }
 
