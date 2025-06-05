@@ -22,4 +22,4 @@ Please provide [Pull Request](https://github.com/YannCebron/m68kplugin/pulls). A
 accompanied by corresponding test/test data.
 
 _Ref x.y.z_ in source code refers
-to [M68000 Family Programmer’s Reference Manual](https://www.nxp.com/files-static/archives/doc/ref_manual/M68000PRM.pdf)
+to [M68000 Family Programmer’s Reference Manual](https://www.nxp.com/docs/en/reference-manual/M68000PRM.pdf)
