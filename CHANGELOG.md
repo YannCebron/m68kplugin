@@ -5,6 +5,7 @@
 ### Changed
 - mark plugin compatible with 2024.1
 - raise minimum IDE version to 2022.2 (from 2021.2)
+- fix missing documentation for `dcb` directive ([Issue](https://github.com/prb28/m68k-instructions-documentation/pull/27))
 
 ## 0.1.73 - 2023-07-25
 

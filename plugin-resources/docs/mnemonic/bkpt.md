@@ -36,7 +36,6 @@ For more information on the breakpoint instruction refer to the appropriate user
 This instruction supports breakpoints for debug monitors and real-time hardware emulators.
 
 ## Condition Codes
-
 Not affected.
 
 *From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*
