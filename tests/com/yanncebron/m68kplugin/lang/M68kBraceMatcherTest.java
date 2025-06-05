@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,6 @@ package com.yanncebron.m68kplugin.lang;
 
 import com.intellij.codeInsight.highlighting.BraceMatchingUtil;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.ex.EditorEx;
-import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 
@@ -58,10 +56,9 @@ public class M68kBraceMatcherTest extends BasePlatformTestCase {
   }
 
   private void doTest(String source, boolean structural) {
-    myFixture.configureByText("a.s", source);
+    myFixture.configureByText(M68kFileType.INSTANCE, source);
     final Editor editor = myFixture.getEditor();
-    final EditorHighlighter editorHighlighter = ((EditorEx) editor).getHighlighter();
-    final HighlighterIterator iterator = editorHighlighter.createIterator(editor.getCaretModel().getOffset());
+    final HighlighterIterator iterator = editor.getHighlighter().createIterator(editor.getCaretModel().getOffset());
 
     boolean isMatched = BraceMatchingUtil.matchBrace(
       editor.getDocument().getCharsSequence(),

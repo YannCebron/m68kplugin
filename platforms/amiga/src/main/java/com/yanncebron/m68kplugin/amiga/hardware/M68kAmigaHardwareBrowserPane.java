@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -199,7 +199,7 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
     }
 
     @Override
-    protected @NotNull DefaultActionGroup createPopupActionGroup(JComponent button) {
+    protected @NotNull DefaultActionGroup createPopupActionGroup(@NotNull JComponent button, @NotNull DataContext dataContext) {
       DefaultActionGroup chipsetGroup = new DefaultActionGroup();
       for (M68kAmigaHardwareRegister.Chipset chipset : M68kAmigaHardwareRegister.Chipset.values()) {
         chipsetGroup.add(createChipsetAction(chipset));

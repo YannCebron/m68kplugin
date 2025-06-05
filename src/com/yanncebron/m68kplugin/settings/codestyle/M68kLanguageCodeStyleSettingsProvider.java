@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable;
 import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider;
 import com.yanncebron.m68kplugin.lang.M68kLanguage;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 final class M68kLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSettingsProvider {
 
@@ -33,7 +32,6 @@ final class M68kLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSetti
     return M68kLanguage.INSTANCE;
   }
 
-  @Nullable
   @Override
   public String getCodeSample(@NotNull LanguageCodeStyleSettingsProvider.SettingsType settingsType) {
     switch (settingsType) {
@@ -48,7 +46,6 @@ final class M68kLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSetti
     }
   }
 
-  @Nullable
   @Override
   public IndentOptionsEditor getIndentOptionsEditor() {
     return new IndentOptionsEditor(this);

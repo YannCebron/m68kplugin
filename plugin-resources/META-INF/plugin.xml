@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2021 The Authors
+  ~ Copyright 2025 The Authors
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -72,6 +72,7 @@
         implementationClass="com.yanncebron.m68kplugin.lang.M68kConditionalAssemblyCodeBlockSupportHandler"/>
 
     <intentionAction>
+      <language>M68k</language>
       <!--suppress PluginXmlCapitalization -->
       <categoryKey>intentions.category</categoryKey>
       <className>com.yanncebron.m68kplugin.intentions.M68kShowUsedRegistersIntention</className>
@@ -119,6 +120,7 @@
         implementation="com.yanncebron.m68kplugin.settings.codestyle.M68kLanguageCodeStyleSettingsProvider"/>
 
     <liveTemplateContext
+        contextId="M68K"
         implementation="com.yanncebron.m68kplugin.template.M68kTemplateContextType"/>
     <defaultLiveTemplates
         file="/liveTemplates/M68kAssembler"/>

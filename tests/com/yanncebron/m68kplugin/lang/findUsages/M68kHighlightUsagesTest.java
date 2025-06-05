@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,13 @@
 
 package com.yanncebron.m68kplugin.lang.findUsages;
 
+import com.intellij.openapi.editor.RangeMarker;
 import com.intellij.openapi.editor.markup.RangeHighlighter;
-import com.intellij.openapi.util.Comparing;
 import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.intellij.util.containers.ContainerUtil;
 
+import java.util.Comparator;
 import java.util.List;
 
 @TestDataPath("$PROJECT_ROOT/testData/editor/highlightUsages")
@@ -57,9 +58,9 @@ public class M68kHighlightUsagesTest extends BasePlatformTestCase {
 
   private void doHighlightUsagesTest(String filePath, String... expectedHighlights) {
     final RangeHighlighter[] allHighlighters = myFixture.testHighlightUsages(filePath);
-    ContainerUtil.sort(allHighlighters, (o1, o2) -> Comparing.compare(o1.getStartOffset(), o2.getStartOffset()));
+    ContainerUtil.sort(allHighlighters, Comparator.comparingInt(RangeMarker::getStartOffset));
 
-    final List<String> highlightData = ContainerUtil.map2List(allHighlighters, rangeHighlighter -> {
+    final List<String> highlightData = ContainerUtil.map(allHighlighters, rangeHighlighter -> {
       final int startOffset = rangeHighlighter.getStartOffset();
       final int endOffset = rangeHighlighter.getEndOffset();
       return startOffset + ":" + endOffset +

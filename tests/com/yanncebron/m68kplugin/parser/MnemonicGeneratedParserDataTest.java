@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +19,14 @@ package com.yanncebron.m68kplugin.parser;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.SmartList;
-import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
-import junit.framework.AssertionFailedError;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+
+import static java.util.Map.entry;
 
 /**
  * Generate all possible variants for all registered {@link M68kMnemonic} and verify parsing yields no errors.
@@ -96,7 +96,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
           ensureNoErrorElements();
           ensureNoMacroCallElements();
           dump(variant);
-        } catch (AssertionFailedError e) {
+        } catch (AssertionError e) {
           if (variants.getKey().isDeprecated()) {
             deprecated++;
             dump(";" + variant.substring(1) + " ; DEPRECATED");
@@ -170,27 +170,27 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
     generated.add(fullText);
   }
 
-  private static final Map<M68kAddressMode, List<String>> ADDRESS_MODE_TEXT = ContainerUtil.<M68kAddressMode, List<String>>immutableMapBuilder()
-    .put(M68kAddressMode.DATA_REGISTER, ContainerUtil.immutableList("d0"))
-    .put(M68kAddressMode.ADDRESS_REGISTER, ContainerUtil.immutableList("a0"))
-    .put(M68kAddressMode.ADDRESS_REGISTER_INDIRECT, ContainerUtil.immutableList("(a0)"))
-    .put(M68kAddressMode.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT, ContainerUtil.immutableList("(a0)+"))
-    .put(M68kAddressMode.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT, ContainerUtil.immutableList("-(a0)"))
-    .put(M68kAddressMode.ADDRESS_REGISTER_DISPLACEMENT, ContainerUtil.immutableList("42(a0)", "(-42,a0)"))
-    .put(M68kAddressMode.ADDRESS_REGISTER_INDEX_DISPLACEMENT, ContainerUtil.immutableList("12(a0,d0)", "(12,a0,a0)"))
-    .put(M68kAddressMode.ABSOLUTE_SHORT, ContainerUtil.immutableList("$4000", "$4000.W"))
-    .put(M68kAddressMode.ABSOLUTE_LONG, ContainerUtil.immutableList("$4000.L"))
-    .put(M68kAddressMode.PC_REGISTER_DISPLACEMENT, ContainerUtil.immutableList("(PC)", "66(PC)", "(-66,PC)"))
-    .put(M68kAddressMode.PC_REGISTER_INDEX_DISPLACEMENT, ContainerUtil.immutableList("66(PC,d0)", "(66,PC,a0)"))
-    .put(M68kAddressMode.LABEL, ContainerUtil.immutableList("label"))
-    .put(M68kAddressMode.IMMEDIATE, ContainerUtil.immutableList("#42"))
-    .put(M68kAddressMode.QUICK_IMMEDIATE, ContainerUtil.immutableList("#1"))
-    .put(M68kAddressMode.REGISTER_LIST, ContainerUtil.immutableList("d0/a0-a2", "#1"))
-    .put(M68kAddressMode.SPECIAL_REGISTER_SR, ContainerUtil.immutableList("SR"))
-    .put(M68kAddressMode.SPECIAL_REGISTER_USP, ContainerUtil.immutableList("USP"))
-    .put(M68kAddressMode.SPECIAL_REGISTER_CCR, ContainerUtil.immutableList("CCR"))
-    .put(M68kAddressMode.CONTROL_REGISTER, ContainerUtil.immutableList("DFC", "SFC", "VBR"))
-    .build();
+  private static final Map<M68kAddressMode, List<String>> ADDRESS_MODE_TEXT = Map.ofEntries(
+    entry(M68kAddressMode.DATA_REGISTER, List.of("d0")),
+    entry(M68kAddressMode.ADDRESS_REGISTER, List.of("a0")),
+    entry(M68kAddressMode.ADDRESS_REGISTER_INDIRECT, List.of("(a0)")),
+    entry(M68kAddressMode.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT, List.of("(a0)+")),
+    entry(M68kAddressMode.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT, List.of("-(a0)")),
+    entry(M68kAddressMode.ADDRESS_REGISTER_DISPLACEMENT, List.of("42(a0)", "(-42,a0)")),
+    entry(M68kAddressMode.ADDRESS_REGISTER_INDEX_DISPLACEMENT, List.of("12(a0,d0)", "(12,a0,a0)")),
+    entry(M68kAddressMode.ABSOLUTE_SHORT, List.of("$4000", "$4000.W")),
+    entry(M68kAddressMode.ABSOLUTE_LONG, List.of("$4000.L")),
+    entry(M68kAddressMode.PC_REGISTER_DISPLACEMENT, List.of("(PC)", "66(PC)", "(-66,PC)")),
+    entry(M68kAddressMode.PC_REGISTER_INDEX_DISPLACEMENT, List.of("66(PC,d0)", "(66,PC,a0)")),
+    entry(M68kAddressMode.LABEL, List.of("label")),
+    entry(M68kAddressMode.IMMEDIATE, List.of("#42")),
+    entry(M68kAddressMode.QUICK_IMMEDIATE, List.of("#1")),
+    entry(M68kAddressMode.REGISTER_LIST, List.of("d0/a0-a2", "#1")),
+    entry(M68kAddressMode.SPECIAL_REGISTER_SR, List.of("SR")),
+    entry(M68kAddressMode.SPECIAL_REGISTER_USP, List.of("USP")),
+    entry(M68kAddressMode.SPECIAL_REGISTER_CCR, List.of("CCR")),
+    entry(M68kAddressMode.CONTROL_REGISTER, List.of("DFC", "SFC", "VBR"))
+  );
 
   @NotNull
   private static Collection<String> getOperandTexts(M68kOperand operand) {

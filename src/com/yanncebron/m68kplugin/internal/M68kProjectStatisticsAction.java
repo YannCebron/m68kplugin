@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
-import com.intellij.openapi.fileEditor.OpenFileDescriptor;
 import com.intellij.openapi.fileEditor.UniqueVFilePathBuilder;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
@@ -184,7 +183,7 @@ final class M68kProjectStatisticsAction extends AnAction {
               " | " + directInclude.length + " (" + (recursiveInclude.length - 1) + ") [" + incbinInclude.length + "]";
           fileInfos.add(info);
         }
-      }), "Scanning files...", true, project);
+      }), "Scanning Files...", true, project);
 
     if (!completed) return;
 
@@ -210,8 +209,7 @@ final class M68kProjectStatisticsAction extends AnAction {
     appendClasses(conditional, sb, "Conditional Assembly Directives");
 
     VirtualFile file = new LightVirtualFile("M68k Project Statistics.txt", sb.toString());
-    OpenFileDescriptor descriptor = new OpenFileDescriptor(project, file);
-    FileEditorManager.getInstance(project).openEditor(descriptor, true);
+    FileEditorManager.getInstance(project).openFile(file, true);
   }
 
   @NotNull

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.CodeInsightFixtureTestCase;
 import com.intellij.testFramework.propertyBased.*;
+import com.yanncebron.m68kplugin.lang.M68kLanguage;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.jetCheck.Generator;
@@ -56,7 +57,7 @@ public class M68kSanityTest extends CodeInsightFixtureTestCase {
   }
 
   public void testRandomActivity() {
-    MadTestingUtil.enableAllInspections(getProject());
+    MadTestingUtil.enableAllInspections(getProject(), M68kLanguage.INSTANCE);
 
     Function<PsiFile, Generator<? extends MadTestingAction>> actions =
       file -> Generator.sampledFrom(

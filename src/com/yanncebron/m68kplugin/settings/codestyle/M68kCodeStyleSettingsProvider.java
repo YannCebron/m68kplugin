@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,17 +26,14 @@ import com.intellij.psi.codeStyle.CustomCodeStyleSettings;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.M68kLanguage;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 final class M68kCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
 
-  @Nullable
   @Override
-  public CustomCodeStyleSettings createCustomSettings(CodeStyleSettings settings) {
+  public CustomCodeStyleSettings createCustomSettings(@NotNull CodeStyleSettings settings) {
     return new M68kCodeStyleSettings(settings);
   }
 
-  @Nullable
   @Override
   public String getConfigurableDisplayName() {
     return M68kLanguage.INSTANCE.getDisplayName();
@@ -48,7 +45,7 @@ final class M68kCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
     return new CodeStyleAbstractConfigurable(settings, modelSettings, getConfigurableDisplayName()) {
 
       @Override
-      protected CodeStyleAbstractPanel createPanel(CodeStyleSettings settings) {
+      protected @NotNull CodeStyleAbstractPanel createPanel(@NotNull CodeStyleSettings settings) {
         return new TabbedLanguageCodeStylePanel(M68kLanguage.INSTANCE, getCurrentSettings(), settings) {
           @Override
           protected void initTabs(CodeStyleSettings settings) {
