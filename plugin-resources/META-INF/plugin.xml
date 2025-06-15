@@ -75,6 +75,7 @@
       <language>M68k</language>
       <!--suppress PluginXmlCapitalization -->
       <categoryKey>intentions.category</categoryKey>
+      <skipBeforeAfter>true</skipBeforeAfter>
       <className>com.yanncebron.m68kplugin.intentions.M68kShowUsedRegistersIntention</className>
     </intentionAction>
 
