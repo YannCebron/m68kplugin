@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ import java.util.*;
  * </p>
  * <p>
  * In completion variants, local labels and labels from the current file are prioritized and shown in bold.
- * Builtin symbols have lowest priority.
+ * Builtin symbols have the lowest priority.
  * </p>
  */
 class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMixIn> implements EmptyResolveMessageProvider {
