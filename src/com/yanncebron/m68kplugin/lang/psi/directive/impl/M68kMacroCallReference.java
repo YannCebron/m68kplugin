@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
-import com.yanncebron.m68kplugin.lang.stubs.index.M68kMacroStubIndex;
+import com.yanncebron.m68kplugin.lang.stubs.index.M68kStubIndexKeys;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -130,7 +130,7 @@ class M68kMacroCallReference extends PsiReferenceBase.Poly<M68kMacroCallDirectiv
       return;
     }
 
-    StubIndex.getInstance().processAllKeys(M68kMacroStubIndex.KEY,
+    StubIndex.getInstance().processAllKeys(M68kStubIndexKeys.MACRO,
       key -> {
         final Collection<M68kLabel> labels = getMacroStubLabels(key, project, scope);
         return ContainerUtil.process(labels, processor);
@@ -147,6 +147,6 @@ class M68kMacroCallReference extends PsiReferenceBase.Poly<M68kMacroCallDirectiv
   }
 
   private static Collection<M68kLabel> getMacroStubLabels(String key, Project project, GlobalSearchScope scope) {
-    return StubIndex.getElements(M68kMacroStubIndex.KEY, key, project, scope, M68kLabel.class);
+    return StubIndex.getElements(M68kStubIndexKeys.MACRO, key, project, scope, M68kLabel.class);
   }
 }

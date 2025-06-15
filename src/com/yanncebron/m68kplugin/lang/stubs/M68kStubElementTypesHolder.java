@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,8 +28,7 @@ import com.yanncebron.m68kplugin.lang.M68kFileElementType;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kLabelImpl;
 import com.yanncebron.m68kplugin.lang.stubs.impl.M68kLabelStubImpl;
-import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
-import com.yanncebron.m68kplugin.lang.stubs.index.M68kMacroStubIndex;
+import com.yanncebron.m68kplugin.lang.stubs.index.M68kStubIndexKeys;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -125,10 +124,10 @@ public interface M68kStubElementTypesHolder {
             }
             return;
           }
-          sink.occurrence(M68kLabelStubIndex.KEY, name);
+          sink.occurrence(M68kStubIndexKeys.LABEL, name);
 
           if (stub.getLabelKind() == M68kLabelBase.LabelKind.MACRO) {
-            sink.occurrence(M68kMacroStubIndex.KEY, name);
+            sink.occurrence(M68kStubIndexKeys.MACRO, name);
           }
         }
       }

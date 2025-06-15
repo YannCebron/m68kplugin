@@ -25,10 +25,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @see M68kMacroStubIndex
  */
-@SuppressWarnings("ExtensionClassShouldBeFinalAndNonPublic")
-public final class M68kLabelStubIndex extends StringStubIndexExtension<M68kLabel> {
-
-  public static final StubIndexKey<String, M68kLabel> KEY = StubIndexKey.createIndexKey("m68k.label.index");
+final class M68kLabelStubIndex extends StringStubIndexExtension<M68kLabel> {
 
   @Override
   public int getVersion() {
@@ -37,6 +34,6 @@ public final class M68kLabelStubIndex extends StringStubIndexExtension<M68kLabel
 
   @Override
   public @NotNull StubIndexKey<String, M68kLabel> getKey() {
-    return KEY;
+    return M68kStubIndexKeys.LABEL;
   }
 }

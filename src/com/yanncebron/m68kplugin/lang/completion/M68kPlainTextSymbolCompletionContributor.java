@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processors;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
+import com.yanncebron.m68kplugin.lang.stubs.index.M68kStubIndexKeys;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -45,12 +45,12 @@ final class M68kPlainTextSymbolCompletionContributor implements PlainTextSymbolC
     Project project = file.getProject();
 
     List<String> names = new ArrayList<>();
-    StubIndex.getInstance().processAllKeys(M68kLabelStubIndex.KEY, Processors.cancelableCollectProcessor(names), scope, null);
+    StubIndex.getInstance().processAllKeys(M68kStubIndexKeys.LABEL, Processors.cancelableCollectProcessor(names), scope, null);
 
     final String filePath = SymbolPresentationUtil.getFilePathPresentation(file);
     List<LookupElement> variants = new ArrayList<>();
     for (String name : names) {
-      final Collection<M68kLabel> labels = StubIndex.getElements(M68kLabelStubIndex.KEY, name, project, scope, M68kLabel.class);
+      final Collection<M68kLabel> labels = StubIndex.getElements(M68kStubIndexKeys.LABEL, name, project, scope, M68kLabel.class);
       for (M68kLabel label : labels) {
         variants.add(LookupElementBuilder.createWithIcon(label).withTypeText(filePath, true));
       }

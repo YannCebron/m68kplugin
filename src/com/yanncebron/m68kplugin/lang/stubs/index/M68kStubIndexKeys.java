@@ -16,27 +16,15 @@
 
 package com.yanncebron.m68kplugin.lang.stubs.index;
 
-import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.yanncebron.m68kplugin.lang.M68kFileElementType;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import org.jetbrains.annotations.NotNull;
 
-/**
- * Separate index for {@code macro} labels to speedup resolve.
- *
- * @see M68kLabelStubIndex
- */
-final class M68kMacroStubIndex extends StringStubIndexExtension<M68kLabel> {
+public final class M68kStubIndexKeys {
 
-  @Override
-  public int getVersion() {
-    return M68kFileElementType.STUB_VERSION;
+  public static final StubIndexKey<String, M68kLabel> LABEL = StubIndexKey.createIndexKey("m68k.label.index");
+
+  public static final StubIndexKey<String, M68kLabel> MACRO = StubIndexKey.createIndexKey("m68k.macro.index");
+
+  private M68kStubIndexKeys() {
   }
-
-  @Override
-  public @NotNull StubIndexKey<String, M68kLabel> getKey() {
-    return M68kStubIndexKeys.MACRO;
-  }
-
 }

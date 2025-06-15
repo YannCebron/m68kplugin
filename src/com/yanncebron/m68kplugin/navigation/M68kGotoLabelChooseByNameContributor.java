@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import com.intellij.util.Processor;
 import com.intellij.util.indexing.FindSymbolParameters;
 import com.intellij.util.indexing.IdFilter;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
+import com.yanncebron.m68kplugin.lang.stubs.index.M68kStubIndexKeys;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,12 +32,12 @@ final class M68kGotoLabelChooseByNameContributor implements ChooseByNameContribu
 
   @Override
   public void processNames(@NotNull Processor<? super String> processor, @NotNull GlobalSearchScope scope, @Nullable IdFilter filter) {
-    StubIndex.getInstance().processAllKeys(M68kLabelStubIndex.KEY, processor, scope, filter);
+    StubIndex.getInstance().processAllKeys(M68kStubIndexKeys.LABEL, processor, scope, filter);
   }
 
   @Override
   public void processElementsWithName(@NotNull String name, @NotNull Processor<? super NavigationItem> processor, @NotNull FindSymbolParameters parameters) {
-    StubIndex.getInstance().processElements(M68kLabelStubIndex.KEY, name,
+    StubIndex.getInstance().processElements(M68kStubIndexKeys.LABEL, name,
       parameters.getProject(), parameters.getSearchScope(), parameters.getIdFilter(), M68kLabel.class,
       label -> processor.process(new M68kGotoLabelNavigationItem(label)));
   }

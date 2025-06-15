@@ -39,7 +39,7 @@ import com.intellij.util.PathUtilRt;
 import com.intellij.util.concurrency.NonUrgentExecutor;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
+import com.yanncebron.m68kplugin.lang.stubs.index.M68kStubIndexKeys;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -111,7 +111,7 @@ class M68kVasmLineInLocationFilter implements Filter, DumbAware {
       .getDataContextFromFocusAsync()
       .onSuccess(context ->
         ReadAction.nonBlocking(()
-            -> StubIndex.getElements(M68kLabelStubIndex.KEY, location, project, GlobalSearchScope.allScope(project), M68kLabel.class))
+            -> StubIndex.getElements(M68kStubIndexKeys.LABEL, location, project, GlobalSearchScope.allScope(project), M68kLabel.class))
           .inSmartMode(project)
           .finishOnUiThread(ModalityState.current(), elements -> {
             Editor editor = CommonDataKeys.EDITOR.getData(context);

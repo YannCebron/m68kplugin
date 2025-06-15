@@ -37,7 +37,7 @@ import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kEndmDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroDirective;
-import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
+import com.yanncebron.m68kplugin.lang.stubs.index.M68kStubIndexKeys;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -194,7 +194,7 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
       return;
     }
 
-    StubIndex.getInstance().processAllKeys(M68kLabelStubIndex.KEY,
+    StubIndex.getInstance().processAllKeys(M68kStubIndexKeys.LABEL,
       key -> {
         final Collection<M68kLabel> labels = getStubLabels(key, project, scope);
         return ContainerUtil.process(labels, processor);
@@ -205,7 +205,7 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
   private static final Condition<M68kLabel> RELEVANT_LABEL_CONDITION = m68kLabel -> !NON_RELEVANT_LABEL_KINDS.contains(m68kLabel.getLabelKind());
 
   private static Collection<M68kLabel> getStubLabels(String key, Project project, GlobalSearchScope scope) {
-    return ContainerUtil.filter(StubIndex.getElements(M68kLabelStubIndex.KEY, key, project, scope, M68kLabel.class), RELEVANT_LABEL_CONDITION);
+    return ContainerUtil.filter(StubIndex.getElements(M68kStubIndexKeys.LABEL, key, project, scope, M68kLabel.class), RELEVANT_LABEL_CONDITION);
   }
 
   private static GlobalSearchScope getIncludeSearchScope(PsiElement element) {
