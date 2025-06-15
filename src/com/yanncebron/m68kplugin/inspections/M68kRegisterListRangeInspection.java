@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.codeInspection.LocalInspectionTool;
 import com.intellij.codeInspection.LocalInspectionToolSession;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.codeInspection.ui.SingleCheckboxOptionsPanel;
+import com.intellij.openapi.project.DumbAware;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.util.containers.MultiMap;
 import com.yanncebron.m68kplugin.M68kBundle;
@@ -30,7 +31,7 @@ import javax.swing.*;
 import java.util.Collection;
 import java.util.Map;
 
-final class M68kRegisterListRangeInspection extends LocalInspectionTool {
+final class M68kRegisterListRangeInspection extends LocalInspectionTool implements DumbAware {
 
   @SuppressWarnings("PublicField")
   public boolean allowMixedTypes = true;
