@@ -40,7 +40,7 @@ The signed comparisons are:
 
 |Mnemonic|Alias|Description|
 |--|--|--|
-|BGE||branch on greater than or equal
+|BGE||branch on greater than or equal|
 |BGT||branch on greater than|
 |BLE||branch on lower than or equal|
 |BLT||branch on less than|
