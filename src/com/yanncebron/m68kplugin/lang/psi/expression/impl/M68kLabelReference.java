@@ -41,7 +41,9 @@ import com.yanncebron.m68kplugin.lang.stubs.index.M68kLabelStubIndex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.EnumSet;
+import java.util.List;
 
 /**
  * Reference to label or builtin symbol.
@@ -66,20 +68,12 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
 
     private static final Resolver INSTANCE = new Resolver();
 
-    private static final Map<String, M68kBuiltinSymbol> builtinSymbols = new HashMap<>();
-
-    static {
-      for (M68kBuiltinSymbol value : M68kBuiltinSymbol.values()) {
-        builtinSymbols.put(value.getName(), value);
-      }
-    }
-
     @Override
     public ResolveResult @NotNull [] resolve(@NotNull M68kLabelReference m68kLabelReference, boolean incompleteCode) {
       PsiElement psiElement = m68kLabelReference.getElement();
       String labelName = m68kLabelReference.getValue();
 
-      final M68kBuiltinSymbol builtinSymbol = builtinSymbols.get(labelName);
+      final M68kBuiltinSymbol builtinSymbol = M68kBuiltinSymbol.findByName(labelName);
       if (builtinSymbol != null) {
         return PsiElementResolveResult.createResults(new M68kBuiltinSymbolPsiElement(psiElement, builtinSymbol));
       }

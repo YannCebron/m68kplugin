@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Builtin compiler symbols.
@@ -83,5 +85,18 @@ public enum M68kBuiltinSymbol {
   @Nullable
   public Icon getIcon() {
     return icon;
+  }
+
+  private static final Map<String, M68kBuiltinSymbol> builtinSymbols = new HashMap<>();
+
+  static {
+    for (M68kBuiltinSymbol value : M68kBuiltinSymbol.values()) {
+      builtinSymbols.put(value.getName(), value);
+    }
+  }
+
+  @Nullable
+  public static M68kBuiltinSymbol findByName(@NonNls String name) {
+    return builtinSymbols.get(name);
   }
 }
