@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.inspections;
 
 import com.intellij.codeInspection.*;
+import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementVisitor;
 import com.yanncebron.m68kplugin.M68kBundle;
@@ -27,7 +28,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
-final class M68kUsageA7RegisterInspection extends LocalInspectionTool implements CleanupLocalInspectionTool {
+final class M68kUsageA7RegisterInspection extends LocalInspectionTool implements CleanupLocalInspectionTool, DumbAware {
 
   @Override
   public @NotNull PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder,
@@ -47,7 +48,7 @@ final class M68kUsageA7RegisterInspection extends LocalInspectionTool implements
   }
 
 
-  private static class ReplaceWithSPRegisterQuickFix implements LocalQuickFix {
+  private static class ReplaceWithSPRegisterQuickFix implements LocalQuickFix, DumbAware {
 
     @Override
     public @Nls(capitalization = Nls.Capitalization.Sentence) @NotNull String getFamilyName() {
