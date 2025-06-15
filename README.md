@@ -5,9 +5,6 @@
 
 ## Motorola 68000 Series Assembly Language Support for IntelliJ based IDEs
 
-> [!IMPORTANT]
-> As of November 2024, this plugin is no longer under active development.
-                                            
 Adds support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_68000_series) assembly language
 in [IntelliJ](https://plugins.jetbrains.com/docs/intellij/intellij-platform.html#ides-based-on-the-intellij-platform) based IDEs.
 
