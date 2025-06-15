@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.project.DumbAware;
+import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiPolyVariantReference;
@@ -34,15 +36,14 @@ import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-final class M68kSyntaxAnnotator implements Annotator {
+final class M68kSyntaxAnnotator implements Annotator, DumbAware {
 
   @Override
   public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
     if (holder.isBatchMode()) return;
     if (!(element instanceof M68kPsiElement)) return;
 
-    if (element instanceof M68kPrivilegedInstruction) {
-      M68kPrivilegedInstruction privilegedInstruction = (M68kPrivilegedInstruction) element;
+    if (element instanceof M68kPrivilegedInstruction privilegedInstruction) {
       if (privilegedInstruction.isPrivileged(M68kCpu.M_68000)) {
         holder.newAnnotation(HighlightSeverity.INFORMATION, M68kBundle.message("highlight.privileged.instruction"))
           .textAttributes(M68kTextAttributes.PRIVILEGED_INSTRUCTION).create();
@@ -57,7 +58,10 @@ final class M68kSyntaxAnnotator implements Annotator {
       doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LOCAL_LABEL, true);
     } else if (element instanceof M68kLabelRefExpression) {
       annotateMacroParameters(holder, element);
-      annotateBuiltinSymbol(holder, element);
+
+      if (!DumbService.isDumb(element.getProject())) {
+        annotateBuiltinSymbol(holder, element);
+      }
     } else if (element instanceof M68kMacroParameterDirective) {
       doAnnotate(holder, element.getNode(), M68kTextAttributes.MACRO_PARAMETER, false);
     }
