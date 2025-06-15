@@ -19,7 +19,7 @@ package com.yanncebron.m68kplugin.inspections;
 import com.intellij.codeInspection.LocalInspectionTool;
 import com.intellij.codeInspection.LocalInspectionToolSession;
 import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.codeInspection.ui.SingleCheckboxOptionsPanel;
+import com.intellij.codeInspection.options.OptPane;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.util.containers.MultiMap;
@@ -27,9 +27,11 @@ import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
 import java.util.Collection;
 import java.util.Map;
+
+import static com.intellij.codeInspection.options.OptPane.checkbox;
+import static com.intellij.codeInspection.options.OptPane.pane;
 
 final class M68kRegisterListRangeInspection extends LocalInspectionTool implements DumbAware {
 
@@ -37,8 +39,10 @@ final class M68kRegisterListRangeInspection extends LocalInspectionTool implemen
   public boolean allowMixedTypes = true;
 
   @Override
-  public JComponent createOptionsPanel() {
-    return new SingleCheckboxOptionsPanel(M68kBundle.message("inspection.register.list.range.mixed.types.option"), this, "allowMixedTypes");
+  public @NotNull OptPane getOptionsPane() {
+    return pane(
+      checkbox("allowMixedTypes", M68kBundle.message("inspection.register.list.range.mixed.types.option"))
+    );
   }
 
   @NotNull
