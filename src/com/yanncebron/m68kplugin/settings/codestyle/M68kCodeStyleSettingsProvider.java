@@ -19,6 +19,7 @@ package com.yanncebron.m68kplugin.settings.codestyle;
 import com.intellij.application.options.CodeStyleAbstractConfigurable;
 import com.intellij.application.options.CodeStyleAbstractPanel;
 import com.intellij.application.options.TabbedLanguageCodeStylePanel;
+import com.intellij.lang.Language;
 import com.intellij.psi.codeStyle.CodeStyleConfigurable;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CodeStyleSettingsProvider;
@@ -32,6 +33,11 @@ final class M68kCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
   @Override
   public CustomCodeStyleSettings createCustomSettings(@NotNull CodeStyleSettings settings) {
     return new M68kCodeStyleSettings(settings);
+  }
+
+  @Override
+  public Language getLanguage() {
+    return M68kLanguage.INSTANCE;
   }
 
   @Override
