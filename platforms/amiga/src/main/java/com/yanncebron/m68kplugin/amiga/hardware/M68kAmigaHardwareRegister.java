@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -324,7 +324,7 @@ public enum M68kAmigaHardwareRegister {
     return chips;
   }
 
-  enum Chipset {
+  public enum Chipset {
     OCS("OCS", "Original Chip Set"),
     ECS("ECS", "Enhanced Chip Set"),
     AGA("AGA", "Advanced Graphics Architecture");
@@ -346,7 +346,7 @@ public enum M68kAmigaHardwareRegister {
     }
   }
 
-  enum Access {
+  public enum Access {
     WRITE("Write"),
     READ("Read"),
     EARLY_READ("Early read"),
@@ -363,7 +363,7 @@ public enum M68kAmigaHardwareRegister {
     }
   }
 
-  enum Chip {
+  public enum Chip {
     AGNUS_ALICE("Agnus/Alice"),
     DENISE_LISA("Denise/Lisa"),
     PAULA("Paula");
