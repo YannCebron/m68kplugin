@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.codeInspection.SuppressQuickFix;
 import com.intellij.codeInspection.util.IntentionFamilyName;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiDocumentManager;
@@ -44,7 +45,7 @@ import org.jetbrains.annotations.Nullable;
  * </ul>
  * </p>
  */
-final class M68kInspectionSuppressor implements InspectionSuppressor {
+final class M68kInspectionSuppressor implements InspectionSuppressor, DumbAware {
 
   @NonNls
   private static final String MARKER = " @@@suppress_inspection@@@";
@@ -90,7 +91,7 @@ final class M68kInspectionSuppressor implements InspectionSuppressor {
   }
 
 
-  private static class ForElementSuppressQuickFix implements SuppressQuickFix {
+  private static class ForElementSuppressQuickFix implements SuppressQuickFix, DumbAware {
 
     private final String toolId;
 
@@ -128,7 +129,7 @@ final class M68kInspectionSuppressor implements InspectionSuppressor {
   }
 
 
-  private static class ForFileSuppressQuickFix implements SuppressQuickFix {
+  private static class ForFileSuppressQuickFix implements SuppressQuickFix, DumbAware {
 
     private final String toolId;
 
