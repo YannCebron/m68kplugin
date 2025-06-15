@@ -5,6 +5,7 @@
 ### Changed
 - raise minimum IDE version to 2024.1 (from 2021.2)
 - mark plugin compatible with 2025.1
+- enable most code insight features when IDE is indexing
 
 ### Fixed
 - missing documentation for `dcb` directive ([Issue](https://github.com/prb28/m68k-instructions-documentation/pull/27))
