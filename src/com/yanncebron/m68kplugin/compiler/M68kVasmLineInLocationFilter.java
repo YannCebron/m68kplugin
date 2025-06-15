@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -57,7 +58,7 @@ import java.util.regex.Pattern;
  *   <li>to global label: {@code  [...] line 2 of "macroName": [...]}</li>
  * </ol>
  */
-class M68kVasmLineInLocationFilter implements Filter {
+class M68kVasmLineInLocationFilter implements Filter, DumbAware {
 
   private static final Pattern PATTERN = Pattern.compile(".*line (\\d+) of \"([0-9 a-z_A-Z\\-\\\\./]+)\".*");
 
