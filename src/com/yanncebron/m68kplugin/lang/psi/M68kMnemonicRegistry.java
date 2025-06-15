@@ -75,14 +75,14 @@ public final class M68kMnemonicRegistry {
 
     // multiple matches: rank by min(addressMode.count)
     filtered.sort((o1, o2) -> {
-      final int o1Source = o1.getSourceOperand().getAddressModes().length;
-      final int o2Source = o2.getSourceOperand().getAddressModes().length;
+      final int o1Source = o1.sourceOperand().getAddressModes().length;
+      final int o2Source = o2.sourceOperand().getAddressModes().length;
       if (o1Source != o2Source) {
         return Integer.compare(o1Source, o2Source);
       }
 
-      final int o1Dest = o1.getDestinationOperand().getAddressModes().length;
-      final int o2Dest = o2.getDestinationOperand().getAddressModes().length;
+      final int o1Dest = o1.destinationOperand().getAddressModes().length;
+      final int o2Dest = o2.destinationOperand().getAddressModes().length;
       return Integer.compare(o1Dest, o2Dest);
     });
 
@@ -95,8 +95,8 @@ public final class M68kMnemonicRegistry {
 
     // operand count
     List<M68kMnemonic> filtered = ContainerUtil.filter(all, mnemonic -> {
-      boolean hasSource = mnemonic.getSourceOperand() != M68kOperand.NONE;
-      boolean hasDestination = mnemonic.getDestinationOperand() != M68kOperand.NONE;
+      boolean hasSource = mnemonic.sourceOperand() != M68kOperand.NONE;
+      boolean hasDestination = mnemonic.destinationOperand() != M68kOperand.NONE;
       if (!hasSource && !hasDestination && operandsCount == 0) {
         return true;
       }
@@ -112,24 +112,24 @@ public final class M68kMnemonicRegistry {
     if (instruction instanceof M68kDataSized dataSized) {
       final M68kDataSize dataSize = dataSized.getDataSize();
       if (dataSize != null) {
-        filtered = ContainerUtil.filter(filtered, mnemonic -> mnemonic.getDataSizes().contains(dataSize));
+        filtered = ContainerUtil.filter(filtered, mnemonic -> mnemonic.dataSizes().contains(dataSize));
       }
     }
 
     // addressing modes
     filtered = ContainerUtil.filter(filtered, mnemonic -> {
         if (operandsCount == 0) {
-          return mnemonic.getSourceOperand() == M68kOperand.NONE &&
-            mnemonic.getDestinationOperand() == M68kOperand.NONE;
+          return mnemonic.sourceOperand() == M68kOperand.NONE &&
+            mnemonic.destinationOperand() == M68kOperand.NONE;
         }
 
         if (operandsCount == 1) {
-          return operandAddressModeMatches(mnemonic.getSourceOperand(), operands.get(0));
+          return operandAddressModeMatches(mnemonic.sourceOperand(), operands.get(0));
         }
 
         if (operandsCount == 2) {
-          return operandAddressModeMatches(mnemonic.getSourceOperand(), operands.get(0)) &&
-            operandAddressModeMatches(mnemonic.getDestinationOperand(), operands.get(1));
+          return operandAddressModeMatches(mnemonic.sourceOperand(), operands.get(0)) &&
+            operandAddressModeMatches(mnemonic.destinationOperand(), operands.get(1));
         }
 
         return false;

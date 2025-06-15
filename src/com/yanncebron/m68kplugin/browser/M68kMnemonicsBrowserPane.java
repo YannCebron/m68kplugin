@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -86,7 +86,7 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
       final Collection<M68kMnemonic> all = instance.findAll(type);
       final M68kMnemonic mnemonic = ContainerUtil.getFirstItem(all);
 
-      if (!isShowMc68010.get() && !mnemonic.getCpus().contains(M68kCpu.M_68000)) {
+      if (!isShowMc68010.get() && !mnemonic.cpus().contains(M68kCpu.M_68000)) {
         continue;
       }
 
@@ -97,13 +97,13 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
 
   @Override
   protected Convertor<? super M68kMnemonic, String> getListItemNamer() {
-    return (Convertor<M68kMnemonic, String>) mnemonic -> StringUtil.toUpperCase(mnemonic.getElementType().toString());
+    return (Convertor<M68kMnemonic, String>) mnemonic -> StringUtil.toUpperCase(mnemonic.elementType().toString());
   }
 
   protected @NotNull String getDocFor(@NotNull M68kMnemonic mnemonic) {
-    final String mnemonicDoc = M68kInstructionDocumentationProvider.getMnemonicDoc(mnemonic.getElementType(), null);
+    final String mnemonicDoc = M68kInstructionDocumentationProvider.getMnemonicDoc(mnemonic.elementType(), null);
     final String referenceDoc = isShowReferenceDocs.get() ?
-      "<hr/>" + M68kInstructionDocumentationProvider.getInstructionReferenceDoc(mnemonic.getElementType()) : "";
+      "<hr/>" + M68kInstructionDocumentationProvider.getInstructionReferenceDoc(mnemonic.elementType()) : "";
 
     return M68kDocumentationUtil.CSS + mnemonicDoc + referenceDoc;
   }

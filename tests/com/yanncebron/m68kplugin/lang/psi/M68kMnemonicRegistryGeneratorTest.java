@@ -135,11 +135,11 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
   private void dumpCode(List<M68kMnemonic> mnemonics) {
     System.out.println(StringUtil.repeat("-", 80));
-    int supportedMnemonics = ContainerUtil.filter(mnemonics, m68kMnemonic -> isSupportedCpu(m68kMnemonic.getCpus())).size();
+    int supportedMnemonics = ContainerUtil.filter(mnemonics, m68kMnemonic -> isSupportedCpu(m68kMnemonic.cpus())).size();
     System.out.println("// Total mnemonics: " + supportedMnemonics);
 
     for (M68kMnemonic mnemonic : mnemonics) {
-      Set<M68kCpu> cpus = mnemonic.getCpus();
+      Set<M68kCpu> cpus = mnemonic.cpus();
       if (SKIP_UNSUPPORTED_CPUS && !isSupportedCpu(cpus)) continue;
 
       String cpuText;
@@ -155,7 +155,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
         cpuText = "EnumSet.of(" + StringUtil.join(cpus, m68kCpu -> "M68kCpu." + m68kCpu.name(), ",") + ")";
       }
 
-      final Set<M68kDataSize> dataSizes = mnemonic.getDataSizes();
+      final Set<M68kDataSize> dataSizes = mnemonic.dataSizes();
       String dataSizeText;
       if (M68kDataSize.GROUP_SBWL.equals(dataSizes)) {
         dataSizeText = "M68kDataSize.GROUP_SBWL";
@@ -179,14 +179,14 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
         dataSizeText = "EnumSet.of(" + StringUtil.join(dataSizes, dataSize -> "M68kDataSize." + dataSize.name(), ",") + ")";
       }
 
-      String mnemonicText = StringUtil.toUpperCase(mnemonic.getElementType().toString());
+      String mnemonicText = StringUtil.toUpperCase(mnemonic.elementType().toString());
       final String tokenText = "M68kTokenTypes." + mnemonicText + "";
 
       System.out.println("mnemonics.putValue(" + tokenText + ",");
       System.out.println("new M68kMnemonic(" +
         tokenText + ",\n" +
-        "                 M68kOperand." + mnemonic.getSourceOperand().name() + ", " +
-        "M68kOperand." + mnemonic.getDestinationOperand().name() + ",\n" +
+        "                 M68kOperand." + mnemonic.sourceOperand().name() + ", " +
+        "M68kOperand." + mnemonic.destinationOperand().name() + ",\n" +
         "                 " + dataSizeText + ",\n" +
         "                 " + cpuText +
         "));");

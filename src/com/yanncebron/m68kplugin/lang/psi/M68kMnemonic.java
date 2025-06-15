@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,83 +24,21 @@ import java.util.Set;
 /**
  * @see M68kMnemonicRegistry
  */
-public final class M68kMnemonic {
-
-  private final IElementType elementType;
-
-  private final M68kOperand sourceOperand;
-  private final M68kOperand destinationOperand;
-  private final Set<M68kDataSize> dataSizes;
-  private final Set<M68kCpu> cpus;
-
-  M68kMnemonic(IElementType elementType,
-               M68kOperand sourceOperand,
-               M68kOperand destinationOperand,
-               Set<M68kDataSize> dataSizes,
-               Set<M68kCpu> cpus) {
-    this.elementType = elementType;
-    this.sourceOperand = sourceOperand;
-    this.destinationOperand = destinationOperand;
-    this.dataSizes = dataSizes;
-    this.cpus = cpus;
-  }
-
-  @NotNull
-  public IElementType getElementType() {
-    return elementType;
-  }
-
-  @NotNull
-  public M68kOperand getSourceOperand() {
-    return sourceOperand;
-  }
-
-  @NotNull
-  public M68kOperand getDestinationOperand() {
-    return destinationOperand;
-  }
-
-  @NotNull
-  public Set<M68kDataSize> getDataSizes() {
-    return dataSizes;
-  }
-
-  @NotNull
-  public Set<M68kCpu> getCpus() {
-    return cpus;
-  }
+public record M68kMnemonic(IElementType elementType,
+                           M68kOperand sourceOperand,
+                           M68kOperand destinationOperand,
+                           Set<M68kDataSize> dataSizes,
+                           Set<M68kCpu> cpus) {
 
   public boolean isDeprecated() {
-    if (getElementType() != M68kTokenTypes.MOVEA) return false;
+    if (elementType() != M68kTokenTypes.MOVEA) return false;
 
-    return (getSourceOperand() == M68kOperand.DATA && getDestinationOperand() == M68kOperand.ALTERABLE_DATA) ||
-      (getSourceOperand() == M68kOperand.ADDRESS_REGISTER && getDestinationOperand() == M68kOperand.ALTERABLE);
+    return (sourceOperand() == M68kOperand.DATA && destinationOperand() == M68kOperand.ALTERABLE_DATA) ||
+      (sourceOperand() == M68kOperand.ADDRESS_REGISTER && destinationOperand() == M68kOperand.ALTERABLE);
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof M68kMnemonic that)) return false;
-
-    if (!elementType.equals(that.elementType)) return false;
-    if (sourceOperand != that.sourceOperand) return false;
-    if (destinationOperand != that.destinationOperand) return false;
-    if (!dataSizes.equals(that.dataSizes)) return false;
-    return cpus.equals(that.cpus);
-  }
-
-  @Override
-  public int hashCode() {
-    int result = elementType.hashCode();
-    result = 31 * result + sourceOperand.hashCode();
-    result = 31 * result + destinationOperand.hashCode();
-    result = 31 * result + dataSizes.hashCode();
-    result = 31 * result + cpus.hashCode();
-    return result;
-  }
-
-  @Override
-  public String toString() {
+  public @NotNull String toString() {
     return "M68kMnemonic{" +
       elementType +
       ", deprecated=" + isDeprecated() +

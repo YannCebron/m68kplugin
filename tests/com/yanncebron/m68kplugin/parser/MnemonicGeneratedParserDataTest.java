@@ -136,15 +136,15 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
     Map<M68kMnemonic, List<String>> result = new LinkedHashMap<>();
     for (M68kMnemonic mnemonic : allMnemonics) {
-      String mnemonicText = mnemonic.getElementType().toString();
+      String mnemonicText = mnemonic.elementType().toString();
       List<String> variants = new SmartList<>();
 
-      for (String sourceText : getOperandTexts(mnemonic.getSourceOperand())) {
-        for (String destinationText : getOperandTexts(mnemonic.getDestinationOperand())) {
-          if (mnemonic.getDataSizes().iterator().next() != M68kDataSize.UNSIZED) {
+      for (String sourceText : getOperandTexts(mnemonic.sourceOperand())) {
+        for (String destinationText : getOperandTexts(mnemonic.destinationOperand())) {
+          if (mnemonic.dataSizes().iterator().next() != M68kDataSize.UNSIZED) {
             addVariant(variants, labelOrIndent, mnemonicText, needsLocalBranchLabel ? labelName : sourceText, destinationText, "  ");
           }
-          for (M68kDataSize dataSize : mnemonic.getDataSizes()) {
+          for (M68kDataSize dataSize : mnemonic.dataSizes()) {
             String dataSizeText = dataSize == M68kDataSize.UNSIZED ? "" : dataSize.getText();
             addVariant(variants, INDENT, mnemonicText, needsLocalBranchLabel ? labelName : sourceText, destinationText, dataSizeText);
           }

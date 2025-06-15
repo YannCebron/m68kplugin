@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,11 +29,11 @@ public class M68kMnemonicTest extends TestCase {
       final Collection<M68kMnemonic> mnemonics = M68kMnemonicRegistry.getInstance().findAll(instructionsType);
       assertFalse(instructionsType.toString(), mnemonics.isEmpty());
       for (M68kMnemonic mnemonic : mnemonics) {
-        if (mnemonic.getElementType() != M68kTokenTypes.MOVEA) {
+        if (mnemonic.elementType() != M68kTokenTypes.MOVEA) {
           assertFalse(mnemonic.toString(), mnemonic.isDeprecated());
         } else {
-          if (mnemonic.getSourceOperand() != M68kOperand.ALL &&
-            mnemonic.getDestinationOperand() != M68kOperand.ADDRESS_REGISTER) {
+          if (mnemonic.sourceOperand() != M68kOperand.ALL &&
+            mnemonic.destinationOperand() != M68kOperand.ADDRESS_REGISTER) {
             assertTrue(mnemonic.toString(), mnemonic.isDeprecated());
             totalDeprecated++;
           } else {

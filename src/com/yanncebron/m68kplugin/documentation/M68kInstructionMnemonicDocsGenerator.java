@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,7 +51,7 @@ class M68kInstructionMnemonicDocsGenerator {
     boolean allCpusSame = true;
     Set<M68kCpu> previousCpus = null;
     for (M68kMnemonic mnemonic : allMnemonics) {
-      final Set<M68kCpu> cpus = mnemonic.getCpus();
+      final Set<M68kCpu> cpus = mnemonic.cpus();
       if (previousCpus != null && !previousCpus.equals(cpus)) {
         allCpusSame = false;
         break;
@@ -65,8 +65,8 @@ class M68kInstructionMnemonicDocsGenerator {
 
     Set<M68kAddressMode> allUsedAddressModes = new HashSet<>();
     for (M68kMnemonic mnemonic : allMnemonics) {
-      ContainerUtil.addAll(allUsedAddressModes, mnemonic.getSourceOperand().getAddressModes());
-      ContainerUtil.addAll(allUsedAddressModes, mnemonic.getDestinationOperand().getAddressModes());
+      ContainerUtil.addAll(allUsedAddressModes, mnemonic.sourceOperand().getAddressModes());
+      ContainerUtil.addAll(allUsedAddressModes, mnemonic.destinationOperand().getAddressModes());
     }
 
     for (M68kMnemonic mnemonic : allMnemonics) {
@@ -75,12 +75,12 @@ class M68kInstructionMnemonicDocsGenerator {
       } else {
         sb.append("<h2>");
       }
-      final String mnemonicText = StringUtil.toUpperCase(StringUtil.toUpperCase(elementType.toString())) + StringUtil.join(mnemonic.getDataSizes(), M68kDataSize::getText, "|");
+      final String mnemonicText = StringUtil.toUpperCase(StringUtil.toUpperCase(elementType.toString())) + StringUtil.join(mnemonic.dataSizes(), M68kDataSize::getText, "|");
       sb.append("<code>").append(StringUtil.escapeXmlEntities(mnemonicText));
       sb.append(StringUtil.repeat("&nbsp;", Math.max(1, 18 - mnemonicText.length())));
 
-      appendOperand(mnemonic.getSourceOperand(), "");
-      appendOperand(mnemonic.getDestinationOperand(), ",");
+      appendOperand(mnemonic.sourceOperand(), "");
+      appendOperand(mnemonic.destinationOperand(), ",");
 
       sb.append("</code></h2>");
 
@@ -90,8 +90,8 @@ class M68kInstructionMnemonicDocsGenerator {
       }
 
 
-      final M68kAddressMode[] sourceAddressModes = mnemonic.getSourceOperand().getAddressModes();
-      final M68kAddressMode[] destinationAddressModes = mnemonic.getDestinationOperand().getAddressModes();
+      final M68kAddressMode[] sourceAddressModes = mnemonic.sourceOperand().getAddressModes();
+      final M68kAddressMode[] destinationAddressModes = mnemonic.destinationOperand().getAddressModes();
       if (sourceAddressModes.length <= 1 &&
         destinationAddressModes.length <= 1) {
         appendBreak();
@@ -126,7 +126,7 @@ class M68kInstructionMnemonicDocsGenerator {
   }
 
   private void appendCpus(M68kMnemonic mnemonic) {
-    final Set<M68kCpu> cpus = mnemonic.getCpus();
+    final Set<M68kCpu> cpus = mnemonic.cpus();
     if (cpus == M68kCpu.GROUP_68000_UP) {
       sb.append(M68kBundle.message("cpu.group.GROUP_68000_UP"));
       appendBreak();
