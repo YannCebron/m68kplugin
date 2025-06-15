@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import com.intellij.codeInspection.LocalQuickFixOnPsiElement;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.codeInspection.util.IntentionFamilyName;
 import com.intellij.codeInspection.util.IntentionName;
+import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
@@ -32,7 +33,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.expression.*;
 import org.jetbrains.annotations.NotNull;
 
-final class M68kSimplifiableExpressionInspection extends LocalInspectionTool {
+final class M68kSimplifiableExpressionInspection extends LocalInspectionTool implements DumbAware {
 
   @Override
   public @NotNull PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder,
@@ -128,7 +129,7 @@ final class M68kSimplifiableExpressionInspection extends LocalInspectionTool {
   }
 
 
-  private static class RemoveParenthesesQuickFix extends LocalQuickFixOnPsiElement {
+  private static class RemoveParenthesesQuickFix extends LocalQuickFixOnPsiElement implements DumbAware {
 
     private RemoveParenthesesQuickFix(@NotNull M68kParenExpression element) {
       super(element);
