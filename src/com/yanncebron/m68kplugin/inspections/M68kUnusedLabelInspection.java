@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.inspections;
 
 import com.intellij.codeInspection.*;
+import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
@@ -27,7 +28,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
-final class M68kUnusedLabelInspection extends LocalInspectionTool implements CleanupLocalInspectionTool {
+final class M68kUnusedLabelInspection extends LocalInspectionTool implements CleanupLocalInspectionTool, DumbAware {
 
   @Override
   public @NotNull PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder,
@@ -47,27 +48,34 @@ final class M68kUnusedLabelInspection extends LocalInspectionTool implements Cle
           M68kBundle.message("inspection.unused.label.message", localLabelName),
           ProblemHighlightType.LIKE_UNUSED_SYMBOL,
 
-          new LocalQuickFix() {
-
-            @Override
-            public @Nls(capitalization = Nls.Capitalization.Sentence) @NotNull String getFamilyName() {
-              return M68kBundle.message("inspection.unused.label.fix.family.name");
-            }
-
-            @Override
-            public @Nls(capitalization = Nls.Capitalization.Sentence) @NotNull String getName() {
-              return M68kBundle.message("inspection.unused.label.fix.name", localLabelName);
-            }
-
-            @Override
-            public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
-              descriptor.getPsiElement().getNextSibling().delete();
-              descriptor.getPsiElement().delete();
-            }
-          }
+          new RemoveLocalLabelQuickFix(localLabelName)
         );
       }
     };
   }
 
+  private static class RemoveLocalLabelQuickFix implements LocalQuickFix, DumbAware {
+
+    private final String localLabelName;
+
+    public RemoveLocalLabelQuickFix(String localLabelName) {
+      this.localLabelName = localLabelName;
+    }
+
+    @Override
+    public @Nls(capitalization = Nls.Capitalization.Sentence) @NotNull String getFamilyName() {
+      return M68kBundle.message("inspection.unused.label.fix.family.name");
+    }
+
+    @Override
+    public @Nls(capitalization = Nls.Capitalization.Sentence) @NotNull String getName() {
+      return M68kBundle.message("inspection.unused.label.fix.name", localLabelName);
+    }
+
+    @Override
+    public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
+      descriptor.getPsiElement().getNextSibling().delete();
+      descriptor.getPsiElement().delete();
+    }
+  }
 }
