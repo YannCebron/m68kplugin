@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.yanncebron.m68kplugin.lang.highlighting;
 import com.intellij.codeInsight.daemon.RainbowVisitor;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor;
+import com.intellij.openapi.project.DumbAware;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.yanncebron.m68kplugin.lang.M68kFile;
@@ -28,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Semantic highlighting ("rainbow") for macro call name.
  */
-final class M68kRainbowVisitor extends RainbowVisitor {
+final class M68kRainbowVisitor extends RainbowVisitor implements DumbAware {
 
   @Override
   public boolean suitableForFile(@NotNull PsiFile file) {
