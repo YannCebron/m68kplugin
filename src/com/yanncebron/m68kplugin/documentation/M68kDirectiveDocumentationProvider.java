@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,9 +53,8 @@ public final class M68kDirectiveDocumentationProvider extends AbstractDocumentat
 
   @Override
   public @Nullable String generateDoc(PsiElement element, @Nullable PsiElement originalElement) {
-    if (!(element instanceof M68kDirective)) return null;
+    if (!(element instanceof M68kDirective directive)) return null;
 
-    M68kDirective directive = (M68kDirective) element;
     if (directive instanceof M68kMacroCallDirective) return null;
 
     ASTNode directiveNode = directive.getNode().findChildByType(M68kTokenGroups.DIRECTIVES);

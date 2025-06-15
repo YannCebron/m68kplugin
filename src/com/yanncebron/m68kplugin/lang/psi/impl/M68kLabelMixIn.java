@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -135,27 +135,18 @@ abstract class M68kLabelMixIn extends StubBasedPsiElementBase<M68kLabelStub> imp
   @Override
   protected @Nullable Icon getElementIcon(int flags) {
     final LabelKind labelKind = getLabelKind();
-    switch (labelKind) {
-      case GLOBAL:
-        return M68kIcons.LABEL_GLOBAL;
-      case MACRO:
-        return M68kIcons.LABEL_MACRO;
-      case EQU:
-      case EQUALS:
-        return M68kIcons.LABEL_EQU;
-      case SET:
-        return M68kIcons.LABEL_SET;
-      case EQUR:
-        return M68kIcons.LABEL_EQUR;
-      case REG:
-        return M68kIcons.LABEL_REG;
-      case FO:
-        return M68kIcons.LABEL_FO;
-      case SO:
-        return M68kIcons.LABEL_SO;
-      default:
+    return switch (labelKind) {
+      case GLOBAL -> M68kIcons.LABEL_GLOBAL;
+      case MACRO -> M68kIcons.LABEL_MACRO;
+      case EQU, EQUALS -> M68kIcons.LABEL_EQU;
+      case SET -> M68kIcons.LABEL_SET;
+      case EQUR -> M68kIcons.LABEL_EQUR;
+      case REG -> M68kIcons.LABEL_REG;
+      case FO -> M68kIcons.LABEL_FO;
+      case SO -> M68kIcons.LABEL_SO;
+      default ->
         throw new IllegalArgumentException("unknown labelKind " + labelKind + "for '" + getName() + "' " + this);
-    }
+    };
   }
 
   @Override

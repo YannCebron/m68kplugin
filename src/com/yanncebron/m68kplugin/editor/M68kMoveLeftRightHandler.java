@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,16 +47,14 @@ final class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
       return ((M68kXrefDirective) element).getLabelRefExpressionList().toArray(PsiElement.EMPTY_ARRAY);
     }
 
-    if (element instanceof M68kIfcConditionalAssemblyDirective) {
-      M68kIfcConditionalAssemblyDirective directive = (M68kIfcConditionalAssemblyDirective) element;
+    if (element instanceof M68kIfcConditionalAssemblyDirective directive) {
       M68kExpression arg1 = directive.getArg1();
       M68kExpression arg2 = directive.getArg2();
       if (arg1 != null && arg2 != null) {
         return new PsiElement[]{arg1, arg2};
       }
     }
-    if (element instanceof M68kIfncConditionalAssemblyDirective) {
-      M68kIfncConditionalAssemblyDirective directive = (M68kIfncConditionalAssemblyDirective) element;
+    if (element instanceof M68kIfncConditionalAssemblyDirective directive) {
       M68kExpression arg1 = directive.getArg1();
       M68kExpression arg2 = directive.getArg2();
       if (arg1 != null && arg2 != null) {
@@ -64,28 +62,24 @@ final class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
       }
     }
 
-    if (element instanceof M68kBinaryExpression) {
-      M68kBinaryExpression binaryExpression = ((M68kBinaryExpression) element);
+    if (element instanceof M68kBinaryExpression binaryExpression) {
       final M68kExpression right = binaryExpression.getRight();
       if (right != null) return new PsiElement[]{binaryExpression.getLeft(), right};
     }
 
-    if (element instanceof M68kAdmRegisterList) {
-      M68kAdmRegisterList registerList = (M68kAdmRegisterList) element;
+    if (element instanceof M68kAdmRegisterList registerList) {
       return registerList.getRegisterRangeList().toArray(PsiElement.EMPTY_ARRAY);
     }
 
-    if (element instanceof M68kExgInstruction) {
-      final M68kExgInstruction exgInstruction = (M68kExgInstruction) element;
-      final M68kAdmRrd source = exgInstruction.getSource();
-      final M68kAdmRrd destination = exgInstruction.getDestination();
+    if (element instanceof M68kExgInstruction instruction) {
+      final M68kAdmRrd source = instruction.getSource();
+      final M68kAdmRrd destination = instruction.getDestination();
       if (source != null && destination != null) {
         return new PsiElement[]{source, destination};
       }
     }
 
-    if (element instanceof M68kCmpmInstruction) {
-      M68kCmpmInstruction instruction = (M68kCmpmInstruction) element;
+    if (element instanceof M68kCmpmInstruction instruction) {
       M68kAdmApi source = instruction.getSource();
       M68kAdmApi destination = instruction.getDestination();
       if (source != null && destination != null) {

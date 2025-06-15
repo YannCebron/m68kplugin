@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,8 +57,7 @@ final class M68kFindUsagesProvider implements FindUsagesProvider {
   @NotNull
   @Override
   public String getType(@NotNull PsiElement element) {
-    if (element instanceof M68kLabel) {
-      M68kLabel label = (M68kLabel) element;
+    if (element instanceof M68kLabel label) {
       if (label.getLabelKind() == M68kLabelBase.LabelKind.MACRO) {
         return M68kBundle.message("term.macro");
       }

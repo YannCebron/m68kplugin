@@ -34,16 +34,11 @@ final class M68kLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSetti
 
   @Override
   public String getCodeSample(@NotNull LanguageCodeStyleSettingsProvider.SettingsType settingsType) {
-    switch (settingsType) {
-      case INDENT_SETTINGS:
-        return CodeStyleAbstractPanel.readFromFile(getClass(), "IndentSettings.s");
-
-      case WRAPPING_AND_BRACES_SETTINGS:
-        return CodeStyleAbstractPanel.readFromFile(getClass(), "WrappingSettings.s");
-
-      default:
-        throw new IllegalStateException("Unexpected value: " + settingsType);
-    }
+    return switch (settingsType) {
+      case INDENT_SETTINGS -> CodeStyleAbstractPanel.readFromFile(getClass(), "IndentSettings.s");
+      case WRAPPING_AND_BRACES_SETTINGS -> CodeStyleAbstractPanel.readFromFile(getClass(), "WrappingSettings.s");
+      default -> throw new IllegalStateException("Unexpected value: " + settingsType);
+    };
   }
 
   @Override

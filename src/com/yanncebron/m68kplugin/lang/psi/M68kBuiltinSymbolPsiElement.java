@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,9 +55,7 @@ public final class M68kBuiltinSymbolPsiElement extends FakePsiElement implements
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof M68kBuiltinSymbolPsiElement)) return false;
-
-    M68kBuiltinSymbolPsiElement that = (M68kBuiltinSymbolPsiElement) o;
+    if (!(o instanceof M68kBuiltinSymbolPsiElement that)) return false;
 
     return builtinSymbol == that.builtinSymbol;
   }

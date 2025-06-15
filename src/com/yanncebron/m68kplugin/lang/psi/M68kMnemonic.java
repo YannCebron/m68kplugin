@@ -80,9 +80,7 @@ public final class M68kMnemonic {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof M68kMnemonic)) return false;
-
-    M68kMnemonic that = (M68kMnemonic) o;
+    if (!(o instanceof M68kMnemonic that)) return false;
 
     if (!elementType.equals(that.elementType)) return false;
     if (sourceOperand != that.sourceOperand) return false;

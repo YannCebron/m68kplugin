@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -109,8 +109,7 @@ public final class M68kMnemonicRegistry {
     });
 
     // data size (optional)
-    if (instruction instanceof M68kDataSized) {
-      M68kDataSized dataSized = (M68kDataSized) instruction;
+    if (instruction instanceof M68kDataSized dataSized) {
       final M68kDataSize dataSize = dataSized.getDataSize();
       if (dataSize != null) {
         filtered = ContainerUtil.filter(filtered, mnemonic -> mnemonic.getDataSizes().contains(dataSize));

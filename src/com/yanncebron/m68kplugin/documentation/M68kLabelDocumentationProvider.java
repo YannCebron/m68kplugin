@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,8 +44,7 @@ final class M68kLabelDocumentationProvider extends AbstractDocumentationProvider
 
   @Override
   public @Nullable String getQuickNavigateInfo(PsiElement element, PsiElement originalElement) {
-    if (!(element instanceof M68kLabelBase)) return null;
-    M68kLabelBase labelBase = (M68kLabelBase) element;
+    if (!(element instanceof M68kLabelBase labelBase)) return null;
 
     final String typeName = LanguageFindUsages.getType(labelBase);
     final String labelName = labelBase.getName();
@@ -64,8 +63,7 @@ final class M68kLabelDocumentationProvider extends AbstractDocumentationProvider
 
   @Override
   public @Nullable String generateDoc(PsiElement element, @Nullable PsiElement originalElement) {
-    if (!(element instanceof M68kLabelBase)) return null;
-    M68kLabelBase labelBase = (M68kLabelBase) element;
+    if (!(element instanceof M68kLabelBase labelBase)) return null;
 
     String commentText = getCommentText(element);
     String valueText = labelBase.getLabelKind().hasValue() ? BR + getValueText(labelBase) : "";
