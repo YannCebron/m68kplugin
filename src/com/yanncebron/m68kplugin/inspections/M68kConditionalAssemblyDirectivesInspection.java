@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.yanncebron.m68kplugin.inspections;
 import com.intellij.codeInspection.LocalInspectionTool;
 import com.intellij.codeInspection.LocalInspectionToolSession;
 import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.openapi.project.DumbAware;
 import com.intellij.psi.PsiElementVisitor;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
@@ -28,7 +29,7 @@ import com.yanncebron.m68kplugin.lang.psi.conditional.M68kIf2ConditionalAssembly
 import com.yanncebron.m68kplugin.lang.psi.conditional.M68kIfp1ConditionalAssemblyDirective;
 import org.jetbrains.annotations.NotNull;
 
-final class M68kConditionalAssemblyDirectivesInspection extends LocalInspectionTool {
+final class M68kConditionalAssemblyDirectivesInspection extends LocalInspectionTool implements DumbAware {
 
   @Override
   public @NotNull PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly, @NotNull LocalInspectionToolSession session) {
