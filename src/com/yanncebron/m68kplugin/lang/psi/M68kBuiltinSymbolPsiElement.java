@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Fake resolve element for {@link M68kBuiltinSymbol}.
  */
+@SuppressWarnings("ExtensionClassShouldBeFinalAndNonPublic")
 public final class M68kBuiltinSymbolPsiElement extends FakePsiElement implements SyntheticElement {
 
   private final PsiElement psiElement;

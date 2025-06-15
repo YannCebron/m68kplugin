@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
+@SuppressWarnings("ExtensionClassShouldBeFinalAndNonPublic")
 public final class M68kFileType extends LanguageFileType {
 
   public static final M68kFileType INSTANCE = new M68kFileType();

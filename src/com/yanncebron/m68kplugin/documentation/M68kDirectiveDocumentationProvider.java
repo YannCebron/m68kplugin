@@ -35,6 +35,7 @@ import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("ExtensionClassShouldBeFinalAndNonPublic")
 public final class M68kDirectiveDocumentationProvider extends AbstractDocumentationProvider {
 
   private static final String DOCS_MNEMONIC_ROOT = "/docs/directives/";
