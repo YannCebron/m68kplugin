@@ -4,7 +4,7 @@ addresses is shown below. The counters are stopped by signals
 from 2 controller connectors (left-right) with 2 pins each.
 
 | BIT# | 15 | 14 | 13 | 12 | 11 | 10 | 09 | 08 | 07 | 06 | 05 | 04 | 03 | 02 | 01 | 00 |
-|------|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | RIGHT | Y7 | Y6 | Y5 | Y4 | Y3 | Y2 | Y1 | Y0 | X7 | X6 | X5 | X4 | X3 | X2 | X1 | X0 |
 | LEFT | Y7 | Y6 | Y5 | Y4 | Y3 | Y2 | Y1 | Y0 | X7 | X6 | X5 | X4 | X3 | X2 | X1 | X0 |
 
