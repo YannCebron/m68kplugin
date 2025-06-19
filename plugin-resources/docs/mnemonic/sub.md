@@ -16,8 +16,8 @@ SUB Dn,<ea>
 Subtract the source operand from the destination operand and store the result in the destination location.
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |*|*|*|*|*|
 
 ## Source operand addressing modes

@@ -22,8 +22,8 @@ Rotate the bits of the operand in the direction indicated. The extend bit, X, is
 ![ROR ROL schema](rol_ror.png)
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |-|*|*|0|*|
 
 The X-bit is not affected and the C-bit is set to the last bit rotated out of the operand (C is set to zero if the shift count is 0).

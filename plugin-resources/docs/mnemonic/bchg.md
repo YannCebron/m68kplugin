@@ -20,8 +20,8 @@ A bit in the destination operand is tested and the state of the specified bit is
 If the operation `BCHG #4,$1234` is carried out and the contents of memory location $1234 are 10101010<sub>2</sub> , bit 4 is tested. It is a 0 and therefore the Z-bit of the CCR is set to 1. Bit 4 of the destination operand is changed and the new contents of location 1234<sub>16</sub> are 10111010<sub>2</sub>.
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |-|-|*|-|-|
 
 Z: set if the bit tested is zero, cleared otherwise.

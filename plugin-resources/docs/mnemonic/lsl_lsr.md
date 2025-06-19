@@ -25,8 +25,8 @@ Logically shift the bits of the operand in the specified direction (i.e., left o
 If [D3.W] = 1100110010101110<sub>2</sub> , the instruction `LSL.W #5,D3` produces the result 1001010111000000<sub>2</sub>. After the shift, both the X-and C-bits of the *CCR* are set to 1 (since the last bit shifted out was a 1).
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |*|*|*|0|*|
 
 The X-bit is set to the last bit shifted out of the operand and is equal to the C-bit. However, a zero shift count leaves the X-bit unaffected and the C-bit cleared.

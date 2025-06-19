@@ -23,8 +23,8 @@ Add the immediate data to the contents of the destination operand. The immediate
 `ADDQ` is used to add a small constant to the operand at the effective address. Some assemblers permit you to write `ADD` and then choose `ADDQ` *automatically* if the constant is in the range 1 to 8.
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |*|*|*|*|*|
 
 Note that the CCR is not updated if the destination operand is an address register.

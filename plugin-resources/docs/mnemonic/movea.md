@@ -27,8 +27,8 @@ MOVEA (Ai),An = [An] ← [M([Ai])]
 ```
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |-|-|-|-|-|
 
 ## Source operand addressing modes

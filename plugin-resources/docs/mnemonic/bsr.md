@@ -20,8 +20,8 @@ The longword address of the instruction immediately following the `BSR` instruct
 `BSR` is used to call a procedure or a subroutine. Since it provides relative addressing (and therefore position independent code), its use is preferable to `JSR`.
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |-|-|-|-|-|
 
 *From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

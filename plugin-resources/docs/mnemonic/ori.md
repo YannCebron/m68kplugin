@@ -15,8 +15,8 @@ ORI #<data>,<ea>
 OR the immediate data with the destination operand. Store the result in the destination operand.
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |-|*|*|0|0|
 
 ## Application
@@ -48,8 +48,8 @@ ORI #<data>,CCR
 OR the immediate data with the condition code register (i.e., the least-significant byte of the status register). For example, the Z flag of the CCR can be set by `ORI #$04,CCR`.
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |*|*|*|*|*|
 
 X is set if bit 4 of data = 1; unchanged otherwise</br>
@@ -82,8 +82,8 @@ OR the immediate data to the status register and store the result in the status 
 Used to set bits in the SR (i.e., the S, T, and interrupt mask bits). For example, `ORI #$8000,SR` sets bit 15 of the SR (i.e., the trace bit).
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |*|*|*|*|*|
 
 X is set if bit 4 of data = 1; unchanged otherwise<br/>

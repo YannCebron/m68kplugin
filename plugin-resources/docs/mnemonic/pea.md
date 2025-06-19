@@ -29,8 +29,8 @@ Subroutine MOVEA.L (4,SP),A0   ;A0 points to parameter under return address
 ```
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |-|-|-|-|-|
 
 ## Source operand addressing modes

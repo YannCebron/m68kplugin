@@ -36,8 +36,8 @@ The specified condition code is tested. If the condition is true, the bits at th
 
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |-|-|-|-|-|
 
 ## Destination operand addressing modes

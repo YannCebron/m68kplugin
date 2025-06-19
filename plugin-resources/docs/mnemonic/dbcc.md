@@ -42,8 +42,8 @@ AGAIN BSR     INPUT     ;Get the data in D1
 ```
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |-|-|-|-|-|
 
 Not affected

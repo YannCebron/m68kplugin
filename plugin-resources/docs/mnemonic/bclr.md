@@ -20,8 +20,8 @@ A bit in the destination operand is tested and the state of the specified bit is
 If the operation `BCLR #4,$1234` is carried out and the contents of memory location $1234 are 1111010<sub>2</sub>, bit 4 is tested. It is a 1 and therefore the Z-bit of the CCR is set to 0. Bit 4 of the destination operand is cleared and the new contents of $1234 are: 11101010<sub>2</sub>.
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |-|-|*|-|-|
 
 Z: set if the bit tested is zero, cleared otherwise.

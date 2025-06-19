@@ -19,8 +19,8 @@ Add the source operand to the destination address register and store the result 
 To add to the contents of an address register and not update the CCR. Note that `ADDA.W D0,A0` is the same as `LEA (A0,D0.W),A0`.
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |-|-|-|-|-|
 
 An `ADDA` operation does not affect the state of the CCR.

@@ -18,8 +18,8 @@ Test and set the byte operand addressed by the effective address field. The N- a
 The `TAS` instruction permits one processor in a multiprocessor system to test a resource (e.g., shared memory) and claim the resource if it is free. The most-significant bit of the byte at the effective address is used as a semaphore to indicate whether the shared resource is free. The `TAS` instruction reads the semaphore bit to find the state of the resource, and then sets the semaphore to claim the resource (if it was free). Because the operation is indivisible, no other processor can access the memory between the testing of the bit and its subsequent setting.
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |-|*|*|0|0|
 
 ## Source operand addressing modes

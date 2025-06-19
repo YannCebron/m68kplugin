@@ -30,8 +30,8 @@ Proc1 MOVE.W  SR,-(SP)    ;Save old CCR on stack
 ```
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |*|*|*|*|*|
 
 The CCR is restored to its pre-exception state.

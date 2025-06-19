@@ -58,8 +58,8 @@ Example MOVEM.L D0-D5/A0-A3,-(SP)    ;Save registers
 ```
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |-|-|-|-|-|
 
 ## Source operand addressing modes (memory to register)

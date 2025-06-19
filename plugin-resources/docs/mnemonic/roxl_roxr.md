@@ -22,8 +22,8 @@ Rotate the bits of the operand in the direction indicated. The extend bit of the
 ![ROXR ROXL schema](roxl_roxr.png)
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |*|*|*|0|*|
 
 The X- and the C-bit are set to the last bit rotated out of the operand. If the rotate count is zero, the X-bit is unaffected and the C-bit is set to the X-bit.

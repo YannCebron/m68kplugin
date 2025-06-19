@@ -18,8 +18,8 @@ The stack pointer is loaded from the specified address register and the old cont
 The `UNLK` instruction is used in conjunction with the `LINK` instruction. The `LINK` creates a stack frame at the start of a procedure, and the `UNLK` collapses the stack frame prior to a return from the procedure.
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |-|-|-|-|-|
 
 *From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

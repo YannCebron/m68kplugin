@@ -15,8 +15,8 @@ EORI #<data>,<ea>
 EOR the immediate data with the contents of the destination operand. Store the result in the destination operand.
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |-|*|*|0|0|
 
 ## Destination operand addressing modes
@@ -43,8 +43,8 @@ EOR the immediate data with the contents of the condition code register (i.e., t
 Used to toggle bits in the CCR. For example, `EORI #$0C,CCR` toggles the N- and Z-bits of the CCR.
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |*|*|*|*|*|
 
 X:= toggled if bit 4 of data = 1; unchanged otherwise<br/>
@@ -72,8 +72,8 @@ EORI #<data>,SR
 EOR (exclusive OR) the immediate data with the contents of the status register and store the result in the status register. All bits of the status register are affected.
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |*|*|*|*|*|
 
 X:= toggled if bit 4 of data = 1; unchanged otherwise<br/>

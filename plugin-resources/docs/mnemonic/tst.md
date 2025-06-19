@@ -17,8 +17,8 @@ The operand is compared with zero. No result is saved, but the contents of the *
 
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |-|*|*|0|0|
 
 ## Source operand addressing modes

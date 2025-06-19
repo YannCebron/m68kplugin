@@ -20,8 +20,8 @@ If `[D0] = $12345678, EXT.W D0` results in 12340078<sub>16</sub><br/>
 If `[D0] = $12345678, EXT.L D0` results in 00005678<sub>16</sub>
 
 ## Condition codes
-|X|N|Z|V|C|
-|--|--|--|--|--|
+| X | N | Z | V | C |
+|:-:|:-:|:-:|:-:|:-:|
 |-|*|*|0|0|
 
 *From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*
