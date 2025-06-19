@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -646,7 +646,8 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (expression? L_PAREN PC R_PAREN) |
+  // (L_PAREN PC R_PAREN) |
+  //             (expression? L_PAREN PC R_PAREN) |
   //             (L_PAREN expression COMMA PC R_PAREN)
   public static boolean adm_pcd(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_pcd")) return false;
@@ -654,31 +655,42 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, ADM_PCD, "<program counter indirect with displacement>");
     r = adm_pcd_0(b, l + 1);
     if (!r) r = adm_pcd_1(b, l + 1);
+    if (!r) r = adm_pcd_2(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // expression? L_PAREN PC R_PAREN
+  // L_PAREN PC R_PAREN
   private static boolean adm_pcd_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_pcd_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = adm_pcd_0_0(b, l + 1);
+    r = consumeTokens(b, 0, L_PAREN, PC, R_PAREN);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // expression? L_PAREN PC R_PAREN
+  private static boolean adm_pcd_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_pcd_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = adm_pcd_1_0(b, l + 1);
     r = r && consumeTokens(b, 0, L_PAREN, PC, R_PAREN);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // expression?
-  private static boolean adm_pcd_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "adm_pcd_0_0")) return false;
+  private static boolean adm_pcd_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_pcd_1_0")) return false;
     M68kExpressionParser.expression(b, l + 1, -1);
     return true;
   }
 
   // L_PAREN expression COMMA PC R_PAREN
-  private static boolean adm_pcd_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "adm_pcd_1")) return false;
+  private static boolean adm_pcd_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_pcd_2")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, L_PAREN);

@@ -11,6 +11,7 @@ M68k.FILE
     M68kAdmAbsImpl(ADM_ABS)
       M68kUnaryMinusExpressionImpl(UNARY_MINUS_EXPRESSION)
         PsiElement(-)('-')
-        PsiErrorElement:'(' or <expression> expected, got '('
-          <empty list>
-  PsiElement(()('(')
+        M68kParenExpressionImpl(PAREN_EXPRESSION)
+          PsiElement(()('(')
+          PsiErrorElement:'(', ')', <address register> or <expression> expected
+            <empty list>

@@ -9,6 +9,7 @@
 
 ### Fixed
 - missing documentation for `dcb` directive ([Issue](https://github.com/prb28/m68k-instructions-documentation/pull/27))
+- no completion for labels inside parenthesized expressions
 
 ## 0.1.73 - 2023-07-25
 

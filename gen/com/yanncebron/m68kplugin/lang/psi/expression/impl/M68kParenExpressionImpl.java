@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,9 +44,9 @@ public class M68kParenExpressionImpl extends M68kExpressionImpl implements M68kP
   }
 
   @Override
-  @NotNull
+  @Nullable
   public M68kExpression getExpression() {
-    return notNullChild(PsiTreeUtil.getChildOfType(this, M68kExpression.class));
+    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
   }
 
 }

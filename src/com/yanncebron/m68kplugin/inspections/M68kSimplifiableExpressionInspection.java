@@ -149,6 +149,7 @@ final class M68kSimplifiableExpressionInspection extends LocalInspectionTool imp
     public void invoke(@NotNull Project project, @NotNull PsiFile file, @NotNull PsiElement startElement, @NotNull PsiElement endElement) {
       assert startElement instanceof M68kParenExpression;
       final M68kExpression replacement = ((M68kParenExpression) startElement).getExpression();
+      assert replacement != null;
       startElement.replace(replacement);
     }
 
