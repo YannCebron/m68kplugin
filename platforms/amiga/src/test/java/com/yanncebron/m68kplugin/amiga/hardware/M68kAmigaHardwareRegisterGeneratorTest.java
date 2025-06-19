@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -141,32 +141,8 @@ public class M68kAmigaHardwareRegisterGeneratorTest extends TestCase {
     return strings.listIterator(listStartIdx);
   }
 
-  private static class RegisterData {
-
-    private final String name;
-    private final String descriptionNodeName;
-    private final String address;
-    private final String description;
-    private final M68kAmigaHardwareRegister.Chipset chipset;
-    private final boolean copperDanger;
-    private final M68kAmigaHardwareRegister.Access access;
-    private final Set<M68kAmigaHardwareRegister.Chip> chips;
-
-    RegisterData(String name, String descriptionNodeName, String address,
-                 String description,
-                 M68kAmigaHardwareRegister.Chipset chipset,
-                 boolean copperDanger,
-                 M68kAmigaHardwareRegister.Access access,
-                 Set<M68kAmigaHardwareRegister.Chip> chips) {
-      this.name = name;
-      this.descriptionNodeName = descriptionNodeName;
-      this.address = address;
-      this.description = description;
-      this.chipset = chipset;
-      this.copperDanger = copperDanger;
-      this.access = access;
-      this.chips = chips;
-    }
-  }
+  private record RegisterData(String name, String descriptionNodeName, String address, String description,
+                              M68kAmigaHardwareRegister.Chipset chipset, boolean copperDanger,
+                              M68kAmigaHardwareRegister.Access access, Set<M68kAmigaHardwareRegister.Chip> chips) {}
 
 }
