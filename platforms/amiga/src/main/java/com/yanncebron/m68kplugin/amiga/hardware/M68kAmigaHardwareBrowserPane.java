@@ -24,6 +24,7 @@ import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.DumbAwareToggleAction;
 import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.Ref;
+import com.intellij.openapi.util.text.NaturalComparator;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
@@ -103,7 +104,7 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
       items.add(register);
     }
 
-    items.sort(Comparator.comparing(M68kAmigaHardwareRegister::getName));
+    items.sort(Comparator.comparing(M68kAmigaHardwareRegister::getName, NaturalComparator.INSTANCE));
     setListItems(items);
   }
 
