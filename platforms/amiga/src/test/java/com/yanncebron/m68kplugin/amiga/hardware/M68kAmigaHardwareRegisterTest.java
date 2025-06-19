@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,6 +36,9 @@ public class M68kAmigaHardwareRegisterTest extends UsefulTestCase {
     int countRevisionAga = 0;
     int countCopperDanger = 0;
 
+    Set<M68kAmigaHardwareRegister.Access> foundAccess = new HashSet<>();
+    Set<M68kAmigaHardwareRegister.Chip> foundChip = new HashSet<>();
+
     Set<String> descriptionFileNames = new HashSet<>();
     for (M68kAmigaHardwareRegister register : M68kAmigaHardwareRegister.values()) {
       assertFalse(register.name(), StringUtil.containsWhitespaces(register.getName()));
@@ -53,7 +56,10 @@ public class M68kAmigaHardwareRegisterTest extends UsefulTestCase {
       descriptionFileNames.add(register.getDescriptionFileName());
 
       assertNotNull(register.name(), register.getAccess());
+      foundAccess.add(register.getAccess());
+
       assertFalse(register.name(), register.getChips().isEmpty());
+      foundChip.addAll(register.getChips());
 
       final M68kAmigaHardwareRegister.Chipset chipset = register.getChipset();
       if (chipset == M68kAmigaHardwareRegister.Chipset.ECS) {
@@ -64,7 +70,6 @@ public class M68kAmigaHardwareRegisterTest extends UsefulTestCase {
         countRevisionOcs++;
       }
 
-
       if (register.isCopperDanger()) countCopperDanger++;
     }
 
@@ -72,6 +77,8 @@ public class M68kAmigaHardwareRegisterTest extends UsefulTestCase {
     assertEquals(30, countRevisionEcs);
     assertEquals(9, countRevisionAga);
 
+    assertSize(4, foundAccess);
+    assertSize(3, foundChip);
     assertEquals(58, countCopperDanger);
 
     assertEquals(78, descriptionFileNames.size());

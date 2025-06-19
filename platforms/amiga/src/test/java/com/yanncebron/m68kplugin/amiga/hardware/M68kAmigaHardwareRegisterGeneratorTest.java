@@ -83,12 +83,13 @@ public class M68kAmigaHardwareRegisterGeneratorTest extends TestCase {
       String flags = string.substring(string.indexOf(addressOriginal) + address.length(), beforeDescription);
 
       M68kAmigaHardwareRegister.Access access = null;
-      if (StringUtil.containsChar(flags, 'R')) {
-        access = M68kAmigaHardwareRegister.Access.READ;
-      } else if (StringUtil.containsChar(flags, 'W')) {
+
+      if (StringUtil.containsChar(flags, 'W')) {
         access = M68kAmigaHardwareRegister.Access.WRITE;
       } else if (StringUtil.contains(flags, "ER")) {
         access = M68kAmigaHardwareRegister.Access.EARLY_READ;
+      } else if (StringUtil.containsChar(flags, 'R')) {
+        access = M68kAmigaHardwareRegister.Access.READ;
       } else if (StringUtil.containsChar(flags, 'S')) {
         access = M68kAmigaHardwareRegister.Access.STROBE;
       }
@@ -143,6 +144,7 @@ public class M68kAmigaHardwareRegisterGeneratorTest extends TestCase {
 
   private record RegisterData(String name, String descriptionNodeName, String address, String description,
                               M68kAmigaHardwareRegister.Chipset chipset, boolean copperDanger,
-                              M68kAmigaHardwareRegister.Access access, Set<M68kAmigaHardwareRegister.Chip> chips) {}
+                              M68kAmigaHardwareRegister.Access access, Set<M68kAmigaHardwareRegister.Chip> chips) {
+  }
 
 }
