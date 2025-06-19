@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.documentation;
 
+import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.io.FileUtil;
@@ -62,7 +63,7 @@ public final class M68kDocumentationUtil {
   public static final String CHECK_MARK = "✓";
 
   @NonNls
-  public static final String CONTRIBUTION_FOOTER = "<br><br><a href=\"https://github.com/prb28/m68k-instructions-documentation\">Contribute to m68k-instructions-documentation project</a>";
+  public static final String CONTRIBUTION_FOOTER = "<br><br><a href=\"https://github.com/prb28/m68k-instructions-documentation\">Contribute to m68k-instructions-documentation project</a>" + DocumentationMarkup.EXTERNAL_LINK_ICON;
 
   public static Couple<String> getMarkdownContents(String docRoot, String markdownFileName) {
     final InputStream resource = M68kDocumentationUtil.class.getResourceAsStream(docRoot + markdownFileName + ".md");

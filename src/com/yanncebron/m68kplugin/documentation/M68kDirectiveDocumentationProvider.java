@@ -85,7 +85,7 @@ public final class M68kDirectiveDocumentationProvider extends AbstractDocumentat
     if (contents.getFirst() == null) {
       return M68kDocumentationUtil.CSS +
         "<h1>" + StringUtil.toUpperCase(directiveText) + "</h1>" +
-        "<p>" + contents.getSecond() +
+        "<p>" + contents.getSecond() + "</p>" +
         M68kDocumentationUtil.CONTRIBUTION_FOOTER;
     }
 
