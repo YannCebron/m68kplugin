@@ -66,7 +66,7 @@ public enum M68kAmigaHardwareRegister {
   BLTBPTL("BLTBPTL", "DFF04E", "Blitter pointer to source B (low 15 bits)", "BLTxPTL", Chipset.OCS, true, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
   BLTAPTH("BLTAPTH", "DFF050", "Blitter pointer to source A (high 5 bits)", "BLTxPTL", Chipset.OCS, true, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
   BLTAPTL("BLTAPTL", "DFF052", "Blitter pointer to source A (low 15 bits)", "BLTxPTL", Chipset.OCS, true, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
-  BPTDPTH("BPTDPTH", "DFF054", "Blitter pointer to destn  D (high 5 bits)", "BLTxPTL", Chipset.OCS, true, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
+  BLTDPTH("BLTDPTH", "DFF054", "Blitter pointer to destn  D (high 5 bits)", "BLTxPTL", Chipset.OCS, true, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
   BLTDPTL("BLTDPTL", "DFF056", "Blitter pointer to destn  D (low 15 bits)", "BLTxPTL", Chipset.OCS, true, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
   BLTSIZE("BLTSIZE", "DFF058", "Blitter start and size (win/width,height)", "BLTSIZE", Chipset.OCS, true, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
   BLTCON0L("BLTCON0L", "DFF05A", "Blitter control 0 lower 8 bits (minterms)", "BLTCON0", Chipset.ECS, true, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),

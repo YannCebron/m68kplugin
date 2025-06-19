@@ -372,7 +372,7 @@ NAME        ADDR   R/W CHIP(s)   FUNCTION
 @{"BLTBPTL" link BLTxPTL}   + ~04E   W  A          Blitter pointer to source B (low 15 bits)
 @{"BLTAPTH" link BLTxPTL}   + ~050   W  A          Blitter pointer to source A (high 5 bits)
 @{"BLTAPTL" link BLTxPTL}   + ~052   W  A          Blitter pointer to source A (low 15 bits)
-@{"BPTDPTH" link BLTxPTL}   + ~054   W  A          Blitter pointer to destn  D (high 5 bits)
+@{"BLTDPTH" link BLTxPTL}   + ~054   W  A          Blitter pointer to destn  D (high 5 bits)
 @{"BLTDPTL" link BLTxPTL}   + ~056   W  A          Blitter pointer to destn  D (low 15 bits)
 @{"BLTSIZE" link BLTSIZE}     ~058   W  A          Blitter start and size (win/width,height)
 @{"BLTCON0L" link BLTCON0}  h ~05A   W  A          Blitter control 0 lower 8 bits (minterms)
