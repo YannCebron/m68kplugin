@@ -13,10 +13,10 @@ color registers do not contain a transparency (T) bit.
 The table below shows the color register bit usage.
 
 
-| BIT#   | 15,14,13,12 | 11,10,09,08 | 07,06,05,04 | 03,02,01,00 |
-|---|---|---|---|---|
-| LOCT=0 | T  X  X  X  | R7 R6 R5 R4 | G7 G6 G5 G4 | B7 B6 B5 B4 |
-| LOCT=1 | X  X  X  X  | R3 R2 R1 R0 | G3 G2 G1 G0 | B3 B2 B1 B0 |
+| BIT#   | 15 | 14 | 13 | 12 | | 11 | 10 | 09 | 08 | | 07 | 06 | 05 | 04 | | 03 | 02 | 01 | 00 |
+|:------:|:--:|:--:|:--:|:--:|-|:--:|:--:|:--:|:--:|-|:--:|:--:|:--:|:--:|-|:--:|:--:|:--:|:--:|
+| LOCT=0 | T  | X  | X  | X  | | R7 | R6 | R5 | R4 | | G7 | G6 | G5 | G4 | | B7 | B6 | B5 | B4 |
+| LOCT=1 | X  | X  | X  | X  | | R3 | R2 | R1 | R0 | | G3 | G2 | G1 | G0 | | B3 | B2 | B1 | B0 |
 
 
 T = TRANSPARENCY, R = RED, G = GREEN, B = BLUE, X = UNUSED

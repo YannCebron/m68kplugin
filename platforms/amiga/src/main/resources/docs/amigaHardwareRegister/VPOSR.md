@@ -8,7 +8,7 @@ I0-I6 Chip identification:
 
 
 | Chip                                      | Value           |
-|---|---|
+|-------------------------------------------|:---------------:|
 | 8361 (Regular) or 8370 (Fat) (Agnus-NTSC) | 10              |
 | 8367 (PAL) or 8371 (Fat-PAL) (Agnus-PAL)  | 00              |
 | 8372 (Fat-hr) (agnushr),thru rev 4        | 20 PAL, 30 NTSC |

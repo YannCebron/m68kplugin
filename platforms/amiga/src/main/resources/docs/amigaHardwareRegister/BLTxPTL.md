@@ -1,4 +1,4 @@
-This pair of registers (see also: BLTxPTH)
+This pair of registers (BLTxPTH/[BLTxPTL](BLTxPTL.md))
 contains the 20 bit address of Blitter source (X=A,B,C) or dest.
 (x=D) DMA data. This pointer must be preloaded with the
 starting address of the data to be processed by the Blitter. After

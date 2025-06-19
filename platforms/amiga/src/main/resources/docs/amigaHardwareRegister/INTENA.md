@@ -4,7 +4,7 @@ is given below.
 
 
 | BIT# | FUNCTION | LEVEL | DESCRIPTION                                |
-|---|---|---|---|
+|:----:|:--------:|:-----:|--------------------------------------------|
 | 15   |  SET/CLR |       | Set/clear control bit. Determines if bits  |
 |      |          |       | written with a 1 get set or cleared. Bits  |
 |      |          |       | written with a zero are always unchanged.  |

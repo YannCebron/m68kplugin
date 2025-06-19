@@ -6,7 +6,7 @@ BITS INITIALIZED BY RESET
 
 
 | BIT#  | FUNCTION | DESCRIPTION                                   |
-|---|---|---|
+|:-----:|:--------:|-----------------------------------------------|
 | 15-08 |          | _(unused)_                                      |
 | 07    | ENBP8    | Enable bit plane 8 (match reqd. for collision)|
 | 06    | ENBP7    | Enable bit plane 7 (match reqd. for collision)|

@@ -6,7 +6,7 @@ control in 35nS increments.
 
 
 | BIT#  | FUNCTION | DESCRIPTION  |
-|---|---|---|
+|:-----:|:--------:|--------------|
 | 15-11 |  x       | _(unused)_     |
 | 10    |  H1      | 140nS        |
 | 09    |  H1      | 70nS         |

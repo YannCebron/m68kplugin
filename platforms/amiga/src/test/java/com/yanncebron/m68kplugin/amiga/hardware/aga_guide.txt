@@ -617,7 +617,7 @@ ADKCONR    010   R   P    Audio,Disk,Uart,Control read
 
          +-------+-------------+-------------------------------------------+
          | BITS  | USE         | DESCRIPTION                               |
-         +-------+-------------+-------------------------------------------+
+         +:-----:+:-----------:+-------------------------------------------+
          | 15    | SET/CLEAR   | Set/clear control bit. Determines if bits |
          |       |             | written with a 1 get set or cleared. Bits |
          |       |             | written with a zero are always unchanged. |
@@ -704,7 +704,7 @@ AUDxVOL   0A8    W   P    Audio channel x volume
 
          +--------+--------------------------------------------------+
          | BITS   | USE                                              |
-         +--------+--------------------------------------------------+
+         +:------:+--------------------------------------------------+
          | 15-07  | (unused)                                         |
          |  06    | Forces volume to max (64 ones, no zeros)         |
          | 05-00  | Sets one of the 64 levels (000000 = no output,   |
@@ -739,7 +739,7 @@ BEAMCON0 h 1DC  W    A            Beam counter control bits
 
           +-------+----------------------------+
           | BIT#  | FUNCTION                   |
-          +-------+----------------------------+
+          +:-----:+:--------------------------:+
           | 15    | (unused)                   |
           | 14    | HARDDIS                    |
           | 13    | LPENDIS                    |
@@ -838,7 +838,7 @@ NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
 BLTxPTL  h 052  W    A    Blitter Pointer to x (Low 15 bits)
 
-         This pair of registers (see also: @{"BLTxPTH" link BLTxPTH})
+         This pair of registers (BLTxPTH/BLTxPTL)
          contains the 20 bit address of Blitter source (X=A,B,C) or dest.
          (x=D) DMA data. This pointer must be preloaded with the
          starting address of the data to be processed by the Blitter. After
@@ -931,11 +931,11 @@ BLTCON1  h 042  W    A    Blitter control register 1
          operations. There are 2 basic modes, area and line, which are
          selected by bit 0 of BLTCON1, as shown below.
 
-         AREA MODE ("normal")
+         ## AREA MODE ("normal")
 
          +------+---------+---------+
          | BIT# | BLTCON0 | BLTCON1 |
-         +------+---------+---------+
+         +:----:+:-------:+:-------:+
          | 15   | ASH3    | BSH3    |
          | 14   | ASH2    | BSH2    |
          | 13   | ASH1    | BSH1    |
@@ -954,11 +954,11 @@ BLTCON1  h 042  W    A    Blitter control register 1
          | 00   | LF0     | LINE(=0)|
          +------+---------+---------+
 
-         LINE MODE (line draw)
+         ## LINE MODE (line draw)
 
          +------+---------+----------+
          | BIT# | BLTCON0 | BLTCON1  |
-         +------+---------+----------+
+         +:----:+:-------:+:--------:+
          | 15   | ASH3    | BSH3     |
          | 14   | ASH2    | BSH2     |
          | 13   | ASH1    | BSH1     |
@@ -979,7 +979,7 @@ BLTCON1  h 042  W    A    Blitter control register 1
 
          +----------+-------------------------------------------+
          | NAME     | DESCRIPTION                               |
-         +----------+-------------------------------------------+
+         +:--------:+-------------------------------------------+
          | ASH3-0   | Shift value of A source                   |
          | BSH3-0   | Shift value of B source and line texture  |
          | USEA     | Mode control bit to use source A          |
@@ -1039,7 +1039,7 @@ NAME   rev ADDR type chip Description
 BPLHDAT  h 07A  W         Ext logic UHRES bit plane identifier
 
          This is the number (sign extended) that is added to the UHRES bitplane
-         pointer (BPLHPTL,H) every line, and then another 2 is added, just like
+         pointer (BPLHPTL,BPLHPTH) every line, and then another 2 is added, just like
          the other modulos.
 @endnode
 
@@ -1090,7 +1090,7 @@ BPLHSTOP p 1D6  W    A    UHRES bit plane vertical stop
 
          +-------+---------+
          | BIT#  | Name    |
-         +-------+---------+
+         +:-----:+:-------:+
          | 15    | BPLHWRM |
          | 14-11 | (unused)|
          | 10-0  | V10-V0  |
@@ -1107,7 +1107,7 @@ NAME   rev ADDR type chip Description
 BPLHSTRT h 1D4  W   A           UHRES bit plane vertical stop
 
          This controls the line when the data fetch starts for
-         the @{"BPLHPTH" link BPLHPTH}, L pointers. V10-V0 on DB10-0.
+         the @{"BPLHPTH" link BPLHPTH}, BPLHPTL pointers. V10-V0 on DB10-0.
 @endnode
 
 @node BPLxPTH BPLxPTH
@@ -1180,7 +1180,7 @@ BPLCON0 p  100  W    D    Bit plane control reg. (misc, control bits)
 
  +------+---------+---------------------------------------------------------+
  | BIT# | BPLCON0 | DESCRIPTION                                             |
- +------+---------+---------------------------------------------------------+
+ +:----:+:-------:+---------------------------------------------------------+
  | 15   | HIRES   | HIRES = High resolution (640*200/640*400 interlace) mode|
  |      |         |                                                         |
  | 14   | BPU2    | Bit plane use code 0000-1000 (NODE thru 8 inclusive)    |
@@ -1228,7 +1228,7 @@ BPLCON1 p  102  W       D Bit plane control reg. (horiz, scroll counter)
 
  +------+---------+---------------------------------------------------------+
  | BIT# | BPLCON1 | DESCRIPTION                                             |
- +------+---------+---------------------------------------------------------+
+ +:----:+:-------:+---------------------------------------------------------+
  | 15   | PF2H7=0 | (PF2Hx =) Playfield 2 horizontal scroll code, x=0-7     |
  | 14   | PF2H6=0 |                                                         |
  | 13   | PF2H1=0 |                                                         |
@@ -1256,7 +1256,7 @@ BPLCON2 p 104   W    D    Bit plane control reg. (new control bits)
 
  +------+----------+--------------------------------------------------------+
  | BIT# | BPLCON2  | DESCRIPTION                                            |
- +------+----------+--------------------------------------------------------+
+ +:----:+:--------:+--------------------------------------------------------+
  | 15   | X        | Don't care - but drive to 0 for upward compatibility!  |
  |      |          |                                                        |
  | 14   | ZDBPSEL2 | 3 bit field which selects which bitplane is to be used |
@@ -1292,7 +1292,7 @@ BPLCON3 p 106  W       D        Bit plane control reg. (enhanced features)
 
  +------+------------+--------------------------------------------------------+
  | BIT# | BPLCON3    | DESCRIPTION                                            |
- +------+------------+--------------------------------------------------------+
+ +:----:+:----------:+--------------------------------------------------------+
  | 15   | BANK2=0    | BANKx = Selects one of eight color banks, x=0-2.       |
  | 14   | BANK1=0    |                                                        |
  | 13   | BANK0=0    |                                                        |
@@ -1330,10 +1330,10 @@ BPLCON3 p 106  W       D        Bit plane control reg. (enhanced features)
  |      |            | Disabled when ECSENA low.                              |
  +------+------------+--------------------------------------------------------+
 
- PF20F2-0 // AFFECTED BITPLANE (8-1) // OFFSET
+ ## PF20F2-0 // AFFECTED BITPLANE (8-1) // OFFSET
  +--------+--------+--------+--+---+---+---+---+---+---+---+---+--+------------------+
  | PF2OF2 | PF2OF1 | PF2OF0 |  | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 |  | OFFSET (decimal) |
- +--------+--------+--------+--+---+---+---+---+---+---+---+---+--+------------------+
+ +:------:+:------:+:------:+--+:-:+:-:+:-:+:-:+:-:+:-:+:-:+:-:+--+------------------+
  | 0      | 0      | 0      |  | - | - | - | - | - | - | - | - |  | none             |
  | 0      | 0      | 1      |  | - | - | - | - | - | - | 1 | - |  | 2                |
  | 0      | 1      | 0      |  | - | - | - | - | - | 1 | - | - |  | 4                |
@@ -1352,7 +1352,7 @@ BPLCON4 p 10c  W       D  Bit plane control reg. (display masks)
 
  +------+----------+----------------------------------------------------------+
  | BIT# | BPLCON4  | DESCRIPTION                                              |
- +------+----------+----------------------------------------------------------+
+ +:----:+:--------:+----------------------------------------------------------+
  | 15   | BPLAM7=0 | This 8 bit field is XOR'ed with the 8 bit plane color    |
  | 14   | BPLAM6=0 | address, thereby altering the color address sent to the  |
  | 13   | BPLAM5=0 | color table (x=1-8).                                     |
@@ -1388,7 +1388,7 @@ CLXCON    098   W   A     Collision control
 
          +------+----------+-----------------------------------------------+
          | BIT# | FUNCTION | DESCRIPTION                                   |
-         +------+----------+-----------------------------------------------+
+         +:----:+:--------:+-----------------------------------------------+
          | 15   | ENSP7    | Enable Sprite 7 (ORed with Sprite 6)          |
          | 14   | ENSP5    | Enable Sprite 5 (ORed with Sprite 4)          |
          | 13   | ENSP3    | Enable Sprite 3 (ORed with Sprite2)           |
@@ -1421,7 +1421,7 @@ CLXCON2 P  10C  W    D    Extended collision control
 
          +-------+----------+-----------------------------------------------+
          | BIT#  | FUNCTION | DESCRIPTION                                   |
-         +-------+----------+-----------------------------------------------+
+         +:-----:+:--------:+-----------------------------------------------+
          | 15-08 |          | (unused)                                      |
          | 07    | ENBP8    | Enable bit plane 8 (match reqd. for collision)|
          | 06    | ENBP7    | Enable bit plane 7 (match reqd. for collision)|
@@ -1448,7 +1448,7 @@ CLXDAT   00E  R     D     Collision data reg. (read and clear)
 
          +------+----------------------------------------+
          | BIT# | COLLISIONS REGISTERED                  |
-         +------+----------------------------------------+
+         +:----:+----------------------------------------+
          | 15   | (unused)                               |
          | 14   | Sprite 4 (or 5) to Sprite 6 (or 7)     |
          | 13   | Sprite 2 (or 3) to Sprite 6 (or 7)     |
@@ -1488,10 +1488,10 @@ COLORxx  180-1BE  W       COLOR table xx
          The table below shows the color register bit usage.
 
          +--------+-------------+-------------+-------------+-------------+
-         | BIT#   | 15,14,13,12 | 11,10,09,08 | 07,06,05,04 | 03,02,01,00 |
-         +--------+-------------+-------------+-------------+-------------+
-         | LOCT=0 | T  X  X  X  | R7 R6 R5 R4 | G7 G6 G5 G4 | B7 B6 B5 B4 |
-         | LOCT=1 | X  X  X  X  | R3 R2 R1 R0 | G3 G2 G1 G0 | B3 B2 B1 B0 |
+         | BIT#   | 15 | 14 | 13 | 12 | | 11 | 10 | 09 | 08 | | 07 | 06 | 05 | 04 | | 03 | 02 | 01 | 00 |
+         +:------:+:--:+:--:+:--:+:--:+-+:--:+:--:+:--:+:--:+-+:--:+:--:+:--:+:--:+-+:--:+:--:+:--:+:--:+
+         | LOCT=0 | T  | X  | X  | X  | | R7 | R6 | R5 | R4 | | G7 | G6 | G5 | G4 | | B7 | B6 | B5 | B4 |
+         | LOCT=1 | X  | X  | X  | X  | | R3 | R2 | R1 | R0 | | G3 | G2 | G1 | G0 | | B3 | B2 | B1 | B0 |
          +--------+-------------+-------------+-------------+-------------+
 
          T = TRANSPARENCY, R = RED, G = GREEN, B = BLUE, X = UNUSED
@@ -1511,7 +1511,7 @@ COPCON h  02E  W     A    Coprocessor control register
 
          +------+-------+-------------------------------------------------+
          | BIT# | NAME  | FUNCTION                                        |
-         +------+-------+-------------------------------------------------+
+         +:----:+:-----:+-------------------------------------------------+
          | 01   | CDANG | Coprocessor danger mode. Allows coprocessor     |
          |      |       | access to all RGA registers if true.            |
          |      |       | (if 0, access to RGA>7E)                        |
@@ -1577,7 +1577,7 @@ COPINS    08C  W   A      Coprocessor inst. fetch identify
 
          +------+------------+-----------+-----------+
          |      | MOVE | MOVE | WAIT | WAIT | SKIP | SKIP |
-         +------+-----+------+-----+-----+-----+-----+
+         +:----:+:----:+:----:+:---:+:---:+:---:+:---:+
          | **BIT#** | _IR1_ | _IR2_  | _IR1_ | _IR2_ | _IR1_ | _IR2_ |
          | 15   | x   | RD15 | VP7 | BFD | VP7 | BFD |
          | 14   | x   | RD14 | VP6 | VE6 | VP6 | VE6 |
@@ -1666,20 +1666,20 @@ DDFSTOP  094  W  A  Display data fetch stop (horiz. position)
 	The tables below show the start and stop timing for
 	different register contents
 
-         DDFSTRT (Left edge of display data fetch)
+         ## DDFSTRT (Left edge of display data fetch)
          +------------------+----+----+----+----+----+
          | PURPOSE          | H8 | H7 | H6 | H5 | H4 |
-         +------------------+----+----+----+----+----+
+         +------------------+:--:+:--:+:--:+:--:+:--:+
          | Extra wide (max) | 0  | 0  | 1  | 0  | 1  |
          | wide             | 0  | 0  | 1  | 1  | 0  |
          | normal           | 0  | 0  | 1  | 1  | 1  |
          | narrow           | 0  | 1  | 0  | 0  | 0  |
          +------------------+----+----+----+----+----+
 
-         DDFSTOP (Right edge of display data fetch)
+         ## DDFSTOP (Right edge of display data fetch)
          +------------------+----+----+----+----+----+
          | PURPOSE          | H8 | H7 | H6 | H5 | H4 |
-         +------------------+----+----+----+----+----+
+         +------------------+:--:+:--:+:--:+:--:+:--:+
          | narrow           | 1  | 1  | 0  | 0  | 1  |
          | normal           | 1  | 1  | 0  | 1  | 0  |
          | wide (max)       | 1  | 1  | 0  | 1  | 1  |
@@ -1741,7 +1741,7 @@ DMACONR 002  R  A   P DMA control (and Blitter status) read
 
          +------+----------+--------------------------------------------+
          | BIT# | FUNCTION | DESCRIPTION                                |
-         +------+----------+--------------------------------------------+
+         +:----:+:--------:+--------------------------------------------+
          | 15   | SET/CLR  | Set/Clear control bit. Determines if bits  |
          |      |          | written wit a 1 get set or cleared.        |
          |      |          | Bits written with a zero are unchanged.    |
@@ -1790,7 +1790,7 @@ DSKLEN	024 W		P    Disk length
 
          +------+----------+------------------------------------+
          | BIT# | FUNCTION | DESCRIPTION                        |
-         +------+----------+------------------------------------+
+         +:----:+:--------:+------------------------------------+
          | 15   | DMAEN    | Disk DMA enable                    |
          | 14   | WRITE    | Disk write (RAM or disk) if 1      |
          | 13-0 | LENGTH   | Length (# of words) of DMA data.   |
@@ -1827,7 +1827,7 @@ DSKBYTR 01A  R  p Disk data byte and status read
 
         +-------+----------+--------------------------------------------------+
         | BIT#  | FUNCTION | DESCRIPTION                                      |
-        +-------+----------+--------------------------------------------------+
+        +:-----:+:--------:+--------------------------------------------------+
         | 15    | DSKBYT   | Disk byte ready (reset on read)                  |
         | 14    | DMAON    | DMAEN (@{"DSKLEN" link DSKLEN}) & DMAEN (DMACON) & DSKEN (DMACON) |
         | 13    | DISKWRITE| Mirror of bit 14 (WRITE) in DSKLEN               |
@@ -1857,7 +1857,7 @@ FMODE P  1FC W 		  Memory Fetch Mode
 
          +-------+----------+-------------------------------------------+
          | BIT#  | FUNCTION | DESCRIPTION                               |
-         +-------+----------+-------------------------------------------+
+         +:-----:+:--------:+-------------------------------------------+
          | 15    | SSCAN2   | Global enable for sprite scan-doubling.   |
          | 14    | BSCAN2   | Enables the use of 2nd P/F modulus on an  |
          |       |          | alternate line basis to support bitplane  |
@@ -1871,7 +1871,7 @@ FMODE P  1FC W 		  Memory Fetch Mode
 
          +------+-----+---------------+-----------+--------------+---------+
          |BPAGEM|BPL32| Bitplane Fetch|Increment  | Memory Cycle |Bus Width|
-         +------+-----+---------------+-----------+--------------+---------+
+         +:----:+:---:+:-------------:+:---------:+:------------:+:-------:+
          | 0    |  0  | By 2 bytes    |(as before)|normal CAS    |16       |
          | 0    |  1  | By 4 bytes    |           |normal CAS    |32       |
          | 1    |  0  | By 4 bytes    |           |double CAS    |16       |
@@ -1880,7 +1880,7 @@ FMODE P  1FC W 		  Memory Fetch Mode
 
          +------+-----+------------+-----------+-------------+---------+
          |SPAGEM|SPR32|Sprite Fetch|Increment  |Memory Cycle |Bus Width|
-         +------+-----+------------+-----------+-------------+---------+
+         +:----:+:---:+:----------:+:---------:+:-----------:+:-------:+
          |  0   |  0  | By 2 bytes |(as before)| normal CAS  |   16    |
          |  0   |  1  | By 4 bytes |           | normal CAS  |   32    |
          |  1   |  0  | By 4 bytes |           | double CAS  |   16    |
@@ -1902,7 +1902,7 @@ HBSTRT 1C4 W  D    Horizontal START position
 
          +-------+----------+--------------+
          | BIT#  | FUNCTION | DESCRIPTION  |
-         +-------+----------+--------------+
+         +:-----:+:--------:+--------------+
          | 15-11 |  x       | (unused)     |
          | 10    |  H1      | 140nS        |
          | 09    |  H1      | 70nS         |
@@ -1936,7 +1936,7 @@ HHPOSW  H 1D8  W  A  DUAL mode hires Hbeam counter write
 
 	This the secondary beam counter for
 	the faster mode, triggering the UHRES pointers & doing the
-	comparisons for @{"HBSTRT" link HBSTOP}, STOP, HTOTAL, HSSTRT, @{"HSSTOP" link HSSTOP}
+	comparisons for @{"HBSTRT" link HBSTRT}, HBSTOP, HTOTAL, HSSTRT, @{"HSSTOP" link HSSTOP}
 	(see @{"HTOTAL" link HTOTAL} for bits).
 @endnode
 
@@ -2001,7 +2001,7 @@ INTENAR  01C  R        P Interrupt enable bits (read)
 
  +------+----------+-------+--------------------------------------------+
  | BIT# | FUNCTION | LEVEL | DESCRIPTION                                |
- +------+----------+-------+--------------------------------------------+
+ +:----:+:--------:+:-----:+--------------------------------------------+
  | 15   |  SET/CLR |       | Set/clear control bit. Determines if bits  |
  |      |          |       | written with a 1 get set or cleared. Bits  |
  |      |          |       | written with a zero are always unchanged.  |
@@ -2053,7 +2053,7 @@ JOY1DAT  Y7  Y6  Y5  Y4  Y3  Y2  Y1  Y0  X7  X6  X5  X4  X3  X2  X1  X0
 
          +-------------------+-----------------------------------------+
          | Serial | Bit Name | Description                             |
-         +--------+----------+-----------------------------------------+
+         +:------:+:--------:+-----------------------------------------+
          |   0    | M0H      | JOY0DAT Horizontal Clock                |
          |   1    | M0HQ     | JOY0DAT Horizontal Clock (quadrature)   |
          |   2    | M0V      | JOY0DAT Vertical Clock                  |
@@ -2071,7 +2071,7 @@ JOY1DAT  Y7  Y6  Y5  Y4  Y3  Y2  Y1  Y0  X7  X6  X5  X4  X3  X2  X1  X0
 
          +------------+------+---------------------------------+
          | Directions | Pin# | Counter bits                    |
-         +------------+------+---------------------------------+
+         +:----------:+:----:+---------------------------------+
          | Forward    |  1   | Y1 xor Y0 (BIT#09 xor BIT#08)   |
          | Left       |  3   | Y1                              |
          | Back       |  2   | X1 xor X0 (BIT#01 xor BIT#00)   |
@@ -2107,7 +2107,7 @@ LISAID  H  07C  R   D    Denise/Lisa (video out chip) revision level
 
          +------+----------------------------------------------------------+
          | BIT# | Description                                              |
-         +------+----------------------------------------------------------+
+         +:----:+----------------------------------------------------------+
          | 7-4  | Lisa/Denise/ECS Denise Revision level (decrement to      |
          |      | bump revision level, hex F represents 0th rev. level).   |
          |   3  | Maintain as a 1 for future generation                    |
@@ -2134,7 +2134,7 @@ RIGHT  Y7  Y6  Y5  Y4  Y3  Y2  Y1  Y0  X7  X6  X5  X4  X3  X2  X1  X0
 
          +-------+------+-----+-----+-------+
          | Loc.  | Dir. | Sym | pin | pin (PAULA) |
-         +-------+------+-----+-----+-------+
+         +-------+:----:+:---:+:---:+:-----:+
          | RIGHT | Y    | RX  | 9   | 33    |
          | RIGHT | X    | RX  | 5   | 32    |
          | LEFT  | Y    | LY  | 9   | 36    |
@@ -2166,7 +2166,7 @@ POTINP 016 R      P Pot pin data read
 
          +-------+----------+----------------------------------------------+
          | BIT#  | FUNCTION | DESCRIPTION                                  |
-         +-------+----------+----------------------------------------------+
+         +:-----:+:--------:+----------------------------------------------+
          | 15    | OUTRY    | Output enable for Paula pin 33               |
          | 14    | DATRY    | I/O data Paula pin 33                        |
          | 13    | OUTRX    | Output enable for Paula pin 32               |
@@ -2222,7 +2222,7 @@ SERDATR  018  R      P  Serial port data and status read.
 
          +------+----------+--------------------------------------------+
          | BIT# | FUNCTION | DESCRIPTION                                |
-         +------+----------+--------------------------------------------+
+         +:----:+:--------:+--------------------------------------------+
          | 15   | OVRUN    | Serial port receiver overrun               |
          | 14   | RBF      | Serial port receive buffer full (mirror)   |
          | 13   | TBE      | Serial port transmit buffer empty (mirror) |
@@ -2255,7 +2255,7 @@ SERPER  032  W        P    Serial port period and control.
 
          +-------+----------+------------------------------------------------+
          | BIT#  | FUNCTION | DESCRIPTION                                    |
-         +-------+----------+------------------------------------------------+
+         +:-----:+:--------:+------------------------------------------------+
          | 15    | LONG     | Defines serial receive as 9 bit word.          |
          | 14-00 | RATE     | Defines baud rate=1/((N+1)*.2794 microseconds) |
          +-------+----------+------------------------------------------------+
@@ -2321,7 +2321,7 @@ SPRxPOS   140   W    A  D   Sprite x vert-horiz start position data.
 
          +-------+----------+------------------------------------------------+
          | BIT#  | SYM      | FUNCTION                                       |
-         +-------+----------+------------------------------------------------+
+         +:-----:+:--------:+------------------------------------------------+
          | 15-08 | SV7-SV0  | Start vertical value. High bit (SV8) is        |
          |       |          | in SPRxCTL register below.                     |
          | 07-00 | SH10-SH3 | Sprite horizontal start value. Low order       |
@@ -2340,7 +2340,7 @@ SPRxCTL p 142 W     A  D   Sprite position and control data
 
          +-------+----------+------------------------------------------------+
          | BIT#  | SYM      | FUNCTION                                       |
-         +-------+----------+------------------------------------------------+
+         +:-----:+:--------:+------------------------------------------------+
          | 15-08 | EV7-EV0  | End (stop) vert. value. Low 8 bits             |
          | 07    | ATT	    | Sprite attach control bit (odd sprites only)   |
          | 06    | SV9	    | Start vert value 10th bit.                     |
@@ -2429,7 +2429,7 @@ VPOSW    02A   W    A   Write most sig. bits (and frame flop)
 
          +-------------------------------------------+-----------------+
          | Chip                                      | Value           |
-         +-------------------------------------------+-----------------+
+         +-------------------------------------------+:---------------:+
          | 8361 (Regular) or 8370 (Fat) (Agnus-NTSC) | 10              |
          | 8367 (PAL) or 8371 (Fat-PAL) (Agnus-PAL)  | 00              |
          | 8372 (Fat-hr) (agnushr),thru rev 4        | 20 PAL, 30 NTSC |

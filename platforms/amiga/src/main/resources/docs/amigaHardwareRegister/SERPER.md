@@ -5,6 +5,6 @@ Baud rate. If this number is N, then the baud rate is
 
 
 | BIT#  | FUNCTION | DESCRIPTION                                    |
-|---|---|---|
+|:-----:|:--------:|------------------------------------------------|
 | 15    | LONG     | Defines serial receive as 9 bit word.          |
 | 14-00 | RATE     | Defines baud rate=1/((N+1)*.2794 microseconds) |

@@ -7,7 +7,7 @@ in [CLXCON2](CLXCON2.md).
 
 
 | BIT# | FUNCTION | DESCRIPTION                                   |
-|---|---|---|
+|:----:|:--------:|-----------------------------------------------|
 | 15   | ENSP7    | Enable Sprite 7 (ORed with Sprite 6)          |
 | 14   | ENSP5    | Enable Sprite 5 (ORed with Sprite 4)          |
 | 13   | ENSP3    | Enable Sprite 3 (ORed with Sprite2)           |

@@ -6,7 +6,7 @@ Playfield 2 is all even numbered enabled bit planes.
 
 
 | BIT# | COLLISIONS REGISTERED                  |
-|---|---|
+|:----:|----------------------------------------|
 | 15   | _(unused)_                               |
 | 14   | Sprite 4 (or 5) to Sprite 6 (or 7)     |
 | 13   | Sprite 2 (or 3) to Sprite 6 (or 7)     |

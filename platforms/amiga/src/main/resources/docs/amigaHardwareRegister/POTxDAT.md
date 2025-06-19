@@ -10,7 +10,7 @@ from 2 controller connectors (left-right) with 2 pins each.
 
 
 | Loc.  | Dir. | Sym | pin | pin (PAULA) |
-|---|---|---|---|---|
+|-------|:----:|:---:|:---:|:-----:|
 | RIGHT | Y    | RX  | 9   | 33    |
 | RIGHT | X    | RX  | 5   | 32    |
 | LEFT  | Y    | LY  | 9   | 36    |

@@ -16,7 +16,7 @@ reached)
 
 
 |      | MOVE | MOVE | WAIT | WAIT | SKIP | SKIP |
-|---|---|---|---|---|---|---|
+|:----:|:----:|:----:|:---:|:---:|:---:|:---:|
 | **BIT#** | _IR1_ | _IR2_  | _IR1_ | _IR2_ | _IR1_ | _IR2_ |
 | 15   | x   | RD15 | VP7 | BFD | VP7 | BFD |
 | 14   | x   | RD14 | VP6 | VE6 | VP6 | VE6 |

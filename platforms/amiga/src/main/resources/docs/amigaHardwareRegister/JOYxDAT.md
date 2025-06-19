@@ -23,7 +23,7 @@ stream. Starting with first bit received:
 
 
 | Serial | Bit Name | Description                             |
-|---|---|---|
+|:------:|:--------:|-----------------------------------------|
 |   0    | M0H      | [JOY0DAT](JOYxDAT.md) Horizontal Clock                |
 |   1    | M0HQ     | [JOY0DAT](JOYxDAT.md) Horizontal Clock (quadrature)   |
 |   2    | M0V      | [JOY0DAT](JOYxDAT.md) Vertical Clock                  |
@@ -41,7 +41,7 @@ Joystick switch closures can be deciphered as follows:
 
 
 | Directions | Pin# | Counter bits                    |
-|---|---|---|
+|:----------:|:----:|---------------------------------|
 | Forward    |  1   | Y1 xor Y0 (BIT#09 xor BIT#08)   |
 | Left       |  3   | Y1                              |
 | Back       |  2   | X1 xor X0 (BIT#01 xor BIT#00)   |

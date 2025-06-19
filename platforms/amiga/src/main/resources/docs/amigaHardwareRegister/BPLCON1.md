@@ -1,5 +1,5 @@
 | BIT# | [BPLCON1](BPLCON1.md) | DESCRIPTION                                             |
-|---|---|---|
+|:----:|:-------:|---------------------------------------------------------|
 | 15   | PF2H7=0 | (PF2Hx =) Playfield 2 horizontal scroll code, x=0-7     |
 | 14   | PF2H6=0 |                                                         |
 | 13   | PF2H1=0 |                                                         |

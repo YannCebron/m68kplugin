@@ -9,7 +9,7 @@ The 8 low-order bits are encoded as follows:
 
 
 | BIT# | Description                                              |
-|---|---|
+|:----:|----------------------------------------------------------|
 | 7-4  | Lisa/Denise/ECS Denise Revision level (decrement to      |
 |      | bump revision level, hex F represents 0th rev. level).   |
 |   3  | Maintain as a 1 for future generation                    |

@@ -1,5 +1,5 @@
 | BIT#  | SYM      | FUNCTION                                       |
-|---|---|---|
+|:-----:|:--------:|------------------------------------------------|
 | 15-08 | EV7-EV0  | End (stop) vert. value. Low 8 bits             |
 | 07    | ATT	    | Sprite attach control bit (odd sprites only)   |
 | 06    | SV9	    | Start vert value 10th bit.                     |

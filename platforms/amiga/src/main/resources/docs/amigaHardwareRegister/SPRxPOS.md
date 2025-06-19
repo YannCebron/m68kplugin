@@ -1,5 +1,5 @@
 | BIT#  | SYM      | FUNCTION                                       |
-|---|---|---|
+|:-----:|:--------:|------------------------------------------------|
 | 15-08 | SV7-SV0  | Start vertical value. High bit (SV8) is        |
 |       |          | in [SPRxCTL](SPRxCTL.md) register below.                     |
 | 07-00 | SH10-SH3 | Sprite horizontal start value. Low order       |

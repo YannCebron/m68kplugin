@@ -3,7 +3,7 @@ types of Chip RAM accesses:
 
 
 | BIT#  | FUNCTION | DESCRIPTION                               |
-|---|---|---|
+|:-----:|:--------:|-------------------------------------------|
 | 15    | SSCAN2   | Global enable for sprite scan-doubling.   |
 | 14    | BSCAN2   | Enables the use of 2nd P/F modulus on an  |
 |       |          | alternate line basis to support bitplane  |
@@ -17,7 +17,7 @@ types of Chip RAM accesses:
 
 
 |BPAGEM|BPL32| Bitplane Fetch|Increment  | Memory Cycle |Bus Width|
-|---|---|---|---|---|---|
+|:----:|:---:|:-------------:|:---------:|:------------:|:-------:|
 | 0    |  0  | By 2 bytes    |(as before)|normal CAS    |16       |
 | 0    |  1  | By 4 bytes    |           |normal CAS    |32       |
 | 1    |  0  | By 4 bytes    |           |double CAS    |16       |
@@ -26,7 +26,7 @@ types of Chip RAM accesses:
 
 
 |SPAGEM|SPR32|Sprite Fetch|Increment  |Memory Cycle |Bus Width|
-|---|---|---|---|---|---|
+|:----:|:---:|:----------:|:---------:|:-----------:|:-------:|
 |  0   |  0  | By 2 bytes |(as before)| normal CAS  |   16    |
 |  0   |  1  | By 4 bytes |           | normal CAS  |   32    |
 |  1   |  0  | By 4 bytes |           | double CAS  |   16    |

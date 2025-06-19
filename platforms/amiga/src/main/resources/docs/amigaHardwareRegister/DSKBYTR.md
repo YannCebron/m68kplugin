@@ -4,7 +4,7 @@ register one byte at a time, and bit 15 (DSKBYT) is set true.
 
 
 | BIT#  | FUNCTION | DESCRIPTION                                      |
-|---|---|---|
+|:-----:|:--------:|--------------------------------------------------|
 | 15    | DSKBYT   | Disk byte ready (reset on read)                  |
 | 14    | DMAON    | DMAEN ([DSKLEN](DSKLEN.md)) & DMAEN ([DMACON](DMACON.md)) & DSKEN ([DMACON](DMACON.md)) |
 | 13    | DISKWRITE| Mirror of bit 14 (WRITE) in [DSKLEN](DSKLEN.md)               |

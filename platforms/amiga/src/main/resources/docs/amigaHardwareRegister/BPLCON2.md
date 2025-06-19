@@ -1,5 +1,5 @@
 | BIT# | [BPLCON2](BPLCON2.md)  | DESCRIPTION                                            |
-|---|---|---|
+|:----:|:--------:|--------------------------------------------------------|
 | 15   | X        | Don't care - but drive to 0 for upward compatibility!  |
 |      |          |                                                        |
 | 14   | ZDBPSEL2 | 3 bit field which selects which bitplane is to be used |

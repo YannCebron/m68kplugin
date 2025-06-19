@@ -3,7 +3,7 @@ that shares the same 4 pins as the 4 pot counters above.
 
 
 | BIT#  | FUNCTION | DESCRIPTION                                  |
-|---|---|---|
+|:-----:|:--------:|----------------------------------------------|
 | 15    | OUTRY    | Output enable for Paula pin 33               |
 | 14    | DATRY    | I/O data Paula pin 33                        |
 | 13    | OUTRX    | Output enable for Paula pin 32               |

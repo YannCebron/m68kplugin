@@ -4,7 +4,7 @@ so that the coprocessor cannot access the Blitter hardware.
 
 
 | BIT# | NAME  | FUNCTION                                        |
-|---|---|---|
+|:----:|:-----:|-------------------------------------------------|
 | 01   | CDANG | Coprocessor danger mode. Allows coprocessor     |
 |      |       | access to all RGA registers if true.            |
 |      |       | (if 0, access to RGA>7E)                        |

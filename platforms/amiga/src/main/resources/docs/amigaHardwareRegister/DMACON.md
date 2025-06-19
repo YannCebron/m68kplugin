@@ -3,7 +3,7 @@ Blitter DMA status bits.
 
 
 | BIT# | FUNCTION | DESCRIPTION                                |
-|---|---|---|
+|:----:|:--------:|--------------------------------------------|
 | 15   | SET/CLR  | Set/Clear control bit. Determines if bits  |
 |      |          | written wit a 1 get set or cleared.        |
 |      |          | Bits written with a zero are unchanged.    |

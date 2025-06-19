@@ -6,7 +6,7 @@ shown below.
 
 
 | BIT# | FUNCTION | DESCRIPTION                                |
-|---|---|---|
+|:----:|:--------:|--------------------------------------------|
 | 15   | OVRUN    | Serial port receiver overrun               |
 | 14   | RBF      | Serial port receive buffer full (mirror)   |
 | 13   | TBE      | Serial port transmit buffer empty (mirror) |

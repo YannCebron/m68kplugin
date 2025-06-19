@@ -106,14 +106,16 @@ public class M68kAmigaHardwareRegisterDocumentationGeneratorTest extends TestCas
     boolean bitTableMode = false;
     int tableCounter = 0;
     for (String line : lines) {
-      if (line.startsWith("+--")) {
+      if (line.startsWith("+--") || line.startsWith("+:-")) {
         tableCounter++;
         if (tableCounter == 1) {
           copy.append("\n");
           continue;
         } else if (tableCounter == 2) {
-          final int columns = StringUtil.countChars(line, '+');
-          copy.append("|---|").append(StringUtil.repeat("---|", columns - 2));
+          for (String column : StringUtil.split(line, "+")) {
+            copy.append("|").append(StringUtil.replace(column, "+", ""));
+          }
+          copy.append("|");
           copy.append("\n");
           continue;
         } else {

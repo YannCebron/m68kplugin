@@ -1,5 +1,5 @@
 | BITS  | USE         | DESCRIPTION                               |
-|---|---|---|
+|:-----:|:-----------:|-------------------------------------------|
 | 15    | SET/CLEAR   | Set/clear control bit. Determines if bits |
 |       |             | written with a 1 get set or cleared. Bits |
 |       |             | written with a zero are always unchanged. |
