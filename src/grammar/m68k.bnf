@@ -1692,11 +1692,7 @@ private plain_paren_expression ::= L_PAREN expression R_PAREN
 {
   pin = 1
 }
-private bracket_paren_expression ::= L_BRACKET expression R_BRACKET
-{
-  pin = 1
-}
-paren_expression ::= plain_paren_expression | bracket_paren_expression
+paren_expression ::= plain_paren_expression
 
 label_ref_expression ::= ID
 {

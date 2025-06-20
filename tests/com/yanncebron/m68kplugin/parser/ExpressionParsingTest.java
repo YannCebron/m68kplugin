@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -117,20 +117,8 @@ public class ExpressionParsingTest extends M68kParsingTestCase {
     doCodeTest(" dc (1)");
   }
 
-  public void testParenWithBracketsExpression() throws Exception {
-    doCodeTest(" dc [1]");
-  }
-
   public void testParenExpressionMissingExpression() throws Exception {
     doCodeTest(" dc (");
-  }
-
-  public void testParenWithBracketsExpressionMissingExpression() throws Exception {
-    doCodeTest(" dc [");
-  }
-
-  public void testParenWithBracketsExpressionMissingRightBracket() throws Exception {
-    doCodeTest(" dc [1");
   }
 
   public void testParenExpressionMissingRightParen() throws Exception {

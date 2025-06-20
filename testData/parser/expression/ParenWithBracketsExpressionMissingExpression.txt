@@ -1,9 +1,0 @@
-M68k.FILE
-  PsiWhiteSpace(' ')
-  M68kDcDirectiveImpl(DC_DIRECTIVE)
-    PsiElement(dc)('dc')
-    PsiWhiteSpace(' ')
-    M68kParenExpressionImpl(PAREN_EXPRESSION)
-      PsiElement([)('[')
-      PsiErrorElement:<expression> expected
-        <empty list>

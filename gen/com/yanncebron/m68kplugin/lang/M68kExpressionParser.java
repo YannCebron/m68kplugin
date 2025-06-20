@@ -26,21 +26,6 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 public class M68kExpressionParser {
 
   /* ********************************************************** */
-  // L_BRACKET expression R_BRACKET
-  static boolean bracket_paren_expression(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bracket_paren_expression")) return false;
-    if (!nextTokenIsFast(b, L_BRACKET)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
-    r = consumeTokenFast(b, L_BRACKET);
-    p = r; // pin = 1
-    r = r && report_error_(b, expression(b, l + 1, -1));
-    r = p && consumeToken(b, R_BRACKET) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
-  }
-
-  /* ********************************************************** */
   // L_PAREN expression R_PAREN
   static boolean plain_paren_expression(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "plain_paren_expression")) return false;
@@ -313,15 +298,14 @@ public class M68kExpressionParser {
     return r;
   }
 
-  // plain_paren_expression | bracket_paren_expression
+  // plain_paren_expression
   public static boolean paren_expression(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "paren_expression")) return false;
-    if (!nextTokenIsFast(b, L_BRACKET, L_PAREN)) return false;
+    if (!nextTokenIsFast(b, L_PAREN)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, PAREN_EXPRESSION, "<paren expression>");
+    Marker m = enter_section_(b);
     r = plain_paren_expression(b, l + 1);
-    if (!r) r = bracket_paren_expression(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, m, PAREN_EXPRESSION, r);
     return r;
   }
 

@@ -27,10 +27,6 @@ public class M68kBraceMatcherTest extends BasePlatformTestCase {
     doTest(" dc.l <caret>(42)", false);
   }
 
-  public void testBrackets() {
-    doTest(" dc.l <caret>[42]", false);
-  }
-
   public void testMacroEndm() {
     doTest("macroName <caret>macro\n" +
       " endm");
