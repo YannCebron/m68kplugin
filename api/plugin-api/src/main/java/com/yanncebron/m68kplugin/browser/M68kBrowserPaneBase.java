@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -253,7 +253,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
   private JComponent createList() {
     list.setBorder(JBUI.Borders.empty());
     list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-    list.setFixedCellHeight(JBUIScale.scale(UIUtil.LIST_FIXED_CELL_HEIGHT));
+    list.setFixedCellHeight(JBUI.CurrentTheme.List.rowHeight());
     list.setFixedCellWidth(list.getWidth());
 
     list.setCellRenderer(getListCellRenderer());
