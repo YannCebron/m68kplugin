@@ -34,7 +34,7 @@ final class M68kBrowserToolWindowFactory implements ToolWindowFactory, DumbAware
 
   private static final ExtensionPointName<M68kBrowserPaneEP> BROWSER_PANE_EP = ExtensionPointName.create("com.yanncebron.m68kplugin.browserPane");
 
-  private static final Key<String> PANE_FQN_KEY = Key.create("M68kBrowserToolWindowFactory.activePaneFQN");
+  private static final Key<String> PANE_FQN_KEY = Key.create("M68kBrowserToolWindowFactory.pane.fqn");
 
   @NonNls
   private static final String ACTIVE_PANE = "M68kBrowserToolWindowFactory.activePane";
