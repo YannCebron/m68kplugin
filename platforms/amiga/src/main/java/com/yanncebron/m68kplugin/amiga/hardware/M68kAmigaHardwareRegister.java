@@ -16,8 +16,11 @@
 
 package com.yanncebron.m68kplugin.amiga.hardware;
 
+import com.intellij.icons.AllIcons;
+import com.intellij.ui.LayeredIcon;
 import org.jetbrains.annotations.NonNls;
 
+import javax.swing.*;
 import java.util.EnumSet;
 import java.util.Set;
 
@@ -259,8 +262,7 @@ public enum M68kAmigaHardwareRegister {
   SPRHPTL("SPRHPTL", "DFF1EA", "UHRES sprite pointer (low 15 bits)", "SPRHPTH", Chipset.ECS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
   BPLHPTH("BPLHPTH", "DFF1EC", "VRam (UHRES) bitplane pointer (hi 5 bits)", "BPLHPTH", Chipset.ECS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
   BPLHPTL("BPLHPTL", "DFF1EE", "VRam (UHRES) bitplane pointer (lo 15 bits)", "BPLHPTH", Chipset.ECS, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE)),
-  FMODE("FMODE", "DFF1FC", "Fetch mode register", "FMODE", Chipset.AGA, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE, Chip.DENISE_LISA))
-  ;
+  FMODE("FMODE", "DFF1FC", "Fetch mode register", "FMODE", Chipset.AGA, false, Access.WRITE, EnumSet.of(Chip.AGNUS_ALICE, Chip.DENISE_LISA));
 
   private final String name;
   private final String address;
@@ -270,6 +272,8 @@ public enum M68kAmigaHardwareRegister {
   private final boolean copperDanger;
   private final Access access;
   private final Set<Chip> chips;
+
+  private final Icon icon;
 
   M68kAmigaHardwareRegister(String name,
                             String address,
@@ -287,6 +291,15 @@ public enum M68kAmigaHardwareRegister {
     this.copperDanger = copperDanger;
     this.access = access;
     this.chips = chips;
+
+    Icon icon = switch (access) {
+      case WRITE -> AllIcons.Nodes.WriteAccess;
+      case READ -> AllIcons.Nodes.ReadAccess;
+      case EARLY_READ -> AllIcons.General.ReaderMode;
+      case STROBE -> AllIcons.Actions.Lightning;
+    };
+
+    this.icon = copperDanger ? LayeredIcon.layeredIcon(new Icon[]{icon, AllIcons.Nodes.ErrorMark}) : icon;
   }
 
   @NonNls
@@ -322,6 +335,10 @@ public enum M68kAmigaHardwareRegister {
 
   public Set<Chip> getChips() {
     return chips;
+  }
+
+  public Icon getIcon() {
+    return icon;
   }
 
   public enum Chipset {

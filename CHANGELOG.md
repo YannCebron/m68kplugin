@@ -6,7 +6,9 @@
 - raise minimum IDE version to 2024.1 (from 2021.2)
 - mark plugin compatible with 2025.1
 - enable most code insight features when IDE is indexing
-- M68k Browser "Amiga Hardware" tab: improve layout for tables
+- M68k Browser "Amiga Hardware" tab: 
+  - improve layout for tables
+  - icons for _Access_ and _Copper Danger_
 
 ### Fixed
 - missing documentation for `dcb` directive ([Issue](https://github.com/prb28/m68k-instructions-documentation/pull/27))

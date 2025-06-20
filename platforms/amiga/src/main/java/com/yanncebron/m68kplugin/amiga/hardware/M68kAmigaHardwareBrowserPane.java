@@ -92,16 +92,9 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
     List<M68kAmigaHardwareRegister> items = new ArrayList<>();
     for (M68kAmigaHardwareRegister register : M68kAmigaHardwareRegister.values()) {
       M68kAmigaHardwareRegister.Chipset chipset = register.getChipset();
-      if (chipsetSetting == M68kAmigaHardwareRegister.Chipset.OCS &&
-        chipset != M68kAmigaHardwareRegister.Chipset.OCS) {
-        continue;
+      if (chipset.ordinal() <= chipsetSetting.ordinal()) {
+        items.add(register);
       }
-      if (chipsetSetting == M68kAmigaHardwareRegister.Chipset.ECS &&
-        chipset == M68kAmigaHardwareRegister.Chipset.AGA) {
-        continue;
-      }
-
-      items.add(register);
     }
 
     items.sort(Comparator.comparing(M68kAmigaHardwareRegister::getName, NaturalComparator.INSTANCE));
@@ -138,7 +131,7 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
       "<b>" + selectedValue.getDescription() + "</b>" +
       "<br>" +
       "<h2><code>$" + selectedValue.getAddress() + " ($0" + selectedValue.getAddress().substring(3) + ")" + "</code></h2>" +
-      "<table style=\"width: 100%;\">" +
+      "<table style=\"width: 50%;\">" +
       "<tr><th style=\"text-align:center;\">Chip Set</th><th style=\"text-align:center;\">Access</th><th style=\"text-align:center;\">Copper Danger</th><th style=\"text-align:center;\">Chips</th></tr>" +
       "<tr>" +
       "<td style=\"text-align:center;\">" + selectedValue.getChipset().getDisplayName() + "</td>" +
@@ -163,6 +156,8 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
     return new ColoredListCellRenderer<>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends M68kAmigaHardwareRegister> list, M68kAmigaHardwareRegister value, int index, boolean selected, boolean hasFocus) {
+        setIcon(value.getIcon());
+
         append(getListItemNamer().convert(value));
 
         if (isAnnotateChipset.get()) {
