@@ -23,7 +23,7 @@ To insert these for given highlighting, use <kbd>Alt+Enter</kbd> quick fix menu:
   
 ## Inspections
 
-Inspection settings and descriptions can be accessed under *M68k assembler* group in *Settings \| Editor \| Inspections*.
+Inspection settings and descriptions can be accessed under the *M68k assembler* group in *Settings \| Editor \| Inspections*.
 
 ### Unresolved label reference
 

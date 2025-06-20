@@ -17,4 +17,4 @@ in [IntelliJ](https://plugins.jetbrains.com/docs/intellij/intellij-platform.html
 
 ---
 
-Please visit the [Project Homepage on GitHub](https://github.com/YannCebron/m68kplugin) for Credits, License and Code of Conduct.
+Visit the [Project Homepage on GitHub](https://github.com/YannCebron/m68kplugin) for Credits, License and Code of Conduct.

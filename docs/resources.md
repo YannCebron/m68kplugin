@@ -11,7 +11,6 @@ title: Resources
 ## IntelliJ Platform Tooling
 
 - [MC68000 Assembly Language Plugin](https://github.com/chrisly42/mc68000-asm-plugin)
-- [SRecord](https://github.com/DerDan/SRecord) (unreleased?)
 
 ## Other Tooling
 

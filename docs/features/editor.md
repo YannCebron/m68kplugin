@@ -28,7 +28,7 @@ Detailed on-the-fly semantic error highlighting for all instructions and directi
 
 For `macro`/`endm` and `section` via *Show method separators* option in *Settings \| Editor \| General \| Appearance*
  
-### Highlight matching brace and directives
+### Highlight matching braces and directives
 
 ![Matching directive](../assets/editor/matching_directive.png)
                             
@@ -42,7 +42,7 @@ _Hover_: enable _Show quick documentation on hover_ in *Settings \| Editor \| Co
 
 ### Mnemonics
 
-_View \| View Quick Documentation_ Show mnemonic documentation (or on mouse hover), current variant is underlined
+_View \| View Quick Documentation_ Show mnemonic documentation (or on mouse hover), the current variant is underlined
 
 ![Mnemonic documentation](../assets/editor/hover_doc.png)
 
@@ -76,7 +76,7 @@ _View \| View Quick Documentation_ Show directive reference documentation
                 
 ### Completion
 
-Smart completion for labels, e.g., ranking current local labels and labels from the current file higher in completion popup.
+Smart completion for labels, e.g., ranking current local labels and labels from the current file higher in the completion popup.
  
 ### Builtin Symbols 
 
@@ -86,7 +86,7 @@ Completion and <kbd>Ctrl+Click</kbd> hover information
 
 ### Quick Definition 
 
-*View \| Quick Definition* to inspect label at caret in popup without leaving the current editor
+*View \| Quick Definition* to inspect label at caret in a popup without leaving the current editor
 
 ![Quick definition](../assets/editor/quick_definition.png)
 

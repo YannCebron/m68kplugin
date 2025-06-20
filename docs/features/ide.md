@@ -10,7 +10,7 @@ nav_order: 3
 
 ### Structure
 
-*Structure View* tool window and *Navigate \| File Structure* popup for current file
+*Structure View* tool window and *Navigate \| File Structure* popup for the current file
 
 ![Structure tool window](../assets/ide/structure_toolwindow.png)
 
@@ -24,7 +24,7 @@ nav_order: 3
 
 Provides access to all reference documentation.
 
-> 💡To search for entries, simply start typing while focus is on the element list on the left.
+> 💡To search for entries, start typing while the focus is on the element list on the left.
 
 ### Mnemonics
 
@@ -42,14 +42,14 @@ Browse all supported directives with reference documentation
 
 Browse all hardware registers with additional reference documentation.
 
-Register list can be filtered by OCS, ECS, and AGA chip set.
-Use _i_ toggle button to show Chip Set information in the list.
+Register list can be filtered by _OCS_, _ECS_, and _AGA_ chip set.
+Use the _i_ toggle button to show Chip Set information in the list.
 
 ![Amiga hardware register documentation](../assets/ide/amiga_hardware_doc.png)
 
 ## External Tools
 
-Navigate to _file:lineNumber_ location or label(s) from the vasm console message
+Navigate to _file:lineNumber_ location or label(s) from vasm console messages
                      
 ![vasm navigation](../assets/ide/vasm_navigation.png)
 
@@ -59,5 +59,5 @@ Completion of label names in _Commit Message_
 
 ## Other
 
-Register `FILE_ID.DIZ`, `startup-sequence`, and `*.NFO` files as plain text
+Register `FILE_ID.DIZ`, `startup-sequence`, and `*.NFO` files as plain text files
 

@@ -33,7 +33,7 @@
 - macro call: parameter count mismatch
 - macro block:
   - highlight usages of parameter at caret
-  - usage of parameters outside of macro block
+  - usage of parameters outside of a macro block
   - non-sequential parameter `\n` numbering
   - highlight parameters in labels `jsr _LVO\1(a6)`
 
@@ -45,7 +45,7 @@
 - method separators:
   - "detected" subroutines
 - highlight returns
-- highlight/navigate control structures `CodeBlockSupportHandler`:
+- highlight/navigate control structures:
   - loop ranges
 - unreachable code `ControlFlowProvider`
 
@@ -54,7 +54,7 @@
 ### Labels
 
 - local label: in-place rename
-- safe delete (quickfix via `M68kUnusedLabelInspection`)
+- safe delete
 - rename:
   - `RenameInputValidatorEx`
   - `NameSuggestionProvider` ?
@@ -64,12 +64,12 @@
 
 ### Register
 
-- shift up/down through available ones
+- shift up/down through available ones (https://register-blaster.grahambates.com/)
 - change/cycle through address mode by typing/intention/...?
 
 ### Extract/Duplicates
 
-- `refactoring.extractIncludeHandler`
+- extract an include file from selection
 - duplicates detection:
   - textual duplicate -> wrap in `rept`/`endr`
   - "extract macro"
@@ -108,7 +108,7 @@
 - register list:
   - sort
   - optimize notation: `d0/d1/d2` &rarr; `d0-d2`
-- string literal not terminated with `,0`
+- string literal is not terminated with `,0`
 - check optimizations from vasm/DevPac [19.6 vasm Docs](http://sun.hasenbraten.de/vasm/release/vasm_19.html)
 
 ### Labels
@@ -122,7 +122,7 @@
 - type check
 - range check
 - **WIP** simplify, unnecessary parentheses
-- intention: convert numeric literal to other bases
+- intention: convert numeric literal to other bases (`AbstractNumberConversionIntention`)
 
 ## Navigation
 
@@ -132,9 +132,9 @@
   - `section`
   - macro: # of parameters
 
-### Include
+### Includes
 
-- goto related: `.i`/binary file -> including files
+- goto related: from `.i`/binary file -> including files
 - gutter icon: `include` all included files (recursively)
 - graph visualization
 - highlight cycles
@@ -151,7 +151,7 @@
 
 - copper list:
   - color-picker/inlays
-  - register name inlay
+  - register name completion/inlay
   - http://deadliners.net/gradientmaster/
 - support IFF images in IDE [https://github.com/haraldk/TwelveMonkeys](https://github.com/haraldk/TwelveMonkeys)
 - FS-UAE [configuration files](https://fs-uae.net/configuration-files)                         

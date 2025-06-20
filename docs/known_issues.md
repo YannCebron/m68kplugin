@@ -12,7 +12,7 @@ title: Known Issues
 
 - `include` directives:
   - not evaluated, symbols are resolved across all files
-  - navigation to symbol declared multiple times (possibly in multiple files) will show popup chooser
+  - navigation to a symbol declared multiple times (possibly in multiple files) will show a popup chooser
   - all included files must be located inside the project (or added as separate content root)
 - conditional assembly directives are not evaluated
 - macro block:
@@ -32,7 +32,7 @@ Currently, only 68000/68010 architecture is supported.
 Non-supported instructions/registers will yield false positive errors
 > _"Cannot resolve macro '$MNEMONIC$ \| $REGISTER$'"_
 
-Using a non-supported address mode will result in syntax error or
+Using a non-supported address mode will result in a syntax error or
 > _"<$ADDRESS_MODE$> expected, got $TEXT$"_
 
 ### Directives
@@ -128,5 +128,5 @@ MadMac assembler specific (a dot may optionally precede all directives):
 - string literals:
   - support escape sequences
   - `'\'` and `''''` are valid
-- add option: allow whitespaces
+- add option to allow whitespaces in instruction arguments ([Issue](https://github.com/YannCebron/m68kplugin/issues/47))
 - support `equr`/`reg` replacement names: `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`

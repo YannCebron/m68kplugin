@@ -21,7 +21,7 @@ This guide uses the following notations to distinguish certain items:
 
 Latest GA release: Open [Plugin Homepage](https://plugins.jetbrains.com/plugin/17712-motorola-68000-series-assembler/) and click *Install to...* button on upper right.
 
-See [Changelog](https://github.com/YannCebron/m68kplugin/blob/main/CHANGELOG.md) for full changelog.
+See [Changelog](https://github.com/YannCebron/m68kplugin/blob/main/CHANGELOG.md) for the full changelog.
 
 Snapshot build artifacts (`m68kplugin-x.y.z.zip`) for [manual installation](https://www.jetbrains.com/help/idea/plugins-settings.html) are available via [GitHub CI](https://github.com/YannCebron/m68kplugin/actions/workflows/build.yml).              
 
