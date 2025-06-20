@@ -1,13 +1,13 @@
 There are 32 of these registers (xx=00-31) and together with the banking
 bits they address the 256 locations in the color palette. There are
 actually two sets of color regs, selection of which is controlled by
-the LOCT reg bit. When LOCT=0 the 4 MSB of red, green and blue
+the LOCT reg bit. When LOCT=0 the 4 MSB of red, green, and blue
 video data are selected along with the T bit for genlocks the low
 order set of registers is also selected as well, so that the 4 bits-
 values are automatically extended to 8 bits. This provides
 compatibility with old software. If the full range of palette values
 are desired, then LOCT can be set high and independent values for
-the 4 LSB of red, green and blue can be written. The low order
+the 4 LSB of red, green, and blue can be written. The low order
 color registers do not contain a transparency (T) bit.
 
 The table below shows the color register bit usage.
