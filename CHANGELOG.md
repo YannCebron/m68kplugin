@@ -5,7 +5,8 @@
 ### Changed
 - raise minimum IDE version to 2024.1 (from 2021.2)
 - mark plugin compatible with 2025.1
-- enable most code insight features when IDE is indexing
+- enable most code insight features when the IDE is indexing
+- M68k Browser: restore the selected item when re-opening a project
 - M68k Browser "Amiga Hardware" tab: 
   - improve layout for tables
   - icons for _Access_ and _Copper Danger_

@@ -107,6 +107,13 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
     setToolbar(toolbarPanel);
 
     initList();
+
+    int selectedValueIdx = PropertiesComponent.getInstance().getInt(getSelectedIdxKey(), -1);
+    list.setSelectedIndex(selectedValueIdx);
+  }
+
+  private @NotNull String getSelectedIdxKey() {
+    return getClass().getSimpleName() + ".selected.index";
   }
 
   @Nullable
@@ -260,6 +267,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
     list.addListSelectionListener(e -> {
       if (e.getValueIsAdjusting()) return;
 
+      PropertiesComponent.getInstance().setValue(getSelectedIdxKey(), list.getSelectedIndex(), -1);
       updateDoc();
     });
     ScrollingUtil.installActions(list);
