@@ -26,6 +26,7 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
 
 public class M68kSectionDirectiveImpl extends ASTWrapperPsiElement implements M68kSectionDirective {
 

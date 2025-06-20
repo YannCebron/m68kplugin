@@ -1246,9 +1246,12 @@ cnop_directive ::= CNOP expression COMMA expression
 
 end_directive ::= END
 
-section_directive ::= SECTION (ID | STRING) (COMMA ID)? (COMMA ID)?
+section_directive ::= SECTION (ID | STRING) (COMMA ID)? (COMMA (ID | number_expression) )?
 {
   pin = 1
+  methods = [
+    number_expression = ""
+  ]
 }
 text_directive ::= TEXT
 cseg_directive ::= CSEG

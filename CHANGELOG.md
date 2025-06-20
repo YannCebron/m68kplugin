@@ -17,6 +17,7 @@
 - M68k Browser "Amiga Hardware" tab:
   - `BLTDPTH` (typo `BPTDPTH`)
   - _Access_ flag: correct "Early Read" (`BLTDDAT`, `DSKDATR`)
+- `section` directive: allow number value for <mem_type> parameter
 
 ## 0.1.73 - 2023-07-25
 

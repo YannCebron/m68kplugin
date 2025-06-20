@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -246,7 +246,7 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
   }
 
   public void testSectionDirective() throws Exception {
-    doCodeTest(" section tos,code,chip");
+    doCodeTest(" section tos,code,1");
   }
 
   public void testSectionDirectiveString() throws Exception {

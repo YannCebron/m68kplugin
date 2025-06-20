@@ -7,4 +7,5 @@ M68k.FILE
     PsiElement(,)(',')
     PsiElement(id)('code')
     PsiElement(,)(',')
-    PsiElement(id)('chip')
+    M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+      PsiElement(dec_number)('1')
