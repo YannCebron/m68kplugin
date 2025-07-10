@@ -1,6 +1,6 @@
 | BIT# | [BPLCON0](BPLCON0.md) | DESCRIPTION                                             |
 |:----:|:-------:|---------------------------------------------------------|
-| 15   | HIRES   | HIRES = High resolution (640*200/640*400 interlace) mode|
+| 15   | HIRES   | HIRES = High resolution (640x200/640x400 interlace) mode|
 |      |         |                                                         |
 | 14   | BPU2    | Bit plane use code 0000-1000 (NODE thru 8 inclusive)    |
 | 13   | BPU1    |                                                         |

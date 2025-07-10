@@ -36,20 +36,28 @@ reached)
 | 00   | 0   | RD00 | 1   | 0   | 1   | 1   |
 
 
-IR1 = First instruction register
-IR2 = Second instruction register
+### IR1
+First instruction register
+### IR2
+Second instruction register
 
-DA = Destination address for MOVE instruction. Fetched during
+### DA
+Destination address for MOVE instruction. Fetched during
 IR1 time, used during IR2 time on RGA bus.
 
-RD = RAM Data moved by MOVE instruction at IR2 time
+### RD
+RAM Data moved by MOVE instruction at IR2 time
 directly from RAM to the address given by the DA field.
 
-VP = Vertical beam position comparison bit.
-HP = Horizontal beam position comparison bit.
+### VP
+Vertical beam position comparison bit.
+### HP
+Horizontal beam position comparison bit.
 
-VE = Enable comparison (mask bit)
-HE = Enable comparison (mask bit)
+### VE
+Enable comparison (mask bit)
+### HE
+Enable comparison (mask bit)
 
   > Note: BFD = Blitter finished disable. When this bit is true, the Blitter
 finished flag will have no effect on the coprocessor. When this

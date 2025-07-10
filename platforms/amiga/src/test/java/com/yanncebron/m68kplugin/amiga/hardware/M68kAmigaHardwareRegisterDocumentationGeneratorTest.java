@@ -27,6 +27,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Generates hardware documentation in Markdown format from {@code aga_guide.txt}.
@@ -35,8 +36,8 @@ public class M68kAmigaHardwareRegisterDocumentationGeneratorTest extends TestCas
 
   private static final boolean ENABLED = false;
 
-  // format bit name enumerations -> def list?
-  // "VARBEAMEN = Enables ....."
+  // 'NAME = Description' / 'NAME, NAME2 = Description'
+  private static final Pattern BIT_DESCRIPTION = Pattern.compile("\\A\\p{Upper}\\d*+[\\s,\\p{Upper}\\d*]*\\s+=\\s+.+");
 
   private static final String OUTPUT_DIR = "/Users/yann/idea-ultimate/m68kplugin/platforms/amiga/src/main/resources/docs/amigaHardwareRegister/";
 
@@ -146,7 +147,15 @@ public class M68kAmigaHardwareRegisterDocumentationGeneratorTest extends TestCas
 
       line = line.replace("(unused)", "_(unused)_");
 
-      copy.append(line);
+      if (BIT_DESCRIPTION.matcher(line).matches()) {
+        int idx = line.indexOf('=');
+        copy.append("### ").append(line.substring(0, idx).trim());
+        copy.append("\n");
+        copy.append(line.substring(idx + 1).trim());
+      } else {
+        copy.append(line);
+      }
+
       copy.append("\n");
     }
 

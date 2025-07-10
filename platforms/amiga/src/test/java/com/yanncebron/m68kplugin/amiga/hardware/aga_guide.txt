@@ -788,8 +788,7 @@ CSCBEN  = The variable composite sync comes out on the HSY pin, and the
 VARVSYEN = Comparator VSY -> VSY pin. The variable VSY is set vertically on
           @{"VSSTRT" link HSSTRT}, reset vertically on @{"VSSTOP" link VSSTOP}, with the horizontal position
           for set set & reset @{"HSSTRT" link HSSTRT} on short fields (all fields are short
-          if LACE = 0) and @{"HCENTER" link HCENTER} on long fields (every other field if
-          LACE = 1).
+          if LACE = 0) and @{"HCENTER" link HCENTER} on long fields (every other field if LACE = 1).
 
 VARHSYEN = Comparator HSY -> HSY pin. Set on HSSTRT value, reset on @{"HSSTOP" link HSSTOP}
           value.
@@ -804,7 +803,7 @@ DUAL    = Run the horizontal comparators with the alternate horizontal beam
           this counter rather than the normal one. This allows the UHRES
           pointers to come out more than once in a horizontal line,
           assuming there is some memory bandwidth left (it doesn't work in
-          640*400*4 interlace mode). Also, to keep the two displays synced,
+          640x400x4 interlace mode). Also, to keep the two displays synced,
           the horizontal line lengths should be multiples of each other.
           If you are amazingly clever, you might not need to do this.
 
@@ -1181,7 +1180,7 @@ BPLCON0 p  100  W    D    Bit plane control reg. (misc, control bits)
  +------+---------+---------------------------------------------------------+
  | BIT# | BPLCON0 | DESCRIPTION                                             |
  +:----:+:-------:+---------------------------------------------------------+
- | 15   | HIRES   | HIRES = High resolution (640*200/640*400 interlace) mode|
+ | 15   | HIRES   | HIRES = High resolution (640x200/640x400 interlace) mode|
  |      |         |                                                         |
  | 14   | BPU2    | Bit plane use code 0000-1000 (NODE thru 8 inclusive)    |
  | 13   | BPU1    |                                                         |
@@ -1494,7 +1493,11 @@ COLORxx  180-1BE  W       COLOR table xx
          | LOCT=1 | X  | X  | X  | X  | | R3 | R2 | R1 | R0 | | G3 | G2 | G1 | G0 | | B3 | B2 | B1 | B0 |
          +--------+-------------+-------------+-------------+-------------+
 
-         T = TRANSPARENCY, R = RED, G = GREEN, B = BLUE, X = UNUSED
+         T = Transparency
+         R = Red
+         G = Green
+         B = Blue
+         X = Unused
 
          T bit of COLOR00 thru COLOR31 sets ZD_pin HI, when that color is
          selected in all video modes.
@@ -2425,7 +2428,7 @@ VPOSW    02A   W    A   Write most sig. bits (and frame flop)
 
          LOF = Long frame (auto toggle control bit in @{"BPLCON0" link BPLCON0})
 
-         I0-I6 Chip identification:
+         I0, I1, I2, I3, I4, I5, I6 = Chip identification
 
          +-------------------------------------------+-----------------+
          | Chip                                      | Value           |

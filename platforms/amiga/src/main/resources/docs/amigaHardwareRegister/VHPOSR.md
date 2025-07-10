@@ -2,4 +2,5 @@
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | USE | V7 | V6 | V5 | V4 | V3 | V2 | V1 | V0 | H8 | H7 | H6 | H5 | H4 | H3 | H2 | H1 |
 
-RESOLUTION = 1/160 of SCREEN WIDTH (280 nS)
+### RESOLUTION
+1/160 of SCREEN WIDTH (280 nS)

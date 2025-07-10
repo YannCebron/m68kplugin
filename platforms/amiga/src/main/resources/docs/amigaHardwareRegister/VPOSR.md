@@ -2,9 +2,11 @@
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | USE | LOF | I6 | I5 | I4 | I3 | I2 | I1 | I0 | LOL | -- | -- | -- | -- | V10 | V9 | V8 |
 
-LOF = Long frame (auto toggle control bit in [BPLCON0](BPLCON0.md))
+### LOF
+Long frame (auto toggle control bit in [BPLCON0](BPLCON0.md))
 
-I0-I6 Chip identification:
+### I0, I1, I2, I3, I4, I5, I6
+Chip identification
 
 
 | Chip                                      | Value           |
@@ -17,5 +19,6 @@ I0-I6 Chip identification:
 | 8374 (Alice) rev 3 thru rev 4             | 23 PAL, 33 NTSC |
 
 
-LOL = Long line bit. When low, it indicates short raster line.
+### LOL
+Long line bit. When low, it indicates short raster line.
 v9,10 -- hires chips only (20,30 identifiers)

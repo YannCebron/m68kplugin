@@ -19,7 +19,16 @@ The table below shows the color register bit usage.
 | LOCT=1 | X  | X  | X  | X  | | R3 | R2 | R1 | R0 | | G3 | G2 | G1 | G0 | | B3 | B2 | B1 | B0 |
 
 
-T = TRANSPARENCY, R = RED, G = GREEN, B = BLUE, X = UNUSED
+### T
+Transparency
+### R
+Red
+### G
+Green
+### B
+Blue
+### X
+Unused
 
 T bit of [COLOR00](COLORx.md) thru [COLOR31](COLORx.md) sets ZD_pin HI, when that color is
 selected in all video modes.
