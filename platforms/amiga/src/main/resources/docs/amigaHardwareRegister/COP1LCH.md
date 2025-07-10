@@ -1,1 +1,1 @@
-These regs contain the jump addresses described in [COPINS](COPINS.md).
+These registers contain the jump addresses described in [COPINS](COPINS.md).

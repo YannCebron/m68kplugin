@@ -1024,7 +1024,7 @@ BLTSIZV  h 05C  W    A    Blitter V size (15 bit height)
          BIT# 15  14  13  12  11  10  09  08  07  06  05  04  03  02  01  00
          USE  x  h14  h13  h12  h11  h10  h9  h8  h7  h6  h5  h4  h3  h2  h1  h0
 
-         These are the Blitter size regs for blits larger than the earlier
+         These are the Blitter size registers for blits larger than the earlier
          chips could accept. The original commands are retained for
          compatibility. BLTSIZV should be written first, followed by @{"BLTSIZH" link BLTSIZH},
          which starts the Blitter. BLTSIZV need not be rewritten for
@@ -1141,7 +1141,7 @@ NAME   rev ADDR type chip Description
 ---------------------------------------------------------------------------
 BPLxDAT   110  W    A           Bit plane x data (parallel to serial convert)
 
-         These regs receive the DMA data fetched from RAM by the
+         These registers receive the DMA data fetched from RAM by the
          bit plane address pointers described above.
          They may also be rewritten by either micro.
          They act as a 8 word parallel to serial buffer for up
@@ -1475,7 +1475,7 @@ COLORxx  180-1BE  W       COLOR table xx
 
          There are 32 of these registers (xx=00-31) and together with the banking
          bits they address the 256 locations in the color palette. There are
-         actually two sets of color regs, selection of which is controlled by
+         actually two sets of color registers, selection of which is controlled by
          the LOCT reg bit. When LOCT=0 the 4 MSB of red, green, and blue
          video data are selected along with the T bit for genlocks the low
          order set of registers is also selected as well, so that the 4 bits-
@@ -1535,7 +1535,7 @@ COPJMP2   08A  S    A     Coprocessor restart at second location
 
          These addresses are strobe addresses, that when written to cause the
          coprocessor to jump indirect using the address contained in the
-         first or second location regs described below. The coprocessor itself
+         first or second location registers described below. The coprocessor itself
          can write to these addresses, causing its own jump indirectly.
 @endnode
 
@@ -1551,7 +1551,7 @@ COP2LCH h 084  W    A         A Coprocessor second location reg
 COP2LCL   086  W    A         A Coprocessor second location reg
                                 (low 15 bits)
 
-         These regs contain the jump addresses described in @{"COPINS" link COPINS}.
+         These registers contain the jump addresses described in @{"COPINS" link COPINS}.
 @endnode
 
 @node COPINS COPINS

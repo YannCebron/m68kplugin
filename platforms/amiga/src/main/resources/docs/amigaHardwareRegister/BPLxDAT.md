@@ -1,4 +1,4 @@
-These regs receive the DMA data fetched from RAM by the
+These registers receive the DMA data fetched from RAM by the
 bit plane address pointers described above.
 They may also be rewritten by either micro.
 They act as a 8 word parallel to serial buffer for up

@@ -2,7 +2,7 @@
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | USE | x | h14 | h13 | h12 | h11 | h10 | h9 | h8 | h7 | h6 | h5 | h4 | h3 | h2 | h1 | h0 |
 
-These are the Blitter size regs for blits larger than the earlier
+These are the Blitter size registers for blits larger than the earlier
 chips could accept. The original commands are retained for
 compatibility. [BLTSIZV](BLTSIZV.md) should be written first, followed by [BLTSIZH](BLTSIZH.md),
 which starts the Blitter. [BLTSIZV](BLTSIZV.md) need not be rewritten for
