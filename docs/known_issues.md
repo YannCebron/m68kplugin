@@ -126,7 +126,6 @@ MadMac assembler specific (a dot may optionally precede all directives):
 ### Misc
 
 - string literals:
-  - support escape sequences
   - `'\'` and `''''` are valid
 - add option to allow whitespaces in instruction arguments ([Issue](https://github.com/YannCebron/m68kplugin/issues/47))
 - support `equr`/`reg` replacement names: `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`

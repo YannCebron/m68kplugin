@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -88,6 +88,11 @@ public class M68kTextAttributes {
 
   public static final TextAttributesKey STRING =
     createTextAttributesKey("M68K_STRING", DefaultLanguageHighlighterColors.STRING);
+
+  public static final TextAttributesKey VALID_STRING_ESCAPE =
+    createTextAttributesKey("M68K_VALID_STRING_ESCAPE", DefaultLanguageHighlighterColors.VALID_STRING_ESCAPE);
+  public static final TextAttributesKey INVALID_STRING_ESCAPE =
+    createTextAttributesKey("M68K_INVALID_STRING_ESCAPE", DefaultLanguageHighlighterColors.INVALID_STRING_ESCAPE);
 
   public static final TextAttributesKey DEC_NUMBER =
     createTextAttributesKey("M68K_DEC_NUMBER", DefaultLanguageHighlighterColors.NUMBER);

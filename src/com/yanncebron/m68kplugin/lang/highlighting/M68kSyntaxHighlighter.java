@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,13 @@
 
 package com.yanncebron.m68kplugin.lang.highlighting;
 
+import com.intellij.lexer.LayeredLexer;
 import com.intellij.lexer.Lexer;
+import com.intellij.lexer.StringLiteralLexer;
 import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
+import com.intellij.psi.StringEscapesTokenTypes;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
@@ -49,6 +52,8 @@ public class M68kSyntaxHighlighter extends SyntaxHighlighterBase {
 
     keys.put(M68kTokenTypes.COMMENT, M68kTextAttributes.COMMENT);
     keys.put(M68kTokenTypes.STRING, M68kTextAttributes.STRING);
+    keys.put(StringEscapesTokenTypes.VALID_STRING_ESCAPE_TOKEN, M68kTextAttributes.VALID_STRING_ESCAPE);
+    keys.put(StringEscapesTokenTypes.INVALID_CHARACTER_ESCAPE_TOKEN, M68kTextAttributes.INVALID_STRING_ESCAPE);
 
     keys.put(M68kTokenTypes.DEC_NUMBER, M68kTextAttributes.DEC_NUMBER);
     keys.put(M68kTokenTypes.HEX_NUMBER, M68kTextAttributes.HEX_NUMBER);
@@ -77,7 +82,7 @@ public class M68kSyntaxHighlighter extends SyntaxHighlighterBase {
   @NotNull
   @Override
   public Lexer getHighlightingLexer() {
-    return new M68kLexer();
+    return new M68kHighlightingLexer();
   }
 
   @NotNull
@@ -86,4 +91,20 @@ public class M68kSyntaxHighlighter extends SyntaxHighlighterBase {
     return pack(keys.get(tokenType));
   }
 
+
+  private static class M68kHighlightingLexer extends LayeredLexer {
+
+    private M68kHighlightingLexer() {
+      super(new M68kLexer());
+
+      registerSelfStoppingLayer(new StringLiteralLexer(StringLiteralLexer.NO_QUOTE_CHAR, M68kTokenTypes.STRING, false, "9", true, false) {
+                                  @Override
+                                  protected boolean shouldAllowSlashZero() {
+                                    return true;
+                                  }
+                                },
+        new IElementType[]{M68kTokenTypes.STRING}, IElementType.EMPTY_ARRAY);
+    }
+
+  }
 }

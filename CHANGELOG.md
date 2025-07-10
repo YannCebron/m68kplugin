@@ -11,6 +11,9 @@
   - improve layout for tables
   - icons for _Access_ and _Copper Danger_
 
+### Added
+- highlight escape sequences in string literals ("`\n`")
+
 ### Fixed
 - missing documentation for `dcb` directive ([Issue](https://github.com/prb28/m68k-instructions-documentation/pull/27))
 - no completion for labels inside parenthesized expressions

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,7 +58,9 @@ final class M68kColorSettingsPage implements ColorSettingsPage, RainbowColorSett
     createDescriptor("color.settings.group.literals", "attribute.descriptor.decimal.number", M68kTextAttributes.DEC_NUMBER),
     createDescriptor("color.settings.group.literals", "attribute.descriptor.hex.number", M68kTextAttributes.HEX_NUMBER),
     createDescriptor("color.settings.group.literals", "attribute.descriptor.oct.number", M68kTextAttributes.OCT_NUMBER),
-    createDescriptor("color.settings.group.literals", "attribute.descriptor.string", M68kTextAttributes.STRING),
+    createDescriptor("color.settings.group.literals.string", "attribute.descriptor.string", M68kTextAttributes.STRING),
+    createDescriptor("color.settings.group.literals.string.escape.sequence", "attribute.descriptor.string.valid.escape", M68kTextAttributes.VALID_STRING_ESCAPE),
+    createDescriptor("color.settings.group.literals.string.escape.sequence", "attribute.descriptor.string.invalid.escape", M68kTextAttributes.INVALID_STRING_ESCAPE),
     createDescriptor("color.settings.group.registers", "attribute.descriptor.address.register", M68kTextAttributes.ADDRESS_REGISTER),
     createDescriptor("color.settings.group.registers", "attribute.descriptor.ccr.register", M68kTextAttributes.CCR_REGISTER),
     createDescriptor("color.settings.group.registers", "attribute.descriptor.data.register", M68kTextAttributes.DATA_REGISTER),
@@ -122,7 +124,7 @@ final class M68kColorSettingsPage implements ColorSettingsPage, RainbowColorSett
       "\n" +
       "<label>DATA</label> equ @42\n" +
       "<label>_LibPtr</label> dc.l <builtinSymbol>*</builtinSymbol>-4\n" +
-      "<label>text</label>    dc.b 'some text',0\n" +
+      "<label>text</label>    dc.b 'some text, valid escape: \\n invalid escape: \\X',0\n" +
       "\n" +
       "* 'Semantic highlighting' is applied to macro call names\n" +
       RainbowHighlighter.generatePaletteExample("\n* ");
