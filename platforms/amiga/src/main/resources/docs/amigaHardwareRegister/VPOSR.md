@@ -13,10 +13,10 @@ Chip identification
 |-------------------------------------------|:---------------:|
 | 8361 (Regular) or 8370 (Fat) (Agnus-NTSC) | 10              |
 | 8367 (PAL) or 8371 (Fat-PAL) (Agnus-PAL)  | 00              |
-| 8372 (Fat-hr) (agnushr),thru rev 4        | 20 PAL, 30 NTSC |
+| 8372 (Fat-hr) (agnushr),through rev 4     | 20 PAL, 30 NTSC |
 | 8372 (Fat-hr) (agnushr),rev 5             | 22 PAL, 31 NTSC |
-| 8374 (Alice) thru rev 2                   | 22 PAL, 32 NTSC |
-| 8374 (Alice) rev 3 thru rev 4             | 23 PAL, 33 NTSC |
+| 8374 (Alice) through rev 2                | 22 PAL, 32 NTSC |
+| 8374 (Alice) rev 3 through rev 4          | 23 PAL, 33 NTSC |
 
 
 ### LOL

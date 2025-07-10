@@ -47,7 +47,7 @@ as they appear.
 32 bit wide data bus supports input of 32-bit wide bitplane data and allows
 doubling of memory bandwidth. Additional doubling of bandwidth can be
 achieved by using FAST page mode Ram. The same bandwidth enhancements are
-available for sprites. Also the maximum number of bitplanes useable in all
+available for sprites. Also the maximum number of bitplanes usable in all
 modes was increased to eight (8).
 
 The color Palette has been expanded to 256 colors deep and 25 bits wide (8
@@ -56,7 +56,7 @@ simultaneous colors in all resolutions. A palette of 16,777,216 colors are
 available in all resolutions.
 
 28Mhz clock input allows for cleaner definition of HIRES and SHRES pixels
-ALICE`S clock genarator is synchronized by means of LISA`s 14MHz and SCLK
+ALICE`S clock generator is synchronized by means of LISA`s 14MHz and SCLK
 outputs, Genlock XCLK and XCLKEN pins have been eliminated (external MUX is
 now required).
 
@@ -105,17 +105,17 @@ Bitplanes
 There are now 8 bitplanes instead of 6. In single playfield modes they can
 address 256 colors instead of 64. As long as the memory architecture can
 support the bandwidth, all 8 bitplanes are available in all 3 resolutions
-In the same vein, 4+4 bitplane dualplayfield is available in all 3
+In the same vein, 4+4 bitplane dual playfield is available in all 3
 resolutions, unless bitplane scan-doubling is enabled, in which case
-both playfields share the same bitplane modulus register. Bits 15 thru 8 of
+both playfields share the same bitplane modulus register. Bits 15 through 8 of
 @{"BPLCON4" link BPLCON4} comprise an 8 bit mask for the 8 bitplane address, XOR`ing the
 individual bits. This allows the copper to exchange color maps with a
 single instruction.
 
 @{"BPLCON1" link BPLCON1} now contains an 8 bit scroll value for each of the playfields.
 Granularity of scroll now extends down to 35nSec.(1 SHRES pixel), and
-scroll can delay playfield thru 32 bus cycles. Bits BPAGEM and BPL32
-in new register @{"FMODE" link FMODE} control size of bitplane data in @{"BPL1DAT" link BPLxDAT} thru @{"BPL8DAT" link BPLxDAT}.
+scroll can delay playfield through 32 bus cycles. Bits BPAGEM and BPL32
+in new register @{"FMODE" link FMODE} control size of bitplane data in @{"BPL1DAT" link BPLxDAT} through @{"BPL8DAT" link BPLxDAT}.
 
 The old 6 bitplane HAM mode, unlike before, works in HIRES and SHRES
 resolutions.
@@ -177,13 +177,13 @@ Playfields screens will probably not display correctly when scan-doubled.
 Sprites
 -------
 
-Bits SPAGEM and SPR32 in @{"FMODE" link FMODE} whether size of sprite load datain
-@{"SPR0DATA(B)" link SPRxDAT} thru @{"SPR7DATA(B)" link SPRxDAT} is 16,32, or 64 bits, analagous to bitplanes.
+Bits SPAGEM and SPR32 in @{"FMODE" link FMODE} whether size of sprite load data in
+@{"SPR0DATA(B)" link SPRxDAT} through @{"SPR7DATA(B)" link SPRxDAT} is 16,32, or 64 bits, analogous to bitplanes.
 @{"BPLCON3" link BPLCON3} contains several bits relating to sprite behavior. SPRES1 and
 SPRES0 control sprite resolution, whether they conform to theECS standard
 or override tp LORES,HIRES,or SHRES. BRDRSPRT, when high,allows sprites to
-be visible in border areas. ESPRM7 thru ESPRM4 allow relocation of the even
-sprite color map. OSPRM7 thru OSPRN4 allow relocation of the odd sprite
+be visible in border areas. ESPRM7 through ESPRM4 allow relocation of the even
+sprite color map. OSPRM7 through OSPRN4 allow relocation of the odd sprite
 color map. In the case of attached sprites OSPRM bits are used.
 
 SSCAN2 bit in @{"FMODE" link FMODE} enables sprite scan-doubling. When enabled, individual
@@ -215,12 +215,12 @@ CLXCON2 is reset by a write to CLXCON, so that old game programs will be
 able to correctly detect collisions.
 
 @{"DIWHIGH" link DIWHIGH} is reset by writes to @{"DIWSTRT" link DIWSTRT} or @{"DIWSTOP" link DIWSTRT}. This is interlock is
-inhertied from ECS Denise.
+inherited from ECS Denise.
 
 Genlock
 -------
 
-Lots of new genlock features were added to ECS DENISE and arecarried over
+Lots of new genlock features were added to ECS DENISE and are carried over
 to LISA. ZDBPEN in @{"BPLCON2" link BPLCON2} allows any bitplane, selected by ZDBPSEL2,1,0,to
 be used as a transparency mask (ZD pin mirrors contents of selected
 bitplane). ZDCTEN disables the old @{"COLOR00" link COLORx} is transparent mode, and allows
@@ -256,7 +256,7 @@ BANK2,1,0 of 8 32 address banks for loading as follows:
 RDRAM bit in @{"BPLCON2" link BPLCON2} causes LISA to interpret all color table accesses as
 reads.
 Note: There is no longer any need to "scramble" SHRES color table entries.
-This artifice is no longer required and pepole who bypass ECS graphics
+This artifice is no longer required and people who bypass ECS graphics
 library calls to do their own 28MHz graphics are to be pointed at and
 publicly humiliated.
 
@@ -316,8 +316,8 @@ PTL,PTH = 20 bit pointer that addresses DMA data. Must be reloaded by a
     processor before use (Vertical blank for bit plane and sprite pointers.
     and prior to starting the blitter for blitter pointers). (old chips -
     18 bits).
-LCL,LCH = 20 bit location (starting address) of DMAdata. Used to
-    automatically restart pointers. such as the Coprocessor program counter
+LCL,LCH = 20 bit location (starting address) of DMA data. Used to
+    automatically restart pointers such as the Coprocessor program counter
     (during vertical blank), and the audio sample counter (whenever the
     audio length count is finished), (Old chips - 18 bits).
 MOD = 15 bit Modulo. A number that is automatically added to the memory
@@ -1182,7 +1182,7 @@ BPLCON0 p  100  W    D    Bit plane control reg. (misc, control bits)
  +:----:+:-------:+---------------------------------------------------------+
  | 15   | HIRES   | HIRES = High resolution (640x200/640x400 interlace) mode|
  |      |         |                                                         |
- | 14   | BPU2    | Bit plane use code 0000-1000 (NODE thru 8 inclusive)    |
+ | 14   | BPU2    | Bit plane use code 0000-1000 (NODE through 8 inclusive) |
  | 13   | BPU1    |                                                         |
  | 12   | BPU0    |                                                         |
  |      |         |                                                         |
@@ -1499,7 +1499,7 @@ COLORxx  180-1BE  W       COLOR table xx
          B = Blue
          X = Unused
 
-         T bit of COLOR00 thru COLOR31 sets ZD_pin HI, when that color is
+         T bit of COLOR00 through COLOR31 sets ZD_pin HI, when that color is
          selected in all video modes.
 @endnode
 
@@ -2435,10 +2435,10 @@ VPOSW    02A   W    A   Write most sig. bits (and frame flop)
          +-------------------------------------------+:---------------:+
          | 8361 (Regular) or 8370 (Fat) (Agnus-NTSC) | 10              |
          | 8367 (PAL) or 8371 (Fat-PAL) (Agnus-PAL)  | 00              |
-         | 8372 (Fat-hr) (agnushr),thru rev 4        | 20 PAL, 30 NTSC |
+         | 8372 (Fat-hr) (agnushr),through rev 4     | 20 PAL, 30 NTSC |
          | 8372 (Fat-hr) (agnushr),rev 5             | 22 PAL, 31 NTSC |
-         | 8374 (Alice) thru rev 2                   | 22 PAL, 32 NTSC |
-         | 8374 (Alice) rev 3 thru rev 4             | 23 PAL, 33 NTSC |
+         | 8374 (Alice) through rev 2                | 22 PAL, 32 NTSC |
+         | 8374 (Alice) rev 3 through rev 4          | 23 PAL, 33 NTSC |
          +-------------------------------------------+-----------------+
 
          LOL = Long line bit. When low, it indicates short raster line.
@@ -2608,7 +2608,7 @@ sprites on a superhires screen.
 
 Sprites are either 16, 32, or 64 bits wide.
 
-Sprites can be attatched in any mode (formerly could not attach sprites
+Sprites can be attached in any mode (formerly could not attach sprites
 in the ECS SHRES 35ns resolution mode).
 
 Can use any bank of 16 colours from the 256 colour palette for the sprite

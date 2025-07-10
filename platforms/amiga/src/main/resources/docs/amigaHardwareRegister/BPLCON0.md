@@ -2,7 +2,7 @@
 |:----:|:-------:|---------------------------------------------------------|
 | 15   | HIRES   | HIRES = High resolution (640x200/640x400 interlace) mode|
 |      |         |                                                         |
-| 14   | BPU2    | Bit plane use code 0000-1000 (NODE thru 8 inclusive)    |
+| 14   | BPU2    | Bit plane use code 0000-1000 (NODE through 8 inclusive) |
 | 13   | BPU1    |                                                         |
 | 12   | BPU0    |                                                         |
 |      |         |                                                         |

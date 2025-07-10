@@ -30,5 +30,5 @@ Blue
 ### X
 Unused
 
-T bit of [COLOR00](COLORx.md) thru [COLOR31](COLORx.md) sets ZD_pin HI, when that color is
+T bit of [COLOR00](COLORx.md) through [COLOR31](COLORx.md) sets ZD_pin HI, when that color is
 selected in all video modes.
