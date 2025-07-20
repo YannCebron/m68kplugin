@@ -29,6 +29,7 @@
     ]]></description>
 
   <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.modules.lang</depends>
 
   <xi:include href="m68kplugin-amiga.xml"/>
 
