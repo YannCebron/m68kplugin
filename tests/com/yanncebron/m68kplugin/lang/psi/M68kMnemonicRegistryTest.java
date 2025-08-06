@@ -91,6 +91,29 @@ public class M68kMnemonicRegistryTest extends BasePlatformTestCase {
       M68kCpu.GROUP_68000_UP));
   }
 
+  // matching via M68kAdmWithRrd
+  public void testFindExg() {
+    doTestFind("exg a0,a1", new M68kMnemonic(M68kTokenTypes.EXG,
+      M68kOperand.ADDRESS_REGISTER, M68kOperand.ADDRESS_REGISTER,
+      M68kDataSize.GROUP_L,
+      M68kCpu.GROUP_68000_UP));
+
+    doTestFind("exg d0,a1", new M68kMnemonic(M68kTokenTypes.EXG,
+      M68kOperand.DATA_REGISTER, M68kOperand.ADDRESS_REGISTER,
+      M68kDataSize.GROUP_L,
+      M68kCpu.GROUP_68000_UP));
+
+    doTestFind("exg a1,d0", new M68kMnemonic(M68kTokenTypes.EXG,
+      M68kOperand.ADDRESS_REGISTER, M68kOperand.DATA_REGISTER,
+      M68kDataSize.GROUP_L,
+      M68kCpu.GROUP_68000_UP));
+
+    doTestFind("exg d0,d1", new M68kMnemonic(M68kTokenTypes.EXG,
+      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER,
+      M68kDataSize.GROUP_L,
+      M68kCpu.GROUP_68000_UP));
+  }
+
   private void doTestFind(String instructionText, M68kMnemonic expectedMnemonic) {
     myFixture.configureByText("a.s", " " + instructionText);
     final M68kPsiElement instruction = M68kPsiTreeUtil.getContainingInstructionOrDirective(myFixture.getFile().findElementAt(2));

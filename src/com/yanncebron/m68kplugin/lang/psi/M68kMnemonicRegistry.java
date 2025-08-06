@@ -68,6 +68,7 @@ public final class M68kMnemonicRegistry {
 
     final List<M68kAdm> operands = PsiTreeUtil.getChildrenOfTypeAsList(instruction, M68kAdm.class);
     List<M68kMnemonic> filtered = getFilteredM68Mnemonics(instruction, operands, all);
+    assert !filtered.isEmpty() : instruction.getText();
 
     if (filtered.size() == 1) {
       return filtered.get(0);
@@ -141,8 +142,20 @@ public final class M68kMnemonicRegistry {
   private static boolean operandAddressModeMatches(M68kOperand operand, M68kAdm givenAdm) {
     for (M68kAddressMode addressMode : operand.getAddressModes()) {
       for (Class<? extends M68kAdm> adm : addressMode.getAdmClasses()) {
+        // match by:
+        // 1. instance class
+        // 2. found ARD/DRD
         if (adm.isInstance(givenAdm)) {
           return true;
+        }
+
+        if (givenAdm instanceof M68kAdmWithRrd admWithRrd) {
+          if (addressMode == M68kAddressMode.ADDRESS_REGISTER && admWithRrd.getAdmArd() != null) {
+            return true;
+          }
+          if (addressMode == M68kAddressMode.DATA_REGISTER && admWithRrd.getAdmDrd() != null) {
+            return true;
+          }
         }
       }
     }

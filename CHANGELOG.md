@@ -8,6 +8,8 @@
 
 ### Fixed
 
+- instruction documentation: fix matching current variant for some cases
+
 ## 0.1.8 - 2025-07-20
 
 ### Changed
