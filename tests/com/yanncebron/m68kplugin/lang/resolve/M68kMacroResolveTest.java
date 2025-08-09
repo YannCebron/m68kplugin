@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,11 +51,13 @@ public class M68kMacroResolveTest extends BasePlatformTestCase {
 
   public void testCompletionVariantsInSingleFile() {
     myFixture.testCompletionVariants("macroCompletionVariantsInSingleFile.s",
-      "macro1", "macro2");
+      "macro1", "macro2", "macro3");
 
     final LookupElement firstMacro1 = findLookupElement(myFixture, "macro1", 0);
     final LookupElementPresentation firstMacro1Presentation = LookupElementPresentation.renderElement(firstMacro1);
     assertLookupIcon(firstMacro1Presentation, M68kIcons.LABEL_MACRO);
+    M68kLookupElementTestUtil.assertPrioritizedLookupElement(firstMacro1, 30.0);
+
     final LookupElement secondMacro1 = findLookupElement(myFixture, "macro1", 21);
     final LookupElementPresentation secondMacro1Presentation = LookupElementPresentation.renderElement(secondMacro1);
     assertLookupIcon(secondMacro1Presentation, M68kIcons.LABEL_MACRO);
@@ -78,7 +80,7 @@ public class M68kMacroResolveTest extends BasePlatformTestCase {
   public void testCompletionVariantsInMultipleFiles() {
     myFixture.copyFileToProject("macroHighlightResolvingInMultipleFiles_other.s");
     myFixture.testCompletionVariants("macroCompletionVariantsInMultipleFiles.s",
-      "macro1", "macro2", "otherMacro", "yetAnotherMacro");
+      "macro1", "macro2", "macro3", "otherMacro", "yetAnotherMacro");
 
     final LookupElement myMacro = findLookupElement(myFixture, "macro1");
     final LookupElementPresentation myMacroPresentation = LookupElementPresentation.renderElement(myMacro);

@@ -12,6 +12,7 @@
 - label documentation: 
   - fix showing the preceding EOL comment instead of the current line EOL comment 
   - show the preceding comment if separated by one conditional assembly directive
+- macro call: resolve to macros in the current file defined _after_ the current location
 
 ## 0.1.8 - 2025-07-20
 

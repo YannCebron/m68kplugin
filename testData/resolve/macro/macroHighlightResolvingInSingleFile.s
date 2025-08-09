@@ -1,16 +1,15 @@
-* not declared yet
-  <error descr="Cannot resolve macro 'macro1'">macro1</error>
-
 macro1 macro
   endm
 
 macro1: macro      ; redefine
+  macro2 ; forward ref is valid
   endm
 
 macro2 macro
   endm
 
   macro macro3:
+  macro2
   endm
 
   macro1

@@ -52,6 +52,7 @@ public class M68kHighlightUsagesTest extends BasePlatformTestCase {
 
   public void testHighlightMacroUsages() {
     doHighlightUsagesTest("highlightMacroUsages.s",
+      "2:9 myMacro",
       "15:22 myMacro",
       "39:46 myMacro");
   }

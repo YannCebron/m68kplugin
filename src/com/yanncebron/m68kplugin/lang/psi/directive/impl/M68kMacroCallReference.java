@@ -26,7 +26,10 @@ import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.presentation.java.SymbolPresentationUtil;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
-import com.intellij.util.*;
+import com.intellij.util.IncorrectOperationException;
+import com.intellij.util.Processor;
+import com.intellij.util.Processors;
+import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
@@ -42,7 +45,7 @@ import java.util.List;
 /**
  * Provides reference to macro.
  * <ol>
- *   <li>search in current file, must precede current element</li>
+ *   <li>search in the current file</li>
  *   <li>search in related files (includes), TODO: currently "all files"</li>
  * </ol>
  */
@@ -55,22 +58,15 @@ class M68kMacroCallReference extends PsiReferenceBase.Poly<M68kMacroCallDirectiv
     public ResolveResult @NotNull [] resolve(@NotNull M68kMacroCallReference m68kMacroCallReference, boolean incompleteCode) {
       M68kMacroCallDirectiveMixIn element = m68kMacroCallReference.getElement();
       String macroName = m68kMacroCallReference.getValue();
-      int currentTextOffset = element.getTextOffset();
 
       List<M68kLabel> resolveResults = new SmartList<>();
-      final CommonProcessors.CollectProcessor<M68kLabel> findLocalProcessor = new CommonProcessors.CollectProcessor<>(resolveResults) {
-        @Override
-        protected boolean accept(M68kLabel m68kLabel) {
-          return m68kLabel.getTextOffset() < currentTextOffset;
-        }
-      };
-      processMacrosInScope(findLocalProcessor, getCurrentFileSearchScope(element), macroName);
+      final Processor<M68kLabel> processor = Processors.cancelableCollectProcessor(resolveResults);
+      processMacrosInScope(processor, getCurrentFileSearchScope(element), macroName);
       if (!resolveResults.isEmpty()) {
         return PsiElementResolveResult.createResults(resolveResults);
       }
 
-      final Processor<M68kLabel> findIncludeProcessor = Processors.cancelableCollectProcessor(resolveResults);
-      processMacrosInScope(findIncludeProcessor, getIncludeSearchScope(element), macroName);
+      processMacrosInScope(processor, getIncludeSearchScope(element), macroName);
       return PsiElementResolveResult.createResults(resolveResults);
     }
   }
@@ -98,14 +94,12 @@ class M68kMacroCallReference extends PsiReferenceBase.Poly<M68kMacroCallDirectiv
     List<LookupElement> variants = new SmartList<>();
 
     final PsiFile currentFile = getElement().getContainingFile().getOriginalFile();
-    final int currentTextOffset = getElement().getOriginalElement().getTextOffset();
     processMacrosInScope(label -> {
       final PsiFile containingFile = label.getContainingFile();
       boolean inCurrentFile = containingFile == currentFile;
 
       LookupElementBuilder builder = LookupElementBuilder.createWithIcon(label);
       if (inCurrentFile) {
-        if (!(label.getTextOffset() < currentTextOffset)) return true;
         variants.add(PrioritizedLookupElement.withPriority(builder.bold(), 30));
       } else {
         variants.add(builder.withTypeText(SymbolPresentationUtil.getFilePathPresentation(containingFile), true));
