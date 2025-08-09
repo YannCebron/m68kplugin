@@ -115,6 +115,13 @@ public class M68kLabelDocumentationProviderTest extends BasePlatformTestCase {
       "<div class='definition'><pre>label</pre></div><div class='content'>comment</div>");
   }
 
+  public void testLabelDocSemicolonEOLCommentWithPrecedingEOLComment() {
+    doTestDoc("" +
+      "anotherLabel = 42 ; NO\n" +
+      "la<caret>bel ; comment",
+      "<div class='definition'><pre>label</pre></div><div class='content'>comment</div>");
+  }
+
   private void doTestDoc(String source, String docText) {
     final PsiElement docElement = getDocElement(source);
     final String doc = DocumentationManager.getProviderFromElement(docElement).generateDoc(docElement, getOriginalElement());

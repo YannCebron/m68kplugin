@@ -88,7 +88,7 @@ final class M68kLabelDocumentationProvider extends AbstractDocumentationProvider
       lastElementLineFeed = false;
 
       if (!(child instanceof PsiComment)) break;
-      if (child.getPrevSibling() instanceof M68kPsiElement) break; // do not include EOL comment
+      if (PsiTreeUtil.skipWhitespacesBackward(child) instanceof M68kPsiElement) break; // do not include EOL comment
 
       final String commentText = child.getText().substring(1);
       if (isRelevantDocText(commentText)) {

@@ -9,6 +9,7 @@
 ### Fixed
 
 - instruction documentation: fix matching current variant for some cases
+- label documentation: fix showing preceding EOL comment instead of current line EOL comment 
 
 ## 0.1.8 - 2025-07-20
 
