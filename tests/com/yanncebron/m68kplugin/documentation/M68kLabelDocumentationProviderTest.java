@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,8 +60,8 @@ public class M68kLabelDocumentationProviderTest extends BasePlatformTestCase {
   }
 
   public void testLabelDoc() {
-    doTestDoc("" +
-        "* not relevant doc" +
+    doTestDoc(
+      "* not relevant doc" +
         "\n\n" +
         "*************************************************************************\n" +
         "*\t\t\t\t\t\t\t\t\t*\n" +
@@ -76,49 +76,54 @@ public class M68kLabelDocumentationProviderTest extends BasePlatformTestCase {
   }
 
   public void testLabelNoCommentDoc() {
-    doTestDoc("" +
-        "la<caret>bel",
+    doTestDoc("la<caret>bel",
       "<div class='definition'><pre>label</pre></div><div class='content'></div>");
   }
 
   public void testLabelIrrelevantCommentDoc() {
-    doTestDoc("" +
-        "* ******\n" +
-        "la<caret>bel",
+    doTestDoc("""
+        * ******
+        la<caret>bel""",
       "<div class='definition'><pre>label</pre></div><div class='content'></div>");
   }
 
   public void testLabelNoEOLCommentDoc() {
-    doTestDoc("" +
-        " rte ; EOL comment\n" +
-        "\n" +
-        "la<caret>bel",
+    doTestDoc("""
+         rte ; EOL comment
+        
+        la<caret>bel""",
       "<div class='definition'><pre>label</pre></div><div class='content'></div>");
   }
 
   public void testEquLabelDoc() {
-    doTestDoc("" +
-        "* doc\n" +
-        "la<caret>bel equ 42",
+    doTestDoc("""
+        * doc
+        la<caret>bel equ 42""",
       "<div class='definition'><pre>label<br><span style=\"color:#0000ff;\">42</span></pre></div><div class='content'>doc</div>");
   }
 
+  public void testLabelDocWithPrecedingConditionalAssemblyDirective() {
+    doTestDoc("""
+        ; comment
+         IF condition
+        la<caret>bel""",
+      "<div class='definition'><pre>label</pre></div><div class='content'>comment</div>");
+  }
+
   public void testLabelDocSemicolonEOLComment() {
-    doTestDoc("" +
-        "la<caret>bel ; comment",
+    doTestDoc("la<caret>bel ; comment",
       "<div class='definition'><pre>label</pre></div><div class='content'>comment</div>");
   }
 
   public void testLabelDocStarEOLComment() {
-    doTestDoc("" +
-        "la<caret>bel * comment",
+    doTestDoc("la<caret>bel * comment",
       "<div class='definition'><pre>label</pre></div><div class='content'>comment</div>");
   }
 
   public void testLabelDocSemicolonEOLCommentWithPrecedingEOLComment() {
-    doTestDoc("" +
-      "anotherLabel = 42 ; NO\n" +
-      "la<caret>bel ; comment",
+    doTestDoc("""
+        anotherLabel = 42 ; NO
+        la<caret>bel ; comment""",
       "<div class='definition'><pre>label</pre></div><div class='content'>comment</div>");
   }
 

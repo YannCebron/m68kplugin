@@ -33,6 +33,7 @@ import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -79,6 +80,7 @@ final class M68kLabelDocumentationProvider extends AbstractDocumentationProvider
 
     boolean lastElementLineFeed = false;
     boolean lastDocIrrelevant = false;
+    boolean skippedConditionalAssemblyDirective = false;
     for (PsiElement child = startElement.getPrevSibling(); child != null; child = child.getPrevSibling()) {
       if (child.getNode().getElementType() == M68kTokenTypes.LINEFEED) {
         if (lastElementLineFeed && !comments.isEmpty()) break;
@@ -86,6 +88,14 @@ final class M68kLabelDocumentationProvider extends AbstractDocumentationProvider
         continue;
       }
       lastElementLineFeed = false;
+
+      M68kPsiElement containingElement = M68kPsiTreeUtil.getContainingInstructionOrDirective(child);
+      if (containingElement instanceof M68kConditionalAssemblyDirective) {
+        if (skippedConditionalAssemblyDirective) break;
+        skippedConditionalAssemblyDirective = true;
+        child = containingElement.getPrevSibling();
+        continue;
+      }
 
       if (!(child instanceof PsiComment)) break;
       if (PsiTreeUtil.skipWhitespacesBackward(child) instanceof M68kPsiElement) break; // do not include EOL comment

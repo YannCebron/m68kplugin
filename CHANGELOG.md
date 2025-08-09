@@ -9,7 +9,9 @@
 ### Fixed
 
 - instruction documentation: fix matching current variant for some cases
-- label documentation: fix showing preceding EOL comment instead of current line EOL comment 
+- label documentation: 
+  - fix showing the preceding EOL comment instead of the current line EOL comment 
+  - show the preceding comment if separated by one conditional assembly directive
 
 ## 0.1.8 - 2025-07-20
 
