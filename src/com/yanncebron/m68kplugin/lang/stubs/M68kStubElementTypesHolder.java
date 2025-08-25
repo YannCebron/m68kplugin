@@ -100,13 +100,7 @@ public interface M68kStubElementTypesHolder {
         final String name = dataStream.readNameString();
 
         final short ordinal = dataStream.readByte();
-        M68kLabelBase.LabelKind kind = null;
-        for (M68kLabelBase.LabelKind value : M68kLabelBase.LabelKind.values()) {
-          if (value.ordinal() == ordinal) {
-            kind = value;
-            break;
-          }
-        }
+        M68kLabelBase.LabelKind kind = M68kLabelBase.LabelKind.values()[ordinal];
         assert kind != null : ordinal;
 
         String value = kind.hasValue() ? dataStream.readUTFFast() : null;
