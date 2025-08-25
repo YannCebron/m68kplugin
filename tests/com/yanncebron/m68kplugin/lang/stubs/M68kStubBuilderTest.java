@@ -82,6 +82,14 @@ public class M68kStubBuilderTest extends LightPlatformTestCase {
         """);
   }
 
+  public void testLabelWithMacroAfter() {
+    doTest(" macro label",
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['label', MACRO, 'null']
+        """);
+  }
+
   public void testLabelWithEqu() {
     doTest("label equ 42 comment",
       """
