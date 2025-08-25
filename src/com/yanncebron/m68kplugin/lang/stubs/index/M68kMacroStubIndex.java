@@ -39,4 +39,8 @@ final class M68kMacroStubIndex extends StringStubIndexExtension<M68kLabel> {
     return M68kStubIndexKeys.MACRO;
   }
 
+  @Override
+  public boolean traceKeyHashToVirtualFileMapping() {
+    return true;
+  }
 }

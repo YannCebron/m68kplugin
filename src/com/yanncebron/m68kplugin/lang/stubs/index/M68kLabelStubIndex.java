@@ -36,4 +36,9 @@ final class M68kLabelStubIndex extends StringStubIndexExtension<M68kLabel> {
   public @NotNull StubIndexKey<String, M68kLabel> getKey() {
     return M68kStubIndexKeys.LABEL;
   }
+
+  @Override
+  public boolean traceKeyHashToVirtualFileMapping() {
+    return true;
+  }
 }
