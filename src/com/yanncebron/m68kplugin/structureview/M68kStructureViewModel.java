@@ -65,18 +65,18 @@ public class M68kStructureViewModel extends StructureViewModelBase implements St
   public Filter @NotNull [] getFilters() {
     return new Filter[]{
       createFilter(psiElement -> psiElement instanceof M68kIncludeDirective || psiElement instanceof M68kIncbinDirective,
-        M68kBundle.message("structureview.filter.includes"), M68kIcons.INCLUDE, "SHOW_INCLUDES"),
+        M68kBundle.message("structure.view.filter.includes"), M68kIcons.INCLUDE, "SHOW_INCLUDES"),
       createFilter(createLabelFilteringFunction(EnumSet.of(M68kLabelBase.LabelKind.GLOBAL)),
-        M68kBundle.message("structureview.filter.labels"), M68kIcons.LABEL_GLOBAL, "SHOW_LABELS"),
+        M68kBundle.message("structure.view.filter.labels"), M68kIcons.LABEL_GLOBAL, "SHOW_LABELS"),
       createFilter(psiElement -> psiElement instanceof M68kLocalLabel,
-        M68kBundle.message("structureview.filter.local.labels"), M68kIcons.LABEL_LOCAL, "SHOW_LOCAL_LABELS"),
+        M68kBundle.message("structure.view.filter.local.labels"), M68kIcons.LABEL_LOCAL, "SHOW_LOCAL_LABELS"),
       createFilter(createLabelFilteringFunction(EnumSet.of(M68kLabelBase.LabelKind.MACRO)),
-        M68kBundle.message("structureview.filter.macros"), M68kIcons.LABEL_MACRO, "SHOW_MACROS"),
+        M68kBundle.message("structure.view.filter.macros"), M68kIcons.LABEL_MACRO, "SHOW_MACROS"),
       createFilter(createLabelFilteringFunction(
         EnumSet.of(M68kLabelBase.LabelKind.EQU, M68kLabelBase.LabelKind.EQUALS,
           M68kLabelBase.LabelKind.SET, M68kLabelBase.LabelKind.EQUR,
           M68kLabelBase.LabelKind.FO, M68kLabelBase.LabelKind.SO)),
-        M68kBundle.message("structureview.filter.assignments"), M68kIcons.LABEL_EQU, "SHOW_ASSIGNMENTS")
+        M68kBundle.message("structure.view.filter.assignments"), M68kIcons.LABEL_EQU, "SHOW_ASSIGNMENTS")
     };
   }
 
