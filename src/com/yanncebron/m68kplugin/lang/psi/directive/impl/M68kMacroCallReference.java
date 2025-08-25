@@ -62,11 +62,10 @@ class M68kMacroCallReference extends PsiReferenceBase.Poly<M68kMacroCallDirectiv
       List<M68kLabel> resolveResults = new SmartList<>();
       final Processor<M68kLabel> processor = Processors.cancelableCollectProcessor(resolveResults);
       processMacrosInScope(processor, getCurrentFileSearchScope(element), macroName);
-      if (!resolveResults.isEmpty()) {
-        return PsiElementResolveResult.createResults(resolveResults);
+      if (resolveResults.isEmpty()) {
+        processMacrosInScope(processor, getIncludeSearchScope(element), macroName);
       }
 
-      processMacrosInScope(processor, getIncludeSearchScope(element), macroName);
       return PsiElementResolveResult.createResults(resolveResults);
     }
   }
