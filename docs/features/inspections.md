@@ -27,6 +27,9 @@ Inspection settings and descriptions can be accessed under the *M68k assembler* 
 
 ### Unresolved label reference
 
+All macros defining a label (via their first parameter) must be configured explicitly.
+Use the provided quick fixes to add them from usages in code or configure manually in inspection settings.
+
 ### Unresolved macro reference
 
 ### Unused local label

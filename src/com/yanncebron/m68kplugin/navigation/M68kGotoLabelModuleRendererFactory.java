@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.ide.util.ModuleRendererFactory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.presentation.java.SymbolPresentationUtil;
 import com.intellij.util.TextWithIcon;
+import com.intellij.util.xml.model.gotosymbol.GoToSymbolProvider;
 
 /**
  * Goto symbol: show containing file on the right instead of "Module".
@@ -28,7 +29,9 @@ final class M68kGotoLabelModuleRendererFactory extends ModuleRendererFactory {
 
   @Override
   protected boolean handles(Object element) {
-    return element instanceof M68kGotoLabelNavigationItem;
+    return
+      element instanceof M68kGotoLabelNavigationItem ||
+      element instanceof M68kGotoImplicitMacroLabelNavigationItem;
   }
 
   @Override
@@ -38,7 +41,7 @@ final class M68kGotoLabelModuleRendererFactory extends ModuleRendererFactory {
 
   @Override
   public TextWithIcon getModuleTextWithIcon(Object element) {
-    M68kGotoLabelNavigationItem navigationItem = (M68kGotoLabelNavigationItem) element;
+    GoToSymbolProvider.BaseNavigationItem navigationItem = (GoToSymbolProvider.BaseNavigationItem) element;
     PsiElement targetElement = navigationItem.getNavigationElement();
     return new TextWithIcon(SymbolPresentationUtil.getFilePathPresentation(targetElement.getContainingFile()), null);
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.intellij.testFramework.fixtures.TestLookupElementPresentation;
 import com.intellij.util.TextWithIcon;
+import com.yanncebron.m68kplugin.inspections.M68kUnresolvedLabelReferenceInspection;
 import icons.M68kIcons;
 
 import javax.swing.*;
@@ -51,7 +52,11 @@ public class M68kGotoLabelTest extends BasePlatformTestCase {
 
     ((PsiManagerEx) myFixture.getPsiManager()).setAssertOnFileLoadingFilter(VirtualFileFilter.ALL, myFixture.getTestRootDisposable());
 
-    GotoSymbolModel2 model = new GotoSymbolModel2(myFixture.getProject());
+    M68kUnresolvedLabelReferenceInspection unresolvedLabelReferenceInspection = new M68kUnresolvedLabelReferenceInspection();
+    unresolvedLabelReferenceInspection.labelDefiningMacros.add("implicitLabelMacro");
+    myFixture.enableInspections(unresolvedLabelReferenceInspection);
+
+    GotoSymbolModel2 model = new GotoSymbolModel2(myFixture.getProject(), getTestRootDisposable());
 
     assertContainsElements(asList(model.getNames(false)),
       "aLabel",
@@ -62,7 +67,8 @@ public class M68kGotoLabelTest extends BasePlatformTestCase {
       "aSet",
       "aEqur",
       "aEquWithoutValue",
-      "bLabel");
+      "bLabel",
+      "implicitLabel");
 
     assertPresentation(model, "aLabel", M68kIcons.LABEL_GLOBAL, null, "gotoLabelA.s");
     assertPresentation(model, "aMacro", M68kIcons.LABEL_MACRO, null, "gotoLabelA.s");
@@ -73,6 +79,8 @@ public class M68kGotoLabelTest extends BasePlatformTestCase {
     assertPresentation(model, "aEqur", M68kIcons.LABEL_EQUR, "d0", "gotoLabelA.s");
 
     assertPresentation(model, "bLabel", M68kIcons.LABEL_GLOBAL, null, "gotoLabelB.s");
+
+    assertPresentation(model, "implicitLabel", M68kIcons.LABEL_MACRO, " (implicitLabelMacro implicitLabel) ", "gotoLabelA.s");
   }
 
   private void assertPresentation(GotoSymbolModel2 model, String elementName,
@@ -91,7 +99,7 @@ public class M68kGotoLabelTest extends BasePlatformTestCase {
         final ModuleRendererFactory moduleRendererFactory = ModuleRendererFactory.findInstance(navigationItem);
         assertInstanceOf(moduleRendererFactory, M68kGotoLabelModuleRendererFactory.class);
         final TextWithIcon textWithIcon = moduleRendererFactory.getModuleTextWithIcon(navigationItem);
-        assertNotNull(navigationItem.getName(),textWithIcon);
+        assertNotNull(navigationItem.getName(), textWithIcon);
         assertEquals(expectedFileLocation, textWithIcon.getText());
         return;
       }

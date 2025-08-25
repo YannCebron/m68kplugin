@@ -6,6 +6,10 @@
 
 ### Added
 
+- Implicit macro labels: 
+  - configure macros defining labels via their first parameter, see inspection _Unresolved label reference_ for details
+  - use _Edit | Find Usages_ on parameter to find usages of implicit label
+
 ### Fixed
 
 - instruction documentation: fix matching current variant for some cases

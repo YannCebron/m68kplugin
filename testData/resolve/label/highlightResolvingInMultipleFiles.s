@@ -6,3 +6,9 @@ myLabel
 * highlightResolvingInMultipleFiles_other.s
   bra otherLabel
   bra otherLabel2
+
+  bra implicitLabel
+
+implicitLabelMacro macro
+;\1 rs.l 1
+  endm

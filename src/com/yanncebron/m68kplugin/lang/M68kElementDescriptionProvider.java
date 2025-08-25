@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,10 @@ import com.intellij.psi.ElementDescriptionLocation;
 import com.intellij.psi.ElementDescriptionProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.usageView.UsageViewLongNameLocation;
+import com.intellij.usageView.UsageViewShortNameLocation;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
+import com.yanncebron.m68kplugin.resolve.M68kImplicitMacroLabelResolver;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,6 +35,12 @@ final class M68kElementDescriptionProvider implements ElementDescriptionProvider
     if (element instanceof M68kLabelBase) {
       if (location == UsageViewLongNameLocation.INSTANCE) {
         return ((M68kLabelBase) element).getName();
+      }
+    }
+    if (element instanceof M68kMacroCallDirective directive) {
+      if (location == UsageViewShortNameLocation.INSTANCE ||
+        location == UsageViewLongNameLocation.INSTANCE) {
+        return M68kImplicitMacroLabelResolver.getFirstParameterText(directive);
       }
     }
     return null;

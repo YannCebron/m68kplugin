@@ -42,6 +42,16 @@ equrLabel equr d7
 regLabel reg d0-d7
   bra <error descr="Cannot resolve label 'regLabel'">regLabel</error>
 
+
+* Implicit Macro label -------------------------------------------------------------------------------------------------
+
+implicitLabelMacro macro
+; \1 rs.l 1
+  endm
+
+  implicitLabelMacro implicitLabel
+  lea implicitLabel(a0),a1
+
 * M68kEquDirectiveBase -------------------------------------------------------------------------------------------------
 
 DATE equ 233

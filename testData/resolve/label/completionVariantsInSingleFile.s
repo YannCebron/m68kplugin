@@ -1,5 +1,9 @@
 topLevelLabel
 topLevelLabel   ; 2nd variant
+
+ implicitLabelMacro implicitLabel
+ implicitLabelMacro implicitLabel ; 2nd variant
+
   bra <caret>
 
 .localLabel
@@ -14,6 +18,10 @@ anotherTopLevel.Label:
 setLabel set 2
 equLabel equ 42
 equalsLabel = 33
+
+implicitLabelMacro macro
+;\1 rs.l 1
+    endm
 
 ; not showing --------------
 equrLabel equr d7

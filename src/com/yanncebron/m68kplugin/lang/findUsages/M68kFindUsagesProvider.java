@@ -30,6 +30,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
 import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import com.yanncebron.m68kplugin.lexer.M68kLexer;
 import org.jetbrains.annotations.NotNull;
 
@@ -66,6 +67,10 @@ final class M68kFindUsagesProvider implements FindUsagesProvider {
 
     if (element instanceof M68kLocalLabel) {
       return M68kBundle.message("term.local.label");
+    }
+
+    if (element instanceof M68kMacroCallDirective) {
+      return M68kBundle.message("term.implicit.label");
     }
 
     return "";

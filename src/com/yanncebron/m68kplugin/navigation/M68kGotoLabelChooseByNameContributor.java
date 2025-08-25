@@ -27,24 +27,36 @@ import com.intellij.util.indexing.FindSymbolParameters;
 import com.intellij.util.indexing.IdFilter;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.stubs.index.M68kStubIndexKeys;
+import com.yanncebron.m68kplugin.resolve.M68kImplicitMacroLabelResolver;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("UnstableApiUsage")
 final class M68kGotoLabelChooseByNameContributor implements ChooseByNameContributorEx, DumbAware {
 
   @Override
   public void processNames(@NotNull Processor<? super String> processor, @NotNull GlobalSearchScope scope, @Nullable IdFilter filter) {
-    DumbModeAccessType.RELIABLE_DATA_ONLY.ignoreDumbMode(() ->
-      StubIndex.getInstance().processAllKeys(M68kStubIndexKeys.LABEL, processor, scope, filter)
+    DumbModeAccessType.RELIABLE_DATA_ONLY.ignoreDumbMode(() -> {
+        StubIndex.getInstance().processAllKeys(M68kStubIndexKeys.LABEL, processor, scope, filter);
+
+      M68kImplicitMacroLabelResolver.processGlobalMacrosDefiningLabels(
+        m68kMacroCallDirective -> processor.process(M68kImplicitMacroLabelResolver.getFirstParameterText(m68kMacroCallDirective)),
+        scope, scope.getProject(), null);
+      }
     );
   }
 
   @Override
   public void processElementsWithName(@NotNull String name, @NotNull Processor<? super NavigationItem> processor, @NotNull FindSymbolParameters parameters) {
-    DumbModeAccessType.RELIABLE_DATA_ONLY.ignoreDumbMode(() ->
-      StubIndex.getInstance().processElements(M68kStubIndexKeys.LABEL, name,
-        parameters.getProject(), parameters.getSearchScope(), parameters.getIdFilter(), M68kLabel.class,
-        label -> processor.process(new M68kGotoLabelNavigationItem(label)))
+    DumbModeAccessType.RELIABLE_DATA_ONLY.ignoreDumbMode(() -> {
+        StubIndex.getInstance().processElements(M68kStubIndexKeys.LABEL, name,
+          parameters.getProject(), parameters.getSearchScope(), parameters.getIdFilter(), M68kLabel.class,
+          label -> processor.process(new M68kGotoLabelNavigationItem(label)));
+
+        M68kImplicitMacroLabelResolver.processGlobalMacrosDefiningLabels(
+          m68kMacroCallDirective -> processor.process(new M68kGotoImplicitMacroLabelNavigationItem(m68kMacroCallDirective)),
+          parameters.getSearchScope(), parameters.getProject(), name);
+      }
     );
   }
 

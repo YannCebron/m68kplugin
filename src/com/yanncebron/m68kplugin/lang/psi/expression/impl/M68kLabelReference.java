@@ -36,8 +36,11 @@ import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kEndmDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroDirective;
 import com.yanncebron.m68kplugin.lang.stubs.index.M68kStubIndexKeys;
+import com.yanncebron.m68kplugin.resolve.M68kImplicitMacroLabelResolver;
+import icons.M68kIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,12 +56,13 @@ import java.util.List;
  *   <li>builtin symbol: lookup known {@link M68kBuiltinSymbol} by hardcoded name</li>
  *   <li>local label: search backwards, then forwards for local labels only - until encountering global label/macro boundary ("parent scope"); first match</li>
  *   <li>global label: search in current file, if not found in included (currently "all other files"); all matches</li>
+ *   <li>implicit label: defined via macro; all matches</li>
  * </ol>
  * <p>
  * This allows for both correct scoping of local labels and optimal performance, as resolving can be optimized for each type.
  * </p>
  * <p>
- * In completion variants, local labels and labels from the current file are prioritized and shown in bold.
+ * In completion variants, local labels and (implicit) labels from the current file are prioritized and shown in bold.
  * Builtin symbols have the lowest priority.
  * </p>
  */
@@ -93,15 +97,24 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
         return ResolveResult.EMPTY_ARRAY;
       }
 
-      List<M68kLabel> resolveResults = new SmartList<>();
-      final Processor<M68kLabel> processor = Processors.cancelableCollectProcessor(resolveResults);
-      processLabelsInScope(processor, getCurrentFileSearchScope(psiElement), labelName);
-      if (!resolveResults.isEmpty()) {
-        return PsiElementResolveResult.createResults(resolveResults);
+      List<M68kLabel> labels = new SmartList<>();
+      Processor<M68kLabel> labelProcessor = Processors.cancelableCollectProcessor(labels);
+      processLabelsInScope(labelProcessor, getCurrentFileSearchScope(psiElement), labelName);
+      if (labels.isEmpty()) {
+        processLabelsInScope(labelProcessor, getIncludeSearchScope(psiElement), labelName);
+      }
+      if (!labels.isEmpty()) {
+        return PsiElementResolveResult.createResults(labels);
       }
 
-      processLabelsInScope(processor, getIncludeSearchScope(psiElement), labelName);
-      return PsiElementResolveResult.createResults(resolveResults);
+      List<M68kMacroCallDirective> implicitMacroLabelMacroCallDirectives = new SmartList<>();
+      Processor<M68kMacroCallDirective> macroCallDirectiveProcessor = Processors.cancelableCollectProcessor(implicitMacroLabelMacroCallDirectives);
+      M68kImplicitMacroLabelResolver.processMacrosDefiningLabels(macroCallDirectiveProcessor, getCurrentFileSearchScope(psiElement), psiElement, labelName);
+      if (labels.isEmpty()) {
+        M68kImplicitMacroLabelResolver.processMacrosDefiningLabels(macroCallDirectiveProcessor, getIncludeSearchScope(psiElement), psiElement, labelName);
+      }
+
+      return PsiElementResolveResult.createResults(implicitMacroLabelMacroCallDirectives);
     }
 
   }
@@ -153,6 +166,22 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
       }
       return true;
     }, GlobalSearchScope.projectScope(getElement().getProject()), null);
+
+    M68kImplicitMacroLabelResolver.processMacrosDefiningLabels(macroCallDirective -> {
+      final PsiFile containingFile = macroCallDirective.getContainingFile();
+      boolean inCurrentFile = containingFile == currentFile;
+
+      String labelName = M68kImplicitMacroLabelResolver.getFirstParameterText(macroCallDirective);
+      LookupElementBuilder builder = LookupElementBuilder.create(macroCallDirective, labelName)
+        .withIcon(M68kIcons.LABEL_MACRO)
+        .withTailText(" (" + M68kImplicitMacroLabelResolver.getImplicitMacroLabelLocationString(macroCallDirective) + ")");
+      if (inCurrentFile) {
+        variants.add(PrioritizedLookupElement.withPriority(builder.bold(), 30));
+      } else {
+        variants.add(builder.withTypeText(SymbolPresentationUtil.getFilePathPresentation(containingFile), true));
+      }
+      return true;
+    }, GlobalSearchScope.projectScope(getElement().getProject()), getElement(), null);
 
     return variants.toArray();
   }

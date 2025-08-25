@@ -104,6 +104,8 @@
         implementation="com.yanncebron.m68kplugin.lang.M68kElementDescriptionProvider"/>
     <usageTypeProvider
         implementation="com.yanncebron.m68kplugin.lang.findUsages.M68kUsageTypeProvider"/>
+    <findUsagesHandlerFactory
+        implementation="com.yanncebron.m68kplugin.resolve.M68kImplicitMacroLabelFindUsagesHandlerFactory"/>
 
     <lang.refactoringSupport
         language="M68k"
