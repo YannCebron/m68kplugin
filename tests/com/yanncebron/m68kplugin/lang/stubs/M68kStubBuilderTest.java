@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,104 +28,138 @@ public class M68kStubBuilderTest extends LightPlatformTestCase {
 
   public void testLabel() {
     doTest("label",
-      "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', GLOBAL, 'null']\n");
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['label', GLOBAL, 'null']
+        """);
   }
 
   public void testLabelWithColon() {
     doTest("label:",
-      "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', GLOBAL, 'null']\n");
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['label', GLOBAL, 'null']
+        """);
   }
 
   public void testLabelAfterWhitespaceWithColon() {
     doTest("  label:",
-      "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', GLOBAL, 'null']\n");
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['label', GLOBAL, 'null']
+        """);
   }
 
   public void testLabelWithBackslashAt() {
     doTest("label\\@",
-      "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label\\@', GLOBAL, 'null']\n");
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['label\\@', GLOBAL, 'null']
+        """);
   }
 
   public void testLabelWithBackslashAtBegin() {
     doTest("\\@label",
-      "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['\\@label', GLOBAL, 'null']\n");
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['\\@label', GLOBAL, 'null']
+        """);
   }
 
   public void testLabelWithDot() {
     doTest("label.suffix",
-      "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label.suffix', GLOBAL, 'null']\n");
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['label.suffix', GLOBAL, 'null']
+        """);
   }
 
   public void testLabelWithMacro() {
     doTest("label macro",
-      "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', MACRO, 'null']\n");
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['label', MACRO, 'null']
+        """);
   }
 
   public void testLabelWithEqu() {
     doTest("label equ 42 comment",
-      "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', EQU, '42']\n");
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['label', EQU, '42']
+        """);
   }
 
   public void testLabelWithEquNoValue() {
     doTest("labelEquNoValue equ ",
-      "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['labelEquNoValue', EQU, '']\n");
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['labelEquNoValue', EQU, '']
+        """);
   }
 
   public void testLabelWithEquals() {
     doTest("label = 42*something",
-      "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', EQUALS, '42*something']\n");
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['label', EQUALS, '42*something']
+        """);
   }
 
   public void testLabelWithSet() {
     doTest("label set 42",
-      "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', SET, '42']\n");
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['label', SET, '42']
+        """);
   }
 
   public void testLabelWithEqur() {
     doTest("label equr d7",
-      "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', EQUR, 'd7']\n");
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['label', EQUR, 'd7']
+        """);
   }
 
   public void testLabelWithReg() {
     doTest("label reg d0-d7/a0",
-      "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', REG, 'd0-d7/a0']\n");
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['label', REG, 'd0-d7/a0']
+        """);
   }
 
   public void testLabelWithFoDataSize() {
     doTest("label fo.w 42",
-      "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', FO, '42']\n");
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['label', FO, '42']
+        """);
   }
 
   public void testLabelWithFo() {
     doTest("label fo 42",
-      "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', FO, '42']\n");
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['label', FO, '42']
+        """);
   }
 
   public void testLabelWithSoDataSize() {
     doTest("label so.w 42",
-      "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', SO, '42']\n");
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['label', SO, '42']
+        """);
   }
 
   public void testLabelWithSo() {
     doTest("label so 42",
-      "PsiFileStubImpl\n" +
-        "  LABEL:M68kLabelStubImpl['label', SO, '42']\n");
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['label', SO, '42']
+        """);
   }
 
   public void testLocalLabelNotStubbed() {
@@ -140,11 +174,11 @@ public class M68kStubBuilderTest extends LightPlatformTestCase {
     assertFalse(fileNode.isParsed());
 
     LightStubBuilder stubBuilder = M68kFileElementType.INSTANCE.getBuilder();
-    StubElement lightTree = stubBuilder.buildStubTree(file);
+    StubElement<?> lightTree = stubBuilder.buildStubTree(file);
     assertFalse(fileNode.isParsed());
 
     file.getNode().getChildren(null); // force switch to AST
-    StubElement astBasedTree = stubBuilder.buildStubTree(file);
+    StubElement<?> astBasedTree = stubBuilder.buildStubTree(file);
     assertTrue(fileNode.isParsed());
 
     assertEquals("light tree differs", expected, DebugUtil.stubTreeToString(lightTree));
