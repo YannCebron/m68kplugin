@@ -20,21 +20,32 @@ import com.intellij.codeInspection.*;
 import com.intellij.codeInspection.ex.InspectionToolWrapper;
 import com.intellij.codeInspection.options.OptPane;
 import com.intellij.codeInspection.ui.StringValidatorWithSwingSelector;
+import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.util.NlsSafe;
+import com.intellij.openapi.util.text.NaturalComparator;
+import com.intellij.platform.backend.presentation.TargetPresentation;
 import com.intellij.profile.codeInspection.InspectionProjectProfileManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.PsiPolyVariantReference;
+import com.intellij.psi.search.ProjectScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.ui.ScrollingUtil;
+import com.intellij.ui.TreeUIHelper;
+import com.intellij.ui.components.JBList;
+import com.intellij.ui.components.JBScrollPane;
+import com.intellij.ui.list.TargetPopup;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
 import com.intellij.util.SmartList;
 import com.yanncebron.m68kplugin.M68kBundle;
+import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.conditional.*;
@@ -46,10 +57,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import javax.swing.*;
+import java.util.*;
 
 @VisibleForTesting
 public final class M68kUnresolvedLabelReferenceInspection extends LocalInspectionTool {
@@ -92,6 +101,7 @@ public final class M68kUnresolvedLabelReferenceInspection extends LocalInspectio
         return M68kBundle.message("inspection.unresolved.label.reference.settings.macros.cannot.resolve.macro", string);
       }
 
+      @SuppressWarnings("UnstableApiUsage")
       @Override
       public @Nullable String select(@NotNull Project project) {
         if (project.isDefault() || DumbService.isDumb(project)) return null;
@@ -100,11 +110,43 @@ public final class M68kUnresolvedLabelReferenceInspection extends LocalInspectio
         Collection<String> macroNames = StubIndex.getInstance().getAllKeys(M68kStubIndexKeys.MACRO, project);
         macroNames.removeAll(labelDefiningMacros);
         List<String> sortedMacroNames = new ArrayList<>(macroNames);
-        Collections.sort(sortedMacroNames);
+        sortedMacroNames.sort(NaturalComparator.INSTANCE);
 
-        //noinspection deprecation
-        int idx = Messages.showChooseDialog(project, M68kBundle.message("inspection.unresolved.label.reference.settings.macros.defining.labels.dialog.message"), M68kBundle.message("inspection.unresolved.label.reference.settings.macros.defining.labels.dialog.title"), null, sortedMacroNames.toArray(new String[0]), null);
-        return idx != -1 ? sortedMacroNames.get(idx) : null;
+        List<M68kLabel> macros = new ArrayList<>(sortedMacroNames.size());
+        for (String sortedMacroName : sortedMacroNames) {
+          macros.addAll(StubIndex.getElements(M68kStubIndexKeys.MACRO, sortedMacroName, project, ProjectScope.getProjectScope(project), M68kLabel.class));
+        }
+
+        DialogBuilder builder = new DialogBuilder(project);
+        builder.title(M68kBundle.message("inspection.unresolved.label.reference.settings.macros.defining.labels.dialog.title"));
+        builder.dimensionKey(M68kUnresolvedLabelReferenceInspection.class.getName() + ".macro.select.dialog");
+        builder.addCancelAction();
+        builder.addOkAction().setText(M68kBundle.message("inspection.unresolved.label.reference.settings.macros.defining.labels.dialog.ok.action"));
+        builder.setOkActionEnabled(false);
+
+        JBList<M68kLabel> list = new JBList<>(macros);
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list.addListSelectionListener(e -> {
+          if (e.getValueIsAdjusting()) return;
+          builder.setOkActionEnabled(list.getSelectedValue() != null);
+        });
+        list.setCellRenderer(TargetPopup.createTargetPresentationRenderer(m68kLabel -> {
+          ItemPresentation presentation = m68kLabel.getPresentation();
+          assert presentation != null;
+          return TargetPresentation.builder(Objects.requireNonNull(presentation.getPresentableText())).icon(presentation.getIcon(false)).locationText(presentation.getLocationString()).presentation();
+        }));
+        ScrollingUtil.installActions(list);
+        TreeUIHelper.getInstance().installListSpeedSearch(list, PsiNamedElement::getName);
+
+        JBScrollPane centerPanel = new JBScrollPane(list);
+        centerPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        builder.centerPanel(centerPanel);
+
+        if (builder.showAndGet()) {
+          return list.getSelectedValue().getName();
+        }
+
+        return null;
       }
     }));
   }
