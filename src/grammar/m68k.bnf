@@ -251,7 +251,11 @@ adm_pcd ::= (L_PAREN PC R_PAREN) |
   methods = [
     displacement = "expression"
   ]
-  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithDisplacement"
+  implements = [
+    "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithDisplacement"
+    "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
+  ]
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithPcRegisterMixIn"
 }
 
 // Ref 2.2.13: bd(PC,Xn.SIZE) | (bd,PC,Xn.SIZE)
@@ -270,7 +274,11 @@ adm_pci ::= adm_pci_old |
   methods = [
     displacement = "expression"
   ]
-  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithDisplacement"
+  implements = [
+    "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithDisplacement"
+    "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
+  ]
+  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithPcRegisterMixIn"
 }
 
 // #4000 | #4000.w | #4000.l

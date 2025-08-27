@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,24 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
 public interface M68kAdmWithRegister extends M68kAdm {
 
   @NotNull
-  M68kRegister getRegister();
+  default M68kRegister getRegister() {
+    ASTNode node = getRegisterElement().getNode();
+    return M68kRegister.find(node.getElementType(), node.getText());
+  }
+
+  /**
+   * @return the associated register element
+   */
+  @NotNull
+  default PsiElement getRegisterElement() {
+    return getFirstChild();
+  }
 
 }

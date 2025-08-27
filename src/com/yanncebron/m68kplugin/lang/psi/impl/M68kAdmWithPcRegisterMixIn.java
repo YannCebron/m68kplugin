@@ -13,16 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.yanncebron.m68kplugin.lang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
+package com.yanncebron.m68kplugin.lang.psi.impl;
+
+import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
+import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
+import org.jetbrains.annotations.NotNull;
 
-public interface M68kAdmPcd extends M68kAdmWithDisplacement, M68kAdmWithRegister {
+abstract class M68kAdmWithPcRegisterMixIn extends M68kAdmWithRegisterMixIn {
 
-  @Nullable
-  M68kExpression getDisplacement();
+  protected M68kAdmWithPcRegisterMixIn(@NotNull ASTNode node) {
+    super(node);
+  }
 
+  @Override
+  public final @NotNull PsiElement getRegisterElement() {
+    return findNotNullChildByType(M68kTokenTypes.PC);
+  }
 }

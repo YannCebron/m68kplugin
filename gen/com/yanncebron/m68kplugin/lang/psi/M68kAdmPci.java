@@ -20,7 +20,7 @@ import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
-public interface M68kAdmPci extends M68kAdmWithDisplacement {
+public interface M68kAdmPci extends M68kAdmWithDisplacement, M68kAdmWithRegister {
 
   @Nullable
   M68kAdmRrdIndex getAdmRrdIndex();

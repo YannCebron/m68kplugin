@@ -111,10 +111,12 @@ public class M68kVisitor extends PsiElementVisitor {
 
   public void visitAdmPcd(@NotNull M68kAdmPcd o) {
     visitAdmWithDisplacement(o);
+    // visitAdmWithRegister(o);
   }
 
   public void visitAdmPci(@NotNull M68kAdmPci o) {
     visitAdmWithDisplacement(o);
+    // visitAdmWithRegister(o);
   }
 
   public void visitAdmQuick(@NotNull M68kAdmQuick o) {

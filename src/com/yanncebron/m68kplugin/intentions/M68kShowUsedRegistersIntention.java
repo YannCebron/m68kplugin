@@ -121,13 +121,16 @@ final class M68kShowUsedRegistersIntention implements IntentionAction, HighPrior
 
       @Override
       public void visitAdmPcd(@NotNull M68kAdmPcd o) {
-        addIfInside(o, M68kRegister.PC);
+        visitAdmWithRegister(o);
       }
 
       @Override
       public void visitAdmPci(@NotNull M68kAdmPci o) {
-        addIfInside(o, M68kRegister.PC);
-        o.acceptChildren(this);
+        visitAdmWithRegister(o);
+        M68kAdmRrdIndex admRrdIndex = o.getAdmRrdIndex();
+        if (admRrdIndex != null) {
+          visitAdmWithRegister(admRrdIndex);
+        }
       }
 
       @Override
