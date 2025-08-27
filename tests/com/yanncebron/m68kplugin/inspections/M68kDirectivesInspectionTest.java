@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,11 @@ public class M68kDirectivesInspectionTest extends BasePlatformTestCase {
 
   public void testContentAfterEndDirective() {
     myFixture.configureByText("test.s",
-      " end\n" +
-        "; comment is allowed\n" +
-        " <error descr=\"No content after 'end' directive allowed\">moveq #1,d0</error>");
+      """
+         end
+        ; comment is allowed
+         <error descr="No content after 'end' directive allowed">moveq #1,d0
+         tst.l d0</error>""");
     myFixture.testHighlighting();
   }
 

@@ -16,11 +16,10 @@
 
 package com.yanncebron.m68kplugin.inspections;
 
-import com.intellij.codeInspection.LocalInspectionTool;
-import com.intellij.codeInspection.LocalInspectionToolSession;
-import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.codeInspection.*;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.util.Ref;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
@@ -52,7 +51,13 @@ final class M68kDirectivesInspection extends LocalInspectionTool implements Dumb
       public void visitEndDirective(@NotNull M68kEndDirective element) {
         final M68kPsiElement nextSibling = PsiTreeUtil.getNextSiblingOfType(element, M68kPsiElement.class);
         if (nextSibling != null) {
-          holder.registerProblem(nextSibling, M68kBundle.message("highlight.no.content.after.end.directive"));
+          Ref<PsiElement> endElement = Ref.create(nextSibling);
+          M68kPsiTreeUtil.processSiblingsForwards(nextSibling, psiElement -> {
+            endElement.set(psiElement);
+            return true;
+          });
+          ProblemDescriptor problemDescriptor = holder.getManager().createProblemDescriptor(nextSibling, endElement.get(), M68kBundle.message("highlight.no.content.after.end.directive"), ProblemHighlightType.LIKE_MARKED_FOR_REMOVAL, isOnTheFly);
+          holder.registerProblem(problemDescriptor);
         }
       }
 
