@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,15 @@ package com.yanncebron.m68kplugin.lang.psi;
 import com.intellij.openapi.util.Comparing;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
+/**
+ * All known registers.
+ * <p>
+ * See vasm {@code cpus/m68k/specregs.h}.
+ */
 public enum M68kRegister {
 
   D0(M68kTokenTypes.DATA_REGISTER, "d0", M68kCpu.GROUP_68000_UP),
@@ -57,17 +63,17 @@ public enum M68kRegister {
   VBR(M68kTokenTypes.VBR, null, M68kCpu.GROUP_68010_UP);
 
   private final IElementType elementType;
-  private final String text;
+  private final @Nullable String text;
   private final Set<M68kCpu> cpus;
 
-  M68kRegister(IElementType elementType, String text, Set<M68kCpu> cpus) {
+  M68kRegister(IElementType elementType, @Nullable String text, Set<M68kCpu> cpus) {
     this.elementType = elementType;
     this.text = text;
     this.cpus = cpus;
   }
 
   @NotNull
-  public static M68kRegister find(IElementType elementType, String text) {
+  public static M68kRegister find(IElementType elementType, @Nullable String text) {
     for (M68kRegister value : values()) {
       if (value.elementType != elementType) continue;
       if (value.text == null) {
