@@ -53,6 +53,6 @@ final class M68kConditionalAssemblyDirectivesInspection extends LocalInspectionT
   }
 
   private static void highlightUnsupported(ProblemsHolder holder, M68kConditionalAssemblyDirective directive) {
-    holder.registerProblem(directive, M68kBundle.message("inspection.conditional.assembly.directives.unsupported"));
+    holder.registerProblem(directive, M68kBundle.message("inspection.conditional.assembly.directives.unsupported", directive.getText()));
   }
 }

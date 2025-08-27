@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,19 +28,19 @@ public class M68kConditionalAssemblyDirectivesInspectionTest extends BasePlatfor
 
   public void testIf1() {
     myFixture.configureByText("a.s",
-      " <error descr=\"Unsupported directive\">if1</error>");
+      " <error descr=\"Unsupported conditional assembly directive 'if1'\">if1</error>");
     myFixture.testHighlighting();
   }
 
   public void testIf2() {
     myFixture.configureByText("a.s",
-      " <error descr=\"Unsupported directive\">if2</error>");
+      " <error descr=\"Unsupported conditional assembly directive 'if2'\">if2</error>");
     myFixture.testHighlighting();
   }
 
   public void testIfp11() {
     myFixture.configureByText("a.s",
-      " <error descr=\"Unsupported directive\">ifp1</error>");
+      " <error descr=\"Unsupported conditional assembly directive 'ifp1'\">ifp1</error>");
     myFixture.testHighlighting();
   }
 
