@@ -4,6 +4,8 @@
 
 ### Changed
 
+- M68k Browser "Mnemonics" tab: show _68010_ suffix
+
 ### Added
 
 - Implicit macro labels: 

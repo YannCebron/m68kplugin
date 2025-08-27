@@ -22,6 +22,9 @@ import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.ui.ColoredListCellRenderer;
+import com.intellij.ui.SimpleTextAttributes;
+import com.intellij.ui.speedSearch.SpeedSearchUtil;
 import com.intellij.util.IconUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.Convertor;
@@ -34,6 +37,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kMnemonicRegistry;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -106,6 +110,22 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
       "<hr/>" + M68kInstructionDocumentationProvider.getInstructionReferenceDoc(mnemonic.elementType()) : "";
 
     return M68kDocumentationUtil.CSS + mnemonicDoc + referenceDoc;
+  }
+
+  @Override
+  protected ColoredListCellRenderer<M68kMnemonic> getListCellRenderer() {
+    return new ColoredListCellRenderer<>() {
+      @Override
+      protected void customizeCellRenderer(@NotNull JList<? extends M68kMnemonic> list, M68kMnemonic value, int index, boolean selected, boolean hasFocus) {
+        append(getListItemNamer().convert(value));
+
+        if (isShowMc68010.get() && !value.cpus().contains(M68kCpu.M_68000)) {
+          append(" (" + M68kCpu.M_68010.getCpuName() + ")", SimpleTextAttributes.GRAY_ATTRIBUTES);
+        }
+
+        SpeedSearchUtil.applySpeedSearchHighlighting(list, this, true, selected);
+      }
+    };
   }
 
 }
