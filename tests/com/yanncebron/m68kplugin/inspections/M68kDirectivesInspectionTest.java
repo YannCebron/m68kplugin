@@ -128,13 +128,13 @@ public class M68kDirectivesInspectionTest extends BasePlatformTestCase {
 
   public void testAutoDirective() {
     myFixture.configureByText("a.s",
-      " <error descr=\"Unsupported directive\">auto</error>");
+      " <error descr=\"Unsupported directive 'auto'\">auto</error>");
     myFixture.testHighlighting();
   }
 
   public void testMask2Directive() {
     myFixture.configureByText("a.s",
-      " <error descr=\"Unsupported directive\">mask2</error>");
+      " <error descr=\"Unsupported directive 'mask2'\">mask2</error>");
     myFixture.testHighlighting();
   }
 

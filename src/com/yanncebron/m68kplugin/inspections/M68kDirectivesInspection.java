@@ -39,12 +39,12 @@ final class M68kDirectivesInspection extends LocalInspectionTool implements Dumb
 
       @Override
       public void visitAutoDirective(@NotNull M68kAutoDirective element) {
-        holder.registerProblem(element, M68kBundle.message("inspection.directives.unsupported"));
+        holder.registerProblem(element, M68kBundle.message("inspection.directives.unsupported", element.getText()));
       }
 
       @Override
       public void visitMask2Directive(@NotNull M68kMask2Directive element) {
-        holder.registerProblem(element, M68kBundle.message("inspection.directives.unsupported"));
+        holder.registerProblem(element, M68kBundle.message("inspection.directives.unsupported", element.getText()));
       }
 
       @Override
