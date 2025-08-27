@@ -100,7 +100,7 @@
 - `dc`:
   - join lines
   - smart enter handler to split a value list / `ListSplitJoinContext`
-- surround descriptors?
+- surround descriptors: valid address mode variants
 - `FocusModeProvider`
 - string literal: support language injection
 - comment: smart enter `CodeDocumentationAwareCommenter`
