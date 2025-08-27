@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package com.yanncebron.m68kplugin.lang.psi.impl;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister;
-import com.yanncebron.m68kplugin.lang.psi.M68kRegister;
 import org.jetbrains.annotations.NotNull;
 
 abstract class M68kAdmWithRegisterMixIn extends ASTWrapperPsiElement implements M68kAdmWithRegister {
@@ -28,8 +27,4 @@ abstract class M68kAdmWithRegisterMixIn extends ASTWrapperPsiElement implements 
     super(node);
   }
 
-  @Override
-  public final @NotNull M68kRegister getRegister() {
-    return M68kRegister.find(getFirstChild().getNode().getElementType(), getText());
-  }
 }
