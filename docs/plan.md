@@ -42,6 +42,9 @@
 - `ReadWriteAccessDetector`
   - registers
   - label references
+- opcode: 
+  - inlay for target architecture
+  - inlay for privileged instruction
 - method separators:
   - "detected" subroutines
 - highlight returns
