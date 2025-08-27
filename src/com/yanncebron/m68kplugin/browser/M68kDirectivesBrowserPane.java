@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.browser;
 
 import com.intellij.openapi.actionSystem.ActionGroup;
+import com.intellij.openapi.util.text.NaturalComparator;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.Convertor;
@@ -26,6 +27,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 final class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<IElementType> {
@@ -42,6 +44,8 @@ final class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<IElementType> 
 
       items.add(type);
     }
+
+    items.sort(Comparator.comparing(IElementType::toString, NaturalComparator.INSTANCE));
     setListItems(items);
   }
 
