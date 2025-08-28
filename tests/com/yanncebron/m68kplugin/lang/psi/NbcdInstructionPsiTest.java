@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,11 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-public class NbcdInstructionPsiTest extends M68kPsiTestCase {
+public class NbcdInstructionPsiTest extends M68kPsiTestCase<M68kNbcdInstruction> {
+
+  public NbcdInstructionPsiTest() {
+    super(M68kNbcdInstruction.class);
+  }
 
   public void testWithoutDataSize() {
     final M68kNbcdInstruction instruction = parse("nbcd d0");
@@ -28,10 +32,6 @@ public class NbcdInstructionPsiTest extends M68kPsiTestCase {
     final M68kNbcdInstruction instruction = parse("nbcd.b d0");
 
     assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
-  }
-
-  private M68kNbcdInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kNbcdInstruction.class);
   }
 
 }

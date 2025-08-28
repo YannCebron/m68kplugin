@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,28 +17,26 @@
 package com.yanncebron.m68kplugin.lang.psi.directive;
 
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiTestCase;
-import org.jetbrains.annotations.NotNull;
 
-public class OutputDirectivePsiTest extends M68kPsiTestCase {
+public class OutputDirectivePsiTest extends M68kPsiTestCase<M68kOutputDirective> {
+
+  public OutputDirectivePsiTest() {
+    super(M68kOutputDirective.class);
+  }
 
   public void testWithNoQuotes() {
-    M68kOutputDirective directive = parse(" output fileName");
+    M68kOutputDirective directive = parse("output fileName");
     assertEquals("fileName", directive.getOutputPath());
   }
 
   public void testWithSingleQuotes() {
-    M68kOutputDirective directive = parse(" output 'fileName'");
+    M68kOutputDirective directive = parse("output 'fileName'");
     assertEquals("fileName", directive.getOutputPath());
   }
 
   public void testWithDoubleQuotes() {
-    M68kOutputDirective directive = parse(" output \"fileName\"");
+    M68kOutputDirective directive = parse("output \"fileName\"");
     assertEquals("fileName", directive.getOutputPath());
-  }
-
-  @NotNull
-  private M68kOutputDirective parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kOutputDirective.class);
   }
 
 }

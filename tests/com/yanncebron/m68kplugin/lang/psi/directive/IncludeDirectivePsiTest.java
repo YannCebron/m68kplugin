@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,12 @@
 package com.yanncebron.m68kplugin.lang.psi.directive;
 
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiTestCase;
-import org.jetbrains.annotations.NotNull;
 
-public class IncludeDirectivePsiTest extends M68kPsiTestCase {
+public class IncludeDirectivePsiTest extends M68kPsiTestCase<M68kIncludeDirective> {
+
+  public IncludeDirectivePsiTest() {
+    super(M68kIncludeDirective.class);
+  }
 
   public void testMissingIncludePath() {
     final M68kIncludeDirective directive = parse("include ");
@@ -45,8 +48,4 @@ public class IncludeDirectivePsiTest extends M68kPsiTestCase {
     assertEquals("test.i", directive.getIncludePath());
   }
 
-  @NotNull
-  private M68kIncludeDirective parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kIncludeDirective.class);
-  }
 }

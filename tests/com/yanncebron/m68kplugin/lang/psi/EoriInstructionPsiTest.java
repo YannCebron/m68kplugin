@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,11 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-public class EoriInstructionPsiTest extends M68kPsiTestCase {
+public class EoriInstructionPsiTest extends M68kPsiTestCase<M68kEoriInstruction> {
+
+  public EoriInstructionPsiTest() {
+    super(M68kEoriInstruction.class);
+  }
 
   public void testWithoutDataSize() {
     final M68kEoriInstruction instruction = parse("eori #1,d1");
@@ -38,10 +42,6 @@ public class EoriInstructionPsiTest extends M68kPsiTestCase {
     final M68kEoriInstruction instruction = parse("eori #1,SR");
 
     assertTrue(instruction.isPrivileged(M68kCpu.M_68000));
-  }
-
-  private M68kEoriInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kEoriInstruction.class);
   }
 
 }

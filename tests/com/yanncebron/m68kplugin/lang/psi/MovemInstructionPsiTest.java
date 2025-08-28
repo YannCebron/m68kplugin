@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,11 @@ package com.yanncebron.m68kplugin.lang.psi;
 
 import java.util.List;
 
-public class MovemInstructionPsiTest extends M68kPsiTestCase {
+public class MovemInstructionPsiTest extends M68kPsiTestCase<M68kMovemInstruction> {
+
+  public MovemInstructionPsiTest() {
+    super(M68kMovemInstruction.class);
+  }
 
   public void testWithDataSize() {
     final M68kMovemInstruction instruction = parse("movem.l d1-d2/a0/a2,(a7)");
@@ -50,10 +54,6 @@ public class MovemInstructionPsiTest extends M68kPsiTestCase {
     final M68kAdmAri admAri = instruction.getAdmAri();
     assertNotNull(admAri);
     assertEquals(M68kRegister.A7, admAri.getRegister());
-  }
-
-  private M68kMovemInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kMovemInstruction.class);
   }
 
 }

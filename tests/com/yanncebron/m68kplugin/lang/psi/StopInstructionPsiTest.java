@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,11 @@ package com.yanncebron.m68kplugin.lang.psi;
 
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
 
-public class StopInstructionPsiTest extends M68kPsiTestCase {
+public class StopInstructionPsiTest extends M68kPsiTestCase<M68kStopInstruction> {
+
+  public StopInstructionPsiTest() {
+    super(M68kStopInstruction.class);
+  }
 
   public void testStopInstruction() {
     final M68kStopInstruction instruction = parse("stop #2");
@@ -28,10 +32,6 @@ public class StopInstructionPsiTest extends M68kPsiTestCase {
     assertNotNull(admQuick);
     final M68kNumberExpression m68kNumberExpression = assertInstanceOf(admQuick.getExpression(), M68kNumberExpression.class);
     assertEquals("2", m68kNumberExpression.getText());
-  }
-
-  private M68kStopInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kStopInstruction.class);
   }
 
 }

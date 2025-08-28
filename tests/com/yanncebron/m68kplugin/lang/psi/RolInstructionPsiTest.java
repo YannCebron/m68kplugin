@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,11 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-public class RolInstructionPsiTest extends M68kPsiTestCase {
+public class RolInstructionPsiTest extends M68kPsiTestCase<M68kRolInstruction> {
+
+  public RolInstructionPsiTest() {
+    super(M68kRolInstruction.class);
+  }
 
   public void testWithoutDataSize() {
     final M68kRolInstruction instruction = parse("rol #1,d0");
@@ -32,10 +36,6 @@ public class RolInstructionPsiTest extends M68kPsiTestCase {
     assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
 
     assertNotNull(instruction.getAdmQuick());
-  }
-
-  private M68kRolInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kRolInstruction.class);
   }
 
 }

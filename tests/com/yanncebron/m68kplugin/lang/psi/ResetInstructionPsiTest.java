@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,15 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-import org.jetbrains.annotations.NotNull;
+public class ResetInstructionPsiTest extends M68kPsiTestCase<M68kResetInstruction> {
 
-public class ResetInstructionPsiTest extends M68kPsiTestCase {
+  public ResetInstructionPsiTest() {
+    super(M68kResetInstruction.class);
+  }
 
   public void testResetInstruction() {
     final M68kResetInstruction instruction = parse("reset");
     assertTrue(instruction.isPrivileged(M68kCpu.M_68000));
-  }
-
-  private @NotNull M68kResetInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kResetInstruction.class);
   }
 
 }

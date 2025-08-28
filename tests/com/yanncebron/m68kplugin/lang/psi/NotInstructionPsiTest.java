@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,11 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-public class NotInstructionPsiTest extends M68kPsiTestCase {
+public class NotInstructionPsiTest extends M68kPsiTestCase<M68kNotInstruction> {
+
+  public NotInstructionPsiTest() {
+    super(M68kNotInstruction.class);
+  }
 
   public void testWithoutDataSize() {
     final M68kNotInstruction instruction = parse("not d0");
@@ -29,10 +33,6 @@ public class NotInstructionPsiTest extends M68kPsiTestCase {
 
     assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
     assertNotNull(instruction.getAdmAix());
-  }
-
-  private M68kNotInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kNotInstruction.class);
   }
 
 }

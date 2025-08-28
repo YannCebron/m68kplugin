@@ -16,7 +16,11 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-public class MovecInstructionPsiTest extends M68kPsiTestCase {
+public class MovecInstructionPsiTest extends M68kPsiTestCase<M68kMovecInstruction> {
+
+  public MovecInstructionPsiTest() {
+    super(M68kMovecInstruction.class);
+  }
 
   public void testWithDataSize() {
     final M68kMovecInstruction instruction = parse("movec.l a0,vbr");
@@ -28,10 +32,6 @@ public class MovecInstructionPsiTest extends M68kPsiTestCase {
     M68kAdmVbr admVbr = instruction.getAdmVbr();
     assertNotNull(admVbr);
     assertEquals(M68kRegister.VBR, admVbr.getRegister());
-  }
-
-  private M68kMovecInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kMovecInstruction.class);
   }
 
 }

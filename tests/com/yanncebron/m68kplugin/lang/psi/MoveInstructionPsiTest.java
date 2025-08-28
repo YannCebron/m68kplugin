@@ -19,7 +19,11 @@ package com.yanncebron.m68kplugin.lang.psi;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
 
-public class MoveInstructionPsiTest extends M68kPsiTestCase {
+public class MoveInstructionPsiTest extends M68kPsiTestCase<M68kMoveInstruction> {
+
+  public MoveInstructionPsiTest() {
+    super(M68kMoveInstruction.class);
+  }
 
   public void testWithDataSize() {
     final M68kMoveInstruction instruction = parse("move.l d0,42(a0)");
@@ -68,10 +72,6 @@ public class MoveInstructionPsiTest extends M68kPsiTestCase {
     for (M68kCpu m68kCpu : M68kCpu.GROUP_68000_UP) {
       assertTrue(instruction.isPrivileged(m68kCpu));
     }
-  }
-
-  private M68kMoveInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kMoveInstruction.class);
   }
 
 }

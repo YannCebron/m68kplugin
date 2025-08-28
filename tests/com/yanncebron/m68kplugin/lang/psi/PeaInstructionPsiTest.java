@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,11 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-public class PeaInstructionPsiTest extends M68kPsiTestCase {
+public class PeaInstructionPsiTest extends M68kPsiTestCase<M68kPeaInstruction> {
+
+  public PeaInstructionPsiTest() {
+    super(M68kPeaInstruction.class);
+  }
 
   public void testWithoutDataSize() {
     final M68kPeaInstruction instruction = parse("pea (a0)");
@@ -28,10 +32,6 @@ public class PeaInstructionPsiTest extends M68kPsiTestCase {
     final M68kPeaInstruction instruction = parse("pea.l (a0)");
 
     assertEquals(M68kDataSize.LONGWORD, instruction.getDataSize());
-  }
-
-  private M68kPeaInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kPeaInstruction.class);
   }
 
 }

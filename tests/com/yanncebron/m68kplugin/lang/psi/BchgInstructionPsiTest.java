@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,11 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-public class BchgInstructionPsiTest extends M68kPsiTestCase {
+public class BchgInstructionPsiTest extends M68kPsiTestCase<M68kBchgInstruction> {
+
+  public BchgInstructionPsiTest() {
+    super(M68kBchgInstruction.class);
+  }
 
   public void testWithoutDataSize() {
     final M68kBchgInstruction instruction = parse("bchg #1,d0");
@@ -35,10 +39,6 @@ public class BchgInstructionPsiTest extends M68kPsiTestCase {
     final M68kAdmDrd sourceDrd = instruction.getSourceDrd();
     assertNotNull(sourceDrd);
     assertEquals(M68kRegister.D1, sourceDrd.getRegister());
-  }
-
-  private M68kBchgInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kBchgInstruction.class);
   }
 
 }

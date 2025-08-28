@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,11 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-public class UnlkInstructionPsiTest extends M68kPsiTestCase {
+public class UnlkInstructionPsiTest extends M68kPsiTestCase<M68kUnlkInstruction> {
+
+  public UnlkInstructionPsiTest() {
+    super(M68kUnlkInstruction.class);
+  }
 
   public void testUnlk() {
     final M68kUnlkInstruction instruction = parse("unlk a0");
@@ -24,10 +28,6 @@ public class UnlkInstructionPsiTest extends M68kPsiTestCase {
     final M68kAdmArd admArd = instruction.getAdmArd();
     assertNotNull(admArd);
     assertEquals(M68kRegister.A0, admArd.getRegister());
-  }
-
-  private M68kUnlkInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kUnlkInstruction.class);
   }
 
 }

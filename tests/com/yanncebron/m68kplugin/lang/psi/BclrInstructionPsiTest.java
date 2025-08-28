@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,11 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-public class BclrInstructionPsiTest extends M68kPsiTestCase {
+public class BclrInstructionPsiTest extends M68kPsiTestCase<M68kBclrInstruction> {
+
+  public BclrInstructionPsiTest() {
+    super(M68kBclrInstruction.class);
+  }
 
   public void testWithoutDataSize() {
     final M68kBclrInstruction instruction = parse("bclr #1,d0");
@@ -28,10 +32,6 @@ public class BclrInstructionPsiTest extends M68kPsiTestCase {
     final M68kBclrInstruction instruction = parse("bclr.b #1,d0");
 
     assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
-  }
-
-  private M68kBclrInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kBclrInstruction.class);
   }
 
 }

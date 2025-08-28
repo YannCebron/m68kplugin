@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,11 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-public class NegInstructionPsiTest extends M68kPsiTestCase {
+public class NegInstructionPsiTest extends M68kPsiTestCase<M68kNegInstruction> {
+
+  public NegInstructionPsiTest() {
+    super(M68kNegInstruction.class);
+  }
 
   public void testWithoutDataSize() {
     final M68kNegInstruction instruction = parse("neg d0");
@@ -29,10 +33,6 @@ public class NegInstructionPsiTest extends M68kPsiTestCase {
     final M68kNegInstruction instruction = parse("neg.b d0");
 
     assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
-  }
-
-  private M68kNegInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kNegInstruction.class);
   }
 
 }

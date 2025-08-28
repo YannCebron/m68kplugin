@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,11 @@ package com.yanncebron.m68kplugin.lang.psi;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
 
-public class BsrInstructionPsiTest extends M68kPsiTestCase {
+public class BsrInstructionPsiTest extends M68kPsiTestCase<M68kBsrInstruction> {
+
+  public BsrInstructionPsiTest() {
+    super(M68kBsrInstruction.class);
+  }
 
   public void testWithoutDataSize() {
     final M68kBsrInstruction instruction = parse("bsr 40000");
@@ -36,10 +40,6 @@ public class BsrInstructionPsiTest extends M68kPsiTestCase {
     assertEquals(M68kDataSize.SHORT, instruction.getDataSize());
 
     assertInstanceOf(instruction.getExpression(), M68kLabelRefExpression.class);
-  }
-
-  private M68kBsrInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kBsrInstruction.class);
   }
 
 }

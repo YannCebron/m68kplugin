@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,11 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-public class OriInstructionPsiTest extends M68kPsiTestCase {
+public class OriInstructionPsiTest extends M68kPsiTestCase<M68kOriInstruction> {
+
+  public OriInstructionPsiTest() {
+    super(M68kOriInstruction.class);
+  }
 
   public void testWithoutDataSize() {
     final M68kOriInstruction instruction = parse("ori #1,d1");
@@ -28,10 +32,6 @@ public class OriInstructionPsiTest extends M68kPsiTestCase {
     final M68kOriInstruction instruction = parse("ori.b #1,d1");
 
     assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
-  }
-
-  private M68kOriInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kOriInstruction.class);
   }
 
 }

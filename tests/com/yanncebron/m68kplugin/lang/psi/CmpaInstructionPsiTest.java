@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,11 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-public class CmpaInstructionPsiTest extends M68kPsiTestCase {
+public class CmpaInstructionPsiTest extends M68kPsiTestCase<M68kCmpaInstruction> {
+
+  public CmpaInstructionPsiTest() {
+    super(M68kCmpaInstruction.class);
+  }
 
   public void testWithoutDataSize() {
     final M68kCmpaInstruction instruction = parse("cmpa d0,a0");
@@ -28,10 +32,6 @@ public class CmpaInstructionPsiTest extends M68kPsiTestCase {
     final M68kCmpaInstruction instruction = parse("cmpa.w d0,a0");
 
     assertEquals(M68kDataSize.WORD, instruction.getDataSize());
-  }
-
-  private M68kCmpaInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kCmpaInstruction.class);
   }
 
 }

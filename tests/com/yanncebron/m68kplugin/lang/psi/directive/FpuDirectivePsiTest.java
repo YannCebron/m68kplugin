@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,12 @@ package com.yanncebron.m68kplugin.lang.psi.directive;
 
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiTestCase;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
-import org.jetbrains.annotations.NotNull;
 
-public class FpuDirectivePsiTest extends M68kPsiTestCase {
+public class FpuDirectivePsiTest extends M68kPsiTestCase<M68kFpuDirective> {
+
+  public FpuDirectivePsiTest() {
+    super(M68kFpuDirective.class);
+  }
 
   public void testCpID() {
     M68kFpuDirective directive = parse("fpu 1");
@@ -31,11 +34,6 @@ public class FpuDirectivePsiTest extends M68kPsiTestCase {
   public void testMissingCpID() {
     M68kFpuDirective directive = parse("fpu");
     assertNull(directive.getCpID());
-  }
-
-  @NotNull
-  private M68kFpuDirective parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kFpuDirective.class);
   }
 
 }

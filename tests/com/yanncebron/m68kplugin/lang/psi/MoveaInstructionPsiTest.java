@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,11 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-public class MoveaInstructionPsiTest extends M68kPsiTestCase {
+public class MoveaInstructionPsiTest extends M68kPsiTestCase<M68kMoveaInstruction> {
+
+  public MoveaInstructionPsiTest() {
+    super(M68kMoveaInstruction.class);
+  }
 
   public void testWithDataSize() {
     final M68kMoveaInstruction instruction = parse("movea.l a0,a1");
@@ -24,10 +28,6 @@ public class MoveaInstructionPsiTest extends M68kPsiTestCase {
     assertEquals(M68kDataSize.LONGWORD, instruction.getDataSize());
 
     assertSize(2, instruction.getAdmArdList());
-  }
-
-  private M68kMoveaInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kMoveaInstruction.class);
   }
 
 }

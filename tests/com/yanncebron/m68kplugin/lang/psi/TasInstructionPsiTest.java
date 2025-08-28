@@ -16,7 +16,11 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-public class TasInstructionPsiTest extends M68kPsiTestCase {
+public class TasInstructionPsiTest extends M68kPsiTestCase<M68kTasInstruction> {
+
+  public TasInstructionPsiTest() {
+    super(M68kTasInstruction.class);
+  }
 
   public void testWithoutDataSize() {
     final M68kTasInstruction instruction = parse("tas d0");
@@ -32,10 +36,6 @@ public class TasInstructionPsiTest extends M68kPsiTestCase {
     M68kAdmApd admApd = instruction.getAdmApd();
     assertNotNull(admApd);
     assertEquals(M68kRegister.A1, admApd.getRegister());
-  }
-
-  private M68kTasInstruction parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kTasInstruction.class);
   }
 
 }

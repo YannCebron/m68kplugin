@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,21 +18,24 @@ package com.yanncebron.m68kplugin.lang.psi.directive;
 
 import com.yanncebron.m68kplugin.lang.psi.M68kDataSize;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiTestCase;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class MacroCallDirectivePsiTest extends M68kPsiTestCase {
+public class MacroCallDirectivePsiTest extends M68kPsiTestCase<M68kMacroCallDirective> {
+
+  public MacroCallDirectivePsiTest() {
+    super(M68kMacroCallDirective.class);
+  }
 
   public void testNoArgs() {
-    M68kMacroCallDirective directive = parse(" MACRO_NAME");
+    M68kMacroCallDirective directive = parse("MACRO_NAME");
 
     assertEmpty(directive.getMacroCallParameterList());
     assertNull(directive.getDataSize());
   }
 
   public void testArgs() {
-    M68kMacroCallDirective directive = parse(" MACRO_NAME d0,<label,1,2>,SR,VBR,d0-d2");
+    M68kMacroCallDirective directive = parse("MACRO_NAME d0,<label,1,2>,SR,VBR,d0-d2");
 
     final List<M68kMacroCallParameter> parameters = directive.getMacroCallParameterList();
     assertSize(5, parameters);
@@ -44,16 +47,10 @@ public class MacroCallDirectivePsiTest extends M68kPsiTestCase {
   }
 
   public void testDataSized() {
-    M68kMacroCallDirective directive = parse(" MACRO_NAME.w");
+    M68kMacroCallDirective directive = parse("MACRO_NAME.w");
 
     assertEmpty(directive.getMacroCallParameterList());
     assertEquals(M68kDataSize.WORD, directive.getDataSize());
-  }
-
-
-  @NotNull
-  private M68kMacroCallDirective parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kMacroCallDirective.class);
   }
 
 }

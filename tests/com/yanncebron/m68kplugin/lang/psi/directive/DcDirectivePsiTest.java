@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,11 @@ import com.yanncebron.m68kplugin.lang.psi.M68kPsiTestCase;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
 
-public class DcDirectivePsiTest extends M68kPsiTestCase {
+public class DcDirectivePsiTest extends M68kPsiTestCase<M68kDcDirective> {
+
+  public DcDirectivePsiTest() {
+    super(M68kDcDirective.class);
+  }
 
   public void testSingleElement() {
     final M68kDcDirective directive = parse("dc.b 0");
@@ -40,7 +44,4 @@ public class DcDirectivePsiTest extends M68kPsiTestCase {
     assertSize(4, directive.getExpressionList());
   }
 
-  private M68kDcDirective parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kDcDirective.class);
-  }
 }

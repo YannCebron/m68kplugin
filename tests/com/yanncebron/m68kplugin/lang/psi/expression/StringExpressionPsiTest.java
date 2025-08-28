@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,30 +22,34 @@ import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiTestCase;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDcDirective;
 
-public class StringExpressionPsiTest extends M68kPsiTestCase {
+public class StringExpressionPsiTest extends M68kPsiTestCase<M68kDcDirective> {
+
+  public StringExpressionPsiTest() {
+    super(M68kDcDirective.class);
+  }
 
   public void testGetValueDoubleQuotes() {
-    final M68kExpression expression = parse("\"text\"");
+    final M68kExpression expression = parseString("\"text\"");
     final M68kStringExpression m68kStringExpression = assertInstanceOf(expression, M68kStringExpression.class);
     assertEquals("text", m68kStringExpression.getValue());
   }
 
   public void testGetValueSingleQuotes() {
-    final M68kExpression expression = parse("'text'");
+    final M68kExpression expression = parseString("'text'");
     final M68kStringExpression m68kStringExpression = assertInstanceOf(expression, M68kStringExpression.class);
     assertEquals("text", m68kStringExpression.getValue());
   }
 
   public void testGetReferences() {
-    final M68kExpression expression = parse("'http://www.amiga.com'");
+    final M68kExpression expression = parseString("'http://www.amiga.com'");
     final M68kStringExpression m68kStringExpression = assertInstanceOf(expression, M68kStringExpression.class);
     final PsiReference psiReference = assertOneElement(m68kStringExpression.getReferences());
     final WebReference webReference = assertInstanceOf(psiReference, WebReference.class);
     assertEquals("http://www.amiga.com", webReference.getUrl());
   }
 
-  private M68kExpression parse(String expressionText) {
-    final M68kDcDirective m68kDcDirective = assertInstanceOf(doParse(" dc " + expressionText), M68kDcDirective.class);
+  private M68kExpression parseString(String expressionText) {
+    final M68kDcDirective m68kDcDirective = parse(" dc " + expressionText);
     return assertInstanceOf(ContainerUtil.getFirstItem(m68kDcDirective.getExpressionList()), M68kExpression.class);
   }
 

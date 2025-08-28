@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,12 @@
 package com.yanncebron.m68kplugin.lang.psi.directive;
 
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiTestCase;
-import org.jetbrains.annotations.NotNull;
 
-public class IncdirDirectivePsiTest extends M68kPsiTestCase {
+public class IncdirDirectivePsiTest extends M68kPsiTestCase<M68kIncdirDirective> {
+
+  public IncdirDirectivePsiTest() {
+    super(M68kIncdirDirective.class);
+  }
 
   public void testMissingIncludePath() {
     final M68kIncdirDirective directive = parse("incdir ");
@@ -45,8 +48,4 @@ public class IncdirDirectivePsiTest extends M68kPsiTestCase {
     assertEquals("my/path", directive.getIncludePath());
   }
 
-  @NotNull
-  private M68kIncdirDirective parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kIncdirDirective.class);
-  }
 }

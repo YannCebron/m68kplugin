@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,26 +25,32 @@ import com.intellij.util.IncorrectOperationException;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.M68kLanguage;
 
-public abstract class M68kPsiTestCase extends LightPlatformTestCase {
+public abstract class M68kPsiTestCase<T extends M68kPsiElement> extends LightPlatformTestCase {
 
-  protected M68kPsiElement doParse(final String text) {
-    return doParse(text, false);
+  private final Class<T> clazz;
+
+  protected M68kPsiTestCase(Class<T> clazz) {
+    this.clazz = clazz;
+  }
+
+  protected T parse(final String text) {
+    return parse(text, false);
   }
 
   /**
    * workaround for {@code eq*} directives including `label`
    */
-  protected M68kPsiElement doParse(final String text, final boolean withLabel) {
-    final M68kFile m68kFile = createFile(text);
+  protected T parse(final String text, final boolean noWhitespacePrefix) {
+    final M68kFile m68kFile = createFile(noWhitespacePrefix? text : " " + text);
 
     final PsiElement firstChild = m68kFile.getFirstChild();
-    if (withLabel) {
-      return assertInstanceOf(firstChild, M68kPsiElement.class);
+    if (noWhitespacePrefix) {
+      return assertInstanceOf(firstChild, clazz);
     }
 
     assertNotNull(firstChild);
     final PsiElement sibling = firstChild.getNextSibling();
-    return assertInstanceOf(sibling, M68kPsiElement.class);
+    return assertInstanceOf(sibling, clazz);
   }
 
   private M68kFile createFile(final String text) throws IncorrectOperationException {

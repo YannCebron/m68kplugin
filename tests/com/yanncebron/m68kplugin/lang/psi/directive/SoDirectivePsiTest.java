@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +20,14 @@ import com.yanncebron.m68kplugin.lang.psi.M68kDataSize;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiTestCase;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
 
-public class SoDirectivePsiTest extends M68kPsiTestCase {
+public class SoDirectivePsiTest extends M68kPsiTestCase<M68kSoDirective> {
+
+  public SoDirectivePsiTest() {
+    super(M68kSoDirective.class);
+  }
 
   public void testWithoutDataSize() {
-    final M68kSoDirective directive = parse("label so 42");
-
+    final M68kSoDirective directive = parse("label so 42", true);
 
     assertNull(directive.getDataSize());
 
@@ -32,14 +35,11 @@ public class SoDirectivePsiTest extends M68kPsiTestCase {
   }
 
   public void testWithDataSize() {
-    final M68kSoDirective directive = parse("label so.b 42");
+    final M68kSoDirective directive = parse("label so.b 42", true);
 
     assertEquals(M68kDataSize.BYTE, directive.getDataSize());
 
     assertInstanceOf(directive.getExpression(), M68kNumberExpression.class);
   }
 
-  private M68kSoDirective parse(String text) {
-    return assertInstanceOf(doParse(text, true), M68kSoDirective.class);
-  }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,12 @@ package com.yanncebron.m68kplugin.lang.psi.directive;
 
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiTestCase;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
-import org.jetbrains.annotations.NotNull;
 
-public class IncbinDirectivePsiTest extends M68kPsiTestCase {
+public class IncbinDirectivePsiTest extends M68kPsiTestCase<M68kIncbinDirective> {
+
+  public IncbinDirectivePsiTest() {
+    super(M68kIncbinDirective.class);
+  }
 
   public void testMissingIncludePath() {
     final M68kIncbinDirective directive = parse("incbin ");
@@ -56,8 +59,4 @@ public class IncbinDirectivePsiTest extends M68kPsiTestCase {
     assertEquals("42", lengthExpression.getText());
   }
 
-  @NotNull
-  private M68kIncbinDirective parse(String text) {
-    return assertInstanceOf(doParse(" " + text), M68kIncbinDirective.class);
-  }
 }
