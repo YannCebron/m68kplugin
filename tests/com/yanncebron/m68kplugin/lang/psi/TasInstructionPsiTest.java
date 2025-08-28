@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,9 @@ public class TasInstructionPsiTest extends M68kPsiTestCase {
     final M68kTasInstruction instruction = parse("tas.b -(a1)");
 
     assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
-    assertNotNull(instruction.getAdmApd());
+    M68kAdmApd admApd = instruction.getAdmApd();
+    assertNotNull(admApd);
+    assertEquals(M68kRegister.A1, admApd.getRegister());
   }
 
   private M68kTasInstruction parse(String text) {

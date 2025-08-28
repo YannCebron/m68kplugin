@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,9 @@ public class MovecInstructionPsiTest extends M68kPsiTestCase {
     assertEquals(M68kDataSize.LONGWORD, instruction.getDataSize());
 
     assertNotNull(instruction.getAdmRrd());
-    assertNotNull(instruction.getAdmVbr());
+    M68kAdmVbr admVbr = instruction.getAdmVbr();
+    assertNotNull(admVbr);
+    assertEquals(M68kRegister.VBR, admVbr.getRegister());
   }
 
   private M68kMovecInstruction parse(String text) {
