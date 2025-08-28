@@ -17,13 +17,10 @@
 package com.yanncebron.m68kplugin.lang.psi;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiFileFactory;
 import com.intellij.testFramework.LightPlatformTestCase;
 import com.intellij.testFramework.PsiTestUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.yanncebron.m68kplugin.lang.M68kFile;
-import com.yanncebron.m68kplugin.lang.M68kLanguage;
 
 public abstract class M68kPsiTestCase<T extends M68kPsiElement> extends LightPlatformTestCase {
 
@@ -41,7 +38,7 @@ public abstract class M68kPsiTestCase<T extends M68kPsiElement> extends LightPla
    * workaround for {@code eq*} directives including `label`
    */
   protected T parse(final String text, final boolean noWhitespacePrefix) {
-    final M68kFile m68kFile = createFile(noWhitespacePrefix? text : " " + text);
+    final M68kFile m68kFile = createFile(noWhitespacePrefix ? text : " " + text);
 
     final PsiElement firstChild = m68kFile.getFirstChild();
     if (noWhitespacePrefix) {
@@ -54,15 +51,14 @@ public abstract class M68kPsiTestCase<T extends M68kPsiElement> extends LightPla
   }
 
   private M68kFile createFile(final String text) throws IncorrectOperationException {
-    final PsiFile psiFile = PsiFileFactory.getInstance(getProject())
-      .createFileFromText("test.s", M68kLanguage.INSTANCE, text);
+    final M68kFile psiFile = assertInstanceOf(createLightFile("test.s", text), M68kFile.class);
 
     final String testName = getTestName(false);
     if (!testName.contains("Missing") && !testName.contains("Wrong")) {
       PsiTestUtil.checkErrorElements(psiFile);
     }
 
-    return assertInstanceOf(psiFile, M68kFile.class);
+    return psiFile;
   }
 
 }
