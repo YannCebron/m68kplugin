@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,11 @@ package com.yanncebron.m68kplugin.lang.psi;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.yanncebron.m68kplugin.lang.M68kFileElementType;
 import com.yanncebron.m68kplugin.lang.M68kLanguage;
+import junit.framework.TestCase;
 
-public class M68kTokenTest extends BasePlatformTestCase {
+public class M68kTokenTest extends TestCase {
 
   private static final TokenSet IGNORE_TYPES = TokenSet.create(
     M68kFileElementType.INSTANCE,
