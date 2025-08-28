@@ -17,13 +17,15 @@
 package com.yanncebron.m68kplugin.amiga.hardware;
 
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.testFramework.UsefulTestCase;
+import junit.framework.TestCase;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-public class M68kAmigaHardwareRegisterTest extends UsefulTestCase {
+import static com.intellij.testFramework.UsefulTestCase.assertSize;
+
+public class M68kAmigaHardwareRegisterTest extends TestCase {
 
   public void testConsistency() {
     assertSize(236, M68kAmigaHardwareRegister.values());
