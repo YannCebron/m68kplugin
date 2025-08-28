@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,13 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.testFramework.fixtures.BasePlatformTestCase;
+import com.intellij.testFramework.LightPlatformTestCase;
 
 import java.util.Collection;
 
-public class M68kMnemonicRegistryTest extends BasePlatformTestCase {
+public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
 
   private final M68kMnemonicRegistry instance = M68kMnemonicRegistry.getInstance();
 
@@ -115,8 +116,8 @@ public class M68kMnemonicRegistryTest extends BasePlatformTestCase {
   }
 
   private void doTestFind(String instructionText, M68kMnemonic expectedMnemonic) {
-    myFixture.configureByText("a.s", " " + instructionText);
-    final M68kPsiElement instruction = M68kPsiTreeUtil.getContainingInstructionOrDirective(myFixture.getFile().findElementAt(2));
+    PsiFile psiFile = createLightFile("a.s", " " + instructionText); //
+    final M68kPsiElement instruction = M68kPsiTreeUtil.getContainingInstructionOrDirective(psiFile.findElementAt(2));
     assertNotNull(instructionText, instruction);
     final M68kInstruction m68kInstruction = assertInstanceOf(instruction, M68kInstruction.class);
 
