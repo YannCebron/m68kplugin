@@ -41,7 +41,9 @@ trap
  dc 'string'
  dc 1/2
  dc "string"
+ dc.b "string with \n \t escapes \0",0
  dc *-42
  dc 42-*
+label:
  dc.b ((2/(1+2)*3)+label)/2
  dc.b 2/1+2*3+label/2

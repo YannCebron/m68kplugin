@@ -8,23 +8,22 @@
 label = 42
  cnop 0,4
  rem
-macroName MACRO
+ erem
  dc.b 42
  dcb.l 42,666
  data
  code
  opt w+,u+
-label2=42
+label2=42 ;intentional duplicate
  section tos,code,chip
  dc.l 1,2,3
 label equ 42
- end
-label equr a4
- erem
+reg_label equr a4
  dr label,label2
  ds 42
  dx.l 42
  plen 22
+ inline
  einline
  list
  even
@@ -35,15 +34,12 @@ label equr a4
  rs 42
  include "includeFile"
  addwatch label
- align 0,4
-label equr d6
+ align 4
  incdir "path"
  page
- inline
  data_f
  code_f
  llen 22
- endm
  bss_c
  text
  nopage
@@ -58,6 +54,7 @@ label set 42
  odd
  cseg
  org $50000
+offset equ 22
  incbin "path",offset,42
  rs.b 42
  xdef label
@@ -65,14 +62,15 @@ label set 42
  xref label
  xref label,anotherLabel
  fail "FAIL MESSAGE"
-
  clrfo
  setfo 42
 
  clrso
  setso 44
 
- auto
+ fpu 1
+ output "fileName"
+
  msource on
  msource off
 
@@ -80,4 +78,8 @@ label set 42
  offset
 
  mask2
+ auto
+
+ end
+; comment
  auto

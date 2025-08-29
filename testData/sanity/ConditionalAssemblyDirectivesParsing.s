@@ -25,6 +25,11 @@
  ifc arg1,arg2
  endif
  ifb NAME
+ elseif NAME
+ endif
+ ifmi 1+2
+ endif
+ ifpl 1+2
  endif
  if NAME
  endif
