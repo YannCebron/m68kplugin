@@ -32,6 +32,7 @@
 
 - macro call: parameter count mismatch
 - macro block:
+  - `Symbol` API
   - highlight usages of parameter at caret
   - usage of parameters outside of a macro block
   - non-sequential parameter `\n` numbering
