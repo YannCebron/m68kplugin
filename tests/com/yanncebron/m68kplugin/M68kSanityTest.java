@@ -20,7 +20,7 @@ import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.TestDataPath;
-import com.intellij.testFramework.fixtures.CodeInsightFixtureTestCase;
+import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.intellij.testFramework.propertyBased.*;
 import com.yanncebron.m68kplugin.lang.M68kLanguage;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
@@ -31,9 +31,8 @@ import org.jetbrains.jetCheck.PropertyChecker;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-@SuppressWarnings("rawtypes")
 @TestDataPath("$PROJECT_ROOT/testData/sanity")
-public class M68kSanityTest extends CodeInsightFixtureTestCase {
+public class M68kSanityTest extends BasePlatformTestCase {
 
   private static final int ITERATION_COUNT = 1000;
 
