@@ -17,7 +17,6 @@
 
 ### Directives
 
-- `rem` sections: treat as real comment
 - unpaired directives:
   - `struct`/`estruct`
 - unpaired conditional assembly directives (nesting!), missing `endc`/`endif`

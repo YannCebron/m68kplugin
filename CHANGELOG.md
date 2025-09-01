@@ -7,8 +7,7 @@
 - M68k Browser "Mnemonics" tab: show _68010_ suffix
 
 ### Added
-
-- Implicit macro labels: 
+- implicit macro labels: 
   - configure macros defining labels via their first parameter, see inspection _Unresolved label reference_ for details
   - use _Edit | Find Usages_ on parameter to find usages of implicit label
 
@@ -19,6 +18,7 @@
   - fix showing the preceding EOL comment instead of the current line EOL comment 
   - show the preceding comment if separated by one conditional assembly directive
 - macro call: resolve to macros in the current file defined _after_ the current location
+- `rem` - `erem` section: treat as real comment
 
 ## 0.1.8 - 2025-07-20
 

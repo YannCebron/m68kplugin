@@ -1,0 +1,12 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kRemDirectiveImpl(REM_DIRECTIVE)
+    PsiElement(rem)('rem')
+  PsiElement(LINEFEED)('\n')
+  PsiComment(comment)(' everything in between')
+  PsiElement(LINEFEED)('\n')
+  PsiComment(comment)(' is a comment')
+  PsiElement(LINEFEED)('\n')
+  M68kEremDirectiveImpl(EREM_DIRECTIVE)
+    PsiElement(erem)(' erem')
+  PsiElement(LINEFEED)('\n')

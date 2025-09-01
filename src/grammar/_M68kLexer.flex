@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -123,6 +123,7 @@ Z=[zZ]
 %state IN_OPERAND
 %state MACRO_PARAMETER
 %state AFTER_OPERAND
+%state IN_REM
 
 %%
 <YYINITIAL, MACRO_DECLARATION, AFTER_LABEL, IN_INSTRUCTION, AFTER_INSTRUCTION, STRING_DIRECTIVE, IN_OPERAND, MACRO_PARAMETER, AFTER_OPERAND> {
@@ -492,7 +493,7 @@ Z=[zZ]
   {P}{R}{I}{N}{T}{V}           { yybegin(IN_OPERAND); return PRINTV; }
   {P}{U}{S}{H}{S}{E}{C}{T}{I}{O}{N} { yybegin(AFTER_OPERAND); return PUSHSECTION; }
   {R}{E}{G}                    { yybegin(IN_OPERAND); return REG; }
-  {R}{E}{M}                    { yybegin(AFTER_OPERAND); return REM; }
+  {R}{E}{M}                    { yybegin(IN_REM); return REM; }
   {R}{E}{P}{T}                 { yybegin(IN_OPERAND); return REPT; }
   {R}{S} / {DATA_SIZE}?        { yybegin(AFTER_INSTRUCTION); return RS; }
   {R}{S}{R}{E}{S}{E}{T}        { yybegin(AFTER_OPERAND); return RSRESET; }
@@ -557,6 +558,13 @@ Z=[zZ]
   {MACRO_NAME} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return MACRO_CALL_ID; }
 
   {COMMENT}                    { return COMMENT; }
+}
+
+// `rem` until matching `erem`
+<IN_REM> {
+  {WHITE_SPACE}+ {E}{R}{E}{M}  { yybegin(AFTER_OPERAND); return EREM; }
+  {CRLF}                   { return LINEFEED; }
+  .+                       { return COMMENT; }
 }
 
 [^] { return BAD_CHARACTER; }

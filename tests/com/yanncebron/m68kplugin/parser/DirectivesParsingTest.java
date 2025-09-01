@@ -377,6 +377,15 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" erem");
   }
 
+  public void testRemWithEremDirective() throws Exception {
+    doCodeTest("""
+       rem
+       everything in between
+       is a comment
+       erem
+      """);
+  }
+
   public void testXDefDirective() throws Exception {
     doCodeTest(" xdef label");
   }
