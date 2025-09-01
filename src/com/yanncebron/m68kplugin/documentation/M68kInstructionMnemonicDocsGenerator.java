@@ -126,30 +126,7 @@ class M68kInstructionMnemonicDocsGenerator {
   }
 
   private void appendCpus(M68kMnemonic mnemonic) {
-    final Set<M68kCpu> cpus = mnemonic.cpus();
-    if (cpus == M68kCpu.GROUP_68000_UP) {
-      sb.append(M68kBundle.message("cpu.group.GROUP_68000_UP"));
-      appendBreak();
-    } else {
-      sb.append("<table><tr>");
-      for (M68kCpu value : M68kCpu.GROUP_68000_UP) {
-        sb.append("<th>");
-        sb.append(value.getCpuName());
-        sb.append("</th>");
-      }
-      sb.append("</tr>");
-
-      sb.append("<tr>");
-      for (M68kCpu value : M68kCpu.GROUP_68000_UP) {
-        sb.append("<td style=\"text-align:center;\">");
-        if (cpus.contains(value)) {
-          sb.append(M68kDocumentationUtil.CHECK_MARK);
-        }
-        sb.append("</td>");
-      }
-      sb.append("</tr>");
-      sb.append("</table>");
-    }
+    M68kDocsGeneratorUtil.appendCpus(sb, mnemonic.cpus());
   }
 
   private void appendOperand(M68kOperand m68kOperand, String prefix) {

@@ -38,6 +38,12 @@ Browse all supported directives with reference documentation
 
 ![Directive reference documentation](../assets/ide/directive_doc.png)
 
+### Registers
+
+Browse all supported registers with reference documentation
+
+![Register reference documentation](../assets/ide/register_doc.png)
+
 ### Amiga Hardware
 
 Browse all hardware registers with additional reference documentation.

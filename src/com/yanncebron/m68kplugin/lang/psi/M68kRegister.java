@@ -86,6 +86,14 @@ public enum M68kRegister {
     throw new IllegalArgumentException("No register for " + elementType + " with text '" + text + "'");
   }
 
+  public Set<M68kCpu> getCpus() {
+    return cpus;
+  }
+
+  public IElementType getElementType() {
+    return elementType;
+  }
+
   public boolean isSameKind(M68kRegister other) {
     return elementType == other.elementType;
   }

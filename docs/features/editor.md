@@ -54,6 +54,10 @@ _M68k Browser_ tool window lists all supported mnemonics with additional referen
 
 _View \| View Quick Documentation_ Show directive reference documentation
 
+### Registers
+
+_View \| View Quick Documentation_ Show register reference documentation
+
 ### Labels
 
 *View \| Quick Documentation* for labels: show preceding lines or EOL comment(s)

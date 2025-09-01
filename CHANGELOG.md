@@ -10,6 +10,9 @@
 - implicit macro labels: 
   - configure macros defining labels via their first parameter, see inspection _Unresolved label reference_ for details
   - use _Edit | Find Usages_ on parameter to find usages of implicit label
+- reference documentation for registers:
+  - in editor
+  - M68k Browser "Registers" tab
 
 ### Fixed
 

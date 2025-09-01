@@ -254,6 +254,10 @@
                  order="after mnemonics"
                  displayName="toolwindow.tab.directives"
                  implementation="com.yanncebron.m68kplugin.browser.M68kDirectivesBrowserPane"/>
+    <browserPane id="registers"
+                 order="after directives"
+                 displayName="toolwindow.tab.registers"
+                 implementation="com.yanncebron.m68kplugin.browser.M68kRegistersBrowserPane"/>
   </extensions>
 
   <actions>
