@@ -2,11 +2,14 @@
 
 ## Unreleased
 
+## 0.1.9 - 2025-09-08
+
 ### Changed
 
 - M68k Browser "Mnemonics" tab: show _68010_ suffix
 
 ### Added
+
 - implicit macro labels: 
   - configure macros defining labels via their first parameter, see inspection _Unresolved label reference_ for details
   - use _Edit | Find Usages_ on parameter to find usages of implicit label
