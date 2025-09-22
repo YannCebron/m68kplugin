@@ -37,8 +37,8 @@ Using a non-supported address mode will result in a syntax error or
 
 ### Directives
 
-[vasm Docs 1](http://sun.hasenbraten.de/vasm/release/vasm_4.html)
-[vasm Docs 2](http://sun.hasenbraten.de/vasm/release/vasm_19.html)
+[vasm Docs 4.4](http://sun.hasenbraten.de/vasm/release/vasm_4.html)
+[vasm Docs 23.5](http://sun.hasenbraten.de/vasm/release/vasm_23.html)
 
 Unsupported directives, these will display as a false positive
 > _"Cannot resolve macro '$DIRECTIVE$'"_
@@ -71,7 +71,8 @@ Unsupported directives, these will display as a false positive
 - `symdebug`
 - `weak`
 
-MadMac assembler specific (a dot may optionally precede all directives):
+--- 
+MadMac assembler specific ([vasm Docs](http://sun.hasenbraten.de/vasm/release/vasm_5.html)) (a dot may optionally precede all directives):
 
 - `abs`
 - `assert`
