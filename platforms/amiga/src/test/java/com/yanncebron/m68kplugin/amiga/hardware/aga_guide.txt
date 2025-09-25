@@ -930,6 +930,8 @@ BLTCON1  h 042  W    A    Blitter control register 1
          operations. There are 2 basic modes, area and line, which are
          selected by bit 0 of BLTCON1, as shown below.
 
+         [BLTCON Helper](https://bltcon-helper.grahambates.com/) by grahambates
+
          ## AREA MODE ("normal")
 
          +------+---------+---------+

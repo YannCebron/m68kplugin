@@ -2,6 +2,8 @@ These two control registers are used together to control Blitter
 operations. There are 2 basic modes, area and line, which are
 selected by bit 0 of [BLTCON1](BLTCON0.md), as shown below.
 
+[BLTCON Helper](https://bltcon-helper.grahambates.com/) by grahambates
+
 ## AREA MODE ("normal")
 
 
