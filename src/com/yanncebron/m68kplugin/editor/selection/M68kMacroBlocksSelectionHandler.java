@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package com.yanncebron.m68kplugin.editor;
+package com.yanncebron.m68kplugin.editor.selection;
 
-import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kEndmDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroDirective;
 
 /**
- * Extend selection to preceding label (or keep current one) (inclusive) up to subsequent label (exclusive).
+ * Extend selection to preceding macro declaration start (or keep current one) (inclusive) up to closing endm (inclusive).
  */
-final class M68kLabelBlocksSelectionHandler extends M68kSelectionHandlerBase {
+final class M68kMacroBlocksSelectionHandler extends M68kSelectionHandlerBase {
 
-  M68kLabelBlocksSelectionHandler() {
-    super(M68kLabelBase.class, true, M68kLabelBase.class, false);
+  M68kMacroBlocksSelectionHandler() {
+    super(M68kMacroDirective.class, true, M68kEndmDirective.class, true);
   }
+
 }
