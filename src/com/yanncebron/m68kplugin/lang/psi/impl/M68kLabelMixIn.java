@@ -24,6 +24,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.presentation.java.SymbolPresentationUtil;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
+import com.intellij.util.SmartList;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
@@ -34,8 +35,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.List;
 
-abstract class M68kLabelMixIn extends StubBasedPsiElementBase<M68kLabelStub> implements M68kLabelBase {
+abstract class M68kLabelMixIn extends StubBasedPsiElementBase<M68kLabelStub> implements M68kLabel {
 
   protected M68kLabelMixIn(@NotNull ASTNode node) {
     super(node);
@@ -87,6 +89,18 @@ abstract class M68kLabelMixIn extends StubBasedPsiElementBase<M68kLabelStub> imp
     }
 
     throw new IllegalArgumentException("cannot determine labelKind for '" + getName() + "' " + this);
+  }
+
+  @Override
+  public @NotNull List<M68kLocalLabel> getLocalLabels() {
+    List<M68kLocalLabel> result = new SmartList<>();
+    M68kPsiTreeUtil.processSiblingsForwards(this, m68kPsiElement -> {
+      if (m68kPsiElement instanceof M68kLocalLabel) {
+        result.add((M68kLocalLabel) m68kPsiElement);
+      }
+      return true;
+    }, M68kLabel.class);
+    return result;
   }
 
   @Override
