@@ -2,6 +2,7 @@
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 [![Version](https://img.shields.io/jetbrains/plugin/v/17712.svg)](https://plugins.jetbrains.com/plugin/17712)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/17712.svg)](https://plugins.jetbrains.com/plugin/17712)
+![NoAI](docs/no_ai.png)
 
 ## Motorola 68000 Series Assembly Language Support for IntelliJ based IDEs
 
