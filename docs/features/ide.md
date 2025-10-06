@@ -8,14 +8,6 @@ nav_order: 3
 
 ## Navigation
 
-### Structure
-
-*Structure View* tool window and *Navigate \| File Structure* popup for the current file
-
-![Structure tool window](../assets/ide/structure_toolwindow.png)
-
-### Navigation
-
 *Navigate \| Symbol* for labels
 
 ![Goto symbol](../assets/ide/goto_symbol.png)

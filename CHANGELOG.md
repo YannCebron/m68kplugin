@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- *View \| Appearance \| Navigation Bar*
+
 ## 0.1.9 - 2025-09-08
 
 ### Changed

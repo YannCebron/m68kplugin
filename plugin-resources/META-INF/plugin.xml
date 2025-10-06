@@ -137,6 +137,7 @@
     <lang.psiStructureViewFactory
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.structureview.M68kStructureViewFactory"/>
+    <navbar implementation="com.yanncebron.m68kplugin.editor.navigation.M68kNavBarModelExtension"/>
 
     <moveLeftRightHandler
         language="M68k"
