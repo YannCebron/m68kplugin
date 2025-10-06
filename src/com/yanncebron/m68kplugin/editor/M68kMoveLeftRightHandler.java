@@ -18,53 +18,47 @@ package com.yanncebron.m68kplugin.editor;
 
 import com.intellij.codeInsight.editorActions.moveLeftRight.MoveElementLeftRightHandler;
 import com.intellij.psi.PsiElement;
-import com.yanncebron.m68kplugin.lang.psi.*;
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmRegisterList;
+import com.yanncebron.m68kplugin.lang.psi.M68kCmpmInstruction;
+import com.yanncebron.m68kplugin.lang.psi.M68kExgInstruction;
+import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.conditional.M68kIfcConditionalAssemblyDirective;
 import com.yanncebron.m68kplugin.lang.psi.conditional.M68kIfncConditionalAssemblyDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kBinaryExpression;
-import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 final class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
 
   @NotNull
   @Override
   public PsiElement @NotNull [] getMovableSubElements(@NotNull PsiElement element) {
-    if (element instanceof M68kDcDirective) {
-      return ((M68kDcDirective) element).getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
+    if (element instanceof M68kDcDirective directive) {
+      return directive.getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
     }
-    if (element instanceof M68kDrDirective) {
-      return ((M68kDrDirective) element).getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
+    if (element instanceof M68kDrDirective directive) {
+      return directive.getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
     }
-    if (element instanceof M68kPrintvDirective) {
-      return ((M68kPrintvDirective) element).getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
+    if (element instanceof M68kPrintvDirective directive) {
+      return directive.getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
     }
-    if (element instanceof M68kXdefDirective) {
-      return ((M68kXdefDirective) element).getLabelRefExpressionList().toArray(PsiElement.EMPTY_ARRAY);
+    if (element instanceof M68kXdefDirective directive) {
+      return directive.getLabelRefExpressionList().toArray(PsiElement.EMPTY_ARRAY);
     }
-    if (element instanceof M68kXrefDirective) {
-      return ((M68kXrefDirective) element).getLabelRefExpressionList().toArray(PsiElement.EMPTY_ARRAY);
+    if (element instanceof M68kXrefDirective directive) {
+      return directive.getLabelRefExpressionList().toArray(PsiElement.EMPTY_ARRAY);
     }
 
     if (element instanceof M68kIfcConditionalAssemblyDirective directive) {
-      M68kExpression arg1 = directive.getArg1();
-      M68kExpression arg2 = directive.getArg2();
-      if (arg1 != null && arg2 != null) {
-        return new PsiElement[]{arg1, arg2};
-      }
+      return getElements(directive.getArg1(), directive.getArg2());
     }
     if (element instanceof M68kIfncConditionalAssemblyDirective directive) {
-      M68kExpression arg1 = directive.getArg1();
-      M68kExpression arg2 = directive.getArg2();
-      if (arg1 != null && arg2 != null) {
-        return new PsiElement[]{arg1, arg2};
-      }
+      return getElements(directive.getArg1(), directive.getArg2());
     }
 
-    if (element instanceof M68kBinaryExpression binaryExpression) {
-      final M68kExpression right = binaryExpression.getRight();
-      if (right != null) return new PsiElement[]{binaryExpression.getLeft(), right};
+    if (element instanceof M68kBinaryExpression instruction) {
+      return getElements(instruction.getLeft(), instruction.getRight());
     }
 
     if (element instanceof M68kAdmRegisterList registerList) {
@@ -72,23 +66,23 @@ final class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
     }
 
     if (element instanceof M68kExgInstruction instruction) {
-      final M68kAdmRrd source = instruction.getSource();
-      final M68kAdmRrd destination = instruction.getDestination();
-      if (source != null && destination != null) {
-        return new PsiElement[]{source, destination};
-      }
+      return getElements(instruction.getSource(), instruction.getDestination());
     }
 
     if (element instanceof M68kCmpmInstruction instruction) {
-      M68kAdmApi source = instruction.getSource();
-      M68kAdmApi destination = instruction.getDestination();
-      if (source != null && destination != null) {
-        return new PsiElement[]{source, destination};
-      }
+      return getElements(instruction.getSource(), instruction.getDestination());
     }
 
-    if (element instanceof M68kMacroCallDirective) {
-      return ((M68kMacroCallDirective) element).getMacroCallParameterList().toArray(PsiElement.EMPTY_ARRAY);
+    if (element instanceof M68kMacroCallDirective directive) {
+      return directive.getMacroCallParameterList().toArray(PsiElement.EMPTY_ARRAY);
+    }
+
+    return PsiElement.EMPTY_ARRAY;
+  }
+
+  private static PsiElement @NotNull [] getElements(@Nullable M68kPsiElement first, @Nullable M68kPsiElement second) {
+    if (first != null && second != null) {
+      return new PsiElement[]{first, second};
     }
 
     return PsiElement.EMPTY_ARRAY;
