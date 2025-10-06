@@ -18,16 +18,11 @@ package com.yanncebron.m68kplugin.lang.psi.directive;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
-import com.yanncebron.m68kplugin.lang.psi.M68kDataSized;
-import com.yanncebron.m68kplugin.lang.psi.M68kDataSize;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
-public interface M68kFoDirective extends M68kDirectiveWithLabel, M68kDataSized {
+public interface M68kDirectiveWithLabel extends M68kDirective {
 
-  @Nullable
-  M68kExpression getExpression();
-
-  @Nullable M68kDataSize getDataSize();
+  @NotNull
+  M68kLabel getLabel();
 
 }

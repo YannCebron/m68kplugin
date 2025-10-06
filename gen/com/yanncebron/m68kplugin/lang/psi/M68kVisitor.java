@@ -485,6 +485,10 @@ public class M68kVisitor extends PsiElementVisitor {
     // visitDirective(o);
   }
 
+  public void visitDirectiveWithLabel(@NotNull M68kDirectiveWithLabel o) {
+    visitDirective(o);
+  }
+
   public void visitDivExpression(@NotNull M68kDivExpression o) {
     visitBinaryExpression(o);
   }
@@ -567,7 +571,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitEquDirectiveBase(@NotNull M68kEquDirectiveBase o) {
-    visitDirective(o);
+    visitDirectiveWithLabel(o);
   }
 
   public void visitEqualsDirective(@NotNull M68kEqualsDirective o) {
@@ -579,7 +583,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitEqurDirective(@NotNull M68kEqurDirective o) {
-    visitDirective(o);
+    visitDirectiveWithLabel(o);
   }
 
   public void visitEremDirective(@NotNull M68kEremDirective o) {
@@ -613,8 +617,8 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitFoDirective(@NotNull M68kFoDirective o) {
-    visitDataSized(o);
-    // visitDirective(o);
+    visitDirectiveWithLabel(o);
+    // visitDataSized(o);
   }
 
   public void visitFpuDirective(@NotNull M68kFpuDirective o) {
@@ -825,7 +829,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitMacroDirective(@NotNull M68kMacroDirective o) {
-    visitDirective(o);
+    visitDirectiveWithLabel(o);
   }
 
   public void visitMacroParameterDirective(@NotNull M68kMacroParameterDirective o) {
@@ -1044,7 +1048,7 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitRegDirective(@NotNull M68kRegDirective o) {
-    visitDirective(o);
+    visitDirectiveWithLabel(o);
   }
 
   public void visitRegisterRange(@NotNull M68kRegisterRange o) {
@@ -1205,8 +1209,8 @@ public class M68kVisitor extends PsiElementVisitor {
   }
 
   public void visitSoDirective(@NotNull M68kSoDirective o) {
-    visitDataSized(o);
-    // visitDirective(o);
+    visitDirectiveWithLabel(o);
+    // visitDataSized(o);
   }
 
   public void visitSpcDirective(@NotNull M68kSpcDirective o) {

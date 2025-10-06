@@ -22,14 +22,15 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.yanncebron.m68kplugin.lang.psi.impl.M68kDataSizedImpl;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
+import com.yanncebron.m68kplugin.lang.psi.M68kDataSize;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
+import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
-public class M68kSoDirectiveImpl extends M68kDataSizedImpl implements M68kSoDirective {
+public class M68kSoDirectiveImpl extends M68kDirectiveWithLabelImpl implements M68kSoDirective {
 
   public M68kSoDirectiveImpl(@NotNull ASTNode node) {
     super(node);
@@ -53,9 +54,8 @@ public class M68kSoDirectiveImpl extends M68kDataSizedImpl implements M68kSoDire
   }
 
   @Override
-  @NotNull
-  public M68kLabel getLabel() {
-    return notNullChild(PsiTreeUtil.getChildOfType(this, M68kLabel.class));
+  public @Nullable M68kDataSize getDataSize() {
+    return M68kPsiImplUtil.getDataSize(this);
   }
 
 }

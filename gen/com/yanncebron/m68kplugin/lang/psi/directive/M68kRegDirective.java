@@ -21,12 +21,9 @@ import com.intellij.psi.PsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmRegisterList;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 
-public interface M68kRegDirective extends M68kDirective {
+public interface M68kRegDirective extends M68kDirectiveWithLabel {
 
   @Nullable
   M68kAdmRegisterList getAdmRegisterList();
-
-  @NotNull
-  M68kLabel getLabel();
 
 }

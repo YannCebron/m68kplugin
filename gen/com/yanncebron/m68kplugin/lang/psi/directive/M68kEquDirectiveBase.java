@@ -21,12 +21,9 @@ import com.intellij.psi.PsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
-public interface M68kEquDirectiveBase extends M68kDirective {
+public interface M68kEquDirectiveBase extends M68kDirectiveWithLabel {
 
   @Nullable
   M68kExpression getExpression();
-
-  @NotNull
-  M68kLabel getLabel();
 
 }

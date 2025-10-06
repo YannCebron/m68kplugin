@@ -19,15 +19,15 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kDataSized;
+import com.yanncebron.m68kplugin.lang.psi.M68kDataSize;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
-public interface M68kSoDirective extends M68kDataSized, M68kDirective {
+public interface M68kSoDirective extends M68kDirectiveWithLabel, M68kDataSized {
 
   @Nullable
   M68kExpression getExpression();
 
-  @NotNull
-  M68kLabel getLabel();
+  @Nullable M68kDataSize getDataSize();
 
 }

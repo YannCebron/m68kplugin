@@ -20,9 +20,6 @@ import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 
-public interface M68kMacroDirective extends M68kDirective {
-
-  @NotNull
-  M68kLabel getLabel();
+public interface M68kMacroDirective extends M68kDirectiveWithLabel {
 
 }

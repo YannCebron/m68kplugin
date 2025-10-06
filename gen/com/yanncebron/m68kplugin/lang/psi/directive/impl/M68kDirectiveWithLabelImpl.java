@@ -22,21 +22,20 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
-public class M68kEquDirectiveBaseImpl extends M68kDirectiveWithLabelImpl implements M68kEquDirectiveBase {
+public class M68kDirectiveWithLabelImpl extends ASTWrapperPsiElement implements M68kDirectiveWithLabel {
 
-  public M68kEquDirectiveBaseImpl(@NotNull ASTNode node) {
+  public M68kDirectiveWithLabelImpl(@NotNull ASTNode node) {
     super(node);
   }
 
-  @Override
   public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitEquDirectiveBase(this);
+    visitor.visitDirectiveWithLabel(this);
   }
 
   @Override
@@ -46,9 +45,9 @@ public class M68kEquDirectiveBaseImpl extends M68kDirectiveWithLabelImpl impleme
   }
 
   @Override
-  @Nullable
-  public M68kExpression getExpression() {
-    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
+  @NotNull
+  public M68kLabel getLabel() {
+    return notNullChild(PsiTreeUtil.getChildOfType(this, M68kLabel.class));
   }
 
 }

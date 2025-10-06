@@ -22,19 +22,19 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmRegisterList;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 
-public class M68kRegDirectiveImpl extends ASTWrapperPsiElement implements M68kRegDirective {
+public class M68kRegDirectiveImpl extends M68kDirectiveWithLabelImpl implements M68kRegDirective {
 
   public M68kRegDirectiveImpl(@NotNull ASTNode node) {
     super(node);
   }
 
+  @Override
   public void accept(@NotNull M68kVisitor visitor) {
     visitor.visitRegDirective(this);
   }
@@ -49,12 +49,6 @@ public class M68kRegDirectiveImpl extends ASTWrapperPsiElement implements M68kRe
   @Nullable
   public M68kAdmRegisterList getAdmRegisterList() {
     return PsiTreeUtil.getChildOfType(this, M68kAdmRegisterList.class);
-  }
-
-  @Override
-  @NotNull
-  public M68kLabel getLabel() {
-    return notNullChild(PsiTreeUtil.getChildOfType(this, M68kLabel.class));
   }
 
 }

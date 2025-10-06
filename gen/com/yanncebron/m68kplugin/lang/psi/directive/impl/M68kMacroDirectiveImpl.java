@@ -22,18 +22,18 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
 
-public class M68kMacroDirectiveImpl extends ASTWrapperPsiElement implements M68kMacroDirective {
+public class M68kMacroDirectiveImpl extends M68kDirectiveWithLabelImpl implements M68kMacroDirective {
 
   public M68kMacroDirectiveImpl(@NotNull ASTNode node) {
     super(node);
   }
 
+  @Override
   public void accept(@NotNull M68kVisitor visitor) {
     visitor.visitMacroDirective(this);
   }
@@ -42,12 +42,6 @@ public class M68kMacroDirectiveImpl extends ASTWrapperPsiElement implements M68k
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public M68kLabel getLabel() {
-    return notNullChild(PsiTreeUtil.getChildOfType(this, M68kLabel.class));
   }
 
 }

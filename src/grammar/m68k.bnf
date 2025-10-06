@@ -1100,7 +1100,6 @@ roxr_instruction ::= ROXR shift_tail
   implements("(machine|fpu|cpu32|(mc68|ac68).*)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(.*)fo_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(.*)so_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
-  implements("equ_directive_base") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   name(".*_directive") = "directive"
 }
 
@@ -1199,10 +1198,15 @@ private directives ::= dc_directive |
                        mask2_directive |
                        output_directive
 
+fake directive_with_label ::= label
+{
+  implements = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
+}
+
 fake equ_directive_base ::= label expression?
 {
-//  implements = "com.intellij.psi.PsiNameIdentifierOwner"
-//  methods = [  getNameIdentifier]
+  extends = directive_with_label
+  implements = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
 }
 equ_directive ::= label EQU expression
 {
@@ -1225,11 +1229,13 @@ set_directive ::= label SET expression
 equr_directive ::= label EQUR adm_rrd
 {
   pin = 2
+  extends = directive_with_label
 }
 
 reg_directive ::= label REG adm_register_list
 {
   pin = 2
+  extends = directive_with_label
 }
 
 even_directive ::= EVEN
@@ -1379,7 +1385,9 @@ org_directive ::= ORG expression
   pin = 1
 }
 
-macro_directive ::= (label MACRO) | (MACRO label)
+macro_directive ::= (label MACRO) | (MACRO label) {
+  extends = directive_with_label
+}
 endm_directive ::= ENDM
 mexit_directive ::= MEXIT
 
@@ -1547,8 +1555,10 @@ machine_directive ::= machine machine_cpu_type
 
 fo_directive ::= label FO data_size_all? expression?
 {
-  extends = data_sized
+  extends = directive_with_label
   pin = 2
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kDataSized"
+  methods = [ getDataSize ]
 }
 
 clrfo_directive ::= CLRFO
@@ -1561,8 +1571,10 @@ setfo_directive ::= SETFO expression
 
 so_directive ::= label SO data_size_all? expression?
 {
-  extends = data_sized
+  extends = directive_with_label
   pin = 2
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kDataSized"
+  methods = [ getDataSize ]
 }
 
 clrso_directive ::= CLRSO
