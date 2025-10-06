@@ -24,6 +24,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.presentation.java.SymbolPresentationUtil;
 import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.SearchScope;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import icons.M68kIcons;
@@ -41,6 +42,11 @@ abstract class M68kLocalLabelMixIn extends ASTWrapperPsiElement implements M68kL
   @Override
   public LabelKind getLabelKind() {
     return LabelKind.LOCAL;
+  }
+
+  @Nullable
+  public M68kLabel getContainingLabel() {
+    return PsiTreeUtil.getPrevSiblingOfType(this, M68kLabel.class);
   }
 
   @Override

@@ -88,6 +88,7 @@ localLabel ::= (dot_local_label | dollar_local_label) COLON?
   name = "local label"
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kLabelBase"
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kLocalLabelMixIn"
+  methods = [ getContainingLabel ]
 }
 
 private instructions ::= m68000_instructions |

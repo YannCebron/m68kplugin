@@ -21,4 +21,6 @@ import com.intellij.psi.PsiElement;
 
 public interface M68kLocalLabel extends M68kLabelBase {
 
+  @Nullable M68kLabel getContainingLabel();
+
 }

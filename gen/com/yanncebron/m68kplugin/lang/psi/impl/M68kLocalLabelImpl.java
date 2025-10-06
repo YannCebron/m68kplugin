@@ -23,6 +23,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
 public class M68kLocalLabelImpl extends M68kLocalLabelMixIn implements M68kLocalLabel {
 
