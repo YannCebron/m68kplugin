@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,9 @@ public class MissingStopAtLineBreakParsingTest extends M68kParsingTestCase{
   }
 
   public void testMoveMissingParameters() throws IOException {
-    doCodeTest(" move \n" +
-      " illegal\n");
+    doCodeTest("""
+       move\s
+       illegal
+      """);
   }
 }

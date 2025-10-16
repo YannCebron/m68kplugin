@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,9 @@ import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 public class M68kVasmLineInLocationFilterTest extends BasePlatformTestCase {
 
   public void testNavigateToFile() {
-    final PsiFile testFile = myFixture.addFileToProject("test.s", "line 1\nline2");
+    final PsiFile testFile = myFixture.addFileToProject("test.s", """
+      line 1
+      line2""");
 
     //                                      012345678901234567890123456789
     final Filter.Result result = getResult("in line 3 of \"test.s\": a message");

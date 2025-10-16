@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,8 +55,9 @@ public class M68kShowUsedRegistersIntentionTest extends BasePlatformTestCase {
   }
 
   public void testOnlySelectionRegister() {
-    doTest(" asl (a0)\n" +
-      "<selection> dbf d7,label</selection>", EnumSet.of(M68kRegister.D7));
+    doTest("""
+       asl (a0)
+      <selection> dbf d7,label</selection>""", EnumSet.of(M68kRegister.D7));
   }
 
   private void doTest(String code, Set<M68kRegister> expectedRegisters) {

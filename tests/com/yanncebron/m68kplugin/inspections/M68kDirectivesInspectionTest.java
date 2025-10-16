@@ -44,9 +44,10 @@ public class M68kDirectivesInspectionTest extends BasePlatformTestCase {
 
   public void testUnmatchedDirectiveMacroMissingEndmNextMacro() {
     myFixture.configureByText("test.s",
-      "<error descr=\"Missing matching 'endm' closing directive\">macroName macro</error>\n" +
-        "anotherMacro macro\n" +
-        " endm");
+      """
+        <error descr="Missing matching 'endm' closing directive">macroName macro</error>
+        anotherMacro macro
+         endm""");
     myFixture.testHighlighting();
   }
 
@@ -94,35 +95,41 @@ public class M68kDirectivesInspectionTest extends BasePlatformTestCase {
 
   public void testNestedRept() {
     myFixture.configureByText("test.s",
-      "  rept 1\n" +
-        "  rept 2\n" +
-        "  rept 3\n" +
-        "  endr\n" +
-        "  endr\n" +
-        "  endr\n" +
-        "\n" +
-        "  rept 1\n" +
-        "  rept 2\n" +
-        "  endr\n" +
-        "  rept 3\n" +
-        "  endr\n" +
-        "  endr");
+      """
+          rept 1
+          rept 2
+          rept 3
+          endr
+          endr
+          endr
+        
+          rept 1
+          rept 2
+          endr
+          rept 3
+          endr
+          endr
+        """);
     myFixture.testHighlighting();
   }
 
   public void testNestedReptMissingEndr() {
     myFixture.configureByText("test.s",
-      "  <error descr=\"Missing matching 'endr' closing directive\">rept 1</error>\n" +
-        "  rept 2\n" +
-        "  endr");
+      """
+          <error descr="Missing matching 'endr' closing directive">rept 1</error>
+          rept 2
+          endr
+        """);
     myFixture.testHighlighting();
   }
 
   public void testNestedReptMissingRept() {
     myFixture.configureByText("test.s",
-      "  rept 1\n" +
-        "  endr\n" +
-        "  <error descr=\"Missing matching 'rept' opening directive\">endr</error>");
+      """
+          rept 1
+          endr
+          <error descr="Missing matching 'rept' opening directive">endr</error>
+        """);
     myFixture.testHighlighting();
   }
 

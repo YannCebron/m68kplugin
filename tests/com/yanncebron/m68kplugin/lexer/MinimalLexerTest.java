@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,15 +24,17 @@ public class MinimalLexerTest extends M68kLexerTestCase {
 
   public void testLineFeedsOnly() {
     doTest("\n\n",
-      "LINEFEED ('\\n')\n" +
-        "LINEFEED ('\\n')");
+      """
+        LINEFEED ('\\n')
+        LINEFEED ('\\n')""");
   }
 
   public void testLineFeedsAndWhitespaceOnly() {
     doTest("  \n ",
-      "WHITE_SPACE ('  ')\n" +
-        "LINEFEED ('\\n')\n" +
-        "WHITE_SPACE (' ')");
+      """
+        WHITE_SPACE ('  ')
+        LINEFEED ('\\n')
+        WHITE_SPACE (' ')""");
   }
 
   public void testLabelOnFirstLine() {
@@ -42,49 +44,56 @@ public class MinimalLexerTest extends M68kLexerTestCase {
 
   public void testLabelWithColonOnFirstLine() {
     doTest("label:",
-      "id ('label')\n" +
-        ": (':')");
+      """
+        id ('label')
+        : (':')""");
   }
 
   public void testLabelWithColonOnFirstLineWithLineFeed() {
     doTest("label:\n",
-      "id ('label')\n" +
-        ": (':')\n" +
-        "LINEFEED ('\\n')");
+      """
+        id ('label')
+        : (':')
+        LINEFEED ('\\n')""");
   }
 
   public void testLabelFollowedByWhitespace() {
     doTest("label   ",
-      "id ('label')\n" +
-        "WHITE_SPACE ('   ')");
+      """
+        id ('label')
+        WHITE_SPACE ('   ')""");
   }
 
   public void testLabelWithColonFollowedByWhitespace() {
     doTest("label:   ",
-      "id ('label')\n" +
-        ": (':')\n" +
-        "WHITE_SPACE ('   ')");
+      """
+        id ('label')
+        : (':')
+        WHITE_SPACE ('   ')""");
   }
 
   public void testLabelWithColonFollowedByInstruction() {
     doTest("label: rts",
-      "id ('label')\n" +
-        ": (':')\n" +
-        "WHITE_SPACE (' ')\n" +
-        "rts ('rts')");
+      """
+        id ('label')
+        : (':')
+        WHITE_SPACE (' ')
+        rts ('rts')""");
   }
 
   public void testLabelWithColonFollowedByInstructionNoWhitespace() {
     doTest("label:rts",
-      "id ('label')\n" +
-        ": (':')\n" +
-        "rts ('rts')");
+      """
+        id ('label')
+        : (':')
+        rts ('rts')""");
   }
 
   public void testLineFeedLabelOnSecondLine() {
     doTest("\nlabel",
-      "LINEFEED ('\\n')\n" +
-        "id ('label')");
+      """
+        LINEFEED ('\\n')
+        id ('label')""");
   }
 
   public void testUnderscoreLabel() {
@@ -99,9 +108,11 @@ public class MinimalLexerTest extends M68kLexerTestCase {
 
   public void testLabelAfterWhitespaceWithColon() {
     doTest("  label:",
-      "WHITE_SPACE ('  ')\n" +
-        "id ('label')\n" +
-        ": (':')\n");
+      """
+        WHITE_SPACE ('  ')
+        id ('label')
+        : (':')
+        """);
   }
 
   public void testUnderscoreTwiceLabel() {
@@ -111,120 +122,132 @@ public class MinimalLexerTest extends M68kLexerTestCase {
 
   public void testLocalLabelOnFirstLine() {
     doTest(".localLabel",
-      ". ('.')\n" +
-        "id ('localLabel')");
+      """
+        . ('.')
+        id ('localLabel')""");
   }
 
   public void testLocalLabelWithColonFollowedByInstructionNoWhitespace() {
     doTest(".localLabel:rts",
-      ". ('.')\n" +
-        "id ('localLabel')\n" +
-        ": (':')\n" +
-        "rts ('rts')");
+      """
+        . ('.')
+        id ('localLabel')
+        : (':')
+        rts ('rts')""");
   }
 
   public void testLocalLabelDotDataSizeName() {
     doTest(".s bra .s",
-      ". ('.')\n" +
-        "id ('s')\n" +
-        "WHITE_SPACE (' ')\n" +
-        "bra ('bra')\n" +
-        "WHITE_SPACE (' ')\n" +
-        "id ('.s')");
+      """
+        . ('.')
+        id ('s')
+        WHITE_SPACE (' ')
+        bra ('bra')
+        WHITE_SPACE (' ')
+        id ('.s')""");
   }
 
   public void testLocalLabelDotDataSizeNameAfterComma() {
     doTest(".s dbf d0,.s",
-      ". ('.')\n" +
-        "id ('s')\n" +
-        "WHITE_SPACE (' ')\n" +
-        "dbf ('dbf')\n" +
-        "WHITE_SPACE (' ')\n" +
-        "data_register ('d0')\n" +
-        ", (',')\n" +
-        "id ('.s')");
+      """
+        . ('.')
+        id ('s')
+        WHITE_SPACE (' ')
+        dbf ('dbf')
+        WHITE_SPACE (' ')
+        data_register ('d0')
+        , (',')
+        id ('.s')""");
   }
 
   public void testLocalLabelWithColonDotDataSizeName() {
     doTest(".s: bra .s",
-      ". ('.')\n" +
-        "id ('s')\n" +
-        ": (':')\n" +
-        "WHITE_SPACE (' ')\n" +
-        "bra ('bra')\n" +
-        "WHITE_SPACE (' ')\n" +
-        "id ('.s')");
+      """
+        . ('.')
+        id ('s')
+        : (':')
+        WHITE_SPACE (' ')
+        bra ('bra')
+        WHITE_SPACE (' ')
+        id ('.s')""");
   }
 
   public void testLocalLabelDotDataSizeNameInstructionDataSize() {
     doTest(".s bra.s .s",
-      ". ('.')\n" +
-        "id ('s')\n" +
-        "WHITE_SPACE (' ')\n" +
-        "bra ('bra')\n" +
-        ".s ('.s')\n" +
-        "WHITE_SPACE (' ')\n" +
-        "id ('.s')");
+      """
+        . ('.')
+        id ('s')
+        WHITE_SPACE (' ')
+        bra ('bra')
+        .s ('.s')
+        WHITE_SPACE (' ')
+        id ('.s')""");
   }
 
   public void testLocalLabelMultipleDotDataSizeName() {
     doTest(".l\n" +
         ".s bra .s",
-      ". ('.')\n" +
-        "id ('l')\n" +
-        "LINEFEED ('\\n')\n" +
-        ". ('.')\n" +
-        "id ('s')\n" +
-        "WHITE_SPACE (' ')\n" +
-        "bra ('bra')\n" +
-        "WHITE_SPACE (' ')\n" +
-        "id ('.s')");
+      """
+        . ('.')
+        id ('l')
+        LINEFEED ('\\n')
+        . ('.')
+        id ('s')
+        WHITE_SPACE (' ')
+        bra ('bra')
+        WHITE_SPACE (' ')
+        id ('.s')""");
   }
 
   public void testLocalLabelDollar() {
     doTest("localLabel$",
-      "id ('localLabel')\n" +
-        "$ ('$')");
+      """
+        id ('localLabel')
+        $ ('$')""");
   }
 
   public void testLocalLabelDollarColon() {
     doTest("localLabel$:",
-      "id ('localLabel')\n" +
-        "$ ('$')\n" +
-        ": (':')");
+      """
+        id ('localLabel')
+        $ ('$')
+        : (':')""");
   }
 
   public void testLocalLabelAfterWhitespaceWithColon() {
     doTest("  .label:",
-      "WHITE_SPACE ('  ')\n" +
-        ". ('.')\n" +
-        "id ('label')\n" +
-        ": (':')");
+      """
+        WHITE_SPACE ('  ')
+        . ('.')
+        id ('label')
+        : (':')""");
   }
 
   public void testInstructionAdmAbsWithDataSize() {
     doTest("  movea.l 4.l,a0",
-      "WHITE_SPACE ('  ')\n" +
-        "movea ('movea')\n" +
-        ".l ('.l')\n" +
-        "WHITE_SPACE (' ')\n" +
-        "dec_number ('4')\n" +
-        ".l ('.l')\n" +
-        ", (',')\n" +
-        "address_register ('a0')");
+      """
+        WHITE_SPACE ('  ')
+        movea ('movea')
+        .l ('.l')
+        WHITE_SPACE (' ')
+        dec_number ('4')
+        .l ('.l')
+        , (',')
+        address_register ('a0')""");
   }
 
   public void testExpressionUsingLabelsWithMnemonicName() {
     doTest(" dc.b bpl*4/trap",
-      "WHITE_SPACE (' ')\n" +
-        "dc ('dc')\n" +
-        ".b ('.b')\n" +
-        "WHITE_SPACE (' ')\n" +
-        "id ('bpl')\n" +
-        "* ('*')\n" +
-        "dec_number ('4')\n" +
-        "/ ('/')\n" +
-        "id ('trap')");
+      """
+        WHITE_SPACE (' ')
+        dc ('dc')
+        .b ('.b')
+        WHITE_SPACE (' ')
+        id ('bpl')
+        * ('*')
+        dec_number ('4')
+        / ('/')
+        id ('trap')""");
   }
 
   public void testMacroLabelBackslashAt() {
@@ -239,59 +262,64 @@ public class MinimalLexerTest extends M68kLexerTestCase {
 
   public void testCurrentPcSymbol() {
     doTest(" dc *-4",
-      "WHITE_SPACE (' ')\n" +
-        "dc ('dc')\n" +
-        "WHITE_SPACE (' ')\n" +
-        "id ('*')\n" +
-        "- ('-')\n" +
-        "dec_number ('4')");
+      """
+        WHITE_SPACE (' ')
+        dc ('dc')
+        WHITE_SPACE (' ')
+        id ('*')
+        - ('-')
+        dec_number ('4')""");
   }
 
   public void testCurrentPcSymbolAfterDataSize() {
     doTest(" dc.b *-4",
-      "WHITE_SPACE (' ')\n" +
-        "dc ('dc')\n" +
-        ".b ('.b')\n" +
-        "WHITE_SPACE (' ')\n" +
-        "id ('*')\n" +
-        "- ('-')\n" +
-        "dec_number ('4')");
+      """
+        WHITE_SPACE (' ')
+        dc ('dc')
+        .b ('.b')
+        WHITE_SPACE (' ')
+        id ('*')
+        - ('-')
+        dec_number ('4')""");
   }
 
   public void testCurrentPcSymbolAfterMinusOperator() {
     doTest(" dc.b 42-*",
-      "WHITE_SPACE (' ')\n" +
-        "dc ('dc')\n" +
-        ".b ('.b')\n" +
-        "WHITE_SPACE (' ')\n" +
-        "dec_number ('42')\n" +
-        "- ('-')\n" +
-        "id ('*')");
+      """
+        WHITE_SPACE (' ')
+        dc ('dc')
+        .b ('.b')
+        WHITE_SPACE (' ')
+        dec_number ('42')
+        - ('-')
+        id ('*')""");
   }
 
   public void testCurrentPcSymbolAfterComma() {
     doTest(" dc.b 1,*-42",
-      "WHITE_SPACE (' ')\n" +
-        "dc ('dc')\n" +
-        ".b ('.b')\n" +
-        "WHITE_SPACE (' ')\n" +
-        "dec_number ('1')\n" +
-        ", (',')\n" +
-        "id ('*')\n" +
-        "- ('-')\n" +
-        "dec_number ('42')");
+      """
+        WHITE_SPACE (' ')
+        dc ('dc')
+        .b ('.b')
+        WHITE_SPACE (' ')
+        dec_number ('1')
+        , (',')
+        id ('*')
+        - ('-')
+        dec_number ('42')""");
   }
 
   public void testCurrentPcSymbolAfterOpeningParentheses() {
     doTest(" dc.b (pc-2)",
-      "WHITE_SPACE (' ')\n" +
-        "dc ('dc')\n" +
-        ".b ('.b')\n" +
-        "WHITE_SPACE (' ')\n" +
-        "( ('(')\n" +
-        "pc ('pc')\n" +
-        "- ('-')\n" +
-        "dec_number ('2')\n" +
-        ") (')')");
+      """
+        WHITE_SPACE (' ')
+        dc ('dc')
+        .b ('.b')
+        WHITE_SPACE (' ')
+        ( ('(')
+        pc ('pc')
+        - ('-')
+        dec_number ('2')
+        ) (')')""");
   }
 }

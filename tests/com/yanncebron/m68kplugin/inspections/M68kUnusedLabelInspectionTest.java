@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,24 +29,30 @@ public class M68kUnusedLabelInspectionTest extends BasePlatformTestCase {
 
   public void testHighlightingLocalLabel() {
     myFixture.configureByText("a.s",
-      ".used\n" +
-        " bra .used\n" +
-        "<warning descr=\"Unused local label 'unused'\">.unused</warning>\n" +
-        "<warning descr=\"Unused local label 'unusedWithColon'\">.unusedWithColon:</warning>\n");
+      """
+        .used
+         bra .used
+        <warning descr="Unused local label 'unused'">.unused</warning>
+        <warning descr="Unused local label 'unusedWithColon'">.unusedWithColon:</warning>
+        """);
     myFixture.testHighlighting();
   }
 
   public void testFixRemoveUnusedLocalLabel() {
     myFixture.configureByText("a.s",
-      "  nop\n" +
-        "<warning descr=\"Unused local label 'unused'\">.un<caret>used</warning>\n" +
-        "  nop\n");
+      """
+          nop
+        <warning descr="Unused local label 'unused'">.un<caret>used</warning>
+          nop
+        """);
     myFixture.testHighlighting();
     final IntentionAction intention = myFixture.findSingleIntention("Remove unused label 'unused'");
     myFixture.launchAction(intention);
     myFixture.checkResult(
-      "  nop\n" +
-        "  nop\n");
+      """
+          nop
+          nop
+        """);
   }
 
 }

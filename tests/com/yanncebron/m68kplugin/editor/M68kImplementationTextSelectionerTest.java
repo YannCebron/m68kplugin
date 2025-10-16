@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,16 +25,18 @@ public class M68kImplementationTextSelectionerTest extends BasePlatformTestCase 
 
   public void testMacro() {
     myFixture.configureByText("a.s",
-      "macroName macro\n" +
-        " move.l d0,d1\n" +
-        " endm\n" +
-        " macro<caret>Name");
+      """
+        macroName macro
+         move.l d0,d1
+         endm
+         macro<caret>Name""");
     PsiElement element =
       TargetElementUtil.findTargetElement(myFixture.getEditor(), TargetElementUtil.getInstance().getAllAccepted());
     assertNotNull(element);
     final String implementationText = ImplementationViewComponent.getNewText(element.getNavigationElement());
-    assertEquals("macroName macro\n" +
-      " move.l d0,d1\n" +
-      " endm", implementationText);
+    assertEquals("""
+      macroName macro
+       move.l d0,d1
+       endm""", implementationText);
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,48 +28,58 @@ public class MacroParsingTest extends M68kParsingTestCase {
   }
 
   public void testEmptyMacro() throws IOException {
-    doCodeTest("macroName MACRO\n" +
-      " ENDM");
+    doCodeTest("""
+      macroName MACRO
+       ENDM""");
   }
 
   public void testEmptyMacroColon() throws IOException {
-    doCodeTest("macroName: MACRO\n" +
-      " ENDM");
+    doCodeTest("""
+      macroName: MACRO
+       ENDM""");
   }
 
   public void testEmptyMacroMacroKeywordFirst() throws IOException {
-    doCodeTest(" MACRO macroName\n" +
-      " ENDM");
+    doCodeTest("""
+       MACRO macroName
+       ENDM\
+      """);
   }
 
   public void testEmptyMacroMacroKeywordFirstColon() throws IOException {
-    doCodeTest(" MACRO macroName:\n" +
-      " ENDM");
+    doCodeTest("""
+       MACRO macroName:
+       ENDM\
+      """);
   }
 
   public void testMacroParameter() throws Exception {
-    doCodeTest("macroName MACRO\n" +
-      " \\1\n" +
-      " ENDM");
+    doCodeTest("""
+      macroName MACRO
+       \\1
+       ENDM""");
   }
 
   public void testMacroParameterAlpha() throws Exception {
-    doCodeTest("macroName MACRO\n" +
-      " \\a\n" +
-      " ENDM");
+    doCodeTest("""
+      macroName MACRO
+       \\a
+       ENDM""");
   }
 
   public void testMacroParameterMissingIndex() throws Exception {
-    doCodeTest("macroName MACRO\n" +
-      " \\\n" +
-      " ENDM");
+    doCodeTest("""
+      macroName MACRO
+       \\
+       ENDM""");
   }
 
   // inserts fake '.w' token
   public void testMacroParameterAsDataSize() throws Exception {
-    doCodeTest("macroName MACRO\n" +
-      " move.\\0 d0,d1\n" +
-      " ENDM");
+    doCodeTest("""
+      macroName MACRO
+       move.\\0 d0,d1
+       ENDM""");
   }
 
 }

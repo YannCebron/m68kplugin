@@ -61,17 +61,19 @@ public class M68kLabelDocumentationProviderTest extends BasePlatformTestCase {
 
   public void testLabelDoc() {
     doTestDoc(
-      "* not relevant doc" +
-        "\n\n" +
-        "*************************************************************************\n" +
-        "*\t\t\t\t\t\t\t\t\t*\n" +
-        "***       Set default function key definitions:\t\t\t\t\t***\n" +
-        "*\t\t\t\t\t\t\t\t\t*\n" +
-        "*\n" +
-        "* newline before\n" +
-        "*************************************************************************\n" +
-        "\n" +
-        "la<caret>bel",
+      """
+        * not relevant doc
+        
+        
+        *************************************************************************
+        *\t\t\t\t\t\t\t\t\t*
+        ***       Set default function key definitions:\t\t\t\t\t***
+        *\t\t\t\t\t\t\t\t\t*
+        *
+        * newline before
+        *************************************************************************
+        
+        la<caret>bel""",
       "<div class='definition'><pre>label</pre></div><div class='content'>Set default function key definitions:<br><br>newline before</div>");
   }
 

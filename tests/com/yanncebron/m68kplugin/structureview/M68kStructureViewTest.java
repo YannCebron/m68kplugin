@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,39 +39,41 @@ public class M68kStructureViewTest extends BasePlatformTestCase {
 
   public void testStructureView() {
     myFixture.configureByText("a.s",
-      "myEqu EQU 2\n" +
-        "myEquals = 42\n" +
-        "mySet set 1\n" +
-        "myEqur equr d0\n" +
-        "myReg reg d0-d7/a0\n" +
-        "myMacro macro\n" +
-        " endm\n" +
-        " include \"include.s\"\n" +
-        " incbin \"incbin_file\"\n" +
-        "label\n" +
-        ".localLabel\n" +
-        "anotherLabel\n" +
-        "foLabel fo 42\n" +
-        "soLabel so 33"
+      """
+        myEqu EQU 2
+        myEquals = 42
+        mySet set 1
+        myEqur equr d0
+        myReg reg d0-d7/a0
+        myMacro macro
+         endm
+         include "include.s"
+         incbin "incbin_file"
+        label
+        .localLabel
+        anotherLabel
+        foLabel fo 42
+        soLabel so 33"""
     );
     myFixture.testStructureView(component -> {
       final JTree tree = component.getTree();
       PlatformTestUtil.waitWhileBusy(tree);
       PlatformTestUtil.assertTreeEqual(tree,
-        "-a.s\n" +
-          " myEqu\n" +
-          " myEquals\n" +
-          " mySet\n" +
-          " myEqur\n" +
-          " myReg\n" +
-          " myMacro\n" +
-          " include.s\n" +
-          " incbin_file\n" +
-          " -label\n" +
-          "  localLabel\n" +
-          " anotherLabel\n" +
-          " foLabel\n" +
-          " soLabel");
+        """
+          -a.s
+           myEqu
+           myEquals
+           mySet
+           myEqur
+           myReg
+           myMacro
+           include.s
+           incbin_file
+           -label
+            localLabel
+           anotherLabel
+           foLabel
+           soLabel""");
 
 
       TreeElementWrapper root = (TreeElementWrapper) TreeUtil.getUserObject(component.getTree().getModel().getRoot());

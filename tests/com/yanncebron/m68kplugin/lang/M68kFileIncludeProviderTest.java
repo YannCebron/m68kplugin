@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,8 +54,10 @@ public class M68kFileIncludeProviderTest extends BasePlatformTestCase {
     final PsiFile testIncludeFile = myFixture.addFileToProject("test.i", "");
     final PsiFile testIncbinFile = myFixture.addFileToProject("dir/test.dat", "");
     myFixture.configureByText("test.s",
-      " INCBIN 'dir/test.dat'\n" +
-        " include 'test.i'");
+      """
+         INCBIN 'dir/test.dat'
+         include 'test.i'
+        """);
 
     final VirtualFile[] includedFiles = getIncludedFiles(false, false);
     assertSameElements(includedFiles, testIncbinFile.getVirtualFile());
