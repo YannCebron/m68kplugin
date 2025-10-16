@@ -1,0 +1,6 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kMachineDirectiveImpl(MACHINE_DIRECTIVE)
+    PsiElement(machine)('machine')
+    PsiWhiteSpace(' ')
+    PsiElement(id)('mc68000')

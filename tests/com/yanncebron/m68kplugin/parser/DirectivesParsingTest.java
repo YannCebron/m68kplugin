@@ -530,6 +530,10 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" machine 68000");
   }
 
+  public void testMachineDirectiveId() throws Exception {
+    doCodeTest(" machine mc68000");
+  }
+
   public void testMachineDirectiveMissingCpuType() throws Exception {
     doCodeTest(" machine ");
   }

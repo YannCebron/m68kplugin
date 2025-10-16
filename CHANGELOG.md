@@ -6,6 +6,10 @@
 
 - *View \| Appearance \| Navigation Bar*
 
+### Fixed
+
+- `machine` directive: support non-numeric _cpu_type_ (`mc68010`)
+
 ## 0.1.9 - 2025-09-08
 
 ### Changed

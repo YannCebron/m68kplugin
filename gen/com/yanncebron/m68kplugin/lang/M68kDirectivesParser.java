@@ -1125,13 +1125,14 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // DEC_NUMBER
+  // DEC_NUMBER | ID
   static boolean machine_cpu_type(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "machine_cpu_type")) return false;
-    if (!nextTokenIs(b, "<cpu type>", DEC_NUMBER)) return false;
+    if (!nextTokenIs(b, "<cpu type>", DEC_NUMBER, ID)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, null, "<cpu type>");
     r = consumeToken(b, DEC_NUMBER);
+    if (!r) r = consumeToken(b, ID);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
