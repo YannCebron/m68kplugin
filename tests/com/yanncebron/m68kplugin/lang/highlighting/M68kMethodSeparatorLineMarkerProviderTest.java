@@ -21,7 +21,9 @@ import com.intellij.codeInsight.daemon.LineMarkerInfo;
 import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerImpl;
 import com.intellij.openapi.editor.markup.SeparatorPlacement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
+import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 
 import java.util.List;
 
@@ -43,16 +45,14 @@ public class M68kMethodSeparatorLineMarkerProviderTest extends BasePlatformTestC
   }
 
   public void testMacro() {
-    final List<LineMarkerInfo<?>> lineMarkerInfos =
-      getLineMarkerInfos("macroName macro\n" +
-        " endm\n");
-
+    final List<LineMarkerInfo<?>> lineMarkerInfos = getLineMarkerInfos("""
+      macroName macro
+       endm
+      """);
     assertSize(2, lineMarkerInfos);
 
-    final LineMarkerInfo<?> before = lineMarkerInfos.get(0);
-    assertEquals(SeparatorPlacement.TOP, before.separatorPlacement);
-    final LeafPsiElement beforePsiElement = assertInstanceOf(before.getElement(), LeafPsiElement.class);
-    assertEquals("macroName", beforePsiElement.getText());
+    LineMarkerInfo<?> before = lineMarkerInfos.get(0);
+    assertBefore(before, "macroName");
 
     final LineMarkerInfo<?> after = lineMarkerInfos.get(1);
     assertEquals(SeparatorPlacement.BOTTOM, after.separatorPlacement);
@@ -60,21 +60,39 @@ public class M68kMethodSeparatorLineMarkerProviderTest extends BasePlatformTestC
     assertEquals("endm", afterPsiElement.getText());
   }
 
-  public void testSection() {
-    final List<LineMarkerInfo<?>> lineMarkerInfos =
-      getLineMarkerInfos(" section tos,code,chip\n");
+  public void testSectionDirective() {
+    doTestSingleBefore(" section tos,code,chip", "section");
+  }
 
-    final LineMarkerInfo<?> before = assertOneElement(lineMarkerInfos);
-    assertEquals(SeparatorPlacement.TOP, before.separatorPlacement);
-    final LeafPsiElement beforePsiElement = assertInstanceOf(before.getElement(), LeafPsiElement.class);
-    assertEquals("section", beforePsiElement.getText());
+  public void testMachineDirective() {
+    doTestSingleBefore(" machine mc68000", "machine");
+  }
+
+  public void testSpecificMachineDirectives() {
+    List<IElementType> directives = List.of(M68kTokenTypes.MC68000, M68kTokenTypes.MC68010, M68kTokenTypes.MC68020,
+      M68kTokenTypes.MC68030, M68kTokenTypes.MC68040, M68kTokenTypes.MC68060,
+      M68kTokenTypes.AC68080, M68kTokenTypes.CPU32);
+    for (IElementType directive : directives) {
+      String directiveText = directive.toString();
+      doTestSingleBefore(" " + directiveText, directiveText);
+    }
   }
 
   private List<LineMarkerInfo<?>> getLineMarkerInfos(String text) {
     myFixture.configureByText("test.s", text);
     myFixture.doHighlighting();
-    final List<LineMarkerInfo<?>> lineMarkerInfos =
-      DaemonCodeAnalyzerImpl.getLineMarkers(myFixture.getEditor().getDocument(), getProject());
-    return lineMarkerInfos;
+    return DaemonCodeAnalyzerImpl.getLineMarkers(myFixture.getEditor().getDocument(), getProject());
+  }
+
+  private void doTestSingleBefore(String text, String leafText) {
+    List<LineMarkerInfo<?>> lineMarkerInfos = getLineMarkerInfos(text);
+    LineMarkerInfo<?> info = assertOneElement(lineMarkerInfos);
+    assertBefore(info, leafText);
+  }
+
+  private static void assertBefore(LineMarkerInfo<?> info, String leafText) {
+    assertEquals(SeparatorPlacement.TOP, info.separatorPlacement);
+    final LeafPsiElement beforePsiElement = assertInstanceOf(info.getElement(), LeafPsiElement.class);
+    assertEquals(leafText, beforePsiElement.getText());
   }
 }

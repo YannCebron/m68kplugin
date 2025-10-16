@@ -24,9 +24,7 @@ import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.markup.SeparatorPlacement;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.psi.PsiElement;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kEndmDirective;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroDirective;
-import com.yanncebron.m68kplugin.lang.psi.directive.M68kSectionDirective;
+import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,6 +45,18 @@ final class M68kMethodSeparatorLineMarkerProvider implements LineMarkerProvider,
     }
 
     if (element instanceof M68kSectionDirective) {
+      return createSeparator(element.getFirstChild());
+    }
+
+    if (element instanceof M68kMachineDirective ||
+      element instanceof M68kMc68000Directive ||
+      element instanceof M68kMc68010Directive ||
+      element instanceof M68kMc68020Directive ||
+      element instanceof M68kMc68030Directive ||
+      element instanceof M68kMc68040Directive ||
+      element instanceof M68kMc68060Directive ||
+      element instanceof M68kAc68080Directive ||
+      element instanceof M68kCpu32Directive) {
       return createSeparator(element.getFirstChild());
     }
 

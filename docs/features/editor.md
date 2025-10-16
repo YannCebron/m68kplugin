@@ -26,7 +26,7 @@ Detailed on-the-fly semantic error highlighting for all instructions and directi
 
 ### Method Separator
 
-For `macro`/`endm` and `section` via *Show method separators* option in *Settings \| Editor \| General \| Appearance*
+For `macro`/`endm`, `section` and machine directives (`machine`, `mc68010` etc.) via *Show method separators* option in *Settings \| Editor \| General \| Appearance*
 
 ### Highlight matching braces and directives
 

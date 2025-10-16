@@ -5,6 +5,7 @@
 ### Added
 
 - *View \| Appearance \| Navigation Bar*
+- add method separator for machine directives (`machine`, `mc68010` etc.)
 
 ### Fixed
 
