@@ -19,6 +19,7 @@ package com.yanncebron.m68kplugin.documentation;
 import com.intellij.codeInsight.documentation.DocumentationManagerProtocol;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.documentation.AbstractDocumentationProvider;
+import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.text.StringUtil;
@@ -86,7 +87,7 @@ public final class M68kDirectiveDocumentationProvider extends AbstractDocumentat
       return M68kDocumentationUtil.CSS +
         "<h1>" + StringUtil.toUpperCase(directiveText) + "</h1>" +
         "<p>" + contents.getSecond() + "</p>" +
-        M68kDocumentationUtil.CONTRIBUTION_FOOTER;
+        (forBrowserPane ? M68kDocumentationUtil.CONTRIBUTION_FOOTER : StringUtil.replace(M68kDocumentationUtil.CONTRIBUTION_FOOTER, DocumentationMarkup.EXTERNAL_LINK_ICON.toString(), ""));
     }
 
     if (forBrowserPane) {
