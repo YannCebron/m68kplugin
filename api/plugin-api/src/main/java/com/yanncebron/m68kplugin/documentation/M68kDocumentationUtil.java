@@ -64,7 +64,8 @@ public final class M68kDocumentationUtil {
 
   @NonNls
   public static final String CONTRIBUTION_FOOTER =
-    "<br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_4.html#Directives-2\">vasm directives docs</a>" + DocumentationMarkup.EXTERNAL_LINK_ICON +
+    "<br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_4.html#Directives-2\">vasm directives docs 1</a>" + DocumentationMarkup.EXTERNAL_LINK_ICON +
+    "<br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_23.html#Extensions-3\">vasm directives docs 2</a>" + DocumentationMarkup.EXTERNAL_LINK_ICON +
     "<br><br><a href=\"https://github.com/prb28/m68k-instructions-documentation\">Contribute to m68k-instructions-documentation project</a>" + DocumentationMarkup.EXTERNAL_LINK_ICON;
 
   public static Couple<String> getMarkdownContents(String docRoot, String markdownFileName) {
