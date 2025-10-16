@@ -44,9 +44,7 @@ import icons.M68kIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * Reference to label or builtin symbol.
@@ -223,11 +221,12 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
       return;
     }
 
-    StubIndex.getInstance().processAllKeys(M68kStubIndexKeys.LABEL,
-      key -> {
-        final Collection<M68kLabel> labels = getStubLabels(key, project, scope);
-        return ContainerUtil.process(labels, processor);
-      }, scope, null);
+    Set<String> allKeys = new HashSet<>();
+    StubIndex.getInstance().processAllKeys(M68kStubIndexKeys.LABEL, Processors.cancelableCollectProcessor(allKeys), scope);
+    ContainerUtil.process(allKeys, key -> {
+      final Collection<M68kLabel> labels = getStubLabels(key, project, scope);
+      return ContainerUtil.process(labels, processor);
+    });
   }
 
   private static final EnumSet<M68kLabelBase.LabelKind> NON_RELEVANT_LABEL_KINDS = EnumSet.of(M68kLabelBase.LabelKind.EQUR, M68kLabelBase.LabelKind.REG, M68kLabelBase.LabelKind.MACRO);
