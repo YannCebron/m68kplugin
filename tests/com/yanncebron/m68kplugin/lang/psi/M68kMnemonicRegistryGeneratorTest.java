@@ -28,6 +28,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+import static java.util.Map.entry;
+
 /**
  * Generates {@link M68kMnemonicRegistry} data from <a href="http://sun.hasenbraten.de/vasm/">vasm</a> input file.
  * <p>
@@ -81,7 +83,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       M68kOperand sourceOperand;
       M68kOperand destinationOperand;
       String operandText = StringUtil.substringBefore(split.get(1), "}");
-      assert operandText != null : trim;
+      assertNotNull(trim, operandText);
       if (operandText.contains(",")) {
         sourceOperand = mapOperand(StringUtil.substringBefore(operandText, ","));
         destinationOperand = mapOperand(StringUtil.substringAfter(operandText, ","));
@@ -94,9 +96,9 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
       // DataSize
       String dataSizeBlockText = StringUtil.substringAfter(lastSplit.get(2), "|");
-      assert dataSizeBlockText != null : trim;
+      assertNotNull(trim, dataSizeBlockText);
       final String dataSizeText = StringUtil.substringBefore(dataSizeBlockText, "|");
-      assert dataSizeText != null : trim;
+      assertNotNull(trim, dataSizeText);
       Set<M68kDataSize> dataSizes = mapDataSizes(dataSizeText);
 
       // CPU
@@ -142,45 +144,11 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       Set<M68kCpu> cpus = mnemonic.cpus();
       if (SKIP_UNSUPPORTED_CPUS && !isSupportedCpu(cpus)) continue;
 
-      String cpuText;
-      if (M68kCpu.GROUP_68000_UP.equals(cpus)) {
-        cpuText = "M68kCpu.GROUP_68000_UP";
-      } else if (M68kCpu.GROUP_68010_UP.equals(cpus)) {
-        cpuText = "M68kCpu.GROUP_68010_UP";
-      } else if (M68kCpu.GROUP_68020_UP.equals(cpus)) {
-        cpuText = "M68kCpu.GROUP_68020_UP";
-      } else if (M68kCpu.APOLLO.equals(cpus)) {
-        cpuText = "M68kCpu.APOLLO";
-      } else {
-        cpuText = "EnumSet.of(" + StringUtil.join(cpus, m68kCpu -> "M68kCpu." + m68kCpu.name(), ",") + ")";
-      }
-
-      final Set<M68kDataSize> dataSizes = mnemonic.dataSizes();
-      String dataSizeText;
-      if (M68kDataSize.GROUP_SBWL.equals(dataSizes)) {
-        dataSizeText = "M68kDataSize.GROUP_SBWL";
-      } else if (M68kDataSize.GROUP_SBW.equals(dataSizes)) {
-        dataSizeText = "M68kDataSize.GROUP_SBW";
-      } else if (M68kDataSize.GROUP_BWL.equals(dataSizes)) {
-        dataSizeText = "M68kDataSize.GROUP_BWL";
-      } else if (M68kDataSize.GROUP_WL.equals(dataSizes)) {
-        dataSizeText = "M68kDataSize.GROUP_WL";
-      } else if (M68kDataSize.GROUP_S.equals(dataSizes)) {
-        dataSizeText = "M68kDataSize.GROUP_S";
-      } else if (M68kDataSize.GROUP_B.equals(dataSizes)) {
-        dataSizeText = "M68kDataSize.GROUP_B";
-      } else if (M68kDataSize.GROUP_W.equals(dataSizes)) {
-        dataSizeText = "M68kDataSize.GROUP_W";
-      } else if (M68kDataSize.GROUP_L.equals(dataSizes)) {
-        dataSizeText = "M68kDataSize.GROUP_L";
-      } else if (M68kDataSize.GROUP_UNSIZED.equals(dataSizes)) {
-        dataSizeText = "M68kDataSize.GROUP_UNSIZED";
-      } else {
-        dataSizeText = "EnumSet.of(" + StringUtil.join(dataSizes, dataSize -> "M68kDataSize." + dataSize.name(), ",") + ")";
-      }
+      String dataSizeText = getDataSizeText(mnemonic);
+      String cpuText = getCpuText(cpus);
 
       String mnemonicText = StringUtil.toUpperCase(mnemonic.elementType().toString());
-      final String tokenText = "M68kTokenTypes." + mnemonicText + "";
+      String tokenText = "M68kTokenTypes." + mnemonicText;
 
       System.out.println("mnemonics.putValue(" + tokenText + ",");
       System.out.println("new M68kMnemonic(" +
@@ -193,54 +161,93 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     }
   }
 
-  private static final Map<String, M68kOperand> OPERAND_MAP = ContainerUtil.<String, M68kOperand>immutableMapBuilder()
-    .put("0", M68kOperand.NONE)
-    .put("IM", M68kOperand.IMMEDIATE)
-    .put("QI", M68kOperand.QUICK_IMMEDIATE)
-    .put("MI", M68kOperand.MEMORY_WITHOUT_IMMEDIATE)
-    .put("BR", M68kOperand.BRANCH_DESTINATION)
-    .put("DB", M68kOperand.DBCC_BRANCH_DESTINATION)
-    .put("MR", M68kOperand.RESTORE_OPERANDS)
-    .put("IR", M68kOperand.IMMEDIATE_REGISTER_LIST_VALUE)
-    .put("DA", M68kOperand.DATA)
-    .put("AD", M68kOperand.ALTERABLE_DATA)
-    .put("CFAD", M68kOperand.ALTERABLE_DATA_CF)
-    .put("MA", M68kOperand.MEMORY)
-    .put("AM", M68kOperand.ALTERABLE_MEMORY)
-    .put("CFAM", M68kOperand.ALTERABLE_MEMORY_CF)
-    .put("CT", M68kOperand.CONTROL)
-    .put("AC", M68kOperand.ALTERABLE_CONTROL)
-    .put("AL", M68kOperand.ALTERABLE)
-    .put("AY", M68kOperand.ALL)
-    .put("D_", M68kOperand.DATA_REGISTER)
-    .put("A_", M68kOperand.ADDRESS_REGISTER)
-    .put("R_", M68kOperand.DATA_OR_ADDRESS_REGISTER)
-    .put("RL", M68kOperand.DATA_OR_ADDRESS_REGISTER_LIST)
-    .put("PA", M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT)
-    .put("AP", M68kOperand.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT)
-    .put("DP", M68kOperand.ADDRESS_REGISTER_DISPLACEMENT)
-    .put("_SR", M68kOperand.SR_REGISTER)
-    .put("_USP", M68kOperand.USP_REGISTER)
-    .put("_CCR", M68kOperand.CCR_REGISTER)
-    .put("_CTRL", M68kOperand.CTRL_REGISTER)
-    .build();
+  private static @NotNull String getCpuText(Set<M68kCpu> cpus) {
+    if (M68kCpu.GROUP_68000_UP.equals(cpus)) {
+      return "M68kCpu.GROUP_68000_UP";
+    } else if (M68kCpu.GROUP_68010_UP.equals(cpus)) {
+      return "M68kCpu.GROUP_68010_UP";
+    } else if (M68kCpu.GROUP_68020_UP.equals(cpus)) {
+      return "M68kCpu.GROUP_68020_UP";
+    } else if (M68kCpu.APOLLO.equals(cpus)) {
+      return "M68kCpu.APOLLO";
+    }
+    return "EnumSet.of(" + StringUtil.join(cpus, m68kCpu -> "M68kCpu." + m68kCpu.name(), ",") + ")";
+  }
+
+
+  private static @NotNull String getDataSizeText(M68kMnemonic mnemonic) {
+    final Set<M68kDataSize> dataSizes = mnemonic.dataSizes();
+
+    if (M68kDataSize.GROUP_SBWL.equals(dataSizes)) {
+      return "M68kDataSize.GROUP_SBWL";
+    } else if (M68kDataSize.GROUP_SBW.equals(dataSizes)) {
+      return "M68kDataSize.GROUP_SBW";
+    } else if (M68kDataSize.GROUP_BWL.equals(dataSizes)) {
+      return "M68kDataSize.GROUP_BWL";
+    } else if (M68kDataSize.GROUP_WL.equals(dataSizes)) {
+      return "M68kDataSize.GROUP_WL";
+    } else if (M68kDataSize.GROUP_S.equals(dataSizes)) {
+      return "M68kDataSize.GROUP_S";
+    } else if (M68kDataSize.GROUP_B.equals(dataSizes)) {
+      return "M68kDataSize.GROUP_B";
+    } else if (M68kDataSize.GROUP_W.equals(dataSizes)) {
+      return "M68kDataSize.GROUP_W";
+    } else if (M68kDataSize.GROUP_L.equals(dataSizes)) {
+      return "M68kDataSize.GROUP_L";
+    } else if (M68kDataSize.GROUP_UNSIZED.equals(dataSizes)) {
+      return "M68kDataSize.GROUP_UNSIZED";
+    }
+    return "EnumSet.of(" + StringUtil.join(dataSizes, dataSize -> "M68kDataSize." + dataSize.name(), ",") + ")";
+  }
+
+  private static final Map<String, M68kOperand> OPERAND_MAP = Map.ofEntries(
+    entry("0", M68kOperand.NONE),
+    entry("IM", M68kOperand.IMMEDIATE),
+    entry("QI", M68kOperand.QUICK_IMMEDIATE),
+    entry("MI", M68kOperand.MEMORY_WITHOUT_IMMEDIATE),
+    entry("BR", M68kOperand.BRANCH_DESTINATION),
+    entry("DB", M68kOperand.DBCC_BRANCH_DESTINATION),
+    entry("MR", M68kOperand.RESTORE_OPERANDS),
+    entry("IR", M68kOperand.IMMEDIATE_REGISTER_LIST_VALUE),
+    entry("DA", M68kOperand.DATA),
+    entry("AD", M68kOperand.ALTERABLE_DATA),
+    entry("CFAD", M68kOperand.ALTERABLE_DATA_CF),
+    entry("MA", M68kOperand.MEMORY),
+    entry("AM", M68kOperand.ALTERABLE_MEMORY),
+    entry("CFAM", M68kOperand.ALTERABLE_MEMORY_CF),
+    entry("CT", M68kOperand.CONTROL),
+    entry("AC", M68kOperand.ALTERABLE_CONTROL),
+    entry("AL", M68kOperand.ALTERABLE),
+    entry("AY", M68kOperand.ALL),
+    entry("D_", M68kOperand.DATA_REGISTER),
+    entry("A_", M68kOperand.ADDRESS_REGISTER),
+    entry("R_", M68kOperand.DATA_OR_ADDRESS_REGISTER),
+    entry("RL", M68kOperand.DATA_OR_ADDRESS_REGISTER_LIST),
+    entry("PA", M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT),
+    entry("AP", M68kOperand.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT),
+    entry("DP", M68kOperand.ADDRESS_REGISTER_DISPLACEMENT),
+    entry("_SR", M68kOperand.SR_REGISTER),
+    entry("_USP", M68kOperand.USP_REGISTER),
+    entry("_CCR", M68kOperand.CCR_REGISTER),
+    entry("_CTRL", M68kOperand.CTRL_REGISTER)
+  );
 
   private static M68kOperand mapOperand(String operandText) {
     return OPERAND_MAP.get(operandText);
   }
 
-  private static final Map<String, Set<M68kDataSize>> DATA_SIZE_MAP = ContainerUtil.<String, Set<M68kDataSize>>immutableMapBuilder()
-    .put("B", M68kDataSize.GROUP_B)
-    .put("W", M68kDataSize.GROUP_W)
-    .put("L", M68kDataSize.GROUP_L)
-    .put("WL", M68kDataSize.GROUP_WL)
-    .put("CFWL", M68kDataSize.GROUP_WL)
-    .put("BWL", M68kDataSize.GROUP_BWL)
-    .put("CFBWL", M68kDataSize.GROUP_BWL)
-    .put("SBW", M68kDataSize.GROUP_SBW)
-    .put("SBWL", M68kDataSize.GROUP_SBWL)
-    .put("UNS", M68kDataSize.GROUP_UNSIZED)
-    .build();
+  private static final Map<String, Set<M68kDataSize>> DATA_SIZE_MAP = Map.ofEntries(
+    entry("B", M68kDataSize.GROUP_B),
+    entry("W", M68kDataSize.GROUP_W),
+    entry("L", M68kDataSize.GROUP_L),
+    entry("WL", M68kDataSize.GROUP_WL),
+    entry("CFWL", M68kDataSize.GROUP_WL),
+    entry("BWL", M68kDataSize.GROUP_BWL),
+    entry("CFBWL", M68kDataSize.GROUP_BWL),
+    entry("SBW", M68kDataSize.GROUP_SBW),
+    entry("SBWL", M68kDataSize.GROUP_SBWL),
+    entry("UNS", M68kDataSize.GROUP_UNSIZED)
+  );
 
   @NotNull
   private static Set<M68kDataSize> mapDataSizes(String dataSizeText) {
@@ -262,21 +269,21 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     return allCpus;
   }
 
-  private static final Map<String, Set<M68kCpu>> CPU_MAP = ContainerUtil.<String, Set<M68kCpu>>immutableMapBuilder()
-    .put("m68000up", M68kCpu.GROUP_68000_UP)
-    .put("m68010up", M68kCpu.GROUP_68010_UP)
-    .put("m68020up", M68kCpu.GROUP_68020_UP)
-    .put("m68030up", M68kCpu.GROUP_68030_UP)
-    .put("m68040up", M68kCpu.GROUP_68040_UP)
-    .put("mfloat", M68kCpu.FLOAT)
-    .put("apollo", M68kCpu.APOLLO)
+  private static final Map<String, Set<M68kCpu>> CPU_MAP = Map.ofEntries(
+    entry("m68000up", M68kCpu.GROUP_68000_UP),
+    entry("m68010up", M68kCpu.GROUP_68010_UP),
+    entry("m68020up", M68kCpu.GROUP_68020_UP),
+    entry("m68030up", M68kCpu.GROUP_68030_UP),
+    entry("m68040up", M68kCpu.GROUP_68040_UP),
+    entry("mfloat", M68kCpu.FLOAT),
+    entry("apollo", M68kCpu.APOLLO),
 
-    .put("m68851", EnumSet.of(M68kCpu.M_68851))
-    .put("m68020", EnumSet.of(M68kCpu.M_68020))
-    .put("m68030", EnumSet.of(M68kCpu.M_68030))
-    .put("m68040", EnumSet.of(M68kCpu.M_68040))
-    .put("m68060", EnumSet.of(M68kCpu.M_68060))
-    .build();
+    entry("m68851", EnumSet.of(M68kCpu.M_68851)),
+    entry("m68020", EnumSet.of(M68kCpu.M_68020)),
+    entry("m68030", EnumSet.of(M68kCpu.M_68030)),
+    entry("m68040", EnumSet.of(M68kCpu.M_68040)),
+    entry("m68060", EnumSet.of(M68kCpu.M_68060))
+    );
 
   @Nullable
   private static Set<M68kCpu> mapCpuPart(String parseCpuText) {
