@@ -7,3 +7,4 @@ data_f
 
 ## Description
 Equivalent to `section data_f,data,fast`.
+See [section](section.md) directive.

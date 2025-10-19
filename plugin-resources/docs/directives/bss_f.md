@@ -7,3 +7,4 @@ bss_f
 
 ## Description
 Equivalent to `section bss_f,bss,fast`.
+See [section](section.md) directive.
