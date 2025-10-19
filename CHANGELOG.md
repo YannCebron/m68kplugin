@@ -5,7 +5,10 @@
 ### Added
 
 - *View \| Appearance \| Navigation Bar*
-- add method separator for machine directives (`machine`, `mc68010` etc.)
+- add method separator for machine directives (`machine`, `mc68010`, etc.)
+- reference documentation for conditional assembly directives (`IFND`, `ELSE`, etc.)
+  - in editor
+  - M68k Browser "Directives" tab
 
 ### Fixed
 

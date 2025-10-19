@@ -47,6 +47,7 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
       M68kTokenTypes.INITNEAR,
       M68kTokenTypes.JUMPERR,
       M68kTokenTypes.JUMPPTR,
+      M68kTokenTypes.LOAD,
       M68kTokenTypes.MACHINE,
       M68kTokenTypes.MASK2,
       M68kTokenTypes.MC68000,
@@ -61,12 +62,7 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
       M68kTokenTypes.REG
     );
 
-    assertNoReferenceDoc(M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES,
-      M68kTokenTypes.ELSEIF,
-      M68kTokenTypes.ENDC,
-      M68kTokenTypes.IFMI,
-      M68kTokenTypes.IFPL
-    );
+    assertNoReferenceDoc(M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES);
   }
 
   private void assertNoReferenceDoc(TokenSet tokenSet, IElementType... missing) {
@@ -103,6 +99,18 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
         "</code></pre>\n" +
         "<h2>Description</h2>\n" +
         "<p>Ends an outcommented block from <a rel=\"nofollow\" href=\"psi_element://rem\">rem</a>. Assembly will continue.</p>\n", doc);
+    });
+  }
+
+  public void testIfmiConditionalAssemblyDirectiveReferenceDoc() {
+    doTest(" if<caret>mi", (psiElement, documentationProvider) -> {
+      String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
+      assertEquals("<style>h1 { font-weight: bold; font-size: 120%; } h2 { padding-top: 13px; font-weight: bold; font-size: 110%; } h3 { padding-top: 10px; font-weight: bold; } table { padding-bottom: 10px; white-space: nowrap; } td { margin: 4px 0 0 0; padding: 0 0 0 0; }th { font-weight: bold; text-align: left; white-space: nowrap; margin: 2px; } em { font-style: italic; }code { white-space: nowrap; }p { padding-top: 5px; } strong { font-weight: bold; }blockquote { padding-left: 10px; padding-right:10px; padding-bottom: 5px; }</style><h1>IFMI</h1>\n" +
+        "<h2>Syntax</h2>\n" +
+        "<pre><code class=\"language-assembly\">ifmi &lt;expression&gt;\n" +
+        "</code></pre>\n" +
+        "<h2>Description</h2>\n" +
+        "<p>Conditionally assemble the following lines if <code>&lt;expression&gt;</code> is less than zero. Equivalent to <a rel=\"nofollow\" href=\"psi_element://iflt\">iflt</a>.</p>\n", doc);
     });
   }
 

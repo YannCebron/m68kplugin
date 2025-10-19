@@ -31,6 +31,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
+import com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import org.jetbrains.annotations.NotNull;
@@ -46,23 +47,35 @@ public final class M68kDirectiveDocumentationProvider extends AbstractDocumentat
                                                             @NotNull PsiFile file,
                                                             @Nullable PsiElement contextElement,
                                                             int targetOffset) {
-    if (contextElement != null &&
-      M68kTokenGroups.DIRECTIVES.contains(contextElement.getNode().getElementType())) {
+    if (contextElement == null) return null;
+
+    if (M68kTokenGroups.DIRECTIVES.contains(contextElement.getNode().getElementType())) {
       return PsiTreeUtil.getParentOfType(contextElement, M68kDirective.class);
     }
+
+    if (M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES.contains(contextElement.getNode().getElementType())) {
+      return PsiTreeUtil.getParentOfType(contextElement, M68kConditionalAssemblyDirective.class);
+    }
+
     return null;
   }
 
   @Override
   public @Nullable String generateDoc(PsiElement element, @Nullable PsiElement originalElement) {
-    if (!(element instanceof M68kDirective directive)) return null;
+    IElementType directiveType;
+    if (element instanceof M68kDirective directive) {
+      if (directive instanceof M68kMacroCallDirective) return null;
+      ASTNode directiveNode = directive.getNode().findChildByType(M68kTokenGroups.DIRECTIVES);
+      assert directiveNode != null : directive.getText();
+      directiveType = directiveNode.getElementType();
+    } else if (element instanceof M68kConditionalAssemblyDirective conditionalAssemblyDirective) {
+      ASTNode directiveNode = conditionalAssemblyDirective.getNode().findChildByType(M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES);
+      assert directiveNode != null : conditionalAssemblyDirective.getText();
+      directiveType = directiveNode.getElementType();
+    } else {
+      return null;
+    }
 
-    if (directive instanceof M68kMacroCallDirective) return null;
-
-    ASTNode directiveNode = directive.getNode().findChildByType(M68kTokenGroups.DIRECTIVES);
-    assert directiveNode != null : directive.getText();
-
-    final IElementType directiveType = directiveNode.getElementType();
     return getDirectiveDoc(directiveType, false);
   }
 
@@ -79,9 +92,12 @@ public final class M68kDirectiveDocumentationProvider extends AbstractDocumentat
 
   @NotNull
   private static String getDirectiveDoc(IElementType directiveType, boolean forBrowserPane) {
-    directiveType = directiveType == M68kTokenTypes.EQ_DIRECTIVE ? M68kTokenTypes.EQU : directiveType;
+    IElementType docDirectiveType = directiveType;
+    if (directiveType == M68kTokenTypes.EQ_DIRECTIVE) {
+      docDirectiveType = M68kTokenTypes.EQU;
+    }
 
-    String directiveText = directiveType.toString();
+    String directiveText = docDirectiveType.toString();
     Couple<String> contents = M68kDocumentationUtil.getMarkdownContents(DOCS_MNEMONIC_ROOT, StringUtil.toLowerCase(directiveText));
     if (contents.getFirst() == null) {
       return M68kDocumentationUtil.CSS +

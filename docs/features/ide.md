@@ -26,7 +26,7 @@ Browse all supported mnemonics with additional reference documentation
 
 ### Directives
 
-Browse all supported directives with reference documentation
+Browse all supported (conditional assembly) directives with reference documentation
 
 ![Directive reference documentation](../assets/ide/directive_doc.png)
 
