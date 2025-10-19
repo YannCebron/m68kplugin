@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -196,7 +196,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType LINK = new M68kTokenType("link");
   public static final IElementType LIST = new M68kTokenType("list");
   public static final IElementType LLEN = new M68kTokenType("llen");
-  public static final IElementType LOAD = new M68kTokenType("list");
+  public static final IElementType LOAD = new M68kTokenType("load");
   public static final IElementType LSL = new M68kTokenType("lsl");
   public static final IElementType LSR = new M68kTokenType("lsr");
   public static final IElementType LT = new M68kTokenType("<");

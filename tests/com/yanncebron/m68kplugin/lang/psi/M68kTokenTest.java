@@ -23,6 +23,9 @@ import com.yanncebron.m68kplugin.lang.M68kFileElementType;
 import com.yanncebron.m68kplugin.lang.M68kLanguage;
 import junit.framework.TestCase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class M68kTokenTest extends TestCase {
 
   private static final TokenSet IGNORE_TYPES = TokenSet.create(
@@ -81,6 +84,19 @@ public class M68kTokenTest extends TestCase {
       }
 
       assertEquals(type.toString(), 1, groupMatch);
+    }
+  }
+
+  public void testUniqueDebugNames() {
+    Map<String, IElementType> names = new HashMap<>();
+    for (IElementType type : IElementType.enumerate(type ->
+      type.getLanguage() == M68kLanguage.INSTANCE &&
+        !(type instanceof M68kCompositeElementType) &&
+        !(type instanceof IStubElementType))) {
+
+      String debugName = type.toString();
+      assertFalse("Duplicate debugName " + debugName, names.containsKey(debugName));
+      names.put(debugName, type);
     }
   }
 }
