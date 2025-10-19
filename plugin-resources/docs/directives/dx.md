@@ -7,4 +7,5 @@ dx.[bdlqswx] <exp>
 
 ## Description
 Tries to allocate space in the DataBss portion of a code or data section.
-Otherwise equivalent to `dcb.[bdlqswx] <exp>,0`.
+Otherwise, equivalent to `dcb.[bdlqswx] <exp>,0`.
+See [dcb](dcb.md) directive.
