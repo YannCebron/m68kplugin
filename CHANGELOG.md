@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Changed
+
+- directives reference docs: cleanup
+
 ### Added
 
 - *View \| Appearance \| Navigation Bar*
