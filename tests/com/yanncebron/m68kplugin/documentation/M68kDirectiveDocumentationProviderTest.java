@@ -37,8 +37,6 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
     assertNoReferenceDoc(M68kTokenGroups.DIRECTIVES,
       M68kTokenTypes.ADDWATCH,
       M68kTokenTypes.AUTO,
-      M68kTokenTypes.DS,
-      M68kTokenTypes.DSEG,
       M68kTokenTypes.JUMPERR,
       M68kTokenTypes.JUMPPTR,
       M68kTokenTypes.LOAD,
