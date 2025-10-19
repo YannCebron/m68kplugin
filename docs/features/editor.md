@@ -114,7 +114,7 @@ Rename labels using *Refactor \| Rename* across the whole project with usage pre
 * *Code \| Comment with Line Comment*
 * *Code \| Move Element Left/Right* for `exg`/`cmpm`, binary expressions, register list, macro call parameters, `dc`/
   `dr` values
-* Spellchecker with bundled dictionaries (M68k/Amiga)
+* Spellchecker with bundled dictionaries (M68k/Amiga/"Scene" jargon)
 * Code Folding (*Settings \| Editor \| General \| Code Folding*)
   * Zero-terminated string literal (`dc.b "a text",0` &rarr; `"a text"`)
   * Custom regions via enclosing `* region [placeholderText]` / `* endregion` comments

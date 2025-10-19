@@ -5,6 +5,7 @@
 ### Changed
 
 - directives reference docs: added missing contents, cleanup
+- added many terms to Amiga dictionary
 
 ### Added
 
