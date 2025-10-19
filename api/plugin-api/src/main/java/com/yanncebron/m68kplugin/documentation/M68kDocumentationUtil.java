@@ -21,6 +21,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.io.StreamUtil;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.io.URLUtil;
 import com.yanncebron.m68kplugin.M68kApiBundle;
 import org.commonmark.Extension;
@@ -103,6 +104,9 @@ public final class M68kDocumentationUtil {
 
         @Override
         public String sanitizeLinkUrl(String url) {
+          if (StringUtil.startsWith(url, "http")) {
+            return super.sanitizeLinkUrl(url);
+          }
           return urlFunction.apply(super.sanitizeLinkUrl(url));
         }
 

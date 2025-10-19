@@ -40,8 +40,7 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
       M68kTokenTypes.JUMPERR,
       M68kTokenTypes.JUMPPTR,
       M68kTokenTypes.LOAD,
-      M68kTokenTypes.MASK2,
-      M68kTokenTypes.OPT
+      M68kTokenTypes.MASK2
     );
 
     assertNoReferenceDoc(M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES);

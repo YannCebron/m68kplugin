@@ -4,7 +4,7 @@
 
 ### Changed
 
-- directives reference docs: cleanup
+- directives reference docs: added missing contents, cleanup
 
 ### Added
 
