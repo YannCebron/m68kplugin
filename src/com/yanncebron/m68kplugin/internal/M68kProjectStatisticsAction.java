@@ -16,10 +16,10 @@
 
 package com.yanncebron.m68kplugin.internal;
 
-import com.intellij.openapi.actionSystem.ActionUpdateThread;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.analysis.AnalysisScope;
+import com.intellij.analysis.BaseAnalysisAction;
+import com.intellij.codeInsight.CodeInsightBundle;
+import com.intellij.codeInsight.highlighting.HighlightErrorFilter;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileEditor.UniqueVFilePathBuilder;
@@ -42,6 +42,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.ObjectUtils;
+import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
 import com.yanncebron.m68kplugin.lang.psi.M68kDataSized;
@@ -57,28 +58,21 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-final class M68kProjectStatisticsAction extends AnAction {
+final class M68kProjectStatisticsAction extends BaseAnalysisAction {
 
   private static final Condition<M68kPsiElement> NO_DATA_SIZE_CONDITION = m68kPsiElement -> {
-    if (m68kPsiElement instanceof M68kDataSized) {
-      return ((M68kDataSized) m68kPsiElement).getDataSize() == null;
+    if (m68kPsiElement instanceof M68kDataSized m68kDataSized) {
+      return m68kDataSized.getDataSize() == null;
     }
     return false;
   };
 
-  @Override
-  public @NotNull ActionUpdateThread getActionUpdateThread() {
-    return ActionUpdateThread.BGT;
+  M68kProjectStatisticsAction() {
+    super(M68kBundle.messagePointer("action.M68kProjectStatisticsAction.text"), CodeInsightBundle.messagePointer("action.analysis.noun"));
   }
 
   @Override
-  public void update(@NotNull AnActionEvent e) {
-    e.getPresentation().setEnabledAndVisible(e.getProject() != null);
-  }
-
-  @Override
-  public void actionPerformed(@NotNull AnActionEvent e) {
-    final Project project = e.getRequiredData(CommonDataKeys.PROJECT);
+  protected void analyze(@NotNull Project project, @NotNull AnalysisScope scope) {
 
     Map<Class<? extends M68kPsiElement>, Integer> instructions = createMap();
     Map<Class<? extends M68kPsiElement>, Integer> withoutDataSize = createMap();
@@ -96,10 +90,12 @@ final class M68kProjectStatisticsAction extends AnAction {
     long startTime = System.currentTimeMillis();
     boolean completed = ProgressManager.getInstance().runProcessWithProgressSynchronously(() ->
       ApplicationManager.getApplication().runReadAction(() -> {
+        GlobalSearchScope searchScope = (GlobalSearchScope) scope.toSearchScope();
         final Collection<VirtualFile> files =
-          FileTypeIndex.getFiles(M68kFileType.INSTANCE, GlobalSearchScope.allScope(project));
+          FileTypeIndex.getFiles(M68kFileType.INSTANCE, searchScope);
 
         final FileIncludeManager fileIncludeManager = FileIncludeManager.getManager(project);
+        List<HighlightErrorFilter> highlightErrorFilters = HighlightErrorFilter.EP_NAME.getExtensions(project);
 
         final ProgressIndicator pi = ProgressManager.getInstance().getProgressIndicator();
         pi.setIndeterminate(false);
@@ -113,7 +109,17 @@ final class M68kProjectStatisticsAction extends AnAction {
 
           pi.setText2("Errors");
           final PsiErrorElement[] errors = m68kPsiFile.findChildrenByClass(PsiErrorElement.class);
-          totalErrors[0] = totalErrors[0] + errors.length;
+          int filteredErrorCount = errors.length;
+          // filter M68kMacroParameterHighlightErrorFilter
+          for (PsiErrorElement error : errors) {
+            for (HighlightErrorFilter filter : highlightErrorFilters) {
+              if (!filter.shouldHighlightErrorElement(error)) {
+                filteredErrorCount--;
+                break;
+              }
+            }
+          }
+          totalErrors[0] += filteredErrorCount;
 
           pi.setText2("Includes");
           final VirtualFile[] directInclude = fileIncludeManager.getIncludedFiles(virtualFile, true);
@@ -150,9 +156,9 @@ final class M68kProjectStatisticsAction extends AnAction {
               }
             }
           }
-          totalResolveTime[0] = totalResolveTime[0] + (System.currentTimeMillis() - resolveStart);
-          totalResolve[0] = totalResolve[0] + macroCalls + labelRefs;
-          totalResolveErrors[0] = totalResolveErrors[0] + macroCallsUnresolved + labelRefsUnresolved;
+          totalResolveTime[0] += System.currentTimeMillis() - resolveStart;
+          totalResolve[0] += macroCalls + labelRefs;
+          totalResolveErrors[0] += macroCallsUnresolved + labelRefsUnresolved;
 
           pi.setText2("Instruction count");
           M68kInstruction[] computeInstructions = m68kPsiFile.findChildrenByClass(M68kInstruction.class);
@@ -173,32 +179,34 @@ final class M68kProjectStatisticsAction extends AnAction {
           countByClass(conditional, computeConditional);
 
           int elements = computeInstructions.length + computeLabels.length + computeDirectives.length + computeConditional.length;
-          totalElements[0] = totalElements[0] + elements;
+          totalElements[0] += elements;
 
           String info =
-            StringUtils.rightPad(UniqueVFilePathBuilder.getInstance().getUniqueVirtualFilePath(project, virtualFile), 25) +
-              StringUtils.leftPad(errors.length + "/" + elements, 18) +
-              " | " + StringUtils.rightPad(labelRefsUnresolved + "/" + labelRefs, 7) +
-              " | " + StringUtils.rightPad(macroCallsUnresolved + "/" + macroCalls, 7) +
+            StringUtils.rightPad(UniqueVFilePathBuilder.getInstance().getUniqueVirtualFilePath(project, virtualFile, searchScope), 34) +
+              " | " + StringUtils.rightPad(getErrorCountText(filteredErrorCount, elements), 7) +
+              " | " + StringUtils.rightPad(getErrorCountText(labelRefsUnresolved, labelRefs), 7) +
+              " | " + StringUtils.rightPad(getErrorCountText(macroCallsUnresolved, macroCalls), 7) +
               " | " + directInclude.length + " (" + (recursiveInclude.length - 1) + ") [" + incbinInclude.length + "]";
           fileInfos.add(info);
         }
-      }), "Scanning Files...", true, project);
+      }), M68kBundle.message("action.M68kProjectStatisticsAction.progress.title"), true, project);
 
     if (!completed) return;
 
     StringBuilder sb = new StringBuilder();
-    sb.append("Files: ").append(fileInfos.size())
+    sb.append(scope.getDisplayName())
+      .append("\n")
+      .append("Files: ").append(fileInfos.size())
       .append(" (").append(StringUtil.formatDuration(System.currentTimeMillis() - startTime)).append(")")
       .append("\n")
-      .append("Total Errors: ").append(totalErrors[0]).append("/").append(totalElements[0])
+      .append("Total Errors: ").append(getErrorCountText(totalErrors[0], totalElements[0]))
       .append("\n")
-      .append("Total Resolve Errors: ").append(totalResolveErrors[0]).append("/").append(totalResolve[0])
+      .append("Total Resolve Errors: ").append(getErrorCountText(totalResolveErrors[0], totalResolve[0]))
       .append(" (").append(StringUtil.formatDuration(totalResolveTime[0])).append(")")
       .append("\n\n");
 
-    sb.append("File                                 Errors | Label   | Macro   | include (recursive) [incbin]\n");
-    sb.append("==============================================================================================\n");
+    sb.append("File                               | Errors  | Label   | Macro   | include (recursive) [incbin]\n");
+    sb.append("===============================================================================================\n");
     fileInfos.sort(NaturalComparator.INSTANCE);
     sb.append(StringUtil.join(fileInfos, "\n"));
 
@@ -210,6 +218,10 @@ final class M68kProjectStatisticsAction extends AnAction {
 
     VirtualFile file = new LightVirtualFile("M68k Project Statistics.txt", sb.toString());
     FileEditorManager.getInstance(project).openFile(file, true);
+  }
+
+  private static String getErrorCountText(int errorCount, int total) {
+    return errorCount == 0 ? Integer.toString(total) : errorCount + "/" + total;
   }
 
   @NotNull
