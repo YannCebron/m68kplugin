@@ -39,7 +39,6 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
       M68kTokenTypes.AUTO,
       M68kTokenTypes.DS,
       M68kTokenTypes.DSEG,
-      M68kTokenTypes.EQUR,
       M68kTokenTypes.FAR,
       M68kTokenTypes.INITNEAR,
       M68kTokenTypes.JUMPERR,
@@ -48,8 +47,7 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
       M68kTokenTypes.MASK2,
       M68kTokenTypes.NEAR,
       M68kTokenTypes.NEAR_CODE,
-      M68kTokenTypes.OPT,
-      M68kTokenTypes.REG
+      M68kTokenTypes.OPT
     );
 
     assertNoReferenceDoc(M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES);
