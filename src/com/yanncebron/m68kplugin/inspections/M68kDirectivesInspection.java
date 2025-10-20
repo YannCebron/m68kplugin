@@ -46,11 +46,18 @@ final class M68kDirectivesInspection extends LocalInspectionTool implements Dumb
       }
 
       @Override
-      public void visitBaseregDirective(@NotNull M68kBaseregDirective o) {
-        M68kAdmArd admArd = o.getAdmArd();
+      public void visitBaseregDirective(@NotNull M68kBaseregDirective element) {
+        M68kAdmArd admArd = element.getAdmArd();
         if (admArd != null && admArd.getRegister() == M68kRegister.A7) {
           holder.registerProblem(admArd, M68kBundle.message("inspection.directives.basereg.a7.not.supported"));
         }
+
+        checkUnmatchedOpeningDirective(element, holder, M68kEndbDirective.class, "endb", M68kBaseregDirective.class);
+      }
+
+      @Override
+      public void visitEndbDirective(@NotNull M68kEndbDirective element) {
+        checkUnmatchedClosingDirective(element, holder, M68kBaseregDirective.class, "basereg", M68kEndbDirective.class);
       }
 
       @Override

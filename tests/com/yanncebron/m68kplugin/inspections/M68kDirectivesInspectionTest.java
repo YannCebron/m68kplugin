@@ -93,6 +93,18 @@ public class M68kDirectivesInspectionTest extends BasePlatformTestCase {
     myFixture.testHighlighting();
   }
 
+  public void testUnmatchedDirectiveBaseregMissingEndb() {
+    myFixture.configureByText("a.s",
+      " <error descr=\"Missing matching 'endb' closing directive\">basereg expr,a1</error>");
+    myFixture.testHighlighting();
+  }
+
+  public void testUnmatchedDirectiveEndbMissingBasereg() {
+    myFixture.configureByText("a.s",
+      " <error descr=\"Missing matching 'basereg' opening directive\">endb a1</error>");
+    myFixture.testHighlighting();
+  }
+
   public void testNestedRept() {
     myFixture.configureByText("test.s",
       """
@@ -147,7 +159,7 @@ public class M68kDirectivesInspectionTest extends BasePlatformTestCase {
 
   public void testBaseregWithA7() {
     myFixture.configureByText("a.s",
-      " basereg expr,<error descr=\"A7 is not allowed here\">a7</error>");
+      " basereg expr,<error descr=\"A7 is not allowed here\">a7</error>\n endb a1");
     myFixture.testHighlighting();
   }
 

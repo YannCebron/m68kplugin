@@ -6,7 +6,9 @@
 
 - directives reference docs: added missing contents, cleanup
 - added many terms to Amiga dictionary
-- _Directives problems_ inspection: highlight usage of `A7` with `basereg` directive
+- _Directives problems_ inspection
+  - highlight unmatched `basereg`/`endb`
+  - highlight usage of `A7` with `basereg`
 
 ### Added
 
