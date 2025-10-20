@@ -45,7 +45,6 @@ Unsupported directives, these will display as a false positive
 
 
 - `.sdreg`
-- `assert`
 - `basereg`/`endb`
 - `cargs` (Devpac)
 - `comm`

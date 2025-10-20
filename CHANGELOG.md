@@ -14,6 +14,7 @@
 - reference documentation for conditional assembly directives (`IFND`, `ELSE`, etc.)
   - in editor
   - M68k Browser "Directives" tab
+- support directives: `assert`
 
 ### Fixed
 

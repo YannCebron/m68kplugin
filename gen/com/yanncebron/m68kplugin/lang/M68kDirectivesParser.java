@@ -104,6 +104,38 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
+  // ASSERT expression (COMMA STRING)?
+  public static boolean assert_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "assert_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", ASSERT)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, ASSERT_DIRECTIVE, "<directive>");
+    r = consumeToken(b, ASSERT);
+    p = r; // pin = 1
+    r = r && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1));
+    r = p && assert_directive_2(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // (COMMA STRING)?
+  private static boolean assert_directive_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "assert_directive_2")) return false;
+    assert_directive_2_0(b, l + 1);
+    return true;
+  }
+
+  // COMMA STRING
+  private static boolean assert_directive_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "assert_directive_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, COMMA, STRING);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // AUTO
   public static boolean auto_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "auto_directive")) return false;
@@ -519,7 +551,8 @@ public class M68kDirectivesParser {
   //                        msource_directive |
   //                        offset_directive |
   //                        mask2_directive |
-  //                        output_directive
+  //                        output_directive |
+  //                        assert_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -617,6 +650,7 @@ public class M68kDirectivesParser {
     if (!r) r = offset_directive(b, l + 1);
     if (!r) r = mask2_directive(b, l + 1);
     if (!r) r = output_directive(b, l + 1);
+    if (!r) r = assert_directive(b, l + 1);
     return r;
   }
 

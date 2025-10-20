@@ -610,4 +610,12 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" output fileName");
   }
 
+  public void testAssertDirective() throws Exception {
+    doCodeTest(" assert 0,'message'");
+  }
+
+  public void testAssertDirectiveNoMessage() throws Exception {
+    doCodeTest(" assert 0");
+  }
+
 }

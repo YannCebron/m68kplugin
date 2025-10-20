@@ -176,6 +176,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitShiftRotateInstructionBase(o);
   }
 
+  public void visitAssertDirective(@NotNull M68kAssertDirective o) {
+    visitDirective(o);
+  }
+
   public void visitAutoDirective(@NotNull M68kAutoDirective o) {
     visitDirective(o);
   }

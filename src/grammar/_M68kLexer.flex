@@ -434,6 +434,7 @@ Z=[zZ]
 
   {A}{D}{D}{W}{A}{T}{C}{H}     { yybegin(IN_OPERAND); return ADDWATCH; }
   {A}{L}{I}{G}{N}              { yybegin(IN_OPERAND); return ALIGN; }
+  {A}{S}{S}{E}{R}{T}           { yybegin(IN_OPERAND); return ASSERT; }
   {A}{U}{T}{O}                 { yybegin(AFTER_OPERAND); return AUTO; }
   {B}{L}{K} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BLK; }
   {B}{S}{S}                    { yybegin(AFTER_OPERAND); return BSS; }

@@ -1,0 +1,9 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kAssertDirectiveImpl(ASSERT_DIRECTIVE)
+    PsiElement(assert)('assert')
+    PsiWhiteSpace(' ')
+    M68kNumberExpressionImpl(NUMBER_EXPRESSION)
+      PsiElement(dec_number)('0')
+    PsiElement(,)(',')
+    PsiElement(string)(''message'')
