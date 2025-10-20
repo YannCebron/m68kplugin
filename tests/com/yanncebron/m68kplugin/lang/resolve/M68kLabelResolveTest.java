@@ -74,9 +74,9 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
     myFixture.configureByText("a.s",
       "MY_CPU equ __C<caret>PU");
     final ResolveResult result = getSingleResolveResultAtCaret();
-    final M68kBuiltinSymbolPsiElement m68kBuiltinSymbolPsiElement = assertInstanceOf(result.getElement(), M68kBuiltinSymbolPsiElement.class);
-    assertEquals(M68kBuiltinSymbol.__CPU.getDescription(), m68kBuiltinSymbolPsiElement.getName());
-    assertEquals("Builtin Symbol", ElementPresentationManager.getTypeNameForObject(m68kBuiltinSymbolPsiElement));
+    final M68kBuiltinSymbolPsiElement psiElement = assertInstanceOf(result.getElement(), M68kBuiltinSymbolPsiElement.class);
+    assertEquals(M68kBuiltinSymbol.__CPU.getDescription() + " (" + M68kBuiltinSymbol.__CPU.getCompiler().getDisplayName() + ")", psiElement.getName());
+    assertEquals("Builtin Symbol", ElementPresentationManager.getTypeNameForObject(psiElement));
   }
 
   public void testHighlightResolvingInSingleFile() {

@@ -21,6 +21,7 @@ import com.intellij.codeInsight.daemon.EmptyResolveMessageProvider;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.codeInspection.util.InspectionMessage;
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Condition;
 import com.intellij.psi.*;
@@ -136,7 +137,7 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
         .withItemTextItalic(true)
         .withIcon(value.getIcon())
         .withTailText(" " + value.getDescription())
-        .withTypeText(value.getCompiler().getDisplayName());
+        .withTypeText(value.getCompiler().getDisplayName(), AllIcons.Actions.Compile, true);
       variants.add(PrioritizedLookupElement.withPriority(builder, -1));
     }
 

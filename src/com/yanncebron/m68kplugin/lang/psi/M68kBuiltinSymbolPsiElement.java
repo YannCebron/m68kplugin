@@ -50,7 +50,8 @@ public final class M68kBuiltinSymbolPsiElement extends FakePsiElement implements
   // to get some basic tooltip
   @Override
   public String getName() {
-    return StringUtil.defaultIfEmpty(builtinSymbol.getDescription(), builtinSymbol.getName());
+    String description = StringUtil.defaultIfEmpty(builtinSymbol.getDescription(), builtinSymbol.getName());
+    return description + " (" + builtinSymbol.getCompiler().getDisplayName() + ")";
   }
 
   @Override

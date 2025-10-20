@@ -9,6 +9,7 @@
 - _Directives problems_ inspection
   - highlight unmatched `basereg`/`endb`
   - highlight usage of `A7` with `basereg`
+- builtin symbols: improve presentation
 
 ### Added
 
