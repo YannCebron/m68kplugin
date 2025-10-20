@@ -50,6 +50,15 @@ public class M68kShowUsedRegistersIntentionTest extends BasePlatformTestCase {
         M68kRegister.A0, M68kRegister.A4, M68kRegister.SP));
   }
 
+  public void testBaseregAndEndbDirectives() {
+    doTest("""
+      <selection>
+        basereg expr,a1
+        endb a2
+      </selection>
+      """, EnumSet.of(M68kRegister.A1, M68kRegister.A2));
+  }
+
   public void testAdmVbrRegister() {
     doTest("<selection> movec d0,vbr</selection>", EnumSet.of(M68kRegister.D0, M68kRegister.VBR));
   }

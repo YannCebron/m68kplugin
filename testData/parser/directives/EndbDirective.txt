@@ -1,0 +1,7 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kEndbDirectiveImpl(ENDB_DIRECTIVE)
+    PsiElement(endb)('endb')
+    PsiWhiteSpace(' ')
+    M68kAdmArdImpl(ADM_ARD)
+      PsiElement(address_register)('a5')

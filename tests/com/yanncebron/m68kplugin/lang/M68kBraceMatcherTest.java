@@ -47,6 +47,13 @@ public class M68kBraceMatcherTest extends BasePlatformTestCase {
       " endr");
   }
 
+  public void testBaseregEndb() {
+    doTest("""
+       <caret>basereg expr,a5
+       endb
+      """);
+  }
+
   private void doTest(String source) {
     doTest(source, true);
   }

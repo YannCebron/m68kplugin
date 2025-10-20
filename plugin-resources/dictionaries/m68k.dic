@@ -2,6 +2,7 @@ abcd
 addq
 addwatch
 addx
+basereg
 bchg
 bclr
 bset
@@ -30,6 +31,7 @@ dbvs
 divu
 dseg
 einline
+endb
 endc
 endm
 endr

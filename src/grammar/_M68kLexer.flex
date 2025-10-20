@@ -436,6 +436,7 @@ Z=[zZ]
   {A}{L}{I}{G}{N}              { yybegin(IN_OPERAND); return ALIGN; }
   {A}{S}{S}{E}{R}{T}           { yybegin(IN_OPERAND); return ASSERT; }
   {A}{U}{T}{O}                 { yybegin(AFTER_OPERAND); return AUTO; }
+  {B}{A}{S}{E}{R}{E}{G}        { yybegin(IN_OPERAND); return BASEREG; }
   {B}{L}{K} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return BLK; }
   {B}{S}{S}                    { yybegin(AFTER_OPERAND); return BSS; }
   {B}{S}{S}_{C}                { yybegin(AFTER_OPERAND); return BSS_C; }
@@ -459,6 +460,7 @@ Z=[zZ]
   {E}{C}{H}{O}                 { yybegin(STRING_DIRECTIVE); return ECHO; }
   {E}{I}{N}{L}{I}{N}{E}        { yybegin(AFTER_OPERAND); return EINLINE; }
   {E}{N}{D}                    { yybegin(AFTER_OPERAND); return END; }
+  {E}{N}{D}{B}                 { yybegin(IN_OPERAND); return ENDB; }
   {E}{N}{D}{R}                 { yybegin(AFTER_OPERAND); return ENDR; }
   {E}{R}{E}{M}                 { yybegin(AFTER_OPERAND); return EREM; }
   {E}{V}{E}{N}                 { yybegin(AFTER_OPERAND); return EVEN; }

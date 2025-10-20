@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +38,7 @@ final class M68kBraceMatcher implements PairedBraceMatcher {
       new BracePair(M68kTokenTypes.INLINE, M68kTokenTypes.EINLINE, true),
       new BracePair(M68kTokenTypes.REM, M68kTokenTypes.EREM, true),
       new BracePair(M68kTokenTypes.REPT, M68kTokenTypes.ENDR, true),
+      new BracePair(M68kTokenTypes.BASEREG, M68kTokenTypes.ENDB, true)
     };
 
   @NotNull

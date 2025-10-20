@@ -148,6 +148,22 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
+  // BASEREG expression COMMA adm_ard
+  public static boolean basereg_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "basereg_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", BASEREG)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, BASEREG_DIRECTIVE, "<directive>");
+    r = consumeToken(b, BASEREG);
+    p = r; // pin = 1
+    r = r && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1));
+    r = p && report_error_(b, consumeToken(b, COMMA)) && r;
+    r = p && adm_ard(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
   // BLK data_size_all? expression (COMMA expression)?
   public static boolean blk_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "blk_directive")) return false;
@@ -552,7 +568,9 @@ public class M68kDirectivesParser {
   //                        offset_directive |
   //                        mask2_directive |
   //                        output_directive |
-  //                        assert_directive
+  //                        assert_directive |
+  //                        basereg_directive |
+  //                        endb_directive
   static boolean directives(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directives")) return false;
     boolean r;
@@ -651,6 +669,8 @@ public class M68kDirectivesParser {
     if (!r) r = mask2_directive(b, l + 1);
     if (!r) r = output_directive(b, l + 1);
     if (!r) r = assert_directive(b, l + 1);
+    if (!r) r = basereg_directive(b, l + 1);
+    if (!r) r = endb_directive(b, l + 1);
     return r;
   }
 
@@ -790,6 +810,20 @@ public class M68kDirectivesParser {
     r = consumeToken(b, END);
     exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  /* ********************************************************** */
+  // ENDB adm_ard
+  public static boolean endb_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "endb_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", ENDB)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, ENDB_DIRECTIVE, "<directive>");
+    r = consumeToken(b, ENDB);
+    p = r; // pin = 1
+    r = r && adm_ard(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */

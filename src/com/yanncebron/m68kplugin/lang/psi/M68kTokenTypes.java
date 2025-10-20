@@ -44,6 +44,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType ASSERT = new M68kTokenType("assert");
   public static final IElementType AUTO = new M68kTokenType("auto");
   public static final IElementType BACKSLASH = new M68kTokenType("\\");
+  public static final IElementType BASEREG = new M68kTokenType("basereg");
   public static final IElementType BCC = new M68kTokenType("bcc");
   public static final IElementType BCHG = new M68kTokenType("bchg");
   public static final IElementType BCLR = new M68kTokenType("bclr");
@@ -135,6 +136,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType ELSE = new M68kTokenType("else");
   public static final IElementType ELSEIF = new M68kTokenType("elseif");
   public static final IElementType END = new M68kTokenType("end");
+  public static final IElementType ENDB = new M68kTokenType("endb");
   public static final IElementType ENDC = new M68kTokenType("endc");
   public static final IElementType ENDIF = new M68kTokenType("endif");
   public static final IElementType ENDM = new M68kTokenType("endm");

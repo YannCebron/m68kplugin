@@ -24,9 +24,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
 import com.yanncebron.m68kplugin.M68kBundle;
-import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
-import com.yanncebron.m68kplugin.lang.psi.M68kPsiTreeUtil;
-import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
+import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -45,6 +43,14 @@ final class M68kDirectivesInspection extends LocalInspectionTool implements Dumb
       @Override
       public void visitMask2Directive(@NotNull M68kMask2Directive element) {
         holder.registerProblem(element, M68kBundle.message("inspection.directives.unsupported", element.getText()));
+      }
+
+      @Override
+      public void visitBaseregDirective(@NotNull M68kBaseregDirective o) {
+        M68kAdmArd admArd = o.getAdmArd();
+        if (admArd != null && admArd.getRegister() == M68kRegister.A7) {
+          holder.registerProblem(admArd, M68kBundle.message("inspection.directives.basereg.a7.not.supported"));
+        }
       }
 
       @Override

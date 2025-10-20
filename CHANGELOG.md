@@ -6,6 +6,7 @@
 
 - directives reference docs: added missing contents, cleanup
 - added many terms to Amiga dictionary
+- _Directives problems_ inspection: highlight usage of `A7` with `basereg` directive
 
 ### Added
 
@@ -14,7 +15,9 @@
 - reference documentation for conditional assembly directives (`IFND`, `ELSE`, etc.)
   - in editor
   - M68k Browser "Directives" tab
-- support directives: `assert`
+- support directives:
+  - `assert`
+  - `basereg`/`endb`
 
 ### Fixed
 

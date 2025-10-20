@@ -145,4 +145,10 @@ public class M68kDirectivesInspectionTest extends BasePlatformTestCase {
     myFixture.testHighlighting();
   }
 
+  public void testBaseregWithA7() {
+    myFixture.configureByText("a.s",
+      " basereg expr,<error descr=\"A7 is not allowed here\">a7</error>");
+    myFixture.testHighlighting();
+  }
+
 }

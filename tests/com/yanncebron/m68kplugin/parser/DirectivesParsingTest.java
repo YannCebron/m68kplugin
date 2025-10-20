@@ -618,4 +618,12 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" assert 0");
   }
 
+  public void testBaseregDirective() throws Exception {
+    doCodeTest(" basereg label,a5");
+  }
+
+  public void testEndbDirective() throws Exception {
+    doCodeTest(" endb a5");
+  }
+
 }

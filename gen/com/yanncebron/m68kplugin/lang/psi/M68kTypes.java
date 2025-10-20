@@ -63,6 +63,7 @@ public interface M68kTypes {
   IElementType ASR_INSTRUCTION = new M68kCompositeElementType("ASR_INSTRUCTION");
   IElementType ASSERT_DIRECTIVE = new M68kCompositeElementType("ASSERT_DIRECTIVE");
   IElementType AUTO_DIRECTIVE = new M68kCompositeElementType("AUTO_DIRECTIVE");
+  IElementType BASEREG_DIRECTIVE = new M68kCompositeElementType("BASEREG_DIRECTIVE");
   IElementType BCC_INSTRUCTION = new M68kCompositeElementType("BCC_INSTRUCTION");
   IElementType BCHG_INSTRUCTION = new M68kCompositeElementType("BCHG_INSTRUCTION");
   IElementType BCLR_INSTRUCTION = new M68kCompositeElementType("BCLR_INSTRUCTION");
@@ -139,6 +140,7 @@ public interface M68kTypes {
   IElementType EINLINE_DIRECTIVE = new M68kCompositeElementType("EINLINE_DIRECTIVE");
   IElementType ELSEIF_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("ELSEIF_CONDITIONAL_ASSEMBLY_DIRECTIVE");
   IElementType ELSE_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("ELSE_CONDITIONAL_ASSEMBLY_DIRECTIVE");
+  IElementType ENDB_DIRECTIVE = new M68kCompositeElementType("ENDB_DIRECTIVE");
   IElementType ENDC_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("ENDC_CONDITIONAL_ASSEMBLY_DIRECTIVE");
   IElementType ENDIF_CONDITIONAL_ASSEMBLY_DIRECTIVE = new M68kCompositeElementType("ENDIF_CONDITIONAL_ASSEMBLY_DIRECTIVE");
   IElementType ENDM_DIRECTIVE = new M68kCompositeElementType("ENDM_DIRECTIVE");
@@ -440,6 +442,9 @@ public interface M68kTypes {
       else if (type == AUTO_DIRECTIVE) {
         return new M68kAutoDirectiveImpl(node);
       }
+      else if (type == BASEREG_DIRECTIVE) {
+        return new M68kBaseregDirectiveImpl(node);
+      }
       else if (type == BCC_INSTRUCTION) {
         return new M68kBccInstructionImpl(node);
       }
@@ -667,6 +672,9 @@ public interface M68kTypes {
       }
       else if (type == ELSE_CONDITIONAL_ASSEMBLY_DIRECTIVE) {
         return new M68kElseConditionalAssemblyDirectiveImpl(node);
+      }
+      else if (type == ENDB_DIRECTIVE) {
+        return new M68kEndbDirectiveImpl(node);
       }
       else if (type == ENDC_CONDITIONAL_ASSEMBLY_DIRECTIVE) {
         return new M68kEndcConditionalAssemblyDirectiveImpl(node);
