@@ -77,6 +77,10 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest("label reg d0-d7/a0");
   }
 
+  public void testRegDirectiveRegisterMask() throws Exception {
+    doCodeTest("label reg #123");
+  }
+
   public void testRegDirectiveLabelColon() throws Exception {
     doCodeTest("label: reg d0-d7/a0");
   }

@@ -1820,7 +1820,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // label REG adm_register_list
+  // label REG (adm_register_list | adm_imm)
   public static boolean reg_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "reg_directive")) return false;
     if (!nextTokenIs(b, "<directive>", ID)) return false;
@@ -1829,9 +1829,18 @@ public class M68kDirectivesParser {
     r = label(b, l + 1);
     r = r && consumeToken(b, REG);
     p = r; // pin = 2
-    r = r && adm_register_list(b, l + 1);
+    r = r && reg_directive_2(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  // adm_register_list | adm_imm
+  private static boolean reg_directive_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "reg_directive_2")) return false;
+    boolean r;
+    r = adm_register_list(b, l + 1);
+    if (!r) r = adm_imm(b, l + 1);
+    return r;
   }
 
   /* ********************************************************** */
