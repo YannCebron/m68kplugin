@@ -51,9 +51,11 @@ Unsupported directives, these will display as a false positive
 - `comm`
 - `comment`
 - `common`
+- `db`/`dw`/`dl` == `dc.b|w|l`
 - `debug`
 - `dsource`
 - `entry`, `extrn`, `global`, `export` == `xdef`
+- `elif`
 - `equrl`
 - `fequr`
 - `fequrl`
@@ -67,6 +69,7 @@ Unsupported directives, these will display as a false positive
 - `optc`
 - `public`
 - `rorg`
+- `rseven`
 - `showoffset` (PhxAss)
 - `struct`/`estruct`
 - `symdebug`
@@ -107,7 +110,7 @@ MadMac assembler specific ([vasm Docs](http://sun.hasenbraten.de/vasm/release/va
 ### Macros
 
 - macro declaration variants:
-  - `macro<$macroName$>`
+  - `macro<$macroName$>` (not supported by vasm)
 - special symbols
   - `\@!`
   - `\@?`
