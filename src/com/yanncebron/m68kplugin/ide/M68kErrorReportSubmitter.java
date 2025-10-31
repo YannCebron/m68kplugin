@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import com.intellij.openapi.application.ApplicationInfo;
 import com.intellij.openapi.diagnostic.ErrorReportSubmitter;
 import com.intellij.openapi.diagnostic.IdeaLoggingEvent;
 import com.intellij.openapi.diagnostic.SubmittedReportInfo;
+import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.Consumer;
@@ -71,7 +72,7 @@ final class M68kErrorReportSubmitter extends ErrorReportSubmitter {
     sb.append(URLEncoder.encode(StringUtil.defaultIfEmpty(event.getMessage(), ""), UTF_8));
 
     sb.append(URLEncoder.encode("\n\n### Runtime Information\n", UTF_8));
-    final IdeaPluginDescriptor descriptor = PluginManagerCore.getPlugin(getPluginDescriptor().getPluginId());
+    final IdeaPluginDescriptor descriptor = PluginManagerCore.getPlugin(PluginId.getId("com.yanncebron.m68kplugin"));
     assert descriptor != null;
     sb.append(URLEncoder.encode("Plugin version : " + descriptor.getVersion() + "\n", UTF_8));
     sb.append(URLEncoder.encode("IDE: " + ApplicationInfo.getInstance().getFullApplicationName() +
