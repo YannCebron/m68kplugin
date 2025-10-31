@@ -43,7 +43,7 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
       M68kTokenTypes.MASK2
     );
 
-    assertNoReferenceDoc(M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES);
+    assertNoReferenceDoc(M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES /* none missing */);
   }
 
   private void assertNoReferenceDoc(TokenSet tokenSet, IElementType... missing) {
