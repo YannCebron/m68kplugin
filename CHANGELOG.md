@@ -4,6 +4,14 @@
 
 ### Changed
 
+### Added
+
+### Fixed
+
+## 0.2.0 - 2025-10-31
+
+### Changed
+
 - directives reference docs: added missing contents, cleanup
 - added many terms to Amiga dictionary
 - _Directives problems_ inspection
