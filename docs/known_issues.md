@@ -25,6 +25,9 @@ title: Known Issues
 
 ## Lexing/Parsing
 
+The plugin supports only [vasm](http://sun.hasenbraten.de/vasm/)-compatible syntax.
+Support for other assemblers is not a priority in the nearest future.
+
 ### Unsupported CPUs
 
 Currently, only 68000/68010 architecture is supported.
