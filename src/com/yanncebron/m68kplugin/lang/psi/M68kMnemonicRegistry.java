@@ -22,7 +22,9 @@ import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.MultiMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -75,7 +77,8 @@ public final class M68kMnemonicRegistry {
     }
 
     // multiple matches: rank by min(addressMode.count)
-    filtered.sort((o1, o2) -> {
+    List<M68kMnemonic> multipleMatches = new ArrayList<>(filtered);
+    multipleMatches.sort((o1, o2) -> {
       final int o1Source = o1.sourceOperand().getAddressModes().length;
       final int o2Source = o2.sourceOperand().getAddressModes().length;
       if (o1Source != o2Source) {
@@ -87,11 +90,11 @@ public final class M68kMnemonicRegistry {
       return Integer.compare(o1Dest, o2Dest);
     });
 
-    return ContainerUtil.getFirstItem(filtered);
+    return ContainerUtil.getFirstItem(multipleMatches);
   }
 
   @NotNull
-  private static List<M68kMnemonic> getFilteredM68Mnemonics(M68kInstruction instruction, List<M68kAdm> operands, Collection<M68kMnemonic> all) {
+  private static @Unmodifiable List<M68kMnemonic> getFilteredM68Mnemonics(M68kInstruction instruction, List<M68kAdm> operands, Collection<M68kMnemonic> all) {
     int operandsCount = operands.size();
 
     // operand count
