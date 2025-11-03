@@ -171,9 +171,13 @@ public class M68kAmigaHardwareRegisterDocumentationGeneratorTest extends TestCas
 
       String registerName = register.getName();
       if (replacedNames.add(registerName)) {
-        copyTrim = copyTrim.replaceAll("\\b" + registerName + "\\b", "[" + registerName + "](" + register.getDescriptionFileName() + ".md)");
+        copyTrim = copyTrim.replaceAll("\\b" + registerName + "\\b", "[" + registerName + "](" + fileName + ".md)");
       }
     }
+
+    // appears as text, but not as filename
+    copyTrim = copyTrim.replaceAll("\\bBLTxPTH\\b", "[BLTxPTH](BLTxPTL.md)");
+
     return copyTrim;
   }
 
