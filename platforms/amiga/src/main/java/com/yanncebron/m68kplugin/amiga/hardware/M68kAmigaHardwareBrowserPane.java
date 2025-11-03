@@ -110,7 +110,10 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
   @Override
   protected String getListItemNameForLink(String link) {
     if (StringUtil.containsChar(link, 'x')) {
-      for (M68kAmigaHardwareRegister value : M68kAmigaHardwareRegister.values()) {
+      // find first matching entry sorted by list order
+      List<M68kAmigaHardwareRegister> items = new ArrayList<>(List.of(M68kAmigaHardwareRegister.values()));
+      items.sort(Comparator.comparing(M68kAmigaHardwareRegister::getName, NaturalComparator.INSTANCE));
+      for (M68kAmigaHardwareRegister value : items) {
         if (value.getDescriptionFileName().equals(link)) {
           return value.getName();
         }
