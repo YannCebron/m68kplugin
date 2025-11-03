@@ -67,54 +67,62 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
   public void testDirectiveNoReferenceDocAvailableFallback() {
     doTest(" add<caret>watch", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
-      assertEquals("<style>h1 { font-weight: bold; font-size: 120%; } h2 { padding-top: 13px; font-weight: bold; font-size: 110%; } h3 { padding-top: 10px; font-weight: bold; } table { padding-bottom: 10px; white-space: nowrap; } td { margin: 4px 0 0 0; padding: 0 0 0 0; }th { font-weight: bold; text-align: left; white-space: nowrap; margin: 2px; } em { font-style: italic; }code { white-space: nowrap; }p { padding-top: 5px; } strong { font-weight: bold; }blockquote { padding-left: 10px; padding-right:10px; padding-bottom: 5px; }</style><h1>ADDWATCH</h1><p>No reference documentation available for 'addwatch'</p><br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_4.html#Directives-2\">vasm directives docs 1</a><br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_23.html#Extensions-3\">vasm directives docs 2</a><br><br><a href=\"https://github.com/prb28/m68k-instructions-documentation\">Contribute to m68k-instructions-documentation project</a>", doc);
+      assertEquals("<h1>ADDWATCH</h1><p>No reference documentation available for 'addwatch'</p><br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_4.html#Directives-2\">vasm directives docs 1</a><br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_23.html#Extensions-3\">vasm directives docs 2</a><br><br><a href=\"https://github.com/prb28/m68k-instructions-documentation\">Contribute to m68k-instructions-documentation project</a>", doc);
     });
   }
 
   public void testEremDirectiveReferenceDoc() {
     doTest(" e<caret>rem", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
-      assertEquals("<style>h1 { font-weight: bold; font-size: 120%; } h2 { padding-top: 13px; font-weight: bold; font-size: 110%; } h3 { padding-top: 10px; font-weight: bold; } table { padding-bottom: 10px; white-space: nowrap; } td { margin: 4px 0 0 0; padding: 0 0 0 0; }th { font-weight: bold; text-align: left; white-space: nowrap; margin: 2px; } em { font-style: italic; }code { white-space: nowrap; }p { padding-top: 5px; } strong { font-weight: bold; }blockquote { padding-left: 10px; padding-right:10px; padding-bottom: 5px; }</style><h1>EREM</h1>\n" +
-        "<h2>Syntax</h2>\n" +
-        "<pre><code class=\"language-assembly\">erem\n" +
-        "</code></pre>\n" +
-        "<h2>Description</h2>\n" +
-        "<p>Ends an outcommented block from <a rel=\"nofollow\" href=\"psi_element://rem\">rem</a>. Assembly will continue.</p>\n", doc);
+      assertEquals("""
+        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='content'><h1>EREM</h1>
+        <h2>Syntax</h2>
+        <pre><code class="language-assembly">erem
+        </code></pre>
+        <h2>Description</h2>
+        <p>Ends an outcommented block from <a rel="nofollow" href="psi_element://rem">rem</a>. Assembly will continue.</p>
+        </div>""", doc);
     });
   }
 
   public void testIfmiConditionalAssemblyDirectiveReferenceDoc() {
     doTest(" if<caret>mi", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
-      assertEquals("<style>h1 { font-weight: bold; font-size: 120%; } h2 { padding-top: 13px; font-weight: bold; font-size: 110%; } h3 { padding-top: 10px; font-weight: bold; } table { padding-bottom: 10px; white-space: nowrap; } td { margin: 4px 0 0 0; padding: 0 0 0 0; }th { font-weight: bold; text-align: left; white-space: nowrap; margin: 2px; } em { font-style: italic; }code { white-space: nowrap; }p { padding-top: 5px; } strong { font-weight: bold; }blockquote { padding-left: 10px; padding-right:10px; padding-bottom: 5px; }</style><h1>IFMI</h1>\n" +
-        "<h2>Syntax</h2>\n" +
-        "<pre><code class=\"language-assembly\">ifmi &lt;expression&gt;\n" +
-        "</code></pre>\n" +
-        "<h2>Description</h2>\n" +
-        "<p>Conditionally assemble the following lines if <code>&lt;expression&gt;</code> is less than zero. Equivalent to <a rel=\"nofollow\" href=\"psi_element://iflt\">iflt</a>.</p>\n", doc);
+      assertEquals("""
+        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='content'><h1>IFMI</h1>
+        <h2>Syntax</h2>
+        <pre><code class="language-assembly">ifmi &lt;expression&gt;
+        </code></pre>
+        <h2>Description</h2>
+        <p>Conditionally assemble the following lines if <code>&lt;expression&gt;</code> is less than zero. Equivalent to <a rel="nofollow" href="psi_element://iflt">iflt</a>.</p>
+        </div>""", doc);
     });
   }
 
   public void testEremDirectiveReferenceDocForBrowser() {
     String directiveDoc = M68kDirectiveDocumentationProvider.getDirectiveDoc(M68kTokenTypes.EREM);
-    assertEquals("<style>h1 { font-weight: bold; font-size: 120%; } h2 { padding-top: 13px; font-weight: bold; font-size: 110%; } h3 { padding-top: 10px; font-weight: bold; } table { padding-bottom: 10px; white-space: nowrap; } td { margin: 4px 0 0 0; padding: 0 0 0 0; }th { font-weight: bold; text-align: left; white-space: nowrap; margin: 2px; } em { font-style: italic; }code { white-space: nowrap; }p { padding-top: 5px; } strong { font-weight: bold; }blockquote { padding-left: 10px; padding-right:10px; padding-bottom: 5px; }</style><h1>EREM</h1>\n" +
-      "<h2>Syntax</h2>\n" +
-      "<pre><code class=\"language-assembly\">erem\n" +
-      "</code></pre>\n" +
-      "<h2>Description</h2>\n" +
-      "<p>Ends an outcommented block from <a rel=\"nofollow\" href=\"rem.md\">rem</a>. Assembly will continue.</p>\n", directiveDoc);
+    assertEquals("""
+      <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='content'><h1>EREM</h1>
+      <h2>Syntax</h2>
+      <pre><code class="language-assembly">erem
+      </code></pre>
+      <h2>Description</h2>
+      <p>Ends an outcommented block from <a rel="nofollow" href="m68kBrowser://rem">rem</a>. Assembly will continue.</p>
+      </div>""", directiveDoc);
   }
 
   public void testEquDirectiveReferenceDoc() {
     doTest("label e<caret>qu 42", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
-      assertEquals("<style>h1 { font-weight: bold; font-size: 120%; } h2 { padding-top: 13px; font-weight: bold; font-size: 110%; } h3 { padding-top: 10px; font-weight: bold; } table { padding-bottom: 10px; white-space: nowrap; } td { margin: 4px 0 0 0; padding: 0 0 0 0; }th { font-weight: bold; text-align: left; white-space: nowrap; margin: 2px; } em { font-style: italic; }code { white-space: nowrap; }p { padding-top: 5px; } strong { font-weight: bold; }blockquote { padding-left: 10px; padding-right:10px; padding-bottom: 5px; }</style><h1>EQU</h1>\n" +
-        "<h2>Syntax</h2>\n" +
-        "<pre><code class=\"language-assembly\">&lt;symbol&gt; equ &lt;expression&gt;\n" +
-        "</code></pre>\n" +
-        "<h2>Description</h2>\n" +
-        "<p>Define a new program symbol with the name <code>&lt;symbol&gt;</code> and assign to it the value of <code>&lt;expression&gt;</code>.\n" +
-        "Defining <code>&lt;symbol&gt;</code> twice will cause an error.</p>\n", doc);
+      assertEquals("""
+        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='content'><h1>EQU</h1>
+        <h2>Syntax</h2>
+        <pre><code class="language-assembly">&lt;symbol&gt; equ &lt;expression&gt;
+        </code></pre>
+        <h2>Description</h2>
+        <p>Define a new program symbol with the name <code>&lt;symbol&gt;</code> and assign to it the value of <code>&lt;expression&gt;</code>.
+        Defining <code>&lt;symbol&gt;</code> twice will cause an error.</p>
+        </div>""", doc);
     });
   }
 
@@ -122,13 +130,15 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
   public void testEqualSignDirectiveReferenceDoc() {
     doTest("label <caret>= 42", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
-      assertEquals("<style>h1 { font-weight: bold; font-size: 120%; } h2 { padding-top: 13px; font-weight: bold; font-size: 110%; } h3 { padding-top: 10px; font-weight: bold; } table { padding-bottom: 10px; white-space: nowrap; } td { margin: 4px 0 0 0; padding: 0 0 0 0; }th { font-weight: bold; text-align: left; white-space: nowrap; margin: 2px; } em { font-style: italic; }code { white-space: nowrap; }p { padding-top: 5px; } strong { font-weight: bold; }blockquote { padding-left: 10px; padding-right:10px; padding-bottom: 5px; }</style><h1>EQU</h1>\n" +
-        "<h2>Syntax</h2>\n" +
-        "<pre><code class=\"language-assembly\">&lt;symbol&gt; equ &lt;expression&gt;\n" +
-        "</code></pre>\n" +
-        "<h2>Description</h2>\n" +
-        "<p>Define a new program symbol with the name <code>&lt;symbol&gt;</code> and assign to it the value of <code>&lt;expression&gt;</code>.\n" +
-        "Defining <code>&lt;symbol&gt;</code> twice will cause an error.</p>\n", doc);
+      assertEquals("""
+        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='content'><h1>EQU</h1>
+        <h2>Syntax</h2>
+        <pre><code class="language-assembly">&lt;symbol&gt; equ &lt;expression&gt;
+        </code></pre>
+        <h2>Description</h2>
+        <p>Define a new program symbol with the name <code>&lt;symbol&gt;</code> and assign to it the value of <code>&lt;expression&gt;</code>.
+        Defining <code>&lt;symbol&gt;</code> twice will cause an error.</p>
+        </div>""", doc);
     });
   }
 

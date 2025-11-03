@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.documentation;
 
 import com.intellij.lang.documentation.AbstractDocumentationProvider;
+import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.text.StringUtil;
@@ -68,7 +69,10 @@ public final class M68kInstructionDocumentationProvider extends AbstractDocument
 
     final IElementType originalMnemonic = instruction.getNode().getFirstChildNode().getElementType();
 
-    return M68kDocumentationUtil.CSS + getMnemonicDoc(originalMnemonic, instruction);
+    return M68kDocumentationUtil.CSS +
+      DocumentationMarkup.CONTENT_START +
+      getMnemonicDoc(originalMnemonic, instruction) +
+      DocumentationMarkup.CONTENT_END;
   }
 
   @NotNull

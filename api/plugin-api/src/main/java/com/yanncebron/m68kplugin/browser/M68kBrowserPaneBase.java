@@ -16,27 +16,23 @@
 
 package com.yanncebron.m68kplugin.browser;
 
-import com.intellij.codeInsight.documentation.DocumentationComponent;
-import com.intellij.ide.BrowserUtil;
 import com.intellij.ide.IdeBundle;
 import com.intellij.ide.util.PropertiesComponent;
+import com.intellij.lang.documentation.ide.DocumentationUtil;
+import com.intellij.lang.documentation.ide.ui.DocumentationComponent;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.*;
-import com.intellij.openapi.editor.colors.EditorColors;
-import com.intellij.openapi.editor.colors.EditorColorsUtil;
-import com.intellij.openapi.options.FontSize;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.DumbAwareToggleAction;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.openapi.ui.Splitter;
-import com.intellij.openapi.ui.popup.Balloon;
-import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.util.ActionCallback;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.platform.backend.documentation.DocumentationResult;
+import com.intellij.platform.backend.documentation.DocumentationTarget;
 import com.intellij.ui.*;
-import com.intellij.ui.awt.RelativePoint;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBPanelWithEmptyText;
 import com.intellij.ui.components.JBScrollPane;
@@ -44,37 +40,40 @@ import com.intellij.ui.navigation.BackAction;
 import com.intellij.ui.navigation.ForwardAction;
 import com.intellij.ui.navigation.History;
 import com.intellij.ui.navigation.Place;
-import com.intellij.ui.scale.JBUIScale;
 import com.intellij.ui.speedSearch.SpeedSearchUtil;
 import com.intellij.util.containers.Convertor;
-import com.intellij.util.ui.HTMLEditorKitBuilder;
 import com.intellij.util.ui.JBUI;
-import com.intellij.util.ui.UIUtil;
 import com.intellij.util.ui.components.BorderLayoutPanel;
-import com.yanncebron.m68kplugin.M68kApiBundle;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import javax.swing.event.HyperlinkEvent;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * @param <T> must implement {@link #equals(Object)} to keep current selection upon list model update
  */
+@SuppressWarnings("UnstableApiUsage")
 public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel implements Place.Navigator, Disposable {
 
-  private final JBSplitter splitter;
+  /**
+   * Link to another item in the current pane.
+   */
+  @NonNls
+  public static final String M68K_BROWSER_ITEM_LINK_PREFIX = "m68kBrowser://";
+
+  public static final Function<String, String> M68K_BROWSER_LINK_FUNCTION = link -> M68K_BROWSER_ITEM_LINK_PREFIX + StringUtil.substringBefore(link, ".md");
+
+  private JBSplitter splitter;
 
   private final JBList<T> list = new JBList<>();
-  private JEditorPane docEditorPane;
+  private DocumentationComponent documentationComponent;
 
   @NonNls
   private static final String SELECTED_ITEM = "M68kBrowserPaneBase.selected.item";
@@ -82,11 +81,15 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
   private final History history = new History(this);
 
   private final Class<T> clazz;
+  private Project project;
 
   protected M68kBrowserPaneBase(Class<T> valueClazz) {
     super(true, true);
-
     clazz = valueClazz;
+  }
+
+  void initUI(@NotNull Project project) {
+    this.project = project;
 
     splitter = new OnePixelSplitter(false, getClass().getSimpleName() + ".splitter.proportion", getInitialSplitProportion());
     splitter.setDividerPositionStrategy(Splitter.DividerPositionStrategy.KEEP_FIRST_SIZE);
@@ -163,7 +166,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
   protected abstract Convertor<? super T, String> getListItemNamer();
 
   protected String getListItemNameForLink(String link) {
-    return StringUtil.toUpperCase(StringUtil.substringBefore(link, ".md"));
+    return StringUtil.toUpperCase(link);
   }
 
   @NotNull
@@ -192,6 +195,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
     updateDoc(list.getSelectedValue());
   }
 
+  @SuppressWarnings("OverrideOnly")
   private void updateDoc(@Nullable T selectedValue) {
     if (selectedValue == null) {
       setNoSelection();
@@ -200,61 +204,27 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
 
     history.pushQueryPlace();
 
-    final String docText = getDocFor(selectedValue);
-    updateDocText(docText);
+    DocumentationTarget target = new M68kBrowserDocumentationTarget() {
+      @Override
+      public @NotNull DocumentationResult computeDocumentation() {
+        return DocumentationResult.documentation(M68kBrowserPaneBase.this.getDocFor(selectedValue));
+      }
+
+      @Override
+      void selectItem(String item) {
+        M68kBrowserPaneBase.this.selectItem(item);
+      }
+    };
+
+    if (documentationComponent == null) {
+      documentationComponent = DocumentationUtil.documentationComponent(project, target.createPointer(), target.computePresentation(), this);
+    }
+    splitter.setSecondComponent(documentationComponent.getComponent());
+    documentationComponent.resetBrowser(target.createPointer(), target.computePresentation());
   }
 
   private void setNoSelection() {
-    setDocComponent(new JBPanelWithEmptyText().withEmptyText(IdeBundle.message("empty.text.nothing.selected")));
-  }
-
-  private void updateDocText(String content) {
-    if (docEditorPane == null) {
-      docEditorPane = new JEditorPane();
-      docEditorPane.setEditable(false);
-      docEditorPane.setBorder(JBUI.Borders.empty(UIUtil.getListCellHPadding(), UIUtil.getListCellHPadding(), UIUtil.getScrollBarWidth(), UIUtil.getScrollBarWidth()));
-      docEditorPane.setEditorKit(new HTMLEditorKitBuilder().build());
-      docEditorPane.addHyperlinkListener(new HyperlinkAdapter() {
-        @Override
-        protected void hyperlinkActivated(@NotNull HyperlinkEvent e) {
-          URL url = e.getURL();
-          if (url != null && BrowserUtil.isAbsoluteURL(url.toExternalForm())) {
-            BrowserUtil.browse(url);
-            return;
-          }
-
-          String elementName = getListItemNameForLink(e.getDescription());
-          for (int i = 0; i < list.getItemsCount(); i++) {
-            T element = list.getModel().getElementAt(i);
-            if (StringUtil.equals(elementName, getListItemNamer().convert(element))) {
-              list.setSelectedIndex(i);
-              list.ensureIndexIsVisible(i);
-              return;
-            }
-          }
-
-          RelativePoint target = new RelativePoint((MouseEvent) e.getInputEvent());
-          JBPopupFactory.getInstance().
-            createHtmlTextBalloonBuilder(
-              M68kApiBundle.message("documentation.error.cannot.show.item", elementName),
-              MessageType.WARNING, null)
-            .createBalloon()
-            .show(target, Balloon.Position.above);
-        }
-      });
-    }
-
-    docEditorPane.setBackground(EditorColorsUtil.getGlobalOrDefaultColor(EditorColors.DOCUMENTATION_COLOR));
-    final FontSize fontSize = DocumentationComponent.getQuickDocFontSize();
-    docEditorPane.setFont(UIUtil.getFontWithFallback(docEditorPane.getFont().getFontName(), Font.PLAIN, JBUIScale.scale(fontSize.getSize())));
-
-    docEditorPane.setText(content);
-    docEditorPane.setCaretPosition(0);
-    setDocComponent(docEditorPane);
-  }
-
-  private void setDocComponent(JComponent component) {
-    splitter.setSecondComponent(new JBScrollPane(component));
+    splitter.setSecondComponent(new JBPanelWithEmptyText().withEmptyText(IdeBundle.message("empty.text.nothing.selected")));
   }
 
   private JComponent createList() {
@@ -349,5 +319,24 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
 
   @Override
   public void dispose() {
+  }
+
+  /**
+   * Select the given item in the list, triggering documentation update.
+   *
+   * @param item Item name.
+   */
+  private void selectItem(String item) {
+    ApplicationManager.getApplication().invokeLater(() -> {
+      String elementName = getListItemNameForLink(item);
+      for (int i = 0; i < list.getItemsCount(); i++) {
+        T element = list.getModel().getElementAt(i);
+        if (StringUtil.equals(elementName, getListItemNamer().convert(element))) {
+          list.setSelectedIndex(i);
+          list.ensureIndexIsVisible(i);
+          return;
+        }
+      }
+    });
   }
 }

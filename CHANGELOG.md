@@ -4,6 +4,10 @@
 
 ### Changed
 
+- M68k Browser: 
+  - re-use default IDE documentation component for better UX
+  - various smaller layout/content improvements
+
 ### Added
 
 ### Fixed

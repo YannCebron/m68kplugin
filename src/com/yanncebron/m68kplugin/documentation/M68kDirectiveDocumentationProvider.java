@@ -28,6 +28,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase;
 import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
@@ -100,19 +101,22 @@ public final class M68kDirectiveDocumentationProvider extends AbstractDocumentat
     String directiveText = docDirectiveType.toString();
     Couple<String> contents = M68kDocumentationUtil.getMarkdownContents(DOCS_MNEMONIC_ROOT, StringUtil.toLowerCase(directiveText));
     if (contents.getFirst() == null) {
-      return M68kDocumentationUtil.CSS +
+      return
         "<h1>" + StringUtil.toUpperCase(directiveText) + "</h1>" +
-        "<p>" + contents.getSecond() + "</p>" +
-        (forBrowserPane ? M68kDocumentationUtil.CONTRIBUTION_FOOTER : StringUtil.replace(M68kDocumentationUtil.CONTRIBUTION_FOOTER, DocumentationMarkup.EXTERNAL_LINK_ICON.toString(), ""));
+          "<p>" + contents.getSecond() + "</p>" +
+          M68kDocumentationUtil.CONTRIBUTION_FOOTER;
     }
 
+    String html;
     if (forBrowserPane) {
-      return M68kDocumentationUtil.CSS + M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, contents.getFirst());
+      html = M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, contents.getFirst(), M68kBrowserPaneBase.M68K_BROWSER_LINK_FUNCTION);
+    } else {
+      // provide "inline" link to handle in getDocumentationElementForLink()
+      html = M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, contents.getFirst(),
+        link -> DocumentationManagerProtocol.PSI_ELEMENT_PROTOCOL + StringUtil.substringBefore(link, ".md"));
     }
 
-    // provide "inline" link to handle in getDocumentationElementForLink()
-    return M68kDocumentationUtil.CSS + M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, contents.getFirst(),
-      link -> DocumentationManagerProtocol.PSI_ELEMENT_PROTOCOL + StringUtil.substringBefore(link, ".md"));
+    return M68kDocumentationUtil.CSS + DocumentationMarkup.CONTENT_START + html + DocumentationMarkup.CONTENT_END;
   }
 
 }

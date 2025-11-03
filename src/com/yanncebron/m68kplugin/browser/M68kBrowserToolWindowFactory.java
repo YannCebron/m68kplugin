@@ -49,6 +49,8 @@ final class M68kBrowserToolWindowFactory implements ToolWindowFactory, DumbAware
       final M68kBrowserPaneBase<?> pane = extension.getInstance();
       if (!pane.isAvailable(project)) continue;
 
+      pane.initUI(project);
+
       final Content content = contentManager.getFactory().createContent(pane, extension.getDisplayName(), false);
       content.setPreferredFocusableComponent(pane.getFocusComponent());
       content.setDisposer(pane);

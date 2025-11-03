@@ -16,9 +16,11 @@
 
 package com.yanncebron.m68kplugin.documentation;
 
+import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
+import com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase;
 import com.yanncebron.m68kplugin.lang.psi.M68kRegister;
 
 public final class M68kRegisterDocsGenerator {
@@ -45,14 +47,14 @@ public final class M68kRegisterDocsGenerator {
     String filename = elementType.toString().toLowerCase();
     Couple<String> markdownContents = M68kDocumentationUtil.getMarkdownContents(DOCS_REGISTER_ROOT, filename);
     if (markdownContents.first == null) {
-      return M68kDocumentationUtil.CSS +
+      return
         "<h1>" + StringUtil.toUpperCase(m68kRegister.name()) + "</h1>" +
-        "<p>" + markdownContents.getSecond() + "</p>" +
-        metaData;
+          "<p>" + markdownContents.getSecond() + "</p>" +
+          metaData;
     }
 
-    String definition = M68kDocumentationUtil.getHtmlForMarkdown(DOCS_REGISTER_ROOT, markdownContents.first);
-    return M68kDocumentationUtil.CSS + definition + metaData;
+    String definition = M68kDocumentationUtil.getHtmlForMarkdown(DOCS_REGISTER_ROOT, markdownContents.first, M68kBrowserPaneBase.M68K_BROWSER_LINK_FUNCTION);
+    return M68kDocumentationUtil.CSS + DocumentationMarkup.CONTENT_START + definition + metaData + DocumentationMarkup.CONTENT_END;
   }
 
 }

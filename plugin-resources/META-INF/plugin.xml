@@ -237,7 +237,8 @@
         icon="M68kIcons.TOOL_WINDOW"
         anchor="right"
         factoryClass="com.yanncebron.m68kplugin.browser.M68kBrowserToolWindowFactory"/>
-
+    <platform.backend.documentation.linkHandler
+        implementation="com.yanncebron.m68kplugin.browser.M68kBrowserItemDocumentationLinkHandler"/>
 
     <consoleFilterProvider
         implementation="com.yanncebron.m68kplugin.compiler.M68kVasmConsoleFilterProvider"/>

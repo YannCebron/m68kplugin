@@ -18,6 +18,7 @@ package com.yanncebron.m68kplugin.amiga.hardware;
 
 import com.intellij.icons.AllIcons;
 import com.intellij.ide.util.PropertiesComponent;
+import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.actionSystem.ex.ComboBoxAction;
 import com.intellij.openapi.project.DumbAware;
@@ -109,9 +110,8 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
   @Override
   protected String getListItemNameForLink(String link) {
     if (StringUtil.containsChar(link, 'x')) {
-      String elementName = StringUtil.substringBefore(link, ".md");
       for (M68kAmigaHardwareRegister value : M68kAmigaHardwareRegister.values()) {
-        if (value.getDescriptionFileName().equals(elementName)) {
+        if (value.getDescriptionFileName().equals(link)) {
           return value.getName();
         }
       }
@@ -121,34 +121,58 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
 
   @Override
   protected @NotNull String getDocFor(@NotNull M68kAmigaHardwareRegister selectedValue) {
-    String copperDanger = selectedValue.isCopperDanger() ? M68kDocumentationUtil.CHECK_MARK : "";
-    String chips = StringUtil.join(selectedValue.getChips(), M68kAmigaHardwareRegister.Chip::getDisplayName, ",<br>");
+    StringBuilder sb = new StringBuilder(M68kDocumentationUtil.CSS);
 
-    String referenceDoc = isShowReferenceDocs.get() ? getReferenceDoc(selectedValue.getDescriptionFileName()) : "";
+    sb.append(DocumentationMarkup.DEFINITION_START);
+    sb.append("<h1>").append(selectedValue.getName()).append("</h1>");
+    sb.append(selectedValue.getDescription());
+    sb.append(DocumentationMarkup.DEFINITION_END);
 
-    return M68kDocumentationUtil.CSS +
-      "<h1>" + selectedValue.getName() + "</h1>" +
-      "<b>" + selectedValue.getDescription() + "</b>" +
-      "<br>" +
-      "<h2><code>$" + selectedValue.getAddress() + " ($0" + selectedValue.getAddress().substring(3) + ")" + "</code></h2>" +
-      "<table style=\"width: 50%;\">" +
-      "<tr><th style=\"text-align:center;\">Chip Set</th><th style=\"text-align:center;\">Access</th><th style=\"text-align:center;\">Copper Danger</th><th style=\"text-align:center;\">Chips</th></tr>" +
-      "<tr>" +
-      "<td style=\"text-align:center;\">" + selectedValue.getChipset().getDisplayName() + "</td>" +
-      "<td style=\"text-align:center;\">" + selectedValue.getAccess().getDisplayName() + "</td>" +
-      "<td style=\"text-align:center;\">" + copperDanger + "</td>" +
-      "<td style=\"text-align:center;\">" + chips + "</td>" +
-      "</tr></table>" +
-      referenceDoc;
+    sb.append(DocumentationMarkup.SECTIONS_START);
+
+    sb.append(DocumentationMarkup.SECTION_HEADER_START);
+    sb.append("Address:");
+    sb.append(DocumentationMarkup.SECTION_SEPARATOR);
+    sb.append("<code>$").append(selectedValue.getAddress()).append("</code> (<code>$0").append(selectedValue.getAddress().substring(3)).append("</code>)");
+    sb.append(DocumentationMarkup.SECTION_END);
+
+    sb.append(DocumentationMarkup.SECTION_HEADER_START);
+    sb.append("Chip Set (Chips):");
+    sb.append(DocumentationMarkup.SECTION_SEPARATOR);
+    sb.append(selectedValue.getChipset().getDisplayName());
+    sb.append(" (").append(StringUtil.join(selectedValue.getChips(), M68kAmigaHardwareRegister.Chip::getDisplayName, ", ")).append(")");
+    sb.append(DocumentationMarkup.SECTION_END);
+
+    sb.append(DocumentationMarkup.SECTION_HEADER_START);
+    sb.append("Access:");
+    sb.append(DocumentationMarkup.SECTION_SEPARATOR);
+    sb.append(selectedValue.getAccess().getDisplayName());
+    sb.append(DocumentationMarkup.SECTION_END);
+
+    sb.append(DocumentationMarkup.SECTION_HEADER_START);
+    sb.append("Copper Danger:");
+    sb.append(DocumentationMarkup.SECTION_SEPARATOR);
+    sb.append(selectedValue.isCopperDanger() ? M68kDocumentationUtil.CHECK_MARK : "-");
+    sb.append(DocumentationMarkup.SECTION_END);
+
+    sb.append(DocumentationMarkup.SECTIONS_END);
+
+    if (isShowReferenceDocs.get()) {
+      sb.append(DocumentationMarkup.CONTENT_START);
+      sb.append(getReferenceDoc(selectedValue.getDescriptionFileName()));
+      sb.append(DocumentationMarkup.CONTENT_END);
+    }
+
+    return sb.toString();
   }
 
-  private static String getReferenceDoc(String markdownFileName) {
+  private String getReferenceDoc(String markdownFileName) {
     Couple<String> markdownContents = M68kDocumentationUtil.getMarkdownContents(DOC_ROOT, markdownFileName);
     if (markdownContents.getFirst() == null) {
       return markdownContents.getSecond();
     }
 
-    return "<hr/><br>" + M68kDocumentationUtil.getHtmlForMarkdown(DOC_ROOT, markdownContents.getFirst());
+    return M68kDocumentationUtil.getHtmlForMarkdown(DOC_ROOT, markdownContents.getFirst(), M68K_BROWSER_LINK_FUNCTION);
   }
 
   @Override

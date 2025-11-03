@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.browser;
 
 import com.intellij.icons.AllIcons;
+import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.util.Ref;
@@ -111,9 +112,9 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
   protected @NotNull String getDocFor(@NotNull M68kMnemonic mnemonic) {
     final String mnemonicDoc = M68kInstructionDocumentationProvider.getMnemonicDoc(mnemonic.elementType(), null);
     final String referenceDoc = isShowReferenceDocs.get() ?
-      "<hr/>" + M68kInstructionDocumentationProvider.getInstructionReferenceDoc(mnemonic.elementType()) : "";
+      "<hr/><br/>" + M68kInstructionDocumentationProvider.getInstructionReferenceDoc(mnemonic.elementType()) : "";
 
-    return M68kDocumentationUtil.CSS + mnemonicDoc + referenceDoc;
+    return M68kDocumentationUtil.CSS + DocumentationMarkup.CONTENT_START + mnemonicDoc + referenceDoc + DocumentationMarkup.CONTENT_END;
   }
 
   @Override

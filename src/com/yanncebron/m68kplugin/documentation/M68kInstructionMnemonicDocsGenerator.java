@@ -71,9 +71,9 @@ class M68kInstructionMnemonicDocsGenerator {
 
     for (M68kMnemonic mnemonic : allMnemonics) {
       if (specific == mnemonic) {
-        sb.append("<h2 style=\"text-decoration: underline;\"> ");
+        sb.append("<h4 style=\"text-decoration: underline;\"> ");
       } else {
-        sb.append("<h2>");
+        sb.append("<h4>");
       }
       final String mnemonicText = StringUtil.toUpperCase(StringUtil.toUpperCase(elementType.toString())) + StringUtil.join(mnemonic.dataSizes(), M68kDataSize::getText, "|");
       sb.append("<code>").append(StringUtil.escapeXmlEntities(mnemonicText));
@@ -82,7 +82,7 @@ class M68kInstructionMnemonicDocsGenerator {
       appendOperand(mnemonic.sourceOperand(), "");
       appendOperand(mnemonic.destinationOperand(), ",");
 
-      sb.append("</code></h2>");
+      sb.append("</code></h4>");
 
 
       if (!allCpusSame) {

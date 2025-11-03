@@ -16,7 +16,6 @@
 
 package com.yanncebron.m68kplugin.documentation;
 
-import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.io.FileUtil;
@@ -45,19 +44,13 @@ public final class M68kDocumentationUtil {
 
   private static final Logger LOG = Logger.getInstance(M68kDocumentationUtil.class);
 
+  /**
+   * Make tables non-wrappable.
+   */
   @NonNls
   public static final String CSS = "<style>" +
-    "h1 { font-weight: bold; font-size: 120%; } " +
-    "h2 { padding-top: 13px; font-weight: bold; font-size: 110%; } " +
-    "h3 { padding-top: 10px; font-weight: bold; } " +
-    "table { padding-bottom: 10px; white-space: nowrap; } " +
-    "td { margin: 4px 0 0 0; padding: 0 0 0 0; }" +
-    "th { font-weight: bold; text-align: left; white-space: nowrap; margin: 2px; } " +
-    "em { font-style: italic; }" +
-    "code { white-space: nowrap; }" +
-    "p { padding-top: 5px; } " +
-    "strong { font-weight: bold; }" +
-    "blockquote { padding-left: 10px; padding-right:10px; padding-bottom: 5px; }" +
+    "table { white-space: nowrap; } " +
+    "blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }" +
     "</style>";
 
   @NonNls
@@ -65,9 +58,9 @@ public final class M68kDocumentationUtil {
 
   @NonNls
   public static final String CONTRIBUTION_FOOTER =
-    "<br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_4.html#Directives-2\">vasm directives docs 1</a>" + DocumentationMarkup.EXTERNAL_LINK_ICON +
-    "<br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_23.html#Extensions-3\">vasm directives docs 2</a>" + DocumentationMarkup.EXTERNAL_LINK_ICON +
-    "<br><br><a href=\"https://github.com/prb28/m68k-instructions-documentation\">Contribute to m68k-instructions-documentation project</a>" + DocumentationMarkup.EXTERNAL_LINK_ICON;
+    "<br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_4.html#Directives-2\">vasm directives docs 1</a>" +
+    "<br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_23.html#Extensions-3\">vasm directives docs 2</a>" +
+    "<br><br><a href=\"https://github.com/prb28/m68k-instructions-documentation\">Contribute to m68k-instructions-documentation project</a>" ;
 
   public static Couple<String> getMarkdownContents(String docRoot, String markdownFileName) {
     final InputStream resource = M68kDocumentationUtil.class.getResourceAsStream(docRoot + markdownFileName + ".md");
