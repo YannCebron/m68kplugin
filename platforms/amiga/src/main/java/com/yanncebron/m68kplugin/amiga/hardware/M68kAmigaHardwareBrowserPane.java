@@ -30,6 +30,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.ui.speedSearch.SpeedSearchUtil;
+import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.Convertor;
 import com.yanncebron.m68kplugin.amiga.M68kAmigaBundle;
 import com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase;
@@ -41,6 +42,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.EnumSet;
 import java.util.List;
 
 public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaHardwareRegister> {
@@ -88,6 +90,11 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
 
   @Override
   protected void initList() {
+    List<M68kAmigaHardwareRegister> items = getSortedShownRegisters();
+    setListItems(items);
+  }
+
+  private static @NotNull List<M68kAmigaHardwareRegister> getSortedShownRegisters() {
     M68kAmigaHardwareRegister.Chipset chipsetSetting = getSelectedChipset();
 
     List<M68kAmigaHardwareRegister> items = new ArrayList<>();
@@ -99,7 +106,7 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
     }
 
     items.sort(Comparator.comparing(M68kAmigaHardwareRegister::getName, NaturalComparator.INSTANCE));
-    setListItems(items);
+    return items;
   }
 
   @Override
@@ -110,10 +117,7 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
   @Override
   protected String getListItemNameForLink(String link) {
     if (StringUtil.containsChar(link, 'x')) {
-      // find first matching entry sorted by list order
-      List<M68kAmigaHardwareRegister> items = new ArrayList<>(List.of(M68kAmigaHardwareRegister.values()));
-      items.sort(Comparator.comparing(M68kAmigaHardwareRegister::getName, NaturalComparator.INSTANCE));
-      for (M68kAmigaHardwareRegister value : items) {
+      for (M68kAmigaHardwareRegister value : getSortedShownRegisters()) {
         if (value.getDescriptionFileName().equals(link)) {
           return value.getName();
         }
@@ -158,6 +162,8 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
     sb.append(selectedValue.isCopperDanger() ? M68kDocumentationUtil.CHECK_MARK : "-");
     sb.append(DocumentationMarkup.SECTION_END);
 
+    appendRelated(sb, selectedValue);
+
     sb.append(DocumentationMarkup.SECTIONS_END);
 
     if (isShowReferenceDocs.get()) {
@@ -167,6 +173,35 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
     }
 
     return sb.toString();
+  }
+
+  private static void appendRelated(StringBuilder sb, M68kAmigaHardwareRegister selectedValue) {
+    if (EnumSet.range(M68kAmigaHardwareRegister.COLOR00, M68kAmigaHardwareRegister.COLOR31).contains(selectedValue)) {
+//      return;
+    }
+
+    List<M68kAmigaHardwareRegister> related = ContainerUtil.filter(getSortedShownRegisters(),
+      register -> selectedValue.getDescriptionFileName().equals(register.getDescriptionFileName()));
+    if (related.size() == 1) return;
+
+    StringBuilder relatedSb = new StringBuilder("<table><tr>");
+    int itemCount = 1;
+    for (M68kAmigaHardwareRegister register : related) {
+      relatedSb.append(DocumentationMarkup.SECTION_START);
+      if (register == selectedValue) relatedSb.append("<b>");
+      relatedSb.append("<a href='" + M68K_BROWSER_ITEM_LINK_PREFIX).append(register.name()).append("'>");
+      relatedSb.append(register.getName()).append("</a>");
+      if (register == selectedValue) relatedSb.append("</b>");
+      relatedSb.append("</td>");
+      if (itemCount++ % 4 == 0) relatedSb.append("</tr><tr>");
+    }
+    relatedSb.append("</tr></table>");
+
+    sb.append(DocumentationMarkup.SECTION_HEADER_START);
+    sb.append("Related:");
+    sb.append(DocumentationMarkup.SECTION_SEPARATOR);
+    sb.append(relatedSb);
+    sb.append(DocumentationMarkup.SECTION_END);
   }
 
   private String getReferenceDoc(String markdownFileName) {
