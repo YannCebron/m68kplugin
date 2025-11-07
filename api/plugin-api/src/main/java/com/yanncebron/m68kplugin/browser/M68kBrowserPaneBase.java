@@ -68,6 +68,12 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
   @NonNls
   public static final String M68K_BROWSER_ITEM_LINK_PREFIX = "m68kBrowser://";
 
+  /**
+   * "Copy to clipboard" action.
+   */
+  @NonNls
+  public static final String M68K_BROWSER_COPY_DATA_LINK_PREFIX = "m68kBrowserCopy://";
+
   public static final Function<String, String> M68K_BROWSER_LINK_FUNCTION = link -> M68K_BROWSER_ITEM_LINK_PREFIX + StringUtil.substringBefore(link, ".md");
 
   private JBSplitter splitter;

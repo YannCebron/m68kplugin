@@ -7,7 +7,9 @@
 - M68k Browser: 
   - re-use default IDE documentation component for better UX
   - various smaller layout/content improvements
-  - "Amiga Hardware" tab: add _Related_ registers
+- "Amiga Hardware" tab: 
+  - add _Related_ registers
+  - add _Copy_ buttons for _address_
 
 ### Added
 

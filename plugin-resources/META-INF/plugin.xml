@@ -238,7 +238,7 @@
         anchor="right"
         factoryClass="com.yanncebron.m68kplugin.browser.M68kBrowserToolWindowFactory"/>
     <platform.backend.documentation.linkHandler
-        implementation="com.yanncebron.m68kplugin.browser.M68kBrowserItemDocumentationLinkHandler"/>
+        implementation="com.yanncebron.m68kplugin.browser.M68kBrowserDocumentationLinkHandler"/>
 
     <consoleFilterProvider
         implementation="com.yanncebron.m68kplugin.compiler.M68kVasmConsoleFilterProvider"/>

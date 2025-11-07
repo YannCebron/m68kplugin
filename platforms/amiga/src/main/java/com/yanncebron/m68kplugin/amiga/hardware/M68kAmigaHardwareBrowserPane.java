@@ -140,7 +140,13 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
     sb.append(DocumentationMarkup.SECTION_HEADER_START);
     sb.append("Address:");
     sb.append(DocumentationMarkup.SECTION_SEPARATOR);
-    sb.append("<code>$").append(selectedValue.getAddress()).append("</code> (<code>$0").append(selectedValue.getAddress().substring(3)).append("</code>)");
+    String address = "$" + selectedValue.getAddress();
+    String shortAddress = "$0" + address.substring(4);
+    sb.append("<code>").append(address).append("</code>")
+      .append("<a href='").append(M68kBrowserPaneBase.M68K_BROWSER_COPY_DATA_LINK_PREFIX).append(address).append("'><icon src='AllIcons.Actions.Copy'/></a>")
+      .append("&nbsp;&ndash;&nbsp;")
+      .append("<code>").append(shortAddress).append("</code>")
+      .append("<a href='").append(M68kBrowserPaneBase.M68K_BROWSER_COPY_DATA_LINK_PREFIX).append(shortAddress).append("'><icon src='AllIcons.Actions.Copy'/></a>");
     sb.append(DocumentationMarkup.SECTION_END);
 
     sb.append(DocumentationMarkup.SECTION_HEADER_START);
