@@ -37,7 +37,6 @@ public final class M68kTokenGroups {
     BMI,
     BNE,
     BPL,
-    BRA,
     BVC,
     BVS
   );
@@ -99,6 +98,7 @@ public final class M68kTokenGroups {
     BCHG,
     BCLR,
     BKPT,
+    BRA,
     BSET,
     BSR,
     BTST,
