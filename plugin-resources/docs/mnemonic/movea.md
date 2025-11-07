@@ -15,7 +15,7 @@ MOVEA <ea>,An
 Move the contents of the source to the destination location. The destination is an address register. The source must be a word or longword. If it is a word, it is sign-extended to a longword. The condition codes are not affected.
 
 ## Application
-The `MOVEA` instruction is used to load an address register (some assemblers simply employ the `MOVE` mnemonic for both `MOVE` and `MOVEA`). Note that the instruction `LEA` can often be used to perform the same operation (e.g., `MOVEA.L #$1234,A0` is the same as `LEA $1234,A0`).
+The `MOVEA` instruction is used to load an address register (some assemblers simply employ the `MOVE` mnemonic for both `MOVE` and `MOVEA`). Note that the instruction [`LEA`](lea.md) can often be used to perform the same operation (e.g., `MOVEA.L #$1234,A0` is the same as `LEA $1234,A0`).
 
 Take care because the `MOVEA.W #$8000,A0` instruction sign-extends the source operand to $FFFF8000 before loading it into A0, whereas `LEA $8000,A0` loads A0 with $00008000.
 

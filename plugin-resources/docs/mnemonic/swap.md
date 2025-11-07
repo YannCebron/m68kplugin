@@ -16,7 +16,7 @@ SWAP Dn
 Exchange the upper and lower 16-bit words of a data register.
 
 ## Application
-The `SWAP Dn` instruction enables the higher-order word in a register to take part in word operations by moving it into the lower-order position. `SWAP Dn` is effectively equivalent to `ROR.L Di,Dn`, where [Di] = 16. However, `SWAP` clears the C-bit of the *CCR*, whereas `ROR` sets it according to the last bit to be shifted into the carry bit.
+The `SWAP Dn` instruction enables the higher-order word in a register to take part in word operations by moving it into the lower-order position. `SWAP Dn` is effectively equivalent to `ROR.L Di,Dn`, where [Di] = 16. However, `SWAP` clears the C-bit of the *CCR*, whereas [`ROR`](rol_ror.md) sets it according to the last bit to be shifted into the carry bit.
 
 ## Condition codes
 | X | N | Z | V | C |

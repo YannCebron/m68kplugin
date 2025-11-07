@@ -59,8 +59,8 @@ public final class M68kDocumentationUtil {
   @NonNls
   public static final String CONTRIBUTION_FOOTER =
     "<br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_4.html#Directives-2\">vasm directives docs 1</a>" +
-    "<br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_23.html#Extensions-3\">vasm directives docs 2</a>" +
-    "<br><br><a href=\"https://github.com/prb28/m68k-instructions-documentation\">Contribute to m68k-instructions-documentation project</a>" ;
+      "<br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_23.html#Extensions-3\">vasm directives docs 2</a>" +
+      "<br><br><a href=\"https://github.com/prb28/m68k-instructions-documentation\">Contribute to m68k-instructions-documentation project</a>";
 
   public static Couple<String> getMarkdownContents(String docRoot, String markdownFileName) {
     final InputStream resource = M68kDocumentationUtil.class.getResourceAsStream(docRoot + markdownFileName + ".md");
@@ -100,6 +100,10 @@ public final class M68kDocumentationUtil {
           if (StringUtil.startsWith(url, "http")) {
             return super.sanitizeLinkUrl(url);
           }
+          if (StringUtil.endsWith(url, "png")) {
+            return super.sanitizeLinkUrl(url);
+          }
+
           return urlFunction.apply(super.sanitizeLinkUrl(url));
         }
 

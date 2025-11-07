@@ -13,9 +13,11 @@
 
 ### Added
 
+- Mnemonics docs: add cross-links in reference docs
+
 ### Fixed
 
-- Mnemonics docs: fix `BRA`
+- Mnemonics docs: fix `BRA` reference docs
 
 ## 0.2.0 - 2025-10-31
 

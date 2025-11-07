@@ -21,7 +21,7 @@ LINK A6,#-12
 The contents of the specified address register are first pushed onto the stack. Then, the address register is loaded with the updated stack pointer. Finally, the 16-bit sign-extended displacement is added to the stack pointer. The contents of the address register occupy two words on the stack. A *negative displacement* must be used to allocate stack area to a procedure. At the end of a `LINK` instruction, the old value of address register An has been pushed on the stack and the new An is pointing at the base of the stack frame. The stack pointer itself has been moved up by d bytes and is pointing at the top of the stack frame. Address register An is called the *frame pointer* because it is used to reference data on the stack frame. By convention, programmers often use A6 as a frame pointer.
 
 ## Application
-The `LINK` and `UNLK` pair are used to create local workspace on the top of a procedure's stack. Consider the code:
+The `LINK` and [`UNLK`](unlk.md) pair are used to create local workspace on the top of a procedure's stack. Consider the code:
 
 ```
 Subrtn LINK  A6,#-12    ;Create a 12-byte workspace

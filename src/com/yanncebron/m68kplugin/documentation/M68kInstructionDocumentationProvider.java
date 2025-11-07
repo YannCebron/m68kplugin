@@ -26,6 +26,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase;
 import com.yanncebron.m68kplugin.lang.psi.M68kInstruction;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
@@ -93,7 +94,7 @@ public final class M68kInstructionDocumentationProvider extends AbstractDocument
       return markdownContents.getSecond();
     }
 
-    return M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, markdownContents.getFirst());
+    return M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, markdownContents.getFirst(), M68kBrowserPaneBase.M68K_BROWSER_LINK_FUNCTION);
   }
 
   private static Couple<String> getMarkdownContents(IElementType originalMnemonic) {
