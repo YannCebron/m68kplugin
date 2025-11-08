@@ -106,7 +106,8 @@ class M68kInstructionMnemonicDocsGenerator {
         if (!allUsedAddressModes.contains(value)) continue;
 
         sb.append("<th style=\"text-align:center;\">");
-        sb.append(value.getNotation());
+        // prevent 'abs.w' to break after 'period' on resize. yes, CSS simply won't work here
+        sb.append(value.getNotation().replace(".", "&#8228;"));
         sb.append("</th>");
       }
       sb.append("</tr>");
