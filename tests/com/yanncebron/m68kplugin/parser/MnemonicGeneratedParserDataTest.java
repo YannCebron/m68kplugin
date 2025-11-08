@@ -126,7 +126,10 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
     final Collection<M68kMnemonic> allMnemonics = M68kMnemonicRegistry.getInstance().findAll(type);
     assertFalse(type.toString(), allMnemonics.isEmpty());
 
-    final boolean needsLocalBranchLabel = M68kTokenGroups.BCC_INSTRUCTIONS.contains(type) || type == M68kTokenTypes.BSR;
+    final boolean needsLocalBranchLabel =
+      M68kTokenGroups.BCC_INSTRUCTIONS.contains(type) ||
+        type == M68kTokenTypes.BRA ||
+        type == M68kTokenTypes.BSR;
     String labelName = "<NOT_BRANCH>";
     String labelOrIndent = INDENT;
     if (needsLocalBranchLabel) {
