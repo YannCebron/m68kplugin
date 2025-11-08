@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.amiga.hardware;
 
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.util.containers.ContainerUtil;
 import junit.framework.TestCase;
 
 import java.util.HashSet;
@@ -27,63 +28,117 @@ import static com.intellij.testFramework.UsefulTestCase.assertSize;
 
 public class M68kAmigaHardwareRegisterTest extends TestCase {
 
+  private static final int CIA_COUNT = 15;
+
   public void testConsistency() {
-    assertSize(236, M68kAmigaHardwareRegister.values());
+    assertSize(236 + CIA_COUNT * 2, M68kAmigaHardwareRegister.values());
 
     Pattern validName = Pattern.compile("[A-Z0-9]{5,8}");
+    Pattern ciaEnumValidName = Pattern.compile("CIA[A|B]_[A-Z]{2,6}");
+    Pattern ciaValidName = Pattern.compile("CIA[A|B][A-Z]{2,6}");
 
     int lastAddress = 0;
+    int countCiaA = 0;
+    int countCiaB = 0;
+    int countNA = 0;
     int countRevisionOcs = 0;
     int countRevisionEcs = 0;
     int countRevisionAga = 0;
     int countCopperDanger = 0;
 
+    Set<String> foundAddress = new HashSet<>();
     Set<M68kAmigaHardwareRegister.Access> foundAccess = new HashSet<>();
     Set<M68kAmigaHardwareRegister.Chip> foundChip = new HashSet<>();
 
-    Set<String> descriptionFileNames = new HashSet<>();
+    Set<String> ciaDescriptionFileNames = new HashSet<>();
+    Set<String> hardwareDescriptionFileNames = new HashSet<>();
     for (M68kAmigaHardwareRegister register : M68kAmigaHardwareRegister.values()) {
-      assertFalse(register.name(), StringUtil.containsWhitespaces(register.getName()));
-      assertTrue(register.name(), validName.matcher(register.getName()).matches());
+      String name = register.name();
+
+      Set<M68kAmigaHardwareRegister.Chip> chips = register.getChips();
+      boolean isCIA = register.getChipset() == M68kAmigaHardwareRegister.Chipset.N_A;
+
+      String registerDisplayName = register.getName();
+      assertFalse(name, StringUtil.containsWhitespaces(registerDisplayName));
+      if (isCIA) {
+        assertTrue(name, ciaEnumValidName.matcher(name).matches());
+        assertTrue(name, ciaValidName.matcher(registerDisplayName).matches());
+      } else {
+        assertTrue(name, validName.matcher(registerDisplayName).matches());
+      }
 
       String address = register.getAddress();
-      assertFalse(register.name(), StringUtil.containsWhitespaces(address));
-      assertTrue(register.name(), StringUtil.startsWith(address, "DFF"));
+      assertFalse(name, StringUtil.containsWhitespaces(address));
+      assertTrue(name, foundAddress.add(address));
+      if (isCIA) {
+        assertEquals(name, 1, chips.size());
+        assertFalse(name, register.isCopperDanger());
+        assertEquals(name, M68kAmigaHardwareRegister.Access.READ_WRITE, register.getAccess());
+
+        M68kAmigaHardwareRegister.Chip ciaChip = ContainerUtil.getFirstItem(chips);
+        if (ciaChip == M68kAmigaHardwareRegister.Chip.CIA_A) {
+          countCiaA++;
+          assertTrue(name, StringUtil.startsWith(name, "CIAA_"));
+          assertTrue(name, StringUtil.startsWith(address, "BFE"));
+          assertTrue(name, StringUtil.startsWith(register.getDescription(), "CIAA "));
+        } else if (ciaChip == M68kAmigaHardwareRegister.Chip.CIA_B) {
+          countCiaB++;
+          assertTrue(name, StringUtil.startsWith(name, "CIAB_"));
+          assertTrue(name, StringUtil.startsWith(address, "BFD"));
+          assertTrue(name, StringUtil.startsWith(register.getDescription(), "CIAB "));
+        } else {
+          fail(name);
+        }
+      } else {
+        assertTrue(name, StringUtil.startsWith(address, "DFF"));
+      }
       final int addressValue = Integer.parseInt(address, 16);
       assertTrue(addressValue > lastAddress);
       lastAddress = addressValue;
 
-      assertFalse(register.name(), StringUtil.containsWhitespaces(register.getDescriptionFileName()));
-      assertFalse(register.name(), register.getDescription().length() < 11);
-      descriptionFileNames.add(register.getDescriptionFileName());
+      assertFalse(name, StringUtil.containsWhitespaces(register.getDescriptionFileName()));
+      assertFalse(name, register.getDescription().length() < 11);
 
-      assertNotNull(register.name(), register.getAccess());
+      if (isCIA) {
+        ciaDescriptionFileNames.add(register.getDescriptionFileName());
+      } else {
+        hardwareDescriptionFileNames.add(register.getDescriptionFileName());
+      }
+
+      assertNotNull(name, register.getAccess());
       foundAccess.add(register.getAccess());
 
-      assertFalse(register.name(), register.getChips().isEmpty());
-      foundChip.addAll(register.getChips());
+      assertFalse(name, chips.isEmpty());
+      foundChip.addAll(chips);
 
       final M68kAmigaHardwareRegister.Chipset chipset = register.getChipset();
       if (chipset == M68kAmigaHardwareRegister.Chipset.ECS) {
         countRevisionEcs++;
       } else if (chipset == M68kAmigaHardwareRegister.Chipset.AGA) {
         countRevisionAga++;
-      } else {
+      } else if (chipset == M68kAmigaHardwareRegister.Chipset.OCS) {
         countRevisionOcs++;
+      } else if (isCIA) {
+        countNA++;
       }
 
       if (register.isCopperDanger()) countCopperDanger++;
     }
 
+    assertEquals(CIA_COUNT * 2, countNA);
+    assertEquals(CIA_COUNT, countCiaA);
+    assertEquals(CIA_COUNT, countCiaB);
+
     assertEquals(197, countRevisionOcs);
     assertEquals(30, countRevisionEcs);
     assertEquals(9, countRevisionAga);
 
-    assertSize(4, foundAccess);
-    assertSize(3, foundChip);
+    assertSize(5, foundAccess);
+    assertSize(5, foundChip);
     assertEquals(58, countCopperDanger);
 
-    assertEquals(78, descriptionFileNames.size());
+    assertEquals(19, ciaDescriptionFileNames.size());
+    assertEquals(78, hardwareDescriptionFileNames.size());
   }
 
 }

@@ -14,6 +14,7 @@
 ### Added
 
 - Mnemonics docs: add cross-links in reference docs
+- "Amiga Hardware" tab: CIAx registers
 
 ### Fixed
 

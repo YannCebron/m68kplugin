@@ -18,23 +18,19 @@ package com.yanncebron.m68kplugin.amiga.hardware;
 
 import com.intellij.icons.AllIcons;
 import com.intellij.ide.util.PropertiesComponent;
-import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.actionSystem.ex.ComboBoxAction;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.DumbAwareToggleAction;
-import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.NaturalComparator;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.ui.speedSearch.SpeedSearchUtil;
-import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.Convertor;
 import com.yanncebron.m68kplugin.amiga.M68kAmigaBundle;
 import com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase;
-import com.yanncebron.m68kplugin.documentation.M68kDocumentationUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,13 +38,11 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.EnumSet;
 import java.util.List;
 
 public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaHardwareRegister> {
 
-  private static final String DOC_ROOT = "/docs/amigaHardwareRegister/";
-
+  private Ref<Boolean> isShowCIA;
   private Ref<Boolean> isAnnotateChipset;
   private Ref<Boolean> isShowReferenceDocs;
 
@@ -59,6 +53,18 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
   @Override
   protected @Nullable ActionGroup getToolbarActionGroup() {
     DefaultActionGroup actionGroup = new DefaultActionGroup();
+
+    isShowCIA = Ref.create(Boolean.TRUE);
+    actionGroup.add(
+      createToggleAction(
+        M68kAmigaBundle.message("toolwindow.tab.amiga.hardware.show.cia.registers"),
+        AllIcons.Nodes.Plugin,
+        isShowCIA,
+        "M68kAmigaHardwareBrowserPane.ShowCIARegisters",
+        (anActionEvent, state) -> initList(),
+        null)
+    );
+
     actionGroup.add(new ChooseChipsetAction());
 
     isAnnotateChipset = Ref.create(Boolean.TRUE);
@@ -94,11 +100,20 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
     setListItems(items);
   }
 
-  private static @NotNull List<M68kAmigaHardwareRegister> getSortedShownRegisters() {
+  private @NotNull List<M68kAmigaHardwareRegister> getSortedShownRegisters() {
     M68kAmigaHardwareRegister.Chipset chipsetSetting = getSelectedChipset();
 
     List<M68kAmigaHardwareRegister> items = new ArrayList<>();
     for (M68kAmigaHardwareRegister register : M68kAmigaHardwareRegister.values()) {
+      if (register.getChipset() == M68kAmigaHardwareRegister.Chipset.N_A) {
+        if (isShowCIA.get() &&
+          (register.getChips().contains(M68kAmigaHardwareRegister.Chip.CIA_A) ||
+            register.getChips().contains(M68kAmigaHardwareRegister.Chip.CIA_B))) {
+          items.add(register);
+        }
+        continue;
+      }
+
       M68kAmigaHardwareRegister.Chipset chipset = register.getChipset();
       if (chipset.ordinal() <= chipsetSetting.ordinal()) {
         items.add(register);
@@ -128,95 +143,8 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
 
   @Override
   protected @NotNull String getDocFor(@NotNull M68kAmigaHardwareRegister selectedValue) {
-    StringBuilder sb = new StringBuilder(M68kDocumentationUtil.CSS);
-
-    sb.append(DocumentationMarkup.DEFINITION_START);
-    sb.append("<h1>").append(selectedValue.getName()).append("</h1>");
-    sb.append(selectedValue.getDescription());
-    sb.append(DocumentationMarkup.DEFINITION_END);
-
-    sb.append(DocumentationMarkup.SECTIONS_START);
-
-    sb.append(DocumentationMarkup.SECTION_HEADER_START);
-    sb.append("Address:");
-    sb.append(DocumentationMarkup.SECTION_SEPARATOR);
-    String address = "$" + selectedValue.getAddress();
-    String shortAddress = "$0" + address.substring(4);
-    sb.append("<code>").append(address).append("</code>")
-      .append("<a href='").append(M68kBrowserPaneBase.M68K_BROWSER_COPY_DATA_LINK_PREFIX).append(address).append("'><icon src='AllIcons.Actions.Copy'/></a>")
-      .append("&nbsp;&ndash;&nbsp;")
-      .append("<code>").append(shortAddress).append("</code>")
-      .append("<a href='").append(M68kBrowserPaneBase.M68K_BROWSER_COPY_DATA_LINK_PREFIX).append(shortAddress).append("'><icon src='AllIcons.Actions.Copy'/></a>");
-    sb.append(DocumentationMarkup.SECTION_END);
-
-    sb.append(DocumentationMarkup.SECTION_HEADER_START);
-    sb.append("Chip Set (Chips):");
-    sb.append(DocumentationMarkup.SECTION_SEPARATOR);
-    sb.append(selectedValue.getChipset().getDisplayName());
-    sb.append(" (").append(StringUtil.join(selectedValue.getChips(), M68kAmigaHardwareRegister.Chip::getDisplayName, ", ")).append(")");
-    sb.append(DocumentationMarkup.SECTION_END);
-
-    sb.append(DocumentationMarkup.SECTION_HEADER_START);
-    sb.append("Access:");
-    sb.append(DocumentationMarkup.SECTION_SEPARATOR);
-    sb.append(selectedValue.getAccess().getDisplayName());
-    sb.append(DocumentationMarkup.SECTION_END);
-
-    sb.append(DocumentationMarkup.SECTION_HEADER_START);
-    sb.append("Copper Danger:");
-    sb.append(DocumentationMarkup.SECTION_SEPARATOR);
-    sb.append(selectedValue.isCopperDanger() ? M68kDocumentationUtil.CHECK_MARK : "-");
-    sb.append(DocumentationMarkup.SECTION_END);
-
-    appendRelated(sb, selectedValue);
-
-    sb.append(DocumentationMarkup.SECTIONS_END);
-
-    if (isShowReferenceDocs.get()) {
-      sb.append(DocumentationMarkup.CONTENT_START);
-      sb.append(getReferenceDoc(selectedValue.getDescriptionFileName()));
-      sb.append(DocumentationMarkup.CONTENT_END);
-    }
-
-    return sb.toString();
-  }
-
-  private static void appendRelated(StringBuilder sb, M68kAmigaHardwareRegister selectedValue) {
-    if (EnumSet.range(M68kAmigaHardwareRegister.COLOR00, M68kAmigaHardwareRegister.COLOR31).contains(selectedValue)) {
-//      return;
-    }
-
-    List<M68kAmigaHardwareRegister> related = ContainerUtil.filter(getSortedShownRegisters(),
-      register -> selectedValue.getDescriptionFileName().equals(register.getDescriptionFileName()));
-    if (related.size() == 1) return;
-
-    StringBuilder relatedSb = new StringBuilder("<table><tr>");
-    int itemCount = 1;
-    for (M68kAmigaHardwareRegister register : related) {
-      relatedSb.append(DocumentationMarkup.SECTION_START);
-      if (register == selectedValue) relatedSb.append("<b>");
-      relatedSb.append("<a href='" + M68K_BROWSER_ITEM_LINK_PREFIX).append(register.name()).append("'>");
-      relatedSb.append(register.getName()).append("</a>");
-      if (register == selectedValue) relatedSb.append("</b>");
-      relatedSb.append("</td>");
-      if (itemCount++ % 4 == 0) relatedSb.append("</tr><tr>");
-    }
-    relatedSb.append("</tr></table>");
-
-    sb.append(DocumentationMarkup.SECTION_HEADER_START);
-    sb.append("Related:");
-    sb.append(DocumentationMarkup.SECTION_SEPARATOR);
-    sb.append(relatedSb);
-    sb.append(DocumentationMarkup.SECTION_END);
-  }
-
-  private String getReferenceDoc(String markdownFileName) {
-    Couple<String> markdownContents = M68kDocumentationUtil.getMarkdownContents(DOC_ROOT, markdownFileName);
-    if (markdownContents.getFirst() == null) {
-      return markdownContents.getSecond();
-    }
-
-    return M68kDocumentationUtil.getHtmlForMarkdown(DOC_ROOT, markdownContents.getFirst(), M68K_BROWSER_LINK_FUNCTION);
+    return new M68kAmigaHardwareRegisterDocsCreator(selectedValue, getSortedShownRegisters())
+      .generateDoc(isShowReferenceDocs.get());
   }
 
   @Override
@@ -230,7 +158,8 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
 
         if (isAnnotateChipset.get()) {
           M68kAmigaHardwareRegister.Chipset chipset = value.getChipset();
-          if (chipset != M68kAmigaHardwareRegister.Chipset.OCS) {
+          if (chipset != M68kAmigaHardwareRegister.Chipset.N_A &&
+            chipset != M68kAmigaHardwareRegister.Chipset.OCS) {
             append(" (" + chipset.getDisplayName() + ")", SimpleTextAttributes.GRAY_ATTRIBUTES);
           }
         }
@@ -266,6 +195,7 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
     protected @NotNull DefaultActionGroup createPopupActionGroup(@NotNull JComponent button, @NotNull DataContext dataContext) {
       DefaultActionGroup chipsetGroup = new DefaultActionGroup();
       for (M68kAmigaHardwareRegister.Chipset chipset : M68kAmigaHardwareRegister.Chipset.values()) {
+        if (chipset == M68kAmigaHardwareRegister.Chipset.N_A) continue;
         chipsetGroup.add(createChipsetAction(chipset));
       }
       return chipsetGroup;
