@@ -7,7 +7,7 @@ section <name>[,<sec_type>][,<mem_type>]
 
 ## Description
 Starts a new section named `<name>` or reactivates an old one.
-`<sec_type>` defines the section type and may be code, text (same as code), data or bss. 
+`<sec_type>` defines the section type and may be `code`, `text` (same as `code`), `data` or `bss`. 
 If the selected output format (like "aout", "tos" or "xfile") does not support section names then a missing `<sec_type>` 
 argument interprets the first argument (`<name>`) as section type instead. 
 Otherwise, a missing `<sec_type>` defaults to a code section with the given name. 

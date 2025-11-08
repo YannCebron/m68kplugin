@@ -10,7 +10,7 @@ opt <option>[,<option>...]
 
 Sets Devpac-compatible options.
 
-When option ‘-phxass’ is given, then it will parse PhxAss options instead (which is discouraged for new code, so there
+When option `-phxass` is given, then it will parse PhxAss options instead (which is discouraged for new code, so there
 is no detailed description here).
 
 ### Devpac2

@@ -121,7 +121,8 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
         </code></pre>
         <h2>Description</h2>
         <p>Define a new program symbol with the name <code>&lt;symbol&gt;</code> and assign to it the value of <code>&lt;expression&gt;</code>.
-        Defining <code>&lt;symbol&gt;</code> twice will cause an error.</p>
+        Defining <code>&lt;symbol&gt;</code> twice will cause an error.
+        See <a rel="nofollow" href="psi_element://set">set</a> directive.</p>
         </div>""", doc);
     });
   }
@@ -137,7 +138,8 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
         </code></pre>
         <h2>Description</h2>
         <p>Define a new program symbol with the name <code>&lt;symbol&gt;</code> and assign to it the value of <code>&lt;expression&gt;</code>.
-        Defining <code>&lt;symbol&gt;</code> twice will cause an error.</p>
+        Defining <code>&lt;symbol&gt;</code> twice will cause an error.
+        See <a rel="nofollow" href="psi_element://set">set</a> directive.</p>
         </div>""", doc);
     });
   }
