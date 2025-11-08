@@ -58,6 +58,7 @@ import java.util.function.Function;
 
 /**
  * @param <T> must implement {@link #equals(Object)} to keep current selection upon list model update
+ * @see M68kBrowserPaneFactory
  */
 @SuppressWarnings("UnstableApiUsage")
 public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel implements Place.Navigator, Disposable {
@@ -76,7 +77,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
 
   public static final Function<String, String> M68K_BROWSER_LINK_FUNCTION = link -> M68K_BROWSER_ITEM_LINK_PREFIX + StringUtil.substringBefore(link, ".md");
 
-  private JBSplitter splitter;
+  private final JBSplitter splitter;
 
   private final JBList<T> list = new JBList<>();
   private DocumentationComponent documentationComponent;
@@ -87,14 +88,11 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
   private final History history = new History(this);
 
   private final Class<T> clazz;
-  private Project project;
+  private final Project project;
 
-  protected M68kBrowserPaneBase(Class<T> valueClazz) {
+  protected M68kBrowserPaneBase(Class<T> valueClazz, Project project) {
     super(true, true);
     clazz = valueClazz;
-  }
-
-  void initUI(@NotNull Project project) {
     this.project = project;
 
     splitter = new OnePixelSplitter(false, getClass().getSimpleName() + ".splitter.proportion", getInitialSplitProportion());
@@ -152,10 +150,6 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
 
   protected JComponent getFocusComponent() {
     return list;
-  }
-
-  public boolean isAvailable(@SuppressWarnings("unused") Project project) {
-    return true;
   }
 
   /**

@@ -19,6 +19,7 @@ package com.yanncebron.m68kplugin.browser;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.NaturalComparator;
 import com.intellij.ui.ColoredListCellRenderer;
@@ -41,8 +42,8 @@ final class M68kRegistersBrowserPane extends M68kBrowserPaneBase<M68kRegister> {
 
   private Ref<Boolean> isShowMc68010;
 
-  M68kRegistersBrowserPane() {
-    super(M68kRegister.class);
+  private M68kRegistersBrowserPane(Project project) {
+    super(M68kRegister.class, project);
   }
 
   @Override
@@ -101,5 +102,13 @@ final class M68kRegistersBrowserPane extends M68kBrowserPaneBase<M68kRegister> {
         SpeedSearchUtil.applySpeedSearchHighlighting(list, this, true, selected);
       }
     };
+  }
+
+  static final class Factory implements M68kBrowserPaneFactory<M68kRegistersBrowserPane> {
+
+    @Override
+    public M68kRegistersBrowserPane createPane(Project project) {
+      return new M68kRegistersBrowserPane(project);
+    }
   }
 }

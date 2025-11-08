@@ -37,8 +37,9 @@
   <resource-bundle>messages.M68kBundle</resource-bundle>
 
   <extensionPoints>
-    <extensionPoint name="browserPane" beanClass="com.yanncebron.m68kplugin.browser.M68kBrowserPaneEP" dynamic="true">
-      <with attribute="implementation" implements="com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase"/>
+    <extensionPoint name="browserPaneFactory" beanClass="com.yanncebron.m68kplugin.browser.M68kBrowserPaneFactoryEP"
+                    dynamic="true">
+      <with attribute="factoryClass" implements="com.yanncebron.m68kplugin.browser.M68kBrowserPaneFactory"/>
     </extensionPoint>
   </extensionPoints>
 
@@ -248,18 +249,18 @@
   </extensions>
 
   <extensions defaultExtensionNs="com.yanncebron.m68kplugin">
-    <browserPane id="mnemonics"
-                 order="first"
-                 displayName="toolwindow.tab.mnemonic"
-                 implementation="com.yanncebron.m68kplugin.browser.M68kMnemonicsBrowserPane"/>
-    <browserPane id="directives"
-                 order="after mnemonics"
-                 displayName="toolwindow.tab.directives"
-                 implementation="com.yanncebron.m68kplugin.browser.M68kDirectivesBrowserPane"/>
-    <browserPane id="registers"
-                 order="after directives"
-                 displayName="toolwindow.tab.registers"
-                 implementation="com.yanncebron.m68kplugin.browser.M68kRegistersBrowserPane"/>
+    <browserPaneFactory id="mnemonics"
+                        order="first"
+                        displayNameKey="toolwindow.tab.mnemonic"
+                        factoryClass="com.yanncebron.m68kplugin.browser.M68kMnemonicsBrowserPane$Factory"/>
+    <browserPaneFactory id="directives"
+                        order="after mnemonics"
+                        displayNameKey="toolwindow.tab.directives"
+                        factoryClass="com.yanncebron.m68kplugin.browser.M68kDirectivesBrowserPane$Factory"/>
+    <browserPaneFactory id="registers"
+                        order="after directives"
+                        displayNameKey="toolwindow.tab.registers"
+                        factoryClass="com.yanncebron.m68kplugin.browser.M68kRegistersBrowserPane$Factory"/>
   </extensions>
 
   <actions>

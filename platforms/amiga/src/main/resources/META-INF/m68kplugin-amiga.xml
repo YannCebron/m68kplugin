@@ -26,10 +26,10 @@
   </extensions>
 
   <extensions defaultExtensionNs="com.yanncebron.m68kplugin">
-    <browserPane id="amigaHardware"
-                 order="last"
-                 bundle="messages.M68kAmigaBundle"
-                 displayName="toolwindow.tab.amiga.hardware"
-                 implementation="com.yanncebron.m68kplugin.amiga.hardware.M68kAmigaHardwareBrowserPane"/>
+    <browserPaneFactory id="amigaHardware"
+                        order="last"
+                        bundle="messages.M68kAmigaBundle"
+                        displayNameKey="toolwindow.tab.amiga.hardware"
+                        factoryClass="com.yanncebron.m68kplugin.amiga.hardware.M68kAmigaHardwareBrowserPane$Factory"/>
   </extensions>
 </idea-plugin>

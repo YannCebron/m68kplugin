@@ -20,6 +20,7 @@ import com.intellij.icons.AllIcons;
 import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.NaturalComparator;
 import com.intellij.openapi.util.text.StringUtil;
@@ -51,8 +52,8 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
 
   private Ref<Boolean> isShowReferenceDocs;
 
-  public M68kMnemonicsBrowserPane() {
-    super(M68kMnemonic.class);
+  private M68kMnemonicsBrowserPane(Project project) {
+    super(M68kMnemonic.class, project);
   }
 
   protected ActionGroup getToolbarActionGroup() {
@@ -133,4 +134,11 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
     };
   }
 
+  static final class Factory implements M68kBrowserPaneFactory<M68kMnemonicsBrowserPane> {
+
+    @Override
+    public M68kMnemonicsBrowserPane createPane(Project project) {
+      return new M68kMnemonicsBrowserPane(project);
+    }
+  }
 }

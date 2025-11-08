@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 
 final class M68kBrowserToolWindowFactory implements ToolWindowFactory, DumbAware {
 
-  private static final ExtensionPointName<M68kBrowserPaneEP> BROWSER_PANE_EP = ExtensionPointName.create("com.yanncebron.m68kplugin.browserPane");
+  private static final ExtensionPointName<M68kBrowserPaneFactoryEP> BROWSER_PANE_FACTORY_EP = ExtensionPointName.create("com.yanncebron.m68kplugin.browserPaneFactory");
 
   private static final Key<String> PANE_FQN_KEY = Key.create("M68kBrowserToolWindowFactory.pane.fqn");
 
@@ -45,11 +45,11 @@ final class M68kBrowserToolWindowFactory implements ToolWindowFactory, DumbAware
 
     String activePane = PropertiesComponent.getInstance().getValue(ACTIVE_PANE);
 
-    for (M68kBrowserPaneEP extension : BROWSER_PANE_EP.getExtensionList()) {
-      final M68kBrowserPaneBase<?> pane = extension.getInstance();
-      if (!pane.isAvailable(project)) continue;
+    for (M68kBrowserPaneFactoryEP extension : BROWSER_PANE_FACTORY_EP.getExtensionList()) {
+      M68kBrowserPaneFactory<?> factory = extension.getInstance();
+      if (!factory.isAvailable(project)) continue;
 
-      pane.initUI(project);
+      M68kBrowserPaneBase<?> pane = factory.createPane(project);
 
       final Content content = contentManager.getFactory().createContent(pane, extension.getDisplayName(), false);
       content.setPreferredFocusableComponent(pane.getFocusComponent());

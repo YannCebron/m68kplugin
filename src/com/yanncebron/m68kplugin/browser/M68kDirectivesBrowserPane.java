@@ -19,6 +19,7 @@ package com.yanncebron.m68kplugin.browser;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.NaturalComparator;
 import com.intellij.openapi.util.text.StringUtil;
@@ -42,8 +43,8 @@ final class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<IElementType> 
 
   private Ref<Boolean> isShowConditionalAssemblyDirectives;
 
-  public M68kDirectivesBrowserPane() {
-    super(IElementType.class);
+  private M68kDirectivesBrowserPane(Project project) {
+    super(IElementType.class, project);
   }
 
   @Override
@@ -103,5 +104,13 @@ final class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<IElementType> 
         SpeedSearchUtil.applySpeedSearchHighlighting(list, this, true, selected);
       }
     };
+  }
+
+  static final class Factory implements M68kBrowserPaneFactory<M68kDirectivesBrowserPane> {
+
+    @Override
+    public M68kDirectivesBrowserPane createPane(Project project) {
+      return new M68kDirectivesBrowserPane(project);
+    }
   }
 }

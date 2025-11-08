@@ -22,6 +22,7 @@ import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.actionSystem.ex.ComboBoxAction;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.DumbAwareToggleAction;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.NaturalComparator;
 import com.intellij.openapi.util.text.StringUtil;
@@ -31,6 +32,7 @@ import com.intellij.ui.speedSearch.SpeedSearchUtil;
 import com.intellij.util.containers.Convertor;
 import com.yanncebron.m68kplugin.amiga.M68kAmigaBundle;
 import com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase;
+import com.yanncebron.m68kplugin.browser.M68kBrowserPaneFactory;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -46,8 +48,8 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
   private Ref<Boolean> isAnnotateChipset;
   private Ref<Boolean> isShowReferenceDocs;
 
-  public M68kAmigaHardwareBrowserPane() {
-    super(M68kAmigaHardwareRegister.class);
+  public M68kAmigaHardwareBrowserPane(Project project) {
+    super(M68kAmigaHardwareRegister.class, project);
   }
 
   @Override
@@ -224,4 +226,11 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
 
   }
 
+  static final class Factory implements M68kBrowserPaneFactory<M68kAmigaHardwareBrowserPane> {
+
+    @Override
+    public M68kAmigaHardwareBrowserPane createPane(Project project) {
+      return new M68kAmigaHardwareBrowserPane(project);
+    }
+  }
 }
