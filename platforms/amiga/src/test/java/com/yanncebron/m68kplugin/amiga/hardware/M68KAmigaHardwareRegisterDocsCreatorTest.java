@@ -27,38 +27,30 @@ public class M68KAmigaHardwareRegisterDocsCreatorTest extends UsefulTestCase {
 
   public void testRegistersWithoutReferenceDocs() {
     Set<M68kAmigaHardwareRegister> withoutDoc = new HashSet<>();
+    Set<String> checkedDescriptionFileNames = new HashSet<>();
     for (M68kAmigaHardwareRegister register : M68kAmigaHardwareRegister.values()) {
-      String registerDoc = getRegisterDoc(register);
-      if (registerDoc.contains("No reference documentation available")) {
-        withoutDoc.add(register);
+      if (checkedDescriptionFileNames.add(register.getDescriptionFileName())) { // do not re-check
+        String registerDoc = getRegisterDoc(register);
+        if (registerDoc.contains("No reference documentation available")) {
+          withoutDoc.add(register);
+        }
       }
     }
 
     assertSameElements(withoutDoc,
       M68kAmigaHardwareRegister.CIAA_PRA,
       M68kAmigaHardwareRegister.CIAA_PRB,
-      M68kAmigaHardwareRegister.CIAA_DDRA,
-      M68kAmigaHardwareRegister.CIAA_DDRB,
-      M68kAmigaHardwareRegister.CIAA_TALO,
-      M68kAmigaHardwareRegister.CIAA_TAHI,
-      M68kAmigaHardwareRegister.CIAA_TBLO,
-      M68kAmigaHardwareRegister.CIAA_TBHI,
       M68kAmigaHardwareRegister.CIAA_TODLO,
       M68kAmigaHardwareRegister.CIAA_TODMID,
       M68kAmigaHardwareRegister.CIAA_TODHI,
       M68kAmigaHardwareRegister.CIAA_SDR,
-      M68kAmigaHardwareRegister.CIAA_ICR,
-      M68kAmigaHardwareRegister.CIAA_CRA,
-      M68kAmigaHardwareRegister.CIAA_CRB,
-      
+
       M68kAmigaHardwareRegister.CIAB_PRA,
       M68kAmigaHardwareRegister.CIAB_PRB,
       M68kAmigaHardwareRegister.CIAB_DDRA,
       M68kAmigaHardwareRegister.CIAB_DDRB,
       M68kAmigaHardwareRegister.CIAB_TALO,
       M68kAmigaHardwareRegister.CIAB_TAHI,
-      M68kAmigaHardwareRegister.CIAB_TBLO,
-      M68kAmigaHardwareRegister.CIAB_TBHI,
       M68kAmigaHardwareRegister.CIAB_TODLO,
       M68kAmigaHardwareRegister.CIAB_TODMID,
       M68kAmigaHardwareRegister.CIAB_TODHI,
