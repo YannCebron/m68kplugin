@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.amiga.hardware;
 
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.util.containers.ContainerUtil;
 import junit.framework.TestCase;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,9 +29,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Generates {@link M68kAmigaHardwareRegister} enumeration.
+ * Generates {@link M68kAmigaHardwareRegister} enumeration..
  */
-@SuppressWarnings("SpellCheckingInspection")
 public class M68kAmigaHardwareRegisterGeneratorTest extends TestCase {
 
   private static final boolean ENABLED = false;
@@ -114,8 +114,13 @@ public class M68kAmigaHardwareRegisterGeneratorTest extends TestCase {
     assertEquals(236, registers.size());
 
     for (RegisterData register : registers) {
-      String chipsData = StringUtil.join(register.chips, chip -> "Chip." + chip.name(), ", ");
-      String chipsText = "EnumSet.of(" + chipsData + ")";
+      String chipsText;
+      if (register.chips.size() == 1) {
+        chipsText = "Chip." + ContainerUtil.getFirstItem(register.chips).name();
+      } else {
+        String chipsData = StringUtil.join(register.chips, chip -> "Chip." + chip.name(), ", ");
+        chipsText = "EnumSet.of(" + chipsData + ")";
+      }
       System.out.println(register.name + "(\"" + register.name + "\", \"DFF" + register.address + "\", " +
         "\"" + register.description + "\", \"" + register.descriptionNodeName + "\", " +
         "Chipset." + register.chipset.name() + ", " +
