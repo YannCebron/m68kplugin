@@ -230,6 +230,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     entry("_USP", M68kOperand.USP_REGISTER),
     entry("_CCR", M68kOperand.CCR_REGISTER),
     entry("_CTRL", M68kOperand.CTRL_REGISTER)
+    // todo ADDRESS_REGISTER_INDEX_DISPLACEMENT = M6??
   );
 
   private static M68kOperand mapOperand(String operandText) {
