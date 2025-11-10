@@ -53,7 +53,7 @@ public record M68kMnemonic(IElementType elementType,
   public @NotNull String toString() {
     return "M68kMnemonic{" +
       elementType +
-      ", deprecated=" + isDeprecated() +
+      (isDeprecated() ? ", DEPRECATED" : "") +
       ", src=" + sourceOperand +
       ", dst=" + destinationOperand +
       ", " + dataSizes +
