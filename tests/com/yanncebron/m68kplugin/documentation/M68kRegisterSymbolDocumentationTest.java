@@ -49,7 +49,7 @@ public class M68kRegisterSymbolDocumentationTest extends BasePlatformTestCase {
       address spaces for data and programs at the user and supervisor modes. Certain
       instructions use SFC and DFC to specify the function codes for operations.</p>
       <p><em>From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.</em></p>
-      <br><hr/><table><tr><th>MC68000</th><th>MC68010</th><th>MC68020</th><th>MC68030</th><th>MC68040</th><th>MC68060</th><th>AC68080</th></tr><tr><td style="text-align:center;"></td><td style="text-align:center;">✓</td><td style="text-align:center;">✓</td><td style="text-align:center;">✓</td><td style="text-align:center;">✓</td><td style="text-align:center;">✓</td><td style="text-align:center;">✓</td></tr></table></div>""");
+      <br><hr/>M68010+<br></div>""");
   }
 
   public void testRemapToAddressRegister() {

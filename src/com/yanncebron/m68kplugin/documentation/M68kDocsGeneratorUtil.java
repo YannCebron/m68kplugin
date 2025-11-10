@@ -29,25 +29,37 @@ final class M68kDocsGeneratorUtil {
     if (cpus == M68kCpu.GROUP_68000_UP) {
       sb.append(M68kBundle.message("cpu.group.GROUP_68000_UP"));
       sb.append("<br>");
-    } else {
-      sb.append("<table><tr>");
-      for (M68kCpu value : M68kCpu.GROUP_68000_UP) {
-        sb.append("<th>");
-        sb.append(value.getCpuName());
-        sb.append("</th>");
-      }
-      sb.append("</tr>");
-
-      sb.append("<tr>");
-      for (M68kCpu value : M68kCpu.GROUP_68000_UP) {
-        sb.append("<td style=\"text-align:center;\">");
-        if (cpus.contains(value)) {
-          sb.append(M68kDocumentationUtil.CHECK_MARK);
-        }
-        sb.append("</td>");
-      }
-      sb.append("</tr>");
-      sb.append("</table>");
+      return;
     }
+    if (cpus == M68kCpu.GROUP_68010_UP) {
+      sb.append(M68kBundle.message("cpu.group.GROUP_68010_UP"));
+      sb.append("<br>");
+      return;
+    }
+    if (cpus == M68kCpu.GROUP_68020_UP) {
+      sb.append(M68kBundle.message("cpu.group.GROUP_68020_UP"));
+      sb.append("<br>");
+      return;
+    }
+
+
+    sb.append("<table><tr>");
+    for (M68kCpu value : M68kCpu.GROUP_68000_UP) {
+      sb.append("<th>");
+      sb.append(value.getCpuName());
+      sb.append("</th>");
+    }
+    sb.append("</tr>");
+
+    sb.append("<tr>");
+    for (M68kCpu value : M68kCpu.GROUP_68000_UP) {
+      sb.append("<td style=\"text-align:center;\">");
+      if (cpus.contains(value)) {
+        sb.append(M68kDocumentationUtil.CHECK_MARK);
+      }
+      sb.append("</td>");
+    }
+    sb.append("</tr>");
+    sb.append("</table>");
   }
 }
