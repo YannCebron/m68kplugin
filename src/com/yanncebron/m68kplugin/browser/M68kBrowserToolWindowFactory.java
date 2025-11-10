@@ -43,7 +43,7 @@ final class M68kBrowserToolWindowFactory implements ToolWindowFactory, DumbAware
   public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
     final ContentManager contentManager = toolWindow.getContentManager();
 
-    String activePane = PropertiesComponent.getInstance().getValue(ACTIVE_PANE);
+    String activePane = PropertiesComponent.getInstance(project).getValue(ACTIVE_PANE);
 
     for (M68kBrowserPaneFactoryEP extension : BROWSER_PANE_FACTORY_EP.getExtensionList()) {
       M68kBrowserPaneFactory<?> factory = extension.getInstance();
@@ -69,7 +69,7 @@ final class M68kBrowserToolWindowFactory implements ToolWindowFactory, DumbAware
         if (event.getOperation() != ContentManagerEvent.ContentOperation.add) return;
 
         String paneKey = event.getContent().getUserData(PANE_FQN_KEY);
-        PropertiesComponent.getInstance().setValue(ACTIVE_PANE, paneKey);
+        PropertiesComponent.getInstance(project).setValue(ACTIVE_PANE, paneKey);
       }
     });
   }

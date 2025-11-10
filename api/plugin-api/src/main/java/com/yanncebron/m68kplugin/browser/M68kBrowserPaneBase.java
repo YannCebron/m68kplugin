@@ -88,7 +88,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
   private final History history = new History(this);
 
   private final Class<T> clazz;
-  private final Project project;
+  protected final Project project;
 
   protected M68kBrowserPaneBase(Class<T> valueClazz, Project project) {
     super(true, true);
@@ -115,7 +115,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
 
     initList();
 
-    int selectedValueIdx = PropertiesComponent.getInstance().getInt(getSelectedIdxKey(), -1);
+    int selectedValueIdx = PropertiesComponent.getInstance(project).getInt(getSelectedIdxKey(), -1);
     list.setSelectedIndex(selectedValueIdx);
   }
 
@@ -237,7 +237,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
     list.addListSelectionListener(e -> {
       if (e.getValueIsAdjusting()) return;
 
-      PropertiesComponent.getInstance().setValue(getSelectedIdxKey(), list.getSelectedIndex(), -1);
+      PropertiesComponent.getInstance(project).setValue(getSelectedIdxKey(), list.getSelectedIndex(), -1);
       updateDoc();
     });
     ScrollingUtil.installActions(list);
@@ -253,7 +253,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
                                               @NotNull BiConsumer<AnActionEvent, Boolean> setSelectedConsumer,
                                               @Nullable Consumer<AnActionEvent> updateConsumer) {
     assert settingField != null;
-    settingField.set(PropertiesComponent.getInstance().getBoolean(settingKey, true));
+    settingField.set(PropertiesComponent.getInstance(project).getBoolean(settingKey, true));
 
     return new DumbAwareToggleAction(text, null, icon) {
 
@@ -279,7 +279,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
       @Override
       public void setSelected(@NotNull AnActionEvent e, boolean state) {
         settingField.set(state);
-        PropertiesComponent.getInstance().setValue(settingKey, settingField.get(), true);
+        PropertiesComponent.getInstance(project).setValue(settingKey, settingField.get(), true);
 
         setSelectedConsumer.accept(e, state);
       }

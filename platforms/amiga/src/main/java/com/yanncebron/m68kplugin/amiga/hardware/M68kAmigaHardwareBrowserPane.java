@@ -174,8 +174,8 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
   @NonNls
   private static final String CHIPSET_SETTING = "M68kAmigaHardwareBrowserPane.Chipset";
 
-  private static M68kAmigaHardwareRegister.Chipset getSelectedChipset() {
-    String chipsetValue = PropertiesComponent.getInstance().getValue(CHIPSET_SETTING, M68kAmigaHardwareRegister.Chipset.AGA.name());
+  private M68kAmigaHardwareRegister.Chipset getSelectedChipset() {
+    String chipsetValue = PropertiesComponent.getInstance(project).getValue(CHIPSET_SETTING, M68kAmigaHardwareRegister.Chipset.AGA.name());
     return M68kAmigaHardwareRegister.Chipset.valueOf(chipsetValue);
   }
 
@@ -218,7 +218,7 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
 
         @Override
         public void setSelected(@NotNull AnActionEvent e, boolean state) {
-          PropertiesComponent.getInstance().setValue(CHIPSET_SETTING, chipset.name());
+          PropertiesComponent.getInstance(project).setValue(CHIPSET_SETTING, chipset.name());
           M68kAmigaHardwareBrowserPane.this.initList();
         }
       };
