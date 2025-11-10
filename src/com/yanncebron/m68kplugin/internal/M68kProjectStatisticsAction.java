@@ -45,10 +45,7 @@ import com.intellij.util.ObjectUtils;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
-import com.yanncebron.m68kplugin.lang.psi.M68kDataSized;
-import com.yanncebron.m68kplugin.lang.psi.M68kInstruction;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
-import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
+import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
@@ -162,6 +159,18 @@ final class M68kProjectStatisticsAction extends BaseAnalysisAction {
 
           pi.setText2("Instruction count");
           M68kInstruction[] computeInstructions = m68kPsiFile.findChildrenByClass(M68kInstruction.class);
+
+          // try to find Mnemonic for instruction
+          // - this may fail due (known) to lexer/parser issues, manual inspection is needed
+          // - alternatively, the parser allows variants the registry doesn't know about :-/
+          for (M68kInstruction instruction : computeInstructions) {
+            try {
+              M68kMnemonicRegistry.getInstance().find(instruction);
+            } catch (Throwable e) {
+              System.out.println(virtualFile.getPresentableUrl() + ": no M68kMnemonic, could be syntax/parser issue '" + instruction.getText() + "' @" + instruction.getTextOffset());
+            }
+          }
+
           countByClass(instructions, computeInstructions);
           countByClass(withoutDataSize, computeInstructions, NO_DATA_SIZE_CONDITION);
 
