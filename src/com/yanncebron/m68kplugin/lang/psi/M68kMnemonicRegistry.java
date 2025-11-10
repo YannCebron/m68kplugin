@@ -173,7 +173,7 @@ public final class M68kMnemonicRegistry {
   }
 
   private M68kMnemonicRegistry() {
-//Total mnemonics: 286
+// Total mnemonics: 283
 
 // ABCD ----------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.ABCD, M68kDataSize.GROUP_B,
@@ -392,8 +392,6 @@ public final class M68kMnemonicRegistry {
       M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.BCHG, M68kDataSize.GROUP_B,
       M68kOperand.QUICK_IMMEDIATE, M68kOperand.ALTERABLE_MEMORY_CF));
-    add(new M68kMnemonic(M68kTokenTypes.BCHG, M68kDataSize.GROUP_B,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.ALTERABLE_MEMORY));
 
 // BCLR ----------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BCLR, M68kDataSize.GROUP_L,
@@ -404,8 +402,6 @@ public final class M68kMnemonicRegistry {
       M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.BCLR, M68kDataSize.GROUP_B,
       M68kOperand.QUICK_IMMEDIATE, M68kOperand.ALTERABLE_MEMORY_CF));
-    add(new M68kMnemonic(M68kTokenTypes.BCLR, M68kDataSize.GROUP_B,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.ALTERABLE_MEMORY));
 
 // BSET ----------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BSET, M68kDataSize.GROUP_L,
@@ -416,8 +412,6 @@ public final class M68kMnemonicRegistry {
       M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.BSET, M68kDataSize.GROUP_B,
       M68kOperand.QUICK_IMMEDIATE, M68kOperand.ALTERABLE_MEMORY_CF));
-    add(new M68kMnemonic(M68kTokenTypes.BSET, M68kDataSize.GROUP_B,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.ALTERABLE_MEMORY));
 
 // BTST ----------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BTST, M68kDataSize.GROUP_L,

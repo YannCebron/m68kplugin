@@ -786,8 +786,6 @@ label01: bcc         label01
          bchg        #1,$4000.L
          bchg.b      #1,$4000.L
 
-* M68kMnemonic{bchg, deprecated=false, src=QUICK_IMMEDIATE, dst=ALTERABLE_MEMORY, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-
 
 ********************************************************************************
 
@@ -842,8 +840,6 @@ label01: bcc         label01
          bclr.b      #1,$4000.W
          bclr        #1,$4000.L
          bclr.b      #1,$4000.L
-
-* M68kMnemonic{bclr, deprecated=false, src=QUICK_IMMEDIATE, dst=ALTERABLE_MEMORY, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
 
 
 ********************************************************************************
@@ -1129,8 +1125,6 @@ label29: bra         label29
          bset.b      #1,$4000.W
          bset        #1,$4000.L
          bset.b      #1,$4000.L
-
-* M68kMnemonic{bset, deprecated=false, src=QUICK_IMMEDIATE, dst=ALTERABLE_MEMORY, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
 
 
 ********************************************************************************

@@ -135,11 +135,30 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       }
 
       if (elementType != null && sourceOperand != null && destinationOperand != null) {
-        mnemonics.add(new M68kMnemonic(elementType,
+        M68kMnemonic m68kMnemonic = new M68kMnemonic(elementType,
           dataSizes,
           sourceOperand,
           destinationOperand,
-          m68kCpus));
+          m68kCpus);
+
+        // skip duplicate entries for bset,bclr,bchg with ALTERABLE_MEMORY_CF vs ALTERABLE_MEMORY
+        // both have the exact same of address modes ATM, so it's a full duplicate
+        boolean skip = false;
+        for (M68kMnemonic existing : mnemonics) {
+          if (existing.elementType() == m68kMnemonic.elementType() &&
+            existing.dataSizes().equals(m68kMnemonic.dataSizes()) &&
+            existing.cpus().equals(m68kMnemonic.cpus()) &&
+            existing.sourceOperand() == m68kMnemonic.sourceOperand() &&
+            existing.destinationOperand() == M68kOperand.ALTERABLE_MEMORY_CF && m68kMnemonic.destinationOperand() == M68kOperand.ALTERABLE_MEMORY) {
+            System.out.println("skip ALTERABLE_MEMORY(CF) duplication:");
+            System.out.println("  entry:    " + m68kMnemonic);
+            System.out.println("  existing: " + existing);
+            skip = true;
+            break;
+          }
+        }
+
+        if (!skip) mnemonics.add(m68kMnemonic);
       }
     }
 

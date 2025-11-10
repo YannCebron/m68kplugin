@@ -20,7 +20,9 @@
 
 ### Fixed
 
-- Mnemonics docs: fix `BRA` reference docs
+- Mnemonics docs:
+  - fix `BRA` reference docs
+  - fix duplicate entry in instruction docs for `BCHG`, `BCLR`, `BSET`
 
 ## 0.2.0 - 2025-10-31
 
