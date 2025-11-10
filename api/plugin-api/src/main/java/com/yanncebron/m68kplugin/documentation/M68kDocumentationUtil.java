@@ -57,6 +57,9 @@ public final class M68kDocumentationUtil {
   public static final String CHECK_MARK = "✓";
 
   @NonNls
+  public static final String NON_BREAK_PERIOD = "&#8228;";
+
+  @NonNls
   public static final String CONTRIBUTION_FOOTER =
     "<br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_4.html#Directives-2\">vasm directives docs 1</a>" +
       "<br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_23.html#Extensions-3\">vasm directives docs 2</a>" +

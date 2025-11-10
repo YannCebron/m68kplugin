@@ -75,12 +75,20 @@ class M68kInstructionMnemonicDocsGenerator {
       } else {
         sb.append("<h4>");
       }
-      final String mnemonicText = StringUtil.toUpperCase(StringUtil.toUpperCase(elementType.toString())) + StringUtil.join(mnemonic.dataSizes(), M68kDataSize::getText, "|");
-      sb.append("<code>").append(StringUtil.escapeXmlEntities(mnemonicText));
-      sb.append(StringUtil.repeat("&nbsp;", Math.max(1, 18 - mnemonicText.length())));
 
-      appendOperand(mnemonic.sourceOperand(), "");
-      appendOperand(mnemonic.destinationOperand(), ",");
+      String dataSizeText = StringUtil.join(mnemonic.dataSizes(), M68kDataSize::getText, "|");
+      int dataSizeTextLength = dataSizeText.length();
+      dataSizeText = StringUtil.escapeXmlEntities(dataSizeText); // "<unsized>"
+      dataSizeText = dataSizeText.replace(".", M68kDocumentationUtil.NON_BREAK_PERIOD);
+
+      String mnemonicText = StringUtil.toUpperCase(elementType.toString());
+      sb.append("<code>").append(mnemonicText).append(dataSizeText);
+
+      if (mnemonic.sourceOperand() != M68kOperand.NONE) {
+        sb.append(StringUtil.repeat("&nbsp;", Math.max(1, 17 - mnemonicText.length() - dataSizeTextLength)));
+        appendOperand(mnemonic.sourceOperand(), "");
+        appendOperand(mnemonic.destinationOperand(), ",");
+      }
 
       sb.append("</code></h4>");
 
@@ -107,7 +115,7 @@ class M68kInstructionMnemonicDocsGenerator {
 
         sb.append("<th style=\"text-align:center;\">");
         // prevent 'abs.w' to break after 'period' on resize. yes, CSS simply won't work here
-        sb.append(value.getNotation().replace(".", "&#8228;"));
+        sb.append(value.getNotation().replace(".", M68kDocumentationUtil.NON_BREAK_PERIOD));
         sb.append("</th>");
       }
       sb.append("</tr>");
