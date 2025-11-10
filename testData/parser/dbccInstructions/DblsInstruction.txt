@@ -6,5 +6,6 @@ M68k.FILE
     M68kAdmDrdImpl(ADM_DRD)
       PsiElement(data_register)('d0')
     PsiElement(,)(',')
-    M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
-      PsiElement(id)('.localLabel')
+    M68kAdmAbsImpl(ADM_ABS)
+      M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
+        PsiElement(id)('.localLabel')

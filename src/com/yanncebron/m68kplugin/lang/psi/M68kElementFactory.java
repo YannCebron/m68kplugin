@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,8 @@ import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class M68kElementFactory {
 
@@ -63,7 +65,7 @@ public class M68kElementFactory {
   @NotNull
   public static M68kLabelRefExpression createLabelRefExpression(Project project, String name) {
     final M68kBraInstruction firstChild = (M68kBraInstruction) createFile(project, " bra " + name).getChildren()[1];
-    final M68kExpression expression = firstChild.getExpression();
+    final M68kExpression expression = Objects.requireNonNull(firstChild.getAdmAbs()).getExpression();
     assert expression instanceof M68kLabelRefExpression : name;
     return (M68kLabelRefExpression) expression;
   }

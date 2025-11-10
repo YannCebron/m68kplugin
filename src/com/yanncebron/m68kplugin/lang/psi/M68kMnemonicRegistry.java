@@ -55,6 +55,9 @@ public final class M68kMnemonicRegistry {
 
   /**
    * Returns (most specific) mnemonic for given instruction.
+   * <p>
+   * Instructions **MUST** use {@code AdmXXX} as operands.
+   * It is **WRONG** to use {@link com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression} or similar directly.
    *
    * @return {@code null} if none matching (e.g., contains parsing error or input is invalid); if multiple candidates, most specific one.
    */

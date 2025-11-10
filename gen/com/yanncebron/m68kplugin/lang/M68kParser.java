@@ -1026,13 +1026,13 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // CC_data_size? expression
+  // CC_data_size? adm_abs
   static boolean bCC_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bCC_tail")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = bCC_tail_0(b, l + 1);
-    r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    r = r && adm_abs(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1543,7 +1543,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // BSR bsr_data_size? expression
+  // BSR bsr_data_size? adm_abs
   public static boolean bsr_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bsr_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", BSR)) return false;
@@ -1552,7 +1552,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, BSR);
     p = r; // pin = 1
     r = r && report_error_(b, bsr_instruction_1(b, l + 1));
-    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
+    r = p && adm_abs(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -1960,7 +1960,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // CC_data_size? adm_drd COMMA expression
+  // CC_data_size? adm_drd COMMA adm_abs
   static boolean dbCC_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "dbCC_tail")) return false;
     boolean r, p;
@@ -1969,7 +1969,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = r && adm_drd(b, l + 1);
     p = r; // pin = 2
     r = r && report_error_(b, consumeToken(b, COMMA));
-    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
+    r = p && adm_abs(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -3632,17 +3632,15 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // HASH expression
+  // adm_quick
   static boolean rtd_displacement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "rtd_displacement")) return false;
     if (!nextTokenIs(b, "<#displacement>", HASH)) return false;
-    boolean r, p;
+    boolean r;
     Marker m = enter_section_(b, l, _NONE_, null, "<#displacement>");
-    r = consumeToken(b, HASH);
-    p = r; // pin = 1
-    r = r && M68kExpressionParser.expression(b, l + 1, -1);
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+    r = adm_quick(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
   }
 
   /* ********************************************************** */

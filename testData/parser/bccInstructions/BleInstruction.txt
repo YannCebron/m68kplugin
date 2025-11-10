@@ -3,5 +3,6 @@ M68k.FILE
   M68kBleInstructionImpl(BLE_INSTRUCTION)
     PsiElement(ble)('ble')
     PsiWhiteSpace(' ')
-    M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
-      PsiElement(id)('label')
+    M68kAdmAbsImpl(ADM_ABS)
+      M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
+        PsiElement(id)('label')

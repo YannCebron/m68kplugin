@@ -30,7 +30,8 @@ public class BsrInstructionPsiTest extends M68kPsiTestCase<M68kBsrInstruction> {
 
     assertNull(instruction.getDataSize());
 
-    final M68kNumberExpression address = assertInstanceOf(instruction.getExpression(), M68kNumberExpression.class);
+    M68kAdmAbs admAbs = assertInstanceOf(instruction.getAdmAbs(), M68kAdmAbs.class);
+    final M68kNumberExpression address = assertInstanceOf(admAbs.getExpression(), M68kNumberExpression.class);
     assertEquals("40000", address.getText());
   }
 
@@ -39,7 +40,8 @@ public class BsrInstructionPsiTest extends M68kPsiTestCase<M68kBsrInstruction> {
 
     assertEquals(M68kDataSize.SHORT, instruction.getDataSize());
 
-    assertInstanceOf(instruction.getExpression(), M68kLabelRefExpression.class);
+    M68kAdmAbs admAbs = assertInstanceOf(instruction.getAdmAbs(), M68kAdmAbs.class);
+    assertInstanceOf(admAbs.getExpression(), M68kLabelRefExpression.class);
   }
 
 }

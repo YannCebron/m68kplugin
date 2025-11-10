@@ -23,7 +23,6 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
-import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
 public class M68kDbneInstructionImpl extends M68kDbccInstructionBaseImpl implements M68kDbneInstruction {
 

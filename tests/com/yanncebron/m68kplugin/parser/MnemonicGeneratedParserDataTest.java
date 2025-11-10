@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.parser;
 
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.SmartList;
 import com.yanncebron.m68kplugin.lang.psi.*;
@@ -29,7 +30,12 @@ import java.util.*;
 import static java.util.Map.entry;
 
 /**
- * Generate all possible variants for all registered {@link M68kMnemonic} and verify parsing yields no errors.
+ * Generate all possible variants for all registered {@link M68kMnemonic} and verify:
+ * <ul>
+ * <li>parsing yields no errors</li>
+ * <li>mnemonic is recognized (not a macro call)</li>
+ * <li>every variant returns entry via {@link M68kMnemonicRegistry#find}</li>
+ * </ul>
  */
 public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
@@ -95,6 +101,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
         try {
           ensureNoErrorElements();
           ensureNoMacroCallElements();
+          ensureHasEntryInRegistry(myFile);
           dump(variant);
         } catch (AssertionError e) {
           if (variants.getKey().isDeprecated()) {
@@ -110,6 +117,14 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
       }
     }
 
+  }
+
+  private void ensureHasEntryInRegistry(PsiFile psiFile) {
+    final M68kPsiElement instruction = M68kPsiTreeUtil.getContainingInstructionOrDirective(psiFile.findElementAt(INDENT.length() + 2));
+    final M68kInstruction m68kInstruction = assertInstanceOf(instruction, M68kInstruction.class);
+
+    final M68kMnemonic m68kMnemonic = M68kMnemonicRegistry.getInstance().find(m68kInstruction);
+    assertNotNull(m68kMnemonic);
   }
 
   private void ensureNoMacroCallElements() {

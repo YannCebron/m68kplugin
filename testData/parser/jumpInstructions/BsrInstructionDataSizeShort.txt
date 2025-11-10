@@ -4,5 +4,6 @@ M68k.FILE
     PsiElement(bsr)('bsr')
     PsiElement(.s)('.s')
     PsiWhiteSpace(' ')
-    M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
-      PsiElement(id)('offset')
+    M68kAdmAbsImpl(ADM_ABS)
+      M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
+        PsiElement(id)('offset')

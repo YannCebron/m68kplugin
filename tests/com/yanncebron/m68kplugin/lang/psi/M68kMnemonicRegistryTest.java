@@ -19,9 +19,13 @@ package com.yanncebron.m68kplugin.lang.psi;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.testFramework.LightPlatformTestCase;
+import com.yanncebron.m68kplugin.parser.MnemonicGeneratedParserDataTest;
 
 import java.util.Collection;
 
+/**
+ * See also {@link MnemonicGeneratedParserDataTest} checking that each variant returns entry via {@link M68kMnemonicRegistry#find}.
+ */
 public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
 
   private final M68kMnemonicRegistry instance = M68kMnemonicRegistry.getInstance();
@@ -61,6 +65,20 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
       M68kOperand.ALTERABLE_MEMORY, M68kOperand.NONE,
       M68kDataSize.GROUP_W,
       M68kCpu.GROUP_68000_UP));
+  }
+
+  public void testBeq() {
+    doTestFind("beq label", new M68kMnemonic(M68kTokenTypes.BEQ,
+      M68kOperand.BRANCH_DESTINATION, M68kOperand.NONE,
+      M68kDataSize.GROUP_SBW,
+      M68kCpu.GROUP_68000_UP));
+  }
+
+  public void testRtd() {
+    doTestFind("rtd #1", new M68kMnemonic(M68kTokenTypes.RTD,
+      M68kOperand.QUICK_IMMEDIATE, M68kOperand.NONE,
+      M68kDataSize.GROUP_UNSIZED,
+      M68kCpu.GROUP_68010_UP));
   }
 
   public void testFindAslDnDn() {

@@ -23,7 +23,6 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.*;
-import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
 public class M68kBsrInstructionImpl extends M68kDataSizedImpl implements M68kBsrInstruction {
 
@@ -44,8 +43,8 @@ public class M68kBsrInstructionImpl extends M68kDataSizedImpl implements M68kBsr
 
   @Override
   @Nullable
-  public M68kExpression getExpression() {
-    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
+  public M68kAdmAbs getAdmAbs() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmAbs.class);
   }
 
 }

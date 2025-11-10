@@ -3,5 +3,6 @@ M68k.FILE
   M68kBccInstructionImpl(BCC_INSTRUCTION)
     PsiElement(bcc)('bcc')
     PsiWhiteSpace(' ')
-    M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
-      PsiElement(id)('label')
+    M68kAdmAbsImpl(ADM_ABS)
+      M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
+        PsiElement(id)('label')

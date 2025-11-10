@@ -24,7 +24,6 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.*;
-import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
 public class M68kRtdInstructionImpl extends ASTWrapperPsiElement implements M68kRtdInstruction {
 
@@ -44,8 +43,8 @@ public class M68kRtdInstructionImpl extends ASTWrapperPsiElement implements M68k
 
   @Override
   @Nullable
-  public M68kExpression getDisplacement() {
-    return PsiTreeUtil.getChildOfType(this, M68kExpression.class);
+  public M68kAdmQuick getDisplacement() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmQuick.class);
   }
 
 }

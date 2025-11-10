@@ -18,14 +18,13 @@ package com.yanncebron.m68kplugin.lang.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
-import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
 public interface M68kDbccInstructionBase extends M68kDataSized, M68kInstruction {
 
   @Nullable
-  M68kAdmDrd getAdmDrd();
+  M68kAdmAbs getAdmAbs();
 
   @Nullable
-  M68kExpression getExpression();
+  M68kAdmDrd getAdmDrd();
 
 }
