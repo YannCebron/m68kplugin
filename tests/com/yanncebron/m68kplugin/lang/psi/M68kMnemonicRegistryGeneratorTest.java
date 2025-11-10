@@ -136,9 +136,9 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
       if (elementType != null && sourceOperand != null && destinationOperand != null) {
         mnemonics.add(new M68kMnemonic(elementType,
+          dataSizes,
           sourceOperand,
           destinationOperand,
-          dataSizes,
           m68kCpus));
       }
     }
@@ -155,37 +155,42 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     int supportedMnemonics = ContainerUtil.filter(mnemonics, m68kMnemonic -> isSupportedCpu(m68kMnemonic.cpus())).size();
     System.out.println("// Total mnemonics: " + supportedMnemonics);
 
+    IElementType lastElementType = null;
     for (M68kMnemonic mnemonic : mnemonics) {
       Set<M68kCpu> cpus = mnemonic.cpus();
       if (SKIP_UNSUPPORTED_CPUS && !isSupportedCpu(cpus)) continue;
 
+      if (lastElementType != mnemonic.elementType()) {
+        System.out.println("\n// " + StringUtil.toUpperCase(mnemonic.elementType().toString()) + " " + StringUtil.repeatSymbol('-', 70));
+      }
+
+      String tokenText = "M68kTokenTypes." + StringUtil.toUpperCase(mnemonic.elementType().toString());
       String dataSizeText = getDataSizeText(mnemonic);
       String cpuText = getCpuText(cpus);
 
-      String mnemonicText = StringUtil.toUpperCase(mnemonic.elementType().toString());
-      String tokenText = "M68kTokenTypes." + mnemonicText;
-
-      System.out.println("mnemonics.putValue(" + tokenText + ",");
-      System.out.println("new M68kMnemonic(" +
-        tokenText + ",\n" +
-        "                 M68kOperand." + mnemonic.sourceOperand().name() + ", " +
-        "M68kOperand." + mnemonic.destinationOperand().name() + ",\n" +
-        "                 " + dataSizeText + ",\n" +
-        "                 " + cpuText +
+      System.out.println("add(new M68kMnemonic(" + tokenText + ", " + dataSizeText + ",\n" +
+        "M68kOperand." + mnemonic.sourceOperand().name() +
+        (mnemonic.destinationOperand() != M68kOperand.NONE ? ", M68kOperand." + mnemonic.destinationOperand().name() : "") +
+        (cpuText != null ? ",\n" + cpuText : "") +
         "));");
+
+      lastElementType = mnemonic.elementType();
     }
   }
 
-  private static @NotNull String getCpuText(Set<M68kCpu> cpus) {
+  private static @Nullable String getCpuText(Set<M68kCpu> cpus) {
     if (M68kCpu.GROUP_68000_UP.equals(cpus)) {
-      return "M68kCpu.GROUP_68000_UP";
-    } else if (M68kCpu.GROUP_68010_UP.equals(cpus)) {
+      return null;
+    }
+
+    if (M68kCpu.GROUP_68010_UP.equals(cpus)) {
       return "M68kCpu.GROUP_68010_UP";
     } else if (M68kCpu.GROUP_68020_UP.equals(cpus)) {
       return "M68kCpu.GROUP_68020_UP";
     } else if (M68kCpu.APOLLO.equals(cpus)) {
       return "M68kCpu.APOLLO";
     }
+
     return "EnumSet.of(" + StringUtil.join(cpus, m68kCpu -> "M68kCpu." + m68kCpu.name(), ",") + ")";
   }
 

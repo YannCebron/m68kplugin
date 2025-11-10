@@ -25,10 +25,22 @@ import java.util.Set;
  * @see M68kMnemonicRegistry
  */
 public record M68kMnemonic(IElementType elementType,
+                           Set<M68kDataSize> dataSizes,
                            M68kOperand sourceOperand,
                            M68kOperand destinationOperand,
-                           Set<M68kDataSize> dataSizes,
                            Set<M68kCpu> cpus) {
+
+  public M68kMnemonic(IElementType elementType, Set<M68kDataSize> dataSizes, M68kOperand sourceOperand, M68kOperand destinationOperand) {
+    this(elementType, dataSizes, sourceOperand, destinationOperand, M68kCpu.GROUP_68000_UP);
+  }
+
+  public M68kMnemonic(IElementType elementType, Set<M68kDataSize> dataSizes, M68kOperand sourceOperand) {
+    this(elementType, dataSizes, sourceOperand, M68kCpu.GROUP_68000_UP);
+  }
+
+  public M68kMnemonic(IElementType elementType, Set<M68kDataSize> dataSizes, M68kOperand sourceOperand, Set<M68kCpu> cpus) {
+    this(elementType, dataSizes, sourceOperand, M68kOperand.NONE, cpus);
+  }
 
   public boolean isDeprecated() {
     if (elementType() != M68kTokenTypes.MOVEA) return false;

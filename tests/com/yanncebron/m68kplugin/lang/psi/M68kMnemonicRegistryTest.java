@@ -54,90 +54,82 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
   }
 
   public void testFindBkpt() {
-    doTestFind("bkpt #2", new M68kMnemonic(M68kTokenTypes.BKPT,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.NONE,
-      M68kDataSize.GROUP_UNSIZED,
-      M68kCpu.GROUP_68010_UP));
+    doTestFind("bkpt #2",
+      new M68kMnemonic(M68kTokenTypes.BKPT, M68kDataSize.GROUP_UNSIZED,
+        M68kOperand.QUICK_IMMEDIATE,
+        M68kCpu.GROUP_68010_UP));
   }
 
   public void testFindAslAlterableMemory() {
-    doTestFind("asl $42", new M68kMnemonic(M68kTokenTypes.ASL,
-      M68kOperand.ALTERABLE_MEMORY, M68kOperand.NONE,
-      M68kDataSize.GROUP_W,
-      M68kCpu.GROUP_68000_UP));
+    doTestFind("asl $42",
+      new M68kMnemonic(M68kTokenTypes.ASL, M68kDataSize.GROUP_W,
+        M68kOperand.ALTERABLE_MEMORY,
+        M68kCpu.GROUP_68000_UP));
   }
 
   public void testBeq() {
-    doTestFind("beq label", new M68kMnemonic(M68kTokenTypes.BEQ,
-      M68kOperand.BRANCH_DESTINATION, M68kOperand.NONE,
-      M68kDataSize.GROUP_SBW,
-      M68kCpu.GROUP_68000_UP));
+    doTestFind("beq label",
+      new M68kMnemonic(M68kTokenTypes.BEQ, M68kDataSize.GROUP_SBW,
+        M68kOperand.BRANCH_DESTINATION));
   }
 
   public void testBeqDataSizeLong() {
-    doTestFind("beq.l label", new M68kMnemonic(M68kTokenTypes.BEQ,
-      M68kOperand.BRANCH_DESTINATION, M68kOperand.NONE,
-      M68kDataSize.GROUP_SBWL,
-      M68kCpu.GROUP_68020_UP));
+    doTestFind("beq.l label",
+      new M68kMnemonic(M68kTokenTypes.BEQ, M68kDataSize.GROUP_SBWL,
+        M68kOperand.BRANCH_DESTINATION,
+        M68kCpu.GROUP_68020_UP));
   }
 
   public void testRtd() {
-    doTestFind("rtd #1", new M68kMnemonic(M68kTokenTypes.RTD,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.NONE,
-      M68kDataSize.GROUP_UNSIZED,
-      M68kCpu.GROUP_68010_UP));
+    doTestFind("rtd #1",
+      new M68kMnemonic(M68kTokenTypes.RTD, M68kDataSize.GROUP_UNSIZED,
+        M68kOperand.QUICK_IMMEDIATE,
+        M68kCpu.GROUP_68010_UP));
   }
 
   public void testFindAslDnDn() {
-    doTestFind("asl d0,d1", new M68kMnemonic(M68kTokenTypes.ASL,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER,
-      M68kDataSize.GROUP_BWL,
-      M68kCpu.GROUP_68000_UP));
+    doTestFind("asl d0,d1",
+      new M68kMnemonic(M68kTokenTypes.ASL, M68kDataSize.GROUP_BWL,
+        M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
   }
 
   public void testFindAslQuickDn() {
-    doTestFind("asl #1,d1", new M68kMnemonic(M68kTokenTypes.ASL,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER,
-      M68kDataSize.GROUP_BWL,
-      M68kCpu.GROUP_68000_UP));
+    doTestFind("asl #1,d1",
+      new M68kMnemonic(M68kTokenTypes.ASL,
+        M68kDataSize.GROUP_BWL,
+        M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER));
   }
 
   public void testFindAslDn() {
-    doTestFind("asl d1", new M68kMnemonic(M68kTokenTypes.ASL,
-      M68kOperand.DATA_REGISTER, M68kOperand.NONE,
-      M68kDataSize.GROUP_BWL,
-      M68kCpu.GROUP_68000_UP));
+    doTestFind("asl d1",
+      new M68kMnemonic(M68kTokenTypes.ASL, M68kDataSize.GROUP_BWL,
+        M68kOperand.DATA_REGISTER));
   }
 
   public void testFindImmediateAlterableData() {
     // second match: `<DATA>,Dn`
-    doTestFind("cmp.b #42,d0", new M68kMnemonic(M68kTokenTypes.CMP,
-      M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA,
-      M68kDataSize.GROUP_BWL,
-      M68kCpu.GROUP_68000_UP));
+    doTestFind("cmp.b #42,d0",
+      new M68kMnemonic(M68kTokenTypes.CMP, M68kDataSize.GROUP_BWL,
+        M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA));
   }
 
   // matching via M68kAdmWithRrd
   public void testFindExg() {
-    doTestFind("exg a0,a1", new M68kMnemonic(M68kTokenTypes.EXG,
-      M68kOperand.ADDRESS_REGISTER, M68kOperand.ADDRESS_REGISTER,
-      M68kDataSize.GROUP_L,
-      M68kCpu.GROUP_68000_UP));
+    doTestFind("exg a0,a1",
+      new M68kMnemonic(M68kTokenTypes.EXG, M68kDataSize.GROUP_L,
+        M68kOperand.ADDRESS_REGISTER, M68kOperand.ADDRESS_REGISTER));
 
-    doTestFind("exg d0,a1", new M68kMnemonic(M68kTokenTypes.EXG,
-      M68kOperand.DATA_REGISTER, M68kOperand.ADDRESS_REGISTER,
-      M68kDataSize.GROUP_L,
-      M68kCpu.GROUP_68000_UP));
+    doTestFind("exg d0,a1",
+      new M68kMnemonic(M68kTokenTypes.EXG, M68kDataSize.GROUP_L,
+        M68kOperand.DATA_REGISTER, M68kOperand.ADDRESS_REGISTER));
 
-    doTestFind("exg a1,d0", new M68kMnemonic(M68kTokenTypes.EXG,
-      M68kOperand.ADDRESS_REGISTER, M68kOperand.DATA_REGISTER,
-      M68kDataSize.GROUP_L,
-      M68kCpu.GROUP_68000_UP));
+    doTestFind("exg a1,d0",
+      new M68kMnemonic(M68kTokenTypes.EXG, M68kDataSize.GROUP_L,
+        M68kOperand.ADDRESS_REGISTER, M68kOperand.DATA_REGISTER));
 
-    doTestFind("exg d0,d1", new M68kMnemonic(M68kTokenTypes.EXG,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER,
-      M68kDataSize.GROUP_L,
-      M68kCpu.GROUP_68000_UP));
+    doTestFind("exg d0,d1",
+      new M68kMnemonic(M68kTokenTypes.EXG, M68kDataSize.GROUP_L,
+        M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
   }
 
   private void doTestFind(String instructionText, M68kMnemonic expectedMnemonic) {
