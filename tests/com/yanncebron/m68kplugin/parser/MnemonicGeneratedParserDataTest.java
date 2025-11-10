@@ -30,7 +30,7 @@ import java.util.*;
 import static java.util.Map.entry;
 
 /**
- * Generate all possible variants for all registered {@link M68kMnemonic} and verify:
+ * Generate all possible unique variants for all registered {@link M68kMnemonic} and verify:
  * <ul>
  * <li>parsing yields no errors</li>
  * <li>mnemonic is recognized (not a macro call)</li>
@@ -41,6 +41,9 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
   // testData/sanity/AllInstructionsParsing.s
   private static final boolean DUMP = false;
+
+  // do not generate exact same variants from previously tested mnemonic(s)
+  private static final boolean SKIP_DUPLICATE_VARIANTS = true;
 
   private static final String INDENT = "         ";
   private int labelCount = 0;
@@ -81,7 +84,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
     dump("* Instructions count: " + M68kTokenGroups.INSTRUCTIONS.getTypes().length);
 
-    assertEquals(5916, total);
+    assertEquals(5428, total);
     assertEmpty(failedVariants);
     assertEquals(781, deprecated);
   }
@@ -171,6 +174,15 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
         }
       }
+
+      if (SKIP_DUPLICATE_VARIANTS) {
+        for (Map.Entry<M68kMnemonic, List<String>> existingEntry : result.entrySet()) {
+          if (existingEntry.getKey().elementType() == mnemonic.elementType()) {
+            variants.removeAll(existingEntry.getValue());
+          }
+        }
+      }
+
       result.put(mnemonic, variants);
     }
 

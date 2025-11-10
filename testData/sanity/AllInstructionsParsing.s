@@ -185,10 +185,6 @@
          add.l       #42,a0
 
 * M68kMnemonic{add, deprecated=false, src=IMMEDIATE, dst=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         add         #42,d0
-         add.b       #42,d0
-         add.w       #42,d0
-         add.l       #42,d0
          add         #42,(a0)
          add.b       #42,(a0)
          add.w       #42,(a0)
@@ -299,10 +295,6 @@
          addi.l      #42,d0
 
 * M68kMnemonic{addi, deprecated=false, src=IMMEDIATE, dst=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         addi        #42,d0
-         addi.b      #42,d0
-         addi.w      #42,d0
-         addi.l      #42,d0
          addi        #42,(a0)
          addi.b      #42,(a0)
          addi.w      #42,(a0)
@@ -529,10 +521,6 @@
          and.l       d0,$4000.L
 
 * M68kMnemonic{and, deprecated=false, src=IMMEDIATE, dst=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         and         #42,d0
-         and.b       #42,d0
-         and.w       #42,d0
-         and.l       #42,d0
          and         #42,(a0)
          and.b       #42,(a0)
          and.w       #42,(a0)
@@ -592,10 +580,6 @@
          andi.l      #42,d0
 
 * M68kMnemonic{andi, deprecated=false, src=IMMEDIATE, dst=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         andi        #42,d0
-         andi.b      #42,d0
-         andi.w      #42,d0
-         andi.l      #42,d0
          andi        #42,(a0)
          andi.b      #42,(a0)
          andi.w      #42,(a0)
@@ -803,26 +787,6 @@ label01: bcc         label01
          bchg.b      #1,$4000.L
 
 * M68kMnemonic{bchg, deprecated=false, src=QUICK_IMMEDIATE, dst=ALTERABLE_MEMORY, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         bchg        #1,(a0)
-         bchg.b      #1,(a0)
-         bchg        #1,(a0)+
-         bchg.b      #1,(a0)+
-         bchg        #1,-(a0)
-         bchg.b      #1,-(a0)
-         bchg        #1,42(a0)
-         bchg.b      #1,42(a0)
-         bchg        #1,(-42,a0)
-         bchg.b      #1,(-42,a0)
-         bchg        #1,12(a0,d0)
-         bchg.b      #1,12(a0,d0)
-         bchg        #1,(12,a0,a0)
-         bchg.b      #1,(12,a0,a0)
-         bchg        #1,$4000
-         bchg.b      #1,$4000
-         bchg        #1,$4000.W
-         bchg.b      #1,$4000.W
-         bchg        #1,$4000.L
-         bchg.b      #1,$4000.L
 
 
 ********************************************************************************
@@ -880,26 +844,6 @@ label01: bcc         label01
          bclr.b      #1,$4000.L
 
 * M68kMnemonic{bclr, deprecated=false, src=QUICK_IMMEDIATE, dst=ALTERABLE_MEMORY, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         bclr        #1,(a0)
-         bclr.b      #1,(a0)
-         bclr        #1,(a0)+
-         bclr.b      #1,(a0)+
-         bclr        #1,-(a0)
-         bclr.b      #1,-(a0)
-         bclr        #1,42(a0)
-         bclr.b      #1,42(a0)
-         bclr        #1,(-42,a0)
-         bclr.b      #1,(-42,a0)
-         bclr        #1,12(a0,d0)
-         bclr.b      #1,12(a0,d0)
-         bclr        #1,(12,a0,a0)
-         bclr.b      #1,(12,a0,a0)
-         bclr        #1,$4000
-         bclr.b      #1,$4000
-         bclr        #1,$4000.W
-         bclr.b      #1,$4000.W
-         bclr        #1,$4000.L
-         bclr.b      #1,$4000.L
 
 
 ********************************************************************************
@@ -1187,26 +1131,6 @@ label29: bra         label29
          bset.b      #1,$4000.L
 
 * M68kMnemonic{bset, deprecated=false, src=QUICK_IMMEDIATE, dst=ALTERABLE_MEMORY, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         bset        #1,(a0)
-         bset.b      #1,(a0)
-         bset        #1,(a0)+
-         bset.b      #1,(a0)+
-         bset        #1,-(a0)
-         bset.b      #1,-(a0)
-         bset        #1,42(a0)
-         bset.b      #1,42(a0)
-         bset        #1,(-42,a0)
-         bset.b      #1,(-42,a0)
-         bset        #1,12(a0,d0)
-         bset.b      #1,12(a0,d0)
-         bset        #1,(12,a0,a0)
-         bset.b      #1,(12,a0,a0)
-         bset        #1,$4000
-         bset.b      #1,$4000
-         bset        #1,$4000.W
-         bset.b      #1,$4000.W
-         bset        #1,$4000.L
-         bset.b      #1,$4000.L
 
 
 ********************************************************************************
@@ -1292,26 +1216,6 @@ label31: bsr         label31
          btst.b      #1,$4000.L
 
 * M68kMnemonic{btst, deprecated=false, src=QUICK_IMMEDIATE, dst=MEMORY_WITHOUT_IMMEDIATE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         btst        #1,(a0)
-         btst.b      #1,(a0)
-         btst        #1,(a0)+
-         btst.b      #1,(a0)+
-         btst        #1,-(a0)
-         btst.b      #1,-(a0)
-         btst        #1,42(a0)
-         btst.b      #1,42(a0)
-         btst        #1,(-42,a0)
-         btst.b      #1,(-42,a0)
-         btst        #1,12(a0,d0)
-         btst.b      #1,12(a0,d0)
-         btst        #1,(12,a0,a0)
-         btst.b      #1,(12,a0,a0)
-         btst        #1,$4000
-         btst.b      #1,$4000
-         btst        #1,$4000.W
-         btst.b      #1,$4000.W
-         btst        #1,$4000.L
-         btst.b      #1,$4000.L
          btst        #1,(PC)
          btst.b      #1,(PC)
          btst        #1,66(PC)
@@ -1395,39 +1299,22 @@ label35: bvs         label35
          chk.w       (66,PC,a0),d0
 
 * M68kMnemonic{chk, deprecated=false, src=DATA, dst=DATA_REGISTER, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         chk         d0,d0
          chk.l       d0,d0
-         chk         #42,d0
          chk.l       #42,d0
-         chk         (a0),d0
          chk.l       (a0),d0
-         chk         (a0)+,d0
          chk.l       (a0)+,d0
-         chk         -(a0),d0
          chk.l       -(a0),d0
-         chk         42(a0),d0
          chk.l       42(a0),d0
-         chk         (-42,a0),d0
          chk.l       (-42,a0),d0
-         chk         12(a0,d0),d0
          chk.l       12(a0,d0),d0
-         chk         (12,a0,a0),d0
          chk.l       (12,a0,a0),d0
-         chk         $4000,d0
          chk.l       $4000,d0
-         chk         $4000.W,d0
          chk.l       $4000.W,d0
-         chk         $4000.L,d0
          chk.l       $4000.L,d0
-         chk         (PC),d0
          chk.l       (PC),d0
-         chk         66(PC),d0
          chk.l       66(PC),d0
-         chk         (-66,PC),d0
          chk.l       (-66,PC),d0
-         chk         66(PC,d0),d0
          chk.l       66(PC,d0),d0
-         chk         (66,PC,a0),d0
          chk.l       (66,PC,a0),d0
 
 
@@ -1614,10 +1501,6 @@ label35: bvs         label35
          cmp.l       #42,a0
 
 * M68kMnemonic{cmp, deprecated=false, src=IMMEDIATE, dst=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         cmp         #42,d0
-         cmp.b       #42,d0
-         cmp.w       #42,d0
-         cmp.l       #42,d0
          cmp         #42,(a0)
          cmp.b       #42,(a0)
          cmp.w       #42,(a0)
@@ -1734,10 +1617,6 @@ label35: bvs         label35
          cmpi.l      #42,d0
 
 * M68kMnemonic{cmpi, deprecated=false, src=IMMEDIATE, dst=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         cmpi        #42,d0
-         cmpi.b      #42,d0
-         cmpi.w      #42,d0
-         cmpi.l      #42,d0
          cmpi        #42,(a0)
          cmpi.b      #42,(a0)
          cmpi.w      #42,(a0)
@@ -1949,54 +1828,21 @@ label35: bvs         label35
          divs.w      $4000.L,d0
 
 * M68kMnemonic{divs, deprecated=false, src=ALTERABLE_DATA_CF, dst=DATA_REGISTER, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         divs        d0,d0
          divs.l      d0,d0
-         divs        (a0),d0
          divs.l      (a0),d0
-         divs        (a0)+,d0
          divs.l      (a0)+,d0
-         divs        -(a0),d0
          divs.l      -(a0),d0
-         divs        42(a0),d0
          divs.l      42(a0),d0
-         divs        (-42,a0),d0
          divs.l      (-42,a0),d0
-         divs        12(a0,d0),d0
          divs.l      12(a0,d0),d0
-         divs        (12,a0,a0),d0
          divs.l      (12,a0,a0),d0
-         divs        $4000,d0
          divs.l      $4000,d0
-         divs        $4000.W,d0
          divs.l      $4000.W,d0
-         divs        $4000.L,d0
          divs.l      $4000.L,d0
 
 * M68kMnemonic{divs, deprecated=false, src=DATA, dst=DATA_REGISTER, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         divs        d0,d0
-         divs.w      d0,d0
          divs        #42,d0
          divs.w      #42,d0
-         divs        (a0),d0
-         divs.w      (a0),d0
-         divs        (a0)+,d0
-         divs.w      (a0)+,d0
-         divs        -(a0),d0
-         divs.w      -(a0),d0
-         divs        42(a0),d0
-         divs.w      42(a0),d0
-         divs        (-42,a0),d0
-         divs.w      (-42,a0),d0
-         divs        12(a0,d0),d0
-         divs.w      12(a0,d0),d0
-         divs        (12,a0,a0),d0
-         divs.w      (12,a0,a0),d0
-         divs        $4000,d0
-         divs.w      $4000,d0
-         divs        $4000.W,d0
-         divs.w      $4000.W,d0
-         divs        $4000.L,d0
-         divs.w      $4000.L,d0
          divs        (PC),d0
          divs.w      (PC),d0
          divs        66(PC),d0
@@ -2009,39 +1855,11 @@ label35: bvs         label35
          divs.w      (66,PC,a0),d0
 
 * M68kMnemonic{divs, deprecated=false, src=DATA, dst=DATA_REGISTER, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         divs        d0,d0
-         divs.l      d0,d0
-         divs        #42,d0
          divs.l      #42,d0
-         divs        (a0),d0
-         divs.l      (a0),d0
-         divs        (a0)+,d0
-         divs.l      (a0)+,d0
-         divs        -(a0),d0
-         divs.l      -(a0),d0
-         divs        42(a0),d0
-         divs.l      42(a0),d0
-         divs        (-42,a0),d0
-         divs.l      (-42,a0),d0
-         divs        12(a0,d0),d0
-         divs.l      12(a0,d0),d0
-         divs        (12,a0,a0),d0
-         divs.l      (12,a0,a0),d0
-         divs        $4000,d0
-         divs.l      $4000,d0
-         divs        $4000.W,d0
-         divs.l      $4000.W,d0
-         divs        $4000.L,d0
-         divs.l      $4000.L,d0
-         divs        (PC),d0
          divs.l      (PC),d0
-         divs        66(PC),d0
          divs.l      66(PC),d0
-         divs        (-66,PC),d0
          divs.l      (-66,PC),d0
-         divs        66(PC,d0),d0
          divs.l      66(PC,d0),d0
-         divs        (66,PC,a0),d0
          divs.l      (66,PC,a0),d0
 
 
@@ -2072,54 +1890,21 @@ label35: bvs         label35
          divu.w      $4000.L,d0
 
 * M68kMnemonic{divu, deprecated=false, src=ALTERABLE_DATA_CF, dst=DATA_REGISTER, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         divu        d0,d0
          divu.l      d0,d0
-         divu        (a0),d0
          divu.l      (a0),d0
-         divu        (a0)+,d0
          divu.l      (a0)+,d0
-         divu        -(a0),d0
          divu.l      -(a0),d0
-         divu        42(a0),d0
          divu.l      42(a0),d0
-         divu        (-42,a0),d0
          divu.l      (-42,a0),d0
-         divu        12(a0,d0),d0
          divu.l      12(a0,d0),d0
-         divu        (12,a0,a0),d0
          divu.l      (12,a0,a0),d0
-         divu        $4000,d0
          divu.l      $4000,d0
-         divu        $4000.W,d0
          divu.l      $4000.W,d0
-         divu        $4000.L,d0
          divu.l      $4000.L,d0
 
 * M68kMnemonic{divu, deprecated=false, src=DATA, dst=DATA_REGISTER, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         divu        d0,d0
-         divu.w      d0,d0
          divu        #42,d0
          divu.w      #42,d0
-         divu        (a0),d0
-         divu.w      (a0),d0
-         divu        (a0)+,d0
-         divu.w      (a0)+,d0
-         divu        -(a0),d0
-         divu.w      -(a0),d0
-         divu        42(a0),d0
-         divu.w      42(a0),d0
-         divu        (-42,a0),d0
-         divu.w      (-42,a0),d0
-         divu        12(a0,d0),d0
-         divu.w      12(a0,d0),d0
-         divu        (12,a0,a0),d0
-         divu.w      (12,a0,a0),d0
-         divu        $4000,d0
-         divu.w      $4000,d0
-         divu        $4000.W,d0
-         divu.w      $4000.W,d0
-         divu        $4000.L,d0
-         divu.w      $4000.L,d0
          divu        (PC),d0
          divu.w      (PC),d0
          divu        66(PC),d0
@@ -2132,39 +1917,11 @@ label35: bvs         label35
          divu.w      (66,PC,a0),d0
 
 * M68kMnemonic{divu, deprecated=false, src=DATA, dst=DATA_REGISTER, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         divu        d0,d0
-         divu.l      d0,d0
-         divu        #42,d0
          divu.l      #42,d0
-         divu        (a0),d0
-         divu.l      (a0),d0
-         divu        (a0)+,d0
-         divu.l      (a0)+,d0
-         divu        -(a0),d0
-         divu.l      -(a0),d0
-         divu        42(a0),d0
-         divu.l      42(a0),d0
-         divu        (-42,a0),d0
-         divu.l      (-42,a0),d0
-         divu        12(a0,d0),d0
-         divu.l      12(a0,d0),d0
-         divu        (12,a0,a0),d0
-         divu.l      (12,a0,a0),d0
-         divu        $4000,d0
-         divu.l      $4000,d0
-         divu        $4000.W,d0
-         divu.l      $4000.W,d0
-         divu        $4000.L,d0
-         divu.l      $4000.L,d0
-         divu        (PC),d0
          divu.l      (PC),d0
-         divu        66(PC),d0
          divu.l      66(PC),d0
-         divu        (-66,PC),d0
          divu.l      (-66,PC),d0
-         divu        66(PC,d0),d0
          divu.l      66(PC,d0),d0
-         divu        (66,PC,a0),d0
          divu.l      (66,PC,a0),d0
 
 
@@ -2223,10 +1980,6 @@ label35: bvs         label35
          eor.l       #42,d0
 
 * M68kMnemonic{eor, deprecated=false, src=IMMEDIATE, dst=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         eor         #42,d0
-         eor.b       #42,d0
-         eor.w       #42,d0
-         eor.l       #42,d0
          eor         #42,(a0)
          eor.b       #42,(a0)
          eor.w       #42,(a0)
@@ -2286,10 +2039,6 @@ label35: bvs         label35
          eori.l      #42,d0
 
 * M68kMnemonic{eori, deprecated=false, src=IMMEDIATE, dst=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         eori        #42,d0
-         eori.b      #42,d0
-         eori.w      #42,d0
-         eori.l      #42,d0
          eori        #42,(a0)
          eori.b      #42,(a0)
          eori.w      #42,(a0)
@@ -2447,7 +2196,6 @@ label35: bvs         label35
          link.w      a0,#42
 
 * M68kMnemonic{link, deprecated=false, src=ADDRESS_REGISTER, dst=IMMEDIATE, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         link        a0,#42
          link.l      a0,#42
 
 
@@ -2581,9 +2329,6 @@ label35: bvs         label35
          move        d0,a0
          move.w      d0,a0
          move.l      d0,a0
-         move        a0,a0
-         move.w      a0,a0
-         move.l      a0,a0
          move        (a0),a0
          move.w      (a0),a0
          move.l      (a0),a0
@@ -3574,9 +3319,6 @@ label35: bvs         label35
 ;        movea       a0,d0 ; DEPRECATED
 ;        movea.w     a0,d0 ; DEPRECATED
 ;        movea.l     a0,d0 ; DEPRECATED
-         movea       a0,a0
-         movea.w     a0,a0
-         movea.l     a0,a0
 ;        movea       a0,(a0) ; DEPRECATED
 ;        movea.w     a0,(a0) ; DEPRECATED
 ;        movea.l     a0,(a0) ; DEPRECATED
@@ -4832,54 +4574,21 @@ label35: bvs         label35
          muls.w      $4000.L,d0
 
 * M68kMnemonic{muls, deprecated=false, src=ALTERABLE_DATA_CF, dst=DATA_REGISTER, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         muls        d0,d0
          muls.l      d0,d0
-         muls        (a0),d0
          muls.l      (a0),d0
-         muls        (a0)+,d0
          muls.l      (a0)+,d0
-         muls        -(a0),d0
          muls.l      -(a0),d0
-         muls        42(a0),d0
          muls.l      42(a0),d0
-         muls        (-42,a0),d0
          muls.l      (-42,a0),d0
-         muls        12(a0,d0),d0
          muls.l      12(a0,d0),d0
-         muls        (12,a0,a0),d0
          muls.l      (12,a0,a0),d0
-         muls        $4000,d0
          muls.l      $4000,d0
-         muls        $4000.W,d0
          muls.l      $4000.W,d0
-         muls        $4000.L,d0
          muls.l      $4000.L,d0
 
 * M68kMnemonic{muls, deprecated=false, src=DATA, dst=DATA_REGISTER, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         muls        d0,d0
-         muls.w      d0,d0
          muls        #42,d0
          muls.w      #42,d0
-         muls        (a0),d0
-         muls.w      (a0),d0
-         muls        (a0)+,d0
-         muls.w      (a0)+,d0
-         muls        -(a0),d0
-         muls.w      -(a0),d0
-         muls        42(a0),d0
-         muls.w      42(a0),d0
-         muls        (-42,a0),d0
-         muls.w      (-42,a0),d0
-         muls        12(a0,d0),d0
-         muls.w      12(a0,d0),d0
-         muls        (12,a0,a0),d0
-         muls.w      (12,a0,a0),d0
-         muls        $4000,d0
-         muls.w      $4000,d0
-         muls        $4000.W,d0
-         muls.w      $4000.W,d0
-         muls        $4000.L,d0
-         muls.w      $4000.L,d0
          muls        (PC),d0
          muls.w      (PC),d0
          muls        66(PC),d0
@@ -4892,39 +4601,11 @@ label35: bvs         label35
          muls.w      (66,PC,a0),d0
 
 * M68kMnemonic{muls, deprecated=false, src=DATA, dst=DATA_REGISTER, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         muls        d0,d0
-         muls.l      d0,d0
-         muls        #42,d0
          muls.l      #42,d0
-         muls        (a0),d0
-         muls.l      (a0),d0
-         muls        (a0)+,d0
-         muls.l      (a0)+,d0
-         muls        -(a0),d0
-         muls.l      -(a0),d0
-         muls        42(a0),d0
-         muls.l      42(a0),d0
-         muls        (-42,a0),d0
-         muls.l      (-42,a0),d0
-         muls        12(a0,d0),d0
-         muls.l      12(a0,d0),d0
-         muls        (12,a0,a0),d0
-         muls.l      (12,a0,a0),d0
-         muls        $4000,d0
-         muls.l      $4000,d0
-         muls        $4000.W,d0
-         muls.l      $4000.W,d0
-         muls        $4000.L,d0
-         muls.l      $4000.L,d0
-         muls        (PC),d0
          muls.l      (PC),d0
-         muls        66(PC),d0
          muls.l      66(PC),d0
-         muls        (-66,PC),d0
          muls.l      (-66,PC),d0
-         muls        66(PC,d0),d0
          muls.l      66(PC,d0),d0
-         muls        (66,PC,a0),d0
          muls.l      (66,PC,a0),d0
 
 
@@ -4955,54 +4636,21 @@ label35: bvs         label35
          mulu.w      $4000.L,d0
 
 * M68kMnemonic{mulu, deprecated=false, src=ALTERABLE_DATA_CF, dst=DATA_REGISTER, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         mulu        d0,d0
          mulu.l      d0,d0
-         mulu        (a0),d0
          mulu.l      (a0),d0
-         mulu        (a0)+,d0
          mulu.l      (a0)+,d0
-         mulu        -(a0),d0
          mulu.l      -(a0),d0
-         mulu        42(a0),d0
          mulu.l      42(a0),d0
-         mulu        (-42,a0),d0
          mulu.l      (-42,a0),d0
-         mulu        12(a0,d0),d0
          mulu.l      12(a0,d0),d0
-         mulu        (12,a0,a0),d0
          mulu.l      (12,a0,a0),d0
-         mulu        $4000,d0
          mulu.l      $4000,d0
-         mulu        $4000.W,d0
          mulu.l      $4000.W,d0
-         mulu        $4000.L,d0
          mulu.l      $4000.L,d0
 
 * M68kMnemonic{mulu, deprecated=false, src=DATA, dst=DATA_REGISTER, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         mulu        d0,d0
-         mulu.w      d0,d0
          mulu        #42,d0
          mulu.w      #42,d0
-         mulu        (a0),d0
-         mulu.w      (a0),d0
-         mulu        (a0)+,d0
-         mulu.w      (a0)+,d0
-         mulu        -(a0),d0
-         mulu.w      -(a0),d0
-         mulu        42(a0),d0
-         mulu.w      42(a0),d0
-         mulu        (-42,a0),d0
-         mulu.w      (-42,a0),d0
-         mulu        12(a0,d0),d0
-         mulu.w      12(a0,d0),d0
-         mulu        (12,a0,a0),d0
-         mulu.w      (12,a0,a0),d0
-         mulu        $4000,d0
-         mulu.w      $4000,d0
-         mulu        $4000.W,d0
-         mulu.w      $4000.W,d0
-         mulu        $4000.L,d0
-         mulu.w      $4000.L,d0
          mulu        (PC),d0
          mulu.w      (PC),d0
          mulu        66(PC),d0
@@ -5015,39 +4663,11 @@ label35: bvs         label35
          mulu.w      (66,PC,a0),d0
 
 * M68kMnemonic{mulu, deprecated=false, src=DATA, dst=DATA_REGISTER, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         mulu        d0,d0
-         mulu.l      d0,d0
-         mulu        #42,d0
          mulu.l      #42,d0
-         mulu        (a0),d0
-         mulu.l      (a0),d0
-         mulu        (a0)+,d0
-         mulu.l      (a0)+,d0
-         mulu        -(a0),d0
-         mulu.l      -(a0),d0
-         mulu        42(a0),d0
-         mulu.l      42(a0),d0
-         mulu        (-42,a0),d0
-         mulu.l      (-42,a0),d0
-         mulu        12(a0,d0),d0
-         mulu.l      12(a0,d0),d0
-         mulu        (12,a0,a0),d0
-         mulu.l      (12,a0,a0),d0
-         mulu        $4000,d0
-         mulu.l      $4000,d0
-         mulu        $4000.W,d0
-         mulu.l      $4000.W,d0
-         mulu        $4000.L,d0
-         mulu.l      $4000.L,d0
-         mulu        (PC),d0
          mulu.l      (PC),d0
-         mulu        66(PC),d0
          mulu.l      66(PC),d0
-         mulu        (-66,PC),d0
          mulu.l      (-66,PC),d0
-         mulu        66(PC,d0),d0
          mulu.l      66(PC,d0),d0
-         mulu        (66,PC,a0),d0
          mulu.l      (66,PC,a0),d0
 
 
@@ -5087,10 +4707,6 @@ label35: bvs         label35
          neg.l       d0
 
 * M68kMnemonic{neg, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE, WORD, LONGWORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         neg         d0
-         neg.b       d0
-         neg.w       d0
-         neg.l       d0
          neg         (a0)
          neg.b       (a0)
          neg.w       (a0)
@@ -5142,10 +4758,6 @@ label35: bvs         label35
          negx.l      d0
 
 * M68kMnemonic{negx, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE, WORD, LONGWORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         negx        d0
-         negx.b      d0
-         negx.w      d0
-         negx.l      d0
          negx        (a0)
          negx.b      (a0)
          negx.w      (a0)
@@ -5203,10 +4815,6 @@ label35: bvs         label35
          not.l       d0
 
 * M68kMnemonic{not, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE, WORD, LONGWORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         not         d0
-         not.b       d0
-         not.w       d0
-         not.l       d0
          not         (a0)
          not.b       (a0)
          not.w       (a0)
@@ -5364,10 +4972,6 @@ label35: bvs         label35
          or.l        d0,$4000.L
 
 * M68kMnemonic{or, deprecated=false, src=IMMEDIATE, dst=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         or          #42,d0
-         or.b        #42,d0
-         or.w        #42,d0
-         or.l        #42,d0
          or          #42,(a0)
          or.b        #42,(a0)
          or.w        #42,(a0)
@@ -5427,10 +5031,6 @@ label35: bvs         label35
          ori.l       #42,d0
 
 * M68kMnemonic{ori, deprecated=false, src=IMMEDIATE, dst=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         ori         #42,d0
-         ori.b       #42,d0
-         ori.w       #42,d0
-         ori.l       #42,d0
          ori         #42,(a0)
          ori.b       #42,(a0)
          ori.w       #42,(a0)
@@ -5732,8 +5332,6 @@ label35: bvs         label35
          scc.b       d0
 
 * M68kMnemonic{scc, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         scc         d0
-         scc.b       d0
          scc         (a0)
          scc.b       (a0)
          scc         (a0)+
@@ -5763,8 +5361,6 @@ label35: bvs         label35
          scs.b       d0
 
 * M68kMnemonic{scs, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         scs         d0
-         scs.b       d0
          scs         (a0)
          scs.b       (a0)
          scs         (a0)+
@@ -5794,8 +5390,6 @@ label35: bvs         label35
          seq.b       d0
 
 * M68kMnemonic{seq, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         seq         d0
-         seq.b       d0
          seq         (a0)
          seq.b       (a0)
          seq         (a0)+
@@ -5825,8 +5419,6 @@ label35: bvs         label35
          sf.b        d0
 
 * M68kMnemonic{sf, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         sf          d0
-         sf.b        d0
          sf          (a0)
          sf.b        (a0)
          sf          (a0)+
@@ -5856,8 +5448,6 @@ label35: bvs         label35
          sge.b       d0
 
 * M68kMnemonic{sge, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         sge         d0
-         sge.b       d0
          sge         (a0)
          sge.b       (a0)
          sge         (a0)+
@@ -5887,8 +5477,6 @@ label35: bvs         label35
          sgt.b       d0
 
 * M68kMnemonic{sgt, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         sgt         d0
-         sgt.b       d0
          sgt         (a0)
          sgt.b       (a0)
          sgt         (a0)+
@@ -5918,8 +5506,6 @@ label35: bvs         label35
          shi.b       d0
 
 * M68kMnemonic{shi, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         shi         d0
-         shi.b       d0
          shi         (a0)
          shi.b       (a0)
          shi         (a0)+
@@ -5949,8 +5535,6 @@ label35: bvs         label35
          shs.b       d0
 
 * M68kMnemonic{shs, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         shs         d0
-         shs.b       d0
          shs         (a0)
          shs.b       (a0)
          shs         (a0)+
@@ -5980,8 +5564,6 @@ label35: bvs         label35
          sle.b       d0
 
 * M68kMnemonic{sle, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         sle         d0
-         sle.b       d0
          sle         (a0)
          sle.b       (a0)
          sle         (a0)+
@@ -6011,8 +5593,6 @@ label35: bvs         label35
          slo.b       d0
 
 * M68kMnemonic{slo, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         slo         d0
-         slo.b       d0
          slo         (a0)
          slo.b       (a0)
          slo         (a0)+
@@ -6042,8 +5622,6 @@ label35: bvs         label35
          sls.b       d0
 
 * M68kMnemonic{sls, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         sls         d0
-         sls.b       d0
          sls         (a0)
          sls.b       (a0)
          sls         (a0)+
@@ -6073,8 +5651,6 @@ label35: bvs         label35
          slt.b       d0
 
 * M68kMnemonic{slt, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         slt         d0
-         slt.b       d0
          slt         (a0)
          slt.b       (a0)
          slt         (a0)+
@@ -6104,8 +5680,6 @@ label35: bvs         label35
          smi.b       d0
 
 * M68kMnemonic{smi, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         smi         d0
-         smi.b       d0
          smi         (a0)
          smi.b       (a0)
          smi         (a0)+
@@ -6135,8 +5709,6 @@ label35: bvs         label35
          sne.b       d0
 
 * M68kMnemonic{sne, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         sne         d0
-         sne.b       d0
          sne         (a0)
          sne.b       (a0)
          sne         (a0)+
@@ -6166,8 +5738,6 @@ label35: bvs         label35
          spl.b       d0
 
 * M68kMnemonic{spl, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         spl         d0
-         spl.b       d0
          spl         (a0)
          spl.b       (a0)
          spl         (a0)+
@@ -6197,8 +5767,6 @@ label35: bvs         label35
          st.b        d0
 
 * M68kMnemonic{st, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         st          d0
-         st.b        d0
          st          (a0)
          st.b        (a0)
          st          (a0)+
@@ -6403,10 +5971,6 @@ label35: bvs         label35
          sub.l       #42,a0
 
 * M68kMnemonic{sub, deprecated=false, src=IMMEDIATE, dst=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         sub         #42,d0
-         sub.b       #42,d0
-         sub.w       #42,d0
-         sub.l       #42,d0
          sub         #42,(a0)
          sub.b       #42,(a0)
          sub.w       #42,(a0)
@@ -6517,10 +6081,6 @@ label35: bvs         label35
          subi.l      #42,d0
 
 * M68kMnemonic{subi, deprecated=false, src=IMMEDIATE, dst=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         subi        #42,d0
-         subi.b      #42,d0
-         subi.w      #42,d0
-         subi.l      #42,d0
          subi        #42,(a0)
          subi.b      #42,(a0)
          subi.w      #42,(a0)
@@ -6639,8 +6199,6 @@ label35: bvs         label35
          svc.b       d0
 
 * M68kMnemonic{svc, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         svc         d0
-         svc.b       d0
          svc         (a0)
          svc.b       (a0)
          svc         (a0)+
@@ -6670,8 +6228,6 @@ label35: bvs         label35
          svs.b       d0
 
 * M68kMnemonic{svs, deprecated=false, src=ALTERABLE_DATA, dst=NONE, [BYTE], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         svs         d0
-         svs.b       d0
          svs         (a0)
          svs.b       (a0)
          svs         (a0)+
@@ -6789,54 +6345,10 @@ label35: bvs         label35
          tst.l       $4000.L
 
 * M68kMnemonic{tst, deprecated=false, src=DATA, dst=NONE, [BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-         tst         d0
-         tst.b       d0
-         tst.w       d0
-         tst.l       d0
          tst         #42
          tst.b       #42
          tst.w       #42
          tst.l       #42
-         tst         (a0)
-         tst.b       (a0)
-         tst.w       (a0)
-         tst.l       (a0)
-         tst         (a0)+
-         tst.b       (a0)+
-         tst.w       (a0)+
-         tst.l       (a0)+
-         tst         -(a0)
-         tst.b       -(a0)
-         tst.w       -(a0)
-         tst.l       -(a0)
-         tst         42(a0)
-         tst.b       42(a0)
-         tst.w       42(a0)
-         tst.l       42(a0)
-         tst         (-42,a0)
-         tst.b       (-42,a0)
-         tst.w       (-42,a0)
-         tst.l       (-42,a0)
-         tst         12(a0,d0)
-         tst.b       12(a0,d0)
-         tst.w       12(a0,d0)
-         tst.l       12(a0,d0)
-         tst         (12,a0,a0)
-         tst.b       (12,a0,a0)
-         tst.w       (12,a0,a0)
-         tst.l       (12,a0,a0)
-         tst         $4000
-         tst.b       $4000
-         tst.w       $4000
-         tst.l       $4000
-         tst         $4000.W
-         tst.b       $4000.W
-         tst.w       $4000.W
-         tst.l       $4000.W
-         tst         $4000.L
-         tst.b       $4000.L
-         tst.w       $4000.L
-         tst.l       $4000.L
          tst         (PC)
          tst.b       (PC)
          tst.w       (PC)
@@ -6870,4 +6382,4 @@ label35: bvs         label35
          unlk      a0
 * Instructions count: 128
 
-* 0/5916 deprecated: 781
+* 0/5428 deprecated: 781
