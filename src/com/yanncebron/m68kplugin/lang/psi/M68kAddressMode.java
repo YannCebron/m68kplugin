@@ -69,7 +69,7 @@ public enum M68kAddressMode {
   /**
    * {@link M68kAdmAbs} -> {@link M68kLabelRefExpression}
    */
-  LABEL("label", M68kAdmAbs.class),
+  LABEL("Label", M68kAdmAbs.class),
 
   /**
    * Ref 2.2.11, {@link M68kAdmPcd}
@@ -83,11 +83,11 @@ public enum M68kAddressMode {
   /**
    * Ref 2.2.18, {@link M68kAdmImm}
    */
-  IMMEDIATE("imm", M68kAdmImm.class),
+  IMMEDIATE("Imm", M68kAdmImm.class),
   /**
    * Ref 2.2.18, {@link M68kAdmQuick}
    */
-  QUICK_IMMEDIATE("quick", M68kAdmQuick.class),
+  QUICK_IMMEDIATE("Quick Imm", M68kAdmQuick.class),
 
   /**
    * {@link M68kAdmRegisterList}
