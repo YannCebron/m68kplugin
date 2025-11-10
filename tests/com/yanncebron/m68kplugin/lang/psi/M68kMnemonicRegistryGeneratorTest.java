@@ -38,6 +38,7 @@ import static java.util.Map.entry;
  *   <li>Specify path to vasm {@code cpus/m68k/opcodes.h} file in {@link #VASM_OPCODES_H_PATH}</li>
  *   <li>Set {@link #ENABLED} to {@code true}</li>
  *   <li>Run {@link #testGenerateMnemonicRegistryData()} and copy generated source output</li>
+ *   <li>Verify MnemonicGeneratedParserDataTest passes, dump</li>
  * </ol>
  * Last check: vasm 2.0c.
  */
@@ -50,7 +51,13 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
   private static final boolean SKIP_UNSUPPORTED_CPUS = true;
 
-  private static final Set<M68kCpu> SUPPORTED_CPUS = EnumSet.of(M68kCpu.M_68000, M68kCpu.M_68010);
+  /**
+   * Generate 680x0-only variants for _known_ operands.
+   * Known unspported: DN, DD
+   */
+  private static final boolean IGNORE_UNKNOWN_OPERANDS = true;
+
+  private static final Set<M68kCpu> SUPPORTED_CPUS = EnumSet.of(M68kCpu.M_68000, M68kCpu.M_68010, M68kCpu.M_68020);
 
   private static final String VASM_OPCODES_H_PATH = "/Users/yann/idea-ultimate/vasm/cpus/m68k/opcodes.h";
 
@@ -112,9 +119,17 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
       if (elementType != null && isSupportedCpu(m68kCpus)) {
         if (sourceOperand == null) {
+          if (IGNORE_UNKNOWN_OPERANDS) {
+            System.out.println("skipping unknown source operand: " + trim);
+            continue;
+          }
           fail("unknown source operand: " + trim);
         }
         if (destinationOperand == null) {
+          if (IGNORE_UNKNOWN_OPERANDS) {
+            System.out.println("skipping unknown destination operand: " + trim);
+            continue;
+          }
           fail("unknown destination operand: " + trim);
         }
       }
@@ -200,6 +215,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     return "EnumSet.of(" + StringUtil.join(dataSizes, dataSize -> "M68kDataSize." + dataSize.name(), ",") + ")";
   }
 
+  // cpus/m68k/operands.h
   private static final Map<String, M68kOperand> OPERAND_MAP = Map.ofEntries(
     entry("0", M68kOperand.NONE),
     entry("IM", M68kOperand.IMMEDIATE),
@@ -284,7 +300,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     entry("m68030", EnumSet.of(M68kCpu.M_68030)),
     entry("m68040", EnumSet.of(M68kCpu.M_68040)),
     entry("m68060", EnumSet.of(M68kCpu.M_68060))
-    );
+  );
 
   @Nullable
   private static Set<M68kCpu> mapCpuPart(String parseCpuText) {

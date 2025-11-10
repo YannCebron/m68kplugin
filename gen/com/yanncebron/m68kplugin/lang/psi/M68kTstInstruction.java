@@ -37,9 +37,21 @@ public interface M68kTstInstruction extends M68kDataSized, M68kInstruction {
   M68kAdmApi getAdmApi();
 
   @Nullable
+  M68kAdmArd getAdmArd();
+
+  @Nullable
   M68kAdmAri getAdmAri();
 
   @Nullable
   M68kAdmDrd getAdmDrd();
+
+  @Nullable
+  M68kAdmImm getAdmImm();
+
+  @Nullable
+  M68kAdmPcd getAdmPcd();
+
+  @Nullable
+  M68kAdmPci getAdmPci();
 
 }

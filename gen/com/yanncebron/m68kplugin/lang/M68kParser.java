@@ -1530,14 +1530,15 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_short | data_size_byte | data_size_word
+  // data_size_short | data_size_byte | data_size_word | data_size_long
   static boolean bsr_data_size(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bsr_data_size")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, null, "<.s|b|w>");
+    Marker m = enter_section_(b, l, _NONE_, null, "<.s|b|w|l>");
     r = data_size_short(b, l + 1);
     if (!r) r = data_size_byte(b, l + 1);
     if (!r) r = data_size_word(b, l + 1);
+    if (!r) r = data_size_long(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -1627,7 +1628,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // CHK data_size_word? adm_group_all_except_ard COMMA adm_drd
+  // CHK data_size_word_long? adm_group_all_except_ard COMMA adm_drd
   public static boolean chk_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "chk_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", CHK)) return false;
@@ -1643,10 +1644,10 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r || p;
   }
 
-  // data_size_word?
+  // data_size_word_long?
   private static boolean chk_instruction_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "chk_instruction_1")) return false;
-    data_size_word(b, l + 1);
+    data_size_word_long(b, l + 1);
     return true;
   }
 
@@ -2574,7 +2575,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // LINK data_size_word? adm_ard COMMA adm_imm
+  // LINK data_size_word_long? adm_ard COMMA adm_imm
   public static boolean link_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "link_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", LINK)) return false;
@@ -2590,10 +2591,10 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r || p;
   }
 
-  // data_size_word?
+  // data_size_word_long?
   private static boolean link_instruction_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "link_instruction_1")) return false;
-    data_size_word(b, l + 1);
+    data_size_word_long(b, l + 1);
     return true;
   }
 
@@ -3281,7 +3282,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_word?
+  // data_size_word_long?
   //                          adm_group_all_except_ard COMMA adm_drd
   static boolean mul_div_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "mul_div_tail")) return false;
@@ -3296,10 +3297,10 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r || p;
   }
 
-  // data_size_word?
+  // data_size_word_long?
   private static boolean mul_div_tail_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "mul_div_tail_0")) return false;
-    data_size_word(b, l + 1);
+    data_size_word_long(b, l + 1);
     return true;
   }
 
@@ -4379,7 +4380,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // TST tail_data_size_all___all_except_ard_pc_imm
+  // TST data_size_all? adm_group_all
   public static boolean tst_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "tst_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", TST)) return false;
@@ -4387,9 +4388,17 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, TST_INSTRUCTION, "<instruction>");
     r = consumeToken(b, TST);
     p = r; // pin = 1
-    r = r && tail_data_size_all___all_except_ard_pc_imm(b, l + 1);
+    r = r && report_error_(b, tst_instruction_1(b, l + 1));
+    r = p && adm_group_all(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  // data_size_all?
+  private static boolean tst_instruction_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tst_instruction_1")) return false;
+    data_size_all(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,8 +49,8 @@ public class JumpInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" bsr.w offset");
   }
 
-  public void testBsrInstructionWrongDataSizeLong() throws Exception {
-    doCodeTest(" bsr.l ");
+  public void testBsrInstructionDataSizeLong() throws Exception {
+    doCodeTest(" bsr.l offset");
   }
 
   public void testJmpInstructionAbs() throws Exception {

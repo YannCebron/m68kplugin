@@ -542,7 +542,7 @@ pea_instruction ::= PEA data_size_long?
   extends = data_sized
 }
 
-link_instruction ::= LINK data_size_word? adm_ard COMMA adm_imm
+link_instruction ::= LINK data_size_word_long? adm_ard COMMA adm_imm
 {
   extends = data_sized
 }
@@ -558,9 +558,9 @@ private jump_instructions ::= jsr_instruction|
                               rte_instruction |
                               rtr_instruction
 
-private bsr_data_size ::= (data_size_short | data_size_byte | data_size_word)
+private bsr_data_size ::= (data_size_short | data_size_byte | data_size_word | data_size_long)
 {
-  name = ".s|b|w"
+  name = ".s|b|w|l"
 }
 bsr_instruction ::= BSR bsr_data_size? adm_abs
 {
@@ -682,7 +682,7 @@ private mul_div_instructions ::= muls_instruction |
                                  divs_instruction |
                                  divu_instruction
 
-private mul_div_tail ::= data_size_word?
+private mul_div_tail ::= data_size_word_long?
                          adm_group_all_except_ard COMMA adm_drd
 {
   pin = 2
@@ -779,7 +779,7 @@ clr_instruction ::= CLR tail_data_size_all___all_except_ard_pc_imm
   extends = data_sized
 }
 
-tst_instruction ::= TST tail_data_size_all___all_except_ard_pc_imm
+tst_instruction ::= TST data_size_all? adm_group_all
 {
   extends = data_sized
 }
@@ -807,7 +807,7 @@ swap_instruction ::= SWAP data_size_word? adm_drd
   extends = data_sized
 }
 
-chk_instruction ::= CHK data_size_word? adm_group_all_except_ard COMMA adm_drd
+chk_instruction ::= CHK data_size_word_long? adm_group_all_except_ard COMMA adm_drd
 {
   extends = data_sized
 }

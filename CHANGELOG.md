@@ -15,6 +15,7 @@
 
 - Mnemonics docs: add cross-links in reference docs
 - "Amiga Hardware" tab: CIAx registers
+- Mnemonics: support some 68020+ only variants for `BSR`, `Bcc`, `CHK`, `DIVS`/`DIVU`, `LINK`, `MULS`/`MULU`, `TST`
 
 ### Fixed
 

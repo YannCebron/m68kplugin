@@ -1,0 +1,9 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kBsrInstructionImpl(BSR_INSTRUCTION)
+    PsiElement(bsr)('bsr')
+    PsiElement(.l)('.l')
+    PsiWhiteSpace(' ')
+    M68kAdmAbsImpl(ADM_ABS)
+      M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
+        PsiElement(id)('offset')

@@ -74,6 +74,13 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
       M68kCpu.GROUP_68000_UP));
   }
 
+  public void testBeqDataSizeLong() {
+    doTestFind("beq.l label", new M68kMnemonic(M68kTokenTypes.BEQ,
+      M68kOperand.BRANCH_DESTINATION, M68kOperand.NONE,
+      M68kDataSize.GROUP_SBWL,
+      M68kCpu.GROUP_68020_UP));
+  }
+
   public void testRtd() {
     doTestFind("rtd #1", new M68kMnemonic(M68kTokenTypes.RTD,
       M68kOperand.QUICK_IMMEDIATE, M68kOperand.NONE,

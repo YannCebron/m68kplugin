@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,8 +61,12 @@ public class MiscInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" link a0,#1");
   }
 
-  public void testLinkInstructionDataSize() throws Exception {
+  public void testLinkInstructionDataSizeWord() throws Exception {
     doCodeTest(" link.w a0,#1");
+  }
+
+  public void testLinkInstructionDataSizeLong() throws Exception {
+    doCodeTest(" link.l a0,#1");
   }
 
   public void testLinkInstructionMissingSource() throws Exception {
@@ -129,6 +133,10 @@ public class MiscInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" clr ");
   }
 
+  public void testTstInstructionArd() throws Exception {
+    doCodeTest(" tst a0");
+  }
+
   public void testTstInstructionAri() throws Exception {
     doCodeTest(" tst (a0)");
   }
@@ -193,8 +201,12 @@ public class MiscInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" chk (a0)+,d0");
   }
 
-  public void testChkInstructionDataSizeAri() throws Exception {
+  public void testChkInstructionDataSizeWordAri() throws Exception {
     doCodeTest(" chk.w (a0),d0");
+  }
+
+  public void testChkInstructionDataSizeLongImm() throws Exception {
+    doCodeTest(" chk.l #77,d0");
   }
 
   public void testChkInstructionWrongArd() throws Exception {

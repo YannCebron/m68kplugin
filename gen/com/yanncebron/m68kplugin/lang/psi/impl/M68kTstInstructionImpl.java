@@ -73,6 +73,12 @@ public class M68kTstInstructionImpl extends M68kDataSizedImpl implements M68kTst
 
   @Override
   @Nullable
+  public M68kAdmArd getAdmArd() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmArd.class);
+  }
+
+  @Override
+  @Nullable
   public M68kAdmAri getAdmAri() {
     return PsiTreeUtil.getChildOfType(this, M68kAdmAri.class);
   }
@@ -81,6 +87,24 @@ public class M68kTstInstructionImpl extends M68kDataSizedImpl implements M68kTst
   @Nullable
   public M68kAdmDrd getAdmDrd() {
     return PsiTreeUtil.getChildOfType(this, M68kAdmDrd.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmImm getAdmImm() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmImm.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmPcd getAdmPcd() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmPcd.class);
+  }
+
+  @Override
+  @Nullable
+  public M68kAdmPci getAdmPci() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmPci.class);
   }
 
 }

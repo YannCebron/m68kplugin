@@ -31,6 +31,7 @@ Support for other assemblers is not a priority in the nearest future.
 ### Unsupported CPUs
 
 Currently, only 68000/68010 architecture is supported.
+For select mnemonics, some 68020+ only variants are supported.
 
 Non-supported instructions/registers will yield false positive errors
 > _"Cannot resolve macro '$MNEMONIC$ \| $REGISTER$'"_

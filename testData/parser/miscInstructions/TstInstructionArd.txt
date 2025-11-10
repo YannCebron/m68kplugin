@@ -1,0 +1,7 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kTstInstructionImpl(TST_INSTRUCTION)
+    PsiElement(tst)('tst')
+    PsiWhiteSpace(' ')
+    M68kAdmArdImpl(ADM_ARD)
+      PsiElement(address_register)('a0')

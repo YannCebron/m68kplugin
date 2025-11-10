@@ -740,6 +740,13 @@ label00: bcc         label00
          bcc.b       label00
          bcc.w       label00
 
+* M68kMnemonic{bcc, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+label00: bcc         label00
+         bcc.s       label00
+         bcc.b       label00
+         bcc.w       label00
+         bcc.l       label00
+
 
 ********************************************************************************
 
@@ -903,6 +910,13 @@ label01: bcs         label01
          bcs.b       label01
          bcs.w       label01
 
+* M68kMnemonic{bcs, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+label01: bcs         label01
+         bcs.s       label01
+         bcs.b       label01
+         bcs.w       label01
+         bcs.l       label01
+
 
 ********************************************************************************
 
@@ -911,6 +925,13 @@ label02: beq         label02
          beq.s       label02
          beq.b       label02
          beq.w       label02
+
+* M68kMnemonic{beq, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+label02: beq         label02
+         beq.s       label02
+         beq.b       label02
+         beq.w       label02
+         beq.l       label02
 
 
 ********************************************************************************
@@ -921,6 +942,13 @@ label03: bge         label03
          bge.b       label03
          bge.w       label03
 
+* M68kMnemonic{bge, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+label03: bge         label03
+         bge.s       label03
+         bge.b       label03
+         bge.w       label03
+         bge.l       label03
+
 
 ********************************************************************************
 
@@ -929,6 +957,13 @@ label04: bgt         label04
          bgt.s       label04
          bgt.b       label04
          bgt.w       label04
+
+* M68kMnemonic{bgt, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+label04: bgt         label04
+         bgt.s       label04
+         bgt.b       label04
+         bgt.w       label04
+         bgt.l       label04
 
 
 ********************************************************************************
@@ -939,6 +974,13 @@ label05: bhi         label05
          bhi.b       label05
          bhi.w       label05
 
+* M68kMnemonic{bhi, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+label05: bhi         label05
+         bhi.s       label05
+         bhi.b       label05
+         bhi.w       label05
+         bhi.l       label05
+
 
 ********************************************************************************
 
@@ -947,6 +989,13 @@ label06: bhs         label06
          bhs.s       label06
          bhs.b       label06
          bhs.w       label06
+
+* M68kMnemonic{bhs, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+label06: bhs         label06
+         bhs.s       label06
+         bhs.b       label06
+         bhs.w       label06
+         bhs.l       label06
 
 
 ********************************************************************************
@@ -963,6 +1012,13 @@ label07: ble         label07
          ble.b       label07
          ble.w       label07
 
+* M68kMnemonic{ble, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+label07: ble         label07
+         ble.s       label07
+         ble.b       label07
+         ble.w       label07
+         ble.l       label07
+
 
 ********************************************************************************
 
@@ -971,6 +1027,13 @@ label08: blo         label08
          blo.s       label08
          blo.b       label08
          blo.w       label08
+
+* M68kMnemonic{blo, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+label08: blo         label08
+         blo.s       label08
+         blo.b       label08
+         blo.w       label08
+         blo.l       label08
 
 
 ********************************************************************************
@@ -981,6 +1044,13 @@ label09: bls         label09
          bls.b       label09
          bls.w       label09
 
+* M68kMnemonic{bls, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+label09: bls         label09
+         bls.s       label09
+         bls.b       label09
+         bls.w       label09
+         bls.l       label09
+
 
 ********************************************************************************
 
@@ -989,6 +1059,13 @@ label10: blt         label10
          blt.s       label10
          blt.b       label10
          blt.w       label10
+
+* M68kMnemonic{blt, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+label10: blt         label10
+         blt.s       label10
+         blt.b       label10
+         blt.w       label10
+         blt.l       label10
 
 
 ********************************************************************************
@@ -999,6 +1076,13 @@ label11: bmi         label11
          bmi.b       label11
          bmi.w       label11
 
+* M68kMnemonic{bmi, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+label11: bmi         label11
+         bmi.s       label11
+         bmi.b       label11
+         bmi.w       label11
+         bmi.l       label11
+
 
 ********************************************************************************
 
@@ -1007,6 +1091,13 @@ label12: bne         label12
          bne.s       label12
          bne.b       label12
          bne.w       label12
+
+* M68kMnemonic{bne, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+label12: bne         label12
+         bne.s       label12
+         bne.b       label12
+         bne.w       label12
+         bne.l       label12
 
 
 ********************************************************************************
@@ -1017,6 +1108,13 @@ label13: bpl         label13
          bpl.b       label13
          bpl.w       label13
 
+* M68kMnemonic{bpl, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+label13: bpl         label13
+         bpl.s       label13
+         bpl.b       label13
+         bpl.w       label13
+         bpl.l       label13
+
 
 ********************************************************************************
 
@@ -1025,6 +1123,13 @@ label14: bra         label14
          bra.s       label14
          bra.b       label14
          bra.w       label14
+
+* M68kMnemonic{bra, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+label14: bra         label14
+         bra.s       label14
+         bra.b       label14
+         bra.w       label14
+         bra.l       label14
 
 
 ********************************************************************************
@@ -1111,6 +1216,13 @@ label15: bsr         label15
          bsr.s       label15
          bsr.b       label15
          bsr.w       label15
+
+* M68kMnemonic{bsr, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+label15: bsr         label15
+         bsr.s       label15
+         bsr.b       label15
+         bsr.w       label15
+         bsr.l       label15
 
 
 ********************************************************************************
@@ -1220,6 +1332,13 @@ label16: bvc         label16
          bvc.b       label16
          bvc.w       label16
 
+* M68kMnemonic{bvc, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+label16: bvc         label16
+         bvc.s       label16
+         bvc.b       label16
+         bvc.w       label16
+         bvc.l       label16
+
 
 ********************************************************************************
 
@@ -1228,6 +1347,13 @@ label17: bvs         label17
          bvs.s       label17
          bvs.b       label17
          bvs.w       label17
+
+* M68kMnemonic{bvs, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+label17: bvs         label17
+         bvs.s       label17
+         bvs.b       label17
+         bvs.w       label17
+         bvs.l       label17
 
 
 ********************************************************************************
@@ -1267,6 +1393,42 @@ label17: bvs         label17
          chk.w       66(PC,d0),d0
          chk         (66,PC,a0),d0
          chk.w       (66,PC,a0),d0
+
+* M68kMnemonic{chk, deprecated=false, src=DATA, dst=DATA_REGISTER, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         chk         d0,d0
+         chk.l       d0,d0
+         chk         #42,d0
+         chk.l       #42,d0
+         chk         (a0),d0
+         chk.l       (a0),d0
+         chk         (a0)+,d0
+         chk.l       (a0)+,d0
+         chk         -(a0),d0
+         chk.l       -(a0),d0
+         chk         42(a0),d0
+         chk.l       42(a0),d0
+         chk         (-42,a0),d0
+         chk.l       (-42,a0),d0
+         chk         12(a0,d0),d0
+         chk.l       12(a0,d0),d0
+         chk         (12,a0,a0),d0
+         chk.l       (12,a0,a0),d0
+         chk         $4000,d0
+         chk.l       $4000,d0
+         chk         $4000.W,d0
+         chk.l       $4000.W,d0
+         chk         $4000.L,d0
+         chk.l       $4000.L,d0
+         chk         (PC),d0
+         chk.l       (PC),d0
+         chk         66(PC),d0
+         chk.l       66(PC),d0
+         chk         (-66,PC),d0
+         chk.l       (-66,PC),d0
+         chk         66(PC,d0),d0
+         chk.l       66(PC,d0),d0
+         chk         (66,PC,a0),d0
+         chk.l       (66,PC,a0),d0
 
 
 ********************************************************************************
@@ -1786,6 +1948,30 @@ label17: bvs         label17
          divs        $4000.L,d0
          divs.w      $4000.L,d0
 
+* M68kMnemonic{divs, deprecated=false, src=ALTERABLE_DATA_CF, dst=DATA_REGISTER, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         divs        d0,d0
+         divs.l      d0,d0
+         divs        (a0),d0
+         divs.l      (a0),d0
+         divs        (a0)+,d0
+         divs.l      (a0)+,d0
+         divs        -(a0),d0
+         divs.l      -(a0),d0
+         divs        42(a0),d0
+         divs.l      42(a0),d0
+         divs        (-42,a0),d0
+         divs.l      (-42,a0),d0
+         divs        12(a0,d0),d0
+         divs.l      12(a0,d0),d0
+         divs        (12,a0,a0),d0
+         divs.l      (12,a0,a0),d0
+         divs        $4000,d0
+         divs.l      $4000,d0
+         divs        $4000.W,d0
+         divs.l      $4000.W,d0
+         divs        $4000.L,d0
+         divs.l      $4000.L,d0
+
 * M68kMnemonic{divs, deprecated=false, src=DATA, dst=DATA_REGISTER, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          divs        d0,d0
          divs.w      d0,d0
@@ -1822,6 +2008,42 @@ label17: bvs         label17
          divs        (66,PC,a0),d0
          divs.w      (66,PC,a0),d0
 
+* M68kMnemonic{divs, deprecated=false, src=DATA, dst=DATA_REGISTER, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         divs        d0,d0
+         divs.l      d0,d0
+         divs        #42,d0
+         divs.l      #42,d0
+         divs        (a0),d0
+         divs.l      (a0),d0
+         divs        (a0)+,d0
+         divs.l      (a0)+,d0
+         divs        -(a0),d0
+         divs.l      -(a0),d0
+         divs        42(a0),d0
+         divs.l      42(a0),d0
+         divs        (-42,a0),d0
+         divs.l      (-42,a0),d0
+         divs        12(a0,d0),d0
+         divs.l      12(a0,d0),d0
+         divs        (12,a0,a0),d0
+         divs.l      (12,a0,a0),d0
+         divs        $4000,d0
+         divs.l      $4000,d0
+         divs        $4000.W,d0
+         divs.l      $4000.W,d0
+         divs        $4000.L,d0
+         divs.l      $4000.L,d0
+         divs        (PC),d0
+         divs.l      (PC),d0
+         divs        66(PC),d0
+         divs.l      66(PC),d0
+         divs        (-66,PC),d0
+         divs.l      (-66,PC),d0
+         divs        66(PC,d0),d0
+         divs.l      66(PC,d0),d0
+         divs        (66,PC,a0),d0
+         divs.l      (66,PC,a0),d0
+
 
 ********************************************************************************
 
@@ -1848,6 +2070,30 @@ label17: bvs         label17
          divu.w      $4000.W,d0
          divu        $4000.L,d0
          divu.w      $4000.L,d0
+
+* M68kMnemonic{divu, deprecated=false, src=ALTERABLE_DATA_CF, dst=DATA_REGISTER, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         divu        d0,d0
+         divu.l      d0,d0
+         divu        (a0),d0
+         divu.l      (a0),d0
+         divu        (a0)+,d0
+         divu.l      (a0)+,d0
+         divu        -(a0),d0
+         divu.l      -(a0),d0
+         divu        42(a0),d0
+         divu.l      42(a0),d0
+         divu        (-42,a0),d0
+         divu.l      (-42,a0),d0
+         divu        12(a0,d0),d0
+         divu.l      12(a0,d0),d0
+         divu        (12,a0,a0),d0
+         divu.l      (12,a0,a0),d0
+         divu        $4000,d0
+         divu.l      $4000,d0
+         divu        $4000.W,d0
+         divu.l      $4000.W,d0
+         divu        $4000.L,d0
+         divu.l      $4000.L,d0
 
 * M68kMnemonic{divu, deprecated=false, src=DATA, dst=DATA_REGISTER, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          divu        d0,d0
@@ -1884,6 +2130,42 @@ label17: bvs         label17
          divu.w      66(PC,d0),d0
          divu        (66,PC,a0),d0
          divu.w      (66,PC,a0),d0
+
+* M68kMnemonic{divu, deprecated=false, src=DATA, dst=DATA_REGISTER, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         divu        d0,d0
+         divu.l      d0,d0
+         divu        #42,d0
+         divu.l      #42,d0
+         divu        (a0),d0
+         divu.l      (a0),d0
+         divu        (a0)+,d0
+         divu.l      (a0)+,d0
+         divu        -(a0),d0
+         divu.l      -(a0),d0
+         divu        42(a0),d0
+         divu.l      42(a0),d0
+         divu        (-42,a0),d0
+         divu.l      (-42,a0),d0
+         divu        12(a0,d0),d0
+         divu.l      12(a0,d0),d0
+         divu        (12,a0,a0),d0
+         divu.l      (12,a0,a0),d0
+         divu        $4000,d0
+         divu.l      $4000,d0
+         divu        $4000.W,d0
+         divu.l      $4000.W,d0
+         divu        $4000.L,d0
+         divu.l      $4000.L,d0
+         divu        (PC),d0
+         divu.l      (PC),d0
+         divu        66(PC),d0
+         divu.l      66(PC),d0
+         divu        (-66,PC),d0
+         divu.l      (-66,PC),d0
+         divu        66(PC,d0),d0
+         divu.l      66(PC,d0),d0
+         divu        (66,PC,a0),d0
+         divu.l      (66,PC,a0),d0
 
 
 ********************************************************************************
@@ -2163,6 +2445,10 @@ label17: bvs         label17
 * M68kMnemonic{link, deprecated=false, src=ADDRESS_REGISTER, dst=IMMEDIATE, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          link        a0,#42
          link.w      a0,#42
+
+* M68kMnemonic{link, deprecated=false, src=ADDRESS_REGISTER, dst=IMMEDIATE, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         link        a0,#42
+         link.l      a0,#42
 
 
 ********************************************************************************
@@ -4545,6 +4831,30 @@ label17: bvs         label17
          muls        $4000.L,d0
          muls.w      $4000.L,d0
 
+* M68kMnemonic{muls, deprecated=false, src=ALTERABLE_DATA_CF, dst=DATA_REGISTER, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         muls        d0,d0
+         muls.l      d0,d0
+         muls        (a0),d0
+         muls.l      (a0),d0
+         muls        (a0)+,d0
+         muls.l      (a0)+,d0
+         muls        -(a0),d0
+         muls.l      -(a0),d0
+         muls        42(a0),d0
+         muls.l      42(a0),d0
+         muls        (-42,a0),d0
+         muls.l      (-42,a0),d0
+         muls        12(a0,d0),d0
+         muls.l      12(a0,d0),d0
+         muls        (12,a0,a0),d0
+         muls.l      (12,a0,a0),d0
+         muls        $4000,d0
+         muls.l      $4000,d0
+         muls        $4000.W,d0
+         muls.l      $4000.W,d0
+         muls        $4000.L,d0
+         muls.l      $4000.L,d0
+
 * M68kMnemonic{muls, deprecated=false, src=DATA, dst=DATA_REGISTER, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          muls        d0,d0
          muls.w      d0,d0
@@ -4581,6 +4891,42 @@ label17: bvs         label17
          muls        (66,PC,a0),d0
          muls.w      (66,PC,a0),d0
 
+* M68kMnemonic{muls, deprecated=false, src=DATA, dst=DATA_REGISTER, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         muls        d0,d0
+         muls.l      d0,d0
+         muls        #42,d0
+         muls.l      #42,d0
+         muls        (a0),d0
+         muls.l      (a0),d0
+         muls        (a0)+,d0
+         muls.l      (a0)+,d0
+         muls        -(a0),d0
+         muls.l      -(a0),d0
+         muls        42(a0),d0
+         muls.l      42(a0),d0
+         muls        (-42,a0),d0
+         muls.l      (-42,a0),d0
+         muls        12(a0,d0),d0
+         muls.l      12(a0,d0),d0
+         muls        (12,a0,a0),d0
+         muls.l      (12,a0,a0),d0
+         muls        $4000,d0
+         muls.l      $4000,d0
+         muls        $4000.W,d0
+         muls.l      $4000.W,d0
+         muls        $4000.L,d0
+         muls.l      $4000.L,d0
+         muls        (PC),d0
+         muls.l      (PC),d0
+         muls        66(PC),d0
+         muls.l      66(PC),d0
+         muls        (-66,PC),d0
+         muls.l      (-66,PC),d0
+         muls        66(PC,d0),d0
+         muls.l      66(PC,d0),d0
+         muls        (66,PC,a0),d0
+         muls.l      (66,PC,a0),d0
+
 
 ********************************************************************************
 
@@ -4607,6 +4953,30 @@ label17: bvs         label17
          mulu.w      $4000.W,d0
          mulu        $4000.L,d0
          mulu.w      $4000.L,d0
+
+* M68kMnemonic{mulu, deprecated=false, src=ALTERABLE_DATA_CF, dst=DATA_REGISTER, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         mulu        d0,d0
+         mulu.l      d0,d0
+         mulu        (a0),d0
+         mulu.l      (a0),d0
+         mulu        (a0)+,d0
+         mulu.l      (a0)+,d0
+         mulu        -(a0),d0
+         mulu.l      -(a0),d0
+         mulu        42(a0),d0
+         mulu.l      42(a0),d0
+         mulu        (-42,a0),d0
+         mulu.l      (-42,a0),d0
+         mulu        12(a0,d0),d0
+         mulu.l      12(a0,d0),d0
+         mulu        (12,a0,a0),d0
+         mulu.l      (12,a0,a0),d0
+         mulu        $4000,d0
+         mulu.l      $4000,d0
+         mulu        $4000.W,d0
+         mulu.l      $4000.W,d0
+         mulu        $4000.L,d0
+         mulu.l      $4000.L,d0
 
 * M68kMnemonic{mulu, deprecated=false, src=DATA, dst=DATA_REGISTER, [WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
          mulu        d0,d0
@@ -4643,6 +5013,42 @@ label17: bvs         label17
          mulu.w      66(PC,d0),d0
          mulu        (66,PC,a0),d0
          mulu.w      (66,PC,a0),d0
+
+* M68kMnemonic{mulu, deprecated=false, src=DATA, dst=DATA_REGISTER, [LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         mulu        d0,d0
+         mulu.l      d0,d0
+         mulu        #42,d0
+         mulu.l      #42,d0
+         mulu        (a0),d0
+         mulu.l      (a0),d0
+         mulu        (a0)+,d0
+         mulu.l      (a0)+,d0
+         mulu        -(a0),d0
+         mulu.l      -(a0),d0
+         mulu        42(a0),d0
+         mulu.l      42(a0),d0
+         mulu        (-42,a0),d0
+         mulu.l      (-42,a0),d0
+         mulu        12(a0,d0),d0
+         mulu.l      12(a0,d0),d0
+         mulu        (12,a0,a0),d0
+         mulu.l      (12,a0,a0),d0
+         mulu        $4000,d0
+         mulu.l      $4000,d0
+         mulu        $4000.W,d0
+         mulu.l      $4000.W,d0
+         mulu        $4000.L,d0
+         mulu.l      $4000.L,d0
+         mulu        (PC),d0
+         mulu.l      (PC),d0
+         mulu        66(PC),d0
+         mulu.l      66(PC),d0
+         mulu        (-66,PC),d0
+         mulu.l      (-66,PC),d0
+         mulu        66(PC,d0),d0
+         mulu.l      66(PC,d0),d0
+         mulu        (66,PC,a0),d0
+         mulu.l      (66,PC,a0),d0
 
 
 ********************************************************************************
@@ -6382,6 +6788,81 @@ label17: bvs         label17
          tst.w       $4000.L
          tst.l       $4000.L
 
+* M68kMnemonic{tst, deprecated=false, src=DATA, dst=NONE, [BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         tst         d0
+         tst.b       d0
+         tst.w       d0
+         tst.l       d0
+         tst         #42
+         tst.b       #42
+         tst.w       #42
+         tst.l       #42
+         tst         (a0)
+         tst.b       (a0)
+         tst.w       (a0)
+         tst.l       (a0)
+         tst         (a0)+
+         tst.b       (a0)+
+         tst.w       (a0)+
+         tst.l       (a0)+
+         tst         -(a0)
+         tst.b       -(a0)
+         tst.w       -(a0)
+         tst.l       -(a0)
+         tst         42(a0)
+         tst.b       42(a0)
+         tst.w       42(a0)
+         tst.l       42(a0)
+         tst         (-42,a0)
+         tst.b       (-42,a0)
+         tst.w       (-42,a0)
+         tst.l       (-42,a0)
+         tst         12(a0,d0)
+         tst.b       12(a0,d0)
+         tst.w       12(a0,d0)
+         tst.l       12(a0,d0)
+         tst         (12,a0,a0)
+         tst.b       (12,a0,a0)
+         tst.w       (12,a0,a0)
+         tst.l       (12,a0,a0)
+         tst         $4000
+         tst.b       $4000
+         tst.w       $4000
+         tst.l       $4000
+         tst         $4000.W
+         tst.b       $4000.W
+         tst.w       $4000.W
+         tst.l       $4000.W
+         tst         $4000.L
+         tst.b       $4000.L
+         tst.w       $4000.L
+         tst.l       $4000.L
+         tst         (PC)
+         tst.b       (PC)
+         tst.w       (PC)
+         tst.l       (PC)
+         tst         66(PC)
+         tst.b       66(PC)
+         tst.w       66(PC)
+         tst.l       66(PC)
+         tst         (-66,PC)
+         tst.b       (-66,PC)
+         tst.w       (-66,PC)
+         tst.l       (-66,PC)
+         tst         66(PC,d0)
+         tst.b       66(PC,d0)
+         tst.w       66(PC,d0)
+         tst.l       66(PC,d0)
+         tst         (66,PC,a0)
+         tst.b       (66,PC,a0)
+         tst.w       (66,PC,a0)
+         tst.l       (66,PC,a0)
+
+* M68kMnemonic{tst, deprecated=false, src=ADDRESS_REGISTER, dst=NONE, [WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
+         tst         a0
+         tst.w       a0
+         tst.l       a0
+
 
 ********************************************************************************
 
@@ -6389,4 +6870,4 @@ label17: bvs         label17
          unlk      a0
 * Instructions count: 128
 
-* 0/5495 deprecated: 781
+* 0/5916 deprecated: 781
