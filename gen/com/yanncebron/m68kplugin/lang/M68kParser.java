@@ -161,12 +161,37 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_all? adm_quick COMMA adm_group_all_except_pc_imm
+  // add_sub_q_tail_wl | add_sub_q_tail_b
   static boolean add_sub_q_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "add_sub_q_tail")) return false;
+    boolean r;
+    r = add_sub_q_tail_wl(b, l + 1);
+    if (!r) r = add_sub_q_tail_b(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // data_size_byte adm_quick COMMA adm_group_all_except_ard_pc_imm
+  static boolean add_sub_q_tail_b(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "add_sub_q_tail_b")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_);
-    r = add_sub_q_tail_0(b, l + 1);
+    r = data_size_byte(b, l + 1);
+    r = r && adm_quick(b, l + 1);
+    p = r; // pin = 2
+    r = r && report_error_(b, consumeToken(b, COMMA));
+    r = p && adm_group_all_except_ard_pc_imm(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // data_size_word_long? adm_quick COMMA adm_group_all_except_pc_imm
+  static boolean add_sub_q_tail_wl(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "add_sub_q_tail_wl")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
+    r = add_sub_q_tail_wl_0(b, l + 1);
     r = r && adm_quick(b, l + 1);
     p = r; // pin = 2
     r = r && report_error_(b, consumeToken(b, COMMA));
@@ -175,10 +200,10 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r || p;
   }
 
-  // data_size_all?
-  private static boolean add_sub_q_tail_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "add_sub_q_tail_0")) return false;
-    data_size_all(b, l + 1);
+  // data_size_word_long?
+  private static boolean add_sub_q_tail_wl_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "add_sub_q_tail_wl_0")) return false;
+    data_size_word_long(b, l + 1);
     return true;
   }
 

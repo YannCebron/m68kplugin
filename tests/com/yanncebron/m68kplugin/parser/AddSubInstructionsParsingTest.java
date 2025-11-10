@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -95,8 +95,8 @@ public class AddSubInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" addq #1,d0");
   }
 
-  public void testAddqInstructionArd() throws IOException {
-    doCodeTest(" addq #1,a0");
+  public void testAddqInstructionArdWithDataSizeByteWrong() throws IOException {
+    doCodeTest(" addq.b #1,a0");
   }
 
   public void testAddqInstructionAri() throws IOException {
@@ -210,6 +210,10 @@ public class AddSubInstructionsParsingTest extends M68kParsingTestCase {
 
   public void testSubqInstructionDrd() throws IOException {
     doCodeTest(" subq #1,d0");
+  }
+
+  public void testSubqInstructionArdWithDataSizeByteWrong() throws IOException {
+    doCodeTest(" subq.b #1,a0");
   }
 
   public void testSubxInstructionDrdDrd() throws IOException {

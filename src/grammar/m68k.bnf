@@ -640,10 +640,15 @@ private add_sub_instructions ::= add_instruction |
                                  subq_instruction |
                                  subx_instruction
 
-private add_sub_q_tail ::= data_size_all? adm_quick COMMA adm_group_all_except_pc_imm
+private add_sub_q_tail_wl ::= data_size_word_long? adm_quick COMMA adm_group_all_except_pc_imm
 {
   pin = 2
 }
+private add_sub_q_tail_b ::= data_size_byte adm_quick COMMA adm_group_all_except_ard_pc_imm
+{
+  pin = 2
+}
+private add_sub_q_tail ::= add_sub_q_tail_wl | add_sub_q_tail_b
 
 private add_sub_x_tail_drd_drd ::= adm_drd COMMA adm_drd
 {
