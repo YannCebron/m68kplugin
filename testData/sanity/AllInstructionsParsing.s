@@ -741,11 +741,11 @@ label00: bcc         label00
          bcc.w       label00
 
 * M68kMnemonic{bcc, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label00: bcc         label00
-         bcc.s       label00
-         bcc.b       label00
-         bcc.w       label00
-         bcc.l       label00
+label01: bcc         label01
+         bcc.s       label01
+         bcc.b       label01
+         bcc.w       label01
+         bcc.l       label01
 
 
 ********************************************************************************
@@ -905,97 +905,97 @@ label00: bcc         label00
 ********************************************************************************
 
 * M68kMnemonic{bcs, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label01: bcs         label01
-         bcs.s       label01
-         bcs.b       label01
-         bcs.w       label01
+label02: bcs         label02
+         bcs.s       label02
+         bcs.b       label02
+         bcs.w       label02
 
 * M68kMnemonic{bcs, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label01: bcs         label01
-         bcs.s       label01
-         bcs.b       label01
-         bcs.w       label01
-         bcs.l       label01
+label03: bcs         label03
+         bcs.s       label03
+         bcs.b       label03
+         bcs.w       label03
+         bcs.l       label03
 
 
 ********************************************************************************
 
 * M68kMnemonic{beq, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label02: beq         label02
-         beq.s       label02
-         beq.b       label02
-         beq.w       label02
+label04: beq         label04
+         beq.s       label04
+         beq.b       label04
+         beq.w       label04
 
 * M68kMnemonic{beq, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label02: beq         label02
-         beq.s       label02
-         beq.b       label02
-         beq.w       label02
-         beq.l       label02
+label05: beq         label05
+         beq.s       label05
+         beq.b       label05
+         beq.w       label05
+         beq.l       label05
 
 
 ********************************************************************************
 
 * M68kMnemonic{bge, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label03: bge         label03
-         bge.s       label03
-         bge.b       label03
-         bge.w       label03
+label06: bge         label06
+         bge.s       label06
+         bge.b       label06
+         bge.w       label06
 
 * M68kMnemonic{bge, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label03: bge         label03
-         bge.s       label03
-         bge.b       label03
-         bge.w       label03
-         bge.l       label03
+label07: bge         label07
+         bge.s       label07
+         bge.b       label07
+         bge.w       label07
+         bge.l       label07
 
 
 ********************************************************************************
 
 * M68kMnemonic{bgt, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label04: bgt         label04
-         bgt.s       label04
-         bgt.b       label04
-         bgt.w       label04
+label08: bgt         label08
+         bgt.s       label08
+         bgt.b       label08
+         bgt.w       label08
 
 * M68kMnemonic{bgt, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label04: bgt         label04
-         bgt.s       label04
-         bgt.b       label04
-         bgt.w       label04
-         bgt.l       label04
+label09: bgt         label09
+         bgt.s       label09
+         bgt.b       label09
+         bgt.w       label09
+         bgt.l       label09
 
 
 ********************************************************************************
 
 * M68kMnemonic{bhi, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label05: bhi         label05
-         bhi.s       label05
-         bhi.b       label05
-         bhi.w       label05
+label10: bhi         label10
+         bhi.s       label10
+         bhi.b       label10
+         bhi.w       label10
 
 * M68kMnemonic{bhi, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label05: bhi         label05
-         bhi.s       label05
-         bhi.b       label05
-         bhi.w       label05
-         bhi.l       label05
+label11: bhi         label11
+         bhi.s       label11
+         bhi.b       label11
+         bhi.w       label11
+         bhi.l       label11
 
 
 ********************************************************************************
 
 * M68kMnemonic{bhs, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label06: bhs         label06
-         bhs.s       label06
-         bhs.b       label06
-         bhs.w       label06
+label12: bhs         label12
+         bhs.s       label12
+         bhs.b       label12
+         bhs.w       label12
 
 * M68kMnemonic{bhs, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label06: bhs         label06
-         bhs.s       label06
-         bhs.b       label06
-         bhs.w       label06
-         bhs.l       label06
+label13: bhs         label13
+         bhs.s       label13
+         bhs.b       label13
+         bhs.w       label13
+         bhs.l       label13
 
 
 ********************************************************************************
@@ -1007,129 +1007,129 @@ label06: bhs         label06
 ********************************************************************************
 
 * M68kMnemonic{ble, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label07: ble         label07
-         ble.s       label07
-         ble.b       label07
-         ble.w       label07
+label14: ble         label14
+         ble.s       label14
+         ble.b       label14
+         ble.w       label14
 
 * M68kMnemonic{ble, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label07: ble         label07
-         ble.s       label07
-         ble.b       label07
-         ble.w       label07
-         ble.l       label07
+label15: ble         label15
+         ble.s       label15
+         ble.b       label15
+         ble.w       label15
+         ble.l       label15
 
 
 ********************************************************************************
 
 * M68kMnemonic{blo, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label08: blo         label08
-         blo.s       label08
-         blo.b       label08
-         blo.w       label08
+label16: blo         label16
+         blo.s       label16
+         blo.b       label16
+         blo.w       label16
 
 * M68kMnemonic{blo, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label08: blo         label08
-         blo.s       label08
-         blo.b       label08
-         blo.w       label08
-         blo.l       label08
+label17: blo         label17
+         blo.s       label17
+         blo.b       label17
+         blo.w       label17
+         blo.l       label17
 
 
 ********************************************************************************
 
 * M68kMnemonic{bls, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label09: bls         label09
-         bls.s       label09
-         bls.b       label09
-         bls.w       label09
+label18: bls         label18
+         bls.s       label18
+         bls.b       label18
+         bls.w       label18
 
 * M68kMnemonic{bls, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label09: bls         label09
-         bls.s       label09
-         bls.b       label09
-         bls.w       label09
-         bls.l       label09
+label19: bls         label19
+         bls.s       label19
+         bls.b       label19
+         bls.w       label19
+         bls.l       label19
 
 
 ********************************************************************************
 
 * M68kMnemonic{blt, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label10: blt         label10
-         blt.s       label10
-         blt.b       label10
-         blt.w       label10
+label20: blt         label20
+         blt.s       label20
+         blt.b       label20
+         blt.w       label20
 
 * M68kMnemonic{blt, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label10: blt         label10
-         blt.s       label10
-         blt.b       label10
-         blt.w       label10
-         blt.l       label10
+label21: blt         label21
+         blt.s       label21
+         blt.b       label21
+         blt.w       label21
+         blt.l       label21
 
 
 ********************************************************************************
 
 * M68kMnemonic{bmi, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label11: bmi         label11
-         bmi.s       label11
-         bmi.b       label11
-         bmi.w       label11
+label22: bmi         label22
+         bmi.s       label22
+         bmi.b       label22
+         bmi.w       label22
 
 * M68kMnemonic{bmi, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label11: bmi         label11
-         bmi.s       label11
-         bmi.b       label11
-         bmi.w       label11
-         bmi.l       label11
+label23: bmi         label23
+         bmi.s       label23
+         bmi.b       label23
+         bmi.w       label23
+         bmi.l       label23
 
 
 ********************************************************************************
 
 * M68kMnemonic{bne, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label12: bne         label12
-         bne.s       label12
-         bne.b       label12
-         bne.w       label12
+label24: bne         label24
+         bne.s       label24
+         bne.b       label24
+         bne.w       label24
 
 * M68kMnemonic{bne, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label12: bne         label12
-         bne.s       label12
-         bne.b       label12
-         bne.w       label12
-         bne.l       label12
+label25: bne         label25
+         bne.s       label25
+         bne.b       label25
+         bne.w       label25
+         bne.l       label25
 
 
 ********************************************************************************
 
 * M68kMnemonic{bpl, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label13: bpl         label13
-         bpl.s       label13
-         bpl.b       label13
-         bpl.w       label13
+label26: bpl         label26
+         bpl.s       label26
+         bpl.b       label26
+         bpl.w       label26
 
 * M68kMnemonic{bpl, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label13: bpl         label13
-         bpl.s       label13
-         bpl.b       label13
-         bpl.w       label13
-         bpl.l       label13
+label27: bpl         label27
+         bpl.s       label27
+         bpl.b       label27
+         bpl.w       label27
+         bpl.l       label27
 
 
 ********************************************************************************
 
 * M68kMnemonic{bra, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label14: bra         label14
-         bra.s       label14
-         bra.b       label14
-         bra.w       label14
+label28: bra         label28
+         bra.s       label28
+         bra.b       label28
+         bra.w       label28
 
 * M68kMnemonic{bra, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label14: bra         label14
-         bra.s       label14
-         bra.b       label14
-         bra.w       label14
-         bra.l       label14
+label29: bra         label29
+         bra.s       label29
+         bra.b       label29
+         bra.w       label29
+         bra.l       label29
 
 
 ********************************************************************************
@@ -1212,17 +1212,17 @@ label14: bra         label14
 ********************************************************************************
 
 * M68kMnemonic{bsr, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label15: bsr         label15
-         bsr.s       label15
-         bsr.b       label15
-         bsr.w       label15
+label30: bsr         label30
+         bsr.s       label30
+         bsr.b       label30
+         bsr.w       label30
 
 * M68kMnemonic{bsr, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label15: bsr         label15
-         bsr.s       label15
-         bsr.b       label15
-         bsr.w       label15
-         bsr.l       label15
+label31: bsr         label31
+         bsr.s       label31
+         bsr.b       label31
+         bsr.w       label31
+         bsr.l       label31
 
 
 ********************************************************************************
@@ -1327,33 +1327,33 @@ label15: bsr         label15
 ********************************************************************************
 
 * M68kMnemonic{bvc, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label16: bvc         label16
-         bvc.s       label16
-         bvc.b       label16
-         bvc.w       label16
+label32: bvc         label32
+         bvc.s       label32
+         bvc.b       label32
+         bvc.w       label32
 
 * M68kMnemonic{bvc, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label16: bvc         label16
-         bvc.s       label16
-         bvc.b       label16
-         bvc.w       label16
-         bvc.l       label16
+label33: bvc         label33
+         bvc.s       label33
+         bvc.b       label33
+         bvc.w       label33
+         bvc.l       label33
 
 
 ********************************************************************************
 
 * M68kMnemonic{bvs, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD], [M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label17: bvs         label17
-         bvs.s       label17
-         bvs.b       label17
-         bvs.w       label17
+label34: bvs         label34
+         bvs.s       label34
+         bvs.b       label34
+         bvs.w       label34
 
 * M68kMnemonic{bvs, deprecated=false, src=BRANCH_DESTINATION, dst=NONE, [SHORT, BYTE, WORD, LONGWORD], [M_68020, M_68030, M_68040, M_68060, AC_68080]}
-label17: bvs         label17
-         bvs.s       label17
-         bvs.b       label17
-         bvs.w       label17
-         bvs.l       label17
+label35: bvs         label35
+         bvs.s       label35
+         bvs.b       label35
+         bvs.w       label35
+         bvs.l       label35
 
 
 ********************************************************************************

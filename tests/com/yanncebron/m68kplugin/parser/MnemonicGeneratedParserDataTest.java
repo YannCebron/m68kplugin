@@ -145,15 +145,17 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
       M68kTokenGroups.BCC_INSTRUCTIONS.contains(type) ||
         type == M68kTokenTypes.BRA ||
         type == M68kTokenTypes.BSR;
-    String labelName = "<NOT_BRANCH>";
-    String labelOrIndent = INDENT;
-    if (needsLocalBranchLabel) {
-      labelName = "label" + String.format("%02d", labelCount++);
-      labelOrIndent = labelName + ": ";
-    }
+
 
     Map<M68kMnemonic, List<String>> result = new LinkedHashMap<>();
     for (M68kMnemonic mnemonic : allMnemonics) {
+      String labelName = "<NOT_BRANCH>";
+      String labelOrIndent = INDENT;
+      if (needsLocalBranchLabel) {
+        labelName = "label" + String.format("%02d", labelCount++);
+        labelOrIndent = labelName + ": ";
+      }
+
       String mnemonicText = mnemonic.elementType().toString();
       List<String> variants = new SmartList<>();
 
