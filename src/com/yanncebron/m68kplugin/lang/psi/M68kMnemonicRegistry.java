@@ -73,6 +73,7 @@ public final class M68kMnemonicRegistry {
 
     final List<M68kAdm> operands = PsiTreeUtil.getChildrenOfTypeAsList(instruction, M68kAdm.class);
     List<M68kMnemonic> filtered = getFilteredM68Mnemonics(instruction, operands, all);
+    // this may fail if there are lexer/parser issues in file, but that's OK for now
     assert !filtered.isEmpty() : instruction.getText();
 
     if (filtered.size() == 1) {
