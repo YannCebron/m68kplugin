@@ -8,9 +8,6 @@
 UNLK An
 ```
 
-## Attributes
-Unsized
-
 ## Description
 The stack pointer is loaded from the specified address register and the old contents of the stack pointer are lost (this has the effect of collapsing the stack frame). The address register is then loaded with the longword pulled off the stack.
 

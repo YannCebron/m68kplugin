@@ -9,9 +9,6 @@ ADD <ea>,Dn
 ADD Dn,<ea>
 ```
 
-## Attributes
-`Size` byte, word, longword
-
 ## Description
 Add the source operand to the destination operand and store the result in the destination location.
 

@@ -9,9 +9,6 @@
 RTR
 ```
 
-## Attributes
-Unsized
-
 ## Description
 The condition code and program counter are pulled from the stack. The previous condition code and program counter are lost. The supervisor portion of the status register is not affected.
 

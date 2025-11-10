@@ -9,9 +9,6 @@
 SWAP Dn
 ```
 
-## Attributes
-`Size` word
-
 ## Description
 Exchange the upper and lower 16-bit words of a data register.
 

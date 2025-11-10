@@ -9,9 +9,6 @@ AND <ea>,Dn
 AND Dn,<ea>
 ```
 
-## Attributes
-`Size` byte, word, longword
-
 ## Description
 `AND` the source operand to the destination operand and store the result in the destination location.
 

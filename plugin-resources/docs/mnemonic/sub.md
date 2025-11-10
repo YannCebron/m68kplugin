@@ -9,9 +9,6 @@ SUB <ea>,Dn
 SUB Dn,<ea>
 ```
 
-## Attributes
-`Size` byte, word, longword
-
 ## Description
 Subtract the source operand from the destination operand and store the result in the destination location.
 

@@ -8,9 +8,6 @@
 ANDI #<data>,<ea>
 ```
 
-## Attributes
-`Size` byte, word, longword
-
 ## Description
 *AND* the immediate data to the destination operand. The `ANDI` permits a literal operand to be ANDed with a destination other than a data register. For example, `ANDI #$FE00,$1234` or `ANDI.B #$F0,(A2)+`.
 
@@ -33,9 +30,6 @@ ANDI #<data>,<ea>
 ```assembly
 ANDI #<data>,CCR
 ```
-
-## Attributes
-`Size` byte
 
 ## Description
 *AND* the immediate data to the condition code register (i.e., the least-significant byte of the status register).
@@ -68,9 +62,6 @@ IF [S] = 1
 ```assembly
 ANDI #<data>,SR
 ```
-
-## Attributes
-`Size` word
 
 ## Description
 *AND* the immediate data to the status register and store the result in the status register. All bits of the SR are affected.

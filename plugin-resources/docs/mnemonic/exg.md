@@ -14,9 +14,6 @@ EXG D2,A0
 EXG A7,D5
 ```
 
-## Attributes
-`Size` longword
-
 ## Description
 Exchange the contents of two registers. The size of the instruction is a longword because the entire 32-bit contents of two registers are exchanged. The instruction permits the exchange of address registers, data registers, and address and data registers.
 

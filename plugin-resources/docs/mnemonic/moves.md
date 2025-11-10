@@ -11,9 +11,6 @@ MOVES < ea > ,Rn
 MOVES Rn, < ea >
 ```
 
-## Attributes
-`Size` byte, word, longword
-
 ## Description
 This instruction moves the byte, word, or long operand from the specified general register to a location within the
 address space specified by the destination function code (DFC) register, or it moves the byte, word, or long operand

@@ -7,9 +7,6 @@
 ```assembly
 CMPM (Ay)+,(Ax)+
 ```
-## Attributes
-`Size` byte, word, longword
-
 ## Sample syntax
 ```assembly
 CMPM.B (A3)+,(A4)+

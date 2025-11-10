@@ -16,9 +16,6 @@ LEA (-6,A0,D0.L),A6
 LEA (Table,PC,D0),A6
 ```
 
-## Attributes
-`Size` longword
-
 ## Description
 The effective address is computed and loaded into the specified address register. For example, `LEA (-6,A0,D0.W),A1` calculates the sum of address register A0 plus data register D0.W sign-extended to 32 bits minus 6, and deposits the result in address register A1. The difference between the `LEA` and [`PEA`](pea.md) instructions is that `LEA` calculates an effective address and puts it in an address register, while `PEA` calculates an effective address in the same way but pushes it on the stack.
 

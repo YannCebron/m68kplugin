@@ -11,9 +11,6 @@ S ← 1;</br>
 TRAP #<vector>
 ```
 
-## Attributes
-Unsized
-
 ## Description
 This instruction forces the processor to initiate exception processing. The vector number used by the `TRAP` instruction is in the range 0 to 15 and therefore, supports 16 traps (i.e., `TRAP #0` to `TRAP #15`).
 

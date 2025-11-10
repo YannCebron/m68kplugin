@@ -8,9 +8,6 @@
 PEA <ea>
 ```
 
-## Attributes
-`Size`  longword
-
 ## Description
 The longword effective address specified by the instruction is computed and pushed onto the stack. The difference between `PEA` and [`LEA`](lea.md) is that `LEA` calculates an effective address and puts it in an address register, while `PEA` calculates an effective address in the same way but pushes it on the stack.
 

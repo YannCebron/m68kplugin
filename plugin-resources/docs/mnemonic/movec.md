@@ -11,9 +11,6 @@ MOVEC Rc,Rn
 MOVEC Rn,Rc
 ```
 
-## Attributes
-`Size` longword
-
 ## Description
 Moves the contents of the specified control register (Rc) to the specified general register (Rn) or copies the contents
 of the specified general register to the specified control register. This is always a 32-bit transfer, even though the

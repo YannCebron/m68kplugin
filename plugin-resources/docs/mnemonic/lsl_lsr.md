@@ -13,9 +13,6 @@ LSL <ea>
 LSR <ea>
 ```
 
-## Attributes
-`Size` byte, word, longword
-
 ## Description
 Logically shift the bits of the operand in the specified direction (i.e., left or right). A zero is shifted into the input position and the bit shifted out is copied into both the C- and the X-bit of the CCR. The shift count may be specified in one of three ways. The count may be a literal, the contents of a data register, or the value 1. An immediate count permits a shift of 1 to 8 places. If the count is in a register, the value is modulo 64 - from 0 to 63. If no count is specified, one shift is made (e.g., `LSL <ea>` shifts the *word* at the effective address one position left).
 

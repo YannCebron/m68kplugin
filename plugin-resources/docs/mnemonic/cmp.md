@@ -12,9 +12,6 @@ CMP <ea>,Dn
 CMP (Test,A6,D3.W),D2
 ```
 
-## Attributes
-`Size` byte, word, longword
-
 ## Description
 Subtract the source operand from the destination operand and set the condition codes accordingly. The destination must be a data register. The destination is not modified by this instruction.
 

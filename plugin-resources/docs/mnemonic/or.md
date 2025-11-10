@@ -9,9 +9,6 @@ OR <ea>,Dn
 OR Dn,<ea>
 ```
 
-## Attributes
-`Size`  byte, word, longword
-
 ## Description
 OR the source operand to the destination operand, and store the result in the destination location.
 

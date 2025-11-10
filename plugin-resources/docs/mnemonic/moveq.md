@@ -8,9 +8,6 @@
 MOVEQ #<data>,Dn
 ```
 
-## Attributes
-`Size`  longword
-
 ## Description
 Move the specified literal to a data register. The literal data is an eight-bit field within the `MOVEQ` op-code and specifies a signed value in the range -128 to +127. When the source operand is transferred, it is sign-extended to 32 bits. Consequently, although only 8 bits are moved, the `MOVEQ` instruction is a *longword* operation.
 

@@ -8,9 +8,6 @@
 MOVEA <ea>,An
 ```
 
-## Attributes
-`Size` word, longword
-
 ## Description
 Move the contents of the source to the destination location. The destination is an address register. The source must be a word or longword. If it is a word, it is sign-extended to a longword. The condition codes are not affected.
 

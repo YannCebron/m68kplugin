@@ -9,9 +9,6 @@ ABCD Dy,Dx
 ABCD -(Ay),-(Ax)
 ```
 
-## Attributes
-`Size` byte
-
 ## Description
 Add the source operand to the destination operand along with the extend bit, and store the result in the destination location. The addition is performed using `BCD` arithmetic. The only legal addressing modes are data register direct and memory to memory with address register indirect using pre-decrementing.
 

@@ -8,9 +8,6 @@
 RTD #<displacement>
 ```
 
-## Attributes
-Unsized
-
 ## Description
 Pulls the program counter value from the stack and adds the sign-extended 16-bit displacement value to the stack pointer. The previous program counter value is lost.
 

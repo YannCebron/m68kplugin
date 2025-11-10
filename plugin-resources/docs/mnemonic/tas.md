@@ -8,9 +8,6 @@
 TAS <ea>
 ```
 
-## Attributes
-`Size` byte
-
 ## Description
 Test and set the byte operand addressed by the effective address field. The N- and Z-bits of the *CCR* are updated accordingly. The high-order bit of the operand (i.e., bit 7) is set. This operation is *indivisible* and uses a read-modify-write cycle. Its principal application is in multiprocessor systems.
 

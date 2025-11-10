@@ -9,8 +9,6 @@
 ```assembly
 ILLEGAL
 ```
-## Attributes
-None
 
 ## Description
 The bit pattern of the illegal instruction, 4AFC<sub>16</sub> causes the illegal instruction trap to be taken. As in all exceptions, the contents of the program counter and the processor status word are pushed onto the supervisor stack at the start of exception processing.

@@ -8,9 +8,6 @@
 SUBI #<data>,<ea>
 ```
 
-## Attributes
-`Size` byte, word, longword
-
 ## Description
 Subtract the immediate data from the destination operand. Store the result in the destination operand.
 

@@ -8,9 +8,6 @@
 EORI #<data>,<ea>
 ```
 
-## Attributes
-`Size` byte, word, longword
-
 ## Description
 EOR the immediate data with the contents of the destination operand. Store the result in the destination operand.
 
@@ -33,8 +30,6 @@ EOR the immediate data with the contents of the destination operand. Store the r
 ```assembly
 EORI #<data>,CCR
 ```
-## Attributes
-`Size` byte
 
 ## Description
 EOR the immediate data with the contents of the condition code register (i.e., the least-significant byte of the status register).
@@ -65,8 +60,6 @@ IF [S] = 1<br/>
 ```assembly
 EORI #<data>,SR
 ```
-## Attributes
-`Size` word
 
 ## Description
 EOR (exclusive OR) the immediate data with the contents of the status register and store the result in the status register. All bits of the status register are affected.

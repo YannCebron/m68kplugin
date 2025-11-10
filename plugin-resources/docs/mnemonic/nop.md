@@ -8,9 +8,6 @@ None
 NOP
 ```
 
-## Attributes
-Unsized
-
 ## Description
 The no operation instruction, `NOP` performs no *computation*. Execution continues with the instruction following the `NOP` instruction. The processor's state is not modified by a `NOP`.
 

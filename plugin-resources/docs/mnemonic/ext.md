@@ -9,9 +9,6 @@ EXT.W Dn
 EXT.L Dn
 ```
 
-## Attributes
-`Size` word, longword
-
 ## Description
 Extend the least-significant byte in a data register to a word, or extend the least-significant word in a data register to a longword. If the operation is word sized, bit 7 of the designated data register is copied to bits (8:15). If the operation is longword sized, bit 15 is copied to bits (16:31).
 

@@ -9,9 +9,6 @@
 JSR <ea>
 ```
 
-## Attributes
-Unsized
-
 ## Description
 `JSR` pushes the longword address of the instruction immediately following the `JSR` onto the system stack. Program execution then continues at the address specified in the instruction.
 

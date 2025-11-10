@@ -16,9 +16,6 @@ MOVE #$123,(A6)+
 MOVE Temp1,Temp2
 ```
 
-## Attributes
-`Size` byte, word, longword
-
 ## Description
 Move the contents of the source to the destination location. The data is examined as it is moved and the condition codes set accordingly. Note that this is actually a *copy* command because the source is not affected by the move. The move instruction has the widest range of addressing modes of all the 68000's instructions.
 
@@ -47,9 +44,6 @@ Move the contents of the source to the destination location. The data is examine
 MOVE <ea>,CCR
 ```
 
-## Attributes
-`Size` word
-
 ## Description
 Move the contents of the source operand to the condition code register. The source operand is a *word*, but only the low-order *byte* contains the condition codes. The upper byte is neglected. Note that `MOVE <ea>,CCR` is a word operation, but `ANDI`, `ORI`, and `EORI` to `CCR` are all byte operations.
 
@@ -76,9 +70,6 @@ The move to CCR instruction permits the programmer to preset the CCR. For exampl
 MOVE SR,<ea>
 ```
 
-## Attributes
-`Size` word
-
 ## Description
 Move the contents of the status register to the destination location. The source operand, the status register, is a word. This instruction is not privileged in the 68000, but is privileged in the 68010, 68020, and 68030. Executing a `MOVE SR,<ea>` while in the user mode on these processors results in a privilege violation trap.
 
@@ -104,10 +95,6 @@ ELSE TRAP
 ```assembly
 MOVE <ea>,SR
 ```
-
-## Attributes
-`Size` word
-
 
 ## Description
 Move the contents of the source operand to the status register. The source operand is a word and all bits of the status register are affected.
@@ -146,9 +133,6 @@ MOVE USP,An
 ```assembly
 MOVE An,USP
 ```
-
-## Attributes
-`Size` longword
 
 ## Description
 Move the contents of the user stack pointer to an address register or vice versa. This is a privileged instruction and allows the operating system running in the supervisor state either to read the contents of the user stack pointer or to set up the user stack pointer.

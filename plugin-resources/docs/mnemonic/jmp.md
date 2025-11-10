@@ -7,8 +7,6 @@
 ```assembly
 JMP <ea>
 ```
-## Attributes
-Unsized
 
 ## Description
 Program execution continues at the effective address specified by the instruction.

@@ -9,9 +9,6 @@ IF cc = 1 THEN [destination] ← 11111111<sub>2</sub><br/>
 Scc <ea>
 ```
 
-## Attributes
-`Size` byte
-
 ## Description
 The specified condition code is tested. If the condition is true, the bits at the effective address are all set to one (i.e., $FF). Otherwise, the bits at the effective address are set to zeros (i.e., $00).
 

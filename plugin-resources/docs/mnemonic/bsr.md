@@ -10,9 +10,6 @@ BSR <label>
 BSR <literal>
 ```
 
-## Attributes
-`Size` byte, word
-
 ## Description
 The longword address of the instruction immediately following the `BSR` instruction is pushed onto the system stack pointed at by A7. Program execution then continues at location [PC] + displacement. The displacement is an 8-bit two's complement value for a short branch, or a 16-bit two's complement value for a long branch. The value in the PC corresponds to the current location plus two. Note that a short branch to the next instruction is impossible, since the branch code 0 is used to indicate a long branch with a 16-bit offset.
 

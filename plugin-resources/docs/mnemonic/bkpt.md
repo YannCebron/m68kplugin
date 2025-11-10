@@ -8,9 +8,6 @@ Run Breakpoint Acknowledge Cycle; TRAP As Illegal Instruction
 BKPT #<data>
 ```
 
-## Attributes
-Unsized
-
 ## Description
 For the MC68010, a breakpoint acknowledge bus cycle is run with function codes driven high and zeros on all address
 lines. Whether the breakpoint acknowledge bus cycle is terminated with DTACK, BERR, or VPA, the processor always takes

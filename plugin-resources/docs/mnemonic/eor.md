@@ -12,9 +12,6 @@ EOR Dn,<ea>
 EOR D3,-(A3)
 ```
 
-## Attributes
-`Size` byte, word, longword.
-
 ## Description
 EOR (exclusive or) the source operand with the destination operand and store the result in the destination location Note that the source operand must be a data register and that the operation `EOR <ea>,Dn` is not permitted.
 

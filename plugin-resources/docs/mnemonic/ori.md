@@ -8,9 +8,6 @@
 ORI #<data>,<ea>
 ```
 
-## Attributes
-`Size`  byte, word, longword
-
 ## Description
 OR the immediate data with the destination operand. Store the result in the destination operand.
 
@@ -41,9 +38,6 @@ ORI.B #%00000011,(A0)+
 ORI #<data>,CCR
 ```
 
-## Attributes
-`Size`  byte
-
 ## Description
 OR the immediate data with the condition code register (i.e., the least-significant byte of the status register). For example, the Z flag of the CCR can be set by `ORI #$04,CCR`.
 
@@ -70,9 +64,6 @@ IF [S] = 1<br/>
 ```assembly
 ORI #<data>,SR
 ```
-
-## Attributes
-`Size`  word
 
 ## Description
 OR the immediate data to the status register and store the result in the status register. All bits of the status register are affected.

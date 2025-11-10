@@ -8,9 +8,6 @@
 ADDA <ea>,An
 ```
 
-## Attributes
-`Size` word, longword
-
 ## Description
 Add the source operand to the destination address register and store the result in the destination address register. The source is sign-extended before it is added to the destination. For example, if we execute `ADDA.W D3,A4` where A4 = 00000100<sub>16</sub> and D3.W = 8002<sub>16</sub>, the contents of D3 are sign-extended to FFFF8002<sub>16</sub> and added to 00000100<sub>16</sub> to give FFFF8102<sub>16</sub>, which is stored in A4.
 

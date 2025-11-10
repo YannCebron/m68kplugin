@@ -17,9 +17,6 @@ STOP #$2700
 STOP #SetUp
 ```
 
-## Attributes
-Unsized
-
 ## Description
 The immediate operand is copied into the entire status register (i.e., both status byte and *CCR* are modified), and the program counter advanced to point to the next instruction to be executed. The processor then suspends all further processing and halts. That is, the privileged `STOP` instruction stops the 68000.
 
