@@ -63,10 +63,13 @@ class M68kInstructionMnemonicDocsGenerator {
       appendBreak();
     }
 
-    Set<M68kAddressMode> allUsedAddressModes = new HashSet<>();
+    // only operands with >1 address mode, otherwise they cannot appear in the table(s)
+    Set<M68kAddressMode> allUsedAddressModesFromMultiOperands = new HashSet<>();
     for (M68kMnemonic mnemonic : allMnemonics) {
-      ContainerUtil.addAll(allUsedAddressModes, mnemonic.sourceOperand().getAddressModes());
-      ContainerUtil.addAll(allUsedAddressModes, mnemonic.destinationOperand().getAddressModes());
+      M68kAddressMode[] sourceModes = mnemonic.sourceOperand().getAddressModes();
+      if (sourceModes.length > 1) ContainerUtil.addAll(allUsedAddressModesFromMultiOperands, sourceModes);
+      M68kAddressMode[] destinationModes = mnemonic.destinationOperand().getAddressModes();
+      if (destinationModes.length > 1) ContainerUtil.addAll(allUsedAddressModesFromMultiOperands, destinationModes);
     }
 
     for (M68kMnemonic mnemonic : allMnemonics) {
@@ -111,7 +114,7 @@ class M68kInstructionMnemonicDocsGenerator {
       sb.append("<table style=\"width: 100%;\"><tr>");
       sb.append("<th></th>");
       for (M68kAddressMode value : M68kAddressMode.values()) {
-        if (!allUsedAddressModes.contains(value)) continue;
+        if (!allUsedAddressModesFromMultiOperands.contains(value)) continue;
 
         sb.append("<th style=\"text-align:center;\">");
         // prevent 'abs.w' to break after 'period' on resize. yes, CSS simply won't work here
@@ -120,8 +123,8 @@ class M68kInstructionMnemonicDocsGenerator {
       }
       sb.append("</tr>");
 
-      appendAddressModes(M68kBundle.message("documentation.hover.source"), allUsedAddressModes, sourceAddressModes);
-      appendAddressModes(M68kBundle.message("documentation.hover.destination"), allUsedAddressModes, destinationAddressModes);
+      appendAddressModes(M68kBundle.message("documentation.hover.source"), allUsedAddressModesFromMultiOperands, sourceAddressModes);
+      appendAddressModes(M68kBundle.message("documentation.hover.destination"), allUsedAddressModesFromMultiOperands, destinationAddressModes);
       sb.append("</table>");
 
       appendBreak();
