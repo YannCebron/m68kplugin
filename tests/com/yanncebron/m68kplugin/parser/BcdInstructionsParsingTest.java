@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,7 +55,7 @@ public class BcdInstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" nbcd.b d0");
   }
 
-  public void testNbcdInstructionArd() throws IOException {
+  public void testNbcdInstructionWrongArd() throws IOException {
     doCodeTest(" nbcd a0");
   }
 

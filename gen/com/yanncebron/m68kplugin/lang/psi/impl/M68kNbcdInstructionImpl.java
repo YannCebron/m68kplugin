@@ -73,12 +73,6 @@ public class M68kNbcdInstructionImpl extends M68kBcdInstructionBaseImpl implemen
 
   @Override
   @Nullable
-  public M68kAdmArd getAdmArd() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmArd.class);
-  }
-
-  @Override
-  @Nullable
   public M68kAdmAri getAdmAri() {
     return PsiTreeUtil.getChildOfType(this, M68kAdmAri.class);
   }

@@ -1,0 +1,8 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kNbcdInstructionImpl(NBCD_INSTRUCTION)
+    PsiElement(nbcd)('nbcd')
+    PsiErrorElement:<address register indirect with displacement>, <address register indirect with index>, <address register indirect with postincrement>, <address register indirect with predecrement>, <address register indirect>, <data register> or <expression> expected, got 'a0'
+      <empty list>
+  PsiWhiteSpace(' ')
+  PsiElement(address_register)('a0')

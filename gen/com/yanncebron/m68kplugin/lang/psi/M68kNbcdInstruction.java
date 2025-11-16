@@ -37,9 +37,6 @@ public interface M68kNbcdInstruction extends M68kBcdInstructionBase {
   M68kAdmApi getAdmApi();
 
   @Nullable
-  M68kAdmArd getAdmArd();
-
-  @Nullable
   M68kAdmAri getAdmAri();
 
   @Nullable

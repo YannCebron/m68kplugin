@@ -364,33 +364,33 @@ adm_register_list ::= register_range (DIV register_range)* {
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdm"
 }
 
-
-// ATTN: ordering in groups
-private adm_group_all ::=                   adm_drd | adm_ard | adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-private adm_group_all_except_ard ::=        adm_drd |           adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-private adm_group_all_except_ard_imm ::=    adm_drd |                     adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-private adm_group_all_except_drd_ard ::=                        adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+// maps to M68kOperand
+// ATTN: keep fixed ordering in groups
+private operand_all ::=                     adm_drd | adm_ard | adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+private operand_data ::=                    adm_drd |           adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+private operand_memory ::=                                      adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+private operand_memory_without_imm ::=                                    adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
 private adm_group_all_except_rrd ::=                            adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
 private adm_group_all_except_pc_imm ::=     adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
-private adm_group_all_except_ard_pc_imm ::= adm_drd |                     adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
-private adm_group_all_except_drd_ard_pc_imm ::=                           adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
+private operand_alterable_data ::=          adm_drd |                     adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
+private operand_alterable_memory ::=                                      adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
 
-private adm_group_ctrl_registers ::= adm_dfc | adm_sfc | adm_vbr
+private operand_ctrl_register ::= adm_dfc | adm_sfc | adm_vbr
 {
   name = "control register"
 }
 
 // Common tails
-private tail_data_size_all___imm__all_except_ard_pc_imm ::= data_size_all?       adm_imm       COMMA adm_group_all_except_ard_pc_imm
+private tail_data_size_all___imm_alterable_data ::= data_size_all? adm_imm COMMA operand_alterable_data
 {
   pin = 2
 }
-private tail_data_size_word_long___all__ard ::=             data_size_word_long? adm_group_all COMMA adm_ard
+private tail_data_size_word_long___all__ard ::= data_size_word_long? operand_all COMMA adm_ard
 {
   pin = 2
 }
 
-private tail_data_size_all___all_except_ard_pc_imm ::=      data_size_all?       adm_group_all_except_ard_pc_imm
+private tail_data_size_all___alterable_data ::= data_size_all? operand_alterable_data
 
 
 // Move ==================================================================
@@ -412,18 +412,18 @@ fake move_instruction_base ::=
 }
 
 private move_tail_ard_alterable::= data_size_word_long? adm_ard COMMA adm_group_all_except_pc_imm
-private move_tail_all_ard ::= data_size_word_long? adm_group_all COMMA adm_ard
-private move_tail_data_alterable_data ::= data_size_all? adm_group_all_except_ard COMMA adm_group_all_except_ard_pc_imm
-private move_tail_ccr_alterable_data ::= data_size_word? adm_ccr COMMA adm_group_all_except_ard_pc_imm
+private move_tail_all_ard ::= data_size_word_long? operand_all COMMA adm_ard
+private move_tail_data_alterable_data ::= data_size_all? operand_data COMMA operand_alterable_data
+private move_tail_ccr_alterable_data ::= data_size_word? adm_ccr COMMA operand_alterable_data
 {
   pin = 2
 }
-private move_tail_sr_alterable_data ::= data_size_word? adm_sr COMMA adm_group_all_except_ard_pc_imm
+private move_tail_sr_alterable_data ::= data_size_word? adm_sr COMMA operand_alterable_data
 {
   pin = 2
 }
-private move_tail_data_ccr ::= data_size_word? adm_group_all_except_ard COMMA adm_ccr
-private move_tail_data_sr ::= data_size_word? adm_group_all_except_ard COMMA adm_sr
+private move_tail_data_ccr ::= data_size_word? operand_data COMMA adm_ccr
+private move_tail_data_sr ::= data_size_word? operand_data COMMA adm_sr
 private move_tail_usp_ard ::= data_size_long? adm_usp COMMA adm_ard
 {
   pin = 2
@@ -490,11 +490,11 @@ movep_instruction ::= MOVEP data_size_word_long?
                         movep_tail_adi_drd
                       )
 
-private movec_from_ctrl_tail ::= adm_group_ctrl_registers COMMA adm_rrd
+private movec_from_ctrl_tail ::= operand_ctrl_register COMMA adm_rrd
 {
   pin = 1
 }
-private movec_to_ctrl_tail ::= adm_rrd COMMA adm_group_ctrl_registers
+private movec_to_ctrl_tail ::= adm_rrd COMMA operand_ctrl_register
 {
   pin = 1
 }
@@ -633,7 +633,7 @@ abcd_instruction ::= ABCD bcd_tail
 
 sbcd_instruction ::= SBCD bcd_tail
 
-nbcd_instruction ::= NBCD data_size_byte? adm_group_all_except_pc_imm
+nbcd_instruction ::= NBCD data_size_byte? operand_alterable_data
 
 // Add/Sub ==================================================================
 ;
@@ -651,11 +651,11 @@ private add_sub_instructions ::= add_instruction |
                                  subq_instruction |
                                  subx_instruction
 
-private add_sub_tail_data_drd ::=             data_size_all?       adm_group_all_except_ard COMMA adm_drd
+private add_sub_tail_data_drd ::=             data_size_all?       operand_data COMMA adm_drd
 private add_sub_tail_ard_drd ::=              data_size_word_long? adm_ard COMMA adm_drd
-private add_sub_tail_drd_alterable_memory ::= data_size_all?       adm_drd COMMA adm_group_all_except_ard_pc_imm
-private add_sub_tail_all_ard ::=              data_size_word_long? adm_group_all COMMA adm_ard
-private add_sub_tail_imm_alterable_data ::=   data_size_all?       adm_imm COMMA adm_group_all_except_ard_pc_imm
+private add_sub_tail_drd_alterable_memory ::= data_size_all?       adm_drd COMMA operand_alterable_memory
+private add_sub_tail_all_ard ::=              data_size_word_long? operand_all COMMA adm_ard
+private add_sub_tail_imm_alterable_data ::=   data_size_all?       adm_imm COMMA operand_alterable_data
 {
   pin = "adm_imm"
 }
@@ -671,7 +671,7 @@ private add_sub_q_tail_wl ::= data_size_word_long? adm_quick COMMA adm_group_all
 {
   pin = 2
 }
-private add_sub_q_tail_b ::= data_size_byte adm_quick COMMA adm_group_all_except_ard_pc_imm
+private add_sub_q_tail_b ::= data_size_byte adm_quick COMMA operand_alterable_data
 {
   pin = 2
 }
@@ -693,13 +693,13 @@ private add_sub_x_tail ::= data_size_all?
 
 add_instruction ::= ADD add_sub_tail
 adda_instruction ::= ADDA tail_data_size_word_long___all__ard
-addi_instruction ::= ADDI tail_data_size_all___imm__all_except_ard_pc_imm
+addi_instruction ::= ADDI tail_data_size_all___imm_alterable_data
 addq_instruction ::= ADDQ add_sub_q_tail
 addx_instruction ::= ADDX add_sub_x_tail
 
 sub_instruction ::= SUB add_sub_tail
 suba_instruction ::= SUBA tail_data_size_word_long___all__ard
-subi_instruction ::= SUBI tail_data_size_all___imm__all_except_ard_pc_imm
+subi_instruction ::= SUBI tail_data_size_all___imm_alterable_data
 subq_instruction ::= SUBQ add_sub_q_tail
 subx_instruction ::= SUBX add_sub_x_tail
 
@@ -715,7 +715,7 @@ private mul_div_instructions ::= muls_instruction |
                                  divu_instruction
 
 private mul_div_tail ::= data_size_word_long?
-                         adm_group_all_except_ard COMMA adm_drd
+                         operand_data COMMA adm_drd
 {
   pin = 2
 }
@@ -745,9 +745,9 @@ fake bool_instruction_base ::= bool_tail
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kPrivilegedInstruction"
 }
 
-private bool_tail_data_drd ::=             data_size_all?  adm_group_all_except_ard COMMA adm_drd
-private bool_tail_drd_alterable_memory ::= data_size_all?  adm_drd COMMA adm_group_all_except_drd_ard_pc_imm
-private bool_tail_imm_alterable_data ::=   data_size_all?  adm_imm COMMA adm_group_all_except_ard_pc_imm
+private bool_tail_data_drd ::=             data_size_all?  operand_data COMMA adm_drd
+private bool_tail_drd_alterable_memory ::= data_size_all?  adm_drd COMMA operand_alterable_memory
+private bool_tail_imm_alterable_data ::=   data_size_all?  adm_imm COMMA operand_alterable_data
 private bool_tail_imm_ccr ::=              data_size_byte? adm_imm COMMA adm_ccr
 private bool_tail_imm_sr ::=               data_size_word? adm_imm COMMA adm_sr
 private bool_tail ::= (
@@ -772,7 +772,7 @@ andi_instruction ::= ANDI bool_i_tail
 or_instruction ::= OR bool_tail
 ori_instruction ::= ORI bool_i_tail
 
-private eor_tail_drd_alterable_data::= data_size_all? adm_drd COMMA adm_group_all_except_ard_pc_imm
+private eor_tail_drd_alterable_data::= data_size_all? adm_drd COMMA operand_alterable_data
 {
   pin = "adm_drd"
 }
@@ -788,7 +788,7 @@ private eor_tail ::= (
 eor_instruction ::= EOR eor_tail
 eori_instruction ::= EORI bool_i_tail
 
-not_instruction ::= NOT tail_data_size_all___all_except_ard_pc_imm
+not_instruction ::= NOT tail_data_size_all___alterable_data
 {
   extends = data_sized
 }
@@ -829,16 +829,16 @@ trapv_instruction ::= TRAPV
 
 bkpt_instruction ::= BKPT adm_quick
 
-clr_instruction ::= CLR tail_data_size_all___all_except_ard_pc_imm
+clr_instruction ::= CLR tail_data_size_all___alterable_data
 {
   extends = data_sized
 }
 
-tst_instruction ::= TST data_size_all? adm_group_all
+tst_instruction ::= TST data_size_all? operand_all
 {
   extends = data_sized
 }
-tas_instruction ::= TAS data_size_byte? adm_group_all_except_ard_pc_imm
+tas_instruction ::= TAS data_size_byte? operand_alterable_data
 {
   extends = data_sized
 }
@@ -848,11 +848,11 @@ ext_instruction ::= EXT data_size_word_long? adm_drd
   extends = data_sized
 }
 
-neg_instruction ::= NEG tail_data_size_all___all_except_ard_pc_imm
+neg_instruction ::= NEG tail_data_size_all___alterable_data
 {
   extends = data_sized
 }
-negx_instruction ::= NEGX tail_data_size_all___all_except_ard_pc_imm
+negx_instruction ::= NEGX tail_data_size_all___alterable_data
 {
   extends = data_sized
 }
@@ -862,7 +862,7 @@ swap_instruction ::= SWAP data_size_word? adm_drd
   extends = data_sized
 }
 
-chk_instruction ::= CHK data_size_word_long? adm_group_all_except_ard COMMA adm_drd
+chk_instruction ::= CHK data_size_word_long? operand_data COMMA adm_drd
 {
   extends = data_sized
 }
@@ -882,16 +882,16 @@ fake cmp_instruction_base ::=
   extends = data_sized
 }
 
-private cmp_tail_ard_drd ::=       data_size_word_long? adm_ard COMMA adm_drd
-private cmp_tail_data_drd ::=      data_size_all?       adm_group_all_except_ard_imm COMMA adm_drd
-private cmp_tail_all_ard ::=       data_size_word_long? adm_group_all COMMA adm_ard
-private cmp_tail_imm_alterable ::= data_size_all?       adm_imm COMMA adm_group_all_except_ard_pc_imm
-private cmp_tail_api_api ::=       data_size_all?       adm_api COMMA adm_api
-cmp_instruction ::= CMP (cmp_tail_ard_drd | cmp_tail_data_drd | cmp_tail_all_ard | cmp_tail_imm_alterable | cmp_tail_api_api)
+private cmp_tail_ard_drd ::=            data_size_word_long? adm_ard COMMA adm_drd
+private cmp_tail_data_drd ::=           data_size_all?       operand_data COMMA adm_drd
+private cmp_tail_all_ard ::=            data_size_word_long? operand_all COMMA adm_ard
+private cmp_tail_imm_alterable_data ::= data_size_all?       adm_imm COMMA operand_alterable_data
+private cmp_tail_api_api ::=            data_size_all?       adm_api COMMA adm_api
+cmp_instruction ::= CMP (cmp_tail_ard_drd | cmp_tail_data_drd | cmp_tail_all_ard | cmp_tail_imm_alterable_data | cmp_tail_api_api)
 
 cmpa_instruction ::= CMPA tail_data_size_word_long___all__ard
 
-cmpi_instruction ::= CMPI tail_data_size_all___imm__all_except_ard_pc_imm
+cmpi_instruction ::= CMPI tail_data_size_all___imm_alterable_data
 
 cmpm_instruction ::= CMPM data_size_all?
                      adm_api COMMA adm_api
@@ -1041,7 +1041,7 @@ private sCC_instructions ::= seq_instruction |
                              shs_instruction |
                              slo_instruction
 
-private sCC_tail ::= data_size_byte? adm_group_all_except_ard_pc_imm
+private sCC_tail ::= data_size_byte? operand_alterable_data
 
 fake scc_instruction_base ::= sCC_tail
 {
@@ -1086,11 +1086,11 @@ fake bit_manipulation_instruction_base ::= (adm_drd | adm_quick)
   ]
 }
 
-private bit_tail_drd_drd ::=        data_size_long? adm_drd   COMMA adm_drd
-private bit_tail_drd_alterable ::=  data_size_byte? adm_drd   COMMA adm_group_all_except_drd_ard_pc_imm
-private bit_tail_quick_drd ::=      data_size_long? adm_quick COMMA adm_drd
-private bit_tail_quick_alterable::= data_size_byte? adm_quick COMMA adm_group_all_except_drd_ard_pc_imm
-private bit_tail ::= (bit_tail_drd_drd | bit_tail_drd_alterable | bit_tail_quick_drd | bit_tail_quick_alterable)
+private bit_tail_drd_drd ::=                data_size_long? adm_drd   COMMA adm_drd
+private bit_tail_drd_alterable_memory ::=   data_size_byte? adm_drd   COMMA operand_alterable_memory
+private bit_tail_quick_drd ::=              data_size_long? adm_quick COMMA adm_drd
+private bit_tail_quick_alterable_memory ::= data_size_byte? adm_quick COMMA operand_alterable_memory
+private bit_tail ::= (bit_tail_drd_drd | bit_tail_drd_alterable_memory | bit_tail_quick_drd | bit_tail_quick_alterable_memory)
 
 bchg_instruction ::= BCHG bit_tail
 
@@ -1099,9 +1099,9 @@ bclr_instruction ::= BCLR bit_tail
 bset_instruction ::= BSET bit_tail
 
 private btst_tail_drd_drd ::=      data_size_long? adm_drd   COMMA adm_drd
-private btst_tail_drd_memory ::=   data_size_byte? adm_drd   COMMA adm_group_all_except_drd_ard
+private btst_tail_drd_memory ::=   data_size_byte? adm_drd   COMMA operand_memory
 private btst_tail_quick_drd ::=    data_size_long? adm_quick COMMA adm_drd
-private btst_tail_quick_memory ::= data_size_byte? adm_quick COMMA adm_group_all_except_ard_imm
+private btst_tail_quick_memory ::= data_size_byte? adm_quick COMMA operand_memory_without_imm
 btst_instruction ::= BTST (btst_tail_drd_drd | btst_tail_drd_memory | btst_tail_quick_drd| btst_tail_quick_memory)
 {
   pin = 1
@@ -1126,7 +1126,7 @@ fake shift_rotate_instruction_base ::=
   extends = data_sized
 }
 
-private shift_tail_alterable_memory ::= data_size_word? adm_group_all_except_drd_ard_pc_imm
+private shift_tail_alterable_memory ::= data_size_word? operand_alterable_memory
 private shift_tail_drd_drd ::=          data_size_all?  adm_drd COMMA adm_drd
 {
   pin = "COMMA"
@@ -1474,7 +1474,7 @@ macro_parameter_directive ::= BACKSLASH macro_parameter_index_parameter
   pin = 1
 }
 
-private macro_call_parameter_element ::= adm_register_list | adm_group_all | adm_sr | adm_ccr | adm_usp | adm_group_ctrl_registers
+private macro_call_parameter_element ::= adm_register_list | operand_all | adm_sr | adm_ccr | adm_usp | operand_ctrl_register
 private angled_macro_call_parameter_element ::= LT macro_call_parameter_element (COMMA macro_call_parameter_element)* GT
 {
   pin = 1
