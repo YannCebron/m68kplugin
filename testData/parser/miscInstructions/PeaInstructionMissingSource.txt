@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kPeaInstructionImpl(PEA_INSTRUCTION)
     PsiElement(pea)('pea')
-    PsiErrorElement:<address register indirect with displacement>, <address register indirect with index>, <address register indirect with predecrement>, <address register indirect>, <expression>, <program counter indirect with displacement> or <program counter indirect with index> expected
+    PsiErrorElement:<address register indirect with displacement>, <address register indirect with index>, <address register indirect>, <expression>, <program counter indirect with displacement> or <program counter indirect with index> expected
       <empty list>
   PsiWhiteSpace(' ')

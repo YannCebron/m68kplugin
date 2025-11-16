@@ -2843,7 +2843,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // JMP jmp_jsr_tail
+  // JMP operand_control
   public static boolean jmp_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "jmp_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", JMP)) return false;
@@ -2851,27 +2851,13 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, JMP_INSTRUCTION, "<instruction>");
     r = consumeToken(b, JMP);
     p = r; // pin = 1
-    r = r && jmp_jsr_tail(b, l + 1);
+    r = r && operand_control(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
   /* ********************************************************** */
-  // adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-  static boolean jmp_jsr_tail(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "jmp_jsr_tail")) return false;
-    boolean r;
-    r = adm_ari(b, l + 1);
-    if (!r) r = adm_pcd(b, l + 1);
-    if (!r) r = adm_pci(b, l + 1);
-    if (!r) r = adm_adi(b, l + 1);
-    if (!r) r = adm_aix(b, l + 1);
-    if (!r) r = adm_abs(b, l + 1);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // JSR jmp_jsr_tail
+  // JSR operand_control
   public static boolean jsr_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "jsr_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", JSR)) return false;
@@ -2879,7 +2865,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, JSR_INSTRUCTION, "<instruction>");
     r = consumeToken(b, JSR);
     p = r; // pin = 1
-    r = r && jmp_jsr_tail(b, l + 1);
+    r = r && operand_control(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -2950,7 +2936,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // LEA data_size_long?
-  //                     (adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA adm_ard
+  //                     operand_control COMMA adm_ard
   public static boolean lea_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "lea_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", LEA)) return false;
@@ -2959,7 +2945,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, LEA);
     p = r; // pin = 1
     r = r && report_error_(b, lea_instruction_1(b, l + 1));
-    r = p && report_error_(b, lea_instruction_2(b, l + 1)) && r;
+    r = p && report_error_(b, operand_control(b, l + 1)) && r;
     r = p && report_error_(b, consumeToken(b, COMMA)) && r;
     r = p && adm_ard(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
@@ -2971,19 +2957,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "lea_instruction_1")) return false;
     data_size_long(b, l + 1);
     return true;
-  }
-
-  // adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-  private static boolean lea_instruction_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "lea_instruction_2")) return false;
-    boolean r;
-    r = adm_ari(b, l + 1);
-    if (!r) r = adm_pcd(b, l + 1);
-    if (!r) r = adm_pci(b, l + 1);
-    if (!r) r = adm_adi(b, l + 1);
-    if (!r) r = adm_aix(b, l + 1);
-    if (!r) r = adm_abs(b, l + 1);
-    return r;
   }
 
   /* ********************************************************** */
@@ -4011,6 +3984,20 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = adm_api(b, l + 1);
     if (!r) r = adm_ari(b, l + 1);
     if (!r) r = adm_apd(b, l + 1);
+    if (!r) r = adm_adi(b, l + 1);
+    if (!r) r = adm_aix(b, l + 1);
+    if (!r) r = adm_abs(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+  static boolean operand_control(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "operand_control")) return false;
+    boolean r;
+    r = adm_ari(b, l + 1);
+    if (!r) r = adm_pcd(b, l + 1);
+    if (!r) r = adm_pci(b, l + 1);
     if (!r) r = adm_adi(b, l + 1);
     if (!r) r = adm_aix(b, l + 1);
     if (!r) r = adm_abs(b, l + 1);
