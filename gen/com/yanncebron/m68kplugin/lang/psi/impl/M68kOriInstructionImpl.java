@@ -43,42 +43,6 @@ public class M68kOriInstructionImpl extends M68kBoolInstructionBaseImpl implemen
 
   @Override
   @Nullable
-  public M68kAdmAbs getAdmAbs() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmAbs.class);
-  }
-
-  @Override
-  @Nullable
-  public M68kAdmAdi getAdmAdi() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmAdi.class);
-  }
-
-  @Override
-  @Nullable
-  public M68kAdmAix getAdmAix() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmAix.class);
-  }
-
-  @Override
-  @Nullable
-  public M68kAdmApd getAdmApd() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmApd.class);
-  }
-
-  @Override
-  @Nullable
-  public M68kAdmApi getAdmApi() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmApi.class);
-  }
-
-  @Override
-  @Nullable
-  public M68kAdmAri getAdmAri() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmAri.class);
-  }
-
-  @Override
-  @Nullable
   public M68kAdmDrd getAdmDrd() {
     return PsiTreeUtil.getChildOfType(this, M68kAdmDrd.class);
   }

@@ -745,8 +745,18 @@ fake bool_instruction_base ::= bool_tail
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kPrivilegedInstruction"
 }
 
-private bool_tail ::= data_size_all?
-                      adm_group_all_except_ard COMMA (adm_group_all_except_ard_pc_imm | adm_ccr | adm_sr)
+private bool_tail_data_drd ::=             data_size_all?  adm_group_all_except_ard COMMA adm_drd
+private bool_tail_drd_alterable_memory ::= data_size_all?  adm_drd COMMA adm_group_all_except_drd_ard_pc_imm
+private bool_tail_imm_alterable_data ::=   data_size_all?  adm_imm COMMA adm_group_all_except_ard_pc_imm
+private bool_tail_imm_ccr ::=              data_size_byte? adm_imm COMMA adm_ccr
+private bool_tail_imm_sr ::=               data_size_word? adm_imm COMMA adm_sr
+private bool_tail ::= (
+                        bool_tail_data_drd |
+                        bool_tail_drd_alterable_memory |
+                        bool_tail_imm_alterable_data |
+                        bool_tail_imm_ccr |
+                        bool_tail_imm_sr
+                      )
 
 private bool_i_tail_imm_ccr ::= data_size_byte? adm_imm COMMA adm_ccr
 private bool_i_tail_imm_sr ::= data_size_word? adm_imm COMMA adm_sr
@@ -762,7 +772,20 @@ andi_instruction ::= ANDI bool_i_tail
 or_instruction ::= OR bool_tail
 ori_instruction ::= ORI bool_i_tail
 
-eor_instruction ::= EOR bool_tail
+private eor_tail_drd_alterable_data::= data_size_all? adm_drd COMMA adm_group_all_except_ard_pc_imm
+{
+  pin = "adm_drd"
+}
+private eor_tail_imm_drd ::=           data_size_all? adm_imm COMMA adm_drd
+private eor_tail ::= (
+                       eor_tail_drd_alterable_data |
+                       eor_tail_imm_drd |
+                       bool_tail_imm_alterable_data |
+                       bool_tail_imm_ccr |
+                       bool_tail_imm_sr
+                     )
+
+eor_instruction ::= EOR eor_tail
 eori_instruction ::= EORI bool_i_tail
 
 not_instruction ::= NOT tail_data_size_all___all_except_ard_pc_imm

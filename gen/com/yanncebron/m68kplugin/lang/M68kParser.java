@@ -1705,35 +1705,125 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_all?
-  //                       adm_group_all_except_ard COMMA (adm_group_all_except_ard_pc_imm | adm_ccr | adm_sr)
+  // bool_tail_data_drd |
+  //                         bool_tail_drd_alterable_memory |
+  //                         bool_tail_imm_alterable_data |
+  //                         bool_tail_imm_ccr |
+  //                         bool_tail_imm_sr
   static boolean bool_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bool_tail")) return false;
     boolean r;
+    r = bool_tail_data_drd(b, l + 1);
+    if (!r) r = bool_tail_drd_alterable_memory(b, l + 1);
+    if (!r) r = bool_tail_imm_alterable_data(b, l + 1);
+    if (!r) r = bool_tail_imm_ccr(b, l + 1);
+    if (!r) r = bool_tail_imm_sr(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // data_size_all?  adm_group_all_except_ard COMMA adm_drd
+  static boolean bool_tail_data_drd(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bool_tail_data_drd")) return false;
+    boolean r;
     Marker m = enter_section_(b);
-    r = bool_tail_0(b, l + 1);
+    r = bool_tail_data_drd_0(b, l + 1);
     r = r && adm_group_all_except_ard(b, l + 1);
     r = r && consumeToken(b, COMMA);
-    r = r && bool_tail_3(b, l + 1);
+    r = r && adm_drd(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // data_size_all?
-  private static boolean bool_tail_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bool_tail_0")) return false;
+  private static boolean bool_tail_data_drd_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bool_tail_data_drd_0")) return false;
     data_size_all(b, l + 1);
     return true;
   }
 
-  // adm_group_all_except_ard_pc_imm | adm_ccr | adm_sr
-  private static boolean bool_tail_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bool_tail_3")) return false;
+  /* ********************************************************** */
+  // data_size_all?  adm_drd COMMA adm_group_all_except_drd_ard_pc_imm
+  static boolean bool_tail_drd_alterable_memory(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bool_tail_drd_alterable_memory")) return false;
     boolean r;
-    r = adm_group_all_except_ard_pc_imm(b, l + 1);
-    if (!r) r = adm_ccr(b, l + 1);
-    if (!r) r = adm_sr(b, l + 1);
+    Marker m = enter_section_(b);
+    r = bool_tail_drd_alterable_memory_0(b, l + 1);
+    r = r && adm_drd(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_group_all_except_drd_ard_pc_imm(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
+  }
+
+  // data_size_all?
+  private static boolean bool_tail_drd_alterable_memory_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bool_tail_drd_alterable_memory_0")) return false;
+    data_size_all(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // data_size_all?  adm_imm COMMA adm_group_all_except_ard_pc_imm
+  static boolean bool_tail_imm_alterable_data(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bool_tail_imm_alterable_data")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = bool_tail_imm_alterable_data_0(b, l + 1);
+    r = r && adm_imm(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_group_all_except_ard_pc_imm(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_all?
+  private static boolean bool_tail_imm_alterable_data_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bool_tail_imm_alterable_data_0")) return false;
+    data_size_all(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // data_size_byte? adm_imm COMMA adm_ccr
+  static boolean bool_tail_imm_ccr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bool_tail_imm_ccr")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = bool_tail_imm_ccr_0(b, l + 1);
+    r = r && adm_imm(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_ccr(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_byte?
+  private static boolean bool_tail_imm_ccr_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bool_tail_imm_ccr_0")) return false;
+    data_size_byte(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // data_size_word? adm_imm COMMA adm_sr
+  static boolean bool_tail_imm_sr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bool_tail_imm_sr")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = bool_tail_imm_sr_0(b, l + 1);
+    r = r && adm_imm(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_sr(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_word?
+  private static boolean bool_tail_imm_sr_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bool_tail_imm_sr_0")) return false;
+    data_size_word(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -2744,7 +2834,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // EOR bool_tail
+  // EOR eor_tail
   public static boolean eor_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "eor_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", EOR)) return false;
@@ -2752,9 +2842,69 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, EOR_INSTRUCTION, "<instruction>");
     r = consumeToken(b, EOR);
     p = r; // pin = 1
-    r = r && bool_tail(b, l + 1);
+    r = r && eor_tail(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  /* ********************************************************** */
+  // eor_tail_drd_alterable_data |
+  //                        eor_tail_imm_drd |
+  //                        bool_tail_imm_alterable_data |
+  //                        bool_tail_imm_ccr |
+  //                        bool_tail_imm_sr
+  static boolean eor_tail(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "eor_tail")) return false;
+    boolean r;
+    r = eor_tail_drd_alterable_data(b, l + 1);
+    if (!r) r = eor_tail_imm_drd(b, l + 1);
+    if (!r) r = bool_tail_imm_alterable_data(b, l + 1);
+    if (!r) r = bool_tail_imm_ccr(b, l + 1);
+    if (!r) r = bool_tail_imm_sr(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // data_size_all? adm_drd COMMA adm_group_all_except_ard_pc_imm
+  static boolean eor_tail_drd_alterable_data(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "eor_tail_drd_alterable_data")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
+    r = eor_tail_drd_alterable_data_0(b, l + 1);
+    r = r && adm_drd(b, l + 1);
+    p = r; // pin = adm_drd
+    r = r && report_error_(b, consumeToken(b, COMMA));
+    r = p && adm_group_all_except_ard_pc_imm(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // data_size_all?
+  private static boolean eor_tail_drd_alterable_data_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "eor_tail_drd_alterable_data_0")) return false;
+    data_size_all(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // data_size_all? adm_imm COMMA adm_drd
+  static boolean eor_tail_imm_drd(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "eor_tail_imm_drd")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = eor_tail_imm_drd_0(b, l + 1);
+    r = r && adm_imm(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_drd(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_all?
+  private static boolean eor_tail_imm_drd_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "eor_tail_imm_drd_0")) return false;
+    data_size_all(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */

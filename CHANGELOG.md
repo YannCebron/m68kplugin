@@ -27,6 +27,7 @@
 - Parser: too lenient parsing for
   - `ADD`/`SUB` 
   - `ADDQ.B`/`SUBQ.B`
+  - `AND`/`OR`/`EOR`
   - `BCHG`, `BCLR`, `BSET`, `BTST`
   - `CMP`
   - `DBcc`
