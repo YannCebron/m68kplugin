@@ -835,7 +835,12 @@ fake cmp_instruction_base ::=
   extends = data_sized
 }
 
-cmp_instruction ::= CMP tail_data_size_all___all__all_except_pc_imm
+private cmp_tail_ard_drd ::=       data_size_word_long? adm_ard COMMA adm_drd
+private cmp_tail_data_drd ::=      data_size_all?       adm_group_all_except_ard_imm COMMA adm_drd
+private cmp_tail_all_ard ::=       data_size_word_long? adm_group_all COMMA adm_ard
+private cmp_tail_imm_alterable ::= data_size_all?       adm_imm COMMA adm_group_all_except_ard_pc_imm
+private cmp_tail_api_api ::=       data_size_all?       adm_api COMMA adm_api
+cmp_instruction ::= CMP (cmp_tail_ard_drd | cmp_tail_data_drd | cmp_tail_all_ard | cmp_tail_imm_alterable | cmp_tail_api_api)
 
 cmpa_instruction ::= CMPA tail_data_size_word_long___all__ard
 

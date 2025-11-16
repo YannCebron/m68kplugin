@@ -27,6 +27,7 @@
 - Parser: correct parsing
   - `ADDQ.B`/`SUBQ.B`
   - `BCHG`, `BCLR`, `BSET`, `BTST`
+  - `CMP`
   - `LEA`
   - `MOVES`
 
