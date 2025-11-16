@@ -370,7 +370,7 @@ private operand_all ::=                     adm_drd | adm_ard | adm_imm | adm_ap
 private operand_data ::=                    adm_drd |           adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
 private operand_memory ::=                                      adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
 private operand_memory_without_imm ::=                                    adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-private adm_group_all_except_pc_imm ::=     adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
+private operand_alterable ::=               adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
 private operand_alterable_data ::=          adm_drd |                     adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
 private operand_alterable_memory ::=                                      adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
 
@@ -410,7 +410,7 @@ fake move_instruction_base ::=
   extends = data_sized
 }
 
-private move_tail_ard_alterable::= data_size_word_long? adm_ard COMMA adm_group_all_except_pc_imm
+private move_tail_ard_alterable::= data_size_word_long? adm_ard COMMA operand_alterable
 private move_tail_all_ard ::= data_size_word_long? operand_all COMMA adm_ard
 private move_tail_data_alterable_data ::= data_size_all? operand_data COMMA operand_alterable_data
 private move_tail_ccr_alterable_data ::= data_size_word? adm_ccr COMMA operand_alterable_data
@@ -665,16 +665,9 @@ private add_sub_tail ::= (
                            add_sub_tail_all_ard |
                            add_sub_tail_imm_alterable_data
                          )
-
-private add_sub_q_tail_wl ::= data_size_word_long? adm_quick COMMA adm_group_all_except_pc_imm
-{
-  pin = 2
-}
-private add_sub_q_tail_b ::= data_size_byte adm_quick COMMA operand_alterable_data
-{
-  pin = 2
-}
-private add_sub_q_tail ::= add_sub_q_tail_wl | add_sub_q_tail_b
+private add_sub_q_tail_quick_ard ::=            data_size_word_long? adm_quick COMMA adm_ard
+private add_sub_q_tail_quick_alterable_data ::= data_size_all?       adm_quick COMMA operand_alterable_data
+private add_sub_q_tail ::= add_sub_q_tail_quick_ard | add_sub_q_tail_quick_alterable_data
 
 private add_sub_x_tail_drd_drd ::= adm_drd COMMA adm_drd
 {

@@ -161,48 +161,53 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // add_sub_q_tail_wl | add_sub_q_tail_b
+  // add_sub_q_tail_quick_ard | add_sub_q_tail_quick_alterable_data
   static boolean add_sub_q_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "add_sub_q_tail")) return false;
     boolean r;
-    r = add_sub_q_tail_wl(b, l + 1);
-    if (!r) r = add_sub_q_tail_b(b, l + 1);
+    r = add_sub_q_tail_quick_ard(b, l + 1);
+    if (!r) r = add_sub_q_tail_quick_alterable_data(b, l + 1);
     return r;
   }
 
   /* ********************************************************** */
-  // data_size_byte adm_quick COMMA operand_alterable_data
-  static boolean add_sub_q_tail_b(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "add_sub_q_tail_b")) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
-    r = data_size_byte(b, l + 1);
+  // data_size_all? adm_quick COMMA operand_alterable_data
+  static boolean add_sub_q_tail_quick_alterable_data(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "add_sub_q_tail_quick_alterable_data")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = add_sub_q_tail_quick_alterable_data_0(b, l + 1);
     r = r && adm_quick(b, l + 1);
-    p = r; // pin = 2
-    r = r && report_error_(b, consumeToken(b, COMMA));
-    r = p && operand_alterable_data(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+    r = r && consumeToken(b, COMMA);
+    r = r && operand_alterable_data(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_all?
+  private static boolean add_sub_q_tail_quick_alterable_data_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "add_sub_q_tail_quick_alterable_data_0")) return false;
+    data_size_all(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */
-  // data_size_word_long? adm_quick COMMA adm_group_all_except_pc_imm
-  static boolean add_sub_q_tail_wl(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "add_sub_q_tail_wl")) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
-    r = add_sub_q_tail_wl_0(b, l + 1);
+  // data_size_word_long? adm_quick COMMA adm_ard
+  static boolean add_sub_q_tail_quick_ard(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "add_sub_q_tail_quick_ard")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = add_sub_q_tail_quick_ard_0(b, l + 1);
     r = r && adm_quick(b, l + 1);
-    p = r; // pin = 2
-    r = r && report_error_(b, consumeToken(b, COMMA));
-    r = p && adm_group_all_except_pc_imm(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_ard(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
   }
 
   // data_size_word_long?
-  private static boolean add_sub_q_tail_wl_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "add_sub_q_tail_wl_0")) return false;
+  private static boolean add_sub_q_tail_quick_ard_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "add_sub_q_tail_quick_ard_0")) return false;
     data_size_word_long(b, l + 1);
     return true;
   }
@@ -670,39 +675,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, ADM_DRD, "<data register>");
     r = consumeToken(b, DATA_REGISTER);
     exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
-  static boolean adm_group_all_except_pc_imm(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "adm_group_all_except_pc_imm")) return false;
-    boolean r;
-    r = adm_drd(b, l + 1);
-    if (!r) r = adm_ard(b, l + 1);
-    if (!r) r = adm_api(b, l + 1);
-    if (!r) r = adm_ari(b, l + 1);
-    if (!r) r = adm_apd(b, l + 1);
-    if (!r) r = adm_adi(b, l + 1);
-    if (!r) r = adm_aix(b, l + 1);
-    if (!r) r = adm_abs(b, l + 1);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-  static boolean adm_group_all_except_rrd(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "adm_group_all_except_rrd")) return false;
-    boolean r;
-    r = adm_imm(b, l + 1);
-    if (!r) r = adm_api(b, l + 1);
-    if (!r) r = adm_ari(b, l + 1);
-    if (!r) r = adm_apd(b, l + 1);
-    if (!r) r = adm_pcd(b, l + 1);
-    if (!r) r = adm_pci(b, l + 1);
-    if (!r) r = adm_adi(b, l + 1);
-    if (!r) r = adm_aix(b, l + 1);
-    if (!r) r = adm_abs(b, l + 1);
     return r;
   }
 
@@ -3297,7 +3269,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_word_long? adm_ard COMMA adm_group_all_except_pc_imm
+  // data_size_word_long? adm_ard COMMA operand_alterable
   static boolean move_tail_ard_alterable(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "move_tail_ard_alterable")) return false;
     boolean r;
@@ -3305,7 +3277,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = move_tail_ard_alterable_0(b, l + 1);
     r = r && adm_ard(b, l + 1);
     r = r && consumeToken(b, COMMA);
-    r = r && adm_group_all_except_pc_imm(b, l + 1);
+    r = r && operand_alterable(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -4009,6 +3981,22 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = adm_apd(b, l + 1);
     if (!r) r = adm_pcd(b, l + 1);
     if (!r) r = adm_pci(b, l + 1);
+    if (!r) r = adm_adi(b, l + 1);
+    if (!r) r = adm_aix(b, l + 1);
+    if (!r) r = adm_abs(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
+  static boolean operand_alterable(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "operand_alterable")) return false;
+    boolean r;
+    r = adm_drd(b, l + 1);
+    if (!r) r = adm_ard(b, l + 1);
+    if (!r) r = adm_api(b, l + 1);
+    if (!r) r = adm_ari(b, l + 1);
+    if (!r) r = adm_apd(b, l + 1);
     if (!r) r = adm_adi(b, l + 1);
     if (!r) r = adm_aix(b, l + 1);
     if (!r) r = adm_abs(b, l + 1);
