@@ -651,6 +651,22 @@ private add_sub_instructions ::= add_instruction |
                                  subq_instruction |
                                  subx_instruction
 
+private add_sub_tail_data_drd ::=             data_size_all?       adm_group_all_except_ard COMMA adm_drd
+private add_sub_tail_ard_drd ::=              data_size_word_long? adm_ard COMMA adm_drd
+private add_sub_tail_drd_alterable_memory ::= data_size_all?       adm_drd COMMA adm_group_all_except_ard_pc_imm
+private add_sub_tail_all_ard ::=              data_size_word_long? adm_group_all COMMA adm_ard
+private add_sub_tail_imm_alterable_data ::=   data_size_all?       adm_imm COMMA adm_group_all_except_ard_pc_imm
+{
+  pin = "adm_imm"
+}
+private add_sub_tail ::= (
+                           add_sub_tail_data_drd |
+                           add_sub_tail_ard_drd |
+                           add_sub_tail_drd_alterable_memory |
+                           add_sub_tail_all_ard |
+                           add_sub_tail_imm_alterable_data
+                         )
+
 private add_sub_q_tail_wl ::= data_size_word_long? adm_quick COMMA adm_group_all_except_pc_imm
 {
   pin = 2
@@ -675,13 +691,13 @@ private add_sub_x_tail ::= data_size_all?
                              add_sub_x_tail_apd_apd
                            )
 
-add_instruction ::= ADD tail_data_size_all___all__all_except_pc_imm
+add_instruction ::= ADD add_sub_tail
 adda_instruction ::= ADDA tail_data_size_word_long___all__ard
 addi_instruction ::= ADDI tail_data_size_all___imm__all_except_ard_pc_imm
 addq_instruction ::= ADDQ add_sub_q_tail
 addx_instruction ::= ADDX add_sub_x_tail
 
-sub_instruction ::= SUB tail_data_size_all___all__all_except_pc_imm
+sub_instruction ::= SUB add_sub_tail
 suba_instruction ::= SUBA tail_data_size_word_long___all__ard
 subi_instruction ::= SUBI tail_data_size_all___imm__all_except_ard_pc_imm
 subq_instruction ::= SUBQ add_sub_q_tail

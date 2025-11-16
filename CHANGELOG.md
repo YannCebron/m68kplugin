@@ -25,6 +25,7 @@
   - fix `BRA` reference docs
   - fix duplicate entry in instruction docs for `BCHG`, `BCLR`, `BSET`
 - Parser: too lenient parsing for
+  - `ADD`/`SUB` 
   - `ADDQ.B`/`SUBQ.B`
   - `BCHG`, `BCLR`, `BSET`, `BTST`
   - `CMP`
