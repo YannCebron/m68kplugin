@@ -124,7 +124,7 @@ fake data_sized ::=
 }
 
 private data_size_byte ::= !<<afterWhitespace>> DOT_B
-private data_size_short ::= !<<afterWhitespace>> DOT_S
+//private data_size_short ::= !<<afterWhitespace>> DOT_S
 private data_size_word ::= !<<afterWhitespace>> DOT_W
 private data_size_long ::= !<<afterWhitespace>> DOT_L
 private data_size_word_long ::= !<<afterWhitespace>> (DOT_W | DOT_L)
@@ -134,6 +134,10 @@ private data_size_word_long ::= !<<afterWhitespace>> (DOT_W | DOT_L)
 private data_size_all ::= !<<afterWhitespace>> (DOT_B | DOT_W | DOT_L)
 {
   name = ".b|w|l"
+}
+private data_size_all_short ::= !<<afterWhitespace>> (DOT_B | DOT_W | DOT_L | DOT_S)
+{
+  name = ".s|b|w|l"
 }
 
 // addressing modes  =====================================================
@@ -568,11 +572,7 @@ private jump_instructions ::= jsr_instruction|
                               rte_instruction |
                               rtr_instruction
 
-private bsr_data_size ::= (data_size_short | data_size_byte | data_size_word | data_size_long)
-{
-  name = ".s|b|w|l"
-}
-bsr_instruction ::= BSR bsr_data_size? adm_abs
+bsr_instruction ::= BSR data_size_all_short? adm_abs
 {
   extends = data_sized
 }
@@ -896,11 +896,6 @@ cmpm_instruction ::= CMPM data_size_all?
 
 
 // Branch ==================================================================
-private CC_data_size ::= (data_size_all | data_size_short)
-{
-  name = ".s|b|w|l"
-}
-
 ;
 {
   extends("(bra|bcs|blo|bls|beq|bne|bhi|bcc||bhs|bpl|bvc||blt|ble|bgt|bge|bmi|bvs)_instruction") = bcc_instruction_base
@@ -924,9 +919,9 @@ private bCC_instructions ::= bra_instruction |
                              bmi_instruction |
                              bvs_instruction
 
-private bCC_tail ::= CC_data_size? adm_abs
+private bCC_tail ::= data_size_all_short? adm_abs
 
-fake bcc_instruction_base ::= CC_data_size? adm_abs? // == bCC_tail with nullable adm_abs due to pin
+fake bcc_instruction_base ::= data_size_all_short? adm_abs? // == bCC_tail with nullable adm_abs due to pin
 {
   extends = data_sized
 }

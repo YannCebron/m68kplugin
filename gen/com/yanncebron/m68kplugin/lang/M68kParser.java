@@ -94,18 +94,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
   };
 
   /* ********************************************************** */
-  // data_size_all | data_size_short
-  static boolean CC_data_size(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "CC_data_size")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, null, "<.s|b|w|l>");
-    r = data_size_all(b, l + 1);
-    if (!r) r = data_size_short(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
   // ABCD bcd_tail
   public static boolean abcd_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "abcd_instruction")) return false;
@@ -1081,7 +1069,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // CC_data_size? adm_abs
+  // data_size_all_short? adm_abs
   static boolean bCC_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bCC_tail")) return false;
     boolean r;
@@ -1092,10 +1080,10 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // CC_data_size?
+  // data_size_all_short?
   private static boolean bCC_tail_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bCC_tail_0")) return false;
-    CC_data_size(b, l + 1);
+    data_size_all_short(b, l + 1);
     return true;
   }
 
@@ -1709,21 +1697,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_short | data_size_byte | data_size_word | data_size_long
-  static boolean bsr_data_size(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bsr_data_size")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, null, "<.s|b|w|l>");
-    r = data_size_short(b, l + 1);
-    if (!r) r = data_size_byte(b, l + 1);
-    if (!r) r = data_size_word(b, l + 1);
-    if (!r) r = data_size_long(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // BSR bsr_data_size? adm_abs
+  // BSR data_size_all_short? adm_abs
   public static boolean bsr_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bsr_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", BSR)) return false;
@@ -1737,10 +1711,10 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r || p;
   }
 
-  // bsr_data_size?
+  // data_size_all_short?
   private static boolean bsr_instruction_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bsr_instruction_1")) return false;
-    bsr_data_size(b, l + 1);
+    data_size_all_short(b, l + 1);
     return true;
   }
 
@@ -2164,6 +2138,39 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, DOT_B);
     if (!r) r = consumeToken(b, DOT_W);
     if (!r) r = consumeToken(b, DOT_L);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // !<<afterWhitespace>> (DOT_B | DOT_W | DOT_L | DOT_S)
+  static boolean data_size_all_short(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "data_size_all_short")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<.s|b|w|l>");
+    r = data_size_all_short_0(b, l + 1);
+    r = r && data_size_all_short_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // !<<afterWhitespace>>
+  private static boolean data_size_all_short_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "data_size_all_short_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_);
+    r = !afterWhitespace(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // DOT_B | DOT_W | DOT_L | DOT_S
+  private static boolean data_size_all_short_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "data_size_all_short_1")) return false;
+    boolean r;
+    r = consumeToken(b, DOT_B);
+    if (!r) r = consumeToken(b, DOT_W);
+    if (!r) r = consumeToken(b, DOT_L);
+    if (!r) r = consumeToken(b, DOT_S);
     return r;
   }
 
@@ -2935,8 +2942,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // LEA data_size_long?
-  //                     operand_control COMMA adm_ard
+  // LEA data_size_long? operand_control COMMA adm_ard
   public static boolean lea_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "lea_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", LEA)) return false;
@@ -4112,8 +4118,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // PEA data_size_long?
-  //                     (adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs)
+  // PEA data_size_long? operand_control
   public static boolean pea_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "pea_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", PEA)) return false;
@@ -4122,7 +4127,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, PEA);
     p = r; // pin = 1
     r = r && report_error_(b, pea_instruction_1(b, l + 1));
-    r = p && pea_instruction_2(b, l + 1) && r;
+    r = p && operand_control(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -4132,20 +4137,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "pea_instruction_1")) return false;
     data_size_long(b, l + 1);
     return true;
-  }
-
-  // adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-  private static boolean pea_instruction_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "pea_instruction_2")) return false;
-    boolean r;
-    r = adm_ari(b, l + 1);
-    if (!r) r = adm_apd(b, l + 1);
-    if (!r) r = adm_pcd(b, l + 1);
-    if (!r) r = adm_pci(b, l + 1);
-    if (!r) r = adm_adi(b, l + 1);
-    if (!r) r = adm_aix(b, l + 1);
-    if (!r) r = adm_abs(b, l + 1);
-    return r;
   }
 
   /* ********************************************************** */
