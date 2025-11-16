@@ -29,6 +29,7 @@
   - `ADDQ.B`/`SUBQ.B`
   - `BCHG`, `BCLR`, `BSET`, `BTST`
   - `CMP`
+  - `DBcc`
   - `LEA`
   - `MOVE`
   - `MOVES`

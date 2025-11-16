@@ -962,12 +962,12 @@ private dbCC_instructions ::= dbra_instruction |
                               dbf_instruction |
                               dbt_instruction
 
-private dbCC_tail ::= CC_data_size? adm_drd COMMA adm_abs
+private dbCC_tail ::= data_size_word? adm_drd COMMA adm_abs
 {
   pin = 2
 }
 
-fake dbcc_instruction_base ::= CC_data_size? adm_drd? COMMA adm_abs? // == dbCC_tail with nullable adm_drd/adm_abs due to pin
+fake dbcc_instruction_base ::= data_size_word? adm_drd? COMMA adm_abs? // == dbCC_tail with nullable adm_drd/adm_abs due to pin
 {
   extends = data_sized
 }

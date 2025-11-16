@@ -208,10 +208,10 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // add_sub_tail_data_drd | 
-  //                            add_sub_tail_ard_drd | 
+  // add_sub_tail_data_drd |
+  //                            add_sub_tail_ard_drd |
   //                            add_sub_tail_drd_alterable_memory |
-  //                            add_sub_tail_all_ard | 
+  //                            add_sub_tail_all_ard |
   //                            add_sub_tail_imm_alterable_data
   static boolean add_sub_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "add_sub_tail")) return false;
@@ -2402,7 +2402,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // CC_data_size? adm_drd COMMA adm_abs
+  // data_size_word? adm_drd COMMA adm_abs
   static boolean dbCC_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "dbCC_tail")) return false;
     boolean r, p;
@@ -2416,10 +2416,10 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r || p;
   }
 
-  // CC_data_size?
+  // data_size_word?
   private static boolean dbCC_tail_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "dbCC_tail_0")) return false;
-    CC_data_size(b, l + 1);
+    data_size_word(b, l + 1);
     return true;
   }
 

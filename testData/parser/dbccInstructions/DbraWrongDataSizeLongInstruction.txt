@@ -1,0 +1,12 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kDbraInstructionImpl(DBRA_INSTRUCTION)
+    PsiElement(dbra)('dbra')
+    PsiErrorElement:'.w' or <data register> expected, got '.l'
+      <empty list>
+  PsiElement(.l)('.l')
+  PsiWhiteSpace(' ')
+  PsiElement(data_register)('d0')
+  PsiElement(,)(',')
+  M68kLabelImpl(LABEL)
+    PsiElement(id)('label')
