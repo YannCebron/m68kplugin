@@ -503,7 +503,7 @@ private moves_tail_from ::= adm_group_all_except_rrd COMMA adm_rrd
 {
   pin = 1
 }
-private moves_tail_to ::= adm_rrd COMMA adm_group_all_except_ard
+private moves_tail_to ::= adm_rrd COMMA adm_group_all_except_rrd
 {
   pin = 1
 }
