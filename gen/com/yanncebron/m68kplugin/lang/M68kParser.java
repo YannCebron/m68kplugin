@@ -2219,28 +2219,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // !<<afterWhitespace>> DOT_S
-  static boolean data_size_short(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "data_size_short")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = data_size_short_0(b, l + 1);
-    r = r && consumeToken(b, DOT_S);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // !<<afterWhitespace>>
-  private static boolean data_size_short_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "data_size_short_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
-    r = !afterWhitespace(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
   // !<<afterWhitespace>> DOT_W
   static boolean data_size_word(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "data_size_word")) return false;

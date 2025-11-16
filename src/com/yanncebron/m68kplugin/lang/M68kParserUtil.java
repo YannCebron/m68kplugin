@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,26 +24,27 @@ import com.intellij.psi.tree.IElementType;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kGtExpression;
 
+@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 class M68kParserUtil extends GeneratedParserUtilBase {
 
   private static final Key<Object> INSIDE_MACRO_CALL = Key.create("inside macro call");
 
-  static boolean afterWhitespace(PsiBuilder b, @SuppressWarnings("UnusedParameters") int level) {
+  static boolean afterWhitespace(PsiBuilder b, @SuppressWarnings("unused") int level) {
     final IElementType left = b.rawLookup(-1);
     return left == TokenType.WHITE_SPACE;
   }
 
-  static boolean enterMacroCall(PsiBuilder b, @SuppressWarnings("UnusedParameters") int level) {
+  static boolean enterMacroCall(PsiBuilder b, @SuppressWarnings("unused") int level) {
     b.putUserData(INSIDE_MACRO_CALL, Boolean.TRUE);
     return true;
   }
 
-  static boolean exitMacroCall(PsiBuilder b, @SuppressWarnings("UnusedParameters") int level) {
+  static boolean exitMacroCall(PsiBuilder b, @SuppressWarnings("unused") int level) {
     b.putUserData(INSIDE_MACRO_CALL, null);
     return true;
   }
 
-  static boolean insideMacroCall(PsiBuilder b, @SuppressWarnings("UnusedParameters") int level) {
+  static boolean insideMacroCall(PsiBuilder b, @SuppressWarnings("unused") int level) {
     return b.getUserData(INSIDE_MACRO_CALL) != null;
   }
 
@@ -52,7 +53,7 @@ class M68kParserUtil extends GeneratedParserUtilBase {
    * as {@link com.yanncebron.m68kplugin.lang.psi.M68kRegisterRange}
    * to avoid precedence conflict with {@link com.yanncebron.m68kplugin.lang.psi.M68kAdmRrd}.
    */
-  static boolean registerRangeStandaloneRegisterValid(PsiBuilder b, @SuppressWarnings("UnusedParameters") int level) {
+  static boolean registerRangeStandaloneRegisterValid(PsiBuilder b, @SuppressWarnings("unused") int level) {
     if (!insideMacroCall(b, level)) return true;
 
     IElementType left = b.rawLookup(-1);
