@@ -31,10 +31,7 @@ public interface M68kLeaInstruction extends M68kDataSized, M68kInstruction {
   M68kAdmAix getAdmAix();
 
   @Nullable
-  M68kAdmApd getAdmApd();
-
-  @NotNull
-  List<M68kAdmArd> getAdmArdList();
+  M68kAdmArd getAdmArd();
 
   @Nullable
   M68kAdmAri getAdmAri();

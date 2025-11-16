@@ -27,6 +27,7 @@
 - Parser: correct parsing
   - `ADDQ.B`/`SUBQ.B`
   - `BCHG`, `BCLR`, `BSET`, `BTST`
+  - `LEA`
 
 ## 0.2.0 - 2025-10-31
 

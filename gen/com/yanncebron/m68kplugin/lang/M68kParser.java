@@ -2720,7 +2720,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // LEA data_size_long?
-  //                     (adm_ard | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA adm_ard
+  //                     (adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA adm_ard
   public static boolean lea_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "lea_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", LEA)) return false;
@@ -2743,13 +2743,11 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // adm_ard | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+  // adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
   private static boolean lea_instruction_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "lea_instruction_2")) return false;
     boolean r;
-    r = adm_ard(b, l + 1);
-    if (!r) r = adm_ari(b, l + 1);
-    if (!r) r = adm_apd(b, l + 1);
+    r = adm_ari(b, l + 1);
     if (!r) r = adm_pcd(b, l + 1);
     if (!r) r = adm_pci(b, l + 1);
     if (!r) r = adm_adi(b, l + 1);

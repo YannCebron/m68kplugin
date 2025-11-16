@@ -61,14 +61,8 @@ public class M68kLeaInstructionImpl extends M68kDataSizedImpl implements M68kLea
 
   @Override
   @Nullable
-  public M68kAdmApd getAdmApd() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmApd.class);
-  }
-
-  @Override
-  @NotNull
-  public List<M68kAdmArd> getAdmArdList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmArd.class);
+  public M68kAdmArd getAdmArd() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmArd.class);
   }
 
   @Override
