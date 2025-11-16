@@ -26,7 +26,7 @@
   - fix duplicate entry in instruction docs for `BCHG`, `BCLR`, `BSET`
 - Parser: correct parsing
   - `ADDQ.B`/`SUBQ.B`
-  - `BTST`
+  - `BCHG`, `BCLR`, `BSET`, `BTST`
 
 ## 0.2.0 - 2025-10-31
 

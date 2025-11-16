@@ -2,7 +2,7 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kBchgInstructionImpl(BCHG_INSTRUCTION)
     PsiElement(bchg)('bchg')
-    PsiElement(.b)('.b')
+    PsiElement(.l)('.l')
     PsiWhiteSpace(' ')
     M68kAdmQuickImpl(ADM_QUICK)
       PsiElement(#)('#')

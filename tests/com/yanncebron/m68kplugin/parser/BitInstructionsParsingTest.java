@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ public class BitInstructionsParsingTest extends M68kParsingTestCase {
   }
 
   public void testBchgInstructionDataSizeImmDrd() throws Exception {
-    doCodeTest(" bchg.b #1,d0");
+    doCodeTest(" bchg.l #1,d0");
   }
 
   public void testBchgInstructionDrdDrd() throws Exception {
@@ -50,7 +50,7 @@ public class BitInstructionsParsingTest extends M68kParsingTestCase {
   }
 
   public void testBsetInstructionDrdDrd() throws Exception {
-    doCodeTest(" bset.b d1,d2");
+    doCodeTest(" bset.l d1,d2");
   }
 
   public void testBtstInstructionDrdDrd() throws Exception {

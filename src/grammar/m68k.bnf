@@ -373,6 +373,7 @@ private adm_group_all_except_drd_ard ::=                        adm_imm | adm_ap
 private adm_group_all_except_rrd ::=                            adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
 private adm_group_all_except_pc_imm ::=     adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
 private adm_group_all_except_ard_pc_imm ::= adm_drd |                     adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
+private adm_group_all_except_drd_ard_pc_imm ::=                           adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
 
 private adm_group_ctrl_registers ::= adm_dfc | adm_sfc | adm_vbr
 {
@@ -1033,12 +1034,11 @@ fake bit_manipulation_instruction_base ::= (adm_drd | adm_quick)
   ]
 }
 
-private bit_data_size ::= data_size_byte | data_size_long
-{
-  name = ".b|l"
-}
-private bit_tail ::= bit_data_size?
-                     (adm_drd | adm_quick) COMMA adm_group_all_except_ard_pc_imm
+private bit_tail_drd_drd ::=        data_size_long? adm_drd   COMMA adm_drd
+private bit_tail_drd_alterable ::=  data_size_byte? adm_drd   COMMA adm_group_all_except_drd_ard_pc_imm
+private bit_tail_quick_drd ::=      data_size_long? adm_quick COMMA adm_drd
+private bit_tail_quick_alterable::= data_size_byte? adm_quick COMMA adm_group_all_except_drd_ard_pc_imm
+private bit_tail ::= (bit_tail_drd_drd | bit_tail_drd_alterable | bit_tail_quick_drd | bit_tail_quick_alterable)
 
 bchg_instruction ::= BCHG bit_tail
 

@@ -29,9 +29,9 @@ public class BclrInstructionPsiTest extends M68kPsiTestCase<M68kBclrInstruction>
   }
 
   public void testWithDataSize() {
-    final M68kBclrInstruction instruction = parse("bclr.b #1,d0");
+    final M68kBclrInstruction instruction = parse("bclr.l #1,d0");
 
-    assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
+    assertEquals(M68kDataSize.LONGWORD, instruction.getDataSize());
   }
 
 }

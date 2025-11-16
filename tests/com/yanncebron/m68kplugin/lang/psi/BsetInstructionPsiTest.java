@@ -29,9 +29,9 @@ public class BsetInstructionPsiTest extends M68kPsiTestCase<M68kBsetInstruction>
   }
 
   public void testWithDataSize() {
-    final M68kBsetInstruction instruction = parse("bset.b #1,d0");
+    final M68kBsetInstruction instruction = parse("bset.l #1,d0");
 
-    assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
+    assertEquals(M68kDataSize.LONGWORD, instruction.getDataSize());
   }
 
 }

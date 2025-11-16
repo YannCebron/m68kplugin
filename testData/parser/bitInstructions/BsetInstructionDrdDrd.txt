@@ -2,7 +2,7 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kBsetInstructionImpl(BSET_INSTRUCTION)
     PsiElement(bset)('bset')
-    PsiElement(.b)('.b')
+    PsiElement(.l)('.l')
     PsiWhiteSpace(' ')
     M68kAdmDrdImpl(ADM_DRD)
       PsiElement(data_register)('d1')
