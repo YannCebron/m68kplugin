@@ -4950,28 +4950,6 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_all?       adm_group_all COMMA adm_group_all_except_pc_imm
-  static boolean tail_data_size_all___all__all_except_pc_imm(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "tail_data_size_all___all__all_except_pc_imm")) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
-    r = tail_data_size_all___all__all_except_pc_imm_0(b, l + 1);
-    r = r && adm_group_all(b, l + 1);
-    p = r; // pin = 2
-    r = r && report_error_(b, consumeToken(b, COMMA));
-    r = p && adm_group_all_except_pc_imm(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
-  }
-
-  // data_size_all?
-  private static boolean tail_data_size_all___all__all_except_pc_imm_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "tail_data_size_all___all__all_except_pc_imm_0")) return false;
-    data_size_all(b, l + 1);
-    return true;
-  }
-
-  /* ********************************************************** */
   // data_size_all?       adm_group_all_except_ard_pc_imm
   static boolean tail_data_size_all___all_except_ard_pc_imm(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "tail_data_size_all___all_except_ard_pc_imm")) return false;

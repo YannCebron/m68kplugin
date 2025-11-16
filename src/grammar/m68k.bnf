@@ -381,10 +381,6 @@ private adm_group_ctrl_registers ::= adm_dfc | adm_sfc | adm_vbr
 }
 
 // Common tails
-private tail_data_size_all___all__all_except_pc_imm ::=     data_size_all?       adm_group_all COMMA adm_group_all_except_pc_imm
-{
-  pin = 2
-}
 private tail_data_size_all___imm__all_except_ard_pc_imm ::= data_size_all?       adm_imm       COMMA adm_group_all_except_ard_pc_imm
 {
   pin = 2
