@@ -40,15 +40,6 @@ public interface M68kMovesInstruction extends M68kMoveInstructionBase, M68kPrivi
   M68kAdmAri getAdmAri();
 
   @Nullable
-  M68kAdmImm getAdmImm();
-
-  @Nullable
-  M68kAdmPcd getAdmPcd();
-
-  @Nullable
-  M68kAdmPci getAdmPci();
-
-  @Nullable
   M68kAdmRrd getAdmRrd();
 
 }

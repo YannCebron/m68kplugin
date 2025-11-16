@@ -79,24 +79,6 @@ public class M68kMovesInstructionImpl extends M68kMoveInstructionBaseImpl implem
 
   @Override
   @Nullable
-  public M68kAdmImm getAdmImm() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmImm.class);
-  }
-
-  @Override
-  @Nullable
-  public M68kAdmPcd getAdmPcd() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmPcd.class);
-  }
-
-  @Override
-  @Nullable
-  public M68kAdmPci getAdmPci() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmPci.class);
-  }
-
-  @Override
-  @Nullable
   public M68kAdmRrd getAdmRrd() {
     return PsiTreeUtil.getChildOfType(this, M68kAdmRrd.class);
   }

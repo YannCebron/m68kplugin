@@ -370,7 +370,6 @@ private operand_all ::=                     adm_drd | adm_ard | adm_imm | adm_ap
 private operand_data ::=                    adm_drd |           adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
 private operand_memory ::=                                      adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
 private operand_memory_without_imm ::=                                    adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-private adm_group_all_except_rrd ::=                            adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
 private adm_group_all_except_pc_imm ::=     adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
 private operand_alterable_data ::=          adm_drd |                     adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
 private operand_alterable_memory ::=                                      adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
@@ -507,11 +506,11 @@ movec_instruction ::= MOVEC data_size_long?
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kPrivilegedInstruction"
 }
 
-private moves_tail_from ::= adm_group_all_except_rrd COMMA adm_rrd
+private moves_tail_from ::= operand_alterable_memory COMMA adm_rrd
 {
   pin = 1
 }
-private moves_tail_to ::= adm_rrd COMMA adm_group_all_except_rrd
+private moves_tail_to ::= adm_rrd COMMA operand_alterable_memory
 {
   pin = 1
 }
