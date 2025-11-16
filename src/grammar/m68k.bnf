@@ -1126,18 +1126,23 @@ fake shift_rotate_instruction_base ::=
   extends = data_sized
 }
 
-private shift_tail_drd ::= data_size_all? (adm_drd | adm_quick) COMMA adm_drd
+private shift_tail_alterable_memory ::= data_size_word? adm_group_all_except_drd_ard_pc_imm
+private shift_tail_drd_drd ::=          data_size_all?  adm_drd COMMA adm_drd
 {
-  pin = 3
+  pin = "COMMA"
 }
-private shift_tail_drd_single ::= data_size_all? adm_drd
+private shift_tail_quick_drd ::=        data_size_all?  adm_quick COMMA adm_drd
+{
+  pin = "adm_quick"
+}
+private shift_tail_drd ::=              data_size_all?  adm_drd
 
-private shift_tail_other ::= data_size_word? (adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs)
 private shift_tail ::=
   (
-     shift_tail_drd |
-     shift_tail_drd_single |
-     shift_tail_other
+    shift_tail_alterable_memory |
+    shift_tail_drd_drd |
+    shift_tail_quick_drd |
+    shift_tail_drd
   )
 
 asl_instruction ::= ASL shift_tail

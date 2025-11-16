@@ -29,6 +29,7 @@
   - `ADDQ.B`/`SUBQ.B`
   - `AND`/`OR`/`EOR`
   - `ANDI`/`ORI`/`EORI`
+  - `ASL`/`ASR`/`LSL`/`LSR`/`ROL`/`ROR`/`ROXL`/`ROXR`
   - `BCHG`, `BCLR`, `BSET`, `BTST`
   - `CMP`
   - `DBcc`
