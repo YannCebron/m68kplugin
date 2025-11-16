@@ -38,7 +38,7 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
   }
 
   public void testFindAllIsEmptyForUnknownElementType() {
-    assertTrue(instance.findAll(M68kTokenTypes.ADDWATCH).isEmpty());
+    assertEmpty(instance.findAll(M68kTokenTypes.ADDWATCH));
   }
 
   public void testFindBkptError() {
@@ -133,7 +133,7 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
   }
 
   private void doTestFind(String instructionText, M68kMnemonic expectedMnemonic) {
-    PsiFile psiFile = createLightFile("a.s", " " + instructionText); //
+    PsiFile psiFile = createLightFile("a.s", " " + instructionText);
     final M68kPsiElement instruction = M68kPsiTreeUtil.getContainingInstructionOrDirective(psiFile.findElementAt(2));
     assertNotNull(instructionText, instruction);
     final M68kInstruction m68kInstruction = assertInstanceOf(instruction, M68kInstruction.class);

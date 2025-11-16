@@ -62,7 +62,7 @@ public final class M68kMnemonicRegistry {
    * @return {@code null} if none matching (e.g., contains parsing error or input is invalid); if multiple candidates, most specific one.
    */
   @Nullable
-  public M68kMnemonic find(M68kInstruction instruction) {
+  public M68kMnemonic find(@NotNull M68kInstruction instruction) {
     if (PsiTreeUtil.hasErrorElements(instruction)) {
       return null;
     }
@@ -71,8 +71,7 @@ public final class M68kMnemonicRegistry {
     final Collection<M68kMnemonic> all = findAll(originalMnemonic);
     assert !all.isEmpty() : instruction.getText();
 
-    final List<M68kAdm> operands = PsiTreeUtil.getChildrenOfTypeAsList(instruction, M68kAdm.class);
-    List<M68kMnemonic> filtered = getFilteredM68Mnemonics(instruction, operands, all);
+    List<M68kMnemonic> filtered = getFilteredM68Mnemonics(all, instruction);
     // this may fail if there are lexer/parser issues in file, but that's OK for now
     assert !filtered.isEmpty() : instruction.getText();
 
@@ -89,16 +88,17 @@ public final class M68kMnemonicRegistry {
         return Integer.compare(o1Source, o2Source);
       }
 
-      final int o1Dest = o1.destinationOperand().getAddressModes().length;
-      final int o2Dest = o2.destinationOperand().getAddressModes().length;
-      return Integer.compare(o1Dest, o2Dest);
+      final int o1Destination = o1.destinationOperand().getAddressModes().length;
+      final int o2Destination = o2.destinationOperand().getAddressModes().length;
+      return Integer.compare(o1Destination, o2Destination);
     });
 
-    return ContainerUtil.getFirstItem(multipleMatches);
+    return multipleMatches.get(0);
   }
 
   @NotNull
-  private static @Unmodifiable List<M68kMnemonic> getFilteredM68Mnemonics(M68kInstruction instruction, List<M68kAdm> operands, Collection<M68kMnemonic> all) {
+  private static @Unmodifiable List<M68kMnemonic> getFilteredM68Mnemonics(Collection<M68kMnemonic> all, M68kInstruction instruction) {
+    List<M68kAdm> operands = PsiTreeUtil.getChildrenOfTypeAsList(instruction, M68kAdm.class);
     int operandsCount = operands.size();
 
     // operand count
