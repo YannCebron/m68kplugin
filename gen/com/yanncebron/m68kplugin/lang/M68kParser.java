@@ -3067,12 +3067,15 @@ public class M68kParser implements PsiParser, LightPsiParser {
   /* ********************************************************** */
   // MOVE
   //                      (
+  //                        move_tail_ard_alterable |
+  //                        move_tail_all_ard |
+  //                        move_tail_data_alterable_data |
+  //                        move_tail_ccr_alterable_data |
+  //                        move_tail_sr_alterable_data |
+  //                        move_tail_data_ccr |
+  //                        move_tail_data_sr |
   //                        move_tail_usp_ard |
-  //                        move_tail_sr |
-  //                        move_tail_from_ccr |
-  //                        move_tail_to_ccr_sr |
-  //                        move_tail_ard_usp |
-  //                        tail_data_size_all___all__all_except_pc_imm
+  //                        move_tail_ard_usp
   //                      )
   public static boolean move_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "move_instruction")) return false;
@@ -3086,21 +3089,27 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r || p;
   }
 
-  // move_tail_usp_ard |
-  //                        move_tail_sr |
-  //                        move_tail_from_ccr |
-  //                        move_tail_to_ccr_sr |
-  //                        move_tail_ard_usp |
-  //                        tail_data_size_all___all__all_except_pc_imm
+  // move_tail_ard_alterable |
+  //                        move_tail_all_ard |
+  //                        move_tail_data_alterable_data |
+  //                        move_tail_ccr_alterable_data |
+  //                        move_tail_sr_alterable_data |
+  //                        move_tail_data_ccr |
+  //                        move_tail_data_sr |
+  //                        move_tail_usp_ard |
+  //                        move_tail_ard_usp
   private static boolean move_instruction_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "move_instruction_1")) return false;
     boolean r;
-    r = move_tail_usp_ard(b, l + 1);
-    if (!r) r = move_tail_sr(b, l + 1);
-    if (!r) r = move_tail_from_ccr(b, l + 1);
-    if (!r) r = move_tail_to_ccr_sr(b, l + 1);
+    r = move_tail_ard_alterable(b, l + 1);
+    if (!r) r = move_tail_all_ard(b, l + 1);
+    if (!r) r = move_tail_data_alterable_data(b, l + 1);
+    if (!r) r = move_tail_ccr_alterable_data(b, l + 1);
+    if (!r) r = move_tail_sr_alterable_data(b, l + 1);
+    if (!r) r = move_tail_data_ccr(b, l + 1);
+    if (!r) r = move_tail_data_sr(b, l + 1);
+    if (!r) r = move_tail_usp_ard(b, l + 1);
     if (!r) r = move_tail_ard_usp(b, l + 1);
-    if (!r) r = tail_data_size_all___all__all_except_pc_imm(b, l + 1);
     return r;
   }
 
@@ -3126,6 +3135,48 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // data_size_word_long? adm_group_all COMMA adm_ard
+  static boolean move_tail_all_ard(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_all_ard")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = move_tail_all_ard_0(b, l + 1);
+    r = r && adm_group_all(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_ard(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_word_long?
+  private static boolean move_tail_all_ard_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_all_ard_0")) return false;
+    data_size_word_long(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // data_size_word_long? adm_ard COMMA adm_group_all_except_pc_imm
+  static boolean move_tail_ard_alterable(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_ard_alterable")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = move_tail_ard_alterable_0(b, l + 1);
+    r = r && adm_ard(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_group_all_except_pc_imm(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_word_long?
+  private static boolean move_tail_ard_alterable_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_ard_alterable_0")) return false;
+    data_size_word_long(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
   // data_size_long? adm_ard COMMA adm_usp
   static boolean move_tail_ard_usp(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "move_tail_ard_usp")) return false;
@@ -3147,34 +3198,97 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_word? adm_ccr COMMA adm_group_all_except_ard
-  static boolean move_tail_from_ccr(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "move_tail_from_ccr")) return false;
+  // data_size_word? adm_ccr COMMA adm_group_all_except_ard_pc_imm
+  static boolean move_tail_ccr_alterable_data(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_ccr_alterable_data")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_);
-    r = move_tail_from_ccr_0(b, l + 1);
+    r = move_tail_ccr_alterable_data_0(b, l + 1);
     r = r && adm_ccr(b, l + 1);
     p = r; // pin = 2
     r = r && report_error_(b, consumeToken(b, COMMA));
-    r = p && adm_group_all_except_ard(b, l + 1) && r;
+    r = p && adm_group_all_except_ard_pc_imm(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
   // data_size_word?
-  private static boolean move_tail_from_ccr_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "move_tail_from_ccr_0")) return false;
+  private static boolean move_tail_ccr_alterable_data_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_ccr_alterable_data_0")) return false;
+    data_size_word(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // data_size_all? adm_group_all_except_ard COMMA adm_group_all_except_ard_pc_imm
+  static boolean move_tail_data_alterable_data(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_data_alterable_data")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = move_tail_data_alterable_data_0(b, l + 1);
+    r = r && adm_group_all_except_ard(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_group_all_except_ard_pc_imm(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_all?
+  private static boolean move_tail_data_alterable_data_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_data_alterable_data_0")) return false;
+    data_size_all(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // data_size_word? adm_group_all_except_ard COMMA adm_ccr
+  static boolean move_tail_data_ccr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_data_ccr")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = move_tail_data_ccr_0(b, l + 1);
+    r = r && adm_group_all_except_ard(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_ccr(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_word?
+  private static boolean move_tail_data_ccr_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_data_ccr_0")) return false;
+    data_size_word(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // data_size_word? adm_group_all_except_ard COMMA adm_sr
+  static boolean move_tail_data_sr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_data_sr")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = move_tail_data_sr_0(b, l + 1);
+    r = r && adm_group_all_except_ard(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_sr(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_word?
+  private static boolean move_tail_data_sr_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_data_sr_0")) return false;
     data_size_word(b, l + 1);
     return true;
   }
 
   /* ********************************************************** */
   // data_size_word? adm_sr COMMA adm_group_all_except_ard_pc_imm
-  static boolean move_tail_sr(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "move_tail_sr")) return false;
+  static boolean move_tail_sr_alterable_data(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_sr_alterable_data")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_);
-    r = move_tail_sr_0(b, l + 1);
+    r = move_tail_sr_alterable_data_0(b, l + 1);
     r = r && adm_sr(b, l + 1);
     p = r; // pin = 2
     r = r && report_error_(b, consumeToken(b, COMMA));
@@ -3184,40 +3298,10 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   // data_size_word?
-  private static boolean move_tail_sr_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "move_tail_sr_0")) return false;
+  private static boolean move_tail_sr_alterable_data_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "move_tail_sr_alterable_data_0")) return false;
     data_size_word(b, l + 1);
     return true;
-  }
-
-  /* ********************************************************** */
-  // data_size_word? adm_group_all_except_ard COMMA (adm_ccr | adm_sr)
-  static boolean move_tail_to_ccr_sr(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "move_tail_to_ccr_sr")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = move_tail_to_ccr_sr_0(b, l + 1);
-    r = r && adm_group_all_except_ard(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && move_tail_to_ccr_sr_3(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // data_size_word?
-  private static boolean move_tail_to_ccr_sr_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "move_tail_to_ccr_sr_0")) return false;
-    data_size_word(b, l + 1);
-    return true;
-  }
-
-  // adm_ccr | adm_sr
-  private static boolean move_tail_to_ccr_sr_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "move_tail_to_ccr_sr_3")) return false;
-    boolean r;
-    r = adm_ccr(b, l + 1);
-    if (!r) r = adm_sr(b, l + 1);
-    return r;
   }
 
   /* ********************************************************** */

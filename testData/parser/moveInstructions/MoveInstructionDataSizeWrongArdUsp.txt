@@ -2,11 +2,9 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kMoveInstructionImpl(MOVE_INSTRUCTION)
     PsiElement(move)('move')
-    PsiElement(.b)('.b')
-    PsiWhiteSpace(' ')
-    M68kAdmArdImpl(ADM_ARD)
-      PsiElement(address_register)('a0')
-    PsiElement(,)(',')
-    PsiErrorElement:<address register indirect with displacement>, <address register indirect with index>, <address register indirect with postincrement>, <address register indirect with predecrement>, <address register indirect>, <address register>, <data register> or <expression> expected, got 'usp'
-      <empty list>
+  PsiElement(.b)('.b')
+  PsiWhiteSpace(' ')
+  PsiErrorElement:<address register indirect with displacement>, <address register indirect with index>, <address register indirect with postincrement>, <address register indirect with predecrement>, <address register indirect>, <data register>, <expression>, <immediate data>, <program counter indirect with displacement> or <program counter indirect with index> expected, got 'a0'
+    PsiElement(address_register)('a0')
+  PsiElement(,)(',')
   PsiElement(usp)('usp')

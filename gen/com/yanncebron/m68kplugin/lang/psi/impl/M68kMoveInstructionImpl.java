@@ -72,9 +72,9 @@ public class M68kMoveInstructionImpl extends M68kMoveInstructionMixIn implements
   }
 
   @Override
-  @Nullable
-  public M68kAdmArd getAdmArd() {
-    return PsiTreeUtil.getChildOfType(this, M68kAdmArd.class);
+  @NotNull
+  public List<M68kAdmArd> getAdmArdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmArd.class);
   }
 
   @Override

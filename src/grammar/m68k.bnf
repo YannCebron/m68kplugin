@@ -415,28 +415,36 @@ fake move_instruction_base ::=
   extends = data_sized
 }
 
+private move_tail_ard_alterable::= data_size_word_long? adm_ard COMMA adm_group_all_except_pc_imm
+private move_tail_all_ard ::= data_size_word_long? adm_group_all COMMA adm_ard
+private move_tail_data_alterable_data ::= data_size_all? adm_group_all_except_ard COMMA adm_group_all_except_ard_pc_imm
+private move_tail_ccr_alterable_data ::= data_size_word? adm_ccr COMMA adm_group_all_except_ard_pc_imm
+{
+  pin = 2
+}
+private move_tail_sr_alterable_data ::= data_size_word? adm_sr COMMA adm_group_all_except_ard_pc_imm
+{
+  pin = 2
+}
+private move_tail_data_ccr ::= data_size_word? adm_group_all_except_ard COMMA adm_ccr
+private move_tail_data_sr ::= data_size_word? adm_group_all_except_ard COMMA adm_sr
 private move_tail_usp_ard ::= data_size_long? adm_usp COMMA adm_ard
 {
   pin = 2
 }
 private move_tail_ard_usp ::= data_size_long? adm_ard COMMA adm_usp
-private move_tail_from_ccr ::= data_size_word? adm_ccr COMMA adm_group_all_except_ard
-{
-  pin = 2
-}
-private move_tail_to_ccr_sr ::= data_size_word? adm_group_all_except_ard COMMA (adm_ccr | adm_sr)
-private move_tail_sr ::= data_size_word? adm_sr COMMA adm_group_all_except_ard_pc_imm
-{
-  pin = 2
-}
+
 move_instruction ::= MOVE
                      (
+                       move_tail_ard_alterable |
+                       move_tail_all_ard |
+                       move_tail_data_alterable_data |
+                       move_tail_ccr_alterable_data |
+                       move_tail_sr_alterable_data |
+                       move_tail_data_ccr |
+                       move_tail_data_sr |
                        move_tail_usp_ard |
-                       move_tail_sr |
-                       move_tail_from_ccr |
-                       move_tail_to_ccr_sr |
-                       move_tail_ard_usp |
-                       tail_data_size_all___all__all_except_pc_imm
+                       move_tail_ard_usp
                      )
 {
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kMoveInstructionMixIn"

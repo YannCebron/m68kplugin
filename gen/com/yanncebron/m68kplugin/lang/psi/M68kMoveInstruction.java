@@ -36,8 +36,8 @@ public interface M68kMoveInstruction extends M68kMoveInstructionBase, M68kPrivil
   @Nullable
   M68kAdmApi getAdmApi();
 
-  @Nullable
-  M68kAdmArd getAdmArd();
+  @NotNull
+  List<M68kAdmArd> getAdmArdList();
 
   @Nullable
   M68kAdmAri getAdmAri();

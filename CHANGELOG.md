@@ -24,11 +24,12 @@
 - Mnemonics docs:
   - fix `BRA` reference docs
   - fix duplicate entry in instruction docs for `BCHG`, `BCLR`, `BSET`
-- Parser: correct parsing
+- Parser: too lenient parsing for
   - `ADDQ.B`/`SUBQ.B`
   - `BCHG`, `BCLR`, `BSET`, `BTST`
   - `CMP`
   - `LEA`
+  - `MOVE`
   - `MOVES`
 
 ## 0.2.0 - 2025-10-31
