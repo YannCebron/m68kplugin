@@ -374,6 +374,9 @@ private operand_alterable ::=               adm_drd | adm_ard |           adm_ap
 private operand_alterable_data ::=          adm_drd |                     adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
 private operand_alterable_memory ::=                                      adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
 
+private operand_restore_operands ::=  adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+private operand_alterable_control ::= adm_ari | adm_adi | adm_aix | adm_abs
+
 private operand_ctrl_register ::= adm_dfc | adm_sfc | adm_vbr
 {
   name = "control register"
@@ -457,14 +460,12 @@ moveq_instruction ::= MOVEQ data_size_long?
   ]
 }
 
-private movem_tail_group_restore_operands ::=  (adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs)
-private movem_tail_group_alterable_control ::= (adm_ari | adm_adi | adm_aix | adm_abs)
 private movem_tail_register_list_apd ::=                   adm_register_list COMMA adm_apd
-private movem_tail_register_list_alterable_control ::=     adm_register_list COMMA movem_tail_group_alterable_control
-private movem_tail_restore_operands_register_list ::=      movem_tail_group_restore_operands COMMA adm_register_list
+private movem_tail_register_list_alterable_control ::=     adm_register_list COMMA operand_alterable_control
+private movem_tail_restore_operands_register_list ::=      operand_restore_operands COMMA adm_register_list
 private movem_tail_register_list_imm_apd ::=               adm_imm COMMA adm_apd
-private movem_tail_register_list_imm_alterable_control ::= adm_imm COMMA movem_tail_group_alterable_control
-private movem_tail_restore_operands_register_list_imm ::=  movem_tail_group_restore_operands COMMA adm_imm
+private movem_tail_register_list_imm_alterable_control ::= adm_imm COMMA operand_alterable_control
+private movem_tail_restore_operands_register_list_imm ::=  operand_restore_operands COMMA adm_imm
 movem_instruction ::= MOVEM data_size_word_long?
                       (
                         movem_tail_register_list_apd |
