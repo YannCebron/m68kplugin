@@ -24,7 +24,9 @@
 - Mnemonics docs:
   - fix `BRA` reference docs
   - fix duplicate entry in instruction docs for `BCHG`, `BCLR`, `BSET`
-- Parser: correct parsing for `ADDQ.B`/`SUBQ.B`
+- Parser: correct parsing
+  - `ADDQ.B`/`SUBQ.B`
+  - `BTST`
 
 ## 0.2.0 - 2025-10-31
 

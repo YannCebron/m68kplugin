@@ -368,6 +368,8 @@ adm_register_list ::= register_range (DIV register_range)* {
 // ATTN: ordering in groups
 private adm_group_all ::=                   adm_drd | adm_ard | adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
 private adm_group_all_except_ard ::=        adm_drd |           adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+private adm_group_all_except_ard_imm ::=    adm_drd |                     adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+private adm_group_all_except_drd_ard ::=                        adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
 private adm_group_all_except_rrd ::=                            adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
 private adm_group_all_except_pc_imm ::=     adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
 private adm_group_all_except_ard_pc_imm ::= adm_drd |                     adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
@@ -1044,9 +1046,14 @@ bclr_instruction ::= BCLR bit_tail
 
 bset_instruction ::= BSET bit_tail
 
-btst_instruction ::= BTST bit_data_size?
-                     (adm_drd | adm_quick) COMMA adm_group_all_except_ard
-
+private btst_tail_drd_drd ::=      data_size_long? adm_drd   COMMA adm_drd
+private btst_tail_drd_memory ::=   data_size_byte? adm_drd   COMMA adm_group_all_except_drd_ard
+private btst_tail_quick_drd ::=    data_size_long? adm_quick COMMA adm_drd
+private btst_tail_quick_memory ::= data_size_byte? adm_quick COMMA adm_group_all_except_ard_imm
+btst_instruction ::= BTST (btst_tail_drd_drd | btst_tail_drd_memory | btst_tail_quick_drd| btst_tail_quick_memory)
+{
+  pin = 1
+}
 
 // Shift/Rotate ============================================================
 ;

@@ -30,9 +30,9 @@ public class BtstInstructionPsiTest extends M68kPsiTestCase<M68kBtstInstruction>
   }
 
   public void testWithDataSize() {
-    final M68kBtstInstruction instruction = parse("btst.b d1,d0");
+    final M68kBtstInstruction instruction = parse("btst.l d1,d0");
 
-    assertEquals(M68kDataSize.BYTE, instruction.getDataSize());
+    assertEquals(M68kDataSize.LONGWORD, instruction.getDataSize());
 
     assertNull(instruction.getSourceQuick());
     final M68kAdmDrd sourceDrd = instruction.getSourceDrd();
