@@ -2,12 +2,8 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kMovemInstructionImpl(MOVEM_INSTRUCTION)
     PsiElement(movem)('movem')
-    PsiWhiteSpace(' ')
-    M68kAdmRegisterListImpl(ADM_REGISTER_LIST)
-      M68kRegisterRangeImpl(REGISTER_RANGE)
-        M68kAdmRrdImpl(ADM_RRD)
-          M68kAdmDrdImpl(ADM_DRD)
-            PsiElement(data_register)('d1')
-    PsiElement(,)(',')
-    PsiErrorElement:<address register indirect with displacement>, <address register indirect with index>, <address register indirect with predecrement>, <address register indirect> or <expression> expected
-      <empty list>
+  PsiWhiteSpace(' ')
+  PsiElement(data_register)('d1')
+  PsiElement(,)(',')
+  PsiErrorElement:<address register indirect with displacement>, <address register indirect with index>, <address register indirect with predecrement>, <address register indirect> or <expression> expected
+    <empty list>

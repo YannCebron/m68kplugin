@@ -462,18 +462,22 @@ moveq_instruction ::= MOVEQ data_size_long?
   ]
 }
 
-private movem_from_tail ::= (adm_register_list | adm_imm) COMMA (adm_ari | adm_apd | adm_adi | adm_aix | adm_abs)
-{
-  pin = 1
-}
-private movem_to_tail ::= (adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA (adm_register_list | adm_imm)
-{
-  pin = 1
-}
+private movem_tail_group_restore_operands ::=  (adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs)
+private movem_tail_group_alterable_control ::= (adm_ari | adm_adi | adm_aix | adm_abs)
+private movem_tail_register_list_apd ::=                   adm_register_list COMMA adm_apd
+private movem_tail_register_list_alterable_control ::=     adm_register_list COMMA movem_tail_group_alterable_control
+private movem_tail_restore_operands_register_list ::=      movem_tail_group_restore_operands COMMA adm_register_list
+private movem_tail_register_list_imm_apd ::=               adm_imm COMMA adm_apd
+private movem_tail_register_list_imm_alterable_control ::= adm_imm COMMA movem_tail_group_alterable_control
+private movem_tail_restore_operands_register_list_imm ::=  movem_tail_group_restore_operands COMMA adm_imm
 movem_instruction ::= MOVEM data_size_word_long?
                       (
-                         movem_from_tail  |
-                         movem_to_tail
+                        movem_tail_register_list_apd |
+                        movem_tail_register_list_alterable_control |
+                        movem_tail_restore_operands_register_list |
+                        movem_tail_register_list_imm_apd |
+                        movem_tail_register_list_imm_alterable_control |
+                        movem_tail_restore_operands_register_list_imm
                       )
 
 private movep_tail_drd_adi ::= adm_drd COMMA adm_adi

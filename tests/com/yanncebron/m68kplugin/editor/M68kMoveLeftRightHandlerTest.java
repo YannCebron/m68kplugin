@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ public class M68kMoveLeftRightHandlerTest extends BasePlatformTestCase {
   }
 
   public void testAdmRegisterList() {
-    doTestMoveLeft(" movem d0/<caret>d1/a0", " movem <caret>d1/d0/a0");
+    doTestMoveLeft(" movem d0/<caret>d1/a0,-(a7)", " movem <caret>d1/d0/a0,-(a7)");
   }
 
   public void testExgInstruction() {

@@ -3659,45 +3659,14 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (adm_register_list | adm_imm) COMMA (adm_ari | adm_apd | adm_adi | adm_aix | adm_abs)
-  static boolean movem_from_tail(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "movem_from_tail")) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
-    r = movem_from_tail_0(b, l + 1);
-    p = r; // pin = 1
-    r = r && report_error_(b, consumeToken(b, COMMA));
-    r = p && movem_from_tail_2(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
-  }
-
-  // adm_register_list | adm_imm
-  private static boolean movem_from_tail_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "movem_from_tail_0")) return false;
-    boolean r;
-    r = adm_register_list(b, l + 1);
-    if (!r) r = adm_imm(b, l + 1);
-    return r;
-  }
-
-  // adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
-  private static boolean movem_from_tail_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "movem_from_tail_2")) return false;
-    boolean r;
-    r = adm_ari(b, l + 1);
-    if (!r) r = adm_apd(b, l + 1);
-    if (!r) r = adm_adi(b, l + 1);
-    if (!r) r = adm_aix(b, l + 1);
-    if (!r) r = adm_abs(b, l + 1);
-    return r;
-  }
-
-  /* ********************************************************** */
   // MOVEM data_size_word_long?
   //                       (
-  //                          movem_from_tail  |
-  //                          movem_to_tail
+  //                         movem_tail_register_list_apd |
+  //                         movem_tail_register_list_alterable_control |
+  //                         movem_tail_restore_operands_register_list |
+  //                         movem_tail_register_list_imm_apd |
+  //                         movem_tail_register_list_imm_alterable_control |
+  //                         movem_tail_restore_operands_register_list_imm
   //                       )
   public static boolean movem_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "movem_instruction")) return false;
@@ -3719,33 +3688,40 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // movem_from_tail  |
-  //                          movem_to_tail
+  // movem_tail_register_list_apd |
+  //                         movem_tail_register_list_alterable_control |
+  //                         movem_tail_restore_operands_register_list |
+  //                         movem_tail_register_list_imm_apd |
+  //                         movem_tail_register_list_imm_alterable_control |
+  //                         movem_tail_restore_operands_register_list_imm
   private static boolean movem_instruction_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "movem_instruction_2")) return false;
     boolean r;
-    r = movem_from_tail(b, l + 1);
-    if (!r) r = movem_to_tail(b, l + 1);
+    r = movem_tail_register_list_apd(b, l + 1);
+    if (!r) r = movem_tail_register_list_alterable_control(b, l + 1);
+    if (!r) r = movem_tail_restore_operands_register_list(b, l + 1);
+    if (!r) r = movem_tail_register_list_imm_apd(b, l + 1);
+    if (!r) r = movem_tail_register_list_imm_alterable_control(b, l + 1);
+    if (!r) r = movem_tail_restore_operands_register_list_imm(b, l + 1);
     return r;
   }
 
   /* ********************************************************** */
-  // (adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs) COMMA (adm_register_list | adm_imm)
-  static boolean movem_to_tail(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "movem_to_tail")) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
-    r = movem_to_tail_0(b, l + 1);
-    p = r; // pin = 1
-    r = r && report_error_(b, consumeToken(b, COMMA));
-    r = p && movem_to_tail_2(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+  // adm_ari | adm_adi | adm_aix | adm_abs
+  static boolean movem_tail_group_alterable_control(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movem_tail_group_alterable_control")) return false;
+    boolean r;
+    r = adm_ari(b, l + 1);
+    if (!r) r = adm_adi(b, l + 1);
+    if (!r) r = adm_aix(b, l + 1);
+    if (!r) r = adm_abs(b, l + 1);
+    return r;
   }
 
+  /* ********************************************************** */
   // adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-  private static boolean movem_to_tail_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "movem_to_tail_0")) return false;
+  static boolean movem_tail_group_restore_operands(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movem_tail_group_restore_operands")) return false;
     boolean r;
     r = adm_api(b, l + 1);
     if (!r) r = adm_ari(b, l + 1);
@@ -3757,12 +3733,83 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // adm_register_list | adm_imm
-  private static boolean movem_to_tail_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "movem_to_tail_2")) return false;
+  /* ********************************************************** */
+  // adm_register_list COMMA movem_tail_group_alterable_control
+  static boolean movem_tail_register_list_alterable_control(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movem_tail_register_list_alterable_control")) return false;
     boolean r;
+    Marker m = enter_section_(b);
     r = adm_register_list(b, l + 1);
-    if (!r) r = adm_imm(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && movem_tail_group_alterable_control(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // adm_register_list COMMA adm_apd
+  static boolean movem_tail_register_list_apd(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movem_tail_register_list_apd")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = adm_register_list(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_apd(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // adm_imm COMMA movem_tail_group_alterable_control
+  static boolean movem_tail_register_list_imm_alterable_control(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movem_tail_register_list_imm_alterable_control")) return false;
+    if (!nextTokenIs(b, HASH)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = adm_imm(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && movem_tail_group_alterable_control(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // adm_imm COMMA adm_apd
+  static boolean movem_tail_register_list_imm_apd(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movem_tail_register_list_imm_apd")) return false;
+    if (!nextTokenIs(b, HASH)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = adm_imm(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_apd(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // movem_tail_group_restore_operands COMMA adm_register_list
+  static boolean movem_tail_restore_operands_register_list(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movem_tail_restore_operands_register_list")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = movem_tail_group_restore_operands(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_register_list(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // movem_tail_group_restore_operands COMMA adm_imm
+  static boolean movem_tail_restore_operands_register_list_imm(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movem_tail_restore_operands_register_list_imm")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = movem_tail_group_restore_operands(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_imm(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
   }
 
