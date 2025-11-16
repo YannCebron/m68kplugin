@@ -28,6 +28,7 @@
   - `ADD`/`SUB` 
   - `ADDQ.B`/`SUBQ.B`
   - `AND`/`OR`/`EOR`
+  - `ANDI`/`ORI`/`EORI`
   - `BCHG`, `BCLR`, `BSET`, `BTST`
   - `CMP`
   - `DBcc`
