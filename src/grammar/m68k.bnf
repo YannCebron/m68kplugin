@@ -1779,11 +1779,10 @@ string_expression ::= STRING
   mixin = "com.yanncebron.m68kplugin.lang.psi.expression.impl.M68kStringExpressionMixIn"
 }
 
-private plain_paren_expression ::= L_PAREN expression R_PAREN
+paren_expression ::= L_PAREN expression R_PAREN
 {
   pin = 1
 }
-paren_expression ::= plain_paren_expression
 
 label_ref_expression ::= ID
 {
