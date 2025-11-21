@@ -370,17 +370,17 @@ adm_register_list ::= register_range (DIV register_range)* {
 
 // maps to M68kOperand
 // ATTN: keep fixed ordering in groups
-private operand_all ::=                     adm_drd | adm_ard | adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-private operand_data ::=                    adm_drd |           adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-private operand_memory ::=                                      adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-private operand_memory_without_imm ::=                                    adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-private operand_alterable ::=               adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
-private operand_alterable_data ::=          adm_drd |                     adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
-private operand_alterable_memory ::=                                      adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
-private operand_control ::=                                                         adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+private operand_all ::=                adm_drd | adm_ard | adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+private operand_data ::=               adm_drd |           adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+private operand_memory ::=                                 adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+private operand_memory_without_imm ::=                               adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+private operand_alterable ::=          adm_drd | adm_ard |           adm_api | adm_ari | adm_apd |                     adm_adi | adm_aix | adm_abs
+private operand_alterable_data ::=     adm_drd |                     adm_api | adm_ari | adm_apd |                     adm_adi | adm_aix | adm_abs
+private operand_alterable_memory ::=                                 adm_api | adm_ari | adm_apd |                     adm_adi | adm_aix | adm_abs
+private operand_control ::=                                                    adm_ari |           adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
 
-private operand_restore_operands ::=  adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-private operand_alterable_control ::= adm_ari | adm_adi | adm_aix | adm_abs
+private operand_restore_operands ::=                                 adm_api | adm_ari |           adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+private operand_alterable_control ::=                                          adm_ari |                               adm_adi | adm_aix | adm_abs
 
 private operand_ctrl_register ::= adm_dfc | adm_sfc | adm_vbr
 {

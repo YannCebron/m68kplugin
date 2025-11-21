@@ -3918,7 +3918,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // adm_drd | adm_ard |           adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
+  // adm_drd | adm_ard |           adm_api | adm_ari | adm_apd |                     adm_adi | adm_aix | adm_abs
   static boolean operand_alterable(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operand_alterable")) return false;
     boolean r;
@@ -3934,7 +3934,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // adm_ari | adm_adi | adm_aix | adm_abs
+  // adm_ari |                               adm_adi | adm_aix | adm_abs
   static boolean operand_alterable_control(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operand_alterable_control")) return false;
     boolean r;
@@ -3946,7 +3946,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // adm_drd |                     adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
+  // adm_drd |                     adm_api | adm_ari | adm_apd |                     adm_adi | adm_aix | adm_abs
   static boolean operand_alterable_data(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operand_alterable_data")) return false;
     boolean r;
@@ -3961,7 +3961,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // adm_api | adm_ari | adm_apd | adm_adi | adm_aix | adm_abs
+  // adm_api | adm_ari | adm_apd |                     adm_adi | adm_aix | adm_abs
   static boolean operand_alterable_memory(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operand_alterable_memory")) return false;
     boolean r;
@@ -3975,7 +3975,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+  // adm_ari |           adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
   static boolean operand_control(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operand_control")) return false;
     boolean r;
@@ -4053,7 +4053,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // adm_api | adm_ari | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+  // adm_api | adm_ari |           adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
   static boolean operand_restore_operands(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operand_restore_operands")) return false;
     boolean r;
