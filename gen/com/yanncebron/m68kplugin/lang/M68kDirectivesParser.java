@@ -1562,13 +1562,12 @@ public class M68kDirectivesParser {
   public static boolean offset_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "offset_directive")) return false;
     if (!nextTokenIs(b, "<directive>", OFFSET)) return false;
-    boolean r, p;
+    boolean r;
     Marker m = enter_section_(b, l, _NONE_, OFFSET_DIRECTIVE, "<directive>");
     r = consumeToken(b, OFFSET);
-    p = r; // pin = 1
     r = r && offset_directive_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+    exit_section_(b, l, m, r, false, null);
+    return r;
   }
 
   // expression?

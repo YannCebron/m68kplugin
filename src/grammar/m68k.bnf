@@ -1671,9 +1671,6 @@ msource_directive ::= MSOURCE msource_param
 }
 
 offset_directive ::= OFFSET expression?
-{
-  pin = 1
-}
 
 
 mask2_directive ::= MASK2
