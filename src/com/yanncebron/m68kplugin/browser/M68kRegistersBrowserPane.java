@@ -85,7 +85,7 @@ final class M68kRegistersBrowserPane extends M68kBrowserPaneBase<M68kRegister> {
 
   @Override
   protected @NotNull String getDocFor(@NotNull M68kRegister selectedValue) {
-    return new M68kRegisterDocsGenerator(selectedValue).getDocumentation();
+    return new M68kRegisterDocsGenerator(selectedValue).getDocumentation(true);
   }
 
   @Override

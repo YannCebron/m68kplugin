@@ -39,6 +39,7 @@
   - `MOVES`
   - `NBCD`
   - `PEA`
+- reference documentation for registers: cross-links not working in editor (`SR` &harr; `CCR`)
 
 ## 0.2.0 - 2025-10-31
 

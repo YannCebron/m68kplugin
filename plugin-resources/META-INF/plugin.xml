@@ -176,6 +176,8 @@
     <lang.documentationProvider
         language="M68k"
         implementationClass="com.yanncebron.m68kplugin.documentation.M68kNumberExpressionDocumentationProvider"/>
+    <platform.backend.documentation.linkHandler
+        implementation="com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn$M68kRegisterSymbolLinkHandler"/>
 
     <problemFileHighlightFilter
         implementation="com.yanncebron.m68kplugin.lang.M68kProblemFileHighlightFilter"/>

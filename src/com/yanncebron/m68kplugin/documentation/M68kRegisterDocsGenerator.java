@@ -23,6 +23,8 @@ import com.intellij.psi.tree.IElementType;
 import com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase;
 import com.yanncebron.m68kplugin.lang.psi.M68kRegister;
 
+import java.util.function.Function;
+
 public final class M68kRegisterDocsGenerator {
 
   private static final String DOCS_REGISTER_ROOT = "/docs/registers/";
@@ -39,7 +41,7 @@ public final class M68kRegisterDocsGenerator {
     }
   }
 
-  public String getDocumentation() {
+  public String getDocumentation(boolean forBrowserPane) {
     StringBuilder metaData = new StringBuilder("<br><hr/>");
     M68kDocsGeneratorUtil.appendCpus(metaData, m68kRegister.getCpus());
 
@@ -53,7 +55,8 @@ public final class M68kRegisterDocsGenerator {
           metaData;
     }
 
-    String definition = M68kDocumentationUtil.getHtmlForMarkdown(DOCS_REGISTER_ROOT, markdownContents.first, M68kBrowserPaneBase.M68K_BROWSER_LINK_FUNCTION);
+    String definition = M68kDocumentationUtil.getHtmlForMarkdown(DOCS_REGISTER_ROOT, markdownContents.first,
+      forBrowserPane ? M68kBrowserPaneBase.M68K_BROWSER_LINK_FUNCTION : Function.identity());
     return M68kDocumentationUtil.CSS + DocumentationMarkup.CONTENT_START + definition + metaData + DocumentationMarkup.CONTENT_END;
   }
 

@@ -55,7 +55,7 @@ public class M68kRegisterSymbolDocumentationTest extends BasePlatformTestCase {
   public void testRemapToAddressRegister() {
     M68kRegister[] remapRegisters = new M68kRegister[]{M68kRegister.SP, M68kRegister.SSP, M68kRegister.USP};
     for (M68kRegister register : remapRegisters) {
-      String documentation = new M68kRegisterDocsGenerator(register).getDocumentation();
+      String documentation = new M68kRegisterDocsGenerator(register).getDocumentation(true);
       assertTrue("failed for " + register + ": " + documentation, documentation.contains("<h1>Address registers (<code>A0</code>-<code>A7</code>)</h1>"));
     }
   }

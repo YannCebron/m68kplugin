@@ -23,10 +23,8 @@ import com.intellij.model.SingleTargetReference;
 import com.intellij.model.Symbol;
 import com.intellij.model.psi.PsiSymbolReference;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.platform.backend.documentation.DocumentationContent;
-import com.intellij.platform.backend.documentation.DocumentationResult;
-import com.intellij.platform.backend.documentation.DocumentationSymbol;
-import com.intellij.platform.backend.documentation.DocumentationTarget;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.platform.backend.documentation.*;
 import com.intellij.platform.backend.presentation.TargetPresentation;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.containers.ConcurrentFactoryMap;
@@ -128,12 +126,30 @@ abstract class M68kAdmWithRegisterMixIn extends ASTWrapperPsiElement implements 
 
     @Override
     public @Nullable DocumentationResult computeDocumentation() {
-      return DocumentationResult.documentation(DocumentationContent.content(new M68kRegisterDocsGenerator(m68kRegister).getDocumentation()));
+      String html = new M68kRegisterDocsGenerator(m68kRegister).getDocumentation(false);
+      return DocumentationResult.documentation(DocumentationContent.content(html));
     }
 
     @Override
     public @NotNull TargetPresentation computePresentation() {
       return TargetPresentation.builder(m68kRegister.name()).presentation();
+    }
+  }
+
+  /**
+   * Resolve {@code registerName.md} cross-links in MD reference docs.
+   */
+  static final class M68kRegisterSymbolLinkHandler implements DocumentationLinkHandler {
+
+    @Override
+    public @Nullable LinkResolveResult resolveLink(@NotNull DocumentationTarget target, @NotNull String url) {
+      if (target instanceof M68RegisterSymbolDocumentationTarget) {
+        String registerName = StringUtil.substringBefore(url, ".md");
+        if (registerName == null) return null;
+        M68kRegister targetRegister = M68kRegister.valueOf(StringUtil.toUpperCase(registerName));
+        return new ResolvedTarget(new M68RegisterSymbolDocumentationTarget(targetRegister));
+      }
+      return null;
     }
   }
 }
