@@ -37,7 +37,7 @@ public class M68kRegisterSymbolDocumentationTest extends BasePlatformTestCase {
       (32 bits), and quad-word (64 bits) operations. They also can be used as index registers.</p>
       <p><em>From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with
       permission.</em></p>
-      <br><hr/>M68000 Family<br></div>""");
+      <br><hr/>MC68000 Family<br></div>""");
   }
 
   public void testSfcRegister() {
@@ -49,7 +49,7 @@ public class M68kRegisterSymbolDocumentationTest extends BasePlatformTestCase {
       address spaces for data and programs at the user and supervisor modes. Certain
       instructions use SFC and DFC to specify the function codes for operations.</p>
       <p><em>From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.</em></p>
-      <br><hr/>M68010+<br></div>""");
+      <br><hr/>MC68010+<br></div>""");
   }
 
   public void testRemapToAddressRegister() {
