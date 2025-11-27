@@ -1,5 +1,3 @@
-# IFD
-
 ## Syntax
 ```assembly
 ifd <symbol>

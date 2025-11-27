@@ -1,5 +1,3 @@
-# CSEG
-
 ## Syntax
 ```assembly
 cseg

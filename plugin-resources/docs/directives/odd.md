@@ -1,5 +1,3 @@
-# ODD
-
 ## Syntax
 ```assembly
 odd

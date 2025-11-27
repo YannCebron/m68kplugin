@@ -1,5 +1,3 @@
-# IF2
-
 ## Syntax
 ```assembly
 if2

@@ -1,5 +1,3 @@
-# EREM
-
 ## Syntax
 ```assembly
 erem

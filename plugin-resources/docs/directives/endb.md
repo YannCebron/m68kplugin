@@ -1,5 +1,3 @@
-# ENDB
-
 ## Syntax
 ```assembly
 endb <An>

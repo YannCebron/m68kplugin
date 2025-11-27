@@ -1,5 +1,3 @@
-# REM
-
 ## Syntax
 ```assembly
 rem

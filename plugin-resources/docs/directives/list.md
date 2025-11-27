@@ -1,5 +1,3 @@
-# LIST
-
 ## Syntax
 ```assembly
 list

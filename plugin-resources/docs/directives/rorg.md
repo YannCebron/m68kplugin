@@ -1,5 +1,3 @@
-# RORG
-
 ## Syntax
 ```assembly
 rorg <expression>[,<fill>]

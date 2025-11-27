@@ -1,5 +1,3 @@
-# CNOP
-
 ## Syntax
 ```assembly
 cnop <offset>,<alignment>

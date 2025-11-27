@@ -1,5 +1,3 @@
-# NEAR
-
 ## Syntax
 ```assembly
 near [<An>]

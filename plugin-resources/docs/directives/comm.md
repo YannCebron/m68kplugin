@@ -1,5 +1,3 @@
-# COMM
-
 ## Syntax
 ```assembly
 comm <symbol>,<size>

@@ -1,5 +1,3 @@
-# INCLUDE
-
 ## Syntax
 ```assembly
 include <file>

@@ -1,5 +1,3 @@
-# SETFO
-
 ## Syntax
 ```assembly
 setfo <expression>

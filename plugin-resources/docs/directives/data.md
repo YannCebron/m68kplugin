@@ -1,5 +1,3 @@
-# DATA
-
 ## Syntax
 ```assembly
 data

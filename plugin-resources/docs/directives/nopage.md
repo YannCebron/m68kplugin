@@ -1,5 +1,3 @@
-# NOPAGE
-
 ## Syntax
 ```assembly
 nopage

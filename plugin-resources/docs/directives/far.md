@@ -1,5 +1,3 @@
-# FAR
-
 ## Syntax
 ```assembly
 far

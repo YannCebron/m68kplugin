@@ -1,5 +1,3 @@
-# EQUR
-
 ## Syntax
 ```assembly
 <symbol> equr <Rn>

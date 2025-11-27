@@ -1,5 +1,3 @@
-# CODE_C
-
 ## Syntax
 ```assembly
 code_c

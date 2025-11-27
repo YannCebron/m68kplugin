@@ -1,5 +1,3 @@
-# IFMI
-
 ## Syntax
 ```assembly
 ifmi <expression>

@@ -1,5 +1,3 @@
-# BSS_F
-
 ## Syntax
 ```assembly
 bss_f

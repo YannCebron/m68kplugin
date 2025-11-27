@@ -1,5 +1,3 @@
-# FAIL
-
 ## Syntax
 ```assembly
 fail <message>

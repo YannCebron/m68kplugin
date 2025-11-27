@@ -1,5 +1,3 @@
-# FEQU
-
 ## Syntax
 ```assembly
 <symbol> fequ.[sdxp] <expression>

@@ -1,5 +1,3 @@
-# PUSHSECTION
-
 ## Syntax
 ```assembly
 pushsection

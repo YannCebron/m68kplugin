@@ -1,5 +1,3 @@
-# INITNEAR
-
 ## Syntax
 ```assembly
 initnear

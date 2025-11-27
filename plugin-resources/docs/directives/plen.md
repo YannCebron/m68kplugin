@@ -1,5 +1,3 @@
-# PLEN
-
 ## Syntax
 ```assembly
 plen <len>

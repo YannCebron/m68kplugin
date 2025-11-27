@@ -1,5 +1,3 @@
-# MACRO
-
 ## Syntax
 ```assembly
 macro <name>

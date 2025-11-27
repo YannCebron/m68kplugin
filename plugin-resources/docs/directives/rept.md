@@ -1,5 +1,3 @@
-# REPT
-
 ## Syntax
 ```assembly
 rept <expression>

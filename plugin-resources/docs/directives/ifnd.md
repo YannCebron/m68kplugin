@@ -1,5 +1,3 @@
-# IFND
-
 ## Syntax
 ```assembly
 ifnd <symbol>

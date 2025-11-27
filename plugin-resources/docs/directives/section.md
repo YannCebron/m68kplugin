@@ -1,5 +1,3 @@
-# SECTION
-
 ## Syntax
 ```assembly
 section <name>[,<sec_type>][,<mem_type>]

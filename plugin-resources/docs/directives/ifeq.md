@@ -1,5 +1,3 @@
-# IFEQ
-
 ## Syntax
 ```assembly
 ifeq <expression>

@@ -1,5 +1,3 @@
-# BSS
-
 ## Syntax
 ```assembly
 bss

@@ -1,5 +1,3 @@
-# TEXT
-
 ## Syntax
 ```assembly
 text

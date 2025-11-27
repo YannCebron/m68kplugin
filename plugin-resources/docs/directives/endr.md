@@ -1,5 +1,3 @@
-# ENDR
-
 ## Syntax
 ```assembly
 endr

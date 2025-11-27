@@ -1,5 +1,3 @@
-# DSEG
-
 ## Syntax
 ```assembly
 dseg

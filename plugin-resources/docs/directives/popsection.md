@@ -1,5 +1,3 @@
-# POPSECTION
-
 ## Syntax
 ```assembly
 popsection

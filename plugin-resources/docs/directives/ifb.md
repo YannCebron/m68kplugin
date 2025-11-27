@@ -1,5 +1,3 @@
-# IFB
-
 ## Syntax
 ```assembly
 ifb <operand>

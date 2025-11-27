@@ -1,5 +1,3 @@
-# NREF
-
 ## Syntax
 ```assembly
 nref <symbol>[,<symbol>...]

@@ -1,5 +1,3 @@
-# DC
-
 ## Syntax
 ```assembly
 dc.[bdlqswx] <exp1>[,<exp2>,"<string1>",’<string2>’...]

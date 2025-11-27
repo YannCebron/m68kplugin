@@ -1,5 +1,3 @@
-# IF
-
 ## Syntax
 ```assembly
 if <expression>

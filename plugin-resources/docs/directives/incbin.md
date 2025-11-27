@@ -1,5 +1,3 @@
-# INCBIN
-
 ## Syntax
 ```assembly
 incbin <file>[,<offset>[,<length>]]

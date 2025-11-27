@@ -98,25 +98,31 @@ public final class M68kDirectiveDocumentationProvider extends AbstractDocumentat
       docDirectiveType = M68kTokenTypes.EQU;
     }
 
+    String referenceDoc = getReferenceDoc(docDirectiveType, forBrowserPane);
+
+    return M68kDocumentationUtil.CSS +
+      DocumentationMarkup.DEFINITION_START +
+      "<h1><code>" + StringUtil.toUpperCase(docDirectiveType.toString()) + "</code></h1>" +
+      DocumentationMarkup.DEFINITION_END +
+      DocumentationMarkup.CONTENT_START +
+      "<p>" + referenceDoc + "</p>" +
+      DocumentationMarkup.CONTENT_END;
+  }
+
+  private static String getReferenceDoc(IElementType docDirectiveType, boolean forBrowserPane) {
     String directiveText = docDirectiveType.toString();
     Couple<String> contents = M68kDocumentationUtil.getMarkdownContents(DOCS_MNEMONIC_ROOT, StringUtil.toLowerCase(directiveText));
     if (contents.getFirst() == null) {
-      return
-        "<h1>" + StringUtil.toUpperCase(directiveText) + "</h1>" +
-          "<p>" + contents.getSecond() + "</p>" +
-          M68kDocumentationUtil.CONTRIBUTION_FOOTER;
+      return contents.getSecond() + M68kDocumentationUtil.CONTRIBUTION_FOOTER;
     }
 
-    String html;
     if (forBrowserPane) {
-      html = M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, contents.getFirst(), M68kBrowserPaneBase.M68K_BROWSER_LINK_FUNCTION);
-    } else {
-      // provide "inline" link to handle in getDocumentationElementForLink()
-      html = M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, contents.getFirst(),
-        link -> DocumentationManagerProtocol.PSI_ELEMENT_PROTOCOL + StringUtil.substringBefore(link, ".md"));
+      return M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, contents.getFirst(), M68kBrowserPaneBase.M68K_BROWSER_LINK_FUNCTION);
     }
 
-    return M68kDocumentationUtil.CSS + DocumentationMarkup.CONTENT_START + html + DocumentationMarkup.CONTENT_END;
+    // provide "inline" link to handle in getDocumentationElementForLink()
+    return M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, contents.getFirst(),
+      link -> DocumentationManagerProtocol.PSI_ELEMENT_PROTOCOL + StringUtil.substringBefore(link, ".md"));
   }
 
 }

@@ -1,5 +1,3 @@
-# OPT
-
 ## Syntax
 
 ```assembly

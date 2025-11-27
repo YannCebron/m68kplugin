@@ -1,5 +1,3 @@
-# SETSO
-
 ## Syntax
 ```assembly
 setso <expression>

@@ -1,5 +1,3 @@
-# CODE
-
 ## Syntax
 ```assembly
 code

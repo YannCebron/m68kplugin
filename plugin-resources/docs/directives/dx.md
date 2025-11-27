@@ -1,5 +1,3 @@
-# DX
-
 ## Syntax
 ```assembly
 dx.[bdlqswx] <exp>

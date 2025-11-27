@@ -1,5 +1,3 @@
-# BSS_C
-
 ## Syntax
 ```assembly
 bss_c

@@ -1,5 +1,3 @@
-# ASSERT
-
 ## Syntax
 ```assembly
 assert <expression>[,<message>]

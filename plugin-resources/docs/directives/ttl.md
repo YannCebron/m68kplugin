@@ -1,5 +1,3 @@
-# TTL
-
 ## Syntax
 ```assembly
 ttl <name>

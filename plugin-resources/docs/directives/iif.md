@@ -1,5 +1,3 @@
-# IIF
-
 ## Syntax
 ```assembly
 iif <expression> <statement>

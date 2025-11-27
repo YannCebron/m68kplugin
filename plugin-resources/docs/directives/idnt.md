@@ -1,5 +1,3 @@
-# IDNT
-
 ## Syntax
 ```assembly
 idnt <name>

@@ -1,5 +1,3 @@
-# IFLT
-
 ## Syntax
 ```assembly
 iflt <expression>

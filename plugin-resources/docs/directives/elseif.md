@@ -1,5 +1,3 @@
-# ELSEIF
-
 ## Syntax
 ```assembly
 elseif

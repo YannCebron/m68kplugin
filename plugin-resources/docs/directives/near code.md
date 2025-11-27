@@ -1,5 +1,3 @@
-# NEAR CODE
-
 ## Syntax
 ```assembly
 near code

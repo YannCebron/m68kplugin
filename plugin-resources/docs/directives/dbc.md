@@ -1,5 +1,3 @@
-# DBC
-
 ## Syntax
 ```assembly
 dcb.[bdlqswx] <exp>[,<fill>]

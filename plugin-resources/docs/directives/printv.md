@@ -1,5 +1,3 @@
-# PRINTV
-
 ## Syntax
 ```assembly
 printv <expression>[,<expression>...]

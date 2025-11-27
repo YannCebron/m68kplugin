@@ -1,5 +1,3 @@
-# CLRFO
-
 ## Syntax
 ```assembly
 clrfo

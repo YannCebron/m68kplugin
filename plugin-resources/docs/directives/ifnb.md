@@ -1,5 +1,3 @@
-# IFNB
-
 ## Syntax
 ```assembly
 ifnb <operand>

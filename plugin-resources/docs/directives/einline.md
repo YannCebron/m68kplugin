@@ -1,5 +1,3 @@
-# EINLINE
-
 ## Syntax
 ```assembly
 einline

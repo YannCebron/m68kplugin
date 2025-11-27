@@ -1,5 +1,3 @@
-# MEXIT
-
 ## Syntax
 ```assembly
 mexit

@@ -1,5 +1,3 @@
-# ELSE
-
 ## Syntax
 ```assembly
 else

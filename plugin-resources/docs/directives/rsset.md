@@ -1,5 +1,3 @@
-# RSSET
-
 ## Syntax
 ```assembly
 rsset <expression>

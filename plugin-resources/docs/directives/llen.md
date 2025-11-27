@@ -1,5 +1,3 @@
-# LLEN
-
 ## Syntax
 ```assembly
 llen <len>

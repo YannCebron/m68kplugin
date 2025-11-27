@@ -1,5 +1,3 @@
-# ENDIF
-
 ## Syntax
 ```assembly
 endif

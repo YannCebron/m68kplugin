@@ -1,5 +1,3 @@
-# PAGE
-
 ## Syntax
 ```assembly
 page

@@ -1,5 +1,3 @@
-# BASEREG
-
 ## Syntax
 ```assembly
 basereg <expression>,<An>

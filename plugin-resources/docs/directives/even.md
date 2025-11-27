@@ -1,5 +1,3 @@
-# EVEN
-
 ## Syntax
 ```assembly
 even

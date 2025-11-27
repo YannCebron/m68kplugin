@@ -1,5 +1,3 @@
-# RSRESET
-
 ## Syntax
 ```assembly
 rsreset

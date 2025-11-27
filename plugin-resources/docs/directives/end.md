@@ -1,5 +1,3 @@
-# END
-
 ## Syntax
 ```assembly
 end

@@ -1,5 +1,3 @@
-# INCDIR
-
 ## Syntax
 ```assembly
 incdir <path>

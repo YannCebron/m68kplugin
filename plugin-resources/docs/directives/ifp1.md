@@ -1,5 +1,3 @@
-# IFP1
-
 ## Syntax
 ```assembly
 ifp1

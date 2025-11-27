@@ -1,5 +1,3 @@
-# ECHO
-
 ## Syntax
 ```assembly
 echo <string>

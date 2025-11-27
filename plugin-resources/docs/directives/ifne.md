@@ -1,5 +1,3 @@
-# IFNE
-
 ## Syntax
 ```assembly
 ifne <expression>

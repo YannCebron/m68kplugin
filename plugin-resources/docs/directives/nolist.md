@@ -1,5 +1,3 @@
-# NOLIST
-
 ## Syntax
 ```assembly
 nolist

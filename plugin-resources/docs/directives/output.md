@@ -1,5 +1,3 @@
-# OUTPUT
-
 ## Syntax
 ```assembly
 output <name>

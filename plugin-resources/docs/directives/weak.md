@@ -1,5 +1,3 @@
-# WEAK
-
 ## Syntax
 ```assembly
 weak <symbol>[,<symbol>...]

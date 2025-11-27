@@ -1,5 +1,3 @@
-# XREF
-
 ## Syntax
 ```assembly
 xref <symbol>[,<symbol>...]

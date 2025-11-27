@@ -1,5 +1,3 @@
-# SET
-
 ## Syntax
 ```assembly
 <symbol> set <expression>

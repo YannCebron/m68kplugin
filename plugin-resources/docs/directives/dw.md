@@ -1,5 +1,3 @@
-# DW
-
 ## Syntax
 ```assembly
 dw <exp1>[,<exp2>...]

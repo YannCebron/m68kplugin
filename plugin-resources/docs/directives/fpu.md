@@ -1,5 +1,3 @@
-# FPU
-
 ## Syntax
 ```assembly
 fpu <cpID>

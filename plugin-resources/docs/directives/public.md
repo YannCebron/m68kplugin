@@ -1,5 +1,3 @@
-# PUBLIC
-
 ## Syntax
 ```assembly
 public <symbol>[,<symbol>...]

@@ -1,5 +1,3 @@
-# CPU32
-
 ## Syntax
 ```assembly
 cpu32

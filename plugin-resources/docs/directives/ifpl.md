@@ -1,5 +1,3 @@
-# IFPL
-
 ## Syntax
 ```assembly
 ifpl <expression>

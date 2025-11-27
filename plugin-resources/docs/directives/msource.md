@@ -1,5 +1,3 @@
-# MSOURCE
-
 ## Syntax
 ```assembly
 msource on/off

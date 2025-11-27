@@ -1,5 +1,3 @@
-# ALIGN
-
 ## Syntax
 ```assembly
 align <bitcount>

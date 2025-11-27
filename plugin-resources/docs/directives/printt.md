@@ -1,5 +1,3 @@
-# PRINTT
-
 ## Syntax
 ```assembly
 printt <string>[,<string>...]

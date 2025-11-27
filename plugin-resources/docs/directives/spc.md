@@ -1,5 +1,3 @@
-# SPC
-
 ## Syntax
 ```assembly
 spc <lines>

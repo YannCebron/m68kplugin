@@ -1,5 +1,3 @@
-# REG
-
 ## Syntax
 ```assembly
 <symbol> reg <reglist>

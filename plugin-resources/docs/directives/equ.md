@@ -1,5 +1,3 @@
-# EQU
-
 ## Syntax
 ```assembly
 <symbol> equ <expression>

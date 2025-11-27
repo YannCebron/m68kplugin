@@ -1,5 +1,3 @@
-# IFGT
-
 ## Syntax
 ```assembly
 ifgt <expression>

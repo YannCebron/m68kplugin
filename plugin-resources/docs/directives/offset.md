@@ -1,5 +1,3 @@
-# OFFSET
-
 ## Syntax
 ```assembly
 offset [<expression>]

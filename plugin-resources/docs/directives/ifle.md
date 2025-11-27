@@ -1,5 +1,3 @@
-# IFLE
-
 ## Syntax
 ```assembly
 ifle <expression>

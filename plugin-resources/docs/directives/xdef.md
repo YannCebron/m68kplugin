@@ -1,5 +1,3 @@
-# XDEF
-
 ## Syntax
 ```assembly
 xdef <symbol>[,<symbol>...]

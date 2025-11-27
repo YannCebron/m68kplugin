@@ -1,5 +1,3 @@
-# IFMACROD
-
 ## Syntax
 ```assembly
 ifmacrod <macro>

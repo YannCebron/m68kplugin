@@ -1,5 +1,3 @@
-# COMMENT
-
 ## Syntax
 ```assembly
 comment

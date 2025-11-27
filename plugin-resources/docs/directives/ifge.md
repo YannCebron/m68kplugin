@@ -1,5 +1,3 @@
-# IFGE
-
 ## Syntax
 ```assembly
 ifge <expression>

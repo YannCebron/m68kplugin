@@ -1,5 +1,3 @@
-# ORG
-
 ## Syntax
 ```assembly
 org <expression>

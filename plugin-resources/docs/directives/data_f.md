@@ -1,5 +1,3 @@
-# DATA_F
-
 ## Syntax
 ```assembly
 data_f

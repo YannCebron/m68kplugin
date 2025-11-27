@@ -1,5 +1,3 @@
-# DL
-
 ## Syntax
 ```assembly
 dl <exp1>[,<exp2>...]
