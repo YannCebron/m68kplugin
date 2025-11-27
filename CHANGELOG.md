@@ -7,16 +7,16 @@
 - M68k Browser: 
   - re-use default IDE documentation component for better UX
   - persist selection and pane settings per project
-- M68k Browser "Amiga Hardware" tab: 
-  - add _Related_ registers
-  - add _Copy_ buttons for _Address_
 
 ### Added
 
 - Mnemonics docs: 
   - add cross-links in reference docs
   - optimize layout and contents
-- "Amiga Hardware" tab: `CIAx` registers
+- "Amiga Hardware" tab: 
+  - `CIAx` registers with reference docs
+  - add _Related_ registers
+  - add _Copy_ buttons for _Address_
 - Mnemonics: support some 68020+ only variants for `BSR`, `Bcc`, `CHK`, `DIVS`/`DIVU`, `LINK`, `MULS`/`MULU`, `TST`
 
 ### Fixed

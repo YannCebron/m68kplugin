@@ -100,6 +100,9 @@ final class M68kAmigaHardwareRegisterDocsCreator {
     if (includeReferenceDoc) {
       sb.append(DocumentationMarkup.CONTENT_START);
       sb.append(getReferenceDoc());
+      if (!isHardwareRegister) {
+        sb.append("<br><a href=\"https://www.amigarealm.com/computing/knowledge/hardref/apf.htm\">Amiga Realm Knowledge Base</a>");
+      }
       sb.append(DocumentationMarkup.CONTENT_END);
     }
 

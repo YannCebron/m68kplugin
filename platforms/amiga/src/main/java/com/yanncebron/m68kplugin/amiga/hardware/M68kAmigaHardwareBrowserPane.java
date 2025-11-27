@@ -25,7 +25,6 @@ import com.intellij.openapi.project.DumbAwareToggleAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.NaturalComparator;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.ui.speedSearch.SpeedSearchUtil;
@@ -133,11 +132,9 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
 
   @Override
   protected String getListItemNameForLink(String link) {
-    if (StringUtil.containsChar(link, 'x')) {
-      for (M68kAmigaHardwareRegister value : getSortedShownRegisters()) {
-        if (value.getDescriptionFileName().equals(link)) {
-          return value.getName();
-        }
+    for (M68kAmigaHardwareRegister value : getSortedShownRegisters()) {
+      if (value.getDescriptionFileName().equals(link)) {
+        return value.getName();
       }
     }
     return super.getListItemNameForLink(link);

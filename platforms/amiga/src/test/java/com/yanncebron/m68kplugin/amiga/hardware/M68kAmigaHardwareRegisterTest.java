@@ -137,7 +137,7 @@ public class M68kAmigaHardwareRegisterTest extends TestCase {
     assertSize(5, foundChip);
     assertEquals(58, countCopperDanger);
 
-    assertEquals(19, ciaDescriptionFileNames.size());
+    assertEquals(21, ciaDescriptionFileNames.size());
     assertEquals(78, hardwareDescriptionFileNames.size());
   }
 

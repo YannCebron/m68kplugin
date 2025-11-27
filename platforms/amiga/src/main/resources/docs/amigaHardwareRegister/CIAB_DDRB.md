@@ -1,0 +1,1 @@
+Direction for [Port B](CIAB_PRB.md) ; 1 = output (set to `0xFF`)

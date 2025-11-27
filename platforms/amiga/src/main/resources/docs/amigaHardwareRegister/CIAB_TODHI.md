@@ -1,0 +1,1 @@
+Horizontal sync event counter bits 23-16

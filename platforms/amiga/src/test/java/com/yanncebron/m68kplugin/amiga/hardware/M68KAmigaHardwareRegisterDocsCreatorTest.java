@@ -37,32 +37,11 @@ public class M68KAmigaHardwareRegisterDocsCreatorTest extends UsefulTestCase {
       }
     }
 
-    assertSameElements(withoutDoc,
-      M68kAmigaHardwareRegister.CIAA_PRA,
-      M68kAmigaHardwareRegister.CIAA_PRB,
-      M68kAmigaHardwareRegister.CIAA_TODLO,
-      M68kAmigaHardwareRegister.CIAA_TODMID,
-      M68kAmigaHardwareRegister.CIAA_TODHI,
-      M68kAmigaHardwareRegister.CIAA_SDR,
-
-      M68kAmigaHardwareRegister.CIAB_PRA,
-      M68kAmigaHardwareRegister.CIAB_PRB,
-      M68kAmigaHardwareRegister.CIAB_DDRA,
-      M68kAmigaHardwareRegister.CIAB_DDRB,
-      M68kAmigaHardwareRegister.CIAB_TALO,
-      M68kAmigaHardwareRegister.CIAB_TAHI,
-      M68kAmigaHardwareRegister.CIAB_TODLO,
-      M68kAmigaHardwareRegister.CIAB_TODMID,
-      M68kAmigaHardwareRegister.CIAB_TODHI,
-      M68kAmigaHardwareRegister.CIAB_DR,
-      M68kAmigaHardwareRegister.CIAB_ICR,
-      M68kAmigaHardwareRegister.CIAB_CRA,
-      M68kAmigaHardwareRegister.CIAB_CRB
-    );
+   assertEmpty(withoutDoc);
   }
 
   public void testCIAA_CRA() {
-    assertEquals("<style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><h1>CIAACRA</h1>CIAA Control Register A</pre></div><table class='sections'><tr><td valign='top' class='section'><p>Address:</td><td valign='top'><code>$BFEE01</code><a href='m68kBrowserCopy://$BFEE01'><icon src='AllIcons.Actions.Copy'/></a></td><tr><td valign='top' class='section'><p>CIA:</td><td valign='top'>CIAA</td><tr><td valign='top' class='section'><p>Access:</td><td valign='top'>Read/Write</td><tr><td valign='top' class='section'><p>Related:</td><td valign='top'><table><tr><td valign='top'><a href='m68kBrowser://CIABCRA'>CIABCRA</a></td><td valign='top'><b><a href='m68kBrowser://CIAACRA'>CIAACRA</a></b></td></tr></table></td></table><div class='content'>No reference documentation available for 'CIAx_CRA'</div>",
+    assertEquals("<style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><h1>CIAACRA</h1>CIAA Control Register A</pre></div><table class='sections'><tr><td valign='top' class='section'><p>Address:</td><td valign='top'><code>$BFEE01</code><a href='m68kBrowserCopy://$BFEE01'><icon src='AllIcons.Actions.Copy'/></a></td><tr><td valign='top' class='section'><p>CIA:</td><td valign='top'>CIAA</td><tr><td valign='top' class='section'><p>Access:</td><td valign='top'>Read/Write</td><tr><td valign='top' class='section'><p>Related:</td><td valign='top'><table><tr><td valign='top'><a href='m68kBrowser://CIABCRA'>CIABCRA</a></td><td valign='top'><b><a href='m68kBrowser://CIAACRA'>CIAACRA</a></b></td></tr></table></td></table><div class='content'><p>Control Register A</p>\n<br><a href=\"https://www.amigarealm.com/computing/knowledge/hardref/apf.htm\">Amiga Realm Knowledge Base</a></div>",
       getRegisterDoc(M68kAmigaHardwareRegister.CIAA_CRA));
   }
 

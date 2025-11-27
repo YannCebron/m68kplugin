@@ -33,11 +33,11 @@ Please see [Contributing](CONTRIBUTING.md) on how to submit feedback and contrib
 
 Plugin Logo from [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Motorola_M_symbol_blue.svg)
 
-Mnemonic and directives documentation taken from [m68k-instructions-documentation](https://github.com/prb28/m68k-instructions-documentation)
+Mnemonic, directives, and `CIAx` Amiga hardware register documentation based on [m68k-instructions-documentation](https://github.com/prb28/m68k-instructions-documentation)
 
 Mnemonic data generated using [vasm](http://sun.hasenbraten.de/vasm/) sources, thanks to Frank Wille and Dr. Volker Barthelmann for granting permission
 
-Amiga hardware register documentation generated from [AGA.guide](https://github.com/rkrajnc/minimig-mist/blob/master/doc/amiga/aga/AGA.guide)
+Amiga hardware register documentation based on [AGA.guide](https://github.com/rkrajnc/minimig-mist/blob/master/doc/amiga/aga/AGA.guide)
 
 ## License
 

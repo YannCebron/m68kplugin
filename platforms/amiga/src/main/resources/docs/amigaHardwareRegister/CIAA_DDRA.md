@@ -1,0 +1,1 @@
+Direction for [Port A](CIAA_PRA.md); 1 = output (set to `Ox03`)

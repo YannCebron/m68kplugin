@@ -1,0 +1,1 @@
+Direction for [Port B](CIAA_PRB.md); 1 = output (can be in or out)

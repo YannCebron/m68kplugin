@@ -29,8 +29,8 @@ public enum M68kAmigaHardwareRegister {
 
   CIAB_PRA("CIABPRA", "BFD000", "CIAB Peripheral Data Register A", "CIAB_PRA", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_B),
   CIAB_PRB("CIABPRB", "BFD100", "CIAB Peripheral Data Register B", "CIAB_PRB", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_B),
-  CIAB_DDRA("CIABDDRA", "BFD200", "CIAB Direction for Port A", "CIAx_DDRA", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_B),
-  CIAB_DDRB("CIABDDRB", "BFD300", "CIAB Direction for Port B", "CIAx_DDRB", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_B),
+  CIAB_DDRA("CIABDDRA", "BFD200", "CIAB Direction for Port A", "CIAB_DDRA", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_B),
+  CIAB_DDRB("CIABDDRB", "BFD300", "CIAB Direction for Port B", "CIAB_DDRB", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_B),
   CIAB_TALO("CIABTALO", "BFD400", "CIAB Timer A Low Byte", "CIAx_TALO", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_B),
   CIAB_TAHI("CIABTAHI", "BFD500", "CIAB Timer A High Byte", "CIAx_TAHI", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_B),
   CIAB_TBLO("CIABTBLO", "BFD600", "CIAB Timer B Low Byte", "CIAx_TALO", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_B),
@@ -45,8 +45,8 @@ public enum M68kAmigaHardwareRegister {
 
   CIAA_PRA("CIAAPRA", "BFE001", "CIAA Peripheral Data Register A", "CIAA_PRA", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_A),
   CIAA_PRB("CIAAPRB", "BFE101", "CIAA Peripheral Data Register B", "CIAA_PRB", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_A),
-  CIAA_DDRA("CIAADDRA", "BFE201", "CIAA Direction for Port A", "CIAx_DDRA", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_A),
-  CIAA_DDRB("CIAADDRB", "BFE301", "CIAA Direction for Port B", "CIAx_DDRB", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_A),
+  CIAA_DDRA("CIAADDRA", "BFE201", "CIAA Direction for Port A", "CIAA_DDRA", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_A),
+  CIAA_DDRB("CIAADDRB", "BFE301", "CIAA Direction for Port B", "CIAA_DDRB", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_A),
   CIAA_TALO("CIAATALO", "BFE401", "CIAA Timer A Low Byte", "CIAx_TALO", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_A),
   CIAA_TAHI("CIAATAHI", "BFE501", "CIAA Timer A High Byte", "CIAx_TAHI", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_A),
   CIAA_TBLO("CIAATBLO", "BFE601", "CIAA Timer B Low Byte", "CIAx_TALO", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_A),
@@ -324,7 +324,6 @@ public enum M68kAmigaHardwareRegister {
                             String description,
                             String descriptionFileName,
                             Chipset chipset,
-
                             boolean copperDanger,
                             Access access,
                             Set<Chip> chips) {
