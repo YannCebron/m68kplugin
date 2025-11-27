@@ -46,7 +46,7 @@ final class M68kAmigaHardwareRegisterDocsCreator {
     StringBuilder sb = new StringBuilder(M68kDocumentationUtil.CSS);
 
     sb.append(DocumentationMarkup.DEFINITION_START);
-    sb.append("<h1>").append(register.getName()).append("</h1>");
+    sb.append("<h1><code>").append(register.getName()).append("</code></h1>");
     sb.append(register.getDescription());
     sb.append(DocumentationMarkup.DEFINITION_END);
 
