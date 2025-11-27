@@ -32,32 +32,53 @@ public final class M68kRegisterDocsGenerator {
   private final M68kRegister m68kRegister;
 
   public M68kRegisterDocsGenerator(M68kRegister m68kRegister) {
-    if (m68kRegister == M68kRegister.SFC) {
-      this.m68kRegister = M68kRegister.DFC;
-    } else if (m68kRegister == M68kRegister.SP || m68kRegister == M68kRegister.SSP || m68kRegister == M68kRegister.USP) {
-      this.m68kRegister = M68kRegister.A7;
-    } else {
-      this.m68kRegister = m68kRegister;
-    }
+    this.m68kRegister = m68kRegister;
   }
 
   public String getDocumentation(boolean forBrowserPane) {
-    StringBuilder metaData = new StringBuilder("<br><hr/>");
-    M68kDocsGeneratorUtil.appendCpus(metaData, m68kRegister.getCpus());
+    StringBuilder sb = new StringBuilder();
+    sb.append(DocumentationMarkup.DEFINITION_START);
+    sb.append("<h1><code>").append(StringUtil.toUpperCase(m68kRegister.name())).append("</code></h1>");
+    sb.append(DocumentationMarkup.DEFINITION_END);
 
-    IElementType elementType = m68kRegister.getElementType();
-    String filename = elementType.toString().toLowerCase();
-    Couple<String> markdownContents = M68kDocumentationUtil.getMarkdownContents(DOCS_REGISTER_ROOT, filename);
+    sb.append(DocumentationMarkup.SECTIONS_START);
+    sb.append(DocumentationMarkup.SECTION_HEADER_START);
+    sb.append("CPU:");
+    sb.append(DocumentationMarkup.SECTION_SEPARATOR);
+    M68kDocsGeneratorUtil.appendCpus(sb, m68kRegister.getCpus());
+    sb.append(DocumentationMarkup.SECTION_END);
+    sb.append(DocumentationMarkup.SECTIONS_END);
+
+    sb.append(DocumentationMarkup.CONTENT_START);
+    sb.append(getReferenceDoc(forBrowserPane));
+    sb.append(DocumentationMarkup.CONTENT_END);
+
+    return M68kDocumentationUtil.CSS + sb;
+  }
+
+  private String getReferenceDoc(boolean forBrowserPane) {
+    Couple<String> markdownContents = M68kDocumentationUtil.getMarkdownContents(DOCS_REGISTER_ROOT, getReferenceDocFileName());
     if (markdownContents.first == null) {
       return
         "<h1>" + StringUtil.toUpperCase(m68kRegister.name()) + "</h1>" +
-          "<p>" + markdownContents.getSecond() + "</p>" +
-          metaData;
+          "<p>" + markdownContents.getSecond() + "</p>";
     }
 
-    String definition = M68kDocumentationUtil.getHtmlForMarkdown(DOCS_REGISTER_ROOT, markdownContents.first,
+    return M68kDocumentationUtil.getHtmlForMarkdown(DOCS_REGISTER_ROOT, markdownContents.first,
       forBrowserPane ? M68kBrowserPaneBase.M68K_BROWSER_LINK_FUNCTION : Function.identity());
-    return M68kDocumentationUtil.CSS + DocumentationMarkup.CONTENT_START + definition + metaData + DocumentationMarkup.CONTENT_END;
+  }
+
+  private String getReferenceDocFileName() {
+    M68kRegister documentationRegister;
+    if (m68kRegister == M68kRegister.SFC) {
+      documentationRegister = M68kRegister.DFC;
+    } else if (m68kRegister == M68kRegister.SP || m68kRegister == M68kRegister.SSP || m68kRegister == M68kRegister.USP) {
+      documentationRegister = M68kRegister.A7;
+    } else {
+      documentationRegister = m68kRegister;
+    }
+    IElementType elementType = documentationRegister.getElementType();
+    return elementType.toString().toLowerCase();
   }
 
 }
