@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,6 @@ plugins {
 }
 
 dependencies {
-    implementation("org.commonmark", "commonmark", "0.18.0")
-    implementation("org.commonmark", "commonmark-ext-gfm-tables", "0.18.0")
+    implementation("org.commonmark", "commonmark", "0.27.0")
+    implementation("org.commonmark", "commonmark-ext-gfm-tables", "0.27.0")
 }
