@@ -57,8 +57,11 @@ public final class M68kInstructionDocumentationProvider extends AbstractDocument
                                                             @NotNull PsiFile file,
                                                             @Nullable PsiElement contextElement,
                                                             int targetOffset) {
-    if (contextElement != null &&
-      M68kTokenGroups.INSTRUCTIONS.contains(contextElement.getNode().getElementType())) {
+    if (contextElement == null) return null;
+
+    IElementType elementType = contextElement.getNode().getElementType();
+    if (M68kTokenGroups.INSTRUCTIONS.contains(elementType) ||
+      M68kTokenGroups.DATA_SIZES.contains(elementType)) {
       return PsiTreeUtil.getParentOfType(contextElement, M68kInstruction.class);
     }
     return null;
