@@ -123,8 +123,8 @@ class M68kInstructionMnemonicDocsGenerator {
       }
       sb.append("</tr>");
 
-      appendAddressModes(M68kBundle.message("documentation.hover.source"), allUsedAddressModesFromMultiOperands, sourceAddressModes);
-      appendAddressModes(M68kBundle.message("documentation.hover.destination"), allUsedAddressModesFromMultiOperands, destinationAddressModes);
+      appendAddressModes(M68kBundle.message("documentation.source"), allUsedAddressModesFromMultiOperands, sourceAddressModes);
+      appendAddressModes(M68kBundle.message("documentation.destination"), allUsedAddressModesFromMultiOperands, destinationAddressModes);
       sb.append("</table>");
 
       appendBreak();

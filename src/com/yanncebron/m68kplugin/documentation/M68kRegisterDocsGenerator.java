@@ -20,6 +20,7 @@ import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
+import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase;
 import com.yanncebron.m68kplugin.lang.psi.M68kRegister;
 
@@ -43,7 +44,7 @@ public final class M68kRegisterDocsGenerator {
 
     sb.append(DocumentationMarkup.SECTIONS_START);
     sb.append(DocumentationMarkup.SECTION_HEADER_START);
-    sb.append("CPU:");
+    sb.append(M68kBundle.message("documentation.section.cpu"));
     sb.append(DocumentationMarkup.SECTION_SEPARATOR);
     M68kDocsGeneratorUtil.appendCpus(sb, m68kRegister.getCpus());
     sb.append(DocumentationMarkup.SECTION_END);
