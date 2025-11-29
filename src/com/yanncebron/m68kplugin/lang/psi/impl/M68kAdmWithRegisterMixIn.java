@@ -147,7 +147,7 @@ abstract class M68kAdmWithRegisterMixIn extends ASTWrapperPsiElement implements 
         String registerName = StringUtil.substringBefore(url, ".md");
         if (registerName == null) return null;
         M68kRegister targetRegister = M68kRegister.valueOf(StringUtil.toUpperCase(registerName));
-        return new ResolvedTarget(new M68RegisterSymbolDocumentationTarget(targetRegister));
+        return LinkResolveResult.resolvedTarget((new M68RegisterSymbolDocumentationTarget(targetRegister)));
       }
       return null;
     }

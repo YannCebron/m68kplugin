@@ -17,9 +17,7 @@
 package com.yanncebron.m68kplugin.browser;
 
 import com.intellij.openapi.project.Project;
-import org.jetbrains.annotations.ApiStatus;
 
-@ApiStatus.OverrideOnly
 public interface M68kBrowserPaneFactory<T extends M68kBrowserPaneBase<?>> {
 
   default boolean isAvailable(Project project) {
