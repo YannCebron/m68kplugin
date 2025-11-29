@@ -28,17 +28,14 @@ final class M68kDocsGeneratorUtil {
   static void appendCpus(StringBuilder sb, Set<M68kCpu> cpus) {
     if (cpus == M68kCpu.GROUP_68000_UP) {
       sb.append(M68kBundle.message("cpu.group.GROUP_68000_UP"));
-      sb.append("<br>");
       return;
     }
     if (cpus == M68kCpu.GROUP_68010_UP) {
       sb.append(M68kBundle.message("cpu.group.GROUP_68010_UP"));
-      sb.append("<br>");
       return;
     }
     if (cpus == M68kCpu.GROUP_68020_UP) {
       sb.append(M68kBundle.message("cpu.group.GROUP_68020_UP"));
-      sb.append("<br>");
       return;
     }
 

@@ -70,10 +70,7 @@ public final class M68kInstructionDocumentationProvider extends AbstractDocument
 
     final IElementType originalMnemonic = instruction.getNode().getFirstChildNode().getElementType();
 
-    return M68kDocumentationUtil.CSS +
-      DocumentationMarkup.CONTENT_START +
-      getMnemonicDoc(originalMnemonic, instruction) +
-      DocumentationMarkup.CONTENT_END;
+    return getMnemonicDoc(originalMnemonic, instruction);
   }
 
   @NotNull
@@ -82,10 +79,16 @@ public final class M68kInstructionDocumentationProvider extends AbstractDocument
 
     final Couple<String> markdownContents = getMarkdownContents(originalMnemonic);
 
+    String mnemonic = StringUtil.toUpperCase(originalMnemonic.toString());
     String referenceHeading = markdownContents.getFirst() != null ?
-      StringUtil.substringAfter(StringUtil.splitByLines(markdownContents.getFirst())[0], "# ") : StringUtil.toUpperCase(originalMnemonic.toString());
+      StringUtil.substringAfter(StringUtil.splitByLines(markdownContents.getFirst())[0], " - ") : "";
 
-    return "<h1>" + referenceHeading + "</h1><br>" + mnemonicDoc;
+    return M68kDocumentationUtil.CSS +
+      DocumentationMarkup.DEFINITION_START +
+      "<h1><code>" + mnemonic + "</code></h1>" +
+      referenceHeading +
+      DocumentationMarkup.DEFINITION_END +
+      mnemonicDoc;
   }
 
   public static String getInstructionReferenceDoc(IElementType originalMnemonic) {

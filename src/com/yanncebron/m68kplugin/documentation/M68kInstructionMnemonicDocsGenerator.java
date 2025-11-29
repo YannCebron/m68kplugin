@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.documentation;
 
+import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.ArrayUtil;
@@ -26,6 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 class M68kInstructionMnemonicDocsGenerator {
@@ -59,7 +61,7 @@ class M68kInstructionMnemonicDocsGenerator {
       previousCpus = cpus;
     }
     if (allCpusSame) {
-      appendCpus(ContainerUtil.getFirstItem(allMnemonics));
+      appendCpuSection(ContainerUtil.getFirstItem(allMnemonics));
       appendBreak();
     }
 
@@ -72,7 +74,8 @@ class M68kInstructionMnemonicDocsGenerator {
       if (destinationModes.length > 1) ContainerUtil.addAll(allUsedAddressModesFromMultiOperands, destinationModes);
     }
 
-    for (M68kMnemonic mnemonic : allMnemonics) {
+    for (Iterator<M68kMnemonic> iterator = allMnemonics.iterator(); iterator.hasNext(); ) {
+      M68kMnemonic mnemonic = iterator.next();
       if (specific == mnemonic) {
         sb.append("<h4 style=\"text-decoration: underline;\"> ");
       } else {
@@ -97,7 +100,7 @@ class M68kInstructionMnemonicDocsGenerator {
 
 
       if (!allCpusSame) {
-        appendCpus(mnemonic);
+        appendCpuSection(mnemonic);
       }
 
 
@@ -105,12 +108,13 @@ class M68kInstructionMnemonicDocsGenerator {
       final M68kAddressMode[] destinationAddressModes = mnemonic.destinationOperand().getAddressModes();
       if (sourceAddressModes.length <= 1 &&
         destinationAddressModes.length <= 1) {
-        appendBreak();
+        if (iterator.hasNext()) {
+          appendBreak();
+        }
         continue;
       }
 
 
-      appendBreak();
       sb.append("<table style=\"width: 100%;\"><tr>");
       sb.append("<th></th>");
       for (M68kAddressMode value : M68kAddressMode.values()) {
@@ -133,12 +137,18 @@ class M68kInstructionMnemonicDocsGenerator {
     return sb.toString();
   }
 
-  private void appendBreak() {
-    sb.append("<br>");
+  private void appendCpuSection(M68kMnemonic mnemonic) {
+    sb.append(DocumentationMarkup.SECTIONS_START);
+    sb.append(DocumentationMarkup.SECTION_HEADER_START);
+    sb.append(M68kBundle.message("documentation.section.cpu"));
+    sb.append(DocumentationMarkup.SECTION_SEPARATOR);
+    M68kDocsGeneratorUtil.appendCpus(sb, mnemonic.cpus());
+    sb.append(DocumentationMarkup.SECTION_END);
+    sb.append(DocumentationMarkup.SECTIONS_END);
   }
 
-  private void appendCpus(M68kMnemonic mnemonic) {
-    M68kDocsGeneratorUtil.appendCpus(sb, mnemonic.cpus());
+  private void appendBreak() {
+    sb.append("<br>");
   }
 
   private void appendOperand(M68kOperand m68kOperand, String prefix) {
@@ -161,7 +171,10 @@ class M68kInstructionMnemonicDocsGenerator {
     if (addressModes.length <= 1) return;
 
     sb.append("<tr>");
-    sb.append("<td style=\"width: 15%;\">").append(label).append("</td>");
+    DocumentationMarkup.SECTION_HEADER_CELL.attr("width", "15%").appendTo(sb);
+    sb.append(label);
+    sb.append("</td>");
+
     for (M68kAddressMode value : M68kAddressMode.values()) {
       if (!allPossibleAddressModes.contains(value)) continue;
 
