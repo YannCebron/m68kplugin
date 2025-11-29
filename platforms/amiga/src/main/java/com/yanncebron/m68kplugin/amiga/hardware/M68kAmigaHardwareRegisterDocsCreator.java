@@ -20,6 +20,7 @@ import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.containers.ContainerUtil;
+import com.yanncebron.m68kplugin.amiga.M68kAmigaBundle;
 import com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase;
 import com.yanncebron.m68kplugin.documentation.M68kDocumentationUtil;
 
@@ -53,7 +54,7 @@ final class M68kAmigaHardwareRegisterDocsCreator {
     sb.append(DocumentationMarkup.SECTIONS_START);
 
     sb.append(DocumentationMarkup.SECTION_HEADER_START);
-    sb.append("Address:");
+    sb.append(M68kAmigaBundle.message("toolwindow.tab.amiga.hardware.section.address"));
     sb.append(DocumentationMarkup.SECTION_SEPARATOR);
     String address = "$" + register.getAddress();
     String shortAddress = "$0" + address.substring(4);
@@ -68,26 +69,26 @@ final class M68kAmigaHardwareRegisterDocsCreator {
 
     sb.append(DocumentationMarkup.SECTION_HEADER_START);
     if (isHardwareRegister) {
-      sb.append("Chip Set (Chips):");
+      sb.append(M68kAmigaBundle.message("toolwindow.tab.amiga.hardware.section.chipset"));
       sb.append(DocumentationMarkup.SECTION_SEPARATOR);
       sb.append(register.getChipset().getDisplayName());
       sb.append(" (").append(StringUtil.join(register.getChips(), M68kAmigaHardwareRegister.Chip::getDisplayName, ", ")).append(")");
     } else {
-      sb.append("CIA:");
+      sb.append(M68kAmigaBundle.message("toolwindow.tab.amiga.hardware.section.cia"));
       sb.append(DocumentationMarkup.SECTION_SEPARATOR);
       sb.append(ContainerUtil.getFirstItem(register.getChips()).getDisplayName());
     }
     sb.append(DocumentationMarkup.SECTION_END);
 
     sb.append(DocumentationMarkup.SECTION_HEADER_START);
-    sb.append("Access:");
+    sb.append(M68kAmigaBundle.message("toolwindow.tab.amiga.hardware.section.access"));
     sb.append(DocumentationMarkup.SECTION_SEPARATOR);
     sb.append(register.getAccess().getDisplayName());
     sb.append(DocumentationMarkup.SECTION_END);
 
     if (isHardwareRegister) {
       sb.append(DocumentationMarkup.SECTION_HEADER_START);
-      sb.append("Copper Danger:");
+      sb.append(M68kAmigaBundle.message("toolwindow.tab.amiga.hardware.section.copper.danger"));
       sb.append(DocumentationMarkup.SECTION_SEPARATOR);
       sb.append(register.isCopperDanger() ? M68kDocumentationUtil.CHECK_MARK : "-");
       sb.append(DocumentationMarkup.SECTION_END);
@@ -128,7 +129,7 @@ final class M68kAmigaHardwareRegisterDocsCreator {
     relatedSb.append("</tr></table>");
 
     sb.append(DocumentationMarkup.SECTION_HEADER_START);
-    sb.append("Related:");
+    sb.append(M68kAmigaBundle.message("toolwindow.tab.amiga.hardware.section.related"));
     sb.append(DocumentationMarkup.SECTION_SEPARATOR);
     sb.append(relatedSb);
     sb.append(DocumentationMarkup.SECTION_END);
