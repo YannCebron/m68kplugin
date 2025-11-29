@@ -40,7 +40,8 @@ Browse all supported registers with reference documentation
 
 Browse all hardware registers with additional reference documentation.
 
-Register list can be filtered by _OCS_, _ECS_, and _AGA_ chip set.
+Register list can be filtered by _OCS_, _ECS_, and _AGA_ chip set and `CIAx` registers can be toggled.
+
 Use the _i_ toggle button to show Chip Set information in the list.
 
 ![Amiga hardware register documentation](../assets/ide/amiga_hardware_doc.png)
