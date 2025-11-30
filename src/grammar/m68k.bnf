@@ -825,7 +825,10 @@ clr_instruction ::= CLR tail_data_size_all___alterable_data
   extends = data_sized
 }
 
-tst_instruction ::= TST data_size_all? operand_all
+private tst_tail_alterable_data ::= data_size_all? operand_alterable_data
+private tst_tail_data ::= data_size_all? operand_data
+private tst_tail_ard ::= data_size_word_long? adm_ard
+tst_instruction ::= TST (tst_tail_data | tst_tail_alterable_data | tst_tail_ard)
 {
   extends = data_sized
 }

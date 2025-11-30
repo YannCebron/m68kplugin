@@ -5004,7 +5004,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // TST data_size_all? operand_all
+  // TST (tst_tail_data | tst_tail_alterable_data | tst_tail_ard)
   public static boolean tst_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "tst_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", TST)) return false;
@@ -5012,15 +5012,74 @@ public class M68kParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, TST_INSTRUCTION, "<instruction>");
     r = consumeToken(b, TST);
     p = r; // pin = 1
-    r = r && report_error_(b, tst_instruction_1(b, l + 1));
-    r = p && operand_all(b, l + 1) && r;
+    r = r && tst_instruction_1(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
-  // data_size_all?
+  // tst_tail_data | tst_tail_alterable_data | tst_tail_ard
   private static boolean tst_instruction_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "tst_instruction_1")) return false;
+    boolean r;
+    r = tst_tail_data(b, l + 1);
+    if (!r) r = tst_tail_alterable_data(b, l + 1);
+    if (!r) r = tst_tail_ard(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // data_size_all? operand_alterable_data
+  static boolean tst_tail_alterable_data(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tst_tail_alterable_data")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = tst_tail_alterable_data_0(b, l + 1);
+    r = r && operand_alterable_data(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_all?
+  private static boolean tst_tail_alterable_data_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tst_tail_alterable_data_0")) return false;
+    data_size_all(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // data_size_word_long? adm_ard
+  static boolean tst_tail_ard(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tst_tail_ard")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = tst_tail_ard_0(b, l + 1);
+    r = r && adm_ard(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_word_long?
+  private static boolean tst_tail_ard_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tst_tail_ard_0")) return false;
+    data_size_word_long(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // data_size_all? operand_data
+  static boolean tst_tail_data(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tst_tail_data")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = tst_tail_data_0(b, l + 1);
+    r = r && operand_data(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_all?
+  private static boolean tst_tail_data_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tst_tail_data_0")) return false;
     data_size_all(b, l + 1);
     return true;
   }
