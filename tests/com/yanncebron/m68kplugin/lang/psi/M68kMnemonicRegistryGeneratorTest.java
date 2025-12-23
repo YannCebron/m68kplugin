@@ -53,7 +53,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
   /**
    * Generate 680x0-only variants for _known_ operands.
-   * Known unspported: DN, DD
+   * Known unsupported: DN, DD
    */
   private static final boolean IGNORE_UNKNOWN_OPERANDS = true;
 
@@ -179,11 +179,12 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       Set<M68kCpu> cpus = mnemonic.cpus();
       if (SKIP_UNSUPPORTED_CPUS && !isSupportedCpu(cpus)) continue;
 
+      String mnemonicText = StringUtil.toUpperCase(mnemonic.elementType().toString());
       if (lastElementType != mnemonic.elementType()) {
-        System.out.println("\n// " + StringUtil.toUpperCase(mnemonic.elementType().toString()) + " " + StringUtil.repeatSymbol('-', 70));
+        System.out.println("\n// " + mnemonicText + " " + StringUtil.repeatSymbol('-', 80 - mnemonicText.length()));
       }
 
-      String tokenText = "M68kTokenTypes." + StringUtil.toUpperCase(mnemonic.elementType().toString());
+      String tokenText = "M68kTokenTypes." + mnemonicText;
       String dataSizeText = getDataSizeText(mnemonic);
       String cpuText = getCpuText(cpus);
 

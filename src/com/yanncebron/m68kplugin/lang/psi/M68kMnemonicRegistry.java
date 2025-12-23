@@ -176,13 +176,13 @@ public final class M68kMnemonicRegistry {
   private M68kMnemonicRegistry() {
 // Total mnemonics: 283
 
-// ABCD ----------------------------------------------------------------------
+// ABCD ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.ABCD, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.ABCD, M68kDataSize.GROUP_B,
       M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT, M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT));
 
-// ADD ----------------------------------------------------------------------
+// ADD -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.ADD, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.ADD, M68kDataSize.GROUP_WL,
@@ -194,29 +194,29 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.ADD, M68kDataSize.GROUP_BWL,
       M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA));
 
-// ADDA ----------------------------------------------------------------------
+// ADDA ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.ADDA, M68kDataSize.GROUP_WL,
       M68kOperand.ALL, M68kOperand.ADDRESS_REGISTER));
 
-// ADDI ----------------------------------------------------------------------
+// ADDI ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.ADDI, M68kDataSize.GROUP_BWL,
       M68kOperand.IMMEDIATE, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.ADDI, M68kDataSize.GROUP_BWL,
       M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA));
 
-// ADDQ ----------------------------------------------------------------------
+// ADDQ ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.ADDQ, M68kDataSize.GROUP_WL,
       M68kOperand.QUICK_IMMEDIATE, M68kOperand.ADDRESS_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.ADDQ, M68kDataSize.GROUP_BWL,
       M68kOperand.QUICK_IMMEDIATE, M68kOperand.ALTERABLE_DATA));
 
-// ADDX ----------------------------------------------------------------------
+// ADDX ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.ADDX, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.ADDX, M68kDataSize.GROUP_BWL,
       M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT, M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT));
 
-// AND ----------------------------------------------------------------------
+// AND -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.AND, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.AND, M68kDataSize.GROUP_BWL,
@@ -228,7 +228,7 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.AND, M68kDataSize.GROUP_W,
       M68kOperand.IMMEDIATE, M68kOperand.SR_REGISTER));
 
-// ANDI ----------------------------------------------------------------------
+// ANDI ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.ANDI, M68kDataSize.GROUP_BWL,
       M68kOperand.IMMEDIATE, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.ANDI, M68kDataSize.GROUP_BWL,
@@ -238,7 +238,7 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.ANDI, M68kDataSize.GROUP_W,
       M68kOperand.IMMEDIATE, M68kOperand.SR_REGISTER));
 
-// ASL ----------------------------------------------------------------------
+// ASL -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.ASL, M68kDataSize.GROUP_W,
       M68kOperand.ALTERABLE_MEMORY));
     add(new M68kMnemonic(M68kTokenTypes.ASL, M68kDataSize.GROUP_BWL,
@@ -248,7 +248,7 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.ASL, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA_REGISTER));
 
-// ASR ----------------------------------------------------------------------
+// ASR -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.ASR, M68kDataSize.GROUP_W,
       M68kOperand.ALTERABLE_MEMORY));
     add(new M68kMnemonic(M68kTokenTypes.ASR, M68kDataSize.GROUP_BWL,
@@ -258,133 +258,133 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.ASR, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA_REGISTER));
 
-// BHS ----------------------------------------------------------------------
+// BHS -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BHS, M68kDataSize.GROUP_SBW,
       M68kOperand.BRANCH_DESTINATION));
     add(new M68kMnemonic(M68kTokenTypes.BHS, M68kDataSize.GROUP_SBWL,
       M68kOperand.BRANCH_DESTINATION,
       M68kCpu.GROUP_68020_UP));
 
-// BLO ----------------------------------------------------------------------
+// BLO -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BLO, M68kDataSize.GROUP_SBW,
       M68kOperand.BRANCH_DESTINATION));
     add(new M68kMnemonic(M68kTokenTypes.BLO, M68kDataSize.GROUP_SBWL,
       M68kOperand.BRANCH_DESTINATION,
       M68kCpu.GROUP_68020_UP));
 
-// BHI ----------------------------------------------------------------------
+// BHI -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BHI, M68kDataSize.GROUP_SBW,
       M68kOperand.BRANCH_DESTINATION));
     add(new M68kMnemonic(M68kTokenTypes.BHI, M68kDataSize.GROUP_SBWL,
       M68kOperand.BRANCH_DESTINATION,
       M68kCpu.GROUP_68020_UP));
 
-// BLS ----------------------------------------------------------------------
+// BLS -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BLS, M68kDataSize.GROUP_SBW,
       M68kOperand.BRANCH_DESTINATION));
     add(new M68kMnemonic(M68kTokenTypes.BLS, M68kDataSize.GROUP_SBWL,
       M68kOperand.BRANCH_DESTINATION,
       M68kCpu.GROUP_68020_UP));
 
-// BCC ----------------------------------------------------------------------
+// BCC -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BCC, M68kDataSize.GROUP_SBW,
       M68kOperand.BRANCH_DESTINATION));
     add(new M68kMnemonic(M68kTokenTypes.BCC, M68kDataSize.GROUP_SBWL,
       M68kOperand.BRANCH_DESTINATION,
       M68kCpu.GROUP_68020_UP));
 
-// BCS ----------------------------------------------------------------------
+// BCS -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BCS, M68kDataSize.GROUP_SBW,
       M68kOperand.BRANCH_DESTINATION));
     add(new M68kMnemonic(M68kTokenTypes.BCS, M68kDataSize.GROUP_SBWL,
       M68kOperand.BRANCH_DESTINATION,
       M68kCpu.GROUP_68020_UP));
 
-// BNE ----------------------------------------------------------------------
+// BNE -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BNE, M68kDataSize.GROUP_SBW,
       M68kOperand.BRANCH_DESTINATION));
     add(new M68kMnemonic(M68kTokenTypes.BNE, M68kDataSize.GROUP_SBWL,
       M68kOperand.BRANCH_DESTINATION,
       M68kCpu.GROUP_68020_UP));
 
-// BEQ ----------------------------------------------------------------------
+// BEQ -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BEQ, M68kDataSize.GROUP_SBW,
       M68kOperand.BRANCH_DESTINATION));
     add(new M68kMnemonic(M68kTokenTypes.BEQ, M68kDataSize.GROUP_SBWL,
       M68kOperand.BRANCH_DESTINATION,
       M68kCpu.GROUP_68020_UP));
 
-// BVC ----------------------------------------------------------------------
+// BVC -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BVC, M68kDataSize.GROUP_SBW,
       M68kOperand.BRANCH_DESTINATION));
     add(new M68kMnemonic(M68kTokenTypes.BVC, M68kDataSize.GROUP_SBWL,
       M68kOperand.BRANCH_DESTINATION,
       M68kCpu.GROUP_68020_UP));
 
-// BVS ----------------------------------------------------------------------
+// BVS -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BVS, M68kDataSize.GROUP_SBW,
       M68kOperand.BRANCH_DESTINATION));
     add(new M68kMnemonic(M68kTokenTypes.BVS, M68kDataSize.GROUP_SBWL,
       M68kOperand.BRANCH_DESTINATION,
       M68kCpu.GROUP_68020_UP));
 
-// BPL ----------------------------------------------------------------------
+// BPL -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BPL, M68kDataSize.GROUP_SBW,
       M68kOperand.BRANCH_DESTINATION));
     add(new M68kMnemonic(M68kTokenTypes.BPL, M68kDataSize.GROUP_SBWL,
       M68kOperand.BRANCH_DESTINATION,
       M68kCpu.GROUP_68020_UP));
 
-// BMI ----------------------------------------------------------------------
+// BMI -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BMI, M68kDataSize.GROUP_SBW,
       M68kOperand.BRANCH_DESTINATION));
     add(new M68kMnemonic(M68kTokenTypes.BMI, M68kDataSize.GROUP_SBWL,
       M68kOperand.BRANCH_DESTINATION,
       M68kCpu.GROUP_68020_UP));
 
-// BGE ----------------------------------------------------------------------
+// BGE -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BGE, M68kDataSize.GROUP_SBW,
       M68kOperand.BRANCH_DESTINATION));
     add(new M68kMnemonic(M68kTokenTypes.BGE, M68kDataSize.GROUP_SBWL,
       M68kOperand.BRANCH_DESTINATION,
       M68kCpu.GROUP_68020_UP));
 
-// BLT ----------------------------------------------------------------------
+// BLT -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BLT, M68kDataSize.GROUP_SBW,
       M68kOperand.BRANCH_DESTINATION));
     add(new M68kMnemonic(M68kTokenTypes.BLT, M68kDataSize.GROUP_SBWL,
       M68kOperand.BRANCH_DESTINATION,
       M68kCpu.GROUP_68020_UP));
 
-// BGT ----------------------------------------------------------------------
+// BGT -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BGT, M68kDataSize.GROUP_SBW,
       M68kOperand.BRANCH_DESTINATION));
     add(new M68kMnemonic(M68kTokenTypes.BGT, M68kDataSize.GROUP_SBWL,
       M68kOperand.BRANCH_DESTINATION,
       M68kCpu.GROUP_68020_UP));
 
-// BLE ----------------------------------------------------------------------
+// BLE -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BLE, M68kDataSize.GROUP_SBW,
       M68kOperand.BRANCH_DESTINATION));
     add(new M68kMnemonic(M68kTokenTypes.BLE, M68kDataSize.GROUP_SBWL,
       M68kOperand.BRANCH_DESTINATION,
       M68kCpu.GROUP_68020_UP));
 
-// BRA ----------------------------------------------------------------------
+// BRA -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BRA, M68kDataSize.GROUP_SBW,
       M68kOperand.BRANCH_DESTINATION));
     add(new M68kMnemonic(M68kTokenTypes.BRA, M68kDataSize.GROUP_SBWL,
       M68kOperand.BRANCH_DESTINATION,
       M68kCpu.GROUP_68020_UP));
 
-// BSR ----------------------------------------------------------------------
+// BSR -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BSR, M68kDataSize.GROUP_SBW,
       M68kOperand.BRANCH_DESTINATION));
     add(new M68kMnemonic(M68kTokenTypes.BSR, M68kDataSize.GROUP_SBWL,
       M68kOperand.BRANCH_DESTINATION,
       M68kCpu.GROUP_68020_UP));
 
-// BCHG ----------------------------------------------------------------------
+// BCHG ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BCHG, M68kDataSize.GROUP_L,
       M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.BCHG, M68kDataSize.GROUP_B,
@@ -394,7 +394,7 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.BCHG, M68kDataSize.GROUP_B,
       M68kOperand.QUICK_IMMEDIATE, M68kOperand.ALTERABLE_MEMORY_CF));
 
-// BCLR ----------------------------------------------------------------------
+// BCLR ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BCLR, M68kDataSize.GROUP_L,
       M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.BCLR, M68kDataSize.GROUP_B,
@@ -404,7 +404,7 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.BCLR, M68kDataSize.GROUP_B,
       M68kOperand.QUICK_IMMEDIATE, M68kOperand.ALTERABLE_MEMORY_CF));
 
-// BSET ----------------------------------------------------------------------
+// BSET ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BSET, M68kDataSize.GROUP_L,
       M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.BSET, M68kDataSize.GROUP_B,
@@ -414,7 +414,7 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.BSET, M68kDataSize.GROUP_B,
       M68kOperand.QUICK_IMMEDIATE, M68kOperand.ALTERABLE_MEMORY_CF));
 
-// BTST ----------------------------------------------------------------------
+// BTST ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BTST, M68kDataSize.GROUP_L,
       M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.BTST, M68kDataSize.GROUP_B,
@@ -426,23 +426,23 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.BTST, M68kDataSize.GROUP_B,
       M68kOperand.QUICK_IMMEDIATE, M68kOperand.MEMORY_WITHOUT_IMMEDIATE));
 
-// BKPT ----------------------------------------------------------------------
+// BKPT ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.BKPT, M68kDataSize.GROUP_UNSIZED,
       M68kOperand.QUICK_IMMEDIATE,
       M68kCpu.GROUP_68010_UP));
 
-// CHK ----------------------------------------------------------------------
+// CHK -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.CHK, M68kDataSize.GROUP_W,
       M68kOperand.DATA, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.CHK, M68kDataSize.GROUP_L,
       M68kOperand.DATA, M68kOperand.DATA_REGISTER,
       M68kCpu.GROUP_68020_UP));
 
-// CLR ----------------------------------------------------------------------
+// CLR -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.CLR, M68kDataSize.GROUP_BWL,
       M68kOperand.ALTERABLE_DATA));
 
-// CMP ----------------------------------------------------------------------
+// CMP -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.CMP, M68kDataSize.GROUP_WL,
       M68kOperand.ADDRESS_REGISTER, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.CMP, M68kDataSize.GROUP_BWL,
@@ -454,97 +454,97 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.CMP, M68kDataSize.GROUP_BWL,
       M68kOperand.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT, M68kOperand.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT));
 
-// CMPA ----------------------------------------------------------------------
+// CMPA ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.CMPA, M68kDataSize.GROUP_WL,
       M68kOperand.ALL, M68kOperand.ADDRESS_REGISTER));
 
-// CMPI ----------------------------------------------------------------------
+// CMPI ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.CMPI, M68kDataSize.GROUP_BWL,
       M68kOperand.IMMEDIATE, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.CMPI, M68kDataSize.GROUP_BWL,
       M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA));
 
-// CMPM ----------------------------------------------------------------------
+// CMPM ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.CMPM, M68kDataSize.GROUP_BWL,
       M68kOperand.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT, M68kOperand.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT));
 
-// DBT ----------------------------------------------------------------------
+// DBT -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBT, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DBF ----------------------------------------------------------------------
+// DBF -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBF, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DBRA ----------------------------------------------------------------------
+// DBRA ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBRA, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DBHI ----------------------------------------------------------------------
+// DBHI ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBHI, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DBLS ----------------------------------------------------------------------
+// DBLS ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBLS, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DBCC ----------------------------------------------------------------------
+// DBCC ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBCC, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DBHS ----------------------------------------------------------------------
+// DBHS ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBHS, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DBCS ----------------------------------------------------------------------
+// DBCS ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBCS, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DBLO ----------------------------------------------------------------------
+// DBLO ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBLO, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DBNE ----------------------------------------------------------------------
+// DBNE ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBNE, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DBEQ ----------------------------------------------------------------------
+// DBEQ ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBEQ, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DBVC ----------------------------------------------------------------------
+// DBVC ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBVC, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DBVS ----------------------------------------------------------------------
+// DBVS ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBVS, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DBPL ----------------------------------------------------------------------
+// DBPL ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBPL, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DBMI ----------------------------------------------------------------------
+// DBMI ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBMI, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DBGE ----------------------------------------------------------------------
+// DBGE ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBGE, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DBLT ----------------------------------------------------------------------
+// DBLT ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBLT, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DBGT ----------------------------------------------------------------------
+// DBGT ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBGT, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DBLE ----------------------------------------------------------------------
+// DBLE ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DBLE, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
 
-// DIVS ----------------------------------------------------------------------
+// DIVS ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DIVS, M68kDataSize.GROUP_W,
       M68kOperand.ALTERABLE_DATA_CF, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.DIVS, M68kDataSize.GROUP_L,
@@ -556,7 +556,7 @@ public final class M68kMnemonicRegistry {
       M68kOperand.DATA, M68kOperand.DATA_REGISTER,
       M68kCpu.GROUP_68020_UP));
 
-// DIVU ----------------------------------------------------------------------
+// DIVU ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.DIVU, M68kDataSize.GROUP_W,
       M68kOperand.ALTERABLE_DATA_CF, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.DIVU, M68kDataSize.GROUP_L,
@@ -568,7 +568,7 @@ public final class M68kMnemonicRegistry {
       M68kOperand.DATA, M68kOperand.DATA_REGISTER,
       M68kCpu.GROUP_68020_UP));
 
-// EOR ----------------------------------------------------------------------
+// EOR -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.EOR, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA_REGISTER, M68kOperand.ALTERABLE_DATA));
     add(new M68kMnemonic(M68kTokenTypes.EOR, M68kDataSize.GROUP_BWL,
@@ -580,7 +580,7 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.EOR, M68kDataSize.GROUP_W,
       M68kOperand.IMMEDIATE, M68kOperand.SR_REGISTER));
 
-// EORI ----------------------------------------------------------------------
+// EORI ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.EORI, M68kDataSize.GROUP_BWL,
       M68kOperand.IMMEDIATE, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.EORI, M68kDataSize.GROUP_BWL,
@@ -590,7 +590,7 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.EORI, M68kDataSize.GROUP_W,
       M68kOperand.IMMEDIATE, M68kOperand.SR_REGISTER));
 
-// EXG ----------------------------------------------------------------------
+// EXG -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.EXG, M68kDataSize.GROUP_L,
       M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.EXG, M68kDataSize.GROUP_L,
@@ -600,34 +600,34 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.EXG, M68kDataSize.GROUP_L,
       M68kOperand.ADDRESS_REGISTER, M68kOperand.DATA_REGISTER));
 
-// EXT ----------------------------------------------------------------------
+// EXT -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.EXT, M68kDataSize.GROUP_WL,
       M68kOperand.DATA_REGISTER));
 
-// ILLEGAL ----------------------------------------------------------------------
+// ILLEGAL -------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.ILLEGAL, M68kDataSize.GROUP_UNSIZED,
       M68kOperand.NONE));
 
-// JMP ----------------------------------------------------------------------
+// JMP -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.JMP, M68kDataSize.GROUP_UNSIZED,
       M68kOperand.CONTROL));
 
-// JSR ----------------------------------------------------------------------
+// JSR -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.JSR, M68kDataSize.GROUP_UNSIZED,
       M68kOperand.CONTROL));
 
-// LEA ----------------------------------------------------------------------
+// LEA -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.LEA, M68kDataSize.GROUP_L,
       M68kOperand.CONTROL, M68kOperand.ADDRESS_REGISTER));
 
-// LINK ----------------------------------------------------------------------
+// LINK ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.LINK, M68kDataSize.GROUP_W,
       M68kOperand.ADDRESS_REGISTER, M68kOperand.IMMEDIATE));
     add(new M68kMnemonic(M68kTokenTypes.LINK, M68kDataSize.GROUP_L,
       M68kOperand.ADDRESS_REGISTER, M68kOperand.IMMEDIATE,
       M68kCpu.GROUP_68020_UP));
 
-// LSL ----------------------------------------------------------------------
+// LSL -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.LSL, M68kDataSize.GROUP_W,
       M68kOperand.ALTERABLE_MEMORY));
     add(new M68kMnemonic(M68kTokenTypes.LSL, M68kDataSize.GROUP_BWL,
@@ -637,7 +637,7 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.LSL, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA_REGISTER));
 
-// LSR ----------------------------------------------------------------------
+// LSR -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.LSR, M68kDataSize.GROUP_W,
       M68kOperand.ALTERABLE_MEMORY));
     add(new M68kMnemonic(M68kTokenTypes.LSR, M68kDataSize.GROUP_BWL,
@@ -647,7 +647,7 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.LSR, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA_REGISTER));
 
-// MOVE ----------------------------------------------------------------------
+// MOVE ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.MOVE, M68kDataSize.GROUP_WL,
       M68kOperand.ADDRESS_REGISTER, M68kOperand.ALTERABLE));
     add(new M68kMnemonic(M68kTokenTypes.MOVE, M68kDataSize.GROUP_WL,
@@ -668,7 +668,7 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.MOVE, M68kDataSize.GROUP_L,
       M68kOperand.ADDRESS_REGISTER, M68kOperand.USP_REGISTER));
 
-// MOVEA ----------------------------------------------------------------------
+// MOVEA ---------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.MOVEA, M68kDataSize.GROUP_WL,
       M68kOperand.ALL, M68kOperand.ADDRESS_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.MOVEA, M68kDataSize.GROUP_WL,
@@ -676,7 +676,7 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.MOVEA, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA, M68kOperand.ALTERABLE_DATA));
 
-// MOVEC ----------------------------------------------------------------------
+// MOVEC ---------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.MOVEC, M68kDataSize.GROUP_L,
       M68kOperand.CTRL_REGISTER, M68kOperand.DATA_OR_ADDRESS_REGISTER,
       M68kCpu.GROUP_68010_UP));
@@ -684,7 +684,7 @@ public final class M68kMnemonicRegistry {
       M68kOperand.DATA_OR_ADDRESS_REGISTER, M68kOperand.CTRL_REGISTER,
       M68kCpu.GROUP_68010_UP));
 
-// MOVEM ----------------------------------------------------------------------
+// MOVEM ---------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.MOVEM, M68kDataSize.GROUP_WL,
       M68kOperand.DATA_OR_ADDRESS_REGISTER_LIST, M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT));
     add(new M68kMnemonic(M68kTokenTypes.MOVEM, M68kDataSize.GROUP_WL,
@@ -698,17 +698,17 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.MOVEM, M68kDataSize.GROUP_WL,
       M68kOperand.RESTORE_OPERANDS, M68kOperand.IMMEDIATE_REGISTER_LIST_VALUE));
 
-// MOVEP ----------------------------------------------------------------------
+// MOVEP ---------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.MOVEP, M68kDataSize.GROUP_WL,
       M68kOperand.ADDRESS_REGISTER_DISPLACEMENT, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.MOVEP, M68kDataSize.GROUP_WL,
       M68kOperand.DATA_REGISTER, M68kOperand.ADDRESS_REGISTER_DISPLACEMENT));
 
-// MOVEQ ----------------------------------------------------------------------
+// MOVEQ ---------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.MOVEQ, M68kDataSize.GROUP_L,
       M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER));
 
-// MOVES ----------------------------------------------------------------------
+// MOVES ---------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.MOVES, M68kDataSize.GROUP_BWL,
       M68kOperand.ALTERABLE_MEMORY, M68kOperand.DATA_OR_ADDRESS_REGISTER,
       M68kCpu.GROUP_68010_UP));
@@ -716,7 +716,7 @@ public final class M68kMnemonicRegistry {
       M68kOperand.DATA_OR_ADDRESS_REGISTER, M68kOperand.ALTERABLE_MEMORY,
       M68kCpu.GROUP_68010_UP));
 
-// MULS ----------------------------------------------------------------------
+// MULS ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.MULS, M68kDataSize.GROUP_W,
       M68kOperand.ALTERABLE_DATA_CF, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.MULS, M68kDataSize.GROUP_L,
@@ -728,7 +728,7 @@ public final class M68kMnemonicRegistry {
       M68kOperand.DATA, M68kOperand.DATA_REGISTER,
       M68kCpu.GROUP_68020_UP));
 
-// MULU ----------------------------------------------------------------------
+// MULU ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.MULU, M68kDataSize.GROUP_W,
       M68kOperand.ALTERABLE_DATA_CF, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.MULU, M68kDataSize.GROUP_L,
@@ -740,33 +740,33 @@ public final class M68kMnemonicRegistry {
       M68kOperand.DATA, M68kOperand.DATA_REGISTER,
       M68kCpu.GROUP_68020_UP));
 
-// NBCD ----------------------------------------------------------------------
+// NBCD ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.NBCD, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// NEG ----------------------------------------------------------------------
+// NEG -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.NEG, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.NEG, M68kDataSize.GROUP_BWL,
       M68kOperand.ALTERABLE_DATA));
 
-// NEGX ----------------------------------------------------------------------
+// NEGX ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.NEGX, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.NEGX, M68kDataSize.GROUP_BWL,
       M68kOperand.ALTERABLE_DATA));
 
-// NOP ----------------------------------------------------------------------
+// NOP -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.NOP, M68kDataSize.GROUP_UNSIZED,
       M68kOperand.NONE));
 
-// NOT ----------------------------------------------------------------------
+// NOT -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.NOT, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.NOT, M68kDataSize.GROUP_BWL,
       M68kOperand.ALTERABLE_DATA));
 
-// OR ----------------------------------------------------------------------
+// OR ------------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.OR, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.OR, M68kDataSize.GROUP_BWL,
@@ -778,7 +778,7 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.OR, M68kDataSize.GROUP_W,
       M68kOperand.IMMEDIATE, M68kOperand.SR_REGISTER));
 
-// ORI ----------------------------------------------------------------------
+// ORI -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.ORI, M68kDataSize.GROUP_BWL,
       M68kOperand.IMMEDIATE, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.ORI, M68kDataSize.GROUP_BWL,
@@ -788,15 +788,15 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.ORI, M68kDataSize.GROUP_W,
       M68kOperand.IMMEDIATE, M68kOperand.SR_REGISTER));
 
-// PEA ----------------------------------------------------------------------
+// PEA -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.PEA, M68kDataSize.GROUP_L,
       M68kOperand.CONTROL));
 
-// RESET ----------------------------------------------------------------------
+// RESET ---------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.RESET, M68kDataSize.GROUP_UNSIZED,
       M68kOperand.NONE));
 
-// ROL ----------------------------------------------------------------------
+// ROL -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.ROL, M68kDataSize.GROUP_W,
       M68kOperand.ALTERABLE_MEMORY));
     add(new M68kMnemonic(M68kTokenTypes.ROL, M68kDataSize.GROUP_BWL,
@@ -806,7 +806,7 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.ROL, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA_REGISTER));
 
-// ROR ----------------------------------------------------------------------
+// ROR -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.ROR, M68kDataSize.GROUP_W,
       M68kOperand.ALTERABLE_MEMORY));
     add(new M68kMnemonic(M68kTokenTypes.ROR, M68kDataSize.GROUP_BWL,
@@ -816,7 +816,7 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.ROR, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA_REGISTER));
 
-// ROXL ----------------------------------------------------------------------
+// ROXL ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.ROXL, M68kDataSize.GROUP_W,
       M68kOperand.ALTERABLE_MEMORY));
     add(new M68kMnemonic(M68kTokenTypes.ROXL, M68kDataSize.GROUP_BWL,
@@ -826,7 +826,7 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.ROXL, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA_REGISTER));
 
-// ROXR ----------------------------------------------------------------------
+// ROXR ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.ROXR, M68kDataSize.GROUP_W,
       M68kOperand.ALTERABLE_MEMORY));
     add(new M68kMnemonic(M68kTokenTypes.ROXR, M68kDataSize.GROUP_BWL,
@@ -836,142 +836,142 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.ROXR, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA_REGISTER));
 
-// RTD ----------------------------------------------------------------------
+// RTD -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.RTD, M68kDataSize.GROUP_UNSIZED,
       M68kOperand.QUICK_IMMEDIATE,
       M68kCpu.GROUP_68010_UP));
 
-// RTE ----------------------------------------------------------------------
+// RTE -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.RTE, M68kDataSize.GROUP_UNSIZED,
       M68kOperand.NONE));
 
-// RTR ----------------------------------------------------------------------
+// RTR -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.RTR, M68kDataSize.GROUP_UNSIZED,
       M68kOperand.NONE));
 
-// RTS ----------------------------------------------------------------------
+// RTS -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.RTS, M68kDataSize.GROUP_UNSIZED,
       M68kOperand.NONE));
 
-// SBCD ----------------------------------------------------------------------
+// SBCD ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SBCD, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SBCD, M68kDataSize.GROUP_B,
       M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT, M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT));
 
-// ST ----------------------------------------------------------------------
+// ST ------------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.ST, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.ST, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// SF ----------------------------------------------------------------------
+// SF ------------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SF, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SF, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// SHI ----------------------------------------------------------------------
+// SHI -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SHI, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SHI, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// SLS ----------------------------------------------------------------------
+// SLS -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SLS, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SLS, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// SCC ----------------------------------------------------------------------
+// SCC -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SCC, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SCC, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// SHS ----------------------------------------------------------------------
+// SHS -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SHS, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SHS, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// SCS ----------------------------------------------------------------------
+// SCS -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SCS, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SCS, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// SLO ----------------------------------------------------------------------
+// SLO -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SLO, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SLO, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// SNE ----------------------------------------------------------------------
+// SNE -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SNE, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SNE, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// SEQ ----------------------------------------------------------------------
+// SEQ -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SEQ, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SEQ, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// SVC ----------------------------------------------------------------------
+// SVC -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SVC, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SVC, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// SVS ----------------------------------------------------------------------
+// SVS -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SVS, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SVS, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// SPL ----------------------------------------------------------------------
+// SPL -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SPL, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SPL, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// SMI ----------------------------------------------------------------------
+// SMI -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SMI, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SMI, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// SGE ----------------------------------------------------------------------
+// SGE -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SGE, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SGE, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// SLT ----------------------------------------------------------------------
+// SLT -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SLT, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SLT, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// SGT ----------------------------------------------------------------------
+// SGT -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SGT, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SGT, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// SLE ----------------------------------------------------------------------
+// SLE -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SLE, M68kDataSize.GROUP_B,
       M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SLE, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// STOP ----------------------------------------------------------------------
+// STOP ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.STOP, M68kDataSize.GROUP_UNSIZED,
       M68kOperand.QUICK_IMMEDIATE));
 
-// SUB ----------------------------------------------------------------------
+// SUB -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SUB, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SUB, M68kDataSize.GROUP_WL,
@@ -983,45 +983,45 @@ public final class M68kMnemonicRegistry {
     add(new M68kMnemonic(M68kTokenTypes.SUB, M68kDataSize.GROUP_BWL,
       M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA));
 
-// SUBA ----------------------------------------------------------------------
+// SUBA ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SUBA, M68kDataSize.GROUP_WL,
       M68kOperand.ALL, M68kOperand.ADDRESS_REGISTER));
 
-// SUBI ----------------------------------------------------------------------
+// SUBI ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SUBI, M68kDataSize.GROUP_BWL,
       M68kOperand.IMMEDIATE, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SUBI, M68kDataSize.GROUP_BWL,
       M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA));
 
-// SUBQ ----------------------------------------------------------------------
+// SUBQ ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SUBQ, M68kDataSize.GROUP_WL,
       M68kOperand.QUICK_IMMEDIATE, M68kOperand.ADDRESS_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SUBQ, M68kDataSize.GROUP_BWL,
       M68kOperand.QUICK_IMMEDIATE, M68kOperand.ALTERABLE_DATA));
 
-// SUBX ----------------------------------------------------------------------
+// SUBX ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SUBX, M68kDataSize.GROUP_BWL,
       M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
     add(new M68kMnemonic(M68kTokenTypes.SUBX, M68kDataSize.GROUP_BWL,
       M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT, M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT));
 
-// SWAP ----------------------------------------------------------------------
+// SWAP ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.SWAP, M68kDataSize.GROUP_W,
       M68kOperand.DATA_REGISTER));
 
-// TAS ----------------------------------------------------------------------
+// TAS -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.TAS, M68kDataSize.GROUP_B,
       M68kOperand.ALTERABLE_DATA));
 
-// TRAP ----------------------------------------------------------------------
+// TRAP ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.TRAP, M68kDataSize.GROUP_UNSIZED,
       M68kOperand.QUICK_IMMEDIATE));
 
-// TRAPV ----------------------------------------------------------------------
+// TRAPV ---------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.TRAPV, M68kDataSize.GROUP_UNSIZED,
       M68kOperand.NONE));
 
-// TST ----------------------------------------------------------------------
+// TST -----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.TST, M68kDataSize.GROUP_BWL,
       M68kOperand.ALTERABLE_DATA));
     add(new M68kMnemonic(M68kTokenTypes.TST, M68kDataSize.GROUP_BWL,
@@ -1031,7 +1031,7 @@ public final class M68kMnemonicRegistry {
       M68kOperand.ADDRESS_REGISTER,
       M68kCpu.GROUP_68020_UP));
 
-// UNLK ----------------------------------------------------------------------
+// UNLK ----------------------------------------------------------------------------
     add(new M68kMnemonic(M68kTokenTypes.UNLK, M68kDataSize.GROUP_UNSIZED,
       M68kOperand.ADDRESS_REGISTER));
   }
