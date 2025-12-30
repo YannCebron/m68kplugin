@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2025 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 
 import java.util.EnumSet;
 import java.util.Set;
@@ -61,6 +62,8 @@ public enum M68kDataSize {
     return null;
   }
 
+  // todo superfluous?
+  @TestOnly
   @Nullable
   public static M68kDataSize findByText(@NotNull @NonNls String text) {
     for (M68kDataSize value : values()) {
