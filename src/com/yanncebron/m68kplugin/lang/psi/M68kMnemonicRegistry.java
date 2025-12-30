@@ -18,13 +18,13 @@ package com.yanncebron.m68kplugin.lang.psi;
 
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.MultiMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -36,6 +36,7 @@ import java.util.List;
  */
 public final class M68kMnemonicRegistry {
 
+  // fixed order
   private final MultiMap<IElementType, M68kMnemonic> mnemonics = MultiMap.createLinked();
 
   private static final M68kMnemonicRegistry INSTANCE = new M68kMnemonicRegistry();
@@ -79,8 +80,8 @@ public final class M68kMnemonicRegistry {
       return filtered.get(0);
     }
 
-    // multiple matches: rank by min(addressMode.count)
-    List<M68kMnemonic> multipleMatches = new ArrayList<>(filtered);
+    // multiple matches: sort by min(addressMode.count), so IMMEDIATE wins over DATA etc.
+    List<M68kMnemonic> multipleMatches = new SmartList<>(filtered);
     multipleMatches.sort((o1, o2) -> {
       final int o1Source = o1.sourceOperand().getAddressModes().length;
       final int o2Source = o2.sourceOperand().getAddressModes().length;
