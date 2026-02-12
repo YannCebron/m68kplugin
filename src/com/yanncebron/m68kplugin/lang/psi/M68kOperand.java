@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -224,10 +224,22 @@ public enum M68kOperand {
    */
   ADDRESS_REGISTER_INDEX_DISPLACEMENT(M68kAddressMode.ADDRESS_REGISTER_INDEX_DISPLACEMENT),
 
+  /**
+   * vasm: {@code _SR}
+   */
   SR_REGISTER(M68kAddressMode.SPECIAL_REGISTER_SR),
+  /**
+   * vasm: {@code _USP}
+   */
   USP_REGISTER(M68kAddressMode.SPECIAL_REGISTER_USP),
+  /**
+   * vasm: {@code _CCR}
+   */
   CCR_REGISTER(M68kAddressMode.SPECIAL_REGISTER_CCR),
 
+  /**
+   * vasm: {@code _CTRL}
+   */
   CTRL_REGISTER(M68kAddressMode.CONTROL_REGISTER);
 
   private final M68kAddressMode[] addressModes;
