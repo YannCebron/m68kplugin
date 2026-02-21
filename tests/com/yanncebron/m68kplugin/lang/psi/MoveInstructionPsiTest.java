@@ -57,13 +57,13 @@ public class MoveInstructionPsiTest extends M68kPsiTestCase<M68kMoveInstruction>
     final M68kAdmSr admSr = instruction.getAdmSr();
     assertNotNull(admSr);
     assertEquals(M68kRegister.SR, admSr.getRegister());
-    assertTrue(M68kPsiImplUtil.isSrc(instruction, admSr));
-    assertFalse(M68kPsiImplUtil.isDest(instruction, admSr));
+    assertTrue(M68kPsiImplUtil.isSecondOperand(instruction, admSr));
+    assertFalse(M68kPsiImplUtil.isFirstOperand(instruction, admSr));
 
     final M68kAdmDrd admDrd = instruction.getAdmDrd();
     assertNotNull(admDrd);
-    assertTrue(M68kPsiImplUtil.isDest(instruction, admDrd));
-    assertFalse(M68kPsiImplUtil.isSrc(instruction, admDrd));
+    assertTrue(M68kPsiImplUtil.isFirstOperand(instruction, admDrd));
+    assertFalse(M68kPsiImplUtil.isSecondOperand(instruction, admDrd));
   }
 
   public void testAdmSrDest() {

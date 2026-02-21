@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,15 +38,14 @@ public class M68kPsiImplUtil {
     return M68kDataSize.findByElementType(childByType.getElementType());
   }
 
-  // TODO extract M68kInstructionWithSrcAndDest
-  public static boolean isDest(M68kInstruction instruction, @NotNull M68kAdm sourceOrDestElement) {
+  public static boolean isFirstOperand(M68kInstruction instruction, @NotNull M68kAdm operand) {
     final ASTNode commaNode = instruction.getNode().findChildByType(M68kTokenTypes.COMMA);
-    return commaNode != null && commaNode.getStartOffset() < sourceOrDestElement.getNode().getStartOffset();
+    return commaNode != null && commaNode.getStartOffset() < operand.getNode().getStartOffset();
   }
 
-  public static boolean isSrc(M68kInstruction instruction, @NotNull M68kAdm sourceOrDestElement) {
+  public static boolean isSecondOperand(M68kInstruction instruction, @NotNull M68kAdm operand) {
     final ASTNode commaNode = instruction.getNode().findChildByType(M68kTokenTypes.COMMA);
-    return commaNode != null && commaNode.getStartOffset() > sourceOrDestElement.getNode().getStartOffset();
+    return commaNode != null && commaNode.getStartOffset() > operand.getNode().getStartOffset();
   }
 
   @NotNull
