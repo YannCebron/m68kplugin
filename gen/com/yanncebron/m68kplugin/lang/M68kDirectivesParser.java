@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 public class M68kDirectivesParser {
 
   /* ********************************************************** */
-  // ac68080
+  // AC68080
   public static boolean ac68080_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ac68080_directive")) return false;
     if (!nextTokenIs(b, "<directive>", AC68080)) return false;
@@ -328,7 +328,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // cpu32
+  // CPU32
   public static boolean cpu32_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cpu32_directive")) return false;
     if (!nextTokenIs(b, "<directive>", CPU32)) return false;
@@ -982,7 +982,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // fpu cpID
+  // FPU cpID
   public static boolean fpu_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "fpu_directive")) return false;
     if (!nextTokenIs(b, "<directive>", FPU)) return false;
@@ -1206,7 +1206,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // machine machine_cpu_type
+  // MACHINE machine_cpu_type
   public static boolean machine_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "machine_directive")) return false;
     if (!nextTokenIs(b, "<directive>", MACHINE)) return false;
@@ -1378,7 +1378,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // mc68000
+  // MC68000
   public static boolean mc68000_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "mc68000_directive")) return false;
     if (!nextTokenIs(b, "<directive>", MC68000)) return false;
@@ -1390,7 +1390,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // mc68010
+  // MC68010
   public static boolean mc68010_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "mc68010_directive")) return false;
     if (!nextTokenIs(b, "<directive>", MC68010)) return false;
@@ -1402,7 +1402,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // mc68020
+  // MC68020
   public static boolean mc68020_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "mc68020_directive")) return false;
     if (!nextTokenIs(b, "<directive>", MC68020)) return false;
@@ -1414,7 +1414,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // mc68030
+  // MC68030
   public static boolean mc68030_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "mc68030_directive")) return false;
     if (!nextTokenIs(b, "<directive>", MC68030)) return false;
@@ -1426,7 +1426,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // mc68040
+  // MC68040
   public static boolean mc68040_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "mc68040_directive")) return false;
     if (!nextTokenIs(b, "<directive>", MC68040)) return false;
@@ -1438,7 +1438,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // mc68060
+  // MC68060
   public static boolean mc68060_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "mc68060_directive")) return false;
     if (!nextTokenIs(b, "<directive>", MC68060)) return false;

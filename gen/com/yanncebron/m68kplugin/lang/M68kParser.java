@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -2381,7 +2381,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // DBF dbCC_tail
+  // DBF  dbCC_tail
   public static boolean dbf_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "dbf_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", DBF)) return false;
@@ -2563,7 +2563,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // DBT dbCC_tail
+  // DBT  dbCC_tail
   public static boolean dbt_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "dbt_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", DBT)) return false;

@@ -1000,8 +1000,8 @@ dbgt_instruction ::= DBGT dbCC_tail
 dbge_instruction ::= DBGE dbCC_tail
 dbmi_instruction ::= DBMI dbCC_tail
 dbvs_instruction ::= DBVS dbCC_tail
-dbf_instruction ::= DBF dbCC_tail
-dbt_instruction ::= DBT dbCC_tail
+dbf_instruction  ::= DBF  dbCC_tail
+dbt_instruction  ::= DBT  dbCC_tail
 
 // sCC instructions ========================================================
 ;
@@ -1603,27 +1603,27 @@ private cpID ::= expression
 {
   name = "cpID"
 }
-fpu_directive     ::= fpu cpID
+fpu_directive     ::= FPU cpID
 {
   pin = 1
   methods = [
      cpID = "expression"
   ]
 }
-cpu32_directive   ::= cpu32
-mc68000_directive ::= mc68000
-mc68010_directive ::= mc68010
-mc68020_directive ::= mc68020
-mc68030_directive ::= mc68030
-mc68040_directive ::= mc68040
-mc68060_directive ::= mc68060
-ac68080_directive ::= ac68080
+cpu32_directive   ::= CPU32
+mc68000_directive ::= MC68000
+mc68010_directive ::= MC68010
+mc68020_directive ::= MC68020
+mc68030_directive ::= MC68030
+mc68040_directive ::= MC68040
+mc68060_directive ::= MC68060
+ac68080_directive ::= AC68080
 
 private machine_cpu_type ::= DEC_NUMBER | ID
 {
   name = "cpu type"
 }
-machine_directive ::= machine machine_cpu_type
+machine_directive ::= MACHINE machine_cpu_type
 {
   pin = 1
 }
