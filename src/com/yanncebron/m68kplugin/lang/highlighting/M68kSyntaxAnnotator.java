@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,8 +42,15 @@ final class M68kSyntaxAnnotator implements Annotator, DumbAware {
     if (!(element instanceof M68kPsiElement)) return;
 
     if (element instanceof M68kPrivilegedInstruction privilegedInstruction) {
-      if (privilegedInstruction.isPrivileged(M68kCpu.M_68000)) {
-        holder.newAnnotation(HighlightSeverity.INFORMATION, M68kBundle.message("highlight.privileged.instruction"))
+      M68kMnemonic m68kMnemonic = M68kMnemonicRegistry.getInstance().find(privilegedInstruction);
+      if (m68kMnemonic != null && m68kMnemonic.privilegedType() != M68kMnemonic.PrivilegedType.NONE) {
+        String message;
+        if (m68kMnemonic.privilegedType() == M68kMnemonic.PrivilegedType.PRIVILEGED_68010_ABOVE) {
+          message = M68kBundle.message("highlight.privileged.instruction.68010.or.above");
+        } else {
+          message = M68kBundle.message("highlight.privileged.instruction");
+        }
+        holder.newAnnotation(HighlightSeverity.INFORMATION, message)
           .textAttributes(M68kTextAttributes.PRIVILEGED_INSTRUCTION).create();
       }
     }

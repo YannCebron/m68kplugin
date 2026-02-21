@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -103,6 +103,9 @@ class M68kInstructionMnemonicDocsGenerator {
         appendCpuSection(mnemonic);
       }
 
+      if (mnemonic.privilegedType() != M68kMnemonic.PrivilegedType.NONE) {
+        appendPrivilegedSection(mnemonic);
+      }
 
       final M68kAddressMode[] sourceAddressModes = mnemonic.sourceOperand().getAddressModes();
       final M68kAddressMode[] destinationAddressModes = mnemonic.destinationOperand().getAddressModes();
@@ -145,6 +148,23 @@ class M68kInstructionMnemonicDocsGenerator {
     M68kDocsGeneratorUtil.appendCpus(sb, mnemonic.cpus());
     sb.append(DocumentationMarkup.SECTION_END);
     sb.append(DocumentationMarkup.SECTIONS_END);
+  }
+
+  private void appendPrivilegedSection(M68kMnemonic mnemonic) {
+    sb.append(DocumentationMarkup.SECTIONS_START);
+    sb.append(DocumentationMarkup.SECTION_HEADER_START);
+    sb.append(M68kBundle.message("documentation.section.privileged"));
+    sb.append(DocumentationMarkup.SECTION_SEPARATOR);
+    String message;
+    if (mnemonic.privilegedType() == M68kMnemonic.PrivilegedType.PRIVILEGED_68010_ABOVE) {
+      message = M68kBundle.message("cpu.group.GROUP_68010_UP");
+    } else {
+      message = M68kBundle.message("cpu.group.GROUP_68000_UP");
+    }
+    sb.append(message);
+    sb.append(DocumentationMarkup.SECTION_END);
+    sb.append(DocumentationMarkup.SECTIONS_END);
+
   }
 
   private void appendBreak() {

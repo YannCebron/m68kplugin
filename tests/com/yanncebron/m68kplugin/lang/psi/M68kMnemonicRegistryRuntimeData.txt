@@ -1,0 +1,41 @@
+# Licensed under the Apache License, Version 2.0 (the "License")
+#
+# Runtime information for M68kMnemonicRegistryGeneratorTest
+#
+# Format (whitespaces required):
+# "mnemonic", {op1,op2}, SIZE, CPU, NONE|PRIVILEGED|PRIVILEGED_68010_ABOVE
+
+"and",    {IM,_SR},   W,      m68000up, PRIVILEGED
+"andi",   {IM,_SR},   W,      m68000up, PRIVILEGED
+
+
+"eor",    {IM,_SR},   W,      m68000up, PRIVILEGED
+"eori",   {IM,_SR},   W,      m68000up, PRIVILEGED
+
+
+"or",     {IM,_SR},   W,      m68000up, PRIVILEGED
+"ori",    {IM,_SR},   W,      m68000up, PRIVILEGED
+
+
+"move",   {_SR,AD},   W,      m68000up, PRIVILEGED_68010_ABOVE
+"move",   {DA,_SR},   W,      m68000up, PRIVILEGED
+
+"move",   {A_,_USP},  L,      m68000up, PRIVILEGED
+"move",   {_USP,A_},  L,      m68000up, PRIVILEGED
+
+
+"movec",  {_CTRL,R_}, L,      m68010up, PRIVILEGED
+"movec",  {R_,_CTRL}, L,      m68010up, PRIVILEGED
+
+
+"moves",  {AM,R_},    BWL,    m68010up, PRIVILEGED
+"moves",  {R_,AM},    BWL,    m68010up, PRIVILEGED
+
+
+"reset",  {0},        UNS,    m68000up, PRIVILEGED
+
+
+"rte",    {0},        UNS,    m68000up, PRIVILEGED
+
+
+"stop",   {QI},       UNS,    m68000up, PRIVILEGED

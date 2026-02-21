@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@ package com.yanncebron.m68kplugin.lang.psi;
 
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
+
+import java.util.Set;
 
 public class MoveInstructionPsiTest extends M68kPsiTestCase<M68kMoveInstruction> {
 
@@ -50,9 +52,7 @@ public class MoveInstructionPsiTest extends M68kPsiTestCase<M68kMoveInstruction>
     final M68kMoveInstruction instruction = parse("move.w SR,d6");
 
     assertFalse(instruction.isPrivileged(M68kCpu.M_68000));
-    for (M68kCpu m68kCpu : M68kCpu.GROUP_68010_UP) {
-      assertTrue(instruction.isPrivileged(m68kCpu));
-    }
+    assertPrivileged(instruction, M68kCpu.GROUP_68010_UP);
 
     final M68kAdmSr admSr = instruction.getAdmSr();
     assertNotNull(admSr);
@@ -68,8 +68,19 @@ public class MoveInstructionPsiTest extends M68kPsiTestCase<M68kMoveInstruction>
 
   public void testAdmSrDest() {
     final M68kMoveInstruction instruction = parse("move.w d6,SR");
+    assertPrivileged(instruction, M68kCpu.GROUP_68000_UP);
+  }
 
-    for (M68kCpu m68kCpu : M68kCpu.GROUP_68000_UP) {
+  public void testUsp() {
+    M68kMoveInstruction toUspInstruction = parse("move.l a0,usp");
+    assertPrivileged(toUspInstruction, M68kCpu.GROUP_68000_UP);
+
+    M68kMoveInstruction fromUspInstruction = parse("move.l usp,a0");
+    assertPrivileged(fromUspInstruction, M68kCpu.GROUP_68000_UP);
+  }
+
+  private static void assertPrivileged(M68kMoveInstruction instruction, Set<M68kCpu> cpus) {
+    for (M68kCpu m68kCpu : cpus) {
       assertTrue(instruction.isPrivileged(m68kCpu));
     }
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -217,7 +217,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
         try {
           ensureNoErrorElements();
           ensureNoMacroCallElements();
-          ensureHasEntryInRegistry();
+          ensureMatchingEntryInRegistryAndCorrectPrivilegedPSI();
           dump(variant);
         } catch (AssertionError e) {
           if (variants.getKey().isDeprecated()) {
@@ -235,12 +235,26 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
   }
 
-  private void ensureHasEntryInRegistry() {
+  private void ensureMatchingEntryInRegistryAndCorrectPrivilegedPSI() {
     final M68kPsiElement instruction = M68kPsiTreeUtil.getContainingInstructionOrDirective(myFile.findElementAt(INDENT.length() + 2));
     final M68kInstruction m68kInstruction = assertInstanceOf(instruction, M68kInstruction.class);
 
     final M68kMnemonic m68kMnemonic = M68kMnemonicRegistry.getInstance().find(m68kInstruction);
     assertNotNull(myFile.getText(), m68kMnemonic);
+
+
+    boolean psiIsPrivileged = m68kInstruction instanceof M68kPrivilegedInstruction;
+    if (m68kMnemonic.privilegedType() != M68kMnemonic.PrivilegedType.NONE) {
+      assertTrue("PSI missing extending M68kPrivilegedInstruction", psiIsPrivileged);
+    } else {
+      Collection<M68kMnemonic> allMnemonics = M68kMnemonicRegistry.getInstance().findAll(instruction.getNode().getFirstChildNode().getElementType());
+      boolean atLeastOnePrivilegedMnemonic = ContainerUtil.exists(allMnemonics, it -> it.privilegedType() != M68kMnemonic.PrivilegedType.NONE);
+      if (atLeastOnePrivilegedMnemonic) {
+        assertTrue("PSI missing extending M68kPrivilegedInstruction", psiIsPrivileged);
+      } else {
+        assertFalse("PSI must not extend M68kPrivilegedInstruction", psiIsPrivileged);
+      }
+    }
   }
 
   private void ensureNoMacroCallElements() {

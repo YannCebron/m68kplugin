@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,11 @@ package com.yanncebron.m68kplugin.lang.psi;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * An instruction possibly requiring supervisor privilege.
+ * An instruction (possibly) requiring supervisor privilege.
  * <p>
- * Use mix-in if privileged status is dynamic.
+ * Ref: Section 6
+ *
+ * @see M68kMnemonic.PrivilegedType
  */
 public interface M68kPrivilegedInstruction extends M68kInstruction {
 
@@ -30,7 +32,8 @@ public interface M68kPrivilegedInstruction extends M68kInstruction {
    * @return {@code true} if this instruction requires supervisor privilege for the given target machine, {@code false} otherwise.
    */
   default boolean isPrivileged(@NotNull M68kCpu m68kCpu) {
-    return true;
+    M68kMnemonic m68kMnemonic = M68kMnemonicRegistry.getInstance().find(this);
+    return m68kMnemonic != null && m68kMnemonic.privilegedType().isPrivileged(m68kCpu);
   }
 
 }

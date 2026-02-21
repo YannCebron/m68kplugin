@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
+import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.ContainerUtil;
@@ -31,11 +32,13 @@ import java.util.*;
 import static java.util.Map.entry;
 
 /**
- * Generates {@link M68kMnemonicRegistry} data from <a href="http://sun.hasenbraten.de/vasm/">vasm</a> input file.
+ * Generates {@link M68kMnemonicRegistry} data from <a href="http://sun.hasenbraten.de/vasm/">vasm</a> input file
+ * plus additional runtime information from {@code M68kMnemonicRegistryRuntimeData.txt}.
  * <p>
  * To generate new data:
  * <ol>
  *   <li>Specify path to vasm {@code cpus/m68k/opcodes.h} file in {@link #VASM_OPCODES_H_PATH}</li>
+ *   <li>Adjust {@link #RUNTIME_DATA_PATH}</li>
  *   <li>Set {@link #ENABLED} to {@code true}</li>
  *   <li>Run {@link #testGenerateMnemonicRegistryData()} and copy generated source output</li>
  *   <li>Verify MnemonicGeneratedParserDataTest passes, dump</li>
@@ -60,12 +63,15 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
   private static final Set<M68kCpu> SUPPORTED_CPUS = EnumSet.of(M68kCpu.M_68000, M68kCpu.M_68010, M68kCpu.M_68020);
 
   private static final String VASM_OPCODES_H_PATH = "/Users/yann/idea-ultimate/vasm/cpus/m68k/opcodes.h";
+  private static final String RUNTIME_DATA_PATH = "/Users/yann/idea-ultimate/m68kplugin/tests/com/yanncebron/m68kplugin/lang/psi/M68kMnemonicRegistryRuntimeData.txt";
 
   public void testGenerateMnemonicRegistryData() throws IOException {
     if (!ENABLED) return;
 
     Set<String> unknownMnemonics = new HashSet<>();
     List<M68kMnemonic> mnemonics = new ArrayList<>();
+
+    List<M68kMnemonicRuntimeData> allRuntimeData = readRuntimeData();
 
     final List<String> strings = Files.readAllLines(Paths.get(VASM_OPCODES_H_PATH));
     for (String string : strings) {
@@ -76,8 +82,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       String mnemonic = mnemonicParts[1];
       if (mnemonic.isEmpty() || " no-op".equals(mnemonic)) continue;
 
-      IElementType elementType = ContainerUtil.find(M68kTokenGroups.INSTRUCTIONS.getTypes(),
-        iElementType -> iElementType.toString().equals(mnemonic));
+      IElementType elementType = findElementType(mnemonic);
       if (elementType == null && LOG_UNKNOWN_MNEMONICS && unknownMnemonics.add(mnemonic)) {
         System.out.println("unknown mnemonic '" + mnemonic + "': " + trim);
         continue;
@@ -87,17 +92,9 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       assertEquals(split.size() + " parts: cannot parse '" + trim + "'", 4, split.size());
 
       // Operands ----------------------------
-      M68kOperand sourceOperand;
-      M68kOperand destinationOperand;
-      String operandText = StringUtil.substringBefore(split.get(1), "}");
-      assertNotNull(trim, operandText);
-      if (operandText.contains(",")) {
-        sourceOperand = mapOperand(StringUtil.substringBefore(operandText, ","));
-        destinationOperand = mapOperand(StringUtil.substringAfter(operandText, ","));
-      } else {
-        sourceOperand = mapOperand(operandText);
-        destinationOperand = M68kOperand.NONE;
-      }
+      Couple<M68kOperand> operands = mapOperands(split.get(1));
+      M68kOperand sourceOperand = operands.getFirst();
+      M68kOperand destinationOperand = operands.getSecond();
 
       List<String> lastSplit = StringUtil.split(split.get(3), ",");
 
@@ -135,11 +132,20 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       }
 
       if (elementType != null && sourceOperand != null && destinationOperand != null) {
+        M68kMnemonicRuntimeData m68kMnemonicRuntimeData = ContainerUtil.find(allRuntimeData, it ->
+          it.elementType == elementType &&
+            it.sourceOperand == sourceOperand &&
+            it.destinationOperand == destinationOperand &&
+            it.dataSizes.equals(dataSizes) &&
+            it.cpus.equals(m68kCpus));
+        M68kMnemonic.PrivilegedType privilegedType = m68kMnemonicRuntimeData != null ? m68kMnemonicRuntimeData.privilegedType : M68kMnemonic.PrivilegedType.NONE;
+
         M68kMnemonic m68kMnemonic = new M68kMnemonic(elementType,
           dataSizes,
           sourceOperand,
           destinationOperand,
-          m68kCpus);
+          m68kCpus,
+          privilegedType);
 
         // skip duplicate entries for bset,bclr,bchg with ALTERABLE_MEMORY_CF vs ALTERABLE_MEMORY
         // both have the exact same of address modes ATM, so it's a full duplicate
@@ -165,6 +171,24 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     dumpCode(mnemonics);
   }
 
+  private Couple<M68kOperand> mapOperands(String operandText) {
+    operandText = operandText.contains("{") ? StringUtil.substringAfter(operandText, "{") : operandText;
+    assertNotNull(operandText);
+    operandText = StringUtil.substringBefore(operandText, "}");
+    assertNotNull(operandText);
+    if (operandText.contains(",")) {
+      return Couple.of(
+        mapOperand(StringUtil.substringBefore(operandText, ",")),
+        mapOperand(StringUtil.substringAfter(operandText, ",")));
+    }
+    return Couple.of(mapOperand(operandText), M68kOperand.NONE);
+  }
+
+  private static @Nullable IElementType findElementType(String mnemonic) {
+    return ContainerUtil.find(M68kTokenGroups.INSTRUCTIONS.getTypes(),
+      iElementType -> iElementType.toString().equals(mnemonic));
+  }
+
   private boolean isSupportedCpu(Set<M68kCpu> cpus) {
     return ContainerUtil.intersects(cpus, SUPPORTED_CPUS);
   }
@@ -188,11 +212,27 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       String dataSizeText = getDataSizeText(mnemonic);
       String cpuText = getCpuText(cpus);
 
-      System.out.println("add(new M68kMnemonic(" + tokenText + ", " + dataSizeText + ",\n" +
-        "M68kOperand." + mnemonic.sourceOperand().name() +
-        (mnemonic.destinationOperand() != M68kOperand.NONE ? ", M68kOperand." + mnemonic.destinationOperand().name() : "") +
-        (cpuText != null ? ",\n" + cpuText : "") +
-        "));");
+      System.out.println();
+      System.out.print("create(" + tokenText + ")");
+      if (dataSizeText != null) {
+        System.out.println(".dataSizes(" + dataSizeText + ")");
+      } else {
+        System.out.println();
+      }
+      if (mnemonic.sourceOperand() != M68kOperand.NONE) {
+        System.out.print(".source(" + mnemonic.sourceOperand().name() + ")");
+        if (mnemonic.destinationOperand() != M68kOperand.NONE) {
+          System.out.print(".destination(" + mnemonic.destinationOperand().name() + ")");
+        }
+        System.out.println();
+      }
+      if (cpuText != null) {
+        System.out.println(".cpus(" + cpuText + ")");
+      }
+      if (mnemonic.privilegedType() != M68kMnemonic.PrivilegedType.NONE) {
+        System.out.println(".privileged(M68kMnemonic.PrivilegedType." + mnemonic.privilegedType().name() + ")");
+      }
+      System.out.println(".build();");
 
       lastElementType = mnemonic.elementType();
     }
@@ -204,38 +244,37 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     }
 
     if (M68kCpu.GROUP_68010_UP.equals(cpus)) {
-      return "M68kCpu.GROUP_68010_UP";
-    } else if (M68kCpu.GROUP_68020_UP.equals(cpus)) {
-      return "M68kCpu.GROUP_68020_UP";
-    } else if (M68kCpu.APOLLO.equals(cpus)) {
-      return "M68kCpu.APOLLO";
+      return "GROUP_68010_UP";
+    }
+    if (M68kCpu.GROUP_68020_UP.equals(cpus)) {
+      return "GROUP_68020_UP";
     }
 
     return "EnumSet.of(" + StringUtil.join(cpus, m68kCpu -> "M68kCpu." + m68kCpu.name(), ",") + ")";
   }
 
 
-  private static @NotNull String getDataSizeText(M68kMnemonic mnemonic) {
+  private static @Nullable String getDataSizeText(M68kMnemonic mnemonic) {
     final Set<M68kDataSize> dataSizes = mnemonic.dataSizes();
 
-    if (M68kDataSize.GROUP_SBWL.equals(dataSizes)) {
-      return "M68kDataSize.GROUP_SBWL";
+    if (M68kDataSize.GROUP_UNSIZED.equals(dataSizes)) {
+      return null;
+    } else if (M68kDataSize.GROUP_SBWL.equals(dataSizes)) {
+      return "GROUP_SBWL";
     } else if (M68kDataSize.GROUP_SBW.equals(dataSizes)) {
-      return "M68kDataSize.GROUP_SBW";
+      return "GROUP_SBW";
     } else if (M68kDataSize.GROUP_BWL.equals(dataSizes)) {
-      return "M68kDataSize.GROUP_BWL";
+      return "GROUP_BWL";
     } else if (M68kDataSize.GROUP_WL.equals(dataSizes)) {
-      return "M68kDataSize.GROUP_WL";
+      return "GROUP_WL";
     } else if (M68kDataSize.GROUP_S.equals(dataSizes)) {
-      return "M68kDataSize.GROUP_S";
+      return "GROUP_S";
     } else if (M68kDataSize.GROUP_B.equals(dataSizes)) {
-      return "M68kDataSize.GROUP_B";
+      return "GROUP_B";
     } else if (M68kDataSize.GROUP_W.equals(dataSizes)) {
-      return "M68kDataSize.GROUP_W";
+      return "GROUP_W";
     } else if (M68kDataSize.GROUP_L.equals(dataSizes)) {
-      return "M68kDataSize.GROUP_L";
-    } else if (M68kDataSize.GROUP_UNSIZED.equals(dataSizes)) {
-      return "M68kDataSize.GROUP_UNSIZED";
+      return "GROUP_L";
     }
     return "EnumSet.of(" + StringUtil.join(dataSizes, dataSize -> "M68kDataSize." + dataSize.name(), ",") + ")";
   }
@@ -344,4 +383,32 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     return null;
   }
 
+  private List<M68kMnemonicRuntimeData> readRuntimeData() throws IOException {
+    List<M68kMnemonicRuntimeData> data = new ArrayList<>();
+
+    for (String line : Files.readAllLines(Paths.get(RUNTIME_DATA_PATH))) {
+      if (!line.startsWith("\"")) continue;
+
+      List<String> split = StringUtil.split(line, ", ");
+
+      String mnemonic = StringUtil.unquoteString(split.get(0).strip());
+      IElementType elementType = findElementType(mnemonic);
+      Couple<M68kOperand> operands = mapOperands(split.get(1).strip());
+      Set<M68kDataSize> dataSizes = mapDataSizes(split.get(2).strip());
+      Set<M68kCpu> m68kCpus = mapCpuSet(split.get(3).strip());
+      M68kMnemonic.PrivilegedType privilegedType = M68kMnemonic.PrivilegedType.valueOf(split.get(4).strip());
+
+      data.add(new M68kMnemonicRuntimeData(elementType,
+        dataSizes,
+        operands.getFirst(), operands.getSecond(),
+        m68kCpus,
+        privilegedType));
+    }
+    return data;
+  }
+
+  record M68kMnemonicRuntimeData(IElementType elementType, Set<M68kDataSize> dataSizes, M68kOperand sourceOperand,
+                                 M68kOperand destinationOperand, Set<M68kCpu> cpus,
+                                 M68kMnemonic.PrivilegedType privilegedType) {
+  }
 }

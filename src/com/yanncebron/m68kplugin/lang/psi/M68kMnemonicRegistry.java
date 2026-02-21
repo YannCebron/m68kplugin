@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,12 @@ import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+
+import static com.yanncebron.m68kplugin.lang.psi.M68kCpu.GROUP_68010_UP;
+import static com.yanncebron.m68kplugin.lang.psi.M68kCpu.GROUP_68020_UP;
+import static com.yanncebron.m68kplugin.lang.psi.M68kDataSize.*;
+import static com.yanncebron.m68kplugin.lang.psi.M68kOperand.*;
 
 /**
  * Registry of all supported mnemonics.
@@ -74,7 +80,11 @@ public final class M68kMnemonicRegistry {
 
     List<M68kMnemonic> filtered = getFilteredM68Mnemonics(all, instruction);
     // this may fail if there are lexer/parser issues in file, but that's OK for now
-    assert !filtered.isEmpty() : instruction.getText();
+    // TODO disabled as we need finding mnemonic for invalid (suppressed) highlighting as well
+    // assert !filtered.isEmpty() : instruction.getText();
+    if (filtered.isEmpty()) {
+      return null;
+    }
 
     if (filtered.size() == 1) {
       return filtered.get(0);
@@ -104,8 +114,8 @@ public final class M68kMnemonicRegistry {
 
     // operand count
     List<M68kMnemonic> filtered = ContainerUtil.filter(all, mnemonic -> {
-      boolean hasSource = mnemonic.sourceOperand() != M68kOperand.NONE;
-      boolean hasDestination = mnemonic.destinationOperand() != M68kOperand.NONE;
+      boolean hasSource = mnemonic.sourceOperand() != NONE;
+      boolean hasDestination = mnemonic.destinationOperand() != NONE;
       if (!hasSource && !hasDestination && operandsCount == 0) {
         return true;
       }
@@ -128,8 +138,8 @@ public final class M68kMnemonicRegistry {
     // addressing modes
     filtered = ContainerUtil.filter(filtered, mnemonic -> {
         if (operandsCount == 0) {
-          return mnemonic.sourceOperand() == M68kOperand.NONE &&
-            mnemonic.destinationOperand() == M68kOperand.NONE;
+          return mnemonic.sourceOperand() == NONE &&
+            mnemonic.destinationOperand() == NONE;
         }
 
         if (operandsCount == 1) {
@@ -170,870 +180,1489 @@ public final class M68kMnemonicRegistry {
     return false;
   }
 
-  private void add(M68kMnemonic m68kMnemonic) {
-    mnemonics.putValue(m68kMnemonic.elementType(), m68kMnemonic);
+  private MnemonicBuilder create(IElementType elementType) {
+    return new MnemonicBuilder(elementType);
+  }
+
+  private class MnemonicBuilder {
+    private final IElementType elementType;
+    private Set<M68kDataSize> dataSizes = GROUP_UNSIZED;
+    private M68kOperand sourceOperand = NONE;
+    private M68kOperand destinationOperand = NONE;
+    private Set<M68kCpu> cpus = M68kCpu.GROUP_68000_UP;
+    private M68kMnemonic.PrivilegedType privilegedType = M68kMnemonic.PrivilegedType.NONE;
+
+    private MnemonicBuilder(IElementType elementType) {
+      this.elementType = elementType;
+    }
+
+    private MnemonicBuilder dataSizes(Set<M68kDataSize> dataSizes) {
+      this.dataSizes = dataSizes;
+      return this;
+    }
+
+    private MnemonicBuilder source(M68kOperand sourceOperand) {
+      this.sourceOperand = sourceOperand;
+      return this;
+    }
+
+    private MnemonicBuilder destination(M68kOperand destinationOperand) {
+      this.destinationOperand = destinationOperand;
+      return this;
+    }
+
+    private MnemonicBuilder cpus(Set<M68kCpu> cpus) {
+      this.cpus = cpus;
+      return this;
+    }
+
+    private MnemonicBuilder privileged(M68kMnemonic.PrivilegedType privilegedType) {
+      this.privilegedType = privilegedType;
+      return this;
+    }
+
+    private void build() {
+      M68kMnemonic m68kMnemonic = new M68kMnemonic(elementType, dataSizes, sourceOperand, destinationOperand, cpus, privilegedType);
+      mnemonics.putValue(m68kMnemonic.elementType(), m68kMnemonic);
+    }
   }
 
   private M68kMnemonicRegistry() {
 // Total mnemonics: 283
 
 // ABCD ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.ABCD, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ABCD, M68kDataSize.GROUP_B,
-      M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT, M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT));
+
+    create(M68kTokenTypes.ABCD).dataSizes(GROUP_B)
+      .source(DATA_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ABCD).dataSizes(GROUP_B)
+      .source(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT).destination(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT)
+      .build();
 
 // ADD -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.ADD, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ADD, M68kDataSize.GROUP_WL,
-      M68kOperand.ADDRESS_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ADD, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER, M68kOperand.ALTERABLE_MEMORY));
-    add(new M68kMnemonic(M68kTokenTypes.ADD, M68kDataSize.GROUP_WL,
-      M68kOperand.ALL, M68kOperand.ADDRESS_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ADD, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.ADD).dataSizes(GROUP_BWL)
+      .source(DATA).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ADD).dataSizes(GROUP_WL)
+      .source(ADDRESS_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ADD).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER).destination(ALTERABLE_MEMORY)
+      .build();
+
+    create(M68kTokenTypes.ADD).dataSizes(GROUP_WL)
+      .source(ALL).destination(ADDRESS_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ADD).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(ALTERABLE_DATA)
+      .build();
 
 // ADDA ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.ADDA, M68kDataSize.GROUP_WL,
-      M68kOperand.ALL, M68kOperand.ADDRESS_REGISTER));
+
+    create(M68kTokenTypes.ADDA).dataSizes(GROUP_WL)
+      .source(ALL).destination(ADDRESS_REGISTER)
+      .build();
 
 // ADDI ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.ADDI, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ADDI, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.ADDI).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ADDI).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(ALTERABLE_DATA)
+      .build();
 
 // ADDQ ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.ADDQ, M68kDataSize.GROUP_WL,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.ADDRESS_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ADDQ, M68kDataSize.GROUP_BWL,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.ADDQ).dataSizes(GROUP_WL)
+      .source(QUICK_IMMEDIATE).destination(ADDRESS_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ADDQ).dataSizes(GROUP_BWL)
+      .source(QUICK_IMMEDIATE).destination(ALTERABLE_DATA)
+      .build();
 
 // ADDX ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.ADDX, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ADDX, M68kDataSize.GROUP_BWL,
-      M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT, M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT));
+
+    create(M68kTokenTypes.ADDX).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ADDX).dataSizes(GROUP_BWL)
+      .source(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT).destination(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT)
+      .build();
 
 // AND -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.AND, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.AND, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER, M68kOperand.ALTERABLE_MEMORY));
-    add(new M68kMnemonic(M68kTokenTypes.AND, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA));
-    add(new M68kMnemonic(M68kTokenTypes.AND, M68kDataSize.GROUP_B,
-      M68kOperand.IMMEDIATE, M68kOperand.CCR_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.AND, M68kDataSize.GROUP_W,
-      M68kOperand.IMMEDIATE, M68kOperand.SR_REGISTER));
+
+    create(M68kTokenTypes.AND).dataSizes(GROUP_BWL)
+      .source(DATA).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.AND).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER).destination(ALTERABLE_MEMORY)
+      .build();
+
+    create(M68kTokenTypes.AND).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(ALTERABLE_DATA)
+      .build();
+
+    create(M68kTokenTypes.AND).dataSizes(GROUP_B)
+      .source(IMMEDIATE).destination(CCR_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.AND).dataSizes(GROUP_W)
+      .source(IMMEDIATE).destination(SR_REGISTER)
+      .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .build();
 
 // ANDI ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.ANDI, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ANDI, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA));
-    add(new M68kMnemonic(M68kTokenTypes.ANDI, M68kDataSize.GROUP_B,
-      M68kOperand.IMMEDIATE, M68kOperand.CCR_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ANDI, M68kDataSize.GROUP_W,
-      M68kOperand.IMMEDIATE, M68kOperand.SR_REGISTER));
+
+    create(M68kTokenTypes.ANDI).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ANDI).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(ALTERABLE_DATA)
+      .build();
+
+    create(M68kTokenTypes.ANDI).dataSizes(GROUP_B)
+      .source(IMMEDIATE).destination(CCR_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ANDI).dataSizes(GROUP_W)
+      .source(IMMEDIATE).destination(SR_REGISTER)
+      .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .build();
 
 // ASL -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.ASL, M68kDataSize.GROUP_W,
-      M68kOperand.ALTERABLE_MEMORY));
-    add(new M68kMnemonic(M68kTokenTypes.ASL, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ASL, M68kDataSize.GROUP_BWL,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ASL, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER));
+
+    create(M68kTokenTypes.ASL).dataSizes(GROUP_W)
+      .source(ALTERABLE_MEMORY)
+      .build();
+
+    create(M68kTokenTypes.ASL).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ASL).dataSizes(GROUP_BWL)
+      .source(QUICK_IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ASL).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER)
+      .build();
 
 // ASR -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.ASR, M68kDataSize.GROUP_W,
-      M68kOperand.ALTERABLE_MEMORY));
-    add(new M68kMnemonic(M68kTokenTypes.ASR, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ASR, M68kDataSize.GROUP_BWL,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ASR, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER));
+
+    create(M68kTokenTypes.ASR).dataSizes(GROUP_W)
+      .source(ALTERABLE_MEMORY)
+      .build();
+
+    create(M68kTokenTypes.ASR).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ASR).dataSizes(GROUP_BWL)
+      .source(QUICK_IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ASR).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER)
+      .build();
 
 // BHS -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BHS, M68kDataSize.GROUP_SBW,
-      M68kOperand.BRANCH_DESTINATION));
-    add(new M68kMnemonic(M68kTokenTypes.BHS, M68kDataSize.GROUP_SBWL,
-      M68kOperand.BRANCH_DESTINATION,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.BHS).dataSizes(GROUP_SBW)
+      .source(BRANCH_DESTINATION)
+      .build();
+
+    create(M68kTokenTypes.BHS).dataSizes(GROUP_SBWL)
+      .source(BRANCH_DESTINATION)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // BLO -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BLO, M68kDataSize.GROUP_SBW,
-      M68kOperand.BRANCH_DESTINATION));
-    add(new M68kMnemonic(M68kTokenTypes.BLO, M68kDataSize.GROUP_SBWL,
-      M68kOperand.BRANCH_DESTINATION,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.BLO).dataSizes(GROUP_SBW)
+      .source(BRANCH_DESTINATION)
+      .build();
+
+    create(M68kTokenTypes.BLO).dataSizes(GROUP_SBWL)
+      .source(BRANCH_DESTINATION)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // BHI -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BHI, M68kDataSize.GROUP_SBW,
-      M68kOperand.BRANCH_DESTINATION));
-    add(new M68kMnemonic(M68kTokenTypes.BHI, M68kDataSize.GROUP_SBWL,
-      M68kOperand.BRANCH_DESTINATION,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.BHI).dataSizes(GROUP_SBW)
+      .source(BRANCH_DESTINATION)
+      .build();
+
+    create(M68kTokenTypes.BHI).dataSizes(GROUP_SBWL)
+      .source(BRANCH_DESTINATION)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // BLS -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BLS, M68kDataSize.GROUP_SBW,
-      M68kOperand.BRANCH_DESTINATION));
-    add(new M68kMnemonic(M68kTokenTypes.BLS, M68kDataSize.GROUP_SBWL,
-      M68kOperand.BRANCH_DESTINATION,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.BLS).dataSizes(GROUP_SBW)
+      .source(BRANCH_DESTINATION)
+      .build();
+
+    create(M68kTokenTypes.BLS).dataSizes(GROUP_SBWL)
+      .source(BRANCH_DESTINATION)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // BCC -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BCC, M68kDataSize.GROUP_SBW,
-      M68kOperand.BRANCH_DESTINATION));
-    add(new M68kMnemonic(M68kTokenTypes.BCC, M68kDataSize.GROUP_SBWL,
-      M68kOperand.BRANCH_DESTINATION,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.BCC).dataSizes(GROUP_SBW)
+      .source(BRANCH_DESTINATION)
+      .build();
+
+    create(M68kTokenTypes.BCC).dataSizes(GROUP_SBWL)
+      .source(BRANCH_DESTINATION)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // BCS -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BCS, M68kDataSize.GROUP_SBW,
-      M68kOperand.BRANCH_DESTINATION));
-    add(new M68kMnemonic(M68kTokenTypes.BCS, M68kDataSize.GROUP_SBWL,
-      M68kOperand.BRANCH_DESTINATION,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.BCS).dataSizes(GROUP_SBW)
+      .source(BRANCH_DESTINATION)
+      .build();
+
+    create(M68kTokenTypes.BCS).dataSizes(GROUP_SBWL)
+      .source(BRANCH_DESTINATION)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // BNE -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BNE, M68kDataSize.GROUP_SBW,
-      M68kOperand.BRANCH_DESTINATION));
-    add(new M68kMnemonic(M68kTokenTypes.BNE, M68kDataSize.GROUP_SBWL,
-      M68kOperand.BRANCH_DESTINATION,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.BNE).dataSizes(GROUP_SBW)
+      .source(BRANCH_DESTINATION)
+      .build();
+
+    create(M68kTokenTypes.BNE).dataSizes(GROUP_SBWL)
+      .source(BRANCH_DESTINATION)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // BEQ -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BEQ, M68kDataSize.GROUP_SBW,
-      M68kOperand.BRANCH_DESTINATION));
-    add(new M68kMnemonic(M68kTokenTypes.BEQ, M68kDataSize.GROUP_SBWL,
-      M68kOperand.BRANCH_DESTINATION,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.BEQ).dataSizes(GROUP_SBW)
+      .source(BRANCH_DESTINATION)
+      .build();
+
+    create(M68kTokenTypes.BEQ).dataSizes(GROUP_SBWL)
+      .source(BRANCH_DESTINATION)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // BVC -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BVC, M68kDataSize.GROUP_SBW,
-      M68kOperand.BRANCH_DESTINATION));
-    add(new M68kMnemonic(M68kTokenTypes.BVC, M68kDataSize.GROUP_SBWL,
-      M68kOperand.BRANCH_DESTINATION,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.BVC).dataSizes(GROUP_SBW)
+      .source(BRANCH_DESTINATION)
+      .build();
+
+    create(M68kTokenTypes.BVC).dataSizes(GROUP_SBWL)
+      .source(BRANCH_DESTINATION)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // BVS -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BVS, M68kDataSize.GROUP_SBW,
-      M68kOperand.BRANCH_DESTINATION));
-    add(new M68kMnemonic(M68kTokenTypes.BVS, M68kDataSize.GROUP_SBWL,
-      M68kOperand.BRANCH_DESTINATION,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.BVS).dataSizes(GROUP_SBW)
+      .source(BRANCH_DESTINATION)
+      .build();
+
+    create(M68kTokenTypes.BVS).dataSizes(GROUP_SBWL)
+      .source(BRANCH_DESTINATION)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // BPL -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BPL, M68kDataSize.GROUP_SBW,
-      M68kOperand.BRANCH_DESTINATION));
-    add(new M68kMnemonic(M68kTokenTypes.BPL, M68kDataSize.GROUP_SBWL,
-      M68kOperand.BRANCH_DESTINATION,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.BPL).dataSizes(GROUP_SBW)
+      .source(BRANCH_DESTINATION)
+      .build();
+
+    create(M68kTokenTypes.BPL).dataSizes(GROUP_SBWL)
+      .source(BRANCH_DESTINATION)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // BMI -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BMI, M68kDataSize.GROUP_SBW,
-      M68kOperand.BRANCH_DESTINATION));
-    add(new M68kMnemonic(M68kTokenTypes.BMI, M68kDataSize.GROUP_SBWL,
-      M68kOperand.BRANCH_DESTINATION,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.BMI).dataSizes(GROUP_SBW)
+      .source(BRANCH_DESTINATION)
+      .build();
+
+    create(M68kTokenTypes.BMI).dataSizes(GROUP_SBWL)
+      .source(BRANCH_DESTINATION)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // BGE -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BGE, M68kDataSize.GROUP_SBW,
-      M68kOperand.BRANCH_DESTINATION));
-    add(new M68kMnemonic(M68kTokenTypes.BGE, M68kDataSize.GROUP_SBWL,
-      M68kOperand.BRANCH_DESTINATION,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.BGE).dataSizes(GROUP_SBW)
+      .source(BRANCH_DESTINATION)
+      .build();
+
+    create(M68kTokenTypes.BGE).dataSizes(GROUP_SBWL)
+      .source(BRANCH_DESTINATION)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // BLT -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BLT, M68kDataSize.GROUP_SBW,
-      M68kOperand.BRANCH_DESTINATION));
-    add(new M68kMnemonic(M68kTokenTypes.BLT, M68kDataSize.GROUP_SBWL,
-      M68kOperand.BRANCH_DESTINATION,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.BLT).dataSizes(GROUP_SBW)
+      .source(BRANCH_DESTINATION)
+      .build();
+
+    create(M68kTokenTypes.BLT).dataSizes(GROUP_SBWL)
+      .source(BRANCH_DESTINATION)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // BGT -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BGT, M68kDataSize.GROUP_SBW,
-      M68kOperand.BRANCH_DESTINATION));
-    add(new M68kMnemonic(M68kTokenTypes.BGT, M68kDataSize.GROUP_SBWL,
-      M68kOperand.BRANCH_DESTINATION,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.BGT).dataSizes(GROUP_SBW)
+      .source(BRANCH_DESTINATION)
+      .build();
+
+    create(M68kTokenTypes.BGT).dataSizes(GROUP_SBWL)
+      .source(BRANCH_DESTINATION)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // BLE -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BLE, M68kDataSize.GROUP_SBW,
-      M68kOperand.BRANCH_DESTINATION));
-    add(new M68kMnemonic(M68kTokenTypes.BLE, M68kDataSize.GROUP_SBWL,
-      M68kOperand.BRANCH_DESTINATION,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.BLE).dataSizes(GROUP_SBW)
+      .source(BRANCH_DESTINATION)
+      .build();
+
+    create(M68kTokenTypes.BLE).dataSizes(GROUP_SBWL)
+      .source(BRANCH_DESTINATION)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // BRA -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BRA, M68kDataSize.GROUP_SBW,
-      M68kOperand.BRANCH_DESTINATION));
-    add(new M68kMnemonic(M68kTokenTypes.BRA, M68kDataSize.GROUP_SBWL,
-      M68kOperand.BRANCH_DESTINATION,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.BRA).dataSizes(GROUP_SBW)
+      .source(BRANCH_DESTINATION)
+      .build();
+
+    create(M68kTokenTypes.BRA).dataSizes(GROUP_SBWL)
+      .source(BRANCH_DESTINATION)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // BSR -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BSR, M68kDataSize.GROUP_SBW,
-      M68kOperand.BRANCH_DESTINATION));
-    add(new M68kMnemonic(M68kTokenTypes.BSR, M68kDataSize.GROUP_SBWL,
-      M68kOperand.BRANCH_DESTINATION,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.BSR).dataSizes(GROUP_SBW)
+      .source(BRANCH_DESTINATION)
+      .build();
+
+    create(M68kTokenTypes.BSR).dataSizes(GROUP_SBWL)
+      .source(BRANCH_DESTINATION)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // BCHG ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BCHG, M68kDataSize.GROUP_L,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.BCHG, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER, M68kOperand.ALTERABLE_MEMORY));
-    add(new M68kMnemonic(M68kTokenTypes.BCHG, M68kDataSize.GROUP_L,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.BCHG, M68kDataSize.GROUP_B,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.ALTERABLE_MEMORY_CF));
+
+    create(M68kTokenTypes.BCHG).dataSizes(GROUP_L)
+      .source(DATA_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.BCHG).dataSizes(GROUP_B)
+      .source(DATA_REGISTER).destination(ALTERABLE_MEMORY)
+      .build();
+
+    create(M68kTokenTypes.BCHG).dataSizes(GROUP_L)
+      .source(QUICK_IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.BCHG).dataSizes(GROUP_B)
+      .source(QUICK_IMMEDIATE).destination(ALTERABLE_MEMORY_CF)
+      .build();
 
 // BCLR ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BCLR, M68kDataSize.GROUP_L,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.BCLR, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER, M68kOperand.ALTERABLE_MEMORY));
-    add(new M68kMnemonic(M68kTokenTypes.BCLR, M68kDataSize.GROUP_L,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.BCLR, M68kDataSize.GROUP_B,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.ALTERABLE_MEMORY_CF));
+
+    create(M68kTokenTypes.BCLR).dataSizes(GROUP_L)
+      .source(DATA_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.BCLR).dataSizes(GROUP_B)
+      .source(DATA_REGISTER).destination(ALTERABLE_MEMORY)
+      .build();
+
+    create(M68kTokenTypes.BCLR).dataSizes(GROUP_L)
+      .source(QUICK_IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.BCLR).dataSizes(GROUP_B)
+      .source(QUICK_IMMEDIATE).destination(ALTERABLE_MEMORY_CF)
+      .build();
 
 // BSET ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BSET, M68kDataSize.GROUP_L,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.BSET, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER, M68kOperand.ALTERABLE_MEMORY));
-    add(new M68kMnemonic(M68kTokenTypes.BSET, M68kDataSize.GROUP_L,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.BSET, M68kDataSize.GROUP_B,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.ALTERABLE_MEMORY_CF));
+
+    create(M68kTokenTypes.BSET).dataSizes(GROUP_L)
+      .source(DATA_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.BSET).dataSizes(GROUP_B)
+      .source(DATA_REGISTER).destination(ALTERABLE_MEMORY)
+      .build();
+
+    create(M68kTokenTypes.BSET).dataSizes(GROUP_L)
+      .source(QUICK_IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.BSET).dataSizes(GROUP_B)
+      .source(QUICK_IMMEDIATE).destination(ALTERABLE_MEMORY_CF)
+      .build();
 
 // BTST ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BTST, M68kDataSize.GROUP_L,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.BTST, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER, M68kOperand.MEMORY));
-    add(new M68kMnemonic(M68kTokenTypes.BTST, M68kDataSize.GROUP_L,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.BTST, M68kDataSize.GROUP_B,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.ALTERABLE_MEMORY_CF));
-    add(new M68kMnemonic(M68kTokenTypes.BTST, M68kDataSize.GROUP_B,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.MEMORY_WITHOUT_IMMEDIATE));
+
+    create(M68kTokenTypes.BTST).dataSizes(GROUP_L)
+      .source(DATA_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.BTST).dataSizes(GROUP_B)
+      .source(DATA_REGISTER).destination(MEMORY)
+      .build();
+
+    create(M68kTokenTypes.BTST).dataSizes(GROUP_L)
+      .source(QUICK_IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.BTST).dataSizes(GROUP_B)
+      .source(QUICK_IMMEDIATE).destination(ALTERABLE_MEMORY_CF)
+      .build();
+
+    create(M68kTokenTypes.BTST).dataSizes(GROUP_B)
+      .source(QUICK_IMMEDIATE).destination(MEMORY_WITHOUT_IMMEDIATE)
+      .build();
 
 // BKPT ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.BKPT, M68kDataSize.GROUP_UNSIZED,
-      M68kOperand.QUICK_IMMEDIATE,
-      M68kCpu.GROUP_68010_UP));
+
+    create(M68kTokenTypes.BKPT)
+      .source(QUICK_IMMEDIATE)
+      .cpus(GROUP_68010_UP)
+      .build();
 
 // CHK -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.CHK, M68kDataSize.GROUP_W,
-      M68kOperand.DATA, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.CHK, M68kDataSize.GROUP_L,
-      M68kOperand.DATA, M68kOperand.DATA_REGISTER,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.CHK).dataSizes(GROUP_W)
+      .source(DATA).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.CHK).dataSizes(GROUP_L)
+      .source(DATA).destination(DATA_REGISTER)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // CLR -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.CLR, M68kDataSize.GROUP_BWL,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.CLR).dataSizes(GROUP_BWL)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // CMP -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.CMP, M68kDataSize.GROUP_WL,
-      M68kOperand.ADDRESS_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.CMP, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.CMP, M68kDataSize.GROUP_WL,
-      M68kOperand.ALL, M68kOperand.ADDRESS_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.CMP, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA));
-    add(new M68kMnemonic(M68kTokenTypes.CMP, M68kDataSize.GROUP_BWL,
-      M68kOperand.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT, M68kOperand.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT));
+
+    create(M68kTokenTypes.CMP).dataSizes(GROUP_WL)
+      .source(ADDRESS_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.CMP).dataSizes(GROUP_BWL)
+      .source(DATA).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.CMP).dataSizes(GROUP_WL)
+      .source(ALL).destination(ADDRESS_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.CMP).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(ALTERABLE_DATA)
+      .build();
+
+    create(M68kTokenTypes.CMP).dataSizes(GROUP_BWL)
+      .source(ADDRESS_REGISTER_INDIRECT_POST_INCREMENT).destination(ADDRESS_REGISTER_INDIRECT_POST_INCREMENT)
+      .build();
 
 // CMPA ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.CMPA, M68kDataSize.GROUP_WL,
-      M68kOperand.ALL, M68kOperand.ADDRESS_REGISTER));
+
+    create(M68kTokenTypes.CMPA).dataSizes(GROUP_WL)
+      .source(ALL).destination(ADDRESS_REGISTER)
+      .build();
 
 // CMPI ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.CMPI, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.CMPI, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.CMPI).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.CMPI).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(ALTERABLE_DATA)
+      .build();
 
 // CMPM ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.CMPM, M68kDataSize.GROUP_BWL,
-      M68kOperand.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT, M68kOperand.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT));
+
+    create(M68kTokenTypes.CMPM).dataSizes(GROUP_BWL)
+      .source(ADDRESS_REGISTER_INDIRECT_POST_INCREMENT).destination(ADDRESS_REGISTER_INDIRECT_POST_INCREMENT)
+      .build();
 
 // DBT -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBT, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBT).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DBF -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBF, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBF).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DBRA ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBRA, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBRA).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DBHI ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBHI, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBHI).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DBLS ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBLS, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBLS).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DBCC ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBCC, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBCC).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DBHS ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBHS, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBHS).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DBCS ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBCS, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBCS).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DBLO ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBLO, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBLO).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DBNE ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBNE, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBNE).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DBEQ ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBEQ, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBEQ).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DBVC ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBVC, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBVC).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DBVS ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBVS, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBVS).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DBPL ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBPL, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBPL).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DBMI ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBMI, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBMI).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DBGE ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBGE, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBGE).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DBLT ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBLT, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBLT).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DBGT ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBGT, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBGT).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DBLE ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DBLE, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER, M68kOperand.DBCC_BRANCH_DESTINATION));
+
+    create(M68kTokenTypes.DBLE).dataSizes(GROUP_W)
+      .source(DATA_REGISTER).destination(DBCC_BRANCH_DESTINATION)
+      .build();
 
 // DIVS ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DIVS, M68kDataSize.GROUP_W,
-      M68kOperand.ALTERABLE_DATA_CF, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.DIVS, M68kDataSize.GROUP_L,
-      M68kOperand.ALTERABLE_DATA_CF, M68kOperand.DATA_REGISTER,
-      M68kCpu.GROUP_68020_UP));
-    add(new M68kMnemonic(M68kTokenTypes.DIVS, M68kDataSize.GROUP_W,
-      M68kOperand.DATA, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.DIVS, M68kDataSize.GROUP_L,
-      M68kOperand.DATA, M68kOperand.DATA_REGISTER,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.DIVS).dataSizes(GROUP_W)
+      .source(ALTERABLE_DATA_CF).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.DIVS).dataSizes(GROUP_L)
+      .source(ALTERABLE_DATA_CF).destination(DATA_REGISTER)
+      .cpus(GROUP_68020_UP)
+      .build();
+
+    create(M68kTokenTypes.DIVS).dataSizes(GROUP_W)
+      .source(DATA).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.DIVS).dataSizes(GROUP_L)
+      .source(DATA).destination(DATA_REGISTER)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // DIVU ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.DIVU, M68kDataSize.GROUP_W,
-      M68kOperand.ALTERABLE_DATA_CF, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.DIVU, M68kDataSize.GROUP_L,
-      M68kOperand.ALTERABLE_DATA_CF, M68kOperand.DATA_REGISTER,
-      M68kCpu.GROUP_68020_UP));
-    add(new M68kMnemonic(M68kTokenTypes.DIVU, M68kDataSize.GROUP_W,
-      M68kOperand.DATA, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.DIVU, M68kDataSize.GROUP_L,
-      M68kOperand.DATA, M68kOperand.DATA_REGISTER,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.DIVU).dataSizes(GROUP_W)
+      .source(ALTERABLE_DATA_CF).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.DIVU).dataSizes(GROUP_L)
+      .source(ALTERABLE_DATA_CF).destination(DATA_REGISTER)
+      .cpus(GROUP_68020_UP)
+      .build();
+
+    create(M68kTokenTypes.DIVU).dataSizes(GROUP_W)
+      .source(DATA).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.DIVU).dataSizes(GROUP_L)
+      .source(DATA).destination(DATA_REGISTER)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // EOR -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.EOR, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER, M68kOperand.ALTERABLE_DATA));
-    add(new M68kMnemonic(M68kTokenTypes.EOR, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.EOR, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA));
-    add(new M68kMnemonic(M68kTokenTypes.EOR, M68kDataSize.GROUP_B,
-      M68kOperand.IMMEDIATE, M68kOperand.CCR_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.EOR, M68kDataSize.GROUP_W,
-      M68kOperand.IMMEDIATE, M68kOperand.SR_REGISTER));
+
+    create(M68kTokenTypes.EOR).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER).destination(ALTERABLE_DATA)
+      .build();
+
+    create(M68kTokenTypes.EOR).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.EOR).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(ALTERABLE_DATA)
+      .build();
+
+    create(M68kTokenTypes.EOR).dataSizes(GROUP_B)
+      .source(IMMEDIATE).destination(CCR_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.EOR).dataSizes(GROUP_W)
+      .source(IMMEDIATE).destination(SR_REGISTER)
+      .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .build();
 
 // EORI ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.EORI, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.EORI, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA));
-    add(new M68kMnemonic(M68kTokenTypes.EORI, M68kDataSize.GROUP_B,
-      M68kOperand.IMMEDIATE, M68kOperand.CCR_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.EORI, M68kDataSize.GROUP_W,
-      M68kOperand.IMMEDIATE, M68kOperand.SR_REGISTER));
+
+    create(M68kTokenTypes.EORI).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.EORI).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(ALTERABLE_DATA)
+      .build();
+
+    create(M68kTokenTypes.EORI).dataSizes(GROUP_B)
+      .source(IMMEDIATE).destination(CCR_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.EORI).dataSizes(GROUP_W)
+      .source(IMMEDIATE).destination(SR_REGISTER)
+      .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .build();
 
 // EXG -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.EXG, M68kDataSize.GROUP_L,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.EXG, M68kDataSize.GROUP_L,
-      M68kOperand.ADDRESS_REGISTER, M68kOperand.ADDRESS_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.EXG, M68kDataSize.GROUP_L,
-      M68kOperand.DATA_REGISTER, M68kOperand.ADDRESS_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.EXG, M68kDataSize.GROUP_L,
-      M68kOperand.ADDRESS_REGISTER, M68kOperand.DATA_REGISTER));
+
+    create(M68kTokenTypes.EXG).dataSizes(GROUP_L)
+      .source(DATA_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.EXG).dataSizes(GROUP_L)
+      .source(ADDRESS_REGISTER).destination(ADDRESS_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.EXG).dataSizes(GROUP_L)
+      .source(DATA_REGISTER).destination(ADDRESS_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.EXG).dataSizes(GROUP_L)
+      .source(ADDRESS_REGISTER).destination(DATA_REGISTER)
+      .build();
 
 // EXT -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.EXT, M68kDataSize.GROUP_WL,
-      M68kOperand.DATA_REGISTER));
+
+    create(M68kTokenTypes.EXT).dataSizes(GROUP_WL)
+      .source(DATA_REGISTER)
+      .build();
 
 // ILLEGAL -------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.ILLEGAL, M68kDataSize.GROUP_UNSIZED,
-      M68kOperand.NONE));
+
+    create(M68kTokenTypes.ILLEGAL)
+      .build();
 
 // JMP -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.JMP, M68kDataSize.GROUP_UNSIZED,
-      M68kOperand.CONTROL));
+
+    create(M68kTokenTypes.JMP)
+      .source(CONTROL)
+      .build();
 
 // JSR -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.JSR, M68kDataSize.GROUP_UNSIZED,
-      M68kOperand.CONTROL));
+
+    create(M68kTokenTypes.JSR)
+      .source(CONTROL)
+      .build();
 
 // LEA -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.LEA, M68kDataSize.GROUP_L,
-      M68kOperand.CONTROL, M68kOperand.ADDRESS_REGISTER));
+
+    create(M68kTokenTypes.LEA).dataSizes(GROUP_L)
+      .source(CONTROL).destination(ADDRESS_REGISTER)
+      .build();
 
 // LINK ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.LINK, M68kDataSize.GROUP_W,
-      M68kOperand.ADDRESS_REGISTER, M68kOperand.IMMEDIATE));
-    add(new M68kMnemonic(M68kTokenTypes.LINK, M68kDataSize.GROUP_L,
-      M68kOperand.ADDRESS_REGISTER, M68kOperand.IMMEDIATE,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.LINK).dataSizes(GROUP_W)
+      .source(ADDRESS_REGISTER).destination(IMMEDIATE)
+      .build();
+
+    create(M68kTokenTypes.LINK).dataSizes(GROUP_L)
+      .source(ADDRESS_REGISTER).destination(IMMEDIATE)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // LSL -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.LSL, M68kDataSize.GROUP_W,
-      M68kOperand.ALTERABLE_MEMORY));
-    add(new M68kMnemonic(M68kTokenTypes.LSL, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.LSL, M68kDataSize.GROUP_BWL,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.LSL, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER));
+
+    create(M68kTokenTypes.LSL).dataSizes(GROUP_W)
+      .source(ALTERABLE_MEMORY)
+      .build();
+
+    create(M68kTokenTypes.LSL).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.LSL).dataSizes(GROUP_BWL)
+      .source(QUICK_IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.LSL).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER)
+      .build();
 
 // LSR -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.LSR, M68kDataSize.GROUP_W,
-      M68kOperand.ALTERABLE_MEMORY));
-    add(new M68kMnemonic(M68kTokenTypes.LSR, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.LSR, M68kDataSize.GROUP_BWL,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.LSR, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER));
+
+    create(M68kTokenTypes.LSR).dataSizes(GROUP_W)
+      .source(ALTERABLE_MEMORY)
+      .build();
+
+    create(M68kTokenTypes.LSR).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.LSR).dataSizes(GROUP_BWL)
+      .source(QUICK_IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.LSR).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER)
+      .build();
 
 // MOVE ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.MOVE, M68kDataSize.GROUP_WL,
-      M68kOperand.ADDRESS_REGISTER, M68kOperand.ALTERABLE));
-    add(new M68kMnemonic(M68kTokenTypes.MOVE, M68kDataSize.GROUP_WL,
-      M68kOperand.ALL, M68kOperand.ADDRESS_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.MOVE, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA, M68kOperand.ALTERABLE_DATA));
-    add(new M68kMnemonic(M68kTokenTypes.MOVE, M68kDataSize.GROUP_W,
-      M68kOperand.CCR_REGISTER, M68kOperand.ALTERABLE_DATA,
-      M68kCpu.GROUP_68010_UP));
-    add(new M68kMnemonic(M68kTokenTypes.MOVE, M68kDataSize.GROUP_W,
-      M68kOperand.SR_REGISTER, M68kOperand.ALTERABLE_DATA));
-    add(new M68kMnemonic(M68kTokenTypes.MOVE, M68kDataSize.GROUP_W,
-      M68kOperand.DATA, M68kOperand.CCR_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.MOVE, M68kDataSize.GROUP_W,
-      M68kOperand.DATA, M68kOperand.SR_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.MOVE, M68kDataSize.GROUP_L,
-      M68kOperand.USP_REGISTER, M68kOperand.ADDRESS_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.MOVE, M68kDataSize.GROUP_L,
-      M68kOperand.ADDRESS_REGISTER, M68kOperand.USP_REGISTER));
+
+    create(M68kTokenTypes.MOVE).dataSizes(GROUP_WL)
+      .source(ADDRESS_REGISTER).destination(ALTERABLE)
+      .build();
+
+    create(M68kTokenTypes.MOVE).dataSizes(GROUP_WL)
+      .source(ALL).destination(ADDRESS_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.MOVE).dataSizes(GROUP_BWL)
+      .source(DATA).destination(ALTERABLE_DATA)
+      .build();
+
+    create(M68kTokenTypes.MOVE).dataSizes(GROUP_W)
+      .source(CCR_REGISTER).destination(ALTERABLE_DATA)
+      .cpus(GROUP_68010_UP)
+      .build();
+
+    create(M68kTokenTypes.MOVE).dataSizes(GROUP_W)
+      .source(SR_REGISTER).destination(ALTERABLE_DATA)
+      .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED_68010_ABOVE)
+      .build();
+
+    create(M68kTokenTypes.MOVE).dataSizes(GROUP_W)
+      .source(DATA).destination(CCR_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.MOVE).dataSizes(GROUP_W)
+      .source(DATA).destination(SR_REGISTER)
+      .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .build();
+
+    create(M68kTokenTypes.MOVE).dataSizes(GROUP_L)
+      .source(USP_REGISTER).destination(ADDRESS_REGISTER)
+      .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .build();
+
+    create(M68kTokenTypes.MOVE).dataSizes(GROUP_L)
+      .source(ADDRESS_REGISTER).destination(USP_REGISTER)
+      .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .build();
 
 // MOVEA ---------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.MOVEA, M68kDataSize.GROUP_WL,
-      M68kOperand.ALL, M68kOperand.ADDRESS_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.MOVEA, M68kDataSize.GROUP_WL,
-      M68kOperand.ADDRESS_REGISTER, M68kOperand.ALTERABLE));
-    add(new M68kMnemonic(M68kTokenTypes.MOVEA, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA, M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.MOVEA).dataSizes(GROUP_WL)
+      .source(ALL).destination(ADDRESS_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.MOVEA).dataSizes(GROUP_WL)
+      .source(ADDRESS_REGISTER).destination(ALTERABLE)
+      .build();
+
+    create(M68kTokenTypes.MOVEA).dataSizes(GROUP_BWL)
+      .source(DATA).destination(ALTERABLE_DATA)
+      .build();
 
 // MOVEC ---------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.MOVEC, M68kDataSize.GROUP_L,
-      M68kOperand.CTRL_REGISTER, M68kOperand.DATA_OR_ADDRESS_REGISTER,
-      M68kCpu.GROUP_68010_UP));
-    add(new M68kMnemonic(M68kTokenTypes.MOVEC, M68kDataSize.GROUP_L,
-      M68kOperand.DATA_OR_ADDRESS_REGISTER, M68kOperand.CTRL_REGISTER,
-      M68kCpu.GROUP_68010_UP));
+
+    create(M68kTokenTypes.MOVEC).dataSizes(GROUP_L)
+      .source(CTRL_REGISTER).destination(DATA_OR_ADDRESS_REGISTER)
+      .cpus(GROUP_68010_UP)
+      .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .build();
+
+    create(M68kTokenTypes.MOVEC).dataSizes(GROUP_L)
+      .source(DATA_OR_ADDRESS_REGISTER).destination(CTRL_REGISTER)
+      .cpus(GROUP_68010_UP)
+      .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .build();
 
 // MOVEM ---------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.MOVEM, M68kDataSize.GROUP_WL,
-      M68kOperand.DATA_OR_ADDRESS_REGISTER_LIST, M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT));
-    add(new M68kMnemonic(M68kTokenTypes.MOVEM, M68kDataSize.GROUP_WL,
-      M68kOperand.DATA_OR_ADDRESS_REGISTER_LIST, M68kOperand.ALTERABLE_CONTROL));
-    add(new M68kMnemonic(M68kTokenTypes.MOVEM, M68kDataSize.GROUP_WL,
-      M68kOperand.RESTORE_OPERANDS, M68kOperand.DATA_OR_ADDRESS_REGISTER_LIST));
-    add(new M68kMnemonic(M68kTokenTypes.MOVEM, M68kDataSize.GROUP_WL,
-      M68kOperand.IMMEDIATE_REGISTER_LIST_VALUE, M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT));
-    add(new M68kMnemonic(M68kTokenTypes.MOVEM, M68kDataSize.GROUP_WL,
-      M68kOperand.IMMEDIATE_REGISTER_LIST_VALUE, M68kOperand.ALTERABLE_CONTROL));
-    add(new M68kMnemonic(M68kTokenTypes.MOVEM, M68kDataSize.GROUP_WL,
-      M68kOperand.RESTORE_OPERANDS, M68kOperand.IMMEDIATE_REGISTER_LIST_VALUE));
+
+    create(M68kTokenTypes.MOVEM).dataSizes(GROUP_WL)
+      .source(DATA_OR_ADDRESS_REGISTER_LIST).destination(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT)
+      .build();
+
+    create(M68kTokenTypes.MOVEM).dataSizes(GROUP_WL)
+      .source(DATA_OR_ADDRESS_REGISTER_LIST).destination(ALTERABLE_CONTROL)
+      .build();
+
+    create(M68kTokenTypes.MOVEM).dataSizes(GROUP_WL)
+      .source(RESTORE_OPERANDS).destination(DATA_OR_ADDRESS_REGISTER_LIST)
+      .build();
+
+    create(M68kTokenTypes.MOVEM).dataSizes(GROUP_WL)
+      .source(IMMEDIATE_REGISTER_LIST_VALUE).destination(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT)
+      .build();
+
+    create(M68kTokenTypes.MOVEM).dataSizes(GROUP_WL)
+      .source(IMMEDIATE_REGISTER_LIST_VALUE).destination(ALTERABLE_CONTROL)
+      .build();
+
+    create(M68kTokenTypes.MOVEM).dataSizes(GROUP_WL)
+      .source(RESTORE_OPERANDS).destination(IMMEDIATE_REGISTER_LIST_VALUE)
+      .build();
 
 // MOVEP ---------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.MOVEP, M68kDataSize.GROUP_WL,
-      M68kOperand.ADDRESS_REGISTER_DISPLACEMENT, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.MOVEP, M68kDataSize.GROUP_WL,
-      M68kOperand.DATA_REGISTER, M68kOperand.ADDRESS_REGISTER_DISPLACEMENT));
+
+    create(M68kTokenTypes.MOVEP).dataSizes(GROUP_WL)
+      .source(ADDRESS_REGISTER_DISPLACEMENT).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.MOVEP).dataSizes(GROUP_WL)
+      .source(DATA_REGISTER).destination(ADDRESS_REGISTER_DISPLACEMENT)
+      .build();
 
 // MOVEQ ---------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.MOVEQ, M68kDataSize.GROUP_L,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER));
+
+    create(M68kTokenTypes.MOVEQ).dataSizes(GROUP_L)
+      .source(QUICK_IMMEDIATE).destination(DATA_REGISTER)
+      .build();
 
 // MOVES ---------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.MOVES, M68kDataSize.GROUP_BWL,
-      M68kOperand.ALTERABLE_MEMORY, M68kOperand.DATA_OR_ADDRESS_REGISTER,
-      M68kCpu.GROUP_68010_UP));
-    add(new M68kMnemonic(M68kTokenTypes.MOVES, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_OR_ADDRESS_REGISTER, M68kOperand.ALTERABLE_MEMORY,
-      M68kCpu.GROUP_68010_UP));
+
+    create(M68kTokenTypes.MOVES).dataSizes(GROUP_BWL)
+      .source(ALTERABLE_MEMORY).destination(DATA_OR_ADDRESS_REGISTER)
+      .cpus(GROUP_68010_UP)
+      .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .build();
+
+    create(M68kTokenTypes.MOVES).dataSizes(GROUP_BWL)
+      .source(DATA_OR_ADDRESS_REGISTER).destination(ALTERABLE_MEMORY)
+      .cpus(GROUP_68010_UP)
+      .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .build();
 
 // MULS ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.MULS, M68kDataSize.GROUP_W,
-      M68kOperand.ALTERABLE_DATA_CF, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.MULS, M68kDataSize.GROUP_L,
-      M68kOperand.ALTERABLE_DATA_CF, M68kOperand.DATA_REGISTER,
-      M68kCpu.GROUP_68020_UP));
-    add(new M68kMnemonic(M68kTokenTypes.MULS, M68kDataSize.GROUP_W,
-      M68kOperand.DATA, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.MULS, M68kDataSize.GROUP_L,
-      M68kOperand.DATA, M68kOperand.DATA_REGISTER,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.MULS).dataSizes(GROUP_W)
+      .source(ALTERABLE_DATA_CF).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.MULS).dataSizes(GROUP_L)
+      .source(ALTERABLE_DATA_CF).destination(DATA_REGISTER)
+      .cpus(GROUP_68020_UP)
+      .build();
+
+    create(M68kTokenTypes.MULS).dataSizes(GROUP_W)
+      .source(DATA).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.MULS).dataSizes(GROUP_L)
+      .source(DATA).destination(DATA_REGISTER)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // MULU ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.MULU, M68kDataSize.GROUP_W,
-      M68kOperand.ALTERABLE_DATA_CF, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.MULU, M68kDataSize.GROUP_L,
-      M68kOperand.ALTERABLE_DATA_CF, M68kOperand.DATA_REGISTER,
-      M68kCpu.GROUP_68020_UP));
-    add(new M68kMnemonic(M68kTokenTypes.MULU, M68kDataSize.GROUP_W,
-      M68kOperand.DATA, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.MULU, M68kDataSize.GROUP_L,
-      M68kOperand.DATA, M68kOperand.DATA_REGISTER,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.MULU).dataSizes(GROUP_W)
+      .source(ALTERABLE_DATA_CF).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.MULU).dataSizes(GROUP_L)
+      .source(ALTERABLE_DATA_CF).destination(DATA_REGISTER)
+      .cpus(GROUP_68020_UP)
+      .build();
+
+    create(M68kTokenTypes.MULU).dataSizes(GROUP_W)
+      .source(DATA).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.MULU).dataSizes(GROUP_L)
+      .source(DATA).destination(DATA_REGISTER)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // NBCD ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.NBCD, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.NBCD).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // NEG -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.NEG, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.NEG, M68kDataSize.GROUP_BWL,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.NEG).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.NEG).dataSizes(GROUP_BWL)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // NEGX ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.NEGX, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.NEGX, M68kDataSize.GROUP_BWL,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.NEGX).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.NEGX).dataSizes(GROUP_BWL)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // NOP -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.NOP, M68kDataSize.GROUP_UNSIZED,
-      M68kOperand.NONE));
+
+    create(M68kTokenTypes.NOP)
+      .build();
 
 // NOT -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.NOT, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.NOT, M68kDataSize.GROUP_BWL,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.NOT).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.NOT).dataSizes(GROUP_BWL)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // OR ------------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.OR, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.OR, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER, M68kOperand.ALTERABLE_MEMORY));
-    add(new M68kMnemonic(M68kTokenTypes.OR, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA));
-    add(new M68kMnemonic(M68kTokenTypes.OR, M68kDataSize.GROUP_B,
-      M68kOperand.IMMEDIATE, M68kOperand.CCR_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.OR, M68kDataSize.GROUP_W,
-      M68kOperand.IMMEDIATE, M68kOperand.SR_REGISTER));
+
+    create(M68kTokenTypes.OR).dataSizes(GROUP_BWL)
+      .source(DATA).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.OR).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER).destination(ALTERABLE_MEMORY)
+      .build();
+
+    create(M68kTokenTypes.OR).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(ALTERABLE_DATA)
+      .build();
+
+    create(M68kTokenTypes.OR).dataSizes(GROUP_B)
+      .source(IMMEDIATE).destination(CCR_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.OR).dataSizes(GROUP_W)
+      .source(IMMEDIATE).destination(SR_REGISTER)
+      .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .build();
 
 // ORI -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.ORI, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ORI, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA));
-    add(new M68kMnemonic(M68kTokenTypes.ORI, M68kDataSize.GROUP_B,
-      M68kOperand.IMMEDIATE, M68kOperand.CCR_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ORI, M68kDataSize.GROUP_W,
-      M68kOperand.IMMEDIATE, M68kOperand.SR_REGISTER));
+
+    create(M68kTokenTypes.ORI).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ORI).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(ALTERABLE_DATA)
+      .build();
+
+    create(M68kTokenTypes.ORI).dataSizes(GROUP_B)
+      .source(IMMEDIATE).destination(CCR_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ORI).dataSizes(GROUP_W)
+      .source(IMMEDIATE).destination(SR_REGISTER)
+      .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .build();
 
 // PEA -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.PEA, M68kDataSize.GROUP_L,
-      M68kOperand.CONTROL));
+
+    create(M68kTokenTypes.PEA).dataSizes(GROUP_L)
+      .source(CONTROL)
+      .build();
 
 // RESET ---------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.RESET, M68kDataSize.GROUP_UNSIZED,
-      M68kOperand.NONE));
+
+    create(M68kTokenTypes.RESET)
+      .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .build();
 
 // ROL -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.ROL, M68kDataSize.GROUP_W,
-      M68kOperand.ALTERABLE_MEMORY));
-    add(new M68kMnemonic(M68kTokenTypes.ROL, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ROL, M68kDataSize.GROUP_BWL,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ROL, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER));
+
+    create(M68kTokenTypes.ROL).dataSizes(GROUP_W)
+      .source(ALTERABLE_MEMORY)
+      .build();
+
+    create(M68kTokenTypes.ROL).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ROL).dataSizes(GROUP_BWL)
+      .source(QUICK_IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ROL).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER)
+      .build();
 
 // ROR -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.ROR, M68kDataSize.GROUP_W,
-      M68kOperand.ALTERABLE_MEMORY));
-    add(new M68kMnemonic(M68kTokenTypes.ROR, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ROR, M68kDataSize.GROUP_BWL,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ROR, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER));
+
+    create(M68kTokenTypes.ROR).dataSizes(GROUP_W)
+      .source(ALTERABLE_MEMORY)
+      .build();
+
+    create(M68kTokenTypes.ROR).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ROR).dataSizes(GROUP_BWL)
+      .source(QUICK_IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ROR).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER)
+      .build();
 
 // ROXL ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.ROXL, M68kDataSize.GROUP_W,
-      M68kOperand.ALTERABLE_MEMORY));
-    add(new M68kMnemonic(M68kTokenTypes.ROXL, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ROXL, M68kDataSize.GROUP_BWL,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ROXL, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER));
+
+    create(M68kTokenTypes.ROXL).dataSizes(GROUP_W)
+      .source(ALTERABLE_MEMORY)
+      .build();
+
+    create(M68kTokenTypes.ROXL).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ROXL).dataSizes(GROUP_BWL)
+      .source(QUICK_IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ROXL).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER)
+      .build();
 
 // ROXR ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.ROXR, M68kDataSize.GROUP_W,
-      M68kOperand.ALTERABLE_MEMORY));
-    add(new M68kMnemonic(M68kTokenTypes.ROXR, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ROXR, M68kDataSize.GROUP_BWL,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ROXR, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER));
+
+    create(M68kTokenTypes.ROXR).dataSizes(GROUP_W)
+      .source(ALTERABLE_MEMORY)
+      .build();
+
+    create(M68kTokenTypes.ROXR).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ROXR).dataSizes(GROUP_BWL)
+      .source(QUICK_IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ROXR).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER)
+      .build();
 
 // RTD -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.RTD, M68kDataSize.GROUP_UNSIZED,
-      M68kOperand.QUICK_IMMEDIATE,
-      M68kCpu.GROUP_68010_UP));
+
+    create(M68kTokenTypes.RTD)
+      .source(QUICK_IMMEDIATE)
+      .cpus(GROUP_68010_UP)
+      .build();
 
 // RTE -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.RTE, M68kDataSize.GROUP_UNSIZED,
-      M68kOperand.NONE));
+
+    create(M68kTokenTypes.RTE)
+      .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .build();
 
 // RTR -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.RTR, M68kDataSize.GROUP_UNSIZED,
-      M68kOperand.NONE));
+
+    create(M68kTokenTypes.RTR)
+      .build();
 
 // RTS -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.RTS, M68kDataSize.GROUP_UNSIZED,
-      M68kOperand.NONE));
+
+    create(M68kTokenTypes.RTS)
+      .build();
 
 // SBCD ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SBCD, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SBCD, M68kDataSize.GROUP_B,
-      M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT, M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT));
+
+    create(M68kTokenTypes.SBCD).dataSizes(GROUP_B)
+      .source(DATA_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SBCD).dataSizes(GROUP_B)
+      .source(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT).destination(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT)
+      .build();
 
 // ST ------------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.ST, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.ST, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.ST).dataSizes(GROUP_B)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.ST).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // SF ------------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SF, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SF, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SF).dataSizes(GROUP_B)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SF).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // SHI -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SHI, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SHI, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SHI).dataSizes(GROUP_B)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SHI).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // SLS -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SLS, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SLS, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SLS).dataSizes(GROUP_B)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SLS).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // SCC -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SCC, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SCC, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SCC).dataSizes(GROUP_B)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SCC).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // SHS -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SHS, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SHS, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SHS).dataSizes(GROUP_B)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SHS).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // SCS -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SCS, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SCS, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SCS).dataSizes(GROUP_B)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SCS).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // SLO -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SLO, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SLO, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SLO).dataSizes(GROUP_B)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SLO).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // SNE -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SNE, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SNE, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SNE).dataSizes(GROUP_B)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SNE).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // SEQ -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SEQ, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SEQ, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SEQ).dataSizes(GROUP_B)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SEQ).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // SVC -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SVC, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SVC, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SVC).dataSizes(GROUP_B)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SVC).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // SVS -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SVS, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SVS, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SVS).dataSizes(GROUP_B)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SVS).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // SPL -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SPL, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SPL, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SPL).dataSizes(GROUP_B)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SPL).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // SMI -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SMI, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SMI, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SMI).dataSizes(GROUP_B)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SMI).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // SGE -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SGE, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SGE, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SGE).dataSizes(GROUP_B)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SGE).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // SLT -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SLT, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SLT, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SLT).dataSizes(GROUP_B)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SLT).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // SGT -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SGT, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SGT, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SGT).dataSizes(GROUP_B)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SGT).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // SLE -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SLE, M68kDataSize.GROUP_B,
-      M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SLE, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SLE).dataSizes(GROUP_B)
+      .source(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SLE).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // STOP ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.STOP, M68kDataSize.GROUP_UNSIZED,
-      M68kOperand.QUICK_IMMEDIATE));
+
+    create(M68kTokenTypes.STOP)
+      .source(QUICK_IMMEDIATE)
+      .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .build();
 
 // SUB -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SUB, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SUB, M68kDataSize.GROUP_WL,
-      M68kOperand.ADDRESS_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SUB, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER, M68kOperand.ALTERABLE_MEMORY));
-    add(new M68kMnemonic(M68kTokenTypes.SUB, M68kDataSize.GROUP_WL,
-      M68kOperand.ALL, M68kOperand.ADDRESS_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SUB, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SUB).dataSizes(GROUP_BWL)
+      .source(DATA).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SUB).dataSizes(GROUP_WL)
+      .source(ADDRESS_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SUB).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER).destination(ALTERABLE_MEMORY)
+      .build();
+
+    create(M68kTokenTypes.SUB).dataSizes(GROUP_WL)
+      .source(ALL).destination(ADDRESS_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SUB).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(ALTERABLE_DATA)
+      .build();
 
 // SUBA ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SUBA, M68kDataSize.GROUP_WL,
-      M68kOperand.ALL, M68kOperand.ADDRESS_REGISTER));
+
+    create(M68kTokenTypes.SUBA).dataSizes(GROUP_WL)
+      .source(ALL).destination(ADDRESS_REGISTER)
+      .build();
 
 // SUBI ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SUBI, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SUBI, M68kDataSize.GROUP_BWL,
-      M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SUBI).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SUBI).dataSizes(GROUP_BWL)
+      .source(IMMEDIATE).destination(ALTERABLE_DATA)
+      .build();
 
 // SUBQ ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SUBQ, M68kDataSize.GROUP_WL,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.ADDRESS_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SUBQ, M68kDataSize.GROUP_BWL,
-      M68kOperand.QUICK_IMMEDIATE, M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.SUBQ).dataSizes(GROUP_WL)
+      .source(QUICK_IMMEDIATE).destination(ADDRESS_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SUBQ).dataSizes(GROUP_BWL)
+      .source(QUICK_IMMEDIATE).destination(ALTERABLE_DATA)
+      .build();
 
 // SUBX ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SUBX, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER));
-    add(new M68kMnemonic(M68kTokenTypes.SUBX, M68kDataSize.GROUP_BWL,
-      M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT, M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT));
+
+    create(M68kTokenTypes.SUBX).dataSizes(GROUP_BWL)
+      .source(DATA_REGISTER).destination(DATA_REGISTER)
+      .build();
+
+    create(M68kTokenTypes.SUBX).dataSizes(GROUP_BWL)
+      .source(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT).destination(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT)
+      .build();
 
 // SWAP ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.SWAP, M68kDataSize.GROUP_W,
-      M68kOperand.DATA_REGISTER));
+
+    create(M68kTokenTypes.SWAP).dataSizes(GROUP_W)
+      .source(DATA_REGISTER)
+      .build();
 
 // TAS -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.TAS, M68kDataSize.GROUP_B,
-      M68kOperand.ALTERABLE_DATA));
+
+    create(M68kTokenTypes.TAS).dataSizes(GROUP_B)
+      .source(ALTERABLE_DATA)
+      .build();
 
 // TRAP ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.TRAP, M68kDataSize.GROUP_UNSIZED,
-      M68kOperand.QUICK_IMMEDIATE));
+
+    create(M68kTokenTypes.TRAP)
+      .source(QUICK_IMMEDIATE)
+      .build();
 
 // TRAPV ---------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.TRAPV, M68kDataSize.GROUP_UNSIZED,
-      M68kOperand.NONE));
+
+    create(M68kTokenTypes.TRAPV)
+      .build();
 
 // TST -----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.TST, M68kDataSize.GROUP_BWL,
-      M68kOperand.ALTERABLE_DATA));
-    add(new M68kMnemonic(M68kTokenTypes.TST, M68kDataSize.GROUP_BWL,
-      M68kOperand.DATA,
-      M68kCpu.GROUP_68020_UP));
-    add(new M68kMnemonic(M68kTokenTypes.TST, M68kDataSize.GROUP_WL,
-      M68kOperand.ADDRESS_REGISTER,
-      M68kCpu.GROUP_68020_UP));
+
+    create(M68kTokenTypes.TST).dataSizes(GROUP_BWL)
+      .source(ALTERABLE_DATA)
+      .build();
+
+    create(M68kTokenTypes.TST).dataSizes(GROUP_BWL)
+      .source(DATA)
+      .cpus(GROUP_68020_UP)
+      .build();
+
+    create(M68kTokenTypes.TST).dataSizes(GROUP_WL)
+      .source(ADDRESS_REGISTER)
+      .cpus(GROUP_68020_UP)
+      .build();
 
 // UNLK ----------------------------------------------------------------------------
-    add(new M68kMnemonic(M68kTokenTypes.UNLK, M68kDataSize.GROUP_UNSIZED,
-      M68kOperand.ADDRESS_REGISTER));
+
+    create(M68kTokenTypes.UNLK)
+      .source(ADDRESS_REGISTER)
+      .build();
   }
 }

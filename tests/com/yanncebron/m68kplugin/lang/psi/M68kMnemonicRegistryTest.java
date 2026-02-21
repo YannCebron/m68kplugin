@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.yanncebron.m68kplugin.lang.psi;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.testFramework.LightPlatformTestCase;
+import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.parser.MnemonicGeneratedParserDataTest;
 
 import java.util.Collection;
@@ -30,11 +31,24 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
 
   private final M68kMnemonicRegistry instance = M68kMnemonicRegistry.getInstance();
 
-  public void testAllInstructionsHaveMnemonics() {
+  public void testAllInstructionsHaveMnemonicsAndCheckPrivileged() {
+    int totalNone = 0;
+    int totalPrivileged = 0;
+    int totalPrivileged68010Above = 0;
+
     for (IElementType instructionsType : M68kTokenGroups.INSTRUCTIONS.getTypes()) {
       final Collection<M68kMnemonic> all = instance.findAll(instructionsType);
       assertFalse("no mnemonics for '" + instructionsType + "'", all.isEmpty());
+
+      totalNone += ContainerUtil.count(all, mnemonic -> mnemonic.privilegedType() == M68kMnemonic.PrivilegedType.NONE);
+      totalPrivileged += ContainerUtil.count(all, mnemonic -> mnemonic.privilegedType() == M68kMnemonic.PrivilegedType.PRIVILEGED);
+      totalPrivileged68010Above += ContainerUtil.count(all, mnemonic -> mnemonic.privilegedType() == M68kMnemonic.PrivilegedType.PRIVILEGED_68010_ABOVE);
     }
+    assertEquals(266, totalNone);
+    assertEquals(16, totalPrivileged);
+    assertEquals(1, totalPrivileged68010Above);
+
+    assertEquals(283, totalNone + totalPrivileged + totalPrivileged68010Above);
   }
 
   public void testFindAllIsEmptyForUnknownElementType() {
@@ -56,35 +70,34 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
   public void testFindBkpt() {
     doTestFind("bkpt #2",
       new M68kMnemonic(M68kTokenTypes.BKPT, M68kDataSize.GROUP_UNSIZED,
-        M68kOperand.QUICK_IMMEDIATE,
-        M68kCpu.GROUP_68010_UP));
+        M68kOperand.QUICK_IMMEDIATE, M68kOperand.NONE,
+        M68kCpu.GROUP_68010_UP, M68kMnemonic.PrivilegedType.NONE));
   }
 
   public void testFindAslAlterableMemory() {
     doTestFind("asl $42",
       new M68kMnemonic(M68kTokenTypes.ASL, M68kDataSize.GROUP_W,
-        M68kOperand.ALTERABLE_MEMORY,
-        M68kCpu.GROUP_68000_UP));
+        M68kOperand.ALTERABLE_MEMORY, M68kOperand.NONE));
   }
 
   public void testBeq() {
     doTestFind("beq label",
       new M68kMnemonic(M68kTokenTypes.BEQ, M68kDataSize.GROUP_SBW,
-        M68kOperand.BRANCH_DESTINATION));
+        M68kOperand.BRANCH_DESTINATION, M68kOperand.NONE));
   }
 
   public void testBeqDataSizeLong() {
     doTestFind("beq.l label",
       new M68kMnemonic(M68kTokenTypes.BEQ, M68kDataSize.GROUP_SBWL,
-        M68kOperand.BRANCH_DESTINATION,
-        M68kCpu.GROUP_68020_UP));
+        M68kOperand.BRANCH_DESTINATION, M68kOperand.NONE,
+        M68kCpu.GROUP_68020_UP, M68kMnemonic.PrivilegedType.NONE));
   }
 
   public void testRtd() {
     doTestFind("rtd #1",
       new M68kMnemonic(M68kTokenTypes.RTD, M68kDataSize.GROUP_UNSIZED,
-        M68kOperand.QUICK_IMMEDIATE,
-        M68kCpu.GROUP_68010_UP));
+        M68kOperand.QUICK_IMMEDIATE, M68kOperand.NONE,
+        M68kCpu.GROUP_68010_UP, M68kMnemonic.PrivilegedType.NONE));
   }
 
   public void testFindAslDnDn() {
@@ -103,7 +116,7 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
   public void testFindAslDn() {
     doTestFind("asl d1",
       new M68kMnemonic(M68kTokenTypes.ASL, M68kDataSize.GROUP_BWL,
-        M68kOperand.DATA_REGISTER));
+        M68kOperand.DATA_REGISTER, M68kOperand.NONE));
   }
 
   public void testFindImmediateAlterableData() {

@@ -566,7 +566,7 @@
          and         #42,CCR
          and.b       #42,CCR
 
-* M68kMnemonic{and, src=IMMEDIATE, dst=SR_REGISTER, [WORD], M68000 Family}
+* M68kMnemonic{and, src=IMMEDIATE, dst=SR_REGISTER, [WORD], M68000 Family, PRIVILEGED}
          and         #42,SR
          and.w       #42,SR
 
@@ -625,7 +625,7 @@
          andi        #42,CCR
          andi.b      #42,CCR
 
-* M68kMnemonic{andi, src=IMMEDIATE, dst=SR_REGISTER, [WORD], M68000 Family}
+* M68kMnemonic{andi, src=IMMEDIATE, dst=SR_REGISTER, [WORD], M68000 Family, PRIVILEGED}
          andi        #42,SR
          andi.w      #42,SR
 
@@ -2019,7 +2019,7 @@ label35: bvs         label35
          eor         #42,CCR
          eor.b       #42,CCR
 
-* M68kMnemonic{eor, src=IMMEDIATE, dst=SR_REGISTER, [WORD], M68000 Family}
+* M68kMnemonic{eor, src=IMMEDIATE, dst=SR_REGISTER, [WORD], M68000 Family, PRIVILEGED}
          eor         #42,SR
          eor.w       #42,SR
 
@@ -2078,7 +2078,7 @@ label35: bvs         label35
          eori        #42,CCR
          eori.b      #42,CCR
 
-* M68kMnemonic{eori, src=IMMEDIATE, dst=SR_REGISTER, [WORD], M68000 Family}
+* M68kMnemonic{eori, src=IMMEDIATE, dst=SR_REGISTER, [WORD], M68000 Family, PRIVILEGED}
          eori        #42,SR
          eori.w      #42,SR
 
@@ -3146,7 +3146,7 @@ label35: bvs         label35
          move        CCR,$4000.L
          move.w      CCR,$4000.L
 
-* M68kMnemonic{move, src=SR_REGISTER, dst=ALTERABLE_DATA, [WORD], M68000 Family}
+* M68kMnemonic{move, src=SR_REGISTER, dst=ALTERABLE_DATA, [WORD], M68000 Family, PRIVILEGED_68010_ABOVE}
          move        SR,d0
          move.w      SR,d0
          move        SR,(a0)
@@ -3206,7 +3206,7 @@ label35: bvs         label35
          move        (66,PC,a0),CCR
          move.w      (66,PC,a0),CCR
 
-* M68kMnemonic{move, src=DATA, dst=SR_REGISTER, [WORD], M68000 Family}
+* M68kMnemonic{move, src=DATA, dst=SR_REGISTER, [WORD], M68000 Family, PRIVILEGED}
          move        d0,SR
          move.w      d0,SR
          move        #42,SR
@@ -3242,11 +3242,11 @@ label35: bvs         label35
          move        (66,PC,a0),SR
          move.w      (66,PC,a0),SR
 
-* M68kMnemonic{move, src=USP_REGISTER, dst=ADDRESS_REGISTER, [LONGWORD], M68000 Family}
+* M68kMnemonic{move, src=USP_REGISTER, dst=ADDRESS_REGISTER, [LONGWORD], M68000 Family, PRIVILEGED}
          move        USP,a0
          move.l      USP,a0
 
-* M68kMnemonic{move, src=ADDRESS_REGISTER, dst=USP_REGISTER, [LONGWORD], M68000 Family}
+* M68kMnemonic{move, src=ADDRESS_REGISTER, dst=USP_REGISTER, [LONGWORD], M68000 Family, PRIVILEGED}
          move        a0,USP
          move.l      a0,USP
 
@@ -4097,7 +4097,7 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{movec, src=CTRL_REGISTER, dst=DATA_OR_ADDRESS_REGISTER, [LONGWORD], M68010+}
+* M68kMnemonic{movec, src=CTRL_REGISTER, dst=DATA_OR_ADDRESS_REGISTER, [LONGWORD], M68010+, PRIVILEGED}
          movec       DFC,d0
          movec.l     DFC,d0
          movec       DFC,a0
@@ -4111,7 +4111,7 @@ label35: bvs         label35
          movec       VBR,a0
          movec.l     VBR,a0
 
-* M68kMnemonic{movec, src=DATA_OR_ADDRESS_REGISTER, dst=CTRL_REGISTER, [LONGWORD], M68010+}
+* M68kMnemonic{movec, src=DATA_OR_ADDRESS_REGISTER, dst=CTRL_REGISTER, [LONGWORD], M68010+, PRIVILEGED}
          movec       d0,DFC
          movec.l     d0,DFC
          movec       d0,SFC
@@ -4376,7 +4376,7 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{moves, src=ALTERABLE_MEMORY, dst=DATA_OR_ADDRESS_REGISTER, [BYTE, WORD, LONGWORD], M68010+}
+* M68kMnemonic{moves, src=ALTERABLE_MEMORY, dst=DATA_OR_ADDRESS_REGISTER, [BYTE, WORD, LONGWORD], M68010+, PRIVILEGED}
          moves       (a0),d0
          moves.b     (a0),d0
          moves.w     (a0),d0
@@ -4458,7 +4458,7 @@ label35: bvs         label35
          moves.w     $4000.L,a0
          moves.l     $4000.L,a0
 
-* M68kMnemonic{moves, src=DATA_OR_ADDRESS_REGISTER, dst=ALTERABLE_MEMORY, [BYTE, WORD, LONGWORD], M68010+}
+* M68kMnemonic{moves, src=DATA_OR_ADDRESS_REGISTER, dst=ALTERABLE_MEMORY, [BYTE, WORD, LONGWORD], M68010+, PRIVILEGED}
          moves       d0,(a0)
          moves.b     d0,(a0)
          moves.w     d0,(a0)
@@ -5011,7 +5011,7 @@ label35: bvs         label35
          or          #42,CCR
          or.b        #42,CCR
 
-* M68kMnemonic{or, src=IMMEDIATE, dst=SR_REGISTER, [WORD], M68000 Family}
+* M68kMnemonic{or, src=IMMEDIATE, dst=SR_REGISTER, [WORD], M68000 Family, PRIVILEGED}
          or          #42,SR
          or.w        #42,SR
 
@@ -5070,7 +5070,7 @@ label35: bvs         label35
          ori         #42,CCR
          ori.b       #42,CCR
 
-* M68kMnemonic{ori, src=IMMEDIATE, dst=SR_REGISTER, [WORD], M68000 Family}
+* M68kMnemonic{ori, src=IMMEDIATE, dst=SR_REGISTER, [WORD], M68000 Family, PRIVILEGED}
          ori         #42,SR
          ori.w       #42,SR
 
@@ -5108,7 +5108,7 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{reset, src=NONE, dst=NONE, [UNSIZED], M68000 Family}
+* M68kMnemonic{reset, src=NONE, dst=NONE, [UNSIZED], M68000 Family, PRIVILEGED}
          reset
 
 
@@ -5292,7 +5292,7 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{rte, src=NONE, dst=NONE, [UNSIZED], M68000 Family}
+* M68kMnemonic{rte, src=NONE, dst=NONE, [UNSIZED], M68000 Family, PRIVILEGED}
          rte
 
 
@@ -5785,7 +5785,7 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{stop, src=QUICK_IMMEDIATE, dst=NONE, [UNSIZED], M68000 Family}
+* M68kMnemonic{stop, src=QUICK_IMMEDIATE, dst=NONE, [UNSIZED], M68000 Family, PRIVILEGED}
          stop      #1
 
 

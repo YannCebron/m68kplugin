@@ -6,10 +6,14 @@
 
 ### Added
 
+- Mnemonic docs:
+  - Privileged instruction: show information
+
 ### Fixed
 
 - Parser: too lenient parsing for
   - `TST`
+- Privileged instruction status: `move.w SR,<ALTERABLE_DATA>` only for 68010+
 
 ## 0.2.1 - 2025-11-29
 
