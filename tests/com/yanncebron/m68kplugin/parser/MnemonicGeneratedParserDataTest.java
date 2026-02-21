@@ -87,8 +87,8 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
       Collection<M68kMnemonic> allMnemonics = M68kMnemonicRegistry.getInstance().findAll(instructionType);
       assertNotEmpty(allMnemonics);
 
-      boolean hasSourceOperand = ContainerUtil.exists(allMnemonics, m68kMnemonic -> m68kMnemonic.sourceOperand() != M68kOperand.NONE);
-      boolean hasDestinationOperand = ContainerUtil.exists(allMnemonics, m68kMnemonic -> m68kMnemonic.destinationOperand() != M68kOperand.NONE);
+      boolean hasSourceOperand = ContainerUtil.exists(allMnemonics, m68kMnemonic -> m68kMnemonic.firstOperand() != M68kOperand.NONE);
+      boolean hasDestinationOperand = ContainerUtil.exists(allMnemonics, m68kMnemonic -> m68kMnemonic.secondOperand() != M68kOperand.NONE);
       if (!hasSourceOperand && !hasDestinationOperand) {
         continue;
       }
@@ -106,8 +106,8 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
             boolean foundValid = false;
             for (M68kMnemonic known : allMnemonics) {
               if ((dataSize == M68kDataSize.UNSIZED || known.dataSizes().contains(dataSize)) &&
-                containsAddressMode(known.sourceOperand(), sourceAdm) &&
-                (known.destinationOperand() == M68kOperand.NONE || containsAddressMode(known.destinationOperand(), destinationAdm))) {
+                containsAddressMode(known.firstOperand(), sourceAdm) &&
+                (known.secondOperand() == M68kOperand.NONE || containsAddressMode(known.secondOperand(), destinationAdm))) {
                 foundValid = true;
                 break;
               }
@@ -289,8 +289,8 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
       String mnemonicText = mnemonic.elementType().toString();
       List<String> variants = new SmartList<>();
 
-      for (String sourceText : OPERAND_TEXTS.get(mnemonic.sourceOperand())) {
-        for (String destinationText : OPERAND_TEXTS.get(mnemonic.destinationOperand())) {
+      for (String sourceText : OPERAND_TEXTS.get(mnemonic.firstOperand())) {
+        for (String destinationText : OPERAND_TEXTS.get(mnemonic.secondOperand())) {
           if (mnemonic.dataSizes().iterator().next() != M68kDataSize.UNSIZED) {
             addVariant(variants, labelOrIndent, mnemonicText, needsLocalBranchLabel ? labelName : sourceText, destinationText, "  ");
           }

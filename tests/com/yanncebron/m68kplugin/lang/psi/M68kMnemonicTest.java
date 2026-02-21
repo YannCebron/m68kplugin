@@ -32,8 +32,8 @@ public class M68kMnemonicTest extends TestCase {
         if (mnemonic.elementType() != M68kTokenTypes.MOVEA) {
           assertFalse(mnemonic.toString(), mnemonic.isDeprecated());
         } else {
-          if (mnemonic.sourceOperand() != M68kOperand.ALL &&
-            mnemonic.destinationOperand() != M68kOperand.ADDRESS_REGISTER) {
+          if (mnemonic.firstOperand() != M68kOperand.ALL &&
+            mnemonic.secondOperand() != M68kOperand.ADDRESS_REGISTER) {
             assertTrue(mnemonic.toString(), mnemonic.isDeprecated());
             totalDeprecated++;
           } else {

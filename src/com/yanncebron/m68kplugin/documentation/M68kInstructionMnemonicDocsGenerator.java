@@ -68,9 +68,9 @@ class M68kInstructionMnemonicDocsGenerator {
     // only operands with >1 address mode, otherwise they cannot appear in the table(s)
     Set<M68kAddressMode> allUsedAddressModesFromMultiOperands = new HashSet<>();
     for (M68kMnemonic mnemonic : allMnemonics) {
-      M68kAddressMode[] sourceModes = mnemonic.sourceOperand().getAddressModes();
+      M68kAddressMode[] sourceModes = mnemonic.firstOperand().getAddressModes();
       if (sourceModes.length > 1) ContainerUtil.addAll(allUsedAddressModesFromMultiOperands, sourceModes);
-      M68kAddressMode[] destinationModes = mnemonic.destinationOperand().getAddressModes();
+      M68kAddressMode[] destinationModes = mnemonic.secondOperand().getAddressModes();
       if (destinationModes.length > 1) ContainerUtil.addAll(allUsedAddressModesFromMultiOperands, destinationModes);
     }
 
@@ -90,10 +90,10 @@ class M68kInstructionMnemonicDocsGenerator {
       String mnemonicText = StringUtil.toUpperCase(elementType.toString());
       sb.append("<code>").append(mnemonicText).append(dataSizeText);
 
-      if (mnemonic.sourceOperand() != M68kOperand.NONE) {
+      if (mnemonic.firstOperand() != M68kOperand.NONE) {
         sb.append(StringUtil.repeat("&nbsp;", Math.max(1, 17 - mnemonicText.length() - dataSizeTextLength)));
-        appendOperand(mnemonic.sourceOperand(), "");
-        appendOperand(mnemonic.destinationOperand(), ",");
+        appendOperand(mnemonic.firstOperand(), "");
+        appendOperand(mnemonic.secondOperand(), ",");
       }
 
       sb.append("</code></h4>");
@@ -107,8 +107,8 @@ class M68kInstructionMnemonicDocsGenerator {
         appendPrivilegedSection(mnemonic);
       }
 
-      final M68kAddressMode[] sourceAddressModes = mnemonic.sourceOperand().getAddressModes();
-      final M68kAddressMode[] destinationAddressModes = mnemonic.destinationOperand().getAddressModes();
+      final M68kAddressMode[] sourceAddressModes = mnemonic.firstOperand().getAddressModes();
+      final M68kAddressMode[] destinationAddressModes = mnemonic.secondOperand().getAddressModes();
       if (sourceAddressModes.length <= 1 &&
         destinationAddressModes.length <= 1) {
         if (iterator.hasNext()) {

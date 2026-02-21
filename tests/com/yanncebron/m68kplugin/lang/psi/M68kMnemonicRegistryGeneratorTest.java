@@ -154,8 +154,8 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
           if (existing.elementType() == m68kMnemonic.elementType() &&
             existing.dataSizes().equals(m68kMnemonic.dataSizes()) &&
             existing.cpus().equals(m68kMnemonic.cpus()) &&
-            existing.sourceOperand() == m68kMnemonic.sourceOperand() &&
-            existing.destinationOperand() == M68kOperand.ALTERABLE_MEMORY_CF && m68kMnemonic.destinationOperand() == M68kOperand.ALTERABLE_MEMORY) {
+            existing.firstOperand() == m68kMnemonic.firstOperand() &&
+            existing.secondOperand() == M68kOperand.ALTERABLE_MEMORY_CF && m68kMnemonic.secondOperand() == M68kOperand.ALTERABLE_MEMORY) {
             System.out.println("skip ALTERABLE_MEMORY(CF) duplication:");
             System.out.println("  entry:    " + m68kMnemonic);
             System.out.println("  existing: " + existing);
@@ -219,10 +219,10 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       } else {
         System.out.println();
       }
-      if (mnemonic.sourceOperand() != M68kOperand.NONE) {
-        System.out.print(".source(" + mnemonic.sourceOperand().name() + ")");
-        if (mnemonic.destinationOperand() != M68kOperand.NONE) {
-          System.out.print(".destination(" + mnemonic.destinationOperand().name() + ")");
+      if (mnemonic.firstOperand() != M68kOperand.NONE) {
+        System.out.print(".first(" + mnemonic.firstOperand().name() + ")");
+        if (mnemonic.secondOperand() != M68kOperand.NONE) {
+          System.out.print(".second(" + mnemonic.secondOperand().name() + ")");
         }
         System.out.println();
       }

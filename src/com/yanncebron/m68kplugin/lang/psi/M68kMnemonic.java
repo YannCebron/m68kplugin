@@ -28,8 +28,8 @@ import java.util.function.Function;
  */
 public record M68kMnemonic(IElementType elementType,
                            Set<M68kDataSize> dataSizes,
-                           M68kOperand sourceOperand,
-                           M68kOperand destinationOperand,
+                           M68kOperand firstOperand,
+                           M68kOperand secondOperand,
                            Set<M68kCpu> cpus,
                            PrivilegedType privilegedType) {
 
@@ -41,8 +41,8 @@ public record M68kMnemonic(IElementType elementType,
   public boolean isDeprecated() {
     if (elementType() != M68kTokenTypes.MOVEA) return false;
 
-    return (sourceOperand() == M68kOperand.DATA && destinationOperand() == M68kOperand.ALTERABLE_DATA) ||
-      (sourceOperand() == M68kOperand.ADDRESS_REGISTER && destinationOperand() == M68kOperand.ALTERABLE);
+    return (firstOperand() == M68kOperand.DATA && secondOperand() == M68kOperand.ALTERABLE_DATA) ||
+      (firstOperand() == M68kOperand.ADDRESS_REGISTER && secondOperand() == M68kOperand.ALTERABLE);
   }
 
   public enum PrivilegedType {
@@ -75,16 +75,16 @@ public record M68kMnemonic(IElementType elementType,
   @Override
   public @NotNull String toString() {
     final String cpuText;
-    if (cpus == M68kCpu.GROUP_68000_UP) cpuText = "M68000 Family";
-    else if (cpus == M68kCpu.GROUP_68010_UP) cpuText = "M68010+";
-    else if (cpus == M68kCpu.GROUP_68020_UP) cpuText = "M68020+";
+    if (cpus == M68kCpu.GROUP_68000_UP) cpuText = "MC68000 Family";
+    else if (cpus == M68kCpu.GROUP_68010_UP) cpuText = "MC68010+";
+    else if (cpus == M68kCpu.GROUP_68020_UP) cpuText = "MC68020+";
     else cpuText = cpus.toString();
 
     return "M68kMnemonic{" +
       elementType +
       (isDeprecated() ? ", DEPRECATED" : "") +
-      ", src=" + sourceOperand +
-      ", dst=" + destinationOperand +
+      ", firstOp=" + firstOperand +
+      ", secondOp=" + secondOperand +
       ", " + dataSizes +
       ", " + cpuText +
       (privilegedType != PrivilegedType.NONE ? ", " + privilegedType.name() : "") +
