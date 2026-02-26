@@ -43,7 +43,7 @@ import static java.util.Map.entry;
  *   <li>Run {@link #testGenerateMnemonicRegistryData()} and copy generated source output</li>
  *   <li>Verify MnemonicGeneratedParserDataTest passes, dump</li>
  * </ol>
- * Last check: vasm 2.0d.
+ * Last check: vasm 2.0e.
  */
 @SuppressWarnings("SpellCheckingInspection")
 public class M68kMnemonicRegistryGeneratorTest extends TestCase {
