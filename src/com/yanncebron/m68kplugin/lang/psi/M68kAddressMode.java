@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,11 +30,24 @@ public enum M68kAddressMode {
   /**
    * Ref 2.2.1, {@link M68kAdmDrd}
    */
-  DATA_REGISTER("Dn", M68kAdmDrd.class),
+  DATA_REGISTER("Dn", M68kAdmDrd.class) {
+    @Override
+    public boolean matches(M68kAdm givenAdm) {
+      return super.matches(givenAdm) ||
+        givenAdm instanceof M68kAdmWithRrd admWithRrd && admWithRrd.getAdmDrd() != null;
+    }
+  },
+
   /**
    * Ref 2.2.2, {@link M68kAdmArd}
    */
-  ADDRESS_REGISTER("An", M68kAdmArd.class),
+  ADDRESS_REGISTER("An", M68kAdmArd.class) {
+    @Override
+    public boolean matches(M68kAdm givenAdm) {
+      return super.matches(givenAdm) ||
+        givenAdm instanceof M68kAdmWithRrd admWithRrd && admWithRrd.getAdmArd() != null;
+    }
+  },
 
   /**
    * Ref 2.2.3, {@link M68kAdmAri}
@@ -127,7 +140,11 @@ public enum M68kAddressMode {
     return notation;
   }
 
-  public Class<? extends M68kAdm>[] getAdmClasses() {
-    return admClasses;
+  public boolean matches(M68kAdm givenAdm) {
+    for (Class<? extends M68kAdm> admClass : admClasses) {
+      if (admClass.isInstance(givenAdm)) return true;
+    }
+
+    return false;
   }
 }

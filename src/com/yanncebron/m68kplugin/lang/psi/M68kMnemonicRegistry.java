@@ -159,23 +159,7 @@ public final class M68kMnemonicRegistry {
 
   private static boolean operandAddressModeMatches(M68kOperand operand, M68kAdm givenAdm) {
     for (M68kAddressMode addressMode : operand.getAddressModes()) {
-      for (Class<? extends M68kAdm> adm : addressMode.getAdmClasses()) {
-        // match by:
-        // 1. instance class
-        // 2. found ARD/DRD
-        if (adm.isInstance(givenAdm)) {
-          return true;
-        }
-
-        if (givenAdm instanceof M68kAdmWithRrd admWithRrd) {
-          if (addressMode == M68kAddressMode.ADDRESS_REGISTER && admWithRrd.getAdmArd() != null) {
-            return true;
-          }
-          if (addressMode == M68kAddressMode.DATA_REGISTER && admWithRrd.getAdmDrd() != null) {
-            return true;
-          }
-        }
-      }
+      if (addressMode.matches(givenAdm)) return true;
     }
     return false;
   }
