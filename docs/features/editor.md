@@ -112,8 +112,14 @@ Rename labels using *Refactor \| Rename* across the whole project with usage pre
 * Smart *Edit \| Extend/Shrink Selection*
 * Smart braces/quote handling
 * *Code \| Comment with Line Comment*
-* *Code \| Move Element Left/Right* for `exg`/`cmpm`, binary expressions, register list, macro call parameters, `dc`/
-  `dr` values
+* *Code \| Move Element Left/Right*
+  * instruction operands (if valid): `move.l d0,a0` &rarr; `move.l a0,d0`
+  * binary expressions: `2*size` &rarr; `size*2`
+  * register list elements (`movem`)
+  * macro call parameters
+  * `dc` and `dr` directive values
+  * `printv`, `xdef`, `xref` directives
+  * `ifc`, `ifnc` conditional assembly directives
 * Spellchecker with bundled dictionaries (M68k/Amiga/"Scene" jargon)
 * Code Folding (*Settings \| Editor \| General \| Code Folding*)
   * Zero-terminated string literal (`dc.b "a text",0` &rarr; `"a text"`)

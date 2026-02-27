@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,16 +59,38 @@ public class M68kMoveLeftRightHandlerTest extends BasePlatformTestCase {
     doTestMoveLeft(" movem d0/<caret>d1/a0,-(a7)", " movem <caret>d1/d0/a0,-(a7)");
   }
 
-  public void testExgInstruction() {
-    doTestMoveLeft(" exg d0,<caret>a0", " exg <caret>a0,d0");
-  }
-
-  public void testCmpmInstruction() {
-    doTestMoveLeft(" cmpm (a0)+,(<caret>a1)+", " cmpm (<caret>a1)+,(a0)+");
-  }
-
   public void testMacroCallDirective() {
     doTestMoveLeft(" MY_MACRO d0,<caret>d1", " MY_MACRO <caret>d1,d0");
+  }
+
+  public void testInstructionSameOperands() {
+    doTestMoveLeft(" abcd d0,<caret>d1", " abcd <caret>d1,d0");
+    doTestMoveLeft(" abcd -(a0),<caret>-(a1)", " abcd <caret>-(a1),-(a0)");
+  }
+
+  public void testInstructionReversedOperands() {
+    doTestMoveLeft(" move a0,<caret>usp", " move <caret>usp,a0");
+  }
+
+  public void testInstructionCompatibleOperands() {
+    doTestMoveLeft(" cmp d0,<caret>d1", " cmp <caret>d1,d0");
+    doTestMoveLeft(" cmp d0,<caret>a0", " cmp <caret>a0,d0");
+
+    doTestMoveLeft(" exg d0,<caret>a0", " exg <caret>a0,d0");
+
+    doTestMoveLeft(" move a0,<caret>d0", " move <caret>d0,a0");
+  }
+
+  public void testInstructionIncompatibleOperands() {
+    doTestMoveLeft(" asl #1,<caret>d0", " asl #1,<caret>d0");
+
+    doTestMoveLeft(" cmp #1,<caret>d0", " cmp #1,<caret>d0");
+  }
+
+  public void testInstructionWithError() {
+    doTestMoveLeft(" abcd d0,<caret>ERROR", " abcd d0,<caret>ERROR");
+
+    doTestMoveLeft(" cmp d0,<caret>#1", " cmp d0,<caret>#1");
   }
 
   private void doTestMoveLeft(String text, String expectedText) {

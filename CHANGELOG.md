@@ -8,6 +8,7 @@
 
 - Mnemonic docs:
   - Privileged instruction: show information
+- *Code \| Move Element Left/Right*: swap instruction operands if valid (`move.l d0,a0` &rarr; `move.l a0,d0`)
 
 ### Fixed
 
