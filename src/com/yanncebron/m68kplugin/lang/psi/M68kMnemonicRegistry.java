@@ -109,22 +109,22 @@ public final class M68kMnemonicRegistry {
 
   @NotNull
   private static @Unmodifiable List<M68kMnemonic> getFilteredM68Mnemonics(Collection<M68kMnemonic> all, M68kInstruction instruction) {
-    List<M68kAdm> operands = PsiTreeUtil.getChildrenOfTypeAsList(instruction, M68kAdm.class);
-    int operandsCount = operands.size();
+    List<M68kAdm> admList = PsiTreeUtil.getChildrenOfTypeAsList(instruction, M68kAdm.class);
+    int operandsCount = admList.size();
 
     // operand count
     List<M68kMnemonic> filtered = ContainerUtil.filter(all, mnemonic -> {
-      boolean hasSource = mnemonic.firstOperand() != NONE;
-      boolean hasDestination = mnemonic.secondOperand() != NONE;
-      if (!hasSource && !hasDestination && operandsCount == 0) {
+      boolean hasFirstOperand = mnemonic.firstOperand() != NONE;
+      boolean hasSecondOperand = mnemonic.secondOperand() != NONE;
+      if (!hasFirstOperand && !hasSecondOperand && operandsCount == 0) {
         return true;
       }
 
-      if (hasSource && !hasDestination && operandsCount == 1) {
+      if (hasFirstOperand && !hasSecondOperand && operandsCount == 1) {
         return true;
       }
 
-      return hasSource && hasDestination && operandsCount == 2;
+      return hasFirstOperand && hasSecondOperand && operandsCount == 2;
     });
 
     // data size (optional)
@@ -143,25 +143,18 @@ public final class M68kMnemonicRegistry {
         }
 
         if (operandsCount == 1) {
-          return operandAddressModeMatches(mnemonic.firstOperand(), operands.get(0));
+          return mnemonic.firstOperand().matches(admList.get(0));
         }
 
         if (operandsCount == 2) {
-          return operandAddressModeMatches(mnemonic.firstOperand(), operands.get(0)) &&
-            operandAddressModeMatches(mnemonic.secondOperand(), operands.get(1));
+          return mnemonic.firstOperand().matches(admList.get(0)) &&
+            mnemonic.secondOperand().matches(admList.get(1));
         }
 
         return false;
       }
     );
     return filtered;
-  }
-
-  private static boolean operandAddressModeMatches(M68kOperand operand, M68kAdm givenAdm) {
-    for (M68kAddressMode addressMode : operand.getAddressModes()) {
-      if (addressMode.matches(givenAdm)) return true;
-    }
-    return false;
   }
 
   private MnemonicBuilder create(IElementType elementType) {

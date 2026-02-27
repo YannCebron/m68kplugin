@@ -248,6 +248,13 @@ public enum M68kOperand {
     this.addressModes = addressModes;
   }
 
+  public boolean matches(M68kAdm givenAdm) {
+    for (M68kAddressMode addressMode : getAddressModes()) {
+      if (addressMode.matches(givenAdm)) return true;
+    }
+    return false;
+  }
+
   public M68kAddressMode[] getAddressModes() {
     return addressModes;
   }
