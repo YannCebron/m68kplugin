@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,9 @@ import junit.framework.TestCase;
 public class M68kDataSizeTest extends TestCase {
 
   public void testFindByText() {
+    assertDataSize(M68kDataSize.SINGLE, ".s");
     assertDataSize(M68kDataSize.BYTE, ".b");
     assertDataSize(M68kDataSize.BYTE, ".B");
-    assertDataSize(M68kDataSize.SHORT, ".s");
     assertDataSize(M68kDataSize.WORD, ".w");
     assertDataSize(M68kDataSize.LONGWORD, ".L");
 
@@ -36,8 +36,8 @@ public class M68kDataSizeTest extends TestCase {
   }
 
   public void testFindByElementType() {
+    assertDataSize(M68kDataSize.SINGLE, M68kTokenTypes.DOT_S);
     assertDataSize(M68kDataSize.BYTE, M68kTokenTypes.DOT_B);
-    assertDataSize(M68kDataSize.SHORT, M68kTokenTypes.DOT_S);
     assertDataSize(M68kDataSize.WORD, M68kTokenTypes.DOT_W);
     assertDataSize(M68kDataSize.LONGWORD, M68kTokenTypes.DOT_L);
 

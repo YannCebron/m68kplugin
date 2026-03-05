@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ public enum M68kDataSize {
 
   UNSIZED("<unsized>", null),
 
-  SHORT(".s", M68kTokenTypes.DOT_S),
+  SINGLE(".s", M68kTokenTypes.DOT_S),
   BYTE(".b", M68kTokenTypes.DOT_B),
   WORD(".w", M68kTokenTypes.DOT_W),
   LONGWORD(".l", M68kTokenTypes.DOT_L);
@@ -72,13 +72,13 @@ public enum M68kDataSize {
     return null;
   }
 
-  public static final Set<M68kDataSize> GROUP_SBWL = EnumSet.of(SHORT, BYTE, WORD, LONGWORD);
-  public static final Set<M68kDataSize> GROUP_SBW = EnumSet.of(SHORT, BYTE, WORD);
+  public static final Set<M68kDataSize> GROUP_SBWL = EnumSet.of(SINGLE, BYTE, WORD, LONGWORD);
+  public static final Set<M68kDataSize> GROUP_SBW = EnumSet.of(SINGLE, BYTE, WORD);
   public static final Set<M68kDataSize> GROUP_BWL = EnumSet.of(BYTE, WORD, LONGWORD);
   public static final Set<M68kDataSize> GROUP_WL = EnumSet.of(WORD, LONGWORD);
 
   public static final Set<M68kDataSize> GROUP_UNSIZED = EnumSet.of(UNSIZED);
-  public static final Set<M68kDataSize> GROUP_S = EnumSet.of(SHORT);
+  public static final Set<M68kDataSize> GROUP_S = EnumSet.of(SINGLE);
   public static final Set<M68kDataSize> GROUP_B = EnumSet.of(BYTE);
   public static final Set<M68kDataSize> GROUP_W = EnumSet.of(WORD);
   public static final Set<M68kDataSize> GROUP_L = EnumSet.of(LONGWORD);

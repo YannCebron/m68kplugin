@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ public class BsrInstructionPsiTest extends M68kPsiTestCase<M68kBsrInstruction> {
   public void testWithDataSize() {
     final M68kBsrInstruction instruction = parse("bsr.s label");
 
-    assertEquals(M68kDataSize.SHORT, instruction.getDataSize());
+    assertEquals(M68kDataSize.SINGLE, instruction.getDataSize());
 
     M68kAdmAbs admAbs = assertInstanceOf(instruction.getAdmAbs(), M68kAdmAbs.class);
     assertInstanceOf(admAbs.getExpression(), M68kLabelRefExpression.class);
