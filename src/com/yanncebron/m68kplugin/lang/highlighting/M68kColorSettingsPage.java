@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,6 +43,7 @@ final class M68kColorSettingsPage implements ColorSettingsPage, RainbowColorSett
     createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.hash", M68kTextAttributes.HASH),
     createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.operation.sign", M68kTextAttributes.OPERATION_SIGN),
     createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.parentheses", M68kTextAttributes.PARENTHESES),
+    createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.brackets", M68kTextAttributes.BRACKETS),
     createDescriptor("color.settings.group.root", "attribute.descriptor.comment", M68kTextAttributes.COMMENT),
     createDescriptor("color.settings.group.root", "attribute.descriptor.data.size", M68kTextAttributes.DATA_SIZES),
     createDescriptor("color.settings.group.directives", "attribute.descriptor.directive", M68kTextAttributes.DIRECTIVE),

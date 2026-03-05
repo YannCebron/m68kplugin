@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,7 +46,8 @@ public class M68kSyntaxHighlighter extends SyntaxHighlighterBase {
     keys.put(M68kTokenTypes.COMMA, M68kTextAttributes.COMMA);
     keys.put(M68kTokenTypes.HASH, M68kTextAttributes.HASH);
     fillMap(keys, M68kTextAttributes.PARENTHESES,
-      M68kTokenTypes.L_PAREN, M68kTokenTypes.R_PAREN,
+      M68kTokenTypes.L_PAREN, M68kTokenTypes.R_PAREN);
+    fillMap(keys, M68kTextAttributes.BRACKETS,
       M68kTokenTypes.L_BRACKET, M68kTokenTypes.R_BRACKET);
     fillMap(keys, M68kTokenGroups.OPERATION_SIGNS, M68kTextAttributes.OPERATION_SIGN);
 
