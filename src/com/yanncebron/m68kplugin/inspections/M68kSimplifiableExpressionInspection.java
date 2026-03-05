@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,12 @@ final class M68kSimplifiableExpressionInspection extends LocalInspectionTool imp
 
       @Override
       public void visitParenExpression(@NotNull M68kParenExpression o) {
-        M68kExpression expression = M68kExpressionUtil.unwrapExpression(o);
+        M68kExpression expression = M68kExpressionUtil.unwrapParentheses(o);
+        if (expression instanceof M68kUnaryPlusExpression m68kUnaryPlusExpression) {
+          expression = M68kExpressionUtil.unwrapParentheses(m68kUnaryPlusExpression.getOperand());
+        } else if (expression instanceof M68kUnaryMinusExpression m68kUnaryMinusExpression) {
+          expression = M68kExpressionUtil.unwrapParentheses(m68kUnaryMinusExpression.getOperand());
+        }
         if (expression instanceof PsiLiteralValue) {
           holder.registerProblem(o,
             M68kBundle.message("inspection.simplifiable.expression.unnecessary.parentheses.message"),
@@ -119,13 +124,11 @@ final class M68kSimplifiableExpressionInspection extends LocalInspectionTool imp
   }
 
   private boolean isOneNumberValue(M68kExpression expression) {
-    if (expression instanceof M68kUnaryMinusExpression) return false;
     return M68kExpressionUtil.isNumberValue(expression, 1L);
   }
 
   private boolean isMinusOneNumberValue(M68kExpression expression) {
-    return expression instanceof M68kUnaryMinusExpression &&
-      M68kExpressionUtil.isNumberValue(((M68kUnaryMinusExpression) expression).getOperand(), 1L);
+    return M68kExpressionUtil.isNumberValue(expression, -1L);
   }
 
 

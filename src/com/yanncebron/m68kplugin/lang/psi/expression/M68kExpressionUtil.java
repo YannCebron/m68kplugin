@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,17 @@ import org.jetbrains.annotations.Nullable;
 public final class M68kExpressionUtil {
 
   public static boolean isNumberValue(M68kExpression expression, long expectedValue) {
-    expression = unwrapExpression(expression);
-    return expression instanceof M68kNumberExpression &&
-      Comparing.equal(((M68kNumberExpression) expression).getValue(), expectedValue);
+    expression = unwrapParentheses(expression);
+
+    if (expression instanceof M68kUnaryMinusExpression unaryMinusExpression) {
+      expression = unwrapParentheses(unaryMinusExpression.getOperand());
+      expectedValue = -expectedValue;
+    } else if (expression instanceof M68kUnaryPlusExpression unaryPlusExpression) {
+      expression = unwrapParentheses(unaryPlusExpression.getOperand());
+    }
+
+    return expression instanceof M68kNumberExpression  m68kNumberExpression&&
+      Comparing.equal(m68kNumberExpression.getValue(), expectedValue);
   }
 
   public static boolean isZeroNumberValue(M68kExpression expression) {
@@ -32,13 +40,10 @@ public final class M68kExpressionUtil {
   }
 
   @Nullable
-  public static M68kExpression unwrapExpression(@Nullable M68kExpression o) {
-    if (o instanceof M68kParenExpression) {
-      return unwrapExpression(((M68kParenExpression) o).getExpression());
+  public static M68kExpression unwrapParentheses(@Nullable M68kExpression expression) {
+    if (expression instanceof M68kParenExpression m68kParenExpression) {
+      return unwrapParentheses(m68kParenExpression.getExpression());
     }
-    if (o instanceof M68kUnaryExpression) {
-      return unwrapExpression(((M68kUnaryExpression) o).getOperand());
-    }
-    return o;
+    return expression;
   }
 }
