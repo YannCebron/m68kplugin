@@ -12,6 +12,8 @@
 * 68881 FPU
 * 68851 MMU
 * Apollo Core 68080
+* CPU32
+* ColdFire
 
 ## Highlighting
 
@@ -33,7 +35,7 @@
 - macro block:
   - `Symbol` API
   - highlight usages of parameter at caret
-  - usage of parameters outside of a macro block
+  - usage of parameters outside a macro block
   - non-sequential parameter `\n` numbering
   - highlight parameters in labels `jsr _LVO\1(a6)`
 
@@ -42,7 +44,7 @@
 - `ReadWriteAccessDetector`
   - registers
   - label references
-- opcode: 
+- instruction: 
   - inlay for target architecture
   - inlay for privileged instruction
 - method separators:
@@ -72,6 +74,8 @@
 
 ### Extract/Duplicates
 
+- extract `equ` constant from selection
+- compute constant expression from selection: `16*2` &rarr; `32`
 - extract an include file from selection
 - duplicates detection:
   - textual duplicate -> wrap in `rept`/`endr`
@@ -118,7 +122,7 @@
 ### Labels
 
 - unused label: global - located in non-include files only?
-- highlight duplicated names (conditional!)
+- highlight duplicated names (conditional! macros!)
 - label naming conventions (`AbstractNamingConventionInspection`)
 
 ### Expression
