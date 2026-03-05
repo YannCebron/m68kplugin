@@ -109,52 +109,36 @@ public final class M68kMnemonicRegistry {
 
   @NotNull
   private static @Unmodifiable List<M68kMnemonic> getFilteredM68Mnemonics(Collection<M68kMnemonic> all, M68kInstruction instruction) {
+    final M68kDataSize dataSize = instruction instanceof M68kDataSized dataSized ? dataSized.getDataSize() : null;
+
     List<M68kAdm> admList = PsiTreeUtil.getChildrenOfTypeAsList(instruction, M68kAdm.class);
     int operandsCount = admList.size();
 
-    // operand count
-    List<M68kMnemonic> filtered = ContainerUtil.filter(all, mnemonic -> {
-      boolean hasFirstOperand = mnemonic.firstOperand() != NONE;
-      boolean hasSecondOperand = mnemonic.secondOperand() != NONE;
-      if (!hasFirstOperand && !hasSecondOperand && operandsCount == 0) {
-        return true;
-      }
+    return ContainerUtil.filter(all, mnemonic -> {
 
-      if (hasFirstOperand && !hasSecondOperand && operandsCount == 1) {
-        return true;
-      }
-
-      return hasFirstOperand && hasSecondOperand && operandsCount == 2;
-    });
-
-    // data size (optional)
-    if (instruction instanceof M68kDataSized dataSized) {
-      final M68kDataSize dataSize = dataSized.getDataSize();
-      if (dataSize != null) {
-        filtered = ContainerUtil.filter(filtered, mnemonic -> mnemonic.dataSizes().contains(dataSize));
-      }
-    }
-
-    // addressing modes
-    filtered = ContainerUtil.filter(filtered, mnemonic -> {
-        if (operandsCount == 0) {
-          return mnemonic.firstOperand() == NONE &&
-            mnemonic.secondOperand() == NONE;
-        }
-
-        if (operandsCount == 1) {
-          return mnemonic.firstOperand().matches(admList.get(0));
-        }
-
-        if (operandsCount == 2) {
-          return mnemonic.firstOperand().matches(admList.get(0)) &&
-            mnemonic.secondOperand().matches(admList.get(1));
-        }
-
+      // data size (optional)
+      if (dataSize != null && !mnemonic.dataSizes().contains(dataSize)) {
         return false;
       }
-    );
-    return filtered;
+
+      // operand count / addressing modes
+      boolean hasFirstOperand = mnemonic.firstOperand() != NONE;
+      boolean hasSecondOperand = mnemonic.secondOperand() != NONE;
+      if (operandsCount == 0 && !hasFirstOperand && !hasSecondOperand) {
+        return true;
+      }
+
+      if (operandsCount == 1 && hasFirstOperand && !hasSecondOperand) {
+        return mnemonic.firstOperand().matches(admList.get(0));
+      }
+
+      if (operandsCount == 2 && hasFirstOperand && hasSecondOperand) {
+        return mnemonic.firstOperand().matches(admList.get(0)) &&
+          mnemonic.secondOperand().matches(admList.get(1));
+      }
+
+      return false;
+    });
   }
 
   private MnemonicBuilder create(IElementType elementType) {
