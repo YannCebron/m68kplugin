@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ public class MovepInstructionPsiTest extends M68kPsiTestCase<M68kMovepInstructio
     assertNotNull(admAdi);
     assertEquals(M68kRegister.A0, admAdi.getRegister());
     final M68kNumberExpression displacementExpression = assertInstanceOf(admAdi.getDisplacement(), M68kNumberExpression.class);
-    assertEquals(42L, displacementExpression.getValue());
+    assertEquals(42, displacementExpression.getValue());
   }
 
 }

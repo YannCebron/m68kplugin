@@ -17,11 +17,12 @@
 package com.yanncebron.m68kplugin.lang.psi.expression;
 
 import com.intellij.openapi.util.Comparing;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public final class M68kExpressionUtil {
 
-  public static boolean isNumberValue(M68kExpression expression, long expectedValue) {
+  public static boolean isNumberValue(M68kExpression expression, int expectedValue) {
     expression = unwrapParentheses(expression);
 
     if (expression instanceof M68kUnaryMinusExpression unaryMinusExpression) {
@@ -31,12 +32,12 @@ public final class M68kExpressionUtil {
       expression = unwrapParentheses(unaryPlusExpression.getOperand());
     }
 
-    return expression instanceof M68kNumberExpression  m68kNumberExpression&&
+    return expression instanceof M68kNumberExpression m68kNumberExpression &&
       Comparing.equal(m68kNumberExpression.getValue(), expectedValue);
   }
 
   public static boolean isZeroNumberValue(M68kExpression expression) {
-    return isNumberValue(expression, 0L);
+    return isNumberValue(expression, 0);
   }
 
   @Nullable
@@ -45,5 +46,15 @@ public final class M68kExpressionUtil {
       return unwrapParentheses(m68kParenExpression.getExpression());
     }
     return expression;
+  }
+
+  @Nullable
+  public static Object computeConstantValue(@NotNull M68kExpression expression) {
+    return M68kConstantExpressionEvaluator.computeConstantExpression(expression, true);
+  }
+
+  @Nullable
+  public static Object computeConstantValueNoOverflow(@NotNull M68kExpression expression) {
+    return M68kConstantExpressionEvaluator.computeConstantExpression(expression, false);
   }
 }

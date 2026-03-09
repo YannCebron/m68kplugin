@@ -124,11 +124,11 @@ final class M68kSimplifiableExpressionInspection extends LocalInspectionTool imp
   }
 
   private boolean isOneNumberValue(M68kExpression expression) {
-    return M68kExpressionUtil.isNumberValue(expression, 1L);
+    return M68kExpressionUtil.isNumberValue(expression, 1);
   }
 
   private boolean isMinusOneNumberValue(M68kExpression expression) {
-    return M68kExpressionUtil.isNumberValue(expression, -1L);
+    return M68kExpressionUtil.isNumberValue(expression, -1);
   }
 
 

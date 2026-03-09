@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,14 +33,14 @@ final class M68kNumberExpressionDocumentationProvider extends AbstractDocumentat
   public @Nullable String generateDoc(PsiElement element, @Nullable PsiElement originalElement) {
     if (!(element instanceof M68kNumberExpression numberExpression)) return null;
 
-    Long originalValue = ObjectUtils.tryCast(numberExpression.getValue(), Long.class);
+    Integer originalValue = ObjectUtils.tryCast(numberExpression.getValue(), Integer.class);
     assert originalValue != null : numberExpression.getText();
 
     return "<code>" +
-      doGetValueText(element, Long.toString(originalValue)) + "<br>" +
-      doGetValueText(element, "$" + Long.toHexString(originalValue)) + "<br>" +
-      doGetValueText(element, "@" + Long.toOctalString(originalValue)) + "<br>" +
-      doGetValueText(element, "%" + Long.toBinaryString(originalValue)) + "<br>" + "</code>";
+      doGetValueText(element, Integer.toString(originalValue)) + "<br>" +
+      doGetValueText(element, "$" + Integer.toHexString(originalValue)) + "<br>" +
+      doGetValueText(element, "@" + Integer.toOctalString(originalValue)) + "<br>" +
+      doGetValueText(element, "%" + Integer.toBinaryString(originalValue)) + "<br>" + "</code>";
   }
 
   @Override

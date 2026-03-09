@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,22 +27,22 @@ public class NumberExpressionPsiTest extends M68kPsiTestCase<M68kDcDirective> {
   }
 
   public void testGetValueInteger() {
-    doTestGetValue("1234", 1234L);
+    doTestGetValue("1234", 1234);
   }
 
   public void testGetValueHex() {
-    doTestGetValue("$fffffffe", 4294967294L);
+    doTestGetValue("$ffff", 65535);
   }
 
   public void testGetValueOctal() {
-    doTestGetValue("@123", 83L);
+    doTestGetValue("@123", 83);
   }
 
   public void testGetValueBinary() {
-    doTestGetValue("%01011", 11L);
+    doTestGetValue("%01011", 11);
   }
 
-  private void doTestGetValue(String numberValue, Long expectedValue) {
+  private void doTestGetValue(String numberValue, Integer expectedValue) {
     final M68kExpression expression = parseNumber(numberValue);
     final M68kNumberExpression numberExpression = assertInstanceOf(expression, M68kNumberExpression.class);
     assertEquals(numberValue, expectedValue, numberExpression.getValue());

@@ -39,7 +39,7 @@ public class MoveInstructionPsiTest extends M68kPsiTestCase<M68kMoveInstruction>
     final M68kAdmPci admPci = instruction.getAdmPci();
     assertNotNull(admPci);
     final M68kNumberExpression displacement = assertInstanceOf(admPci.getDisplacement(), M68kNumberExpression.class);
-    assertEquals(42L, displacement.getValue());
+    assertEquals(42, displacement.getValue());
     assertEquals(M68kRegister.PC, admPci.getRegister());
 
     final M68kAdmRrdIndex admRrdIndex = admPci.getAdmRrdIndex();

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,16 +35,16 @@ abstract class M68kNumberExpressionMixIn extends ASTWrapperPsiElement implements
 
     IElementType elementType = getFirstChild().getNode().getElementType();
     if (elementType == M68kTokenTypes.DEC_NUMBER) {
-      return Long.parseLong(text);
+      return Integer.parseInt(text);
     }
     if (elementType == M68kTokenTypes.HEX_NUMBER) {
-      return Long.parseLong(text.substring(1), 16);
+      return Integer.parseInt(text.substring(1), 16);
     }
     if (elementType == M68kTokenTypes.OCT_NUMBER) {
-      return Long.parseLong(text.substring(1), 8);
+      return Integer.parseInt(text.substring(1), 8);
     }
     if (elementType == M68kTokenTypes.BIN_NUMBER) {
-      return Long.parseLong(text.substring(1), 2);
+      return Integer.parseInt(text.substring(1), 2);
     }
 
     throw new IllegalArgumentException("could not determine getValue() for " + elementType + ", '" + text + "'");
