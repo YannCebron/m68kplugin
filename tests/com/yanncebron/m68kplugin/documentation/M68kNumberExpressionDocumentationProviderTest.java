@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,10 @@ public class M68kNumberExpressionDocumentationProviderTest extends BasePlatformT
   public void testGenerateHoverDoc() {
     doTestGenerateDoc(" dc.b 4<caret>2",
       "<code><span style=\"color:#0000ff;\">42</span><br><span style=\"color:#0000ff;\">$2a</span><br><span style=\"color:#0000ff;\">@52</span><br><span style=\"color:#0000ff;\">%101010</span><br></code>");
+  }
+
+  public void testGenerateHoverDocInvalidValue() {
+    doTestGenerateDoc(" dc.b -214748<caret>3649","Invalid number value");
   }
 
   private void doTestGenerateDoc(String source, String docText) {

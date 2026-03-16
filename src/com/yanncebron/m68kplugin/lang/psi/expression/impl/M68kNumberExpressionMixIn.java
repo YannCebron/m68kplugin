@@ -23,6 +23,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kUnaryMinusExpression;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 abstract class M68kNumberExpressionMixIn extends ASTWrapperPsiElement implements M68kNumberExpression {
 
@@ -30,6 +31,9 @@ abstract class M68kNumberExpressionMixIn extends ASTWrapperPsiElement implements
     super(node);
   }
 
+  /**
+   * @return {@code null} for invalid number (out of range)
+   */
   @Override
   public Object getValue() {
     String text = getText();
@@ -54,7 +58,12 @@ abstract class M68kNumberExpressionMixIn extends ASTWrapperPsiElement implements
     throw new IllegalArgumentException("could not determine getValue() for " + elementType + ", '" + text + "'");
   }
 
+  @Nullable
   private static Integer parseNumber(String text, boolean isNegative, int radix) {
-    return Integer.parseInt(isNegative ? "-" + text : text, radix);
+    try {
+      return Integer.parseInt(isNegative ? "-" + text : text, radix);
+    } catch (NumberFormatException e) {
+      return null;
+    }
   }
 }

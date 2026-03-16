@@ -20,6 +20,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiTestCase;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDcDirective;
+import org.jetbrains.annotations.Nullable;
 
 public class NumberExpressionPsiTest extends M68kPsiTestCase<M68kDcDirective> {
 
@@ -47,7 +48,15 @@ public class NumberExpressionPsiTest extends M68kPsiTestCase<M68kDcDirective> {
     doTestGetValue("-%01011", -11);
   }
 
-  private void doTestGetValue(String numberValue, Integer expectedValue) {
+  public void testGetValueFailsForOverflow() {
+    doTestGetValue("" + Integer.MAX_VALUE , Integer.MAX_VALUE);
+    doTestGetValue("" + Integer.MAX_VALUE + 1, null);
+
+    doTestGetValue("-2147483648", Integer.MIN_VALUE);
+    doTestGetValue("-2147483649", null);
+  }
+
+  private void doTestGetValue(String numberValue, @Nullable Integer expectedValue) {
     final M68kExpression expression = parseNumber(numberValue);
     final M68kNumberExpression numberExpression = PsiTreeUtil.findChildOfType(expression, M68kNumberExpression.class, false);
     assertNotNull(numberExpression);
