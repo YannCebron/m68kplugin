@@ -2,27 +2,33 @@
 <body>
 Reports simplifiable expressions.
 <p>The following problems are reported:</p>
+<h3>Unnecessary parentheses</h3>
+<ul>
+    <li><code>(42)</code> &rarr; <code>42</code></li>
+</ul>
+<h3>Unary prefix for <code>0</code></h3>
 <ul>
     <li><code>+0</code> &rarr; <code>0</code></li>
     <li><code>-0</code> &rarr; <code>0</code></li>
 </ul>
-<ul>
-    <li><code>(42)</code> &rarr; <code>42</code></li>
-</ul>
+<h3>Addition/subtraction: operand <code>0</code></h3>
 <ul>
     <li><code>0+42</code> &rarr; <code>42</code></li>
     <li><code>42-0</code> &rarr; <code>42</code></li>
     <li><code>0-42</code> &rarr; <code>-42</code></li>
 </ul>
+<h3>Multiplication: unnecessary operand</h3>
 <ul>
     <li><code>42*0</code> &rarr; <code>0</code></li>
     <li><code>42*1</code> &rarr; <code>42</code></li>
     <li><code>42*-1</code> &rarr; <code>-42</code></li>
 </ul>
+<h3>Division: unnecessary operand</h3>
 <ul>
     <li><code>42/1</code> &rarr; <code>42</code></li>
     <li><code>42/-1</code> &rarr; <code>-42</code></li>
 </ul>
+<h3>Modulo: unnecessary operand</h3>
 <ul>
     <li><code>42%1</code> &rarr; <code>42</code></li>
 </ul>
