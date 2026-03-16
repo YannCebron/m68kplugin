@@ -28,7 +28,9 @@ public class M68kExpressionUtilTest extends M68kPsiTestCase<M68kDcDirective> {
 
   public void testIsNumberValue() {
     assertTrue(M68kExpressionUtil.isNumberValue(getExpression("42"), 42));
+    assertTrue(M68kExpressionUtil.isNumberValue(getExpression("+42"), 42));
     assertTrue(M68kExpressionUtil.isNumberValue(getExpression("-42"), -42));
+    assertTrue(M68kExpressionUtil.isNumberValue(getExpression("-$F"), -15));
   }
 
   public void testUnwrapParentheses() {
@@ -77,13 +79,12 @@ public class M68kExpressionUtilTest extends M68kPsiTestCase<M68kDcDirective> {
     assertEquals(2, computeConstantValue("3-1"));
   }
 
-  // todo handle parsing negative values?
-  public void _testComputeConstantValueMinusExpressionOverflow() {
+  public void testComputeConstantValueMinusExpressionOverflow() {
     try {
       computeConstantValue(Integer.MIN_VALUE + "-1");
       fail("must overflow");
     } catch (M68kConstantEvaluationOverflowException e) {
-      assertEquals("9223372036854775807+1", e.getOverflowingExpression().getText());
+      assertEquals("-2147483648-1", e.getOverflowingExpression().getText());
     }
   }
 
@@ -117,13 +118,12 @@ public class M68kExpressionUtilTest extends M68kPsiTestCase<M68kDcDirective> {
     }
   }
 
-  // todo handle parsing negative values
-  public void _testComputeConstantValueDivExpressionOverflow() {
+  public void testComputeConstantValueDivExpressionOverflow() {
     try {
       computeConstantValue(Integer.MIN_VALUE + "/-1");
       fail("must overflow");
     } catch (M68kConstantEvaluationOverflowException e) {
-      assertEquals("9223372036854775807/0", e.getOverflowingExpression().getText());
+      assertEquals("-2147483648/-1", e.getOverflowingExpression().getText());
     }
   }
 

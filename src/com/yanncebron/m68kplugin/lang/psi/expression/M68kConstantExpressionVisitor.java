@@ -70,11 +70,17 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
 
   @Override
   public void visitUnaryMinusExpression(@NotNull M68kUnaryMinusExpression o) {
-    // todo BS ??
     result = null;
-    Object value = getStoredValue(o.getOperand());
+    M68kExpression operand = o.getOperand();
+    Object value = getStoredValue(operand);
     if (value instanceof Number) {
-      result = -((Number) value).intValue();
+      int intValue = ((Number) value).intValue();
+      // plain number literal is already parsed signed
+      if (operand instanceof M68kNumberExpression) {
+        result = intValue;
+      } else {
+        result = -intValue;
+      }
     }
   }
 
@@ -107,7 +113,7 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
   public void visitMinusExpression(@NotNull M68kMinusExpression expression) {
     handleBinaryNumberExpression(expression, (left, right) -> {
       result = left - right;
-      checkAdditionOverflow((Integer) result>= 0, left >= 0, right < 0, expression);
+      checkAdditionOverflow((Integer) result >= 0, left >= 0, right < 0, expression);
       return null;
     });
   }

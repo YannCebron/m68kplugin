@@ -21,6 +21,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kUnaryMinusExpression;
 import org.jetbrains.annotations.NotNull;
 
 abstract class M68kNumberExpressionMixIn extends ASTWrapperPsiElement implements M68kNumberExpression {
@@ -31,22 +32,29 @@ abstract class M68kNumberExpressionMixIn extends ASTWrapperPsiElement implements
 
   @Override
   public Object getValue() {
-    final String text = getText();
+    String text = getText();
+    boolean isNegative = getParent() instanceof M68kUnaryMinusExpression;
 
     IElementType elementType = getFirstChild().getNode().getElementType();
     if (elementType == M68kTokenTypes.DEC_NUMBER) {
-      return Integer.parseInt(text);
+      return parseNumber(text, isNegative, 10);
     }
+
+    text = text.substring(1);
     if (elementType == M68kTokenTypes.HEX_NUMBER) {
-      return Integer.parseInt(text.substring(1), 16);
+      return parseNumber(text, isNegative, 16);
     }
     if (elementType == M68kTokenTypes.OCT_NUMBER) {
-      return Integer.parseInt(text.substring(1), 8);
+      return parseNumber(text, isNegative, 8);
     }
     if (elementType == M68kTokenTypes.BIN_NUMBER) {
-      return Integer.parseInt(text.substring(1), 2);
+      return parseNumber(text, isNegative, 2);
     }
 
     throw new IllegalArgumentException("could not determine getValue() for " + elementType + ", '" + text + "'");
+  }
+
+  private static Integer parseNumber(String text, boolean isNegative, int radix) {
+    return Integer.parseInt(isNegative ? "-" + text : text, radix);
   }
 }

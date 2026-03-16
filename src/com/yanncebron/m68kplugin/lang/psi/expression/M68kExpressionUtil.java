@@ -25,15 +25,13 @@ public final class M68kExpressionUtil {
   public static boolean isNumberValue(M68kExpression expression, int expectedValue) {
     expression = unwrapParentheses(expression);
 
-    if (expression instanceof M68kUnaryMinusExpression unaryMinusExpression) {
-      expression = unwrapParentheses(unaryMinusExpression.getOperand());
-      expectedValue = -expectedValue;
-    } else if (expression instanceof M68kUnaryPlusExpression unaryPlusExpression) {
-      expression = unwrapParentheses(unaryPlusExpression.getOperand());
+    Object m68kNumberExpression = expression;
+    if (expression instanceof M68kUnaryMinusExpression || expression instanceof M68kUnaryPlusExpression) {
+      m68kNumberExpression = unwrapParentheses(((M68kUnaryExpression) expression).getOperand());
     }
 
-    return expression instanceof M68kNumberExpression m68kNumberExpression &&
-      Comparing.equal(m68kNumberExpression.getValue(), expectedValue);
+    return m68kNumberExpression instanceof M68kNumberExpression numberExpression &&
+      Comparing.equal(numberExpression.getValue(), expectedValue);
   }
 
   public static boolean isZeroNumberValue(M68kExpression expression) {

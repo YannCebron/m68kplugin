@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.lang.psi.expression;
 
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiTestCase;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDcDirective;
@@ -28,23 +29,28 @@ public class NumberExpressionPsiTest extends M68kPsiTestCase<M68kDcDirective> {
 
   public void testGetValueInteger() {
     doTestGetValue("1234", 1234);
+    doTestGetValue("-1234", -1234);
   }
 
   public void testGetValueHex() {
     doTestGetValue("$ffff", 65535);
+    doTestGetValue("-$ffff", -65535);
   }
 
   public void testGetValueOctal() {
     doTestGetValue("@123", 83);
+    doTestGetValue("-@123", -83);
   }
 
   public void testGetValueBinary() {
     doTestGetValue("%01011", 11);
+    doTestGetValue("-%01011", -11);
   }
 
   private void doTestGetValue(String numberValue, Integer expectedValue) {
     final M68kExpression expression = parseNumber(numberValue);
-    final M68kNumberExpression numberExpression = assertInstanceOf(expression, M68kNumberExpression.class);
+    final M68kNumberExpression numberExpression = PsiTreeUtil.findChildOfType(expression, M68kNumberExpression.class, false);
+    assertNotNull(numberExpression);
     assertEquals(numberValue, expectedValue, numberExpression.getValue());
   }
 
