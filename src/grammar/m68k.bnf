@@ -135,7 +135,7 @@ private data_size_all ::= !<<afterWhitespace>> (DOT_B | DOT_W | DOT_L)
 {
   name = ".b|w|l"
 }
-private data_size_all_short ::= !<<afterWhitespace>> (DOT_B | DOT_W | DOT_L | DOT_S)
+private data_size_all_single ::= !<<afterWhitespace>> (DOT_B | DOT_W | DOT_L | DOT_S)
 {
   name = ".s|b|w|l"
 }
@@ -571,7 +571,7 @@ private jump_instructions ::= jsr_instruction|
                               rte_instruction |
                               rtr_instruction
 
-bsr_instruction ::= BSR data_size_all_short? adm_abs
+bsr_instruction ::= BSR data_size_all_single? adm_abs
 {
   extends = data_sized
 }
@@ -920,9 +920,9 @@ private bCC_instructions ::= bra_instruction |
                              bmi_instruction |
                              bvs_instruction
 
-private bCC_tail ::= data_size_all_short? adm_abs
+private bCC_tail ::= data_size_all_single? adm_abs
 
-fake bcc_instruction_base ::= data_size_all_short? adm_abs? // == bCC_tail with nullable adm_abs due to pin
+fake bcc_instruction_base ::= data_size_all_single? adm_abs? // == bCC_tail with nullable adm_abs due to pin
 {
   extends = data_sized
 }

@@ -1069,7 +1069,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // data_size_all_short? adm_abs
+  // data_size_all_single? adm_abs
   static boolean bCC_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bCC_tail")) return false;
     boolean r;
@@ -1080,10 +1080,10 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // data_size_all_short?
+  // data_size_all_single?
   private static boolean bCC_tail_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bCC_tail_0")) return false;
-    data_size_all_short(b, l + 1);
+    data_size_all_single(b, l + 1);
     return true;
   }
 
@@ -1697,7 +1697,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // BSR data_size_all_short? adm_abs
+  // BSR data_size_all_single? adm_abs
   public static boolean bsr_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bsr_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", BSR)) return false;
@@ -1711,10 +1711,10 @@ public class M68kParser implements PsiParser, LightPsiParser {
     return r || p;
   }
 
-  // data_size_all_short?
+  // data_size_all_single?
   private static boolean bsr_instruction_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bsr_instruction_1")) return false;
-    data_size_all_short(b, l + 1);
+    data_size_all_single(b, l + 1);
     return true;
   }
 
@@ -2143,19 +2143,19 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // !<<afterWhitespace>> (DOT_B | DOT_W | DOT_L | DOT_S)
-  static boolean data_size_all_short(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "data_size_all_short")) return false;
+  static boolean data_size_all_single(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "data_size_all_single")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, null, "<.s|b|w|l>");
-    r = data_size_all_short_0(b, l + 1);
-    r = r && data_size_all_short_1(b, l + 1);
+    r = data_size_all_single_0(b, l + 1);
+    r = r && data_size_all_single_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   // !<<afterWhitespace>>
-  private static boolean data_size_all_short_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "data_size_all_short_0")) return false;
+  private static boolean data_size_all_single_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "data_size_all_single_0")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NOT_);
     r = !afterWhitespace(b, l + 1);
@@ -2164,8 +2164,8 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   // DOT_B | DOT_W | DOT_L | DOT_S
-  private static boolean data_size_all_short_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "data_size_all_short_1")) return false;
+  private static boolean data_size_all_single_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "data_size_all_single_1")) return false;
     boolean r;
     r = consumeToken(b, DOT_B);
     if (!r) r = consumeToken(b, DOT_W);
