@@ -28,8 +28,13 @@ public class M68kNumberExpressionDocumentationProviderTest extends BasePlatformT
       "<code><span style=\"color:#0000ff;\">42</span><br><span style=\"color:#0000ff;\">$2a</span><br><span style=\"color:#0000ff;\">@52</span><br><span style=\"color:#0000ff;\">%101010</span><br></code>");
   }
 
+  public void testGenerateHoverDocNegativeNumber() {
+    doTestGenerateDoc(" dc.b -<caret>1",
+      "<code><span style=\"\">-</span><span style=\"color:#0000ff;\">1</span><br><span style=\"color:#0000ff;\">$ffffffff</span><br><span style=\"color:#0000ff;\">@37777777777</span><br><span style=\"color:#0000ff;\">%11111111111111111111111111111111</span><br></code>");
+  }
+
   public void testGenerateHoverDocInvalidValue() {
-    doTestGenerateDoc(" dc.b -214748<caret>3649","Invalid number value");
+    doTestGenerateDoc(" dc.b -214748<caret>3649", "Invalid number value");
   }
 
   private void doTestGenerateDoc(String source, String docText) {
