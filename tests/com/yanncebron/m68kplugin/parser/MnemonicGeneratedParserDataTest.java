@@ -36,7 +36,7 @@ import static java.util.Map.entry;
 public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
   // testData/sanity/AllInstructionsParsing.s
-  private static final boolean DUMP = true;
+  private static final boolean DUMP = false;
 
   // do not generate exact same variants from previously tested mnemonic(s)
   private static final boolean SKIP_DUPLICATE_VARIANTS = true;
