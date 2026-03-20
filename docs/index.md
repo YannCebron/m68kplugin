@@ -1,5 +1,5 @@
 ---
-title: Home
+title: Motorola 68000 Series Assembly Language Support for IntelliJ-based IDEs
 nav_order: 1
 permalink: /
 ---
