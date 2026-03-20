@@ -718,13 +718,13 @@
 
 ********************************************************************************
 
-* M68kMnemonic{bcc, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD], MC68000 Family}
+* M68kMnemonic{bcc, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label00: bcc         label00
          bcc.s       label00
          bcc.b       label00
          bcc.w       label00
 
-* M68kMnemonic{bcc, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bcc, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
 label01: bcc         label01
          bcc.s       label01
          bcc.b       label01
@@ -844,13 +844,13 @@ label01: bcc         label01
 
 ********************************************************************************
 
-* M68kMnemonic{bcs, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD], MC68000 Family}
+* M68kMnemonic{bcs, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label02: bcs         label02
          bcs.s       label02
          bcs.b       label02
          bcs.w       label02
 
-* M68kMnemonic{bcs, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bcs, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
 label03: bcs         label03
          bcs.s       label03
          bcs.b       label03
@@ -860,13 +860,13 @@ label03: bcs         label03
 
 ********************************************************************************
 
-* M68kMnemonic{beq, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD], MC68000 Family}
+* M68kMnemonic{beq, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label04: beq         label04
          beq.s       label04
          beq.b       label04
          beq.w       label04
 
-* M68kMnemonic{beq, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{beq, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
 label05: beq         label05
          beq.s       label05
          beq.b       label05
@@ -876,13 +876,13 @@ label05: beq         label05
 
 ********************************************************************************
 
-* M68kMnemonic{bge, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD], MC68000 Family}
+* M68kMnemonic{bge, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label06: bge         label06
          bge.s       label06
          bge.b       label06
          bge.w       label06
 
-* M68kMnemonic{bge, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bge, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
 label07: bge         label07
          bge.s       label07
          bge.b       label07
@@ -892,13 +892,13 @@ label07: bge         label07
 
 ********************************************************************************
 
-* M68kMnemonic{bgt, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD], MC68000 Family}
+* M68kMnemonic{bgt, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label08: bgt         label08
          bgt.s       label08
          bgt.b       label08
          bgt.w       label08
 
-* M68kMnemonic{bgt, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bgt, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
 label09: bgt         label09
          bgt.s       label09
          bgt.b       label09
@@ -908,13 +908,13 @@ label09: bgt         label09
 
 ********************************************************************************
 
-* M68kMnemonic{bhi, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD], MC68000 Family}
+* M68kMnemonic{bhi, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label10: bhi         label10
          bhi.s       label10
          bhi.b       label10
          bhi.w       label10
 
-* M68kMnemonic{bhi, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bhi, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
 label11: bhi         label11
          bhi.s       label11
          bhi.b       label11
@@ -924,13 +924,13 @@ label11: bhi         label11
 
 ********************************************************************************
 
-* M68kMnemonic{bhs, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD], MC68000 Family}
+* M68kMnemonic{bhs, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label12: bhs         label12
          bhs.s       label12
          bhs.b       label12
          bhs.w       label12
 
-* M68kMnemonic{bhs, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bhs, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
 label13: bhs         label13
          bhs.s       label13
          bhs.b       label13
@@ -946,13 +946,13 @@ label13: bhs         label13
 
 ********************************************************************************
 
-* M68kMnemonic{ble, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD], MC68000 Family}
+* M68kMnemonic{ble, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label14: ble         label14
          ble.s       label14
          ble.b       label14
          ble.w       label14
 
-* M68kMnemonic{ble, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{ble, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
 label15: ble         label15
          ble.s       label15
          ble.b       label15
@@ -962,13 +962,13 @@ label15: ble         label15
 
 ********************************************************************************
 
-* M68kMnemonic{blo, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD], MC68000 Family}
+* M68kMnemonic{blo, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label16: blo         label16
          blo.s       label16
          blo.b       label16
          blo.w       label16
 
-* M68kMnemonic{blo, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{blo, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
 label17: blo         label17
          blo.s       label17
          blo.b       label17
@@ -978,13 +978,13 @@ label17: blo         label17
 
 ********************************************************************************
 
-* M68kMnemonic{bls, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD], MC68000 Family}
+* M68kMnemonic{bls, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label18: bls         label18
          bls.s       label18
          bls.b       label18
          bls.w       label18
 
-* M68kMnemonic{bls, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bls, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
 label19: bls         label19
          bls.s       label19
          bls.b       label19
@@ -994,13 +994,13 @@ label19: bls         label19
 
 ********************************************************************************
 
-* M68kMnemonic{blt, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD], MC68000 Family}
+* M68kMnemonic{blt, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label20: blt         label20
          blt.s       label20
          blt.b       label20
          blt.w       label20
 
-* M68kMnemonic{blt, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{blt, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
 label21: blt         label21
          blt.s       label21
          blt.b       label21
@@ -1010,13 +1010,13 @@ label21: blt         label21
 
 ********************************************************************************
 
-* M68kMnemonic{bmi, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD], MC68000 Family}
+* M68kMnemonic{bmi, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label22: bmi         label22
          bmi.s       label22
          bmi.b       label22
          bmi.w       label22
 
-* M68kMnemonic{bmi, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bmi, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
 label23: bmi         label23
          bmi.s       label23
          bmi.b       label23
@@ -1026,13 +1026,13 @@ label23: bmi         label23
 
 ********************************************************************************
 
-* M68kMnemonic{bne, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD], MC68000 Family}
+* M68kMnemonic{bne, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label24: bne         label24
          bne.s       label24
          bne.b       label24
          bne.w       label24
 
-* M68kMnemonic{bne, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bne, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
 label25: bne         label25
          bne.s       label25
          bne.b       label25
@@ -1042,13 +1042,13 @@ label25: bne         label25
 
 ********************************************************************************
 
-* M68kMnemonic{bpl, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD], MC68000 Family}
+* M68kMnemonic{bpl, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label26: bpl         label26
          bpl.s       label26
          bpl.b       label26
          bpl.w       label26
 
-* M68kMnemonic{bpl, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bpl, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
 label27: bpl         label27
          bpl.s       label27
          bpl.b       label27
@@ -1058,13 +1058,13 @@ label27: bpl         label27
 
 ********************************************************************************
 
-* M68kMnemonic{bra, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD], MC68000 Family}
+* M68kMnemonic{bra, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label28: bra         label28
          bra.s       label28
          bra.b       label28
          bra.w       label28
 
-* M68kMnemonic{bra, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bra, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
 label29: bra         label29
          bra.s       label29
          bra.b       label29
@@ -1129,13 +1129,13 @@ label29: bra         label29
 
 ********************************************************************************
 
-* M68kMnemonic{bsr, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD], MC68000 Family}
+* M68kMnemonic{bsr, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label30: bsr         label30
          bsr.s       label30
          bsr.b       label30
          bsr.w       label30
 
-* M68kMnemonic{bsr, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bsr, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
 label31: bsr         label31
          bsr.s       label31
          bsr.b       label31
@@ -1224,13 +1224,13 @@ label31: bsr         label31
 
 ********************************************************************************
 
-* M68kMnemonic{bvc, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD], MC68000 Family}
+* M68kMnemonic{bvc, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label32: bvc         label32
          bvc.s       label32
          bvc.b       label32
          bvc.w       label32
 
-* M68kMnemonic{bvc, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bvc, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
 label33: bvc         label33
          bvc.s       label33
          bvc.b       label33
@@ -1240,13 +1240,13 @@ label33: bvc         label33
 
 ********************************************************************************
 
-* M68kMnemonic{bvs, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD], MC68000 Family}
+* M68kMnemonic{bvs, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label34: bvs         label34
          bvs.s       label34
          bvs.b       label34
          bvs.w       label34
 
-* M68kMnemonic{bvs, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SHORT, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bvs, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
 label35: bvs         label35
          bvs.s       label35
          bvs.b       label35
