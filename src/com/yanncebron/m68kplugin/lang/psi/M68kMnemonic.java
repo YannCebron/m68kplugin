@@ -75,9 +75,9 @@ public record M68kMnemonic(IElementType elementType,
   @Override
   public @NotNull String toString() {
     final String cpuText;
-    if (cpus == M68kCpu.GROUP_68000_UP) cpuText = "MC68000 Family";
-    else if (cpus == M68kCpu.GROUP_68010_UP) cpuText = "MC68010+";
-    else if (cpus == M68kCpu.GROUP_68020_UP) cpuText = "MC68020+";
+    if (cpus.equals(M68kCpu.GROUP_68000_UP)) cpuText = "MC68000 Family";
+    else if (cpus.equals(M68kCpu.GROUP_68010_UP)) cpuText = "MC68010+";
+    else if (cpus.equals(M68kCpu.GROUP_68020_UP)) cpuText = "MC68020+";
     else cpuText = cpus.toString();
 
     return "M68kMnemonic{" +
