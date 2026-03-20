@@ -194,8 +194,11 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
   }
 
   private void dumpCode(List<M68kMnemonic> mnemonics) {
-    System.out.println(StringUtil.repeat("-", 80));
     int supportedMnemonics = ContainerUtil.filter(mnemonics, m68kMnemonic -> isSupportedCpu(m68kMnemonic.cpus())).size();
+    assertEquals("total parsed mnemonic count", 330, mnemonics.size());
+    assertEquals("supported mnemonic count", 283, supportedMnemonics);
+
+    System.out.println(StringUtil.repeat("-", 80));
     System.out.println("// Total mnemonics: " + supportedMnemonics);
 
     IElementType lastElementType = null;
