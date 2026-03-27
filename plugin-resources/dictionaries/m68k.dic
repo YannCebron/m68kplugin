@@ -5,6 +5,7 @@ addx
 basereg
 bchg
 bclr
+bkpt
 bset
 btst
 carg
@@ -90,6 +91,7 @@ subq
 subx
 trapv
 unlk
+unsized
 vasm
 vlink
 xdef
