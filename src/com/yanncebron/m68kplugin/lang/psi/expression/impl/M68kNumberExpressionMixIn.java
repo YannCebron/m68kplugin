@@ -39,6 +39,17 @@ abstract class M68kNumberExpressionMixIn extends ASTWrapperPsiElement implements
     String text = getText();
     boolean isNegative = getParent() instanceof M68kUnaryMinusExpression;
 
+    // no need to parse most frequent values '0', '1'/'-1', '2'/'-2'
+    if ("0".equals(text)) {
+      return 0;
+    }
+    if ("1".equals(text)) {
+      return isNegative ? -1 : 1;
+    }
+    if ("2".equals(text)) {
+      return isNegative ? -2 : 2;
+    }
+
     IElementType elementType = getFirstChild().getNode().getElementType();
     if (elementType == M68kTokenTypes.DEC_NUMBER) {
       return parseNumber(text, isNegative, 10);

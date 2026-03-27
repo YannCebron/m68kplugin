@@ -15,6 +15,7 @@
 - Parser: too lenient parsing for
   - `TST`
 - Privileged instruction status: `move.w SR,<ALTERABLE_DATA>` only for 68010+
+- Parsing number literals
 
 ## 0.2.1 - 2025-11-29
 

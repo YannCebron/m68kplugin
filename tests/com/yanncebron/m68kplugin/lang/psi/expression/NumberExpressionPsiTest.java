@@ -62,6 +62,35 @@ public class NumberExpressionPsiTest extends M68kPsiTestCase<M68kDcDirective> {
     doTestGetValue("-2147483649", 2147483647);
   }
 
+  public void testGetValueOptimizedZero() {
+    doTestGetValue("0", 0);
+    doTestGetValue("$0", 0);
+    doTestGetValue("@0", 0);
+    doTestGetValue("%0", 0);
+  }
+
+  public void testGetValueOptimizedOneMinusOne() {
+    doTestGetValue("1", 1);
+    doTestGetValue("$1", 1);
+    doTestGetValue("@1", 1);
+    doTestGetValue("%1", 1);
+
+    doTestGetValue("-1", -1);
+    doTestGetValue("-$1", -1);
+    doTestGetValue("-@1", -1);
+    doTestGetValue("-%1", -1);
+  }
+
+  public void testGetValueOptimizedTwoMinusTwo() {
+    doTestGetValue("2", 2);
+    doTestGetValue("$2", 2);
+    doTestGetValue("@2", 2);
+
+    doTestGetValue("-2", -2);
+    doTestGetValue("-$2", -2);
+    doTestGetValue("-@2", -2);
+  }
+
   private void doTestGetValue(String numberValue, @Nullable Integer expectedValue) {
     final M68kExpression expression = parseNumber(numberValue);
     final M68kNumberExpression numberExpression = PsiTreeUtil.findChildOfType(expression, M68kNumberExpression.class, false);
