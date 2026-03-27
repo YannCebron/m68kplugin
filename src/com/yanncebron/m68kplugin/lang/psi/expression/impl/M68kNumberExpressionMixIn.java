@@ -32,7 +32,7 @@ abstract class M68kNumberExpressionMixIn extends ASTWrapperPsiElement implements
   }
 
   /**
-   * @return {@code null} for invalid number (out of range)
+   * @return parsed number as {@link Integer} or {@code null} for invalid number (breaking Long range)
    */
   @Override
   public Object getValue() {
@@ -61,7 +61,8 @@ abstract class M68kNumberExpressionMixIn extends ASTWrapperPsiElement implements
   @Nullable
   private static Integer parseNumber(String text, boolean isNegative, int radix) {
     try {
-      return Integer.parseInt(isNegative ? "-" + text : text, radix);
+      long longValue = Long.parseLong(isNegative ? "-" + text : text, radix);
+      return Long.valueOf(longValue).intValue();
     } catch (NumberFormatException e) {
       return null;
     }

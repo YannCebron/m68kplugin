@@ -34,7 +34,7 @@ public class M68kNumberExpressionDocumentationProviderTest extends BasePlatformT
   }
 
   public void testGenerateHoverDocInvalidValue() {
-    doTestGenerateDoc(" dc.b -214748<caret>3649", "Invalid number value");
+    doTestGenerateDoc(" dc.b -999999999<caret>99999999999999999", "Invalid number value");
   }
 
   private void doTestGenerateDoc(String source, String docText) {

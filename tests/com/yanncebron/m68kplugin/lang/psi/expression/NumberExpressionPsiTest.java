@@ -22,6 +22,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kPsiTestCase;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDcDirective;
 import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class NumberExpressionPsiTest extends M68kPsiTestCase<M68kDcDirective> {
 
   public NumberExpressionPsiTest() {
@@ -34,8 +35,12 @@ public class NumberExpressionPsiTest extends M68kPsiTestCase<M68kDcDirective> {
   }
 
   public void testGetValueHex() {
-    doTestGetValue("$ffff", 65535);
-    doTestGetValue("-$ffff", -65535);
+    doTestGetValue("$FFFF", 0xffff);
+    doTestGetValue("$FFFFFFFF", -1);
+    doTestGetValue("$FFFFFFFFFFFF", -1);
+    doTestGetValue("$DFDFDF00", -538976512);
+    doTestGetValue("$FFFFFFFE", -2);
+    doTestGetValue("-$FFFF", -0xffff);
   }
 
   public void testGetValueOctal() {
@@ -49,11 +54,12 @@ public class NumberExpressionPsiTest extends M68kPsiTestCase<M68kDcDirective> {
   }
 
   public void testGetValueFailsForOverflow() {
-    doTestGetValue("" + Integer.MAX_VALUE , Integer.MAX_VALUE);
-    doTestGetValue("" + Integer.MAX_VALUE + 1, null);
+    doTestGetValue("" + Integer.MAX_VALUE, Integer.MAX_VALUE);
+    doTestGetValue("" + (Integer.MAX_VALUE + 1L), -2147483648);
+    doTestGetValue("" + Long.MAX_VALUE, -1);
 
-    doTestGetValue("-2147483648", Integer.MIN_VALUE);
-    doTestGetValue("-2147483649", null);
+    doTestGetValue("-2147483648", -2147483648);
+    doTestGetValue("-2147483649", 2147483647);
   }
 
   private void doTestGetValue(String numberValue, @Nullable Integer expectedValue) {
