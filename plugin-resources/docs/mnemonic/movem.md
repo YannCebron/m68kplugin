@@ -62,14 +62,4 @@ Example MOVEM.L D0-D5/A0-A3,-(SP)    ;Save registers
 |:-:|:-:|:-:|:-:|:-:|
 |-|-|-|-|-|
 
-## Source operand addressing modes (memory to register)
-|Dn|An|(An)|(An)+|&#x2011;(An)|(d,An)|(d,An,Xi)|ABS.W|ABS.L|(d,PC)|(d,PC,Xn)|imm|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|||✓|✓||✓|✓|✓|✓|✓|✓||
-
-## Destination operand addressing modes (register to memory)
-|Dn|An|(An)|(An)+|&#x2011;(An)|(d,An)|(d,An,Xi)|ABS.W|ABS.L|(d,PC)|(d,PC,Xn)|imm|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|||✓||✓|✓|✓|✓|✓||||
-
 *From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

@@ -4,10 +4,11 @@
 
 ### Changed
 
+- Mnemonic reference docs: remove "Source/Destination addressing modes" tables (duplicating syntax docs)
+
 ### Added
 
-- Mnemonic docs:
-  - Privileged instruction: show information
+- Mnemonic syntax docs: show information for privileged instruction
 - *Code \| Move Element Left/Right*: swap instruction operands if valid (`move.l d0,a0` &rarr; `move.l a0,d0`)
 
 ### Fixed

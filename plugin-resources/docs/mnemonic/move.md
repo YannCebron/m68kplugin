@@ -24,15 +24,6 @@ Move the contents of the source to the destination location. The data is examine
 |:-:|:-:|:-:|:-:|:-:|
 |-|*|*|0|0|
 
-## Source operand addressing modes
-|Dn|An|(An)|(An)+|&#x2011;(An)|(d,An)|(d,An,Xi)|ABS.W|ABS.L|(d,PC)|(d,PC,Xn)|imm|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|✓|✓|✓|✓|✓|✓|✓|✓|✓|✓|✓|✓|
-
-## Destination operand addressing modes
-|Dn|An|(An)|(An)+|&#x2011;(An)|(d,An)|(d,An,Xi)|ABS.W|ABS.L|(d,PC)|(d,PC,Xn)|imm|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|✓||✓|✓|✓|✓|✓|✓|✓||||
 
 # MOVE to CCR - Copy data to CCR from source
 
@@ -55,10 +46,6 @@ The move to CCR instruction permits the programmer to preset the CCR. For exampl
 |:-:|:-:|:-:|:-:|:-:|
 |*|*|*|*|*|
 
-## Source operand addressing modes
-|Dn|An|(An)|(An)+|&#x2011;(An)|(d,An)|(d,An,Xi)|ABS.W|ABS.L|(d,PC)|(d,PC,Xn)|imm|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|✓||✓|✓|✓|✓|✓|✓|✓|✓|✓|✓|
 
 # MOVE from SR - Copy data from SR to destination
 
@@ -77,11 +64,6 @@ Move the contents of the status register to the destination location. The source
 | X | N | Z | V | C |
 |:-:|:-:|:-:|:-:|:-:|
 |-|-|-|-|-|
-
-## Destination operand addressing modes
-|Dn|An|(An)|(An)+|&#x2011;(An)|(d,An)|(d,An,Xi)|ABS.W|ABS.L|(d,PC)|(d,PC,Xn)|imm|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|✓||✓|✓|✓|✓|✓|✓|✓||||
 
 
 # MOVE to SR - Copy data to SR from source
@@ -107,10 +89,6 @@ The `MOVE to SR` instruction allows the programmer to preset the contents of the
 |:-:|:-:|:-:|:-:|:-:|
 |*|*|*|*|*|
 
-## Source operand addressing modes
-|Dn|An|(An)|(An)+|&#x2011;(An)|(d,An)|(d,An,Xi)|ABS.W|ABS.L|(d,PC)|(d,PC,Xn)|imm|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|✓||✓|✓|✓|✓|✓|✓|✓|✓|✓|✓|
 
 # MOVE USP - Copy data to or from USP
 

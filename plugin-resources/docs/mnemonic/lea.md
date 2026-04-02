@@ -32,11 +32,6 @@ The effective address is computed and loaded into the specified address register
 Table DS.B 100
 ```
 
-## Source operand addressing modes
-|Dn|An|(An)|(An)+|&#x2011;(An)|(d,An)|(d,An,Xi)|ABS.W|ABS.L|(d,PC)|(d,PC,Xn)|imm|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|||✓|||✓|✓|✓|✓|✓|✓||
-
 ## Condition codes
 | X | N | Z | V | C |
 |:-:|:-:|:-:|:-:|:-:|

@@ -23,10 +23,6 @@ OR the immediate data with the destination operand. Store the result in the dest
 ORI.B #%00000011,(A0)+
 ```
 
-## Destination operand addressing modes
-|Dn|An|(An)|(An)+|&#x2011;(An)|(d,An)|(d,An,Xi)|ABS.W|ABS.L|(d,PC)|(d,PC,Xn)|imm|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|✓||✓|✓|✓|✓|✓|✓|✓||||
 
 # ORI to CCR - Inclusive OR immediate to CCR
 
