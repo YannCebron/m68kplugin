@@ -3,11 +3,6 @@
 ## Operation
 [PC] ← destination
 
-## Syntax
-```assembly
-JMP <ea>
-```
-
 ## Description
 Program execution continues at the effective address specified by the instruction.
 

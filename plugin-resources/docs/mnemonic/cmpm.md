@@ -3,15 +3,6 @@
 ## Operation
 [destination] - [source]
 
-## Syntax
-```assembly
-CMPM (Ay)+,(Ax)+
-```
-## Sample syntax
-```assembly
-CMPM.B (A3)+,(A4)+
-```
-
 ## Description
 Subtract the source operand from the destination operand and set the condition codes accordingly. The destination is not modified by this instruction. The only permitted addressing mode is address register indirect with post-incrementing for both source and destination operands.
 

@@ -4,11 +4,6 @@
 [CCR] ← tested([operand])<br/>
 ***i.e.,*** [operand] - 0; update CCR
 
-## Syntax
-```assembly
-TST <ea>
-```
-
 ## Description
 The operand is compared with zero. No result is saved, but the contents of the *CCR* are set according to the result. The effect of `TST <ea>` is the same as `CMPI #0,<ea>` except that the [`CMPI`](cmpi.md) instruction also sets/clears the V- and C-bits of the *CCR*.
 

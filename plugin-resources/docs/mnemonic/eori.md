@@ -3,11 +3,6 @@
 ## Operation
 [destination] ← \<literal\> ⊕ [destination]
 
-## Syntax
-```assembly
-EORI #<data>,<ea>
-```
-
 ## Description
 EOR the immediate data with the contents of the destination operand. Store the result in the destination operand.
 
@@ -21,11 +16,6 @@ EOR the immediate data with the contents of the destination operand. Store the r
 
 ## Operation
 [CCR] ← \<literal\> ⊕ [CCR]
-
-## Syntax
-```assembly
-EORI #<data>,CCR
-```
 
 ## Description
 EOR the immediate data with the contents of the condition code register (i.e., the least-significant byte of the status register).
@@ -51,11 +41,6 @@ IF [S] = 1<br/>
 &nbsp;THEN<br/>
 &nbsp;&nbsp;[SR] ← \<literal\> ⊕ [SR]<br/>
 &nbsp;ELSE TRAP<br/>
-
-## Syntax
-```assembly
-EORI #<data>,SR
-```
 
 ## Description
 EOR (exclusive OR) the immediate data with the contents of the status register and store the result in the status register. All bits of the status register are affected.

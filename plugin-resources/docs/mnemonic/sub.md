@@ -3,12 +3,6 @@
 ## Operation
 [destination] ← [destination] - [source]
 
-## Syntax
-```assembly
-SUB <ea>,Dn
-SUB Dn,<ea>
-```
-
 ## Description
 Subtract the source operand from the destination operand and store the result in the destination location.
 

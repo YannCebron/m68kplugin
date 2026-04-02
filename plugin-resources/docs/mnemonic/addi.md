@@ -3,11 +3,6 @@
 ## Operation
 [destination] ← \<literal\> + [destination]
 
-## Syntax
-```assembly
-ADDI #<data>,<ea>
-```
-
 ## Description
 Add immediate data to the destination operand. Store the result in the destination operand. `ADDI` can be used to add a literal directly to a memory location. For example, `ADDI.W #$1234,$2000` has the effect [M(2000<sub>16</sub>)]←[M(2000<sub>16</sub>)]+1234<sub>16</sub>.
 

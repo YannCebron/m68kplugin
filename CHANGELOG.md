@@ -4,7 +4,7 @@
 
 ### Changed
 
-- Mnemonic reference docs: remove "Source/Destination addressing modes" tables (duplicating syntax docs)
+- Mnemonic reference docs: remove the "Syntax" section and "Source/Destination addressing modes" tables (duplicating syntax docs)
 
 ### Added
 

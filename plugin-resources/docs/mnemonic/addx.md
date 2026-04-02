@@ -3,12 +3,6 @@
 ## Operation
 [destination] ← [source] + [destination] + [X]
 
-## Syntax
-```assembly
-ADDX Dy,Dx
-ADDX -(Ay),-(Ax)
-```
-
 ## Description
 Add the source operand to the destination operand along with the extend bit, and store the result in the destination location. The only legal addressing modes are data register direct and memory to memory with address register indirect using pre-decrementing.
 

@@ -6,17 +6,6 @@ IF [S] = 1 THEN<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;STOP<br/>
 &nbsp;&nbsp;ELSE TRAP
 
-## Syntax
-```assembly
-STOP #<data>
-```
-
-## Sample syntax
-```assembly
-STOP #$2700
-STOP #SetUp
-```
-
 ## Description
 The immediate operand is copied into the entire status register (i.e., both status byte and *CCR* are modified), and the program counter advanced to point to the next instruction to be executed. The processor then suspends all further processing and halts. That is, the privileged `STOP` instruction stops the 68000.
 

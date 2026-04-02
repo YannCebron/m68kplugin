@@ -4,11 +4,6 @@
 [SP] ← [SP] - 4; [M([SP])] ← [PC]<br/>
 [PC] ← destination
 
-## Syntax
-```assembly
-JSR <ea>
-```
-
 ## Description
 `JSR` pushes the longword address of the instruction immediately following the `JSR` onto the system stack. Program execution then continues at the address specified in the instruction.
 

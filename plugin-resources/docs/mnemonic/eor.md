@@ -3,15 +3,6 @@
 ## Operation
 [destination] ← [source] ⊕ [destination]
 
-## Syntax
-```assembly
-EOR Dn,<ea>
-```
-## Sample syntax
-```assembly
-EOR D3,-(A3)
-```
-
 ## Description
 EOR (exclusive or) the source operand with the destination operand and store the result in the destination location Note that the source operand must be a data register and that the operation `EOR <ea>,Dn` is not permitted.
 

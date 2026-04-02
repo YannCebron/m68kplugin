@@ -5,12 +5,6 @@ If Supervisor State<br/>
 &nbsp;&nbsp;Then Rn → Destination [DFC] or Source [SFC] → Rn<br/>
 Else TRAP
 
-## Syntax
-```assembly
-MOVES < ea > ,Rn
-MOVES Rn, < ea >
-```
-
 ## Description
 This instruction moves the byte, word, or long operand from the specified general register to a location within the
 address space specified by the destination function code (DFC) register, or it moves the byte, word, or long operand

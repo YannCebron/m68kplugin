@@ -8,11 +8,6 @@ IF(condition false)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ELSE [PC] ← [PC] + d {take branch}<br/>
 &nbsp;&nbsp;ELSE [PC] ← [PC] + 2 {fall through to next instruction}<br/>
 
-## Syntax
-```assembly
-DBcc Dn,<label>
-```
-
 ## Description
 The `DBcc` instruction provides an automatic looping facility and replaces the usual decrement counter, test, and branch instructions. Three parameters are required by the `DBcc` instruction: a branch condition (specified by 'cc'), a data register that serves as the loop down-counter, and a label that indicates the start of the loop. The `DBcc` first tests the condition 'cc', and if 'cc' is true the loop is terminated and the branch back to \<label\> not taken. The 14 branch conditions supported by Bcc are also supported by `DBcc`, as well as `DBF` and `DBT` (F = false, and T = true). Note that many assemblers permit the mnemonic `DBF` to be expressed as `DBRA` (i.e., decrement and branch back).
 

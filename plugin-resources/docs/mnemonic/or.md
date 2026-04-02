@@ -3,12 +3,6 @@
 ## Operation
 [destination] ← [source] + [destination]
 
-## Syntax
-```assembly
-OR <ea>,Dn
-OR Dn,<ea>
-```
-
 ## Description
 OR the source operand to the destination operand, and store the result in the destination location.
 

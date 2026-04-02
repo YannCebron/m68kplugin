@@ -3,11 +3,6 @@
 ## Operation
 [destination] ← \<literal\> + [destination]
 
-## Syntax
-```assembly
-ORI #<data>,<ea>
-```
-
 ## Description
 OR the immediate data with the destination operand. Store the result in the destination operand.
 
@@ -28,11 +23,6 @@ ORI.B #%00000011,(A0)+
 
 ## Operation
 [CCR] ← \<literal\> + [CCR]
-
-## Syntax
-```assembly
-ORI #<data>,CCR
-```
 
 ## Description
 OR the immediate data with the condition code register (i.e., the least-significant byte of the status register). For example, the Z flag of the CCR can be set by `ORI #$04,CCR`.
@@ -55,11 +45,6 @@ IF [S] = 1<br/>
 &nbsp;&nbsp;THEN<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[SR] ← \<literal\> + [SR]<br/>
 &nbsp;&nbsp;ELSE TRAP
-
-## Syntax
-```assembly
-ORI #<data>,SR
-```
 
 ## Description
 OR the immediate data to the status register and store the result in the status register. All bits of the status register are affected.

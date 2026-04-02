@@ -3,11 +3,6 @@
 ## Operation
 [destination] ← [destination] - \<literal\>
 
-## Syntax
-```assembly
-SUBI #<data>,<ea>
-```
-
 ## Description
 Subtract the immediate data from the destination operand. Store the result in the destination operand.
 

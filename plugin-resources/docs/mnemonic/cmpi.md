@@ -3,11 +3,6 @@
 ## Operation
 [destination] - \<immediate data\>
 
-## Syntax
-```assembly
-CMPI #<data>,<ea>
-```
-
 ## Description
 Subtract the immediate data from the destination operand and set the condition codes accordingly - the destination is not modified. `CMPI` permits the comparison of a literal with memory.
 

@@ -7,11 +7,6 @@ IF V = 1 THEN:<br/>
 &nbsp;&nbsp;[PC] ← [M($01C)]<br/>
 &nbsp;&nbsp;ELSE no action
 
-## Syntax
-```assembly
-TRAPV
-```
-
 ## Description
 If the V-bit in the *CCR* is set, then initiate exception processing.
 The exception vector is located at address 01C<sub>16</sub>. This instruction

@@ -3,12 +3,6 @@
 ## Operation
 [destination] ← [source] + [destination]
 
-## Syntax
-```assembly
-ADD <ea>,Dn
-ADD Dn,<ea>
-```
-
 ## Description
 Add the source operand to the destination operand and store the result in the destination location.
 

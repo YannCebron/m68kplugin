@@ -3,11 +3,6 @@
 ## Operation
 [PC] ← [M([SP])]; [SP] ← [SP] + 4
 
-## Syntax
-```assembly
-RTS
-```
-
 ## Description
 The program counter is pulled from the stack and the previous value of the PC is lost. `RTS` is used to terminate a subroutine.
 

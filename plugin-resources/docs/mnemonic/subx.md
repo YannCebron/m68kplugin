@@ -3,12 +3,6 @@
 ## Operation
 [destination] ← [destination] - [source] - [X]
 
-## Syntax
-```assembly
-SUBX Dx,Dy
-SUBX -(Ax),-(Ay)
-```
-
 ## Description
 Subtract the source operand from the destination operand along with the extend bit, and store the result in the destination location. The only legal addressing modes are data register direct and memory to memory with address register indirect using auto-decrementing.
 

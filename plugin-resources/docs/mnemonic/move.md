@@ -3,19 +3,6 @@
 ## Operation
 [destination] ← [source]
 
-## Syntax
-```assembly
-MOVE <ea>,<e>
-```
-
-## Sample syntax
-```assembly
-MOVE (A5),-(A2)
-MOVE -(A5),(A2)+
-MOVE #$123,(A6)+
-MOVE Temp1,Temp2
-```
-
 ## Description
 Move the contents of the source to the destination location. The data is examined as it is moved and the condition codes set accordingly. Note that this is actually a *copy* command because the source is not affected by the move. The move instruction has the widest range of addressing modes of all the 68000's instructions.
 
@@ -29,11 +16,6 @@ Move the contents of the source to the destination location. The data is examine
 
 ## Operation
 [CCR] ← [source]
-
-## Syntax
-```assembly
-MOVE <ea>,CCR
-```
 
 ## Description
 Move the contents of the source operand to the condition code register. The source operand is a *word*, but only the low-order *byte* contains the condition codes. The upper byte is neglected. Note that `MOVE <ea>,CCR` is a word operation, but `ANDI`, `ORI`, and `EORI` to `CCR` are all byte operations.
@@ -52,11 +34,6 @@ The move to CCR instruction permits the programmer to preset the CCR. For exampl
 ## Operation
 [destination] ← [SR]
 
-## Syntax
-```assembly
-MOVE SR,<ea>
-```
-
 ## Description
 Move the contents of the status register to the destination location. The source operand, the status register, is a word. This instruction is not privileged in the 68000, but is privileged in the 68010 or above. Executing a `MOVE SR,<ea>` while in the user mode on these processors results in a privilege violation trap.
 
@@ -72,11 +49,6 @@ Move the contents of the status register to the destination location. The source
 IF [S] = 1<br/>
 &nbsp;&nbsp;THEN [SR] ← [source]<br/>
 ELSE TRAP
-
-## Syntax
-```assembly
-MOVE <ea>,SR
-```
 
 ## Description
 Move the contents of the source operand to the status register. The source operand is a word and all bits of the status register are affected.
@@ -101,16 +73,6 @@ ELSE TRAP
 IF [S] = 1&nbsp;&nbsp;&nbsp;&nbsp;{MOVE An,USP form}<br/>
 &nbsp;&nbsp;THEN [An] ← [USP]<br/>
 ELSE TRAP
-
-## Syntax 1
-```assembly
-MOVE USP,An
-```
-
-## Syntax 2
-```assembly
-MOVE An,USP
-```
 
 ## Description
 Move the contents of the user stack pointer to an address register or vice versa. This is a privileged instruction and allows the operating system running in the supervisor state either to read the contents of the user stack pointer or to set up the user stack pointer.

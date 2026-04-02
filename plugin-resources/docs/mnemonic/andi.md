@@ -3,11 +3,6 @@
 ## Operation
 [destination] ← \<literal\>.[destination]
 
-## Syntax
-```assembly
-ANDI #<data>,<ea>
-```
-
 ## Description
 *AND* the immediate data to the destination operand. The `ANDI` permits a literal operand to be ANDed with a destination other than a data register. For example, `ANDI #$FE00,$1234` or `ANDI.B #$F0,(A2)+`.
 
@@ -20,11 +15,6 @@ ANDI #<data>,<ea>
 
 ## Operation
 [CCR] ← \<data\>.[CCR]
-
-## Syntax
-```assembly
-ANDI #<data>,CCR
-```
 
 ## Description
 *AND* the immediate data to the condition code register (i.e., the least-significant byte of the status register).
@@ -51,11 +41,6 @@ IF [S] = 1
   THEN
     [SR] ← <literal>.[SR]
   ELSE TRAP
-```
-
-## Syntax
-```assembly
-ANDI #<data>,SR
 ```
 
 ## Description

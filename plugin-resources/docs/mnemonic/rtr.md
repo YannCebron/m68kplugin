@@ -4,11 +4,6 @@
 [CCR] ← [M([SP])]; [SP] ← [SP] + 2<br/>
 [PC] ← [M([SP])]; [SP] ← [SP] + 4
 
-## Syntax
-```assembly
-RTR
-```
-
 ## Description
 The condition code and program counter are pulled from the stack. The previous condition code and program counter are lost. The supervisor portion of the status register is not affected.
 

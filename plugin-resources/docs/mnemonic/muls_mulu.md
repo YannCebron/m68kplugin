@@ -3,12 +3,6 @@
 ## Operation
 [destination] ← [destination] * [source]
 
-## Syntax
-```assembly
-MULS <ea>,Dn
-MULU <ea>,Dn
-```
-
 ## Description
 Multiply the 16-bit destination operand by the 16-bit source
 operand and store the result in the destination. Both the source and destination are 16-bit word values and the destination result is a 32-bit longword. The product is therefore a correct product and is not truncated. `MULU` performs multiplication with unsigned values and `MULS` performs multiplication with two's complement values.

@@ -4,11 +4,6 @@
 [Register(16:31)] ← [Register(0:15)];<br/>
 [Register(0:15)] ← [Register(16:31]
 
-## Syntax
-```assembly
-SWAP Dn
-```
-
 ## Description
 Exchange the upper and lower 16-bit words of a data register.
 

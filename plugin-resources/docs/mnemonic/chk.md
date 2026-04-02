@@ -3,11 +3,6 @@
 ## Operation
 IF [Dn] < 0 OR [Dn] > [\<ea\>] THEN TRAP
 
-## Syntax
-```assembly
-CHK <ea>,Dn
-```
-
 ## Description
 The contents of the low-order word in the data register specified in the instruction are examined and compared with the upper bound at the effective address. The upper bound is a two's complement integer. If the data register value is less than zero or greater than the upper bound contained in the operand word, then the processor initiates exception processing.
 

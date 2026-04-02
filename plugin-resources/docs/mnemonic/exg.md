@@ -3,17 +3,6 @@
 ## Operation
 [Rx] ← [Ry]; [Ry] ← [Rx]
 
-## Syntax
-```assembly
-EXG Rx,Ry
-```
-## Sample syntax
-```assembly
-EXG D3,D4
-EXG D2,A0
-EXG A7,D5
-```
-
 ## Description
 Exchange the contents of two registers. The size of the instruction is a longword because the entire 32-bit contents of two registers are exchanged. The instruction permits the exchange of address registers, data registers, and address and data registers.
 

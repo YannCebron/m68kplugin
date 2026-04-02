@@ -3,12 +3,6 @@
 ## Operation
 [destination] ← [source] . [destination]
 
-## Syntax
-```assembly
-AND <ea>,Dn
-AND Dn,<ea>
-```
-
 ## Description
 `AND` the source operand to the destination operand and store the result in the destination location.
 
