@@ -26,7 +26,7 @@ Detailed on-the-fly semantic error highlighting for all instructions and directi
 
 ### Method Separator
 
-For `macro`/`endm`, `section` and machine directives (`machine`, `mc68010` etc.) via *Show method separators* option in *Settings \| Editor \| General \| Appearance*
+For `macro`/`endm`, `section` and machine directives (`machine`, `mc68010` etc.) via the *Show method separators* option in *Settings \| Editor \| General \| Appearance*
 
 ### Highlight matching braces and directives
 
@@ -42,11 +42,11 @@ _Hover_: enable _Show quick documentation on hover_ in *Settings \| Editor \| Co
 
 ### Mnemonics
 
-_View \| View Quick Documentation_ Show mnemonic documentation (or on mouse hover), the current variant is underlined
+_View \| View Quick Documentation_ Show mnemonic syntax documentation (or on mouse hover), the current variant is underlined
 
 ![Mnemonic documentation](../assets/editor/hover_doc.png)
 
-_M68k Browser_ tool window lists all supported mnemonics with additional reference documentation
+_M68k Browser_ tool window lists all supported mnemonics with syntax and additional reference documentation
 
 ![Mnemonic reference documentation](../assets/ide/reference_doc.png)
 
@@ -103,7 +103,7 @@ Completion and <kbd>Ctrl+Click</kbd> hover information
 
 ### Rename Refactoring
 
-Rename labels using *Refactor \| Rename* across the whole project with usage preview
+Rename labels and macros using *Refactor \| Rename* across the whole project with usage preview
 
 ![Rename preview](../assets/editor/rename_preview.png)
 
@@ -113,16 +113,16 @@ Rename labels using *Refactor \| Rename* across the whole project with usage pre
 * Smart braces/quote handling
 * *Code \| Comment with Line Comment*
 * *Code \| Move Element Left/Right*
-  * instruction operands (if valid): `move.l d0,a0` &rarr; `move.l a0,d0`
-  * binary expressions: `2*size` &rarr; `size*2`
+  * instruction operands (if valid): `move.l d0,a0` → `move.l a0,d0`
+  * binary expressions: `2*size` → `size*2`
   * register list elements (`movem`)
   * macro call parameters
   * `dc` and `dr` directive values
   * `printv`, `xdef`, `xref` directives
   * `ifc`, `ifnc` conditional assembly directives
-* Spellchecker with bundled dictionaries (M68k/Amiga/"Scene" jargon)
+* Spellchecker with bundled dictionaries (M68k/Amiga/"Scene")
 * Code Folding (*Settings \| Editor \| General \| Code Folding*)
-  * Zero-terminated string literal (`dc.b "a text",0` &rarr; `"a text"`)
+  * Zero-terminated string literal (`dc.b "a text",0` → `"a text"`)
   * Custom regions via enclosing `* region [placeholderText]` / `* endregion` comments
 * Live Templates (*Settings \| Editor \| Live Templates*)
 * Code Style Settings (*Settings \| Editor \| Code Style \| M68k Assembler*)
@@ -133,7 +133,7 @@ Rename labels using *Refactor \| Rename* across the whole project with usage pre
 
 * *Move Caret to Code Block Start/End* for matching directives
 * *View \| Appearance \| Navigation Bar* 
-  * Enable _Show Members_ to show current parent label
+  * Enable _Show Members_ to show the current parent label
 
 ### Structure
 

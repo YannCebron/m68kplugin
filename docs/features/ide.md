@@ -14,7 +14,7 @@ nav_order: 3
 
 ## M68k Browser Tool Window
 
-Provides access to all reference documentation.
+Provides access to all syntax and reference documentation.
 
 > 💡To search for entries, start typing while the focus is on the element list on the left.
 
@@ -42,13 +42,13 @@ Browse all hardware registers with additional reference documentation.
 
 Register list can be filtered by _OCS_, _ECS_, and _AGA_ chip set and `CIAx` registers can be toggled.
 
-Use the _i_ toggle button to show Chip Set information in the list.
+Use the _i_ toggle button to show chip set information in the list.
 
 ![Amiga hardware register documentation](../assets/ide/amiga_hardware_doc.png)
 
 ## External Tools
 
-Navigate to _file:lineNumber_ location or label(s) from vasm console messages
+Navigate to _file:lineNumber_ location or label(s) from [vasm](http://sun.hasenbraten.de/vasm/) console messages
                      
 ![vasm navigation](../assets/ide/vasm_navigation.png)
 

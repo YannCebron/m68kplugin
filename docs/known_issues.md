@@ -30,8 +30,8 @@ Support for other assemblers is not a priority in the nearest future.
 
 ### Unsupported CPUs
 
-Currently, only 68000/68010 architecture is supported.
-For select mnemonics, some 68020+ only variants are supported.
+Currently, only MC68000/MC68010 architecture is supported.
+For select mnemonics, some MC68020+ only variants are supported.
 
 Non-supported instructions/registers will yield false positive errors
 > _"Cannot resolve macro '$MNEMONIC$ \| $REGISTER$'"_
@@ -101,7 +101,7 @@ MadMac assembler specific ([vasm Docs](http://sun.hasenbraten.de/vasm/release/va
 - allow `@` (Devpac)
 - `-ldots` option: allow dots within identifiers
 - `-localu` option: allow local labels starting with `_` instead of `.` (Devpac)
-- ending with double-colon `::` &rarr; automatically exported (`xdef`)
+- ending with double-colon `::` automatically exported (`xdef`)
 - allow referencing `global_name\local_name` syntax (PhxAss)
 
 ### Builtin Symbols
@@ -134,5 +134,5 @@ MadMac assembler specific ([vasm Docs](http://sun.hasenbraten.de/vasm/release/va
 
 - string literals:
   - `'\'` and `''''` are valid
-- add option to allow whitespaces in instruction arguments ([Issue](https://github.com/YannCebron/m68kplugin/issues/47))
+- add an option to allow whitespaces in instruction arguments ([Issue](https://github.com/YannCebron/m68kplugin/issues/47))
 - support `equr`/`reg` replacement names: `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`

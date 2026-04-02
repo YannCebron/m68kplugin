@@ -4,12 +4,12 @@
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/17712.svg)](https://plugins.jetbrains.com/plugin/17712)
 ![NoAI](docs/no_ai.png)
 
-## Motorola 68000 Series Assembly Language Support for IntelliJ based IDEs
+## Motorola 68000 Series Assembly Language Support for IntelliJ-based IDEs
 
 Adds support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_68000_series) assembly language
-in [IntelliJ](https://plugins.jetbrains.com/docs/intellij/intellij-platform.html#ides-based-on-the-intellij-platform) based IDEs.
+in [IntelliJ-](https://plugins.jetbrains.com/docs/intellij/intellij-platform.html#ides-based-on-the-intellij-platform)based IDEs.
 
-**📖 Please visit the [Documentation site](https://yanncebron.github.io/m68kplugin/) for user guide. 📖** 
+**📖 Please visit the [Documentation site](https://yanncebron.github.io/m68kplugin/) for the user guide. 📖** 
 
 ![m68plugin](docs/assets/m68kplugin_landing.png)
 
@@ -17,11 +17,11 @@ Please see [Contributing](CONTRIBUTING.md) on how to submit feedback and contrib
 
 ## Installation
             
-- Open [Plugin Homepage](https://plugins.jetbrains.com/plugin/17712-motorola-68000-series-assembler/) and click *Install to...* button on upper right
+- Open the [Plugin Homepage](https://plugins.jetbrains.com/plugin/17712-motorola-68000-series-assembler/) and click the *Install to...* button on the upper right
 
-- Using IDE built-in plugin system:
+- Using IDE's built-in plugin system:
 
-  <kbd>Settings</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "Motorola 68000 Series Assembler"</kbd> >  <kbd>Install Plugin</kbd>
+  <kbd>Settings</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "Motorola 68000 Series Assembler"</kbd> > <kbd>Install Plugin</kbd>
 
 - Manually:
 
@@ -37,12 +37,12 @@ Mnemonic, directives, and `CIAx` Amiga hardware register documentation based on 
 
 Mnemonic data generated using [vasm](http://sun.hasenbraten.de/vasm/) sources, thanks to Frank Wille and Dr. Volker Barthelmann for granting permission
 
-Amiga hardware register documentation based on [AGA.guide](https://github.com/rkrajnc/minimig-mist/blob/master/doc/amiga/aga/AGA.guide)
+Amiga hardware registers documentation based on [AGA.guide](https://github.com/rkrajnc/minimig-mist/blob/master/doc/amiga/aga/AGA.guide)
 
 ## License
 
 Licensed under the Apache License, Version 2.0 (the "License"), see [LICENCE](LICENCE)
 
-This software includes [commonmark-java](https://github.com/atlassian/commonmark-java) library, Copyright (c) 2015-2016, Atlassian Pty Ltd
+This software includes the [commonmark-java](https://github.com/atlassian/commonmark-java) library, Copyright © 2015–2016, Atlassian Pty Ltd
 
-*All product names, trademarks, and registered trademarks are property of their respective owners.*
+*All product names, trademarks, and registered trademarks are the property of their respective owners.*

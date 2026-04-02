@@ -17,6 +17,6 @@ and many more features.
 
 Please [leave a comment and rating](https://plugins.jetbrains.com/plugin/17712-motorola-68000-series-assembler/reviews) if you like this plugin 😀
 
-Visit the [Project Homepage on GitHub](https://github.com/YannCebron/m68kplugin) for Credits, License and Code of Conduct.
+Visit the [Project Homepage on GitHub](https://github.com/YannCebron/m68kplugin) for Credits, License, and Code of Conduct.
              
 ![NoAI](no_ai.png)

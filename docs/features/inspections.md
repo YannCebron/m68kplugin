@@ -8,7 +8,7 @@ nav_order: 2
 
 ## Suppression
 
-A "special" line comment followed by the inspection ID to disable can be used to suppress false positives for specific places.
+A "special" marker comment followed by the ID of the inspection to disable can be used to suppress false positives for specific places.
 
 In the following snippet, `a7` will no longer be highlighted by _Usage of A7 register_ inspection:
 
@@ -18,8 +18,8 @@ In the following snippet, `a7` will no longer be highlighted by _Usage of A7 reg
 ```
 
 To insert these for given highlighting, use <kbd>Alt+Enter</kbd> quick fix menu:
-- _Suppress for element_ adds suppression comment in preceding line
-- _Suppress for file_ adds suppression comment to begin of the file (must occur before first instruction/directive)
+- _Suppress for element_ adds suppression comment in the preceding line
+- _Suppress for file_ adds suppression comment to the beginning of the file (must occur before first instruction/directive)
   
 ## Inspections
 

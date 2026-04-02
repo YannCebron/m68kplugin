@@ -8,9 +8,9 @@
 
 ## Target Architecture
 
-* 68020/30/40/60
-* 68881 FPU
-* 68851 MMU
+* MC68020/30/40/60
+* MC68881 FPU
+* MC68851 MMU
 * Apollo Core 68080
 * CPU32
 * ColdFire
@@ -75,16 +75,16 @@
 ### Extract/Duplicates
 
 - extract `equ` constant from selection
-- compute constant expression from selection: `16*2` &rarr; `32`
+- compute constant expression from selection: `16*2` → `32`
 - extract an include file from selection
 - duplicates detection:
-  - textual duplicate -> wrap in `rept`/`endr`
+  - textual duplicate → wrap in `rept`/`endr`
   - "extract macro"
 
 ## Editing
 
 - `EnterHandlerDelegate` smart indent? or `LineIndentProvider`
-- `M68kCommaFlipper`: swap src\|dest if valid
+- `M68kCommaFlipper`: swap src\|destination if valid
 - formatter
   - upper-/lowercase code style settings
     - mnemonic/directive/conditional assembly
@@ -121,7 +121,7 @@
 
 ### Labels
 
-- unused label: global - located in non-include files only?
+- unused label: global – located in non-include files only?
 - highlight duplicated names (conditional! macros!)
 - label naming conventions (`AbstractNamingConventionInspection`)
 
@@ -129,7 +129,7 @@
 
 - type check
 - range check
-- **WIP** simplify, unnecessary parentheses
+- **WIP** simplify expression, unnecessary parentheses
 - intention: convert numeric literal to other bases (`AbstractNumberConversionIntention`)
 
 ## Navigation
@@ -153,7 +153,7 @@
 
 ## Tools
 
-- show cycles/size in editor [https://68kcounter-web.vercel.app/](https://68kcounter-web.vercel.app/), [MC680x0 Reference](http://oldwww.nvg.ntnu.no/amiga/MC680x0_Sections/index.HTML)
+- show cycles/size in the editor [https://68kcounter-web.vercel.app/](https://68kcounter-web.vercel.app/), [MC680x0 Reference](http://oldwww.nvg.ntnu.no/amiga/MC680x0_Sections/index.HTML)
 
 ## Amiga
 
