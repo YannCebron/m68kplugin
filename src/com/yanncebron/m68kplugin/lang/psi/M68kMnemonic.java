@@ -34,8 +34,8 @@ public record M68kMnemonic(IElementType elementType,
                            PrivilegedType privilegedType) {
 
   @TestOnly
-  public M68kMnemonic(IElementType elementType, Set<M68kDataSize> dataSizes, M68kOperand sourceOperand, M68kOperand destinationOperand) {
-    this(elementType, dataSizes, sourceOperand, destinationOperand, M68kCpu.GROUP_68000_UP, PrivilegedType.NONE);
+  public M68kMnemonic(IElementType elementType, Set<M68kDataSize> dataSizes, M68kOperand firstOperand, M68kOperand secondOperand) {
+    this(elementType, dataSizes, firstOperand, secondOperand, M68kCpu.GROUP_68000_UP, PrivilegedType.NONE);
   }
 
   public boolean isDeprecated() {
