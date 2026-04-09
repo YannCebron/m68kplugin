@@ -48,7 +48,7 @@ import static java.util.Map.entry;
 @SuppressWarnings("SpellCheckingInspection")
 public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
-  private static final boolean ENABLED = true;
+  private static final boolean ENABLED = false;
 
   private static final boolean LOG_UNKNOWN_MNEMONICS = false;
 
