@@ -45,7 +45,7 @@
   </extensionPoints>
 
   <extensions defaultExtensionNs="com.intellij">
-    <errorHandler implementation="com.yanncebron.m68kplugin.ide.M68kErrorReportSubmitter"/>
+    <errorHandler implementation="com.intellij.diagnostic.JetBrainsMarketplaceErrorReportSubmitter"/>
 
     <fileType name="M68k Assembler"
               implementationClass="com.yanncebron.m68kplugin.lang.M68kFileType"

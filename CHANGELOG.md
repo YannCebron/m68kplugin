@@ -5,6 +5,7 @@
 ### Changed
 
 - Mnemonic reference docs: remove the "Syntax" section and "Source/Destination addressing modes" tables (duplicating syntax docs)
+- Exception Reporting: use JetBrains Marketplace reporting instead of pre-filling a GitHub issue in the browser
 
 ### Added
 
