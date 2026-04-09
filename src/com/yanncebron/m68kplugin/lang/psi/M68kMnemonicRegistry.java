@@ -191,7 +191,7 @@ public final class M68kMnemonicRegistry {
   private M68kMnemonicRegistry() {
 // Total mnemonics: 283
 
-// ABCD ----------------------------------------------------------------------------
+// ABCD ------------------------------------------------------------------------
 
     create(M68kTokenTypes.ABCD).dataSizes(GROUP_B)
       .first(DATA_REGISTER).second(DATA_REGISTER)
@@ -201,7 +201,7 @@ public final class M68kMnemonicRegistry {
       .first(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT).second(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT)
       .build();
 
-// ADD -----------------------------------------------------------------------------
+// ADD -------------------------------------------------------------------------
 
     create(M68kTokenTypes.ADD).dataSizes(GROUP_BWL)
       .first(DATA).second(DATA_REGISTER)
@@ -223,13 +223,13 @@ public final class M68kMnemonicRegistry {
       .first(IMMEDIATE).second(ALTERABLE_DATA)
       .build();
 
-// ADDA ----------------------------------------------------------------------------
+// ADDA ------------------------------------------------------------------------
 
     create(M68kTokenTypes.ADDA).dataSizes(GROUP_WL)
       .first(ALL).second(ADDRESS_REGISTER)
       .build();
 
-// ADDI ----------------------------------------------------------------------------
+// ADDI ------------------------------------------------------------------------
 
     create(M68kTokenTypes.ADDI).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(DATA_REGISTER)
@@ -239,7 +239,7 @@ public final class M68kMnemonicRegistry {
       .first(IMMEDIATE).second(ALTERABLE_DATA)
       .build();
 
-// ADDQ ----------------------------------------------------------------------------
+// ADDQ ------------------------------------------------------------------------
 
     create(M68kTokenTypes.ADDQ).dataSizes(GROUP_WL)
       .first(QUICK_IMMEDIATE).second(ADDRESS_REGISTER)
@@ -249,7 +249,7 @@ public final class M68kMnemonicRegistry {
       .first(QUICK_IMMEDIATE).second(ALTERABLE_DATA)
       .build();
 
-// ADDX ----------------------------------------------------------------------------
+// ADDX ------------------------------------------------------------------------
 
     create(M68kTokenTypes.ADDX).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER).second(DATA_REGISTER)
@@ -259,7 +259,7 @@ public final class M68kMnemonicRegistry {
       .first(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT).second(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT)
       .build();
 
-// AND -----------------------------------------------------------------------------
+// AND -------------------------------------------------------------------------
 
     create(M68kTokenTypes.AND).dataSizes(GROUP_BWL)
       .first(DATA).second(DATA_REGISTER)
@@ -282,7 +282,7 @@ public final class M68kMnemonicRegistry {
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .build();
 
-// ANDI ----------------------------------------------------------------------------
+// ANDI ------------------------------------------------------------------------
 
     create(M68kTokenTypes.ANDI).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(DATA_REGISTER)
@@ -301,7 +301,7 @@ public final class M68kMnemonicRegistry {
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .build();
 
-// ASL -----------------------------------------------------------------------------
+// ASL -------------------------------------------------------------------------
 
     create(M68kTokenTypes.ASL).dataSizes(GROUP_W)
       .first(ALTERABLE_MEMORY)
@@ -319,7 +319,7 @@ public final class M68kMnemonicRegistry {
       .first(DATA_REGISTER)
       .build();
 
-// ASR -----------------------------------------------------------------------------
+// ASR -------------------------------------------------------------------------
 
     create(M68kTokenTypes.ASR).dataSizes(GROUP_W)
       .first(ALTERABLE_MEMORY)
@@ -337,7 +337,7 @@ public final class M68kMnemonicRegistry {
       .first(DATA_REGISTER)
       .build();
 
-// BHS -----------------------------------------------------------------------------
+// BHS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BHS).dataSizes(GROUP_SBW)
       .first(BRANCH_DESTINATION)
@@ -348,7 +348,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// BLO -----------------------------------------------------------------------------
+// BLO -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BLO).dataSizes(GROUP_SBW)
       .first(BRANCH_DESTINATION)
@@ -359,7 +359,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// BHI -----------------------------------------------------------------------------
+// BHI -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BHI).dataSizes(GROUP_SBW)
       .first(BRANCH_DESTINATION)
@@ -370,7 +370,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// BLS -----------------------------------------------------------------------------
+// BLS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BLS).dataSizes(GROUP_SBW)
       .first(BRANCH_DESTINATION)
@@ -381,7 +381,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// BCC -----------------------------------------------------------------------------
+// BCC -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BCC).dataSizes(GROUP_SBW)
       .first(BRANCH_DESTINATION)
@@ -392,7 +392,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// BCS -----------------------------------------------------------------------------
+// BCS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BCS).dataSizes(GROUP_SBW)
       .first(BRANCH_DESTINATION)
@@ -403,7 +403,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// BNE -----------------------------------------------------------------------------
+// BNE -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BNE).dataSizes(GROUP_SBW)
       .first(BRANCH_DESTINATION)
@@ -414,7 +414,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// BEQ -----------------------------------------------------------------------------
+// BEQ -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BEQ).dataSizes(GROUP_SBW)
       .first(BRANCH_DESTINATION)
@@ -425,7 +425,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// BVC -----------------------------------------------------------------------------
+// BVC -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BVC).dataSizes(GROUP_SBW)
       .first(BRANCH_DESTINATION)
@@ -436,7 +436,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// BVS -----------------------------------------------------------------------------
+// BVS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BVS).dataSizes(GROUP_SBW)
       .first(BRANCH_DESTINATION)
@@ -447,7 +447,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// BPL -----------------------------------------------------------------------------
+// BPL -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BPL).dataSizes(GROUP_SBW)
       .first(BRANCH_DESTINATION)
@@ -458,7 +458,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// BMI -----------------------------------------------------------------------------
+// BMI -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BMI).dataSizes(GROUP_SBW)
       .first(BRANCH_DESTINATION)
@@ -469,7 +469,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// BGE -----------------------------------------------------------------------------
+// BGE -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BGE).dataSizes(GROUP_SBW)
       .first(BRANCH_DESTINATION)
@@ -480,7 +480,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// BLT -----------------------------------------------------------------------------
+// BLT -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BLT).dataSizes(GROUP_SBW)
       .first(BRANCH_DESTINATION)
@@ -491,7 +491,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// BGT -----------------------------------------------------------------------------
+// BGT -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BGT).dataSizes(GROUP_SBW)
       .first(BRANCH_DESTINATION)
@@ -502,7 +502,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// BLE -----------------------------------------------------------------------------
+// BLE -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BLE).dataSizes(GROUP_SBW)
       .first(BRANCH_DESTINATION)
@@ -513,7 +513,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// BRA -----------------------------------------------------------------------------
+// BRA -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BRA).dataSizes(GROUP_SBW)
       .first(BRANCH_DESTINATION)
@@ -524,7 +524,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// BSR -----------------------------------------------------------------------------
+// BSR -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BSR).dataSizes(GROUP_SBW)
       .first(BRANCH_DESTINATION)
@@ -535,7 +535,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// BCHG ----------------------------------------------------------------------------
+// BCHG ------------------------------------------------------------------------
 
     create(M68kTokenTypes.BCHG).dataSizes(GROUP_L)
       .first(DATA_REGISTER).second(DATA_REGISTER)
@@ -553,7 +553,7 @@ public final class M68kMnemonicRegistry {
       .first(QUICK_IMMEDIATE).second(ALTERABLE_MEMORY_CF)
       .build();
 
-// BCLR ----------------------------------------------------------------------------
+// BCLR ------------------------------------------------------------------------
 
     create(M68kTokenTypes.BCLR).dataSizes(GROUP_L)
       .first(DATA_REGISTER).second(DATA_REGISTER)
@@ -571,7 +571,7 @@ public final class M68kMnemonicRegistry {
       .first(QUICK_IMMEDIATE).second(ALTERABLE_MEMORY_CF)
       .build();
 
-// BSET ----------------------------------------------------------------------------
+// BSET ------------------------------------------------------------------------
 
     create(M68kTokenTypes.BSET).dataSizes(GROUP_L)
       .first(DATA_REGISTER).second(DATA_REGISTER)
@@ -589,7 +589,7 @@ public final class M68kMnemonicRegistry {
       .first(QUICK_IMMEDIATE).second(ALTERABLE_MEMORY_CF)
       .build();
 
-// BTST ----------------------------------------------------------------------------
+// BTST ------------------------------------------------------------------------
 
     create(M68kTokenTypes.BTST).dataSizes(GROUP_L)
       .first(DATA_REGISTER).second(DATA_REGISTER)
@@ -611,14 +611,14 @@ public final class M68kMnemonicRegistry {
       .first(QUICK_IMMEDIATE).second(MEMORY_WITHOUT_IMMEDIATE)
       .build();
 
-// BKPT ----------------------------------------------------------------------------
+// BKPT ------------------------------------------------------------------------
 
     create(M68kTokenTypes.BKPT)
       .first(QUICK_IMMEDIATE)
       .cpus(GROUP_68010_UP)
       .build();
 
-// CHK -----------------------------------------------------------------------------
+// CHK -------------------------------------------------------------------------
 
     create(M68kTokenTypes.CHK).dataSizes(GROUP_W)
       .first(DATA).second(DATA_REGISTER)
@@ -629,13 +629,13 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// CLR -----------------------------------------------------------------------------
+// CLR -------------------------------------------------------------------------
 
     create(M68kTokenTypes.CLR).dataSizes(GROUP_BWL)
       .first(ALTERABLE_DATA)
       .build();
 
-// CMP -----------------------------------------------------------------------------
+// CMP -------------------------------------------------------------------------
 
     create(M68kTokenTypes.CMP).dataSizes(GROUP_WL)
       .first(ADDRESS_REGISTER).second(DATA_REGISTER)
@@ -657,13 +657,13 @@ public final class M68kMnemonicRegistry {
       .first(ADDRESS_REGISTER_INDIRECT_POST_INCREMENT).second(ADDRESS_REGISTER_INDIRECT_POST_INCREMENT)
       .build();
 
-// CMPA ----------------------------------------------------------------------------
+// CMPA ------------------------------------------------------------------------
 
     create(M68kTokenTypes.CMPA).dataSizes(GROUP_WL)
       .first(ALL).second(ADDRESS_REGISTER)
       .build();
 
-// CMPI ----------------------------------------------------------------------------
+// CMPI ------------------------------------------------------------------------
 
     create(M68kTokenTypes.CMPI).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(DATA_REGISTER)
@@ -673,127 +673,127 @@ public final class M68kMnemonicRegistry {
       .first(IMMEDIATE).second(ALTERABLE_DATA)
       .build();
 
-// CMPM ----------------------------------------------------------------------------
+// CMPM ------------------------------------------------------------------------
 
     create(M68kTokenTypes.CMPM).dataSizes(GROUP_BWL)
       .first(ADDRESS_REGISTER_INDIRECT_POST_INCREMENT).second(ADDRESS_REGISTER_INDIRECT_POST_INCREMENT)
       .build();
 
-// DBT -----------------------------------------------------------------------------
+// DBT -------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBT).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DBF -----------------------------------------------------------------------------
+// DBF -------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBF).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DBRA ----------------------------------------------------------------------------
+// DBRA ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBRA).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DBHI ----------------------------------------------------------------------------
+// DBHI ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBHI).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DBLS ----------------------------------------------------------------------------
+// DBLS ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBLS).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DBCC ----------------------------------------------------------------------------
+// DBCC ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBCC).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DBHS ----------------------------------------------------------------------------
+// DBHS ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBHS).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DBCS ----------------------------------------------------------------------------
+// DBCS ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBCS).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DBLO ----------------------------------------------------------------------------
+// DBLO ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBLO).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DBNE ----------------------------------------------------------------------------
+// DBNE ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBNE).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DBEQ ----------------------------------------------------------------------------
+// DBEQ ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBEQ).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DBVC ----------------------------------------------------------------------------
+// DBVC ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBVC).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DBVS ----------------------------------------------------------------------------
+// DBVS ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBVS).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DBPL ----------------------------------------------------------------------------
+// DBPL ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBPL).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DBMI ----------------------------------------------------------------------------
+// DBMI ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBMI).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DBGE ----------------------------------------------------------------------------
+// DBGE ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBGE).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DBLT ----------------------------------------------------------------------------
+// DBLT ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBLT).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DBGT ----------------------------------------------------------------------------
+// DBGT ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBGT).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DBLE ----------------------------------------------------------------------------
+// DBLE ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBLE).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .build();
 
-// DIVS ----------------------------------------------------------------------------
+// DIVS ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DIVS).dataSizes(GROUP_W)
       .first(ALTERABLE_DATA_CF).second(DATA_REGISTER)
@@ -813,7 +813,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// DIVU ----------------------------------------------------------------------------
+// DIVU ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DIVU).dataSizes(GROUP_W)
       .first(ALTERABLE_DATA_CF).second(DATA_REGISTER)
@@ -833,7 +833,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// EOR -----------------------------------------------------------------------------
+// EOR -------------------------------------------------------------------------
 
     create(M68kTokenTypes.EOR).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER).second(ALTERABLE_DATA)
@@ -856,7 +856,7 @@ public final class M68kMnemonicRegistry {
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .build();
 
-// EORI ----------------------------------------------------------------------------
+// EORI ------------------------------------------------------------------------
 
     create(M68kTokenTypes.EORI).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(DATA_REGISTER)
@@ -875,7 +875,7 @@ public final class M68kMnemonicRegistry {
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .build();
 
-// EXG -----------------------------------------------------------------------------
+// EXG -------------------------------------------------------------------------
 
     create(M68kTokenTypes.EXG).dataSizes(GROUP_L)
       .first(DATA_REGISTER).second(DATA_REGISTER)
@@ -893,36 +893,36 @@ public final class M68kMnemonicRegistry {
       .first(ADDRESS_REGISTER).second(DATA_REGISTER)
       .build();
 
-// EXT -----------------------------------------------------------------------------
+// EXT -------------------------------------------------------------------------
 
     create(M68kTokenTypes.EXT).dataSizes(GROUP_WL)
       .first(DATA_REGISTER)
       .build();
 
-// ILLEGAL -------------------------------------------------------------------------
+// ILLEGAL ---------------------------------------------------------------------
 
     create(M68kTokenTypes.ILLEGAL)
       .build();
 
-// JMP -----------------------------------------------------------------------------
+// JMP -------------------------------------------------------------------------
 
     create(M68kTokenTypes.JMP)
       .first(CONTROL)
       .build();
 
-// JSR -----------------------------------------------------------------------------
+// JSR -------------------------------------------------------------------------
 
     create(M68kTokenTypes.JSR)
       .first(CONTROL)
       .build();
 
-// LEA -----------------------------------------------------------------------------
+// LEA -------------------------------------------------------------------------
 
     create(M68kTokenTypes.LEA).dataSizes(GROUP_L)
       .first(CONTROL).second(ADDRESS_REGISTER)
       .build();
 
-// LINK ----------------------------------------------------------------------------
+// LINK ------------------------------------------------------------------------
 
     create(M68kTokenTypes.LINK).dataSizes(GROUP_W)
       .first(ADDRESS_REGISTER).second(IMMEDIATE)
@@ -933,7 +933,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// LSL -----------------------------------------------------------------------------
+// LSL -------------------------------------------------------------------------
 
     create(M68kTokenTypes.LSL).dataSizes(GROUP_W)
       .first(ALTERABLE_MEMORY)
@@ -951,7 +951,7 @@ public final class M68kMnemonicRegistry {
       .first(DATA_REGISTER)
       .build();
 
-// LSR -----------------------------------------------------------------------------
+// LSR -------------------------------------------------------------------------
 
     create(M68kTokenTypes.LSR).dataSizes(GROUP_W)
       .first(ALTERABLE_MEMORY)
@@ -969,7 +969,7 @@ public final class M68kMnemonicRegistry {
       .first(DATA_REGISTER)
       .build();
 
-// MOVE ----------------------------------------------------------------------------
+// MOVE ------------------------------------------------------------------------
 
     create(M68kTokenTypes.MOVE).dataSizes(GROUP_WL)
       .first(ADDRESS_REGISTER).second(ALTERABLE)
@@ -1012,7 +1012,7 @@ public final class M68kMnemonicRegistry {
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .build();
 
-// MOVEA ---------------------------------------------------------------------------
+// MOVEA -----------------------------------------------------------------------
 
     create(M68kTokenTypes.MOVEA).dataSizes(GROUP_WL)
       .first(ALL).second(ADDRESS_REGISTER)
@@ -1026,7 +1026,7 @@ public final class M68kMnemonicRegistry {
       .first(DATA).second(ALTERABLE_DATA)
       .build();
 
-// MOVEC ---------------------------------------------------------------------------
+// MOVEC -----------------------------------------------------------------------
 
     create(M68kTokenTypes.MOVEC).dataSizes(GROUP_L)
       .first(CTRL_REGISTER).second(DATA_OR_ADDRESS_REGISTER)
@@ -1040,7 +1040,7 @@ public final class M68kMnemonicRegistry {
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .build();
 
-// MOVEM ---------------------------------------------------------------------------
+// MOVEM -----------------------------------------------------------------------
 
     create(M68kTokenTypes.MOVEM).dataSizes(GROUP_WL)
       .first(DATA_OR_ADDRESS_REGISTER_LIST).second(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT)
@@ -1066,7 +1066,7 @@ public final class M68kMnemonicRegistry {
       .first(RESTORE_OPERANDS).second(IMMEDIATE_REGISTER_LIST_VALUE)
       .build();
 
-// MOVEP ---------------------------------------------------------------------------
+// MOVEP -----------------------------------------------------------------------
 
     create(M68kTokenTypes.MOVEP).dataSizes(GROUP_WL)
       .first(ADDRESS_REGISTER_DISPLACEMENT).second(DATA_REGISTER)
@@ -1076,13 +1076,13 @@ public final class M68kMnemonicRegistry {
       .first(DATA_REGISTER).second(ADDRESS_REGISTER_DISPLACEMENT)
       .build();
 
-// MOVEQ ---------------------------------------------------------------------------
+// MOVEQ -----------------------------------------------------------------------
 
     create(M68kTokenTypes.MOVEQ).dataSizes(GROUP_L)
       .first(QUICK_IMMEDIATE).second(DATA_REGISTER)
       .build();
 
-// MOVES ---------------------------------------------------------------------------
+// MOVES -----------------------------------------------------------------------
 
     create(M68kTokenTypes.MOVES).dataSizes(GROUP_BWL)
       .first(ALTERABLE_MEMORY).second(DATA_OR_ADDRESS_REGISTER)
@@ -1096,7 +1096,7 @@ public final class M68kMnemonicRegistry {
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .build();
 
-// MULS ----------------------------------------------------------------------------
+// MULS ------------------------------------------------------------------------
 
     create(M68kTokenTypes.MULS).dataSizes(GROUP_W)
       .first(ALTERABLE_DATA_CF).second(DATA_REGISTER)
@@ -1116,7 +1116,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// MULU ----------------------------------------------------------------------------
+// MULU ------------------------------------------------------------------------
 
     create(M68kTokenTypes.MULU).dataSizes(GROUP_W)
       .first(ALTERABLE_DATA_CF).second(DATA_REGISTER)
@@ -1136,13 +1136,13 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// NBCD ----------------------------------------------------------------------------
+// NBCD ------------------------------------------------------------------------
 
     create(M68kTokenTypes.NBCD).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
       .build();
 
-// NEG -----------------------------------------------------------------------------
+// NEG -------------------------------------------------------------------------
 
     create(M68kTokenTypes.NEG).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER)
@@ -1152,7 +1152,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// NEGX ----------------------------------------------------------------------------
+// NEGX ------------------------------------------------------------------------
 
     create(M68kTokenTypes.NEGX).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER)
@@ -1162,12 +1162,12 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// NOP -----------------------------------------------------------------------------
+// NOP -------------------------------------------------------------------------
 
     create(M68kTokenTypes.NOP)
       .build();
 
-// NOT -----------------------------------------------------------------------------
+// NOT -------------------------------------------------------------------------
 
     create(M68kTokenTypes.NOT).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER)
@@ -1177,7 +1177,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// OR ------------------------------------------------------------------------------
+// OR --------------------------------------------------------------------------
 
     create(M68kTokenTypes.OR).dataSizes(GROUP_BWL)
       .first(DATA).second(DATA_REGISTER)
@@ -1200,7 +1200,7 @@ public final class M68kMnemonicRegistry {
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .build();
 
-// ORI -----------------------------------------------------------------------------
+// ORI -------------------------------------------------------------------------
 
     create(M68kTokenTypes.ORI).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(DATA_REGISTER)
@@ -1219,19 +1219,19 @@ public final class M68kMnemonicRegistry {
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .build();
 
-// PEA -----------------------------------------------------------------------------
+// PEA -------------------------------------------------------------------------
 
     create(M68kTokenTypes.PEA).dataSizes(GROUP_L)
       .first(CONTROL)
       .build();
 
-// RESET ---------------------------------------------------------------------------
+// RESET -----------------------------------------------------------------------
 
     create(M68kTokenTypes.RESET)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .build();
 
-// ROL -----------------------------------------------------------------------------
+// ROL -------------------------------------------------------------------------
 
     create(M68kTokenTypes.ROL).dataSizes(GROUP_W)
       .first(ALTERABLE_MEMORY)
@@ -1249,7 +1249,7 @@ public final class M68kMnemonicRegistry {
       .first(DATA_REGISTER)
       .build();
 
-// ROR -----------------------------------------------------------------------------
+// ROR -------------------------------------------------------------------------
 
     create(M68kTokenTypes.ROR).dataSizes(GROUP_W)
       .first(ALTERABLE_MEMORY)
@@ -1267,7 +1267,7 @@ public final class M68kMnemonicRegistry {
       .first(DATA_REGISTER)
       .build();
 
-// ROXL ----------------------------------------------------------------------------
+// ROXL ------------------------------------------------------------------------
 
     create(M68kTokenTypes.ROXL).dataSizes(GROUP_W)
       .first(ALTERABLE_MEMORY)
@@ -1285,7 +1285,7 @@ public final class M68kMnemonicRegistry {
       .first(DATA_REGISTER)
       .build();
 
-// ROXR ----------------------------------------------------------------------------
+// ROXR ------------------------------------------------------------------------
 
     create(M68kTokenTypes.ROXR).dataSizes(GROUP_W)
       .first(ALTERABLE_MEMORY)
@@ -1303,30 +1303,30 @@ public final class M68kMnemonicRegistry {
       .first(DATA_REGISTER)
       .build();
 
-// RTD -----------------------------------------------------------------------------
+// RTD -------------------------------------------------------------------------
 
     create(M68kTokenTypes.RTD)
       .first(QUICK_IMMEDIATE)
       .cpus(GROUP_68010_UP)
       .build();
 
-// RTE -----------------------------------------------------------------------------
+// RTE -------------------------------------------------------------------------
 
     create(M68kTokenTypes.RTE)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .build();
 
-// RTR -----------------------------------------------------------------------------
+// RTR -------------------------------------------------------------------------
 
     create(M68kTokenTypes.RTR)
       .build();
 
-// RTS -----------------------------------------------------------------------------
+// RTS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.RTS)
       .build();
 
-// SBCD ----------------------------------------------------------------------------
+// SBCD ------------------------------------------------------------------------
 
     create(M68kTokenTypes.SBCD).dataSizes(GROUP_B)
       .first(DATA_REGISTER).second(DATA_REGISTER)
@@ -1336,7 +1336,7 @@ public final class M68kMnemonicRegistry {
       .first(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT).second(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT)
       .build();
 
-// ST ------------------------------------------------------------------------------
+// ST --------------------------------------------------------------------------
 
     create(M68kTokenTypes.ST).dataSizes(GROUP_B)
       .first(DATA_REGISTER)
@@ -1346,7 +1346,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// SF ------------------------------------------------------------------------------
+// SF --------------------------------------------------------------------------
 
     create(M68kTokenTypes.SF).dataSizes(GROUP_B)
       .first(DATA_REGISTER)
@@ -1356,7 +1356,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// SHI -----------------------------------------------------------------------------
+// SHI -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SHI).dataSizes(GROUP_B)
       .first(DATA_REGISTER)
@@ -1366,7 +1366,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// SLS -----------------------------------------------------------------------------
+// SLS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SLS).dataSizes(GROUP_B)
       .first(DATA_REGISTER)
@@ -1376,7 +1376,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// SCC -----------------------------------------------------------------------------
+// SCC -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SCC).dataSizes(GROUP_B)
       .first(DATA_REGISTER)
@@ -1386,7 +1386,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// SHS -----------------------------------------------------------------------------
+// SHS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SHS).dataSizes(GROUP_B)
       .first(DATA_REGISTER)
@@ -1396,7 +1396,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// SCS -----------------------------------------------------------------------------
+// SCS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SCS).dataSizes(GROUP_B)
       .first(DATA_REGISTER)
@@ -1406,7 +1406,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// SLO -----------------------------------------------------------------------------
+// SLO -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SLO).dataSizes(GROUP_B)
       .first(DATA_REGISTER)
@@ -1416,7 +1416,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// SNE -----------------------------------------------------------------------------
+// SNE -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SNE).dataSizes(GROUP_B)
       .first(DATA_REGISTER)
@@ -1426,7 +1426,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// SEQ -----------------------------------------------------------------------------
+// SEQ -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SEQ).dataSizes(GROUP_B)
       .first(DATA_REGISTER)
@@ -1436,7 +1436,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// SVC -----------------------------------------------------------------------------
+// SVC -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SVC).dataSizes(GROUP_B)
       .first(DATA_REGISTER)
@@ -1446,7 +1446,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// SVS -----------------------------------------------------------------------------
+// SVS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SVS).dataSizes(GROUP_B)
       .first(DATA_REGISTER)
@@ -1456,7 +1456,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// SPL -----------------------------------------------------------------------------
+// SPL -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SPL).dataSizes(GROUP_B)
       .first(DATA_REGISTER)
@@ -1466,7 +1466,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// SMI -----------------------------------------------------------------------------
+// SMI -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SMI).dataSizes(GROUP_B)
       .first(DATA_REGISTER)
@@ -1476,7 +1476,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// SGE -----------------------------------------------------------------------------
+// SGE -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SGE).dataSizes(GROUP_B)
       .first(DATA_REGISTER)
@@ -1486,7 +1486,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// SLT -----------------------------------------------------------------------------
+// SLT -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SLT).dataSizes(GROUP_B)
       .first(DATA_REGISTER)
@@ -1496,7 +1496,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// SGT -----------------------------------------------------------------------------
+// SGT -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SGT).dataSizes(GROUP_B)
       .first(DATA_REGISTER)
@@ -1506,7 +1506,7 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// SLE -----------------------------------------------------------------------------
+// SLE -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SLE).dataSizes(GROUP_B)
       .first(DATA_REGISTER)
@@ -1516,14 +1516,14 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_DATA)
       .build();
 
-// STOP ----------------------------------------------------------------------------
+// STOP ------------------------------------------------------------------------
 
     create(M68kTokenTypes.STOP)
       .first(QUICK_IMMEDIATE)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .build();
 
-// SUB -----------------------------------------------------------------------------
+// SUB -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SUB).dataSizes(GROUP_BWL)
       .first(DATA).second(DATA_REGISTER)
@@ -1545,13 +1545,13 @@ public final class M68kMnemonicRegistry {
       .first(IMMEDIATE).second(ALTERABLE_DATA)
       .build();
 
-// SUBA ----------------------------------------------------------------------------
+// SUBA ------------------------------------------------------------------------
 
     create(M68kTokenTypes.SUBA).dataSizes(GROUP_WL)
       .first(ALL).second(ADDRESS_REGISTER)
       .build();
 
-// SUBI ----------------------------------------------------------------------------
+// SUBI ------------------------------------------------------------------------
 
     create(M68kTokenTypes.SUBI).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(DATA_REGISTER)
@@ -1561,7 +1561,7 @@ public final class M68kMnemonicRegistry {
       .first(IMMEDIATE).second(ALTERABLE_DATA)
       .build();
 
-// SUBQ ----------------------------------------------------------------------------
+// SUBQ ------------------------------------------------------------------------
 
     create(M68kTokenTypes.SUBQ).dataSizes(GROUP_WL)
       .first(QUICK_IMMEDIATE).second(ADDRESS_REGISTER)
@@ -1571,7 +1571,7 @@ public final class M68kMnemonicRegistry {
       .first(QUICK_IMMEDIATE).second(ALTERABLE_DATA)
       .build();
 
-// SUBX ----------------------------------------------------------------------------
+// SUBX ------------------------------------------------------------------------
 
     create(M68kTokenTypes.SUBX).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER).second(DATA_REGISTER)
@@ -1581,30 +1581,30 @@ public final class M68kMnemonicRegistry {
       .first(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT).second(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT)
       .build();
 
-// SWAP ----------------------------------------------------------------------------
+// SWAP ------------------------------------------------------------------------
 
     create(M68kTokenTypes.SWAP).dataSizes(GROUP_W)
       .first(DATA_REGISTER)
       .build();
 
-// TAS -----------------------------------------------------------------------------
+// TAS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.TAS).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
       .build();
 
-// TRAP ----------------------------------------------------------------------------
+// TRAP ------------------------------------------------------------------------
 
     create(M68kTokenTypes.TRAP)
       .first(QUICK_IMMEDIATE)
       .build();
 
-// TRAPV ---------------------------------------------------------------------------
+// TRAPV -----------------------------------------------------------------------
 
     create(M68kTokenTypes.TRAPV)
       .build();
 
-// TST -----------------------------------------------------------------------------
+// TST -------------------------------------------------------------------------
 
     create(M68kTokenTypes.TST).dataSizes(GROUP_BWL)
       .first(ALTERABLE_DATA)
@@ -1620,7 +1620,7 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
-// UNLK ----------------------------------------------------------------------------
+// UNLK ------------------------------------------------------------------------
 
     create(M68kTokenTypes.UNLK)
       .first(ADDRESS_REGISTER)

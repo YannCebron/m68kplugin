@@ -48,7 +48,7 @@ import static java.util.Map.entry;
 @SuppressWarnings("SpellCheckingInspection")
 public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
-  private static final boolean ENABLED = false;
+  private static final boolean ENABLED = true;
 
   private static final boolean LOG_UNKNOWN_MNEMONICS = false;
 
@@ -56,7 +56,6 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
   /**
    * Generate 680x0-only variants for _known_ operands.
-   * Known unsupported: DN, DD
    */
   private static final boolean IGNORE_UNKNOWN_OPERANDS = true;
 
@@ -73,9 +72,11 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
     List<M68kMnemonicRuntimeData> allRuntimeData = readRuntimeData();
 
-    final List<String> strings = Files.readAllLines(Paths.get(VASM_OPCODES_H_PATH));
-    for (String string : strings) {
-      final String trim = string.trim();
+    final List<String> lines = Files.readAllLines(Paths.get(VASM_OPCODES_H_PATH));
+    assertEquals(2914, lines.size());
+
+    for (String line : lines) {
+      final String trim = line.trim();
       final String[] mnemonicParts = trim.split("\"");
       if (mnemonicParts.length != 3) continue;
 
@@ -83,8 +84,10 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       if (mnemonic.isEmpty() || " no-op".equals(mnemonic)) continue;
 
       IElementType elementType = findElementType(mnemonic);
-      if (elementType == null && LOG_UNKNOWN_MNEMONICS && unknownMnemonics.add(mnemonic)) {
-        System.out.println("unknown mnemonic '" + mnemonic + "': " + trim);
+      if (elementType == null) {
+        if (LOG_UNKNOWN_MNEMONICS && unknownMnemonics.add(mnemonic)) {
+          System.out.println("unknown mnemonic '" + mnemonic + "': " + trim);
+        }
         continue;
       }
 
@@ -93,8 +96,8 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
       // Operands ----------------------------
       Couple<M68kOperand> operands = mapOperands(split.get(1));
-      M68kOperand sourceOperand = operands.getFirst();
-      M68kOperand destinationOperand = operands.getSecond();
+      M68kOperand firstOperand = operands.getFirst();
+      M68kOperand secondOperand = operands.getSecond();
 
       List<String> lastSplit = StringUtil.split(split.get(3), ",");
 
@@ -114,72 +117,74 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
         continue;
       }
 
-      if (elementType != null && isSupportedCpu(m68kCpus)) {
-        if (sourceOperand == null) {
+      if (isSupportedCpu(m68kCpus)) {
+        if (firstOperand == null) {
           if (IGNORE_UNKNOWN_OPERANDS) {
-            System.out.println("skipping unknown source operand: " + trim);
+            System.out.println("skipping unknown first operand: " + trim);
             continue;
           }
-          fail("unknown source operand: " + trim);
+          fail("unknown first operand: " + trim);
         }
-        if (destinationOperand == null) {
+        if (secondOperand == null) {
           if (IGNORE_UNKNOWN_OPERANDS) {
-            System.out.println("skipping unknown destination operand: " + trim);
+            System.out.println("skipping unknown second operand: " + trim);
             continue;
           }
-          fail("unknown destination operand: " + trim);
+          fail("unknown second operand: " + trim);
         }
       }
 
-      if (elementType != null && sourceOperand != null && destinationOperand != null) {
-        M68kMnemonicRuntimeData m68kMnemonicRuntimeData = ContainerUtil.find(allRuntimeData, it ->
-          it.elementType == elementType &&
-            it.sourceOperand == sourceOperand &&
-            it.destinationOperand == destinationOperand &&
-            it.dataSizes.equals(dataSizes) &&
-            it.cpus.equals(m68kCpus));
-        M68kMnemonic.PrivilegedType privilegedType = m68kMnemonicRuntimeData != null ? m68kMnemonicRuntimeData.privilegedType : M68kMnemonic.PrivilegedType.NONE;
-
-        M68kMnemonic m68kMnemonic = new M68kMnemonic(elementType,
-          dataSizes,
-          sourceOperand,
-          destinationOperand,
-          m68kCpus,
-          privilegedType);
-
-        // skip duplicate entries for bset,bclr,bchg with ALTERABLE_MEMORY_CF vs ALTERABLE_MEMORY
-        // both have the exact same of address modes ATM, so it's a full duplicate
-        boolean skip = false;
-        for (M68kMnemonic existing : mnemonics) {
-          if (existing.elementType() == m68kMnemonic.elementType() &&
-            existing.dataSizes().equals(m68kMnemonic.dataSizes()) &&
-            existing.cpus().equals(m68kMnemonic.cpus()) &&
-            existing.firstOperand() == m68kMnemonic.firstOperand() &&
-            existing.secondOperand() == M68kOperand.ALTERABLE_MEMORY_CF && m68kMnemonic.secondOperand() == M68kOperand.ALTERABLE_MEMORY) {
-            System.out.println("skip ALTERABLE_MEMORY(CF) duplication:");
-            System.out.println("  entry:    " + m68kMnemonic);
-            System.out.println("  existing: " + existing);
-            skip = true;
-            break;
-          }
-        }
-
-        if (!skip) mnemonics.add(m68kMnemonic);
+      if (firstOperand == null || secondOperand == null) {
+        continue;
       }
+
+      M68kMnemonicRuntimeData m68kMnemonicRuntimeData = ContainerUtil.find(allRuntimeData, it ->
+        it.elementType == elementType &&
+          it.firstOperand == firstOperand &&
+          it.secondOperand == secondOperand &&
+          it.dataSizes.equals(dataSizes) &&
+          it.cpus.equals(m68kCpus));
+      M68kMnemonic.PrivilegedType privilegedType = m68kMnemonicRuntimeData != null ? m68kMnemonicRuntimeData.privilegedType : M68kMnemonic.PrivilegedType.NONE;
+
+      M68kMnemonic m68kMnemonic = new M68kMnemonic(elementType,
+        dataSizes,
+        firstOperand,
+        secondOperand,
+        m68kCpus,
+        privilegedType);
+
+      // skip duplicate entries for bset,bclr,bchg with ALTERABLE_MEMORY_CF vs ALTERABLE_MEMORY
+      // both have the exact same of address modes ATM, so it's a full duplicate
+      boolean skip = false;
+      for (M68kMnemonic existing : mnemonics) {
+        if (existing.elementType() == m68kMnemonic.elementType() &&
+          existing.dataSizes().equals(m68kMnemonic.dataSizes()) &&
+          existing.cpus().equals(m68kMnemonic.cpus()) &&
+          existing.firstOperand() == m68kMnemonic.firstOperand() &&
+          existing.secondOperand() == M68kOperand.ALTERABLE_MEMORY_CF && m68kMnemonic.secondOperand() == M68kOperand.ALTERABLE_MEMORY) {
+          System.out.println("skip ALTERABLE_MEMORY(CF) duplication:");
+          System.out.println("  entry:    " + m68kMnemonic);
+          System.out.println("  existing: " + existing);
+          System.out.println();
+          skip = true;
+          break;
+        }
+      }
+
+      if (!skip) mnemonics.add(m68kMnemonic);
     }
 
     dumpCode(mnemonics);
   }
 
-  private Couple<M68kOperand> mapOperands(String operandText) {
+  private static Couple<M68kOperand> mapOperands(String operandText) {
     operandText = operandText.contains("{") ? StringUtil.substringAfter(operandText, "{") : operandText;
     assertNotNull(operandText);
     operandText = StringUtil.substringBefore(operandText, "}");
     assertNotNull(operandText);
     if (operandText.contains(",")) {
-      return Couple.of(
-        mapOperand(StringUtil.substringBefore(operandText, ",")),
-        mapOperand(StringUtil.substringAfter(operandText, ",")));
+      List<String> operandTexts = StringUtil.split(operandText, ",");
+      return Couple.of(mapOperand(operandTexts.get(0)), mapOperand(operandTexts.get(1)));
     }
     return Couple.of(mapOperand(operandText), M68kOperand.NONE);
   }
@@ -198,6 +203,8 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     assertEquals("total parsed mnemonic count", 330, mnemonics.size());
     assertEquals("supported mnemonic count", 283, supportedMnemonics);
 
+    System.out.println();
+    System.out.println();
     System.out.println(StringUtil.repeat("-", 80));
     System.out.println("// Total mnemonics: " + supportedMnemonics);
 
@@ -208,7 +215,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
       String mnemonicText = StringUtil.toUpperCase(mnemonic.elementType().toString());
       if (lastElementType != mnemonic.elementType()) {
-        System.out.println("\n// " + mnemonicText + " " + StringUtil.repeatSymbol('-', 80 - mnemonicText.length()));
+        System.out.println("\n// " + mnemonicText + " " + StringUtil.repeatSymbol('-', 80 - 4 - mnemonicText.length()));
       }
 
       String tokenText = "M68kTokenTypes." + mnemonicText;
@@ -239,6 +246,8 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
       lastElementType = mnemonic.elementType();
     }
+    System.out.println();
+    System.out.println();
   }
 
   private static @Nullable String getCpuText(Set<M68kCpu> cpus) {
@@ -401,17 +410,16 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       Set<M68kCpu> m68kCpus = mapCpuSet(split.get(3).strip());
       M68kMnemonic.PrivilegedType privilegedType = M68kMnemonic.PrivilegedType.valueOf(split.get(4).strip());
 
-      data.add(new M68kMnemonicRuntimeData(elementType,
-        dataSizes,
-        operands.getFirst(), operands.getSecond(),
-        m68kCpus,
-        privilegedType));
+      data.add(
+        new M68kMnemonicRuntimeData(elementType, dataSizes,
+          operands.getFirst(), operands.getSecond(),
+          m68kCpus, privilegedType));
     }
     return data;
   }
 
-  record M68kMnemonicRuntimeData(IElementType elementType, Set<M68kDataSize> dataSizes, M68kOperand sourceOperand,
-                                 M68kOperand destinationOperand, Set<M68kCpu> cpus,
-                                 M68kMnemonic.PrivilegedType privilegedType) {
+  private record M68kMnemonicRuntimeData(IElementType elementType, Set<M68kDataSize> dataSizes,
+                                         M68kOperand firstOperand, M68kOperand secondOperand,
+                                         Set<M68kCpu> cpus, M68kMnemonic.PrivilegedType privilegedType) {
   }
 }
