@@ -288,13 +288,11 @@
 
 ********************************************************************************
 
-* M68kMnemonic{addi, firstOp=IMMEDIATE, secondOp=DATA_REGISTER, [BYTE, WORD, LONGWORD], MC68000 Family}
+* M68kMnemonic{addi, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
          addi        #42,d0
          addi.b      #42,d0
          addi.w      #42,d0
          addi.l      #42,d0
-
-* M68kMnemonic{addi, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
          addi        #42,(a0)
          addi.b      #42,(a0)
          addi.w      #42,(a0)
@@ -573,13 +571,11 @@
 
 ********************************************************************************
 
-* M68kMnemonic{andi, firstOp=IMMEDIATE, secondOp=DATA_REGISTER, [BYTE, WORD, LONGWORD], MC68000 Family}
+* M68kMnemonic{andi, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
          andi        #42,d0
          andi.b      #42,d0
          andi.w      #42,d0
          andi.l      #42,d0
-
-* M68kMnemonic{andi, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
          andi        #42,(a0)
          andi.b      #42,(a0)
          andi.w      #42,(a0)
@@ -1187,7 +1183,7 @@ label31: bsr         label31
          btst        #1,d0
          btst.l      #1,d0
 
-* M68kMnemonic{btst, firstOp=QUICK_IMMEDIATE, secondOp=ALTERABLE_MEMORY_CF, [BYTE], MC68000 Family}
+* M68kMnemonic{btst, firstOp=QUICK_IMMEDIATE, secondOp=MEMORY_WITHOUT_IMMEDIATE, [BYTE], MC68000 Family}
          btst        #1,(a0)
          btst.b      #1,(a0)
          btst        #1,(a0)+
@@ -1208,8 +1204,6 @@ label31: bsr         label31
          btst.b      #1,$4000.W
          btst        #1,$4000.L
          btst.b      #1,$4000.L
-
-* M68kMnemonic{btst, firstOp=QUICK_IMMEDIATE, secondOp=MEMORY_WITHOUT_IMMEDIATE, [BYTE], MC68000 Family}
          btst        #1,(PC)
          btst.b      #1,(PC)
          btst        #1,66(PC)
@@ -1604,13 +1598,11 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{cmpi, firstOp=IMMEDIATE, secondOp=DATA_REGISTER, [BYTE, WORD, LONGWORD], MC68000 Family}
+* M68kMnemonic{cmpi, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
          cmpi        #42,d0
          cmpi.b      #42,d0
          cmpi.w      #42,d0
          cmpi.l      #42,d0
-
-* M68kMnemonic{cmpi, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
          cmpi        #42,(a0)
          cmpi.b      #42,(a0)
          cmpi.w      #42,(a0)
@@ -1797,9 +1789,11 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{divs, firstOp=ALTERABLE_DATA_CF, secondOp=DATA_REGISTER, [WORD], MC68000 Family}
+* M68kMnemonic{divs, firstOp=DATA, secondOp=DATA_REGISTER, [WORD], MC68000 Family}
          divs        d0,d0
          divs.w      d0,d0
+         divs        #42,d0
+         divs.w      #42,d0
          divs        (a0),d0
          divs.w      (a0),d0
          divs        (a0)+,d0
@@ -1820,23 +1814,6 @@ label35: bvs         label35
          divs.w      $4000.W,d0
          divs        $4000.L,d0
          divs.w      $4000.L,d0
-
-* M68kMnemonic{divs, firstOp=ALTERABLE_DATA_CF, secondOp=DATA_REGISTER, [LONGWORD], MC68020+}
-         divs.l      d0,d0
-         divs.l      (a0),d0
-         divs.l      (a0)+,d0
-         divs.l      -(a0),d0
-         divs.l      42(a0),d0
-         divs.l      (-42,a0),d0
-         divs.l      12(a0,d0),d0
-         divs.l      (12,a0,a0),d0
-         divs.l      $4000,d0
-         divs.l      $4000.W,d0
-         divs.l      $4000.L,d0
-
-* M68kMnemonic{divs, firstOp=DATA, secondOp=DATA_REGISTER, [WORD], MC68000 Family}
-         divs        #42,d0
-         divs.w      #42,d0
          divs        (PC),d0
          divs.w      (PC),d0
          divs        66(PC),d0
@@ -1849,7 +1826,18 @@ label35: bvs         label35
          divs.w      (66,PC,a0),d0
 
 * M68kMnemonic{divs, firstOp=DATA, secondOp=DATA_REGISTER, [LONGWORD], MC68020+}
+         divs.l      d0,d0
          divs.l      #42,d0
+         divs.l      (a0),d0
+         divs.l      (a0)+,d0
+         divs.l      -(a0),d0
+         divs.l      42(a0),d0
+         divs.l      (-42,a0),d0
+         divs.l      12(a0,d0),d0
+         divs.l      (12,a0,a0),d0
+         divs.l      $4000,d0
+         divs.l      $4000.W,d0
+         divs.l      $4000.L,d0
          divs.l      (PC),d0
          divs.l      66(PC),d0
          divs.l      (-66,PC),d0
@@ -1859,9 +1847,11 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{divu, firstOp=ALTERABLE_DATA_CF, secondOp=DATA_REGISTER, [WORD], MC68000 Family}
+* M68kMnemonic{divu, firstOp=DATA, secondOp=DATA_REGISTER, [WORD], MC68000 Family}
          divu        d0,d0
          divu.w      d0,d0
+         divu        #42,d0
+         divu.w      #42,d0
          divu        (a0),d0
          divu.w      (a0),d0
          divu        (a0)+,d0
@@ -1882,23 +1872,6 @@ label35: bvs         label35
          divu.w      $4000.W,d0
          divu        $4000.L,d0
          divu.w      $4000.L,d0
-
-* M68kMnemonic{divu, firstOp=ALTERABLE_DATA_CF, secondOp=DATA_REGISTER, [LONGWORD], MC68020+}
-         divu.l      d0,d0
-         divu.l      (a0),d0
-         divu.l      (a0)+,d0
-         divu.l      -(a0),d0
-         divu.l      42(a0),d0
-         divu.l      (-42,a0),d0
-         divu.l      12(a0,d0),d0
-         divu.l      (12,a0,a0),d0
-         divu.l      $4000,d0
-         divu.l      $4000.W,d0
-         divu.l      $4000.L,d0
-
-* M68kMnemonic{divu, firstOp=DATA, secondOp=DATA_REGISTER, [WORD], MC68000 Family}
-         divu        #42,d0
-         divu.w      #42,d0
          divu        (PC),d0
          divu.w      (PC),d0
          divu        66(PC),d0
@@ -1911,7 +1884,18 @@ label35: bvs         label35
          divu.w      (66,PC,a0),d0
 
 * M68kMnemonic{divu, firstOp=DATA, secondOp=DATA_REGISTER, [LONGWORD], MC68020+}
+         divu.l      d0,d0
          divu.l      #42,d0
+         divu.l      (a0),d0
+         divu.l      (a0)+,d0
+         divu.l      -(a0),d0
+         divu.l      42(a0),d0
+         divu.l      (-42,a0),d0
+         divu.l      12(a0,d0),d0
+         divu.l      (12,a0,a0),d0
+         divu.l      $4000,d0
+         divu.l      $4000.W,d0
+         divu.l      $4000.L,d0
          divu.l      (PC),d0
          divu.l      66(PC),d0
          divu.l      (-66,PC),d0
@@ -1967,13 +1951,11 @@ label35: bvs         label35
          eor.w       d0,$4000.L
          eor.l       d0,$4000.L
 
-* M68kMnemonic{eor, firstOp=IMMEDIATE, secondOp=DATA_REGISTER, [BYTE, WORD, LONGWORD], MC68000 Family}
+* M68kMnemonic{eor, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
          eor         #42,d0
          eor.b       #42,d0
          eor.w       #42,d0
          eor.l       #42,d0
-
-* M68kMnemonic{eor, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
          eor         #42,(a0)
          eor.b       #42,(a0)
          eor.w       #42,(a0)
@@ -2026,13 +2008,11 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{eori, firstOp=IMMEDIATE, secondOp=DATA_REGISTER, [BYTE, WORD, LONGWORD], MC68000 Family}
+* M68kMnemonic{eori, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
          eori        #42,d0
          eori.b      #42,d0
          eori.w      #42,d0
          eori.l      #42,d0
-
-* M68kMnemonic{eori, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
          eori        #42,(a0)
          eori.b      #42,(a0)
          eori.w      #42,(a0)
@@ -4543,9 +4523,11 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{muls, firstOp=ALTERABLE_DATA_CF, secondOp=DATA_REGISTER, [WORD], MC68000 Family}
+* M68kMnemonic{muls, firstOp=DATA, secondOp=DATA_REGISTER, [WORD], MC68000 Family}
          muls        d0,d0
          muls.w      d0,d0
+         muls        #42,d0
+         muls.w      #42,d0
          muls        (a0),d0
          muls.w      (a0),d0
          muls        (a0)+,d0
@@ -4566,23 +4548,6 @@ label35: bvs         label35
          muls.w      $4000.W,d0
          muls        $4000.L,d0
          muls.w      $4000.L,d0
-
-* M68kMnemonic{muls, firstOp=ALTERABLE_DATA_CF, secondOp=DATA_REGISTER, [LONGWORD], MC68020+}
-         muls.l      d0,d0
-         muls.l      (a0),d0
-         muls.l      (a0)+,d0
-         muls.l      -(a0),d0
-         muls.l      42(a0),d0
-         muls.l      (-42,a0),d0
-         muls.l      12(a0,d0),d0
-         muls.l      (12,a0,a0),d0
-         muls.l      $4000,d0
-         muls.l      $4000.W,d0
-         muls.l      $4000.L,d0
-
-* M68kMnemonic{muls, firstOp=DATA, secondOp=DATA_REGISTER, [WORD], MC68000 Family}
-         muls        #42,d0
-         muls.w      #42,d0
          muls        (PC),d0
          muls.w      (PC),d0
          muls        66(PC),d0
@@ -4595,7 +4560,18 @@ label35: bvs         label35
          muls.w      (66,PC,a0),d0
 
 * M68kMnemonic{muls, firstOp=DATA, secondOp=DATA_REGISTER, [LONGWORD], MC68020+}
+         muls.l      d0,d0
          muls.l      #42,d0
+         muls.l      (a0),d0
+         muls.l      (a0)+,d0
+         muls.l      -(a0),d0
+         muls.l      42(a0),d0
+         muls.l      (-42,a0),d0
+         muls.l      12(a0,d0),d0
+         muls.l      (12,a0,a0),d0
+         muls.l      $4000,d0
+         muls.l      $4000.W,d0
+         muls.l      $4000.L,d0
          muls.l      (PC),d0
          muls.l      66(PC),d0
          muls.l      (-66,PC),d0
@@ -4605,9 +4581,11 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{mulu, firstOp=ALTERABLE_DATA_CF, secondOp=DATA_REGISTER, [WORD], MC68000 Family}
+* M68kMnemonic{mulu, firstOp=DATA, secondOp=DATA_REGISTER, [WORD], MC68000 Family}
          mulu        d0,d0
          mulu.w      d0,d0
+         mulu        #42,d0
+         mulu.w      #42,d0
          mulu        (a0),d0
          mulu.w      (a0),d0
          mulu        (a0)+,d0
@@ -4628,23 +4606,6 @@ label35: bvs         label35
          mulu.w      $4000.W,d0
          mulu        $4000.L,d0
          mulu.w      $4000.L,d0
-
-* M68kMnemonic{mulu, firstOp=ALTERABLE_DATA_CF, secondOp=DATA_REGISTER, [LONGWORD], MC68020+}
-         mulu.l      d0,d0
-         mulu.l      (a0),d0
-         mulu.l      (a0)+,d0
-         mulu.l      -(a0),d0
-         mulu.l      42(a0),d0
-         mulu.l      (-42,a0),d0
-         mulu.l      12(a0,d0),d0
-         mulu.l      (12,a0,a0),d0
-         mulu.l      $4000,d0
-         mulu.l      $4000.W,d0
-         mulu.l      $4000.L,d0
-
-* M68kMnemonic{mulu, firstOp=DATA, secondOp=DATA_REGISTER, [WORD], MC68000 Family}
-         mulu        #42,d0
-         mulu.w      #42,d0
          mulu        (PC),d0
          mulu.w      (PC),d0
          mulu        66(PC),d0
@@ -4657,7 +4618,18 @@ label35: bvs         label35
          mulu.w      (66,PC,a0),d0
 
 * M68kMnemonic{mulu, firstOp=DATA, secondOp=DATA_REGISTER, [LONGWORD], MC68020+}
+         mulu.l      d0,d0
          mulu.l      #42,d0
+         mulu.l      (a0),d0
+         mulu.l      (a0)+,d0
+         mulu.l      -(a0),d0
+         mulu.l      42(a0),d0
+         mulu.l      (-42,a0),d0
+         mulu.l      12(a0,d0),d0
+         mulu.l      (12,a0,a0),d0
+         mulu.l      $4000,d0
+         mulu.l      $4000.W,d0
+         mulu.l      $4000.L,d0
          mulu.l      (PC),d0
          mulu.l      66(PC),d0
          mulu.l      (-66,PC),d0
@@ -5018,13 +4990,11 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{ori, firstOp=IMMEDIATE, secondOp=DATA_REGISTER, [BYTE, WORD, LONGWORD], MC68000 Family}
+* M68kMnemonic{ori, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
          ori         #42,d0
          ori.b       #42,d0
          ori.w       #42,d0
          ori.l       #42,d0
-
-* M68kMnemonic{ori, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
          ori         #42,(a0)
          ori.b       #42,(a0)
          ori.w       #42,(a0)
@@ -6068,13 +6038,11 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{subi, firstOp=IMMEDIATE, secondOp=DATA_REGISTER, [BYTE, WORD, LONGWORD], MC68000 Family}
+* M68kMnemonic{subi, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
          subi        #42,d0
          subi.b      #42,d0
          subi.w      #42,d0
          subi.l      #42,d0
-
-* M68kMnemonic{subi, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
          subi        #42,(a0)
          subi.b      #42,(a0)
          subi.w      #42,(a0)

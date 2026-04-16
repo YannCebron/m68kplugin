@@ -162,24 +162,22 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     assertEquals("total parsed mnemonic count", 333, parsedMnemonics.size());
 
     List<M68kMnemonic> cleanupMnemonics = cleanupMnemonics(parsedMnemonics);
-    assertEquals("total cleanup mnemonic count", 330, cleanupMnemonics.size());
+    assertEquals("total cleanup mnemonic count", 314, cleanupMnemonics.size());
 
     dumpCode(cleanupMnemonics);
   }
 
-  private List<M68kMnemonic> cleanupMnemonics(List<M68kMnemonic> parsedMnemonics) {
+  private static List<M68kMnemonic> cleanupMnemonics(List<M68kMnemonic> parsedMnemonics) {
     printDivider();
 
-    List<M68kMnemonic> cleanMnemonics = new ArrayList<>();
+    List<M68kMnemonic> cleanupMnemonics = new ArrayList<>();
 
-    // skip duplicate entries for bset,bclr,bchg with ALTERABLE_MEMORY_CF vs ALTERABLE_MEMORY
+    // skip duplicate entries for bset,bclr,bchg with ALTERABLE_MEMORY_CF vs. ALTERABLE_MEMORY
     // both have the exact same of address modes ATM, so it's a full duplicate
     for (M68kMnemonic m68kMnemonic : parsedMnemonics) {
       boolean skip = false;
       for (M68kMnemonic existing : parsedMnemonics) {
-        if (existing.elementType() == m68kMnemonic.elementType() &&
-          existing.dataSizes().equals(m68kMnemonic.dataSizes()) &&
-          existing.cpus().equals(m68kMnemonic.cpus()) &&
+        if (matchingMnemonic(existing, m68kMnemonic) &&
           existing.firstOperand() == m68kMnemonic.firstOperand() &&
           existing.secondOperand() == M68kOperand.ALTERABLE_MEMORY_CF && m68kMnemonic.secondOperand() == M68kOperand.ALTERABLE_MEMORY) {
           System.out.println("skip ALTERABLE_MEMORY(CF) duplication:");
@@ -190,10 +188,64 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
           break;
         }
       }
-      if (!skip) cleanMnemonics.add(m68kMnemonic);
+      if (!skip) cleanupMnemonics.add(m68kMnemonic);
+    }
+    assertEquals("skip ALTERABLE_MEMORY(CF) duplication difference count", 3, parsedMnemonics.size() - cleanupMnemonics.size());
+
+
+    // cleanup duplicates for addressing modes (due to separate entries for CF), e.g., "IM,_D" vs. "IM,AD"
+    List<M68kMnemonic> toRemove = new ArrayList<>();
+    for (M68kMnemonic m68kMnemonic : cleanupMnemonics) {
+      boolean skip = false;
+      for (M68kMnemonic existing : cleanupMnemonics) {
+        if (matchingMnemonic(existing, m68kMnemonic) &&
+          operandAddressModesOverlap(m68kMnemonic, existing)) {
+          System.out.println("skip operand address modes overlap");
+          System.out.println("  entry:    " + m68kMnemonic);
+          System.out.println("  existing: " + existing);
+          System.out.println();
+          skip = true;
+          break;
+        }
+      }
+      if (skip) toRemove.add(m68kMnemonic);
+    }
+    assertEquals("operand address modes overlap count", 16, toRemove.size());
+    cleanupMnemonics.removeAll(toRemove);
+
+    return cleanupMnemonics;
+  }
+
+  private static boolean matchingMnemonic(M68kMnemonic existing, M68kMnemonic m68kMnemonic) {
+    return existing.elementType() == m68kMnemonic.elementType() &&
+      existing.dataSizes().equals(m68kMnemonic.dataSizes()) &&
+      existing.cpus().equals(m68kMnemonic.cpus());
+  }
+
+  /**
+   * Either first or second operand's address modes have a full overlap.
+   */
+  private static boolean operandAddressModesOverlap(M68kMnemonic firstMnemonic, M68kMnemonic secondMnemonic) {
+    if (firstMnemonic == secondMnemonic) return false;
+
+    if (firstMnemonic.firstOperand() == secondMnemonic.firstOperand()) {
+      return addressModesOverlap(firstMnemonic.secondOperand(), secondMnemonic.secondOperand());
     }
 
-    return cleanMnemonics;
+    if (firstMnemonic.secondOperand() == secondMnemonic.secondOperand() &&
+      firstMnemonic.secondOperand() != M68kOperand.NONE) {
+      return addressModesOverlap(firstMnemonic.firstOperand(), secondMnemonic.firstOperand());
+    }
+
+    return false;
+  }
+
+  private static boolean addressModesOverlap(M68kOperand first, M68kOperand second) {
+    if (first == M68kOperand.NONE || second == M68kOperand.NONE) return false;
+
+    Set<M68kAddressMode> firstAddressModes = Set.of(first.getAddressModes());
+    Set<M68kAddressMode> secondAddressModes = Set.of(second.getAddressModes());
+    return secondAddressModes.containsAll(firstAddressModes);
   }
 
   private static Couple<M68kOperand> mapOperands(String operandText) {
@@ -224,7 +276,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
   private void dumpCode(List<M68kMnemonic> mnemonics) {
     int supportedMnemonics = ContainerUtil.filter(mnemonics, m68kMnemonic -> isSupportedCpu(m68kMnemonic.cpus())).size();
-    assertEquals("supported mnemonic count", 283, supportedMnemonics);
+    assertEquals("supported mnemonic count", 267, supportedMnemonics);
 
     printDivider();
 

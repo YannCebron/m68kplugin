@@ -18,6 +18,7 @@
   - `TST`
 - Privileged instruction status: `move.w SR,<ALTERABLE_DATA>` only for 68010+
 - Parsing number literals
+- Consolidate mnemonics data to remove duplicates with overlapping address modes
 
 ## 0.2.1 - 2025-11-29
 
