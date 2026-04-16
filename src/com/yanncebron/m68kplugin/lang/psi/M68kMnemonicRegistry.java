@@ -542,7 +542,7 @@ public final class M68kMnemonicRegistry {
       .build();
 
     create(M68kTokenTypes.BCHG).dataSizes(GROUP_B)
-      .first(QUICK_IMMEDIATE).second(ALTERABLE_MEMORY_CF)
+      .first(QUICK_IMMEDIATE).second(ALTERABLE_MEMORY)
       .build();
 
 // BCLR ------------------------------------------------------------------------
@@ -560,7 +560,7 @@ public final class M68kMnemonicRegistry {
       .build();
 
     create(M68kTokenTypes.BCLR).dataSizes(GROUP_B)
-      .first(QUICK_IMMEDIATE).second(ALTERABLE_MEMORY_CF)
+      .first(QUICK_IMMEDIATE).second(ALTERABLE_MEMORY)
       .build();
 
 // BSET ------------------------------------------------------------------------
@@ -578,7 +578,7 @@ public final class M68kMnemonicRegistry {
       .build();
 
     create(M68kTokenTypes.BSET).dataSizes(GROUP_B)
-      .first(QUICK_IMMEDIATE).second(ALTERABLE_MEMORY_CF)
+      .first(QUICK_IMMEDIATE).second(ALTERABLE_MEMORY)
       .build();
 
 // BTST ------------------------------------------------------------------------

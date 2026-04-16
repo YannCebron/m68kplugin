@@ -179,7 +179,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       for (M68kMnemonic existing : parsedMnemonics) {
         if (matchingMnemonic(existing, m68kMnemonic) &&
           existing.firstOperand() == m68kMnemonic.firstOperand() &&
-          existing.secondOperand() == M68kOperand.ALTERABLE_MEMORY_CF && m68kMnemonic.secondOperand() == M68kOperand.ALTERABLE_MEMORY) {
+          m68kMnemonic.secondOperand() == M68kOperand.ALTERABLE_MEMORY_CF && existing.secondOperand() == M68kOperand.ALTERABLE_MEMORY) {
           System.out.println("skip ALTERABLE_MEMORY(CF) duplication:");
           System.out.println("  entry:    " + m68kMnemonic);
           System.out.println("  existing: " + existing);
@@ -212,6 +212,14 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     }
     assertEquals("operand address modes overlap count", 16, toRemove.size());
     cleanupMnemonics.removeAll(toRemove);
+
+
+    // there must be no _CF operands leftover
+    Set<M68kOperand> CF_OPERANDS = EnumSet.of(M68kOperand.ALTERABLE_DATA_CF, M68kOperand.ALTERABLE_MEMORY_CF);
+    for (M68kMnemonic cleanupMnemonic : cleanupMnemonics) {
+      assertFalse(cleanupMnemonic.toString(), CF_OPERANDS.contains(cleanupMnemonic.firstOperand()));
+      assertFalse(cleanupMnemonic.toString(), CF_OPERANDS.contains(cleanupMnemonic.secondOperand()));
+    }
 
     return cleanupMnemonics;
   }

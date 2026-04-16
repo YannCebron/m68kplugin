@@ -760,7 +760,7 @@ label01: bcc         label01
          bchg        #1,d0
          bchg.l      #1,d0
 
-* M68kMnemonic{bchg, firstOp=QUICK_IMMEDIATE, secondOp=ALTERABLE_MEMORY_CF, [BYTE], MC68000 Family}
+* M68kMnemonic{bchg, firstOp=QUICK_IMMEDIATE, secondOp=ALTERABLE_MEMORY, [BYTE], MC68000 Family}
          bchg        #1,(a0)
          bchg.b      #1,(a0)
          bchg        #1,(a0)+
@@ -815,7 +815,7 @@ label01: bcc         label01
          bclr        #1,d0
          bclr.l      #1,d0
 
-* M68kMnemonic{bclr, firstOp=QUICK_IMMEDIATE, secondOp=ALTERABLE_MEMORY_CF, [BYTE], MC68000 Family}
+* M68kMnemonic{bclr, firstOp=QUICK_IMMEDIATE, secondOp=ALTERABLE_MEMORY, [BYTE], MC68000 Family}
          bclr        #1,(a0)
          bclr.b      #1,(a0)
          bclr        #1,(a0)+
@@ -1100,7 +1100,7 @@ label29: bra         label29
          bset        #1,d0
          bset.l      #1,d0
 
-* M68kMnemonic{bset, firstOp=QUICK_IMMEDIATE, secondOp=ALTERABLE_MEMORY_CF, [BYTE], MC68000 Family}
+* M68kMnemonic{bset, firstOp=QUICK_IMMEDIATE, secondOp=ALTERABLE_MEMORY, [BYTE], MC68000 Family}
          bset        #1,(a0)
          bset.b      #1,(a0)
          bset        #1,(a0)+
