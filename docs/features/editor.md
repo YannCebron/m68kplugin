@@ -147,11 +147,13 @@ Rename labels and macros using *Refactor \| Rename* across the whole project wit
 
 Invoke intentions via <kbd>Alt</kbd>+<kbd>Enter</kbd> or click on the lightbulb popup in editor.
 
-*Flip comma*
+#### Flip comma
 
 Swap comma-separated expressions or instruction operands (if valid).
 See also *Code \| Move Element Left/Right* above.
 
-*Show Used/Free Registers* for selection
+#### Show Used/Free Registers 
+
+For text selection in editor.
 
 ![Used registers](../assets/editor/used_registers.png)
