@@ -87,9 +87,9 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
       Collection<M68kMnemonic> allMnemonics = M68kMnemonicRegistry.getInstance().findAll(instructionType);
       assertNotEmpty(allMnemonics);
 
-      boolean hasSourceOperand = ContainerUtil.exists(allMnemonics, m68kMnemonic -> m68kMnemonic.firstOperand() != M68kOperand.NONE);
-      boolean hasDestinationOperand = ContainerUtil.exists(allMnemonics, m68kMnemonic -> m68kMnemonic.secondOperand() != M68kOperand.NONE);
-      if (!hasSourceOperand && !hasDestinationOperand) {
+      boolean hasFirstOperand = ContainerUtil.exists(allMnemonics, M68kMnemonic::hasFirstOperand);
+      boolean hasSecondOperand = ContainerUtil.exists(allMnemonics, M68kMnemonic::hasSecondOperand);
+      if (!hasFirstOperand && !hasSecondOperand) {
         continue;
       }
       boolean hasDataSize = ContainerUtil.exists(allMnemonics, m68kMnemonic -> !m68kMnemonic.dataSizes().contains(M68kDataSize.UNSIZED));
@@ -120,7 +120,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
             // enough to test against first notation variant
             String sourceText = ADDRESS_MODE_TEXT.get(sourceAdm).get(0);
             String variant;
-            if (hasDestinationOperand) {
+            if (hasSecondOperand) {
               String destinationText = ADDRESS_MODE_TEXT.get(destinationAdm).get(0);
               variant = "  " + instructionType + dataSizeText + " " + sourceText + "," + destinationText;
             } else {
@@ -130,7 +130,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
               continue; // skip duplicates from unnecessary loop (hasDestinationOperand=false)
             }
 
-            String variantOutput = variant + StringUtil.repeat(" ", 30 - variant.length()) + " ; " + sourceAdm + (hasDestinationOperand ? "," + destinationAdm : "") + " ";
+            String variantOutput = variant + StringUtil.repeat(" ", 30 - variant.length()) + " ; " + sourceAdm + (hasSecondOperand ? "," + destinationAdm : "") + " ";
             total++;
             myFile = createPsiFile("a", variant);
             M68kPsiElement m68kPsiElement = M68kPsiTreeUtil.getContainingInstructionOrDirective(myFile.findElementAt(3));

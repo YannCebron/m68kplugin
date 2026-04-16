@@ -38,6 +38,14 @@ public record M68kMnemonic(IElementType elementType,
     this(elementType, dataSizes, firstOperand, secondOperand, M68kCpu.GROUP_68000_UP, PrivilegedType.NONE);
   }
 
+  public boolean hasFirstOperand() {
+    return firstOperand() != M68kOperand.NONE;
+  }
+
+  public boolean hasSecondOperand() {
+    return secondOperand() != M68kOperand.NONE;
+  }
+
   public boolean isDeprecated() {
     if (elementType() != M68kTokenTypes.MOVEA) return false;
 

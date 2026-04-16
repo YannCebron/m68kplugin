@@ -90,7 +90,7 @@ class M68kInstructionMnemonicDocsGenerator {
       String mnemonicText = StringUtil.toUpperCase(elementType.toString());
       sb.append("<code>").append(mnemonicText).append(dataSizeText);
 
-      if (mnemonic.firstOperand() != M68kOperand.NONE) {
+      if (mnemonic.hasFirstOperand()) {
         sb.append(StringUtil.repeat("&nbsp;", Math.max(1, 17 - mnemonicText.length() - dataSizeTextLength)));
         appendOperand(mnemonic.firstOperand(), "");
         appendOperand(mnemonic.secondOperand(), ",");

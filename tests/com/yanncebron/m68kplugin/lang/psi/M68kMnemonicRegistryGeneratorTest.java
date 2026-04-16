@@ -241,7 +241,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     }
 
     if (firstMnemonic.secondOperand() == secondMnemonic.secondOperand() &&
-      firstMnemonic.secondOperand() != M68kOperand.NONE) {
+      firstMnemonic.hasSecondOperand()) {
       return addressModesOverlap(firstMnemonic.firstOperand(), secondMnemonic.firstOperand());
     }
 
@@ -311,9 +311,9 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       } else {
         System.out.println();
       }
-      if (mnemonic.firstOperand() != M68kOperand.NONE) {
+      if (mnemonic.hasFirstOperand()) {
         System.out.print(".first(" + mnemonic.firstOperand().name() + ")");
-        if (mnemonic.secondOperand() != M68kOperand.NONE) {
+        if (mnemonic.hasSecondOperand()) {
           System.out.print(".second(" + mnemonic.secondOperand().name() + ")");
         }
         System.out.println();
