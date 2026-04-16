@@ -39,7 +39,7 @@ import static java.util.Map.entry;
  * <ol>
  *   <li>Specify path to vasm {@code cpus/m68k/opcodes.h} file in {@link #VASM_OPCODES_H_PATH}</li>
  *   <li>Adjust {@link #RUNTIME_DATA_PATH}</li>
- *   <li>Set {@link #ENABLED} to {@code true}</li>
+ *   <li>Set environment variable {@code M68kMnemonicRegistryGeneratorTest} in run configuration to enable the test</li>
  *   <li>Run {@link #testGenerateMnemonicRegistryData()} and copy generated source output</li>
  *   <li>Verify MnemonicGeneratedParserDataTest passes, dump</li>
  * </ol>
@@ -47,8 +47,6 @@ import static java.util.Map.entry;
  */
 @SuppressWarnings("SpellCheckingInspection")
 public class M68kMnemonicRegistryGeneratorTest extends TestCase {
-
-  private static final boolean ENABLED = false;
 
   private static final boolean LOG_UNKNOWN_MNEMONICS = false;
 
@@ -65,7 +63,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
   private static final String RUNTIME_DATA_PATH = "/Users/yann/idea-ultimate/m68kplugin/tests/com/yanncebron/m68kplugin/lang/psi/M68kMnemonicRegistryRuntimeData.txt";
 
   public void testGenerateMnemonicRegistryData() throws IOException {
-    if (!ENABLED) return;
+    if (System.getenv(getClass().getSimpleName()) == null) return;
 
     List<M68kMnemonicRuntimeData> allRuntimeData = readRuntimeData();
     assertEquals("parsed runtime data count", 17, allRuntimeData.size());
