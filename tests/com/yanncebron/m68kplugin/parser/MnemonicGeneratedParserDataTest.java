@@ -33,10 +33,13 @@ import java.util.*;
 
 import static java.util.Map.entry;
 
+/**
+ * Set environment variable {@code MnemonicGeneratedParserDataTest} in run configuration to enable console output.
+ */
 public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
   // testData/sanity/AllInstructionsParsing.s
-  private static final boolean DUMP = false;
+  private static final boolean DUMP = System.getenv(MnemonicGeneratedParserDataTest.class.getSimpleName()) != null;
 
   // do not generate exact same variants from previously tested mnemonic(s)
   private static final boolean SKIP_DUPLICATE_VARIANTS = true;
