@@ -4,7 +4,7 @@
 
 ### Changed
 
-- Mnemonic reference docs: remove the "Syntax" section and "Source/Destination addressing modes" tables (duplicating syntax docs)
+- Mnemonic reference docs: remove the _Syntax_ section and _Source/Destination addressing modes_ tables (duplicating syntax docs)
 - Exception Reporting: use JetBrains Marketplace reporting instead of pre-filling a GitHub issue in the browser
 
 ### Added
@@ -14,11 +14,10 @@
 
 ### Fixed
 
-- Parser: too lenient parsing for
-  - `TST`
-- Privileged instruction status: `move.w SR,<ALTERABLE_DATA>` only for 68010+
+- Parser: too lenient parsing for `TST`
+- Privileged instruction status: `move.w SR,<ALTERABLE_DATA>` only for MC68010+
 - Parsing number literals
-- Consolidate mnemonics data to remove duplicates with overlapping address modes
+- Consolidate mnemonics data and remove duplicates with overlapping address modes
 
 ## 0.2.1 - 2025-11-29
 
