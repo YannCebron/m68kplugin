@@ -189,7 +189,7 @@ public final class M68kMnemonicRegistry {
   }
 
   private M68kMnemonicRegistry() {
-// Total mnemonics: 267
+// Total mnemonics: 246
 
 // ABCD ------------------------------------------------------------------------
 
@@ -1085,18 +1085,10 @@ public final class M68kMnemonicRegistry {
 // NEG -------------------------------------------------------------------------
 
     create(M68kTokenTypes.NEG).dataSizes(GROUP_BWL)
-      .first(DATA_REGISTER)
-      .build();
-
-    create(M68kTokenTypes.NEG).dataSizes(GROUP_BWL)
       .first(ALTERABLE_DATA)
       .build();
 
 // NEGX ------------------------------------------------------------------------
-
-    create(M68kTokenTypes.NEGX).dataSizes(GROUP_BWL)
-      .first(DATA_REGISTER)
-      .build();
 
     create(M68kTokenTypes.NEGX).dataSizes(GROUP_BWL)
       .first(ALTERABLE_DATA)
@@ -1108,10 +1100,6 @@ public final class M68kMnemonicRegistry {
       .build();
 
 // NOT -------------------------------------------------------------------------
-
-    create(M68kTokenTypes.NOT).dataSizes(GROUP_BWL)
-      .first(DATA_REGISTER)
-      .build();
 
     create(M68kTokenTypes.NOT).dataSizes(GROUP_BWL)
       .first(ALTERABLE_DATA)
@@ -1275,18 +1263,10 @@ public final class M68kMnemonicRegistry {
 // ST --------------------------------------------------------------------------
 
     create(M68kTokenTypes.ST).dataSizes(GROUP_B)
-      .first(DATA_REGISTER)
-      .build();
-
-    create(M68kTokenTypes.ST).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
       .build();
 
 // SF --------------------------------------------------------------------------
-
-    create(M68kTokenTypes.SF).dataSizes(GROUP_B)
-      .first(DATA_REGISTER)
-      .build();
 
     create(M68kTokenTypes.SF).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
@@ -1295,18 +1275,10 @@ public final class M68kMnemonicRegistry {
 // SHI -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SHI).dataSizes(GROUP_B)
-      .first(DATA_REGISTER)
-      .build();
-
-    create(M68kTokenTypes.SHI).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
       .build();
 
 // SLS -------------------------------------------------------------------------
-
-    create(M68kTokenTypes.SLS).dataSizes(GROUP_B)
-      .first(DATA_REGISTER)
-      .build();
 
     create(M68kTokenTypes.SLS).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
@@ -1315,18 +1287,10 @@ public final class M68kMnemonicRegistry {
 // SCC -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SCC).dataSizes(GROUP_B)
-      .first(DATA_REGISTER)
-      .build();
-
-    create(M68kTokenTypes.SCC).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
       .build();
 
 // SHS -------------------------------------------------------------------------
-
-    create(M68kTokenTypes.SHS).dataSizes(GROUP_B)
-      .first(DATA_REGISTER)
-      .build();
 
     create(M68kTokenTypes.SHS).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
@@ -1335,18 +1299,10 @@ public final class M68kMnemonicRegistry {
 // SCS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SCS).dataSizes(GROUP_B)
-      .first(DATA_REGISTER)
-      .build();
-
-    create(M68kTokenTypes.SCS).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
       .build();
 
 // SLO -------------------------------------------------------------------------
-
-    create(M68kTokenTypes.SLO).dataSizes(GROUP_B)
-      .first(DATA_REGISTER)
-      .build();
 
     create(M68kTokenTypes.SLO).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
@@ -1355,18 +1311,10 @@ public final class M68kMnemonicRegistry {
 // SNE -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SNE).dataSizes(GROUP_B)
-      .first(DATA_REGISTER)
-      .build();
-
-    create(M68kTokenTypes.SNE).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
       .build();
 
 // SEQ -------------------------------------------------------------------------
-
-    create(M68kTokenTypes.SEQ).dataSizes(GROUP_B)
-      .first(DATA_REGISTER)
-      .build();
 
     create(M68kTokenTypes.SEQ).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
@@ -1375,18 +1323,10 @@ public final class M68kMnemonicRegistry {
 // SVC -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SVC).dataSizes(GROUP_B)
-      .first(DATA_REGISTER)
-      .build();
-
-    create(M68kTokenTypes.SVC).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
       .build();
 
 // SVS -------------------------------------------------------------------------
-
-    create(M68kTokenTypes.SVS).dataSizes(GROUP_B)
-      .first(DATA_REGISTER)
-      .build();
 
     create(M68kTokenTypes.SVS).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
@@ -1395,18 +1335,10 @@ public final class M68kMnemonicRegistry {
 // SPL -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SPL).dataSizes(GROUP_B)
-      .first(DATA_REGISTER)
-      .build();
-
-    create(M68kTokenTypes.SPL).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
       .build();
 
 // SMI -------------------------------------------------------------------------
-
-    create(M68kTokenTypes.SMI).dataSizes(GROUP_B)
-      .first(DATA_REGISTER)
-      .build();
 
     create(M68kTokenTypes.SMI).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
@@ -1415,18 +1347,10 @@ public final class M68kMnemonicRegistry {
 // SGE -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SGE).dataSizes(GROUP_B)
-      .first(DATA_REGISTER)
-      .build();
-
-    create(M68kTokenTypes.SGE).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
       .build();
 
 // SLT -------------------------------------------------------------------------
-
-    create(M68kTokenTypes.SLT).dataSizes(GROUP_B)
-      .first(DATA_REGISTER)
-      .build();
 
     create(M68kTokenTypes.SLT).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
@@ -1435,18 +1359,10 @@ public final class M68kMnemonicRegistry {
 // SGT -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SGT).dataSizes(GROUP_B)
-      .first(DATA_REGISTER)
-      .build();
-
-    create(M68kTokenTypes.SGT).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
       .build();
 
 // SLE -------------------------------------------------------------------------
-
-    create(M68kTokenTypes.SLE).dataSizes(GROUP_B)
-      .first(DATA_REGISTER)
-      .build();
 
     create(M68kTokenTypes.SLE).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)

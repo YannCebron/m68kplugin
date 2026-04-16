@@ -162,7 +162,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     assertEquals("total parsed mnemonic count", 333, parsedMnemonics.size());
 
     List<M68kMnemonic> cleanupMnemonics = cleanupMnemonics(parsedMnemonics);
-    assertEquals("total cleanup mnemonic count", 314, cleanupMnemonics.size());
+    assertEquals("total cleanup mnemonic count", 293, cleanupMnemonics.size());
 
     dumpCode(cleanupMnemonics);
   }
@@ -210,7 +210,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       }
       if (skip) toRemove.add(m68kMnemonic);
     }
-    assertEquals("operand address modes overlap count", 16, toRemove.size());
+    assertEquals("operand address modes overlap count", 37, toRemove.size());
     cleanupMnemonics.removeAll(toRemove);
 
 
@@ -245,7 +245,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       return addressModesOverlap(firstMnemonic.firstOperand(), secondMnemonic.firstOperand());
     }
 
-    return false;
+    return !firstMnemonic.hasSecondOperand() && addressModesOverlap(firstMnemonic.firstOperand(), secondMnemonic.firstOperand());
   }
 
   private static boolean addressModesOverlap(M68kOperand first, M68kOperand second) {
@@ -284,7 +284,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
   private void dumpCode(List<M68kMnemonic> mnemonics) {
     int supportedMnemonics = ContainerUtil.filter(mnemonics, m68kMnemonic -> isSupportedCpu(m68kMnemonic.cpus())).size();
-    assertEquals("supported mnemonic count", 267, supportedMnemonics);
+    assertEquals("supported mnemonic count", 246, supportedMnemonics);
 
     printDivider();
 

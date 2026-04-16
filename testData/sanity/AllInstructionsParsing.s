@@ -4666,13 +4666,11 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{neg, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE, WORD, LONGWORD], MC68000 Family}
+* M68kMnemonic{neg, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE, WORD, LONGWORD], MC68000 Family}
          neg         d0
          neg.b       d0
          neg.w       d0
          neg.l       d0
-
-* M68kMnemonic{neg, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE, WORD, LONGWORD], MC68000 Family}
          neg         (a0)
          neg.b       (a0)
          neg.w       (a0)
@@ -4717,13 +4715,11 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{negx, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE, WORD, LONGWORD], MC68000 Family}
+* M68kMnemonic{negx, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE, WORD, LONGWORD], MC68000 Family}
          negx        d0
          negx.b      d0
          negx.w      d0
          negx.l      d0
-
-* M68kMnemonic{negx, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE, WORD, LONGWORD], MC68000 Family}
          negx        (a0)
          negx.b      (a0)
          negx.w      (a0)
@@ -4774,13 +4770,11 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{not, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE, WORD, LONGWORD], MC68000 Family}
+* M68kMnemonic{not, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE, WORD, LONGWORD], MC68000 Family}
          not         d0
          not.b       d0
          not.w       d0
          not.l       d0
-
-* M68kMnemonic{not, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE, WORD, LONGWORD], MC68000 Family}
          not         (a0)
          not.b       (a0)
          not.w       (a0)
@@ -5291,11 +5285,9 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{scc, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE], MC68000 Family}
+* M68kMnemonic{scc, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          scc         d0
          scc.b       d0
-
-* M68kMnemonic{scc, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          scc         (a0)
          scc.b       (a0)
          scc         (a0)+
@@ -5320,11 +5312,9 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{scs, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE], MC68000 Family}
+* M68kMnemonic{scs, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          scs         d0
          scs.b       d0
-
-* M68kMnemonic{scs, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          scs         (a0)
          scs.b       (a0)
          scs         (a0)+
@@ -5349,11 +5339,9 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{seq, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE], MC68000 Family}
+* M68kMnemonic{seq, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          seq         d0
          seq.b       d0
-
-* M68kMnemonic{seq, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          seq         (a0)
          seq.b       (a0)
          seq         (a0)+
@@ -5378,11 +5366,9 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{sf, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE], MC68000 Family}
+* M68kMnemonic{sf, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          sf          d0
          sf.b        d0
-
-* M68kMnemonic{sf, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          sf          (a0)
          sf.b        (a0)
          sf          (a0)+
@@ -5407,11 +5393,9 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{sge, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE], MC68000 Family}
+* M68kMnemonic{sge, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          sge         d0
          sge.b       d0
-
-* M68kMnemonic{sge, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          sge         (a0)
          sge.b       (a0)
          sge         (a0)+
@@ -5436,11 +5420,9 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{sgt, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE], MC68000 Family}
+* M68kMnemonic{sgt, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          sgt         d0
          sgt.b       d0
-
-* M68kMnemonic{sgt, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          sgt         (a0)
          sgt.b       (a0)
          sgt         (a0)+
@@ -5465,11 +5447,9 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{shi, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE], MC68000 Family}
+* M68kMnemonic{shi, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          shi         d0
          shi.b       d0
-
-* M68kMnemonic{shi, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          shi         (a0)
          shi.b       (a0)
          shi         (a0)+
@@ -5494,11 +5474,9 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{shs, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE], MC68000 Family}
+* M68kMnemonic{shs, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          shs         d0
          shs.b       d0
-
-* M68kMnemonic{shs, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          shs         (a0)
          shs.b       (a0)
          shs         (a0)+
@@ -5523,11 +5501,9 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{sle, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE], MC68000 Family}
+* M68kMnemonic{sle, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          sle         d0
          sle.b       d0
-
-* M68kMnemonic{sle, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          sle         (a0)
          sle.b       (a0)
          sle         (a0)+
@@ -5552,11 +5528,9 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{slo, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE], MC68000 Family}
+* M68kMnemonic{slo, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          slo         d0
          slo.b       d0
-
-* M68kMnemonic{slo, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          slo         (a0)
          slo.b       (a0)
          slo         (a0)+
@@ -5581,11 +5555,9 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{sls, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE], MC68000 Family}
+* M68kMnemonic{sls, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          sls         d0
          sls.b       d0
-
-* M68kMnemonic{sls, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          sls         (a0)
          sls.b       (a0)
          sls         (a0)+
@@ -5610,11 +5582,9 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{slt, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE], MC68000 Family}
+* M68kMnemonic{slt, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          slt         d0
          slt.b       d0
-
-* M68kMnemonic{slt, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          slt         (a0)
          slt.b       (a0)
          slt         (a0)+
@@ -5639,11 +5609,9 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{smi, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE], MC68000 Family}
+* M68kMnemonic{smi, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          smi         d0
          smi.b       d0
-
-* M68kMnemonic{smi, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          smi         (a0)
          smi.b       (a0)
          smi         (a0)+
@@ -5668,11 +5636,9 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{sne, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE], MC68000 Family}
+* M68kMnemonic{sne, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          sne         d0
          sne.b       d0
-
-* M68kMnemonic{sne, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          sne         (a0)
          sne.b       (a0)
          sne         (a0)+
@@ -5697,11 +5663,9 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{spl, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE], MC68000 Family}
+* M68kMnemonic{spl, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          spl         d0
          spl.b       d0
-
-* M68kMnemonic{spl, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          spl         (a0)
          spl.b       (a0)
          spl         (a0)+
@@ -5726,11 +5690,9 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{st, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE], MC68000 Family}
+* M68kMnemonic{st, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          st          d0
          st.b        d0
-
-* M68kMnemonic{st, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          st          (a0)
          st.b        (a0)
          st          (a0)+
@@ -6156,11 +6118,9 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{svc, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE], MC68000 Family}
+* M68kMnemonic{svc, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          svc         d0
          svc.b       d0
-
-* M68kMnemonic{svc, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          svc         (a0)
          svc.b       (a0)
          svc         (a0)+
@@ -6185,11 +6145,9 @@ label35: bvs         label35
 
 ********************************************************************************
 
-* M68kMnemonic{svs, firstOp=DATA_REGISTER, secondOp=NONE, [BYTE], MC68000 Family}
+* M68kMnemonic{svs, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          svs         d0
          svs.b       d0
-
-* M68kMnemonic{svs, firstOp=ALTERABLE_DATA, secondOp=NONE, [BYTE], MC68000 Family}
          svs         (a0)
          svs.b       (a0)
          svs         (a0)+
