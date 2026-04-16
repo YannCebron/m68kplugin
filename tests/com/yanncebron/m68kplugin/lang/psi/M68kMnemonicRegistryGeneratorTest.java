@@ -67,13 +67,16 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
   public void testGenerateMnemonicRegistryData() throws IOException {
     if (!ENABLED) return;
 
-    Set<String> unknownMnemonics = new HashSet<>();
-    List<M68kMnemonic> mnemonics = new ArrayList<>();
-
     List<M68kMnemonicRuntimeData> allRuntimeData = readRuntimeData();
+    assertEquals("parsed runtime data count", 17, allRuntimeData.size());
 
     final List<String> lines = Files.readAllLines(Paths.get(VASM_OPCODES_H_PATH));
-    assertEquals(2914, lines.size());
+    assertEquals("line count opcodes.h", 2914, lines.size());
+
+    printDivider();
+
+    Set<String> unknownMnemonics = new HashSet<>();
+    List<M68kMnemonic> parsedMnemonics = new ArrayList<>();
 
     for (String line : lines) {
       final String trim = line.trim();
@@ -153,10 +156,27 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
         m68kCpus,
         privilegedType);
 
-      // skip duplicate entries for bset,bclr,bchg with ALTERABLE_MEMORY_CF vs ALTERABLE_MEMORY
-      // both have the exact same of address modes ATM, so it's a full duplicate
+      parsedMnemonics.add(m68kMnemonic);
+    }
+
+    assertEquals("total parsed mnemonic count", 333, parsedMnemonics.size());
+
+    List<M68kMnemonic> cleanupMnemonics = cleanupMnemonics(parsedMnemonics);
+    assertEquals("total cleanup mnemonic count", 330, cleanupMnemonics.size());
+
+    dumpCode(cleanupMnemonics);
+  }
+
+  private List<M68kMnemonic> cleanupMnemonics(List<M68kMnemonic> parsedMnemonics) {
+    printDivider();
+
+    List<M68kMnemonic> cleanMnemonics = new ArrayList<>();
+
+    // skip duplicate entries for bset,bclr,bchg with ALTERABLE_MEMORY_CF vs ALTERABLE_MEMORY
+    // both have the exact same of address modes ATM, so it's a full duplicate
+    for (M68kMnemonic m68kMnemonic : parsedMnemonics) {
       boolean skip = false;
-      for (M68kMnemonic existing : mnemonics) {
+      for (M68kMnemonic existing : parsedMnemonics) {
         if (existing.elementType() == m68kMnemonic.elementType() &&
           existing.dataSizes().equals(m68kMnemonic.dataSizes()) &&
           existing.cpus().equals(m68kMnemonic.cpus()) &&
@@ -170,11 +190,10 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
           break;
         }
       }
-
-      if (!skip) mnemonics.add(m68kMnemonic);
+      if (!skip) cleanMnemonics.add(m68kMnemonic);
     }
 
-    dumpCode(mnemonics);
+    return cleanMnemonics;
   }
 
   private static Couple<M68kOperand> mapOperands(String operandText) {
@@ -198,14 +217,17 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     return ContainerUtil.intersects(cpus, SUPPORTED_CPUS);
   }
 
+  private static void printDivider() {
+    System.out.println();
+    System.out.println(StringUtil.repeat("-", 120));
+  }
+
   private void dumpCode(List<M68kMnemonic> mnemonics) {
     int supportedMnemonics = ContainerUtil.filter(mnemonics, m68kMnemonic -> isSupportedCpu(m68kMnemonic.cpus())).size();
-    assertEquals("total parsed mnemonic count", 330, mnemonics.size());
     assertEquals("supported mnemonic count", 283, supportedMnemonics);
 
-    System.out.println();
-    System.out.println();
-    System.out.println(StringUtil.repeat("-", 80));
+    printDivider();
+
     System.out.println("// Total mnemonics: " + supportedMnemonics);
 
     IElementType lastElementType = null;
