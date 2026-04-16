@@ -145,7 +145,12 @@ Rename labels and macros using *Refactor \| Rename* across the whole project wit
 
 ### Intentions
 
-Invoke intention via <kbd>Alt</kbd>+<kbd>Enter</kbd>
+Invoke intentions via <kbd>Alt</kbd>+<kbd>Enter</kbd> or click on the lightbulb popup in editor.
+
+*Flip comma*
+
+Swap comma-separated expressions or instruction operands (if valid).
+See also *Code \| Move Element Left/Right* above.
 
 *Show Used/Free Registers* for selection
 

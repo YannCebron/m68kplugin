@@ -84,7 +84,6 @@
 ## Editing
 
 - `EnterHandlerDelegate` smart indent? or `LineIndentProvider`
-- `M68kCommaFlipper`: swap src\|destination if valid
 - formatter
   - upper-/lowercase code style settings
     - mnemonic/directive/conditional assembly

@@ -10,7 +10,7 @@
 ### Added
 
 - Mnemonic syntax docs: show information for privileged instruction
-- *Code \| Move Element Left/Right*: swap instruction operands if valid (`move.l d0,a0` &rarr; `move.l a0,d0`)
+- *Code \| Move Element Left/Right* and *Flip Comma* intention: swap instruction operands if valid (`move.l d0,a0` &rarr; `move.l a0,d0`)
 
 ### Fixed
 

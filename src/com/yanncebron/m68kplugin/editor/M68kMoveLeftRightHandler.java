@@ -76,7 +76,7 @@ final class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
     return PsiElement.EMPTY_ARRAY;
   }
 
-  private static @NotNull PsiElement @NotNull [] getMovableSubElementsForInstruction(M68kInstruction instruction) {
+  static @NotNull PsiElement @NotNull [] getMovableSubElementsForInstruction(M68kInstruction instruction) {
     List<M68kAdm> admList = PsiTreeUtil.getChildrenOfTypeAsList(instruction, M68kAdm.class);
     if (admList.size() != 2) return PsiElement.EMPTY_ARRAY;
 
@@ -89,7 +89,7 @@ final class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
     }
 
     for (M68kMnemonic mnemonic : M68kMnemonicRegistry.getInstance().findAll(matchingMnemonic.elementType())) {
-      // must have 2 operands (e.g. ASL has firstOperand variants)
+      // must have 2 operands (e.g., ASL has firstOperand variants)
       if (mnemonic.secondOperand() == M68kOperand.NONE) {
         continue;
       }
