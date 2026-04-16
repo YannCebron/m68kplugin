@@ -214,11 +214,19 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     cleanupMnemonics.removeAll(toRemove);
 
 
-    // there must be no _CF operands leftover
+    // SANITY CHECK: there must be no _CF operands leftover
     Set<M68kOperand> CF_OPERANDS = EnumSet.of(M68kOperand.ALTERABLE_DATA_CF, M68kOperand.ALTERABLE_MEMORY_CF);
     for (M68kMnemonic cleanupMnemonic : cleanupMnemonics) {
-      assertFalse(cleanupMnemonic.toString(), CF_OPERANDS.contains(cleanupMnemonic.firstOperand()));
-      assertFalse(cleanupMnemonic.toString(), CF_OPERANDS.contains(cleanupMnemonic.secondOperand()));
+      assertFalse("must not use _CF in first operand: " + cleanupMnemonic, CF_OPERANDS.contains(cleanupMnemonic.firstOperand()));
+      assertFalse("must not use _CF in second operand: " + cleanupMnemonic, CF_OPERANDS.contains(cleanupMnemonic.secondOperand()));
+    }
+
+    // SANITY CHECK: no leftover overlap in address modes
+    for (M68kMnemonic first : cleanupMnemonics) {
+      for (M68kMnemonic second : cleanupMnemonics) {
+        assertFalse("must not have overlap address modes: \n" + first + "\n" + second,
+          matchingMnemonic(first, second) && operandAddressModesOverlap(first, second));
+      }
     }
 
     return cleanupMnemonics;
