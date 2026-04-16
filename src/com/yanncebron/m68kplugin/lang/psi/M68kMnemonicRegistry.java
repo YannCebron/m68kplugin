@@ -93,15 +93,15 @@ public final class M68kMnemonicRegistry {
     // multiple matches: sort by min(addressMode.count), so IMMEDIATE wins over DATA etc.
     List<M68kMnemonic> multipleMatches = new SmartList<>(filtered);
     multipleMatches.sort((o1, o2) -> {
-      final int o1Source = o1.firstOperand().getAddressModes().length;
-      final int o2Source = o2.firstOperand().getAddressModes().length;
-      if (o1Source != o2Source) {
-        return Integer.compare(o1Source, o2Source);
+      final int o1FirstOperandAddressModesCount = o1.firstOperand().getAddressModes().length;
+      final int o2FirstOperandAddressModesCount = o2.firstOperand().getAddressModes().length;
+      if (o1FirstOperandAddressModesCount != o2FirstOperandAddressModesCount) {
+        return Integer.compare(o1FirstOperandAddressModesCount, o2FirstOperandAddressModesCount);
       }
 
-      final int o1Destination = o1.secondOperand().getAddressModes().length;
-      final int o2Destination = o2.secondOperand().getAddressModes().length;
-      return Integer.compare(o1Destination, o2Destination);
+      final int o1SecondOperandAddressModesCount = o1.secondOperand().getAddressModes().length;
+      final int o2SecondOperandAddressModesCount = o2.secondOperand().getAddressModes().length;
+      return Integer.compare(o1SecondOperandAddressModesCount, o2SecondOperandAddressModesCount);
     });
 
     return multipleMatches.get(0);
