@@ -200,7 +200,6 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       for (M68kMnemonic existing : cleanupMnemonics) {
         if (matchingMnemonic(existing, m68kMnemonic) &&
           operandAddressModesOverlap(m68kMnemonic, existing)) {
-          System.out.println("skip operand address modes overlap");
           System.out.println("  entry:    " + m68kMnemonic);
           System.out.println("  existing: " + existing);
           System.out.println();
@@ -238,30 +237,30 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       existing.cpus().equals(m68kMnemonic.cpus());
   }
 
-  /**
-   * Either first or second operand's address modes have a full overlap.
-   */
   private static boolean operandAddressModesOverlap(M68kMnemonic firstMnemonic, M68kMnemonic secondMnemonic) {
     if (firstMnemonic == secondMnemonic) return false;
 
     if (firstMnemonic.firstOperand() == secondMnemonic.firstOperand()) {
-      return addressModesOverlap(firstMnemonic.secondOperand(), secondMnemonic.secondOperand());
+      return addressModesOverlap(firstMnemonic.secondOperand(), secondMnemonic.secondOperand(), "EQUAL, OVERLAP");
     }
 
     if (firstMnemonic.secondOperand() == secondMnemonic.secondOperand() &&
       firstMnemonic.hasSecondOperand()) {
-      return addressModesOverlap(firstMnemonic.firstOperand(), secondMnemonic.firstOperand());
+      return addressModesOverlap(firstMnemonic.firstOperand(), secondMnemonic.firstOperand(), "OVERLAP, EQUAL");
     }
 
-    return !firstMnemonic.hasSecondOperand() && addressModesOverlap(firstMnemonic.firstOperand(), secondMnemonic.firstOperand());
+    return !firstMnemonic.hasSecondOperand() &&
+      addressModesOverlap(firstMnemonic.firstOperand(), secondMnemonic.firstOperand(), "OVERLAP");
   }
 
-  private static boolean addressModesOverlap(M68kOperand first, M68kOperand second) {
+  private static boolean addressModesOverlap(M68kOperand first, M68kOperand second, String reason) {
     if (first == M68kOperand.NONE || second == M68kOperand.NONE) return false;
 
     Set<M68kAddressMode> firstAddressModes = Set.of(first.getAddressModes());
     Set<M68kAddressMode> secondAddressModes = Set.of(second.getAddressModes());
-    return secondAddressModes.containsAll(firstAddressModes);
+    boolean overlap = secondAddressModes.containsAll(firstAddressModes);
+    if (overlap) System.out.println(reason);
+    return overlap;
   }
 
   private static Couple<M68kOperand> mapOperands(String operandText) {
