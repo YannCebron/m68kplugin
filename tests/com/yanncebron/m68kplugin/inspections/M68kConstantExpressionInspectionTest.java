@@ -30,8 +30,12 @@ public class M68kConstantExpressionInspectionTest extends BasePlatformTestCase {
     doTest("""
       ; division by zero
         dc.b <error descr="Error evaluating expression: 1/0">1/0</error>
+ 
       ; overflow
         dc.l <error descr="Error evaluating expression: 88888888*99999999">88888888*99999999</error>
+ 
+      ; show "operand value out of range" even when eval fails
+        dc <error descr="Error evaluating expression: 234*234233*23333"><error descr="Operand value out of range: -1006344382 (valid: -32768..65535)">234*234233*23333</error></error>
       """);
   }
 
