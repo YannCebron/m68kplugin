@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Changed
+
+### Added
+
+### Fixed
+
 ## 0.2.2 - 2026-04-17
 
 ### Changed
