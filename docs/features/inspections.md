@@ -44,3 +44,4 @@ Use the provided quick fixes to add them from usages in code or configure manual
 
 ### Simplifiable expression
 
+### Constant expression
