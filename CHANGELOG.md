@@ -4,13 +4,13 @@
 
 ### Changed
 
-- Mnemonic reference docs: remove the _Syntax_ section and _Source/Destination addressing modes_ tables (duplicating syntax docs)
+- Mnemonic reference docs: remove the _Syntax_ sections and _Source/Destination addressing modes_ tables (duplicating syntax docs)
 - Exception Reporting: use JetBrains Marketplace reporting instead of pre-filling a GitHub issue in the browser
 
 ### Added
 
 - Mnemonic syntax docs: show information for privileged instruction
-- *Code \| Move Element Left/Right* and *Flip Comma* intention: swap instruction operands if valid (`move.l d0,a0` &rarr; `move.l a0,d0`)
+- *Code \| Move Element Left/Right* and *Flip Comma* intention: swap instruction operands if valid (`move.l d0,a0` &harr; `move.l a0,d0`)
 
 ### Fixed
 
