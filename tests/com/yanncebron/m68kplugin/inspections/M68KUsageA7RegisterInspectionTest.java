@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2026The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,9 @@
 package com.yanncebron.m68kplugin.inspections;
 
 import com.intellij.codeInsight.intention.IntentionAction;
-import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 
-@TestDataPath("$PROJECT_ROOT/testData/inspections/usageA7Register")
 public class M68KUsageA7RegisterInspectionTest extends BasePlatformTestCase {
-
-  @Override
-  protected String getTestDataPath() {
-    return "testData/inspections/usageA7Register";
-  }
 
   @Override
   protected void setUp() throws Exception {
@@ -35,7 +28,16 @@ public class M68KUsageA7RegisterInspectionTest extends BasePlatformTestCase {
   }
 
   public void testHighlighting() {
-    myFixture.testHighlighting("usageA7Register.s");
+    myFixture.configureByText("a.s", """
+        move.l d0,<warning descr="Usage of A7 register">a7</warning>
+        move.l d0,(<warning descr="Usage of A7 register">a7</warning>)
+        move.l d0,-(<warning descr="Usage of A7 register">a7</warning>)
+        move.l d0,(<warning descr="Usage of A7 register">a7</warning>)+
+        move.l d0,4(<warning descr="Usage of A7 register">a7</warning>)
+        move.l d0,4(<warning descr="Usage of A7 register">a7</warning>,d7)
+        jmp 4(pc,<warning descr="Usage of A7 register">a7</warning>.l)
+      """);
+    myFixture.testHighlighting();
   }
 
   public void testReplaceWithSPFix() {
