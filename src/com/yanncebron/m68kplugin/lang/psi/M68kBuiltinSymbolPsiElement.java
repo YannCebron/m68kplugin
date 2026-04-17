@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.yanncebron.m68kplugin.lang.psi;
 
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.SyntheticElement;
 import com.intellij.psi.impl.FakePsiElement;
 import org.jetbrains.annotations.NotNull;
@@ -34,6 +35,11 @@ public final class M68kBuiltinSymbolPsiElement extends FakePsiElement implements
   public M68kBuiltinSymbolPsiElement(PsiElement psiElement, M68kBuiltinSymbol builtinSymbol) {
     this.psiElement = psiElement;
     this.builtinSymbol = builtinSymbol;
+  }
+
+  @Override
+  public PsiFile getContainingFile() {
+    return null;
   }
 
   @Override
