@@ -1,0 +1,76 @@
+<html>
+<body>
+Highlights problems with constant expressions.
+
+<h3>Number value out of range</h3>
+
+<h3>Expression overflow</h3>
+
+Addition, subtraction, multiplication or division overflow or division by 0.
+
+<h3>Instruction operand value</h3>
+
+<table>
+    <tr>
+        <th>Instruction</th>
+        <th>Range</th>
+    </tr>
+    <tr>
+        <td>addq, subq</td>
+        <td>1..8</td>
+    </tr>
+    <tr>
+        <td>bchg, btst, bclr</td>
+        <td>1..8</td>
+    </tr>
+    <tr>
+        <td>asl, asr, lsl, lsr, roxl, roxr</td>
+        <td>1..8</td>
+    </tr>
+    <tr>
+        <td>moveq</td>
+        <td>-128..127</td>
+    </tr>
+    <tr>
+        <td>trap</td>
+        <td>0..15</td>
+    </tr>
+    <tr>
+        <td>bkpt</td>
+        <td>0..7</td>
+    </tr>
+    <tr>
+        <td>stop</td>
+        <td>0..65535</td>
+    </tr>
+    <tr>
+        <td>rtd</td>
+        <td>-32768..32767</td>
+    </tr>
+</table>
+
+<h3>Directive operand value</h3>
+
+<table>
+    <tr>
+        <th>Directive</th>
+        <th>Range</th>
+    </tr>
+    <tr>
+        <td><code>dc.b</code></td>
+        <td>-128..127</td>
+    </tr>
+    <tr>
+        <td><code>dc.w</code></td>
+        <td>-32768..65535</td>
+    </tr>
+    <tr>
+        <td><code>rept</code></td>
+        <td>&gt;0</td>
+    </tr>
+</table>
+
+<!-- tooltip end -->
+
+</body>
+</html>

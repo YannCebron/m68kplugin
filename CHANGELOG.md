@@ -8,6 +8,8 @@
 
 ### Added
 
+- _Constant expression_ inspection: check expression overflow, number value, instruction operand value
+
 ### Fixed
 
 ## 0.2.2 - 2026-04-17
