@@ -39,6 +39,8 @@ Mnemonic data generated using [vasm](http://sun.hasenbraten.de/vasm/) sources, t
 
 Amiga hardware registers documentation based on [AGA.guide](https://github.com/rkrajnc/minimig-mist/blob/master/doc/amiga/aga/AGA.guide)
 
+Filetype icon generated with [Letter Icon Composer](https://davidseptimus.github.io/letter-icon-composer/)
+
 ## License
 
 Licensed under the Apache License, Version 2.0 (the "License"), see [LICENCE](LICENCE)

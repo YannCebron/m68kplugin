@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import javax.swing.*;
 
 public final class M68kIcons {
 
-  public static final Icon FILE = AllIcons.FileTypes.Custom;
+  public static final Icon FILE = IconLoader.findIcon("/icons/m68kFile.svg", M68kIcons.class);
 
   public static final Icon TOOL_WINDOW = IconLoader.findIcon("/icons/browserToolWindow.svg", M68kIcons.class);
 

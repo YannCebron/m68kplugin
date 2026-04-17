@@ -4,6 +4,8 @@
 
 ### Changed
 
+- Dedicated _68_ icon for files
+
 ### Added
 
 ### Fixed
