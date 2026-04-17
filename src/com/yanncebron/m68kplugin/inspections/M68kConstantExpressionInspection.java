@@ -30,7 +30,7 @@ import com.yanncebron.m68kplugin.lang.psi.expression.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-class M68kConstantExpressionInspection extends LocalInspectionTool {
+final class M68kConstantExpressionInspection extends LocalInspectionTool {
 
   @Override
   public @NotNull PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly, @NotNull LocalInspectionToolSession session) {
