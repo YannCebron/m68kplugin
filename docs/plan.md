@@ -127,7 +127,6 @@
 ### Expression
 
 - type check
-- range check
 - **WIP** simplify expression, unnecessary parentheses
 - intention: convert numeric literal to other bases (`AbstractNumberConversionIntention`)
 
