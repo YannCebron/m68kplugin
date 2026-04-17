@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.2.2 - 2026-04-17
+
 ### Changed
 
 - Mnemonic reference docs: remove the _Syntax_ sections and _Source/Destination addressing modes_ tables (duplicating syntax docs)
