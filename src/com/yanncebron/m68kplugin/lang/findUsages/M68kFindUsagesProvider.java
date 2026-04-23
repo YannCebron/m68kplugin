@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,10 +26,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.usageView.UsageViewLongNameLocation;
 import com.intellij.usageView.UsageViewShortNameLocation;
 import com.yanncebron.m68kplugin.M68kBundle;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabel;
-import com.yanncebron.m68kplugin.lang.psi.M68kLabelBase;
-import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
-import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
+import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import com.yanncebron.m68kplugin.lexer.M68kLexer;
 import org.jetbrains.annotations.NotNull;
@@ -40,8 +37,8 @@ final class M68kFindUsagesProvider implements FindUsagesProvider {
   public WordsScanner getWordsScanner() {
     return new DefaultWordsScanner(new M68kLexer(),
       TokenSet.create(M68kTokenTypes.ID),
-      TokenSet.create(M68kTokenTypes.COMMENT),
-      TokenSet.create(M68kTokenTypes.STRING)
+      M68kTokenGroups.COMMENTS,
+      M68kTokenGroups.STRING_LITERALS
     );
   }
 
