@@ -32,8 +32,6 @@ public class M68kTokenTest extends TestCase {
     M68kFileElementType.INSTANCE,
     M68kTokenTypes.COLON,
     M68kTokenTypes.COMMA,
-    M68kTokenTypes.COMMENT,
-    M68kTokenTypes.COMMENT_REM,
     M68kTokenTypes.DOLLAR,
     M68kTokenTypes.DOT,
     M68kTokenTypes.HASH,
@@ -43,8 +41,7 @@ public class M68kTokenTest extends TestCase {
     M68kTokenTypes.L_PAREN,
     M68kTokenTypes.MACRO_CALL_ID,
     M68kTokenTypes.R_BRACKET,
-    M68kTokenTypes.R_PAREN,
-    M68kTokenTypes.STRING
+    M68kTokenTypes.R_PAREN
   );
 
   private static final TokenSet IGNORE_REGISTERS = TokenSet.create(
@@ -69,7 +66,9 @@ public class M68kTokenTest extends TestCase {
     M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES,
     M68kTokenGroups.OPERATION_SIGNS,
     M68kTokenGroups.NUMBERS,
-    M68kTokenGroups.DATA_SIZES
+    M68kTokenGroups.DATA_SIZES,
+    M68kTokenGroups.COMMENTS,
+    M68kTokenGroups.STRING_LITERALS
   };
 
   public void testAllTokenTypesRegisteredInOneGroup() {
