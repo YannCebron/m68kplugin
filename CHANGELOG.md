@@ -10,6 +10,7 @@
 
 - _Constant expression_ inspection: check expression overflow, number value, instruction operand value
 - Editor Color Scheme settings: highlight `rem`/`erem` block as _Deleted Text_ (_Comments | Rem/Erem block_)
+- `opt` directive arguments: support *Code \| Move Element Left/Right* and *Flip Comma* intention
 
 ### Fixed
 

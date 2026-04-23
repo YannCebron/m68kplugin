@@ -1,0 +1,6 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kOptDirectiveImpl(OPT_DIRECTIVE)
+    PsiElement(opt)('opt')
+    PsiErrorElement:<option> expected
+      <empty list>

@@ -35,6 +35,11 @@ public class M68kCommaFlipperTest extends BasePlatformTestCase {
       " cmp d1,d0");
   }
 
+  public void testFlipOptDirectiveArgs() {
+    doFlipTest(" opt w+,<caret>u+",
+      " opt u+,w+");
+  }
+
   private void doFlipTest(String before, String after) {
     myFixture.configureByText(M68kFileType.INSTANCE, before);
     List<IntentionAction> intentions = myFixture.filterAvailableIntentions(CodeInsightBundle.message("intention.name.flip"));

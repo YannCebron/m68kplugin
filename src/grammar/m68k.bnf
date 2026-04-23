@@ -1430,12 +1430,12 @@ blk_directive ::= BLK data_size_all? expression (COMMA expression)?
   ]
 }
 
-private opt_element ::= (ID EQ DEC_NUMBER (DIV DEC_NUMBER)?) |
-                        (ID (PLUS | MINUS)?)
+opt_directive_arg ::= (ID EQ DEC_NUMBER (DIV DEC_NUMBER)?) |
+                      (ID (PLUS | MINUS)?)
 {
   name = "option"
 }
-opt_directive ::= OPT opt_element (COMMA opt_element)*
+opt_directive ::= OPT opt_directive_arg (COMMA opt_directive_arg)*
 {
   pin = 1
 }

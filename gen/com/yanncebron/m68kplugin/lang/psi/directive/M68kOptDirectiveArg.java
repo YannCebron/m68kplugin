@@ -18,10 +18,8 @@ package com.yanncebron.m68kplugin.lang.psi.directive;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 
-public interface M68kOptDirective extends M68kDirective {
-
-  @NotNull
-  List<M68kOptDirectiveArg> getOptDirectiveArgList();
+public interface M68kOptDirectiveArg extends M68kPsiElement {
 
 }

@@ -113,12 +113,13 @@ Rename labels and macros using *Refactor \| Rename* across the whole project wit
 * Smart braces/quote handling
 * *Code \| Comment with Line Comment*
 * *Code \| Move Element Left/Right*
-  * instruction operands (if valid): `move.l d0,a0` → `move.l a0,d0`
-  * binary expressions: `2*size` → `size*2`
+  * instruction operands (if valid): `move.l d0,a0` &harr; `move.l a0,d0`
+  * binary expressions: `2*size` &harr; `size*2`
   * register list elements (`movem`)
   * macro call parameters
   * `dc` and `dr` directive values
   * `printv`, `xdef`, `xref` directives
+  * `opt` directive arguments
   * `ifc`, `ifnc` conditional assembly directives
 * Spellchecker with bundled dictionaries (M68k/Amiga/"Scene")
 * Code Folding (*Settings \| Editor \| General \| Code Folding*)
@@ -149,7 +150,7 @@ Invoke intentions via <kbd>Alt</kbd>+<kbd>Enter</kbd> or click on the lightbulb 
 
 #### Flip comma
 
-Swap comma-separated expressions or instruction operands (if valid).
+Swap comma-separated expressions or instruction/directive operands (if valid).
 See also *Code \| Move Element Left/Right* above.
 
 #### Show Used/Free Registers 

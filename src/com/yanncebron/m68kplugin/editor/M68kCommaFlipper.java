@@ -22,6 +22,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kAdm;
 import com.yanncebron.m68kplugin.lang.psi.M68kInstruction;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kPsiTreeUtil;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kOptDirectiveArg;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,6 +43,10 @@ final class M68kCommaFlipper implements FlipCommaIntention.Flipper {
       M68kPsiElement instructionOrDirective = M68kPsiTreeUtil.getContainingInstructionOrDirective(left);
       return instructionOrDirective instanceof M68kInstruction m68kInstruction &&
         M68kMoveLeftRightHandler.getMovableSubElementsForInstruction(m68kInstruction).length == 2;
+    }
+
+    if (left instanceof M68kOptDirectiveArg && right instanceof M68kOptDirectiveArg) {
+      return true;
     }
 
     return false;

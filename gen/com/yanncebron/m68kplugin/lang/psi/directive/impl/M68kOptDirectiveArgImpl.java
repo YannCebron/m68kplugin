@@ -27,26 +27,20 @@ import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
 
-public class M68kOptDirectiveImpl extends ASTWrapperPsiElement implements M68kOptDirective {
+public class M68kOptDirectiveArgImpl extends ASTWrapperPsiElement implements M68kOptDirectiveArg {
 
-  public M68kOptDirectiveImpl(@NotNull ASTNode node) {
+  public M68kOptDirectiveArgImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull M68kVisitor visitor) {
-    visitor.visitOptDirective(this);
+    visitor.visitOptDirectiveArg(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof M68kVisitor) accept((M68kVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public List<M68kOptDirectiveArg> getOptDirectiveArgList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kOptDirectiveArg.class);
   }
 
 }

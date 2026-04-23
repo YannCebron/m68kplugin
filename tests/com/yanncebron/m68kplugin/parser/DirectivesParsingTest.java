@@ -201,6 +201,10 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" BLK 42");
   }
 
+  public void testOptDirectiveMissingArguments() throws Exception {
+    doCodeTest(" opt");
+  }
+
   public void testOptDirective() throws Exception {
     doCodeTest(" opt w+");
   }

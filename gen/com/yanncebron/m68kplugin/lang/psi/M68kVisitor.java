@@ -1002,6 +1002,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitDirective(o);
   }
 
+  public void visitOptDirectiveArg(@NotNull M68kOptDirectiveArg o) {
+    visitPsiElement(o);
+  }
+
   public void visitOrExpression(@NotNull M68kOrExpression o) {
     visitBinaryExpression(o);
   }

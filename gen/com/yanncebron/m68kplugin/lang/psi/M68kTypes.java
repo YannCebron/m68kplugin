@@ -248,6 +248,7 @@ public interface M68kTypes {
   IElementType ODD_DIRECTIVE = new M68kCompositeElementType("ODD_DIRECTIVE");
   IElementType OFFSET_DIRECTIVE = new M68kCompositeElementType("OFFSET_DIRECTIVE");
   IElementType OPT_DIRECTIVE = new M68kCompositeElementType("OPT_DIRECTIVE");
+  IElementType OPT_DIRECTIVE_ARG = new M68kCompositeElementType("OPT_DIRECTIVE_ARG");
   IElementType ORG_DIRECTIVE = new M68kCompositeElementType("ORG_DIRECTIVE");
   IElementType ORI_INSTRUCTION = new M68kCompositeElementType("ORI_INSTRUCTION");
   IElementType OR_EXPRESSION = new M68kCompositeElementType("OR_EXPRESSION");
@@ -993,6 +994,9 @@ public interface M68kTypes {
       }
       else if (type == OPT_DIRECTIVE) {
         return new M68kOptDirectiveImpl(node);
+      }
+      else if (type == OPT_DIRECTIVE_ARG) {
+        return new M68kOptDirectiveArgImpl(node);
       }
       else if (type == ORG_DIRECTIVE) {
         return new M68kOrgDirectiveImpl(node);

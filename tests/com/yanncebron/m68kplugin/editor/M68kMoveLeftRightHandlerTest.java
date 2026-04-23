@@ -30,6 +30,10 @@ public class M68kMoveLeftRightHandlerTest extends BasePlatformTestCase {
     doTestMoveLeft(" dr.b 0,1,<caret>2", " dr.b 0,<caret>2,1");
   }
 
+  public void testOptDirective() {
+    doTestMoveLeft(" opt w+,<caret>u+", " opt <caret>u+,w+");
+  }
+
   public void testPrintvDirective() {
     doTestMoveLeft(" printv 0,1,<caret>2", " printv 0,<caret>2,1");
   }

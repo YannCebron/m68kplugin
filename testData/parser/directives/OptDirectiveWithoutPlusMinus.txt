@@ -3,4 +3,5 @@ M68k.FILE
   M68kOptDirectiveImpl(OPT_DIRECTIVE)
     PsiElement(opt)('opt')
     PsiWhiteSpace(' ')
-    PsiElement(id)('debug')
+    M68kOptDirectiveArgImpl(OPT_DIRECTIVE_ARG)
+      PsiElement(id)('debug')
