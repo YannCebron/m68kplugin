@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -566,8 +566,8 @@ Z=[zZ]
 // `rem` until matching `erem`
 <IN_REM> {
   {WHITE_SPACE}+ {E}{R}{E}{M}  { yybegin(AFTER_OPERAND); return EREM; }
-  {CRLF}                   { return LINEFEED; }
-  .+                       { return COMMENT; }
+  {CRLF}                       { return LINEFEED; }
+  .+                           { return COMMENT_REM; }
 }
 
 [^] { return BAD_CHARACTER; }

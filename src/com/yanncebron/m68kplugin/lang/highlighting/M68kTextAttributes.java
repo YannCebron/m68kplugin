@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.lang.highlighting;
 
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
+import com.intellij.openapi.editor.colors.EditorColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
@@ -87,6 +88,8 @@ public class M68kTextAttributes {
 
   public static final TextAttributesKey COMMENT =
     createTextAttributesKey("M68K_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
+  public static final TextAttributesKey COMMENT_REM =
+    createTextAttributesKey("M68K_COMMENT_REM", EditorColors.DELETED_TEXT_ATTRIBUTES);
 
   public static final TextAttributesKey STRING =
     createTextAttributesKey("M68K_STRING", DefaultLanguageHighlighterColors.STRING);

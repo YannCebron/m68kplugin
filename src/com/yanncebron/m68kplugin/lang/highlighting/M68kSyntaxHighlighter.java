@@ -52,6 +52,8 @@ public class M68kSyntaxHighlighter extends SyntaxHighlighterBase {
     fillMap(keys, M68kTokenGroups.OPERATION_SIGNS, M68kTextAttributes.OPERATION_SIGN);
 
     keys.put(M68kTokenTypes.COMMENT, M68kTextAttributes.COMMENT);
+    keys.put(M68kTokenTypes.COMMENT_REM, M68kTextAttributes.COMMENT_REM);
+
     keys.put(M68kTokenTypes.STRING, M68kTextAttributes.STRING);
     keys.put(StringEscapesTokenTypes.VALID_STRING_ESCAPE_TOKEN, M68kTextAttributes.VALID_STRING_ESCAPE);
     keys.put(StringEscapesTokenTypes.INVALID_CHARACTER_ESCAPE_TOKEN, M68kTextAttributes.INVALID_STRING_ESCAPE);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -341,7 +341,7 @@ public final class M68kTokenGroups {
     OCT_NUMBER
   );
 
-  public static final TokenSet COMMENTS = TokenSet.create(COMMENT);
+  public static final TokenSet COMMENTS = TokenSet.create(COMMENT, COMMENT_REM);
 
   public static final TokenSet STRING_LITERALS = TokenSet.create(STRING);
 }

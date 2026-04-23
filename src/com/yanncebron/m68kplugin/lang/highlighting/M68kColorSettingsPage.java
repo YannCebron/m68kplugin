@@ -44,17 +44,24 @@ final class M68kColorSettingsPage implements ColorSettingsPage, RainbowColorSett
     createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.operation.sign", M68kTextAttributes.OPERATION_SIGN),
     createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.parentheses", M68kTextAttributes.PARENTHESES),
     createDescriptor("color.settings.group.braces.operators", "attribute.descriptor.brackets", M68kTextAttributes.BRACKETS),
-    createDescriptor("color.settings.group.root", "attribute.descriptor.comment", M68kTextAttributes.COMMENT),
+
+    createDescriptor("color.settings.group.comments", "attribute.descriptor.comment", M68kTextAttributes.COMMENT),
+    createDescriptor("color.settings.group.comments", "attribute.descriptor.comment.erem", M68kTextAttributes.COMMENT_REM),
+
     createDescriptor("color.settings.group.root", "attribute.descriptor.data.size", M68kTextAttributes.DATA_SIZES),
+
     createDescriptor("color.settings.group.directives", "attribute.descriptor.directive", M68kTextAttributes.DIRECTIVE),
     createDescriptor("color.settings.group.directives", "attribute.descriptor.conditional.assembly.directive", M68kTextAttributes.CONDITIONAL_ASSEMBLY_DIRECTIVE),
     createDescriptor("color.settings.group.directives", "attribute.descriptor.macrocall", M68kTextAttributes.MACRO_CALL),
     createDescriptor("color.settings.group.directives", "attribute.descriptor.macro.parameter", M68kTextAttributes.MACRO_PARAMETER),
+
     createDescriptor("color.settings.group.instructions", "attribute.descriptor.instruction", M68kTextAttributes.INSTRUCTION),
     createDescriptor("color.settings.group.instructions", "attribute.descriptor.privileged.instruction", M68kTextAttributes.PRIVILEGED_INSTRUCTION),
+
     createDescriptor("color.settings.group.labels", "attribute.descriptor.builtin.symbol", M68kTextAttributes.BUILTIN_SYMBOL),
     createDescriptor("color.settings.group.labels", "attribute.descriptor.label", M68kTextAttributes.LABEL),
     createDescriptor("color.settings.group.labels", "attribute.descriptor.local.label", M68kTextAttributes.LOCAL_LABEL),
+
     createDescriptor("color.settings.group.literals", "attribute.descriptor.binary.number", M68kTextAttributes.BIN_NUMBER),
     createDescriptor("color.settings.group.literals", "attribute.descriptor.decimal.number", M68kTextAttributes.DEC_NUMBER),
     createDescriptor("color.settings.group.literals", "attribute.descriptor.hex.number", M68kTextAttributes.HEX_NUMBER),
@@ -62,6 +69,7 @@ final class M68kColorSettingsPage implements ColorSettingsPage, RainbowColorSett
     createDescriptor("color.settings.group.literals.string", "attribute.descriptor.string", M68kTextAttributes.STRING),
     createDescriptor("color.settings.group.literals.string.escape.sequence", "attribute.descriptor.string.valid.escape", M68kTextAttributes.VALID_STRING_ESCAPE),
     createDescriptor("color.settings.group.literals.string.escape.sequence", "attribute.descriptor.string.invalid.escape", M68kTextAttributes.INVALID_STRING_ESCAPE),
+
     createDescriptor("color.settings.group.registers", "attribute.descriptor.address.register", M68kTextAttributes.ADDRESS_REGISTER),
     createDescriptor("color.settings.group.registers", "attribute.descriptor.ccr.register", M68kTextAttributes.CCR_REGISTER),
     createDescriptor("color.settings.group.registers", "attribute.descriptor.data.register", M68kTextAttributes.DATA_REGISTER),
@@ -116,9 +124,14 @@ final class M68kColorSettingsPage implements ColorSettingsPage, RainbowColorSett
       "<localLabel>.local</localLabel>:\n" +
       "        CALL_MACRO.l _LibPtr,-42\n" +
       "        moveq #%0101+$FF,d1\n" +
-      "        move.l d0,(a1) ;comment\n" +
+      "        move.l d0,(a1) ; EOL comment\n" +
       "        rts\n" +
       "\n" +
+      "; rem/erem block\n" +
+      "        rem\n"+
+      "        move.l d0,d1\n"+
+      "        erem\n"+
+      "\n"+
       "        IFGE <builtinSymbol>__CPU</builtinSymbol>-68010\n" +
       "<label>CPU_FLAG</label> SET 1\n" +
       "        ENDC\n" +

@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -89,6 +89,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType COLON = new M68kTokenType(":");
   public static final IElementType COMMA = new M68kTokenType(",");
   public static final IElementType COMMENT = new M68kTokenType("comment");
+  public static final IElementType COMMENT_REM = new M68kTokenType("comment_rem");
   public static final IElementType CPU32 = new M68kTokenType("cpu32");
   public static final IElementType CSEG = new M68kTokenType("cseg");
   public static final IElementType DATA = new M68kTokenType("data");
