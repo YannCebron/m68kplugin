@@ -6,5 +6,5 @@ M68k.FILE
   PsiWhiteSpace(' ')
   PsiElement(data_register)('d0')
   PsiElement(,)(',')
-  PsiErrorElement:<address register indirect with displacement>, <address register indirect with index>, <address register indirect with postincrement>, <address register indirect with predecrement>, <address register indirect>, <data register> or <expression> expected, got 'cCr'
+  PsiErrorElement:<ALTERABLE_DATA> expected, got 'cCr'
     PsiElement(ccr)('cCr')

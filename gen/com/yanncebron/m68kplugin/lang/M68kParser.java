@@ -467,7 +467,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   public static boolean adm_adi(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_adi")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ADM_ADI, "<address register indirect with displacement>");
+    Marker m = enter_section_(b, l, _NONE_, ADM_ADI, "<(d,An)>");
     r = adm_adi_0(b, l + 1);
     if (!r) r = adm_adi_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
@@ -507,7 +507,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   public static boolean adm_aix(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_aix")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ADM_AIX, "<address register indirect with index>");
+    Marker m = enter_section_(b, l, _NONE_, ADM_AIX, "<adm aix>");
     r = adm_aix_old(b, l + 1);
     if (!r) r = adm_aix_new(b, l + 1);
     exit_section_(b, l, m, r, false, null);
@@ -578,9 +578,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // MINUS L_PAREN adm_ard R_PAREN
   public static boolean adm_apd(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_apd")) return false;
-    if (!nextTokenIs(b, "<address register indirect with predecrement>", MINUS)) return false;
+    if (!nextTokenIs(b, "<-(An)>", MINUS)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, ADM_APD, "<address register indirect with predecrement>");
+    Marker m = enter_section_(b, l, _NONE_, ADM_APD, "<-(An)>");
     r = consumeTokens(b, 0, MINUS, L_PAREN);
     r = r && adm_ard(b, l + 1);
     p = r; // pin = 3
@@ -593,9 +593,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // L_PAREN adm_ard R_PAREN PLUS
   public static boolean adm_api(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_api")) return false;
-    if (!nextTokenIs(b, "<address register indirect with postincrement>", L_PAREN)) return false;
+    if (!nextTokenIs(b, "<(An)+>", L_PAREN)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ADM_API, "<address register indirect with postincrement>");
+    Marker m = enter_section_(b, l, _NONE_, ADM_API, "<(An)+>");
     r = consumeToken(b, L_PAREN);
     r = r && adm_ard(b, l + 1);
     r = r && consumeTokens(b, 0, R_PAREN, PLUS);
@@ -607,9 +607,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // ADDRESS_REGISTER | SP
   public static boolean adm_ard(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_ard")) return false;
-    if (!nextTokenIs(b, "<address register>", ADDRESS_REGISTER, SP)) return false;
+    if (!nextTokenIs(b, "<An>", ADDRESS_REGISTER, SP)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ADM_ARD, "<address register>");
+    Marker m = enter_section_(b, l, _NONE_, ADM_ARD, "<An>");
     r = consumeToken(b, ADDRESS_REGISTER);
     if (!r) r = consumeToken(b, SP);
     exit_section_(b, l, m, r, false, null);
@@ -620,13 +620,13 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // L_PAREN adm_ard R_PAREN
   public static boolean adm_ari(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_ari")) return false;
-    if (!nextTokenIs(b, "<address register indirect>", L_PAREN)) return false;
+    if (!nextTokenIs(b, L_PAREN)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ADM_ARI, "<address register indirect>");
+    Marker m = enter_section_(b);
     r = consumeToken(b, L_PAREN);
     r = r && adm_ard(b, l + 1);
     r = r && consumeToken(b, R_PAREN);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, m, ADM_ARI, r);
     return r;
   }
 
@@ -646,11 +646,11 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // DFC
   public static boolean adm_dfc(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_dfc")) return false;
-    if (!nextTokenIs(b, "<DFC>", DFC)) return false;
+    if (!nextTokenIs(b, DFC)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ADM_DFC, "<DFC>");
+    Marker m = enter_section_(b);
     r = consumeToken(b, DFC);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, m, ADM_DFC, r);
     return r;
   }
 
@@ -658,9 +658,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // DATA_REGISTER
   public static boolean adm_drd(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_drd")) return false;
-    if (!nextTokenIs(b, "<data register>", DATA_REGISTER)) return false;
+    if (!nextTokenIs(b, "<Dn>", DATA_REGISTER)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ADM_DRD, "<data register>");
+    Marker m = enter_section_(b, l, _NONE_, ADM_DRD, "<Dn>");
     r = consumeToken(b, DATA_REGISTER);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -670,9 +670,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // HASH expression data_size_word_long?
   public static boolean adm_imm(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_imm")) return false;
-    if (!nextTokenIs(b, "<immediate data>", HASH)) return false;
+    if (!nextTokenIs(b, "<#Imm>", HASH)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, ADM_IMM, "<immediate data>");
+    Marker m = enter_section_(b, l, _NONE_, ADM_IMM, "<#Imm>");
     r = consumeToken(b, HASH);
     p = r; // pin = 1
     r = r && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1));
@@ -695,7 +695,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   public static boolean adm_pcd(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_pcd")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ADM_PCD, "<program counter indirect with displacement>");
+    Marker m = enter_section_(b, l, _NONE_, ADM_PCD, "<adm pcd>");
     r = adm_pcd_0(b, l + 1);
     if (!r) r = adm_pcd_1(b, l + 1);
     if (!r) r = adm_pcd_2(b, l + 1);
@@ -749,7 +749,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   public static boolean adm_pci(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_pci")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ADM_PCI, "<program counter indirect with index>");
+    Marker m = enter_section_(b, l, _NONE_, ADM_PCI, "<adm pci>");
     r = adm_pci_old(b, l + 1);
     if (!r) r = adm_pci_new(b, l + 1);
     exit_section_(b, l, m, r, false, null);
@@ -817,9 +817,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // HASH expression
   public static boolean adm_quick(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_quick")) return false;
-    if (!nextTokenIs(b, "<quick immediate>", HASH)) return false;
+    if (!nextTokenIs(b, "<Quick #Imm>", HASH)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, ADM_QUICK, "<quick immediate>");
+    Marker m = enter_section_(b, l, _NONE_, ADM_QUICK, "<Quick #Imm>");
     r = consumeToken(b, HASH);
     p = r; // pin = 1
     r = r && M68kExpressionParser.expression(b, l + 1, -1);
@@ -868,7 +868,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   public static boolean adm_rrd(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_rrd")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ADM_RRD, "<data|address register>");
+    Marker m = enter_section_(b, l, _NONE_, ADM_RRD, "<Rn>");
     r = adm_drd(b, l + 1);
     if (!r) r = adm_ard(b, l + 1);
     exit_section_(b, l, m, r, false, null);
@@ -880,7 +880,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   public static boolean adm_rrd_index(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_rrd_index")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ADM_RRD_INDEX, "<data|address register>");
+    Marker m = enter_section_(b, l, _NONE_, ADM_RRD_INDEX, "<Rn>");
     r = adm_rrd_index_0(b, l + 1);
     if (!r) r = adm_rrd_index_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
@@ -927,11 +927,11 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // SFC
   public static boolean adm_sfc(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_sfc")) return false;
-    if (!nextTokenIs(b, "<SFC>", SFC)) return false;
+    if (!nextTokenIs(b, SFC)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ADM_SFC, "<SFC>");
+    Marker m = enter_section_(b);
     r = consumeToken(b, SFC);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, m, ADM_SFC, r);
     return r;
   }
 
@@ -963,11 +963,11 @@ public class M68kParser implements PsiParser, LightPsiParser {
   // VBR
   public static boolean adm_vbr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_vbr")) return false;
-    if (!nextTokenIs(b, "<VBR>", VBR)) return false;
+    if (!nextTokenIs(b, VBR)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ADM_VBR, "<VBR>");
+    Marker m = enter_section_(b);
     r = consumeToken(b, VBR);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, m, ADM_VBR, r);
     return r;
   }
 
@@ -3660,9 +3660,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_);
     r = adm_drd(b, l + 1);
-    p = r; // pin = 1
-    r = r && report_error_(b, consumeToken(b, COMMA));
-    r = p && adm_adi(b, l + 1) && r;
+    r = r && consumeToken(b, COMMA);
+    p = r; // pin = 2
+    r = r && adm_adi(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -3903,6 +3903,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   static boolean operand_all(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operand_all")) return false;
     boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<ALL>");
     r = adm_drd(b, l + 1);
     if (!r) r = adm_ard(b, l + 1);
     if (!r) r = adm_imm(b, l + 1);
@@ -3914,6 +3915,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = adm_adi(b, l + 1);
     if (!r) r = adm_aix(b, l + 1);
     if (!r) r = adm_abs(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -3922,6 +3924,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   static boolean operand_alterable(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operand_alterable")) return false;
     boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<ALTERABLE>");
     r = adm_drd(b, l + 1);
     if (!r) r = adm_ard(b, l + 1);
     if (!r) r = adm_api(b, l + 1);
@@ -3930,6 +3933,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = adm_adi(b, l + 1);
     if (!r) r = adm_aix(b, l + 1);
     if (!r) r = adm_abs(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -3938,10 +3942,12 @@ public class M68kParser implements PsiParser, LightPsiParser {
   static boolean operand_alterable_control(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operand_alterable_control")) return false;
     boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<ALTERABLE_CONTROL>");
     r = adm_ari(b, l + 1);
     if (!r) r = adm_adi(b, l + 1);
     if (!r) r = adm_aix(b, l + 1);
     if (!r) r = adm_abs(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -3950,6 +3956,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   static boolean operand_alterable_data(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operand_alterable_data")) return false;
     boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<ALTERABLE_DATA>");
     r = adm_drd(b, l + 1);
     if (!r) r = adm_api(b, l + 1);
     if (!r) r = adm_ari(b, l + 1);
@@ -3957,6 +3964,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = adm_adi(b, l + 1);
     if (!r) r = adm_aix(b, l + 1);
     if (!r) r = adm_abs(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -3965,12 +3973,14 @@ public class M68kParser implements PsiParser, LightPsiParser {
   static boolean operand_alterable_memory(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operand_alterable_memory")) return false;
     boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<ALTERABLE_MEMORY>");
     r = adm_api(b, l + 1);
     if (!r) r = adm_ari(b, l + 1);
     if (!r) r = adm_apd(b, l + 1);
     if (!r) r = adm_adi(b, l + 1);
     if (!r) r = adm_aix(b, l + 1);
     if (!r) r = adm_abs(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -3979,12 +3989,14 @@ public class M68kParser implements PsiParser, LightPsiParser {
   static boolean operand_control(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operand_control")) return false;
     boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<CONTROL>");
     r = adm_ari(b, l + 1);
     if (!r) r = adm_pcd(b, l + 1);
     if (!r) r = adm_pci(b, l + 1);
     if (!r) r = adm_adi(b, l + 1);
     if (!r) r = adm_aix(b, l + 1);
     if (!r) r = adm_abs(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -3993,7 +4005,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   static boolean operand_ctrl_register(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operand_ctrl_register")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, null, "<control register>");
+    Marker m = enter_section_(b, l, _NONE_, null, "<CTRL_REGISTER>");
     r = adm_dfc(b, l + 1);
     if (!r) r = adm_sfc(b, l + 1);
     if (!r) r = adm_vbr(b, l + 1);
@@ -4006,6 +4018,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   static boolean operand_data(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operand_data")) return false;
     boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<DATA>");
     r = adm_drd(b, l + 1);
     if (!r) r = adm_imm(b, l + 1);
     if (!r) r = adm_api(b, l + 1);
@@ -4016,6 +4029,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = adm_adi(b, l + 1);
     if (!r) r = adm_aix(b, l + 1);
     if (!r) r = adm_abs(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -4024,6 +4038,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   static boolean operand_memory(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operand_memory")) return false;
     boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<MEMORY>");
     r = adm_imm(b, l + 1);
     if (!r) r = adm_api(b, l + 1);
     if (!r) r = adm_ari(b, l + 1);
@@ -4033,6 +4048,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = adm_adi(b, l + 1);
     if (!r) r = adm_aix(b, l + 1);
     if (!r) r = adm_abs(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -4041,6 +4057,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   static boolean operand_memory_without_imm(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operand_memory_without_imm")) return false;
     boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<MEMORY_WITHOUT_IMMEDIATE>");
     r = adm_api(b, l + 1);
     if (!r) r = adm_ari(b, l + 1);
     if (!r) r = adm_apd(b, l + 1);
@@ -4049,6 +4066,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = adm_adi(b, l + 1);
     if (!r) r = adm_aix(b, l + 1);
     if (!r) r = adm_abs(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -4057,6 +4075,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   static boolean operand_restore_operands(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operand_restore_operands")) return false;
     boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<RESTORE_OPERANDS>");
     r = adm_api(b, l + 1);
     if (!r) r = adm_ari(b, l + 1);
     if (!r) r = adm_pcd(b, l + 1);
@@ -4064,6 +4083,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
     if (!r) r = adm_adi(b, l + 1);
     if (!r) r = adm_aix(b, l + 1);
     if (!r) r = adm_abs(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -4123,7 +4143,7 @@ public class M68kParser implements PsiParser, LightPsiParser {
   public static boolean register_range(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "register_range")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, REGISTER_RANGE, "<register range>");
+    Marker m = enter_section_(b, l, _NONE_, REGISTER_RANGE, "<Rn list>");
     r = register_range_real(b, l + 1);
     if (!r) r = register_range_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);

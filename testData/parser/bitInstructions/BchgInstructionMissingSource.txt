@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kBchgInstructionImpl(BCHG_INSTRUCTION)
     PsiElement(bchg)('bchg')
-    PsiErrorElement:<data register> or <quick immediate> expected
+    PsiErrorElement:<Dn> or <Quick #Imm> expected
       <empty list>
   PsiWhiteSpace(' ')

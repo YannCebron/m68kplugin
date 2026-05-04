@@ -172,8 +172,8 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
       }
     }
 
-    assertEquals(121291, total);
-    assertEquals(17166, skippedValidCount);
+    assertEquals(148661, total);
+    assertEquals(18716, skippedValidCount);
     assertEquals(1280, matchedByMnemonicCount);
     assertEmpty(failedVariants);
   }
@@ -351,7 +351,9 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
     entry(M68kAddressMode.SPECIAL_REGISTER_SR, List.of("SR")),
     entry(M68kAddressMode.SPECIAL_REGISTER_USP, List.of("USP")),
     entry(M68kAddressMode.SPECIAL_REGISTER_CCR, List.of("CCR")),
-    entry(M68kAddressMode.CONTROL_REGISTER, List.of("DFC", "SFC", "VBR"))
+    entry(M68kAddressMode.CONTROL_REGISTER_DFC, List.of("DFC")),
+    entry(M68kAddressMode.CONTROL_REGISTER_SFC, List.of("SFC")),
+    entry(M68kAddressMode.CONTROL_REGISTER_VBR, List.of("VBR"))
   );
 
   private static final Map<M68kOperand, List<String>> OPERAND_TEXTS = FactoryMap.create(operand -> {

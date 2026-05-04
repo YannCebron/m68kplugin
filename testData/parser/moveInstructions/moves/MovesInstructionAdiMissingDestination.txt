@@ -11,5 +11,5 @@ M68k.FILE
         PsiElement(address_register)('a0')
       PsiElement())(')')
     PsiElement(,)(',')
-    PsiErrorElement:<data|address register> expected
+    PsiErrorElement:<Rn> expected
       <empty list>

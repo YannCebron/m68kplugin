@@ -5,6 +5,7 @@
 ### Changed
 
 - Dedicated _68_ icon for files
+- Parser error messages: shorten and align with semantics from mnemonic doc
 
 ### Added
 

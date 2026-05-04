@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kLinkInstructionImpl(LINK_INSTRUCTION)
     PsiElement(link)('link')
-    PsiErrorElement:<address register> expected
+    PsiErrorElement:<An> expected
       <empty list>
   PsiWhiteSpace(' ')

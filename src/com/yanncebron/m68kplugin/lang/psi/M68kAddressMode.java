@@ -20,6 +20,8 @@ import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
 
 /**
  * Translates to {@code Adm*} PSI.
+ * <p>
+ * {@link #notation} must be synced with {@code adm_...} rules {@code "name"} attribute.
  *
  * @see M68kAdm
  * @see M68kOperand
@@ -96,11 +98,11 @@ public enum M68kAddressMode {
   /**
    * Ref 2.2.18, {@link M68kAdmImm}
    */
-  IMMEDIATE("Imm", M68kAdmImm.class),
+  IMMEDIATE("#Imm", M68kAdmImm.class),
   /**
    * Ref 2.2.18, {@link M68kAdmQuick}
    */
-  QUICK_IMMEDIATE("Quick Imm", M68kAdmQuick.class),
+  QUICK_IMMEDIATE("Quick #Imm", M68kAdmQuick.class),
 
   /**
    * {@link M68kAdmRegisterList}
@@ -122,18 +124,23 @@ public enum M68kAddressMode {
 
   /**
    * {@link M68kAdmDfc}
+   */
+  CONTROL_REGISTER_DFC("DFC", M68kAdmDfc.class),
+  /**
    * {@link M68kAdmSfc}
+   */
+  CONTROL_REGISTER_SFC("SFC", M68kAdmSfc.class),
+  /**
    * {@link M68kAdmVbr}
    */
-  CONTROL_REGISTER("CTRL", M68kAdmDfc.class, M68kAdmSfc.class, M68kAdmVbr.class);
+  CONTROL_REGISTER_VBR("VBR", M68kAdmVbr.class);
 
   private final String notation;
-  private final Class<? extends M68kAdm>[] admClasses;
+  private final Class<? extends M68kAdm> admClass;
 
-  @SafeVarargs
-  M68kAddressMode(String notation, Class<? extends M68kAdm>... admClasses) {
+  M68kAddressMode(String notation, Class<? extends M68kAdm> admClass) {
     this.notation = notation;
-    this.admClasses = admClasses;
+    this.admClass = admClass;
   }
 
   public String getNotation() {
@@ -141,10 +148,6 @@ public enum M68kAddressMode {
   }
 
   public boolean matches(M68kAdm givenAdm) {
-    for (Class<? extends M68kAdm> admClass : admClasses) {
-      if (admClass.isInstance(givenAdm)) return true;
-    }
-
-    return false;
+    return admClass.isInstance(givenAdm);
   }
 }

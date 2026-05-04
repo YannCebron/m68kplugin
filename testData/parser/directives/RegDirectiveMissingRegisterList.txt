@@ -4,6 +4,6 @@ M68k.FILE
       PsiElement(id)('label')
     PsiWhiteSpace(' ')
     PsiElement(reg)('REG')
-    PsiErrorElement:<immediate data> or <register range> expected
+    PsiErrorElement:<#Imm> or <Rn list> expected
       <empty list>
   PsiWhiteSpace(' ')

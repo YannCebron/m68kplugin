@@ -18,6 +18,7 @@ package com.yanncebron.m68kplugin.documentation;
 
 import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.util.text.Strings;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.ArrayUtil;
 import com.intellij.util.containers.ContainerUtil;
@@ -177,12 +178,7 @@ class M68kInstructionMnemonicDocsGenerator {
     }
 
     sb.append(prefix);
-    final M68kAddressMode[] addressModes = m68kOperand.getAddressModes();
-    if (addressModes.length != 1) {
-      sb.append("&lt;").append(m68kOperand).append(">");
-    } else {
-      sb.append(addressModes[0].getNotation());
-    }
+    sb.append(Strings.escapeXmlEntities(m68kOperand.getNotation()));
   }
 
   private void appendAddressModes(String label,

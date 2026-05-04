@@ -4,6 +4,6 @@ M68k.FILE
       PsiElement(id)('label')
     PsiWhiteSpace(' ')
     PsiElement(equr)('equr')
-    PsiErrorElement:<data|address register> expected
+    PsiErrorElement:<Rn> expected
       <empty list>
   PsiWhiteSpace(' ')

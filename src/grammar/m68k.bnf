@@ -117,7 +117,7 @@ private m68000_instructions ::=
                          sCC_instructions
 
 
-// data size  _______=====================================================
+// data size  ============================================================
 fake data_sized ::=
 {
   methods = [ getDataSize ]
@@ -141,11 +141,13 @@ private data_size_all_single ::= !<<afterWhitespace>> (DOT_B | DOT_W | DOT_L | D
 }
 
 // addressing modes  =====================================================
+// 'name' must be specified only if not used exclusively from 'operand_..' rules
+// and synced with M68kAddressMode "notation"
 
 // Dn
 adm_drd ::= DATA_REGISTER
 {
-  name = "data register"
+  name = "Dn"
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
 }
@@ -153,7 +155,7 @@ adm_drd ::= DATA_REGISTER
 // An | SP
 adm_ard ::= ADDRESS_REGISTER | SP
 {
-  name = "address register"
+  name = "An"
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
 }
@@ -161,7 +163,7 @@ adm_ard ::= ADDRESS_REGISTER | SP
 // Rn
 adm_rrd ::= adm_drd | adm_ard
 {
-  name = "data|address register"
+  name = "Rn"
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRrd"
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRrdMixIn"
 }
@@ -169,7 +171,7 @@ adm_rrd ::= adm_drd | adm_ard
 // Rn[.SIZE] used in adm_ix/adm_pci / duplicates adm_rrd to avoid nesting
 adm_rrd_index ::= (adm_drd data_size_all?) | (adm_ard data_size_word_long?)
 {
-  name = "data|address register"
+  name = "Rn"
   methods = [
     getDataSize
   ]
@@ -181,7 +183,6 @@ adm_rrd_index ::= (adm_drd data_size_all?) | (adm_ard data_size_word_long?)
 // Ref 2.2.3: (An)
 adm_ari ::= L_PAREN adm_ard R_PAREN
 {
-  name = "address register indirect"
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithIndirectAddressRegister"
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithIndirectAddressRegisterMixIn"
 }
@@ -189,7 +190,7 @@ adm_ari ::= L_PAREN adm_ard R_PAREN
 // Ref 2.2.4: (An)+
 adm_api ::= L_PAREN adm_ard R_PAREN PLUS
 {
-  name = "address register indirect with postincrement"
+  name = "(An)+"
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithIndirectAddressRegister"
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithIndirectAddressRegisterMixIn"
 }
@@ -197,7 +198,7 @@ adm_api ::= L_PAREN adm_ard R_PAREN PLUS
 // Ref 2.2.5: -(An)
 adm_apd ::= MINUS L_PAREN adm_ard R_PAREN
 {
-  name = "address register indirect with predecrement"
+  name = "-(An)"
   pin = 3
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithIndirectAddressRegister"
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithIndirectAddressRegisterMixIn"
@@ -210,7 +211,7 @@ adm_adi ::= (expression L_PAREN adm_ard R_PAREN) |
   methods = [
     displacement = "expression"
   ]
-  name = "address register indirect with displacement"
+  name = "(d,An)"
   implements = [
     "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithDisplacement"
     "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithIndirectAddressRegister"
@@ -230,7 +231,6 @@ private adm_aix_new ::= L_PAREN (expression COMMA)? adm_ard COMMA adm_rrd_index 
 adm_aix ::= adm_aix_old |
             adm_aix_new
 {
-  name = "address register indirect with index"
   methods = [
     displacement = "expression"
   ]
@@ -252,7 +252,6 @@ adm_pcd ::= (L_PAREN PC R_PAREN) |
             (expression? L_PAREN PC R_PAREN) |
             (L_PAREN expression COMMA PC R_PAREN)
 {
-  name = "program counter indirect with displacement"
   methods = [
     displacement = "expression"
   ]
@@ -275,7 +274,6 @@ private adm_pci_new ::= L_PAREN (expression COMMA)? PC COMMA adm_rrd_index R_PAR
 adm_pci ::= adm_pci_old |
             adm_pci_new
 {
-  name = "program counter indirect with index"
   methods = [
     displacement = "expression"
   ]
@@ -290,7 +288,7 @@ adm_pci ::= adm_pci_old |
 adm_imm ::= HASH expression data_size_word_long?
 {
   pin = 1
-  name = "immediate data"
+  name = "#Imm"
   methods = [
     getDataSize
   ]
@@ -300,11 +298,11 @@ adm_imm ::= HASH expression data_size_word_long?
   ]
 }
 
-// #42 (0..255)
+// #42
 adm_quick ::= HASH expression
 {
   pin = 1
-  name = "quick immediate"
+  name = "Quick #Imm"
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdm"
 }
 
@@ -329,19 +327,16 @@ adm_usp ::= USP
 
 adm_dfc ::= DFC
 {
-  name = "DFC"
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
 }
 adm_sfc ::= SFC
 {
-  name = "SFC"
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
 }
 adm_vbr ::= VBR
 {
-  name = "VBR"
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
 }
@@ -355,7 +350,7 @@ private register_range_real ::= adm_rrd MINUS adm_rrd
 register_range ::= register_range_real |
                    <<registerRangeStandaloneRegisterValid>> adm_rrd
 {
-  name = "register range"
+  name = "Rn list"
   methods = [
     adm_rrd= ""
     from = "adm_rrd[0]"
@@ -370,21 +365,21 @@ adm_register_list ::= register_range (DIV register_range)* {
 
 // maps to M68kOperand
 // ATTN: keep fixed ordering in groups
-private operand_all ::=                adm_drd | adm_ard | adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-private operand_data ::=               adm_drd |           adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-private operand_memory ::=                                 adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-private operand_memory_without_imm ::=                               adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-private operand_alterable ::=          adm_drd | adm_ard |           adm_api | adm_ari | adm_apd |                     adm_adi | adm_aix | adm_abs
-private operand_alterable_data ::=     adm_drd |                     adm_api | adm_ari | adm_apd |                     adm_adi | adm_aix | adm_abs
-private operand_alterable_memory ::=                                 adm_api | adm_ari | adm_apd |                     adm_adi | adm_aix | adm_abs
-private operand_control ::=                                                    adm_ari |           adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+private operand_all ::=                adm_drd | adm_ard | adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "ALL" }
+private operand_data ::=               adm_drd |           adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "DATA" }
+private operand_memory ::=                                 adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "MEMORY" }
+private operand_memory_without_imm ::=                               adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "MEMORY_WITHOUT_IMMEDIATE" }
+private operand_alterable ::=          adm_drd | adm_ard |           adm_api | adm_ari | adm_apd |                     adm_adi | adm_aix | adm_abs { name = "ALTERABLE" }
+private operand_alterable_data ::=     adm_drd |                     adm_api | adm_ari | adm_apd |                     adm_adi | adm_aix | adm_abs { name = "ALTERABLE_DATA" }
+private operand_alterable_memory ::=                                 adm_api | adm_ari | adm_apd |                     adm_adi | adm_aix | adm_abs { name = "ALTERABLE_MEMORY" }
+private operand_control ::=                                                    adm_ari |           adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "CONTROL" }
+private operand_alterable_control ::=                                          adm_ari |                               adm_adi | adm_aix | adm_abs { name = "ALTERABLE_CONTROL" }
 
-private operand_restore_operands ::=                                 adm_api | adm_ari |           adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
-private operand_alterable_control ::=                                          adm_ari |                               adm_adi | adm_aix | adm_abs
+private operand_restore_operands ::=                                 adm_api | adm_ari |           adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "RESTORE_OPERANDS" }
 
 private operand_ctrl_register ::= adm_dfc | adm_sfc | adm_vbr
 {
-  name = "control register"
+  name = "CTRL_REGISTER"
 }
 
 // Common tails

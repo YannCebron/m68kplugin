@@ -7,5 +7,5 @@ M68k.FILE
       M68kLabelRefExpressionImpl(LABEL_REF_EXPRESSION)
         PsiElement(id)('src')
     PsiElement(,)(',')
-    PsiErrorElement:<address register> expected
+    PsiErrorElement:<An> expected
       <empty list>

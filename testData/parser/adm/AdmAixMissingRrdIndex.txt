@@ -15,5 +15,5 @@ M68k.FILE
       M68kAdmArdImpl(ADM_ARD)
         PsiElement(address_register)('a0')
       PsiElement(,)(',')
-      PsiErrorElement:<data|address register> expected
+      PsiErrorElement:<Rn> expected
         <empty list>

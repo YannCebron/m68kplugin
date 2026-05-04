@@ -201,7 +201,13 @@ public enum M68kOperand {
   /**
    * vasm: {@code R_}
    */
-  DATA_OR_ADDRESS_REGISTER(M68kAddressMode.DATA_REGISTER, M68kAddressMode.ADDRESS_REGISTER),
+  DATA_OR_ADDRESS_REGISTER(M68kAddressMode.DATA_REGISTER, M68kAddressMode.ADDRESS_REGISTER) {
+    @Override
+    public String getNotation() {
+      return "<Rn>";
+    }
+  },
+
   /**
    * vasm: {@code RL}
    */
@@ -240,12 +246,16 @@ public enum M68kOperand {
   /**
    * vasm: {@code _CTRL}
    */
-  CTRL_REGISTER(M68kAddressMode.CONTROL_REGISTER);
+  CTRL_REGISTER(M68kAddressMode.CONTROL_REGISTER_DFC,
+    M68kAddressMode.CONTROL_REGISTER_SFC,
+    M68kAddressMode.CONTROL_REGISTER_VBR);
 
   private final M68kAddressMode[] addressModes;
+  private final String notation;
 
   M68kOperand(M68kAddressMode... addressModes) {
     this.addressModes = addressModes;
+    notation = addressModes.length == 1 ? addressModes[0].getNotation() : "<" + this + ">";
   }
 
   public boolean matches(M68kAdm givenAdm) {
@@ -258,4 +268,9 @@ public enum M68kOperand {
   public M68kAddressMode[] getAddressModes() {
     return addressModes;
   }
+
+  public String getNotation() {
+    return notation;
+  }
+
 }

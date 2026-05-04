@@ -9,7 +9,7 @@ M68k.FILE
       PsiElement(()('(')
       PsiElement(pc)('pc')
       PsiElement(,)(',')
-      PsiErrorElement:<data|address register> expected, got ')'
+      PsiErrorElement:<Rn> expected, got ')'
         <empty list>
       PsiElement())(')')
     PsiElement(,)(',')

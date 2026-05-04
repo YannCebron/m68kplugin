@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kMovepInstructionImpl(MOVEP_INSTRUCTION)
     PsiElement(movep)('movep')
-    PsiErrorElement:<address register indirect with displacement> or data_register expected
+    PsiErrorElement:<(d,An)> or data_register expected
       <empty list>
   PsiWhiteSpace(' ')

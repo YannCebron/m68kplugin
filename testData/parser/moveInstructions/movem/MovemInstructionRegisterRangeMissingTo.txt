@@ -9,7 +9,7 @@ M68k.FILE
           M68kAdmDrdImpl(ADM_DRD)
             PsiElement(data_register)('d1')
         PsiElement(-)('-')
-        PsiErrorElement:',', '/' or <data|address register> expected, got ','
+        PsiErrorElement:',', '/' or <Rn> expected, got ','
           <empty list>
     PsiElement(,)(',')
     M68kAdmAriImpl(ADM_ARI)

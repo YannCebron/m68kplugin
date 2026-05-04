@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kUnlkInstructionImpl(UNLK_INSTRUCTION)
     PsiElement(unlk)('unlk')
-    PsiErrorElement:<address register> expected
+    PsiErrorElement:<An> expected
       <empty list>
   PsiWhiteSpace(' ')
