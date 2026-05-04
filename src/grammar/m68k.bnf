@@ -95,27 +95,6 @@ private instructions ::= m68000_instructions |
                          directives |
                          conditional_assembly_directives
 
-private m68000_instructions ::=
-                         move_instructions |
-                         data_movement_instructions |
-                         jump_instructions |
-
-                         add_sub_instructions |
-                         mul_div_instructions |
-                         bcd_instructions|
-
-                         misc_instructions |
-
-                         cmp_instructions |
-
-                         logical_operation_instructions |
-                         bit_manipulation_instructions |
-                         shift_rotate_instructions |
-
-                         bCC_instructions |
-                         dbCC_instructions |
-                         sCC_instructions
-
 
 // data size  ============================================================
 fake data_sized ::=
@@ -381,6 +360,34 @@ private operand_ctrl_register ::= adm_dfc | adm_sfc | adm_vbr
 {
   name = "CTRL_REGISTER"
 }
+
+
+// Instructions  ===================================================================
+;
+{
+  parserClass = "com.yanncebron.m68kplugin.lang.M68kMnemonicsParser"
+}
+
+private m68000_instructions ::=
+                         move_instructions |
+                         data_movement_instructions |
+                         jump_instructions |
+
+                         add_sub_instructions |
+                         mul_div_instructions |
+                         bcd_instructions|
+
+                         misc_instructions |
+
+                         cmp_instructions |
+
+                         logical_operation_instructions |
+                         bit_manipulation_instructions |
+                         shift_rotate_instructions |
+
+                         bCC_instructions |
+                         dbCC_instructions |
+                         sCC_instructions
 
 // Common tails
 private tail_data_size_all___imm_alterable_data ::= data_size_all? adm_imm COMMA operand_alterable_data
@@ -818,10 +825,9 @@ clr_instruction ::= CLR tail_data_size_all___alterable_data
   extends = data_sized
 }
 
-private tst_tail_alterable_data ::= data_size_all? operand_alterable_data
 private tst_tail_data ::= data_size_all? operand_data
 private tst_tail_ard ::= data_size_word_long? adm_ard
-tst_instruction ::= TST (tst_tail_data | tst_tail_alterable_data | tst_tail_ard)
+tst_instruction ::= TST (tst_tail_data | tail_data_size_all___alterable_data | tst_tail_ard)
 {
   extends = data_sized
 }
