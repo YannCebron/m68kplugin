@@ -16,10 +16,10 @@
          add.b       d0,d0
          add.w       d0,d0
          add.l       d0,d0
-         add         #42,d0
-         add.b       #42,d0
-         add.w       #42,d0
-         add.l       #42,d0
+         add         #42.L,d0
+         add.b       #42.L,d0
+         add.w       #42.L,d0
+         add.l       #42.L,d0
          add         (a0),d0
          add.b       (a0),d0
          add.w       (a0),d0
@@ -180,51 +180,51 @@
          add         (66,PC,a0),a0
          add.w       (66,PC,a0),a0
          add.l       (66,PC,a0),a0
-         add         #42,a0
-         add.w       #42,a0
-         add.l       #42,a0
+         add         #42.L,a0
+         add.w       #42.L,a0
+         add.l       #42.L,a0
 
 * M68kMnemonic{add, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
-         add         #42,(a0)
-         add.b       #42,(a0)
-         add.w       #42,(a0)
-         add.l       #42,(a0)
-         add         #42,(a0)+
-         add.b       #42,(a0)+
-         add.w       #42,(a0)+
-         add.l       #42,(a0)+
-         add         #42,-(a0)
-         add.b       #42,-(a0)
-         add.w       #42,-(a0)
-         add.l       #42,-(a0)
-         add         #42,42(a0)
-         add.b       #42,42(a0)
-         add.w       #42,42(a0)
-         add.l       #42,42(a0)
-         add         #42,(-42,a0)
-         add.b       #42,(-42,a0)
-         add.w       #42,(-42,a0)
-         add.l       #42,(-42,a0)
-         add         #42,12(a0,d0)
-         add.b       #42,12(a0,d0)
-         add.w       #42,12(a0,d0)
-         add.l       #42,12(a0,d0)
-         add         #42,(12,a0,a0)
-         add.b       #42,(12,a0,a0)
-         add.w       #42,(12,a0,a0)
-         add.l       #42,(12,a0,a0)
-         add         #42,$4000
-         add.b       #42,$4000
-         add.w       #42,$4000
-         add.l       #42,$4000
-         add         #42,$4000.W
-         add.b       #42,$4000.W
-         add.w       #42,$4000.W
-         add.l       #42,$4000.W
-         add         #42,$4000.L
-         add.b       #42,$4000.L
-         add.w       #42,$4000.L
-         add.l       #42,$4000.L
+         add         #42.L,(a0)
+         add.b       #42.L,(a0)
+         add.w       #42.L,(a0)
+         add.l       #42.L,(a0)
+         add         #42.L,(a0)+
+         add.b       #42.L,(a0)+
+         add.w       #42.L,(a0)+
+         add.l       #42.L,(a0)+
+         add         #42.L,-(a0)
+         add.b       #42.L,-(a0)
+         add.w       #42.L,-(a0)
+         add.l       #42.L,-(a0)
+         add         #42.L,42(a0)
+         add.b       #42.L,42(a0)
+         add.w       #42.L,42(a0)
+         add.l       #42.L,42(a0)
+         add         #42.L,(-42,a0)
+         add.b       #42.L,(-42,a0)
+         add.w       #42.L,(-42,a0)
+         add.l       #42.L,(-42,a0)
+         add         #42.L,12(a0,d0)
+         add.b       #42.L,12(a0,d0)
+         add.w       #42.L,12(a0,d0)
+         add.l       #42.L,12(a0,d0)
+         add         #42.L,(12,a0,a0)
+         add.b       #42.L,(12,a0,a0)
+         add.w       #42.L,(12,a0,a0)
+         add.l       #42.L,(12,a0,a0)
+         add         #42.L,$4000
+         add.b       #42.L,$4000
+         add.w       #42.L,$4000
+         add.l       #42.L,$4000
+         add         #42.L,$4000.W
+         add.b       #42.L,$4000.W
+         add.w       #42.L,$4000.W
+         add.l       #42.L,$4000.W
+         add         #42.L,$4000.L
+         add.b       #42.L,$4000.L
+         add.w       #42.L,$4000.L
+         add.l       #42.L,$4000.L
 
 
 ********************************************************************************
@@ -281,58 +281,58 @@
          adda        (66,PC,a0),a0
          adda.w      (66,PC,a0),a0
          adda.l      (66,PC,a0),a0
-         adda        #42,a0
-         adda.w      #42,a0
-         adda.l      #42,a0
+         adda        #42.L,a0
+         adda.w      #42.L,a0
+         adda.l      #42.L,a0
 
 
 ********************************************************************************
 
 * M68kMnemonic{addi, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
-         addi        #42,d0
-         addi.b      #42,d0
-         addi.w      #42,d0
-         addi.l      #42,d0
-         addi        #42,(a0)
-         addi.b      #42,(a0)
-         addi.w      #42,(a0)
-         addi.l      #42,(a0)
-         addi        #42,(a0)+
-         addi.b      #42,(a0)+
-         addi.w      #42,(a0)+
-         addi.l      #42,(a0)+
-         addi        #42,-(a0)
-         addi.b      #42,-(a0)
-         addi.w      #42,-(a0)
-         addi.l      #42,-(a0)
-         addi        #42,42(a0)
-         addi.b      #42,42(a0)
-         addi.w      #42,42(a0)
-         addi.l      #42,42(a0)
-         addi        #42,(-42,a0)
-         addi.b      #42,(-42,a0)
-         addi.w      #42,(-42,a0)
-         addi.l      #42,(-42,a0)
-         addi        #42,12(a0,d0)
-         addi.b      #42,12(a0,d0)
-         addi.w      #42,12(a0,d0)
-         addi.l      #42,12(a0,d0)
-         addi        #42,(12,a0,a0)
-         addi.b      #42,(12,a0,a0)
-         addi.w      #42,(12,a0,a0)
-         addi.l      #42,(12,a0,a0)
-         addi        #42,$4000
-         addi.b      #42,$4000
-         addi.w      #42,$4000
-         addi.l      #42,$4000
-         addi        #42,$4000.W
-         addi.b      #42,$4000.W
-         addi.w      #42,$4000.W
-         addi.l      #42,$4000.W
-         addi        #42,$4000.L
-         addi.b      #42,$4000.L
-         addi.w      #42,$4000.L
-         addi.l      #42,$4000.L
+         addi        #42.L,d0
+         addi.b      #42.L,d0
+         addi.w      #42.L,d0
+         addi.l      #42.L,d0
+         addi        #42.L,(a0)
+         addi.b      #42.L,(a0)
+         addi.w      #42.L,(a0)
+         addi.l      #42.L,(a0)
+         addi        #42.L,(a0)+
+         addi.b      #42.L,(a0)+
+         addi.w      #42.L,(a0)+
+         addi.l      #42.L,(a0)+
+         addi        #42.L,-(a0)
+         addi.b      #42.L,-(a0)
+         addi.w      #42.L,-(a0)
+         addi.l      #42.L,-(a0)
+         addi        #42.L,42(a0)
+         addi.b      #42.L,42(a0)
+         addi.w      #42.L,42(a0)
+         addi.l      #42.L,42(a0)
+         addi        #42.L,(-42,a0)
+         addi.b      #42.L,(-42,a0)
+         addi.w      #42.L,(-42,a0)
+         addi.l      #42.L,(-42,a0)
+         addi        #42.L,12(a0,d0)
+         addi.b      #42.L,12(a0,d0)
+         addi.w      #42.L,12(a0,d0)
+         addi.l      #42.L,12(a0,d0)
+         addi        #42.L,(12,a0,a0)
+         addi.b      #42.L,(12,a0,a0)
+         addi.w      #42.L,(12,a0,a0)
+         addi.l      #42.L,(12,a0,a0)
+         addi        #42.L,$4000
+         addi.b      #42.L,$4000
+         addi.w      #42.L,$4000
+         addi.l      #42.L,$4000
+         addi        #42.L,$4000.W
+         addi.b      #42.L,$4000.W
+         addi.w      #42.L,$4000.W
+         addi.l      #42.L,$4000.W
+         addi        #42.L,$4000.L
+         addi.b      #42.L,$4000.L
+         addi.w      #42.L,$4000.L
+         addi.l      #42.L,$4000.L
 
 
 ********************************************************************************
@@ -411,10 +411,10 @@
          and.b       d0,d0
          and.w       d0,d0
          and.l       d0,d0
-         and         #42,d0
-         and.b       #42,d0
-         and.w       #42,d0
-         and.l       #42,d0
+         and         #42.L,d0
+         and.b       #42.L,d0
+         and.w       #42.L,d0
+         and.l       #42.L,d0
          and         (a0),d0
          and.b       (a0),d0
          and.w       (a0),d0
@@ -519,111 +519,111 @@
          and.l       d0,$4000.L
 
 * M68kMnemonic{and, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
-         and         #42,(a0)
-         and.b       #42,(a0)
-         and.w       #42,(a0)
-         and.l       #42,(a0)
-         and         #42,(a0)+
-         and.b       #42,(a0)+
-         and.w       #42,(a0)+
-         and.l       #42,(a0)+
-         and         #42,-(a0)
-         and.b       #42,-(a0)
-         and.w       #42,-(a0)
-         and.l       #42,-(a0)
-         and         #42,42(a0)
-         and.b       #42,42(a0)
-         and.w       #42,42(a0)
-         and.l       #42,42(a0)
-         and         #42,(-42,a0)
-         and.b       #42,(-42,a0)
-         and.w       #42,(-42,a0)
-         and.l       #42,(-42,a0)
-         and         #42,12(a0,d0)
-         and.b       #42,12(a0,d0)
-         and.w       #42,12(a0,d0)
-         and.l       #42,12(a0,d0)
-         and         #42,(12,a0,a0)
-         and.b       #42,(12,a0,a0)
-         and.w       #42,(12,a0,a0)
-         and.l       #42,(12,a0,a0)
-         and         #42,$4000
-         and.b       #42,$4000
-         and.w       #42,$4000
-         and.l       #42,$4000
-         and         #42,$4000.W
-         and.b       #42,$4000.W
-         and.w       #42,$4000.W
-         and.l       #42,$4000.W
-         and         #42,$4000.L
-         and.b       #42,$4000.L
-         and.w       #42,$4000.L
-         and.l       #42,$4000.L
+         and         #42.L,(a0)
+         and.b       #42.L,(a0)
+         and.w       #42.L,(a0)
+         and.l       #42.L,(a0)
+         and         #42.L,(a0)+
+         and.b       #42.L,(a0)+
+         and.w       #42.L,(a0)+
+         and.l       #42.L,(a0)+
+         and         #42.L,-(a0)
+         and.b       #42.L,-(a0)
+         and.w       #42.L,-(a0)
+         and.l       #42.L,-(a0)
+         and         #42.L,42(a0)
+         and.b       #42.L,42(a0)
+         and.w       #42.L,42(a0)
+         and.l       #42.L,42(a0)
+         and         #42.L,(-42,a0)
+         and.b       #42.L,(-42,a0)
+         and.w       #42.L,(-42,a0)
+         and.l       #42.L,(-42,a0)
+         and         #42.L,12(a0,d0)
+         and.b       #42.L,12(a0,d0)
+         and.w       #42.L,12(a0,d0)
+         and.l       #42.L,12(a0,d0)
+         and         #42.L,(12,a0,a0)
+         and.b       #42.L,(12,a0,a0)
+         and.w       #42.L,(12,a0,a0)
+         and.l       #42.L,(12,a0,a0)
+         and         #42.L,$4000
+         and.b       #42.L,$4000
+         and.w       #42.L,$4000
+         and.l       #42.L,$4000
+         and         #42.L,$4000.W
+         and.b       #42.L,$4000.W
+         and.w       #42.L,$4000.W
+         and.l       #42.L,$4000.W
+         and         #42.L,$4000.L
+         and.b       #42.L,$4000.L
+         and.w       #42.L,$4000.L
+         and.l       #42.L,$4000.L
 
 * M68kMnemonic{and, firstOp=IMMEDIATE, secondOp=CCR_REGISTER, [BYTE], MC68000 Family}
-         and         #42,CCR
-         and.b       #42,CCR
+         and         #42.L,CCR
+         and.b       #42.L,CCR
 
 * M68kMnemonic{and, firstOp=IMMEDIATE, secondOp=SR_REGISTER, [WORD], MC68000 Family, PRIVILEGED}
-         and         #42,SR
-         and.w       #42,SR
+         and         #42.L,SR
+         and.w       #42.L,SR
 
 
 ********************************************************************************
 
 * M68kMnemonic{andi, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
-         andi        #42,d0
-         andi.b      #42,d0
-         andi.w      #42,d0
-         andi.l      #42,d0
-         andi        #42,(a0)
-         andi.b      #42,(a0)
-         andi.w      #42,(a0)
-         andi.l      #42,(a0)
-         andi        #42,(a0)+
-         andi.b      #42,(a0)+
-         andi.w      #42,(a0)+
-         andi.l      #42,(a0)+
-         andi        #42,-(a0)
-         andi.b      #42,-(a0)
-         andi.w      #42,-(a0)
-         andi.l      #42,-(a0)
-         andi        #42,42(a0)
-         andi.b      #42,42(a0)
-         andi.w      #42,42(a0)
-         andi.l      #42,42(a0)
-         andi        #42,(-42,a0)
-         andi.b      #42,(-42,a0)
-         andi.w      #42,(-42,a0)
-         andi.l      #42,(-42,a0)
-         andi        #42,12(a0,d0)
-         andi.b      #42,12(a0,d0)
-         andi.w      #42,12(a0,d0)
-         andi.l      #42,12(a0,d0)
-         andi        #42,(12,a0,a0)
-         andi.b      #42,(12,a0,a0)
-         andi.w      #42,(12,a0,a0)
-         andi.l      #42,(12,a0,a0)
-         andi        #42,$4000
-         andi.b      #42,$4000
-         andi.w      #42,$4000
-         andi.l      #42,$4000
-         andi        #42,$4000.W
-         andi.b      #42,$4000.W
-         andi.w      #42,$4000.W
-         andi.l      #42,$4000.W
-         andi        #42,$4000.L
-         andi.b      #42,$4000.L
-         andi.w      #42,$4000.L
-         andi.l      #42,$4000.L
+         andi        #42.L,d0
+         andi.b      #42.L,d0
+         andi.w      #42.L,d0
+         andi.l      #42.L,d0
+         andi        #42.L,(a0)
+         andi.b      #42.L,(a0)
+         andi.w      #42.L,(a0)
+         andi.l      #42.L,(a0)
+         andi        #42.L,(a0)+
+         andi.b      #42.L,(a0)+
+         andi.w      #42.L,(a0)+
+         andi.l      #42.L,(a0)+
+         andi        #42.L,-(a0)
+         andi.b      #42.L,-(a0)
+         andi.w      #42.L,-(a0)
+         andi.l      #42.L,-(a0)
+         andi        #42.L,42(a0)
+         andi.b      #42.L,42(a0)
+         andi.w      #42.L,42(a0)
+         andi.l      #42.L,42(a0)
+         andi        #42.L,(-42,a0)
+         andi.b      #42.L,(-42,a0)
+         andi.w      #42.L,(-42,a0)
+         andi.l      #42.L,(-42,a0)
+         andi        #42.L,12(a0,d0)
+         andi.b      #42.L,12(a0,d0)
+         andi.w      #42.L,12(a0,d0)
+         andi.l      #42.L,12(a0,d0)
+         andi        #42.L,(12,a0,a0)
+         andi.b      #42.L,(12,a0,a0)
+         andi.w      #42.L,(12,a0,a0)
+         andi.l      #42.L,(12,a0,a0)
+         andi        #42.L,$4000
+         andi.b      #42.L,$4000
+         andi.w      #42.L,$4000
+         andi.l      #42.L,$4000
+         andi        #42.L,$4000.W
+         andi.b      #42.L,$4000.W
+         andi.w      #42.L,$4000.W
+         andi.l      #42.L,$4000.W
+         andi        #42.L,$4000.L
+         andi.b      #42.L,$4000.L
+         andi.w      #42.L,$4000.L
+         andi.l      #42.L,$4000.L
 
 * M68kMnemonic{andi, firstOp=IMMEDIATE, secondOp=CCR_REGISTER, [BYTE], MC68000 Family}
-         andi        #42,CCR
-         andi.b      #42,CCR
+         andi        #42.L,CCR
+         andi.b      #42.L,CCR
 
 * M68kMnemonic{andi, firstOp=IMMEDIATE, secondOp=SR_REGISTER, [WORD], MC68000 Family, PRIVILEGED}
-         andi        #42,SR
-         andi.w      #42,SR
+         andi        #42.L,SR
+         andi.w      #42.L,SR
 
 
 ********************************************************************************
@@ -1176,8 +1176,8 @@ label31: bsr         label31
          btst.b      d0,66(PC,d0)
          btst        d0,(66,PC,a0)
          btst.b      d0,(66,PC,a0)
-         btst        d0,#42
-         btst.b      d0,#42
+         btst        d0,#42.L
+         btst.b      d0,#42.L
 
 * M68kMnemonic{btst, firstOp=QUICK_IMMEDIATE, secondOp=DATA_REGISTER, [LONGWORD], MC68000 Family}
          btst        #1,d0
@@ -1253,8 +1253,8 @@ label35: bvs         label35
 * M68kMnemonic{chk, firstOp=DATA, secondOp=DATA_REGISTER, [WORD], MC68000 Family}
          chk         d0,d0
          chk.w       d0,d0
-         chk         #42,d0
-         chk.w       #42,d0
+         chk         #42.L,d0
+         chk.w       #42.L,d0
          chk         (a0),d0
          chk.w       (a0),d0
          chk         (a0)+,d0
@@ -1288,7 +1288,7 @@ label35: bvs         label35
 
 * M68kMnemonic{chk, firstOp=DATA, secondOp=DATA_REGISTER, [LONGWORD], MC68020+}
          chk.l       d0,d0
-         chk.l       #42,d0
+         chk.l       #42.L,d0
          chk.l       (a0),d0
          chk.l       (a0)+,d0
          chk.l       -(a0),d0
@@ -1367,10 +1367,10 @@ label35: bvs         label35
          cmp.b       d0,d0
          cmp.w       d0,d0
          cmp.l       d0,d0
-         cmp         #42,d0
-         cmp.b       #42,d0
-         cmp.w       #42,d0
-         cmp.l       #42,d0
+         cmp         #42.L,d0
+         cmp.b       #42.L,d0
+         cmp.w       #42.L,d0
+         cmp.l       #42.L,d0
          cmp         (a0),d0
          cmp.b       (a0),d0
          cmp.w       (a0),d0
@@ -1484,51 +1484,51 @@ label35: bvs         label35
          cmp         (66,PC,a0),a0
          cmp.w       (66,PC,a0),a0
          cmp.l       (66,PC,a0),a0
-         cmp         #42,a0
-         cmp.w       #42,a0
-         cmp.l       #42,a0
+         cmp         #42.L,a0
+         cmp.w       #42.L,a0
+         cmp.l       #42.L,a0
 
 * M68kMnemonic{cmp, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
-         cmp         #42,(a0)
-         cmp.b       #42,(a0)
-         cmp.w       #42,(a0)
-         cmp.l       #42,(a0)
-         cmp         #42,(a0)+
-         cmp.b       #42,(a0)+
-         cmp.w       #42,(a0)+
-         cmp.l       #42,(a0)+
-         cmp         #42,-(a0)
-         cmp.b       #42,-(a0)
-         cmp.w       #42,-(a0)
-         cmp.l       #42,-(a0)
-         cmp         #42,42(a0)
-         cmp.b       #42,42(a0)
-         cmp.w       #42,42(a0)
-         cmp.l       #42,42(a0)
-         cmp         #42,(-42,a0)
-         cmp.b       #42,(-42,a0)
-         cmp.w       #42,(-42,a0)
-         cmp.l       #42,(-42,a0)
-         cmp         #42,12(a0,d0)
-         cmp.b       #42,12(a0,d0)
-         cmp.w       #42,12(a0,d0)
-         cmp.l       #42,12(a0,d0)
-         cmp         #42,(12,a0,a0)
-         cmp.b       #42,(12,a0,a0)
-         cmp.w       #42,(12,a0,a0)
-         cmp.l       #42,(12,a0,a0)
-         cmp         #42,$4000
-         cmp.b       #42,$4000
-         cmp.w       #42,$4000
-         cmp.l       #42,$4000
-         cmp         #42,$4000.W
-         cmp.b       #42,$4000.W
-         cmp.w       #42,$4000.W
-         cmp.l       #42,$4000.W
-         cmp         #42,$4000.L
-         cmp.b       #42,$4000.L
-         cmp.w       #42,$4000.L
-         cmp.l       #42,$4000.L
+         cmp         #42.L,(a0)
+         cmp.b       #42.L,(a0)
+         cmp.w       #42.L,(a0)
+         cmp.l       #42.L,(a0)
+         cmp         #42.L,(a0)+
+         cmp.b       #42.L,(a0)+
+         cmp.w       #42.L,(a0)+
+         cmp.l       #42.L,(a0)+
+         cmp         #42.L,-(a0)
+         cmp.b       #42.L,-(a0)
+         cmp.w       #42.L,-(a0)
+         cmp.l       #42.L,-(a0)
+         cmp         #42.L,42(a0)
+         cmp.b       #42.L,42(a0)
+         cmp.w       #42.L,42(a0)
+         cmp.l       #42.L,42(a0)
+         cmp         #42.L,(-42,a0)
+         cmp.b       #42.L,(-42,a0)
+         cmp.w       #42.L,(-42,a0)
+         cmp.l       #42.L,(-42,a0)
+         cmp         #42.L,12(a0,d0)
+         cmp.b       #42.L,12(a0,d0)
+         cmp.w       #42.L,12(a0,d0)
+         cmp.l       #42.L,12(a0,d0)
+         cmp         #42.L,(12,a0,a0)
+         cmp.b       #42.L,(12,a0,a0)
+         cmp.w       #42.L,(12,a0,a0)
+         cmp.l       #42.L,(12,a0,a0)
+         cmp         #42.L,$4000
+         cmp.b       #42.L,$4000
+         cmp.w       #42.L,$4000
+         cmp.l       #42.L,$4000
+         cmp         #42.L,$4000.W
+         cmp.b       #42.L,$4000.W
+         cmp.w       #42.L,$4000.W
+         cmp.l       #42.L,$4000.W
+         cmp         #42.L,$4000.L
+         cmp.b       #42.L,$4000.L
+         cmp.w       #42.L,$4000.L
+         cmp.l       #42.L,$4000.L
 
 * M68kMnemonic{cmp, firstOp=ADDRESS_REGISTER_INDIRECT_POST_INCREMENT, secondOp=ADDRESS_REGISTER_INDIRECT_POST_INCREMENT, [BYTE, WORD, LONGWORD], MC68000 Family}
          cmp         (a0)+,(a0)+
@@ -1591,58 +1591,58 @@ label35: bvs         label35
          cmpa        (66,PC,a0),a0
          cmpa.w      (66,PC,a0),a0
          cmpa.l      (66,PC,a0),a0
-         cmpa        #42,a0
-         cmpa.w      #42,a0
-         cmpa.l      #42,a0
+         cmpa        #42.L,a0
+         cmpa.w      #42.L,a0
+         cmpa.l      #42.L,a0
 
 
 ********************************************************************************
 
 * M68kMnemonic{cmpi, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
-         cmpi        #42,d0
-         cmpi.b      #42,d0
-         cmpi.w      #42,d0
-         cmpi.l      #42,d0
-         cmpi        #42,(a0)
-         cmpi.b      #42,(a0)
-         cmpi.w      #42,(a0)
-         cmpi.l      #42,(a0)
-         cmpi        #42,(a0)+
-         cmpi.b      #42,(a0)+
-         cmpi.w      #42,(a0)+
-         cmpi.l      #42,(a0)+
-         cmpi        #42,-(a0)
-         cmpi.b      #42,-(a0)
-         cmpi.w      #42,-(a0)
-         cmpi.l      #42,-(a0)
-         cmpi        #42,42(a0)
-         cmpi.b      #42,42(a0)
-         cmpi.w      #42,42(a0)
-         cmpi.l      #42,42(a0)
-         cmpi        #42,(-42,a0)
-         cmpi.b      #42,(-42,a0)
-         cmpi.w      #42,(-42,a0)
-         cmpi.l      #42,(-42,a0)
-         cmpi        #42,12(a0,d0)
-         cmpi.b      #42,12(a0,d0)
-         cmpi.w      #42,12(a0,d0)
-         cmpi.l      #42,12(a0,d0)
-         cmpi        #42,(12,a0,a0)
-         cmpi.b      #42,(12,a0,a0)
-         cmpi.w      #42,(12,a0,a0)
-         cmpi.l      #42,(12,a0,a0)
-         cmpi        #42,$4000
-         cmpi.b      #42,$4000
-         cmpi.w      #42,$4000
-         cmpi.l      #42,$4000
-         cmpi        #42,$4000.W
-         cmpi.b      #42,$4000.W
-         cmpi.w      #42,$4000.W
-         cmpi.l      #42,$4000.W
-         cmpi        #42,$4000.L
-         cmpi.b      #42,$4000.L
-         cmpi.w      #42,$4000.L
-         cmpi.l      #42,$4000.L
+         cmpi        #42.L,d0
+         cmpi.b      #42.L,d0
+         cmpi.w      #42.L,d0
+         cmpi.l      #42.L,d0
+         cmpi        #42.L,(a0)
+         cmpi.b      #42.L,(a0)
+         cmpi.w      #42.L,(a0)
+         cmpi.l      #42.L,(a0)
+         cmpi        #42.L,(a0)+
+         cmpi.b      #42.L,(a0)+
+         cmpi.w      #42.L,(a0)+
+         cmpi.l      #42.L,(a0)+
+         cmpi        #42.L,-(a0)
+         cmpi.b      #42.L,-(a0)
+         cmpi.w      #42.L,-(a0)
+         cmpi.l      #42.L,-(a0)
+         cmpi        #42.L,42(a0)
+         cmpi.b      #42.L,42(a0)
+         cmpi.w      #42.L,42(a0)
+         cmpi.l      #42.L,42(a0)
+         cmpi        #42.L,(-42,a0)
+         cmpi.b      #42.L,(-42,a0)
+         cmpi.w      #42.L,(-42,a0)
+         cmpi.l      #42.L,(-42,a0)
+         cmpi        #42.L,12(a0,d0)
+         cmpi.b      #42.L,12(a0,d0)
+         cmpi.w      #42.L,12(a0,d0)
+         cmpi.l      #42.L,12(a0,d0)
+         cmpi        #42.L,(12,a0,a0)
+         cmpi.b      #42.L,(12,a0,a0)
+         cmpi.w      #42.L,(12,a0,a0)
+         cmpi.l      #42.L,(12,a0,a0)
+         cmpi        #42.L,$4000
+         cmpi.b      #42.L,$4000
+         cmpi.w      #42.L,$4000
+         cmpi.l      #42.L,$4000
+         cmpi        #42.L,$4000.W
+         cmpi.b      #42.L,$4000.W
+         cmpi.w      #42.L,$4000.W
+         cmpi.l      #42.L,$4000.W
+         cmpi        #42.L,$4000.L
+         cmpi.b      #42.L,$4000.L
+         cmpi.w      #42.L,$4000.L
+         cmpi.l      #42.L,$4000.L
 
 
 ********************************************************************************
@@ -1792,8 +1792,8 @@ label35: bvs         label35
 * M68kMnemonic{divs, firstOp=DATA, secondOp=DATA_REGISTER, [WORD], MC68000 Family}
          divs        d0,d0
          divs.w      d0,d0
-         divs        #42,d0
-         divs.w      #42,d0
+         divs        #42.L,d0
+         divs.w      #42.L,d0
          divs        (a0),d0
          divs.w      (a0),d0
          divs        (a0)+,d0
@@ -1827,7 +1827,7 @@ label35: bvs         label35
 
 * M68kMnemonic{divs, firstOp=DATA, secondOp=DATA_REGISTER, [LONGWORD], MC68020+}
          divs.l      d0,d0
-         divs.l      #42,d0
+         divs.l      #42.L,d0
          divs.l      (a0),d0
          divs.l      (a0)+,d0
          divs.l      -(a0),d0
@@ -1850,8 +1850,8 @@ label35: bvs         label35
 * M68kMnemonic{divu, firstOp=DATA, secondOp=DATA_REGISTER, [WORD], MC68000 Family}
          divu        d0,d0
          divu.w      d0,d0
-         divu        #42,d0
-         divu.w      #42,d0
+         divu        #42.L,d0
+         divu.w      #42.L,d0
          divu        (a0),d0
          divu.w      (a0),d0
          divu        (a0)+,d0
@@ -1885,7 +1885,7 @@ label35: bvs         label35
 
 * M68kMnemonic{divu, firstOp=DATA, secondOp=DATA_REGISTER, [LONGWORD], MC68020+}
          divu.l      d0,d0
-         divu.l      #42,d0
+         divu.l      #42.L,d0
          divu.l      (a0),d0
          divu.l      (a0)+,d0
          divu.l      -(a0),d0
@@ -1952,115 +1952,115 @@ label35: bvs         label35
          eor.l       d0,$4000.L
 
 * M68kMnemonic{eor, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
-         eor         #42,d0
-         eor.b       #42,d0
-         eor.w       #42,d0
-         eor.l       #42,d0
-         eor         #42,(a0)
-         eor.b       #42,(a0)
-         eor.w       #42,(a0)
-         eor.l       #42,(a0)
-         eor         #42,(a0)+
-         eor.b       #42,(a0)+
-         eor.w       #42,(a0)+
-         eor.l       #42,(a0)+
-         eor         #42,-(a0)
-         eor.b       #42,-(a0)
-         eor.w       #42,-(a0)
-         eor.l       #42,-(a0)
-         eor         #42,42(a0)
-         eor.b       #42,42(a0)
-         eor.w       #42,42(a0)
-         eor.l       #42,42(a0)
-         eor         #42,(-42,a0)
-         eor.b       #42,(-42,a0)
-         eor.w       #42,(-42,a0)
-         eor.l       #42,(-42,a0)
-         eor         #42,12(a0,d0)
-         eor.b       #42,12(a0,d0)
-         eor.w       #42,12(a0,d0)
-         eor.l       #42,12(a0,d0)
-         eor         #42,(12,a0,a0)
-         eor.b       #42,(12,a0,a0)
-         eor.w       #42,(12,a0,a0)
-         eor.l       #42,(12,a0,a0)
-         eor         #42,$4000
-         eor.b       #42,$4000
-         eor.w       #42,$4000
-         eor.l       #42,$4000
-         eor         #42,$4000.W
-         eor.b       #42,$4000.W
-         eor.w       #42,$4000.W
-         eor.l       #42,$4000.W
-         eor         #42,$4000.L
-         eor.b       #42,$4000.L
-         eor.w       #42,$4000.L
-         eor.l       #42,$4000.L
+         eor         #42.L,d0
+         eor.b       #42.L,d0
+         eor.w       #42.L,d0
+         eor.l       #42.L,d0
+         eor         #42.L,(a0)
+         eor.b       #42.L,(a0)
+         eor.w       #42.L,(a0)
+         eor.l       #42.L,(a0)
+         eor         #42.L,(a0)+
+         eor.b       #42.L,(a0)+
+         eor.w       #42.L,(a0)+
+         eor.l       #42.L,(a0)+
+         eor         #42.L,-(a0)
+         eor.b       #42.L,-(a0)
+         eor.w       #42.L,-(a0)
+         eor.l       #42.L,-(a0)
+         eor         #42.L,42(a0)
+         eor.b       #42.L,42(a0)
+         eor.w       #42.L,42(a0)
+         eor.l       #42.L,42(a0)
+         eor         #42.L,(-42,a0)
+         eor.b       #42.L,(-42,a0)
+         eor.w       #42.L,(-42,a0)
+         eor.l       #42.L,(-42,a0)
+         eor         #42.L,12(a0,d0)
+         eor.b       #42.L,12(a0,d0)
+         eor.w       #42.L,12(a0,d0)
+         eor.l       #42.L,12(a0,d0)
+         eor         #42.L,(12,a0,a0)
+         eor.b       #42.L,(12,a0,a0)
+         eor.w       #42.L,(12,a0,a0)
+         eor.l       #42.L,(12,a0,a0)
+         eor         #42.L,$4000
+         eor.b       #42.L,$4000
+         eor.w       #42.L,$4000
+         eor.l       #42.L,$4000
+         eor         #42.L,$4000.W
+         eor.b       #42.L,$4000.W
+         eor.w       #42.L,$4000.W
+         eor.l       #42.L,$4000.W
+         eor         #42.L,$4000.L
+         eor.b       #42.L,$4000.L
+         eor.w       #42.L,$4000.L
+         eor.l       #42.L,$4000.L
 
 * M68kMnemonic{eor, firstOp=IMMEDIATE, secondOp=CCR_REGISTER, [BYTE], MC68000 Family}
-         eor         #42,CCR
-         eor.b       #42,CCR
+         eor         #42.L,CCR
+         eor.b       #42.L,CCR
 
 * M68kMnemonic{eor, firstOp=IMMEDIATE, secondOp=SR_REGISTER, [WORD], MC68000 Family, PRIVILEGED}
-         eor         #42,SR
-         eor.w       #42,SR
+         eor         #42.L,SR
+         eor.w       #42.L,SR
 
 
 ********************************************************************************
 
 * M68kMnemonic{eori, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
-         eori        #42,d0
-         eori.b      #42,d0
-         eori.w      #42,d0
-         eori.l      #42,d0
-         eori        #42,(a0)
-         eori.b      #42,(a0)
-         eori.w      #42,(a0)
-         eori.l      #42,(a0)
-         eori        #42,(a0)+
-         eori.b      #42,(a0)+
-         eori.w      #42,(a0)+
-         eori.l      #42,(a0)+
-         eori        #42,-(a0)
-         eori.b      #42,-(a0)
-         eori.w      #42,-(a0)
-         eori.l      #42,-(a0)
-         eori        #42,42(a0)
-         eori.b      #42,42(a0)
-         eori.w      #42,42(a0)
-         eori.l      #42,42(a0)
-         eori        #42,(-42,a0)
-         eori.b      #42,(-42,a0)
-         eori.w      #42,(-42,a0)
-         eori.l      #42,(-42,a0)
-         eori        #42,12(a0,d0)
-         eori.b      #42,12(a0,d0)
-         eori.w      #42,12(a0,d0)
-         eori.l      #42,12(a0,d0)
-         eori        #42,(12,a0,a0)
-         eori.b      #42,(12,a0,a0)
-         eori.w      #42,(12,a0,a0)
-         eori.l      #42,(12,a0,a0)
-         eori        #42,$4000
-         eori.b      #42,$4000
-         eori.w      #42,$4000
-         eori.l      #42,$4000
-         eori        #42,$4000.W
-         eori.b      #42,$4000.W
-         eori.w      #42,$4000.W
-         eori.l      #42,$4000.W
-         eori        #42,$4000.L
-         eori.b      #42,$4000.L
-         eori.w      #42,$4000.L
-         eori.l      #42,$4000.L
+         eori        #42.L,d0
+         eori.b      #42.L,d0
+         eori.w      #42.L,d0
+         eori.l      #42.L,d0
+         eori        #42.L,(a0)
+         eori.b      #42.L,(a0)
+         eori.w      #42.L,(a0)
+         eori.l      #42.L,(a0)
+         eori        #42.L,(a0)+
+         eori.b      #42.L,(a0)+
+         eori.w      #42.L,(a0)+
+         eori.l      #42.L,(a0)+
+         eori        #42.L,-(a0)
+         eori.b      #42.L,-(a0)
+         eori.w      #42.L,-(a0)
+         eori.l      #42.L,-(a0)
+         eori        #42.L,42(a0)
+         eori.b      #42.L,42(a0)
+         eori.w      #42.L,42(a0)
+         eori.l      #42.L,42(a0)
+         eori        #42.L,(-42,a0)
+         eori.b      #42.L,(-42,a0)
+         eori.w      #42.L,(-42,a0)
+         eori.l      #42.L,(-42,a0)
+         eori        #42.L,12(a0,d0)
+         eori.b      #42.L,12(a0,d0)
+         eori.w      #42.L,12(a0,d0)
+         eori.l      #42.L,12(a0,d0)
+         eori        #42.L,(12,a0,a0)
+         eori.b      #42.L,(12,a0,a0)
+         eori.w      #42.L,(12,a0,a0)
+         eori.l      #42.L,(12,a0,a0)
+         eori        #42.L,$4000
+         eori.b      #42.L,$4000
+         eori.w      #42.L,$4000
+         eori.l      #42.L,$4000
+         eori        #42.L,$4000.W
+         eori.b      #42.L,$4000.W
+         eori.w      #42.L,$4000.W
+         eori.l      #42.L,$4000.W
+         eori        #42.L,$4000.L
+         eori.b      #42.L,$4000.L
+         eori.w      #42.L,$4000.L
+         eori.l      #42.L,$4000.L
 
 * M68kMnemonic{eori, firstOp=IMMEDIATE, secondOp=CCR_REGISTER, [BYTE], MC68000 Family}
-         eori        #42,CCR
-         eori.b      #42,CCR
+         eori        #42.L,CCR
+         eori.b      #42.L,CCR
 
 * M68kMnemonic{eori, firstOp=IMMEDIATE, secondOp=SR_REGISTER, [WORD], MC68000 Family, PRIVILEGED}
-         eori        #42,SR
-         eori.w      #42,SR
+         eori        #42.L,SR
+         eori.w      #42.L,SR
 
 
 ********************************************************************************
@@ -2166,11 +2166,11 @@ label35: bvs         label35
 ********************************************************************************
 
 * M68kMnemonic{link, firstOp=ADDRESS_REGISTER, secondOp=IMMEDIATE, [WORD], MC68000 Family}
-         link        a0,#42
-         link.w      a0,#42
+         link        a0,#42.L
+         link.w      a0,#42.L
 
 * M68kMnemonic{link, firstOp=ADDRESS_REGISTER, secondOp=IMMEDIATE, [LONGWORD], MC68020+}
-         link.l      a0,#42
+         link.l      a0,#42.L
 
 
 ********************************************************************************
@@ -2348,9 +2348,9 @@ label35: bvs         label35
          move        (66,PC,a0),a0
          move.w      (66,PC,a0),a0
          move.l      (66,PC,a0),a0
-         move        #42,a0
-         move.w      #42,a0
-         move.l      #42,a0
+         move        #42.L,a0
+         move.w      #42.L,a0
+         move.l      #42.L,a0
 
 * M68kMnemonic{move, firstOp=DATA, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
          move        d0,d0
@@ -2397,50 +2397,50 @@ label35: bvs         label35
          move.b      d0,$4000.L
          move.w      d0,$4000.L
          move.l      d0,$4000.L
-         move        #42,d0
-         move.b      #42,d0
-         move.w      #42,d0
-         move.l      #42,d0
-         move        #42,(a0)
-         move.b      #42,(a0)
-         move.w      #42,(a0)
-         move.l      #42,(a0)
-         move        #42,(a0)+
-         move.b      #42,(a0)+
-         move.w      #42,(a0)+
-         move.l      #42,(a0)+
-         move        #42,-(a0)
-         move.b      #42,-(a0)
-         move.w      #42,-(a0)
-         move.l      #42,-(a0)
-         move        #42,42(a0)
-         move.b      #42,42(a0)
-         move.w      #42,42(a0)
-         move.l      #42,42(a0)
-         move        #42,(-42,a0)
-         move.b      #42,(-42,a0)
-         move.w      #42,(-42,a0)
-         move.l      #42,(-42,a0)
-         move        #42,12(a0,d0)
-         move.b      #42,12(a0,d0)
-         move.w      #42,12(a0,d0)
-         move.l      #42,12(a0,d0)
-         move        #42,(12,a0,a0)
-         move.b      #42,(12,a0,a0)
-         move.w      #42,(12,a0,a0)
-         move.l      #42,(12,a0,a0)
-         move        #42,$4000
-         move.b      #42,$4000
-         move.w      #42,$4000
-         move.l      #42,$4000
-         move        #42,$4000.W
-         move.b      #42,$4000.W
-         move.w      #42,$4000.W
-         move.l      #42,$4000.W
-         move        #42,$4000.L
-         move.b      #42,$4000.L
-         move.w      #42,$4000.L
-         move.l      #42,$4000.L
+         move        #42.L,d0
+         move.b      #42.L,d0
+         move.w      #42.L,d0
+         move.l      #42.L,d0
+         move        #42.L,(a0)
+         move.b      #42.L,(a0)
+         move.w      #42.L,(a0)
+         move.l      #42.L,(a0)
+         move        #42.L,(a0)+
+         move.b      #42.L,(a0)+
+         move.w      #42.L,(a0)+
+         move.l      #42.L,(a0)+
+         move        #42.L,-(a0)
+         move.b      #42.L,-(a0)
+         move.w      #42.L,-(a0)
+         move.l      #42.L,-(a0)
+         move        #42.L,42(a0)
+         move.b      #42.L,42(a0)
+         move.w      #42.L,42(a0)
+         move.l      #42.L,42(a0)
+         move        #42.L,(-42,a0)
+         move.b      #42.L,(-42,a0)
+         move.w      #42.L,(-42,a0)
+         move.l      #42.L,(-42,a0)
+         move        #42.L,12(a0,d0)
+         move.b      #42.L,12(a0,d0)
+         move.w      #42.L,12(a0,d0)
+         move.l      #42.L,12(a0,d0)
+         move        #42.L,(12,a0,a0)
+         move.b      #42.L,(12,a0,a0)
+         move.w      #42.L,(12,a0,a0)
+         move.l      #42.L,(12,a0,a0)
+         move        #42.L,$4000
+         move.b      #42.L,$4000
+         move.w      #42.L,$4000
+         move.l      #42.L,$4000
+         move        #42.L,$4000.W
+         move.b      #42.L,$4000.W
+         move.w      #42.L,$4000.W
+         move.l      #42.L,$4000.W
+         move        #42.L,$4000.L
+         move.b      #42.L,$4000.L
+         move.w      #42.L,$4000.L
+         move.l      #42.L,$4000.L
          move        (a0),d0
          move.b      (a0),d0
          move.w      (a0),d0
@@ -3153,8 +3153,8 @@ label35: bvs         label35
 * M68kMnemonic{move, firstOp=DATA, secondOp=CCR_REGISTER, [WORD], MC68000 Family}
          move        d0,CCR
          move.w      d0,CCR
-         move        #42,CCR
-         move.w      #42,CCR
+         move        #42.L,CCR
+         move.w      #42.L,CCR
          move        (a0),CCR
          move.w      (a0),CCR
          move        (a0)+,CCR
@@ -3189,8 +3189,8 @@ label35: bvs         label35
 * M68kMnemonic{move, firstOp=DATA, secondOp=SR_REGISTER, [WORD], MC68000 Family, PRIVILEGED}
          move        d0,SR
          move.w      d0,SR
-         move        #42,SR
-         move.w      #42,SR
+         move        #42.L,SR
+         move.w      #42.L,SR
          move        (a0),SR
          move.w      (a0),SR
          move        (a0)+,SR
@@ -3285,9 +3285,9 @@ label35: bvs         label35
          movea       (66,PC,a0),a0
          movea.w     (66,PC,a0),a0
          movea.l     (66,PC,a0),a0
-         movea       #42,a0
-         movea.w     #42,a0
-         movea.l     #42,a0
+         movea       #42.L,a0
+         movea.w     #42.L,a0
+         movea.l     #42.L,a0
 
 * M68kMnemonic{movea, DEPRECATED, firstOp=ADDRESS_REGISTER, secondOp=ALTERABLE, [WORD, LONGWORD], MC68000 Family}
 ;        movea       a0,d0 ; DEPRECATED
@@ -3369,50 +3369,50 @@ label35: bvs         label35
 ;        movea.b     d0,$4000.L ; DEPRECATED
 ;        movea.w     d0,$4000.L ; DEPRECATED
 ;        movea.l     d0,$4000.L ; DEPRECATED
-;        movea       #42,d0 ; DEPRECATED
-;        movea.b     #42,d0 ; DEPRECATED
-;        movea.w     #42,d0 ; DEPRECATED
-;        movea.l     #42,d0 ; DEPRECATED
-;        movea       #42,(a0) ; DEPRECATED
-;        movea.b     #42,(a0) ; DEPRECATED
-;        movea.w     #42,(a0) ; DEPRECATED
-;        movea.l     #42,(a0) ; DEPRECATED
-;        movea       #42,(a0)+ ; DEPRECATED
-;        movea.b     #42,(a0)+ ; DEPRECATED
-;        movea.w     #42,(a0)+ ; DEPRECATED
-;        movea.l     #42,(a0)+ ; DEPRECATED
-;        movea       #42,-(a0) ; DEPRECATED
-;        movea.b     #42,-(a0) ; DEPRECATED
-;        movea.w     #42,-(a0) ; DEPRECATED
-;        movea.l     #42,-(a0) ; DEPRECATED
-;        movea       #42,42(a0) ; DEPRECATED
-;        movea.b     #42,42(a0) ; DEPRECATED
-;        movea.w     #42,42(a0) ; DEPRECATED
-;        movea.l     #42,42(a0) ; DEPRECATED
-;        movea       #42,(-42,a0) ; DEPRECATED
-;        movea.b     #42,(-42,a0) ; DEPRECATED
-;        movea.w     #42,(-42,a0) ; DEPRECATED
-;        movea.l     #42,(-42,a0) ; DEPRECATED
-;        movea       #42,12(a0,d0) ; DEPRECATED
-;        movea.b     #42,12(a0,d0) ; DEPRECATED
-;        movea.w     #42,12(a0,d0) ; DEPRECATED
-;        movea.l     #42,12(a0,d0) ; DEPRECATED
-;        movea       #42,(12,a0,a0) ; DEPRECATED
-;        movea.b     #42,(12,a0,a0) ; DEPRECATED
-;        movea.w     #42,(12,a0,a0) ; DEPRECATED
-;        movea.l     #42,(12,a0,a0) ; DEPRECATED
-;        movea       #42,$4000 ; DEPRECATED
-;        movea.b     #42,$4000 ; DEPRECATED
-;        movea.w     #42,$4000 ; DEPRECATED
-;        movea.l     #42,$4000 ; DEPRECATED
-;        movea       #42,$4000.W ; DEPRECATED
-;        movea.b     #42,$4000.W ; DEPRECATED
-;        movea.w     #42,$4000.W ; DEPRECATED
-;        movea.l     #42,$4000.W ; DEPRECATED
-;        movea       #42,$4000.L ; DEPRECATED
-;        movea.b     #42,$4000.L ; DEPRECATED
-;        movea.w     #42,$4000.L ; DEPRECATED
-;        movea.l     #42,$4000.L ; DEPRECATED
+;        movea       #42.L,d0 ; DEPRECATED
+;        movea.b     #42.L,d0 ; DEPRECATED
+;        movea.w     #42.L,d0 ; DEPRECATED
+;        movea.l     #42.L,d0 ; DEPRECATED
+;        movea       #42.L,(a0) ; DEPRECATED
+;        movea.b     #42.L,(a0) ; DEPRECATED
+;        movea.w     #42.L,(a0) ; DEPRECATED
+;        movea.l     #42.L,(a0) ; DEPRECATED
+;        movea       #42.L,(a0)+ ; DEPRECATED
+;        movea.b     #42.L,(a0)+ ; DEPRECATED
+;        movea.w     #42.L,(a0)+ ; DEPRECATED
+;        movea.l     #42.L,(a0)+ ; DEPRECATED
+;        movea       #42.L,-(a0) ; DEPRECATED
+;        movea.b     #42.L,-(a0) ; DEPRECATED
+;        movea.w     #42.L,-(a0) ; DEPRECATED
+;        movea.l     #42.L,-(a0) ; DEPRECATED
+;        movea       #42.L,42(a0) ; DEPRECATED
+;        movea.b     #42.L,42(a0) ; DEPRECATED
+;        movea.w     #42.L,42(a0) ; DEPRECATED
+;        movea.l     #42.L,42(a0) ; DEPRECATED
+;        movea       #42.L,(-42,a0) ; DEPRECATED
+;        movea.b     #42.L,(-42,a0) ; DEPRECATED
+;        movea.w     #42.L,(-42,a0) ; DEPRECATED
+;        movea.l     #42.L,(-42,a0) ; DEPRECATED
+;        movea       #42.L,12(a0,d0) ; DEPRECATED
+;        movea.b     #42.L,12(a0,d0) ; DEPRECATED
+;        movea.w     #42.L,12(a0,d0) ; DEPRECATED
+;        movea.l     #42.L,12(a0,d0) ; DEPRECATED
+;        movea       #42.L,(12,a0,a0) ; DEPRECATED
+;        movea.b     #42.L,(12,a0,a0) ; DEPRECATED
+;        movea.w     #42.L,(12,a0,a0) ; DEPRECATED
+;        movea.l     #42.L,(12,a0,a0) ; DEPRECATED
+;        movea       #42.L,$4000 ; DEPRECATED
+;        movea.b     #42.L,$4000 ; DEPRECATED
+;        movea.w     #42.L,$4000 ; DEPRECATED
+;        movea.l     #42.L,$4000 ; DEPRECATED
+;        movea       #42.L,$4000.W ; DEPRECATED
+;        movea.b     #42.L,$4000.W ; DEPRECATED
+;        movea.w     #42.L,$4000.W ; DEPRECATED
+;        movea.l     #42.L,$4000.W ; DEPRECATED
+;        movea       #42.L,$4000.L ; DEPRECATED
+;        movea.b     #42.L,$4000.L ; DEPRECATED
+;        movea.w     #42.L,$4000.L ; DEPRECATED
+;        movea.l     #42.L,$4000.L ; DEPRECATED
 ;        movea       (a0),d0 ; DEPRECATED
 ;        movea.b     (a0),d0 ; DEPRECATED
 ;        movea.w     (a0),d0 ; DEPRECATED
@@ -4253,79 +4253,79 @@ label35: bvs         label35
          movem.l     (66,PC,a0),#3
 
 * M68kMnemonic{movem, firstOp=IMMEDIATE_REGISTER_LIST_VALUE, secondOp=ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT, [WORD, LONGWORD], MC68000 Family}
-         movem       #42,-(a0)
-         movem.w     #42,-(a0)
-         movem.l     #42,-(a0)
+         movem       #42.L,-(a0)
+         movem.w     #42.L,-(a0)
+         movem.l     #42.L,-(a0)
 
 * M68kMnemonic{movem, firstOp=IMMEDIATE_REGISTER_LIST_VALUE, secondOp=ALTERABLE_CONTROL, [WORD, LONGWORD], MC68000 Family}
-         movem       #42,(a0)
-         movem.w     #42,(a0)
-         movem.l     #42,(a0)
-         movem       #42,42(a0)
-         movem.w     #42,42(a0)
-         movem.l     #42,42(a0)
-         movem       #42,(-42,a0)
-         movem.w     #42,(-42,a0)
-         movem.l     #42,(-42,a0)
-         movem       #42,12(a0,d0)
-         movem.w     #42,12(a0,d0)
-         movem.l     #42,12(a0,d0)
-         movem       #42,(12,a0,a0)
-         movem.w     #42,(12,a0,a0)
-         movem.l     #42,(12,a0,a0)
-         movem       #42,$4000
-         movem.w     #42,$4000
-         movem.l     #42,$4000
-         movem       #42,$4000.W
-         movem.w     #42,$4000.W
-         movem.l     #42,$4000.W
-         movem       #42,$4000.L
-         movem.w     #42,$4000.L
-         movem.l     #42,$4000.L
+         movem       #42.L,(a0)
+         movem.w     #42.L,(a0)
+         movem.l     #42.L,(a0)
+         movem       #42.L,42(a0)
+         movem.w     #42.L,42(a0)
+         movem.l     #42.L,42(a0)
+         movem       #42.L,(-42,a0)
+         movem.w     #42.L,(-42,a0)
+         movem.l     #42.L,(-42,a0)
+         movem       #42.L,12(a0,d0)
+         movem.w     #42.L,12(a0,d0)
+         movem.l     #42.L,12(a0,d0)
+         movem       #42.L,(12,a0,a0)
+         movem.w     #42.L,(12,a0,a0)
+         movem.l     #42.L,(12,a0,a0)
+         movem       #42.L,$4000
+         movem.w     #42.L,$4000
+         movem.l     #42.L,$4000
+         movem       #42.L,$4000.W
+         movem.w     #42.L,$4000.W
+         movem.l     #42.L,$4000.W
+         movem       #42.L,$4000.L
+         movem.w     #42.L,$4000.L
+         movem.l     #42.L,$4000.L
 
 * M68kMnemonic{movem, firstOp=RESTORE_OPERANDS, secondOp=IMMEDIATE_REGISTER_LIST_VALUE, [WORD, LONGWORD], MC68000 Family}
-         movem       (a0),#42
-         movem.w     (a0),#42
-         movem.l     (a0),#42
-         movem       (a0)+,#42
-         movem.w     (a0)+,#42
-         movem.l     (a0)+,#42
-         movem       42(a0),#42
-         movem.w     42(a0),#42
-         movem.l     42(a0),#42
-         movem       (-42,a0),#42
-         movem.w     (-42,a0),#42
-         movem.l     (-42,a0),#42
-         movem       12(a0,d0),#42
-         movem.w     12(a0,d0),#42
-         movem.l     12(a0,d0),#42
-         movem       (12,a0,a0),#42
-         movem.w     (12,a0,a0),#42
-         movem.l     (12,a0,a0),#42
-         movem       $4000,#42
-         movem.w     $4000,#42
-         movem.l     $4000,#42
-         movem       $4000.W,#42
-         movem.w     $4000.W,#42
-         movem.l     $4000.W,#42
-         movem       $4000.L,#42
-         movem.w     $4000.L,#42
-         movem.l     $4000.L,#42
-         movem       (PC),#42
-         movem.w     (PC),#42
-         movem.l     (PC),#42
-         movem       66(PC),#42
-         movem.w     66(PC),#42
-         movem.l     66(PC),#42
-         movem       (-66,PC),#42
-         movem.w     (-66,PC),#42
-         movem.l     (-66,PC),#42
-         movem       66(PC,d0),#42
-         movem.w     66(PC,d0),#42
-         movem.l     66(PC,d0),#42
-         movem       (66,PC,a0),#42
-         movem.w     (66,PC,a0),#42
-         movem.l     (66,PC,a0),#42
+         movem       (a0),#42.L
+         movem.w     (a0),#42.L
+         movem.l     (a0),#42.L
+         movem       (a0)+,#42.L
+         movem.w     (a0)+,#42.L
+         movem.l     (a0)+,#42.L
+         movem       42(a0),#42.L
+         movem.w     42(a0),#42.L
+         movem.l     42(a0),#42.L
+         movem       (-42,a0),#42.L
+         movem.w     (-42,a0),#42.L
+         movem.l     (-42,a0),#42.L
+         movem       12(a0,d0),#42.L
+         movem.w     12(a0,d0),#42.L
+         movem.l     12(a0,d0),#42.L
+         movem       (12,a0,a0),#42.L
+         movem.w     (12,a0,a0),#42.L
+         movem.l     (12,a0,a0),#42.L
+         movem       $4000,#42.L
+         movem.w     $4000,#42.L
+         movem.l     $4000,#42.L
+         movem       $4000.W,#42.L
+         movem.w     $4000.W,#42.L
+         movem.l     $4000.W,#42.L
+         movem       $4000.L,#42.L
+         movem.w     $4000.L,#42.L
+         movem.l     $4000.L,#42.L
+         movem       (PC),#42.L
+         movem.w     (PC),#42.L
+         movem.l     (PC),#42.L
+         movem       66(PC),#42.L
+         movem.w     66(PC),#42.L
+         movem.l     66(PC),#42.L
+         movem       (-66,PC),#42.L
+         movem.w     (-66,PC),#42.L
+         movem.l     (-66,PC),#42.L
+         movem       66(PC,d0),#42.L
+         movem.w     66(PC,d0),#42.L
+         movem.l     66(PC,d0),#42.L
+         movem       (66,PC,a0),#42.L
+         movem.w     (66,PC,a0),#42.L
+         movem.l     (66,PC,a0),#42.L
 
 
 ********************************************************************************
@@ -4526,8 +4526,8 @@ label35: bvs         label35
 * M68kMnemonic{muls, firstOp=DATA, secondOp=DATA_REGISTER, [WORD], MC68000 Family}
          muls        d0,d0
          muls.w      d0,d0
-         muls        #42,d0
-         muls.w      #42,d0
+         muls        #42.L,d0
+         muls.w      #42.L,d0
          muls        (a0),d0
          muls.w      (a0),d0
          muls        (a0)+,d0
@@ -4561,7 +4561,7 @@ label35: bvs         label35
 
 * M68kMnemonic{muls, firstOp=DATA, secondOp=DATA_REGISTER, [LONGWORD], MC68020+}
          muls.l      d0,d0
-         muls.l      #42,d0
+         muls.l      #42.L,d0
          muls.l      (a0),d0
          muls.l      (a0)+,d0
          muls.l      -(a0),d0
@@ -4584,8 +4584,8 @@ label35: bvs         label35
 * M68kMnemonic{mulu, firstOp=DATA, secondOp=DATA_REGISTER, [WORD], MC68000 Family}
          mulu        d0,d0
          mulu.w      d0,d0
-         mulu        #42,d0
-         mulu.w      #42,d0
+         mulu        #42.L,d0
+         mulu.w      #42.L,d0
          mulu        (a0),d0
          mulu.w      (a0),d0
          mulu        (a0)+,d0
@@ -4619,7 +4619,7 @@ label35: bvs         label35
 
 * M68kMnemonic{mulu, firstOp=DATA, secondOp=DATA_REGISTER, [LONGWORD], MC68020+}
          mulu.l      d0,d0
-         mulu.l      #42,d0
+         mulu.l      #42.L,d0
          mulu.l      (a0),d0
          mulu.l      (a0)+,d0
          mulu.l      -(a0),d0
@@ -4824,10 +4824,10 @@ label35: bvs         label35
          or.b        d0,d0
          or.w        d0,d0
          or.l        d0,d0
-         or          #42,d0
-         or.b        #42,d0
-         or.w        #42,d0
-         or.l        #42,d0
+         or          #42.L,d0
+         or.b        #42.L,d0
+         or.w        #42.L,d0
+         or.l        #42.L,d0
          or          (a0),d0
          or.b        (a0),d0
          or.w        (a0),d0
@@ -4932,111 +4932,111 @@ label35: bvs         label35
          or.l        d0,$4000.L
 
 * M68kMnemonic{or, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
-         or          #42,(a0)
-         or.b        #42,(a0)
-         or.w        #42,(a0)
-         or.l        #42,(a0)
-         or          #42,(a0)+
-         or.b        #42,(a0)+
-         or.w        #42,(a0)+
-         or.l        #42,(a0)+
-         or          #42,-(a0)
-         or.b        #42,-(a0)
-         or.w        #42,-(a0)
-         or.l        #42,-(a0)
-         or          #42,42(a0)
-         or.b        #42,42(a0)
-         or.w        #42,42(a0)
-         or.l        #42,42(a0)
-         or          #42,(-42,a0)
-         or.b        #42,(-42,a0)
-         or.w        #42,(-42,a0)
-         or.l        #42,(-42,a0)
-         or          #42,12(a0,d0)
-         or.b        #42,12(a0,d0)
-         or.w        #42,12(a0,d0)
-         or.l        #42,12(a0,d0)
-         or          #42,(12,a0,a0)
-         or.b        #42,(12,a0,a0)
-         or.w        #42,(12,a0,a0)
-         or.l        #42,(12,a0,a0)
-         or          #42,$4000
-         or.b        #42,$4000
-         or.w        #42,$4000
-         or.l        #42,$4000
-         or          #42,$4000.W
-         or.b        #42,$4000.W
-         or.w        #42,$4000.W
-         or.l        #42,$4000.W
-         or          #42,$4000.L
-         or.b        #42,$4000.L
-         or.w        #42,$4000.L
-         or.l        #42,$4000.L
+         or          #42.L,(a0)
+         or.b        #42.L,(a0)
+         or.w        #42.L,(a0)
+         or.l        #42.L,(a0)
+         or          #42.L,(a0)+
+         or.b        #42.L,(a0)+
+         or.w        #42.L,(a0)+
+         or.l        #42.L,(a0)+
+         or          #42.L,-(a0)
+         or.b        #42.L,-(a0)
+         or.w        #42.L,-(a0)
+         or.l        #42.L,-(a0)
+         or          #42.L,42(a0)
+         or.b        #42.L,42(a0)
+         or.w        #42.L,42(a0)
+         or.l        #42.L,42(a0)
+         or          #42.L,(-42,a0)
+         or.b        #42.L,(-42,a0)
+         or.w        #42.L,(-42,a0)
+         or.l        #42.L,(-42,a0)
+         or          #42.L,12(a0,d0)
+         or.b        #42.L,12(a0,d0)
+         or.w        #42.L,12(a0,d0)
+         or.l        #42.L,12(a0,d0)
+         or          #42.L,(12,a0,a0)
+         or.b        #42.L,(12,a0,a0)
+         or.w        #42.L,(12,a0,a0)
+         or.l        #42.L,(12,a0,a0)
+         or          #42.L,$4000
+         or.b        #42.L,$4000
+         or.w        #42.L,$4000
+         or.l        #42.L,$4000
+         or          #42.L,$4000.W
+         or.b        #42.L,$4000.W
+         or.w        #42.L,$4000.W
+         or.l        #42.L,$4000.W
+         or          #42.L,$4000.L
+         or.b        #42.L,$4000.L
+         or.w        #42.L,$4000.L
+         or.l        #42.L,$4000.L
 
 * M68kMnemonic{or, firstOp=IMMEDIATE, secondOp=CCR_REGISTER, [BYTE], MC68000 Family}
-         or          #42,CCR
-         or.b        #42,CCR
+         or          #42.L,CCR
+         or.b        #42.L,CCR
 
 * M68kMnemonic{or, firstOp=IMMEDIATE, secondOp=SR_REGISTER, [WORD], MC68000 Family, PRIVILEGED}
-         or          #42,SR
-         or.w        #42,SR
+         or          #42.L,SR
+         or.w        #42.L,SR
 
 
 ********************************************************************************
 
 * M68kMnemonic{ori, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
-         ori         #42,d0
-         ori.b       #42,d0
-         ori.w       #42,d0
-         ori.l       #42,d0
-         ori         #42,(a0)
-         ori.b       #42,(a0)
-         ori.w       #42,(a0)
-         ori.l       #42,(a0)
-         ori         #42,(a0)+
-         ori.b       #42,(a0)+
-         ori.w       #42,(a0)+
-         ori.l       #42,(a0)+
-         ori         #42,-(a0)
-         ori.b       #42,-(a0)
-         ori.w       #42,-(a0)
-         ori.l       #42,-(a0)
-         ori         #42,42(a0)
-         ori.b       #42,42(a0)
-         ori.w       #42,42(a0)
-         ori.l       #42,42(a0)
-         ori         #42,(-42,a0)
-         ori.b       #42,(-42,a0)
-         ori.w       #42,(-42,a0)
-         ori.l       #42,(-42,a0)
-         ori         #42,12(a0,d0)
-         ori.b       #42,12(a0,d0)
-         ori.w       #42,12(a0,d0)
-         ori.l       #42,12(a0,d0)
-         ori         #42,(12,a0,a0)
-         ori.b       #42,(12,a0,a0)
-         ori.w       #42,(12,a0,a0)
-         ori.l       #42,(12,a0,a0)
-         ori         #42,$4000
-         ori.b       #42,$4000
-         ori.w       #42,$4000
-         ori.l       #42,$4000
-         ori         #42,$4000.W
-         ori.b       #42,$4000.W
-         ori.w       #42,$4000.W
-         ori.l       #42,$4000.W
-         ori         #42,$4000.L
-         ori.b       #42,$4000.L
-         ori.w       #42,$4000.L
-         ori.l       #42,$4000.L
+         ori         #42.L,d0
+         ori.b       #42.L,d0
+         ori.w       #42.L,d0
+         ori.l       #42.L,d0
+         ori         #42.L,(a0)
+         ori.b       #42.L,(a0)
+         ori.w       #42.L,(a0)
+         ori.l       #42.L,(a0)
+         ori         #42.L,(a0)+
+         ori.b       #42.L,(a0)+
+         ori.w       #42.L,(a0)+
+         ori.l       #42.L,(a0)+
+         ori         #42.L,-(a0)
+         ori.b       #42.L,-(a0)
+         ori.w       #42.L,-(a0)
+         ori.l       #42.L,-(a0)
+         ori         #42.L,42(a0)
+         ori.b       #42.L,42(a0)
+         ori.w       #42.L,42(a0)
+         ori.l       #42.L,42(a0)
+         ori         #42.L,(-42,a0)
+         ori.b       #42.L,(-42,a0)
+         ori.w       #42.L,(-42,a0)
+         ori.l       #42.L,(-42,a0)
+         ori         #42.L,12(a0,d0)
+         ori.b       #42.L,12(a0,d0)
+         ori.w       #42.L,12(a0,d0)
+         ori.l       #42.L,12(a0,d0)
+         ori         #42.L,(12,a0,a0)
+         ori.b       #42.L,(12,a0,a0)
+         ori.w       #42.L,(12,a0,a0)
+         ori.l       #42.L,(12,a0,a0)
+         ori         #42.L,$4000
+         ori.b       #42.L,$4000
+         ori.w       #42.L,$4000
+         ori.l       #42.L,$4000
+         ori         #42.L,$4000.W
+         ori.b       #42.L,$4000.W
+         ori.w       #42.L,$4000.W
+         ori.l       #42.L,$4000.W
+         ori         #42.L,$4000.L
+         ori.b       #42.L,$4000.L
+         ori.w       #42.L,$4000.L
+         ori.l       #42.L,$4000.L
 
 * M68kMnemonic{ori, firstOp=IMMEDIATE, secondOp=CCR_REGISTER, [BYTE], MC68000 Family}
-         ori         #42,CCR
-         ori.b       #42,CCR
+         ori         #42.L,CCR
+         ori.b       #42.L,CCR
 
 * M68kMnemonic{ori, firstOp=IMMEDIATE, secondOp=SR_REGISTER, [WORD], MC68000 Family, PRIVILEGED}
-         ori         #42,SR
-         ori.w       #42,SR
+         ori         #42.L,SR
+         ori.w       #42.L,SR
 
 
 ********************************************************************************
@@ -5728,10 +5728,10 @@ label35: bvs         label35
          sub.b       d0,d0
          sub.w       d0,d0
          sub.l       d0,d0
-         sub         #42,d0
-         sub.b       #42,d0
-         sub.w       #42,d0
-         sub.l       #42,d0
+         sub         #42.L,d0
+         sub.b       #42.L,d0
+         sub.w       #42.L,d0
+         sub.l       #42.L,d0
          sub         (a0),d0
          sub.b       (a0),d0
          sub.w       (a0),d0
@@ -5892,51 +5892,51 @@ label35: bvs         label35
          sub         (66,PC,a0),a0
          sub.w       (66,PC,a0),a0
          sub.l       (66,PC,a0),a0
-         sub         #42,a0
-         sub.w       #42,a0
-         sub.l       #42,a0
+         sub         #42.L,a0
+         sub.w       #42.L,a0
+         sub.l       #42.L,a0
 
 * M68kMnemonic{sub, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
-         sub         #42,(a0)
-         sub.b       #42,(a0)
-         sub.w       #42,(a0)
-         sub.l       #42,(a0)
-         sub         #42,(a0)+
-         sub.b       #42,(a0)+
-         sub.w       #42,(a0)+
-         sub.l       #42,(a0)+
-         sub         #42,-(a0)
-         sub.b       #42,-(a0)
-         sub.w       #42,-(a0)
-         sub.l       #42,-(a0)
-         sub         #42,42(a0)
-         sub.b       #42,42(a0)
-         sub.w       #42,42(a0)
-         sub.l       #42,42(a0)
-         sub         #42,(-42,a0)
-         sub.b       #42,(-42,a0)
-         sub.w       #42,(-42,a0)
-         sub.l       #42,(-42,a0)
-         sub         #42,12(a0,d0)
-         sub.b       #42,12(a0,d0)
-         sub.w       #42,12(a0,d0)
-         sub.l       #42,12(a0,d0)
-         sub         #42,(12,a0,a0)
-         sub.b       #42,(12,a0,a0)
-         sub.w       #42,(12,a0,a0)
-         sub.l       #42,(12,a0,a0)
-         sub         #42,$4000
-         sub.b       #42,$4000
-         sub.w       #42,$4000
-         sub.l       #42,$4000
-         sub         #42,$4000.W
-         sub.b       #42,$4000.W
-         sub.w       #42,$4000.W
-         sub.l       #42,$4000.W
-         sub         #42,$4000.L
-         sub.b       #42,$4000.L
-         sub.w       #42,$4000.L
-         sub.l       #42,$4000.L
+         sub         #42.L,(a0)
+         sub.b       #42.L,(a0)
+         sub.w       #42.L,(a0)
+         sub.l       #42.L,(a0)
+         sub         #42.L,(a0)+
+         sub.b       #42.L,(a0)+
+         sub.w       #42.L,(a0)+
+         sub.l       #42.L,(a0)+
+         sub         #42.L,-(a0)
+         sub.b       #42.L,-(a0)
+         sub.w       #42.L,-(a0)
+         sub.l       #42.L,-(a0)
+         sub         #42.L,42(a0)
+         sub.b       #42.L,42(a0)
+         sub.w       #42.L,42(a0)
+         sub.l       #42.L,42(a0)
+         sub         #42.L,(-42,a0)
+         sub.b       #42.L,(-42,a0)
+         sub.w       #42.L,(-42,a0)
+         sub.l       #42.L,(-42,a0)
+         sub         #42.L,12(a0,d0)
+         sub.b       #42.L,12(a0,d0)
+         sub.w       #42.L,12(a0,d0)
+         sub.l       #42.L,12(a0,d0)
+         sub         #42.L,(12,a0,a0)
+         sub.b       #42.L,(12,a0,a0)
+         sub.w       #42.L,(12,a0,a0)
+         sub.l       #42.L,(12,a0,a0)
+         sub         #42.L,$4000
+         sub.b       #42.L,$4000
+         sub.w       #42.L,$4000
+         sub.l       #42.L,$4000
+         sub         #42.L,$4000.W
+         sub.b       #42.L,$4000.W
+         sub.w       #42.L,$4000.W
+         sub.l       #42.L,$4000.W
+         sub         #42.L,$4000.L
+         sub.b       #42.L,$4000.L
+         sub.w       #42.L,$4000.L
+         sub.l       #42.L,$4000.L
 
 
 ********************************************************************************
@@ -5993,58 +5993,58 @@ label35: bvs         label35
          suba        (66,PC,a0),a0
          suba.w      (66,PC,a0),a0
          suba.l      (66,PC,a0),a0
-         suba        #42,a0
-         suba.w      #42,a0
-         suba.l      #42,a0
+         suba        #42.L,a0
+         suba.w      #42.L,a0
+         suba.l      #42.L,a0
 
 
 ********************************************************************************
 
 * M68kMnemonic{subi, firstOp=IMMEDIATE, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
-         subi        #42,d0
-         subi.b      #42,d0
-         subi.w      #42,d0
-         subi.l      #42,d0
-         subi        #42,(a0)
-         subi.b      #42,(a0)
-         subi.w      #42,(a0)
-         subi.l      #42,(a0)
-         subi        #42,(a0)+
-         subi.b      #42,(a0)+
-         subi.w      #42,(a0)+
-         subi.l      #42,(a0)+
-         subi        #42,-(a0)
-         subi.b      #42,-(a0)
-         subi.w      #42,-(a0)
-         subi.l      #42,-(a0)
-         subi        #42,42(a0)
-         subi.b      #42,42(a0)
-         subi.w      #42,42(a0)
-         subi.l      #42,42(a0)
-         subi        #42,(-42,a0)
-         subi.b      #42,(-42,a0)
-         subi.w      #42,(-42,a0)
-         subi.l      #42,(-42,a0)
-         subi        #42,12(a0,d0)
-         subi.b      #42,12(a0,d0)
-         subi.w      #42,12(a0,d0)
-         subi.l      #42,12(a0,d0)
-         subi        #42,(12,a0,a0)
-         subi.b      #42,(12,a0,a0)
-         subi.w      #42,(12,a0,a0)
-         subi.l      #42,(12,a0,a0)
-         subi        #42,$4000
-         subi.b      #42,$4000
-         subi.w      #42,$4000
-         subi.l      #42,$4000
-         subi        #42,$4000.W
-         subi.b      #42,$4000.W
-         subi.w      #42,$4000.W
-         subi.l      #42,$4000.W
-         subi        #42,$4000.L
-         subi.b      #42,$4000.L
-         subi.w      #42,$4000.L
-         subi.l      #42,$4000.L
+         subi        #42.L,d0
+         subi.b      #42.L,d0
+         subi.w      #42.L,d0
+         subi.l      #42.L,d0
+         subi        #42.L,(a0)
+         subi.b      #42.L,(a0)
+         subi.w      #42.L,(a0)
+         subi.l      #42.L,(a0)
+         subi        #42.L,(a0)+
+         subi.b      #42.L,(a0)+
+         subi.w      #42.L,(a0)+
+         subi.l      #42.L,(a0)+
+         subi        #42.L,-(a0)
+         subi.b      #42.L,-(a0)
+         subi.w      #42.L,-(a0)
+         subi.l      #42.L,-(a0)
+         subi        #42.L,42(a0)
+         subi.b      #42.L,42(a0)
+         subi.w      #42.L,42(a0)
+         subi.l      #42.L,42(a0)
+         subi        #42.L,(-42,a0)
+         subi.b      #42.L,(-42,a0)
+         subi.w      #42.L,(-42,a0)
+         subi.l      #42.L,(-42,a0)
+         subi        #42.L,12(a0,d0)
+         subi.b      #42.L,12(a0,d0)
+         subi.w      #42.L,12(a0,d0)
+         subi.l      #42.L,12(a0,d0)
+         subi        #42.L,(12,a0,a0)
+         subi.b      #42.L,(12,a0,a0)
+         subi.w      #42.L,(12,a0,a0)
+         subi.l      #42.L,(12,a0,a0)
+         subi        #42.L,$4000
+         subi.b      #42.L,$4000
+         subi.w      #42.L,$4000
+         subi.l      #42.L,$4000
+         subi        #42.L,$4000.W
+         subi.b      #42.L,$4000.W
+         subi.w      #42.L,$4000.W
+         subi.l      #42.L,$4000.W
+         subi        #42.L,$4000.L
+         subi.b      #42.L,$4000.L
+         subi.w      #42.L,$4000.L
+         subi.l      #42.L,$4000.L
 
 
 ********************************************************************************
@@ -6265,10 +6265,10 @@ label35: bvs         label35
          tst.l       $4000.L
 
 * M68kMnemonic{tst, firstOp=DATA, secondOp=NONE, [BYTE, WORD, LONGWORD], MC68020+}
-         tst         #42
-         tst.b       #42
-         tst.w       #42
-         tst.l       #42
+         tst         #42.L
+         tst.b       #42.L
+         tst.w       #42.L
+         tst.l       #42.L
          tst         (PC)
          tst.b       (PC)
          tst.w       (PC)

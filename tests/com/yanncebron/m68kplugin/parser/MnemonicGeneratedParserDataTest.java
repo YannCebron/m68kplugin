@@ -174,7 +174,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
     assertEquals(121291, total);
     assertEquals(17166, skippedValidCount);
-    assertEquals(1472, matchedByMnemonicCount);
+    assertEquals(1280, matchedByMnemonicCount);
     assertEmpty(failedVariants);
   }
 
@@ -345,7 +345,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
     entry(M68kAddressMode.PC_REGISTER_DISPLACEMENT, List.of("(PC)", "66(PC)", "(-66,PC)")),
     entry(M68kAddressMode.PC_REGISTER_INDEX_DISPLACEMENT, List.of("66(PC,d0)", "(66,PC,a0)")),
     entry(M68kAddressMode.LABEL, List.of("label")),
-    entry(M68kAddressMode.IMMEDIATE, List.of("#42")),
+    entry(M68kAddressMode.IMMEDIATE, List.of("#42.L")),
     entry(M68kAddressMode.QUICK_IMMEDIATE, List.of("#1")),
     entry(M68kAddressMode.REGISTER_LIST, List.of("d0/a0-a2", "#3")),
     entry(M68kAddressMode.SPECIAL_REGISTER_SR, List.of("SR")),
