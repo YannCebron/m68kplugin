@@ -653,7 +653,6 @@ private add_sub_tail_data_drd ::=             data_size_all?       operand_data 
 private add_sub_tail_ard_drd ::=              data_size_word_long? adm_ard COMMA adm_drd
 private add_sub_tail_drd_alterable_memory ::= data_size_all?       adm_drd COMMA operand_alterable_memory
 private add_sub_tail_all_ard ::=              data_size_word_long? operand_all COMMA adm_ard
-private add_sub_tail_imm_alterable_data ::=   data_size_all?       adm_imm COMMA operand_alterable_data
 {
   pin = "adm_imm"
 }
@@ -662,7 +661,7 @@ private add_sub_tail ::= (
                            add_sub_tail_ard_drd |
                            add_sub_tail_drd_alterable_memory |
                            add_sub_tail_all_ard |
-                           add_sub_tail_imm_alterable_data
+                           tail_data_size_all___imm_alterable_data
                          )
 private add_sub_q_tail_quick_ard ::=            data_size_word_long? adm_quick COMMA adm_ard
 private add_sub_q_tail_quick_alterable_data ::= data_size_all?       adm_quick COMMA operand_alterable_data

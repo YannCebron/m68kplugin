@@ -137,7 +137,7 @@ public class M68kMnemonicsParser {
   //                            add_sub_tail_ard_drd |
   //                            add_sub_tail_drd_alterable_memory |
   //                            add_sub_tail_all_ard |
-  //                            add_sub_tail_imm_alterable_data
+  //                            tail_data_size_all___imm_alterable_data
   static boolean add_sub_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "add_sub_tail")) return false;
     boolean r;
@@ -145,7 +145,7 @@ public class M68kMnemonicsParser {
     if (!r) r = add_sub_tail_ard_drd(b, l + 1);
     if (!r) r = add_sub_tail_drd_alterable_memory(b, l + 1);
     if (!r) r = add_sub_tail_all_ard(b, l + 1);
-    if (!r) r = add_sub_tail_imm_alterable_data(b, l + 1);
+    if (!r) r = tail_data_size_all___imm_alterable_data(b, l + 1);
     return r;
   }
 
@@ -229,28 +229,6 @@ public class M68kMnemonicsParser {
   // data_size_all?
   private static boolean add_sub_tail_drd_alterable_memory_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "add_sub_tail_drd_alterable_memory_0")) return false;
-    data_size_all(b, l + 1);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // data_size_all?       adm_imm COMMA operand_alterable_data
-  static boolean add_sub_tail_imm_alterable_data(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "add_sub_tail_imm_alterable_data")) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
-    r = add_sub_tail_imm_alterable_data_0(b, l + 1);
-    r = r && adm_imm(b, l + 1);
-    p = r; // pin = adm_imm
-    r = r && report_error_(b, consumeToken(b, COMMA));
-    r = p && operand_alterable_data(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
-  }
-
-  // data_size_all?
-  private static boolean add_sub_tail_imm_alterable_data_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "add_sub_tail_imm_alterable_data_0")) return false;
     data_size_all(b, l + 1);
     return true;
   }
