@@ -1616,7 +1616,7 @@ public class M68kDirectivesParser {
 
   /* ********************************************************** */
   // (ID EQ DEC_NUMBER (DIV DEC_NUMBER)?) |
-  //                         (ID (PLUS | MINUS)?)
+  //                       (ID (PLUS | MINUS)?)
   public static boolean opt_directive_arg(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "opt_directive_arg")) return false;
     if (!nextTokenIs(b, "<option>", ID)) return false;
