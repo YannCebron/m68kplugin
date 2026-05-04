@@ -2241,14 +2241,15 @@ public class M68kMnemonicsParser {
   // MOVE
   //                      (
   //                        move_tail_ard_alterable |
-  //                        move_tail_all_ard |
+  // //                       move_tail_all_ard |
   //                        move_tail_data_alterable_data |
   //                        move_tail_ccr_alterable_data |
   //                        move_tail_sr_alterable_data |
   //                        move_tail_data_ccr |
   //                        move_tail_data_sr |
   //                        move_tail_usp_ard |
-  //                        move_tail_ard_usp
+  //                        move_tail_ard_usp |
+  //                        tail_data_size_word_long___all__ard
   //                      )
   public static boolean move_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "move_instruction")) return false;
@@ -2263,19 +2264,19 @@ public class M68kMnemonicsParser {
   }
 
   // move_tail_ard_alterable |
-  //                        move_tail_all_ard |
+  // //                       move_tail_all_ard |
   //                        move_tail_data_alterable_data |
   //                        move_tail_ccr_alterable_data |
   //                        move_tail_sr_alterable_data |
   //                        move_tail_data_ccr |
   //                        move_tail_data_sr |
   //                        move_tail_usp_ard |
-  //                        move_tail_ard_usp
+  //                        move_tail_ard_usp |
+  //                        tail_data_size_word_long___all__ard
   private static boolean move_instruction_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "move_instruction_1")) return false;
     boolean r;
     r = move_tail_ard_alterable(b, l + 1);
-    if (!r) r = move_tail_all_ard(b, l + 1);
     if (!r) r = move_tail_data_alterable_data(b, l + 1);
     if (!r) r = move_tail_ccr_alterable_data(b, l + 1);
     if (!r) r = move_tail_sr_alterable_data(b, l + 1);
@@ -2283,6 +2284,7 @@ public class M68kMnemonicsParser {
     if (!r) r = move_tail_data_sr(b, l + 1);
     if (!r) r = move_tail_usp_ard(b, l + 1);
     if (!r) r = move_tail_ard_usp(b, l + 1);
+    if (!r) r = tail_data_size_word_long___all__ard(b, l + 1);
     return r;
   }
 

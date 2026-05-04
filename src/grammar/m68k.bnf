@@ -421,7 +421,6 @@ fake move_instruction_base ::=
 }
 
 private move_tail_ard_alterable::= data_size_word_long? adm_ard COMMA operand_alterable
-private move_tail_all_ard ::= data_size_word_long? operand_all COMMA adm_ard
 private move_tail_data_alterable_data ::= data_size_all? operand_data COMMA operand_alterable_data
 private move_tail_ccr_alterable_data ::= data_size_word? adm_ccr COMMA operand_alterable_data
 {
@@ -442,14 +441,14 @@ private move_tail_ard_usp ::= data_size_long? adm_ard COMMA adm_usp
 move_instruction ::= MOVE
                      (
                        move_tail_ard_alterable |
-                       move_tail_all_ard |
                        move_tail_data_alterable_data |
                        move_tail_ccr_alterable_data |
                        move_tail_sr_alterable_data |
                        move_tail_data_ccr |
                        move_tail_data_sr |
                        move_tail_usp_ard |
-                       move_tail_ard_usp
+                       move_tail_ard_usp |
+                       tail_data_size_word_long___all__ard
                      )
 {
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kPrivilegedInstruction"
