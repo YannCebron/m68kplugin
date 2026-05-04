@@ -879,16 +879,16 @@ public class M68kMnemonicsParser {
 
   /* ********************************************************** */
   // bool_i_tail_imm_drd |
-  //                           bool_tail_imm_alterable_data |
   //                           bool_tail_imm_ccr |
-  //                           bool_tail_imm_sr
+  //                           bool_tail_imm_sr |
+  //                           tail_data_size_all___imm_alterable_data
   static boolean bool_i_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bool_i_tail")) return false;
     boolean r;
     r = bool_i_tail_imm_drd(b, l + 1);
-    if (!r) r = bool_tail_imm_alterable_data(b, l + 1);
     if (!r) r = bool_tail_imm_ccr(b, l + 1);
     if (!r) r = bool_tail_imm_sr(b, l + 1);
+    if (!r) r = tail_data_size_all___imm_alterable_data(b, l + 1);
     return r;
   }
 
