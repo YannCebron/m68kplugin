@@ -3660,9 +3660,9 @@ public class M68kParser implements PsiParser, LightPsiParser {
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_);
     r = adm_drd(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    p = r; // pin = 2
-    r = r && adm_adi(b, l + 1);
+    p = r; // pin = 1
+    r = r && report_error_(b, consumeToken(b, COMMA));
+    r = p && adm_adi(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
