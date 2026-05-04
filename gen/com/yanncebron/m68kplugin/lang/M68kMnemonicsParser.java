@@ -1297,7 +1297,7 @@ public class M68kMnemonicsParser {
   }
 
   /* ********************************************************** */
-  // CMP (cmp_tail_ard_drd | cmp_tail_data_drd | cmp_tail_all_ard | cmp_tail_imm_alterable_data | cmp_tail_api_api)
+  // CMP (cmp_tail_ard_drd | cmp_tail_data_drd | cmp_tail_imm_alterable_data | cmp_tail_api_api | tail_data_size_word_long___all__ard)
   public static boolean cmp_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cmp_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", CMP)) return false;
@@ -1310,15 +1310,15 @@ public class M68kMnemonicsParser {
     return r || p;
   }
 
-  // cmp_tail_ard_drd | cmp_tail_data_drd | cmp_tail_all_ard | cmp_tail_imm_alterable_data | cmp_tail_api_api
+  // cmp_tail_ard_drd | cmp_tail_data_drd | cmp_tail_imm_alterable_data | cmp_tail_api_api | tail_data_size_word_long___all__ard
   private static boolean cmp_instruction_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cmp_instruction_1")) return false;
     boolean r;
     r = cmp_tail_ard_drd(b, l + 1);
     if (!r) r = cmp_tail_data_drd(b, l + 1);
-    if (!r) r = cmp_tail_all_ard(b, l + 1);
     if (!r) r = cmp_tail_imm_alterable_data(b, l + 1);
     if (!r) r = cmp_tail_api_api(b, l + 1);
+    if (!r) r = tail_data_size_word_long___all__ard(b, l + 1);
     return r;
   }
 
@@ -1335,27 +1335,6 @@ public class M68kMnemonicsParser {
     if (!r) r = cmpi_instruction(b, l + 1);
     if (!r) r = cmpm_instruction(b, l + 1);
     return r;
-  }
-
-  /* ********************************************************** */
-  // data_size_word_long? operand_all COMMA adm_ard
-  static boolean cmp_tail_all_ard(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "cmp_tail_all_ard")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = cmp_tail_all_ard_0(b, l + 1);
-    r = r && operand_all(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && adm_ard(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // data_size_word_long?
-  private static boolean cmp_tail_all_ard_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "cmp_tail_all_ard_0")) return false;
-    data_size_word_long(b, l + 1);
-    return true;
   }
 
   /* ********************************************************** */
@@ -2241,7 +2220,6 @@ public class M68kMnemonicsParser {
   // MOVE
   //                      (
   //                        move_tail_ard_alterable |
-  // //                       move_tail_all_ard |
   //                        move_tail_data_alterable_data |
   //                        move_tail_ccr_alterable_data |
   //                        move_tail_sr_alterable_data |
@@ -2264,7 +2242,6 @@ public class M68kMnemonicsParser {
   }
 
   // move_tail_ard_alterable |
-  // //                       move_tail_all_ard |
   //                        move_tail_data_alterable_data |
   //                        move_tail_ccr_alterable_data |
   //                        move_tail_sr_alterable_data |
@@ -2307,27 +2284,6 @@ public class M68kMnemonicsParser {
     if (!r) r = movec_instruction(b, l + 1);
     if (!r) r = moves_instruction(b, l + 1);
     return r;
-  }
-
-  /* ********************************************************** */
-  // data_size_word_long? operand_all COMMA adm_ard
-  static boolean move_tail_all_ard(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "move_tail_all_ard")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = move_tail_all_ard_0(b, l + 1);
-    r = r && operand_all(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && adm_ard(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // data_size_word_long?
-  private static boolean move_tail_all_ard_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "move_tail_all_ard_0")) return false;
-    data_size_word_long(b, l + 1);
-    return true;
   }
 
   /* ********************************************************** */
