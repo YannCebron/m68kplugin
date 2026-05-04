@@ -2105,7 +2105,7 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // XDEF label_ref_expression (COMMA label_ref_expression)*
+  // XDEF expression (COMMA expression)*
   public static boolean xdef_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "xdef_directive")) return false;
     if (!nextTokenIs(b, "<directive>", XDEF)) return false;
@@ -2113,13 +2113,13 @@ public class M68kDirectivesParser {
     Marker m = enter_section_(b, l, _NONE_, XDEF_DIRECTIVE, "<directive>");
     r = consumeToken(b, XDEF);
     p = r; // pin = 1
-    r = r && report_error_(b, M68kExpressionParser.label_ref_expression(b, l + 1));
+    r = r && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1));
     r = p && xdef_directive_2(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
-  // (COMMA label_ref_expression)*
+  // (COMMA expression)*
   private static boolean xdef_directive_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "xdef_directive_2")) return false;
     while (true) {
@@ -2130,19 +2130,19 @@ public class M68kDirectivesParser {
     return true;
   }
 
-  // COMMA label_ref_expression
+  // COMMA expression
   private static boolean xdef_directive_2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "xdef_directive_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, COMMA);
-    r = r && M68kExpressionParser.label_ref_expression(b, l + 1);
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   /* ********************************************************** */
-  // XREF label_ref_expression (COMMA label_ref_expression)*
+  // XREF expression (COMMA expression)*
   public static boolean xref_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "xref_directive")) return false;
     if (!nextTokenIs(b, "<directive>", XREF)) return false;
@@ -2150,13 +2150,13 @@ public class M68kDirectivesParser {
     Marker m = enter_section_(b, l, _NONE_, XREF_DIRECTIVE, "<directive>");
     r = consumeToken(b, XREF);
     p = r; // pin = 1
-    r = r && report_error_(b, M68kExpressionParser.label_ref_expression(b, l + 1));
+    r = r && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1));
     r = p && xref_directive_2(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
-  // (COMMA label_ref_expression)*
+  // (COMMA expression)*
   private static boolean xref_directive_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "xref_directive_2")) return false;
     while (true) {
@@ -2167,13 +2167,13 @@ public class M68kDirectivesParser {
     return true;
   }
 
-  // COMMA label_ref_expression
+  // COMMA expression
   private static boolean xref_directive_2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "xref_directive_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, COMMA);
-    r = r && M68kExpressionParser.label_ref_expression(b, l + 1);
+    r = r && M68kExpressionParser.expression(b, l + 1, -1);
     exit_section_(b, m, null, r);
     return r;
   }

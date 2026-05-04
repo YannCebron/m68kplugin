@@ -1535,11 +1535,11 @@ einline_directive ::= EINLINE
 rem_directive ::= REM
 erem_directive ::= EREM
 
-xdef_directive ::= XDEF label_ref_expression (COMMA label_ref_expression)*
+xdef_directive ::= XDEF expression (COMMA expression)*
 {
   pin = 1
 }
-xref_directive ::= XREF label_ref_expression (COMMA label_ref_expression)*
+xref_directive ::= XREF expression (COMMA expression)*
 {
   pin = 1
 }

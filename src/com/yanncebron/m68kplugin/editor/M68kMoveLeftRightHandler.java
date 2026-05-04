@@ -47,10 +47,10 @@ final class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
       return directive.getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
     }
     if (element instanceof M68kXdefDirective directive) {
-      return directive.getLabelRefExpressionList().toArray(PsiElement.EMPTY_ARRAY);
+      return directive.getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
     }
     if (element instanceof M68kXrefDirective directive) {
-      return directive.getLabelRefExpressionList().toArray(PsiElement.EMPTY_ARRAY);
+      return directive.getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
     }
 
     if (element instanceof M68kIfcConditionalAssemblyDirective directive) {

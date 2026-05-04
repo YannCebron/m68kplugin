@@ -26,7 +26,7 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.yanncebron.m68kplugin.lang.psi.directive.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
-import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
 
 public class M68kXdefDirectiveImpl extends ASTWrapperPsiElement implements M68kXdefDirective {
 
@@ -46,8 +46,8 @@ public class M68kXdefDirectiveImpl extends ASTWrapperPsiElement implements M68kX
 
   @Override
   @NotNull
-  public List<M68kLabelRefExpression> getLabelRefExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kLabelRefExpression.class);
+  public List<M68kExpression> getExpressionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
   }
 
 }
