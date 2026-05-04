@@ -973,27 +973,6 @@ public class M68kMnemonicsParser {
   }
 
   /* ********************************************************** */
-  // data_size_all?  adm_imm COMMA operand_alterable_data
-  static boolean bool_tail_imm_alterable_data(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bool_tail_imm_alterable_data")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = bool_tail_imm_alterable_data_0(b, l + 1);
-    r = r && adm_imm(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && operand_alterable_data(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // data_size_all?
-  private static boolean bool_tail_imm_alterable_data_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bool_tail_imm_alterable_data_0")) return false;
-    data_size_all(b, l + 1);
-    return true;
-  }
-
-  /* ********************************************************** */
   // data_size_byte? adm_imm COMMA adm_ccr
   static boolean bool_tail_imm_ccr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bool_tail_imm_ccr")) return false;
@@ -1847,17 +1826,17 @@ public class M68kMnemonicsParser {
   /* ********************************************************** */
   // eor_tail_drd_alterable_data |
   //                        eor_tail_imm_drd |
-  //                        bool_tail_imm_alterable_data |
   //                        bool_tail_imm_ccr |
-  //                        bool_tail_imm_sr
+  //                        bool_tail_imm_sr |
+  //                        tail_data_size_all___imm_alterable_data
   static boolean eor_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "eor_tail")) return false;
     boolean r;
     r = eor_tail_drd_alterable_data(b, l + 1);
     if (!r) r = eor_tail_imm_drd(b, l + 1);
-    if (!r) r = bool_tail_imm_alterable_data(b, l + 1);
     if (!r) r = bool_tail_imm_ccr(b, l + 1);
     if (!r) r = bool_tail_imm_sr(b, l + 1);
+    if (!r) r = tail_data_size_all___imm_alterable_data(b, l + 1);
     return r;
   }
 
