@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,11 @@
 package com.yanncebron.m68kplugin.inspections;
 
 import com.intellij.codeInspection.*;
+import com.intellij.modcommand.ActionContext;
+import com.intellij.modcommand.ModCommand;
+import com.intellij.modcommand.Presentation;
+import com.intellij.modcommand.PsiBasedModCommandAction;
 import com.intellij.openapi.project.DumbAware;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.searches.ReferencesSearch;
@@ -27,6 +30,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kLocalLabel;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 final class M68kUnusedLabelInspection extends LocalInspectionTool implements CleanupLocalInspectionTool, DumbAware {
 
@@ -47,18 +51,18 @@ final class M68kUnusedLabelInspection extends LocalInspectionTool implements Cle
         holder.registerProblem(m68kLocalLabel,
           M68kBundle.message("inspection.unused.label.message", localLabelName),
           ProblemHighlightType.LIKE_UNUSED_SYMBOL,
-
-          new RemoveLocalLabelQuickFix(localLabelName)
+          LocalQuickFix.from(new RemoveLocalLabelQuickFix(m68kLocalLabel, localLabelName))
         );
       }
     };
   }
 
-  private static class RemoveLocalLabelQuickFix implements LocalQuickFix, DumbAware {
+  private static class RemoveLocalLabelQuickFix extends PsiBasedModCommandAction<M68kLocalLabel> implements DumbAware {
 
     private final String localLabelName;
 
-    public RemoveLocalLabelQuickFix(String localLabelName) {
+    private RemoveLocalLabelQuickFix(M68kLocalLabel label, String localLabelName) {
+      super(label);
       this.localLabelName = localLabelName;
     }
 
@@ -68,14 +72,16 @@ final class M68kUnusedLabelInspection extends LocalInspectionTool implements Cle
     }
 
     @Override
-    public @Nls(capitalization = Nls.Capitalization.Sentence) @NotNull String getName() {
-      return M68kBundle.message("inspection.unused.label.fix.name", localLabelName);
+    protected @NotNull ModCommand perform(@NotNull ActionContext context, @NotNull M68kLocalLabel element) {
+      return ModCommand.psiUpdate(element, (m68kLocalLabel, modPsiUpdater) -> {
+        m68kLocalLabel.getNextSibling().delete();
+        m68kLocalLabel.delete();
+      });
     }
 
     @Override
-    public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
-      descriptor.getPsiElement().getNextSibling().delete();
-      descriptor.getPsiElement().delete();
+    protected @Nullable Presentation getPresentation(@NotNull ActionContext context, @NotNull M68kLocalLabel element) {
+      return Presentation.of(M68kBundle.message("inspection.unused.label.fix.name", localLabelName));
     }
   }
 }
