@@ -1079,7 +1079,7 @@ public class M68kMnemonicsParser {
   }
 
   /* ********************************************************** */
-  // BTST (btst_tail_drd_drd | btst_tail_drd_memory | btst_tail_quick_drd| btst_tail_quick_memory)
+  // BTST (bit_tail_drd_drd | btst_tail_drd_memory | bit_tail_quick_drd| btst_tail_quick_memory)
   public static boolean btst_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "btst_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", BTST)) return false;
@@ -1092,36 +1092,15 @@ public class M68kMnemonicsParser {
     return r || p;
   }
 
-  // btst_tail_drd_drd | btst_tail_drd_memory | btst_tail_quick_drd| btst_tail_quick_memory
+  // bit_tail_drd_drd | btst_tail_drd_memory | bit_tail_quick_drd| btst_tail_quick_memory
   private static boolean btst_instruction_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "btst_instruction_1")) return false;
     boolean r;
-    r = btst_tail_drd_drd(b, l + 1);
+    r = bit_tail_drd_drd(b, l + 1);
     if (!r) r = btst_tail_drd_memory(b, l + 1);
-    if (!r) r = btst_tail_quick_drd(b, l + 1);
+    if (!r) r = bit_tail_quick_drd(b, l + 1);
     if (!r) r = btst_tail_quick_memory(b, l + 1);
     return r;
-  }
-
-  /* ********************************************************** */
-  // data_size_long? adm_drd   COMMA adm_drd
-  static boolean btst_tail_drd_drd(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "btst_tail_drd_drd")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = btst_tail_drd_drd_0(b, l + 1);
-    r = r && adm_drd(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && adm_drd(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // data_size_long?
-  private static boolean btst_tail_drd_drd_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "btst_tail_drd_drd_0")) return false;
-    data_size_long(b, l + 1);
-    return true;
   }
 
   /* ********************************************************** */
@@ -1142,27 +1121,6 @@ public class M68kMnemonicsParser {
   private static boolean btst_tail_drd_memory_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "btst_tail_drd_memory_0")) return false;
     data_size_byte(b, l + 1);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // data_size_long? adm_quick COMMA adm_drd
-  static boolean btst_tail_quick_drd(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "btst_tail_quick_drd")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = btst_tail_quick_drd_0(b, l + 1);
-    r = r && adm_quick(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && adm_drd(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // data_size_long?
-  private static boolean btst_tail_quick_drd_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "btst_tail_quick_drd_0")) return false;
-    data_size_long(b, l + 1);
     return true;
   }
 

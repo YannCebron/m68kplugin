@@ -1083,11 +1083,9 @@ bclr_instruction ::= BCLR bit_tail
 
 bset_instruction ::= BSET bit_tail
 
-private btst_tail_drd_drd ::=      data_size_long? adm_drd   COMMA adm_drd
 private btst_tail_drd_memory ::=   data_size_byte? adm_drd   COMMA operand_memory
-private btst_tail_quick_drd ::=    data_size_long? adm_quick COMMA adm_drd
 private btst_tail_quick_memory ::= data_size_byte? adm_quick COMMA operand_memory_without_imm
-btst_instruction ::= BTST (btst_tail_drd_drd | btst_tail_drd_memory | btst_tail_quick_drd| btst_tail_quick_memory)
+btst_instruction ::= BTST (bit_tail_drd_drd | btst_tail_drd_memory | bit_tail_quick_drd| btst_tail_quick_memory)
 {
   pin = 1
 }
