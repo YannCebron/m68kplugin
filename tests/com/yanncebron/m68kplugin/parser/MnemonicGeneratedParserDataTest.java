@@ -229,7 +229,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
             continue;
           }
 
-          final String failedVariantText = variant + " ; FAILED " + StringUtil.splitByLines(e.getMessage())[0];
+          final String failedVariantText = variant + " ; FAILED " + StringUtil.convertLineSeparators(e.getMessage(), " ");
           failedVariants.add(failedVariantText);
           dump(failedVariantText);
         }
