@@ -874,6 +874,7 @@ fake cmp_instruction_base ::=
 
 private cmp_tail_ard_drd ::=            data_size_word_long? adm_ard COMMA adm_drd
 private cmp_tail_data_drd ::=           data_size_all?       operand_data COMMA adm_drd
+// tail_data_size_all___imm_alterable_data has pin, can't use
 private cmp_tail_imm_alterable_data ::= data_size_all?       adm_imm COMMA operand_alterable_data
 private cmp_tail_api_api ::=            data_size_all?       adm_api COMMA adm_api
 cmp_instruction ::= CMP (cmp_tail_ard_drd | cmp_tail_data_drd | cmp_tail_imm_alterable_data | cmp_tail_api_api | tail_data_size_word_long___all__ard)
