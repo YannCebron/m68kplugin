@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,12 @@
 
 package com.yanncebron.m68kplugin.intentions;
 
-import com.intellij.codeInsight.hint.HintManager;
-import com.intellij.codeInsight.intention.HighPriorityAction;
-import com.intellij.codeInsight.intention.IntentionAction;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.SelectionModel;
+import com.intellij.codeInsight.intention.PriorityAction;
+import com.intellij.modcommand.ActionContext;
+import com.intellij.modcommand.ModCommand;
+import com.intellij.modcommand.ModCommandAction;
+import com.intellij.modcommand.Presentation;
 import com.intellij.openapi.project.DumbAware;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -32,17 +31,13 @@ import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.Set;
 
-final class M68kShowUsedRegistersIntention implements IntentionAction, HighPriorityAction, DumbAware {
-
-  @Override
-  public @Nls(capitalization = Nls.Capitalization.Sentence) @NotNull String getText() {
-    return getFamilyName();
-  }
+final class M68kShowUsedRegistersIntention implements ModCommandAction, DumbAware {
 
   @Override
   public @NotNull @Nls(capitalization = Nls.Capitalization.Sentence) String getFamilyName() {
@@ -50,22 +45,19 @@ final class M68kShowUsedRegistersIntention implements IntentionAction, HighPrior
   }
 
   @Override
-  public boolean isAvailable(@NotNull Project project, Editor editor, PsiFile file) {
-    return file instanceof M68kFile && editor.getSelectionModel().hasSelection();
+  public @Nullable Presentation getPresentation(@NotNull ActionContext context) {
+    if (context.file() instanceof M68kFile && !context.selection().isEmpty()) {
+      return Presentation.of(getFamilyName()).withPriority(PriorityAction.Priority.TOP);
+    }
+    return null;
   }
 
   @Override
-  public boolean startInWriteAction() {
-    return false;
-  }
-
-  @Override
-  public void invoke(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
-    Set<M68kRegister> used = getUsedRegisters(editor, file);
+  public @NotNull ModCommand perform(@NotNull ActionContext context) {
+    Set<M68kRegister> used = getUsedRegisters(context.file(), context.selection());
 
     if (used.isEmpty()) {
-      HintManager.getInstance().showInformationHint(editor, M68kBundle.message("intention.M68kShowUsedRegistersIntention.hint.no.registers"));
-      return;
+      return ModCommand.info(M68kBundle.message("intention.M68kShowUsedRegistersIntention.hint.no.registers"));
     }
 
     StringBuilder sb = new StringBuilder();
@@ -84,7 +76,7 @@ final class M68kShowUsedRegistersIntention implements IntentionAction, HighPrior
     }
     sb.append("</table>");
 
-    HintManager.getInstance().showInformationHint(editor, XmlStringUtil.wrapInHtml(sb));
+    return ModCommand.info(XmlStringUtil.wrapInHtml(sb));
   }
 
   private void printRegister(StringBuilder message, Set<M68kRegister> used, Iterator<M68kRegister> it) {
@@ -101,15 +93,12 @@ final class M68kShowUsedRegistersIntention implements IntentionAction, HighPrior
   }
 
   @NotNull
-  static Set<M68kRegister> getUsedRegisters(@NotNull Editor editor, @NotNull PsiFile file) {
-    final SelectionModel selectionModel = editor.getSelectionModel();
-    TextRange selectionRange = TextRange.create(selectionModel.getSelectionStart(), selectionModel.getSelectionEnd());
-
+  static Set<M68kRegister> getUsedRegisters(@NotNull PsiFile file, @NotNull TextRange textRange) {
     Set<M68kRegister> used = EnumSet.noneOf(M68kRegister.class);
     final M68kVisitor registerVisitor = new M68kVisitor() {
 
       private void addIfInside(PsiElement o, M68kRegister register) {
-        if (selectionRange.contains(o.getTextRange())) {
+        if (textRange.contains(o.getTextRange())) {
           used.add(register);
         }
       }

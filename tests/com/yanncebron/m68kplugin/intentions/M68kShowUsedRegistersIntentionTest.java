@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package com.yanncebron.m68kplugin.intentions;
 
+import com.intellij.openapi.editor.SelectionModel;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.yanncebron.m68kplugin.lang.psi.M68kRegister;
 
@@ -71,7 +73,9 @@ public class M68kShowUsedRegistersIntentionTest extends BasePlatformTestCase {
 
   private void doTest(String code, Set<M68kRegister> expectedRegisters) {
     myFixture.configureByText("a.s", code);
-    final Set<M68kRegister> usedRegisters = M68kShowUsedRegistersIntention.getUsedRegisters(myFixture.getEditor(), myFixture.getFile());
+    final SelectionModel selectionModel = myFixture.getEditor().getSelectionModel();
+    TextRange selectionRange = TextRange.create(selectionModel.getSelectionStart(), selectionModel.getSelectionEnd());
+    final Set<M68kRegister> usedRegisters = M68kShowUsedRegistersIntention.getUsedRegisters(myFixture.getFile(), selectionRange);
     assertSameElements(usedRegisters, expectedRegisters);
   }
 }
