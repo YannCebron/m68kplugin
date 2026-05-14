@@ -74,12 +74,12 @@ final class M68kConstantExpressionEvaluator extends M68kRecursiveElementWalkingV
 
   @Override
   protected void elementFinished(@NotNull PsiElement element) {
-    if (!(element instanceof M68kExpression)) return;
+    if (!(element instanceof M68kExpression m68kExpression)) return;
 
-    Object value = getCached((M68kExpression) element);
+    Object value = getCached(m68kExpression);
     if (value == null) {
       Object result = visitor.handle(element);
-      cache((M68kExpression) element, result);
+      cache(m68kExpression, result);
     } else {
       visitor.store(element, value == NO_VALUE ? null : value);
     }
@@ -87,12 +87,12 @@ final class M68kConstantExpressionEvaluator extends M68kRecursiveElementWalkingV
 
   @Override
   public void visitElement(@NotNull PsiElement element) {
-    if (!(element instanceof M68kExpression)) {
+    if (!(element instanceof M68kExpression m68kExpression)) {
       super.visitElement(element);
       return;
     }
 
-    Object value = getCached((M68kExpression) element);
+    Object value = getCached(m68kExpression);
     if (value == null) {
       super.visitElement(element);
       // will cache back in elementFinished()
