@@ -181,7 +181,7 @@ public class M68kConditionalAssemblyParser {
   }
 
   /* ********************************************************** */
-  // IFC expression COMMA expression
+  // IFC tail_expression_expression
   public static boolean ifc_conditional_assembly_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ifc_conditional_assembly_directive")) return false;
     if (!nextTokenIs(b, "<directive>", IFC)) return false;
@@ -189,9 +189,7 @@ public class M68kConditionalAssemblyParser {
     Marker m = enter_section_(b, l, _NONE_, IFC_CONDITIONAL_ASSEMBLY_DIRECTIVE, "<directive>");
     r = consumeToken(b, IFC);
     p = r; // pin = 1
-    r = r && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1));
-    r = p && report_error_(b, consumeToken(b, COMMA)) && r;
-    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
+    r = r && M68kDirectivesParser.tail_expression_expression(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -337,7 +335,7 @@ public class M68kConditionalAssemblyParser {
   }
 
   /* ********************************************************** */
-  // IFNC expression COMMA expression
+  // IFNC tail_expression_expression
   public static boolean ifnc_conditional_assembly_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ifnc_conditional_assembly_directive")) return false;
     if (!nextTokenIs(b, "<directive>", IFNC)) return false;
@@ -345,9 +343,7 @@ public class M68kConditionalAssemblyParser {
     Marker m = enter_section_(b, l, _NONE_, IFNC_CONDITIONAL_ASSEMBLY_DIRECTIVE, "<directive>");
     r = consumeToken(b, IFNC);
     p = r; // pin = 1
-    r = r && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1));
-    r = p && report_error_(b, consumeToken(b, COMMA)) && r;
-    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
+    r = r && M68kDirectivesParser.tail_expression_expression(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

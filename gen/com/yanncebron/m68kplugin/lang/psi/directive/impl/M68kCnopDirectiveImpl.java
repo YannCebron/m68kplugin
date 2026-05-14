@@ -53,10 +53,10 @@ public class M68kCnopDirectiveImpl extends ASTWrapperPsiElement implements M68kC
   }
 
   @Override
-  @Nullable
+  @NotNull
   public M68kExpression getOffset() {
     List<M68kExpression> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, M68kExpression.class);
-    return p1.size() < 1 ? null : p1.get(0);
+    return p1.get(0);
   }
 
 }

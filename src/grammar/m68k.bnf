@@ -1259,6 +1259,9 @@ fake directive_with_label ::= label
 }
 
 private tail_expression_list ::= expression (COMMA expression)*
+private tail_expression_expression ::= expression COMMA expression {
+  pin = 1
+}
 
 fake equ_directive_base ::= label expression?
 {
@@ -1305,9 +1308,8 @@ align_directive ::= ALIGN expression
     offset = "expression"
   ]
 }
-cnop_directive ::= CNOP expression COMMA expression
+cnop_directive ::= CNOP tail_expression_expression
 {
-  pin = 1
   methods = [
     expression = ""
     divisor = "expression[1]"
@@ -1739,7 +1741,7 @@ not_equals_expression ::= expression (EXCLAMATION_EQ | LT_GT) expression
 private relational_group ::= lt_expression | lt_eq_expression | gt_expression | gt_eq_expression
 lt_expression ::= expression LT expression
 lt_eq_expression ::= expression LT_EQ expression
-gt_expression ::= expression  GT <<notClosingAngledMacroCallParameter>>  expression
+gt_expression ::= expression GT <<notClosingAngledMacroCallParameter>>  expression
 gt_eq_expression ::= expression GT_EQ expression
 
 private add_group ::= plus_expression | minus_expression
@@ -1838,14 +1840,14 @@ ifne_conditional_assembly_directive ::= IFNE expression
 
 ifb_conditional_assembly_directive ::= IFB expression
 ifnb_conditional_assembly_directive ::= IFNB expression
-ifc_conditional_assembly_directive ::= IFC expression COMMA expression {
+ifc_conditional_assembly_directive ::= IFC tail_expression_expression {
   methods = [
     expression = ""
     arg1 = "expression[0]"
     arg2 = "expression[1]"
   ]
 }
-ifnc_conditional_assembly_directive ::= IFNC expression COMMA expression {
+ifnc_conditional_assembly_directive ::= IFNC tail_expression_expression {
   methods = [
     expression = ""
     arg1 = "expression[0]"

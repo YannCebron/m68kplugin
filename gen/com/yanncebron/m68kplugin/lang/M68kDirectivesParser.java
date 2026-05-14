@@ -265,19 +265,16 @@ public class M68kDirectivesParser {
   }
 
   /* ********************************************************** */
-  // CNOP expression COMMA expression
+  // CNOP tail_expression_expression
   public static boolean cnop_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cnop_directive")) return false;
     if (!nextTokenIs(b, "<directive>", CNOP)) return false;
-    boolean r, p;
+    boolean r;
     Marker m = enter_section_(b, l, _NONE_, CNOP_DIRECTIVE, "<directive>");
     r = consumeToken(b, CNOP);
-    p = r; // pin = 1
-    r = r && report_error_(b, M68kExpressionParser.expression(b, l + 1, -1));
-    r = p && report_error_(b, consumeToken(b, COMMA)) && r;
-    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+    r = r && tail_expression_expression(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
   }
 
   /* ********************************************************** */
@@ -2006,6 +2003,20 @@ public class M68kDirectivesParser {
     r = consumeToken(b, SPC);
     p = r; // pin = 1
     r = r && M68kExpressionParser.expression(b, l + 1, -1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // expression COMMA expression
+  static boolean tail_expression_expression(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tail_expression_expression")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
+    r = M68kExpressionParser.expression(b, l + 1, -1);
+    p = r; // pin = 1
+    r = r && report_error_(b, consumeToken(b, COMMA));
+    r = p && M68kExpressionParser.expression(b, l + 1, -1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

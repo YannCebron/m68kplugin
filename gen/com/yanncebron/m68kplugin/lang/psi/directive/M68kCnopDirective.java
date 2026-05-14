@@ -25,7 +25,7 @@ public interface M68kCnopDirective extends M68kDirective {
   @Nullable
   M68kExpression getDivisor();
 
-  @Nullable
+  @NotNull
   M68kExpression getOffset();
 
 }
