@@ -738,6 +738,7 @@ private bool_tail_data_drd ::=             data_size_all?  operand_data COMMA ad
 private bool_tail_drd_alterable_memory ::= data_size_all?  adm_drd COMMA operand_alterable_memory
 private bool_tail_imm_ccr ::=              data_size_byte? adm_imm COMMA adm_ccr
 private bool_tail_imm_sr ::=               data_size_word? adm_imm COMMA adm_sr
+private bool_tail_imm_drd ::=              data_size_all?  adm_imm COMMA adm_drd
 private bool_tail ::= (
                         bool_tail_data_drd |
                         bool_tail_drd_alterable_memory |
@@ -746,9 +747,8 @@ private bool_tail ::= (
                         tail_data_size_all___imm_alterable_data
                       )
 
-private bool_i_tail_imm_drd ::= data_size_all? adm_imm COMMA adm_drd
 private bool_i_tail ::= (
-                          bool_i_tail_imm_drd |
+                          bool_tail_imm_drd |
                           bool_tail_imm_ccr |
                           bool_tail_imm_sr |
                           tail_data_size_all___imm_alterable_data
@@ -764,10 +764,9 @@ private eor_tail_drd_alterable_data::= data_size_all? adm_drd COMMA operand_alte
 {
   pin = "adm_drd"
 }
-private eor_tail_imm_drd ::=           data_size_all? adm_imm COMMA adm_drd
 private eor_tail ::= (
                        eor_tail_drd_alterable_data |
-                       eor_tail_imm_drd |
+                       bool_tail_imm_drd |
                        bool_tail_imm_ccr |
                        bool_tail_imm_sr |
                        tail_data_size_all___imm_alterable_data

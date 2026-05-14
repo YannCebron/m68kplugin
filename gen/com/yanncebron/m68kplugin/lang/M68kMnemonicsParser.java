@@ -878,39 +878,18 @@ public class M68kMnemonicsParser {
   }
 
   /* ********************************************************** */
-  // bool_i_tail_imm_drd |
+  // bool_tail_imm_drd |
   //                           bool_tail_imm_ccr |
   //                           bool_tail_imm_sr |
   //                           tail_data_size_all___imm_alterable_data
   static boolean bool_i_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bool_i_tail")) return false;
     boolean r;
-    r = bool_i_tail_imm_drd(b, l + 1);
+    r = bool_tail_imm_drd(b, l + 1);
     if (!r) r = bool_tail_imm_ccr(b, l + 1);
     if (!r) r = bool_tail_imm_sr(b, l + 1);
     if (!r) r = tail_data_size_all___imm_alterable_data(b, l + 1);
     return r;
-  }
-
-  /* ********************************************************** */
-  // data_size_all? adm_imm COMMA adm_drd
-  static boolean bool_i_tail_imm_drd(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bool_i_tail_imm_drd")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = bool_i_tail_imm_drd_0(b, l + 1);
-    r = r && adm_imm(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && adm_drd(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // data_size_all?
-  private static boolean bool_i_tail_imm_drd_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "bool_i_tail_imm_drd_0")) return false;
-    data_size_all(b, l + 1);
-    return true;
   }
 
   /* ********************************************************** */
@@ -990,6 +969,27 @@ public class M68kMnemonicsParser {
   private static boolean bool_tail_imm_ccr_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bool_tail_imm_ccr_0")) return false;
     data_size_byte(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // data_size_all?  adm_imm COMMA adm_drd
+  static boolean bool_tail_imm_drd(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bool_tail_imm_drd")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = bool_tail_imm_drd_0(b, l + 1);
+    r = r && adm_imm(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_drd(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_all?
+  private static boolean bool_tail_imm_drd_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bool_tail_imm_drd_0")) return false;
+    data_size_all(b, l + 1);
     return true;
   }
 
@@ -1783,7 +1783,7 @@ public class M68kMnemonicsParser {
 
   /* ********************************************************** */
   // eor_tail_drd_alterable_data |
-  //                        eor_tail_imm_drd |
+  //                        bool_tail_imm_drd |
   //                        bool_tail_imm_ccr |
   //                        bool_tail_imm_sr |
   //                        tail_data_size_all___imm_alterable_data
@@ -1791,7 +1791,7 @@ public class M68kMnemonicsParser {
     if (!recursion_guard_(b, l, "eor_tail")) return false;
     boolean r;
     r = eor_tail_drd_alterable_data(b, l + 1);
-    if (!r) r = eor_tail_imm_drd(b, l + 1);
+    if (!r) r = bool_tail_imm_drd(b, l + 1);
     if (!r) r = bool_tail_imm_ccr(b, l + 1);
     if (!r) r = bool_tail_imm_sr(b, l + 1);
     if (!r) r = tail_data_size_all___imm_alterable_data(b, l + 1);
@@ -1816,27 +1816,6 @@ public class M68kMnemonicsParser {
   // data_size_all?
   private static boolean eor_tail_drd_alterable_data_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "eor_tail_drd_alterable_data_0")) return false;
-    data_size_all(b, l + 1);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // data_size_all? adm_imm COMMA adm_drd
-  static boolean eor_tail_imm_drd(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "eor_tail_imm_drd")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = eor_tail_imm_drd_0(b, l + 1);
-    r = r && adm_imm(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && adm_drd(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // data_size_all?
-  private static boolean eor_tail_imm_drd_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "eor_tail_imm_drd_0")) return false;
     data_size_all(b, l + 1);
     return true;
   }
