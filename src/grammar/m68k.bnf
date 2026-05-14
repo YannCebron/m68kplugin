@@ -1258,6 +1258,8 @@ fake directive_with_label ::= label
   implements = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
 }
 
+private tail_expression_list ::= expression (COMMA expression)*
+
 fake equ_directive_base ::= label expression?
 {
   extends = directive_with_label
@@ -1364,7 +1366,7 @@ include_directive ::= INCLUDE include_path
   ]
 }
 
-dc_directive ::= DC data_size_all? expression (COMMA expression)*
+dc_directive ::= DC data_size_all? tail_expression_list
 {
   pin = 1
   extends = data_sized
@@ -1387,7 +1389,7 @@ ds_directive ::= DS data_size_all? expression
   extends = data_sized
 }
 
-dr_directive ::= DR data_size_all? expression (COMMA expression)*
+dr_directive ::= DR data_size_all? tail_expression_list
 {
   pin = 1
   extends = data_sized
@@ -1535,11 +1537,11 @@ einline_directive ::= EINLINE
 rem_directive ::= REM
 erem_directive ::= EREM
 
-xdef_directive ::= XDEF expression (COMMA expression)*
+xdef_directive ::= XDEF tail_expression_list
 {
   pin = 1
 }
-xref_directive ::= XREF expression (COMMA expression)*
+xref_directive ::= XREF tail_expression_list
 {
   pin = 1
 }
@@ -1555,7 +1557,7 @@ printt_directive ::= PRINTT STRING?
   pin = 1
 }
 
-printv_directive ::= PRINTV expression (COMMA expression)*
+printv_directive ::= PRINTV tail_expression_list
 {
   pin = 1
 }
