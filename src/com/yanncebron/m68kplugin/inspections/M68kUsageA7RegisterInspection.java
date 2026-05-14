@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,10 @@
 package com.yanncebron.m68kplugin.inspections;
 
 import com.intellij.codeInspection.*;
+import com.intellij.modcommand.ActionContext;
+import com.intellij.modcommand.ModCommand;
+import com.intellij.modcommand.PsiBasedModCommandAction;
 import com.intellij.openapi.project.DumbAware;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementVisitor;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmArd;
@@ -41,14 +43,18 @@ final class M68kUsageA7RegisterInspection extends LocalInspectionTool implements
         if (m68kAdmArd.getRegister() != M68kRegister.A7) return;
 
         holder.registerProblem(m68kAdmArd, M68kBundle.message("inspection.usage.a7.register.message"),
-          new ReplaceWithSPRegisterQuickFix());
+          LocalQuickFix.from(new ReplaceWithSPRegisterQuickFix(m68kAdmArd)));
       }
 
     };
   }
 
 
-  private static class ReplaceWithSPRegisterQuickFix implements LocalQuickFix, DumbAware {
+  private static class ReplaceWithSPRegisterQuickFix extends PsiBasedModCommandAction<M68kAdmArd> implements DumbAware {
+
+    private ReplaceWithSPRegisterQuickFix(@NotNull M68kAdmArd element) {
+      super(element);
+    }
 
     @Override
     public @Nls(capitalization = Nls.Capitalization.Sentence) @NotNull String getFamilyName() {
@@ -56,9 +62,11 @@ final class M68kUsageA7RegisterInspection extends LocalInspectionTool implements
     }
 
     @Override
-    public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
-      final M68kAdmArd sp = M68kElementFactory.createAddressRegister(project, "sp");
-      descriptor.getPsiElement().replace(sp);
+    protected @NotNull ModCommand perform(@NotNull ActionContext context, @NotNull M68kAdmArd element) {
+      return ModCommand.psiUpdate(element, (m68kAdmArd, modPsiUpdater) -> {
+        final M68kAdmArd sp = M68kElementFactory.createAddressRegister(context.project(), "sp");
+        m68kAdmArd.replace(sp);
+      });
     }
   }
 }
