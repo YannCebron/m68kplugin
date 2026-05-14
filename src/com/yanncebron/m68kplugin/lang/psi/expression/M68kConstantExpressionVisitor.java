@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiFunction;
+import java.util.function.BiConsumer;
 
 final class M68kConstantExpressionVisitor extends M68kVisitor {
   private final boolean throwExceptionOnOverflow;
@@ -105,7 +105,6 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
     handleBinaryNumberExpression(expression, (left, right) -> {
       result = left + right;
       checkAdditionOverflow((Integer) result >= 0, left >= 0, right >= 0, expression);
-      return null;
     });
   }
 
@@ -114,7 +113,6 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
     handleBinaryNumberExpression(expression, (left, right) -> {
       result = left - right;
       checkAdditionOverflow((Integer) result >= 0, left >= 0, right < 0, expression);
-      return null;
     });
   }
 
@@ -123,7 +121,6 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
     handleBinaryNumberExpression(expression, (left, right) -> {
       result = left * right;
       checkMultiplicationOverflow((Integer) result, left, right, expression);
-      return null;
     });
   }
 
@@ -132,7 +129,6 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
     handleBinaryNumberExpression(expression, (left, right) -> {
       checkDivisionOverflow(left, right, expression);
       result = right == 0 ? null : left / right;
-      return null;
     });
   }
 
@@ -141,7 +137,6 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
     handleBinaryNumberExpression(expression, (left, right) -> {
       checkDivisionOverflow(left, right, expression);
       result = right == 0 ? null : left % right;
-      return null;
     });
   }
 
@@ -149,7 +144,6 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
   public void visitAndExpression(@NotNull M68kAndExpression expression) {
     handleBinaryNumberExpression(expression, (left, right) -> {
       result = left & right;
-      return null;
     });
   }
 
@@ -157,7 +151,6 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
   public void visitOrExpression(@NotNull M68kOrExpression expression) {
     handleBinaryNumberExpression(expression, (left, right) -> {
       result = left | right;
-      return null;
     });
   }
 
@@ -165,7 +158,6 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
   public void visitXorExpression(@NotNull M68kXorExpression expression) {
     handleBinaryNumberExpression(expression, (left, right) -> {
       result = left ^ right;
-      return null;
     });
   }
 
@@ -178,7 +170,6 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
   public void visitShiftLeftExpression(@NotNull M68kShiftLeftExpression o) {
     handleBinaryNumberExpression(o, (left, right) -> {
       result = left << right;
-      return null;
     });
   }
 
@@ -186,12 +177,11 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
   public void visitShiftRightExpression(@NotNull M68kShiftRightExpression o) {
     handleBinaryNumberExpression(o, (left, right) -> {
       result = left >> right;
-      return null;
     });
 
   }
 
-  private void handleBinaryNumberExpression(M68kBinaryExpression expression, BiFunction<Integer, Integer, Void> func) {
+  private void handleBinaryNumberExpression(M68kBinaryExpression expression, BiConsumer<Integer, Integer> func) {
     Object left = getStoredValue(expression.getLeft());
     Object right = getStoredValue(expression.getRight());
 
@@ -201,7 +191,7 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
       return;
     }
 
-    func.apply(((Number) left).intValue(), ((Number) right).intValue());
+    func.accept(((Number) left).intValue(), ((Number) right).intValue());
   }
 
   private void checkAdditionOverflow(boolean resultPositive, boolean lPositive, boolean rPositive, M68kExpression expression) {
