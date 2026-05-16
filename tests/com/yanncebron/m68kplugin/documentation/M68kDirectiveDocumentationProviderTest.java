@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,7 +79,7 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
         <pre><code class="language-assembly">erem
         </code></pre>
         <h2>Description</h2>
-        <p>Ends an outcommented block from <a rel="nofollow" href="psi_element://rem">rem</a>. Assembly will continue.</p>
+        <p>Ends an out-commented block from <a rel="nofollow" href="psi_element://rem">rem</a>. Assembly will continue.</p>
         </p></div>""", doc);
     });
   }
@@ -104,7 +104,7 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
       <pre><code class="language-assembly">erem
       </code></pre>
       <h2>Description</h2>
-      <p>Ends an outcommented block from <a rel="nofollow" href="m68kBrowser://rem">rem</a>. Assembly will continue.</p>
+      <p>Ends an out-commented block from <a rel="nofollow" href="m68kBrowser://rem">rem</a>. Assembly will continue.</p>
       </p></div>""", directiveDoc);
   }
 

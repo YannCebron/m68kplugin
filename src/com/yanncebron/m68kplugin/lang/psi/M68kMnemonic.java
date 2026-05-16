@@ -65,7 +65,7 @@ public record M68kMnemonic(IElementType elementType,
     PRIVILEGED(m68kCpu -> Boolean.TRUE),
 
     /**
-     * Privileged for 68010 or above only.
+     * Privileged for MC68010 or above only.
      */
     PRIVILEGED_68010_ABOVE(M68kCpu.GROUP_68010_UP::contains);
 

@@ -12,7 +12,7 @@ When calling a macro you may pass up to 9 arguments, separated by comma.
 Those arguments are referenced within the macro context as `\1` to `\9`. 
 Parameter `\0` is set to the macro’s first qualifier (mnemonic extension), when given. 
 In Devpac- and PhxAss-compatibility mode, or with option `-allmp`, up to 35 arguments are accepted, 
-where argument 10-35 can be referenced by `\a` to `\z`.
+where argument 10–35 can be referenced by `\a` to `\z`.
 
 ### Special macro parameters
 

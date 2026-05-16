@@ -13,7 +13,7 @@ zero. I2, I1, and I0 define the interrupt mask level.
 
 ## Status Register Bits
 
-_15-8 SYSTEM BYTE_ / _7-0 USER BYTE ([CCR](ccr.md))_
+_15–8 SYSTEM BYTE_ / _7–0 USER BYTE ([CCR](ccr.md))_
 
 | 15 | 14 | 13 | 12 | 11 | 10 | 9  | 8  |   | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
 |:--:|:--:|:--:|:--:|:--:|:--:|:---|:--:|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|

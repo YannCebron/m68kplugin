@@ -26,7 +26,7 @@ Case-sensitivity for all symbols and macros. Default is on.
 #### d
 
 Include all symbols for debugging in the output file. May also generate line debugging information in some output
-formats. Default is off in Devpac-comptability mode, otherwise on.
+formats. Default is off in Devpac-compatibility mode, otherwise on.
 
 #### l
 
@@ -36,7 +36,7 @@ This option was supported by Devpac-Amiga only.
 #### o
 
 Enable all optimizations (`o1` to `o12`), or disable all optimizations. The default is that all are disabled in
-Devpac-compatibility mode and enabled otherwise. When running in native vasm mode this option will also enable `PC`
+Devpac-compatibility mode and enabled otherwise. When running in native vasm mode, this option will also enable `PC`
 -relative (`opt a`) and the following safe vasm-specific optimizations (see below): `og`, `of`.
 
 #### o1
@@ -66,15 +66,15 @@ No effect in vasm.
 #### o7
 
 Replace `bra.b` by a 2-byte no-operation instruction, like `lea (a6),a6`, when branching to the next instruction.
-Note: `nop` is not really a no-operation instruction on 68040 and higher.
+Note: `nop` is not really a no-operation instruction on MC68040 and higher.
 
 #### o8
 
-Optimize 68020+ base displacements to 16 bit.
+Optimize MC68020+ base displacements to 16 bit.
 
 #### o9
 
-Optimize 68020+ outer displacements to 16 bit.
+Optimize MC68020+ outer displacements to 16 bit.
 
 #### o10
 
@@ -94,16 +94,16 @@ Show all optimizations being performed. Default is on in Devpac-compatibility mo
 
 #### p
 
-Check if code is position independent. This will cause an error on every relocation entry being required. Default is
+Check if the code is position independent. This will cause an error on every relocation entry being required. Default is
 off.
 
 #### s
 
-Include symbols in listing file. Default is on.
+Include symbols in the listing file. Default is on.
 
 #### t
 
-Check size and type of all expressions. Default is on.
+Check the size and type of all expressions. Default is on.
 
 #### w
 
@@ -119,12 +119,9 @@ Devpac options without +/- suffix:
 
 #### l0, l1, l2
 
-Nonzero selects object file, zero selects executable file format, when Atari-TOS (`-Ftos`) or Amiga-hunk output format
+Nonzero selects the object file, zero selects the executable file format, when Atari-TOS (`-Ftos`) or Amiga-hunk output format
 (`-Fhunk`) was set on the command line.
-This option was supported by Devpac-Atari only and its original function was to select TOS-executable (0), DRI-object (
-
-1)
-
+This option was supported by Devpac-Atari only, and its original function was to select TOS-executable (0), DRI-object (1)
 or GST-object (2) output. For GST objects use (`-Fgst`) instead.
 
 #### p=`<type>[/<type>]`
@@ -162,7 +159,7 @@ The default state is off for all these options, except for `of` and `og`, which 
 
 #### oa
 
-Automatically optimize absolute Apollo destination operands to `PC`-relative references (requires 68080 code-generation
+Automatically optimize absolute Apollo destination operands to `PC`-relative references (requires MC68080 code-generation
 enabled).
 
 #### ob
@@ -183,7 +180,7 @@ Enable immediate float constant optimizations (refer to `-opt-fconst`).
 
 #### og
 
-Enable generic vasm optimizations. This includes all safe optimizations which cannot be controlled by another option.
+Enable generic vasm optimizations. This includes all safe optimizations that cannot be controlled by another option.
 
 #### oj
 
