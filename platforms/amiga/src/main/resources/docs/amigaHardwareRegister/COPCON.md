@@ -1,4 +1,4 @@
-This is a 1 bit register that when set true, allows the coprocessor
+This is a 1-bit register that when set true, allows the coprocessor
 to access the Blitter hardware. This bit is cleared power on reset,
 so that the coprocessor cannot access the Blitter hardware.
 

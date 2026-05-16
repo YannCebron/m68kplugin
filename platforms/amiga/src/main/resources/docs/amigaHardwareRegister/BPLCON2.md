@@ -2,7 +2,7 @@
 |:----:|:--------:|--------------------------------------------------------|
 | 15   | X        | Don't care - but drive to 0 for upward compatibility!  |
 |      |          |                                                        |
-| 14   | ZDBPSEL2 | 3 bit field which selects which bitplane is to be used |
+| 14   | ZDBPSEL2 | 3-bit field which selects which bitplane is to be used |
 | 13   | ZDBPSEL1 | for ZD when ZDBBPEN is set - 000 selects BB1 and 111   |
 | 12   | ZDBPSEL0 | selects BP8.                                           |
 |      |          |                                                        |

@@ -66,7 +66,7 @@ to the rest of the bit comparisons) before the coprocessor can
 exit from its wait state, or skip over an instruction. Note
 that the V7 comparison cannot be masked.
 
-The coprocessor is basically a 2 cycle machine that requests
+The coprocessor is basically a 2-cycle machine that requests
 the bus only during odd memory cycles. (4 memory cycles per in)
 
 It has priority over the Blitter and micro.
@@ -78,11 +78,11 @@ requested, 4 memory cycle times are required per instruction.
 (memory cycles are 280 ns)
 
 There are two indirect jump registers COP1LC and COP2LC.
-These are 20 bit pointer registers whose contents are used to modify
+These are 20-bit pointer registers whose contents are used to modify
 program counter for initialization or jumps.
 
 They are transferred to the program counter whenever strobe address
-[COPJMP1](COPJMP2.md) or [COPJMP2](COPJMP2.md) are written. In addition COP1LC is automatically
+[COPJMP1](COPJMP2.md) or [COPJMP2](COPJMP2.md) is written. In addition, COP1LC is automatically
 used at the beginning of each vertical blank time.
 
 It is important that one of the jump registers be initialized and its

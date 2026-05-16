@@ -15,6 +15,6 @@ BITS INITIALIZED BY RESET
 | 00    | MVBP7    | Match value for bit plane 7 collision         |
 
 
-  > Note: Disabled bit planes cannot prevent collisions. Therefore if all
+  > Note: Disabled bit planes cannot prevent collisions. Therefore, if all
 bitplanes are disabled, collision will be continuous, regardless
 of the match values.

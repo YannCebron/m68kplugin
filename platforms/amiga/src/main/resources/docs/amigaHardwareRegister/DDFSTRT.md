@@ -29,5 +29,5 @@ different register contents
 | wide (max)       | 1  | 1  | 0  | 1  | 1  |
 
 
-Note that these numbers will vary with variable beam counter
+Note that these numbers will vary with the variable beam counter
 mode set (the maxes and mins, that is).

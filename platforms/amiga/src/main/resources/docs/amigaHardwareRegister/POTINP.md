@@ -1,4 +1,4 @@
-This register controls a 4 bit bi-direction I/O port
+This register controls a 4-bit bi-direction I/O port
 that shares the same 4 pins as the 4 pot counters above.
 
 

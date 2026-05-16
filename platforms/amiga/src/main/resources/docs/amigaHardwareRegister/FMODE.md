@@ -10,9 +10,9 @@ types of Chip RAM accesses:
 |       |          | scan-doubling.                            |
 | 13-04 | _(unused)_ |                                           |
 | 03    | SPAGEM   | Sprite page mode (double CAS)             |
-| 02    | SPR32    | Sprite 32 bit wide mode                   |
+| 02    | SPR32    | Sprite 32-bit wide mode                   |
 | 01    | BPAGEM   | Bitplane Page Mode (double CAS)           |
-| 00    | BLP32    | Bitplane 32 bit wide mode                 |
+| 00    | BLP32    | Bitplane 32-bit wide mode                 |
 
 
 

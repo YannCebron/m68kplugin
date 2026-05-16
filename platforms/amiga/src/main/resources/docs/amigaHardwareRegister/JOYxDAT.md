@@ -1,4 +1,4 @@
-These addresses each read a 16 bit register. These in turn
+These addresses each read a 16-bit register. These in turn
 are loaded from the MDAT serial stream and are clocked in on
 the rising edge of SCLK. MLD output is used to parallel load
 the external parallel-to-serial converter. This in turn is
@@ -17,7 +17,7 @@ Mouse counter usage (pins 1,3 = Yclock, pins 2,4 = Xclock)
 
 0=LEFT CONTROLLER PAIR, 1=RIGHT CONTROLLER PAIR.
 (4 counters total). The bit usage for both left and right
-addresses is shown below. Each 6 bit counter (Y7-Y2,X7-X2) is
+addresses is shown below. Each 6-bit counter (Y7-Y2,X7-X2) is
 clocked by 2 of the signals input from the mouse serial
 stream. Starting with first bit received:
 

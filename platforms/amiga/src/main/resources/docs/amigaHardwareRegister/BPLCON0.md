@@ -14,7 +14,7 @@
 |      |         | defined that allows bitplane 6 to cause an intensity    |
 |      |         | reduction of the other 5 bitplanes. The color           |
 |      |         | register output selected by 5 bitplanes is shifted      |
-|      |         | to half intensity by the 6th bit plane. This is         |
+|      |         | to half-intensity by the 6th bit plane. This is         |
 |      |         | called EXTRA-HALFBRITE Mode.                            |
 | 09   |  COLOR  | Enables color burst output signal                       |
 | 08   |  GAUD   | Genlock audio enable. This level appears on the ZD      |

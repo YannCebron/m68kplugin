@@ -1,4 +1,4 @@
-This register controls all of the DMA channels, and contains
+This register controls all the DMA channels, and contains
 Blitter DMA status bits.
 
 
@@ -7,7 +7,7 @@ Blitter DMA status bits.
 | 15   | SET/CLR  | Set/Clear control bit. Determines if bits  |
 |      |          | written wit a 1 get set or cleared.        |
 |      |          | Bits written with a zero are unchanged.    |
-| 14   | BBUSY    | Blitter busy status bit (read only)        |
+| 14   | BBUSY    | Blitter busy status bit (read-only)        |
 | 13   | BZERO    | Blitter logic zero status bit. (read only) |
 | 12   | X        |                                            |
 | 11   | X        |                                            |

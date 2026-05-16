@@ -1,4 +1,4 @@
-These addresses each read a pair of 8 bit pot counters.
+These addresses each read a pair of 8-bit pot counters.
 (4 counters total). The bit assignment for both
 addresses is shown below. The counters are stopped by signals
 from 2 controller connectors (left-right) with 2 pins each.
