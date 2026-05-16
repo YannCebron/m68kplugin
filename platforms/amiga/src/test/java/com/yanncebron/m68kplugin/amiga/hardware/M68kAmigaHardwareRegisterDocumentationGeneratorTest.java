@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,8 @@ public class M68kAmigaHardwareRegisterDocumentationGeneratorTest extends TestCas
   public void testGenerateRegisterMarkdown() throws IOException {
     if (!ENABLED) return;
 
-    Set<String> descriptionNames = ContainerUtil.map2LinkedSet(EnumSet.allOf(M68kAmigaHardwareRegister.class), M68kAmigaHardwareRegister::getDescriptionFileName);
+    List<M68kAmigaHardwareRegister> hardwareRegisters = ContainerUtil.filter(EnumSet.allOf(M68kAmigaHardwareRegister.class), m68kAmigaHardwareRegister -> m68kAmigaHardwareRegister.getChipset() != M68kAmigaHardwareRegister.Chipset.N_A);
+    Set<String> descriptionNames = ContainerUtil.map2LinkedSet(hardwareRegisters, M68kAmigaHardwareRegister::getDescriptionFileName);
     assertEquals(78, descriptionNames.size());
 
     for (String descriptionName : descriptionNames) {
