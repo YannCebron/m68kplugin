@@ -31,7 +31,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType ADDA = new M68kTokenType("adda");
   public static final IElementType ADDI = new M68kTokenType("addi");
   public static final IElementType ADDQ = new M68kTokenType("addq");
-  public static final IElementType ADDRESS_REGISTER = new M68kTokenType("address_register");
+  public static final IElementType ADDRESS_REGISTER = new M68kTokenType("An");
   public static final IElementType ADDWATCH = new M68kTokenType("addwatch");
   public static final IElementType ADDX = new M68kTokenType("addx");
   public static final IElementType ALIGN = new M68kTokenType("align");
@@ -95,7 +95,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType DATA = new M68kTokenType("data");
   public static final IElementType DATA_C = new M68kTokenType("data_c");
   public static final IElementType DATA_F = new M68kTokenType("data_f");
-  public static final IElementType DATA_REGISTER = new M68kTokenType("data_register");
+  public static final IElementType DATA_REGISTER = new M68kTokenType("Dn");
   public static final IElementType DBCC = new M68kTokenType("dbcc");
   public static final IElementType DBCS = new M68kTokenType("dbcs");
   public static final IElementType DBEQ = new M68kTokenType("dbeq");

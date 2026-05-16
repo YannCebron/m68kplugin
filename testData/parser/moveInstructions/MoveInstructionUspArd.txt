@@ -7,4 +7,4 @@ M68k.FILE
       PsiElement(usp)('usp')
     PsiElement(,)(',')
     M68kAdmArdImpl(ADM_ARD)
-      PsiElement(address_register)('a0')
+      PsiElement(An)('a0')

@@ -5,6 +5,6 @@ M68k.FILE
   PsiElement(.b)('.b')
   PsiWhiteSpace(' ')
   PsiErrorElement:<DATA> expected, got 'a0'
-    PsiElement(address_register)('a0')
+    PsiElement(An)('a0')
   PsiElement(,)(',')
   PsiElement(usp)('usp')

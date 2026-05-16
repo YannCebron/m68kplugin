@@ -4,4 +4,4 @@ M68k.FILE
     PsiElement(neg)('neg')
     PsiWhiteSpace(' ')
     M68kAdmDrdImpl(ADM_DRD)
-      PsiElement(data_register)('d0')
+      PsiElement(Dn)('d0')

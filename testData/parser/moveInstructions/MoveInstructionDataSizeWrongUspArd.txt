@@ -7,4 +7,4 @@ M68k.FILE
   PsiErrorElement:<DATA> expected, got 'usp'
     PsiElement(usp)('usp')
   PsiElement(,)(',')
-  PsiElement(address_register)('a0')
+  PsiElement(An)('a0')

@@ -4,4 +4,4 @@ M68k.FILE
     PsiElement(endb)('endb')
     PsiWhiteSpace(' ')
     M68kAdmArdImpl(ADM_ARD)
-      PsiElement(address_register)('a5')
+      PsiElement(An)('a5')

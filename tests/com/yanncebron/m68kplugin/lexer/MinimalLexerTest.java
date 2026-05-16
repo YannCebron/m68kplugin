@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -155,7 +155,7 @@ public class MinimalLexerTest extends M68kLexerTestCase {
         WHITE_SPACE (' ')
         dbf ('dbf')
         WHITE_SPACE (' ')
-        data_register ('d0')
+        Dn ('d0')
         , (',')
         id ('.s')""");
   }
@@ -233,7 +233,7 @@ public class MinimalLexerTest extends M68kLexerTestCase {
         dec_number ('4')
         .l ('.l')
         , (',')
-        address_register ('a0')""");
+        An ('a0')""");
   }
 
   public void testExpressionUsingLabelsWithMnemonicName() {

@@ -8,5 +8,5 @@ M68k.FILE
         PsiElement(id)('label')
       PsiElement(()('(')
       M68kAdmArdImpl(ADM_ARD)
-        PsiElement(address_register)('a0')
+        PsiElement(An)('a0')
       PsiElement())(')')

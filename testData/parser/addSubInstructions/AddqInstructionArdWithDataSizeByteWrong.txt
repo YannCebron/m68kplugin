@@ -8,4 +8,4 @@ M68k.FILE
   PsiElement(dec_number)('1')
   PsiElement(,)(',')
   PsiErrorElement:<ALTERABLE_DATA> expected, got 'a0'
-    PsiElement(address_register)('a0')
+    PsiElement(An)('a0')

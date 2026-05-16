@@ -4,7 +4,7 @@ M68k.FILE
     PsiElement(link)('link')
     PsiWhiteSpace(' ')
     M68kAdmArdImpl(ADM_ARD)
-      PsiElement(address_register)('a0')
+      PsiElement(An)('a0')
     PsiElement(,)(',')
     M68kAdmImmImpl(ADM_IMM)
       PsiElement(#)('#')

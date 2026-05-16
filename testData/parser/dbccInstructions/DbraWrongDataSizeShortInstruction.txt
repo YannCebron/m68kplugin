@@ -6,7 +6,7 @@ M68k.FILE
       <empty list>
   PsiElement(.s)('.s')
   PsiWhiteSpace(' ')
-  PsiElement(data_register)('d0')
+  PsiElement(Dn)('d0')
   PsiElement(,)(',')
   M68kLabelImpl(LABEL)
     PsiElement(id)('label')

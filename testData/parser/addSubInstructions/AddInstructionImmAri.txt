@@ -12,5 +12,5 @@ M68k.FILE
     M68kAdmAriImpl(ADM_ARI)
       PsiElement(()('(')
       M68kAdmArdImpl(ADM_ARD)
-        PsiElement(address_register)('a3')
+        PsiElement(An)('a3')
       PsiElement())(')')

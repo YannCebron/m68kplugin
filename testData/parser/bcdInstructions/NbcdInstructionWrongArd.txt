@@ -5,4 +5,4 @@ M68k.FILE
     PsiErrorElement:<ALTERABLE_DATA> expected, got 'a0'
       <empty list>
   PsiWhiteSpace(' ')
-  PsiElement(address_register)('a0')
+  PsiElement(An)('a0')
