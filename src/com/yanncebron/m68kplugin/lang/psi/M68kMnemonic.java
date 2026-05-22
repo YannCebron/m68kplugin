@@ -18,7 +18,6 @@ package com.yanncebron.m68kplugin.lang.psi;
 
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.TestOnly;
 
 import java.util.Set;
 import java.util.function.Function;
@@ -31,12 +30,8 @@ public record M68kMnemonic(IElementType elementType,
                            M68kOperand firstOperand,
                            M68kOperand secondOperand,
                            Set<M68kCpu> cpus,
-                           PrivilegedType privilegedType) {
-
-  @TestOnly
-  public M68kMnemonic(IElementType elementType, Set<M68kDataSize> dataSizes, M68kOperand firstOperand, M68kOperand secondOperand) {
-    this(elementType, dataSizes, firstOperand, secondOperand, M68kCpu.GROUP_68000_UP, PrivilegedType.NONE);
-  }
+                           PrivilegedType privilegedType,
+                           boolean deprecated) {
 
   public boolean hasFirstOperand() {
     return firstOperand() != M68kOperand.NONE;
@@ -44,13 +39,6 @@ public record M68kMnemonic(IElementType elementType,
 
   public boolean hasSecondOperand() {
     return secondOperand() != M68kOperand.NONE;
-  }
-
-  public boolean isDeprecated() {
-    if (elementType() != M68kTokenTypes.MOVEA) return false;
-
-    return (firstOperand() == M68kOperand.DATA && secondOperand() == M68kOperand.ALTERABLE_DATA) ||
-      (firstOperand() == M68kOperand.ADDRESS_REGISTER && secondOperand() == M68kOperand.ALTERABLE);
   }
 
   public enum PrivilegedType {
@@ -90,12 +78,12 @@ public record M68kMnemonic(IElementType elementType,
 
     return "M68kMnemonic{" +
       elementType +
-      (isDeprecated() ? ", DEPRECATED" : "") +
       ", firstOp=" + firstOperand +
       ", secondOp=" + secondOperand +
       ", " + dataSizes +
       ", " + cpuText +
       (privilegedType != PrivilegedType.NONE ? ", " + privilegedType.name() : "") +
+      (deprecated() ? ", DEPRECATED" : "") +
       '}';
   }
 }

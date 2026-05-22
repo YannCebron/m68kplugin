@@ -111,12 +111,14 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
       // CPU
       String cpuText = StringUtil.substringBefore(lastSplit.get(3), "}");
+      assertNotNull(cpuText);
       final Set<M68kCpu> m68kCpus = mapCpuSet(cpuText);
       if (m68kCpus == null || m68kCpus.isEmpty()) {
         if (!SKIP_UNSUPPORTED_CPUS && elementType != null)
           System.out.println("skip entry for unknown CPU '" + cpuText + "': " + trim);
         continue;
       }
+      boolean deprecated = cpuText.contains("malias");
 
       if (isSupportedCpu(m68kCpus)) {
         if (firstOperand == null) {
@@ -152,7 +154,8 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
         firstOperand,
         secondOperand,
         m68kCpus,
-        privilegedType);
+        privilegedType,
+        deprecated);
 
       parsedMnemonics.add(m68kMnemonic);
     }
@@ -328,6 +331,9 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       }
       if (mnemonic.privilegedType() != M68kMnemonic.PrivilegedType.NONE) {
         System.out.println(".privileged(M68kMnemonic.PrivilegedType." + mnemonic.privilegedType().name() + ")");
+      }
+      if (mnemonic.deprecated()) {
+        System.out.println(".deprecated()");
       }
       System.out.println(".build();");
 

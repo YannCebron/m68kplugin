@@ -52,7 +52,7 @@ public final class M68kMnemonicRegistry {
   }
 
   /**
-   * Returns all registered mnemonics for given element type.
+   * Returns all registered mnemonics for the given element type.
    *
    * @return empty list if none registered or elementType is not instruction.
    */
@@ -61,12 +61,12 @@ public final class M68kMnemonicRegistry {
   }
 
   /**
-   * Returns (most specific) mnemonic for given instruction.
+   * Returns (most specific) mnemonic for the given instruction.
    * <p>
    * Instructions **MUST** use {@code AdmXXX} as operands.
    * It is **WRONG** to use {@link com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression} or similar directly.
    *
-   * @return {@code null} if none matching (e.g., contains parsing error or input is invalid); if multiple candidates, most specific one.
+   * @return {@code null} if none matching (e.g., contains a parsing error or input is invalid); if multiple candidates, most specific one.
    */
   @Nullable
   public M68kMnemonic find(@NotNull M68kInstruction instruction) {
@@ -152,6 +152,7 @@ public final class M68kMnemonicRegistry {
     private M68kOperand secondOperand = NONE;
     private Set<M68kCpu> cpus = M68kCpu.GROUP_68000_UP;
     private M68kMnemonic.PrivilegedType privilegedType = M68kMnemonic.PrivilegedType.NONE;
+    private boolean deprecated = false;
 
     private MnemonicBuilder(IElementType elementType) {
       this.elementType = elementType;
@@ -182,8 +183,13 @@ public final class M68kMnemonicRegistry {
       return this;
     }
 
+    private MnemonicBuilder deprecated() {
+      this.deprecated = true;
+      return this;
+    }
+
     private void build() {
-      M68kMnemonic m68kMnemonic = new M68kMnemonic(elementType, dataSizes, firstOperand, secondOperand, cpus, privilegedType);
+      M68kMnemonic m68kMnemonic = new M68kMnemonic(elementType, dataSizes, firstOperand, secondOperand, cpus, privilegedType, deprecated);
       mnemonics.putValue(m68kMnemonic.elementType(), m68kMnemonic);
     }
   }
@@ -978,10 +984,12 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.MOVEA).dataSizes(GROUP_WL)
       .first(ADDRESS_REGISTER).second(ALTERABLE)
+      .deprecated()
       .build();
 
     create(M68kTokenTypes.MOVEA).dataSizes(GROUP_BWL)
       .first(DATA).second(ALTERABLE_DATA)
+      .deprecated()
       .build();
 
 // MOVEC -----------------------------------------------------------------------

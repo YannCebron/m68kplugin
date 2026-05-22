@@ -223,7 +223,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
           dump(variant);
         } catch (AssertionError e) {
-          if (variants.getKey().isDeprecated()) {
+          if (variants.getKey().deprecated()) {
             deprecated++;
             dump(";" + variant.substring(1) + " ; DEPRECATED");
             continue;

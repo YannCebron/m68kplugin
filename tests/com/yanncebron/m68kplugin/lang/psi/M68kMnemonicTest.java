@@ -17,29 +17,27 @@
 package com.yanncebron.m68kplugin.lang.psi;
 
 import com.intellij.psi.tree.IElementType;
+import com.intellij.testFramework.UsefulTestCase;
+import com.intellij.util.SmartList;
 import junit.framework.TestCase;
 
 import java.util.Collection;
+import java.util.List;
 
 public class M68kMnemonicTest extends TestCase {
 
   public void testDeprecated() {
-    int totalDeprecated = 0;
+    List<M68kMnemonic> deprecated = new SmartList<>();
     for (IElementType instructionsType : M68kTokenGroups.INSTRUCTIONS.getTypes()) {
       final Collection<M68kMnemonic> mnemonics = M68kMnemonicRegistry.getInstance().findAll(instructionsType);
       assertFalse(instructionsType.toString(), mnemonics.isEmpty());
       for (M68kMnemonic mnemonic : mnemonics) {
-        if (mnemonic.elementType() == M68kTokenTypes.MOVEA &&
-          mnemonic.firstOperand() != M68kOperand.ALL &&
-          mnemonic.secondOperand() != M68kOperand.ADDRESS_REGISTER) {
-          assertTrue(mnemonic.toString(), mnemonic.isDeprecated());
-          totalDeprecated++;
-        } else {
-          assertFalse(mnemonic.toString(), mnemonic.isDeprecated());
+        if (mnemonic.deprecated()) {
+          deprecated.add(mnemonic);
         }
       }
     }
 
-    assertEquals(2, totalDeprecated);
+    assertEquals(UsefulTestCase.toString(deprecated), 2, deprecated.size());
   }
 }

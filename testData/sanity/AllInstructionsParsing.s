@@ -3289,7 +3289,7 @@ label35: bvs         label35
          movea.w     #42.L,a0
          movea.l     #42.L,a0
 
-* M68kMnemonic{movea, DEPRECATED, firstOp=ADDRESS_REGISTER, secondOp=ALTERABLE, [WORD, LONGWORD], MC68000 Family}
+* M68kMnemonic{movea, firstOp=ADDRESS_REGISTER, secondOp=ALTERABLE, [WORD, LONGWORD], MC68000 Family, DEPRECATED}
 ;        movea       a0,d0 ; DEPRECATED
 ;        movea.w     a0,d0 ; DEPRECATED
 ;        movea.l     a0,d0 ; DEPRECATED
@@ -3324,7 +3324,7 @@ label35: bvs         label35
 ;        movea.w     a0,$4000.L ; DEPRECATED
 ;        movea.l     a0,$4000.L ; DEPRECATED
 
-* M68kMnemonic{movea, DEPRECATED, firstOp=DATA, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family}
+* M68kMnemonic{movea, firstOp=DATA, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family, DEPRECATED}
 ;        movea       d0,d0 ; DEPRECATED
 ;        movea.b     d0,d0 ; DEPRECATED
 ;        movea.w     d0,d0 ; DEPRECATED
