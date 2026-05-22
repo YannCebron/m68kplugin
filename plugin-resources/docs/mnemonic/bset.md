@@ -14,11 +14,4 @@ A bit in the destination operand is tested and the state of the specified bit is
 
 Z: set if the bit tested is zero, cleared otherwise.
 
-## Destination operand addressing mode for `BSET Dn,<ea>` form
-|Dn|An|(An)|(An)+|&#x2011;(An)|(d,An)|(d,An,Xi)|ABS.W|ABS.L|(d,PC)|(d,PC,Xn)|imm|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|✓||✓|✓|✓|✓|✓|✓|✓||||
-
-Note that data register direct (i.e., Dn) addressing uses a longword operand, while all other modes use a byte operand.
-
 *From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*
