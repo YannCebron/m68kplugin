@@ -21,6 +21,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiErrorElement;
 import com.intellij.psi.PsiRecursiveElementVisitor;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.util.ArrayUtil;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.FactoryMap;
@@ -34,7 +35,7 @@ import java.util.*;
 import static java.util.Map.entry;
 
 /**
- * Set environment variable {@code MnemonicGeneratedParserDataTest} in run configuration to enable console output.
+ * Set environment variable {@code MnemonicGeneratedParserDataTest} in the run configuration to enable console output.
  */
 public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
@@ -179,10 +180,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
   }
 
   private static boolean containsAddressMode(M68kOperand m68kOperand, M68kAddressMode addressMode) {
-    for (M68kAddressMode mode : m68kOperand.getAddressModes()) {
-      if (mode == addressMode) return true;
-    }
-    return false;
+    return ArrayUtil.find(m68kOperand.getAddressModes(), addressMode) != -1;
   }
 
   /**
@@ -191,6 +189,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
    * <li>parsing yields no errors</li>
    * <li>mnemonic is recognized (not a macro call)</li>
    * <li>every variant returns entry via {@link M68kMnemonicRegistry#find}</li>
+   * <li>privileged instructions implement {@link M68kPrivilegedInstruction}</li>
    * </ul>
    */
   public void testGenerateAndParseAllInstructions() {
@@ -221,6 +220,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
           ensureNoErrorElements();
           ensureNoMacroCallElements();
           ensureMatchingEntryInRegistryAndCorrectPrivilegedPSI();
+
           dump(variant);
         } catch (AssertionError e) {
           if (variants.getKey().isDeprecated()) {
