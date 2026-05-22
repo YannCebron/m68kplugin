@@ -4,7 +4,7 @@
 [destination] ← [source] ⊕ [destination]
 
 ## Description
-EOR (exclusive or) the source operand with the destination operand and store the result in the destination location Note that the source operand must be a data register and that the operation `EOR <ea>,Dn` is not permitted.
+EOR (exclusive or) the source operand with the destination operand and store the result in the destination location.
 
 ## Application
 The EOR instruction is used to *toggle* (i.e., change the state of) selected bits in the operand. For example, if [D0] = 00001111, and [D1] = 10101010, the operation `EOR.B D0,D1` toggles bits 0 to 3 of D1 and results in [D1] = 10100101.

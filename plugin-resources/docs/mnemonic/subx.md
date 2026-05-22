@@ -4,7 +4,7 @@
 [destination] ← [destination] - [source] - [X]
 
 ## Description
-Subtract the source operand from the destination operand along with the extend bit, and store the result in the destination location. The only legal addressing modes are data register direct and memory to memory with address register indirect using auto-decrementing.
+Subtract the source operand from the destination operand along with the extend bit, and store the result in the destination location.
 
 ## Condition codes
 | X | N | Z | V | C |
