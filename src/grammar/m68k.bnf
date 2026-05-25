@@ -454,7 +454,12 @@ move_instruction ::= MOVE
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kPrivilegedInstruction"
 }
 
-movea_instruction ::= MOVEA tail_data_size_word_long___all__ard
+movea_instruction ::= MOVEA
+                      (
+                        move_tail_ard_alterable |            // deprecated
+                        move_tail_data_alterable_data |      // deprecated
+                        tail_data_size_word_long___all__ard
+                      )
 
 moveq_instruction ::= MOVEQ data_size_long?
                       adm_quick COMMA adm_drd

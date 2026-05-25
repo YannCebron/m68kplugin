@@ -6,6 +6,7 @@
 
 - Dedicated _68_ icon for files
 - Parser error messages: shorten and align with semantics from mnemonic doc
+- Deprecated mnemonic variants: highlight with strikethrough in editor and mnemonic docs (currently only `movea`)
 
 ### Added
 

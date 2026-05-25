@@ -77,8 +77,12 @@ class M68kInstructionMnemonicDocsGenerator {
 
     for (Iterator<M68kMnemonic> iterator = allMnemonics.iterator(); iterator.hasNext(); ) {
       M68kMnemonic mnemonic = iterator.next();
-      if (specific == mnemonic) {
-        sb.append("<h4 style=\"text-decoration: underline;\"> ");
+      String style = specific == mnemonic ? "underline" : "";
+      if (mnemonic.deprecated()) {
+        style += " line-through";
+      }
+      if (!style.isEmpty()) {
+        sb.append("<h4 style=\"text-decoration: ").append(style).append(";\"> ");
       } else {
         sb.append("<h4>");
       }
@@ -89,10 +93,8 @@ class M68kInstructionMnemonicDocsGenerator {
       dataSizeText = StringUtil.escapeXmlEntities(dataSizeText); // "<unsized>"
       dataSizeText = dataSizeText.replace(".", M68kDocumentationUtil.NON_BREAK_PERIOD);
 
-      boolean deprecated = mnemonic.deprecated();
       String mnemonicText = StringUtil.toUpperCase(elementType.toString());
       sb.append("<code>");
-      if (deprecated) sb.append("<strike>");
       sb.append(mnemonicText).append(dataSizeText);
 
       if (mnemonic.hasFirstOperand()) {
@@ -101,7 +103,6 @@ class M68kInstructionMnemonicDocsGenerator {
         appendOperand(mnemonic.secondOperand(), ",");
       }
 
-      if (deprecated) sb.append("</strike>");
       sb.append("</code></h4>");
 
 

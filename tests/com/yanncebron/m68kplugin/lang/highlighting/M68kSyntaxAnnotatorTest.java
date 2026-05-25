@@ -20,6 +20,16 @@ import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 
 public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
 
+  public void testDeprecatedMnemonic() {
+    myFixture.configureByText("test.s",
+      """
+          movea a0,a0
+          <warning descr="Deprecated mnemonic" textAttributesKey="DEPRECATED_ATTRIBUTES">movea a0,d0</warning>
+          <warning descr="Deprecated mnemonic" textAttributesKey="DEPRECATED_ATTRIBUTES">movea d0,d0</warning>
+        """);
+    myFixture.testHighlighting();
+  }
+
   public void testPrivilegedInstructions() {
     myFixture.configureByText("test.s",
       """

@@ -47,7 +47,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
   private static final String INDENT = "         ";
   private int labelCounter = 0;
-  private int total = 0, deprecated = 0;
+  private int total = 0;
   private final List<String> failedVariants = new SmartList<>();
 
   public MnemonicGeneratedParserDataTest() {
@@ -60,7 +60,6 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
     labelCounter = 0;
     total = 0;
-    deprecated = 0;
     failedVariants.clear();
   }
 
@@ -69,7 +68,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
     try {
       super.tearDown();
     } finally {
-      dump("\n* " + failedVariants.size() + "/" + total + " deprecated: " + deprecated);
+      dump("\n* " + failedVariants.size() + "/" + total);
     }
   }
 
@@ -175,7 +174,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
     assertEquals(148661, total);
     assertEquals(18716, skippedValidCount);
-    assertEquals(1280, matchedByMnemonicCount);
+    assertEquals(1399, matchedByMnemonicCount);
     assertEmpty(failedVariants);
   }
 
@@ -201,7 +200,6 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
     assertEquals(5428, total);
     assertEmpty(failedVariants);
-    assertEquals(781, deprecated);
   }
 
   private void doParserTest(IElementType instructionsType) {
@@ -223,12 +221,6 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
           dump(variant);
         } catch (AssertionError e) {
-          if (variants.getKey().deprecated()) {
-            deprecated++;
-            dump(";" + variant.substring(1) + " ; DEPRECATED");
-            continue;
-          }
-
           final String failedVariantText = variant + " ; FAILED " + StringUtil.convertLineSeparators(e.getMessage(), " ");
           failedVariants.add(failedVariantText);
           dump(failedVariantText);

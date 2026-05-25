@@ -6,5 +6,5 @@ M68k.FILE
     M68kAdmArdImpl(ADM_ARD)
       PsiElement(An)('a0')
     PsiElement(,)(',')
-    PsiErrorElement:<An> expected
+    PsiErrorElement:<ALTERABLE> or <An> expected
       <empty list>

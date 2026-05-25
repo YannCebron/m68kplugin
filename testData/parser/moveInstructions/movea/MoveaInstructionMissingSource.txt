@@ -2,6 +2,6 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kMoveaInstructionImpl(MOVEA_INSTRUCTION)
     PsiElement(movea)('movea')
-    PsiErrorElement:<ALL> expected
+    PsiErrorElement:<ALL>, <An> or <DATA> expected
       <empty list>
   PsiWhiteSpace(' ')

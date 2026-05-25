@@ -3290,789 +3290,789 @@ label35: bvs         label35
          movea.l     #42.L,a0
 
 * M68kMnemonic{movea, firstOp=ADDRESS_REGISTER, secondOp=ALTERABLE, [WORD, LONGWORD], MC68000 Family, DEPRECATED}
-;        movea       a0,d0 ; DEPRECATED
-;        movea.w     a0,d0 ; DEPRECATED
-;        movea.l     a0,d0 ; DEPRECATED
-;        movea       a0,(a0) ; DEPRECATED
-;        movea.w     a0,(a0) ; DEPRECATED
-;        movea.l     a0,(a0) ; DEPRECATED
-;        movea       a0,(a0)+ ; DEPRECATED
-;        movea.w     a0,(a0)+ ; DEPRECATED
-;        movea.l     a0,(a0)+ ; DEPRECATED
-;        movea       a0,-(a0) ; DEPRECATED
-;        movea.w     a0,-(a0) ; DEPRECATED
-;        movea.l     a0,-(a0) ; DEPRECATED
-;        movea       a0,42(a0) ; DEPRECATED
-;        movea.w     a0,42(a0) ; DEPRECATED
-;        movea.l     a0,42(a0) ; DEPRECATED
-;        movea       a0,(-42,a0) ; DEPRECATED
-;        movea.w     a0,(-42,a0) ; DEPRECATED
-;        movea.l     a0,(-42,a0) ; DEPRECATED
-;        movea       a0,12(a0,d0) ; DEPRECATED
-;        movea.w     a0,12(a0,d0) ; DEPRECATED
-;        movea.l     a0,12(a0,d0) ; DEPRECATED
-;        movea       a0,(12,a0,a0) ; DEPRECATED
-;        movea.w     a0,(12,a0,a0) ; DEPRECATED
-;        movea.l     a0,(12,a0,a0) ; DEPRECATED
-;        movea       a0,$4000 ; DEPRECATED
-;        movea.w     a0,$4000 ; DEPRECATED
-;        movea.l     a0,$4000 ; DEPRECATED
-;        movea       a0,$4000.W ; DEPRECATED
-;        movea.w     a0,$4000.W ; DEPRECATED
-;        movea.l     a0,$4000.W ; DEPRECATED
-;        movea       a0,$4000.L ; DEPRECATED
-;        movea.w     a0,$4000.L ; DEPRECATED
-;        movea.l     a0,$4000.L ; DEPRECATED
+         movea       a0,d0
+         movea.w     a0,d0
+         movea.l     a0,d0
+         movea       a0,(a0)
+         movea.w     a0,(a0)
+         movea.l     a0,(a0)
+         movea       a0,(a0)+
+         movea.w     a0,(a0)+
+         movea.l     a0,(a0)+
+         movea       a0,-(a0)
+         movea.w     a0,-(a0)
+         movea.l     a0,-(a0)
+         movea       a0,42(a0)
+         movea.w     a0,42(a0)
+         movea.l     a0,42(a0)
+         movea       a0,(-42,a0)
+         movea.w     a0,(-42,a0)
+         movea.l     a0,(-42,a0)
+         movea       a0,12(a0,d0)
+         movea.w     a0,12(a0,d0)
+         movea.l     a0,12(a0,d0)
+         movea       a0,(12,a0,a0)
+         movea.w     a0,(12,a0,a0)
+         movea.l     a0,(12,a0,a0)
+         movea       a0,$4000
+         movea.w     a0,$4000
+         movea.l     a0,$4000
+         movea       a0,$4000.W
+         movea.w     a0,$4000.W
+         movea.l     a0,$4000.W
+         movea       a0,$4000.L
+         movea.w     a0,$4000.L
+         movea.l     a0,$4000.L
 
 * M68kMnemonic{movea, firstOp=DATA, secondOp=ALTERABLE_DATA, [BYTE, WORD, LONGWORD], MC68000 Family, DEPRECATED}
-;        movea       d0,d0 ; DEPRECATED
-;        movea.b     d0,d0 ; DEPRECATED
-;        movea.w     d0,d0 ; DEPRECATED
-;        movea.l     d0,d0 ; DEPRECATED
-;        movea       d0,(a0) ; DEPRECATED
-;        movea.b     d0,(a0) ; DEPRECATED
-;        movea.w     d0,(a0) ; DEPRECATED
-;        movea.l     d0,(a0) ; DEPRECATED
-;        movea       d0,(a0)+ ; DEPRECATED
-;        movea.b     d0,(a0)+ ; DEPRECATED
-;        movea.w     d0,(a0)+ ; DEPRECATED
-;        movea.l     d0,(a0)+ ; DEPRECATED
-;        movea       d0,-(a0) ; DEPRECATED
-;        movea.b     d0,-(a0) ; DEPRECATED
-;        movea.w     d0,-(a0) ; DEPRECATED
-;        movea.l     d0,-(a0) ; DEPRECATED
-;        movea       d0,42(a0) ; DEPRECATED
-;        movea.b     d0,42(a0) ; DEPRECATED
-;        movea.w     d0,42(a0) ; DEPRECATED
-;        movea.l     d0,42(a0) ; DEPRECATED
-;        movea       d0,(-42,a0) ; DEPRECATED
-;        movea.b     d0,(-42,a0) ; DEPRECATED
-;        movea.w     d0,(-42,a0) ; DEPRECATED
-;        movea.l     d0,(-42,a0) ; DEPRECATED
-;        movea       d0,12(a0,d0) ; DEPRECATED
-;        movea.b     d0,12(a0,d0) ; DEPRECATED
-;        movea.w     d0,12(a0,d0) ; DEPRECATED
-;        movea.l     d0,12(a0,d0) ; DEPRECATED
-;        movea       d0,(12,a0,a0) ; DEPRECATED
-;        movea.b     d0,(12,a0,a0) ; DEPRECATED
-;        movea.w     d0,(12,a0,a0) ; DEPRECATED
-;        movea.l     d0,(12,a0,a0) ; DEPRECATED
-;        movea       d0,$4000 ; DEPRECATED
-;        movea.b     d0,$4000 ; DEPRECATED
-;        movea.w     d0,$4000 ; DEPRECATED
-;        movea.l     d0,$4000 ; DEPRECATED
-;        movea       d0,$4000.W ; DEPRECATED
-;        movea.b     d0,$4000.W ; DEPRECATED
-;        movea.w     d0,$4000.W ; DEPRECATED
-;        movea.l     d0,$4000.W ; DEPRECATED
-;        movea       d0,$4000.L ; DEPRECATED
-;        movea.b     d0,$4000.L ; DEPRECATED
-;        movea.w     d0,$4000.L ; DEPRECATED
-;        movea.l     d0,$4000.L ; DEPRECATED
-;        movea       #42.L,d0 ; DEPRECATED
-;        movea.b     #42.L,d0 ; DEPRECATED
-;        movea.w     #42.L,d0 ; DEPRECATED
-;        movea.l     #42.L,d0 ; DEPRECATED
-;        movea       #42.L,(a0) ; DEPRECATED
-;        movea.b     #42.L,(a0) ; DEPRECATED
-;        movea.w     #42.L,(a0) ; DEPRECATED
-;        movea.l     #42.L,(a0) ; DEPRECATED
-;        movea       #42.L,(a0)+ ; DEPRECATED
-;        movea.b     #42.L,(a0)+ ; DEPRECATED
-;        movea.w     #42.L,(a0)+ ; DEPRECATED
-;        movea.l     #42.L,(a0)+ ; DEPRECATED
-;        movea       #42.L,-(a0) ; DEPRECATED
-;        movea.b     #42.L,-(a0) ; DEPRECATED
-;        movea.w     #42.L,-(a0) ; DEPRECATED
-;        movea.l     #42.L,-(a0) ; DEPRECATED
-;        movea       #42.L,42(a0) ; DEPRECATED
-;        movea.b     #42.L,42(a0) ; DEPRECATED
-;        movea.w     #42.L,42(a0) ; DEPRECATED
-;        movea.l     #42.L,42(a0) ; DEPRECATED
-;        movea       #42.L,(-42,a0) ; DEPRECATED
-;        movea.b     #42.L,(-42,a0) ; DEPRECATED
-;        movea.w     #42.L,(-42,a0) ; DEPRECATED
-;        movea.l     #42.L,(-42,a0) ; DEPRECATED
-;        movea       #42.L,12(a0,d0) ; DEPRECATED
-;        movea.b     #42.L,12(a0,d0) ; DEPRECATED
-;        movea.w     #42.L,12(a0,d0) ; DEPRECATED
-;        movea.l     #42.L,12(a0,d0) ; DEPRECATED
-;        movea       #42.L,(12,a0,a0) ; DEPRECATED
-;        movea.b     #42.L,(12,a0,a0) ; DEPRECATED
-;        movea.w     #42.L,(12,a0,a0) ; DEPRECATED
-;        movea.l     #42.L,(12,a0,a0) ; DEPRECATED
-;        movea       #42.L,$4000 ; DEPRECATED
-;        movea.b     #42.L,$4000 ; DEPRECATED
-;        movea.w     #42.L,$4000 ; DEPRECATED
-;        movea.l     #42.L,$4000 ; DEPRECATED
-;        movea       #42.L,$4000.W ; DEPRECATED
-;        movea.b     #42.L,$4000.W ; DEPRECATED
-;        movea.w     #42.L,$4000.W ; DEPRECATED
-;        movea.l     #42.L,$4000.W ; DEPRECATED
-;        movea       #42.L,$4000.L ; DEPRECATED
-;        movea.b     #42.L,$4000.L ; DEPRECATED
-;        movea.w     #42.L,$4000.L ; DEPRECATED
-;        movea.l     #42.L,$4000.L ; DEPRECATED
-;        movea       (a0),d0 ; DEPRECATED
-;        movea.b     (a0),d0 ; DEPRECATED
-;        movea.w     (a0),d0 ; DEPRECATED
-;        movea.l     (a0),d0 ; DEPRECATED
-;        movea       (a0),(a0) ; DEPRECATED
-;        movea.b     (a0),(a0) ; DEPRECATED
-;        movea.w     (a0),(a0) ; DEPRECATED
-;        movea.l     (a0),(a0) ; DEPRECATED
-;        movea       (a0),(a0)+ ; DEPRECATED
-;        movea.b     (a0),(a0)+ ; DEPRECATED
-;        movea.w     (a0),(a0)+ ; DEPRECATED
-;        movea.l     (a0),(a0)+ ; DEPRECATED
-;        movea       (a0),-(a0) ; DEPRECATED
-;        movea.b     (a0),-(a0) ; DEPRECATED
-;        movea.w     (a0),-(a0) ; DEPRECATED
-;        movea.l     (a0),-(a0) ; DEPRECATED
-;        movea       (a0),42(a0) ; DEPRECATED
-;        movea.b     (a0),42(a0) ; DEPRECATED
-;        movea.w     (a0),42(a0) ; DEPRECATED
-;        movea.l     (a0),42(a0) ; DEPRECATED
-;        movea       (a0),(-42,a0) ; DEPRECATED
-;        movea.b     (a0),(-42,a0) ; DEPRECATED
-;        movea.w     (a0),(-42,a0) ; DEPRECATED
-;        movea.l     (a0),(-42,a0) ; DEPRECATED
-;        movea       (a0),12(a0,d0) ; DEPRECATED
-;        movea.b     (a0),12(a0,d0) ; DEPRECATED
-;        movea.w     (a0),12(a0,d0) ; DEPRECATED
-;        movea.l     (a0),12(a0,d0) ; DEPRECATED
-;        movea       (a0),(12,a0,a0) ; DEPRECATED
-;        movea.b     (a0),(12,a0,a0) ; DEPRECATED
-;        movea.w     (a0),(12,a0,a0) ; DEPRECATED
-;        movea.l     (a0),(12,a0,a0) ; DEPRECATED
-;        movea       (a0),$4000 ; DEPRECATED
-;        movea.b     (a0),$4000 ; DEPRECATED
-;        movea.w     (a0),$4000 ; DEPRECATED
-;        movea.l     (a0),$4000 ; DEPRECATED
-;        movea       (a0),$4000.W ; DEPRECATED
-;        movea.b     (a0),$4000.W ; DEPRECATED
-;        movea.w     (a0),$4000.W ; DEPRECATED
-;        movea.l     (a0),$4000.W ; DEPRECATED
-;        movea       (a0),$4000.L ; DEPRECATED
-;        movea.b     (a0),$4000.L ; DEPRECATED
-;        movea.w     (a0),$4000.L ; DEPRECATED
-;        movea.l     (a0),$4000.L ; DEPRECATED
-;        movea       (a0)+,d0 ; DEPRECATED
-;        movea.b     (a0)+,d0 ; DEPRECATED
-;        movea.w     (a0)+,d0 ; DEPRECATED
-;        movea.l     (a0)+,d0 ; DEPRECATED
-;        movea       (a0)+,(a0) ; DEPRECATED
-;        movea.b     (a0)+,(a0) ; DEPRECATED
-;        movea.w     (a0)+,(a0) ; DEPRECATED
-;        movea.l     (a0)+,(a0) ; DEPRECATED
-;        movea       (a0)+,(a0)+ ; DEPRECATED
-;        movea.b     (a0)+,(a0)+ ; DEPRECATED
-;        movea.w     (a0)+,(a0)+ ; DEPRECATED
-;        movea.l     (a0)+,(a0)+ ; DEPRECATED
-;        movea       (a0)+,-(a0) ; DEPRECATED
-;        movea.b     (a0)+,-(a0) ; DEPRECATED
-;        movea.w     (a0)+,-(a0) ; DEPRECATED
-;        movea.l     (a0)+,-(a0) ; DEPRECATED
-;        movea       (a0)+,42(a0) ; DEPRECATED
-;        movea.b     (a0)+,42(a0) ; DEPRECATED
-;        movea.w     (a0)+,42(a0) ; DEPRECATED
-;        movea.l     (a0)+,42(a0) ; DEPRECATED
-;        movea       (a0)+,(-42,a0) ; DEPRECATED
-;        movea.b     (a0)+,(-42,a0) ; DEPRECATED
-;        movea.w     (a0)+,(-42,a0) ; DEPRECATED
-;        movea.l     (a0)+,(-42,a0) ; DEPRECATED
-;        movea       (a0)+,12(a0,d0) ; DEPRECATED
-;        movea.b     (a0)+,12(a0,d0) ; DEPRECATED
-;        movea.w     (a0)+,12(a0,d0) ; DEPRECATED
-;        movea.l     (a0)+,12(a0,d0) ; DEPRECATED
-;        movea       (a0)+,(12,a0,a0) ; DEPRECATED
-;        movea.b     (a0)+,(12,a0,a0) ; DEPRECATED
-;        movea.w     (a0)+,(12,a0,a0) ; DEPRECATED
-;        movea.l     (a0)+,(12,a0,a0) ; DEPRECATED
-;        movea       (a0)+,$4000 ; DEPRECATED
-;        movea.b     (a0)+,$4000 ; DEPRECATED
-;        movea.w     (a0)+,$4000 ; DEPRECATED
-;        movea.l     (a0)+,$4000 ; DEPRECATED
-;        movea       (a0)+,$4000.W ; DEPRECATED
-;        movea.b     (a0)+,$4000.W ; DEPRECATED
-;        movea.w     (a0)+,$4000.W ; DEPRECATED
-;        movea.l     (a0)+,$4000.W ; DEPRECATED
-;        movea       (a0)+,$4000.L ; DEPRECATED
-;        movea.b     (a0)+,$4000.L ; DEPRECATED
-;        movea.w     (a0)+,$4000.L ; DEPRECATED
-;        movea.l     (a0)+,$4000.L ; DEPRECATED
-;        movea       -(a0),d0 ; DEPRECATED
-;        movea.b     -(a0),d0 ; DEPRECATED
-;        movea.w     -(a0),d0 ; DEPRECATED
-;        movea.l     -(a0),d0 ; DEPRECATED
-;        movea       -(a0),(a0) ; DEPRECATED
-;        movea.b     -(a0),(a0) ; DEPRECATED
-;        movea.w     -(a0),(a0) ; DEPRECATED
-;        movea.l     -(a0),(a0) ; DEPRECATED
-;        movea       -(a0),(a0)+ ; DEPRECATED
-;        movea.b     -(a0),(a0)+ ; DEPRECATED
-;        movea.w     -(a0),(a0)+ ; DEPRECATED
-;        movea.l     -(a0),(a0)+ ; DEPRECATED
-;        movea       -(a0),-(a0) ; DEPRECATED
-;        movea.b     -(a0),-(a0) ; DEPRECATED
-;        movea.w     -(a0),-(a0) ; DEPRECATED
-;        movea.l     -(a0),-(a0) ; DEPRECATED
-;        movea       -(a0),42(a0) ; DEPRECATED
-;        movea.b     -(a0),42(a0) ; DEPRECATED
-;        movea.w     -(a0),42(a0) ; DEPRECATED
-;        movea.l     -(a0),42(a0) ; DEPRECATED
-;        movea       -(a0),(-42,a0) ; DEPRECATED
-;        movea.b     -(a0),(-42,a0) ; DEPRECATED
-;        movea.w     -(a0),(-42,a0) ; DEPRECATED
-;        movea.l     -(a0),(-42,a0) ; DEPRECATED
-;        movea       -(a0),12(a0,d0) ; DEPRECATED
-;        movea.b     -(a0),12(a0,d0) ; DEPRECATED
-;        movea.w     -(a0),12(a0,d0) ; DEPRECATED
-;        movea.l     -(a0),12(a0,d0) ; DEPRECATED
-;        movea       -(a0),(12,a0,a0) ; DEPRECATED
-;        movea.b     -(a0),(12,a0,a0) ; DEPRECATED
-;        movea.w     -(a0),(12,a0,a0) ; DEPRECATED
-;        movea.l     -(a0),(12,a0,a0) ; DEPRECATED
-;        movea       -(a0),$4000 ; DEPRECATED
-;        movea.b     -(a0),$4000 ; DEPRECATED
-;        movea.w     -(a0),$4000 ; DEPRECATED
-;        movea.l     -(a0),$4000 ; DEPRECATED
-;        movea       -(a0),$4000.W ; DEPRECATED
-;        movea.b     -(a0),$4000.W ; DEPRECATED
-;        movea.w     -(a0),$4000.W ; DEPRECATED
-;        movea.l     -(a0),$4000.W ; DEPRECATED
-;        movea       -(a0),$4000.L ; DEPRECATED
-;        movea.b     -(a0),$4000.L ; DEPRECATED
-;        movea.w     -(a0),$4000.L ; DEPRECATED
-;        movea.l     -(a0),$4000.L ; DEPRECATED
-;        movea       42(a0),d0 ; DEPRECATED
-;        movea.b     42(a0),d0 ; DEPRECATED
-;        movea.w     42(a0),d0 ; DEPRECATED
-;        movea.l     42(a0),d0 ; DEPRECATED
-;        movea       42(a0),(a0) ; DEPRECATED
-;        movea.b     42(a0),(a0) ; DEPRECATED
-;        movea.w     42(a0),(a0) ; DEPRECATED
-;        movea.l     42(a0),(a0) ; DEPRECATED
-;        movea       42(a0),(a0)+ ; DEPRECATED
-;        movea.b     42(a0),(a0)+ ; DEPRECATED
-;        movea.w     42(a0),(a0)+ ; DEPRECATED
-;        movea.l     42(a0),(a0)+ ; DEPRECATED
-;        movea       42(a0),-(a0) ; DEPRECATED
-;        movea.b     42(a0),-(a0) ; DEPRECATED
-;        movea.w     42(a0),-(a0) ; DEPRECATED
-;        movea.l     42(a0),-(a0) ; DEPRECATED
-;        movea       42(a0),42(a0) ; DEPRECATED
-;        movea.b     42(a0),42(a0) ; DEPRECATED
-;        movea.w     42(a0),42(a0) ; DEPRECATED
-;        movea.l     42(a0),42(a0) ; DEPRECATED
-;        movea       42(a0),(-42,a0) ; DEPRECATED
-;        movea.b     42(a0),(-42,a0) ; DEPRECATED
-;        movea.w     42(a0),(-42,a0) ; DEPRECATED
-;        movea.l     42(a0),(-42,a0) ; DEPRECATED
-;        movea       42(a0),12(a0,d0) ; DEPRECATED
-;        movea.b     42(a0),12(a0,d0) ; DEPRECATED
-;        movea.w     42(a0),12(a0,d0) ; DEPRECATED
-;        movea.l     42(a0),12(a0,d0) ; DEPRECATED
-;        movea       42(a0),(12,a0,a0) ; DEPRECATED
-;        movea.b     42(a0),(12,a0,a0) ; DEPRECATED
-;        movea.w     42(a0),(12,a0,a0) ; DEPRECATED
-;        movea.l     42(a0),(12,a0,a0) ; DEPRECATED
-;        movea       42(a0),$4000 ; DEPRECATED
-;        movea.b     42(a0),$4000 ; DEPRECATED
-;        movea.w     42(a0),$4000 ; DEPRECATED
-;        movea.l     42(a0),$4000 ; DEPRECATED
-;        movea       42(a0),$4000.W ; DEPRECATED
-;        movea.b     42(a0),$4000.W ; DEPRECATED
-;        movea.w     42(a0),$4000.W ; DEPRECATED
-;        movea.l     42(a0),$4000.W ; DEPRECATED
-;        movea       42(a0),$4000.L ; DEPRECATED
-;        movea.b     42(a0),$4000.L ; DEPRECATED
-;        movea.w     42(a0),$4000.L ; DEPRECATED
-;        movea.l     42(a0),$4000.L ; DEPRECATED
-;        movea       (-42,a0),d0 ; DEPRECATED
-;        movea.b     (-42,a0),d0 ; DEPRECATED
-;        movea.w     (-42,a0),d0 ; DEPRECATED
-;        movea.l     (-42,a0),d0 ; DEPRECATED
-;        movea       (-42,a0),(a0) ; DEPRECATED
-;        movea.b     (-42,a0),(a0) ; DEPRECATED
-;        movea.w     (-42,a0),(a0) ; DEPRECATED
-;        movea.l     (-42,a0),(a0) ; DEPRECATED
-;        movea       (-42,a0),(a0)+ ; DEPRECATED
-;        movea.b     (-42,a0),(a0)+ ; DEPRECATED
-;        movea.w     (-42,a0),(a0)+ ; DEPRECATED
-;        movea.l     (-42,a0),(a0)+ ; DEPRECATED
-;        movea       (-42,a0),-(a0) ; DEPRECATED
-;        movea.b     (-42,a0),-(a0) ; DEPRECATED
-;        movea.w     (-42,a0),-(a0) ; DEPRECATED
-;        movea.l     (-42,a0),-(a0) ; DEPRECATED
-;        movea       (-42,a0),42(a0) ; DEPRECATED
-;        movea.b     (-42,a0),42(a0) ; DEPRECATED
-;        movea.w     (-42,a0),42(a0) ; DEPRECATED
-;        movea.l     (-42,a0),42(a0) ; DEPRECATED
-;        movea       (-42,a0),(-42,a0) ; DEPRECATED
-;        movea.b     (-42,a0),(-42,a0) ; DEPRECATED
-;        movea.w     (-42,a0),(-42,a0) ; DEPRECATED
-;        movea.l     (-42,a0),(-42,a0) ; DEPRECATED
-;        movea       (-42,a0),12(a0,d0) ; DEPRECATED
-;        movea.b     (-42,a0),12(a0,d0) ; DEPRECATED
-;        movea.w     (-42,a0),12(a0,d0) ; DEPRECATED
-;        movea.l     (-42,a0),12(a0,d0) ; DEPRECATED
-;        movea       (-42,a0),(12,a0,a0) ; DEPRECATED
-;        movea.b     (-42,a0),(12,a0,a0) ; DEPRECATED
-;        movea.w     (-42,a0),(12,a0,a0) ; DEPRECATED
-;        movea.l     (-42,a0),(12,a0,a0) ; DEPRECATED
-;        movea       (-42,a0),$4000 ; DEPRECATED
-;        movea.b     (-42,a0),$4000 ; DEPRECATED
-;        movea.w     (-42,a0),$4000 ; DEPRECATED
-;        movea.l     (-42,a0),$4000 ; DEPRECATED
-;        movea       (-42,a0),$4000.W ; DEPRECATED
-;        movea.b     (-42,a0),$4000.W ; DEPRECATED
-;        movea.w     (-42,a0),$4000.W ; DEPRECATED
-;        movea.l     (-42,a0),$4000.W ; DEPRECATED
-;        movea       (-42,a0),$4000.L ; DEPRECATED
-;        movea.b     (-42,a0),$4000.L ; DEPRECATED
-;        movea.w     (-42,a0),$4000.L ; DEPRECATED
-;        movea.l     (-42,a0),$4000.L ; DEPRECATED
-;        movea       12(a0,d0),d0 ; DEPRECATED
-;        movea.b     12(a0,d0),d0 ; DEPRECATED
-;        movea.w     12(a0,d0),d0 ; DEPRECATED
-;        movea.l     12(a0,d0),d0 ; DEPRECATED
-;        movea       12(a0,d0),(a0) ; DEPRECATED
-;        movea.b     12(a0,d0),(a0) ; DEPRECATED
-;        movea.w     12(a0,d0),(a0) ; DEPRECATED
-;        movea.l     12(a0,d0),(a0) ; DEPRECATED
-;        movea       12(a0,d0),(a0)+ ; DEPRECATED
-;        movea.b     12(a0,d0),(a0)+ ; DEPRECATED
-;        movea.w     12(a0,d0),(a0)+ ; DEPRECATED
-;        movea.l     12(a0,d0),(a0)+ ; DEPRECATED
-;        movea       12(a0,d0),-(a0) ; DEPRECATED
-;        movea.b     12(a0,d0),-(a0) ; DEPRECATED
-;        movea.w     12(a0,d0),-(a0) ; DEPRECATED
-;        movea.l     12(a0,d0),-(a0) ; DEPRECATED
-;        movea       12(a0,d0),42(a0) ; DEPRECATED
-;        movea.b     12(a0,d0),42(a0) ; DEPRECATED
-;        movea.w     12(a0,d0),42(a0) ; DEPRECATED
-;        movea.l     12(a0,d0),42(a0) ; DEPRECATED
-;        movea       12(a0,d0),(-42,a0) ; DEPRECATED
-;        movea.b     12(a0,d0),(-42,a0) ; DEPRECATED
-;        movea.w     12(a0,d0),(-42,a0) ; DEPRECATED
-;        movea.l     12(a0,d0),(-42,a0) ; DEPRECATED
-;        movea       12(a0,d0),12(a0,d0) ; DEPRECATED
-;        movea.b     12(a0,d0),12(a0,d0) ; DEPRECATED
-;        movea.w     12(a0,d0),12(a0,d0) ; DEPRECATED
-;        movea.l     12(a0,d0),12(a0,d0) ; DEPRECATED
-;        movea       12(a0,d0),(12,a0,a0) ; DEPRECATED
-;        movea.b     12(a0,d0),(12,a0,a0) ; DEPRECATED
-;        movea.w     12(a0,d0),(12,a0,a0) ; DEPRECATED
-;        movea.l     12(a0,d0),(12,a0,a0) ; DEPRECATED
-;        movea       12(a0,d0),$4000 ; DEPRECATED
-;        movea.b     12(a0,d0),$4000 ; DEPRECATED
-;        movea.w     12(a0,d0),$4000 ; DEPRECATED
-;        movea.l     12(a0,d0),$4000 ; DEPRECATED
-;        movea       12(a0,d0),$4000.W ; DEPRECATED
-;        movea.b     12(a0,d0),$4000.W ; DEPRECATED
-;        movea.w     12(a0,d0),$4000.W ; DEPRECATED
-;        movea.l     12(a0,d0),$4000.W ; DEPRECATED
-;        movea       12(a0,d0),$4000.L ; DEPRECATED
-;        movea.b     12(a0,d0),$4000.L ; DEPRECATED
-;        movea.w     12(a0,d0),$4000.L ; DEPRECATED
-;        movea.l     12(a0,d0),$4000.L ; DEPRECATED
-;        movea       (12,a0,a0),d0 ; DEPRECATED
-;        movea.b     (12,a0,a0),d0 ; DEPRECATED
-;        movea.w     (12,a0,a0),d0 ; DEPRECATED
-;        movea.l     (12,a0,a0),d0 ; DEPRECATED
-;        movea       (12,a0,a0),(a0) ; DEPRECATED
-;        movea.b     (12,a0,a0),(a0) ; DEPRECATED
-;        movea.w     (12,a0,a0),(a0) ; DEPRECATED
-;        movea.l     (12,a0,a0),(a0) ; DEPRECATED
-;        movea       (12,a0,a0),(a0)+ ; DEPRECATED
-;        movea.b     (12,a0,a0),(a0)+ ; DEPRECATED
-;        movea.w     (12,a0,a0),(a0)+ ; DEPRECATED
-;        movea.l     (12,a0,a0),(a0)+ ; DEPRECATED
-;        movea       (12,a0,a0),-(a0) ; DEPRECATED
-;        movea.b     (12,a0,a0),-(a0) ; DEPRECATED
-;        movea.w     (12,a0,a0),-(a0) ; DEPRECATED
-;        movea.l     (12,a0,a0),-(a0) ; DEPRECATED
-;        movea       (12,a0,a0),42(a0) ; DEPRECATED
-;        movea.b     (12,a0,a0),42(a0) ; DEPRECATED
-;        movea.w     (12,a0,a0),42(a0) ; DEPRECATED
-;        movea.l     (12,a0,a0),42(a0) ; DEPRECATED
-;        movea       (12,a0,a0),(-42,a0) ; DEPRECATED
-;        movea.b     (12,a0,a0),(-42,a0) ; DEPRECATED
-;        movea.w     (12,a0,a0),(-42,a0) ; DEPRECATED
-;        movea.l     (12,a0,a0),(-42,a0) ; DEPRECATED
-;        movea       (12,a0,a0),12(a0,d0) ; DEPRECATED
-;        movea.b     (12,a0,a0),12(a0,d0) ; DEPRECATED
-;        movea.w     (12,a0,a0),12(a0,d0) ; DEPRECATED
-;        movea.l     (12,a0,a0),12(a0,d0) ; DEPRECATED
-;        movea       (12,a0,a0),(12,a0,a0) ; DEPRECATED
-;        movea.b     (12,a0,a0),(12,a0,a0) ; DEPRECATED
-;        movea.w     (12,a0,a0),(12,a0,a0) ; DEPRECATED
-;        movea.l     (12,a0,a0),(12,a0,a0) ; DEPRECATED
-;        movea       (12,a0,a0),$4000 ; DEPRECATED
-;        movea.b     (12,a0,a0),$4000 ; DEPRECATED
-;        movea.w     (12,a0,a0),$4000 ; DEPRECATED
-;        movea.l     (12,a0,a0),$4000 ; DEPRECATED
-;        movea       (12,a0,a0),$4000.W ; DEPRECATED
-;        movea.b     (12,a0,a0),$4000.W ; DEPRECATED
-;        movea.w     (12,a0,a0),$4000.W ; DEPRECATED
-;        movea.l     (12,a0,a0),$4000.W ; DEPRECATED
-;        movea       (12,a0,a0),$4000.L ; DEPRECATED
-;        movea.b     (12,a0,a0),$4000.L ; DEPRECATED
-;        movea.w     (12,a0,a0),$4000.L ; DEPRECATED
-;        movea.l     (12,a0,a0),$4000.L ; DEPRECATED
-;        movea       $4000,d0 ; DEPRECATED
-;        movea.b     $4000,d0 ; DEPRECATED
-;        movea.w     $4000,d0 ; DEPRECATED
-;        movea.l     $4000,d0 ; DEPRECATED
-;        movea       $4000,(a0) ; DEPRECATED
-;        movea.b     $4000,(a0) ; DEPRECATED
-;        movea.w     $4000,(a0) ; DEPRECATED
-;        movea.l     $4000,(a0) ; DEPRECATED
-;        movea       $4000,(a0)+ ; DEPRECATED
-;        movea.b     $4000,(a0)+ ; DEPRECATED
-;        movea.w     $4000,(a0)+ ; DEPRECATED
-;        movea.l     $4000,(a0)+ ; DEPRECATED
-;        movea       $4000,-(a0) ; DEPRECATED
-;        movea.b     $4000,-(a0) ; DEPRECATED
-;        movea.w     $4000,-(a0) ; DEPRECATED
-;        movea.l     $4000,-(a0) ; DEPRECATED
-;        movea       $4000,42(a0) ; DEPRECATED
-;        movea.b     $4000,42(a0) ; DEPRECATED
-;        movea.w     $4000,42(a0) ; DEPRECATED
-;        movea.l     $4000,42(a0) ; DEPRECATED
-;        movea       $4000,(-42,a0) ; DEPRECATED
-;        movea.b     $4000,(-42,a0) ; DEPRECATED
-;        movea.w     $4000,(-42,a0) ; DEPRECATED
-;        movea.l     $4000,(-42,a0) ; DEPRECATED
-;        movea       $4000,12(a0,d0) ; DEPRECATED
-;        movea.b     $4000,12(a0,d0) ; DEPRECATED
-;        movea.w     $4000,12(a0,d0) ; DEPRECATED
-;        movea.l     $4000,12(a0,d0) ; DEPRECATED
-;        movea       $4000,(12,a0,a0) ; DEPRECATED
-;        movea.b     $4000,(12,a0,a0) ; DEPRECATED
-;        movea.w     $4000,(12,a0,a0) ; DEPRECATED
-;        movea.l     $4000,(12,a0,a0) ; DEPRECATED
-;        movea       $4000,$4000 ; DEPRECATED
-;        movea.b     $4000,$4000 ; DEPRECATED
-;        movea.w     $4000,$4000 ; DEPRECATED
-;        movea.l     $4000,$4000 ; DEPRECATED
-;        movea       $4000,$4000.W ; DEPRECATED
-;        movea.b     $4000,$4000.W ; DEPRECATED
-;        movea.w     $4000,$4000.W ; DEPRECATED
-;        movea.l     $4000,$4000.W ; DEPRECATED
-;        movea       $4000,$4000.L ; DEPRECATED
-;        movea.b     $4000,$4000.L ; DEPRECATED
-;        movea.w     $4000,$4000.L ; DEPRECATED
-;        movea.l     $4000,$4000.L ; DEPRECATED
-;        movea       $4000.W,d0 ; DEPRECATED
-;        movea.b     $4000.W,d0 ; DEPRECATED
-;        movea.w     $4000.W,d0 ; DEPRECATED
-;        movea.l     $4000.W,d0 ; DEPRECATED
-;        movea       $4000.W,(a0) ; DEPRECATED
-;        movea.b     $4000.W,(a0) ; DEPRECATED
-;        movea.w     $4000.W,(a0) ; DEPRECATED
-;        movea.l     $4000.W,(a0) ; DEPRECATED
-;        movea       $4000.W,(a0)+ ; DEPRECATED
-;        movea.b     $4000.W,(a0)+ ; DEPRECATED
-;        movea.w     $4000.W,(a0)+ ; DEPRECATED
-;        movea.l     $4000.W,(a0)+ ; DEPRECATED
-;        movea       $4000.W,-(a0) ; DEPRECATED
-;        movea.b     $4000.W,-(a0) ; DEPRECATED
-;        movea.w     $4000.W,-(a0) ; DEPRECATED
-;        movea.l     $4000.W,-(a0) ; DEPRECATED
-;        movea       $4000.W,42(a0) ; DEPRECATED
-;        movea.b     $4000.W,42(a0) ; DEPRECATED
-;        movea.w     $4000.W,42(a0) ; DEPRECATED
-;        movea.l     $4000.W,42(a0) ; DEPRECATED
-;        movea       $4000.W,(-42,a0) ; DEPRECATED
-;        movea.b     $4000.W,(-42,a0) ; DEPRECATED
-;        movea.w     $4000.W,(-42,a0) ; DEPRECATED
-;        movea.l     $4000.W,(-42,a0) ; DEPRECATED
-;        movea       $4000.W,12(a0,d0) ; DEPRECATED
-;        movea.b     $4000.W,12(a0,d0) ; DEPRECATED
-;        movea.w     $4000.W,12(a0,d0) ; DEPRECATED
-;        movea.l     $4000.W,12(a0,d0) ; DEPRECATED
-;        movea       $4000.W,(12,a0,a0) ; DEPRECATED
-;        movea.b     $4000.W,(12,a0,a0) ; DEPRECATED
-;        movea.w     $4000.W,(12,a0,a0) ; DEPRECATED
-;        movea.l     $4000.W,(12,a0,a0) ; DEPRECATED
-;        movea       $4000.W,$4000 ; DEPRECATED
-;        movea.b     $4000.W,$4000 ; DEPRECATED
-;        movea.w     $4000.W,$4000 ; DEPRECATED
-;        movea.l     $4000.W,$4000 ; DEPRECATED
-;        movea       $4000.W,$4000.W ; DEPRECATED
-;        movea.b     $4000.W,$4000.W ; DEPRECATED
-;        movea.w     $4000.W,$4000.W ; DEPRECATED
-;        movea.l     $4000.W,$4000.W ; DEPRECATED
-;        movea       $4000.W,$4000.L ; DEPRECATED
-;        movea.b     $4000.W,$4000.L ; DEPRECATED
-;        movea.w     $4000.W,$4000.L ; DEPRECATED
-;        movea.l     $4000.W,$4000.L ; DEPRECATED
-;        movea       $4000.L,d0 ; DEPRECATED
-;        movea.b     $4000.L,d0 ; DEPRECATED
-;        movea.w     $4000.L,d0 ; DEPRECATED
-;        movea.l     $4000.L,d0 ; DEPRECATED
-;        movea       $4000.L,(a0) ; DEPRECATED
-;        movea.b     $4000.L,(a0) ; DEPRECATED
-;        movea.w     $4000.L,(a0) ; DEPRECATED
-;        movea.l     $4000.L,(a0) ; DEPRECATED
-;        movea       $4000.L,(a0)+ ; DEPRECATED
-;        movea.b     $4000.L,(a0)+ ; DEPRECATED
-;        movea.w     $4000.L,(a0)+ ; DEPRECATED
-;        movea.l     $4000.L,(a0)+ ; DEPRECATED
-;        movea       $4000.L,-(a0) ; DEPRECATED
-;        movea.b     $4000.L,-(a0) ; DEPRECATED
-;        movea.w     $4000.L,-(a0) ; DEPRECATED
-;        movea.l     $4000.L,-(a0) ; DEPRECATED
-;        movea       $4000.L,42(a0) ; DEPRECATED
-;        movea.b     $4000.L,42(a0) ; DEPRECATED
-;        movea.w     $4000.L,42(a0) ; DEPRECATED
-;        movea.l     $4000.L,42(a0) ; DEPRECATED
-;        movea       $4000.L,(-42,a0) ; DEPRECATED
-;        movea.b     $4000.L,(-42,a0) ; DEPRECATED
-;        movea.w     $4000.L,(-42,a0) ; DEPRECATED
-;        movea.l     $4000.L,(-42,a0) ; DEPRECATED
-;        movea       $4000.L,12(a0,d0) ; DEPRECATED
-;        movea.b     $4000.L,12(a0,d0) ; DEPRECATED
-;        movea.w     $4000.L,12(a0,d0) ; DEPRECATED
-;        movea.l     $4000.L,12(a0,d0) ; DEPRECATED
-;        movea       $4000.L,(12,a0,a0) ; DEPRECATED
-;        movea.b     $4000.L,(12,a0,a0) ; DEPRECATED
-;        movea.w     $4000.L,(12,a0,a0) ; DEPRECATED
-;        movea.l     $4000.L,(12,a0,a0) ; DEPRECATED
-;        movea       $4000.L,$4000 ; DEPRECATED
-;        movea.b     $4000.L,$4000 ; DEPRECATED
-;        movea.w     $4000.L,$4000 ; DEPRECATED
-;        movea.l     $4000.L,$4000 ; DEPRECATED
-;        movea       $4000.L,$4000.W ; DEPRECATED
-;        movea.b     $4000.L,$4000.W ; DEPRECATED
-;        movea.w     $4000.L,$4000.W ; DEPRECATED
-;        movea.l     $4000.L,$4000.W ; DEPRECATED
-;        movea       $4000.L,$4000.L ; DEPRECATED
-;        movea.b     $4000.L,$4000.L ; DEPRECATED
-;        movea.w     $4000.L,$4000.L ; DEPRECATED
-;        movea.l     $4000.L,$4000.L ; DEPRECATED
-;        movea       (PC),d0 ; DEPRECATED
-;        movea.b     (PC),d0 ; DEPRECATED
-;        movea.w     (PC),d0 ; DEPRECATED
-;        movea.l     (PC),d0 ; DEPRECATED
-;        movea       (PC),(a0) ; DEPRECATED
-;        movea.b     (PC),(a0) ; DEPRECATED
-;        movea.w     (PC),(a0) ; DEPRECATED
-;        movea.l     (PC),(a0) ; DEPRECATED
-;        movea       (PC),(a0)+ ; DEPRECATED
-;        movea.b     (PC),(a0)+ ; DEPRECATED
-;        movea.w     (PC),(a0)+ ; DEPRECATED
-;        movea.l     (PC),(a0)+ ; DEPRECATED
-;        movea       (PC),-(a0) ; DEPRECATED
-;        movea.b     (PC),-(a0) ; DEPRECATED
-;        movea.w     (PC),-(a0) ; DEPRECATED
-;        movea.l     (PC),-(a0) ; DEPRECATED
-;        movea       (PC),42(a0) ; DEPRECATED
-;        movea.b     (PC),42(a0) ; DEPRECATED
-;        movea.w     (PC),42(a0) ; DEPRECATED
-;        movea.l     (PC),42(a0) ; DEPRECATED
-;        movea       (PC),(-42,a0) ; DEPRECATED
-;        movea.b     (PC),(-42,a0) ; DEPRECATED
-;        movea.w     (PC),(-42,a0) ; DEPRECATED
-;        movea.l     (PC),(-42,a0) ; DEPRECATED
-;        movea       (PC),12(a0,d0) ; DEPRECATED
-;        movea.b     (PC),12(a0,d0) ; DEPRECATED
-;        movea.w     (PC),12(a0,d0) ; DEPRECATED
-;        movea.l     (PC),12(a0,d0) ; DEPRECATED
-;        movea       (PC),(12,a0,a0) ; DEPRECATED
-;        movea.b     (PC),(12,a0,a0) ; DEPRECATED
-;        movea.w     (PC),(12,a0,a0) ; DEPRECATED
-;        movea.l     (PC),(12,a0,a0) ; DEPRECATED
-;        movea       (PC),$4000 ; DEPRECATED
-;        movea.b     (PC),$4000 ; DEPRECATED
-;        movea.w     (PC),$4000 ; DEPRECATED
-;        movea.l     (PC),$4000 ; DEPRECATED
-;        movea       (PC),$4000.W ; DEPRECATED
-;        movea.b     (PC),$4000.W ; DEPRECATED
-;        movea.w     (PC),$4000.W ; DEPRECATED
-;        movea.l     (PC),$4000.W ; DEPRECATED
-;        movea       (PC),$4000.L ; DEPRECATED
-;        movea.b     (PC),$4000.L ; DEPRECATED
-;        movea.w     (PC),$4000.L ; DEPRECATED
-;        movea.l     (PC),$4000.L ; DEPRECATED
-;        movea       66(PC),d0 ; DEPRECATED
-;        movea.b     66(PC),d0 ; DEPRECATED
-;        movea.w     66(PC),d0 ; DEPRECATED
-;        movea.l     66(PC),d0 ; DEPRECATED
-;        movea       66(PC),(a0) ; DEPRECATED
-;        movea.b     66(PC),(a0) ; DEPRECATED
-;        movea.w     66(PC),(a0) ; DEPRECATED
-;        movea.l     66(PC),(a0) ; DEPRECATED
-;        movea       66(PC),(a0)+ ; DEPRECATED
-;        movea.b     66(PC),(a0)+ ; DEPRECATED
-;        movea.w     66(PC),(a0)+ ; DEPRECATED
-;        movea.l     66(PC),(a0)+ ; DEPRECATED
-;        movea       66(PC),-(a0) ; DEPRECATED
-;        movea.b     66(PC),-(a0) ; DEPRECATED
-;        movea.w     66(PC),-(a0) ; DEPRECATED
-;        movea.l     66(PC),-(a0) ; DEPRECATED
-;        movea       66(PC),42(a0) ; DEPRECATED
-;        movea.b     66(PC),42(a0) ; DEPRECATED
-;        movea.w     66(PC),42(a0) ; DEPRECATED
-;        movea.l     66(PC),42(a0) ; DEPRECATED
-;        movea       66(PC),(-42,a0) ; DEPRECATED
-;        movea.b     66(PC),(-42,a0) ; DEPRECATED
-;        movea.w     66(PC),(-42,a0) ; DEPRECATED
-;        movea.l     66(PC),(-42,a0) ; DEPRECATED
-;        movea       66(PC),12(a0,d0) ; DEPRECATED
-;        movea.b     66(PC),12(a0,d0) ; DEPRECATED
-;        movea.w     66(PC),12(a0,d0) ; DEPRECATED
-;        movea.l     66(PC),12(a0,d0) ; DEPRECATED
-;        movea       66(PC),(12,a0,a0) ; DEPRECATED
-;        movea.b     66(PC),(12,a0,a0) ; DEPRECATED
-;        movea.w     66(PC),(12,a0,a0) ; DEPRECATED
-;        movea.l     66(PC),(12,a0,a0) ; DEPRECATED
-;        movea       66(PC),$4000 ; DEPRECATED
-;        movea.b     66(PC),$4000 ; DEPRECATED
-;        movea.w     66(PC),$4000 ; DEPRECATED
-;        movea.l     66(PC),$4000 ; DEPRECATED
-;        movea       66(PC),$4000.W ; DEPRECATED
-;        movea.b     66(PC),$4000.W ; DEPRECATED
-;        movea.w     66(PC),$4000.W ; DEPRECATED
-;        movea.l     66(PC),$4000.W ; DEPRECATED
-;        movea       66(PC),$4000.L ; DEPRECATED
-;        movea.b     66(PC),$4000.L ; DEPRECATED
-;        movea.w     66(PC),$4000.L ; DEPRECATED
-;        movea.l     66(PC),$4000.L ; DEPRECATED
-;        movea       (-66,PC),d0 ; DEPRECATED
-;        movea.b     (-66,PC),d0 ; DEPRECATED
-;        movea.w     (-66,PC),d0 ; DEPRECATED
-;        movea.l     (-66,PC),d0 ; DEPRECATED
-;        movea       (-66,PC),(a0) ; DEPRECATED
-;        movea.b     (-66,PC),(a0) ; DEPRECATED
-;        movea.w     (-66,PC),(a0) ; DEPRECATED
-;        movea.l     (-66,PC),(a0) ; DEPRECATED
-;        movea       (-66,PC),(a0)+ ; DEPRECATED
-;        movea.b     (-66,PC),(a0)+ ; DEPRECATED
-;        movea.w     (-66,PC),(a0)+ ; DEPRECATED
-;        movea.l     (-66,PC),(a0)+ ; DEPRECATED
-;        movea       (-66,PC),-(a0) ; DEPRECATED
-;        movea.b     (-66,PC),-(a0) ; DEPRECATED
-;        movea.w     (-66,PC),-(a0) ; DEPRECATED
-;        movea.l     (-66,PC),-(a0) ; DEPRECATED
-;        movea       (-66,PC),42(a0) ; DEPRECATED
-;        movea.b     (-66,PC),42(a0) ; DEPRECATED
-;        movea.w     (-66,PC),42(a0) ; DEPRECATED
-;        movea.l     (-66,PC),42(a0) ; DEPRECATED
-;        movea       (-66,PC),(-42,a0) ; DEPRECATED
-;        movea.b     (-66,PC),(-42,a0) ; DEPRECATED
-;        movea.w     (-66,PC),(-42,a0) ; DEPRECATED
-;        movea.l     (-66,PC),(-42,a0) ; DEPRECATED
-;        movea       (-66,PC),12(a0,d0) ; DEPRECATED
-;        movea.b     (-66,PC),12(a0,d0) ; DEPRECATED
-;        movea.w     (-66,PC),12(a0,d0) ; DEPRECATED
-;        movea.l     (-66,PC),12(a0,d0) ; DEPRECATED
-;        movea       (-66,PC),(12,a0,a0) ; DEPRECATED
-;        movea.b     (-66,PC),(12,a0,a0) ; DEPRECATED
-;        movea.w     (-66,PC),(12,a0,a0) ; DEPRECATED
-;        movea.l     (-66,PC),(12,a0,a0) ; DEPRECATED
-;        movea       (-66,PC),$4000 ; DEPRECATED
-;        movea.b     (-66,PC),$4000 ; DEPRECATED
-;        movea.w     (-66,PC),$4000 ; DEPRECATED
-;        movea.l     (-66,PC),$4000 ; DEPRECATED
-;        movea       (-66,PC),$4000.W ; DEPRECATED
-;        movea.b     (-66,PC),$4000.W ; DEPRECATED
-;        movea.w     (-66,PC),$4000.W ; DEPRECATED
-;        movea.l     (-66,PC),$4000.W ; DEPRECATED
-;        movea       (-66,PC),$4000.L ; DEPRECATED
-;        movea.b     (-66,PC),$4000.L ; DEPRECATED
-;        movea.w     (-66,PC),$4000.L ; DEPRECATED
-;        movea.l     (-66,PC),$4000.L ; DEPRECATED
-;        movea       66(PC,d0),d0 ; DEPRECATED
-;        movea.b     66(PC,d0),d0 ; DEPRECATED
-;        movea.w     66(PC,d0),d0 ; DEPRECATED
-;        movea.l     66(PC,d0),d0 ; DEPRECATED
-;        movea       66(PC,d0),(a0) ; DEPRECATED
-;        movea.b     66(PC,d0),(a0) ; DEPRECATED
-;        movea.w     66(PC,d0),(a0) ; DEPRECATED
-;        movea.l     66(PC,d0),(a0) ; DEPRECATED
-;        movea       66(PC,d0),(a0)+ ; DEPRECATED
-;        movea.b     66(PC,d0),(a0)+ ; DEPRECATED
-;        movea.w     66(PC,d0),(a0)+ ; DEPRECATED
-;        movea.l     66(PC,d0),(a0)+ ; DEPRECATED
-;        movea       66(PC,d0),-(a0) ; DEPRECATED
-;        movea.b     66(PC,d0),-(a0) ; DEPRECATED
-;        movea.w     66(PC,d0),-(a0) ; DEPRECATED
-;        movea.l     66(PC,d0),-(a0) ; DEPRECATED
-;        movea       66(PC,d0),42(a0) ; DEPRECATED
-;        movea.b     66(PC,d0),42(a0) ; DEPRECATED
-;        movea.w     66(PC,d0),42(a0) ; DEPRECATED
-;        movea.l     66(PC,d0),42(a0) ; DEPRECATED
-;        movea       66(PC,d0),(-42,a0) ; DEPRECATED
-;        movea.b     66(PC,d0),(-42,a0) ; DEPRECATED
-;        movea.w     66(PC,d0),(-42,a0) ; DEPRECATED
-;        movea.l     66(PC,d0),(-42,a0) ; DEPRECATED
-;        movea       66(PC,d0),12(a0,d0) ; DEPRECATED
-;        movea.b     66(PC,d0),12(a0,d0) ; DEPRECATED
-;        movea.w     66(PC,d0),12(a0,d0) ; DEPRECATED
-;        movea.l     66(PC,d0),12(a0,d0) ; DEPRECATED
-;        movea       66(PC,d0),(12,a0,a0) ; DEPRECATED
-;        movea.b     66(PC,d0),(12,a0,a0) ; DEPRECATED
-;        movea.w     66(PC,d0),(12,a0,a0) ; DEPRECATED
-;        movea.l     66(PC,d0),(12,a0,a0) ; DEPRECATED
-;        movea       66(PC,d0),$4000 ; DEPRECATED
-;        movea.b     66(PC,d0),$4000 ; DEPRECATED
-;        movea.w     66(PC,d0),$4000 ; DEPRECATED
-;        movea.l     66(PC,d0),$4000 ; DEPRECATED
-;        movea       66(PC,d0),$4000.W ; DEPRECATED
-;        movea.b     66(PC,d0),$4000.W ; DEPRECATED
-;        movea.w     66(PC,d0),$4000.W ; DEPRECATED
-;        movea.l     66(PC,d0),$4000.W ; DEPRECATED
-;        movea       66(PC,d0),$4000.L ; DEPRECATED
-;        movea.b     66(PC,d0),$4000.L ; DEPRECATED
-;        movea.w     66(PC,d0),$4000.L ; DEPRECATED
-;        movea.l     66(PC,d0),$4000.L ; DEPRECATED
-;        movea       (66,PC,a0),d0 ; DEPRECATED
-;        movea.b     (66,PC,a0),d0 ; DEPRECATED
-;        movea.w     (66,PC,a0),d0 ; DEPRECATED
-;        movea.l     (66,PC,a0),d0 ; DEPRECATED
-;        movea       (66,PC,a0),(a0) ; DEPRECATED
-;        movea.b     (66,PC,a0),(a0) ; DEPRECATED
-;        movea.w     (66,PC,a0),(a0) ; DEPRECATED
-;        movea.l     (66,PC,a0),(a0) ; DEPRECATED
-;        movea       (66,PC,a0),(a0)+ ; DEPRECATED
-;        movea.b     (66,PC,a0),(a0)+ ; DEPRECATED
-;        movea.w     (66,PC,a0),(a0)+ ; DEPRECATED
-;        movea.l     (66,PC,a0),(a0)+ ; DEPRECATED
-;        movea       (66,PC,a0),-(a0) ; DEPRECATED
-;        movea.b     (66,PC,a0),-(a0) ; DEPRECATED
-;        movea.w     (66,PC,a0),-(a0) ; DEPRECATED
-;        movea.l     (66,PC,a0),-(a0) ; DEPRECATED
-;        movea       (66,PC,a0),42(a0) ; DEPRECATED
-;        movea.b     (66,PC,a0),42(a0) ; DEPRECATED
-;        movea.w     (66,PC,a0),42(a0) ; DEPRECATED
-;        movea.l     (66,PC,a0),42(a0) ; DEPRECATED
-;        movea       (66,PC,a0),(-42,a0) ; DEPRECATED
-;        movea.b     (66,PC,a0),(-42,a0) ; DEPRECATED
-;        movea.w     (66,PC,a0),(-42,a0) ; DEPRECATED
-;        movea.l     (66,PC,a0),(-42,a0) ; DEPRECATED
-;        movea       (66,PC,a0),12(a0,d0) ; DEPRECATED
-;        movea.b     (66,PC,a0),12(a0,d0) ; DEPRECATED
-;        movea.w     (66,PC,a0),12(a0,d0) ; DEPRECATED
-;        movea.l     (66,PC,a0),12(a0,d0) ; DEPRECATED
-;        movea       (66,PC,a0),(12,a0,a0) ; DEPRECATED
-;        movea.b     (66,PC,a0),(12,a0,a0) ; DEPRECATED
-;        movea.w     (66,PC,a0),(12,a0,a0) ; DEPRECATED
-;        movea.l     (66,PC,a0),(12,a0,a0) ; DEPRECATED
-;        movea       (66,PC,a0),$4000 ; DEPRECATED
-;        movea.b     (66,PC,a0),$4000 ; DEPRECATED
-;        movea.w     (66,PC,a0),$4000 ; DEPRECATED
-;        movea.l     (66,PC,a0),$4000 ; DEPRECATED
-;        movea       (66,PC,a0),$4000.W ; DEPRECATED
-;        movea.b     (66,PC,a0),$4000.W ; DEPRECATED
-;        movea.w     (66,PC,a0),$4000.W ; DEPRECATED
-;        movea.l     (66,PC,a0),$4000.W ; DEPRECATED
-;        movea       (66,PC,a0),$4000.L ; DEPRECATED
-;        movea.b     (66,PC,a0),$4000.L ; DEPRECATED
-;        movea.w     (66,PC,a0),$4000.L ; DEPRECATED
-;        movea.l     (66,PC,a0),$4000.L ; DEPRECATED
+         movea       d0,d0
+         movea.b     d0,d0
+         movea.w     d0,d0
+         movea.l     d0,d0
+         movea       d0,(a0)
+         movea.b     d0,(a0)
+         movea.w     d0,(a0)
+         movea.l     d0,(a0)
+         movea       d0,(a0)+
+         movea.b     d0,(a0)+
+         movea.w     d0,(a0)+
+         movea.l     d0,(a0)+
+         movea       d0,-(a0)
+         movea.b     d0,-(a0)
+         movea.w     d0,-(a0)
+         movea.l     d0,-(a0)
+         movea       d0,42(a0)
+         movea.b     d0,42(a0)
+         movea.w     d0,42(a0)
+         movea.l     d0,42(a0)
+         movea       d0,(-42,a0)
+         movea.b     d0,(-42,a0)
+         movea.w     d0,(-42,a0)
+         movea.l     d0,(-42,a0)
+         movea       d0,12(a0,d0)
+         movea.b     d0,12(a0,d0)
+         movea.w     d0,12(a0,d0)
+         movea.l     d0,12(a0,d0)
+         movea       d0,(12,a0,a0)
+         movea.b     d0,(12,a0,a0)
+         movea.w     d0,(12,a0,a0)
+         movea.l     d0,(12,a0,a0)
+         movea       d0,$4000
+         movea.b     d0,$4000
+         movea.w     d0,$4000
+         movea.l     d0,$4000
+         movea       d0,$4000.W
+         movea.b     d0,$4000.W
+         movea.w     d0,$4000.W
+         movea.l     d0,$4000.W
+         movea       d0,$4000.L
+         movea.b     d0,$4000.L
+         movea.w     d0,$4000.L
+         movea.l     d0,$4000.L
+         movea       #42.L,d0
+         movea.b     #42.L,d0
+         movea.w     #42.L,d0
+         movea.l     #42.L,d0
+         movea       #42.L,(a0)
+         movea.b     #42.L,(a0)
+         movea.w     #42.L,(a0)
+         movea.l     #42.L,(a0)
+         movea       #42.L,(a0)+
+         movea.b     #42.L,(a0)+
+         movea.w     #42.L,(a0)+
+         movea.l     #42.L,(a0)+
+         movea       #42.L,-(a0)
+         movea.b     #42.L,-(a0)
+         movea.w     #42.L,-(a0)
+         movea.l     #42.L,-(a0)
+         movea       #42.L,42(a0)
+         movea.b     #42.L,42(a0)
+         movea.w     #42.L,42(a0)
+         movea.l     #42.L,42(a0)
+         movea       #42.L,(-42,a0)
+         movea.b     #42.L,(-42,a0)
+         movea.w     #42.L,(-42,a0)
+         movea.l     #42.L,(-42,a0)
+         movea       #42.L,12(a0,d0)
+         movea.b     #42.L,12(a0,d0)
+         movea.w     #42.L,12(a0,d0)
+         movea.l     #42.L,12(a0,d0)
+         movea       #42.L,(12,a0,a0)
+         movea.b     #42.L,(12,a0,a0)
+         movea.w     #42.L,(12,a0,a0)
+         movea.l     #42.L,(12,a0,a0)
+         movea       #42.L,$4000
+         movea.b     #42.L,$4000
+         movea.w     #42.L,$4000
+         movea.l     #42.L,$4000
+         movea       #42.L,$4000.W
+         movea.b     #42.L,$4000.W
+         movea.w     #42.L,$4000.W
+         movea.l     #42.L,$4000.W
+         movea       #42.L,$4000.L
+         movea.b     #42.L,$4000.L
+         movea.w     #42.L,$4000.L
+         movea.l     #42.L,$4000.L
+         movea       (a0),d0
+         movea.b     (a0),d0
+         movea.w     (a0),d0
+         movea.l     (a0),d0
+         movea       (a0),(a0)
+         movea.b     (a0),(a0)
+         movea.w     (a0),(a0)
+         movea.l     (a0),(a0)
+         movea       (a0),(a0)+
+         movea.b     (a0),(a0)+
+         movea.w     (a0),(a0)+
+         movea.l     (a0),(a0)+
+         movea       (a0),-(a0)
+         movea.b     (a0),-(a0)
+         movea.w     (a0),-(a0)
+         movea.l     (a0),-(a0)
+         movea       (a0),42(a0)
+         movea.b     (a0),42(a0)
+         movea.w     (a0),42(a0)
+         movea.l     (a0),42(a0)
+         movea       (a0),(-42,a0)
+         movea.b     (a0),(-42,a0)
+         movea.w     (a0),(-42,a0)
+         movea.l     (a0),(-42,a0)
+         movea       (a0),12(a0,d0)
+         movea.b     (a0),12(a0,d0)
+         movea.w     (a0),12(a0,d0)
+         movea.l     (a0),12(a0,d0)
+         movea       (a0),(12,a0,a0)
+         movea.b     (a0),(12,a0,a0)
+         movea.w     (a0),(12,a0,a0)
+         movea.l     (a0),(12,a0,a0)
+         movea       (a0),$4000
+         movea.b     (a0),$4000
+         movea.w     (a0),$4000
+         movea.l     (a0),$4000
+         movea       (a0),$4000.W
+         movea.b     (a0),$4000.W
+         movea.w     (a0),$4000.W
+         movea.l     (a0),$4000.W
+         movea       (a0),$4000.L
+         movea.b     (a0),$4000.L
+         movea.w     (a0),$4000.L
+         movea.l     (a0),$4000.L
+         movea       (a0)+,d0
+         movea.b     (a0)+,d0
+         movea.w     (a0)+,d0
+         movea.l     (a0)+,d0
+         movea       (a0)+,(a0)
+         movea.b     (a0)+,(a0)
+         movea.w     (a0)+,(a0)
+         movea.l     (a0)+,(a0)
+         movea       (a0)+,(a0)+
+         movea.b     (a0)+,(a0)+
+         movea.w     (a0)+,(a0)+
+         movea.l     (a0)+,(a0)+
+         movea       (a0)+,-(a0)
+         movea.b     (a0)+,-(a0)
+         movea.w     (a0)+,-(a0)
+         movea.l     (a0)+,-(a0)
+         movea       (a0)+,42(a0)
+         movea.b     (a0)+,42(a0)
+         movea.w     (a0)+,42(a0)
+         movea.l     (a0)+,42(a0)
+         movea       (a0)+,(-42,a0)
+         movea.b     (a0)+,(-42,a0)
+         movea.w     (a0)+,(-42,a0)
+         movea.l     (a0)+,(-42,a0)
+         movea       (a0)+,12(a0,d0)
+         movea.b     (a0)+,12(a0,d0)
+         movea.w     (a0)+,12(a0,d0)
+         movea.l     (a0)+,12(a0,d0)
+         movea       (a0)+,(12,a0,a0)
+         movea.b     (a0)+,(12,a0,a0)
+         movea.w     (a0)+,(12,a0,a0)
+         movea.l     (a0)+,(12,a0,a0)
+         movea       (a0)+,$4000
+         movea.b     (a0)+,$4000
+         movea.w     (a0)+,$4000
+         movea.l     (a0)+,$4000
+         movea       (a0)+,$4000.W
+         movea.b     (a0)+,$4000.W
+         movea.w     (a0)+,$4000.W
+         movea.l     (a0)+,$4000.W
+         movea       (a0)+,$4000.L
+         movea.b     (a0)+,$4000.L
+         movea.w     (a0)+,$4000.L
+         movea.l     (a0)+,$4000.L
+         movea       -(a0),d0
+         movea.b     -(a0),d0
+         movea.w     -(a0),d0
+         movea.l     -(a0),d0
+         movea       -(a0),(a0)
+         movea.b     -(a0),(a0)
+         movea.w     -(a0),(a0)
+         movea.l     -(a0),(a0)
+         movea       -(a0),(a0)+
+         movea.b     -(a0),(a0)+
+         movea.w     -(a0),(a0)+
+         movea.l     -(a0),(a0)+
+         movea       -(a0),-(a0)
+         movea.b     -(a0),-(a0)
+         movea.w     -(a0),-(a0)
+         movea.l     -(a0),-(a0)
+         movea       -(a0),42(a0)
+         movea.b     -(a0),42(a0)
+         movea.w     -(a0),42(a0)
+         movea.l     -(a0),42(a0)
+         movea       -(a0),(-42,a0)
+         movea.b     -(a0),(-42,a0)
+         movea.w     -(a0),(-42,a0)
+         movea.l     -(a0),(-42,a0)
+         movea       -(a0),12(a0,d0)
+         movea.b     -(a0),12(a0,d0)
+         movea.w     -(a0),12(a0,d0)
+         movea.l     -(a0),12(a0,d0)
+         movea       -(a0),(12,a0,a0)
+         movea.b     -(a0),(12,a0,a0)
+         movea.w     -(a0),(12,a0,a0)
+         movea.l     -(a0),(12,a0,a0)
+         movea       -(a0),$4000
+         movea.b     -(a0),$4000
+         movea.w     -(a0),$4000
+         movea.l     -(a0),$4000
+         movea       -(a0),$4000.W
+         movea.b     -(a0),$4000.W
+         movea.w     -(a0),$4000.W
+         movea.l     -(a0),$4000.W
+         movea       -(a0),$4000.L
+         movea.b     -(a0),$4000.L
+         movea.w     -(a0),$4000.L
+         movea.l     -(a0),$4000.L
+         movea       42(a0),d0
+         movea.b     42(a0),d0
+         movea.w     42(a0),d0
+         movea.l     42(a0),d0
+         movea       42(a0),(a0)
+         movea.b     42(a0),(a0)
+         movea.w     42(a0),(a0)
+         movea.l     42(a0),(a0)
+         movea       42(a0),(a0)+
+         movea.b     42(a0),(a0)+
+         movea.w     42(a0),(a0)+
+         movea.l     42(a0),(a0)+
+         movea       42(a0),-(a0)
+         movea.b     42(a0),-(a0)
+         movea.w     42(a0),-(a0)
+         movea.l     42(a0),-(a0)
+         movea       42(a0),42(a0)
+         movea.b     42(a0),42(a0)
+         movea.w     42(a0),42(a0)
+         movea.l     42(a0),42(a0)
+         movea       42(a0),(-42,a0)
+         movea.b     42(a0),(-42,a0)
+         movea.w     42(a0),(-42,a0)
+         movea.l     42(a0),(-42,a0)
+         movea       42(a0),12(a0,d0)
+         movea.b     42(a0),12(a0,d0)
+         movea.w     42(a0),12(a0,d0)
+         movea.l     42(a0),12(a0,d0)
+         movea       42(a0),(12,a0,a0)
+         movea.b     42(a0),(12,a0,a0)
+         movea.w     42(a0),(12,a0,a0)
+         movea.l     42(a0),(12,a0,a0)
+         movea       42(a0),$4000
+         movea.b     42(a0),$4000
+         movea.w     42(a0),$4000
+         movea.l     42(a0),$4000
+         movea       42(a0),$4000.W
+         movea.b     42(a0),$4000.W
+         movea.w     42(a0),$4000.W
+         movea.l     42(a0),$4000.W
+         movea       42(a0),$4000.L
+         movea.b     42(a0),$4000.L
+         movea.w     42(a0),$4000.L
+         movea.l     42(a0),$4000.L
+         movea       (-42,a0),d0
+         movea.b     (-42,a0),d0
+         movea.w     (-42,a0),d0
+         movea.l     (-42,a0),d0
+         movea       (-42,a0),(a0)
+         movea.b     (-42,a0),(a0)
+         movea.w     (-42,a0),(a0)
+         movea.l     (-42,a0),(a0)
+         movea       (-42,a0),(a0)+
+         movea.b     (-42,a0),(a0)+
+         movea.w     (-42,a0),(a0)+
+         movea.l     (-42,a0),(a0)+
+         movea       (-42,a0),-(a0)
+         movea.b     (-42,a0),-(a0)
+         movea.w     (-42,a0),-(a0)
+         movea.l     (-42,a0),-(a0)
+         movea       (-42,a0),42(a0)
+         movea.b     (-42,a0),42(a0)
+         movea.w     (-42,a0),42(a0)
+         movea.l     (-42,a0),42(a0)
+         movea       (-42,a0),(-42,a0)
+         movea.b     (-42,a0),(-42,a0)
+         movea.w     (-42,a0),(-42,a0)
+         movea.l     (-42,a0),(-42,a0)
+         movea       (-42,a0),12(a0,d0)
+         movea.b     (-42,a0),12(a0,d0)
+         movea.w     (-42,a0),12(a0,d0)
+         movea.l     (-42,a0),12(a0,d0)
+         movea       (-42,a0),(12,a0,a0)
+         movea.b     (-42,a0),(12,a0,a0)
+         movea.w     (-42,a0),(12,a0,a0)
+         movea.l     (-42,a0),(12,a0,a0)
+         movea       (-42,a0),$4000
+         movea.b     (-42,a0),$4000
+         movea.w     (-42,a0),$4000
+         movea.l     (-42,a0),$4000
+         movea       (-42,a0),$4000.W
+         movea.b     (-42,a0),$4000.W
+         movea.w     (-42,a0),$4000.W
+         movea.l     (-42,a0),$4000.W
+         movea       (-42,a0),$4000.L
+         movea.b     (-42,a0),$4000.L
+         movea.w     (-42,a0),$4000.L
+         movea.l     (-42,a0),$4000.L
+         movea       12(a0,d0),d0
+         movea.b     12(a0,d0),d0
+         movea.w     12(a0,d0),d0
+         movea.l     12(a0,d0),d0
+         movea       12(a0,d0),(a0)
+         movea.b     12(a0,d0),(a0)
+         movea.w     12(a0,d0),(a0)
+         movea.l     12(a0,d0),(a0)
+         movea       12(a0,d0),(a0)+
+         movea.b     12(a0,d0),(a0)+
+         movea.w     12(a0,d0),(a0)+
+         movea.l     12(a0,d0),(a0)+
+         movea       12(a0,d0),-(a0)
+         movea.b     12(a0,d0),-(a0)
+         movea.w     12(a0,d0),-(a0)
+         movea.l     12(a0,d0),-(a0)
+         movea       12(a0,d0),42(a0)
+         movea.b     12(a0,d0),42(a0)
+         movea.w     12(a0,d0),42(a0)
+         movea.l     12(a0,d0),42(a0)
+         movea       12(a0,d0),(-42,a0)
+         movea.b     12(a0,d0),(-42,a0)
+         movea.w     12(a0,d0),(-42,a0)
+         movea.l     12(a0,d0),(-42,a0)
+         movea       12(a0,d0),12(a0,d0)
+         movea.b     12(a0,d0),12(a0,d0)
+         movea.w     12(a0,d0),12(a0,d0)
+         movea.l     12(a0,d0),12(a0,d0)
+         movea       12(a0,d0),(12,a0,a0)
+         movea.b     12(a0,d0),(12,a0,a0)
+         movea.w     12(a0,d0),(12,a0,a0)
+         movea.l     12(a0,d0),(12,a0,a0)
+         movea       12(a0,d0),$4000
+         movea.b     12(a0,d0),$4000
+         movea.w     12(a0,d0),$4000
+         movea.l     12(a0,d0),$4000
+         movea       12(a0,d0),$4000.W
+         movea.b     12(a0,d0),$4000.W
+         movea.w     12(a0,d0),$4000.W
+         movea.l     12(a0,d0),$4000.W
+         movea       12(a0,d0),$4000.L
+         movea.b     12(a0,d0),$4000.L
+         movea.w     12(a0,d0),$4000.L
+         movea.l     12(a0,d0),$4000.L
+         movea       (12,a0,a0),d0
+         movea.b     (12,a0,a0),d0
+         movea.w     (12,a0,a0),d0
+         movea.l     (12,a0,a0),d0
+         movea       (12,a0,a0),(a0)
+         movea.b     (12,a0,a0),(a0)
+         movea.w     (12,a0,a0),(a0)
+         movea.l     (12,a0,a0),(a0)
+         movea       (12,a0,a0),(a0)+
+         movea.b     (12,a0,a0),(a0)+
+         movea.w     (12,a0,a0),(a0)+
+         movea.l     (12,a0,a0),(a0)+
+         movea       (12,a0,a0),-(a0)
+         movea.b     (12,a0,a0),-(a0)
+         movea.w     (12,a0,a0),-(a0)
+         movea.l     (12,a0,a0),-(a0)
+         movea       (12,a0,a0),42(a0)
+         movea.b     (12,a0,a0),42(a0)
+         movea.w     (12,a0,a0),42(a0)
+         movea.l     (12,a0,a0),42(a0)
+         movea       (12,a0,a0),(-42,a0)
+         movea.b     (12,a0,a0),(-42,a0)
+         movea.w     (12,a0,a0),(-42,a0)
+         movea.l     (12,a0,a0),(-42,a0)
+         movea       (12,a0,a0),12(a0,d0)
+         movea.b     (12,a0,a0),12(a0,d0)
+         movea.w     (12,a0,a0),12(a0,d0)
+         movea.l     (12,a0,a0),12(a0,d0)
+         movea       (12,a0,a0),(12,a0,a0)
+         movea.b     (12,a0,a0),(12,a0,a0)
+         movea.w     (12,a0,a0),(12,a0,a0)
+         movea.l     (12,a0,a0),(12,a0,a0)
+         movea       (12,a0,a0),$4000
+         movea.b     (12,a0,a0),$4000
+         movea.w     (12,a0,a0),$4000
+         movea.l     (12,a0,a0),$4000
+         movea       (12,a0,a0),$4000.W
+         movea.b     (12,a0,a0),$4000.W
+         movea.w     (12,a0,a0),$4000.W
+         movea.l     (12,a0,a0),$4000.W
+         movea       (12,a0,a0),$4000.L
+         movea.b     (12,a0,a0),$4000.L
+         movea.w     (12,a0,a0),$4000.L
+         movea.l     (12,a0,a0),$4000.L
+         movea       $4000,d0
+         movea.b     $4000,d0
+         movea.w     $4000,d0
+         movea.l     $4000,d0
+         movea       $4000,(a0)
+         movea.b     $4000,(a0)
+         movea.w     $4000,(a0)
+         movea.l     $4000,(a0)
+         movea       $4000,(a0)+
+         movea.b     $4000,(a0)+
+         movea.w     $4000,(a0)+
+         movea.l     $4000,(a0)+
+         movea       $4000,-(a0)
+         movea.b     $4000,-(a0)
+         movea.w     $4000,-(a0)
+         movea.l     $4000,-(a0)
+         movea       $4000,42(a0)
+         movea.b     $4000,42(a0)
+         movea.w     $4000,42(a0)
+         movea.l     $4000,42(a0)
+         movea       $4000,(-42,a0)
+         movea.b     $4000,(-42,a0)
+         movea.w     $4000,(-42,a0)
+         movea.l     $4000,(-42,a0)
+         movea       $4000,12(a0,d0)
+         movea.b     $4000,12(a0,d0)
+         movea.w     $4000,12(a0,d0)
+         movea.l     $4000,12(a0,d0)
+         movea       $4000,(12,a0,a0)
+         movea.b     $4000,(12,a0,a0)
+         movea.w     $4000,(12,a0,a0)
+         movea.l     $4000,(12,a0,a0)
+         movea       $4000,$4000
+         movea.b     $4000,$4000
+         movea.w     $4000,$4000
+         movea.l     $4000,$4000
+         movea       $4000,$4000.W
+         movea.b     $4000,$4000.W
+         movea.w     $4000,$4000.W
+         movea.l     $4000,$4000.W
+         movea       $4000,$4000.L
+         movea.b     $4000,$4000.L
+         movea.w     $4000,$4000.L
+         movea.l     $4000,$4000.L
+         movea       $4000.W,d0
+         movea.b     $4000.W,d0
+         movea.w     $4000.W,d0
+         movea.l     $4000.W,d0
+         movea       $4000.W,(a0)
+         movea.b     $4000.W,(a0)
+         movea.w     $4000.W,(a0)
+         movea.l     $4000.W,(a0)
+         movea       $4000.W,(a0)+
+         movea.b     $4000.W,(a0)+
+         movea.w     $4000.W,(a0)+
+         movea.l     $4000.W,(a0)+
+         movea       $4000.W,-(a0)
+         movea.b     $4000.W,-(a0)
+         movea.w     $4000.W,-(a0)
+         movea.l     $4000.W,-(a0)
+         movea       $4000.W,42(a0)
+         movea.b     $4000.W,42(a0)
+         movea.w     $4000.W,42(a0)
+         movea.l     $4000.W,42(a0)
+         movea       $4000.W,(-42,a0)
+         movea.b     $4000.W,(-42,a0)
+         movea.w     $4000.W,(-42,a0)
+         movea.l     $4000.W,(-42,a0)
+         movea       $4000.W,12(a0,d0)
+         movea.b     $4000.W,12(a0,d0)
+         movea.w     $4000.W,12(a0,d0)
+         movea.l     $4000.W,12(a0,d0)
+         movea       $4000.W,(12,a0,a0)
+         movea.b     $4000.W,(12,a0,a0)
+         movea.w     $4000.W,(12,a0,a0)
+         movea.l     $4000.W,(12,a0,a0)
+         movea       $4000.W,$4000
+         movea.b     $4000.W,$4000
+         movea.w     $4000.W,$4000
+         movea.l     $4000.W,$4000
+         movea       $4000.W,$4000.W
+         movea.b     $4000.W,$4000.W
+         movea.w     $4000.W,$4000.W
+         movea.l     $4000.W,$4000.W
+         movea       $4000.W,$4000.L
+         movea.b     $4000.W,$4000.L
+         movea.w     $4000.W,$4000.L
+         movea.l     $4000.W,$4000.L
+         movea       $4000.L,d0
+         movea.b     $4000.L,d0
+         movea.w     $4000.L,d0
+         movea.l     $4000.L,d0
+         movea       $4000.L,(a0)
+         movea.b     $4000.L,(a0)
+         movea.w     $4000.L,(a0)
+         movea.l     $4000.L,(a0)
+         movea       $4000.L,(a0)+
+         movea.b     $4000.L,(a0)+
+         movea.w     $4000.L,(a0)+
+         movea.l     $4000.L,(a0)+
+         movea       $4000.L,-(a0)
+         movea.b     $4000.L,-(a0)
+         movea.w     $4000.L,-(a0)
+         movea.l     $4000.L,-(a0)
+         movea       $4000.L,42(a0)
+         movea.b     $4000.L,42(a0)
+         movea.w     $4000.L,42(a0)
+         movea.l     $4000.L,42(a0)
+         movea       $4000.L,(-42,a0)
+         movea.b     $4000.L,(-42,a0)
+         movea.w     $4000.L,(-42,a0)
+         movea.l     $4000.L,(-42,a0)
+         movea       $4000.L,12(a0,d0)
+         movea.b     $4000.L,12(a0,d0)
+         movea.w     $4000.L,12(a0,d0)
+         movea.l     $4000.L,12(a0,d0)
+         movea       $4000.L,(12,a0,a0)
+         movea.b     $4000.L,(12,a0,a0)
+         movea.w     $4000.L,(12,a0,a0)
+         movea.l     $4000.L,(12,a0,a0)
+         movea       $4000.L,$4000
+         movea.b     $4000.L,$4000
+         movea.w     $4000.L,$4000
+         movea.l     $4000.L,$4000
+         movea       $4000.L,$4000.W
+         movea.b     $4000.L,$4000.W
+         movea.w     $4000.L,$4000.W
+         movea.l     $4000.L,$4000.W
+         movea       $4000.L,$4000.L
+         movea.b     $4000.L,$4000.L
+         movea.w     $4000.L,$4000.L
+         movea.l     $4000.L,$4000.L
+         movea       (PC),d0
+         movea.b     (PC),d0
+         movea.w     (PC),d0
+         movea.l     (PC),d0
+         movea       (PC),(a0)
+         movea.b     (PC),(a0)
+         movea.w     (PC),(a0)
+         movea.l     (PC),(a0)
+         movea       (PC),(a0)+
+         movea.b     (PC),(a0)+
+         movea.w     (PC),(a0)+
+         movea.l     (PC),(a0)+
+         movea       (PC),-(a0)
+         movea.b     (PC),-(a0)
+         movea.w     (PC),-(a0)
+         movea.l     (PC),-(a0)
+         movea       (PC),42(a0)
+         movea.b     (PC),42(a0)
+         movea.w     (PC),42(a0)
+         movea.l     (PC),42(a0)
+         movea       (PC),(-42,a0)
+         movea.b     (PC),(-42,a0)
+         movea.w     (PC),(-42,a0)
+         movea.l     (PC),(-42,a0)
+         movea       (PC),12(a0,d0)
+         movea.b     (PC),12(a0,d0)
+         movea.w     (PC),12(a0,d0)
+         movea.l     (PC),12(a0,d0)
+         movea       (PC),(12,a0,a0)
+         movea.b     (PC),(12,a0,a0)
+         movea.w     (PC),(12,a0,a0)
+         movea.l     (PC),(12,a0,a0)
+         movea       (PC),$4000
+         movea.b     (PC),$4000
+         movea.w     (PC),$4000
+         movea.l     (PC),$4000
+         movea       (PC),$4000.W
+         movea.b     (PC),$4000.W
+         movea.w     (PC),$4000.W
+         movea.l     (PC),$4000.W
+         movea       (PC),$4000.L
+         movea.b     (PC),$4000.L
+         movea.w     (PC),$4000.L
+         movea.l     (PC),$4000.L
+         movea       66(PC),d0
+         movea.b     66(PC),d0
+         movea.w     66(PC),d0
+         movea.l     66(PC),d0
+         movea       66(PC),(a0)
+         movea.b     66(PC),(a0)
+         movea.w     66(PC),(a0)
+         movea.l     66(PC),(a0)
+         movea       66(PC),(a0)+
+         movea.b     66(PC),(a0)+
+         movea.w     66(PC),(a0)+
+         movea.l     66(PC),(a0)+
+         movea       66(PC),-(a0)
+         movea.b     66(PC),-(a0)
+         movea.w     66(PC),-(a0)
+         movea.l     66(PC),-(a0)
+         movea       66(PC),42(a0)
+         movea.b     66(PC),42(a0)
+         movea.w     66(PC),42(a0)
+         movea.l     66(PC),42(a0)
+         movea       66(PC),(-42,a0)
+         movea.b     66(PC),(-42,a0)
+         movea.w     66(PC),(-42,a0)
+         movea.l     66(PC),(-42,a0)
+         movea       66(PC),12(a0,d0)
+         movea.b     66(PC),12(a0,d0)
+         movea.w     66(PC),12(a0,d0)
+         movea.l     66(PC),12(a0,d0)
+         movea       66(PC),(12,a0,a0)
+         movea.b     66(PC),(12,a0,a0)
+         movea.w     66(PC),(12,a0,a0)
+         movea.l     66(PC),(12,a0,a0)
+         movea       66(PC),$4000
+         movea.b     66(PC),$4000
+         movea.w     66(PC),$4000
+         movea.l     66(PC),$4000
+         movea       66(PC),$4000.W
+         movea.b     66(PC),$4000.W
+         movea.w     66(PC),$4000.W
+         movea.l     66(PC),$4000.W
+         movea       66(PC),$4000.L
+         movea.b     66(PC),$4000.L
+         movea.w     66(PC),$4000.L
+         movea.l     66(PC),$4000.L
+         movea       (-66,PC),d0
+         movea.b     (-66,PC),d0
+         movea.w     (-66,PC),d0
+         movea.l     (-66,PC),d0
+         movea       (-66,PC),(a0)
+         movea.b     (-66,PC),(a0)
+         movea.w     (-66,PC),(a0)
+         movea.l     (-66,PC),(a0)
+         movea       (-66,PC),(a0)+
+         movea.b     (-66,PC),(a0)+
+         movea.w     (-66,PC),(a0)+
+         movea.l     (-66,PC),(a0)+
+         movea       (-66,PC),-(a0)
+         movea.b     (-66,PC),-(a0)
+         movea.w     (-66,PC),-(a0)
+         movea.l     (-66,PC),-(a0)
+         movea       (-66,PC),42(a0)
+         movea.b     (-66,PC),42(a0)
+         movea.w     (-66,PC),42(a0)
+         movea.l     (-66,PC),42(a0)
+         movea       (-66,PC),(-42,a0)
+         movea.b     (-66,PC),(-42,a0)
+         movea.w     (-66,PC),(-42,a0)
+         movea.l     (-66,PC),(-42,a0)
+         movea       (-66,PC),12(a0,d0)
+         movea.b     (-66,PC),12(a0,d0)
+         movea.w     (-66,PC),12(a0,d0)
+         movea.l     (-66,PC),12(a0,d0)
+         movea       (-66,PC),(12,a0,a0)
+         movea.b     (-66,PC),(12,a0,a0)
+         movea.w     (-66,PC),(12,a0,a0)
+         movea.l     (-66,PC),(12,a0,a0)
+         movea       (-66,PC),$4000
+         movea.b     (-66,PC),$4000
+         movea.w     (-66,PC),$4000
+         movea.l     (-66,PC),$4000
+         movea       (-66,PC),$4000.W
+         movea.b     (-66,PC),$4000.W
+         movea.w     (-66,PC),$4000.W
+         movea.l     (-66,PC),$4000.W
+         movea       (-66,PC),$4000.L
+         movea.b     (-66,PC),$4000.L
+         movea.w     (-66,PC),$4000.L
+         movea.l     (-66,PC),$4000.L
+         movea       66(PC,d0),d0
+         movea.b     66(PC,d0),d0
+         movea.w     66(PC,d0),d0
+         movea.l     66(PC,d0),d0
+         movea       66(PC,d0),(a0)
+         movea.b     66(PC,d0),(a0)
+         movea.w     66(PC,d0),(a0)
+         movea.l     66(PC,d0),(a0)
+         movea       66(PC,d0),(a0)+
+         movea.b     66(PC,d0),(a0)+
+         movea.w     66(PC,d0),(a0)+
+         movea.l     66(PC,d0),(a0)+
+         movea       66(PC,d0),-(a0)
+         movea.b     66(PC,d0),-(a0)
+         movea.w     66(PC,d0),-(a0)
+         movea.l     66(PC,d0),-(a0)
+         movea       66(PC,d0),42(a0)
+         movea.b     66(PC,d0),42(a0)
+         movea.w     66(PC,d0),42(a0)
+         movea.l     66(PC,d0),42(a0)
+         movea       66(PC,d0),(-42,a0)
+         movea.b     66(PC,d0),(-42,a0)
+         movea.w     66(PC,d0),(-42,a0)
+         movea.l     66(PC,d0),(-42,a0)
+         movea       66(PC,d0),12(a0,d0)
+         movea.b     66(PC,d0),12(a0,d0)
+         movea.w     66(PC,d0),12(a0,d0)
+         movea.l     66(PC,d0),12(a0,d0)
+         movea       66(PC,d0),(12,a0,a0)
+         movea.b     66(PC,d0),(12,a0,a0)
+         movea.w     66(PC,d0),(12,a0,a0)
+         movea.l     66(PC,d0),(12,a0,a0)
+         movea       66(PC,d0),$4000
+         movea.b     66(PC,d0),$4000
+         movea.w     66(PC,d0),$4000
+         movea.l     66(PC,d0),$4000
+         movea       66(PC,d0),$4000.W
+         movea.b     66(PC,d0),$4000.W
+         movea.w     66(PC,d0),$4000.W
+         movea.l     66(PC,d0),$4000.W
+         movea       66(PC,d0),$4000.L
+         movea.b     66(PC,d0),$4000.L
+         movea.w     66(PC,d0),$4000.L
+         movea.l     66(PC,d0),$4000.L
+         movea       (66,PC,a0),d0
+         movea.b     (66,PC,a0),d0
+         movea.w     (66,PC,a0),d0
+         movea.l     (66,PC,a0),d0
+         movea       (66,PC,a0),(a0)
+         movea.b     (66,PC,a0),(a0)
+         movea.w     (66,PC,a0),(a0)
+         movea.l     (66,PC,a0),(a0)
+         movea       (66,PC,a0),(a0)+
+         movea.b     (66,PC,a0),(a0)+
+         movea.w     (66,PC,a0),(a0)+
+         movea.l     (66,PC,a0),(a0)+
+         movea       (66,PC,a0),-(a0)
+         movea.b     (66,PC,a0),-(a0)
+         movea.w     (66,PC,a0),-(a0)
+         movea.l     (66,PC,a0),-(a0)
+         movea       (66,PC,a0),42(a0)
+         movea.b     (66,PC,a0),42(a0)
+         movea.w     (66,PC,a0),42(a0)
+         movea.l     (66,PC,a0),42(a0)
+         movea       (66,PC,a0),(-42,a0)
+         movea.b     (66,PC,a0),(-42,a0)
+         movea.w     (66,PC,a0),(-42,a0)
+         movea.l     (66,PC,a0),(-42,a0)
+         movea       (66,PC,a0),12(a0,d0)
+         movea.b     (66,PC,a0),12(a0,d0)
+         movea.w     (66,PC,a0),12(a0,d0)
+         movea.l     (66,PC,a0),12(a0,d0)
+         movea       (66,PC,a0),(12,a0,a0)
+         movea.b     (66,PC,a0),(12,a0,a0)
+         movea.w     (66,PC,a0),(12,a0,a0)
+         movea.l     (66,PC,a0),(12,a0,a0)
+         movea       (66,PC,a0),$4000
+         movea.b     (66,PC,a0),$4000
+         movea.w     (66,PC,a0),$4000
+         movea.l     (66,PC,a0),$4000
+         movea       (66,PC,a0),$4000.W
+         movea.b     (66,PC,a0),$4000.W
+         movea.w     (66,PC,a0),$4000.W
+         movea.l     (66,PC,a0),$4000.W
+         movea       (66,PC,a0),$4000.L
+         movea.b     (66,PC,a0),$4000.L
+         movea.w     (66,PC,a0),$4000.L
+         movea.l     (66,PC,a0),$4000.L
 
 
 ********************************************************************************
@@ -6302,4 +6302,4 @@ label35: bvs         label35
          unlk      a0
 * Instructions count: 128
 
-* 0/5428 deprecated: 781
+* 0/5428

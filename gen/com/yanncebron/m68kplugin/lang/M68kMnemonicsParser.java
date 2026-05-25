@@ -2352,7 +2352,12 @@ public class M68kMnemonicsParser {
   }
 
   /* ********************************************************** */
-  // MOVEA tail_data_size_word_long___all__ard
+  // MOVEA
+  //                       (
+  //                         move_tail_ard_alterable |           // deprecated
+  //                         move_tail_data_alterable_data |      // deprecated
+  //                         tail_data_size_word_long___all__ard
+  //                       )
   public static boolean movea_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "movea_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", MOVEA)) return false;
@@ -2360,9 +2365,21 @@ public class M68kMnemonicsParser {
     Marker m = enter_section_(b, l, _NONE_, MOVEA_INSTRUCTION, "<instruction>");
     r = consumeToken(b, MOVEA);
     p = r; // pin = 1
-    r = r && tail_data_size_word_long___all__ard(b, l + 1);
+    r = r && movea_instruction_1(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  // move_tail_ard_alterable |           // deprecated
+  //                         move_tail_data_alterable_data |      // deprecated
+  //                         tail_data_size_word_long___all__ard
+  private static boolean movea_instruction_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "movea_instruction_1")) return false;
+    boolean r;
+    r = move_tail_ard_alterable(b, l + 1);
+    if (!r) r = move_tail_data_alterable_data(b, l + 1);
+    if (!r) r = tail_data_size_word_long___all__ard(b, l + 1);
+    return r;
   }
 
   /* ********************************************************** */

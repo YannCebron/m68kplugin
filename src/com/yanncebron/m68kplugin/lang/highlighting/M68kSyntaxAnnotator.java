@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.lang.highlighting;
 
+import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.annotation.AnnotationBuilder;
 import com.intellij.lang.annotation.AnnotationHolder;
@@ -41,9 +42,21 @@ final class M68kSyntaxAnnotator implements Annotator, DumbAware {
     if (holder.isBatchMode()) return;
     if (!(element instanceof M68kPsiElement)) return;
 
-    if (element instanceof M68kPrivilegedInstruction privilegedInstruction) {
-      M68kMnemonic m68kMnemonic = M68kMnemonicRegistry.getInstance().find(privilegedInstruction);
-      if (m68kMnemonic != null && m68kMnemonic.privilegedType() != M68kMnemonic.PrivilegedType.NONE) {
+    if (element instanceof M68kInstruction m68kInstruction) {
+      if (element instanceof M68kDataSized) {
+        annotateMacroParameters(holder, element);
+      }
+
+      M68kMnemonic m68kMnemonic = M68kMnemonicRegistry.getInstance().find(m68kInstruction);
+      if (m68kMnemonic == null) return;
+
+      if (m68kMnemonic.deprecated()) {
+        holder.newAnnotation(HighlightSeverity.WARNING, M68kBundle.message("highlight.deprecated.mnemonic"))
+          .highlightType(ProblemHighlightType.LIKE_DEPRECATED)
+          .create();
+      }
+
+      if (m68kInstruction instanceof M68kPrivilegedInstruction && m68kMnemonic.privilegedType() != M68kMnemonic.PrivilegedType.NONE) {
         String message;
         if (m68kMnemonic.privilegedType() == M68kMnemonic.PrivilegedType.PRIVILEGED_68010_ABOVE) {
           message = M68kBundle.message("highlight.privileged.instruction.68010.or.above");
@@ -53,10 +66,6 @@ final class M68kSyntaxAnnotator implements Annotator, DumbAware {
         holder.newAnnotation(HighlightSeverity.INFORMATION, message)
           .textAttributes(M68kTextAttributes.PRIVILEGED_INSTRUCTION).create();
       }
-    }
-
-    if (element instanceof M68kInstruction && element instanceof M68kDataSized) {
-      annotateMacroParameters(holder, element);
     } else if (element instanceof M68kLabel) {
       doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LABEL, true);
     } else if (element instanceof M68kLocalLabel) {

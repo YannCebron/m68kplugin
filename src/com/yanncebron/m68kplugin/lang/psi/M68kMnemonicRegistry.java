@@ -90,9 +90,15 @@ public final class M68kMnemonicRegistry {
       return filtered.get(0);
     }
 
-    // multiple matches: sort by min(addressMode.count), so IMMEDIATE wins over DATA etc.
+    // multiple matches: sort by
+    // 1. not deprecated
+    // 2. min(addressMode.count), so IMMEDIATE wins over DATA etc.
     List<M68kMnemonic> multipleMatches = new SmartList<>(filtered);
     multipleMatches.sort((o1, o2) -> {
+      if (o1.deprecated()) {
+        return 1;
+      }
+
       final int o1FirstOperandAddressModesCount = o1.firstOperand().getAddressModes().length;
       final int o2FirstOperandAddressModesCount = o2.firstOperand().getAddressModes().length;
       if (o1FirstOperandAddressModesCount != o2FirstOperandAddressModesCount) {

@@ -131,6 +131,14 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
         M68kCpu.GROUP_68000_UP, M68kMnemonic.PrivilegedType.NONE, false));
   }
 
+  public void testFindMoveaArdAlterable() {
+    // do not match deprecated <ADDRESS_REGISTER>,<ALTERABLE>
+    doTestFind("movea.w a0,a0",
+      new M68kMnemonic(M68kTokenTypes.MOVEA, M68kDataSize.GROUP_WL,
+        M68kOperand.ALL, M68kOperand.ADDRESS_REGISTER,
+        M68kCpu.GROUP_68000_UP, M68kMnemonic.PrivilegedType.NONE, false));
+  }
+
   // matching via M68kAdmWithRrd
   public void testFindExg() {
     doTestFind("exg a0,a1",
