@@ -10,5 +10,3 @@ Add the source operand to the destination operand and store the result in the de
 | X | N | Z | V | C |
 |:-:|:-:|:-:|:-:|:-:|
 |*|*|*|*|*|
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

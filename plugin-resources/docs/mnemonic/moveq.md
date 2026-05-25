@@ -13,5 +13,3 @@ Move the specified literal to a data register. The literal data is an eight-bit 
 | X | N | Z | V | C |
 |:-:|:-:|:-:|:-:|:-:|
 |-|*|*|0|0|
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

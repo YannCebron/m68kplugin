@@ -12,5 +12,3 @@ Subtract the source operand from the destination operand along with the extend b
 |*|*|*|*|*|
 
 Z: Cleared if the result is non-zero, unchanged otherwise. The Z-bit can be used to test for zero after a chain of multiple precision operations.
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

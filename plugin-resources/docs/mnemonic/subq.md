@@ -10,5 +10,3 @@ Subtract the immediate data from the destination operand. The immediate data mus
 | X | N | Z | V | C |
 |:-:|:-:|:-:|:-:|:-:|
 |*|*|*|*|*|
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

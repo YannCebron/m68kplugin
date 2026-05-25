@@ -24,5 +24,3 @@ LOOP    ADDX -(A0),-(A1) ;Add pair of numbers
 |*|*|*|*|*|
 
 The Z-bit is cleared if the result is non-zero, and left unchanged otherwise. The Z-bit can be used to test for zero after a chain of multiple precision operations.
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

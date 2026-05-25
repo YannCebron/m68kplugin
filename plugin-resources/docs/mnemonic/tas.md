@@ -13,5 +13,3 @@ The `TAS` instruction permits one processor in a multiprocessor system to test a
 | X | N | Z | V | C |
 |:-:|:-:|:-:|:-:|:-:|
 |-|*|*|0|0|
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

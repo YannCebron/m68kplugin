@@ -12,5 +12,3 @@ control register may be implemented with fewer bits. Unimplemented bits are read
 
 ## Condition Codes
 Not affected.
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

@@ -52,6 +52,7 @@ public final class M68kRegisterDocsGenerator {
 
     sb.append(DocumentationMarkup.CONTENT_START);
     sb.append(getReferenceDoc(forBrowserPane));
+    sb.append(M68kDocumentationUtil.MOTOROLA_FOOTER);
     sb.append(DocumentationMarkup.CONTENT_END);
 
     return M68kDocumentationUtil.CSS + sb;

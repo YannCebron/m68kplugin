@@ -8,5 +8,3 @@ Pulls the program counter value from the stack and adds the sign-extended 16-bit
 
 ## Condition codes
 Not affected.
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

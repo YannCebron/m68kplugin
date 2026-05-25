@@ -26,5 +26,3 @@ Subrtn LINK  A6,#-12    ;Create a 12-byte workspace
 |-|-|-|-|-|
 
 The LINK instruction does not affect the CCR.
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

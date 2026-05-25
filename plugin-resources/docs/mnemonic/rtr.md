@@ -27,5 +27,3 @@ Proc1 MOVE.W  SR,-(SP)    ;Save old CCR on stack
 |*|*|*|*|*|
 
 The CCR is restored to its pre-exception state.
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

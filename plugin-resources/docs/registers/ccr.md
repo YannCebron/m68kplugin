@@ -41,6 +41,3 @@ operand size; otherwise clear.
 
 Set if a carry out of the most significant bit of the operand occurs for an addition, or if a
 borrow occurs in a subtraction; otherwise clear.
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with
-permission.*

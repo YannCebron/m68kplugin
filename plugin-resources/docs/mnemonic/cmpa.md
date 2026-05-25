@@ -10,5 +10,3 @@ Subtract the source operand from the destination address register and set the co
 | X | N | Z | V | C |
 |:-:|:-:|:-:|:-:|:-:|
 |-|*|*|*|*|
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

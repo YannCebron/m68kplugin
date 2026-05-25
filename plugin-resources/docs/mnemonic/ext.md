@@ -14,5 +14,3 @@ If `[D0] = $12345678, EXT.L D0` results in 00005678<sub>16</sub>
 | X | N | Z | V | C |
 |:-:|:-:|:-:|:-:|:-:|
 |-|*|*|0|0|
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

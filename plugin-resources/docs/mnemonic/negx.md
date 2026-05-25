@@ -12,5 +12,3 @@ The operand addressed as the destination and the extend bit are subtracted from 
 |*|*|*|*|*|
 
 The Z-bit is cleared if the result is non-zero and is unchanged otherwise. The X-bit is set to the same value as the C-bit.
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

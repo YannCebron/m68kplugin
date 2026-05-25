@@ -14,5 +14,3 @@ operand and store the result in the destination. Both the source and destination
 | X | N | Z | V | C |
 |:-:|:-:|:-:|:-:|:-:|
 |-|*|*|0|0|
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

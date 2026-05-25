@@ -49,5 +49,3 @@ The official mnemonics `BCC` (branch on carry clear) and `BCS` (branch on carry 
 | X | N | Z | V | C |
 |:-:|:-:|:-:|:-:|:-:|
 |-|-|-|-|-|
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

@@ -16,5 +16,3 @@ stack pointer (ISP or MSP). For processors that do not support ISP or MSP, the s
 is the system stack pointer (SSP). The ISP and MSP are general-purpose address registers
 for the supervisor mode. They can be used as software stack pointers, index registers, or
 base address registers. The ISP and MSP can be used for word and long-word operations.
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

@@ -81,5 +81,3 @@ Move the contents of the user stack pointer to an address register or vice versa
 | X | N | Z | V | C |
 |:-:|:-:|:-:|:-:|:-:|
 |-|-|-|-|-|
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

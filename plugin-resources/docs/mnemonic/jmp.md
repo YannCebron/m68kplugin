@@ -13,5 +13,3 @@ Apart from a simple unconditional jump to an address fixed at compile time (i.e.
 | X | N | Z | V | C |
 |:-:|:-:|:-:|:-:|:-:|
 |-|-|-|-|-|
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

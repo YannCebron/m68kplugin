@@ -53,5 +53,3 @@ This instruction is used to clear the interrupt mask, the S-bit, and the T-bit o
 | X | N | Z | V | C |
 |:-:|:-:|:-:|:-:|:-:|
 |*|*|*|*|*|
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

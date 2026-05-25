@@ -17,5 +17,3 @@ The execution of instructions resumes when a trace, an interrupt, or a reset exc
 |*|*|*|*|*|
 
 Set according to the literal.
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

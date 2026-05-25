@@ -12,5 +12,3 @@ The operand addressed as the destination and the extend bit in the CCR are subtr
 |*|U|*|U|*|
 
 The Z-bit is cleared if the result is non-zero and is unchanged otherwise. The C-bit is set if a decimal borrow occurs. The X-bit is set to the same value as the C-bit.
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

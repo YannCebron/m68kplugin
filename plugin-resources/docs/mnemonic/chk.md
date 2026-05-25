@@ -21,5 +21,3 @@ CHK    #max_bound,D0   ;Test subscript against 0 and upper bound
 |-|*|U|U|U|
 
 N: set if [Dn] < 0 ; cleared if [Dn] > [\<ea\>]; undefined otherwise.
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

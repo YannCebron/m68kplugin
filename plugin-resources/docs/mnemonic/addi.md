@@ -10,5 +10,3 @@ Add immediate data to the destination operand. Store the result in the destinati
 | X | N | Z | V | C |
 |:-:|:-:|:-:|:-:|:-:|
 |*|*|*|*|*|
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

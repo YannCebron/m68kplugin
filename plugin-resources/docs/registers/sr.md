@@ -37,6 +37,3 @@ _15–8 SYSTEM BYTE_ / _7–0 USER BYTE ([CCR](ccr.md))_
 | 1 | 1 | MSP          |
 
 #### INTERRUPT PRIORITY MASK: `I2`/`I1`/`I0`
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with
-permission.*

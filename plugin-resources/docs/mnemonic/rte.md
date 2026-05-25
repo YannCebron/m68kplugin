@@ -15,5 +15,3 @@ The status register and program counter are pulled from the stack. The previous 
 |*|*|*|*|*|
 
 The CCR is restored to its pre-exception state.
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

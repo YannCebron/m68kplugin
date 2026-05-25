@@ -31,5 +31,3 @@ The specified condition code is tested. If the condition is true, the bits at th
 | X | N | Z | V | C |
 |:-:|:-:|:-:|:-:|:-:|
 |-|-|-|-|-|
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

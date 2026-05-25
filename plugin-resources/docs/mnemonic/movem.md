@@ -43,5 +43,3 @@ Example MOVEM.L D0-D5/A0-A3,-(SP)    ;Save registers
 | X | N | Z | V | C |
 |:-:|:-:|:-:|:-:|:-:|
 |-|-|-|-|-|
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

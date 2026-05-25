@@ -16,5 +16,3 @@ If the operation `BCLR #4,$1234` is carried out and the contents of memory locat
 |-|-|*|-|-|
 
 Z: set if the bit tested is zero, cleared otherwise.
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

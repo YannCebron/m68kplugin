@@ -24,5 +24,3 @@ Subroutine MOVEA.L (4,SP),A0   ;A0 points to parameter under return address
 | X | N | Z | V | C |
 |:-:|:-:|:-:|:-:|:-:|
 |-|-|-|-|-|
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

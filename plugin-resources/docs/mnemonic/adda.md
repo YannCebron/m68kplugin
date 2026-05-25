@@ -16,5 +16,3 @@ To add to the contents of an address register and not update the CCR. Note that 
 |-|-|-|-|-|
 
 An `ADDA` operation does not affect the state of the CCR.
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

@@ -12,5 +12,3 @@ Subtract the destination operand from 0 and store the result in the destination 
 |*|*|*|*|*|
 
 Note that the X-bit is set to the value of the C-bit.
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

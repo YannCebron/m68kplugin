@@ -100,7 +100,8 @@ public final class M68kInstructionDocumentationProvider extends AbstractDocument
       return markdownContents.getSecond();
     }
 
-    return M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, markdownContents.getFirst(), M68kBrowserPaneBase.M68K_BROWSER_LINK_FUNCTION);
+    String referenceHtml = M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, markdownContents.getFirst(), M68kBrowserPaneBase.M68K_BROWSER_LINK_FUNCTION);
+    return referenceHtml + M68kDocumentationUtil.MOTOROLA_FOOTER;
   }
 
   private static Couple<String> getMarkdownContents(IElementType originalMnemonic) {

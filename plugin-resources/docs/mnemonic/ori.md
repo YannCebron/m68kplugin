@@ -63,5 +63,3 @@ N is set if bit 3 of data = 1; unchanged otherwise<br/>
 Z is set if bit 2 of data = 1; unchanged otherwise<br/>
 V is set if bit 1 of data = 1; unchanged otherwise<br/>
 C is set if bit 0 of data = 1; unchanged otherwise
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*

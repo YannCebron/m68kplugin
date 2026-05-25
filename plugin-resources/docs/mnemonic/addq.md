@@ -15,5 +15,3 @@ Add the immediate data to the contents of the destination operand. The immediate
 |*|*|*|*|*|
 
 Note that the CCR is not updated if the destination operand is an address register.
-
-*From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.*
