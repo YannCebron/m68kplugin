@@ -114,10 +114,10 @@ class M68kInstructionMnemonicDocsGenerator {
         appendPrivilegedSection(mnemonic);
       }
 
-      final M68kAddressMode[] sourceAddressModes = mnemonic.firstOperand().getAddressModes();
-      final M68kAddressMode[] destinationAddressModes = mnemonic.secondOperand().getAddressModes();
-      if (sourceAddressModes.length <= 1 &&
-        destinationAddressModes.length <= 1) {
+      final M68kAddressMode[] firstAddressModes = mnemonic.firstOperand().getAddressModes();
+      final M68kAddressMode[] secondAddressModes = mnemonic.secondOperand().getAddressModes();
+      if (firstAddressModes.length <= 1 &&
+        secondAddressModes.length <= 1) {
         if (iterator.hasNext()) {
           appendBreak();
         }
@@ -137,8 +137,8 @@ class M68kInstructionMnemonicDocsGenerator {
       }
       sb.append("</tr>");
 
-      appendAddressModes(M68kBundle.message("documentation.source"), allUsedAddressModesFromMultiOperands, sourceAddressModes);
-      appendAddressModes(M68kBundle.message("documentation.destination"), allUsedAddressModesFromMultiOperands, destinationAddressModes);
+      appendAddressModes(M68kBundle.message("documentation.operand.first"), allUsedAddressModesFromMultiOperands, firstAddressModes);
+      appendAddressModes(M68kBundle.message("documentation.operand.second"), allUsedAddressModesFromMultiOperands, secondAddressModes);
       sb.append("</table>");
 
       appendBreak();
