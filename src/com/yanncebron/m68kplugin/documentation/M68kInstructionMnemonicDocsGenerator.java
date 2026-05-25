@@ -83,13 +83,17 @@ class M68kInstructionMnemonicDocsGenerator {
         sb.append("<h4>");
       }
 
+
       String dataSizeText = StringUtil.join(mnemonic.dataSizes(), M68kDataSize::getText, "|");
       int dataSizeTextLength = dataSizeText.length();
       dataSizeText = StringUtil.escapeXmlEntities(dataSizeText); // "<unsized>"
       dataSizeText = dataSizeText.replace(".", M68kDocumentationUtil.NON_BREAK_PERIOD);
 
+      boolean deprecated = mnemonic.deprecated();
       String mnemonicText = StringUtil.toUpperCase(elementType.toString());
-      sb.append("<code>").append(mnemonicText).append(dataSizeText);
+      sb.append("<code>");
+      if (deprecated) sb.append("<strike>");
+      sb.append(mnemonicText).append(dataSizeText);
 
       if (mnemonic.hasFirstOperand()) {
         sb.append(StringUtil.repeat("&nbsp;", Math.max(1, 17 - mnemonicText.length() - dataSizeTextLength)));
@@ -97,6 +101,7 @@ class M68kInstructionMnemonicDocsGenerator {
         appendOperand(mnemonic.secondOperand(), ",");
       }
 
+      if (deprecated) sb.append("</strike>");
       sb.append("</code></h4>");
 
 
