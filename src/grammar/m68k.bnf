@@ -344,17 +344,18 @@ adm_register_list ::= register_range (DIV register_range)* {
 
 // maps to M68kOperand
 // ATTN: keep fixed ordering in groups
-private operand_all ::=                adm_drd | adm_ard | adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "ALL" }
-private operand_data ::=               adm_drd |           adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "DATA" }
-private operand_memory ::=                                 adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "MEMORY" }
-private operand_memory_without_imm ::=                               adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "MEMORY_WITHOUT_IMMEDIATE" }
-private operand_alterable ::=          adm_drd | adm_ard |           adm_api | adm_ari | adm_apd |                     adm_adi | adm_aix | adm_abs { name = "ALTERABLE" }
-private operand_alterable_data ::=     adm_drd |                     adm_api | adm_ari | adm_apd |                     adm_adi | adm_aix | adm_abs { name = "ALTERABLE_DATA" }
-private operand_alterable_memory ::=                                 adm_api | adm_ari | adm_apd |                     adm_adi | adm_aix | adm_abs { name = "ALTERABLE_MEMORY" }
-private operand_control ::=                                                    adm_ari |           adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "CONTROL" }
-private operand_alterable_control ::=                                          adm_ari |                               adm_adi | adm_aix | adm_abs { name = "ALTERABLE_CONTROL" }
+private operand_all ::=                    adm_drd | adm_ard | adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "ALL" }
+private operand_data ::=                   adm_drd |           adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "DATA" }
+private operand_data_without_immediate ::= adm_drd |                     adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "DATA_WITHOUT_IMMEDIATE" }
+private operand_memory ::=                                     adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "MEMORY" }
+private operand_memory_without_imm ::=                                   adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "MEMORY_WITHOUT_IMMEDIATE" }
+private operand_alterable ::=              adm_drd | adm_ard |           adm_api | adm_ari | adm_apd |                     adm_adi | adm_aix | adm_abs { name = "ALTERABLE" }
+private operand_alterable_data ::=         adm_drd |                     adm_api | adm_ari | adm_apd |                     adm_adi | adm_aix | adm_abs { name = "ALTERABLE_DATA" }
+private operand_alterable_memory ::=                                     adm_api | adm_ari | adm_apd |                     adm_adi | adm_aix | adm_abs { name = "ALTERABLE_MEMORY" }
+private operand_control ::=                                                        adm_ari |           adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "CONTROL" }
+private operand_alterable_control ::=                                              adm_ari |                               adm_adi | adm_aix | adm_abs { name = "ALTERABLE_CONTROL" }
 
-private operand_restore_operands ::=                                 adm_api | adm_ari |           adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "RESTORE_OPERANDS" }
+private operand_restore_operands ::=                                     adm_api | adm_ari |           adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs { name = "RESTORE_OPERANDS" }
 
 private operand_ctrl_register ::= adm_dfc | adm_sfc | adm_vbr
 {
@@ -876,16 +877,25 @@ fake cmp_instruction_base ::=
   extends = data_sized
 }
 
-private cmp_tail_ard_drd ::=            data_size_word_long? adm_ard COMMA adm_drd
-private cmp_tail_data_drd ::=           data_size_all?       operand_data COMMA adm_drd
+private cmp_tail_ard_drd ::=                data_size_word_long? adm_ard COMMA adm_drd
+private cmp_tail_data_drd ::=                     data_size_all? operand_data COMMA adm_drd
 // tail_data_size_all___imm_alterable_data has pin, can't use
-private cmp_tail_imm_alterable_data ::= data_size_all?       adm_imm COMMA operand_alterable_data
-private cmp_tail_api_api ::=            data_size_all?       adm_api COMMA adm_api
-cmp_instruction ::= CMP (cmp_tail_ard_drd | cmp_tail_data_drd | cmp_tail_imm_alterable_data | cmp_tail_api_api | tail_data_size_word_long___all__ard)
+private cmp_tail_imm_alterable_data ::=           data_size_all? adm_imm COMMA operand_alterable_data
+private cmp_tail_api_api ::=                      data_size_all? adm_api COMMA adm_api
+private cmp_tail_immediate_data_not_immediate ::= data_size_all? adm_imm COMMA operand_data_without_immediate
+cmp_instruction ::= CMP
+                    (
+                      cmp_tail_ard_drd |
+                      cmp_tail_data_drd |
+                      cmp_tail_immediate_data_not_immediate |
+                      cmp_tail_imm_alterable_data |
+                      cmp_tail_api_api |
+                      tail_data_size_word_long___all__ard
+                    )
 
 cmpa_instruction ::= CMPA tail_data_size_word_long___all__ard
 
-cmpi_instruction ::= CMPI tail_data_size_all___imm_alterable_data
+cmpi_instruction ::= CMPI (cmp_tail_immediate_data_not_immediate | tail_data_size_all___imm_alterable_data)
 
 cmpm_instruction ::= CMPM data_size_all?
                      adm_api COMMA adm_api

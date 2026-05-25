@@ -160,10 +160,10 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       parsedMnemonics.add(m68kMnemonic);
     }
 
-    assertEquals("total parsed mnemonic count", 333, parsedMnemonics.size());
+    assertEquals("total parsed mnemonic count", 342, parsedMnemonics.size());
 
     List<M68kMnemonic> cleanupMnemonics = cleanupMnemonics(parsedMnemonics);
-    assertEquals("total cleanup mnemonic count", 293, cleanupMnemonics.size());
+    assertEquals("total cleanup mnemonic count", 302, cleanupMnemonics.size());
 
     dumpCode(cleanupMnemonics);
   }
@@ -292,7 +292,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
   private void dumpCode(List<M68kMnemonic> mnemonics) {
     int supportedMnemonics = ContainerUtil.filter(mnemonics, m68kMnemonic -> isSupportedCpu(m68kMnemonic.cpus())).size();
-    assertEquals("supported mnemonic count", 246, supportedMnemonics);
+    assertEquals("supported mnemonic count", 248, supportedMnemonics);
 
     printDivider();
 
@@ -396,6 +396,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     entry("IR", M68kOperand.IMMEDIATE_REGISTER_LIST_VALUE),
     entry("DA", M68kOperand.DATA),
     entry("AD", M68kOperand.ALTERABLE_DATA),
+    entry("DN", M68kOperand.DATA_WITHOUT_IMMEDIATE),
     entry("CFAD", M68kOperand.ALTERABLE_DATA_CF),
     entry("MA", M68kOperand.MEMORY),
     entry("AM", M68kOperand.ALTERABLE_MEMORY),

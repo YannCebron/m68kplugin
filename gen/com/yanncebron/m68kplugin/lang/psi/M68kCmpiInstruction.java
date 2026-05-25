@@ -45,4 +45,10 @@ public interface M68kCmpiInstruction extends M68kCmpInstructionBase {
   @Nullable
   M68kAdmImm getAdmImm();
 
+  @Nullable
+  M68kAdmPcd getAdmPcd();
+
+  @Nullable
+  M68kAdmPci getAdmPci();
+
 }

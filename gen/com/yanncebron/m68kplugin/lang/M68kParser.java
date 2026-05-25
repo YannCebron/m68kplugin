@@ -1058,6 +1058,25 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // adm_drd |                     adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
+  static boolean operand_data_without_immediate(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "operand_data_without_immediate")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, null, "<DATA_WITHOUT_IMMEDIATE>");
+    r = adm_drd(b, l + 1);
+    if (!r) r = adm_api(b, l + 1);
+    if (!r) r = adm_ari(b, l + 1);
+    if (!r) r = adm_apd(b, l + 1);
+    if (!r) r = adm_pcd(b, l + 1);
+    if (!r) r = adm_pci(b, l + 1);
+    if (!r) r = adm_adi(b, l + 1);
+    if (!r) r = adm_aix(b, l + 1);
+    if (!r) r = adm_abs(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // adm_imm | adm_api | adm_ari | adm_apd | adm_pcd | adm_pci | adm_adi | adm_aix | adm_abs
   static boolean operand_memory(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operand_memory")) return false;

@@ -169,6 +169,19 @@ public enum M68kOperand {
     M68kAddressMode.ABSOLUTE_SHORT,
     M68kAddressMode.ABSOLUTE_LONG),
   /**
+   * vasm: {@code DN}
+   */
+  DATA_WITHOUT_IMMEDIATE(M68kAddressMode.DATA_REGISTER,
+    M68kAddressMode.ADDRESS_REGISTER_INDIRECT,
+    M68kAddressMode.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT,
+    M68kAddressMode.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT,
+    M68kAddressMode.ADDRESS_REGISTER_DISPLACEMENT,
+    M68kAddressMode.ADDRESS_REGISTER_INDEX_DISPLACEMENT,
+    M68kAddressMode.ABSOLUTE_SHORT,
+    M68kAddressMode.ABSOLUTE_LONG,
+    M68kAddressMode.PC_REGISTER_DISPLACEMENT,
+    M68kAddressMode.PC_REGISTER_INDEX_DISPLACEMENT),
+  /**
    * vasm: {@code AM}
    */
   ALTERABLE_MEMORY(M68kAddressMode.ADDRESS_REGISTER_INDIRECT,
@@ -178,6 +191,7 @@ public enum M68kOperand {
     M68kAddressMode.ADDRESS_REGISTER_INDEX_DISPLACEMENT,
     M68kAddressMode.ABSOLUTE_SHORT,
     M68kAddressMode.ABSOLUTE_LONG),
+
   /**
    * vasm: {@code CFAM}
    */
@@ -193,6 +207,7 @@ public enum M68kOperand {
    * vasm: {@code D_}
    */
   DATA_REGISTER(M68kAddressMode.DATA_REGISTER),
+
   /**
    * vasm: {@code A_}
    */
@@ -217,14 +232,17 @@ public enum M68kOperand {
    * vasm: {@code PA}
    */
   ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT(M68kAddressMode.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT),
+
   /**
    * vasm: {@code AP}
    */
   ADDRESS_REGISTER_INDIRECT_POST_INCREMENT(M68kAddressMode.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT),
+
   /**
    * vasm: {@code DP}
    */
   ADDRESS_REGISTER_DISPLACEMENT(M68kAddressMode.ADDRESS_REGISTER_DISPLACEMENT),
+
   /**
    * vasm: {@code ???}
    */
@@ -234,10 +252,12 @@ public enum M68kOperand {
    * vasm: {@code _SR}
    */
   SR_REGISTER(M68kAddressMode.SPECIAL_REGISTER_SR),
+
   /**
    * vasm: {@code _USP}
    */
   USP_REGISTER(M68kAddressMode.SPECIAL_REGISTER_USP),
+
   /**
    * vasm: {@code _CCR}
    */

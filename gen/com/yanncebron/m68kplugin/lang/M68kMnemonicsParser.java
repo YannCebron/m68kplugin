@@ -1212,7 +1212,15 @@ public class M68kMnemonicsParser {
   }
 
   /* ********************************************************** */
-  // CMP (cmp_tail_ard_drd | cmp_tail_data_drd | cmp_tail_imm_alterable_data | cmp_tail_api_api | tail_data_size_word_long___all__ard)
+  // CMP
+  //                     (
+  //                       cmp_tail_ard_drd |
+  //                       cmp_tail_data_drd |
+  //                       cmp_tail_immediate_data_not_immediate |
+  //                       cmp_tail_imm_alterable_data |
+  //                       cmp_tail_api_api |
+  //                       tail_data_size_word_long___all__ard
+  //                     )
   public static boolean cmp_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cmp_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", CMP)) return false;
@@ -1225,12 +1233,18 @@ public class M68kMnemonicsParser {
     return r || p;
   }
 
-  // cmp_tail_ard_drd | cmp_tail_data_drd | cmp_tail_imm_alterable_data | cmp_tail_api_api | tail_data_size_word_long___all__ard
+  // cmp_tail_ard_drd |
+  //                       cmp_tail_data_drd |
+  //                       cmp_tail_immediate_data_not_immediate |
+  //                       cmp_tail_imm_alterable_data |
+  //                       cmp_tail_api_api |
+  //                       tail_data_size_word_long___all__ard
   private static boolean cmp_instruction_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cmp_instruction_1")) return false;
     boolean r;
     r = cmp_tail_ard_drd(b, l + 1);
     if (!r) r = cmp_tail_data_drd(b, l + 1);
+    if (!r) r = cmp_tail_immediate_data_not_immediate(b, l + 1);
     if (!r) r = cmp_tail_imm_alterable_data(b, l + 1);
     if (!r) r = cmp_tail_api_api(b, l + 1);
     if (!r) r = tail_data_size_word_long___all__ard(b, l + 1);
@@ -1253,7 +1267,7 @@ public class M68kMnemonicsParser {
   }
 
   /* ********************************************************** */
-  // data_size_all?       adm_api COMMA adm_api
+  // data_size_all? adm_api COMMA adm_api
   static boolean cmp_tail_api_api(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cmp_tail_api_api")) return false;
     boolean r;
@@ -1295,7 +1309,7 @@ public class M68kMnemonicsParser {
   }
 
   /* ********************************************************** */
-  // data_size_all?       operand_data COMMA adm_drd
+  // data_size_all? operand_data COMMA adm_drd
   static boolean cmp_tail_data_drd(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cmp_tail_data_drd")) return false;
     boolean r;
@@ -1316,7 +1330,7 @@ public class M68kMnemonicsParser {
   }
 
   /* ********************************************************** */
-  // data_size_all?       adm_imm COMMA operand_alterable_data
+  // data_size_all? adm_imm COMMA operand_alterable_data
   static boolean cmp_tail_imm_alterable_data(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cmp_tail_imm_alterable_data")) return false;
     boolean r;
@@ -1337,6 +1351,27 @@ public class M68kMnemonicsParser {
   }
 
   /* ********************************************************** */
+  // data_size_all? adm_imm COMMA operand_data_without_immediate
+  static boolean cmp_tail_immediate_data_not_immediate(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "cmp_tail_immediate_data_not_immediate")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = cmp_tail_immediate_data_not_immediate_0(b, l + 1);
+    r = r && adm_imm(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && operand_data_without_immediate(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_all?
+  private static boolean cmp_tail_immediate_data_not_immediate_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "cmp_tail_immediate_data_not_immediate_0")) return false;
+    data_size_all(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
   // CMPA tail_data_size_word_long___all__ard
   public static boolean cmpa_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cmpa_instruction")) return false;
@@ -1351,7 +1386,7 @@ public class M68kMnemonicsParser {
   }
 
   /* ********************************************************** */
-  // CMPI tail_data_size_all___imm_alterable_data
+  // CMPI (cmp_tail_immediate_data_not_immediate | tail_data_size_all___imm_alterable_data)
   public static boolean cmpi_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cmpi_instruction")) return false;
     if (!nextTokenIs(b, "<instruction>", CMPI)) return false;
@@ -1359,9 +1394,18 @@ public class M68kMnemonicsParser {
     Marker m = enter_section_(b, l, _NONE_, CMPI_INSTRUCTION, "<instruction>");
     r = consumeToken(b, CMPI);
     p = r; // pin = 1
-    r = r && tail_data_size_all___imm_alterable_data(b, l + 1);
+    r = r && cmpi_instruction_1(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  // cmp_tail_immediate_data_not_immediate | tail_data_size_all___imm_alterable_data
+  private static boolean cmpi_instruction_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "cmpi_instruction_1")) return false;
+    boolean r;
+    r = cmp_tail_immediate_data_not_immediate(b, l + 1);
+    if (!r) r = tail_data_size_all___imm_alterable_data(b, l + 1);
+    return r;
   }
 
   /* ********************************************************** */
@@ -2354,7 +2398,7 @@ public class M68kMnemonicsParser {
   /* ********************************************************** */
   // MOVEA
   //                       (
-  //                         move_tail_ard_alterable |           // deprecated
+  //                         move_tail_ard_alterable |            // deprecated
   //                         move_tail_data_alterable_data |      // deprecated
   //                         tail_data_size_word_long___all__ard
   //                       )
@@ -2370,7 +2414,7 @@ public class M68kMnemonicsParser {
     return r || p;
   }
 
-  // move_tail_ard_alterable |           // deprecated
+  // move_tail_ard_alterable |            // deprecated
   //                         move_tail_data_alterable_data |      // deprecated
   //                         tail_data_size_word_long___all__ard
   private static boolean movea_instruction_1(PsiBuilder b, int l) {

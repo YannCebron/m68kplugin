@@ -201,7 +201,7 @@ public final class M68kMnemonicRegistry {
   }
 
   private M68kMnemonicRegistry() {
-// Total mnemonics: 246
+// Total mnemonics: 248
 
 // ABCD ------------------------------------------------------------------------
 
@@ -654,6 +654,11 @@ public final class M68kMnemonicRegistry {
       .build();
 
     create(M68kTokenTypes.CMP).dataSizes(GROUP_BWL)
+      .first(IMMEDIATE).second(DATA_WITHOUT_IMMEDIATE)
+      .cpus(GROUP_68020_UP)
+      .build();
+
+    create(M68kTokenTypes.CMP).dataSizes(GROUP_BWL)
       .first(ADDRESS_REGISTER_INDIRECT_POST_INCREMENT).second(ADDRESS_REGISTER_INDIRECT_POST_INCREMENT)
       .build();
 
@@ -667,6 +672,11 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.CMPI).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(ALTERABLE_DATA)
+      .build();
+
+    create(M68kTokenTypes.CMPI).dataSizes(GROUP_BWL)
+      .first(IMMEDIATE).second(DATA_WITHOUT_IMMEDIATE)
+      .cpus(GROUP_68020_UP)
       .build();
 
 // CMPM ------------------------------------------------------------------------
