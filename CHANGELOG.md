@@ -4,9 +4,9 @@
 
 ### Changed
 
-- Dedicated _68_ icon for files
+- Dedicated _68_ icon for source files
 - Parser error messages: shorten and align with semantics from mnemonic doc
-- Deprecated mnemonic variants: highlight with strikethrough in editor and mnemonic docs (currently only `movea`)
+- Deprecated mnemonic variants: highlight with strikethrough in editor and mnemonic docs (currently only `MOVEA`)
 
 ### Added
 
