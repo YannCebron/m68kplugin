@@ -78,6 +78,12 @@ public class M68kDivuInstructionImpl extends M68kDataSizedImpl implements M68kDi
   }
 
   @Override
+  @Nullable
+  public M68kAdmDoubleDrd getAdmDoubleDrd() {
+    return PsiTreeUtil.getChildOfType(this, M68kAdmDoubleDrd.class);
+  }
+
+  @Override
   @NotNull
   public List<M68kAdmDrd> getAdmDrdList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmDrd.class);

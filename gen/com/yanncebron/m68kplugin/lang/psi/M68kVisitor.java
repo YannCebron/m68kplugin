@@ -100,6 +100,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitAdmWithRegister(o);
   }
 
+  public void visitAdmDoubleDrd(@NotNull M68kAdmDoubleDrd o) {
+    visitAdm(o);
+  }
+
   public void visitAdmDrd(@NotNull M68kAdmDrd o) {
     visitAdmWithRegister(o);
   }

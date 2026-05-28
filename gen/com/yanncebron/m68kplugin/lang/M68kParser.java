@@ -306,6 +306,21 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // adm_drd COLON adm_drd
+  public static boolean adm_double_drd(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "adm_double_drd")) return false;
+    if (!nextTokenIs(b, "<Dr:Dq>", DATA_REGISTER)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, ADM_DOUBLE_DRD, "<Dr:Dq>");
+    r = adm_drd(b, l + 1);
+    r = r && consumeToken(b, COLON);
+    p = r; // pin = 2
+    r = r && adm_drd(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
   // DATA_REGISTER
   public static boolean adm_drd(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "adm_drd")) return false;

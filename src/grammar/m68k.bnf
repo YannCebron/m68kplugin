@@ -131,6 +131,19 @@ adm_drd ::= DATA_REGISTER
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
 }
 
+// Dr:Dq (MUL/DIV)
+adm_double_drd ::= adm_drd COLON adm_drd
+{
+  pin = 2
+  name = "Dr:Dq"
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdm"
+  methods = [
+    adm_drd = ""
+    remainder = "adm_drd[0]"
+    quotient = "adm_drd[1]"
+  ]
+}
+
 // An | SP
 adm_ard ::= ADDRESS_REGISTER | SP
 {
@@ -710,11 +723,9 @@ private mul_div_instructions ::= muls_instruction |
                                  divs_instruction |
                                  divu_instruction
 
-private mul_div_tail ::= data_size_word_long?
-                         operand_data COMMA adm_drd
-{
-  pin = 2
-}
+private mul_div_tail_data_drd ::=        data_size_word_long? operand_data COMMA adm_drd
+private mul_div_tail_data_double_drd ::= data_size_long?      operand_data COMMA adm_double_drd
+private mul_div_tail ::= (mul_div_tail_data_double_drd | mul_div_tail_data_drd)
 
 muls_instruction ::= MULS mul_div_tail
 mulu_instruction ::= MULU mul_div_tail

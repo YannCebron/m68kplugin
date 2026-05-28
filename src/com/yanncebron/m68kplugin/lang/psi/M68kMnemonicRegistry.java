@@ -201,7 +201,7 @@ public final class M68kMnemonicRegistry {
   }
 
   private M68kMnemonicRegistry() {
-// Total mnemonics: 248
+// Total mnemonics: 252
 
 // ABCD ------------------------------------------------------------------------
 
@@ -810,6 +810,11 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
+    create(M68kTokenTypes.DIVS).dataSizes(GROUP_L)
+      .first(DATA).second(DOUBLE_DATA_REGISTER)
+      .cpus(GROUP_68020_UP)
+      .build();
+
 // DIVU ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DIVU).dataSizes(GROUP_W)
@@ -818,6 +823,11 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.DIVU).dataSizes(GROUP_L)
       .first(DATA).second(DATA_REGISTER)
+      .cpus(GROUP_68020_UP)
+      .build();
+
+    create(M68kTokenTypes.DIVU).dataSizes(GROUP_L)
+      .first(DATA).second(DOUBLE_DATA_REGISTER)
       .cpus(GROUP_68020_UP)
       .build();
 
@@ -1089,6 +1099,11 @@ public final class M68kMnemonicRegistry {
       .cpus(GROUP_68020_UP)
       .build();
 
+    create(M68kTokenTypes.MULS).dataSizes(GROUP_L)
+      .first(DATA).second(DOUBLE_DATA_REGISTER)
+      .cpus(GROUP_68020_UP)
+      .build();
+
 // MULU ------------------------------------------------------------------------
 
     create(M68kTokenTypes.MULU).dataSizes(GROUP_W)
@@ -1097,6 +1112,11 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.MULU).dataSizes(GROUP_L)
       .first(DATA).second(DATA_REGISTER)
+      .cpus(GROUP_68020_UP)
+      .build();
+
+    create(M68kTokenTypes.MULU).dataSizes(GROUP_L)
+      .first(DATA).second(DOUBLE_DATA_REGISTER)
       .cpus(GROUP_68020_UP)
       .build();
 

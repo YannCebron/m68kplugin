@@ -172,9 +172,9 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
       }
     }
 
-    assertEquals(148645, total);
-    assertEquals(18732, skippedValidCount);
-    assertEquals(1415, matchedByMnemonicCount);
+    assertEquals(163270, total);
+    assertEquals(19587, skippedValidCount);
+    assertEquals(1431, matchedByMnemonicCount);
     assertEmpty(failedVariants);
   }
 
@@ -198,7 +198,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
     dump("* Instructions count: " + M68kTokenGroups.INSTRUCTIONS.getTypes().length);
 
-    assertEquals(5468, total);
+    assertEquals(5604, total);
     assertEmpty(failedVariants);
   }
 
@@ -326,6 +326,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
   private static final Map<M68kAddressMode, List<String>> ADDRESS_MODE_TEXT = Map.ofEntries(
     entry(M68kAddressMode.DATA_REGISTER, List.of("d0")),
+    entry(M68kAddressMode.DOUBLE_DATA_REGISTER, List.of("d0:d1")),
     entry(M68kAddressMode.ADDRESS_REGISTER, List.of("a0")),
     entry(M68kAddressMode.ADDRESS_REGISTER_INDIRECT, List.of("(a0)")),
     entry(M68kAddressMode.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT, List.of("(a0)+")),
@@ -355,7 +356,9 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
     List<String> texts = new SmartList<>();
     for (M68kAddressMode addressMode : operand.getAddressModes()) {
-      texts.addAll(ADDRESS_MODE_TEXT.get(addressMode));
+      List<String> addressModeTexts = ADDRESS_MODE_TEXT.get(addressMode);
+      assertNotNull("no texts for " + addressMode, addressModeTexts);
+      texts.addAll(addressModeTexts);
     }
     return texts;
   });

@@ -209,6 +209,11 @@ public enum M68kOperand {
   DATA_REGISTER(M68kAddressMode.DATA_REGISTER),
 
   /**
+   * vasm: {@code DD}
+   */
+  DOUBLE_DATA_REGISTER(M68kAddressMode.DOUBLE_DATA_REGISTER),
+
+  /**
    * vasm: {@code A_}
    */
   ADDRESS_REGISTER(M68kAddressMode.ADDRESS_REGISTER),

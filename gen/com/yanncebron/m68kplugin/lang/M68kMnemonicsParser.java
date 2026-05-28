@@ -2788,24 +2788,53 @@ public class M68kMnemonicsParser {
   }
 
   /* ********************************************************** */
-  // data_size_word_long?
-  //                          operand_data COMMA adm_drd
+  // mul_div_tail_data_double_drd | mul_div_tail_data_drd
   static boolean mul_div_tail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "mul_div_tail")) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
-    r = mul_div_tail_0(b, l + 1);
+    boolean r;
+    r = mul_div_tail_data_double_drd(b, l + 1);
+    if (!r) r = mul_div_tail_data_drd(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // data_size_long?      operand_data COMMA adm_double_drd
+  static boolean mul_div_tail_data_double_drd(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "mul_div_tail_data_double_drd")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = mul_div_tail_data_double_drd_0(b, l + 1);
     r = r && operand_data(b, l + 1);
-    p = r; // pin = 2
-    r = r && report_error_(b, consumeToken(b, COMMA));
-    r = p && adm_drd(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_double_drd(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_long?
+  private static boolean mul_div_tail_data_double_drd_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "mul_div_tail_data_double_drd_0")) return false;
+    data_size_long(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // data_size_word_long? operand_data COMMA adm_drd
+  static boolean mul_div_tail_data_drd(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "mul_div_tail_data_drd")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = mul_div_tail_data_drd_0(b, l + 1);
+    r = r && operand_data(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_drd(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
   }
 
   // data_size_word_long?
-  private static boolean mul_div_tail_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "mul_div_tail_0")) return false;
+  private static boolean mul_div_tail_data_drd_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "mul_div_tail_data_drd_0")) return false;
     data_size_word_long(b, l + 1);
     return true;
   }

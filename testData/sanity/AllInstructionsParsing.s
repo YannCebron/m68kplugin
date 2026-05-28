@@ -1887,6 +1887,42 @@ label35: bvs         label35
          divs.l      66(PC,d0),d0
          divs.l      (66,PC,a0),d0
 
+* M68kMnemonic{divs, firstOp=DATA, secondOp=DOUBLE_DATA_REGISTER, [LONGWORD], MC68020+}
+         divs        d0,d0:d1
+         divs.l      d0,d0:d1
+         divs        #42.L,d0:d1
+         divs.l      #42.L,d0:d1
+         divs        (a0),d0:d1
+         divs.l      (a0),d0:d1
+         divs        (a0)+,d0:d1
+         divs.l      (a0)+,d0:d1
+         divs        -(a0),d0:d1
+         divs.l      -(a0),d0:d1
+         divs        42(a0),d0:d1
+         divs.l      42(a0),d0:d1
+         divs        (-42,a0),d0:d1
+         divs.l      (-42,a0),d0:d1
+         divs        12(a0,d0),d0:d1
+         divs.l      12(a0,d0),d0:d1
+         divs        (12,a0,a0),d0:d1
+         divs.l      (12,a0,a0),d0:d1
+         divs        $4000,d0:d1
+         divs.l      $4000,d0:d1
+         divs        $4000.W,d0:d1
+         divs.l      $4000.W,d0:d1
+         divs        $4000.L,d0:d1
+         divs.l      $4000.L,d0:d1
+         divs        (PC),d0:d1
+         divs.l      (PC),d0:d1
+         divs        66(PC),d0:d1
+         divs.l      66(PC),d0:d1
+         divs        (-66,PC),d0:d1
+         divs.l      (-66,PC),d0:d1
+         divs        66(PC,d0),d0:d1
+         divs.l      66(PC,d0),d0:d1
+         divs        (66,PC,a0),d0:d1
+         divs.l      (66,PC,a0),d0:d1
+
 
 ********************************************************************************
 
@@ -1944,6 +1980,42 @@ label35: bvs         label35
          divu.l      (-66,PC),d0
          divu.l      66(PC,d0),d0
          divu.l      (66,PC,a0),d0
+
+* M68kMnemonic{divu, firstOp=DATA, secondOp=DOUBLE_DATA_REGISTER, [LONGWORD], MC68020+}
+         divu        d0,d0:d1
+         divu.l      d0,d0:d1
+         divu        #42.L,d0:d1
+         divu.l      #42.L,d0:d1
+         divu        (a0),d0:d1
+         divu.l      (a0),d0:d1
+         divu        (a0)+,d0:d1
+         divu.l      (a0)+,d0:d1
+         divu        -(a0),d0:d1
+         divu.l      -(a0),d0:d1
+         divu        42(a0),d0:d1
+         divu.l      42(a0),d0:d1
+         divu        (-42,a0),d0:d1
+         divu.l      (-42,a0),d0:d1
+         divu        12(a0,d0),d0:d1
+         divu.l      12(a0,d0),d0:d1
+         divu        (12,a0,a0),d0:d1
+         divu.l      (12,a0,a0),d0:d1
+         divu        $4000,d0:d1
+         divu.l      $4000,d0:d1
+         divu        $4000.W,d0:d1
+         divu.l      $4000.W,d0:d1
+         divu        $4000.L,d0:d1
+         divu.l      $4000.L,d0:d1
+         divu        (PC),d0:d1
+         divu.l      (PC),d0:d1
+         divu        66(PC),d0:d1
+         divu.l      66(PC),d0:d1
+         divu        (-66,PC),d0:d1
+         divu.l      (-66,PC),d0:d1
+         divu        66(PC,d0),d0:d1
+         divu.l      66(PC,d0),d0:d1
+         divu        (66,PC,a0),d0:d1
+         divu.l      (66,PC,a0),d0:d1
 
 
 ********************************************************************************
@@ -4621,6 +4693,42 @@ label35: bvs         label35
          muls.l      66(PC,d0),d0
          muls.l      (66,PC,a0),d0
 
+* M68kMnemonic{muls, firstOp=DATA, secondOp=DOUBLE_DATA_REGISTER, [LONGWORD], MC68020+}
+         muls        d0,d0:d1
+         muls.l      d0,d0:d1
+         muls        #42.L,d0:d1
+         muls.l      #42.L,d0:d1
+         muls        (a0),d0:d1
+         muls.l      (a0),d0:d1
+         muls        (a0)+,d0:d1
+         muls.l      (a0)+,d0:d1
+         muls        -(a0),d0:d1
+         muls.l      -(a0),d0:d1
+         muls        42(a0),d0:d1
+         muls.l      42(a0),d0:d1
+         muls        (-42,a0),d0:d1
+         muls.l      (-42,a0),d0:d1
+         muls        12(a0,d0),d0:d1
+         muls.l      12(a0,d0),d0:d1
+         muls        (12,a0,a0),d0:d1
+         muls.l      (12,a0,a0),d0:d1
+         muls        $4000,d0:d1
+         muls.l      $4000,d0:d1
+         muls        $4000.W,d0:d1
+         muls.l      $4000.W,d0:d1
+         muls        $4000.L,d0:d1
+         muls.l      $4000.L,d0:d1
+         muls        (PC),d0:d1
+         muls.l      (PC),d0:d1
+         muls        66(PC),d0:d1
+         muls.l      66(PC),d0:d1
+         muls        (-66,PC),d0:d1
+         muls.l      (-66,PC),d0:d1
+         muls        66(PC,d0),d0:d1
+         muls.l      66(PC,d0),d0:d1
+         muls        (66,PC,a0),d0:d1
+         muls.l      (66,PC,a0),d0:d1
+
 
 ********************************************************************************
 
@@ -4678,6 +4786,42 @@ label35: bvs         label35
          mulu.l      (-66,PC),d0
          mulu.l      66(PC,d0),d0
          mulu.l      (66,PC,a0),d0
+
+* M68kMnemonic{mulu, firstOp=DATA, secondOp=DOUBLE_DATA_REGISTER, [LONGWORD], MC68020+}
+         mulu        d0,d0:d1
+         mulu.l      d0,d0:d1
+         mulu        #42.L,d0:d1
+         mulu.l      #42.L,d0:d1
+         mulu        (a0),d0:d1
+         mulu.l      (a0),d0:d1
+         mulu        (a0)+,d0:d1
+         mulu.l      (a0)+,d0:d1
+         mulu        -(a0),d0:d1
+         mulu.l      -(a0),d0:d1
+         mulu        42(a0),d0:d1
+         mulu.l      42(a0),d0:d1
+         mulu        (-42,a0),d0:d1
+         mulu.l      (-42,a0),d0:d1
+         mulu        12(a0,d0),d0:d1
+         mulu.l      12(a0,d0),d0:d1
+         mulu        (12,a0,a0),d0:d1
+         mulu.l      (12,a0,a0),d0:d1
+         mulu        $4000,d0:d1
+         mulu.l      $4000,d0:d1
+         mulu        $4000.W,d0:d1
+         mulu.l      $4000.W,d0:d1
+         mulu        $4000.L,d0:d1
+         mulu.l      $4000.L,d0:d1
+         mulu        (PC),d0:d1
+         mulu.l      (PC),d0:d1
+         mulu        66(PC),d0:d1
+         mulu.l      66(PC),d0:d1
+         mulu        (-66,PC),d0:d1
+         mulu.l      (-66,PC),d0:d1
+         mulu        66(PC,d0),d0:d1
+         mulu.l      66(PC,d0),d0:d1
+         mulu        (66,PC,a0),d0:d1
+         mulu.l      (66,PC,a0),d0:d1
 
 
 ********************************************************************************

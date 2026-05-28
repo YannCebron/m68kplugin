@@ -39,6 +39,9 @@ public interface M68kMuluInstruction extends M68kDataSized, M68kInstruction {
   @Nullable
   M68kAdmAri getAdmAri();
 
+  @Nullable
+  M68kAdmDoubleDrd getAdmDoubleDrd();
+
   @NotNull
   List<M68kAdmDrd> getAdmDrdList();
 

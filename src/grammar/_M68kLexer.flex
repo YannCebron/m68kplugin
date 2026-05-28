@@ -248,6 +248,7 @@ Z=[zZ]
   ">"  { return GT; }
   "==" { return EQ_EQ; }
   "="  { return EQ; }
+  ":"  { return COLON; }
 
   {DECNUMBER}                 { return DEC_NUMBER; }
   {HEXNUMBER}                 { return HEX_NUMBER; }

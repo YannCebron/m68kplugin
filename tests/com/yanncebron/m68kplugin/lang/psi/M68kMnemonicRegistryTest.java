@@ -44,11 +44,11 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
       totalPrivileged += ContainerUtil.count(all, mnemonic -> mnemonic.privilegedType() == M68kMnemonic.PrivilegedType.PRIVILEGED);
       totalPrivileged68010Above += ContainerUtil.count(all, mnemonic -> mnemonic.privilegedType() == M68kMnemonic.PrivilegedType.PRIVILEGED_68010_ABOVE);
     }
-    assertEquals(231, totalNone);
+    assertEquals(235, totalNone);
     assertEquals(16, totalPrivileged);
     assertEquals(1, totalPrivileged68010Above);
 
-    assertEquals(248, totalNone + totalPrivileged + totalPrivileged68010Above);
+    assertEquals(252, totalNone + totalPrivileged + totalPrivileged68010Above);
   }
 
   public void testFindAllIsEmptyForUnknownElementType() {

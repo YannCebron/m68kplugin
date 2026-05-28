@@ -2,9 +2,8 @@ M68k.FILE
   PsiWhiteSpace(' ')
   M68kDivuInstructionImpl(DIVU_INSTRUCTION)
     PsiElement(divu)('divu')
-    PsiWhiteSpace(' ')
-    M68kAdmDrdImpl(ADM_DRD)
-      PsiElement(Dn)('d0')
-    PsiElement(,)(',')
-    PsiErrorElement:<Dn> expected
-      <empty list>
+  PsiWhiteSpace(' ')
+  PsiElement(Dn)('d0')
+  PsiElement(,)(',')
+  PsiErrorElement:<Dn> or <Dr:Dq> expected
+    <empty list>
