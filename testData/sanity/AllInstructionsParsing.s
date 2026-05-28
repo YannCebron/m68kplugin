@@ -1,4 +1,3 @@
-********************************************************************************
 
 * M68kMnemonic{abcd, firstOp=DATA_REGISTER, secondOp=DATA_REGISTER, [BYTE], MC68000 Family}
          abcd        d0,d0
@@ -1530,6 +1529,28 @@ label35: bvs         label35
          cmp.w       #42.L,$4000.L
          cmp.l       #42.L,$4000.L
 
+* M68kMnemonic{cmp, firstOp=IMMEDIATE, secondOp=DATA_WITHOUT_IMMEDIATE, [BYTE, WORD, LONGWORD], MC68020+}
+         cmp         #42.L,(PC)
+         cmp.b       #42.L,(PC)
+         cmp.w       #42.L,(PC)
+         cmp.l       #42.L,(PC)
+         cmp         #42.L,66(PC)
+         cmp.b       #42.L,66(PC)
+         cmp.w       #42.L,66(PC)
+         cmp.l       #42.L,66(PC)
+         cmp         #42.L,(-66,PC)
+         cmp.b       #42.L,(-66,PC)
+         cmp.w       #42.L,(-66,PC)
+         cmp.l       #42.L,(-66,PC)
+         cmp         #42.L,66(PC,d0)
+         cmp.b       #42.L,66(PC,d0)
+         cmp.w       #42.L,66(PC,d0)
+         cmp.l       #42.L,66(PC,d0)
+         cmp         #42.L,(66,PC,a0)
+         cmp.b       #42.L,(66,PC,a0)
+         cmp.w       #42.L,(66,PC,a0)
+         cmp.l       #42.L,(66,PC,a0)
+
 * M68kMnemonic{cmp, firstOp=ADDRESS_REGISTER_INDIRECT_POST_INCREMENT, secondOp=ADDRESS_REGISTER_INDIRECT_POST_INCREMENT, [BYTE, WORD, LONGWORD], MC68000 Family}
          cmp         (a0)+,(a0)+
          cmp.b       (a0)+,(a0)+
@@ -1643,6 +1664,28 @@ label35: bvs         label35
          cmpi.b      #42.L,$4000.L
          cmpi.w      #42.L,$4000.L
          cmpi.l      #42.L,$4000.L
+
+* M68kMnemonic{cmpi, firstOp=IMMEDIATE, secondOp=DATA_WITHOUT_IMMEDIATE, [BYTE, WORD, LONGWORD], MC68020+}
+         cmpi        #42.L,(PC)
+         cmpi.b      #42.L,(PC)
+         cmpi.w      #42.L,(PC)
+         cmpi.l      #42.L,(PC)
+         cmpi        #42.L,66(PC)
+         cmpi.b      #42.L,66(PC)
+         cmpi.w      #42.L,66(PC)
+         cmpi.l      #42.L,66(PC)
+         cmpi        #42.L,(-66,PC)
+         cmpi.b      #42.L,(-66,PC)
+         cmpi.w      #42.L,(-66,PC)
+         cmpi.l      #42.L,(-66,PC)
+         cmpi        #42.L,66(PC,d0)
+         cmpi.b      #42.L,66(PC,d0)
+         cmpi.w      #42.L,66(PC,d0)
+         cmpi.l      #42.L,66(PC,d0)
+         cmpi        #42.L,(66,PC,a0)
+         cmpi.b      #42.L,(66,PC,a0)
+         cmpi.w      #42.L,(66,PC,a0)
+         cmpi.l      #42.L,(66,PC,a0)
 
 
 ********************************************************************************
@@ -6302,4 +6345,4 @@ label35: bvs         label35
          unlk      a0
 * Instructions count: 128
 
-* 0/5428
+* 0/5604
