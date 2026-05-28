@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.2.3 - 2026-05-28
 
 ### Changed
 
@@ -15,8 +15,6 @@
 - `opt` directive arguments: support *Code \| Move Element Left/Right* and *Flip Comma* intention
 - `CMP`/`CMPI`: support `#Imm,<DATA_WITHOUT_IMMEDIATE>` variant (MC68020+)
 - `DIVS`/`DIVU`/`MULS`/`MULU`: support `<DATA>,Dr:Dq` variant (MC68020+)
-
-### Fixed
 
 ## 0.2.2 - 2026-04-17
 
