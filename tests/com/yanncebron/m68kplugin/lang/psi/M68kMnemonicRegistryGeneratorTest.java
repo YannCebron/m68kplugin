@@ -55,7 +55,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
   /**
    * Generate 680x0-only variants for _known_ operands.
    */
-  private static final boolean IGNORE_UNKNOWN_OPERANDS = true;
+  private static final boolean SKIP_UNKNOWN_OPERANDS = false;
 
   private static final Set<M68kCpu> SUPPORTED_CPUS = EnumSet.of(M68kCpu.M_68000, M68kCpu.M_68010, M68kCpu.M_68020);
 
@@ -122,14 +122,14 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
       if (isSupportedCpu(m68kCpus)) {
         if (firstOperand == null) {
-          if (IGNORE_UNKNOWN_OPERANDS) {
+          if (SKIP_UNKNOWN_OPERANDS) {
             System.out.println("skipping unknown first operand: " + trim);
             continue;
           }
           fail("unknown first operand: " + trim);
         }
         if (secondOperand == null) {
-          if (IGNORE_UNKNOWN_OPERANDS) {
+          if (SKIP_UNKNOWN_OPERANDS) {
             System.out.println("skipping unknown second operand: " + trim);
             continue;
           }
