@@ -25,6 +25,16 @@ To insert these for given highlighting, use <kbd>Alt+Enter</kbd> quick fix menu:
 
 Inspection settings and descriptions can be accessed under the *M68k assembler* group in *Settings \| Editor \| Inspections*.
 
+### Conditional assembly directives problems
+
+### Constant expression
+
+### Directives problems
+
+### Register list/range problems
+
+### Simplifiable expression
+
 ### Unresolved label reference
 
 All macros defining a label (via their first parameter) must be configured explicitly.
@@ -34,14 +44,4 @@ Use the provided quick fixes to add them from usages in code or configure manual
 
 ### Unused local label
 
-### Directives problems
-
-### Conditional assembly directives problems
-
-### Register list/range problems
-
 ### Usage of A7 register
-
-### Simplifiable expression
-
-### Constant expression
