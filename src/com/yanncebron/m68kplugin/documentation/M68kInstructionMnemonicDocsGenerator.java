@@ -88,7 +88,7 @@ class M68kInstructionMnemonicDocsGenerator {
         style += " line-through";
       }
       if (!style.isEmpty()) {
-        sb.append("<h4 style=\"text-decoration: ").append(style).append(";\"> ");
+        sb.append("<h4 style=\"text-decoration: ").append(style).append(";\">");
       } else {
         sb.append("<h4>");
       }
