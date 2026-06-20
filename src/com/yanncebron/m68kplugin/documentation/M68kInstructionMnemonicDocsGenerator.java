@@ -57,6 +57,7 @@ class M68kInstructionMnemonicDocsGenerator {
   String generateHtmlDoc() {
     sb = new StringBuilder();
 
+    boolean insertBreak = false;
     boolean allCpusSame = true;
     Set<M68kCpu> previousCpus = null;
     for (M68kMnemonic mnemonic : allMnemonics) {
@@ -69,6 +70,16 @@ class M68kInstructionMnemonicDocsGenerator {
     }
     if (allCpusSame) {
       appendCpuSection(ContainerUtil.getFirstItem(allMnemonics));
+      insertBreak = true;
+    }
+
+    M68kMnemonic m68kMnemonic = ContainerUtil.getFirstItem(allMnemonics);
+    if (m68kMnemonic.privilegedType() != M68kMnemonic.PrivilegedType.NONE) {
+      appendPrivilegedSection(m68kMnemonic);
+      insertBreak = true;
+    }
+
+    if (insertBreak) {
       appendBreak();
     }
 
@@ -114,10 +125,6 @@ class M68kInstructionMnemonicDocsGenerator {
 
       if (!allCpusSame) {
         appendCpuSection(mnemonic);
-      }
-
-      if (mnemonic.privilegedType() != M68kMnemonic.PrivilegedType.NONE) {
-        appendPrivilegedSection(mnemonic);
       }
 
       final M68kAddressMode[] firstAddressModes = mnemonic.firstOperand().getAddressModes();
