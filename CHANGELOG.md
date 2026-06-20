@@ -9,6 +9,7 @@
 ### Added
 
 ### Fixed
+- M68k Browser "Amiga Hardware" tab: CIA registers change the link to reference docs to working one
 
 ## 0.2.3 - 2026-05-28
 
