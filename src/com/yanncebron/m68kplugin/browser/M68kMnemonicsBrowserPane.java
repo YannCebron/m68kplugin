@@ -130,6 +130,10 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
           append(" (" + M68kCpu.M_68010.getCpuName() + ")", SimpleTextAttributes.GRAY_ATTRIBUTES);
         }
 
+        if (value.privilegedType() != M68kMnemonic.PrivilegedType.NONE) {
+          setIcon(AllIcons.General.ExclMark);
+        }
+
         SpeedSearchUtil.applySpeedSearchHighlighting(list, this, true, selected);
       }
     };
