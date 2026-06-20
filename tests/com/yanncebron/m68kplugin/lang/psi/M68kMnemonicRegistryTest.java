@@ -31,24 +31,36 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
 
   private final M68kMnemonicRegistry instance = M68kMnemonicRegistry.getInstance();
 
-  public void testAllInstructionsHaveMnemonicsAndCheckPrivileged() {
+  public void testAllInstructionsHaveMnemonicsAndCheckDeprecatedAndPrivilegedAndSpecialRegisterOperands() {
+    int totalDeprecated = 0;
+
     int totalNone = 0;
     int totalPrivileged = 0;
     int totalPrivileged68010Above = 0;
+
+    int totalSpecialRegisterOperands = 0;
 
     for (IElementType instructionsType : M68kTokenGroups.INSTRUCTIONS.getTypes()) {
       final Collection<M68kMnemonic> all = instance.findAll(instructionsType);
       assertFalse("no mnemonics for '" + instructionsType + "'", all.isEmpty());
 
+      totalDeprecated += ContainerUtil.count(all, M68kMnemonic::deprecated);
+
       totalNone += ContainerUtil.count(all, mnemonic -> mnemonic.privilegedType() == M68kMnemonic.PrivilegedType.NONE);
       totalPrivileged += ContainerUtil.count(all, mnemonic -> mnemonic.privilegedType() == M68kMnemonic.PrivilegedType.PRIVILEGED);
       totalPrivileged68010Above += ContainerUtil.count(all, mnemonic -> mnemonic.privilegedType() == M68kMnemonic.PrivilegedType.PRIVILEGED_68010_ABOVE);
+
+      totalSpecialRegisterOperands += ContainerUtil.count(all, M68kMnemonic::hasSpecialRegisterOperands);
     }
+
+    assertEquals(2, totalDeprecated);
+
     assertEquals(235, totalNone);
     assertEquals(16, totalPrivileged);
     assertEquals(1, totalPrivileged68010Above);
-
     assertEquals(252, totalNone + totalPrivileged + totalPrivileged68010Above);
+
+    assertEquals(18, totalSpecialRegisterOperands);
   }
 
   public void testFindAllIsEmptyForUnknownElementType() {
