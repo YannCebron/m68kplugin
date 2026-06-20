@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase;
-import com.yanncebron.m68kplugin.lang.psi.M68kInstruction;
-import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
-import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
+import com.yanncebron.m68kplugin.lang.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -71,31 +69,38 @@ public final class M68kInstructionDocumentationProvider extends AbstractDocument
   public @Nullable String generateDoc(PsiElement element, @Nullable PsiElement originalElement) {
     if (!(element instanceof M68kInstruction instruction)) return null;
 
-    final IElementType originalMnemonic = instruction.getNode().getFirstChildNode().getElementType();
+    // find specific matching mnemonic (valid instruction)
+    M68kMnemonic instructionMnemonic = M68kMnemonicRegistry.getInstance().find(instruction);
+    if (instructionMnemonic != null) {
+      return getMnemonicDoc(instructionMnemonic, true);
+    }
 
-    return getMnemonicDoc(originalMnemonic, instruction);
+    // invalid instruction (e.g., PSI error, missing operands): show docs for all mnemonics
+    IElementType elementType = instruction.getNode().getFirstChildNode().getElementType();
+    String docText = new M68kInstructionMnemonicDocsGenerator(elementType).generateHtmlDoc();
+    return buildDoc(getMarkdownContents(elementType), StringUtil.toUpperCase(elementType.toString()), docText);
   }
 
   @NotNull
-  public static String getMnemonicDoc(IElementType originalMnemonic, @Nullable M68kInstruction instruction) {
-    String mnemonicDoc = new M68kInstructionMnemonicDocsGenerator(originalMnemonic, instruction).generateHtmlDoc();
+  public static String getMnemonicDoc(M68kMnemonic m68kMnemonic, boolean highlightMatching) {
+    String docText = new M68kInstructionMnemonicDocsGenerator(m68kMnemonic, highlightMatching).generateHtmlDoc();
+    return buildDoc(getMarkdownContents(m68kMnemonic), m68kMnemonic.getExternalName(), docText);
+  }
 
-    final Couple<String> markdownContents = getMarkdownContents(originalMnemonic);
-
-    String mnemonic = StringUtil.toUpperCase(originalMnemonic.toString());
+  private static @NotNull String buildDoc(Couple<String> markdownContents, String mnemonicTitle, String docText) {
     String referenceHeading = markdownContents.getFirst() != null ?
       StringUtil.substringAfter(StringUtil.splitByLines(markdownContents.getFirst())[0], " - ") : "";
 
     return M68kDocumentationUtil.CSS +
       DocumentationMarkup.DEFINITION_START +
-      "<h1><code>" + mnemonic + "</code></h1>" +
+      "<h1><code>" + mnemonicTitle + "</code></h1>" +
       referenceHeading +
       DocumentationMarkup.DEFINITION_END +
-      mnemonicDoc;
+      docText;
   }
 
-  public static String getInstructionReferenceDoc(IElementType originalMnemonic) {
-    final Couple<String> markdownContents = getMarkdownContents(originalMnemonic);
+  public static String getInstructionReferenceDoc(M68kMnemonic m68kMnemonic) {
+    final Couple<String> markdownContents = getMarkdownContents(m68kMnemonic);
     if (markdownContents.getFirst() == null) {
       return markdownContents.getSecond();
     }
@@ -104,10 +109,20 @@ public final class M68kInstructionDocumentationProvider extends AbstractDocument
     return referenceHtml + M68kDocumentationUtil.MOTOROLA_FOOTER;
   }
 
-  private static Couple<String> getMarkdownContents(IElementType originalMnemonic) {
-    String docMnemonic = findDocMnemonic(originalMnemonic);
+  private static Couple<String> getMarkdownContents(M68kMnemonic originalMnemonic) {
+    String markdownFilename;
+    if (originalMnemonic.hasSpecialRegisterOperands()) {
+      markdownFilename = originalMnemonic.getExternalName().replace(' ', '_');
+    } else {
+      markdownFilename = findDocMnemonic(originalMnemonic.elementType());
+    }
 
-    return M68kDocumentationUtil.getMarkdownContents(DOCS_MNEMONIC_ROOT, docMnemonic);
+    return M68kDocumentationUtil.getMarkdownContents(DOCS_MNEMONIC_ROOT, StringUtil.toLowerCase(markdownFilename));
+  }
+
+  private static Couple<String> getMarkdownContents(IElementType elementType) {
+    String markdownFilename = findDocMnemonic(elementType);
+    return M68kDocumentationUtil.getMarkdownContents(DOCS_MNEMONIC_ROOT, StringUtil.toLowerCase(markdownFilename));
   }
 
   @NotNull
@@ -117,7 +132,7 @@ public final class M68kInstructionDocumentationProvider extends AbstractDocument
         return entry.getKey();
       }
     }
-    return StringUtil.toLowerCase(originalMnemonic.toString());
+    return originalMnemonic.toString();
   }
 
 }

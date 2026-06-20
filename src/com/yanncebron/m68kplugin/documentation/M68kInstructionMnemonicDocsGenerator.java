@@ -24,7 +24,6 @@ import com.intellij.util.ArrayUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -33,22 +32,29 @@ import java.util.Set;
 
 class M68kInstructionMnemonicDocsGenerator {
 
-  private final IElementType elementType;
-  private final @Nullable M68kInstruction instruction;
+  private final Collection<M68kMnemonic> allMnemonics;
+  private final M68kMnemonic instructionMnemonic;
+  private final IElementType mnemonicElementType;
 
   private StringBuilder sb;
 
-  M68kInstructionMnemonicDocsGenerator(IElementType elementType, @Nullable M68kInstruction instruction) {
-    this.elementType = elementType;
-    this.instruction = instruction;
+  M68kInstructionMnemonicDocsGenerator(M68kMnemonic mnemonic, boolean highlightMatching) {
+    allMnemonics = mnemonic.hasSpecialRegisterOperands() ? Set.of(mnemonic) :
+      ContainerUtil.filter(M68kMnemonicRegistry.getInstance().findAll(mnemonic.elementType()), m68kMnemonic -> !m68kMnemonic.hasSpecialRegisterOperands());
+    assert !allMnemonics.isEmpty() : mnemonic;
+    mnemonicElementType = mnemonic.elementType();
+    instructionMnemonic = highlightMatching && allMnemonics.size() > 1 ? mnemonic : null;
+  }
+
+  M68kInstructionMnemonicDocsGenerator(IElementType elementType) {
+    allMnemonics = M68kMnemonicRegistry.getInstance().findAll(elementType);
+    assert !allMnemonics.isEmpty() : elementType;
+
+    mnemonicElementType = elementType;
+    instructionMnemonic = null;
   }
 
   String generateHtmlDoc() {
-    final Collection<M68kMnemonic> allMnemonics = M68kMnemonicRegistry.getInstance().findAll(elementType);
-    assert !allMnemonics.isEmpty() : elementType;
-
-    M68kMnemonic specific = instruction != null && allMnemonics.size() > 1 ? M68kMnemonicRegistry.getInstance().find(instruction) : null;
-
     sb = new StringBuilder();
 
     boolean allCpusSame = true;
@@ -77,7 +83,7 @@ class M68kInstructionMnemonicDocsGenerator {
 
     for (Iterator<M68kMnemonic> iterator = allMnemonics.iterator(); iterator.hasNext(); ) {
       M68kMnemonic mnemonic = iterator.next();
-      String style = specific == mnemonic ? "underline" : "";
+      String style = instructionMnemonic == mnemonic ? "underline" : "";
       if (mnemonic.deprecated()) {
         style += " line-through";
       }
@@ -93,9 +99,9 @@ class M68kInstructionMnemonicDocsGenerator {
       dataSizeText = StringUtil.escapeXmlEntities(dataSizeText); // "<unsized>"
       dataSizeText = dataSizeText.replace(".", M68kDocumentationUtil.NON_BREAK_PERIOD);
 
-      String mnemonicText = StringUtil.toUpperCase(elementType.toString());
       sb.append("<code>");
-      sb.append(mnemonicText).append(dataSizeText);
+      String mnemonicText = mnemonicElementType.toString();
+      sb.append(StringUtil.toUpperCase(mnemonicText)).append(dataSizeText);
 
       if (mnemonic.hasFirstOperand()) {
         sb.append(StringUtil.repeat("&nbsp;", Math.max(1, 17 - mnemonicText.length() - dataSizeTextLength)));

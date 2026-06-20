@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,56 +23,75 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.intellij.util.PairConsumer;
+import com.intellij.util.containers.ContainerUtil;
+import com.yanncebron.m68kplugin.lang.psi.M68kMnemonic;
+import com.yanncebron.m68kplugin.lang.psi.M68kMnemonicRegistry;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public class M68kInstructionDocumentationProviderTest extends BasePlatformTestCase {
 
   public void testMoveInstructionReferenceDoc() {
-    doTestReferenceDoc(M68kTokenTypes.MOVE, "<h1>MOVE - Copy data from source to destination</h1>");
+    doTestMappedReferenceDoc(M68kTokenTypes.MOVE, "<h1>MOVE - Copy data from source to destination</h1>");
   }
 
   public void testAslInstructionReferenceDoc() {
-    doTestReferenceDoc(M68kTokenTypes.ASL, "<h1>ASL, ASR - Arithmetic shift left/right</h1>");
+    doTestMappedReferenceDoc(M68kTokenTypes.ASL, "<h1>ASL, ASR - Arithmetic shift left/right</h1>");
   }
 
   public void testLslInstructionReferenceDoc() {
-    doTestReferenceDoc(M68kTokenTypes.LSL, "<h1>LSL, LSR - Logical shift left/right</h1>");
+    doTestMappedReferenceDoc(M68kTokenTypes.LSL, "<h1>LSL, LSR - Logical shift left/right</h1>");
   }
 
   public void testRoxlInstructionReferenceDoc() {
-    doTestReferenceDoc(M68kTokenTypes.ROXL, "<h1>ROXL, ROXR - Rotate left/right with extend</h1>");
+    doTestMappedReferenceDoc(M68kTokenTypes.ROXL, "<h1>ROXL, ROXR - Rotate left/right with extend</h1>");
   }
 
   public void testBccInstructionReferenceDoc() {
-    doTestReferenceDoc(M68kTokenTypes.BHS, "<h1>Bcc - Branch on condition cc</h1>");
+    doTestMappedReferenceDoc(M68kTokenTypes.BHS, "<h1>Bcc - Branch on condition cc</h1>");
   }
 
-  public void testAllInstructionsHaveReferenceDocs() {
+  public void testAllMnemonicsHaveReferenceDocs() {
     for (IElementType elementType : M68kTokenGroups.INSTRUCTIONS.getTypes()) {
-      doTestReferenceDoc(elementType,
-        " - ", // [mnemonic] - [description]
-        "Description",
-        "From MOTOROLA M68000 FAMILY Programmer's reference manual."
-      );
+      Set<String> externalNames = new HashSet<>();
+      for (M68kMnemonic m68kMnemonic : M68kMnemonicRegistry.getInstance().findAll(elementType)) {
+        if (externalNames.add(m68kMnemonic.getExternalName())) {
+          doTestReferenceDoc(m68kMnemonic,
+            " - ", // [mnemonic(s)] - [description]
+            "Description",
+            "From MOTOROLA M68000 FAMILY Programmer's reference manual."
+          );
+        }
+      }
     }
   }
 
-  public void testUnlkDoc() { // "<unsized>"
-    doTest(" unl<caret>k", (psiElement, documentationProvider) -> {
-      String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
-      assertEquals("<style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><h1><code>UNLK</code></h1>Unlink</pre></div><table class='sections'><tr><td valign='top' class='section'><p>CPU:</td><td valign='top'>MC68000 Family</td></table><br><h4><code>UNLK&lt;unsized&gt;&nbsp;&nbsp;&nbsp;&nbsp;An</code></h4>", doc);
-    });
-  }
-
-  public void testMovemInstructionDoc() {
+  public void testMovemNoOperandsInstructionDoc() {
     doTest(" move<caret>m", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
       assertEquals("<style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><h1><code>MOVEM</code></h1>Move multiple registers</pre></div><table class='sections'><tr><td valign='top' class='section'><p>CPU:</td><td valign='top'>MC68000 Family</td></table><br><h4><code>MOVEM&#8228;w|&#8228;l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rn list,-(An)</code></h4><br><h4><code>MOVEM&#8228;w|&#8228;l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rn list,&lt;ALTERABLE_CONTROL&gt;</code></h4><table style=\"width: 100%;\"><tr><th></th><th style=\"text-align:center;\">(An)</th><th style=\"text-align:center;\">(An)+</th><th style=\"text-align:center;\">(d,An)</th><th style=\"text-align:center;\">(d,An,Xi)</th><th style=\"text-align:center;\">ABS&#8228;W</th><th style=\"text-align:center;\">ABS&#8228;L</th><th style=\"text-align:center;\">(d,PC)</th><th style=\"text-align:center;\">(d,PC,Xn)</th></tr><tr><td class=\"section\" valign=\"top\" width=\"15%\"/>Second:</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\"></td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\"></td><td style=\"text-align:center;\"></td></tr></table><br><h4><code>MOVEM&#8228;w|&#8228;l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;RESTORE_OPERANDS&gt;,Rn list</code></h4><table style=\"width: 100%;\"><tr><th></th><th style=\"text-align:center;\">(An)</th><th style=\"text-align:center;\">(An)+</th><th style=\"text-align:center;\">(d,An)</th><th style=\"text-align:center;\">(d,An,Xi)</th><th style=\"text-align:center;\">ABS&#8228;W</th><th style=\"text-align:center;\">ABS&#8228;L</th><th style=\"text-align:center;\">(d,PC)</th><th style=\"text-align:center;\">(d,PC,Xn)</th></tr><tr><td class=\"section\" valign=\"top\" width=\"15%\"/>First:</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td></tr></table><br><h4><code>MOVEM&#8228;w|&#8228;l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#Imm,-(An)</code></h4><br><h4><code>MOVEM&#8228;w|&#8228;l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#Imm,&lt;ALTERABLE_CONTROL&gt;</code></h4><table style=\"width: 100%;\"><tr><th></th><th style=\"text-align:center;\">(An)</th><th style=\"text-align:center;\">(An)+</th><th style=\"text-align:center;\">(d,An)</th><th style=\"text-align:center;\">(d,An,Xi)</th><th style=\"text-align:center;\">ABS&#8228;W</th><th style=\"text-align:center;\">ABS&#8228;L</th><th style=\"text-align:center;\">(d,PC)</th><th style=\"text-align:center;\">(d,PC,Xn)</th></tr><tr><td class=\"section\" valign=\"top\" width=\"15%\"/>Second:</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\"></td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\"></td><td style=\"text-align:center;\"></td></tr></table><br><h4><code>MOVEM&#8228;w|&#8228;l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;RESTORE_OPERANDS&gt;,#Imm</code></h4><table style=\"width: 100%;\"><tr><th></th><th style=\"text-align:center;\">(An)</th><th style=\"text-align:center;\">(An)+</th><th style=\"text-align:center;\">(d,An)</th><th style=\"text-align:center;\">(d,An,Xi)</th><th style=\"text-align:center;\">ABS&#8228;W</th><th style=\"text-align:center;\">ABS&#8228;L</th><th style=\"text-align:center;\">(d,PC)</th><th style=\"text-align:center;\">(d,PC,Xn)</th></tr><tr><td class=\"section\" valign=\"top\" width=\"15%\"/>First:</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td></tr></table><br>", doc);
     });
   }
 
-  public void testMovecInstructionDoc() {
+  public void testAndiInstructionDoc() { // skip to CCR|SR variants
+    doTest(" and<caret>i #3,d0", (psiElement, documentationProvider) -> {
+      String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
+      assertEquals("<style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><h1><code>ANDI</code></h1>AND immediate</pre></div><table class='sections'><tr><td valign='top' class='section'><p>CPU:</td><td valign='top'>MC68000 Family</td></table><br><h4><code>ANDI&#8228;b|&#8228;w|&#8228;l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#Imm,&lt;ALTERABLE_DATA&gt;</code></h4><table style=\"width: 100%;\"><tr><th></th><th style=\"text-align:center;\">Dn</th><th style=\"text-align:center;\">(An)</th><th style=\"text-align:center;\">(An)+</th><th style=\"text-align:center;\">-(An)</th><th style=\"text-align:center;\">(d,An)</th><th style=\"text-align:center;\">(d,An,Xi)</th><th style=\"text-align:center;\">ABS&#8228;W</th><th style=\"text-align:center;\">ABS&#8228;L</th></tr><tr><td class=\"section\" valign=\"top\" width=\"15%\"/>Second:</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td></tr></table><br>", doc);
+    });
+  }
+
+  public void testUnlkInstructionDoc() { // "<unsized>"
+    doTest(" unl<caret>k a0", (psiElement, documentationProvider) -> {
+      String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
+      assertEquals("<style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><h1><code>UNLK</code></h1>Unlink</pre></div><table class='sections'><tr><td valign='top' class='section'><p>CPU:</td><td valign='top'>MC68000 Family</td></table><br><h4><code>UNLK&lt;unsized&gt;&nbsp;&nbsp;&nbsp;&nbsp;An</code></h4>", doc);
+    });
+  }
+
+  public void testMovecInstructionDoc() { // privileged
     doTest(" move<caret>c", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
       assertEquals("<style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><h1><code>MOVEC</code></h1>Move Control Register</pre></div><table class='sections'><tr><td valign='top' class='section'><p>CPU:</td><td valign='top'>MC68010+</td></table><br><h4><code>MOVEC&#8228;l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;CTRL_REGISTER&gt;,&lt;Rn&gt;</code></h4><table class='sections'><tr><td valign='top' class='section'><p>Privileged:</td><td valign='top'>MC68000 Family</td></table><table style=\"width: 100%;\"><tr><th></th><th style=\"text-align:center;\">Dn</th><th style=\"text-align:center;\">An</th><th style=\"text-align:center;\">DFC</th><th style=\"text-align:center;\">SFC</th><th style=\"text-align:center;\">VBR</th></tr><tr><td class=\"section\" valign=\"top\" width=\"15%\"/>First:</td><td style=\"text-align:center;\"></td><td style=\"text-align:center;\"></td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td></tr><tr><td class=\"section\" valign=\"top\" width=\"15%\"/>Second:</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\"></td><td style=\"text-align:center;\"></td><td style=\"text-align:center;\"></td></tr></table><br><h4><code>MOVEC&#8228;l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Rn&gt;,&lt;CTRL_REGISTER&gt;</code></h4><table class='sections'><tr><td valign='top' class='section'><p>Privileged:</td><td valign='top'>MC68000 Family</td></table><table style=\"width: 100%;\"><tr><th></th><th style=\"text-align:center;\">Dn</th><th style=\"text-align:center;\">An</th><th style=\"text-align:center;\">DFC</th><th style=\"text-align:center;\">SFC</th><th style=\"text-align:center;\">VBR</th></tr><tr><td class=\"section\" valign=\"top\" width=\"15%\"/>First:</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\"></td><td style=\"text-align:center;\"></td><td style=\"text-align:center;\"></td></tr><tr><td class=\"section\" valign=\"top\" width=\"15%\"/>Second:</td><td style=\"text-align:center;\"></td><td style=\"text-align:center;\"></td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td><td style=\"text-align:center;\">✓</td></tr></table><br>", doc);
@@ -93,10 +112,17 @@ public class M68kInstructionDocumentationProviderTest extends BasePlatformTestCa
     });
   }
 
-  private void doTestReferenceDoc(IElementType instructionType, String... docTextContains) {
-    final String doc = M68kInstructionDocumentationProvider.getInstructionReferenceDoc(instructionType);
+  private void doTestMappedReferenceDoc(IElementType instructionType, String... docTextContains) {
+    Collection<M68kMnemonic> all = M68kMnemonicRegistry.getInstance().findAll(instructionType);
+    M68kMnemonic m68kMnemonic = ContainerUtil.getFirstItem(all);
+    assertNotNull(m68kMnemonic);
+    doTestReferenceDoc(m68kMnemonic, docTextContains);
+  }
+
+  private void doTestReferenceDoc(M68kMnemonic m68kMnemonic, String... docTextContains) {
+    final String doc = M68kInstructionDocumentationProvider.getInstructionReferenceDoc(m68kMnemonic);
     for (String contain : docTextContains) {
-      assertTrue(doc, StringUtil.contains(doc, contain));
+      assertTrue(m68kMnemonic + ": " + doc, StringUtil.contains(doc, contain));
     }
   }
 

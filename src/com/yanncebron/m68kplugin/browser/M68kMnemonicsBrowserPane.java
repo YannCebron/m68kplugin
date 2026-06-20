@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.NaturalComparator;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
@@ -40,10 +39,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
 
@@ -97,22 +93,28 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
         continue;
       }
 
-      items.add(mnemonic);
+      // collect all unique items (special operands)
+      Set<String> externalNames = new HashSet<>();
+      for (M68kMnemonic m68kMnemonic : all) {
+        if (externalNames.add(m68kMnemonic.getExternalName())) {
+          items.add(m68kMnemonic);
+        }
+      }
     }
 
-    items.sort(Comparator.comparing(m68kMnemonic -> m68kMnemonic.elementType().toString(), NaturalComparator.INSTANCE));
+    items.sort(Comparator.comparing(M68kMnemonic::getExternalName, NaturalComparator.INSTANCE));
     setListItems(items);
   }
 
   @Override
   protected Convertor<? super M68kMnemonic, String> getListItemNamer() {
-    return (Convertor<M68kMnemonic, String>) mnemonic -> StringUtil.toUpperCase(mnemonic.elementType().toString());
+    return (Convertor<M68kMnemonic, String>) M68kMnemonic::getExternalName;
   }
 
   protected @NotNull String getDocFor(@NotNull M68kMnemonic mnemonic) {
-    final String mnemonicDoc = M68kInstructionDocumentationProvider.getMnemonicDoc(mnemonic.elementType(), null);
+    final String mnemonicDoc = M68kInstructionDocumentationProvider.getMnemonicDoc(mnemonic, false);
     final String referenceDoc = isShowReferenceDocs.get() ?
-      "<br/>" + M68kInstructionDocumentationProvider.getInstructionReferenceDoc(mnemonic.elementType()) : "";
+      "<br/>" + M68kInstructionDocumentationProvider.getInstructionReferenceDoc(mnemonic) : "";
 
     return mnemonicDoc + DocumentationMarkup.CONTENT_START + referenceDoc + DocumentationMarkup.CONTENT_END;
   }

@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,12 +34,40 @@ public record M68kMnemonic(IElementType elementType,
                            PrivilegedType privilegedType,
                            boolean deprecated) {
 
+  private static final Set<M68kOperand> SPECIAL_REGISTER_OPERANDS = Set.of(
+    M68kOperand.CCR_REGISTER,
+    M68kOperand.SR_REGISTER,
+    M68kOperand.USP_REGISTER
+  );
+
   public boolean hasFirstOperand() {
     return firstOperand() != M68kOperand.NONE;
   }
 
   public boolean hasSecondOperand() {
     return secondOperand() != M68kOperand.NONE;
+  }
+
+  public String getExternalName() {
+    String elementName = StringUtil.toUpperCase(elementType().toString());
+    if (SPECIAL_REGISTER_OPERANDS.contains(firstOperand)) {
+      return elementName + " from " + getOperandRegisterExternalName(firstOperand);
+    }
+    if (SPECIAL_REGISTER_OPERANDS.contains(secondOperand)) {
+      return elementName + " to " + getOperandRegisterExternalName(secondOperand);
+    }
+    return elementName;
+  }
+
+  public boolean hasSpecialRegisterOperands() {
+    return SPECIAL_REGISTER_OPERANDS.contains(firstOperand) ||
+      SPECIAL_REGISTER_OPERANDS.contains(secondOperand);
+  }
+
+  private String getOperandRegisterExternalName(M68kOperand operand) {
+    M68kAddressMode[] addressModes = operand.getAddressModes();
+    assert addressModes.length == 1 : this;
+    return addressModes[0].getNotation();
   }
 
   public enum PrivilegedType {
