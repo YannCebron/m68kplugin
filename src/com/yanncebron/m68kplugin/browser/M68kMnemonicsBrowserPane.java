@@ -31,7 +31,7 @@ import com.intellij.util.IconUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.Convertor;
 import com.yanncebron.m68kplugin.M68kBundle;
-import com.yanncebron.m68kplugin.documentation.M68kInstructionDocumentationProvider;
+import com.yanncebron.m68kplugin.documentation.M68kInstructionDocsUtil;
 import com.yanncebron.m68kplugin.lang.psi.M68kCpu;
 import com.yanncebron.m68kplugin.lang.psi.M68kMnemonic;
 import com.yanncebron.m68kplugin.lang.psi.M68kMnemonicRegistry;
@@ -112,9 +112,9 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
   }
 
   protected @NotNull String getDocFor(@NotNull M68kMnemonic mnemonic) {
-    final String mnemonicDoc = M68kInstructionDocumentationProvider.getMnemonicDoc(mnemonic, false);
+    final String mnemonicDoc = M68kInstructionDocsUtil.getMnemonicDoc(mnemonic, false);
     final String referenceDoc = isShowReferenceDocs.get() ?
-      "<br/>" + M68kInstructionDocumentationProvider.getInstructionReferenceDoc(mnemonic) : "";
+      "<br/>" + M68kInstructionDocsUtil.getMnemonicReferenceDoc(mnemonic) : "";
 
     return mnemonicDoc + DocumentationMarkup.CONTENT_START + referenceDoc + DocumentationMarkup.CONTENT_END;
   }

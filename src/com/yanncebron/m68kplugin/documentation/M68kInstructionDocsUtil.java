@@ -16,28 +16,23 @@
 
 package com.yanncebron.m68kplugin.documentation;
 
-import com.intellij.lang.documentation.AbstractDocumentationProvider;
 import com.intellij.lang.documentation.DocumentationMarkup;
-import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase;
-import com.yanncebron.m68kplugin.lang.psi.*;
+import com.yanncebron.m68kplugin.lang.psi.M68kInstruction;
+import com.yanncebron.m68kplugin.lang.psi.M68kMnemonic;
+import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
+import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-@SuppressWarnings("ExtensionClassShouldBeFinalAndNonPublic")
-public final class M68kInstructionDocumentationProvider extends AbstractDocumentationProvider {
+public final class M68kInstructionDocsUtil {
 
   private static final String DOCS_MNEMONIC_ROOT = "/docs/mnemonic/";
-
 
   private static final Map<String, TokenSet> MNEMONIC_MAP = Map.of(
     "asl_asr", TokenSet.create(M68kTokenTypes.ASL, M68kTokenTypes.ASR),
@@ -50,41 +45,29 @@ public final class M68kInstructionDocumentationProvider extends AbstractDocument
     "roxl_roxr", TokenSet.create(M68kTokenTypes.ROXL, M68kTokenTypes.ROXR),
     "scc", M68kTokenGroups.SCC_INSTRUCTIONS);
 
-  @Override
-  public @Nullable PsiElement getCustomDocumentationElement(@NotNull Editor editor,
-                                                            @NotNull PsiFile file,
-                                                            @Nullable PsiElement contextElement,
-                                                            int targetOffset) {
-    if (contextElement == null) return null;
-
-    IElementType elementType = contextElement.getNode().getElementType();
-    if (M68kTokenGroups.INSTRUCTIONS.contains(elementType) ||
-      M68kTokenGroups.DATA_SIZES.contains(elementType)) {
-      return PsiTreeUtil.getParentOfType(contextElement, M68kInstruction.class);
-    }
-    return null;
-  }
-
-  @Override
-  public @Nullable String generateDoc(PsiElement element, @Nullable PsiElement originalElement) {
-    if (!(element instanceof M68kInstruction instruction)) return null;
-
-    // find specific matching mnemonic (valid instruction)
-    M68kMnemonic instructionMnemonic = M68kMnemonicRegistry.getInstance().find(instruction);
-    if (instructionMnemonic != null) {
-      return getMnemonicDoc(instructionMnemonic, true);
-    }
-
-    // invalid instruction (e.g., PSI error, missing operands): show docs for all mnemonics
-    IElementType elementType = instruction.getNode().getFirstChildNode().getElementType();
-    String docText = new M68kInstructionMnemonicDocsGenerator(elementType).generateHtmlDoc();
-    return buildDoc(getMarkdownContents(elementType), StringUtil.toUpperCase(elementType.toString()), docText);
-  }
-
   @NotNull
   public static String getMnemonicDoc(M68kMnemonic m68kMnemonic, boolean highlightMatching) {
     String docText = new M68kInstructionMnemonicDocsGenerator(m68kMnemonic, highlightMatching).generateHtmlDoc();
     return buildDoc(getMarkdownContents(m68kMnemonic), m68kMnemonic.getExternalName(), docText);
+  }
+
+  @NotNull
+  static String getMnemonicDoc(M68kInstruction instruction) {
+    IElementType elementType = instruction.getNode().getFirstChildNode().getElementType();
+    String docText = new M68kInstructionMnemonicDocsGenerator(elementType).generateHtmlDoc();
+    String markdownFilename = findDocMnemonic(elementType);
+    return buildDoc(M68kDocumentationUtil.getMarkdownContents(DOCS_MNEMONIC_ROOT, StringUtil.toLowerCase(markdownFilename)), StringUtil.toUpperCase(elementType.toString()), docText);
+  }
+
+  @NotNull
+  public static String getMnemonicReferenceDoc(M68kMnemonic m68kMnemonic) {
+    final Couple<String> markdownContents = getMarkdownContents(m68kMnemonic);
+    if (markdownContents.getFirst() == null) {
+      return markdownContents.getSecond();
+    }
+
+    String referenceHtml = M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, markdownContents.getFirst(), M68kBrowserPaneBase.M68K_BROWSER_LINK_FUNCTION);
+    return referenceHtml + M68kDocumentationUtil.MOTOROLA_FOOTER;
   }
 
   private static @NotNull String buildDoc(Couple<String> markdownContents, String mnemonicTitle, String docText) {
@@ -99,16 +82,6 @@ public final class M68kInstructionDocumentationProvider extends AbstractDocument
       docText;
   }
 
-  public static String getInstructionReferenceDoc(M68kMnemonic m68kMnemonic) {
-    final Couple<String> markdownContents = getMarkdownContents(m68kMnemonic);
-    if (markdownContents.getFirst() == null) {
-      return markdownContents.getSecond();
-    }
-
-    String referenceHtml = M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, markdownContents.getFirst(), M68kBrowserPaneBase.M68K_BROWSER_LINK_FUNCTION);
-    return referenceHtml + M68kDocumentationUtil.MOTOROLA_FOOTER;
-  }
-
   private static Couple<String> getMarkdownContents(M68kMnemonic originalMnemonic) {
     String markdownFilename;
     if (originalMnemonic.hasSpecialRegisterOperands()) {
@@ -117,11 +90,6 @@ public final class M68kInstructionDocumentationProvider extends AbstractDocument
       markdownFilename = findDocMnemonic(originalMnemonic.elementType());
     }
 
-    return M68kDocumentationUtil.getMarkdownContents(DOCS_MNEMONIC_ROOT, StringUtil.toLowerCase(markdownFilename));
-  }
-
-  private static Couple<String> getMarkdownContents(IElementType elementType) {
-    String markdownFilename = findDocMnemonic(elementType);
     return M68kDocumentationUtil.getMarkdownContents(DOCS_MNEMONIC_ROOT, StringUtil.toLowerCase(markdownFilename));
   }
 
