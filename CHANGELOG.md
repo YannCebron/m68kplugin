@@ -4,7 +4,9 @@
 
 ### Changed
 - Mnemonic (reference) docs: separate variants with `CCR`/`SR`/`USP` operands (e.g., `ANDI to CCR`, `ANDI to SR`)
-- M68k Browser "Mnemonics" tab: add exclamation icon for privileged variants
+- M68k Browser "Mnemonics" tab: 
+  - add exclamation icon for privileged variants
+  - add _Include MC68020 Only Variants_ toggle filter
 - _View | Quick Definition_ for (local) label: show up to five following statements; stop at the next (local) label
 
 ### Added

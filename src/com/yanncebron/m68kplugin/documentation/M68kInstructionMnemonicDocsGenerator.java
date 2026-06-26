@@ -25,10 +25,8 @@ import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Predicate;
 
 class M68kInstructionMnemonicDocsGenerator {
 
@@ -54,13 +52,16 @@ class M68kInstructionMnemonicDocsGenerator {
     instructionMnemonic = null;
   }
 
-  String generateHtmlDoc() {
+  String generateHtmlDoc(Predicate<M68kMnemonic> predicate) {
     sb = new StringBuilder();
+
+    List<M68kMnemonic> filteredMnemonics = allMnemonics.stream().filter(predicate).toList();
+    assert !filteredMnemonics.isEmpty() : predicate + " for " + allMnemonics;
 
     boolean insertBreak = false;
     boolean allCpusSame = true;
     Set<M68kCpu> previousCpus = null;
-    for (M68kMnemonic mnemonic : allMnemonics) {
+    for (M68kMnemonic mnemonic : filteredMnemonics) {
       final Set<M68kCpu> cpus = mnemonic.cpus();
       if (previousCpus != null && !previousCpus.equals(cpus)) {
         allCpusSame = false;
@@ -69,11 +70,11 @@ class M68kInstructionMnemonicDocsGenerator {
       previousCpus = cpus;
     }
     if (allCpusSame) {
-      appendCpuSection(ContainerUtil.getFirstItem(allMnemonics));
+      appendCpuSection(ContainerUtil.getFirstItem(filteredMnemonics));
       insertBreak = true;
     }
 
-    M68kMnemonic m68kMnemonic = ContainerUtil.getFirstItem(allMnemonics);
+    M68kMnemonic m68kMnemonic = ContainerUtil.getFirstItem(filteredMnemonics);
     if (m68kMnemonic.privilegedType() != M68kMnemonic.PrivilegedType.NONE) {
       appendPrivilegedSection(m68kMnemonic);
       insertBreak = true;
@@ -85,14 +86,14 @@ class M68kInstructionMnemonicDocsGenerator {
 
     // only operands with >1 address mode, otherwise they cannot appear in the table(s)
     Set<M68kAddressMode> allUsedAddressModesFromMultiOperands = new HashSet<>();
-    for (M68kMnemonic mnemonic : allMnemonics) {
+    for (M68kMnemonic mnemonic : filteredMnemonics) {
       M68kAddressMode[] sourceModes = mnemonic.firstOperand().getAddressModes();
       if (sourceModes.length > 1) ContainerUtil.addAll(allUsedAddressModesFromMultiOperands, sourceModes);
       M68kAddressMode[] destinationModes = mnemonic.secondOperand().getAddressModes();
       if (destinationModes.length > 1) ContainerUtil.addAll(allUsedAddressModesFromMultiOperands, destinationModes);
     }
 
-    for (Iterator<M68kMnemonic> iterator = allMnemonics.iterator(); iterator.hasNext(); ) {
+    for (Iterator<M68kMnemonic> iterator = filteredMnemonics.iterator(); iterator.hasNext(); ) {
       M68kMnemonic mnemonic = iterator.next();
       String style = instructionMnemonic == mnemonic ? "underline" : "";
       if (mnemonic.deprecated()) {
@@ -144,7 +145,7 @@ class M68kInstructionMnemonicDocsGenerator {
         if (!allUsedAddressModesFromMultiOperands.contains(value)) continue;
 
         sb.append("<th style=\"text-align:center;\">");
-        // prevent 'abs.w' to break after 'period' on resize. yes, CSS simply won't work here
+        // prevent 'abs.w' from breaking after 'period' on resize. yes, CSS simply won't work here
         sb.append(value.getNotation().replace(".", M68kDocumentationUtil.NON_BREAK_PERIOD));
         sb.append("</th>");
       }

@@ -25,6 +25,7 @@ import java.util.function.Function;
 
 /**
  * @see M68kMnemonicRegistry
+ * @see M68kMnemonicPredicates
  */
 public record M68kMnemonic(IElementType elementType,
                            Set<M68kDataSize> dataSizes,

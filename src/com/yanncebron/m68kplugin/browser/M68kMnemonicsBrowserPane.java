@@ -21,6 +21,7 @@ import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Predicates;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.NaturalComparator;
 import com.intellij.psi.tree.IElementType;
@@ -30,20 +31,21 @@ import com.intellij.ui.speedSearch.SpeedSearchUtil;
 import com.intellij.util.IconUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.Convertor;
+import com.yanncebron.m68kplugin.M68kApiBundle;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.documentation.M68kInstructionDocsUtil;
-import com.yanncebron.m68kplugin.lang.psi.M68kCpu;
-import com.yanncebron.m68kplugin.lang.psi.M68kMnemonic;
-import com.yanncebron.m68kplugin.lang.psi.M68kMnemonicRegistry;
-import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
+import com.yanncebron.m68kplugin.lang.psi.*;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.util.*;
+import java.util.function.Predicate;
 
 final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
 
   private Ref<Boolean> isShowMc68010;
+
+  private Ref<Boolean> isShowMc68020Variants;
 
   private Ref<Boolean> isShowReferenceDocs;
 
@@ -65,7 +67,18 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
         null
       ));
 
-    actionGroup.addSeparator();
+    actionGroup.addSeparator(M68kApiBundle.message("toolwindow.tab.documentation.separator.text"));
+
+    isShowMc68020Variants = Ref.create(Boolean.TRUE);
+    actionGroup.add(
+      createToggleAction(
+        M68kBundle.message("toolwindow.tab.mnemonic.include.cpu.only.variants", M68kCpu.M_68020.getCpuName()),
+        IconUtil.addText(AllIcons.General.Filter, M68kCpu.M_68020.getCpuCode()),
+        isShowMc68020Variants,
+        "M68kMnemonicsPanel.show.mc68020.variants",
+        (anActionEvent, state) -> updateDoc(),
+        null
+      ));
 
     isShowReferenceDocs = Ref.create(Boolean.TRUE);
     actionGroup.add(
@@ -112,7 +125,12 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
   }
 
   protected @NotNull String getDocFor(@NotNull M68kMnemonic mnemonic) {
-    final String mnemonicDoc = M68kInstructionDocsUtil.getMnemonicDoc(mnemonic, false);
+    Predicate<M68kMnemonic> predicate = Predicates.alwaysTrue();
+    if (!isShowMc68020Variants.get()) {
+      predicate = M68kMnemonicPredicates.forCpuGroup(M68kCpu.GROUP_68020_UP).negate();
+    }
+
+    final String mnemonicDoc = M68kInstructionDocsUtil.getMnemonicDoc(mnemonic, false, predicate);
     final String referenceDoc = isShowReferenceDocs.get() ?
       "<br/>" + M68kInstructionDocsUtil.getMnemonicReferenceDoc(mnemonic) : "";
 

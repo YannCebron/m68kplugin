@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.ui.speedSearch.SpeedSearchUtil;
 import com.intellij.util.containers.Convertor;
+import com.yanncebron.m68kplugin.M68kApiBundle;
 import com.yanncebron.m68kplugin.amiga.M68kAmigaBundle;
 import com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase;
 import com.yanncebron.m68kplugin.browser.M68kBrowserPaneFactory;
@@ -79,7 +80,7 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
         anActionEvent -> anActionEvent.getPresentation().setEnabled(getSelectedChipset() != M68kAmigaHardwareRegister.Chipset.OCS)
       ));
 
-    actionGroup.addSeparator();
+    actionGroup.addSeparator(M68kApiBundle.message("toolwindow.tab.documentation.separator.text"));
 
     isShowReferenceDocs = Ref.create(Boolean.TRUE);
     actionGroup.add(

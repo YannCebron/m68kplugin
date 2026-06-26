@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.documentation;
 
 import com.intellij.model.Pointer;
+import com.intellij.openapi.util.Predicates;
 import com.intellij.platform.backend.documentation.DocumentationResult;
 import com.intellij.platform.backend.documentation.DocumentationTarget;
 import com.intellij.platform.backend.documentation.DocumentationTargetProvider;
@@ -91,7 +92,7 @@ final class M68kInstructionDocumentationTargetProvider implements DocumentationT
       // find specific matching mnemonic (valid instruction)
       M68kMnemonic instructionMnemonic = M68kMnemonicRegistry.getInstance().find(m68kInstruction);
       if (instructionMnemonic != null) {
-        return M68kInstructionDocsUtil.getMnemonicDoc(instructionMnemonic, true);
+        return M68kInstructionDocsUtil.getMnemonicDoc(instructionMnemonic, true, Predicates.alwaysTrue());
       }
 
       // invalid instruction (e.g., PSI error, missing operands): show docs for all mnemonics

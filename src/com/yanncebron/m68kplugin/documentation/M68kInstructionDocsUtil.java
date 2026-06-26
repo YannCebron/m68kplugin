@@ -18,6 +18,7 @@ package com.yanncebron.m68kplugin.documentation;
 
 import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.util.Couple;
+import com.intellij.openapi.util.Predicates;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -29,6 +30,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
+import java.util.function.Predicate;
 
 public final class M68kInstructionDocsUtil {
 
@@ -46,15 +48,15 @@ public final class M68kInstructionDocsUtil {
     "scc", M68kTokenGroups.SCC_INSTRUCTIONS);
 
   @NotNull
-  public static String getMnemonicDoc(M68kMnemonic m68kMnemonic, boolean highlightMatching) {
-    String docText = new M68kInstructionMnemonicDocsGenerator(m68kMnemonic, highlightMatching).generateHtmlDoc();
+  public static String getMnemonicDoc(M68kMnemonic m68kMnemonic, boolean highlightMatching, Predicate<M68kMnemonic> predicate) {
+    String docText = new M68kInstructionMnemonicDocsGenerator(m68kMnemonic, highlightMatching).generateHtmlDoc(predicate);
     return buildDoc(getMarkdownContents(m68kMnemonic), m68kMnemonic.getExternalName(), docText);
   }
 
   @NotNull
   static String getMnemonicDoc(M68kInstruction instruction) {
     IElementType elementType = instruction.getNode().getFirstChildNode().getElementType();
-    String docText = new M68kInstructionMnemonicDocsGenerator(elementType).generateHtmlDoc();
+    String docText = new M68kInstructionMnemonicDocsGenerator(elementType).generateHtmlDoc(Predicates.alwaysTrue());
     String markdownFilename = findDocMnemonic(elementType);
     return buildDoc(M68kDocumentationUtil.getMarkdownContents(DOCS_MNEMONIC_ROOT, StringUtil.toLowerCase(markdownFilename)), StringUtil.toUpperCase(elementType.toString()), docText);
   }
