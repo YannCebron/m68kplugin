@@ -110,10 +110,10 @@ final class M68kColorSettingsPage implements ColorSettingsPage, RainbowColorSett
   @NotNull
   @Override
   public String getDemoText() {
-    return "CALL_MACRO macro\n" +
+    return "<label>CALL_MACRO</label> macro\n" +
       "        move.<macroParameter>\\0</macroParameter> <macroParameter>\\1</macroParameter>,a6\n" +
       "        jsr _LVO<macroParameter>\\2</macroParameter>(a6)\n" +
-      ".localMacroLabel<macroParameter>\\@</macroParameter>\n" +
+      "<localLabel>.localMacroLabel</localLabel><macroParameter>\\@</macroParameter>\n" +
       "        endm\n" +
       "\n" +
       "<label>label</label>\n" +
