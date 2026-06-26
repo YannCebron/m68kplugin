@@ -71,7 +71,7 @@ public record M68kMnemonic(IElementType elementType,
     return addressModes[0].getNotation();
   }
 
-  public enum PrivilegedType {
+  enum PrivilegedType {
     /**
      * Never privileged.
      */
@@ -112,7 +112,7 @@ public record M68kMnemonic(IElementType elementType,
       ", secondOp=" + secondOperand +
       ", " + dataSizes +
       ", " + cpuText +
-      (privilegedType != PrivilegedType.NONE ? ", " + privilegedType.name() : "") +
+      (M68kMnemonicPredicates.privilegedAny().test(this) ? ", " + privilegedType.name() : "") +
       (deprecated() ? ", DEPRECATED" : "") +
       '}';
   }

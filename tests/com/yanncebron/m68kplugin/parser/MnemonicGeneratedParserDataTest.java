@@ -239,11 +239,11 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
 
     boolean psiIsPrivileged = m68kInstruction instanceof M68kPrivilegedInstruction;
-    if (m68kMnemonic.privilegedType() != M68kMnemonic.PrivilegedType.NONE) {
+    if (M68kMnemonicPredicates.privilegedAny().test(m68kMnemonic)) {
       assertTrue("PSI missing extending M68kPrivilegedInstruction", psiIsPrivileged);
     } else {
       Collection<M68kMnemonic> allMnemonics = M68kMnemonicRegistry.getInstance().findAll(instruction.getNode().getFirstChildNode().getElementType());
-      boolean atLeastOnePrivilegedMnemonic = ContainerUtil.exists(allMnemonics, it -> it.privilegedType() != M68kMnemonic.PrivilegedType.NONE);
+      boolean atLeastOnePrivilegedMnemonic = allMnemonics.stream().anyMatch(M68kMnemonicPredicates.privilegedAny());
       if (atLeastOnePrivilegedMnemonic) {
         assertTrue("PSI missing extending M68kPrivilegedInstruction", psiIsPrivileged);
       } else {

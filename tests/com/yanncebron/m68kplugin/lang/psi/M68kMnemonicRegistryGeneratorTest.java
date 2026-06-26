@@ -329,7 +329,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       if (cpuText != null) {
         System.out.println(".cpus(" + cpuText + ")");
       }
-      if (mnemonic.privilegedType() != M68kMnemonic.PrivilegedType.NONE) {
+      if (M68kMnemonicPredicates.privilegedAny().test(mnemonic)) {
         System.out.println(".privileged(M68kMnemonic.PrivilegedType." + mnemonic.privilegedType().name() + ")");
       }
       if (mnemonic.deprecated()) {

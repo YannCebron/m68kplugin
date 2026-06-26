@@ -24,4 +24,22 @@ public final class M68kMnemonicPredicates {
   public static Predicate<M68kMnemonic> forCpuGroup(Set<M68kCpu> cpus) {
     return mnemonic -> mnemonic.cpus().equals(cpus);
   }
+
+  private static final Predicate<M68kMnemonic> PRIVILEGED_ANY = mnemonic -> mnemonic.privilegedType() != M68kMnemonic.PrivilegedType.NONE;
+
+  public static Predicate<M68kMnemonic> privilegedAny() {
+    return PRIVILEGED_ANY;
+  }
+
+  private static final Predicate<M68kMnemonic> PRIVILEGED = mnemonic -> mnemonic.privilegedType() == M68kMnemonic.PrivilegedType.PRIVILEGED;
+
+  public static Predicate<M68kMnemonic> privileged() {
+    return PRIVILEGED;
+  }
+
+  private static final Predicate<M68kMnemonic> PRIVILEGED_68010_ABOVE = mnemonic -> mnemonic.privilegedType() == M68kMnemonic.PrivilegedType.PRIVILEGED_68010_ABOVE;
+
+  public static Predicate<M68kMnemonic> privileged68010Above() {
+    return PRIVILEGED_68010_ABOVE;
+  }
 }

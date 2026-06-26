@@ -56,9 +56,9 @@ final class M68kSyntaxAnnotator implements Annotator, DumbAware {
           .create();
       }
 
-      if (m68kInstruction instanceof M68kPrivilegedInstruction && m68kMnemonic.privilegedType() != M68kMnemonic.PrivilegedType.NONE) {
+      if (m68kInstruction instanceof M68kPrivilegedInstruction && M68kMnemonicPredicates.privilegedAny().test(m68kMnemonic)) {
         String message;
-        if (m68kMnemonic.privilegedType() == M68kMnemonic.PrivilegedType.PRIVILEGED_68010_ABOVE) {
+        if (M68kMnemonicPredicates.privileged68010Above().test(m68kMnemonic)) {
           message = M68kBundle.message("highlight.privileged.instruction.68010.or.above");
         } else {
           message = M68kBundle.message("highlight.privileged.instruction");

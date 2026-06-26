@@ -34,9 +34,9 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
   public void testAllInstructionsHaveMnemonicsAndCheckDeprecatedAndPrivilegedAndSpecialRegisterOperands() {
     int totalDeprecated = 0;
 
-    int totalNone = 0;
-    int totalPrivileged = 0;
-    int totalPrivileged68010Above = 0;
+    long totalNone = 0;
+    long totalPrivileged = 0;
+    long totalPrivileged68010Above = 0;
 
     int totalSpecialRegisterOperands = 0;
 
@@ -46,9 +46,9 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
 
       totalDeprecated += ContainerUtil.count(all, M68kMnemonic::deprecated);
 
-      totalNone += ContainerUtil.count(all, mnemonic -> mnemonic.privilegedType() == M68kMnemonic.PrivilegedType.NONE);
-      totalPrivileged += ContainerUtil.count(all, mnemonic -> mnemonic.privilegedType() == M68kMnemonic.PrivilegedType.PRIVILEGED);
-      totalPrivileged68010Above += ContainerUtil.count(all, mnemonic -> mnemonic.privilegedType() == M68kMnemonic.PrivilegedType.PRIVILEGED_68010_ABOVE);
+      totalNone += all.stream().filter(M68kMnemonicPredicates.privilegedAny().negate()).count();
+      totalPrivileged += all.stream().filter(M68kMnemonicPredicates.privileged()).count();
+      totalPrivileged68010Above += all.stream().filter(M68kMnemonicPredicates.privileged68010Above()).count();
 
       totalSpecialRegisterOperands += ContainerUtil.count(all, M68kMnemonic::hasSpecialRegisterOperands);
     }

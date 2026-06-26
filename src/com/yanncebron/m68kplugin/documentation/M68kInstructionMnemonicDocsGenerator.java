@@ -75,7 +75,7 @@ class M68kInstructionMnemonicDocsGenerator {
     }
 
     M68kMnemonic m68kMnemonic = ContainerUtil.getFirstItem(filteredMnemonics);
-    if (m68kMnemonic.privilegedType() != M68kMnemonic.PrivilegedType.NONE) {
+    if (M68kMnemonicPredicates.privilegedAny().test(m68kMnemonic)) {
       appendPrivilegedSection(m68kMnemonic);
       insertBreak = true;
     }
@@ -177,7 +177,7 @@ class M68kInstructionMnemonicDocsGenerator {
     sb.append(M68kBundle.message("documentation.section.privileged"));
     sb.append(DocumentationMarkup.SECTION_SEPARATOR);
     String message;
-    if (mnemonic.privilegedType() == M68kMnemonic.PrivilegedType.PRIVILEGED_68010_ABOVE) {
+    if (M68kMnemonicPredicates.privileged68010Above().test(mnemonic)) {
       message = M68kBundle.message("cpu.group.GROUP_68010_UP");
     } else {
       message = M68kBundle.message("cpu.group.GROUP_68000_UP");
