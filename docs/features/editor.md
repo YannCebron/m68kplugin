@@ -91,7 +91,11 @@ Completion and <kbd>Ctrl+Click</kbd> hover information
 
 ### Quick Definition
 
-*View \| Quick Definition* to inspect label at caret in a popup without leaving the current editor
+*View \| Quick Definition* to inspect a macro or (local) label at caret in a popup without leaving the current editor
+
+The range is expanded for:
+- macros: to whole macro
+- (local) label: including up to five following statements; stop at the next (local) label
 
 ![Quick definition](../assets/editor/quick_definition.png)
 
