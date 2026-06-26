@@ -16,13 +16,12 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-import com.intellij.openapi.util.Condition;
-
 import java.util.Set;
+import java.util.function.Predicate;
 
 public final class M68kMnemonicPredicates {
 
-  public static Condition<M68kMnemonic> forCpuGroup(Set<M68kCpu> cpus) {
+  public static Predicate<M68kMnemonic> forCpuGroup(Set<M68kCpu> cpus) {
     return mnemonic -> mnemonic.cpus().equals(cpus);
   }
 }
