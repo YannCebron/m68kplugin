@@ -93,7 +93,7 @@ final class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
 
     for (M68kMnemonic mnemonic : M68kMnemonicRegistry.getInstance().findAll(matchingMnemonic.elementType())) {
       // must have 2 operands (e.g., ASL has firstOperand variants)
-      if (mnemonic.secondOperand() == M68kOperand.NONE) {
+      if (!matchingMnemonic.hasSecondOperand()) {
         continue;
       }
 

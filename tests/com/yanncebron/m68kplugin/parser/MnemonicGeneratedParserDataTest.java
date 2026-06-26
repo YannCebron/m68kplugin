@@ -110,7 +110,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
             for (M68kMnemonic known : allMnemonics) {
               if ((dataSize == M68kDataSize.UNSIZED || known.dataSizes().contains(dataSize)) &&
                 containsAddressMode(known.firstOperand(), sourceAdm) &&
-                (known.secondOperand() == M68kOperand.NONE || containsAddressMode(known.secondOperand(), destinationAdm))) {
+                (!known.hasSecondOperand() || containsAddressMode(known.secondOperand(), destinationAdm))) {
                 foundValid = true;
                 break;
               }

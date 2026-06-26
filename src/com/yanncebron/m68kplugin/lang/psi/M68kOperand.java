@@ -23,6 +23,9 @@ public enum M68kOperand {
 
   /**
    * vasm: {@code 0}
+   *
+   * @see M68kMnemonic#hasFirstOperand()
+   * @see M68kMnemonic#hasSecondOperand()
    */
   NONE,
 
