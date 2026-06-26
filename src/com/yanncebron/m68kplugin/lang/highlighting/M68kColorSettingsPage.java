@@ -52,8 +52,9 @@ final class M68kColorSettingsPage implements ColorSettingsPage, RainbowColorSett
 
     createDescriptor("color.settings.group.directives", "attribute.descriptor.directive", M68kTextAttributes.DIRECTIVE),
     createDescriptor("color.settings.group.directives", "attribute.descriptor.conditional.assembly.directive", M68kTextAttributes.CONDITIONAL_ASSEMBLY_DIRECTIVE),
-    createDescriptor("color.settings.group.directives", "attribute.descriptor.macrocall", M68kTextAttributes.MACRO_CALL),
-    createDescriptor("color.settings.group.directives", "attribute.descriptor.macro.parameter", M68kTextAttributes.MACRO_PARAMETER),
+
+    createDescriptor("color.settings.group.macros", "attribute.descriptor.macrocall", M68kTextAttributes.MACRO_CALL),
+    createDescriptor("color.settings.group.macros", "attribute.descriptor.macro.parameter", M68kTextAttributes.MACRO_PARAMETER),
 
     createDescriptor("color.settings.group.instructions", "attribute.descriptor.instruction", M68kTextAttributes.INSTRUCTION),
     createDescriptor("color.settings.group.instructions", "attribute.descriptor.privileged.instruction", M68kTextAttributes.PRIVILEGED_INSTRUCTION),
