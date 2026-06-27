@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,11 @@
 
 package com.yanncebron.m68kplugin.lang;
 
+import com.intellij.psi.tree.IElementType;
 import com.intellij.spellchecker.inspections.SpellCheckingInspection;
 import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
+import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 
 @TestDataPath("$PROJECT_ROOT/testData/spellchecker")
 public class M68kSpellcheckerTest extends BasePlatformTestCase {
@@ -44,6 +46,29 @@ public class M68kSpellcheckerTest extends BasePlatformTestCase {
 
   public void testStringExpression() {
     doTest();
+  }
+
+  public void testAllMnemonics() {
+    for (IElementType elementType : M68kTokenGroups.INSTRUCTIONS.getTypes()) {
+      doTestElementType(elementType);
+    }
+  }
+
+  public void testAllDirectives() {
+    for (IElementType elementType : M68kTokenGroups.DIRECTIVES.getTypes()) {
+      doTestElementType(elementType);
+    }
+  }
+
+  public void testAllConditionalDirectives() {
+    for (IElementType elementType : M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES.getTypes()) {
+      doTestElementType(elementType);
+    }
+  }
+
+  private void doTestElementType(IElementType element) {
+    myFixture.configureByText("a.s", "; " + element.toString());
+    myFixture.testHighlighting(false, false, true);
   }
 
   private void doTest() {
