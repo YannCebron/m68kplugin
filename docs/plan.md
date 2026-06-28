@@ -133,7 +133,6 @@
 ## Navigation
 
 - breadcrumbs
-- quick definition: better range for labels/"code-blocks"
 - structure view:
   - `section`
   - macro: # of parameters
@@ -158,6 +157,7 @@
 - copper list:
   - color-picker/inlays
   - register name completion/inlay
+  - register editor doc/_Select In_
   - http://deadliners.net/gradientmaster/
 - support IFF images in IDE [https://github.com/haraldk/TwelveMonkeys](https://github.com/haraldk/TwelveMonkeys)
 - FS-UAE [configuration files](https://fs-uae.net/configuration-files)                         
