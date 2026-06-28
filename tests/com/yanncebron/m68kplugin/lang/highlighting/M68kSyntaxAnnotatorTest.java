@@ -62,6 +62,21 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
     myFixture.testHighlighting(false, true, false);
   }
 
+  public void testSymbolLabels() {
+    myFixture.configureByText("test.s", """
+      <info textAttributesKey="M68K_SYMBOL_LABEL">equ_name</info> equ 3
+      <info textAttributesKey="M68K_SYMBOL_LABEL">equals_name</info> = 3
+      <info textAttributesKey="M68K_SYMBOL_LABEL">register_name</info> equr d3
+      <info textAttributesKey="M68K_SYMBOL_LABEL">fo_name</info> fo 3
+      <info textAttributesKey="M68K_SYMBOL_LABEL">reg_name</info> reg d0-d2
+      <info textAttributesKey="M68K_SYMBOL_LABEL">set_name</info> set 3
+      <info textAttributesKey="M68K_SYMBOL_LABEL">so_name</info> so 3
+      <info textAttributesKey="M68K_LABEL">macroName</info> macro
+        endm
+      """);
+    myFixture.testHighlighting(false, true, false);
+  }
+
   public void testBuiltinSymbol() {
     myFixture.configureByText("test.s",
       """

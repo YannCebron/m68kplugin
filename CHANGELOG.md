@@ -10,6 +10,7 @@
 - _View | Quick Definition_ for (local) label: show up to five following statements; stop at the next (local) label
 
 ### Added
+- Editor Color Scheme settings: add _Labels | Symbol_ for label declarations for directives like `EQU`, `SET` etc.
 
 ### Fixed
 - M68k Browser "Amiga Hardware" tab: CIA registers change the link to reference docs to working one

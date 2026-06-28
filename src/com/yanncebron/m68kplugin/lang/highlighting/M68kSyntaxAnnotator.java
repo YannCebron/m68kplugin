@@ -27,9 +27,12 @@ import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReferenceBase;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ObjectUtils;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kDirectiveWithLabel;
+import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroParameterDirective;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
 import org.jetbrains.annotations.NotNull;
@@ -67,7 +70,12 @@ final class M68kSyntaxAnnotator implements Annotator, DumbAware {
           .textAttributes(M68kTextAttributes.PRIVILEGED_INSTRUCTION).create();
       }
     } else if (element instanceof M68kLabel) {
-      doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LABEL, true);
+      TextAttributesKey key = M68kTextAttributes.LABEL;
+      M68kDirectiveWithLabel directiveWithLabel = PsiTreeUtil.getParentOfType(element, M68kDirectiveWithLabel.class);
+      if (directiveWithLabel != null && (!(directiveWithLabel instanceof M68kMacroDirective))) {
+          key = M68kTextAttributes.SYMBOL_LABEL;
+      }
+      doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), key, true);
     } else if (element instanceof M68kLocalLabel) {
       doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LOCAL_LABEL, true);
     } else if (element instanceof M68kLabelRefExpression) {

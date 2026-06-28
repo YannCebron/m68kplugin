@@ -37,9 +37,12 @@ public class M68kTextAttributes {
   public static final TextAttributesKey BUILTIN_SYMBOL =
     createTextAttributesKey("M68K_BUILTIN_SYMBOL", DefaultLanguageHighlighterColors.PREDEFINED_SYMBOL);
   public static final TextAttributesKey LABEL =
-    createTextAttributesKey("M68K_LABEL", DefaultLanguageHighlighterColors.STATIC_METHOD);
+    createTextAttributesKey("M68K_LABEL", DefaultLanguageHighlighterColors.LABEL);
   public static final TextAttributesKey LOCAL_LABEL =
     createTextAttributesKey("M68K_LOCAL_LABEL", DefaultLanguageHighlighterColors.INSTANCE_METHOD);
+  public static final TextAttributesKey SYMBOL_LABEL =
+    createTextAttributesKey("M68K_SYMBOL_LABEL", DefaultLanguageHighlighterColors.CONSTANT);
+
   public static final TextAttributesKey DATA_SIZES =
     createTextAttributesKey("M68K_DATA_SIZES", DefaultLanguageHighlighterColors.KEYWORD);
 

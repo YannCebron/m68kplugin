@@ -62,6 +62,7 @@ final class M68kColorSettingsPage implements ColorSettingsPage, RainbowColorSett
     createDescriptor("color.settings.group.labels", "attribute.descriptor.builtin.symbol", M68kTextAttributes.BUILTIN_SYMBOL),
     createDescriptor("color.settings.group.labels", "attribute.descriptor.label", M68kTextAttributes.LABEL),
     createDescriptor("color.settings.group.labels", "attribute.descriptor.local.label", M68kTextAttributes.LOCAL_LABEL),
+    createDescriptor("color.settings.group.labels", "attribute.descriptor.symbol.label", M68kTextAttributes.SYMBOL_LABEL),
 
     createDescriptor("color.settings.group.literals", "attribute.descriptor.binary.number", M68kTextAttributes.BIN_NUMBER),
     createDescriptor("color.settings.group.literals", "attribute.descriptor.decimal.number", M68kTextAttributes.DEC_NUMBER),
@@ -134,10 +135,10 @@ final class M68kColorSettingsPage implements ColorSettingsPage, RainbowColorSett
       "        erem\n"+
       "\n"+
       "        IFGE <builtinSymbol>__CPU</builtinSymbol>-68010\n" +
-      "<label>CPU_FLAG</label> SET 1\n" +
+      "<symbolLabel>CPU_FLAG</symbolLabel> SET 1\n" +
       "        ENDC\n" +
       "\n" +
-      "<label>DATA</label> equ @42\n" +
+      "<symbolLabel>DATA</symbolLabel> equ @42\n" +
       "<label>_LibPtr</label> dc.l <builtinSymbol>*</builtinSymbol>-4\n" +
       "<label>text</label>    dc.b 'some text, valid escape: \\n invalid escape: \\X',0\n" +
       "\n" +
@@ -151,6 +152,7 @@ final class M68kColorSettingsPage implements ColorSettingsPage, RainbowColorSett
     additionalMap.put("builtinSymbol", M68kTextAttributes.BUILTIN_SYMBOL);
     additionalMap.put("label", M68kTextAttributes.LABEL);
     additionalMap.put("localLabel", M68kTextAttributes.LOCAL_LABEL);
+    additionalMap.put("symbolLabel", M68kTextAttributes.SYMBOL_LABEL);
     additionalMap.put("macroParameter", M68kTextAttributes.MACRO_PARAMETER);
     additionalMap.put("privilegedInstruction", M68kTextAttributes.PRIVILEGED_INSTRUCTION);
 
