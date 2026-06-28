@@ -28,10 +28,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.refactoring.suggested.UtilsKt;
 import com.yanncebron.m68kplugin.lang.M68kFile;
-import com.yanncebron.m68kplugin.lang.psi.M68kInstruction;
-import com.yanncebron.m68kplugin.lang.psi.M68kMnemonic;
-import com.yanncebron.m68kplugin.lang.psi.M68kMnemonicRegistry;
-import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
+import com.yanncebron.m68kplugin.lang.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -57,7 +54,8 @@ final class M68kInstructionDocumentationTargetProvider implements DocumentationT
 
     IElementType elementType = element.getNode().getElementType();
     if (M68kTokenGroups.INSTRUCTIONS.contains(elementType) ||
-      M68kTokenGroups.DATA_SIZES.contains(elementType)) {
+      (M68kTokenGroups.DATA_SIZES.contains(elementType) && // do not trigger on '$42.L'
+        PsiTreeUtil.getParentOfType(element, M68kAdm.class) == null)) {
       return PsiTreeUtil.getParentOfType(element, M68kInstruction.class);
     }
     return null;
