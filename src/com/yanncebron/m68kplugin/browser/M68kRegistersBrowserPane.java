@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,14 @@
 package com.yanncebron.m68kplugin.browser;
 
 import com.intellij.icons.AllIcons;
+import com.intellij.ide.SelectInContext;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.NaturalComparator;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.ui.speedSearch.SpeedSearchUtil;
@@ -29,9 +32,11 @@ import com.intellij.util.IconUtil;
 import com.intellij.util.containers.Convertor;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.documentation.M68kRegisterDocsGenerator;
+import com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister;
 import com.yanncebron.m68kplugin.lang.psi.M68kCpu;
 import com.yanncebron.m68kplugin.lang.psi.M68kRegister;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -104,11 +109,29 @@ final class M68kRegistersBrowserPane extends M68kBrowserPaneBase<M68kRegister> {
     };
   }
 
-  static final class Factory implements M68kBrowserPaneFactory<M68kRegistersBrowserPane> {
+  static final class Factory implements M68kBrowserPaneFactory<M68kRegistersBrowserPane, M68kRegister> {
 
     @Override
     public M68kRegistersBrowserPane createPane(Project project) {
       return new M68kRegistersBrowserPane(project);
+    }
+
+    @Override
+    public boolean canSelect(SelectInContext context) {
+      return findAdmWithRegister(context) != null;
+    }
+
+    @Override
+    public @Nullable M68kRegister getSelectedItem(SelectInContext context) {
+      M68kAdmWithRegister admWithRegister = findAdmWithRegister(context);
+      return admWithRegister == null ? null : admWithRegister.getRegister();
+    }
+
+    private @Nullable M68kAdmWithRegister findAdmWithRegister(SelectInContext context) {
+      Object selectorInFile = context.getSelectorInFile();
+      if (!(selectorInFile instanceof PsiElement psiElement)) return null;
+
+      return PsiTreeUtil.getParentOfType(psiElement, M68kAdmWithRegister.class);
     }
   }
 }

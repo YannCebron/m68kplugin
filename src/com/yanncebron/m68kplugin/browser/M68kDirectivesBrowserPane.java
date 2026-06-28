@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,14 @@
 package com.yanncebron.m68kplugin.browser;
 
 import com.intellij.icons.AllIcons;
+import com.intellij.ide.SelectInContext;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.NaturalComparator;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.speedSearch.SpeedSearchUtil;
@@ -32,6 +34,7 @@ import com.yanncebron.m68kplugin.documentation.M68kDirectiveDocumentationProvide
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -106,11 +109,32 @@ final class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<IElementType> 
     };
   }
 
-  static final class Factory implements M68kBrowserPaneFactory<M68kDirectivesBrowserPane> {
+  static final class Factory implements M68kBrowserPaneFactory<M68kDirectivesBrowserPane, IElementType> {
 
     @Override
     public M68kDirectivesBrowserPane createPane(Project project) {
       return new M68kDirectivesBrowserPane(project);
+    }
+
+    @Override
+    public boolean canSelect(SelectInContext context) {
+      IElementType elementType = getElementType(context);
+      if (elementType == null) return false;
+
+      return M68kTokenGroups.DIRECTIVES.contains(elementType) ||
+        M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES.contains(elementType);
+    }
+
+    @Override
+    public @Nullable IElementType getSelectedItem(SelectInContext context) {
+      return getElementType(context);
+    }
+
+    private static @Nullable IElementType getElementType(SelectInContext context) {
+      Object selectorInFile = context.getSelectorInFile();
+      if (!(selectorInFile instanceof PsiElement psiElement)) return null;
+
+      return psiElement.getNode().getElementType();
     }
   }
 }

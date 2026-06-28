@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,10 @@ import org.jetbrains.annotations.NotNull;
 
 final class M68kBrowserToolWindowFactory implements ToolWindowFactory, DumbAware {
 
-  private static final ExtensionPointName<M68kBrowserPaneFactoryEP> BROWSER_PANE_FACTORY_EP = ExtensionPointName.create("com.yanncebron.m68kplugin.browserPaneFactory");
+  @NonNls
+  static final String TOOLWINDOW_ID = "M68kBrowser";
+
+  static final ExtensionPointName<M68kBrowserPaneFactoryEP> BROWSER_PANE_FACTORY_EP = ExtensionPointName.create("com.yanncebron.m68kplugin.browserPaneFactory");
 
   private static final Key<String> PANE_FQN_KEY = Key.create("M68kBrowserToolWindowFactory.pane.fqn");
 
@@ -46,7 +49,7 @@ final class M68kBrowserToolWindowFactory implements ToolWindowFactory, DumbAware
     String activePane = PropertiesComponent.getInstance(project).getValue(ACTIVE_PANE);
 
     for (M68kBrowserPaneFactoryEP extension : BROWSER_PANE_FACTORY_EP.getExtensionList()) {
-      M68kBrowserPaneFactory<?> factory = extension.getInstance();
+      M68kBrowserPaneFactory<?, ?> factory = extension.getInstance();
       if (!factory.isAvailable(project)) continue;
 
       M68kBrowserPaneBase<?> pane = factory.createPane(project);

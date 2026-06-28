@@ -11,6 +11,7 @@
 
 ### Added
 - Editor Color Scheme settings: add _Labels | Symbol_ for label declarations for directives like `EQU`, `SET` etc.
+- M68k Browser: add _Navigate | Select In..._ to open current editor element (instruction, directive, register) in browser
 
 ### Fixed
 - M68k Browser "Amiga Hardware" tab: CIA registers change the link to reference docs to working one

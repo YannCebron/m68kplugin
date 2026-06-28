@@ -40,6 +40,8 @@ For `macro`/`endm`, `section` and machine directives (`machine`, `mc68010` etc.)
 
 _Hover_: enable _Show quick documentation on hover_ in *Settings \| Editor \| Code Editing*
 
+Use _Navigate | Select In..._ on current element in editor to open it in the _M68k Browser_ tool window.
+
 ### Mnemonics
 
 _View \| View Quick Documentation_ Show mnemonic syntax documentation (or on mouse hover), the current variant is underlined

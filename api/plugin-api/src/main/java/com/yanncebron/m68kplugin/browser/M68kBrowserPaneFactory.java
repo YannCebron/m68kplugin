@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,28 @@
 
 package com.yanncebron.m68kplugin.browser;
 
+import com.intellij.diagnostic.PluginException;
+import com.intellij.ide.SelectInContext;
 import com.intellij.openapi.project.Project;
+import org.jetbrains.annotations.Nullable;
 
-public interface M68kBrowserPaneFactory<T extends M68kBrowserPaneBase<?>> {
+public interface M68kBrowserPaneFactory<T extends M68kBrowserPaneBase<V>, V> {
 
   default boolean isAvailable(Project project) {
     return true;
   }
 
   T createPane(Project project);
+
+  /**
+   * @return {@code true} if element from "Select In..." context can be selected in this pane
+   */
+  default boolean canSelect(SelectInContext context) {
+    return false;
+  }
+
+  default @Nullable V getSelectedItem(SelectInContext context) {
+    throw PluginException.createByClass("getSelectedItem() not implemented: " + this, null, this.getClass());
+  }
+
 }

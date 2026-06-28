@@ -224,7 +224,7 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
 
   }
 
-  static final class Factory implements M68kBrowserPaneFactory<M68kAmigaHardwareBrowserPane> {
+  static final class Factory implements M68kBrowserPaneFactory<M68kAmigaHardwareBrowserPane, M68kAmigaHardwareRegister> {
 
     @Override
     public M68kAmigaHardwareBrowserPane createPane(Project project) {

@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.browser;
 
 import com.intellij.icons.AllIcons;
+import com.intellij.ide.SelectInContext;
 import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
@@ -24,7 +25,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Predicates;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.NaturalComparator;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.ui.speedSearch.SpeedSearchUtil;
@@ -157,11 +160,48 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
     };
   }
 
-  static final class Factory implements M68kBrowserPaneFactory<M68kMnemonicsBrowserPane> {
+  static final class Factory implements M68kBrowserPaneFactory<M68kMnemonicsBrowserPane, M68kMnemonic> {
 
     @Override
     public M68kMnemonicsBrowserPane createPane(Project project) {
       return new M68kMnemonicsBrowserPane(project);
+    }
+
+    @Override
+    public boolean canSelect(SelectInContext context) {
+      Object selectorInFile = context.getSelectorInFile();
+      if (!(selectorInFile instanceof PsiElement psiElement)) return false;
+
+      IElementType elementType = psiElement.getNode().getElementType();
+      if (M68kTokenGroups.INSTRUCTIONS.contains(elementType)) {
+        return true;
+      }
+
+      // do not trigger on '$42.L'
+      return M68kTokenGroups.DATA_SIZES.contains(elementType) &&
+        PsiTreeUtil.getParentOfType(psiElement, M68kAdm.class) == null;
+    }
+
+    @Override
+    public M68kMnemonic getSelectedItem(SelectInContext context) {
+      Object selectorInFile = context.getSelectorInFile();
+      if (!(selectorInFile instanceof PsiElement psiElement)) return null;
+
+      M68kInstruction m68kInstruction = PsiTreeUtil.getParentOfType(psiElement, M68kInstruction.class);
+      if (m68kInstruction == null) {
+        return null;
+      }
+
+      // specific special mnemonic
+      M68kMnemonic m68kMnemonic = M68kMnemonicRegistry.getInstance().find(m68kInstruction);
+      if (m68kMnemonic != null && m68kMnemonic.hasSpecialRegisterOperands()) {
+        return m68kMnemonic;
+      }
+
+      // first mnemonic
+      IElementType elementType = m68kInstruction.getFirstChild().getNode().getElementType();
+      Collection<M68kMnemonic> all = M68kMnemonicRegistry.getInstance().findAll(elementType);
+      return ContainerUtil.getFirstItem(all);
     }
   }
 }

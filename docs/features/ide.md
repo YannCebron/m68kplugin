@@ -16,6 +16,8 @@ nav_order: 3
 
 Provides access to all syntax and reference documentation.
 
+Use _Navigate | Select In..._ on current element in editor to open it in the _M68k Browser_ tool window.
+
 > 💡To search for entries, start typing while the focus is on the element list on the left.
 
 ### Mnemonics

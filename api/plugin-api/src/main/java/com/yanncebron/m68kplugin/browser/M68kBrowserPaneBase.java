@@ -340,4 +340,8 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
       }
     });
   }
+
+  void selectItem(Object /* T */ element) {
+    list.setSelectedValue(element, true);
+  }
 }

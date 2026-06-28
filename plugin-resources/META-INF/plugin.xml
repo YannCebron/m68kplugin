@@ -243,6 +243,8 @@
         icon="M68kIcons.TOOL_WINDOW"
         anchor="right"
         factoryClass="com.yanncebron.m68kplugin.browser.M68kBrowserToolWindowFactory"/>
+    <selectInTarget
+        implementation="com.yanncebron.m68kplugin.browser.M68kBrowserSelectInTarget"/>
     <platform.backend.documentation.linkHandler
         implementation="com.yanncebron.m68kplugin.browser.M68kBrowserDocumentationLinkHandler"/>
 
