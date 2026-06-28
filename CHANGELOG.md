@@ -3,7 +3,7 @@
 ## Unreleased
 
 ### Changed
-- Mnemonic (reference) docs: separate variants with `CCR`/`SR`/`USP` operands (e.g., `ANDI to CCR`, `ANDI to SR`)
+- Mnemonic (reference) docs: separate variants with `CCR`/`SR`/`USP` operands (e.g., `ANDI` vs. `ANDI to CCR` vs. `ANDI to SR`)
 - M68k Browser "Mnemonics" tab: 
   - add exclamation icon for privileged variants
   - add _Include MC68020 Only Variants_ toggle filter
