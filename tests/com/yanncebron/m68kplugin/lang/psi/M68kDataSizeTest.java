@@ -21,20 +21,6 @@ import junit.framework.TestCase;
 
 public class M68kDataSizeTest extends TestCase {
 
-  public void testFindByText() {
-    assertDataSize(M68kDataSize.SINGLE, ".s");
-    assertDataSize(M68kDataSize.BYTE, ".b");
-    assertDataSize(M68kDataSize.BYTE, ".B");
-    assertDataSize(M68kDataSize.WORD, ".w");
-    assertDataSize(M68kDataSize.LONGWORD, ".L");
-
-    assertDataSize(null, "INVALID_VALUE");
-  }
-
-  private void assertDataSize(M68kDataSize expected, String text) {
-    assertEquals(expected, M68kDataSize.findByText(text));
-  }
-
   public void testFindByElementType() {
     assertDataSize(M68kDataSize.SINGLE, M68kTokenTypes.DOT_S);
     assertDataSize(M68kDataSize.BYTE, M68kTokenTypes.DOT_B);

@@ -16,12 +16,10 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-import com.intellij.openapi.util.Comparing;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.TestOnly;
 
 import java.util.EnumSet;
 import java.util.Set;
@@ -58,16 +56,6 @@ public enum M68kDataSize {
   public static M68kDataSize findByElementType(@NotNull IElementType elementType) {
     for (M68kDataSize value : values()) {
       if (elementType == value.getElementType()) return value;
-    }
-    return null;
-  }
-
-  // todo superfluous?
-  @TestOnly
-  @Nullable
-  public static M68kDataSize findByText(@NotNull @NonNls String text) {
-    for (M68kDataSize value : values()) {
-      if (Comparing.strEqual(text, value.getText(), false)) return value;
     }
     return null;
   }
