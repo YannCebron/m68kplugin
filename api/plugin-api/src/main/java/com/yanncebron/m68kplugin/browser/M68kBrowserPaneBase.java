@@ -189,7 +189,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
 
     list.setModel(new CollectionListModel<>(items));
 
-    list.setSelectedValue(selectedValue, true);
+    selectItem(selectedValue);
   }
 
   protected void updateDoc() {
@@ -303,7 +303,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
     Object value = place.getPath(SELECTED_ITEM);
     if (value == null) return ActionCallback.REJECTED;
 
-    list.setSelectedValue(value, true);
+    selectItem(value);
 
     // list might not contain value anymore due to filtering, force update doc manually
     if (!list.getSelectedValue().equals(value)) {
@@ -333,8 +333,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
       for (int i = 0; i < list.getItemsCount(); i++) {
         T element = list.getModel().getElementAt(i);
         if (StringUtil.equals(elementName, getListItemNamer().convert(element))) {
-          list.setSelectedIndex(i);
-          list.ensureIndexIsVisible(i);
+          selectItem(element);
           return;
         }
       }
