@@ -53,6 +53,7 @@ final class M68kColorSettingsPage implements ColorSettingsPage, RainbowColorSett
     createDescriptor("color.settings.group.directives", "attribute.descriptor.directive", M68kTextAttributes.DIRECTIVE),
     createDescriptor("color.settings.group.directives", "attribute.descriptor.conditional.assembly.directive", M68kTextAttributes.CONDITIONAL_ASSEMBLY_DIRECTIVE),
 
+    createDescriptor("color.settings.group.macros", "attribute.descriptor.macro.label", M68kTextAttributes.MACRO_LABEL),
     createDescriptor("color.settings.group.macros", "attribute.descriptor.macrocall", M68kTextAttributes.MACRO_CALL),
     createDescriptor("color.settings.group.macros", "attribute.descriptor.macro.parameter", M68kTextAttributes.MACRO_PARAMETER),
 
@@ -112,7 +113,7 @@ final class M68kColorSettingsPage implements ColorSettingsPage, RainbowColorSett
   @NotNull
   @Override
   public String getDemoText() {
-    return "<label>CALL_MACRO</label> macro\n" +
+    return "<macroLabel>CALL_MACRO</macroLabel> macro\n" +
       "        move.<macroParameter>\\0</macroParameter> <macroParameter>\\1</macroParameter>,a6\n" +
       "        jsr _LVO<macroParameter>\\2</macroParameter>(a6)\n" +
       "<localLabel>.localMacroLabel</localLabel><macroParameter>\\@</macroParameter>\n" +
@@ -153,6 +154,7 @@ final class M68kColorSettingsPage implements ColorSettingsPage, RainbowColorSett
     additionalMap.put("label", M68kTextAttributes.LABEL);
     additionalMap.put("localLabel", M68kTextAttributes.LOCAL_LABEL);
     additionalMap.put("symbolLabel", M68kTextAttributes.SYMBOL_LABEL);
+    additionalMap.put("macroLabel", M68kTextAttributes.MACRO_LABEL);
     additionalMap.put("macroParameter", M68kTextAttributes.MACRO_PARAMETER);
     additionalMap.put("privilegedInstruction", M68kTextAttributes.PRIVILEGED_INSTRUCTION);
 

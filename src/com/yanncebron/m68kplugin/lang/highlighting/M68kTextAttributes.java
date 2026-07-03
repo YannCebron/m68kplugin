@@ -29,6 +29,8 @@ public class M68kTextAttributes {
   public static final TextAttributesKey PRIVILEGED_INSTRUCTION =
     createTextAttributesKey("M68K_PRIVILEGED_INSTRUCTION", DefaultLanguageHighlighterColors.HIGHLIGHTED_REFERENCE);
 
+  public static final TextAttributesKey MACRO_LABEL =
+    createTextAttributesKey("M68K_MACRO_LABEL", DefaultLanguageHighlighterColors.LABEL);
   public static final TextAttributesKey MACRO_CALL =
     createTextAttributesKey("M68K_MACRO_CALL", DefaultLanguageHighlighterColors.FUNCTION_CALL);
   public static final TextAttributesKey MACRO_PARAMETER =

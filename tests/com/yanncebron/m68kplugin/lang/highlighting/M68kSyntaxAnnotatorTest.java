@@ -71,8 +71,6 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
       <info textAttributesKey="M68K_SYMBOL_LABEL">reg_name</info> reg d0-d2
       <info textAttributesKey="M68K_SYMBOL_LABEL">set_name</info> set 3
       <info textAttributesKey="M68K_SYMBOL_LABEL">so_name</info> so 3
-      <info textAttributesKey="M68K_LABEL">macroName</info> macro
-        endm
       """);
     myFixture.testHighlighting(false, true, false);
   }
@@ -86,10 +84,10 @@ public class M68kSyntaxAnnotatorTest extends BasePlatformTestCase {
     myFixture.testHighlighting(false, true, false);
   }
 
-  public void testMacroParameter() {
+  public void testMacroLabelAndParameter() {
     myFixture.configureByText("test.s",
       """
-        <info textAttributesKey="M68K_LABEL">macroName</info> macro
+        <info textAttributesKey="M68K_MACRO_LABEL">macroName</info> macro
           <info textAttributesKey="M68K_MACRO_PARAMETER">\\1</info>
          move.<info textAttributesKey="M68K_MACRO_PARAMETER">\\0</info> d0,d1
          jsr _LVO<info textAttributesKey="M68K_MACRO_PARAMETER">\\a</info>(a6)

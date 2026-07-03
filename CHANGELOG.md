@@ -10,7 +10,9 @@
 - _View | Quick Definition_ for (local) label: show up to five following statements; stop at the next (local) label
 
 ### Added
-- Editor Color Scheme settings: add _Labels | Symbol_ for label declarations for directives like `EQU`, `SET` etc.
+- Editor Color Scheme settings: 
+  - add _Labels | Symbol_ for label declarations for directives like `EQU`, `SET` etc.
+  - add _Macros | Macro label_ for `MACRO` name label
 - M68k Browser: add _Navigate | Select In..._ to open the current editor element (instruction, directive, register) in browser
 - M68k Browser: add keyboard shortcuts for toggling current pane settings
 

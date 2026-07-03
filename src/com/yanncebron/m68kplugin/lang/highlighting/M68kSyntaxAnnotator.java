@@ -72,8 +72,8 @@ final class M68kSyntaxAnnotator implements Annotator, DumbAware {
     } else if (element instanceof M68kLabel) {
       TextAttributesKey key = M68kTextAttributes.LABEL;
       M68kDirectiveWithLabel directiveWithLabel = PsiTreeUtil.getParentOfType(element, M68kDirectiveWithLabel.class);
-      if (directiveWithLabel != null && (!(directiveWithLabel instanceof M68kMacroDirective))) {
-          key = M68kTextAttributes.SYMBOL_LABEL;
+      if (directiveWithLabel != null) {
+        key = directiveWithLabel instanceof M68kMacroDirective ? M68kTextAttributes.MACRO_LABEL : M68kTextAttributes.SYMBOL_LABEL;
       }
       doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), key, true);
     } else if (element instanceof M68kLocalLabel) {
