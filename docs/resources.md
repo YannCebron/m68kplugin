@@ -19,6 +19,7 @@ title: Resources
 ## Documentation
 
 - [M68000 Family Programmer’s Reference Manual](https://www.nxp.com/docs/en/reference-manual/M68000PRM.pdf) _Ref x.y.z_ in source code
+- [M68000 User's Manual](https://www.nxp.com/docs/en/reference-manual/MC68000UM.pdf)
 - [https://github.com/tonioni/WinUAE/blob/master/table68k](https://github.com/tonioni/WinUAE/blob/master/table68k)
 - [https://amigasourcecodepreservation.gitlab.io/mc680x0-reference/](https://amigasourcecodepreservation.gitlab.io/mc680x0-reference/)
 
