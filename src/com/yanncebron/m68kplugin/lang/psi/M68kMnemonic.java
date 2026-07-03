@@ -18,6 +18,8 @@ package com.yanncebron.m68kplugin.lang.psi;
 
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
+import com.yanncebron.m68kplugin.M68kBundle;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
@@ -49,13 +51,14 @@ public record M68kMnemonic(IElementType elementType,
     return secondOperand() != M68kOperand.NONE;
   }
 
+  @Nls
   public String getExternalName() {
     String elementName = StringUtil.toUpperCase(elementType().toString());
     if (SPECIAL_REGISTER_OPERANDS.contains(firstOperand)) {
-      return elementName + " from " + getOperandRegisterExternalName(firstOperand);
+      return M68kBundle.message("mnemonic.external.name.from.operand", elementName, getOperandRegisterExternalName(firstOperand));
     }
     if (SPECIAL_REGISTER_OPERANDS.contains(secondOperand)) {
-      return elementName + " to " + getOperandRegisterExternalName(secondOperand);
+      return M68kBundle.message("mnemonic.external.name.to.operand", elementName, getOperandRegisterExternalName(secondOperand));
     }
     return elementName;
   }
