@@ -336,7 +336,6 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
 
       ShortcutSet shortcut = ActionUtil.getMnemonicAsShortcut(this);
       if (shortcut != null) {
-        setShortcutSet(shortcut);
         registerCustomShortcutSet(shortcut, M68kBrowserPaneBase.this);
       }
     }

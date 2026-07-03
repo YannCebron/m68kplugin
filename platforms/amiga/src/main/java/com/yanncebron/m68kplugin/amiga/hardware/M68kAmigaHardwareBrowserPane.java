@@ -179,7 +179,6 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
   }
 
 
-  @SuppressWarnings("UnstableApiUsage")
   private class ChooseChipsetAction extends ComboBoxAction implements DumbAware {
     private ChooseChipsetAction() {
       super();
@@ -187,7 +186,6 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
       getTemplatePresentation().setText(M68kAmigaBundle.message("toolwindow.tab.amiga.hardware.choose.chipset"));
       ShortcutSet shortcut = ActionUtil.getMnemonicAsShortcut(this);
       if (shortcut != null) {
-        setShortcutSet(shortcut);
         registerCustomShortcutSet(shortcut, M68kAmigaHardwareBrowserPane.this);
       }
     }
