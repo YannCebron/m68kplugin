@@ -26,7 +26,7 @@ import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
  * @see M68kAdm
  * @see M68kOperand
  */
-// todo encode supported CPUs (2.4)
+// todo encode supported CPUs (Table 2-4, 7-2)
 public enum M68kAddressMode {
 
   /**
