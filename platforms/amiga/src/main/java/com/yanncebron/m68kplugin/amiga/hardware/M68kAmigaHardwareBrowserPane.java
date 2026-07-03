@@ -19,6 +19,7 @@ package com.yanncebron.m68kplugin.amiga.hardware;
 import com.intellij.icons.AllIcons;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.ex.ActionUtil;
 import com.intellij.openapi.actionSystem.ex.ComboBoxAction;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.DumbAwareToggleAction;
@@ -178,7 +179,18 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
   }
 
 
+  @SuppressWarnings("UnstableApiUsage")
   private class ChooseChipsetAction extends ComboBoxAction implements DumbAware {
+    private ChooseChipsetAction() {
+      super();
+
+      getTemplatePresentation().setText(M68kAmigaBundle.message("toolwindow.tab.amiga.hardware.choose.chipset"));
+      ShortcutSet shortcut = ActionUtil.getMnemonicAsShortcut(this);
+      if (shortcut != null) {
+        setShortcutSet(shortcut);
+        registerCustomShortcutSet(shortcut, M68kAmigaHardwareBrowserPane.this);
+      }
+    }
 
     @Override
     public @NotNull ActionUpdateThread getActionUpdateThread() {

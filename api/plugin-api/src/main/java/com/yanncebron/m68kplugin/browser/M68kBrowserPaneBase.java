@@ -22,6 +22,7 @@ import com.intellij.lang.documentation.ide.DocumentationUtil;
 import com.intellij.lang.documentation.ide.ui.DocumentationComponent;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.ex.ActionUtil;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.DumbAwareToggleAction;
 import com.intellij.openapi.project.Project;
@@ -256,35 +257,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
     assert settingField != null;
     settingField.set(PropertiesComponent.getInstance(project).getBoolean(settingKey, true));
 
-    return new DumbAwareToggleAction(text, null, icon) {
-
-      @Override
-      public @NotNull ActionUpdateThread getActionUpdateThread() {
-        return ActionUpdateThread.BGT;
-      }
-
-      @Override
-      public void update(@NotNull AnActionEvent e) {
-        super.update(e);
-
-        if (updateConsumer != null) {
-          updateConsumer.accept(e);
-        }
-      }
-
-      @Override
-      public boolean isSelected(@NotNull AnActionEvent e) {
-        return settingField.get();
-      }
-
-      @Override
-      public void setSelected(@NotNull AnActionEvent e, boolean state) {
-        settingField.set(state);
-        PropertiesComponent.getInstance(project).setValue(settingKey, settingField.get(), true);
-
-        setSelectedConsumer.accept(e, state);
-      }
-    };
+    return new MyDumbAwareToggleAction(text, icon, updateConsumer, settingField, settingKey, setSelectedConsumer);
   }
 
   @Override
@@ -343,4 +316,57 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
   void selectItem(Object /* T */ element) {
     list.setSelectedValue(element, true);
   }
+
+
+  private class MyDumbAwareToggleAction extends DumbAwareToggleAction {
+
+    private final @Nullable Consumer<AnActionEvent> updateConsumer;
+    private final Ref<Boolean> settingField;
+    private final String settingKey;
+    private final @NotNull BiConsumer<AnActionEvent, Boolean> setSelectedConsumer;
+
+    private MyDumbAwareToggleAction(String text, Icon icon, @Nullable Consumer<AnActionEvent> updateConsumer,
+                                    Ref<Boolean> settingField, String settingKey,
+                                    @NotNull BiConsumer<AnActionEvent, Boolean> setSelectedConsumer) {
+      super(text, null, icon);
+      this.updateConsumer = updateConsumer;
+      this.settingField = settingField;
+      this.settingKey = settingKey;
+      this.setSelectedConsumer = setSelectedConsumer;
+
+      ShortcutSet shortcut = ActionUtil.getMnemonicAsShortcut(this);
+      if (shortcut != null) {
+        setShortcutSet(shortcut);
+        registerCustomShortcutSet(shortcut, M68kBrowserPaneBase.this);
+      }
+    }
+
+    @Override
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+      return ActionUpdateThread.BGT;
+    }
+
+    @Override
+    public void update(@NotNull AnActionEvent e) {
+      super.update(e);
+
+      if (updateConsumer != null) {
+        updateConsumer.accept(e);
+      }
+    }
+
+    @Override
+    public boolean isSelected(@NotNull AnActionEvent e) {
+      return settingField.get();
+    }
+
+    @Override
+    public void setSelected(@NotNull AnActionEvent e, boolean state) {
+      settingField.set(state);
+      PropertiesComponent.getInstance(project).setValue(settingKey, settingField.get(), true);
+
+      setSelectedConsumer.accept(e, state);
+    }
+  }
+
 }
