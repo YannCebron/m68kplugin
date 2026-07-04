@@ -22,9 +22,9 @@ import com.intellij.psi.PsiElement;
 public interface M68kAdmDoubleDrd extends M68kAdm {
 
   @NotNull
-  M68kAdmDrd getRemainder();
+  M68kAdmDrd getFirst();
 
   @Nullable
-  M68kAdmDrd getQuotient();
+  M68kAdmDrd getSecond();
 
 }

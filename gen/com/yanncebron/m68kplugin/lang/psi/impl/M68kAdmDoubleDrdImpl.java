@@ -44,14 +44,14 @@ public class M68kAdmDoubleDrdImpl extends ASTWrapperPsiElement implements M68kAd
 
   @Override
   @NotNull
-  public M68kAdmDrd getRemainder() {
+  public M68kAdmDrd getFirst() {
     List<M68kAdmDrd> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmDrd.class);
     return p1.get(0);
   }
 
   @Override
   @Nullable
-  public M68kAdmDrd getQuotient() {
+  public M68kAdmDrd getSecond() {
     List<M68kAdmDrd> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, M68kAdmDrd.class);
     return p1.size() < 2 ? null : p1.get(1);
   }

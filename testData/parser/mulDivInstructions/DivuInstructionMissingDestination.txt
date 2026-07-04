@@ -5,5 +5,5 @@ M68k.FILE
   PsiWhiteSpace(' ')
   PsiElement(Dn)('d0')
   PsiElement(,)(',')
-  PsiErrorElement:<Dn> or <Dr:Dq> expected
+  PsiErrorElement:<Dn> or <Dx:Dy> expected
     <empty list>

@@ -27,8 +27,11 @@ public class DivsInstructionPsiTest extends M68kPsiTestCase<M68kDivsInstruction>
 
     M68kAdmDoubleDrd admDoubleDrd = instruction.getAdmDoubleDrd();
     assertNotNull(admDoubleDrd);
-    assertEquals(M68kRegister.D1, admDoubleDrd.getRemainder().getRegister());
-    M68kAdmDrd quotient = admDoubleDrd.getQuotient();
+
+    M68kAdmDrd remainder = admDoubleDrd.getFirst();
+    assertEquals(M68kRegister.D1, remainder.getRegister());
+
+    M68kAdmDrd quotient = admDoubleDrd.getSecond();
     assertNotNull(quotient);
     assertEquals(M68kRegister.D2, quotient.getRegister());
   }

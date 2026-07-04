@@ -131,16 +131,16 @@ adm_drd ::= DATA_REGISTER
   mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
 }
 
-// Dr:Dq (MUL/DIV)
+// Dx:Dy (e.g. MUL/DIV, TBLx (CPU32))
 adm_double_drd ::= adm_drd COLON adm_drd
 {
   pin = 2
-  name = "Dr:Dq"
+  name = "Dx:Dy"
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdm"
   methods = [
     adm_drd = ""
-    remainder = "adm_drd[0]"
-    quotient = "adm_drd[1]"
+    first = "adm_drd[0]"
+    second = "adm_drd[1]"
   ]
 }
 
