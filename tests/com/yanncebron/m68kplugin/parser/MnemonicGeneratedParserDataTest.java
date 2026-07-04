@@ -172,9 +172,9 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
       }
     }
 
-    assertEquals(163270, total);
-    assertEquals(19587, skippedValidCount);
-    assertEquals(1431, matchedByMnemonicCount);
+    assertEquals(163378, total);
+    assertEquals(19631, skippedValidCount);
+    assertEquals(1433, matchedByMnemonicCount);
     assertEmpty(failedVariants);
   }
 
@@ -198,7 +198,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
     dump("* Instructions count: " + M68kTokenGroups.INSTRUCTIONS.getTypes().length);
 
-    assertEquals(5605, total);
+    assertEquals(5607, total);
     assertEmpty(failedVariants);
   }
 

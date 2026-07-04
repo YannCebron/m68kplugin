@@ -42,7 +42,7 @@ final class M68kDocsGeneratorUtil {
       sb.append(M68kBundle.message("cpu.group.GROUP_68020_UP_WITH_CPU32"));
       return;
     }
-    if (cpus == M68kCpu.GROUP_CPU32) {
+    if (cpus.equals(M68kCpu.GROUP_CPU32)) {
       sb.append(M68kBundle.message("cpu.group.GROUP_CPU32"));
       return;
     }

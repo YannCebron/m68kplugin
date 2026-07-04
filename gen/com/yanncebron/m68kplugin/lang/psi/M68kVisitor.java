@@ -819,6 +819,12 @@ public class M68kVisitor extends PsiElementVisitor {
     visitBinaryExpression(o);
   }
 
+  public void visitLpstopInstruction(@NotNull M68kLpstopInstruction o) {
+    visitDataSized(o);
+    // visitPrivilegedInstruction(o);
+    // visitInstruction(o);
+  }
+
   public void visitLslInstruction(@NotNull M68kLslInstruction o) {
     visitShiftRotateInstructionBase(o);
   }

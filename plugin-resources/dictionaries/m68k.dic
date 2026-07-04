@@ -60,6 +60,7 @@ jumpptr
 llen
 longword
 longwords
+lpstop
 mexit
 movea
 movem

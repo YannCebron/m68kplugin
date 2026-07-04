@@ -66,7 +66,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     if (System.getenv(getClass().getSimpleName()) == null) return;
 
     List<M68kMnemonicRuntimeData> allRuntimeData = readRuntimeData();
-    assertEquals("parsed runtime data count", 17, allRuntimeData.size());
+    assertEquals("parsed runtime data count", 18, allRuntimeData.size());
 
     final List<String> lines = Files.readAllLines(Paths.get(VASM_OPCODES_H_PATH));
     assertEquals("line count opcodes.h", 2914, lines.size());
@@ -160,10 +160,10 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       parsedMnemonics.add(m68kMnemonic);
     }
 
-    assertEquals("total parsed mnemonic count", 349, parsedMnemonics.size());
+    assertEquals("total parsed mnemonic count", 350, parsedMnemonics.size());
 
     List<M68kMnemonic> cleanupMnemonics = cleanupMnemonics(parsedMnemonics);
-    assertEquals("total cleanup mnemonic count", 309, cleanupMnemonics.size());
+    assertEquals("total cleanup mnemonic count", 310, cleanupMnemonics.size());
 
     dumpCode(cleanupMnemonics);
   }
@@ -292,7 +292,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
   private void dumpCode(List<M68kMnemonic> mnemonics) {
     int supportedMnemonics = ContainerUtil.filter(mnemonics, m68kMnemonic -> isSupportedCpu(m68kMnemonic.cpus())).size();
-    assertEquals("supported mnemonic count", 253, supportedMnemonics);
+    assertEquals("supported mnemonic count", 254, supportedMnemonics);
 
     printDivider();
 
@@ -363,7 +363,9 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       return "GROUP_CPU32";
     }
 
-    return "EnumSet.of(" + StringUtil.join(cpus, m68kCpu -> "M68kCpu." + m68kCpu.name(), ", ") + ")";
+    // do not output non-supported CPUs (e.g., LPSTOP which is currently only for CPU32)
+    List<M68kCpu> supportedCpus = ContainerUtil.filter(cpus, SUPPORTED_CPUS::contains);
+    return "EnumSet.of(" + StringUtil.join(supportedCpus, m68kCpu -> "M68kCpu." + m68kCpu.name(), ", ") + ")";
   }
 
 

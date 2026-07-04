@@ -85,7 +85,8 @@ public final class M68kTokenGroups {
   );
 
   public static final TokenSet CPU32_INSTRUCTIONS = TokenSet.create(
-    BGND
+    BGND,
+    LPSTOP
   );
 
   public static final TokenSet INSTRUCTIONS = TokenSet.orSet(TokenSet.create(

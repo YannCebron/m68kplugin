@@ -2295,6 +2295,13 @@ label35: bvs         label35
 
 ********************************************************************************
 
+* M68kMnemonic{lpstop, firstOp=IMMEDIATE, secondOp=NONE, [WORD], [CPU32], PRIVILEGED}
+         lpstop      #42.L
+         lpstop.w    #42.L
+
+
+********************************************************************************
+
 * M68kMnemonic{lsl, firstOp=ALTERABLE_MEMORY, secondOp=NONE, [WORD], MC68000 Family}
          lsl         (a0)
          lsl.w       (a0)
@@ -6492,6 +6499,6 @@ label35: bvs         label35
 
 * M68kMnemonic{unlk, firstOp=ADDRESS_REGISTER, secondOp=NONE, [UNSIZED], MC68000 Family}
          unlk      a0
-* Instructions count: 129
+* Instructions count: 130
 
-* 0/5605
+* 0/5607

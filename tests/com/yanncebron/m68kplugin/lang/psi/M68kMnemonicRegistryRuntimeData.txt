@@ -16,6 +16,7 @@
 "or",     {IM,_SR},   W,      m68000up, PRIVILEGED
 "ori",    {IM,_SR},   W,      m68000up, PRIVILEGED
 
+"lpstop", {IM},       W,      m68060|cpu32|apollo, PRIVILEGED
 
 "move",   {_SR,AD},   W,      m68000up, PRIVILEGED_68010_ABOVE
 "move",   {DA,_SR},   W,      m68000up, PRIVILEGED

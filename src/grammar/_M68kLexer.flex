@@ -434,7 +434,7 @@ Z=[zZ]
   {R}{O}{X}{R} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return ROXR; }
 
   {B}{G}{N}{D}                 { yybegin(AFTER_OPERAND); return BGND; }
-
+  {L}{P}{S}{T}{O}{P} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return LPSTOP; }
 
   {A}{D}{D}{W}{A}{T}{C}{H}     { yybegin(IN_OPERAND); return ADDWATCH; }
   {A}{L}{I}{G}{N}              { yybegin(IN_OPERAND); return ALIGN; }

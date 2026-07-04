@@ -18,6 +18,7 @@
 - M68k Browser: add keyboard shortcuts for toggling current pane settings
 - CPU32 support:
   - `BGND`
+  - `LPSTOP`
 
 ### Fixed
 - M68k Browser "Amiga Hardware" tab: CIA registers change the link to reference docs to working one

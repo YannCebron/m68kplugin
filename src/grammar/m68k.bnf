@@ -1168,11 +1168,18 @@ roxr_instruction ::= ROXR shift_tail
 
 
 // CPU32 instructions  ===========================================================
-private cpu32_instructions ::=
-                       bgnd_instruction
+// todo parser generates nonsense line, remove manually
+// if (!nextTokenIs(b, "", BGND, LPSTOP)) return false;
+private cpu32_instructions ::= bgnd_instruction |
+                               lpstop_instruction
 
 bgnd_instruction ::= BGND
 
+lpstop_instruction ::= LPSTOP data_size_word? adm_imm
+{
+  extends = data_sized
+  implements = "com.yanncebron.m68kplugin.lang.psi.M68kPrivilegedInstruction"
+}
 
 // Directives  ===================================================================
 ;

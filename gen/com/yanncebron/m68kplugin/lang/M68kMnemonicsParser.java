@@ -1446,9 +1446,15 @@ public class M68kMnemonicsParser {
   }
 
   /* ********************************************************** */
-  // bgnd_instruction
+  // bgnd_instruction |
+  //                                lpstop_instruction
   static boolean cpu32_instructions(PsiBuilder b, int l) {
-    return bgnd_instruction(b, l + 1);
+    if (!recursion_guard_(b, l, "cpu32_instructions")) return false;
+    // if (!nextTokenIs(b, "", BGND, LPSTOP)) return false; // todo remove manually
+    boolean r;
+    r = bgnd_instruction(b, l + 1);
+    if (!r) r = lpstop_instruction(b, l + 1);
+    return r;
   }
 
   /* ********************************************************** */
@@ -2070,6 +2076,28 @@ public class M68kMnemonicsParser {
     if (!r) r = eori_instruction(b, l + 1);
     if (!r) r = not_instruction(b, l + 1);
     return r;
+  }
+
+  /* ********************************************************** */
+  // LPSTOP data_size_word? adm_imm
+  public static boolean lpstop_instruction(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "lpstop_instruction")) return false;
+    if (!nextTokenIs(b, "<instruction>", LPSTOP)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, LPSTOP_INSTRUCTION, "<instruction>");
+    r = consumeToken(b, LPSTOP);
+    p = r; // pin = 1
+    r = r && report_error_(b, lpstop_instruction_1(b, l + 1));
+    r = p && adm_imm(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // data_size_word?
+  private static boolean lpstop_instruction_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "lpstop_instruction_1")) return false;
+    data_size_word(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */

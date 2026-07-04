@@ -26,6 +26,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
@@ -200,7 +201,7 @@ public final class M68kMnemonicRegistry {
   }
 
   private M68kMnemonicRegistry() {
-// Total mnemonics: 253
+// Total mnemonics: 254
 
 // ABCD ------------------------------------------------------------------------
 
@@ -926,6 +927,14 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.LINK).dataSizes(GROUP_L)
       .first(ADDRESS_REGISTER).second(IMMEDIATE)
       .cpus(GROUP_68020_UP_WITH_CPU32)
+      .build();
+
+// LPSTOP ----------------------------------------------------------------------
+
+    create(M68kTokenTypes.LPSTOP).dataSizes(GROUP_W)
+      .first(IMMEDIATE)
+      .cpus(EnumSet.of(M68kCpu.CPU32))
+      .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .build();
 
 // LSL -------------------------------------------------------------------------
