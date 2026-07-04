@@ -468,8 +468,8 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     entry("m68030up", M68kCpu.GROUP_68030_UP),
     entry("m68040up", M68kCpu.GROUP_68040_UP),
 
-    entry("mfloat", M68kCpu.FLOAT),
-    entry("apollo", M68kCpu.APOLLO),
+    entry("mfloat", M68kCpu.GROUP_FLOAT),
+    entry("apollo", M68kCpu.GROUP_APOLLO),
 
     entry("m68851", EnumSet.of(M68kCpu.M_68851)),
     entry("m68020", EnumSet.of(M68kCpu.M_68020)),
