@@ -886,6 +886,12 @@ label07: bge         label07
 
 ********************************************************************************
 
+* M68kMnemonic{bgnd, firstOp=NONE, secondOp=NONE, [UNSIZED], [CPU32]}
+         bgnd
+
+
+********************************************************************************
+
 * M68kMnemonic{bgt, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD], MC68000 Family}
 label08: bgt         label08
          bgt.s       label08
@@ -6486,6 +6492,6 @@ label35: bvs         label35
 
 * M68kMnemonic{unlk, firstOp=ADDRESS_REGISTER, secondOp=NONE, [UNSIZED], MC68000 Family}
          unlk      a0
-* Instructions count: 128
+* Instructions count: 129
 
-* 0/5604
+* 0/5605

@@ -627,6 +627,18 @@ public class M68kMnemonicsParser {
   }
 
   /* ********************************************************** */
+  // BGND
+  public static boolean bgnd_instruction(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "bgnd_instruction")) return false;
+    if (!nextTokenIs(b, "<instruction>", BGND)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, BGND_INSTRUCTION, "<instruction>");
+    r = consumeToken(b, BGND);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // BGT bCC_tail
   public static boolean bgt_instruction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "bgt_instruction")) return false;
@@ -1431,6 +1443,12 @@ public class M68kMnemonicsParser {
     if (!recursion_guard_(b, l, "cmpm_instruction_1")) return false;
     data_size_all(b, l + 1);
     return true;
+  }
+
+  /* ********************************************************** */
+  // bgnd_instruction
+  static boolean cpu32_instructions(PsiBuilder b, int l) {
+    return bgnd_instruction(b, l + 1);
   }
 
   /* ********************************************************** */

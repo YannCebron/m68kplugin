@@ -92,6 +92,7 @@ localLabel ::= (dot_local_label | dollar_local_label) COLON?
 }
 
 private instructions ::= m68000_instructions |
+                         cpu32_instructions |
                          directives |
                          conditional_assembly_directives
 
@@ -1164,6 +1165,13 @@ ror_instruction ::= ROR shift_tail
 
 roxl_instruction ::= ROXL shift_tail
 roxr_instruction ::= ROXR shift_tail
+
+
+// CPU32 instructions  ===========================================================
+private cpu32_instructions ::=
+                       bgnd_instruction
+
+bgnd_instruction ::= BGND
 
 
 // Directives  ===================================================================

@@ -160,10 +160,10 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       parsedMnemonics.add(m68kMnemonic);
     }
 
-    assertEquals("total parsed mnemonic count", 348, parsedMnemonics.size());
+    assertEquals("total parsed mnemonic count", 349, parsedMnemonics.size());
 
     List<M68kMnemonic> cleanupMnemonics = cleanupMnemonics(parsedMnemonics);
-    assertEquals("total cleanup mnemonic count", 308, cleanupMnemonics.size());
+    assertEquals("total cleanup mnemonic count", 309, cleanupMnemonics.size());
 
     dumpCode(cleanupMnemonics);
   }
@@ -292,7 +292,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
   private void dumpCode(List<M68kMnemonic> mnemonics) {
     int supportedMnemonics = ContainerUtil.filter(mnemonics, m68kMnemonic -> isSupportedCpu(m68kMnemonic.cpus())).size();
-    assertEquals("supported mnemonic count", 252, supportedMnemonics);
+    assertEquals("supported mnemonic count", 253, supportedMnemonics);
 
     printDivider();
 
@@ -357,6 +357,10 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
     if (M68kCpu.GROUP_68020_UP_WITH_CPU32.equals(cpus)) {
       return "GROUP_68020_UP_WITH_CPU32";
+    }
+
+    if (M68kCpu.GROUP_CPU32.equals(cpus)) {
+      return "GROUP_CPU32";
     }
 
     return "EnumSet.of(" + StringUtil.join(cpus, m68kCpu -> "M68kCpu." + m68kCpu.name(), ", ") + ")";

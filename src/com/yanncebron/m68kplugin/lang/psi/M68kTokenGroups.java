@@ -84,6 +84,10 @@ public final class M68kTokenGroups {
     SVS
   );
 
+  public static final TokenSet CPU32_INSTRUCTIONS = TokenSet.create(
+    BGND
+  );
+
   public static final TokenSet INSTRUCTIONS = TokenSet.orSet(TokenSet.create(
     ABCD,
     ADD,
@@ -160,7 +164,7 @@ public final class M68kTokenGroups {
     TRAPV,
     TST,
     UNLK
-  ), BCC_INSTRUCTIONS, DBCC_INSTRUCTIONS, SCC_INSTRUCTIONS);
+  ), BCC_INSTRUCTIONS, DBCC_INSTRUCTIONS, SCC_INSTRUCTIONS, CPU32_INSTRUCTIONS);
 
   public static final TokenSet DATA_SIZES = TokenSet.create(
     DOT_B,

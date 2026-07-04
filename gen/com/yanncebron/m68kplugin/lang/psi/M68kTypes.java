@@ -71,6 +71,7 @@ public interface M68kTypes {
   IElementType BCS_INSTRUCTION = new M68kCompositeElementType("BCS_INSTRUCTION");
   IElementType BEQ_INSTRUCTION = new M68kCompositeElementType("BEQ_INSTRUCTION");
   IElementType BGE_INSTRUCTION = new M68kCompositeElementType("BGE_INSTRUCTION");
+  IElementType BGND_INSTRUCTION = new M68kCompositeElementType("BGND_INSTRUCTION");
   IElementType BGT_INSTRUCTION = new M68kCompositeElementType("BGT_INSTRUCTION");
   IElementType BHI_INSTRUCTION = new M68kCompositeElementType("BHI_INSTRUCTION");
   IElementType BHS_INSTRUCTION = new M68kCompositeElementType("BHS_INSTRUCTION");
@@ -467,6 +468,9 @@ public interface M68kTypes {
       }
       else if (type == BGE_INSTRUCTION) {
         return new M68kBgeInstructionImpl(node);
+      }
+      else if (type == BGND_INSTRUCTION) {
+        return new M68kBgndInstructionImpl(node);
       }
       else if (type == BGT_INSTRUCTION) {
         return new M68kBgtInstructionImpl(node);

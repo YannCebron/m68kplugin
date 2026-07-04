@@ -200,7 +200,7 @@ public final class M68kMnemonicRegistry {
   }
 
   private M68kMnemonicRegistry() {
-// Total mnemonics: 252
+// Total mnemonics: 253
 
 // ABCD ------------------------------------------------------------------------
 
@@ -608,6 +608,12 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BTST).dataSizes(GROUP_B)
       .first(QUICK_IMMEDIATE).second(MEMORY_WITHOUT_IMMEDIATE)
+      .build();
+
+// BGND ------------------------------------------------------------------------
+
+    create(M68kTokenTypes.BGND)
+      .cpus(GROUP_CPU32)
       .build();
 
 // BKPT ------------------------------------------------------------------------

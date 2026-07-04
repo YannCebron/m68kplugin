@@ -226,6 +226,10 @@ public class M68kVisitor extends PsiElementVisitor {
     visitBccInstructionBase(o);
   }
 
+  public void visitBgndInstruction(@NotNull M68kBgndInstruction o) {
+    visitInstruction(o);
+  }
+
   public void visitBgtInstruction(@NotNull M68kBgtInstruction o) {
     visitBccInstructionBase(o);
   }

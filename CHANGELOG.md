@@ -15,6 +15,8 @@
   - add _Macros | Macro label_ for `MACRO` name label
 - M68k Browser: add _Navigate | Select In..._ to open the current editor element (instruction, directive, register) in browser
 - M68k Browser: add keyboard shortcuts for toggling current pane settings
+- CPU32 support:
+  - `BGND`
 
 ### Fixed
 - M68k Browser "Amiga Hardware" tab: CIA registers change the link to reference docs to working one

@@ -51,6 +51,7 @@ public abstract class M68kTokenTypes {
   public static final IElementType BCS = new M68kTokenType("bcs");
   public static final IElementType BEQ = new M68kTokenType("beq");
   public static final IElementType BGE = new M68kTokenType("bge");
+  public static final IElementType BGND = new M68kTokenType("bgnd");
   public static final IElementType BGT = new M68kTokenType("bgt");
   public static final IElementType BHI = new M68kTokenType("bhi");
   public static final IElementType BHS = new M68kTokenType("bhs");

@@ -837,12 +837,14 @@ public class M68kParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // m68000_instructions |
+  //                          cpu32_instructions |
   //                          directives |
   //                          conditional_assembly_directives
   static boolean instructions(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "instructions")) return false;
     boolean r;
     r = M68kMnemonicsParser.m68000_instructions(b, l + 1);
+    if (!r) r = M68kMnemonicsParser.cpu32_instructions(b, l + 1);
     if (!r) r = M68kDirectivesParser.directives(b, l + 1);
     if (!r) r = M68kConditionalAssemblyParser.conditional_assembly_directives(b, l + 1);
     return r;

@@ -5,6 +5,7 @@ addx
 basereg
 bchg
 bclr
+bgnd
 bkpt
 bset
 btst
