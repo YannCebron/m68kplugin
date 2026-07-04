@@ -69,6 +69,7 @@ public enum M68kCpu {
     return cpuCode;
   }
 
+  public static final Set<M68kCpu> GROUP_CPU32 = EnumSet.of(CPU32);
   public static final Set<M68kCpu> GROUP_APOLLO = EnumSet.of(AC_68080);
 
   public static final Set<M68kCpu> GROUP_FLOAT = EnumSet.of(M_68881, M_68040, M_68060, AC_68080);

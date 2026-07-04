@@ -105,7 +105,7 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
       final Collection<M68kMnemonic> all = instance.findAll(type);
       final M68kMnemonic mnemonic = ContainerUtil.getFirstItem(all);
 
-      if (!isShowMc68010.get() && !mnemonic.cpus().contains(M68kCpu.M_68000)) {
+      if (!isShowMc68010.get() && mnemonic.cpus().equals(M68kCpu.GROUP_68010_UP)) {
         continue;
       }
 
@@ -148,7 +148,7 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
       protected void customizeCellRenderer(@NotNull JList<? extends M68kMnemonic> list, M68kMnemonic value, int index, boolean selected, boolean hasFocus) {
         append(getListItemNamer().convert(value));
 
-        if (isShowMc68010.get() && !value.cpus().contains(M68kCpu.M_68000)) {
+        if (isShowMc68010.get() && value.cpus().equals(M68kCpu.GROUP_68010_UP)) {
           append(" (" + M68kCpu.M_68010.getCpuName() + ")", SimpleTextAttributes.GRAY_ATTRIBUTES);
         }
 
