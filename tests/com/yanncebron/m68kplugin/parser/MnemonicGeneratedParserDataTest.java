@@ -88,7 +88,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 //    for (IElementType instructionType : TokenSet.create(M68kTokenTypes.ABCD).getTypes()) {
 
       Collection<M68kMnemonic> allMnemonics = M68kMnemonicRegistry.getInstance().findAll(instructionType);
-      assertNotEmpty(allMnemonics);
+      assertFalse("no mnemonics for "+ instructionType, allMnemonics.isEmpty());
 
       boolean hasFirstOperand = ContainerUtil.exists(allMnemonics, M68kMnemonic::hasFirstOperand);
       boolean hasSecondOperand = ContainerUtil.exists(allMnemonics, M68kMnemonic::hasSecondOperand);
