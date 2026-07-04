@@ -130,7 +130,8 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
   protected @NotNull String getDocFor(@NotNull M68kMnemonic mnemonic) {
     Predicate<M68kMnemonic> predicate = Predicates.alwaysTrue();
     if (!isShowMc68020Variants.get()) {
-      predicate = M68kMnemonicPredicates.forCpuGroup(M68kCpu.GROUP_68020_UP).negate();
+      predicate = M68kMnemonicPredicates.forCpuGroup(M68kCpu.GROUP_68020_UP).negate()
+        .and(M68kMnemonicPredicates.forCpuGroup(M68kCpu.GROUP_68020_UP_WITH_CPU32).negate());
     }
 
     final String mnemonicDoc = M68kInstructionDocsUtil.getMnemonicDoc(mnemonic, false, predicate);

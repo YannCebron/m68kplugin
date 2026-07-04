@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,6 +36,10 @@ final class M68kDocsGeneratorUtil {
     }
     if (cpus == M68kCpu.GROUP_68020_UP) {
       sb.append(M68kBundle.message("cpu.group.GROUP_68020_UP"));
+      return;
+    }
+    if (cpus == M68kCpu.GROUP_68020_UP_WITH_CPU32) {
+      sb.append(M68kBundle.message("cpu.group.GROUP_68020_UP_WITH_CPU32"));
       return;
     }
 

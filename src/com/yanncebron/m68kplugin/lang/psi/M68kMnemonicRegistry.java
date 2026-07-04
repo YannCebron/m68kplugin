@@ -29,8 +29,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import static com.yanncebron.m68kplugin.lang.psi.M68kCpu.GROUP_68010_UP;
-import static com.yanncebron.m68kplugin.lang.psi.M68kCpu.GROUP_68020_UP;
+import static com.yanncebron.m68kplugin.lang.psi.M68kCpu.*;
 import static com.yanncebron.m68kplugin.lang.psi.M68kDataSize.*;
 import static com.yanncebron.m68kplugin.lang.psi.M68kOperand.*;
 
@@ -349,7 +348,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BHS).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BLO -------------------------------------------------------------------------
@@ -360,7 +359,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BLO).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BHI -------------------------------------------------------------------------
@@ -371,7 +370,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BHI).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BLS -------------------------------------------------------------------------
@@ -382,7 +381,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BLS).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BCC -------------------------------------------------------------------------
@@ -393,7 +392,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BCC).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BCS -------------------------------------------------------------------------
@@ -404,7 +403,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BCS).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BNE -------------------------------------------------------------------------
@@ -415,7 +414,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BNE).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BEQ -------------------------------------------------------------------------
@@ -426,7 +425,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BEQ).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BVC -------------------------------------------------------------------------
@@ -437,7 +436,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BVC).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BVS -------------------------------------------------------------------------
@@ -448,7 +447,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BVS).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BPL -------------------------------------------------------------------------
@@ -459,7 +458,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BPL).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BMI -------------------------------------------------------------------------
@@ -470,7 +469,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BMI).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BGE -------------------------------------------------------------------------
@@ -481,7 +480,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BGE).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BLT -------------------------------------------------------------------------
@@ -492,7 +491,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BLT).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BGT -------------------------------------------------------------------------
@@ -503,7 +502,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BGT).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BLE -------------------------------------------------------------------------
@@ -514,7 +513,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BLE).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BRA -------------------------------------------------------------------------
@@ -525,7 +524,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BRA).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BSR -------------------------------------------------------------------------
@@ -536,7 +535,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BSR).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BCHG ------------------------------------------------------------------------
@@ -655,7 +654,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.CMP).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(DATA_WITHOUT_IMMEDIATE)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
     create(M68kTokenTypes.CMP).dataSizes(GROUP_BWL)
@@ -676,7 +675,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.CMPI).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(DATA_WITHOUT_IMMEDIATE)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // CMPM ------------------------------------------------------------------------
@@ -807,12 +806,12 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.DIVS).dataSizes(GROUP_L)
       .first(DATA).second(DATA_REGISTER)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
     create(M68kTokenTypes.DIVS).dataSizes(GROUP_L)
       .first(DATA).second(DOUBLE_DATA_REGISTER)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // DIVU ------------------------------------------------------------------------
@@ -823,12 +822,12 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.DIVU).dataSizes(GROUP_L)
       .first(DATA).second(DATA_REGISTER)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
     create(M68kTokenTypes.DIVU).dataSizes(GROUP_L)
       .first(DATA).second(DOUBLE_DATA_REGISTER)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // EOR -------------------------------------------------------------------------
@@ -920,7 +919,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.LINK).dataSizes(GROUP_L)
       .first(ADDRESS_REGISTER).second(IMMEDIATE)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // LSL -------------------------------------------------------------------------
@@ -1096,12 +1095,12 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.MULS).dataSizes(GROUP_L)
       .first(DATA).second(DATA_REGISTER)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
     create(M68kTokenTypes.MULS).dataSizes(GROUP_L)
       .first(DATA).second(DOUBLE_DATA_REGISTER)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // MULU ------------------------------------------------------------------------
@@ -1112,12 +1111,12 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.MULU).dataSizes(GROUP_L)
       .first(DATA).second(DATA_REGISTER)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
     create(M68kTokenTypes.MULU).dataSizes(GROUP_L)
       .first(DATA).second(DOUBLE_DATA_REGISTER)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // NBCD ------------------------------------------------------------------------
@@ -1504,12 +1503,12 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.TST).dataSizes(GROUP_BWL)
       .first(DATA)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
     create(M68kTokenTypes.TST).dataSizes(GROUP_WL)
       .first(ADDRESS_REGISTER)
-      .cpus(GROUP_68020_UP)
+      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // UNLK ------------------------------------------------------------------------

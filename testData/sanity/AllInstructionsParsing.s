@@ -1,4 +1,3 @@
-
 * M68kMnemonic{abcd, firstOp=DATA_REGISTER, secondOp=DATA_REGISTER, [BYTE], MC68000 Family}
          abcd        d0,d0
          abcd.b      d0,d0
@@ -719,7 +718,7 @@ label00: bcc         label00
          bcc.b       label00
          bcc.w       label00
 
-* M68kMnemonic{bcc, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bcc, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+/CPU32}
 label01: bcc         label01
          bcc.s       label01
          bcc.b       label01
@@ -845,7 +844,7 @@ label02: bcs         label02
          bcs.b       label02
          bcs.w       label02
 
-* M68kMnemonic{bcs, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bcs, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+/CPU32}
 label03: bcs         label03
          bcs.s       label03
          bcs.b       label03
@@ -861,7 +860,7 @@ label04: beq         label04
          beq.b       label04
          beq.w       label04
 
-* M68kMnemonic{beq, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{beq, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+/CPU32}
 label05: beq         label05
          beq.s       label05
          beq.b       label05
@@ -877,7 +876,7 @@ label06: bge         label06
          bge.b       label06
          bge.w       label06
 
-* M68kMnemonic{bge, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bge, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+/CPU32}
 label07: bge         label07
          bge.s       label07
          bge.b       label07
@@ -893,7 +892,7 @@ label08: bgt         label08
          bgt.b       label08
          bgt.w       label08
 
-* M68kMnemonic{bgt, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bgt, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+/CPU32}
 label09: bgt         label09
          bgt.s       label09
          bgt.b       label09
@@ -909,7 +908,7 @@ label10: bhi         label10
          bhi.b       label10
          bhi.w       label10
 
-* M68kMnemonic{bhi, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bhi, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+/CPU32}
 label11: bhi         label11
          bhi.s       label11
          bhi.b       label11
@@ -925,7 +924,7 @@ label12: bhs         label12
          bhs.b       label12
          bhs.w       label12
 
-* M68kMnemonic{bhs, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bhs, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+/CPU32}
 label13: bhs         label13
          bhs.s       label13
          bhs.b       label13
@@ -947,7 +946,7 @@ label14: ble         label14
          ble.b       label14
          ble.w       label14
 
-* M68kMnemonic{ble, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{ble, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+/CPU32}
 label15: ble         label15
          ble.s       label15
          ble.b       label15
@@ -963,7 +962,7 @@ label16: blo         label16
          blo.b       label16
          blo.w       label16
 
-* M68kMnemonic{blo, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{blo, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+/CPU32}
 label17: blo         label17
          blo.s       label17
          blo.b       label17
@@ -979,7 +978,7 @@ label18: bls         label18
          bls.b       label18
          bls.w       label18
 
-* M68kMnemonic{bls, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bls, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+/CPU32}
 label19: bls         label19
          bls.s       label19
          bls.b       label19
@@ -995,7 +994,7 @@ label20: blt         label20
          blt.b       label20
          blt.w       label20
 
-* M68kMnemonic{blt, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{blt, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+/CPU32}
 label21: blt         label21
          blt.s       label21
          blt.b       label21
@@ -1011,7 +1010,7 @@ label22: bmi         label22
          bmi.b       label22
          bmi.w       label22
 
-* M68kMnemonic{bmi, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bmi, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+/CPU32}
 label23: bmi         label23
          bmi.s       label23
          bmi.b       label23
@@ -1027,7 +1026,7 @@ label24: bne         label24
          bne.b       label24
          bne.w       label24
 
-* M68kMnemonic{bne, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bne, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+/CPU32}
 label25: bne         label25
          bne.s       label25
          bne.b       label25
@@ -1043,7 +1042,7 @@ label26: bpl         label26
          bpl.b       label26
          bpl.w       label26
 
-* M68kMnemonic{bpl, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bpl, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+/CPU32}
 label27: bpl         label27
          bpl.s       label27
          bpl.b       label27
@@ -1059,7 +1058,7 @@ label28: bra         label28
          bra.b       label28
          bra.w       label28
 
-* M68kMnemonic{bra, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bra, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+/CPU32}
 label29: bra         label29
          bra.s       label29
          bra.b       label29
@@ -1130,7 +1129,7 @@ label30: bsr         label30
          bsr.b       label30
          bsr.w       label30
 
-* M68kMnemonic{bsr, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bsr, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+/CPU32}
 label31: bsr         label31
          bsr.s       label31
          bsr.b       label31
@@ -1223,7 +1222,7 @@ label32: bvc         label32
          bvc.b       label32
          bvc.w       label32
 
-* M68kMnemonic{bvc, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bvc, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+/CPU32}
 label33: bvc         label33
          bvc.s       label33
          bvc.b       label33
@@ -1239,7 +1238,7 @@ label34: bvs         label34
          bvs.b       label34
          bvs.w       label34
 
-* M68kMnemonic{bvs, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{bvs, firstOp=BRANCH_DESTINATION, secondOp=NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68020+/CPU32}
 label35: bvs         label35
          bvs.s       label35
          bvs.b       label35
@@ -1529,7 +1528,7 @@ label35: bvs         label35
          cmp.w       #42.L,$4000.L
          cmp.l       #42.L,$4000.L
 
-* M68kMnemonic{cmp, firstOp=IMMEDIATE, secondOp=DATA_WITHOUT_IMMEDIATE, [BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{cmp, firstOp=IMMEDIATE, secondOp=DATA_WITHOUT_IMMEDIATE, [BYTE, WORD, LONGWORD], MC68020+/CPU32}
          cmp         #42.L,(PC)
          cmp.b       #42.L,(PC)
          cmp.w       #42.L,(PC)
@@ -1665,7 +1664,7 @@ label35: bvs         label35
          cmpi.w      #42.L,$4000.L
          cmpi.l      #42.L,$4000.L
 
-* M68kMnemonic{cmpi, firstOp=IMMEDIATE, secondOp=DATA_WITHOUT_IMMEDIATE, [BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{cmpi, firstOp=IMMEDIATE, secondOp=DATA_WITHOUT_IMMEDIATE, [BYTE, WORD, LONGWORD], MC68020+/CPU32}
          cmpi        #42.L,(PC)
          cmpi.b      #42.L,(PC)
          cmpi.w      #42.L,(PC)
@@ -1868,7 +1867,7 @@ label35: bvs         label35
          divs        (66,PC,a0),d0
          divs.w      (66,PC,a0),d0
 
-* M68kMnemonic{divs, firstOp=DATA, secondOp=DATA_REGISTER, [LONGWORD], MC68020+}
+* M68kMnemonic{divs, firstOp=DATA, secondOp=DATA_REGISTER, [LONGWORD], MC68020+/CPU32}
          divs.l      d0,d0
          divs.l      #42.L,d0
          divs.l      (a0),d0
@@ -1887,7 +1886,7 @@ label35: bvs         label35
          divs.l      66(PC,d0),d0
          divs.l      (66,PC,a0),d0
 
-* M68kMnemonic{divs, firstOp=DATA, secondOp=DOUBLE_DATA_REGISTER, [LONGWORD], MC68020+}
+* M68kMnemonic{divs, firstOp=DATA, secondOp=DOUBLE_DATA_REGISTER, [LONGWORD], MC68020+/CPU32}
          divs        d0,d0:d1
          divs.l      d0,d0:d1
          divs        #42.L,d0:d1
@@ -1962,7 +1961,7 @@ label35: bvs         label35
          divu        (66,PC,a0),d0
          divu.w      (66,PC,a0),d0
 
-* M68kMnemonic{divu, firstOp=DATA, secondOp=DATA_REGISTER, [LONGWORD], MC68020+}
+* M68kMnemonic{divu, firstOp=DATA, secondOp=DATA_REGISTER, [LONGWORD], MC68020+/CPU32}
          divu.l      d0,d0
          divu.l      #42.L,d0
          divu.l      (a0),d0
@@ -1981,7 +1980,7 @@ label35: bvs         label35
          divu.l      66(PC,d0),d0
          divu.l      (66,PC,a0),d0
 
-* M68kMnemonic{divu, firstOp=DATA, secondOp=DOUBLE_DATA_REGISTER, [LONGWORD], MC68020+}
+* M68kMnemonic{divu, firstOp=DATA, secondOp=DOUBLE_DATA_REGISTER, [LONGWORD], MC68020+/CPU32}
          divu        d0,d0:d1
          divu.l      d0,d0:d1
          divu        #42.L,d0:d1
@@ -2284,7 +2283,7 @@ label35: bvs         label35
          link        a0,#42.L
          link.w      a0,#42.L
 
-* M68kMnemonic{link, firstOp=ADDRESS_REGISTER, secondOp=IMMEDIATE, [LONGWORD], MC68020+}
+* M68kMnemonic{link, firstOp=ADDRESS_REGISTER, secondOp=IMMEDIATE, [LONGWORD], MC68020+/CPU32}
          link.l      a0,#42.L
 
 
@@ -4674,7 +4673,7 @@ label35: bvs         label35
          muls        (66,PC,a0),d0
          muls.w      (66,PC,a0),d0
 
-* M68kMnemonic{muls, firstOp=DATA, secondOp=DATA_REGISTER, [LONGWORD], MC68020+}
+* M68kMnemonic{muls, firstOp=DATA, secondOp=DATA_REGISTER, [LONGWORD], MC68020+/CPU32}
          muls.l      d0,d0
          muls.l      #42.L,d0
          muls.l      (a0),d0
@@ -4693,7 +4692,7 @@ label35: bvs         label35
          muls.l      66(PC,d0),d0
          muls.l      (66,PC,a0),d0
 
-* M68kMnemonic{muls, firstOp=DATA, secondOp=DOUBLE_DATA_REGISTER, [LONGWORD], MC68020+}
+* M68kMnemonic{muls, firstOp=DATA, secondOp=DOUBLE_DATA_REGISTER, [LONGWORD], MC68020+/CPU32}
          muls        d0,d0:d1
          muls.l      d0,d0:d1
          muls        #42.L,d0:d1
@@ -4768,7 +4767,7 @@ label35: bvs         label35
          mulu        (66,PC,a0),d0
          mulu.w      (66,PC,a0),d0
 
-* M68kMnemonic{mulu, firstOp=DATA, secondOp=DATA_REGISTER, [LONGWORD], MC68020+}
+* M68kMnemonic{mulu, firstOp=DATA, secondOp=DATA_REGISTER, [LONGWORD], MC68020+/CPU32}
          mulu.l      d0,d0
          mulu.l      #42.L,d0
          mulu.l      (a0),d0
@@ -4787,7 +4786,7 @@ label35: bvs         label35
          mulu.l      66(PC,d0),d0
          mulu.l      (66,PC,a0),d0
 
-* M68kMnemonic{mulu, firstOp=DATA, secondOp=DOUBLE_DATA_REGISTER, [LONGWORD], MC68020+}
+* M68kMnemonic{mulu, firstOp=DATA, secondOp=DOUBLE_DATA_REGISTER, [LONGWORD], MC68020+/CPU32}
          mulu        d0,d0:d1
          mulu.l      d0,d0:d1
          mulu        #42.L,d0:d1
@@ -6451,7 +6450,7 @@ label35: bvs         label35
          tst.w       $4000.L
          tst.l       $4000.L
 
-* M68kMnemonic{tst, firstOp=DATA, secondOp=NONE, [BYTE, WORD, LONGWORD], MC68020+}
+* M68kMnemonic{tst, firstOp=DATA, secondOp=NONE, [BYTE, WORD, LONGWORD], MC68020+/CPU32}
          tst         #42.L
          tst.b       #42.L
          tst.w       #42.L
@@ -6477,7 +6476,7 @@ label35: bvs         label35
          tst.w       (66,PC,a0)
          tst.l       (66,PC,a0)
 
-* M68kMnemonic{tst, firstOp=ADDRESS_REGISTER, secondOp=NONE, [WORD, LONGWORD], MC68020+}
+* M68kMnemonic{tst, firstOp=ADDRESS_REGISTER, secondOp=NONE, [WORD, LONGWORD], MC68020+/CPU32}
          tst         a0
          tst.w       a0
          tst.l       a0

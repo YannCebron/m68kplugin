@@ -57,7 +57,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
    */
   private static final boolean SKIP_UNKNOWN_OPERANDS = false;
 
-  private static final Set<M68kCpu> SUPPORTED_CPUS = EnumSet.of(M68kCpu.M_68000, M68kCpu.M_68010, M68kCpu.M_68020);
+  private static final Set<M68kCpu> SUPPORTED_CPUS = EnumSet.of(M68kCpu.M_68000, M68kCpu.M_68010, M68kCpu.CPU32, M68kCpu.M_68020);
 
   private static final String VASM_OPCODES_H_PATH = "/Users/yann/idea-ultimate/vasm/cpus/m68k/opcodes.h";
   private static final String RUNTIME_DATA_PATH = "/Users/yann/idea-ultimate/m68kplugin/tests/com/yanncebron/m68kplugin/lang/psi/M68kMnemonicRegistryRuntimeData.txt";
@@ -355,7 +355,11 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       return "GROUP_68020_UP";
     }
 
-    return "EnumSet.of(" + StringUtil.join(cpus, m68kCpu -> "M68kCpu." + m68kCpu.name(), ",") + ")";
+    if (M68kCpu.GROUP_68020_UP_WITH_CPU32.equals(cpus)) {
+      return "GROUP_68020_UP_WITH_CPU32";
+    }
+
+    return "EnumSet.of(" + StringUtil.join(cpus, m68kCpu -> "M68kCpu." + m68kCpu.name(), ", ") + ")";
   }
 
 
@@ -381,7 +385,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     } else if (M68kDataSize.GROUP_L.equals(dataSizes)) {
       return "GROUP_L";
     }
-    return "EnumSet.of(" + StringUtil.join(dataSizes, dataSize -> "M68kDataSize." + dataSize.name(), ",") + ")";
+    return "EnumSet.of(" + StringUtil.join(dataSizes, dataSize -> "M68kDataSize." + dataSize.name(), ", ") + ")";
   }
 
   // cpus/m68k/operands.h
@@ -463,6 +467,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     entry("m68020up", M68kCpu.GROUP_68020_UP),
     entry("m68030up", M68kCpu.GROUP_68030_UP),
     entry("m68040up", M68kCpu.GROUP_68040_UP),
+
     entry("mfloat", M68kCpu.FLOAT),
     entry("apollo", M68kCpu.APOLLO),
 
@@ -470,7 +475,9 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     entry("m68020", EnumSet.of(M68kCpu.M_68020)),
     entry("m68030", EnumSet.of(M68kCpu.M_68030)),
     entry("m68040", EnumSet.of(M68kCpu.M_68040)),
-    entry("m68060", EnumSet.of(M68kCpu.M_68060))
+    entry("m68060", EnumSet.of(M68kCpu.M_68060)),
+
+    entry("cpu32", EnumSet.of(M68kCpu.CPU32))
   );
 
   @Nullable
@@ -480,8 +487,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       return m68kCpus;
     }
 
-    if (!"cpu32".equals(parseCpuText) &&
-      !"mgas".equals(parseCpuText) &&
+    if (!"mgas".equals(parseCpuText) &&
       !"malias".equals(parseCpuText) &&
       !"mbanked".equals(parseCpuText) &&
       !StringUtil.startsWith(parseCpuText, "mcf")) {

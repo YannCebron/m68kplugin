@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import java.util.EnumSet;
 import java.util.Set;
 
 /**
- * All known CPUs architectures.
+ * All known CPU models.
  * <p>
  * <em>NB</em> Not all are (or will be) supported.
  * </p>
@@ -40,7 +40,9 @@ public enum M68kCpu {
 
   M_68851("Motorola 68851", "MC68851", "851"),
 
-  AC_68080("Apollo Core 68080", "AC68080", "080");
+  AC_68080("Apollo Core 68080", "AC68080", "080"),
+
+  CPU32("Motorola CPU32", "CPU32", "CPU32");
 
   private final String displayName;
   private final String cpuName;
@@ -67,15 +69,15 @@ public enum M68kCpu {
     return cpuCode;
   }
 
-  public static final Set<M68kCpu> MOTOROLA = EnumSet.of(M_68000, M_68010, M_68020, M_68030, M_68040, M_68060);
   public static final Set<M68kCpu> APOLLO = EnumSet.of(AC_68080);
 
   public static final Set<M68kCpu> FLOAT = EnumSet.of(M_68881, M_68040, M_68060, AC_68080);
   public static final Set<M68kCpu> MMU = EnumSet.of(M_68851, M_68030, M_68040, M_68060);
 
-  public static final Set<M68kCpu> GROUP_68000_UP = EnumSet.of(M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080);
-  public static final Set<M68kCpu> GROUP_68010_UP = EnumSet.of(M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080);
+  public static final Set<M68kCpu> GROUP_68000_UP = EnumSet.of(CPU32, M_68000, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080);
+  public static final Set<M68kCpu> GROUP_68010_UP = EnumSet.of(CPU32, M_68010, M_68020, M_68030, M_68040, M_68060, AC_68080);
   public static final Set<M68kCpu> GROUP_68020_UP = EnumSet.of(M_68020, M_68030, M_68040, M_68060, AC_68080);
+  public static final Set<M68kCpu> GROUP_68020_UP_WITH_CPU32 = EnumSet.of(CPU32, M_68020, M_68030, M_68040, M_68060, AC_68080);
   public static final Set<M68kCpu> GROUP_68030_UP = EnumSet.of(M_68030, M_68040, M_68060, AC_68080);
   public static final Set<M68kCpu> GROUP_68040_UP = EnumSet.of(M_68040, M_68060, AC_68080);
 
