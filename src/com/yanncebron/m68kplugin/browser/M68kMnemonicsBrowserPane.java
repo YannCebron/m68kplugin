@@ -47,6 +47,7 @@ import java.util.function.Predicate;
 final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
 
   private Ref<Boolean> isShowMc68010;
+  private Ref<Boolean> isShowCpu32;
 
   private Ref<Boolean> isShowMc68020Variants;
 
@@ -66,6 +67,17 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
         IconUtil.addText(AllIcons.Actions.PreviewDetails, M68kCpu.M_68010.getCpuCode()),
         isShowMc68010,
         "M68kMnemonicsPanel.show.mc68010",
+        (anActionEvent, state) -> initList(),
+        null
+      ));
+
+    isShowCpu32 = Ref.create(Boolean.TRUE);
+    actionGroup.add(
+      createToggleAction(
+        M68kBundle.message("toolwindow.tab.mnemonic.include.cpu32.only.mnemonics"),
+        IconUtil.addText(AllIcons.Actions.PreviewDetails, M68kCpu.CPU32.getCpuCode()),
+        isShowCpu32,
+        "M68kMnemonicsPanel.show.cpu32",
         (anActionEvent, state) -> initList(),
         null
       ));
@@ -106,6 +118,9 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
       final M68kMnemonic mnemonic = ContainerUtil.getFirstItem(all);
 
       if (!isShowMc68010.get() && mnemonic.cpus().equals(M68kCpu.GROUP_68010_UP)) {
+        continue;
+      }
+      if (!isShowCpu32.get() && mnemonic.cpus().equals(M68kCpu.GROUP_CPU32)) {
         continue;
       }
 
@@ -150,6 +165,10 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
 
         if (isShowMc68010.get() && value.cpus().equals(M68kCpu.GROUP_68010_UP)) {
           append(" (" + M68kCpu.M_68010.getCpuName() + ")", SimpleTextAttributes.GRAY_ATTRIBUTES);
+        }
+
+        if (isShowCpu32.get() && value.cpus().equals(M68kCpu.GROUP_CPU32)) {
+          append(" (" + M68kCpu.CPU32.getCpuName() + ")", SimpleTextAttributes.GRAY_ATTRIBUTES);
         }
 
         if (M68kMnemonicPredicates.privilegedAny().test(value)) {

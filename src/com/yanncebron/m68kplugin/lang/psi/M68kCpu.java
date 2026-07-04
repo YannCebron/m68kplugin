@@ -42,7 +42,7 @@ public enum M68kCpu {
 
   AC_68080("Apollo Core 68080", "AC68080", "080"),
 
-  CPU32("Motorola CPU32", "CPU32", "CPU32");
+  CPU32("Motorola CPU32", "CPU32", "32");
 
   private final String displayName;
   private final String cpuName;
