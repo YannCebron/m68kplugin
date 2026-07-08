@@ -71,6 +71,11 @@ intellij {
     sandboxDir.set(rootDir.canonicalPath + "/.sandbox")
 }
 
+grammarKit {
+  jflexRelease.set("1.10.17")
+  grammarKitRelease.set("2023.3.3")
+}
+
 // Configure Gradle Changelog Plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
 changelog {
     version.set(properties("pluginVersion"))
