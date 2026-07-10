@@ -320,6 +320,8 @@ public abstract class M68kTokenTypes {
   public static final IElementType SVS = new M68kTokenType("svs");
   public static final IElementType SWAP = new M68kTokenType("swap");
   public static final IElementType TAS = new M68kTokenType("tas");
+  public static final IElementType TBLS = new M68kTokenType("tbls");
+  public static final IElementType TBLSN = new M68kTokenType("tblsn");
   public static final IElementType TEXT = new M68kTokenType("text");
   public static final IElementType TILDE = new M68kTokenType("~");
   public static final IElementType TRAP = new M68kTokenType("trap");

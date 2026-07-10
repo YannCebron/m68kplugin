@@ -36,4 +36,17 @@ public class Cpu32InstructionsParsingTest extends M68kParsingTestCase {
   public void testLpstopInstructionDataSizeWord() throws Exception {
     doCodeTest(" lpstop.w #22");
   }
+
+  public void testTblsInstruction() throws Exception {
+    doCodeTest(" tbls (a1),d0");
+  }
+
+  public void testTblsInstructionDataSizeDoubleDrd() throws Exception {
+    doCodeTest(" tbls.l d0:d1,d2");
+  }
+
+  public void testTblsnInstruction() throws Exception {
+    doCodeTest(" tblsn (a1),d0");
+  }
+
 }

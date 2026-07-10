@@ -57,6 +57,10 @@ public class M68KInstructionDocumentationTargetProviderTest extends BasePlatform
     doTestMappedReferenceDoc(M68kTokenTypes.BHS, "<h1>Bcc - Branch on condition cc</h1>");
   }
 
+  public void testTblsXInstructionReferenceDoc() {
+    doTestMappedReferenceDoc(M68kTokenTypes.TBLSN, "<h1>TBLS, TBLSN - Table Lookup and Interpolate (Signed)</h1>");
+  }
+
   public void testAllMnemonicsHaveReferenceDocs() {
     for (IElementType elementType : M68kTokenGroups.INSTRUCTIONS.getTypes()) {
       Set<String> externalNames = new HashSet<>();
@@ -116,7 +120,7 @@ public class M68KInstructionDocumentationTargetProviderTest extends BasePlatform
   private void doTestReferenceDoc(M68kMnemonic m68kMnemonic, String... docTextContains) {
     final String doc = M68kInstructionDocsUtil.getMnemonicReferenceDoc(m68kMnemonic);
     for (String contain : docTextContains) {
-      assertTrue(m68kMnemonic + ": " + doc, StringUtil.contains(doc, contain));
+      assertTrue(m68kMnemonic + ": missing '" + contain + "' in " + doc, StringUtil.contains(doc, contain));
     }
   }
 

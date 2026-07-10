@@ -1168,10 +1168,10 @@ roxr_instruction ::= ROXR shift_tail
 
 
 // CPU32 instructions  ===========================================================
-// todo parser generates nonsense line, remove manually
-// if (!nextTokenIs(b, "", BGND, LPSTOP)) return false;
 private cpu32_instructions ::= bgnd_instruction |
-                               lpstop_instruction
+                               lpstop_instruction |
+                               tbls_instruction |
+                               tblsn_instruction
 
 bgnd_instruction ::= BGND
 
@@ -1179,6 +1179,17 @@ lpstop_instruction ::= LPSTOP data_size_word? adm_imm
 {
   extends = data_sized
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kPrivilegedInstruction"
+}
+
+private tbl_x_tail ::= data_size_all? (adm_double_drd | operand_control) COMMA adm_drd
+
+tbls_instruction ::= TBLS tbl_x_tail
+{
+  extends = data_sized
+}
+tblsn_instruction ::= TBLSN tbl_x_tail
+{
+  extends = data_sized
 }
 
 // Directives  ===================================================================

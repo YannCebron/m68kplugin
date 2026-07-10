@@ -91,6 +91,8 @@ suba
 subi
 subq
 subx
+tbls
+tblsn
 trapv
 unlk
 unsized

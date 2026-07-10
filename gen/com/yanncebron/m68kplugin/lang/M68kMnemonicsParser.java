@@ -1447,13 +1447,16 @@ public class M68kMnemonicsParser {
 
   /* ********************************************************** */
   // bgnd_instruction |
-  //                                lpstop_instruction
+  //                                lpstop_instruction |
+  //                                tbls_instruction |
+  //                                tblsn_instruction
   static boolean cpu32_instructions(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cpu32_instructions")) return false;
-    // if (!nextTokenIs(b, "", BGND, LPSTOP)) return false; // todo remove manually
     boolean r;
     r = bgnd_instruction(b, l + 1);
     if (!r) r = lpstop_instruction(b, l + 1);
+    if (!r) r = tbls_instruction(b, l + 1);
+    if (!r) r = tblsn_instruction(b, l + 1);
     return r;
   }
 
@@ -3806,6 +3809,64 @@ public class M68kMnemonicsParser {
     if (!recursion_guard_(b, l, "tas_instruction_1")) return false;
     data_size_byte(b, l + 1);
     return true;
+  }
+
+  /* ********************************************************** */
+  // data_size_all? (adm_double_drd | operand_control) COMMA adm_drd
+  static boolean tbl_x_tail(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tbl_x_tail")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = tbl_x_tail_0(b, l + 1);
+    r = r && tbl_x_tail_1(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && adm_drd(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // data_size_all?
+  private static boolean tbl_x_tail_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tbl_x_tail_0")) return false;
+    data_size_all(b, l + 1);
+    return true;
+  }
+
+  // adm_double_drd | operand_control
+  private static boolean tbl_x_tail_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tbl_x_tail_1")) return false;
+    boolean r;
+    r = adm_double_drd(b, l + 1);
+    if (!r) r = operand_control(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // TBLS tbl_x_tail
+  public static boolean tbls_instruction(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tbls_instruction")) return false;
+    if (!nextTokenIs(b, "<instruction>", TBLS)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, TBLS_INSTRUCTION, "<instruction>");
+    r = consumeToken(b, TBLS);
+    p = r; // pin = 1
+    r = r && tbl_x_tail(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // TBLSN tbl_x_tail
+  public static boolean tblsn_instruction(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tblsn_instruction")) return false;
+    if (!nextTokenIs(b, "<instruction>", TBLSN)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, TBLSN_INSTRUCTION, "<instruction>");
+    r = consumeToken(b, TBLSN);
+    p = r; // pin = 1
+    r = r && tbl_x_tail(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */

@@ -433,8 +433,10 @@ Z=[zZ]
   {R}{O}{X}{L} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return ROXL; }
   {R}{O}{X}{R} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return ROXR; }
 
-  {B}{G}{N}{D}                 { yybegin(AFTER_OPERAND); return BGND; }
+  {B}{G}{N}{D}                       { yybegin(AFTER_OPERAND); return BGND; }
   {L}{P}{S}{T}{O}{P} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return LPSTOP; }
+  {T}{B}{L}{S} / {DATA_SIZE}?        { yybegin(AFTER_INSTRUCTION); return TBLS; }
+  {T}{B}{L}{S}{N} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return TBLSN; }
 
   {A}{D}{D}{W}{A}{T}{C}{H}     { yybegin(IN_OPERAND); return ADDWATCH; }
   {A}{L}{I}{G}{N}              { yybegin(IN_OPERAND); return ALIGN; }

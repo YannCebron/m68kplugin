@@ -45,7 +45,9 @@ public final class M68kInstructionDocsUtil {
     "lsl_lsr", TokenSet.create(M68kTokenTypes.LSL, M68kTokenTypes.LSR),
     "rol_ror", TokenSet.create(M68kTokenTypes.ROL, M68kTokenTypes.ROR),
     "roxl_roxr", TokenSet.create(M68kTokenTypes.ROXL, M68kTokenTypes.ROXR),
-    "scc", M68kTokenGroups.SCC_INSTRUCTIONS);
+    "scc", M68kTokenGroups.SCC_INSTRUCTIONS,
+    "tbls_tblsn", TokenSet.create(M68kTokenTypes.TBLS, M68kTokenTypes.TBLSN)
+  );
 
   @NotNull
   public static String getMnemonicDoc(M68kMnemonic m68kMnemonic, boolean highlightMatching, Predicate<M68kMnemonic> predicate) {

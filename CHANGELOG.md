@@ -19,6 +19,7 @@
 - CPU32 support:
   - `BGND`
   - `LPSTOP`
+  - `TBLS`/`TBLSN`
 
 ### Fixed
 - M68k Browser "Amiga Hardware" tab: CIA registers change the link to reference docs to working one

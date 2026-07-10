@@ -55,10 +55,10 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
 
     assertEquals(2, totalDeprecated);
 
-    assertEquals(236, totalNone);
+    assertEquals(240, totalNone);
     assertEquals(17, totalPrivileged);
     assertEquals(1, totalPrivileged68010Above);
-    assertEquals(254, totalNone + totalPrivileged + totalPrivileged68010Above);
+    assertEquals(258, totalNone + totalPrivileged + totalPrivileged68010Above);
 
     assertEquals(18, totalSpecialRegisterOperands);
   }
