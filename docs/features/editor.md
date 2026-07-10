@@ -24,6 +24,8 @@ Detailed on-the-fly semantic error highlighting for all instructions and directi
 
 ![Parser error](../assets/editor/parser_error.png)
 
+All currently supported instructions with all variants can be found [here](https://github.com/YannCebron/m68kplugin/blob/main/testData/sanity/AllInstructionsParsing.s).
+
 ### Method Separator
 
 For `macro`/`endm`, `section` and machine directives (`machine`, `mc68010` etc.) via the *Show method separators* option in *Settings \| Editor \| General \| Appearance*
