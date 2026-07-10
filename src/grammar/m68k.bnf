@@ -1171,7 +1171,9 @@ roxr_instruction ::= ROXR shift_tail
 private cpu32_instructions ::= bgnd_instruction |
                                lpstop_instruction |
                                tbls_instruction |
-                               tblsn_instruction
+                               tblsn_instruction |
+                               tblu_instruction |
+                               tblun_instruction
 
 bgnd_instruction ::= BGND
 
@@ -1188,6 +1190,15 @@ tbls_instruction ::= TBLS tbl_x_tail
   extends = data_sized
 }
 tblsn_instruction ::= TBLSN tbl_x_tail
+{
+  extends = data_sized
+}
+
+tblu_instruction ::= TBLU tbl_x_tail
+{
+  extends = data_sized
+}
+tblun_instruction ::= TBLUN tbl_x_tail
 {
   extends = data_sized
 }

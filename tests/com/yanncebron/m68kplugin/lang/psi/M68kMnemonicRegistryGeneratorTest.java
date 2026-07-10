@@ -160,10 +160,10 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       parsedMnemonics.add(m68kMnemonic);
     }
 
-    assertEquals("total parsed mnemonic count", 354, parsedMnemonics.size());
+    assertEquals("total parsed mnemonic count", 358, parsedMnemonics.size());
 
     List<M68kMnemonic> cleanupMnemonics = cleanupMnemonics(parsedMnemonics);
-    assertEquals("total cleanup mnemonic count", 314, cleanupMnemonics.size());
+    assertEquals("total cleanup mnemonic count", 318, cleanupMnemonics.size());
 
     dumpCode(cleanupMnemonics);
   }
@@ -292,7 +292,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
   private void dumpCode(List<M68kMnemonic> mnemonics) {
     int supportedMnemonics = ContainerUtil.filter(mnemonics, m68kMnemonic -> isSupportedCpu(m68kMnemonic.cpus())).size();
-    assertEquals("supported mnemonic count", 258, supportedMnemonics);
+    assertEquals("supported mnemonic count", 262, supportedMnemonics);
 
     printDivider();
 

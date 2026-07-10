@@ -1,0 +1,13 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kTbluInstructionImpl(TBLU_INSTRUCTION)
+    PsiElement(tblu)('tblu')
+    PsiWhiteSpace(' ')
+    M68kAdmAriImpl(ADM_ARI)
+      PsiElement(()('(')
+      M68kAdmArdImpl(ADM_ARD)
+        PsiElement(An)('a1')
+      PsiElement())(')')
+    PsiElement(,)(',')
+    M68kAdmDrdImpl(ADM_DRD)
+      PsiElement(Dn)('d0')

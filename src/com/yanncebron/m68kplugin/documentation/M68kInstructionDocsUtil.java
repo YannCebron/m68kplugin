@@ -32,21 +32,24 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import static java.util.Map.entry;
+
 public final class M68kInstructionDocsUtil {
 
   private static final String DOCS_MNEMONIC_ROOT = "/docs/mnemonic/";
 
-  private static final Map<String, TokenSet> MNEMONIC_MAP = Map.of(
-    "asl_asr", TokenSet.create(M68kTokenTypes.ASL, M68kTokenTypes.ASR),
-    "bcc", M68kTokenGroups.BCC_INSTRUCTIONS,
-    "dbcc", M68kTokenGroups.DBCC_INSTRUCTIONS,
-    "divs_divu", TokenSet.create(M68kTokenTypes.DIVS, M68kTokenTypes.DIVU),
-    "muls_mulu", TokenSet.create(M68kTokenTypes.MULS, M68kTokenTypes.MULU),
-    "lsl_lsr", TokenSet.create(M68kTokenTypes.LSL, M68kTokenTypes.LSR),
-    "rol_ror", TokenSet.create(M68kTokenTypes.ROL, M68kTokenTypes.ROR),
-    "roxl_roxr", TokenSet.create(M68kTokenTypes.ROXL, M68kTokenTypes.ROXR),
-    "scc", M68kTokenGroups.SCC_INSTRUCTIONS,
-    "tbls_tblsn", TokenSet.create(M68kTokenTypes.TBLS, M68kTokenTypes.TBLSN)
+  private static final Map<String, TokenSet> MNEMONIC_MAP = Map.ofEntries(
+    entry("asl_asr", TokenSet.create(M68kTokenTypes.ASL, M68kTokenTypes.ASR)),
+    entry("bcc", M68kTokenGroups.BCC_INSTRUCTIONS),
+    entry("dbcc", M68kTokenGroups.DBCC_INSTRUCTIONS),
+    entry("divs_divu", TokenSet.create(M68kTokenTypes.DIVS, M68kTokenTypes.DIVU)),
+    entry("muls_mulu", TokenSet.create(M68kTokenTypes.MULS, M68kTokenTypes.MULU)),
+    entry("lsl_lsr", TokenSet.create(M68kTokenTypes.LSL, M68kTokenTypes.LSR)),
+    entry("rol_ror", TokenSet.create(M68kTokenTypes.ROL, M68kTokenTypes.ROR)),
+    entry("roxl_roxr", TokenSet.create(M68kTokenTypes.ROXL, M68kTokenTypes.ROXR)),
+    entry("scc", M68kTokenGroups.SCC_INSTRUCTIONS),
+    entry("tbls_tblsn", TokenSet.create(M68kTokenTypes.TBLS, M68kTokenTypes.TBLSN)),
+    entry("tblu_tblun", TokenSet.create(M68kTokenTypes.TBLU, M68kTokenTypes.TBLUN))
   );
 
   @NotNull

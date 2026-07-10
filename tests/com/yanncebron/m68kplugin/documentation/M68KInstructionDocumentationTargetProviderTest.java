@@ -61,6 +61,10 @@ public class M68KInstructionDocumentationTargetProviderTest extends BasePlatform
     doTestMappedReferenceDoc(M68kTokenTypes.TBLSN, "<h1>TBLS, TBLSN - Table Lookup and Interpolate (Signed)</h1>");
   }
 
+  public void testTbluXInstructionReferenceDoc() {
+    doTestMappedReferenceDoc(M68kTokenTypes.TBLUN, "<h1>TBLU, TBLUN - Table Lookup and Interpolate (Unsigned)</h1>");
+  }
+
   public void testAllMnemonicsHaveReferenceDocs() {
     for (IElementType elementType : M68kTokenGroups.INSTRUCTIONS.getTypes()) {
       Set<String> externalNames = new HashSet<>();

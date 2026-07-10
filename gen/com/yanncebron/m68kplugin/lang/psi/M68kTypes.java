@@ -320,6 +320,8 @@ public interface M68kTypes {
   IElementType TAS_INSTRUCTION = new M68kCompositeElementType("TAS_INSTRUCTION");
   IElementType TBLSN_INSTRUCTION = new M68kCompositeElementType("TBLSN_INSTRUCTION");
   IElementType TBLS_INSTRUCTION = new M68kCompositeElementType("TBLS_INSTRUCTION");
+  IElementType TBLUN_INSTRUCTION = new M68kCompositeElementType("TBLUN_INSTRUCTION");
+  IElementType TBLU_INSTRUCTION = new M68kCompositeElementType("TBLU_INSTRUCTION");
   IElementType TEXT_DIRECTIVE = new M68kCompositeElementType("TEXT_DIRECTIVE");
   IElementType TRAPV_INSTRUCTION = new M68kCompositeElementType("TRAPV_INSTRUCTION");
   IElementType TRAP_INSTRUCTION = new M68kCompositeElementType("TRAP_INSTRUCTION");
@@ -1215,6 +1217,12 @@ public interface M68kTypes {
       }
       else if (type == TBLS_INSTRUCTION) {
         return new M68kTblsInstructionImpl(node);
+      }
+      else if (type == TBLUN_INSTRUCTION) {
+        return new M68kTblunInstructionImpl(node);
+      }
+      else if (type == TBLU_INSTRUCTION) {
+        return new M68kTbluInstructionImpl(node);
       }
       else if (type == TEXT_DIRECTIVE) {
         return new M68kTextDirectiveImpl(node);

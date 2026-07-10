@@ -93,6 +93,8 @@ subq
 subx
 tbls
 tblsn
+tblu
+tblun
 trapv
 unlk
 unsized

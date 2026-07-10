@@ -1449,7 +1449,9 @@ public class M68kMnemonicsParser {
   // bgnd_instruction |
   //                                lpstop_instruction |
   //                                tbls_instruction |
-  //                                tblsn_instruction
+  //                                tblsn_instruction |
+  //                                tblu_instruction |
+  //                                tblun_instruction
   static boolean cpu32_instructions(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cpu32_instructions")) return false;
     boolean r;
@@ -1457,6 +1459,8 @@ public class M68kMnemonicsParser {
     if (!r) r = lpstop_instruction(b, l + 1);
     if (!r) r = tbls_instruction(b, l + 1);
     if (!r) r = tblsn_instruction(b, l + 1);
+    if (!r) r = tblu_instruction(b, l + 1);
+    if (!r) r = tblun_instruction(b, l + 1);
     return r;
   }
 
@@ -3863,6 +3867,34 @@ public class M68kMnemonicsParser {
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, TBLSN_INSTRUCTION, "<instruction>");
     r = consumeToken(b, TBLSN);
+    p = r; // pin = 1
+    r = r && tbl_x_tail(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // TBLU tbl_x_tail
+  public static boolean tblu_instruction(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tblu_instruction")) return false;
+    if (!nextTokenIs(b, "<instruction>", TBLU)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, TBLU_INSTRUCTION, "<instruction>");
+    r = consumeToken(b, TBLU);
+    p = r; // pin = 1
+    r = r && tbl_x_tail(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // TBLUN tbl_x_tail
+  public static boolean tblun_instruction(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tblun_instruction")) return false;
+    if (!nextTokenIs(b, "<instruction>", TBLUN)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, TBLUN_INSTRUCTION, "<instruction>");
+    r = consumeToken(b, TBLUN);
     p = r; // pin = 1
     r = r && tbl_x_tail(b, l + 1);
     exit_section_(b, l, m, r, p, null);

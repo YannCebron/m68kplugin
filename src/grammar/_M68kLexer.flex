@@ -437,6 +437,8 @@ Z=[zZ]
   {L}{P}{S}{T}{O}{P} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return LPSTOP; }
   {T}{B}{L}{S} / {DATA_SIZE}?        { yybegin(AFTER_INSTRUCTION); return TBLS; }
   {T}{B}{L}{S}{N} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return TBLSN; }
+  {T}{B}{L}{U} / {DATA_SIZE}?        { yybegin(AFTER_INSTRUCTION); return TBLU; }
+  {T}{B}{L}{U}{N} / {DATA_SIZE}?     { yybegin(AFTER_INSTRUCTION); return TBLUN; }
 
   {A}{D}{D}{W}{A}{T}{C}{H}     { yybegin(IN_OPERAND); return ADDWATCH; }
   {A}{L}{I}{G}{N}              { yybegin(IN_OPERAND); return ALIGN; }

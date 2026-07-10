@@ -6531,6 +6531,132 @@ label35: bvs         label35
 
 ********************************************************************************
 
+* M68kMnemonic{tblu, firstOp=CONTROL, secondOp=DATA_REGISTER, [BYTE, WORD, LONGWORD], [CPU32]}
+         tblu        (a0),d0
+         tblu.b      (a0),d0
+         tblu.w      (a0),d0
+         tblu.l      (a0),d0
+         tblu        42(a0),d0
+         tblu.b      42(a0),d0
+         tblu.w      42(a0),d0
+         tblu.l      42(a0),d0
+         tblu        (-42,a0),d0
+         tblu.b      (-42,a0),d0
+         tblu.w      (-42,a0),d0
+         tblu.l      (-42,a0),d0
+         tblu        12(a0,d0),d0
+         tblu.b      12(a0,d0),d0
+         tblu.w      12(a0,d0),d0
+         tblu.l      12(a0,d0),d0
+         tblu        (12,a0,a0),d0
+         tblu.b      (12,a0,a0),d0
+         tblu.w      (12,a0,a0),d0
+         tblu.l      (12,a0,a0),d0
+         tblu        $4000,d0
+         tblu.b      $4000,d0
+         tblu.w      $4000,d0
+         tblu.l      $4000,d0
+         tblu        $4000.W,d0
+         tblu.b      $4000.W,d0
+         tblu.w      $4000.W,d0
+         tblu.l      $4000.W,d0
+         tblu        $4000.L,d0
+         tblu.b      $4000.L,d0
+         tblu.w      $4000.L,d0
+         tblu.l      $4000.L,d0
+         tblu        (PC),d0
+         tblu.b      (PC),d0
+         tblu.w      (PC),d0
+         tblu.l      (PC),d0
+         tblu        66(PC),d0
+         tblu.b      66(PC),d0
+         tblu.w      66(PC),d0
+         tblu.l      66(PC),d0
+         tblu        (-66,PC),d0
+         tblu.b      (-66,PC),d0
+         tblu.w      (-66,PC),d0
+         tblu.l      (-66,PC),d0
+         tblu        66(PC,d0),d0
+         tblu.b      66(PC,d0),d0
+         tblu.w      66(PC,d0),d0
+         tblu.l      66(PC,d0),d0
+         tblu        (66,PC,a0),d0
+         tblu.b      (66,PC,a0),d0
+         tblu.w      (66,PC,a0),d0
+         tblu.l      (66,PC,a0),d0
+
+* M68kMnemonic{tblu, firstOp=DOUBLE_DATA_REGISTER, secondOp=DATA_REGISTER, [BYTE, WORD, LONGWORD], [CPU32]}
+         tblu        d0:d1,d0
+         tblu.b      d0:d1,d0
+         tblu.w      d0:d1,d0
+         tblu.l      d0:d1,d0
+
+
+********************************************************************************
+
+* M68kMnemonic{tblun, firstOp=CONTROL, secondOp=DATA_REGISTER, [BYTE, WORD, LONGWORD], [CPU32]}
+         tblun       (a0),d0
+         tblun.b     (a0),d0
+         tblun.w     (a0),d0
+         tblun.l     (a0),d0
+         tblun       42(a0),d0
+         tblun.b     42(a0),d0
+         tblun.w     42(a0),d0
+         tblun.l     42(a0),d0
+         tblun       (-42,a0),d0
+         tblun.b     (-42,a0),d0
+         tblun.w     (-42,a0),d0
+         tblun.l     (-42,a0),d0
+         tblun       12(a0,d0),d0
+         tblun.b     12(a0,d0),d0
+         tblun.w     12(a0,d0),d0
+         tblun.l     12(a0,d0),d0
+         tblun       (12,a0,a0),d0
+         tblun.b     (12,a0,a0),d0
+         tblun.w     (12,a0,a0),d0
+         tblun.l     (12,a0,a0),d0
+         tblun       $4000,d0
+         tblun.b     $4000,d0
+         tblun.w     $4000,d0
+         tblun.l     $4000,d0
+         tblun       $4000.W,d0
+         tblun.b     $4000.W,d0
+         tblun.w     $4000.W,d0
+         tblun.l     $4000.W,d0
+         tblun       $4000.L,d0
+         tblun.b     $4000.L,d0
+         tblun.w     $4000.L,d0
+         tblun.l     $4000.L,d0
+         tblun       (PC),d0
+         tblun.b     (PC),d0
+         tblun.w     (PC),d0
+         tblun.l     (PC),d0
+         tblun       66(PC),d0
+         tblun.b     66(PC),d0
+         tblun.w     66(PC),d0
+         tblun.l     66(PC),d0
+         tblun       (-66,PC),d0
+         tblun.b     (-66,PC),d0
+         tblun.w     (-66,PC),d0
+         tblun.l     (-66,PC),d0
+         tblun       66(PC,d0),d0
+         tblun.b     66(PC,d0),d0
+         tblun.w     66(PC,d0),d0
+         tblun.l     66(PC,d0),d0
+         tblun       (66,PC,a0),d0
+         tblun.b     (66,PC,a0),d0
+         tblun.w     (66,PC,a0),d0
+         tblun.l     (66,PC,a0),d0
+
+* M68kMnemonic{tblun, firstOp=DOUBLE_DATA_REGISTER, secondOp=DATA_REGISTER, [BYTE, WORD, LONGWORD], [CPU32]}
+         tblun       d0:d1,d0
+         tblun.b     d0:d1,d0
+         tblun.w     d0:d1,d0
+         tblun.l     d0:d1,d0
+
+
+********************************************************************************
+
 * M68kMnemonic{trap, firstOp=QUICK_IMMEDIATE, secondOp=NONE, [UNSIZED], MC68000 Family}
          trap      #1
 
@@ -6625,6 +6751,6 @@ label35: bvs         label35
 
 * M68kMnemonic{unlk, firstOp=ADDRESS_REGISTER, secondOp=NONE, [UNSIZED], MC68000 Family}
          unlk      a0
-* Instructions count: 132
+* Instructions count: 134
 
-* 0/5719
+* 0/5831

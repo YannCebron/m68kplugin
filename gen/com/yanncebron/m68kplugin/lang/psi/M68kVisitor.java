@@ -1318,6 +1318,16 @@ public class M68kVisitor extends PsiElementVisitor {
     // visitInstruction(o);
   }
 
+  public void visitTbluInstruction(@NotNull M68kTbluInstruction o) {
+    visitDataSized(o);
+    // visitInstruction(o);
+  }
+
+  public void visitTblunInstruction(@NotNull M68kTblunInstruction o) {
+    visitDataSized(o);
+    // visitInstruction(o);
+  }
+
   public void visitTextDirective(@NotNull M68kTextDirective o) {
     visitDirective(o);
   }

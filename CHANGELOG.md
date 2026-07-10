@@ -20,6 +20,7 @@
   - `BGND`
   - `LPSTOP`
   - `TBLS`/`TBLSN`
+  - `TBLU`/`TBLUN`
 
 ### Fixed
 - M68k Browser "Amiga Hardware" tab: CIA registers change the link to reference docs to working one

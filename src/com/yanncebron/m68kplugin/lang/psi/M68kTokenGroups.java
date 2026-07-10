@@ -88,7 +88,9 @@ public final class M68kTokenGroups {
     BGND,
     LPSTOP,
     TBLS,
-    TBLSN
+    TBLSN,
+    TBLU,
+    TBLUN
   );
 
   public static final TokenSet INSTRUCTIONS = TokenSet.orSet(TokenSet.create(

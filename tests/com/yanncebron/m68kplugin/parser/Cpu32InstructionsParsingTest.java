@@ -49,4 +49,8 @@ public class Cpu32InstructionsParsingTest extends M68kParsingTestCase {
     doCodeTest(" tblsn (a1),d0");
   }
 
+  public void testTbluInstruction() throws Exception {
+    doCodeTest(" tblu (a1),d0");
+  }
+
 }

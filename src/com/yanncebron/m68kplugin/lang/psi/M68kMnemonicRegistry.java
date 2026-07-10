@@ -201,7 +201,7 @@ public final class M68kMnemonicRegistry {
   }
 
   private M68kMnemonicRegistry() {
-    // Total mnemonics: 258
+// Total mnemonics: 262
 
 // ABCD ------------------------------------------------------------------------
 
@@ -1519,6 +1519,30 @@ public final class M68kMnemonicRegistry {
       .build();
 
     create(M68kTokenTypes.TBLSN).dataSizes(GROUP_BWL)
+      .first(DOUBLE_DATA_REGISTER).second(DATA_REGISTER)
+      .cpus(GROUP_CPU32)
+      .build();
+
+// TBLU ------------------------------------------------------------------------
+
+    create(M68kTokenTypes.TBLU).dataSizes(GROUP_BWL)
+      .first(CONTROL).second(DATA_REGISTER)
+      .cpus(GROUP_CPU32)
+      .build();
+
+    create(M68kTokenTypes.TBLU).dataSizes(GROUP_BWL)
+      .first(DOUBLE_DATA_REGISTER).second(DATA_REGISTER)
+      .cpus(GROUP_CPU32)
+      .build();
+
+// TBLUN -----------------------------------------------------------------------
+
+    create(M68kTokenTypes.TBLUN).dataSizes(GROUP_BWL)
+      .first(CONTROL).second(DATA_REGISTER)
+      .cpus(GROUP_CPU32)
+      .build();
+
+    create(M68kTokenTypes.TBLUN).dataSizes(GROUP_BWL)
       .first(DOUBLE_DATA_REGISTER).second(DATA_REGISTER)
       .cpus(GROUP_CPU32)
       .build();
