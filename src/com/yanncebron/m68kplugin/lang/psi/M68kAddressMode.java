@@ -41,9 +41,9 @@ public enum M68kAddressMode {
   },
 
   /**
-   * DIV/MUL mnemonics, second operand (MC68020+), {@link M68kAdmDoubleDrd}
+   * MUL/DIV, TBLx (CPU32), {@link M68kAdmDoubleDrd}
    */
-  DOUBLE_DATA_REGISTER("Dr:Dq", M68kAdmDoubleDrd.class),
+  DOUBLE_DATA_REGISTER("Dx:Dy", M68kAdmDoubleDrd.class),
 
   /**
    * Ref 2.2.2, {@link M68kAdmArd}
