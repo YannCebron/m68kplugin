@@ -30,7 +30,7 @@ Support for other assemblers is not a priority in the nearest future.
 
 ### Unsupported CPUs
 
-Currently, only MC68000/MC68010 architecture is supported.
+Currently, only MC68000/MC68010 and CPU32 architecture is supported.
 For select mnemonics, some MC68020+ only variants are supported.
 
 Non-supported instructions/registers will yield false positive errors

@@ -12,7 +12,6 @@
 * MC68881 FPU
 * MC68851 MMU
 * Apollo Core AC68080
-* CPU32 (WIP)
 * ColdFire
 
 ## Highlighting
