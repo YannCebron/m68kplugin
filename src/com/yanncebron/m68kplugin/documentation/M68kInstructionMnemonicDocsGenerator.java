@@ -52,6 +52,10 @@ class M68kInstructionMnemonicDocsGenerator {
     instructionMnemonic = null;
   }
 
+  /**
+   * @param predicate to filter specific mnemonic variants
+   * @see M68kMnemonicPredicates
+   */
   String generateHtmlDoc(Predicate<M68kMnemonic> predicate) {
     sb = new StringBuilder();
 
