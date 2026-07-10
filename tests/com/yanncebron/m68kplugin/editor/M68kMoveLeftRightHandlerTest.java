@@ -54,13 +54,16 @@ public class M68kMoveLeftRightHandlerTest extends BasePlatformTestCase {
     doTestMoveLeft(" ifnc arg1,<caret>bpl", " ifnc <caret>bpl,arg1");
   }
 
-
   public void testBinaryExpression() {
     doTestMoveLeft(" dc 1+<caret>2", " dc <caret>2+1");
   }
 
   public void testAdmRegisterList() {
     doTestMoveLeft(" movem d0/<caret>d1/a0,-(a7)", " movem <caret>d1/d0/a0,-(a7)");
+  }
+
+  public void testAdmDoubleDrd() {
+    doTestMoveLeft(" tbls.l d0:<caret>d1,d2", " tbls.l <caret>d1:d0,d2");
   }
 
   public void testMacroCallDirective() {

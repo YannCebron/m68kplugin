@@ -21,6 +21,7 @@
   - `LPSTOP`
   - `TBLS`/`TBLSN`
   - `TBLU`/`TBLUN`
+- *Code \| Move Element Left/Right*: support double data register (e.g., `d0`/`d1` in `mulu.l (a0),d0:d1`)
 
 ### Fixed
 - M68k Browser "Amiga Hardware" tab: CIA registers change the link to reference docs to working one

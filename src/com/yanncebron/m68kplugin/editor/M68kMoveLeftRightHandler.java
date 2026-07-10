@@ -68,6 +68,10 @@ final class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
       return registerList.getRegisterRangeList().toArray(PsiElement.EMPTY_ARRAY);
     }
 
+    if (element instanceof M68kAdmDoubleDrd doubleDrd) {
+      return getElements(doubleDrd.getFirst(), doubleDrd.getSecond());
+    }
+
     if (element instanceof M68kMacroCallDirective directive) {
       return directive.getMacroCallParameterList().toArray(PsiElement.EMPTY_ARRAY);
     }
