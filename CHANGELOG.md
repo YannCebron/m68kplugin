@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Changed
+
 - Mnemonic (reference) docs: separate variants with `CCR`/`SR`/`USP` operands (e.g., `ANDI` vs. `ANDI to CCR` vs. `ANDI to SR`)
 - M68k Browser "Mnemonics" tab: 
   - add exclamation icon for privileged variants
@@ -11,11 +12,12 @@
 - _View | Quick Definition_ for (local) label: show up to five following statements; stop at the next (local) label
 
 ### Added
+
 - Editor Color Scheme settings: 
   - add _Labels | Symbol_ for label declarations for directives like `EQU`, `SET` etc.
   - add _Macros | Macro label_ for `MACRO` name label
-- M68k Browser: add _Navigate | Select In..._ to open the current editor element (instruction, directive, register) in browser
-- M68k Browser: add keyboard shortcuts for toggling current pane settings
+- M68k Browser: support _Navigate | Select In..._ to open the current editor element (instruction, directive, register) in browser
+- M68k Browser: add keyboard shortcuts for toggling current pane settings (see tooltips)
 - CPU32 support:
   - `BGND`
   - `LPSTOP`
@@ -24,6 +26,7 @@
 - *Code \| Move Element Left/Right*: support double data register (e.g., `d0`/`d1` in `mulu.l (a0),d0:d1`)
 
 ### Fixed
+
 - M68k Browser "Amiga Hardware" tab: CIA registers change the link to reference docs to working one
 
 ## 0.2.3 - 2026-05-28
