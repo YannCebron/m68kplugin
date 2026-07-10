@@ -122,6 +122,7 @@ Rename labels and macros using *Refactor \| Rename* across the whole project wit
   * instruction operands (if valid): `move.l d0,a0` &harr; `move.l a0,d0`
   * binary expressions: `2*size` &harr; `size*2`
   * register list elements (`movem`)
+  * double data register: `d0` & `d1` in `mulu.l (a0),d0:d1`
   * macro call parameters
   * `dc` and `dr` directive values
   * `printv`, `xdef`, `xref` directives
