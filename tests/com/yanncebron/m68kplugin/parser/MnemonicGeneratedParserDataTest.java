@@ -257,7 +257,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
       @Override
       public void visitMacroCallDirective(@NotNull M68kMacroCallDirective o) {
-        fail("unexpected macrocall '" + myFile.getText() + "'");
+        fail("unexpected macrocall, re-gen lexer?! '" + myFile.getText() + "'");
       }
     });
   }
