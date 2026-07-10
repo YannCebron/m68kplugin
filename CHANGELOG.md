@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.2.4 - 2026-07-10
+
 ### Changed
 
 - Mnemonic (reference) docs: separate variants with `CCR`/`SR`/`USP` operands (e.g., `ANDI` vs. `ANDI to CCR` vs. `ANDI to SR`)
