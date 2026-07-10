@@ -4,6 +4,8 @@ Thanks for your interest in contributing to this project!
 
 > All contributions must be made in accordance with [Apache 2 License](LICENCE) and [Code of Conduct](CODE_OF_CONDUCT.md).
 
+> Contributions made using any AI-based tooling are not welcome.
+
 ## Bugs and Feature Requests
 
 Use [GitHub issues](https://github.com/YannCebron/m68kplugin/issues) to report bugs, feature requests, or general ideas.
