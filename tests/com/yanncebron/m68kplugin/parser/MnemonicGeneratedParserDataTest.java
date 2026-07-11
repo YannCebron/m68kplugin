@@ -16,11 +16,9 @@
 
 package com.yanncebron.m68kplugin.parser;
 
-import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiErrorElement;
-import com.intellij.psi.PsiRecursiveElementVisitor;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ArrayUtil;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
@@ -39,7 +37,6 @@ import static java.util.Map.entry;
  */
 public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
-  // testData/sanity/AllInstructionsParsing.s
   private static final boolean DUMP = System.getenv(MnemonicGeneratedParserDataTest.class.getSimpleName()) != null;
 
   // do not generate exact same variants from previously tested mnemonic(s)
@@ -88,7 +85,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 //    for (IElementType instructionType : TokenSet.create(M68kTokenTypes.ABCD).getTypes()) {
 
       Collection<M68kMnemonic> allMnemonics = M68kMnemonicRegistry.getInstance().findAll(instructionType);
-      assertFalse("no mnemonics for "+ instructionType, allMnemonics.isEmpty());
+      assertFalse("no mnemonics for " + instructionType, allMnemonics.isEmpty());
 
       boolean hasFirstOperand = ContainerUtil.exists(allMnemonics, M68kMnemonic::hasFirstOperand);
       boolean hasSecondOperand = ContainerUtil.exists(allMnemonics, M68kMnemonic::hasSecondOperand);
@@ -103,14 +100,14 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
         String dataSizeText = dataSize == M68kDataSize.UNSIZED ? "" : dataSize.getText();
 
-        for (M68kAddressMode sourceAdm : M68kAddressMode.values()) {
-          for (M68kAddressMode destinationAdm : M68kAddressMode.values()) {
+        for (M68kAddressMode firstAddressMode : M68kAddressMode.values()) {
+          for (M68kAddressMode secondAddressMode : M68kAddressMode.values()) {
 
             boolean foundValid = false;
             for (M68kMnemonic known : allMnemonics) {
               if ((dataSize == M68kDataSize.UNSIZED || known.dataSizes().contains(dataSize)) &&
-                containsAddressMode(known.firstOperand(), sourceAdm) &&
-                (!known.hasSecondOperand() || containsAddressMode(known.secondOperand(), destinationAdm))) {
+                containsAddressMode(known.firstOperand(), firstAddressMode) &&
+                (!known.hasSecondOperand() || containsAddressMode(known.secondOperand(), secondAddressMode))) {
                 foundValid = true;
                 break;
               }
@@ -121,34 +118,26 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
             }
 
             // enough to test against first notation variant
-            String sourceText = ADDRESS_MODE_TEXT.get(sourceAdm).get(0);
+            String firstText = ADDRESS_MODE_TEXT.get(firstAddressMode).get(0);
             String variant;
             if (hasSecondOperand) {
-              String destinationText = ADDRESS_MODE_TEXT.get(destinationAdm).get(0);
-              variant = "  " + instructionType + dataSizeText + " " + sourceText + "," + destinationText;
+              String secondText = ADDRESS_MODE_TEXT.get(secondAddressMode).get(0);
+              variant = "  " + instructionType + dataSizeText + " " + firstText + "," + secondText;
             } else {
-              variant = "  " + instructionType + dataSizeText + " " + sourceText;
+              variant = "  " + instructionType + dataSizeText + " " + firstText;
             }
             if (!generatedVariants.add(variant)) {
               continue; // skip duplicates from unnecessary loop (hasDestinationOperand=false)
             }
 
-            String variantOutput = variant + StringUtil.repeat(" ", 30 - variant.length()) + " ; " + sourceAdm + (hasSecondOperand ? "," + destinationAdm : "") + " ";
+            String variantOutput = variant + StringUtil.repeat(" ", 30 - variant.length()) + " ; " + firstAddressMode + (hasSecondOperand ? "," + secondAddressMode : "") + " ";
             total++;
             myFile = createPsiFile("a", variant);
             M68kPsiElement m68kPsiElement = M68kPsiTreeUtil.getContainingInstructionOrDirective(myFile.findElementAt(3));
             ensureNoMacroCallElements();
             M68kInstruction m68kInstruction = assertInstanceOf(m68kPsiElement, M68kInstruction.class);
 
-            Ref<Boolean> foundAnyError = Ref.create(Boolean.FALSE);
-            myFile.accept(new PsiRecursiveElementVisitor() {
-              @Override
-              public void visitErrorElement(@NotNull PsiErrorElement element) {
-                foundAnyError.set(true);
-                super.visitErrorElement(element);
-              }
-            });
-            if (foundAnyError.get()) {
+            if (PsiTreeUtil.hasErrorElements(myFile)) {
               dump(variantOutput + "failed expectedly");
             } else {
               // check that adm's match if no parser error (IMMEDIATE vs QUICK_IMMEDIATE, LABEL vs ABSOLUTE etc.)
@@ -190,6 +179,8 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
    * <li>every variant returns entry via {@link M68kMnemonicRegistry#find}</li>
    * <li>privileged instructions implement {@link M68kPrivilegedInstruction}</li>
    * </ul>
+   * <p>
+   * Copy output to {@code testData/sanity/AllInstructionsParsing.s}.
    */
   public void testGenerateAndParseAllInstructions() {
     for (IElementType instructionsType : M68kTokenGroups.INSTRUCTIONS.getTypes()) {
