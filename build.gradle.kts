@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
+import org.jetbrains.intellij.platform.gradle.tasks.VerifyPluginTask.FailureLevel
 
 fun properties(key: String) = providers.gradleProperty(key).get()
 
@@ -70,6 +71,10 @@ tasks {
         sourceFile.set(file("src/grammar/_M68kLexer.flex"))
         skeleton.set(file("src/grammar/idea-flex.skeleton"))
         targetRootOutputDir.set(file("gen"))
+    }
+
+    verifyPlugin {
+        failureLevel.set(listOf(FailureLevel.COMPATIBILITY_PROBLEMS))
     }
 
 }
