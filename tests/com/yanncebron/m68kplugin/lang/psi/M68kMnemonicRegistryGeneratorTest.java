@@ -43,7 +43,7 @@ import static java.util.Map.entry;
  *   <li>Run {@link #testGenerateMnemonicRegistryData()} and copy generated source output</li>
  *   <li>Verify MnemonicGeneratedParserDataTest passes, dump</li>
  * </ol>
- * Last check: vasm 2.0e.
+ * Last check: vasm 2.0f.
  */
 @SuppressWarnings("SpellCheckingInspection")
 public class M68kMnemonicRegistryGeneratorTest extends TestCase {
@@ -69,7 +69,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     assertEquals("parsed runtime data count", 18, allRuntimeData.size());
 
     final List<String> lines = Files.readAllLines(Paths.get(VASM_OPCODES_H_PATH));
-    assertEquals("line count opcodes.h", 2914, lines.size());
+    assertEquals("line count opcodes.h", 2863, lines.size());
 
     printDivider();
 
@@ -160,10 +160,10 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       parsedMnemonics.add(m68kMnemonic);
     }
 
-    assertEquals("total parsed mnemonic count", 358, parsedMnemonics.size());
+    assertEquals("total parsed mnemonic count", 340, parsedMnemonics.size());
 
     List<M68kMnemonic> cleanupMnemonics = cleanupMnemonics(parsedMnemonics);
-    assertEquals("total cleanup mnemonic count", 318, cleanupMnemonics.size());
+    assertEquals("total cleanup mnemonic count", 300, cleanupMnemonics.size());
 
     dumpCode(cleanupMnemonics);
   }
@@ -292,7 +292,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
   private void dumpCode(List<M68kMnemonic> mnemonics) {
     int supportedMnemonics = ContainerUtil.filter(mnemonics, m68kMnemonic -> isSupportedCpu(m68kMnemonic.cpus())).size();
-    assertEquals("supported mnemonic count", 262, supportedMnemonics);
+    assertEquals("supported mnemonic count", 244, supportedMnemonics);
 
     printDivider();
 

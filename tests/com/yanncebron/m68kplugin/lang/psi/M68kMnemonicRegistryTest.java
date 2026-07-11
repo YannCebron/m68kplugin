@@ -55,10 +55,10 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
 
     assertEquals(2, totalDeprecated);
 
-    assertEquals(244, totalNone);
+    assertEquals(226, totalNone);
     assertEquals(17, totalPrivileged);
     assertEquals(1, totalPrivileged68010Above);
-    assertEquals(262, totalNone + totalPrivileged + totalPrivileged68010Above);
+    assertEquals(244, totalNone + totalPrivileged + totalPrivileged68010Above);
 
     assertEquals(18, totalSpecialRegisterOperands);
   }
@@ -93,18 +93,18 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
         M68kCpu.GROUP_68000_UP, M68kMnemonic.PrivilegedType.NONE, false));
   }
 
-  public void testBeq() {
-    doTestFind("beq label",
-      new M68kMnemonic(M68kTokenTypes.BEQ, M68kDataSize.GROUP_SBW,
-        M68kOperand.BRANCH_DESTINATION, M68kOperand.NONE,
+  public void testChk() {
+    doTestFind("chk d0,d0",
+      new M68kMnemonic(M68kTokenTypes.CHK, M68kDataSize.GROUP_W,
+        M68kOperand.DATA, M68kOperand.DATA_REGISTER,
         M68kCpu.GROUP_68000_UP, M68kMnemonic.PrivilegedType.NONE, false));
   }
 
-  public void testBeqDataSizeLong() {
-    doTestFind("beq.l label",
-      new M68kMnemonic(M68kTokenTypes.BEQ, M68kDataSize.GROUP_SBWL,
-        M68kOperand.BRANCH_DESTINATION, M68kOperand.NONE,
-        M68kCpu.GROUP_68020_UP_WITH_CPU32, M68kMnemonic.PrivilegedType.NONE, false));
+  public void testChkDataSizeLong() {
+    doTestFind("chk.l d0,d0",
+      new M68kMnemonic(M68kTokenTypes.CHK, M68kDataSize.GROUP_L,
+        M68kOperand.DATA, M68kOperand.DATA_REGISTER,
+        M68kCpu.GROUP_68020_UP, M68kMnemonic.PrivilegedType.NONE, false));
   }
 
   public void testRtd() {

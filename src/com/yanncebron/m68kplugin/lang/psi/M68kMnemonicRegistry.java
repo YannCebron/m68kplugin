@@ -201,7 +201,7 @@ public final class M68kMnemonicRegistry {
   }
 
   private M68kMnemonicRegistry() {
-// Total mnemonics: 262
+// Total mnemonics: 244
 
 // ABCD ------------------------------------------------------------------------
 
@@ -343,200 +343,110 @@ public final class M68kMnemonicRegistry {
 
 // BHS -------------------------------------------------------------------------
 
-    create(M68kTokenTypes.BHS).dataSizes(GROUP_SBW)
-      .first(BRANCH_DESTINATION)
-      .build();
-
     create(M68kTokenTypes.BHS).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BLO -------------------------------------------------------------------------
 
-    create(M68kTokenTypes.BLO).dataSizes(GROUP_SBW)
-      .first(BRANCH_DESTINATION)
-      .build();
-
     create(M68kTokenTypes.BLO).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BHI -------------------------------------------------------------------------
 
-    create(M68kTokenTypes.BHI).dataSizes(GROUP_SBW)
-      .first(BRANCH_DESTINATION)
-      .build();
-
     create(M68kTokenTypes.BHI).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BLS -------------------------------------------------------------------------
 
-    create(M68kTokenTypes.BLS).dataSizes(GROUP_SBW)
-      .first(BRANCH_DESTINATION)
-      .build();
-
     create(M68kTokenTypes.BLS).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BCC -------------------------------------------------------------------------
 
-    create(M68kTokenTypes.BCC).dataSizes(GROUP_SBW)
-      .first(BRANCH_DESTINATION)
-      .build();
-
     create(M68kTokenTypes.BCC).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BCS -------------------------------------------------------------------------
 
-    create(M68kTokenTypes.BCS).dataSizes(GROUP_SBW)
-      .first(BRANCH_DESTINATION)
-      .build();
-
     create(M68kTokenTypes.BCS).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BNE -------------------------------------------------------------------------
 
-    create(M68kTokenTypes.BNE).dataSizes(GROUP_SBW)
-      .first(BRANCH_DESTINATION)
-      .build();
-
     create(M68kTokenTypes.BNE).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BEQ -------------------------------------------------------------------------
 
-    create(M68kTokenTypes.BEQ).dataSizes(GROUP_SBW)
-      .first(BRANCH_DESTINATION)
-      .build();
-
     create(M68kTokenTypes.BEQ).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BVC -------------------------------------------------------------------------
 
-    create(M68kTokenTypes.BVC).dataSizes(GROUP_SBW)
-      .first(BRANCH_DESTINATION)
-      .build();
-
     create(M68kTokenTypes.BVC).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BVS -------------------------------------------------------------------------
 
-    create(M68kTokenTypes.BVS).dataSizes(GROUP_SBW)
-      .first(BRANCH_DESTINATION)
-      .build();
-
     create(M68kTokenTypes.BVS).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BPL -------------------------------------------------------------------------
 
-    create(M68kTokenTypes.BPL).dataSizes(GROUP_SBW)
-      .first(BRANCH_DESTINATION)
-      .build();
-
     create(M68kTokenTypes.BPL).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BMI -------------------------------------------------------------------------
 
-    create(M68kTokenTypes.BMI).dataSizes(GROUP_SBW)
-      .first(BRANCH_DESTINATION)
-      .build();
-
     create(M68kTokenTypes.BMI).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BGE -------------------------------------------------------------------------
 
-    create(M68kTokenTypes.BGE).dataSizes(GROUP_SBW)
-      .first(BRANCH_DESTINATION)
-      .build();
-
     create(M68kTokenTypes.BGE).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BLT -------------------------------------------------------------------------
 
-    create(M68kTokenTypes.BLT).dataSizes(GROUP_SBW)
-      .first(BRANCH_DESTINATION)
-      .build();
-
     create(M68kTokenTypes.BLT).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BGT -------------------------------------------------------------------------
 
-    create(M68kTokenTypes.BGT).dataSizes(GROUP_SBW)
-      .first(BRANCH_DESTINATION)
-      .build();
-
     create(M68kTokenTypes.BGT).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BLE -------------------------------------------------------------------------
 
-    create(M68kTokenTypes.BLE).dataSizes(GROUP_SBW)
-      .first(BRANCH_DESTINATION)
-      .build();
-
     create(M68kTokenTypes.BLE).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BRA -------------------------------------------------------------------------
 
-    create(M68kTokenTypes.BRA).dataSizes(GROUP_SBW)
-      .first(BRANCH_DESTINATION)
-      .build();
-
     create(M68kTokenTypes.BRA).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BSR -------------------------------------------------------------------------
 
-    create(M68kTokenTypes.BSR).dataSizes(GROUP_SBW)
-      .first(BRANCH_DESTINATION)
-      .build();
-
     create(M68kTokenTypes.BSR).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
-      .cpus(GROUP_68020_UP_WITH_CPU32)
       .build();
 
 // BCHG ------------------------------------------------------------------------

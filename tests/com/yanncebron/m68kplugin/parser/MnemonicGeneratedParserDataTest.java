@@ -189,7 +189,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
     dump("* Instructions count: " + M68kTokenGroups.INSTRUCTIONS.getTypes().length);
 
-    assertEquals(5831, total);
+    assertEquals(5759, total);
     assertEmpty(failedVariants);
   }
 

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Changed
+
+- regenerate mnemonic data from vasm 2.0f
+
 ## 0.2.4 - 2026-07-10
 
 ### Changed
