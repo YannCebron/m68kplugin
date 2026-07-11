@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-
-plugins {
-    id("m68kplugin.java-conventions")
-}
+import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 
 dependencies {
     compileOnly(project(":plugin-api"))
     testRuntimeOnly(project(":plugin-api"))
+
+    testImplementation("junit:junit:4.13.2")
+
+    intellijPlatform {
+        testFramework(TestFrameworkType.Platform)
+    }
 }

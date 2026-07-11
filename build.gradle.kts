@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,39 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import org.jetbrains.changelog.Changelog
-import org.jetbrains.intellij.tasks.RunPluginVerifierTask.FailureLevel
+import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 
-fun properties(key: String) = project.findProperty(key).toString()
+fun properties(key: String) = providers.gradleProperty(key).get()
 
 plugins {
-    // generic Java setup
-    id("m68kplugin.java-conventions")
-    // Gradle Changelog Plugin
-    id("org.jetbrains.changelog") version "2.5.0"
-    // GrammarKit
-    id("org.jetbrains.grammarkit") version "2023.3.0.3"
+    id("org.jetbrains.kotlin.jvm")
+    id("org.jetbrains.intellij.platform")
+    id("org.jetbrains.intellij.platform.grammarkit")
+    id("org.jetbrains.changelog")
 }
-
-group = properties("pluginGroup")
 
 dependencies {
-    implementation(project("amiga", "instrumentedJar"))
+    testImplementation("junit:junit:4.13.2")
 
-    compileOnly(project(":plugin-api"))
-    implementation(project("plugin-api", "instrumentedJar"))
-}
+    intellijPlatform {
+        intellijIdeaCommunity(properties("platformVersion"))
 
-// Configure project's dependencies
-repositories {
-    mavenCentral()
-}
+        pluginComposedModule(implementation(project(":plugin-api")))
+        pluginComposedModule(implementation(project(":amiga")))
+        testFramework(TestFrameworkType.Platform)
 
-idea {
-    module {
-        generatedSourceDirs.add(file("gen"))
-        excludeDirs.add(file(".sandbox"))
+        jflex("1.10.17")
+        grammarKit("2023.3.3")
     }
+}
+
+subprojects {
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "org.jetbrains.intellij.platform.module")
 }
 
 sourceSets {
@@ -58,28 +54,10 @@ sourceSets {
     }
 }
 
-// Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
-intellij {
-    pluginName.set(properties("pluginName"))
-    version.set(properties("platformVersion"))
-    type.set(properties("platformType"))
-    updateSinceUntilBuild.set(true)
-
-    // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
-    plugins.set(properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty))
-
-    sandboxDir.set(rootDir.canonicalPath + "/.sandbox")
-}
-
-grammarKit {
-  jflexRelease.set("1.10.17")
-  grammarKitRelease.set("2023.3.3")
-}
-
-// Configure Gradle Changelog Plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
-changelog {
-    version.set(properties("pluginVersion"))
-    groups.set(emptyList())
+idea {
+    module {
+        generatedSourceDirs.add(file("gen"))
+    }
 }
 
 tasks {
@@ -91,75 +69,7 @@ tasks {
     generateLexer {
         sourceFile.set(file("src/grammar/_M68kLexer.flex"))
         skeleton.set(file("src/grammar/idea-flex.skeleton"))
-        targetOutputDir.set(file("gen/com/yanncebron/m68kplugin/lexer/"))
-        purgeOldFiles.set(true)
+        targetRootOutputDir.set(file("gen"))
     }
 
-    prepareSandbox {
-        enabled = true
-    }
-
-    verifyPlugin {
-        enabled = true
-    }
-
-    verifyPluginConfiguration {
-        enabled = true
-    }
-
-    patchPluginXml {
-        enabled = true
-        version.set(properties("pluginVersion"))
-        sinceBuild.set(properties("pluginSinceBuild"))
-        untilBuild.set(properties("pluginUntilBuild"))
-
-        // Get the latest available change notes from the changelog file
-        changeNotes.set(provider {
-            changelog.renderItem(changelog.run {
-                getOrNull(properties("pluginVersion")) ?: getLatest()
-            }, Changelog.OutputType.HTML)
-        })
-    }
-
-    runIde {
-        enabled = true
-        if (project.hasProperty("ideDir")) {
-            ideDir.set(file(project.property("ideDir")!!))
-            jbrVersion.set(project.property("ideJBR")!! as String)
-        }
-        autoReloadPlugins.set(false)
-    }
-
-    runPluginVerifier {
-        enabled = true
-        ideVersions.set(properties("pluginVerifierIdeVersions").split(',').map(String::trim).filter(String::isNotEmpty))
-        failureLevel.set(listOf(FailureLevel.COMPATIBILITY_PROBLEMS))
-    }
-
-    // Configure UI tests plugin
-    // Read more: https://github.com/JetBrains/intellij-ui-test-robot
-    runIdeForUiTests {
-        enabled = true
-        systemProperty("robot-server.port", "8082")
-        systemProperty("ide.mac.message.dialogs.as.sheets", "false")
-        systemProperty("jb.privacy.policy.text", "<!--999.999-->")
-        systemProperty("jb.consents.confirmation.enabled", "false")
-    }
-
-    signPlugin {
-        enabled = true
-        certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
-        privateKey.set(System.getenv("PRIVATE_KEY"))
-        password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
-    }
-
-    publishPlugin {
-        enabled = true
-        dependsOn("patchChangelog")
-        token.set(System.getenv("PUBLISH_TOKEN"))
-        // pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels, like 2.1.7-alpha.3
-        // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
-        // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
-        channels.set(listOf(properties("pluginVersion").split('-').getOrElse(1) { "default" }.split('.').first()))
-    }
 }
