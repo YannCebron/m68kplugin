@@ -24,9 +24,9 @@ import com.intellij.platform.backend.documentation.DocumentationTargetProvider;
 import com.intellij.platform.backend.presentation.TargetPresentation;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.SmartPointerManager;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.refactoring.suggested.UtilsKt;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import org.jetbrains.annotations.NotNull;
@@ -73,7 +73,7 @@ final class M68kInstructionDocumentationTargetProvider implements DocumentationT
 
     @Override
     public @NotNull Pointer<? extends DocumentationTarget> createPointer() {
-      return Pointer.delegatingPointer(UtilsKt.createSmartPointer(m68kInstruction), M68kInstructionDocumentationTarget::new);
+      return Pointer.delegatingPointer(SmartPointerManager.getInstance(m68kInstruction.getProject()).createSmartPsiElementPointer(m68kInstruction), M68kInstructionDocumentationTarget::new);
     }
 
     @Override
