@@ -91,10 +91,10 @@ class M68kInstructionMnemonicDocsGenerator {
     // only operands with >1 address mode, otherwise they cannot appear in the table(s)
     Set<M68kAddressMode> allUsedAddressModesFromMultiOperands = new HashSet<>();
     for (M68kMnemonic mnemonic : filteredMnemonics) {
-      M68kAddressMode[] sourceModes = mnemonic.firstOperand().getAddressModes();
-      if (sourceModes.length > 1) ContainerUtil.addAll(allUsedAddressModesFromMultiOperands, sourceModes);
-      M68kAddressMode[] destinationModes = mnemonic.secondOperand().getAddressModes();
-      if (destinationModes.length > 1) ContainerUtil.addAll(allUsedAddressModesFromMultiOperands, destinationModes);
+      M68kAddressMode[] firstAddressModes = mnemonic.firstOperand().getAddressModes();
+      if (firstAddressModes.length > 1) ContainerUtil.addAll(allUsedAddressModesFromMultiOperands, firstAddressModes);
+      M68kAddressMode[] secondAddressModes = mnemonic.secondOperand().getAddressModes();
+      if (secondAddressModes.length > 1) ContainerUtil.addAll(allUsedAddressModesFromMultiOperands, secondAddressModes);
     }
 
     for (Iterator<M68kMnemonic> iterator = filteredMnemonics.iterator(); iterator.hasNext(); ) {
