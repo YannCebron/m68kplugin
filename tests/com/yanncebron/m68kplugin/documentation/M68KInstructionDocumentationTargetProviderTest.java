@@ -24,6 +24,7 @@ import com.intellij.platform.backend.documentation.DocumentationTarget;
 import com.intellij.platform.backend.documentation.impl.ImplKt;
 import com.intellij.platform.backend.presentation.TargetPresentation;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.lang.psi.*;
@@ -37,32 +38,48 @@ import java.util.Set;
 @SuppressWarnings("UnstableApiUsage")
 public class M68KInstructionDocumentationTargetProviderTest extends BasePlatformTestCase {
 
-  public void testMoveInstructionReferenceDoc() {
-    doTestMappedReferenceDoc(M68kTokenTypes.MOVE, "<h1>MOVE - Copy data from source to destination</h1>");
+  public void testAslAsrInstructionReferenceDoc() {
+    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.ASL, M68kTokenTypes.ASR), "<h1>ASL, ASR - Arithmetic shift left/right</h1>");
   }
 
-  public void testAslInstructionReferenceDoc() {
-    doTestMappedReferenceDoc(M68kTokenTypes.ASL, "<h1>ASL, ASR - Arithmetic shift left/right</h1>");
+  public void testLslLsrInstructionReferenceDoc() {
+    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.LSL, M68kTokenTypes.LSR), "<h1>LSL, LSR - Logical shift left/right</h1>");
   }
 
-  public void testLslInstructionReferenceDoc() {
-    doTestMappedReferenceDoc(M68kTokenTypes.LSL, "<h1>LSL, LSR - Logical shift left/right</h1>");
+  public void testRolRorInstructionReferenceDoc() {
+    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.ROL, M68kTokenTypes.ROR), "<h1>ROL, ROR - Rotate left/right (without extend)</h1>");
   }
 
-  public void testRoxlInstructionReferenceDoc() {
-    doTestMappedReferenceDoc(M68kTokenTypes.ROXL, "<h1>ROXL, ROXR - Rotate left/right with extend</h1>");
+  public void testRoxlRoxrInstructionReferenceDoc() {
+    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.ROXL, M68kTokenTypes.ROXR), "<h1>ROXL, ROXR - Rotate left/right with extend</h1>");
   }
 
-  public void testBccInstructionReferenceDoc() {
-    doTestMappedReferenceDoc(M68kTokenTypes.BHS, "<h1>Bcc - Branch on condition cc</h1>");
+  public void testDivsDivuInstructionReferenceDoc() {
+    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.DIVS, M68kTokenTypes.DIVU), "<h1>DIVS, DIVU - Signed divide, unsigned divide</h1>");
+  }
+
+  public void testMulsMuluInstructionReferenceDoc() {
+    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.MULS, M68kTokenTypes.MULU), "<h1>MULS, MULU - Signed multiply, unsigned multiply</h1>");
+  }
+
+  public void testBccInstructionsReferenceDoc() {
+    doTestMappedReferenceDoc(M68kTokenGroups.BCC_INSTRUCTIONS, "<h1>Bcc - Branch on condition cc</h1>");
+  }
+
+  public void testDbccInstructionsReferenceDoc() {
+    doTestMappedReferenceDoc(M68kTokenGroups.DBCC_INSTRUCTIONS, "<h1>DBcc - Test condition, decrement, and branch</h1>");
+  }
+
+  public void testSccInstructionsReferenceDoc() {
+    doTestMappedReferenceDoc(M68kTokenGroups.SCC_INSTRUCTIONS, "<h1>Scc - Set according to condition cc</h1>");
   }
 
   public void testTblsXInstructionReferenceDoc() {
-    doTestMappedReferenceDoc(M68kTokenTypes.TBLSN, "<h1>TBLS, TBLSN - Table Lookup and Interpolate (Signed)</h1>");
+    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.TBLS, M68kTokenTypes.TBLSN), "<h1>TBLS, TBLSN - Table Lookup and Interpolate (Signed)</h1>");
   }
 
   public void testTbluXInstructionReferenceDoc() {
-    doTestMappedReferenceDoc(M68kTokenTypes.TBLUN, "<h1>TBLU, TBLUN - Table Lookup and Interpolate (Unsigned)</h1>");
+    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.TBLU, M68kTokenTypes.TBLUN), "<h1>TBLU, TBLUN - Table Lookup and Interpolate (Unsigned)</h1>");
   }
 
   public void testAllMnemonicsHaveReferenceDocs() {
@@ -114,11 +131,13 @@ public class M68KInstructionDocumentationTargetProviderTest extends BasePlatform
     assertEquals("<style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><h1><code>BEQ</code></h1>Branch on condition cc</pre></div><table class='sections'><tr><td valign='top' class='section'><p>CPU:</td><td valign='top'>MC68000 Family</td></table><br><h4><code>BEQ&#8228;s|&#8228;b|&#8228;w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Label</code></h4>", mnemonicDocWithout68020WithCpu32);
   }
 
-  private void doTestMappedReferenceDoc(IElementType instructionType, String... docTextContains) {
-    Collection<M68kMnemonic> all = M68kMnemonicRegistry.getInstance().findAll(instructionType);
-    M68kMnemonic m68kMnemonic = ContainerUtil.getFirstItem(all);
-    assertNotNull(m68kMnemonic);
-    doTestReferenceDoc(m68kMnemonic, docTextContains);
+  private void doTestMappedReferenceDoc(TokenSet instructionTokens, String... docTextContains) {
+    for (IElementType instructionType : instructionTokens.getTypes()) {
+      Collection<M68kMnemonic> all = M68kMnemonicRegistry.getInstance().findAll(instructionType);
+      M68kMnemonic m68kMnemonic = ContainerUtil.getFirstItem(all);
+      assertNotNull(m68kMnemonic);
+      doTestReferenceDoc(m68kMnemonic, docTextContains);
+    }
   }
 
   private void doTestReferenceDoc(M68kMnemonic m68kMnemonic, String... docTextContains) {
