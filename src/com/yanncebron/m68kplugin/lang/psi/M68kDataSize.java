@@ -47,6 +47,11 @@ public enum M68kDataSize {
     return text;
   }
 
+  public String getTextWithoutDot() {
+    assert this != UNSIZED;
+    return text.substring(1);
+  }
+
   @Nullable
   public IElementType getElementType() {
     return elementType;

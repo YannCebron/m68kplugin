@@ -110,7 +110,17 @@ class M68kInstructionMnemonicDocsGenerator {
       }
 
 
-      String dataSizeText = StringUtil.join(mnemonic.dataSizes(), M68kDataSize::getText, "|");
+      String dataSizeText;
+      if (mnemonic.dataSizes() == M68kDataSize.GROUP_UNSIZED) {
+        dataSizeText = M68kDataSize.UNSIZED.getText();
+      } else {
+        String textWithoutDots = StringUtil.join(mnemonic.dataSizes(), M68kDataSize::getTextWithoutDot, "");
+        if (mnemonic.dataSizes().size() == 1) {
+          dataSizeText = "." + textWithoutDots;
+        } else {
+          dataSizeText = ".[" + textWithoutDots + "]";
+        }
+      }
       int dataSizeTextLength = dataSizeText.length();
       dataSizeText = StringUtil.escapeXmlEntities(dataSizeText); // "<unsized>"
       dataSizeText = dataSizeText.replace(".", M68kDocumentationUtil.NON_BREAK_PERIOD);
