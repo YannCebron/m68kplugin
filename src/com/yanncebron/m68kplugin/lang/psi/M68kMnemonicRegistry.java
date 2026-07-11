@@ -169,13 +169,13 @@ public final class M68kMnemonicRegistry {
       return this;
     }
 
-    private MnemonicBuilder first(M68kOperand sourceOperand) {
-      this.firstOperand = sourceOperand;
+    private MnemonicBuilder first(M68kOperand firstOperand) {
+      this.firstOperand = firstOperand;
       return this;
     }
 
-    private MnemonicBuilder second(M68kOperand destinationOperand) {
-      this.secondOperand = destinationOperand;
+    private MnemonicBuilder second(M68kOperand secondOperand) {
+      this.secondOperand = secondOperand;
       return this;
     }
 
