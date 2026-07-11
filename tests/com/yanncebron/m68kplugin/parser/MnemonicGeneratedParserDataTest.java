@@ -275,14 +275,14 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
       String mnemonicText = mnemonic.elementType().toString();
       List<String> variants = new SmartList<>();
 
-      for (String sourceText : OPERAND_TEXTS.get(mnemonic.firstOperand())) {
-        for (String destinationText : OPERAND_TEXTS.get(mnemonic.secondOperand())) {
+      for (String firstText : OPERAND_TEXTS.get(mnemonic.firstOperand())) {
+        for (String secondText : OPERAND_TEXTS.get(mnemonic.secondOperand())) {
           if (mnemonic.dataSizes().iterator().next() != M68kDataSize.UNSIZED) {
-            addVariant(variants, labelOrIndent, mnemonicText, needsLocalBranchLabel ? labelName : sourceText, destinationText, "  ");
+            addVariant(variants, labelOrIndent, mnemonicText, needsLocalBranchLabel ? labelName : firstText, secondText, "  ");
           }
           for (M68kDataSize dataSize : mnemonic.dataSizes()) {
             String dataSizeText = dataSize == M68kDataSize.UNSIZED ? "" : dataSize.getText();
-            addVariant(variants, INDENT, mnemonicText, needsLocalBranchLabel ? labelName : sourceText, destinationText, dataSizeText);
+            addVariant(variants, INDENT, mnemonicText, needsLocalBranchLabel ? labelName : firstText, secondText, dataSizeText);
           }
 
         }
@@ -303,13 +303,13 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
   }
 
   private static void addVariant(List<String> generated, String labelOrIndent, String mnemonicText,
-                                 @Nullable String sourceText, @Nullable String destinationText, String dataSizeText) {
+                                 @Nullable String firstText, @Nullable String secondText, String dataSizeText) {
     String fullText = labelOrIndent + mnemonicText + dataSizeText;
-    if (sourceText != null) {
-      fullText += StringUtil.repeatSymbol(' ', 10 - mnemonicText.length()) + sourceText;
+    if (firstText != null) {
+      fullText += StringUtil.repeatSymbol(' ', 10 - mnemonicText.length()) + firstText;
     }
-    if (destinationText != null) {
-      fullText += "," + destinationText;
+    if (secondText != null) {
+      fullText += "," + secondText;
     }
 
     generated.add(fullText);
