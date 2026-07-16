@@ -14,11 +14,6 @@
  * limitations under the License.
  */
 
-
-plugins {
-    id("m68kplugin.java-conventions")
-}
-
 dependencies {
     implementation("org.commonmark", "commonmark", "0.28.0")
     implementation("org.commonmark", "commonmark-ext-gfm-tables", "0.28.0")
