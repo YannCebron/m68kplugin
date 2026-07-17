@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 import org.jetbrains.intellij.platform.gradle.tasks.VerifyPluginTask.FailureLevel
 
@@ -45,6 +46,19 @@ subprojects {
     apply(plugin = "org.jetbrains.intellij.platform.module")
 }
 
+intellijPlatform {
+    pluginVerification {
+        ides {
+            recommended()
+            select {
+                types = listOf(IntelliJPlatformType.IntellijIdea)
+                sinceBuild = "253"
+            }
+        }
+        failureLevel.set(listOf(FailureLevel.COMPATIBILITY_PROBLEMS))
+    }
+}
+
 sourceSets {
     main {
         java.srcDirs("src", "gen")
@@ -71,10 +85,6 @@ tasks {
         sourceFile.set(file("src/grammar/_M68kLexer.flex"))
         skeleton.set(file("src/grammar/idea-flex.skeleton"))
         targetRootOutputDir.set(file("gen"))
-    }
-
-    verifyPlugin {
-        failureLevel.set(listOf(FailureLevel.COMPATIBILITY_PROBLEMS))
     }
 
 }
