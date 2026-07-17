@@ -95,7 +95,7 @@ final class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<IElementType> 
   }
 
   @Override
-  protected ColoredListCellRenderer<IElementType> getListCellRenderer() {
+  protected ListCellRenderer<IElementType> getListCellRenderer() {
     return new ColoredListCellRenderer<>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends IElementType> list, IElementType value, int index, boolean selected, boolean hasFocus) {

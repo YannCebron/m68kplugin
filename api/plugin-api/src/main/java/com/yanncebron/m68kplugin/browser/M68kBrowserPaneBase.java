@@ -174,7 +174,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
   @NotNull
   protected abstract String getDocFor(@NotNull T selectedValue);
 
-  protected ColoredListCellRenderer<T> getListCellRenderer() {
+  protected ListCellRenderer<T> getListCellRenderer() {
     return new ColoredListCellRenderer<>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends T> list, T value, int index, boolean selected, boolean hasFocus) {

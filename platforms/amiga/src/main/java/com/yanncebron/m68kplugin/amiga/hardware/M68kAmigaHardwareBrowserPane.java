@@ -149,7 +149,7 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
   }
 
   @Override
-  protected ColoredListCellRenderer<M68kAmigaHardwareRegister> getListCellRenderer() {
+  protected ListCellRenderer<M68kAmigaHardwareRegister> getListCellRenderer() {
     return new ColoredListCellRenderer<>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends M68kAmigaHardwareRegister> list, M68kAmigaHardwareRegister value, int index, boolean selected, boolean hasFocus) {

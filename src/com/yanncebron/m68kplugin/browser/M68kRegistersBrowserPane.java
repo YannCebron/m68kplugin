@@ -94,7 +94,7 @@ final class M68kRegistersBrowserPane extends M68kBrowserPaneBase<M68kRegister> {
   }
 
   @Override
-  protected ColoredListCellRenderer<M68kRegister> getListCellRenderer() {
+  protected ListCellRenderer<M68kRegister> getListCellRenderer() {
     return new ColoredListCellRenderer<>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends M68kRegister> list, M68kRegister value, int index, boolean selected, boolean hasFocus) {

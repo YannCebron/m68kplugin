@@ -157,7 +157,7 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
   }
 
   @Override
-  protected ColoredListCellRenderer<M68kMnemonic> getListCellRenderer() {
+  protected ListCellRenderer<M68kMnemonic> getListCellRenderer() {
     return new ColoredListCellRenderer<>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends M68kMnemonic> list, M68kMnemonic value, int index, boolean selected, boolean hasFocus) {
