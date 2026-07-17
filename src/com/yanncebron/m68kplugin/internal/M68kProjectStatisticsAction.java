@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +50,6 @@ import com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDir
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroCallDirective;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kLabelRefExpression;
-import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -190,12 +189,13 @@ final class M68kProjectStatisticsAction extends BaseAnalysisAction {
           int elements = computeInstructions.length + computeLabels.length + computeDirectives.length + computeConditional.length;
           totalElements[0] += elements;
 
-          String info =
-            StringUtils.rightPad(UniqueVFilePathBuilder.getInstance().getUniqueVirtualFilePath(project, virtualFile, searchScope), 34) +
-              " | " + StringUtils.rightPad(getErrorCountText(filteredErrorCount, elements), 7) +
-              " | " + StringUtils.rightPad(getErrorCountText(labelRefsUnresolved, labelRefs), 7) +
-              " | " + StringUtils.rightPad(getErrorCountText(macroCallsUnresolved, macroCalls), 7) +
-              " | " + directInclude.length + " (" + (recursiveInclude.length - 1) + ") [" + incbinInclude.length + "]";
+          String info = "| " +
+            "`" + UniqueVFilePathBuilder.getInstance().getUniqueVirtualFilePath(project, virtualFile, searchScope) + "`" +
+            " | " + getErrorCountText(filteredErrorCount, elements) +
+            " | " + getErrorCountText(labelRefsUnresolved, labelRefs) +
+            " | " + getErrorCountText(macroCallsUnresolved, macroCalls) +
+            " | " + directInclude.length + " (" + (recursiveInclude.length - 1) + ") [" + incbinInclude.length + "]"
+            + "|";
           fileInfos.add(info);
         }
       }), M68kBundle.message("action.M68kProjectStatisticsAction.progress.title"), true, project);
@@ -204,18 +204,18 @@ final class M68kProjectStatisticsAction extends BaseAnalysisAction {
 
     StringBuilder sb = new StringBuilder();
     sb.append(scope.getDisplayName())
-      .append("\n")
+      .append("\n\n")
       .append("Files: ").append(fileInfos.size())
       .append(" (").append(StringUtil.formatDuration(System.currentTimeMillis() - startTime)).append(")")
-      .append("\n")
+      .append("\n\n")
       .append("Total Errors: ").append(getErrorCountText(totalErrors[0], totalElements[0]))
-      .append("\n")
+      .append("\n\n")
       .append("Total Resolve Errors: ").append(getErrorCountText(totalResolveErrors[0], totalResolve[0]))
       .append(" (").append(StringUtil.formatDuration(totalResolveTime[0])).append(")")
       .append("\n\n");
 
-    sb.append("File                               | Errors  | Label   | Macro   | include (recursive) [incbin]\n");
-    sb.append("===============================================================================================\n");
+    sb.append("| File | Errors | Label | Macro | include (recursive) [incbin] |\n");
+    sb.append("|:-----|-------:|------:|------:|:---------|\n");
     fileInfos.sort(NaturalComparator.INSTANCE);
     sb.append(StringUtil.join(fileInfos, "\n"));
 
@@ -225,12 +225,12 @@ final class M68kProjectStatisticsAction extends BaseAnalysisAction {
     appendClasses(withoutDataSize, sb, "Instructions|Directives w/o specified DataSize");
     appendClasses(conditional, sb, "Conditional Assembly Directives");
 
-    VirtualFile file = new LightVirtualFile("M68k Project Statistics.txt", sb.toString());
+    VirtualFile file = new LightVirtualFile("M68k Project Statistics.md", sb.toString());
     FileEditorManager.getInstance(project).openFile(file, true);
   }
 
   private static String getErrorCountText(int errorCount, int total) {
-    return errorCount == 0 ? Integer.toString(total) : errorCount + "/" + total;
+    return errorCount == 0 ? (total == 0 ? "-" : Integer.toString(total)) : "**" + errorCount + "/" + total + "**";
   }
 
   @NotNull
@@ -241,14 +241,14 @@ final class M68kProjectStatisticsAction extends BaseAnalysisAction {
   private void appendClasses(Map<Class<? extends M68kPsiElement>, Integer> instructions, StringBuilder sb, String title) {
     int total = instructions.values().stream().mapToInt(value -> value).sum();
     sb.append("\n");
-    sb.append(StringUtil.repeatSymbol('-', 80));
-    sb.append("\n#").append(total).append(" --- ").append(title).append("\n\n");
+    sb.append("\n# ").append(title).append(" (").append(total).append(")\n\n");
 
+    sb.append("| Class | Count |\n");
+    sb.append("|:--|--:|\n");
     for (Map.Entry<Class<? extends M68kPsiElement>, Integer> entry : instructions.entrySet()) {
       final String fqn = entry.getKey().getSimpleName();
       final String className = fqn.substring(4, fqn.length() - 4);
-      sb.append(StringUtils.rightPad(className, 40))
-        .append(StringUtils.leftPad(String.valueOf(entry.getValue()), 8)).append("\n");
+      sb.append("| `").append(className).append("` | ").append(entry.getValue()).append(" |\n");
     }
   }
 
