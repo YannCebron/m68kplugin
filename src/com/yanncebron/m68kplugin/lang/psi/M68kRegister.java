@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import java.util.Set;
  * All known registers.
  * <p>
  * See vasm {@code cpus/m68k/specregs.h}.
+ * Reference: Table 1-1, Table 1-2
  */
 public enum M68kRegister {
 
