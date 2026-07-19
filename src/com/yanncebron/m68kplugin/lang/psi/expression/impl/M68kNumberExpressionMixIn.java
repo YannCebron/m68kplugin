@@ -19,6 +19,7 @@ package com.yanncebron.m68kplugin.lang.psi.expression.impl;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kUnaryMinusExpression;
@@ -50,7 +51,7 @@ abstract class M68kNumberExpressionMixIn extends ASTWrapperPsiElement implements
       return isNegative ? -2 : 2;
     }
 
-    IElementType elementType = getFirstChild().getNode().getElementType();
+    IElementType elementType = PsiUtilCore.getElementType(getFirstChild());
     if (elementType == M68kTokenTypes.DEC_NUMBER) {
       return parseNumber(text, isNegative, 10);
     }

@@ -28,6 +28,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase;
 import com.yanncebron.m68kplugin.lang.psi.M68kElementFactory;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
@@ -50,11 +51,12 @@ public final class M68kDirectiveDocumentationProvider extends AbstractDocumentat
                                                             int targetOffset) {
     if (contextElement == null) return null;
 
-    if (M68kTokenGroups.DIRECTIVES.contains(contextElement.getNode().getElementType())) {
+    IElementType elementType = PsiUtilCore.getElementType(contextElement);
+    if (M68kTokenGroups.DIRECTIVES.contains(elementType)) {
       return PsiTreeUtil.getParentOfType(contextElement, M68kDirective.class);
     }
 
-    if (M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES.contains(contextElement.getNode().getElementType())) {
+    if (M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES.contains(elementType)) {
       return PsiTreeUtil.getParentOfType(contextElement, M68kConditionalAssemblyDirective.class);
     }
 

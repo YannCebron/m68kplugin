@@ -26,6 +26,7 @@ import com.intellij.openapi.util.text.NaturalComparator;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.speedSearch.SpeedSearchUtil;
 import com.intellij.util.containers.Convertor;
@@ -134,7 +135,7 @@ final class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<IElementType> 
       Object selectorInFile = context.getSelectorInFile();
       if (!(selectorInFile instanceof PsiElement psiElement)) return null;
 
-      return psiElement.getNode().getElementType();
+      return PsiUtilCore.getElementType(psiElement);
     }
   }
 }

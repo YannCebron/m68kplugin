@@ -21,6 +21,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
@@ -49,7 +50,7 @@ final class M68kNumberExpressionDocumentationProvider extends AbstractDocumentat
   @Override
   public @Nullable PsiElement getCustomDocumentationElement(@NotNull Editor editor, @NotNull PsiFile file, @Nullable PsiElement contextElement, int targetOffset) {
     if (contextElement != null &&
-      M68kTokenGroups.NUMBERS.contains(contextElement.getNode().getElementType())) {
+      M68kTokenGroups.NUMBERS.contains(PsiUtilCore.getElementType(contextElement))) {
       return PsiTreeUtil.getParentOfType(contextElement, M68kNumberExpression.class, false);
     }
     return null;

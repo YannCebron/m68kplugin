@@ -28,6 +28,7 @@ import com.intellij.openapi.util.text.NaturalComparator;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.ui.speedSearch.SpeedSearchUtil;
@@ -192,7 +193,7 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
       Object selectorInFile = context.getSelectorInFile();
       if (!(selectorInFile instanceof PsiElement psiElement)) return false;
 
-      IElementType elementType = psiElement.getNode().getElementType();
+      IElementType elementType = PsiUtilCore.getElementType(psiElement);
       if (M68kTokenGroups.INSTRUCTIONS.contains(elementType)) {
         return true;
       }
@@ -219,7 +220,7 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
       }
 
       // first mnemonic
-      IElementType elementType = m68kInstruction.getFirstChild().getNode().getElementType();
+      IElementType elementType = PsiUtilCore.getElementType(m68kInstruction.getFirstChild());
       Collection<M68kMnemonic> all = M68kMnemonicRegistry.getInstance().findAll(elementType);
       return ContainerUtil.getFirstItem(all);
     }
