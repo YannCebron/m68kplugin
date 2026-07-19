@@ -27,6 +27,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.SmartPointerManager;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.yanncebron.m68kplugin.lang.M68kFile;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import org.jetbrains.annotations.NotNull;
@@ -52,7 +53,7 @@ final class M68kInstructionDocumentationTargetProvider implements DocumentationT
     if (element == null) return null;
     if (element instanceof M68kInstruction m68kInstruction) return m68kInstruction;
 
-    IElementType elementType = element.getNode().getElementType();
+    IElementType elementType = PsiUtilCore.getElementType(element);
     if (M68kTokenGroups.INSTRUCTIONS.contains(elementType) ||
       (M68kTokenGroups.DATA_SIZES.contains(elementType) && // do not trigger on '$42.L'
         PsiTreeUtil.getParentOfType(element, M68kAdm.class) == null)) {
