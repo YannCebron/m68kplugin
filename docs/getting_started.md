@@ -42,7 +42,7 @@ It should usually not take a noticeable amount of time, during which some functi
 ### Project Settings
 **Since v0.2.5**
 
-_Settings | Languages & Frameworks | M68k Assembler_
+_Settings \| Languages & Frameworks \| M68k Assembler_
 
 #### Target Platform
 
