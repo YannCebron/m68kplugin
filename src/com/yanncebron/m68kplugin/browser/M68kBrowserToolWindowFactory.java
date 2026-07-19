@@ -23,12 +23,16 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
+import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentManager;
 import com.intellij.ui.content.ContentManagerEvent;
 import com.intellij.ui.content.ContentManagerListener;
+import com.yanncebron.m68kplugin.settings.ide.M68kProjectEnvironmentListener;
+import com.yanncebron.m68kplugin.settings.ide.M68kTargetPlatform;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 final class M68kBrowserToolWindowFactory implements ToolWindowFactory, DumbAware {
 
@@ -44,9 +48,24 @@ final class M68kBrowserToolWindowFactory implements ToolWindowFactory, DumbAware
 
   @Override
   public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
-    final ContentManager contentManager = toolWindow.getContentManager();
-
     String activePane = PropertiesComponent.getInstance(project).getValue(ACTIVE_PANE);
+
+    initPanes(project, toolWindow, activePane);
+
+    toolWindow.addContentManagerListener(new ContentManagerListener() {
+      @Override
+      public void selectionChanged(@NotNull ContentManagerEvent event) {
+        if (event.getOperation() != ContentManagerEvent.ContentOperation.add) return;
+
+        String paneKey = event.getContent().getUserData(PANE_FQN_KEY);
+        PropertiesComponent.getInstance(project).setValue(ACTIVE_PANE, paneKey);
+      }
+    });
+  }
+
+  private static void initPanes(@NotNull Project project, @NotNull ToolWindow toolWindow, @Nullable String activePane) {
+    final ContentManager contentManager = toolWindow.getContentManager();
+    contentManager.removeAllContents(true);
 
     for (M68kBrowserPaneFactoryEP extension : BROWSER_PANE_FACTORY_EP.getExtensionList()) {
       M68kBrowserPaneFactory<?, ?> factory = extension.getInstance();
@@ -65,16 +84,23 @@ final class M68kBrowserToolWindowFactory implements ToolWindowFactory, DumbAware
         contentManager.setSelectedContent(content);
       }
     }
+  }
 
-    toolWindow.addContentManagerListener(new ContentManagerListener() {
-      @Override
-      public void selectionChanged(@NotNull ContentManagerEvent event) {
-        if (event.getOperation() != ContentManagerEvent.ContentOperation.add) return;
+  final static class ProjectEnvironmentListener implements M68kProjectEnvironmentListener {
 
-        String paneKey = event.getContent().getUserData(PANE_FQN_KEY);
-        PropertiesComponent.getInstance(project).setValue(ACTIVE_PANE, paneKey);
-      }
-    });
+    ProjectEnvironmentListener(Project project) {
+      this.project = project;
+    }
+
+    private final Project project;
+
+    @Override
+    public void targetPlatformChanged(M68kTargetPlatform targetPlatform) {
+      ToolWindow toolWindow = ToolWindowManager.getInstance(project).getToolWindow(M68kBrowserToolWindowFactory.TOOLWINDOW_ID);
+      assert toolWindow != null;
+
+      initPanes(project, toolWindow, null);
+    }
   }
 
 }

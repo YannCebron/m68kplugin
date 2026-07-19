@@ -4,7 +4,11 @@
 
 ### Changed
 
-- regenerate mnemonic data from vasm 2.0f
+- Mnemonic data: regenerate from vasm 2.0f
+
+### Added
+
+- _Settings | Languages & Frameworks | M68k Assembler_ to select _Target platform_
 
 ## 0.2.4 - 2026-07-10
 

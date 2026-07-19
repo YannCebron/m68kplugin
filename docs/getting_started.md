@@ -39,6 +39,16 @@ See *Motorola 68000 Assembler* entry in *Settings \| Editor \| File Types* to cu
 On initial opening of existing sources, or when many source files are changed, the IDE will analyze relevant files to track all information.
 It should usually not take a noticeable amount of time, during which some functionality (e.g., resolving/navigation) is not fully available.
 
+### Project Settings
+**Since v0.2.5**
+
+_Settings | Languages & Frameworks | M68k Assembler_
+
+#### Target Platform
+
+- Generic: basic support (default)
+- Amiga: adds [_Amiga Hardware_](features/ide.md#amiga-hardware) pane in _M68k Browser_
+
 ## Building
 
 [vasm](http://sun.hasenbraten.de/vasm/) executable can easily be invoked via [External Tools](https://www.jetbrains.com/help/idea/configuring-third-party-tools.html) 

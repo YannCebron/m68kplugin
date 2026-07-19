@@ -19,10 +19,14 @@ package com.yanncebron.m68kplugin.browser;
 import com.intellij.diagnostic.PluginException;
 import com.intellij.ide.SelectInContext;
 import com.intellij.openapi.project.Project;
+import com.yanncebron.m68kplugin.settings.ide.M68kProjectEnvironment;
 import org.jetbrains.annotations.Nullable;
 
 public interface M68kBrowserPaneFactory<T extends M68kBrowserPaneBase<V>, V> {
 
+  /**
+   * @see M68kProjectEnvironment
+   */
   default boolean isAvailable(Project project) {
     return true;
   }

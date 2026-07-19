@@ -40,6 +40,8 @@ Browse all supported registers with reference documentation
 
 ### Amiga Hardware
 
+> [Target platform](../getting_started.md#target-platform) must be set to _Amiga_
+
 Browse all hardware registers with additional reference documentation.
 
 Register list can be filtered by _OCS_, _ECS_, and _AGA_ chip set and `CIAx` registers can be toggled.

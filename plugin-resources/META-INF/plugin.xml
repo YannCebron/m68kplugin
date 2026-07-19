@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2025 The Authors
+  ~ Copyright 2026 The Authors
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -43,6 +43,11 @@
       <with attribute="factoryClass" implements="com.yanncebron.m68kplugin.browser.M68kBrowserPaneFactory"/>
     </extensionPoint>
   </extensionPoints>
+
+  <projectListeners>
+    <listener topic="com.yanncebron.m68kplugin.settings.ide.M68kProjectEnvironmentListener"
+              class="com.yanncebron.m68kplugin.browser.M68kBrowserToolWindowFactory$ProjectEnvironmentListener"/>
+  </projectListeners>
 
   <extensions defaultExtensionNs="com.intellij">
     <errorHandler implementation="com.intellij.diagnostic.JetBrainsMarketplaceErrorReportSubmitter"/>
@@ -251,6 +256,16 @@
     <consoleFilterProvider
         implementation="com.yanncebron.m68kplugin.compiler.M68kVasmConsoleFilterProvider"/>
 
+
+    <projectConfigurable
+        id="M68kProjectConfigurable"
+        parentId="language"
+        key="general.m68k.assembler"
+        instance="com.yanncebron.m68kplugin.settings.ide.M68kProjectConfigurable"
+        nonDefaultProject="true"/>
+    <projectService
+        serviceInterface="com.yanncebron.m68kplugin.settings.ide.M68kProjectEnvironment"
+        serviceImplementation="com.yanncebron.m68kplugin.settings.ide.M68kProjectEnvironmentImpl"/>
 
     <fileType name="PLAIN_TEXT" fileNames="FILE_ID.DIZ" extensions="nfo"/>
   </extensions>

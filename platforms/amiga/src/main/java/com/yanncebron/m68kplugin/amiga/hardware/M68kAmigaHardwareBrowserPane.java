@@ -34,6 +34,8 @@ import com.yanncebron.m68kplugin.M68kApiBundle;
 import com.yanncebron.m68kplugin.amiga.M68kAmigaBundle;
 import com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase;
 import com.yanncebron.m68kplugin.browser.M68kBrowserPaneFactory;
+import com.yanncebron.m68kplugin.settings.ide.M68kProjectEnvironment;
+import com.yanncebron.m68kplugin.settings.ide.M68kTargetPlatform;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -235,6 +237,11 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
   }
 
   static final class Factory implements M68kBrowserPaneFactory<M68kAmigaHardwareBrowserPane, M68kAmigaHardwareRegister> {
+
+    @Override
+    public boolean isAvailable(Project project) {
+      return M68kProjectEnvironment.getInstance(project).getTargetPlatform() == M68kTargetPlatform.AMIGA;
+    }
 
     @Override
     public M68kAmigaHardwareBrowserPane createPane(Project project) {
