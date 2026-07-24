@@ -8,7 +8,7 @@ nav_order: 3
 
 ## Navigation
 
-*Navigate \| Symbol* for labels
+*Navigate \| Symbol* for labels/symbols
 
 ![Goto symbol](../assets/ide/goto_symbol.png)
 
@@ -16,9 +16,11 @@ nav_order: 3
 
 Provides access to all syntax and reference documentation.
 
-Use _Navigate | Select In..._ on current element in editor to open it in the _M68k Browser_ tool window.
+Use _Navigate \| Select In..._ on the current element in editor to open it in the _M68k Browser_ tool window.
 
-> 💡To search for entries, start typing while the focus is on the element list on the left.
+> 💡To search for entries, put the focus on the element list on the left and start typing.
+>
+> All toggle buttons have keyboard shortcuts (see tooltips).
 
 ### Mnemonics
 
