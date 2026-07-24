@@ -24,7 +24,7 @@ import com.intellij.util.xmlb.annotations.Property
  * @see com.yanncebron.m68kplugin.settings.ide.M68kProjectEnvironment
  */
 @Service(Service.Level.PROJECT)
-@State(name = "M68kProjectSettings", storages = [Storage(StoragePathMacros.WORKSPACE_FILE)])
+@State(name = "M68kProjectSettings", storages = [Storage("m68kplugin.xml")])
 internal class M68kProjectSettings :
     SerializablePersistentStateComponent<M68kProjectSettings.State>(State()) {
 
