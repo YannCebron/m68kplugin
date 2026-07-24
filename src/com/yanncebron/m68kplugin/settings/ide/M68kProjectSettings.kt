@@ -21,13 +21,16 @@ import com.intellij.openapi.project.Project
 import com.intellij.util.xmlb.annotations.Property
 
 /**
- * @see com.yanncebron.m68kplugin.settings.ide.M68kProjectEnvironment
+ * @see M68kProjectEnvironment
  */
 @Service(Service.Level.PROJECT)
 @State(name = "M68kProjectSettings", storages = [Storage("m68kplugin.xml")])
 internal class M68kProjectSettings :
     SerializablePersistentStateComponent<M68kProjectSettings.State>(State()) {
 
+    /**
+     * @see M68kProjectEnvironment.getTargetPlatform
+     */
     var targetPlatform: M68kTargetPlatform
         get() = state.targetPlatform
         set(value) {

@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NonNls
 internal class M68kProjectConfigurable(private val project: Project) :
     BoundConfigurable(M68kBundle.message("general.m68k.assembler")), SearchableConfigurable {
 
-    private val settings: M68kProjectSettings
+    private val projectSettings: M68kProjectSettings
         get() = M68kProjectSettings.getInstance(project)
 
     @Suppress("UnstableApiUsage")
@@ -52,7 +52,7 @@ internal class M68kProjectConfigurable(private val project: Project) :
                                 }
                             }
                         })
-                        .bindItem(settings::targetPlatform.toNullableProperty())
+                        .bindItem(projectSettings::targetPlatform.toNullableProperty())
                         .comment(
                             M68kBundle.message("ide.settings.project.target.platform.comment"),
                             action = HyperlinkEventAction.HTML_HYPERLINK_INSTANCE
@@ -65,13 +65,13 @@ internal class M68kProjectConfigurable(private val project: Project) :
     override fun getId(): @NonNls String = "M68kProjectConfigurable"
 
     override fun apply() {
-        val oldTargetPlatform = settings.targetPlatform
+        val oldTargetPlatform = projectSettings.targetPlatform
 
         super.apply()
 
-        if (oldTargetPlatform != settings.targetPlatform) {
+        if (oldTargetPlatform != projectSettings.targetPlatform) {
             val publisher = project.messageBus.syncPublisher(M68kProjectEnvironmentListener.TOPIC)
-            publisher.targetPlatformChanged(settings.targetPlatform);
+            publisher.targetPlatformChanged(projectSettings.targetPlatform);
         }
     }
 }

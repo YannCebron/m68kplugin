@@ -19,7 +19,7 @@ package com.yanncebron.m68kplugin.settings.ide;
 import com.intellij.openapi.project.Project;
 
 /**
- * Exposes project level environment settings.
+ * Exposes project level environment settings (read-only).
  *
  * @see M68kProjectEnvironmentListener
  */
