@@ -45,11 +45,13 @@ It should usually not take a noticeable amount of time, during which some functi
 _Settings \| Languages & Frameworks \| M68k Assembler_
 
 Settings marked with 
+
 Shared 
 {: .label }
 are stored in `.idea/m68kplugin.xml` and shared via VCS.
 
 Settings marked with 
+
 Local 
 {: .label .label-green }
 are stored in `.idea/workspace.xml` and **not** shared (user-local).
@@ -58,7 +60,8 @@ are stored in `.idea/workspace.xml` and **not** shared (user-local).
 
 #### Target Platform
 
-Shared {: .label }
+Shared 
+{: .label }
 
 - Generic: basic support (default)
 - Amiga: adds [_Amiga Hardware_](features/ide.md#amiga-hardware) pane in _M68k Browser_
