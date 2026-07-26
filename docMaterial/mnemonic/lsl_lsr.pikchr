@@ -1,0 +1,30 @@
+C: box "C" fit
+X: box "X" fit at 1cm south of C
+
+
+OP: box "Operand &larr;" fit at 2cm right of C.e
+Z: text "0" fit at 1cm right of OP.e
+
+text "LSL" bold at 0.5cm north of OP
+
+arrow from OP.w to C.e
+dot at 0.5cm west of OP.w
+arrow from last dot down 1cm then left to X.e
+
+arrow from Z.w to OP.e
+
+
+
+
+Z2: text "0" fit at 2cm south of OP.w
+
+OP2: box "Operand &rarr;" fit at 2cm right of Z2
+text "LSR" bold at 0.5cm north of OP2.w
+
+arrow from Z2.e to OP2.w
+
+C2: box "C" fit at 2.25cm right of OP2
+X2: box "X" fit at 1cm south of C2
+arrow from OP2.e to C2.w
+dot at 0.5cm right of OP2.e
+arrow from last dot down 1cm then right to X2.w

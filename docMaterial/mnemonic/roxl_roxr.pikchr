@@ -1,0 +1,27 @@
+C: box "C" fit
+
+
+OP: box "Operand &larr;" fit at 2cm right of C.e
+X: box "X" fit at 2cm right of OP
+
+text "ROXL" bold at 1cm north of OP
+
+arrow from OP.w to C.e
+dot at 0.5cm west of OP.w
+arrow from last dot up 0.75cm then right until even with X then down to X.n
+arrow from X.w to OP.e
+
+
+
+
+
+OP2: box "Operand &rarr;" fit at 2cm south of OP
+text "ROXR" bold at 1cm north of OP2
+X2: box "X" fit at 2cm west of OP2
+
+
+C2: box "C" fit at 2.25cm right of OP2
+arrow from OP2.e to C2.w
+dot at 0.5cm east of OP2.e
+arrow from last dot up 0.75cm then left until even with X2 then down to X2.n
+arrow from X2.e to OP2.w

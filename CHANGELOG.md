@@ -5,6 +5,7 @@
 ### Changed
 
 - Mnemonic data: regenerate from vasm 2.0f
+- Mnemonic reference docs: re-gen diagrams from scratch (shift instructions/`MOVEP`)
 
 ### Added
 

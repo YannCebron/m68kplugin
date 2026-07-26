@@ -1,0 +1,71 @@
+$r = 5cm
+linerad = 0.75*$r
+
+T: [
+text "[M(0800001)] &larr; [D0(24:31)]" ljust  mono
+text "[M(0800003)] &larr; [D0(16:23)]" ljust mono at 0.5cm below last text
+text "[M(0800005)] &larr; [D0(8:15)]"  ljust mono at 0.5cm below last text
+text "[M(0800007)] &larr; [D0(0:7)]" ljust mono at 0.5cm below last text
+]
+
+P: [
+T1: text "080000"
+AA1: box width 1cm height 1cm fill lightgray
+A1: box width 1cm height 1cm
+
+T2: text "080002" at 1cm below T1
+box width 1cm height 1cm fill lightgray
+A2: box width 1cm height 1cm
+
+T3: text "080004" at 1cm below T2
+box width 1cm height 1cm fill lightgray
+A3: box width 1cm height 1cm
+
+T4: text "080006" at 1cm below T3
+AA4: box width 1cm height 1cm fill lightgray
+A4: box width 1cm height 1cm
+
+
+text "Memory" at 0.5cm north of A1.nw
+
+line from AA1.nw up 0.25cm
+line from A1.ne up 0.25cm
+
+line from AA4.sw down 0.25cm
+line from A4.se down 0.25cm
+# -------------------
+
+B1: box width 1cm height 0.5cm at 3cm right of A1
+dot at B1.c
+arrow from B1.c to A1.c
+text "080001" at 1cm east of A1.ne
+
+B2: box width 1cm height 0.5cm at 1cm right of B1
+dot at B2.c
+arrow from B2.c down 1cm then left to A2.c
+text "080003" at 1cm east of A2.ne
+
+B3: box width 1cm height 0.5cm at 1cm right of B2
+dot at B3.c
+arrow from B3.c down 2cm then left to A3.c
+text "080005" at 1cm east of A3.ne
+
+B4: box width 1cm height 0.5cm at 1cm right of B3
+dot at B4.c
+arrow from B4.c down 3cm then left to A4.c
+text "080007" at 1cm east of A4.ne
+
+text "DO" at 1cm east of B4
+
+text "  31" small ljust at 0.25cm above B1.nw
+text "...24  " small rjust at 0.25cm above B1.ne
+
+text "  23" small ljust at 0.25cm above B2.nw
+text "...16  " small rjust at 0.25cm above B2.ne
+
+text "  15" small ljust at 0.25cm above B3.nw
+text ".....8  " small rjust at 0.25cm above B3.ne
+
+text "  7" small ljust at 0.25cm above B4.nw
+text ".......0  " small rjust at 0.25cm above B4.ne
+] at 4cm south of T

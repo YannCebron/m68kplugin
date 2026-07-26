@@ -1,0 +1,25 @@
+C: box "C" fit
+
+
+OP: box "Operand &larr;" fit at 2cm right of C.e
+
+text "ROL" bold at 0.75cm north of OP
+
+arrow from OP.w to C.e
+dot at 0.5cm west of OP.w
+arrow from last dot up 0.5cm then right 3cm  then down until even with OP.e then right to OP.e
+
+
+
+
+
+
+OP2: box "Operand &rarr;" fit at 2cm south of OP
+text "ROR" bold at 0.75cm north of OP2
+
+
+
+C2: box "C" fit at 2.25cm right of OP2
+arrow from OP2.e to C2.w
+dot at 0.5cm east of OP2.e
+arrow from last dot up 0.5cm then left 3cm then down until even with OP2.w then right to OP2.w
