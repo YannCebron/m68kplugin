@@ -44,15 +44,20 @@ It should usually not take a noticeable amount of time, during which some functi
 
 _Settings \| Languages & Frameworks \| M68k Assembler_
 
-Settings marked with Shared {: .label }
+Settings marked with 
+Shared 
+{: .label }
 are stored in `.idea/m68kplugin.xml` and shared via VCS.
 
-Settings marked with Local {: .label .label-green }
+Settings marked with 
+Local 
+{: .label .label-green }
 are stored in `.idea/workspace.xml` and **not** shared (user-local).
 
 ### Project
 
 #### Target Platform
+
 Shared {: .label }
 
 - Generic: basic support (default)
@@ -61,7 +66,9 @@ Shared {: .label }
 ### Editor
 
 #### View \| Quick Definition: number of following statements for (local) label
-Local {: .label .label-green }
+
+Local 
+{: .label .label-green }
 
 The maximum number of statements to show.
 
