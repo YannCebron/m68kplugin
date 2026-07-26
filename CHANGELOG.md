@@ -8,7 +8,9 @@
 
 ### Added
 
-- _Settings | Languages & Frameworks | M68k Assembler_ to select _Target platform_
+- _Settings | Languages & Frameworks | M68k Assembler_ to configure
+  - _Target platform_ (Generic/Amiga)
+  - _View | Quick Definition_: number of following statements for (local) label 
 
 ## 0.2.4 - 2026-07-10
 

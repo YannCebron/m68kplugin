@@ -20,6 +20,7 @@ import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.codeInsight.hint.ImplementationViewComponent;
 import com.intellij.psi.PsiElement;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
+import com.yanncebron.m68kplugin.settings.ide.M68kWorkspaceSettings;
 
 public class M68kImplementationTextSelectionerTest extends BasePlatformTestCase {
 
@@ -78,6 +79,26 @@ public class M68kImplementationTextSelectionerTest extends BasePlatformTestCase 
         rept 3
         endr
         moveq #5,d0""");
+  }
+
+  public void testLabelZeroFollowingEntries() {
+    M68kWorkspaceSettings workspaceSettings = M68kWorkspaceSettings.getInstance(getProject());
+    int originalValue = workspaceSettings.getLabelQuickDefinitionStatementsAfter();
+    workspaceSettings.setLabelQuickDefinitionStatementsAfter(0);
+
+    try {
+      myFixture.configureByText("a.s",
+        """
+          label
+            moveq #1,d0
+            moveq #2,d0
+            bra la<caret>bel
+          """);
+      doTest("""
+        label""");
+    } finally {
+      workspaceSettings.setLabelQuickDefinitionStatementsAfter(originalValue);
+    }
   }
 
   public void testLabelStopAtFirstLabel() {

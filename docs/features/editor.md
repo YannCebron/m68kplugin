@@ -99,7 +99,7 @@ Completion and <kbd>Ctrl+Click</kbd> hover information
 
 The range is expanded for:
 - macros: to whole macro
-- (local) label: including up to five following statements; stop at the next (local) label
+- (local) label: including up to _n_ following statements; stop at the next (local) label
 
 ![Quick definition](../assets/editor/quick_definition.png)
 

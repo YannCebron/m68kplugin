@@ -39,15 +39,31 @@ See *Motorola 68000 Assembler* entry in *Settings \| Editor \| File Types* to cu
 On initial opening of existing sources, or when many source files are changed, the IDE will analyze relevant files to track all information.
 It should usually not take a noticeable amount of time, during which some functionality (e.g., resolving/navigation) is not fully available.
 
-### Project Settings
+## Settings
 **Since v0.2.5**
 
 _Settings \| Languages & Frameworks \| M68k Assembler_
 
+Settings marked with Shared {: .label }
+are stored in `.idea/m68kplugin.xml` and shared via VCS.
+
+Settings marked with Local {: .label .label-green }
+are stored in `.idea/workspace.xml` and **not** shared (user-local).
+
+### Project
+
 #### Target Platform
+Shared {: .label }
 
 - Generic: basic support (default)
 - Amiga: adds [_Amiga Hardware_](features/ide.md#amiga-hardware) pane in _M68k Browser_
+
+### Editor
+
+#### View \| Quick Definition: number of following statements for (local) label
+Local {: .label .label-green }
+
+The maximum number of statements to show.
 
 ## Building
 

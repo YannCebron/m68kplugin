@@ -21,10 +21,7 @@ import com.intellij.openapi.options.SearchableConfigurable
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.SimpleTextAttributes
-import com.intellij.ui.dsl.builder.HyperlinkEventAction
-import com.intellij.ui.dsl.builder.bindItem
-import com.intellij.ui.dsl.builder.panel
-import com.intellij.ui.dsl.builder.toNullableProperty
+import com.intellij.ui.dsl.builder.*
 import com.intellij.ui.dsl.listCellRenderer.listCellRenderer
 import com.yanncebron.m68kplugin.M68kBundle
 import org.jetbrains.annotations.NonNls
@@ -34,6 +31,9 @@ internal class M68kProjectConfigurable(private val project: Project) :
 
     private val projectSettings: M68kProjectSettings
         get() = M68kProjectSettings.getInstance(project)
+
+    private val workspaceSettings: M68kWorkspaceSettings
+        get() = M68kWorkspaceSettings.getInstance(project)
 
     @Suppress("UnstableApiUsage")
     override fun createPanel(): DialogPanel {
@@ -57,6 +57,14 @@ internal class M68kProjectConfigurable(private val project: Project) :
                             M68kBundle.message("ide.settings.project.target.platform.comment"),
                             action = HyperlinkEventAction.HTML_HYPERLINK_INSTANCE
                         )
+                }
+            }
+
+            group(M68kBundle.message("ide.settings.editor")) {
+                row(M68kBundle.message("ide.settings.editor.label.following.statements")) {
+                    spinner(IntRange(0, 50))
+                        .bindIntValue(workspaceSettings::labelQuickDefinitionStatementsAfter)
+                        .comment(M68kBundle.message("ide.settings.editor.label.following.statements.comment"))
                 }
             }
         }

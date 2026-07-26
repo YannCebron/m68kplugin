@@ -21,34 +21,27 @@ import com.intellij.openapi.project.Project
 import com.intellij.util.xmlb.annotations.Property
 
 /**
- * Shareable project settings.
- *
- * @see M68kProjectEnvironment
- * @see M68kWorkspaceSettings
+ * Local workspace settings (not shared).
  */
 @Service(Service.Level.PROJECT)
-@State(name = "M68kProjectSettings", storages = [Storage("m68kplugin.xml")])
-internal class M68kProjectSettings :
-    SerializablePersistentStateComponent<M68kProjectSettings.State>(State()) {
+@State(name = "M68kWorkspaceSettings", storages = [Storage(StoragePathMacros.WORKSPACE_FILE)])
+class M68kWorkspaceSettings : SerializablePersistentStateComponent<M68kWorkspaceSettings.State>(State()) {
 
-    /**
-     * @see M68kProjectEnvironment.getTargetPlatform
-     */
-    var targetPlatform: M68kTargetPlatform
-        get() = state.targetPlatform
+    var labelQuickDefinitionStatementsAfter: Int
+        get() = state.labelQuickDefinitionStatementsAfter
         set(value) {
             updateState {
-                it.copy(targetPlatform = value)
+                it.copy(labelQuickDefinitionStatementsAfter = value)
             }
         }
 
     data class State(
         @field:Property
-        val targetPlatform: M68kTargetPlatform = M68kTargetPlatform.GENERIC
+        val labelQuickDefinitionStatementsAfter: Int = 5
     )
 
     companion object {
         @JvmStatic
-        fun getInstance(project: Project): M68kProjectSettings = project.service()
+        fun getInstance(project: Project): M68kWorkspaceSettings = project.service()
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,13 +28,14 @@ import com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDir
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kEndmDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kMacroDirective;
+import com.yanncebron.m68kplugin.settings.ide.M68kWorkspaceSettings;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Expand <em>View | Quick Definition</em> range:
  * <ul>
  *   <li>full {@code macro ... endm} block</li>
- *   <li>(local) label: up to 5 following statements; stop at the next (local) label</li>
+ *   <li>(local) label: up to <em>n</em> following statements; stop at the next (local) label</li>
  * </ul>
  * .
  */
@@ -67,6 +68,11 @@ final class M68kImplementationTextSelectioner implements ImplementationTextSelec
       return textEndOffset.get();
     }
 
+    int linesAfter = M68kWorkspaceSettings.getInstance(element.getProject()).getLabelQuickDefinitionStatementsAfter();
+    if (linesAfter == 0) {
+      return textEndOffset.get();
+    }
+
     Ref<Integer> maxEntries = Ref.create(0);
     M68kPsiTreeUtil.processSiblingsForwards(element, sibling -> {
       if (sibling instanceof M68kLocalLabel || sibling instanceof M68kLabel) {
@@ -79,10 +85,9 @@ final class M68kImplementationTextSelectioner implements ImplementationTextSelec
         textEndOffset.set(sibling.getTextRange().getEndOffset());
         maxEntries.set(maxEntries.get() + 1);
       }
-      return maxEntries.get() < 5;
+      return maxEntries.get() < linesAfter;
     });
 
     return textEndOffset.get();
-
   }
 }
