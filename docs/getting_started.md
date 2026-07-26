@@ -44,16 +44,10 @@ It should usually not take a noticeable amount of time, during which some functi
 
 _Settings \| Languages & Frameworks \| M68k Assembler_
 
-Settings marked with 
-
-Shared 
-{: .label }
+Settings marked with _SHARED_
 are stored in `.idea/m68kplugin.xml` and shared via VCS.
 
-Settings marked with 
-
-Local 
-{: .label .label-green }
+Settings marked with _LOCAL_ 
 are stored in `.idea/workspace.xml` and **not** shared (user-local).
 
 ### Project
