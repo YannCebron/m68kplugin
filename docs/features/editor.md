@@ -42,7 +42,7 @@ For `macro`/`endm`, `section` and machine directives (`machine`, `mc68010` etc.)
 
 _Hover_: enable _Show quick documentation on hover_ in *Settings \| Editor \| Code Editing*
 
-Use _Navigate | Select In..._ on current element in editor to open it in the _M68k Browser_ tool window.
+Use _Navigate \| Select In..._ on current element in editor to open it in the _M68k Browser_ tool window.
 
 ### Mnemonics
 
@@ -164,6 +164,6 @@ See also *Code \| Move Element Left/Right* above.
 
 #### Show Used/Free Registers 
 
-For text selection in editor.
+For current text selection in editor.
 
 ![Used registers](../assets/editor/used_registers.png)
