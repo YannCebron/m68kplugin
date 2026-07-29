@@ -25,6 +25,7 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.StringEscapesTokenTypes;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import com.yanncebron.m68kplugin.lexer.M68kLexer;
@@ -45,11 +46,9 @@ public class M68kSyntaxHighlighter extends SyntaxHighlighterBase {
     keys.put(M68kTokenTypes.COLON, M68kTextAttributes.COLON);
     keys.put(M68kTokenTypes.COMMA, M68kTextAttributes.COMMA);
     keys.put(M68kTokenTypes.HASH, M68kTextAttributes.HASH);
-    fillMap(keys, M68kTextAttributes.PARENTHESES,
-      M68kTokenTypes.L_PAREN, M68kTokenTypes.R_PAREN);
-    fillMap(keys, M68kTextAttributes.BRACKETS,
-      M68kTokenTypes.L_BRACKET, M68kTokenTypes.R_BRACKET);
-    fillMap(keys, M68kTokenGroups.OPERATION_SIGNS, M68kTextAttributes.OPERATION_SIGN);
+    safeMap(keys, TokenSet.create(M68kTokenTypes.L_PAREN, M68kTokenTypes.R_PAREN), M68kTextAttributes.PARENTHESES);
+    safeMap(keys, TokenSet.create(M68kTokenTypes.L_BRACKET, M68kTokenTypes.R_BRACKET), M68kTextAttributes.BRACKETS);
+    safeMap(keys, M68kTokenGroups.OPERATION_SIGNS, M68kTextAttributes.OPERATION_SIGN);
 
     keys.put(M68kTokenTypes.COMMENT, M68kTextAttributes.COMMENT);
     keys.put(M68kTokenTypes.COMMENT_REM, M68kTextAttributes.COMMENT_REM);
@@ -63,11 +62,11 @@ public class M68kSyntaxHighlighter extends SyntaxHighlighterBase {
     keys.put(M68kTokenTypes.OCT_NUMBER, M68kTextAttributes.OCT_NUMBER);
     keys.put(M68kTokenTypes.BIN_NUMBER, M68kTextAttributes.BIN_NUMBER);
 
-    fillMap(keys, M68kTokenGroups.INSTRUCTIONS, M68kTextAttributes.INSTRUCTION);
+    safeMap(keys, M68kTokenGroups.INSTRUCTIONS, M68kTextAttributes.INSTRUCTION);
     keys.put(M68kTokenTypes.MACRO_CALL_ID, M68kTextAttributes.MACRO_CALL);
-    fillMap(keys, M68kTokenGroups.DATA_SIZES, M68kTextAttributes.DATA_SIZES);
-    fillMap(keys, M68kTokenGroups.DIRECTIVES, M68kTextAttributes.DIRECTIVE);
-    fillMap(keys, M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES, M68kTextAttributes.CONDITIONAL_ASSEMBLY_DIRECTIVE);
+    safeMap(keys, M68kTokenGroups.DATA_SIZES, M68kTextAttributes.DATA_SIZES);
+    safeMap(keys, M68kTokenGroups.DIRECTIVES, M68kTextAttributes.DIRECTIVE);
+    safeMap(keys, M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES, M68kTextAttributes.CONDITIONAL_ASSEMBLY_DIRECTIVE);
 
     keys.put(M68kTokenTypes.DATA_REGISTER, M68kTextAttributes.DATA_REGISTER);
     keys.put(M68kTokenTypes.ADDRESS_REGISTER, M68kTextAttributes.ADDRESS_REGISTER);
