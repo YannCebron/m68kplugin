@@ -21,15 +21,12 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.ContainerUtil;
 import junit.framework.TestCase;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
-
-import static java.util.Map.entry;
 
 /**
  * Generates {@link M68kMnemonicRegistry} data from <a href="http://sun.hasenbraten.de/vasm/">vasm</a> input file
@@ -96,7 +93,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       assertEquals(split.size() + " parts: cannot parse '" + trim + "'", 4, split.size());
 
       // Operands ----------------------------
-      Couple<M68kOperand> operands = mapOperands(split.get(1));
+      Couple<M68kOperand> operands = M68kMnemonicRegistryGeneratorParser.mapOperands(split.get(1));
       M68kOperand firstOperand = operands.getFirst();
       M68kOperand secondOperand = operands.getSecond();
 
@@ -107,12 +104,12 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       assertNotNull(trim, dataSizeBlockText);
       final String dataSizeText = StringUtil.substringBefore(dataSizeBlockText, "|");
       assertNotNull(trim, dataSizeText);
-      Set<M68kDataSize> dataSizes = mapDataSizes(dataSizeText);
+      Set<M68kDataSize> dataSizes = M68kMnemonicRegistryGeneratorParser.mapDataSizes(dataSizeText);
 
       // CPU
       String cpuText = StringUtil.substringBefore(lastSplit.get(3), "}");
       assertNotNull(cpuText);
-      final Set<M68kCpu> m68kCpus = mapCpuSet(cpuText);
+      final Set<M68kCpu> m68kCpus = M68kMnemonicRegistryGeneratorParser.mapCpuSet(cpuText);
       if (m68kCpus == null || m68kCpus.isEmpty()) {
         if (!SKIP_UNSUPPORTED_CPUS && elementType != null)
           System.out.println("skip entry for unknown CPU '" + cpuText + "': " + trim);
@@ -264,24 +261,12 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     return overlap;
   }
 
-  private static Couple<M68kOperand> mapOperands(String operandText) {
-    operandText = operandText.contains("{") ? StringUtil.substringAfter(operandText, "{") : operandText;
-    assertNotNull(operandText);
-    operandText = StringUtil.substringBefore(operandText, "}");
-    assertNotNull(operandText);
-    if (operandText.contains(",")) {
-      List<String> operandTexts = StringUtil.split(operandText, ",");
-      return Couple.of(mapOperand(operandTexts.get(0)), mapOperand(operandTexts.get(1)));
-    }
-    return Couple.of(mapOperand(operandText), M68kOperand.NONE);
-  }
-
   private static @Nullable IElementType findElementType(String mnemonic) {
     return ContainerUtil.find(M68kTokenGroups.INSTRUCTIONS.getTypes(),
       iElementType -> iElementType.toString().equals(mnemonic));
   }
 
-  private boolean isSupportedCpu(Set<M68kCpu> cpus) {
+  private static boolean isSupportedCpu(Set<M68kCpu> cpus) {
     return ContainerUtil.intersects(cpus, SUPPORTED_CPUS);
   }
 
@@ -394,114 +379,6 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     return "EnumSet.of(" + StringUtil.join(dataSizes, dataSize -> "M68kDataSize." + dataSize.name(), ", ") + ")";
   }
 
-  // cpus/m68k/operands.h
-  private static final Map<String, M68kOperand> OPERAND_MAP = Map.ofEntries(
-    entry("0", M68kOperand.NONE),
-    entry("IM", M68kOperand.IMMEDIATE),
-    entry("QI", M68kOperand.QUICK_IMMEDIATE),
-    entry("MI", M68kOperand.MEMORY_WITHOUT_IMMEDIATE),
-    entry("BR", M68kOperand.BRANCH_DESTINATION),
-    entry("DB", M68kOperand.DBCC_BRANCH_DESTINATION),
-    entry("MR", M68kOperand.RESTORE_OPERANDS),
-    entry("IR", M68kOperand.IMMEDIATE_REGISTER_LIST_VALUE),
-    entry("DA", M68kOperand.DATA),
-    entry("AD", M68kOperand.ALTERABLE_DATA),
-    entry("DN", M68kOperand.DATA_WITHOUT_IMMEDIATE),
-    entry("CFAD", M68kOperand.ALTERABLE_DATA_CF),
-    entry("MA", M68kOperand.MEMORY),
-    entry("AM", M68kOperand.ALTERABLE_MEMORY),
-    entry("CFAM", M68kOperand.ALTERABLE_MEMORY_CF),
-    entry("CT", M68kOperand.CONTROL),
-    entry("AC", M68kOperand.ALTERABLE_CONTROL),
-    entry("AL", M68kOperand.ALTERABLE),
-    entry("AY", M68kOperand.ALL),
-    entry("D_", M68kOperand.DATA_REGISTER),
-    entry("DD", M68kOperand.DOUBLE_DATA_REGISTER),
-    entry("A_", M68kOperand.ADDRESS_REGISTER),
-    entry("R_", M68kOperand.DATA_OR_ADDRESS_REGISTER),
-    entry("RL", M68kOperand.DATA_OR_ADDRESS_REGISTER_LIST),
-    entry("PA", M68kOperand.ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT),
-    entry("AP", M68kOperand.ADDRESS_REGISTER_INDIRECT_POST_INCREMENT),
-    entry("DP", M68kOperand.ADDRESS_REGISTER_DISPLACEMENT),
-    entry("_SR", M68kOperand.SR_REGISTER),
-    entry("_USP", M68kOperand.USP_REGISTER),
-    entry("_CCR", M68kOperand.CCR_REGISTER),
-    entry("_CTRL", M68kOperand.CTRL_REGISTER)
-    // todo ADDRESS_REGISTER_INDEX_DISPLACEMENT = M6??
-  );
-
-  private static M68kOperand mapOperand(String operandText) {
-    return OPERAND_MAP.get(operandText);
-  }
-
-  private static final Map<String, Set<M68kDataSize>> DATA_SIZE_MAP = Map.ofEntries(
-    entry("B", M68kDataSize.GROUP_B),
-    entry("W", M68kDataSize.GROUP_W),
-    entry("L", M68kDataSize.GROUP_L),
-    entry("WL", M68kDataSize.GROUP_WL),
-    entry("CFWL", M68kDataSize.GROUP_WL),
-    entry("BWL", M68kDataSize.GROUP_BWL),
-    entry("CFBWL", M68kDataSize.GROUP_BWL),
-    entry("SBW", M68kDataSize.GROUP_SBW),
-    entry("SBWL", M68kDataSize.GROUP_SBWL),
-    entry("UNS", M68kDataSize.GROUP_UNSIZED)
-  );
-
-  @NotNull
-  private static Set<M68kDataSize> mapDataSizes(String dataSizeText) {
-    return DATA_SIZE_MAP.getOrDefault(dataSizeText, EnumSet.noneOf(M68kDataSize.class));
-  }
-
-  private static Set<M68kCpu> mapCpuSet(String cpuText) {
-    if (!StringUtil.contains(cpuText, "|")) {
-      return mapCpuPart(cpuText);
-    }
-
-    Set<M68kCpu> allCpus = EnumSet.noneOf(M68kCpu.class);
-    for (String parseCpuText : StringUtil.split(cpuText, "|")) {
-      Set<M68kCpu> parse = mapCpuPart(parseCpuText);
-      if (parse == null) continue;
-
-      allCpus.addAll(parse);
-    }
-    return allCpus;
-  }
-
-  private static final Map<String, Set<M68kCpu>> CPU_MAP = Map.ofEntries(
-    entry("m68000up", M68kCpu.GROUP_68000_UP),
-    entry("m68010up", M68kCpu.GROUP_68010_UP),
-    entry("m68020up", M68kCpu.GROUP_68020_UP),
-    entry("m68030up", M68kCpu.GROUP_68030_UP),
-    entry("m68040up", M68kCpu.GROUP_68040_UP),
-
-    entry("mfloat", M68kCpu.GROUP_FLOAT),
-    entry("apollo", M68kCpu.GROUP_APOLLO),
-
-    entry("m68851", EnumSet.of(M68kCpu.M_68851)),
-    entry("m68020", EnumSet.of(M68kCpu.M_68020)),
-    entry("m68030", EnumSet.of(M68kCpu.M_68030)),
-    entry("m68040", EnumSet.of(M68kCpu.M_68040)),
-    entry("m68060", EnumSet.of(M68kCpu.M_68060)),
-
-    entry("cpu32", EnumSet.of(M68kCpu.CPU32))
-  );
-
-  @Nullable
-  private static Set<M68kCpu> mapCpuPart(String parseCpuText) {
-    final Set<M68kCpu> m68kCpus = CPU_MAP.get(parseCpuText);
-    if (m68kCpus != null) {
-      return m68kCpus;
-    }
-
-    if (!"mgas".equals(parseCpuText) &&
-      !"malias".equals(parseCpuText) &&
-      !"mbanked".equals(parseCpuText) &&
-      !StringUtil.startsWith(parseCpuText, "mcf")) {
-      fail("cannot parse CPU '" + parseCpuText + "'");
-    }
-    return null;
-  }
-
   private List<M68kMnemonicRuntimeData> readRuntimeData() throws IOException {
     List<M68kMnemonicRuntimeData> data = new ArrayList<>();
 
@@ -512,9 +389,9 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
       String mnemonic = StringUtil.unquoteString(split.get(0).strip());
       IElementType elementType = findElementType(mnemonic);
-      Couple<M68kOperand> operands = mapOperands(split.get(1).strip());
-      Set<M68kDataSize> dataSizes = mapDataSizes(split.get(2).strip());
-      Set<M68kCpu> m68kCpus = mapCpuSet(split.get(3).strip());
+      Couple<M68kOperand> operands = M68kMnemonicRegistryGeneratorParser.mapOperands(split.get(1).strip());
+      Set<M68kDataSize> dataSizes = M68kMnemonicRegistryGeneratorParser.mapDataSizes(split.get(2).strip());
+      Set<M68kCpu> m68kCpus = M68kMnemonicRegistryGeneratorParser.mapCpuSet(split.get(3).strip());
       M68kMnemonic.PrivilegedType privilegedType = M68kMnemonic.PrivilegedType.valueOf(split.get(4).strip());
 
       data.add(
