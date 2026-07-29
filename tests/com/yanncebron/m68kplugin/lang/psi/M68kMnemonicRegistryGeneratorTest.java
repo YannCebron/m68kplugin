@@ -30,12 +30,12 @@ import java.util.*;
 
 /**
  * Generates {@link M68kMnemonicRegistry} data from <a href="http://sun.hasenbraten.de/vasm/">vasm</a> input file
- * plus additional runtime information from {@code M68kMnemonicRegistryRuntimeData.txt}.
+ * plus runtime information from {@link M68kMnemonicRegistryRuntimeParser}.
  * <p>
  * To generate new data:
  * <ol>
  *   <li>Specify path to vasm {@code cpus/m68k/opcodes.h} file in {@link #VASM_OPCODES_H_PATH}</li>
- *   <li>Adjust {@link #RUNTIME_DATA_PATH}</li>
+ *   <li>Adjust {@link M68kMnemonicRegistryRuntimeParser#RUNTIME_DATA_PATH}</li>
  *   <li>Set environment variable {@code M68kMnemonicRegistryGeneratorTest} in run configuration to enable the test</li>
  *   <li>Run {@link #testGenerateMnemonicRegistryData()} and copy generated source output</li>
  *   <li>Verify MnemonicGeneratedParserDataTest passes, dump</li>
@@ -57,13 +57,9 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
   private static final Set<M68kCpu> SUPPORTED_CPUS = EnumSet.of(M68kCpu.M_68000, M68kCpu.M_68010, M68kCpu.CPU32, M68kCpu.M_68020);
 
   private static final String VASM_OPCODES_H_PATH = "/Users/yann/idea-ultimate/vasm/cpus/m68k/opcodes.h";
-  private static final String RUNTIME_DATA_PATH = "/Users/yann/idea-ultimate/m68kplugin/tests/com/yanncebron/m68kplugin/lang/psi/M68kMnemonicRegistryRuntimeData.txt";
 
   public void testGenerateMnemonicRegistryData() throws IOException {
     if (System.getenv(getClass().getSimpleName()) == null) return;
-
-    List<M68kMnemonicRuntimeData> allRuntimeData = readRuntimeData();
-    assertEquals("parsed runtime data count", 18, allRuntimeData.size());
 
     final List<String> lines = Files.readAllLines(Paths.get(VASM_OPCODES_H_PATH));
     assertEquals("line count opcodes.h", 2863, lines.size());
@@ -138,20 +134,15 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
         continue;
       }
 
-      M68kMnemonicRuntimeData m68kMnemonicRuntimeData = ContainerUtil.find(allRuntimeData, it ->
-        it.elementType == elementType &&
-          it.firstOperand == firstOperand &&
-          it.secondOperand == secondOperand &&
-          it.dataSizes.equals(dataSizes) &&
-          it.cpus.equals(m68kCpus));
-      M68kMnemonic.PrivilegedType privilegedType = m68kMnemonicRuntimeData != null ? m68kMnemonicRuntimeData.privilegedType : M68kMnemonic.PrivilegedType.NONE;
+      M68kMnemonicRegistryRuntimeParser.M68MnemonicRuntimeInfo m68MnemonicRuntimeInfo =
+        M68kMnemonicRegistryRuntimeParser.find(elementType, firstOperand, secondOperand, dataSizes, m68kCpus);
 
       M68kMnemonic m68kMnemonic = new M68kMnemonic(elementType,
         dataSizes,
         firstOperand,
         secondOperand,
         m68kCpus,
-        privilegedType,
+        m68MnemonicRuntimeInfo.privilegedType(),
         deprecated);
 
       parsedMnemonics.add(m68kMnemonic);
@@ -379,31 +370,4 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     return "EnumSet.of(" + StringUtil.join(dataSizes, dataSize -> "M68kDataSize." + dataSize.name(), ", ") + ")";
   }
 
-  private List<M68kMnemonicRuntimeData> readRuntimeData() throws IOException {
-    List<M68kMnemonicRuntimeData> data = new ArrayList<>();
-
-    for (String line : Files.readAllLines(Paths.get(RUNTIME_DATA_PATH))) {
-      if (!line.startsWith("\"")) continue;
-
-      List<String> split = StringUtil.split(line, ", ");
-
-      String mnemonic = StringUtil.unquoteString(split.get(0).strip());
-      IElementType elementType = findElementType(mnemonic);
-      Couple<M68kOperand> operands = M68kMnemonicRegistryGeneratorParser.mapOperands(split.get(1).strip());
-      Set<M68kDataSize> dataSizes = M68kMnemonicRegistryGeneratorParser.mapDataSizes(split.get(2).strip());
-      Set<M68kCpu> m68kCpus = M68kMnemonicRegistryGeneratorParser.mapCpuSet(split.get(3).strip());
-      M68kMnemonic.PrivilegedType privilegedType = M68kMnemonic.PrivilegedType.valueOf(split.get(4).strip());
-
-      data.add(
-        new M68kMnemonicRuntimeData(elementType, dataSizes,
-          operands.getFirst(), operands.getSecond(),
-          m68kCpus, privilegedType));
-    }
-    return data;
-  }
-
-  private record M68kMnemonicRuntimeData(IElementType elementType, Set<M68kDataSize> dataSizes,
-                                         M68kOperand firstOperand, M68kOperand secondOperand,
-                                         Set<M68kCpu> cpus, M68kMnemonic.PrivilegedType privilegedType) {
-  }
 }
