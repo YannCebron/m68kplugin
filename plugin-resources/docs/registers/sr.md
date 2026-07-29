@@ -13,11 +13,9 @@ zero. I2, I1, and I0 define the interrupt mask level.
 
 ## Status Register Bits
 
-_15–8 SYSTEM BYTE_ / _7–0 USER BYTE ([CCR](ccr.md))_
+![SR](sr.png)
 
-| 15 | 14 | 13 | 12 | 11 | 10 | 9  | 8  |   | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
-|:--:|:--:|:--:|:--:|:--:|:--:|:---|:--:|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| T1 | T0 | S  | M  | 0  | I2 | I1 | I0 |   | 0 | 0 | 0 | X | N | Z | V | C |
+### _15–8 SYSTEM BYTE_
 
 #### TRACE MODE: `T1`/`T0`
 
@@ -37,3 +35,5 @@ _15–8 SYSTEM BYTE_ / _7–0 USER BYTE ([CCR](ccr.md))_
 | 1 | 1 | MSP          |
 
 #### INTERRUPT PRIORITY MASK: `I2`/`I1`/`I0`
+
+### _7–0 USER BYTE ([CCR](ccr.md))_

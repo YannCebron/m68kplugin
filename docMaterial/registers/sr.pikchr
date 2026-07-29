@@ -1,0 +1,95 @@
+$width=0.75cm
+
+$HEADER_BELOW=0
+
+define header {
+ $1: box $2 small invis fit width $width
+}
+
+define header_group {
+ line thin from $width/6 east of $2.nw up $width/6 then right until even with $width/6 west of $3.e then down to $width/6 west of $3.ne
+ text $1 at $width/2 north of last line.n
+ line thin from last text.s to last line.n chop
+}
+
+define header_group_below {
+ $HEADER_BELOW=$width
+ line thin from $width*(1+1/6) south of $width/6 east of $2.sw down $width/6 then right until even with $width*(1+1/6) south of $width/6 west of $3.e then up to $width*(1+1/6) south of $width/6 west of $3.se
+ text $1 at $width/2 south of last line.s
+ line thin from last text.n to last line.s chop
+}
+
+define content {
+ box $1 $4  with .nw at $2.sw  height $width wid $3*$width
+}
+
+define unused {
+ box "0"  with .nw at $1.sw height $width wid $2*$width fill lightgray
+}
+
+define annotate_start {
+ box " " invisible fit $1
+ "" invisible with .w at $width*1.5+$HEADER_BELOW below last box
+}
+define annotate_left_start {
+ box " " invisible fit $1
+ "" invisible with .e at $width*1.5+$HEADER_BELOW below last box
+}
+
+define annotate {
+ text $1 width $width*3 with .nw at last text.sw
+ line thin from $width south of $2.s down until even with last text then to last text.w chop
+}
+define annotate_left {
+ text $1 width $width*3 with .ne at last text.se
+ line thin from $width south of $2.s down until even with last text then to last text.e chop
+}
+
+define draw_header {
+ header(H15,"15");header(H14,"14");header(H13,"13");header(H12,"12");header(H11,"11");header(H10,"10");header(H9,"9");header(H8,"8");
+ header(H7,"7");header(H6,"6");header(H5,"5");header(H4,"4");header(H3,"3");header(H2,"2");header(H1,"1");header(H0,"0");
+}
+
+BITS: [
+
+draw_header()
+
+content("T1",H15,1)
+content("T0",H14,1)
+content("S", H13,1)
+content("M",H12,1)
+#content("0",H11,1)
+unused(H11,1)
+content("I2",H10,1)
+content("I1",H9,1)
+content("I0",H8,1)
+
+#content("0",H7,1)
+#content("0",H6,1)
+#content("0",H5,1)
+unused(H7,3)
+content("X",H4,1)
+content("N",H3,1)
+content("Z",H2,1)
+content("V",H1,1)
+content("C",H0,1)
+
+
+header_group("SYSTEM BYTE",H15,H8)
+header_group("USER BYTE (CONDITION CODE REGISTER)", H7, H0)
+header_group_below("TRACE ENABLE",H15,H14)
+header_group_below("INTERRUPT PRIORITY MASK",H10,H8)
+
+####### ANNOTATE
+annotate_left_start(at west of H4)
+annotate_left("EXTEND", H4)
+annotate_left("NEGATIVE", H3)
+annotate_left("ZERO", H2)
+annotate_left("OVERFLOW", H1)
+annotate_left("CARRY", H0)
+
+annotate_left_start(at west of H13)
+annotate_left("SUPERVISOR/USER STATE", H13)
+annotate_left("MASTER/INTERRUPT STATE", H12)
+
+]
