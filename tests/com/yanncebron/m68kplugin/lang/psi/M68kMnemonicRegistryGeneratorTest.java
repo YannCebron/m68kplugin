@@ -37,7 +37,7 @@ import java.util.*;
  *   <li>Specify path to vasm {@code cpus/m68k/opcodes.h} file in {@link #VASM_OPCODES_H_PATH}</li>
  *   <li>Adjust {@link M68kMnemonicRegistryRuntimeParser#RUNTIME_DATA_PATH}</li>
  *   <li>Set environment variable {@code M68kMnemonicRegistryGeneratorTest} in run configuration to enable the test</li>
- *   <li>Run {@link #testGenerateMnemonicRegistryData()} and copy generated source output</li>
+ *   <li>Run {@link #testGenerateMnemonicRegistryData()} and copy generated source output, add missing runtime entries</li>
  *   <li>Verify MnemonicGeneratedParserDataTest passes, dump</li>
  * </ol>
  * Last check: vasm 2.0f.
@@ -385,7 +385,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       return "GROUP_CPU32";
     }
 
-    // do not output non-supported CPUs (e.g., LPSTOP which is currently only for CPU32)
+    // do not output non-supported CPUs (e.g., LPSTOP with 'm68060|cpu32|apollo', but only CPU32 is supported)
     List<M68kCpu> supportedCpus = ContainerUtil.filter(cpus, SUPPORTED_CPUS::contains);
     return "EnumSet.of(" + StringUtil.join(supportedCpus, m68kCpu -> "M68kCpu." + m68kCpu.name(), ", ") + ")";
   }
