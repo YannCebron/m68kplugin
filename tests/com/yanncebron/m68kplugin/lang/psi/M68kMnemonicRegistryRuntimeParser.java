@@ -41,6 +41,11 @@ final class M68kMnemonicRegistryRuntimeParser {
   record M68MnemonicRuntimeInfo(M68kMnemonic.PrivilegedType privilegedType) {
   }
 
+  /**
+   * No runtime info available.
+   */
+  static M68MnemonicRuntimeInfo NO_ENTRY = new M68MnemonicRuntimeInfo(M68kMnemonic.PrivilegedType.NONE);
+
   static M68MnemonicRuntimeInfo find(IElementType elementType, M68kOperand firstOperand, M68kOperand secondOperand, Set<M68kDataSize> dataSizes, Set<M68kCpu> m68kCpus) {
     M68kMnemonicRuntimeData m68kMnemonicRuntimeData = ContainerUtil.find(getAllRuntimeData(), it ->
       it.elementType == elementType &&
@@ -49,7 +54,11 @@ final class M68kMnemonicRegistryRuntimeParser {
         it.dataSizes.equals(dataSizes) &&
         it.cpus.equals(m68kCpus));
 
-    M68kMnemonic.PrivilegedType privilegedType = m68kMnemonicRuntimeData != null ? m68kMnemonicRuntimeData.privilegedType : M68kMnemonic.PrivilegedType.NONE;
+    if (m68kMnemonicRuntimeData == null) {
+      return NO_ENTRY;
+    }
+
+    M68kMnemonic.PrivilegedType privilegedType = m68kMnemonicRuntimeData.privilegedType;
     return new M68MnemonicRuntimeInfo(privilegedType);
   }
 
@@ -84,6 +93,8 @@ final class M68kMnemonicRegistryRuntimeParser {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+
+    assert data.size() == 244 : data.size();
     return data;
   }
 

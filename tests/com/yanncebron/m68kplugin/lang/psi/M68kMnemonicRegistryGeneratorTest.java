@@ -46,8 +46,11 @@ import java.util.*;
 public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
   private static final boolean LOG_UNKNOWN_MNEMONICS = false;
-
   private static final boolean SKIP_UNSUPPORTED_CPUS = true;
+
+  private static final boolean LOG_MNEMONIC_CLEANUP = false;
+
+  private static final boolean LOG_NO_RUNTIME_INFO = true;
 
   /**
    * Generate 680x0-only variants for _known_ operands.
@@ -64,10 +67,10 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     final List<String> lines = Files.readAllLines(Paths.get(VASM_OPCODES_H_PATH));
     assertEquals("line count opcodes.h", 2863, lines.size());
 
-    printDivider();
-
     Set<String> unknownMnemonics = new HashSet<>();
     List<M68kMnemonic> parsedMnemonics = new ArrayList<>();
+
+    Map<M68kMnemonic, String> missingRuntimeInfo = new HashMap<>();
 
     for (String line : lines) {
       final String trim = line.trim();
@@ -146,6 +149,24 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
         deprecated);
 
       parsedMnemonics.add(m68kMnemonic);
+
+      // store text for missing entry in M68kMnemonicRegistryRuntimeParser data
+      if (LOG_NO_RUNTIME_INFO && m68MnemonicRuntimeInfo == M68kMnemonicRegistryRuntimeParser.NO_ENTRY) {
+        String mnemonicText = StringUtil.wrapWithDoubleQuote(mnemonic) + "," + StringUtil.repeat(" ", Math.max(1, 9 - mnemonic.length()));
+
+        String operandStripText = StringUtil.substringBefore(split.get(1), "}");
+        assertNotNull(split.get(1), operandStripText);
+        String operandText = "{" + operandStripText + "}," + StringUtil.repeat(" ", Math.max(1, 9 - operandStripText.length()));
+
+        String filterDataSizeText = dataSizeText.startsWith("CF") ? dataSizeText.substring(2) : dataSizeText;
+        String formatDataSizeText = filterDataSizeText + "," + StringUtil.repeat(" ", Math.max(1, 7 - filterDataSizeText.length()));
+
+        String filterCpuText = M68kMnemonicRegistryGeneratorParser.filterCpuText(cpuText);
+        String formatCpuText = filterCpuText + "," + StringUtil.repeat(" ", Math.max(1, 15 - filterCpuText.length()));
+
+        String runTimeInfoText = mnemonicText + operandText + formatDataSizeText + formatCpuText + "NONE";
+        missingRuntimeInfo.put(m68kMnemonic, runTimeInfoText);
+      }
     }
 
     assertEquals("total parsed mnemonic count", 340, parsedMnemonics.size());
@@ -153,11 +174,11 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     List<M68kMnemonic> cleanupMnemonics = cleanupMnemonics(parsedMnemonics);
     assertEquals("total cleanup mnemonic count", 300, cleanupMnemonics.size());
 
-    dumpCode(cleanupMnemonics);
+    dumpCode(cleanupMnemonics, missingRuntimeInfo);
   }
 
   private static List<M68kMnemonic> cleanupMnemonics(List<M68kMnemonic> parsedMnemonics) {
-    printDivider();
+    if (LOG_MNEMONIC_CLEANUP) printDivider();
 
     List<M68kMnemonic> cleanupMnemonics = new ArrayList<>();
 
@@ -169,10 +190,12 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
         if (matchingMnemonic(existing, m68kMnemonic) &&
           existing.firstOperand() == m68kMnemonic.firstOperand() &&
           m68kMnemonic.secondOperand() == M68kOperand.ALTERABLE_MEMORY_CF && existing.secondOperand() == M68kOperand.ALTERABLE_MEMORY) {
-          System.out.println("skip ALTERABLE_MEMORY(CF) duplication:");
-          System.out.println("  entry:    " + m68kMnemonic);
-          System.out.println("  existing: " + existing);
-          System.out.println();
+          if (LOG_MNEMONIC_CLEANUP) {
+            System.out.println("skip ALTERABLE_MEMORY(CF) duplication:");
+            System.out.println("  entry:    " + m68kMnemonic);
+            System.out.println("  existing: " + existing);
+            System.out.println();
+          }
           skip = true;
           break;
         }
@@ -189,9 +212,11 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       for (M68kMnemonic existing : cleanupMnemonics) {
         if (matchingMnemonic(existing, m68kMnemonic) &&
           operandAddressModesOverlap(m68kMnemonic, existing)) {
-          System.out.println("  entry:    " + m68kMnemonic);
-          System.out.println("  existing: " + existing);
-          System.out.println();
+          if (LOG_MNEMONIC_CLEANUP) {
+            System.out.println("  entry:    " + m68kMnemonic);
+            System.out.println("  existing: " + existing);
+            System.out.println();
+          }
           skip = true;
           break;
         }
@@ -248,7 +273,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     Set<M68kAddressMode> firstAddressModes = Set.of(first.getAddressModes());
     Set<M68kAddressMode> secondAddressModes = Set.of(second.getAddressModes());
     boolean overlap = secondAddressModes.containsAll(firstAddressModes);
-    if (overlap) System.out.println(reason);
+    if (overlap && LOG_MNEMONIC_CLEANUP) System.out.println(reason);
     return overlap;
   }
 
@@ -266,9 +291,30 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
     System.out.println(StringUtil.repeat("-", 120));
   }
 
-  private void dumpCode(List<M68kMnemonic> mnemonics) {
+  private void dumpCode(List<M68kMnemonic> mnemonics, Map<M68kMnemonic, String> missingRuntimeInfo) {
     int supportedMnemonics = ContainerUtil.filter(mnemonics, m68kMnemonic -> isSupportedCpu(m68kMnemonic.cpus())).size();
     assertEquals("supported mnemonic count", 244, supportedMnemonics);
+
+    if (LOG_NO_RUNTIME_INFO) {
+      printDivider();
+
+      IElementType lastElementType = null;
+      for (M68kMnemonic mnemonic : mnemonics) {
+        Set<M68kCpu> cpus = mnemonic.cpus();
+        if (SKIP_UNSUPPORTED_CPUS && !isSupportedCpu(cpus)) continue;
+
+        String missingInfoText = missingRuntimeInfo.get(mnemonic);
+        if (missingInfoText != null) {
+          IElementType elementType = mnemonic.elementType();
+          if (elementType != lastElementType) {
+            System.out.println();
+          }
+
+          System.out.println(missingInfoText);
+          lastElementType = elementType;
+        }
+      }
+    }
 
     printDivider();
 

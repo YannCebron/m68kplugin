@@ -1,42 +1,335 @@
 # Licensed under the Apache License, Version 2.0 (the "License")
 #
-# Runtime information for M68kMnemonicRegistryGeneratorTest
+# Runtime information via M68kMnemonicRegistryRuntimeParser
 #
 # Format (whitespaces required):
-# "mnemonic", {op1,op2}, SIZE, CPU, NONE|PRIVILEGED|PRIVILEGED_68010_ABOVE
+# "mnemonic", {op1,op2}, SIZE, CPU[s], NONE|PRIVILEGED|PRIVILEGED_68010_ABOVE
 
-"and",    {IM,_SR},   W,      m68000up, PRIVILEGED
-"andi",   {IM,_SR},   W,      m68000up, PRIVILEGED
+"abcd",     {D_,D_},    B,      m68000up,       NONE
+"abcd",     {PA,PA},    B,      m68000up,       NONE
 
+"add",      {DA,D_},    BWL,    m68000up,       NONE
+"add",      {A_,D_},    WL,     m68000up,       NONE
+"add",      {D_,AM},    BWL,    m68000up,       NONE
+"add",      {AY,A_},    WL,     m68000up,       NONE
+"add",      {IM,AD},    BWL,    m68000up,       NONE
 
-"eor",    {IM,_SR},   W,      m68000up, PRIVILEGED
-"eori",   {IM,_SR},   W,      m68000up, PRIVILEGED
+"adda",     {AY,A_},    WL,     m68000up,       NONE
 
+"addi",     {IM,AD},    BWL,    m68000up,       NONE
 
-"or",     {IM,_SR},   W,      m68000up, PRIVILEGED
-"ori",    {IM,_SR},   W,      m68000up, PRIVILEGED
+"addq",     {QI,A_},    WL,     m68000up,       NONE
+"addq",     {QI,AD},    BWL,    m68000up,       NONE
 
-"lpstop", {IM},       W,      m68060|cpu32|apollo, PRIVILEGED
+"addx",     {D_,D_},    BWL,    m68000up,       NONE
+"addx",     {PA,PA},    BWL,    m68000up,       NONE
 
-"move",   {_SR,AD},   W,      m68000up, PRIVILEGED_68010_ABOVE
-"move",   {DA,_SR},   W,      m68000up, PRIVILEGED
+"and",      {DA,D_},    BWL,    m68000up,       NONE
+"and",      {D_,AM},    BWL,    m68000up,       NONE
+"and",      {IM,AD},    BWL,    m68000up,       NONE
+"and",      {IM,_CCR},  B,      m68000up,       NONE
+"and",      {IM,_SR},   W,      m68000up,       PRIVILEGED
 
-"move",   {A_,_USP},  L,      m68000up, PRIVILEGED
-"move",   {_USP,A_},  L,      m68000up, PRIVILEGED
+"andi",     {IM,AD},    BWL,    m68000up,       NONE
+"andi",     {IM,_CCR},  B,      m68000up,       NONE
+"andi",     {IM,_SR},   W,      m68000up,       PRIVILEGED
 
+"asl",      {AM},       W,      m68000up,       NONE
+"asl",      {D_,D_},    BWL,    m68000up,       NONE
+"asl",      {QI,D_},    BWL,    m68000up,       NONE
+"asl",      {D_},       BWL,    m68000up,       NONE
 
-"movec",  {_CTRL,R_}, L,      m68010up, PRIVILEGED
-"movec",  {R_,_CTRL}, L,      m68010up, PRIVILEGED
+"asr",      {AM},       W,      m68000up,       NONE
+"asr",      {D_,D_},    BWL,    m68000up,       NONE
+"asr",      {QI,D_},    BWL,    m68000up,       NONE
+"asr",      {D_},       BWL,    m68000up,       NONE
 
+"bhs",      {BR},       SBWL,   m68000up,       NONE
+"blo",      {BR},       SBWL,   m68000up,       NONE
+"bhi",      {BR},       SBWL,   m68000up,       NONE
+"bls",      {BR},       SBWL,   m68000up,       NONE
+"bcc",      {BR},       SBWL,   m68000up,       NONE
+"bcs",      {BR},       SBWL,   m68000up,       NONE
+"bne",      {BR},       SBWL,   m68000up,       NONE
+"beq",      {BR},       SBWL,   m68000up,       NONE
+"bvc",      {BR},       SBWL,   m68000up,       NONE
+"bvs",      {BR},       SBWL,   m68000up,       NONE
+"bpl",      {BR},       SBWL,   m68000up,       NONE
+"bmi",      {BR},       SBWL,   m68000up,       NONE
+"bge",      {BR},       SBWL,   m68000up,       NONE
+"blt",      {BR},       SBWL,   m68000up,       NONE
+"bgt",      {BR},       SBWL,   m68000up,       NONE
+"ble",      {BR},       SBWL,   m68000up,       NONE
 
-"moves",  {AM,R_},    BWL,    m68010up, PRIVILEGED
-"moves",  {R_,AM},    BWL,    m68010up, PRIVILEGED
+"bra",      {BR},       SBWL,   m68000up,       NONE
 
+"bsr",      {BR},       SBWL,   m68000up,       NONE
 
-"reset",  {0},        UNS,    m68000up, PRIVILEGED
+"bchg",     {D_,D_},    L,      m68000up,       NONE
+"bchg",     {D_,AM},    B,      m68000up,       NONE
+"bchg",     {QI,D_},    L,      m68000up,       NONE
+"bchg",     {QI,AM},    B,      m68000up,       NONE
 
+"bclr",     {D_,D_},    L,      m68000up,       NONE
+"bclr",     {D_,AM},    B,      m68000up,       NONE
+"bclr",     {QI,D_},    L,      m68000up,       NONE
+"bclr",     {QI,AM},    B,      m68000up,       NONE
 
-"rte",    {0},        UNS,    m68000up, PRIVILEGED
+"bset",     {D_,D_},    L,      m68000up,       NONE
+"bset",     {D_,AM},    B,      m68000up,       NONE
+"bset",     {QI,D_},    L,      m68000up,       NONE
+"bset",     {QI,AM},    B,      m68000up,       NONE
 
+"btst",     {D_,D_},    L,      m68000up,       NONE
+"btst",     {D_,MA},    B,      m68000up,       NONE
+"btst",     {QI,D_},    L,      m68000up,       NONE
+"btst",     {QI,MI},    B,      m68000up,       NONE
 
-"stop",   {QI},       UNS,    m68000up, PRIVILEGED
+"bgnd",     {0},        UNS,    cpu32,          NONE
+
+"bkpt",     {QI},       UNS,    m68010up,       NONE
+
+"chk",      {DA,D_},    W,      m68000up,       NONE
+"chk",      {DA,D_},    L,      m68020up,       NONE
+
+"clr",      {AD},       BWL,    m68000up,       NONE
+
+"cmp",      {A_,D_},    WL,     m68000up,       NONE
+"cmp",      {DA,D_},    BWL,    m68000up,       NONE
+"cmp",      {AY,A_},    WL,     m68000up,       NONE
+"cmp",      {IM,AD},    BWL,    m68000up,       NONE
+"cmp",      {IM,DN},    BWL,    m68020up|cpu32, NONE
+"cmp",      {AP,AP},    BWL,    m68000up,       NONE
+
+"cmpa",     {AY,A_},    WL,     m68000up,       NONE
+
+"cmpi",     {IM,AD},    BWL,    m68000up,       NONE
+"cmpi",     {IM,DN},    BWL,    m68020up|cpu32, NONE
+
+"cmpm",     {AP,AP},    BWL,    m68000up,       NONE
+
+"dbt",      {D_,DB},    W,      m68000up,       NONE
+
+"dbf",      {D_,DB},    W,      m68000up,       NONE
+"dbra",     {D_,DB},    W,      m68000up,       NONE
+"dbhi",     {D_,DB},    W,      m68000up,       NONE
+"dbls",     {D_,DB},    W,      m68000up,       NONE
+"dbcc",     {D_,DB},    W,      m68000up,       NONE
+"dbhs",     {D_,DB},    W,      m68000up,       NONE
+"dbcs",     {D_,DB},    W,      m68000up,       NONE
+"dblo",     {D_,DB},    W,      m68000up,       NONE
+"dbne",     {D_,DB},    W,      m68000up,       NONE
+"dbeq",     {D_,DB},    W,      m68000up,       NONE
+"dbvc",     {D_,DB},    W,      m68000up,       NONE
+"dbvs",     {D_,DB},    W,      m68000up,       NONE
+"dbpl",     {D_,DB},    W,      m68000up,       NONE
+"dbmi",     {D_,DB},    W,      m68000up,       NONE
+"dbge",     {D_,DB},    W,      m68000up,       NONE
+"dblt",     {D_,DB},    W,      m68000up,       NONE
+"dbgt",     {D_,DB},    W,      m68000up,       NONE
+"dble",     {D_,DB},    W,      m68000up,       NONE
+
+"divs",     {DA,D_},    W,      m68000up,       NONE
+"divs",     {DA,D_},    L,      m68020up|cpu32, NONE
+"divs",     {DA,DD},    L,      m68020up|cpu32, NONE
+
+"divu",     {DA,D_},    W,      m68000up,       NONE
+"divu",     {DA,D_},    L,      m68020up|cpu32, NONE
+"divu",     {DA,DD},    L,      m68020up|cpu32, NONE
+
+"eor",      {D_,AD},    BWL,    m68000up,       NONE
+"eor",      {IM,AD},    BWL,    m68000up,       NONE
+"eor",      {IM,_CCR},  B,      m68000up,       NONE
+"eor",      {IM,_SR},   W,      m68000up,       PRIVILEGED
+
+"eori",     {IM,AD},    BWL,    m68000up,       NONE
+"eori",     {IM,_CCR},  B,      m68000up,       NONE
+"eori",     {IM,_SR},   W,      m68000up,       PRIVILEGED
+
+"exg",      {D_,D_},    L,      m68000up,       NONE
+"exg",      {A_,A_},    L,      m68000up,       NONE
+"exg",      {D_,A_},    L,      m68000up,       NONE
+"exg",      {A_,D_},    L,      m68000up,       NONE
+
+"ext",      {D_},       WL,     m68000up,       NONE
+
+"illegal",  {0},        UNS,    m68000up,       NONE
+
+"jmp",      {CT},       UNS,    m68000up,       NONE
+
+"jsr",      {CT},       UNS,    m68000up,       NONE
+
+"lea",      {CT,A_},    L,      m68000up,       NONE
+
+"link",     {A_,IM},    W,      m68000up,       NONE
+"link",     {A_,IM},    L,      m68020up|cpu32, NONE
+
+"lpstop",   {IM},       W,      m68060|cpu32|apollo, PRIVILEGED
+
+"lsl",      {AM},       W,      m68000up,       NONE
+"lsl",      {D_,D_},    BWL,    m68000up,       NONE
+"lsl",      {QI,D_},    BWL,    m68000up,       NONE
+"lsl",      {D_},       BWL,    m68000up,       NONE
+
+"lsr",      {AM},       W,      m68000up,       NONE
+"lsr",      {D_,D_},    BWL,    m68000up,       NONE
+"lsr",      {QI,D_},    BWL,    m68000up,       NONE
+"lsr",      {D_},       BWL,    m68000up,       NONE
+
+"move",     {A_,AL},    WL,     m68000up,       NONE
+"move",     {AY,A_},    WL,     m68000up,       NONE
+"move",     {DA,AD},    BWL,    m68000up,       NONE
+"move",     {_CCR,AD},  W,      m68010up,       NONE
+"move",     {_SR,AD},   W,      m68000up,       PRIVILEGED_68010_ABOVE
+"move",     {DA,_CCR},  W,      m68000up,       NONE
+"move",     {DA,_SR},   W,      m68000up,       PRIVILEGED
+"move",     {_USP,A_},  L,      m68000up,       PRIVILEGED
+"move",     {A_,_USP},  L,      m68000up,       PRIVILEGED
+
+"movea",    {AY,A_},    WL,     m68000up,       NONE
+"movea",    {A_,AL},    WL,     m68000up,       NONE
+"movea",    {DA,AD},    BWL,    m68000up,       NONE
+
+"movec",    {_CTRL,R_}, L,      m68010up,       PRIVILEGED
+"movec",    {R_,_CTRL}, L,      m68010up,       PRIVILEGED
+
+"movem",    {RL,PA},    WL,     m68000up,       NONE
+"movem",    {RL,AC},    WL,     m68000up,       NONE
+"movem",    {MR,RL},    WL,     m68000up,       NONE
+"movem",    {IR,PA},    WL,     m68000up,       NONE
+"movem",    {IR,AC},    WL,     m68000up,       NONE
+"movem",    {MR,IR},    WL,     m68000up,       NONE
+
+"movep",    {DP,D_},    WL,     m68000up,       NONE
+"movep",    {D_,DP},    WL,     m68000up,       NONE
+
+"moveq",    {QI,D_},    L,      m68000up,       NONE
+
+"moves",    {AM,R_},    BWL,    m68010up,       PRIVILEGED
+"moves",    {R_,AM},    BWL,    m68010up,       PRIVILEGED
+
+"muls",     {DA,D_},    W,      m68000up,       NONE
+"muls",     {DA,D_},    L,      m68020up|cpu32, NONE
+"muls",     {DA,DD},    L,      m68020up|cpu32, NONE
+
+"mulu",     {DA,D_},    W,      m68000up,       NONE
+"mulu",     {DA,D_},    L,      m68020up|cpu32, NONE
+"mulu",     {DA,DD},    L,      m68020up|cpu32, NONE
+
+"nbcd",     {AD},       B,      m68000up,       NONE
+
+"neg",      {AD},       BWL,    m68000up,       NONE
+
+"negx",     {AD},       BWL,    m68000up,       NONE
+
+"nop",      {0},        UNS,    m68000up,       NONE
+
+"not",      {AD},       BWL,    m68000up,       NONE
+
+"or",       {DA,D_},    BWL,    m68000up,       NONE
+"or",       {D_,AM},    BWL,    m68000up,       NONE
+"or",       {IM,AD},    BWL,    m68000up,       NONE
+"or",       {IM,_CCR},  B,      m68000up,       NONE
+"or",       {IM,_SR},   W,      m68000up,       PRIVILEGED
+
+"ori",      {IM,AD},    BWL,    m68000up,       NONE
+"ori",      {IM,_CCR},  B,      m68000up,       NONE
+"ori",      {IM,_SR},   W,      m68000up,       PRIVILEGED
+
+"pea",      {CT},       L,      m68000up,       NONE
+
+"reset",    {0},        UNS,    m68000up,       PRIVILEGED
+
+"rol",      {AM},       W,      m68000up,       NONE
+"rol",      {D_,D_},    BWL,    m68000up,       NONE
+"rol",      {QI,D_},    BWL,    m68000up,       NONE
+"rol",      {D_},       BWL,    m68000up,       NONE
+
+"ror",      {AM},       W,      m68000up,       NONE
+"ror",      {D_,D_},    BWL,    m68000up,       NONE
+"ror",      {QI,D_},    BWL,    m68000up,       NONE
+"ror",      {D_},       BWL,    m68000up,       NONE
+
+"roxl",     {AM},       W,      m68000up,       NONE
+"roxl",     {D_,D_},    BWL,    m68000up,       NONE
+"roxl",     {QI,D_},    BWL,    m68000up,       NONE
+"roxl",     {D_},       BWL,    m68000up,       NONE
+
+"roxr",     {AM},       W,      m68000up,       NONE
+"roxr",     {D_,D_},    BWL,    m68000up,       NONE
+"roxr",     {QI,D_},    BWL,    m68000up,       NONE
+"roxr",     {D_},       BWL,    m68000up,       NONE
+
+"rtd",      {QI},       UNS,    m68010up,       NONE
+
+"rte",      {0},        UNS,    m68000up,       PRIVILEGED
+
+"rtr",      {0},        UNS,    m68000up,       NONE
+
+"rts",      {0},        UNS,    m68000up,       NONE
+
+"sbcd",     {D_,D_},    B,      m68000up,       NONE
+"sbcd",     {PA,PA},    B,      m68000up,       NONE
+
+"st",       {AD},       B,      m68000up,       NONE
+"sf",       {AD},       B,      m68000up,       NONE
+"shi",      {AD},       B,      m68000up,       NONE
+"sls",      {AD},       B,      m68000up,       NONE
+"scc",      {AD},       B,      m68000up,       NONE
+"shs",      {AD},       B,      m68000up,       NONE
+"scs",      {AD},       B,      m68000up,       NONE
+"slo",      {AD},       B,      m68000up,       NONE
+"sne",      {AD},       B,      m68000up,       NONE
+"seq",      {AD},       B,      m68000up,       NONE
+"svc",      {AD},       B,      m68000up,       NONE
+"svs",      {AD},       B,      m68000up,       NONE
+"spl",      {AD},       B,      m68000up,       NONE
+"smi",      {AD},       B,      m68000up,       NONE
+"sge",      {AD},       B,      m68000up,       NONE
+"slt",      {AD},       B,      m68000up,       NONE
+"sgt",      {AD},       B,      m68000up,       NONE
+"sle",      {AD},       B,      m68000up,       NONE
+
+"stop",     {QI},       UNS,    m68000up,       PRIVILEGED
+
+"sub",      {DA,D_},    BWL,    m68000up,       NONE
+"sub",      {A_,D_},    WL,     m68000up,       NONE
+"sub",      {D_,AM},    BWL,    m68000up,       NONE
+"sub",      {AY,A_},    WL,     m68000up,       NONE
+"sub",      {IM,AD},    BWL,    m68000up,       NONE
+
+"suba",     {AY,A_},    WL,     m68000up,       NONE
+
+"subi",     {IM,AD},    BWL,    m68000up,       NONE
+
+"subq",     {QI,A_},    WL,     m68000up,       NONE
+"subq",     {QI,AD},    BWL,    m68000up,       NONE
+
+"subx",     {D_,D_},    BWL,    m68000up,       NONE
+"subx",     {PA,PA},    BWL,    m68000up,       NONE
+
+"swap",     {D_},       W,      m68000up,       NONE
+
+"tas",      {AD},       B,      m68000up,       NONE
+
+"tbls",     {CT,D_},    BWL,    cpu32,          NONE
+"tbls",     {DD,D_},    BWL,    cpu32,          NONE
+
+"tblsn",    {CT,D_},    BWL,    cpu32,          NONE
+"tblsn",    {DD,D_},    BWL,    cpu32,          NONE
+
+"tblu",     {CT,D_},    BWL,    cpu32,          NONE
+"tblu",     {DD,D_},    BWL,    cpu32,          NONE
+
+"tblun",    {CT,D_},    BWL,    cpu32,          NONE
+"tblun",    {DD,D_},    BWL,    cpu32,          NONE
+
+"trap",     {QI},       UNS,    m68000up,       NONE
+
+"trapv",    {0},        UNS,    m68000up,       NONE
+
+"tst",      {AD},       BWL,    m68000up,       NONE
+"tst",      {DA},       BWL,    m68020up|cpu32, NONE
+"tst",      {A_},       WL,     m68020up|cpu32, NONE
+
+"unlk",     {A_},       UNS,    m68000up,       NONE

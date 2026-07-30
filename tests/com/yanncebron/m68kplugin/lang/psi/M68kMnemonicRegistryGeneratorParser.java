@@ -116,6 +116,17 @@ final class M68kMnemonicRegistryGeneratorParser {
     return DATA_SIZE_MAP.getOrDefault(dataSizeText, EnumSet.noneOf(M68kDataSize.class));
   }
 
+  /**
+   * Raw CPU text from vasm, filtered by supported CPUs in mnemonics
+   * (we can't map back "m68020up|cpu32").
+   */
+  static String filterCpuText(String cpuText) {
+    List<String> cpuTexts = StringUtil.split(cpuText, "|").stream()
+      .filter(CPU_MAP::containsKey)
+      .toList();
+    return StringUtil.join(cpuTexts, "|");
+  }
+
   static Set<M68kCpu> mapCpuSet(String cpuText) {
     if (!StringUtil.contains(cpuText, "|")) {
       return mapCpuPart(cpuText);
