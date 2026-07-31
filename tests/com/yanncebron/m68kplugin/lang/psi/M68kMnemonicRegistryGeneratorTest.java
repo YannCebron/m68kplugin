@@ -145,8 +145,8 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
         firstOperand,
         secondOperand,
         m68kCpus,
-        m68MnemonicRuntimeInfo.privilegedType(),
-        deprecated);
+        deprecated, m68MnemonicRuntimeInfo.privilegedType(),
+        m68MnemonicRuntimeInfo.controlFlow());
 
       parsedMnemonics.add(m68kMnemonic);
 
@@ -164,7 +164,8 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
         String filterCpuText = M68kMnemonicRegistryGeneratorParser.filterCpuText(cpuText);
         String formatCpuText = filterCpuText + "," + StringUtil.repeat(" ", Math.max(1, 15 - filterCpuText.length()));
 
-        String runTimeInfoText = mnemonicText + operandText + formatDataSizeText + formatCpuText + "\nNONE";
+        String runTimeInfoText = mnemonicText + operandText + formatDataSizeText + formatCpuText +
+          "\nNONE,       NOTHING";
         missingRuntimeInfo.put(m68kMnemonic, runTimeInfoText);
       }
     }
@@ -353,11 +354,14 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       if (cpuText != null) {
         System.out.println(".cpus(" + cpuText + ")");
       }
+      if (mnemonic.deprecated()) {
+        System.out.println(".deprecated()");
+      }
       if (M68kMnemonicPredicates.privilegedAny().test(mnemonic)) {
         System.out.println(".privileged(M68kMnemonic.PrivilegedType." + mnemonic.privilegedType().name() + ")");
       }
-      if (mnemonic.deprecated()) {
-        System.out.println(".deprecated()");
+      if (mnemonic.controlFlow() != M68kMnemonic.ControlFlow.NOTHING) {
+        System.out.println(".controlFlow(M68kMnemonic.ControlFlow." + mnemonic.controlFlow().name() + ")");
       }
       System.out.println(".build();");
 

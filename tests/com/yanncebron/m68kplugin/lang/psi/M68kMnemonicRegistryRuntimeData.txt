@@ -5,579 +5,579 @@
 # 2 lines per mnemonic (whitespaces required):
 #
 # "mnemonic", {op1,op2}, SIZE, CPU[s]
-# $PRIV$
+# $PRIVILEGE$, $CONTROL_FLOW$
 #
-# $PRIV$ = NONE|PRIVILEGED|PRIVILEGED_68010_ABOVE
+# $PRIVILEGE$ = NONE|PRIVILEGED|PRIVILEGED_68010_ABOVE
+# $CONTROL_FLOW$ = NOTHING|TRAP|BRANCH|JUMP|RETURN
 
 "abcd",     {D_,D_},    B,      m68000up
-NONE
+NONE,       NOTHING
 "abcd",     {PA,PA},    B,      m68000up
-NONE
+NONE,       NOTHING
 
 "add",      {DA,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "add",      {A_,D_},    WL,     m68000up
-NONE
+NONE,       NOTHING
 "add",      {D_,AM},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "add",      {AY,A_},    WL,     m68000up
-NONE
+NONE,       NOTHING
 "add",      {IM,AD},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "adda",     {AY,A_},    WL,     m68000up
-NONE
+NONE,       NOTHING
 
 "addi",     {IM,AD},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "addq",     {QI,A_},    WL,     m68000up
-NONE
+NONE,       NOTHING
 "addq",     {QI,AD},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "addx",     {D_,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "addx",     {PA,PA},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "and",      {DA,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "and",      {D_,AM},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "and",      {IM,AD},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "and",      {IM,_CCR},  B,      m68000up
-NONE
+NONE,       NOTHING
 "and",      {IM,_SR},   W,      m68000up
-PRIVILEGED
+PRIVILEGED, TRAP
 
 "andi",     {IM,AD},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "andi",     {IM,_CCR},  B,      m68000up
-NONE
+NONE,       NOTHING
 "andi",     {IM,_SR},   W,      m68000up
-PRIVILEGED
+PRIVILEGED, TRAP
 
 "asl",      {AM},       W,      m68000up
-NONE
+NONE,       NOTHING
 "asl",      {D_,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "asl",      {QI,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "asl",      {D_},       BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "asr",      {AM},       W,      m68000up
-NONE
+NONE,       NOTHING
 "asr",      {D_,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "asr",      {QI,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "asr",      {D_},       BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "bhs",      {BR},       SBWL,   m68000up
-NONE
+NONE,       BRANCH
 "blo",      {BR},       SBWL,   m68000up
-NONE
+NONE,       BRANCH
 "bhi",      {BR},       SBWL,   m68000up
-NONE
+NONE,       BRANCH
 "bls",      {BR},       SBWL,   m68000up
-NONE
+NONE,       BRANCH
 "bcc",      {BR},       SBWL,   m68000up
-NONE
+NONE,       BRANCH
 "bcs",      {BR},       SBWL,   m68000up
-NONE
+NONE,       BRANCH
 "bne",      {BR},       SBWL,   m68000up
-NONE
+NONE,       BRANCH
 "beq",      {BR},       SBWL,   m68000up
-NONE
+NONE,       BRANCH
 "bvc",      {BR},       SBWL,   m68000up
-NONE
+NONE,       BRANCH
 "bvs",      {BR},       SBWL,   m68000up
-NONE
+NONE,       BRANCH
 "bpl",      {BR},       SBWL,   m68000up
-NONE
+NONE,       BRANCH
 "bmi",      {BR},       SBWL,   m68000up
-NONE
+NONE,       BRANCH
 "bge",      {BR},       SBWL,   m68000up
-NONE
+NONE,       BRANCH
 "blt",      {BR},       SBWL,   m68000up
-NONE
+NONE,       BRANCH
 "bgt",      {BR},       SBWL,   m68000up
-NONE
+NONE,       BRANCH
 "ble",      {BR},       SBWL,   m68000up
-NONE
+NONE,       BRANCH
 
 "bra",      {BR},       SBWL,   m68000up
-NONE
+NONE,       NOTHING
 
 "bsr",      {BR},       SBWL,   m68000up
-NONE
+NONE,       BRANCH
 
 "bchg",     {D_,D_},    L,      m68000up
-NONE
+NONE,       NOTHING
 "bchg",     {D_,AM},    B,      m68000up
-NONE
+NONE,       NOTHING
 "bchg",     {QI,D_},    L,      m68000up
-NONE
+NONE,       NOTHING
 "bchg",     {QI,AM},    B,      m68000up
-NONE
+NONE,       NOTHING
 
 "bclr",     {D_,D_},    L,      m68000up
-NONE
+NONE,       NOTHING
 "bclr",     {D_,AM},    B,      m68000up
-NONE
+NONE,       NOTHING
 "bclr",     {QI,D_},    L,      m68000up
-NONE
+NONE,       NOTHING
 "bclr",     {QI,AM},    B,      m68000up
-NONE
+NONE,       NOTHING
 
 "bset",     {D_,D_},    L,      m68000up
-NONE
+NONE,       NOTHING
 "bset",     {D_,AM},    B,      m68000up
-NONE
+NONE,       NOTHING
 "bset",     {QI,D_},    L,      m68000up
-NONE
+NONE,       NOTHING
 "bset",     {QI,AM},    B,      m68000up
-NONE
+NONE,       NOTHING
 
 "btst",     {D_,D_},    L,      m68000up
-NONE
+NONE,       NOTHING
 "btst",     {D_,MA},    B,      m68000up
-NONE
+NONE,       NOTHING
 "btst",     {QI,D_},    L,      m68000up
-NONE
+NONE,       NOTHING
 "btst",     {QI,MI},    B,      m68000up
-NONE
+NONE,       NOTHING
 
 "bgnd",     {0},        UNS,    cpu32
-NONE
+NONE,       NOTHING
 
 "bkpt",     {QI},       UNS,    m68010up
-NONE
+NONE,       TRAP
 
 "chk",      {DA,D_},    W,      m68000up
-NONE
+NONE,       TRAP
 "chk",      {DA,D_},    L,      m68020up
-NONE
+NONE,       TRAP
 
 "clr",      {AD},       BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "cmp",      {A_,D_},    WL,     m68000up
-NONE
+NONE,       NOTHING
 "cmp",      {DA,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "cmp",      {AY,A_},    WL,     m68000up
-NONE
+NONE,       NOTHING
 "cmp",      {IM,AD},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "cmp",      {IM,DN},    BWL,    m68020up|cpu32
-NONE
+NONE,       NOTHING
 "cmp",      {AP,AP},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "cmpa",     {AY,A_},    WL,     m68000up
-NONE
+NONE,       NOTHING
 
 "cmpi",     {IM,AD},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "cmpi",     {IM,DN},    BWL,    m68020up|cpu32
-NONE
+NONE,       NOTHING
 
 "cmpm",     {AP,AP},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "dbt",      {D_,DB},    W,      m68000up
-NONE
-
+NONE,       BRANCH
 "dbf",      {D_,DB},    W,      m68000up
-NONE
+NONE,       BRANCH
 "dbra",     {D_,DB},    W,      m68000up
-NONE
+NONE,       BRANCH
 "dbhi",     {D_,DB},    W,      m68000up
-NONE
+NONE,       BRANCH
 "dbls",     {D_,DB},    W,      m68000up
-NONE
+NONE,       BRANCH
 "dbcc",     {D_,DB},    W,      m68000up
-NONE
+NONE,       BRANCH
 "dbhs",     {D_,DB},    W,      m68000up
-NONE
+NONE,       BRANCH
 "dbcs",     {D_,DB},    W,      m68000up
-NONE
+NONE,       BRANCH
 "dblo",     {D_,DB},    W,      m68000up
-NONE
+NONE,       BRANCH
 "dbne",     {D_,DB},    W,      m68000up
-NONE
+NONE,       BRANCH
 "dbeq",     {D_,DB},    W,      m68000up
-NONE
+NONE,       BRANCH
 "dbvc",     {D_,DB},    W,      m68000up
-NONE
+NONE,       BRANCH
 "dbvs",     {D_,DB},    W,      m68000up
-NONE
+NONE,       BRANCH
 "dbpl",     {D_,DB},    W,      m68000up
-NONE
+NONE,       BRANCH
 "dbmi",     {D_,DB},    W,      m68000up
-NONE
+NONE,       BRANCH
 "dbge",     {D_,DB},    W,      m68000up
-NONE
+NONE,       BRANCH
 "dblt",     {D_,DB},    W,      m68000up
-NONE
+NONE,       BRANCH
 "dbgt",     {D_,DB},    W,      m68000up
-NONE
+NONE,       BRANCH
 "dble",     {D_,DB},    W,      m68000up
-NONE
+NONE,       BRANCH
 
 "divs",     {DA,D_},    W,      m68000up
-NONE
+NONE,       TRAP
 "divs",     {DA,D_},    L,      m68020up|cpu32
-NONE
+NONE,       TRAP
 "divs",     {DA,DD},    L,      m68020up|cpu32
-NONE
+NONE,       TRAP
 
 "divu",     {DA,D_},    W,      m68000up
-NONE
+NONE,       TRAP
 "divu",     {DA,D_},    L,      m68020up|cpu32
-NONE
+NONE,       TRAP
 "divu",     {DA,DD},    L,      m68020up|cpu32
-NONE
+NONE,       TRAP
 
 "eor",      {D_,AD},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "eor",      {IM,AD},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "eor",      {IM,_CCR},  B,      m68000up
-NONE
+NONE,       NOTHING
 "eor",      {IM,_SR},   W,      m68000up
-PRIVILEGED
+PRIVILEGED, TRAP
 
 "eori",     {IM,AD},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "eori",     {IM,_CCR},  B,      m68000up
-NONE
+NONE,       NOTHING
 "eori",     {IM,_SR},   W,      m68000up
-PRIVILEGED
+PRIVILEGED, TRAP
 
 "exg",      {D_,D_},    L,      m68000up
-NONE
+NONE,       NOTHING
 "exg",      {A_,A_},    L,      m68000up
-NONE
+NONE,       NOTHING
 "exg",      {D_,A_},    L,      m68000up
-NONE
+NONE,       NOTHING
 "exg",      {A_,D_},    L,      m68000up
-NONE
+NONE,       NOTHING
 
 "ext",      {D_},       WL,     m68000up
-NONE
+NONE,       NOTHING
 
 "illegal",  {0},        UNS,    m68000up
-NONE
+NONE,       TRAP
 
 "jmp",      {CT},       UNS,    m68000up
-NONE
+NONE,       JUMP
 
 "jsr",      {CT},       UNS,    m68000up
-NONE
+NONE,       JUMP
 
 "lea",      {CT,A_},    L,      m68000up
-NONE
+NONE,       NOTHING
 
 "link",     {A_,IM},    W,      m68000up
-NONE
+NONE,       NOTHING
 "link",     {A_,IM},    L,      m68020up|cpu32
-NONE
+NONE,       NOTHING
 
 "lpstop",   {IM},       W,      m68060|cpu32|apollo
-PRIVILEGED
+PRIVILEGED, TRAP
 
 "lsl",      {AM},       W,      m68000up
-NONE
+NONE,       NOTHING
 "lsl",      {D_,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "lsl",      {QI,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "lsl",      {D_},       BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "lsr",      {AM},       W,      m68000up
-NONE
+NONE,       NOTHING
 "lsr",      {D_,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "lsr",      {QI,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "lsr",      {D_},       BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "move",     {A_,AL},    WL,     m68000up
-NONE
+NONE,       NOTHING
 "move",     {AY,A_},    WL,     m68000up
-NONE
+NONE,       NOTHING
 "move",     {DA,AD},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "move",     {_CCR,AD},  W,      m68010up
-NONE
+NONE,       NOTHING
 "move",     {_SR,AD},   W,      m68000up
-PRIVILEGED_68010_ABOVE
+PRIVILEGED_68010_ABOVE, TRAP
 "move",     {DA,_CCR},  W,      m68000up
-NONE
+NONE,       NOTHING
 "move",     {DA,_SR},   W,      m68000up
-PRIVILEGED
+PRIVILEGED, TRAP
 "move",     {_USP,A_},  L,      m68000up
-PRIVILEGED
+PRIVILEGED, TRAP
 "move",     {A_,_USP},  L,      m68000up
-PRIVILEGED
+PRIVILEGED, TRAP
 
 "movea",    {AY,A_},    WL,     m68000up
-NONE
+NONE,       NOTHING
 "movea",    {A_,AL},    WL,     m68000up
-NONE
+NONE,       NOTHING
 "movea",    {DA,AD},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "movec",    {_CTRL,R_}, L,      m68010up
-PRIVILEGED
+PRIVILEGED, TRAP
 "movec",    {R_,_CTRL}, L,      m68010up
-PRIVILEGED
+PRIVILEGED, TRAP
 
 "movem",    {RL,PA},    WL,     m68000up
-NONE
+NONE,       NOTHING
 "movem",    {RL,AC},    WL,     m68000up
-NONE
+NONE,       NOTHING
 "movem",    {MR,RL},    WL,     m68000up
-NONE
+NONE,       NOTHING
 "movem",    {IR,PA},    WL,     m68000up
-NONE
+NONE,       NOTHING
 "movem",    {IR,AC},    WL,     m68000up
-NONE
+NONE,       NOTHING
 "movem",    {MR,IR},    WL,     m68000up
-NONE
+NONE,       NOTHING
 
 "movep",    {DP,D_},    WL,     m68000up
-NONE
+NONE,       NOTHING
 "movep",    {D_,DP},    WL,     m68000up
-NONE
+NONE,       NOTHING
 
 "moveq",    {QI,D_},    L,      m68000up
-NONE
+NONE,       NOTHING
 
 "moves",    {AM,R_},    BWL,    m68010up
-PRIVILEGED
+PRIVILEGED, TRAP
 "moves",    {R_,AM},    BWL,    m68010up
-PRIVILEGED
+PRIVILEGED, TRAP
 
 "muls",     {DA,D_},    W,      m68000up
-NONE
+NONE,       NOTHING
 "muls",     {DA,D_},    L,      m68020up|cpu32
-NONE
+NONE,       NOTHING
 "muls",     {DA,DD},    L,      m68020up|cpu32
-NONE
+NONE,       NOTHING
 
 "mulu",     {DA,D_},    W,      m68000up
-NONE
+NONE,       NOTHING
 "mulu",     {DA,D_},    L,      m68020up|cpu32
-NONE
+NONE,       NOTHING
 "mulu",     {DA,DD},    L,      m68020up|cpu32
-NONE
+NONE,       NOTHING
 
 "nbcd",     {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 
 "neg",      {AD},       BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "negx",     {AD},       BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "nop",      {0},        UNS,    m68000up
-NONE
+NONE,       NOTHING
 
 "not",      {AD},       BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "or",       {DA,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "or",       {D_,AM},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "or",       {IM,AD},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "or",       {IM,_CCR},  B,      m68000up
-NONE
+NONE,       NOTHING
 "or",       {IM,_SR},   W,      m68000up
-PRIVILEGED
+PRIVILEGED, TRAP
 
 "ori",      {IM,AD},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "ori",      {IM,_CCR},  B,      m68000up
-NONE
+NONE,       NOTHING
 "ori",      {IM,_SR},   W,      m68000up
-PRIVILEGED
+PRIVILEGED, TRAP
 
 "pea",      {CT},       L,      m68000up
-NONE
+NONE,       NOTHING
 
 "reset",    {0},        UNS,    m68000up
-PRIVILEGED
+PRIVILEGED, TRAP
 
 "rol",      {AM},       W,      m68000up
-NONE
+NONE,       NOTHING
 "rol",      {D_,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "rol",      {QI,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "rol",      {D_},       BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "ror",      {AM},       W,      m68000up
-NONE
+NONE,       NOTHING
 "ror",      {D_,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "ror",      {QI,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "ror",      {D_},       BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "roxl",     {AM},       W,      m68000up
-NONE
+NONE,       NOTHING
 "roxl",     {D_,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "roxl",     {QI,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "roxl",     {D_},       BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "roxr",     {AM},       W,      m68000up
-NONE
+NONE,       NOTHING
 "roxr",     {D_,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "roxr",     {QI,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "roxr",     {D_},       BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "rtd",      {QI},       UNS,    m68010up
-NONE
+NONE,       RETURN
 
 "rte",      {0},        UNS,    m68000up
-PRIVILEGED
+PRIVILEGED, TRAP_RETURN
 
 "rtr",      {0},        UNS,    m68000up
-NONE
+NONE,       RETURN
 
 "rts",      {0},        UNS,    m68000up
-NONE
+NONE,       RETURN
 
 "sbcd",     {D_,D_},    B,      m68000up
-NONE
+NONE,       NOTHING
 "sbcd",     {PA,PA},    B,      m68000up
-NONE
+NONE,       NOTHING
 
 "st",       {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 "sf",       {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 "shi",      {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 "sls",      {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 "scc",      {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 "shs",      {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 "scs",      {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 "slo",      {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 "sne",      {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 "seq",      {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 "svc",      {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 "svs",      {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 "spl",      {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 "smi",      {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 "sge",      {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 "slt",      {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 "sgt",      {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 "sle",      {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 
 "stop",     {QI},       UNS,    m68000up
-PRIVILEGED
+PRIVILEGED, TRAP
 
 "sub",      {DA,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "sub",      {A_,D_},    WL,     m68000up
-NONE
+NONE,       NOTHING
 "sub",      {D_,AM},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "sub",      {AY,A_},    WL,     m68000up
-NONE
+NONE,       NOTHING
 "sub",      {IM,AD},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "suba",     {AY,A_},    WL,     m68000up
-NONE
+NONE,       NOTHING
 
 "subi",     {IM,AD},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "subq",     {QI,A_},    WL,     m68000up
-NONE
+NONE,       NOTHING
 "subq",     {QI,AD},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "subx",     {D_,D_},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 "subx",     {PA,PA},    BWL,    m68000up
-NONE
+NONE,       NOTHING
 
 "swap",     {D_},       W,      m68000up
-NONE
+NONE,       NOTHING
 
 "tas",      {AD},       B,      m68000up
-NONE
+NONE,       NOTHING
 
 "tbls",     {CT,D_},    BWL,    cpu32
-NONE
+NONE,       NOTHING
 "tbls",     {DD,D_},    BWL,    cpu32
-NONE
+NONE,       NOTHING
 
 "tblsn",    {CT,D_},    BWL,    cpu32
-NONE
+NONE,       NOTHING
 "tblsn",    {DD,D_},    BWL,    cpu32
-NONE
+NONE,       NOTHING
 
 "tblu",     {CT,D_},    BWL,    cpu32
-NONE
+NONE,       NOTHING
 "tblu",     {DD,D_},    BWL,    cpu32
-NONE
+NONE,       NOTHING
 
 "tblun",    {CT,D_},    BWL,    cpu32
-NONE
+NONE,       NOTHING
 "tblun",    {DD,D_},    BWL,    cpu32
-NONE
+NONE,       NOTHING
 
 "trap",     {QI},       UNS,    m68000up
-NONE
+NONE,       TRAP
 
 "trapv",    {0},        UNS,    m68000up
-NONE
+NONE,       TRAP
 
 "tst",      {AD},       BWL,    m68000up
-NONE
+NONE,       NOTHING
 "tst",      {DA},       BWL,    m68020up|cpu32
-NONE
+NONE,       NOTHING
 "tst",      {A_},       WL,     m68020up|cpu32
-NONE
+NONE,       NOTHING
 
 "unlk",     {A_},       UNS,    m68000up
-NONE
+NONE,       NOTHING

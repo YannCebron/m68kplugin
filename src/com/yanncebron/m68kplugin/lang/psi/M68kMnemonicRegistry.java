@@ -159,6 +159,7 @@ public final class M68kMnemonicRegistry {
     private Set<M68kCpu> cpus = M68kCpu.GROUP_68000_UP;
     private M68kMnemonic.PrivilegedType privilegedType = M68kMnemonic.PrivilegedType.NONE;
     private boolean deprecated = false;
+    private M68kMnemonic.ControlFlow controlFlow = M68kMnemonic.ControlFlow.NOTHING;
 
     private MnemonicBuilder(IElementType elementType) {
       this.elementType = elementType;
@@ -194,8 +195,14 @@ public final class M68kMnemonicRegistry {
       return this;
     }
 
+    private MnemonicBuilder controlFlow(M68kMnemonic.ControlFlow controlFlow) {
+      this.controlFlow = controlFlow;
+      return this;
+    }
+
     private void build() {
-      M68kMnemonic m68kMnemonic = new M68kMnemonic(elementType, dataSizes, firstOperand, secondOperand, cpus, privilegedType, deprecated);
+      M68kMnemonic m68kMnemonic = new M68kMnemonic(elementType, dataSizes,
+        firstOperand, secondOperand, cpus, deprecated, privilegedType, controlFlow);
       mnemonics.putValue(m68kMnemonic.elementType(), m68kMnemonic);
     }
   }
@@ -288,6 +295,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.AND).dataSizes(GROUP_W)
       .first(IMMEDIATE).second(SR_REGISTER)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // ANDI ------------------------------------------------------------------------
@@ -303,6 +311,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.ANDI).dataSizes(GROUP_W)
       .first(IMMEDIATE).second(SR_REGISTER)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // ASL -------------------------------------------------------------------------
@@ -345,96 +354,112 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BHS).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // BLO -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BLO).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // BHI -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BHI).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // BLS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BLS).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // BCC -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BCC).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // BCS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BCS).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // BNE -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BNE).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // BEQ -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BEQ).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // BVC -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BVC).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // BVS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BVS).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // BPL -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BPL).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // BMI -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BMI).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // BGE -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BGE).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // BLT -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BLT).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // BGT -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BGT).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // BLE -------------------------------------------------------------------------
 
     create(M68kTokenTypes.BLE).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // BRA -------------------------------------------------------------------------
@@ -447,6 +472,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BSR).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // BCHG ------------------------------------------------------------------------
@@ -532,17 +558,20 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.BKPT)
       .first(QUICK_IMMEDIATE)
       .cpus(GROUP_68010_UP)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // CHK -------------------------------------------------------------------------
 
     create(M68kTokenTypes.CHK).dataSizes(GROUP_W)
       .first(DATA).second(DATA_REGISTER)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
     create(M68kTokenTypes.CHK).dataSizes(GROUP_L)
       .first(DATA).second(DATA_REGISTER)
       .cpus(GROUP_68020_UP)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // CLR -------------------------------------------------------------------------
@@ -605,146 +634,171 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.DBT).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DBF -------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBF).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DBRA ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBRA).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DBHI ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBHI).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DBLS ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBLS).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DBCC ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBCC).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DBHS ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBHS).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DBCS ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBCS).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DBLO ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBLO).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DBNE ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBNE).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DBEQ ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBEQ).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DBVC ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBVC).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DBVS ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBVS).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DBPL ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBPL).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DBMI ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBMI).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DBGE ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBGE).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DBLT ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBLT).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DBGT ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBGT).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DBLE ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DBLE).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // DIVS ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DIVS).dataSizes(GROUP_W)
       .first(DATA).second(DATA_REGISTER)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
     create(M68kTokenTypes.DIVS).dataSizes(GROUP_L)
       .first(DATA).second(DATA_REGISTER)
       .cpus(GROUP_68020_UP_WITH_CPU32)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
     create(M68kTokenTypes.DIVS).dataSizes(GROUP_L)
       .first(DATA).second(DOUBLE_DATA_REGISTER)
       .cpus(GROUP_68020_UP_WITH_CPU32)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // DIVU ------------------------------------------------------------------------
 
     create(M68kTokenTypes.DIVU).dataSizes(GROUP_W)
       .first(DATA).second(DATA_REGISTER)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
     create(M68kTokenTypes.DIVU).dataSizes(GROUP_L)
       .first(DATA).second(DATA_REGISTER)
       .cpus(GROUP_68020_UP_WITH_CPU32)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
     create(M68kTokenTypes.DIVU).dataSizes(GROUP_L)
       .first(DATA).second(DOUBLE_DATA_REGISTER)
       .cpus(GROUP_68020_UP_WITH_CPU32)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // EOR -------------------------------------------------------------------------
@@ -764,6 +818,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.EOR).dataSizes(GROUP_W)
       .first(IMMEDIATE).second(SR_REGISTER)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // EORI ------------------------------------------------------------------------
@@ -779,6 +834,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.EORI).dataSizes(GROUP_W)
       .first(IMMEDIATE).second(SR_REGISTER)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // EXG -------------------------------------------------------------------------
@@ -808,18 +864,21 @@ public final class M68kMnemonicRegistry {
 // ILLEGAL ---------------------------------------------------------------------
 
     create(M68kTokenTypes.ILLEGAL)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // JMP -------------------------------------------------------------------------
 
     create(M68kTokenTypes.JMP)
       .first(CONTROL)
+      .controlFlow(M68kMnemonic.ControlFlow.JUMP)
       .build();
 
 // JSR -------------------------------------------------------------------------
 
     create(M68kTokenTypes.JSR)
       .first(CONTROL)
+      .controlFlow(M68kMnemonic.ControlFlow.JUMP)
       .build();
 
 // LEA -------------------------------------------------------------------------
@@ -845,6 +904,7 @@ public final class M68kMnemonicRegistry {
       .first(IMMEDIATE)
       .cpus(EnumSet.of(M68kCpu.CPU32))
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // LSL -------------------------------------------------------------------------
@@ -905,6 +965,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.MOVE).dataSizes(GROUP_W)
       .first(SR_REGISTER).second(ALTERABLE_DATA)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED_68010_ABOVE)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
     create(M68kTokenTypes.MOVE).dataSizes(GROUP_W)
@@ -914,16 +975,19 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.MOVE).dataSizes(GROUP_W)
       .first(DATA).second(SR_REGISTER)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
     create(M68kTokenTypes.MOVE).dataSizes(GROUP_L)
       .first(USP_REGISTER).second(ADDRESS_REGISTER)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
     create(M68kTokenTypes.MOVE).dataSizes(GROUP_L)
       .first(ADDRESS_REGISTER).second(USP_REGISTER)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // MOVEA -----------------------------------------------------------------------
@@ -948,12 +1012,14 @@ public final class M68kMnemonicRegistry {
       .first(CTRL_REGISTER).second(DATA_OR_ADDRESS_REGISTER)
       .cpus(GROUP_68010_UP)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
     create(M68kTokenTypes.MOVEC).dataSizes(GROUP_L)
       .first(DATA_OR_ADDRESS_REGISTER).second(CTRL_REGISTER)
       .cpus(GROUP_68010_UP)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // MOVEM -----------------------------------------------------------------------
@@ -1004,12 +1070,14 @@ public final class M68kMnemonicRegistry {
       .first(ALTERABLE_MEMORY).second(DATA_OR_ADDRESS_REGISTER)
       .cpus(GROUP_68010_UP)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
     create(M68kTokenTypes.MOVES).dataSizes(GROUP_BWL)
       .first(DATA_OR_ADDRESS_REGISTER).second(ALTERABLE_MEMORY)
       .cpus(GROUP_68010_UP)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // MULS ------------------------------------------------------------------------
@@ -1094,6 +1162,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.OR).dataSizes(GROUP_W)
       .first(IMMEDIATE).second(SR_REGISTER)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // ORI -------------------------------------------------------------------------
@@ -1109,6 +1178,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.ORI).dataSizes(GROUP_W)
       .first(IMMEDIATE).second(SR_REGISTER)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // PEA -------------------------------------------------------------------------
@@ -1121,6 +1191,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.RESET)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // ROL -------------------------------------------------------------------------
@@ -1200,22 +1271,26 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.RTD)
       .first(QUICK_IMMEDIATE)
       .cpus(GROUP_68010_UP)
+      .controlFlow(M68kMnemonic.ControlFlow.RETURN)
       .build();
 
 // RTE -------------------------------------------------------------------------
 
     create(M68kTokenTypes.RTE)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP_RETURN)
       .build();
 
 // RTR -------------------------------------------------------------------------
 
     create(M68kTokenTypes.RTR)
+      .controlFlow(M68kMnemonic.ControlFlow.RETURN)
       .build();
 
 // RTS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.RTS)
+      .controlFlow(M68kMnemonic.ControlFlow.RETURN)
       .build();
 
 // SBCD ------------------------------------------------------------------------
@@ -1341,6 +1416,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.STOP)
       .first(QUICK_IMMEDIATE)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // SUB -------------------------------------------------------------------------
@@ -1461,11 +1537,13 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.TRAP)
       .first(QUICK_IMMEDIATE)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // TRAPV -----------------------------------------------------------------------
 
     create(M68kTokenTypes.TRAPV)
+      .controlFlow(M68kMnemonic.ControlFlow.TRAP)
       .build();
 
 // TST -------------------------------------------------------------------------

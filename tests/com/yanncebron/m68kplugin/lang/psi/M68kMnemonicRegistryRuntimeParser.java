@@ -40,13 +40,14 @@ final class M68kMnemonicRegistryRuntimeParser {
 
   private static List<M68kMnemonicRuntimeData> allRuntimeData = null;
 
-  record M68MnemonicRuntimeInfo(M68kMnemonic.PrivilegedType privilegedType) {
+  record M68MnemonicRuntimeInfo(M68kMnemonic.PrivilegedType privilegedType,
+                                M68kMnemonic.ControlFlow controlFlow) {
   }
 
   /**
    * No runtime info available.
    */
-  static M68MnemonicRuntimeInfo NO_ENTRY = new M68MnemonicRuntimeInfo(M68kMnemonic.PrivilegedType.NONE);
+  static M68MnemonicRuntimeInfo NO_ENTRY = new M68MnemonicRuntimeInfo(M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING);
 
   static M68MnemonicRuntimeInfo find(IElementType elementType, M68kOperand firstOperand, M68kOperand secondOperand, Set<M68kDataSize> dataSizes, Set<M68kCpu> m68kCpus) {
     M68kMnemonicRuntimeData m68kMnemonicRuntimeData = ContainerUtil.find(getAllRuntimeData(), it ->
@@ -62,8 +63,7 @@ final class M68kMnemonicRegistryRuntimeParser {
 
     allRuntimeData.remove(m68kMnemonicRuntimeData);
 
-    M68kMnemonic.PrivilegedType privilegedType = m68kMnemonicRuntimeData.privilegedType;
-    return new M68MnemonicRuntimeInfo(privilegedType);
+    return new M68MnemonicRuntimeInfo(m68kMnemonicRuntimeData.privilegedType, m68kMnemonicRuntimeData.controlFlow);
   }
 
   static void assertAllUsed() {
@@ -104,11 +104,11 @@ final class M68kMnemonicRegistryRuntimeParser {
       split = StringUtil.split(line, ", ");
 
       M68kMnemonic.PrivilegedType privilegedType = M68kMnemonic.PrivilegedType.valueOf(split.get(0).strip());
+      M68kMnemonic.ControlFlow controlFlow = M68kMnemonic.ControlFlow.valueOf(split.get(1).strip());
 
       data.add(
-        new M68kMnemonicRuntimeData(elementType, dataSizes,
-          operands.getFirst(), operands.getSecond(),
-          m68kCpus, privilegedType));
+        new M68kMnemonicRuntimeData(elementType, operands.getFirst(), operands.getSecond(), dataSizes,
+          m68kCpus, privilegedType, controlFlow));
     }
 
     assert data.size() == 244 : data.size();
@@ -121,8 +121,10 @@ final class M68kMnemonicRegistryRuntimeParser {
   }
 
 
-  private record M68kMnemonicRuntimeData(IElementType elementType, Set<M68kDataSize> dataSizes,
+  private record M68kMnemonicRuntimeData(IElementType elementType,
                                          M68kOperand firstOperand, M68kOperand secondOperand,
-                                         Set<M68kCpu> cpus, M68kMnemonic.PrivilegedType privilegedType) {
+                                         Set<M68kDataSize> dataSizes, Set<M68kCpu> cpus,
+                                         M68kMnemonic.PrivilegedType privilegedType,
+                                         M68kMnemonic.ControlFlow controlFlow) {
   }
 }

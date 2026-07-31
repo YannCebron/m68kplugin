@@ -34,8 +34,9 @@ public record M68kMnemonic(IElementType elementType,
                            M68kOperand firstOperand,
                            M68kOperand secondOperand,
                            Set<M68kCpu> cpus,
+                           boolean deprecated,
                            PrivilegedType privilegedType,
-                           boolean deprecated) {
+                           ControlFlow controlFlow) {
 
   private static final Set<M68kOperand> SPECIAL_REGISTER_OPERANDS = Set.of(
     M68kOperand.CCR_REGISTER,
@@ -101,6 +102,15 @@ public record M68kMnemonic(IElementType elementType,
     }
   }
 
+  enum ControlFlow {
+    NOTHING,
+    TRAP,
+    TRAP_RETURN,
+    BRANCH,
+    JUMP,
+    RETURN
+  }
+
   @Override
   public @NotNull String toString() {
     final String cpuText;
@@ -116,8 +126,9 @@ public record M68kMnemonic(IElementType elementType,
       ", secondOp=" + secondOperand +
       ", " + dataSizes +
       ", " + cpuText +
-      (M68kMnemonicPredicates.privilegedAny().test(this) ? ", " + privilegedType.name() : "") +
       (deprecated() ? ", DEPRECATED" : "") +
+      (M68kMnemonicPredicates.privilegedAny().test(this) ? ", " + privilegedType.name() : "") +
+      (controlFlow() != ControlFlow.NOTHING ? ", " + controlFlow : "") +
       '}';
   }
 }
