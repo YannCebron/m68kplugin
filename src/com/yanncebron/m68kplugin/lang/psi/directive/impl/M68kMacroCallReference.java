@@ -40,7 +40,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Provides reference to macro.
@@ -123,11 +125,12 @@ class M68kMacroCallReference extends PsiReferenceBase.Poly<M68kMacroCallDirectiv
       return;
     }
 
-    StubIndex.getInstance().processAllKeys(M68kStubIndexKeys.MACRO,
-      key -> {
-        final Collection<M68kLabel> labels = getMacroStubLabels(key, project, scope);
-        return ContainerUtil.process(labels, processor);
-      }, scope, null);
+    Set<String> allKeys = new HashSet<>();
+    StubIndex.getInstance().processAllKeys(M68kStubIndexKeys.MACRO, Processors.cancelableCollectProcessor(allKeys), scope);
+    ContainerUtil.process(allKeys, key -> {
+      final Collection<M68kLabel> labels = getMacroStubLabels(key, project, scope);
+      return ContainerUtil.process(labels, processor);
+    });
   }
 
   private static GlobalSearchScope getIncludeSearchScope(PsiElement element) {
