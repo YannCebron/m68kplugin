@@ -102,7 +102,7 @@ public record M68kMnemonic(IElementType elementType,
     }
   }
 
-  enum ControlFlow {
+  public enum ControlFlow {
     NOTHING,
     TRAP,
     TRAP_RETURN,

@@ -13,6 +13,7 @@
   - _Target platform_ (Generic/Amiga)
   - _View | Quick Definition_: number of following statements for (local) label 
 - Register reference docs: add diagram for `SR`
+- Mnemonic docs: show "Control Flow" flag for `TRAP`/`TRAP_RETURN`
 
 ## 0.2.4 - 2026-07-10
 

@@ -84,6 +84,12 @@ class M68kInstructionMnemonicDocsGenerator {
       insertBreak = true;
     }
 
+    M68kMnemonic.ControlFlow controlFlow = m68kMnemonic.controlFlow();
+    if (controlFlow == M68kMnemonic.ControlFlow.TRAP || controlFlow == M68kMnemonic.ControlFlow.TRAP_RETURN) {
+      appendControlFlowSection(m68kMnemonic);
+      insertBreak = true;
+    }
+
     if (insertBreak) {
       appendBreak();
     }
@@ -199,7 +205,16 @@ class M68kInstructionMnemonicDocsGenerator {
     sb.append(message);
     sb.append(DocumentationMarkup.SECTION_END);
     sb.append(DocumentationMarkup.SECTIONS_END);
+  }
 
+  private void appendControlFlowSection(M68kMnemonic mnemonic) {
+    sb.append(DocumentationMarkup.SECTIONS_START);
+    sb.append(DocumentationMarkup.SECTION_HEADER_START);
+    sb.append(M68kBundle.message("documentation.section.control.flow"));
+    sb.append(DocumentationMarkup.SECTION_SEPARATOR);
+    sb.append(mnemonic.controlFlow());
+    sb.append(DocumentationMarkup.SECTION_END);
+    sb.append(DocumentationMarkup.SECTIONS_END);
   }
 
   private void appendBreak() {
