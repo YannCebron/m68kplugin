@@ -16,7 +16,6 @@
 
 package com.yanncebron.m68kplugin.browser;
 
-import com.intellij.ide.IdeBundle;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.lang.documentation.ide.DocumentationUtil;
 import com.intellij.lang.documentation.ide.ui.DocumentationComponent;
@@ -45,6 +44,7 @@ import com.intellij.ui.speedSearch.SpeedSearchUtil;
 import com.intellij.util.containers.Convertor;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.components.BorderLayoutPanel;
+import com.yanncebron.m68kplugin.M68kApiBundle;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -226,7 +226,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
   }
 
   private void setNoSelection() {
-    splitter.setSecondComponent(new JBPanelWithEmptyText().withEmptyText(IdeBundle.message("empty.text.nothing.selected")));
+    splitter.setSecondComponent(new JBPanelWithEmptyText().withEmptyText(M68kApiBundle.message("empty.text.nothing.selected")));
   }
 
   private JComponent createList() {
