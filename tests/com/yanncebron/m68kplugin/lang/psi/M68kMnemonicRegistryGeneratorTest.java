@@ -164,7 +164,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
         String filterCpuText = M68kMnemonicRegistryGeneratorParser.filterCpuText(cpuText);
         String formatCpuText = filterCpuText + "," + StringUtil.repeat(" ", Math.max(1, 15 - filterCpuText.length()));
 
-        String runTimeInfoText = mnemonicText + operandText + formatDataSizeText + formatCpuText + "NONE";
+        String runTimeInfoText = mnemonicText + operandText + formatDataSizeText + formatCpuText + "\nNONE";
         missingRuntimeInfo.put(m68kMnemonic, runTimeInfoText);
       }
     }

@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -72,26 +73,35 @@ final class M68kMnemonicRegistryRuntimeParser {
   private static List<M68kMnemonicRuntimeData> readRuntimeData() {
     List<M68kMnemonicRuntimeData> data = new ArrayList<>();
 
+    List<String> lines;
     try {
-      for (String line : Files.readAllLines(Paths.get(RUNTIME_DATA_PATH))) {
-        if (!line.startsWith("\"")) continue;
-
-        List<String> split = StringUtil.split(line, ", ");
-
-        String mnemonic = StringUtil.unquoteString(split.get(0).strip());
-        IElementType elementType = findElementType(mnemonic);
-        Couple<M68kOperand> operands = M68kMnemonicRegistryGeneratorParser.mapOperands(split.get(1).strip());
-        Set<M68kDataSize> dataSizes = M68kMnemonicRegistryGeneratorParser.mapDataSizes(split.get(2).strip());
-        Set<M68kCpu> m68kCpus = M68kMnemonicRegistryGeneratorParser.mapCpuSet(split.get(3).strip());
-        M68kMnemonic.PrivilegedType privilegedType = M68kMnemonic.PrivilegedType.valueOf(split.get(4).strip());
-
-        data.add(
-          new M68kMnemonicRuntimeData(elementType, dataSizes,
-            operands.getFirst(), operands.getSecond(),
-            m68kCpus, privilegedType));
-      }
+      lines = Files.readAllLines(Paths.get(RUNTIME_DATA_PATH));
     } catch (IOException e) {
       throw new RuntimeException(e);
+    }
+
+    Iterator<String> it = lines.iterator();
+    while (it.hasNext()) {
+      String line = it.next();
+      if (!line.startsWith("\"")) continue;
+
+      List<String> split = StringUtil.split(line, ", ");
+
+      String mnemonic = StringUtil.unquoteString(split.get(0).strip());
+      IElementType elementType = findElementType(mnemonic);
+      Couple<M68kOperand> operands = M68kMnemonicRegistryGeneratorParser.mapOperands(split.get(1).strip());
+      Set<M68kDataSize> dataSizes = M68kMnemonicRegistryGeneratorParser.mapDataSizes(split.get(2).strip());
+      Set<M68kCpu> m68kCpus = M68kMnemonicRegistryGeneratorParser.mapCpuSet(split.get(3).strip());
+
+      line = it.next();
+      split = StringUtil.split(line, ", ");
+
+      M68kMnemonic.PrivilegedType privilegedType = M68kMnemonic.PrivilegedType.valueOf(split.get(0).strip());
+
+      data.add(
+        new M68kMnemonicRuntimeData(elementType, dataSizes,
+          operands.getFirst(), operands.getSecond(),
+          m68kCpus, privilegedType));
     }
 
     assert data.size() == 244 : data.size();
