@@ -103,8 +103,10 @@ final class M68kMnemonicRegistryRuntimeParser {
       line = it.next();
       split = StringUtil.split(line, ", ");
 
-      M68kMnemonic.PrivilegedType privilegedType = M68kMnemonic.PrivilegedType.valueOf(split.get(0).strip());
-      M68kMnemonic.ControlFlow controlFlow = M68kMnemonic.ControlFlow.valueOf(split.get(1).strip());
+      String privilegedText = split.get(0).strip();
+      M68kMnemonic.PrivilegedType privilegedType = "-".equals(privilegedText) ? M68kMnemonic.PrivilegedType.NONE : M68kMnemonic.PrivilegedType.valueOf(privilegedText);
+      String controlFlowText = split.get(1).strip();
+      M68kMnemonic.ControlFlow controlFlow = "-".equals(controlFlowText) ? M68kMnemonic.ControlFlow.NOTHING : M68kMnemonic.ControlFlow.valueOf(controlFlowText);
 
       data.add(
         new M68kMnemonicRuntimeData(elementType, operands.getFirst(), operands.getSecond(), dataSizes,
