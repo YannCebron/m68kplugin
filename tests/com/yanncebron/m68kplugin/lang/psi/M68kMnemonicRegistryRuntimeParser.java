@@ -19,6 +19,7 @@ package com.yanncebron.m68kplugin.lang.psi;
 import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,8 +60,14 @@ final class M68kMnemonicRegistryRuntimeParser {
       return NO_ENTRY;
     }
 
+    allRuntimeData.remove(m68kMnemonicRuntimeData);
+
     M68kMnemonic.PrivilegedType privilegedType = m68kMnemonicRuntimeData.privilegedType;
     return new M68MnemonicRuntimeInfo(privilegedType);
+  }
+
+  static void assertAllUsed() {
+    UsefulTestCase.assertEmpty(allRuntimeData);
   }
 
   private static List<M68kMnemonicRuntimeData> getAllRuntimeData() {

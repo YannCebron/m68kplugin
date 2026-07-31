@@ -169,6 +169,8 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       }
     }
 
+    M68kMnemonicRegistryRuntimeParser.assertAllUsed();
+
     assertEquals("total parsed mnemonic count", 340, parsedMnemonics.size());
 
     List<M68kMnemonic> cleanupMnemonics = cleanupMnemonics(parsedMnemonics);
