@@ -23,4 +23,4 @@ corresponding to the S-bit is off, execution of the instruction will cause a pri
 violation. An external reset always initiates reset exception processing.
 
 ## Condition codes
-Set according to the imemdiate operand.
+Set according to the immediate operand.
