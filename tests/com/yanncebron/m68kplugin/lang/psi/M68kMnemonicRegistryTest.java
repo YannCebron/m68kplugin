@@ -101,56 +101,72 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
     doTestFind("bkpt #2",
       new M68kMnemonic(M68kTokenTypes.BKPT, M68kDataSize.GROUP_UNSIZED,
         M68kOperand.QUICK_IMMEDIATE, M68kOperand.NONE,
-        M68kCpu.GROUP_68010_UP, false, M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.TRAP));
+        M68kCpu.GROUP_68010_UP, false,
+        M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.TRAP,
+        M68kMnemonic.ConditionCodes.NONE_AFFECTED, M68kMnemonic.ConditionCodes.NONE_AFFECTED));
   }
 
   public void testFindAslAlterableMemory() {
     doTestFind("asl $42",
       new M68kMnemonic(M68kTokenTypes.ASL, M68kDataSize.GROUP_W,
         M68kOperand.ALTERABLE_MEMORY, M68kOperand.NONE,
-        M68kCpu.GROUP_68000_UP, false, M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING));
+        M68kCpu.GROUP_68000_UP, false,
+        M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING,
+        M68kMnemonic.ConditionCodes.parseAffected("*****"), M68kMnemonic.ConditionCodes.NONE_AFFECTED));
   }
 
   public void testChk() {
     doTestFind("chk d0,d0",
       new M68kMnemonic(M68kTokenTypes.CHK, M68kDataSize.GROUP_W,
         M68kOperand.DATA, M68kOperand.DATA_REGISTER,
-        M68kCpu.GROUP_68000_UP, false, M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.TRAP));
+        M68kCpu.GROUP_68000_UP, false,
+        M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.TRAP,
+        M68kMnemonic.ConditionCodes.parseAffected("-*UUU"), M68kMnemonic.ConditionCodes.NONE_AFFECTED));
   }
 
   public void testChkDataSizeLong() {
     doTestFind("chk.l d0,d0",
       new M68kMnemonic(M68kTokenTypes.CHK, M68kDataSize.GROUP_L,
         M68kOperand.DATA, M68kOperand.DATA_REGISTER,
-        M68kCpu.GROUP_68020_UP, false, M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.TRAP));
+        M68kCpu.GROUP_68020_UP, false,
+        M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.TRAP,
+        M68kMnemonic.ConditionCodes.parseAffected("-*UUU"), M68kMnemonic.ConditionCodes.NONE_AFFECTED));
   }
 
   public void testRtd() {
     doTestFind("rtd #1",
       new M68kMnemonic(M68kTokenTypes.RTD, M68kDataSize.GROUP_UNSIZED,
         M68kOperand.QUICK_IMMEDIATE, M68kOperand.NONE,
-        M68kCpu.GROUP_68010_UP, false, M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.RETURN));
+        M68kCpu.GROUP_68010_UP, false,
+        M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.RETURN,
+        M68kMnemonic.ConditionCodes.NONE_AFFECTED, M68kMnemonic.ConditionCodes.NONE_AFFECTED));
   }
 
   public void testFindAslDnDn() {
     doTestFind("asl d0,d1",
       new M68kMnemonic(M68kTokenTypes.ASL, M68kDataSize.GROUP_BWL,
         M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER,
-        M68kCpu.GROUP_68000_UP, false, M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING));
+        M68kCpu.GROUP_68000_UP, false,
+        M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING,
+        M68kMnemonic.ConditionCodes.parseAffected("*****"), M68kMnemonic.ConditionCodes.NONE_AFFECTED));
   }
 
   public void testFindAslQuickDn() {
     doTestFind("asl #1,d1",
       new M68kMnemonic(M68kTokenTypes.ASL, M68kDataSize.GROUP_BWL,
         M68kOperand.QUICK_IMMEDIATE, M68kOperand.DATA_REGISTER,
-        M68kCpu.GROUP_68000_UP, false, M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING));
+        M68kCpu.GROUP_68000_UP, false,
+        M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING,
+        M68kMnemonic.ConditionCodes.parseAffected("*****"), M68kMnemonic.ConditionCodes.NONE_AFFECTED));
   }
 
   public void testFindAslDn() {
     doTestFind("asl d1",
       new M68kMnemonic(M68kTokenTypes.ASL, M68kDataSize.GROUP_BWL,
         M68kOperand.DATA_REGISTER, M68kOperand.NONE,
-        M68kCpu.GROUP_68000_UP, false, M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING));
+        M68kCpu.GROUP_68000_UP, false,
+        M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING,
+        M68kMnemonic.ConditionCodes.parseAffected("*****"), M68kMnemonic.ConditionCodes.NONE_AFFECTED));
   }
 
   public void testFindImmediateAlterableData() {
@@ -158,7 +174,9 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
     doTestFind("cmp.b #42,d0",
       new M68kMnemonic(M68kTokenTypes.CMP, M68kDataSize.GROUP_BWL,
         M68kOperand.IMMEDIATE, M68kOperand.ALTERABLE_DATA,
-        M68kCpu.GROUP_68000_UP, false, M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING));
+        M68kCpu.GROUP_68000_UP, false,
+        M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING,
+        M68kMnemonic.ConditionCodes.parseAffected("-****"), M68kMnemonic.ConditionCodes.NONE_AFFECTED));
   }
 
   public void testFindMoveaArdAlterable() {
@@ -166,7 +184,9 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
     doTestFind("movea.w a0,a0",
       new M68kMnemonic(M68kTokenTypes.MOVEA, M68kDataSize.GROUP_WL,
         M68kOperand.ALL, M68kOperand.ADDRESS_REGISTER,
-        M68kCpu.GROUP_68000_UP, false, M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING));
+        M68kCpu.GROUP_68000_UP, false,
+        M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING,
+        M68kMnemonic.ConditionCodes.NONE_AFFECTED, M68kMnemonic.ConditionCodes.NONE_AFFECTED));
   }
 
   // matching via M68kAdmWithRrd
@@ -174,22 +194,30 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
     doTestFind("exg a0,a1",
       new M68kMnemonic(M68kTokenTypes.EXG, M68kDataSize.GROUP_L,
         M68kOperand.ADDRESS_REGISTER, M68kOperand.ADDRESS_REGISTER,
-        M68kCpu.GROUP_68000_UP, false, M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING));
+        M68kCpu.GROUP_68000_UP, false,
+        M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING,
+        M68kMnemonic.ConditionCodes.NONE_AFFECTED, M68kMnemonic.ConditionCodes.NONE_AFFECTED));
 
     doTestFind("exg d0,a1",
       new M68kMnemonic(M68kTokenTypes.EXG, M68kDataSize.GROUP_L,
         M68kOperand.DATA_REGISTER, M68kOperand.ADDRESS_REGISTER,
-        M68kCpu.GROUP_68000_UP, false, M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING));
+        M68kCpu.GROUP_68000_UP, false,
+        M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING,
+        M68kMnemonic.ConditionCodes.NONE_AFFECTED, M68kMnemonic.ConditionCodes.NONE_AFFECTED));
 
     doTestFind("exg a1,d0",
       new M68kMnemonic(M68kTokenTypes.EXG, M68kDataSize.GROUP_L,
         M68kOperand.ADDRESS_REGISTER, M68kOperand.DATA_REGISTER,
-        M68kCpu.GROUP_68000_UP, false, M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING));
+        M68kCpu.GROUP_68000_UP, false,
+        M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING,
+        M68kMnemonic.ConditionCodes.NONE_AFFECTED, M68kMnemonic.ConditionCodes.NONE_AFFECTED));
 
     doTestFind("exg d0,d1",
       new M68kMnemonic(M68kTokenTypes.EXG, M68kDataSize.GROUP_L,
         M68kOperand.DATA_REGISTER, M68kOperand.DATA_REGISTER,
-        M68kCpu.GROUP_68000_UP, false, M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING));
+        M68kCpu.GROUP_68000_UP, false,
+        M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING,
+        M68kMnemonic.ConditionCodes.NONE_AFFECTED, M68kMnemonic.ConditionCodes.NONE_AFFECTED));
   }
 
   private void doTestFind(String instructionText, M68kMnemonic expectedMnemonic) {

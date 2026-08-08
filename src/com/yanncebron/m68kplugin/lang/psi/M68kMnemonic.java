@@ -16,12 +16,14 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
 import com.yanncebron.m68kplugin.M68kBundle;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.EnumSet;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -36,7 +38,9 @@ public record M68kMnemonic(IElementType elementType,
                            Set<M68kCpu> cpus,
                            boolean deprecated,
                            PrivilegedType privilegedType,
-                           ControlFlow controlFlow) {
+                           ControlFlow controlFlow,
+                           ConditionCodes affected,
+                           ConditionCodes tested) {
 
   private static final Set<M68kOperand> SPECIAL_REGISTER_OPERANDS = Set.of(
     M68kOperand.CCR_REGISTER,
@@ -122,13 +126,141 @@ public record M68kMnemonic(IElementType elementType,
 
     return "M68kMnemonic{" +
       elementType +
-      ", firstOp=" + firstOperand +
-      ", secondOp=" + secondOperand +
+      ", " + firstOperand +
+      ", " + secondOperand +
       ", " + dataSizes +
       ", " + cpuText +
       (deprecated() ? ", DEPRECATED" : "") +
       (M68kMnemonicPredicates.privilegedAny().test(this) ? ", " + privilegedType.name() : "") +
       (controlFlow() != ControlFlow.NOTHING ? ", " + controlFlow : "") +
+      (affected != ConditionCodes.NONE_AFFECTED ? ", " + affected : "") +
+      (tested != ConditionCodes.NONE_AFFECTED ? ", " + tested : "") +
       '}';
+  }
+
+  public static final class ConditionCodes {
+
+    private final Code x;
+    private final Code n;
+    private final Code z;
+    private final Code v;
+    private final Code c;
+
+    /**
+     * Constant for "not affected".
+     */
+    public static final ConditionCodes NONE_AFFECTED = parseAffected("-----");
+
+    private ConditionCodes(Code x, Code n, Code z, Code v, Code c) {
+      this.x = x;
+      this.n = n;
+      this.z = z;
+      this.v = v;
+      this.c = c;
+    }
+
+    static ConditionCodes parseAffected(String value) {
+      assertLength(value);
+
+      EnumSet<Code> INVALID_CODES_N_C = EnumSet.of(Code.CARRY, Code.TEST);
+
+      Code x = Code.fromId(value, 0, EnumSet.of(Code.TEST));
+      Code n = Code.fromId(value, 1, INVALID_CODES_N_C);
+      Code z = Code.fromId(value, 2, INVALID_CODES_N_C);
+      Code v = Code.fromId(value, 3, INVALID_CODES_N_C);
+      Code c = Code.fromId(value, 4, INVALID_CODES_N_C);
+
+      return new ConditionCodes(x, n, z, v, c);
+    }
+
+    static ConditionCodes parseTested(String value) {
+      assertLength(value);
+
+      EnumSet<Code> INVALID_CODES_TESTED = EnumSet.complementOf(EnumSet.of(Code.NOT_AFFECTED, Code.TEST));
+
+      Code x = Code.fromId(value, 0, INVALID_CODES_TESTED);
+      Code n = Code.fromId(value, 1, INVALID_CODES_TESTED);
+      Code z = Code.fromId(value, 2, INVALID_CODES_TESTED);
+      Code v = Code.fromId(value, 3, INVALID_CODES_TESTED);
+      Code c = Code.fromId(value, 4, INVALID_CODES_TESTED);
+
+      return new ConditionCodes(x, n, z, v, c);
+    }
+
+    private static void assertLength(String value) {
+      if (value.length() != 5) {
+        throw new IllegalArgumentException("Invalid value length for '" + value + "'");
+      }
+    }
+
+    /**
+     * @return String for UI use.
+     */
+    @NlsSafe
+    public String toDisplayText() {
+      return "" + x.displayId + n.displayId + z.displayId + v.displayId + c.displayId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (!(o instanceof ConditionCodes that)) return false;
+
+      return x == that.x && n == that.n && z == that.z && v == that.v && c == that.c;
+    }
+
+    @Override
+    public int hashCode() {
+      int result = x.hashCode();
+      result = 31 * result + n.hashCode();
+      result = 31 * result + z.hashCode();
+      result = 31 * result + v.hashCode();
+      result = 31 * result + c.hashCode();
+      return result;
+    }
+
+    @Override
+    public String toString() {
+      return "" + x.parseId + n.parseId + z.parseId + v.parseId + c.parseId;
+    }
+
+    private enum Code {
+      NOT_AFFECTED('-', '-'),
+
+      CLEAR('0', '0'),
+      SET('1', '1'),
+
+      UNDEFINED('U', 'U'),
+      RESULT('*', '*'),
+      CARRY('C', '*'),
+
+      AND('A', '*'),
+      OR('O', '*'),
+
+      TEST('?', '?');
+
+      private final char parseId;
+      private final char displayId;
+
+      Code(char parseId, char displayId) {
+        this.parseId = parseId;
+        this.displayId = displayId;
+      }
+
+      private static Code fromId(String value, int offset, EnumSet<Code> invalidCodes) {
+        char id = value.charAt(offset);
+        for (Code code : Code.values()) {
+          if (id == code.parseId) {
+            if (invalidCodes.contains(code)) {
+              throw new IllegalArgumentException("id '" + id + "' forbidden (@" + offset + " in '" + value + "')");
+            }
+
+            return code;
+          }
+        }
+
+        throw new IllegalArgumentException("id '" + id + "' invalid (@" + offset + " in '" + value + "')");
+      }
+    }
+
   }
 }

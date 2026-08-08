@@ -146,7 +146,8 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
         secondOperand,
         m68kCpus,
         deprecated, m68MnemonicRuntimeInfo.privilegedType(),
-        m68MnemonicRuntimeInfo.controlFlow());
+        m68MnemonicRuntimeInfo.controlFlow(),
+        m68MnemonicRuntimeInfo.affected(), m68MnemonicRuntimeInfo.tested());
 
       parsedMnemonics.add(m68kMnemonic);
 
@@ -362,6 +363,12 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       }
       if (mnemonic.controlFlow() != M68kMnemonic.ControlFlow.NOTHING) {
         System.out.println(".controlFlow(M68kMnemonic.ControlFlow." + mnemonic.controlFlow().name() + ")");
+      }
+      if (mnemonic.affected() != M68kMnemonic.ConditionCodes.NONE_AFFECTED) {
+        System.out.println(".affected(\"" + mnemonic.affected().toString() + "\")");
+      }
+      if (mnemonic.tested() != M68kMnemonic.ConditionCodes.NONE_AFFECTED) {
+        System.out.println(".tested(\"" + mnemonic.tested().toString() + "\")");
       }
       System.out.println(".build();");
 

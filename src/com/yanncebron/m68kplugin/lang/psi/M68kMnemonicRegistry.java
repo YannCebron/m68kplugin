@@ -157,9 +157,12 @@ public final class M68kMnemonicRegistry {
     private M68kOperand firstOperand = NONE;
     private M68kOperand secondOperand = NONE;
     private Set<M68kCpu> cpus = M68kCpu.GROUP_68000_UP;
-    private M68kMnemonic.PrivilegedType privilegedType = M68kMnemonic.PrivilegedType.NONE;
     private boolean deprecated = false;
+
+    private M68kMnemonic.PrivilegedType privilegedType = M68kMnemonic.PrivilegedType.NONE;
     private M68kMnemonic.ControlFlow controlFlow = M68kMnemonic.ControlFlow.NOTHING;
+    private M68kMnemonic.ConditionCodes affected = M68kMnemonic.ConditionCodes.NONE_AFFECTED;
+    private M68kMnemonic.ConditionCodes tested = M68kMnemonic.ConditionCodes.NONE_AFFECTED;
 
     private MnemonicBuilder(IElementType elementType) {
       this.elementType = elementType;
@@ -200,9 +203,21 @@ public final class M68kMnemonicRegistry {
       return this;
     }
 
+    private MnemonicBuilder affected(String value) {
+      this.affected = M68kMnemonic.ConditionCodes.parseAffected(value);
+      return this;
+    }
+
+    private MnemonicBuilder tested(String value) {
+      this.tested = M68kMnemonic.ConditionCodes.parseTested(value);
+      return this;
+    }
+
     private void build() {
       M68kMnemonic m68kMnemonic = new M68kMnemonic(elementType, dataSizes,
-        firstOperand, secondOperand, cpus, deprecated, privilegedType, controlFlow);
+        firstOperand, secondOperand, cpus, deprecated,
+        privilegedType, controlFlow,
+        affected, tested);
       mnemonics.putValue(m68kMnemonic.elementType(), m68kMnemonic);
     }
   }
@@ -214,32 +229,41 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.ABCD).dataSizes(GROUP_B)
       .first(DATA_REGISTER).second(DATA_REGISTER)
+      .affected("CUAU*")
+      .tested("?-?--")
       .build();
 
     create(M68kTokenTypes.ABCD).dataSizes(GROUP_B)
       .first(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT).second(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT)
+      .affected("CUAU*")
+      .tested("?-?--")
       .build();
 
 // ADD -------------------------------------------------------------------------
 
     create(M68kTokenTypes.ADD).dataSizes(GROUP_BWL)
       .first(DATA).second(DATA_REGISTER)
+      .affected("C****")
       .build();
 
     create(M68kTokenTypes.ADD).dataSizes(GROUP_WL)
       .first(ADDRESS_REGISTER).second(DATA_REGISTER)
+      .affected("C****")
       .build();
 
     create(M68kTokenTypes.ADD).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER).second(ALTERABLE_MEMORY)
+      .affected("C****")
       .build();
 
     create(M68kTokenTypes.ADD).dataSizes(GROUP_WL)
       .first(ALL).second(ADDRESS_REGISTER)
+      .affected("C****")
       .build();
 
     create(M68kTokenTypes.ADD).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(ALTERABLE_DATA)
+      .affected("C****")
       .build();
 
 // ADDA ------------------------------------------------------------------------
@@ -252,102 +276,129 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.ADDI).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(ALTERABLE_DATA)
+      .affected("C****")
       .build();
 
 // ADDQ ------------------------------------------------------------------------
 
     create(M68kTokenTypes.ADDQ).dataSizes(GROUP_WL)
       .first(QUICK_IMMEDIATE).second(ADDRESS_REGISTER)
+      .affected("C****")
       .build();
 
     create(M68kTokenTypes.ADDQ).dataSizes(GROUP_BWL)
       .first(QUICK_IMMEDIATE).second(ALTERABLE_DATA)
+      .affected("C****")
       .build();
 
 // ADDX ------------------------------------------------------------------------
 
     create(M68kTokenTypes.ADDX).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER).second(DATA_REGISTER)
+      .affected("C*A**")
+      .tested("?-?--")
       .build();
 
     create(M68kTokenTypes.ADDX).dataSizes(GROUP_BWL)
       .first(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT).second(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT)
+      .affected("C*A**")
+      .tested("?-?--")
       .build();
 
 // AND -------------------------------------------------------------------------
 
     create(M68kTokenTypes.AND).dataSizes(GROUP_BWL)
       .first(DATA).second(DATA_REGISTER)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.AND).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER).second(ALTERABLE_MEMORY)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.AND).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(ALTERABLE_DATA)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.AND).dataSizes(GROUP_B)
       .first(IMMEDIATE).second(CCR_REGISTER)
+      .affected("AAAAA")
+      .tested("?????")
       .build();
 
     create(M68kTokenTypes.AND).dataSizes(GROUP_W)
       .first(IMMEDIATE).second(SR_REGISTER)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .affected("AAAAA")
+      .tested("?????")
       .build();
 
 // ANDI ------------------------------------------------------------------------
 
     create(M68kTokenTypes.ANDI).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(ALTERABLE_DATA)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.ANDI).dataSizes(GROUP_B)
       .first(IMMEDIATE).second(CCR_REGISTER)
+      .affected("AAAAA")
+      .tested("?????")
       .build();
 
     create(M68kTokenTypes.ANDI).dataSizes(GROUP_W)
       .first(IMMEDIATE).second(SR_REGISTER)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .affected("AAAAA")
+      .tested("?????")
       .build();
 
 // ASL -------------------------------------------------------------------------
 
     create(M68kTokenTypes.ASL).dataSizes(GROUP_W)
       .first(ALTERABLE_MEMORY)
+      .affected("*****")
       .build();
 
     create(M68kTokenTypes.ASL).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER).second(DATA_REGISTER)
+      .affected("*****")
       .build();
 
     create(M68kTokenTypes.ASL).dataSizes(GROUP_BWL)
       .first(QUICK_IMMEDIATE).second(DATA_REGISTER)
+      .affected("*****")
       .build();
 
     create(M68kTokenTypes.ASL).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER)
+      .affected("*****")
       .build();
 
 // ASR -------------------------------------------------------------------------
 
     create(M68kTokenTypes.ASR).dataSizes(GROUP_W)
       .first(ALTERABLE_MEMORY)
+      .affected("***0*")
       .build();
 
     create(M68kTokenTypes.ASR).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER).second(DATA_REGISTER)
+      .affected("***0*")
       .build();
 
     create(M68kTokenTypes.ASR).dataSizes(GROUP_BWL)
       .first(QUICK_IMMEDIATE).second(DATA_REGISTER)
+      .affected("***0*")
       .build();
 
     create(M68kTokenTypes.ASR).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER)
+      .affected("***0*")
       .build();
 
 // BHS -------------------------------------------------------------------------
@@ -355,6 +406,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.BHS).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("----?")
       .build();
 
 // BLO -------------------------------------------------------------------------
@@ -362,6 +414,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.BLO).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("----?")
       .build();
 
 // BHI -------------------------------------------------------------------------
@@ -369,6 +422,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.BHI).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("--?-?")
       .build();
 
 // BLS -------------------------------------------------------------------------
@@ -376,6 +430,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.BLS).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("--?-?")
       .build();
 
 // BCC -------------------------------------------------------------------------
@@ -383,6 +438,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.BCC).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("----?")
       .build();
 
 // BCS -------------------------------------------------------------------------
@@ -390,6 +446,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.BCS).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("----?")
       .build();
 
 // BNE -------------------------------------------------------------------------
@@ -397,6 +454,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.BNE).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("--?--")
       .build();
 
 // BEQ -------------------------------------------------------------------------
@@ -404,6 +462,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.BEQ).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("--?--")
       .build();
 
 // BVC -------------------------------------------------------------------------
@@ -411,6 +470,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.BVC).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("---?-")
       .build();
 
 // BVS -------------------------------------------------------------------------
@@ -418,6 +478,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.BVS).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("---?-")
       .build();
 
 // BPL -------------------------------------------------------------------------
@@ -425,6 +486,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.BPL).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("-?---")
       .build();
 
 // BMI -------------------------------------------------------------------------
@@ -432,6 +494,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.BMI).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("-?---")
       .build();
 
 // BGE -------------------------------------------------------------------------
@@ -439,6 +502,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.BGE).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("-?-?-")
       .build();
 
 // BLT -------------------------------------------------------------------------
@@ -446,6 +510,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.BLT).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("-?-?-")
       .build();
 
 // BGT -------------------------------------------------------------------------
@@ -453,6 +518,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.BGT).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("-???-")
       .build();
 
 // BLE -------------------------------------------------------------------------
@@ -460,6 +526,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.BLE).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("-???-")
       .build();
 
 // BRA -------------------------------------------------------------------------
@@ -479,72 +546,88 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BCHG).dataSizes(GROUP_L)
       .first(DATA_REGISTER).second(DATA_REGISTER)
+      .affected("--*--")
       .build();
 
     create(M68kTokenTypes.BCHG).dataSizes(GROUP_B)
       .first(DATA_REGISTER).second(ALTERABLE_MEMORY)
+      .affected("--*--")
       .build();
 
     create(M68kTokenTypes.BCHG).dataSizes(GROUP_L)
       .first(QUICK_IMMEDIATE).second(DATA_REGISTER)
+      .affected("--*--")
       .build();
 
     create(M68kTokenTypes.BCHG).dataSizes(GROUP_B)
       .first(QUICK_IMMEDIATE).second(ALTERABLE_MEMORY)
+      .affected("--*--")
       .build();
 
 // BCLR ------------------------------------------------------------------------
 
     create(M68kTokenTypes.BCLR).dataSizes(GROUP_L)
       .first(DATA_REGISTER).second(DATA_REGISTER)
+      .affected("--*--")
       .build();
 
     create(M68kTokenTypes.BCLR).dataSizes(GROUP_B)
       .first(DATA_REGISTER).second(ALTERABLE_MEMORY)
+      .affected("--*--")
       .build();
 
     create(M68kTokenTypes.BCLR).dataSizes(GROUP_L)
       .first(QUICK_IMMEDIATE).second(DATA_REGISTER)
+      .affected("--*--")
       .build();
 
     create(M68kTokenTypes.BCLR).dataSizes(GROUP_B)
       .first(QUICK_IMMEDIATE).second(ALTERABLE_MEMORY)
+      .affected("--*--")
       .build();
 
 // BSET ------------------------------------------------------------------------
 
     create(M68kTokenTypes.BSET).dataSizes(GROUP_L)
       .first(DATA_REGISTER).second(DATA_REGISTER)
+      .affected("--*--")
       .build();
 
     create(M68kTokenTypes.BSET).dataSizes(GROUP_B)
       .first(DATA_REGISTER).second(ALTERABLE_MEMORY)
+      .affected("--*--")
       .build();
 
     create(M68kTokenTypes.BSET).dataSizes(GROUP_L)
       .first(QUICK_IMMEDIATE).second(DATA_REGISTER)
+      .affected("--*--")
       .build();
 
     create(M68kTokenTypes.BSET).dataSizes(GROUP_B)
       .first(QUICK_IMMEDIATE).second(ALTERABLE_MEMORY)
+      .affected("--*--")
       .build();
 
 // BTST ------------------------------------------------------------------------
 
     create(M68kTokenTypes.BTST).dataSizes(GROUP_L)
       .first(DATA_REGISTER).second(DATA_REGISTER)
+      .affected("--*--")
       .build();
 
     create(M68kTokenTypes.BTST).dataSizes(GROUP_B)
       .first(DATA_REGISTER).second(MEMORY)
+      .affected("--*--")
       .build();
 
     create(M68kTokenTypes.BTST).dataSizes(GROUP_L)
       .first(QUICK_IMMEDIATE).second(DATA_REGISTER)
+      .affected("--*--")
       .build();
 
     create(M68kTokenTypes.BTST).dataSizes(GROUP_B)
       .first(QUICK_IMMEDIATE).second(MEMORY_WITHOUT_IMMEDIATE)
+      .affected("--*--")
       .build();
 
 // BGND ------------------------------------------------------------------------
@@ -566,68 +649,81 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.CHK).dataSizes(GROUP_W)
       .first(DATA).second(DATA_REGISTER)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .affected("-*UUU")
       .build();
 
     create(M68kTokenTypes.CHK).dataSizes(GROUP_L)
       .first(DATA).second(DATA_REGISTER)
       .cpus(GROUP_68020_UP)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .affected("-*UUU")
       .build();
 
 // CLR -------------------------------------------------------------------------
 
     create(M68kTokenTypes.CLR).dataSizes(GROUP_BWL)
       .first(ALTERABLE_DATA)
+      .affected("-0100")
       .build();
 
 // CMP -------------------------------------------------------------------------
 
     create(M68kTokenTypes.CMP).dataSizes(GROUP_WL)
       .first(ADDRESS_REGISTER).second(DATA_REGISTER)
+      .affected("-****")
       .build();
 
     create(M68kTokenTypes.CMP).dataSizes(GROUP_BWL)
       .first(DATA).second(DATA_REGISTER)
+      .affected("-****")
       .build();
 
     create(M68kTokenTypes.CMP).dataSizes(GROUP_WL)
       .first(ALL).second(ADDRESS_REGISTER)
+      .affected("-****")
       .build();
 
     create(M68kTokenTypes.CMP).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(ALTERABLE_DATA)
+      .affected("-****")
       .build();
 
     create(M68kTokenTypes.CMP).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(DATA_WITHOUT_IMMEDIATE)
       .cpus(GROUP_68020_UP_WITH_CPU32)
+      .affected("-****")
       .build();
 
     create(M68kTokenTypes.CMP).dataSizes(GROUP_BWL)
       .first(ADDRESS_REGISTER_INDIRECT_POST_INCREMENT).second(ADDRESS_REGISTER_INDIRECT_POST_INCREMENT)
+      .affected("-****")
       .build();
 
 // CMPA ------------------------------------------------------------------------
 
     create(M68kTokenTypes.CMPA).dataSizes(GROUP_WL)
       .first(ALL).second(ADDRESS_REGISTER)
+      .affected("-****")
       .build();
 
 // CMPI ------------------------------------------------------------------------
 
     create(M68kTokenTypes.CMPI).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(ALTERABLE_DATA)
+      .affected("-****")
       .build();
 
     create(M68kTokenTypes.CMPI).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(DATA_WITHOUT_IMMEDIATE)
       .cpus(GROUP_68020_UP_WITH_CPU32)
+      .affected("-****")
       .build();
 
 // CMPM ------------------------------------------------------------------------
 
     create(M68kTokenTypes.CMPM).dataSizes(GROUP_BWL)
       .first(ADDRESS_REGISTER_INDIRECT_POST_INCREMENT).second(ADDRESS_REGISTER_INDIRECT_POST_INCREMENT)
+      .affected("-****")
       .build();
 
 // DBT -------------------------------------------------------------------------
@@ -635,6 +731,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBT).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("-----")
       .build();
 
 // DBF -------------------------------------------------------------------------
@@ -642,6 +739,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBF).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("-----")
       .build();
 
 // DBRA ------------------------------------------------------------------------
@@ -649,6 +747,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBRA).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("-----")
       .build();
 
 // DBHI ------------------------------------------------------------------------
@@ -656,6 +755,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBHI).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("--?-?")
       .build();
 
 // DBLS ------------------------------------------------------------------------
@@ -663,6 +763,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBLS).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("--?-?")
       .build();
 
 // DBCC ------------------------------------------------------------------------
@@ -670,6 +771,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBCC).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("----?")
       .build();
 
 // DBHS ------------------------------------------------------------------------
@@ -677,6 +779,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBHS).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("----?")
       .build();
 
 // DBCS ------------------------------------------------------------------------
@@ -684,6 +787,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBCS).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("----?")
       .build();
 
 // DBLO ------------------------------------------------------------------------
@@ -691,6 +795,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBLO).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("----?")
       .build();
 
 // DBNE ------------------------------------------------------------------------
@@ -698,6 +803,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBNE).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("--?--")
       .build();
 
 // DBEQ ------------------------------------------------------------------------
@@ -705,6 +811,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBEQ).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("--?--")
       .build();
 
 // DBVC ------------------------------------------------------------------------
@@ -712,6 +819,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBVC).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("---?-")
       .build();
 
 // DBVS ------------------------------------------------------------------------
@@ -719,6 +827,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBVS).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("---?-")
       .build();
 
 // DBPL ------------------------------------------------------------------------
@@ -726,6 +835,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBPL).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("-?---")
       .build();
 
 // DBMI ------------------------------------------------------------------------
@@ -733,6 +843,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBMI).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("-?---")
       .build();
 
 // DBGE ------------------------------------------------------------------------
@@ -740,6 +851,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBGE).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("-?-?-")
       .build();
 
 // DBLT ------------------------------------------------------------------------
@@ -747,6 +859,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBLT).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("-?-?-")
       .build();
 
 // DBGT ------------------------------------------------------------------------
@@ -754,6 +867,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBGT).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("-???-")
       .build();
 
 // DBLE ------------------------------------------------------------------------
@@ -761,6 +875,7 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DBLE).dataSizes(GROUP_W)
       .first(DATA_REGISTER).second(DBCC_BRANCH_DESTINATION)
       .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
+      .tested("-???-")
       .build();
 
 // DIVS ------------------------------------------------------------------------
@@ -768,18 +883,21 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DIVS).dataSizes(GROUP_W)
       .first(DATA).second(DATA_REGISTER)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .affected("-***0")
       .build();
 
     create(M68kTokenTypes.DIVS).dataSizes(GROUP_L)
       .first(DATA).second(DATA_REGISTER)
       .cpus(GROUP_68020_UP_WITH_CPU32)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .affected("-***0")
       .build();
 
     create(M68kTokenTypes.DIVS).dataSizes(GROUP_L)
       .first(DATA).second(DOUBLE_DATA_REGISTER)
       .cpus(GROUP_68020_UP_WITH_CPU32)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .affected("-***0")
       .build();
 
 // DIVU ------------------------------------------------------------------------
@@ -787,54 +905,68 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.DIVU).dataSizes(GROUP_W)
       .first(DATA).second(DATA_REGISTER)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .affected("-***0")
       .build();
 
     create(M68kTokenTypes.DIVU).dataSizes(GROUP_L)
       .first(DATA).second(DATA_REGISTER)
       .cpus(GROUP_68020_UP_WITH_CPU32)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .affected("-***0")
       .build();
 
     create(M68kTokenTypes.DIVU).dataSizes(GROUP_L)
       .first(DATA).second(DOUBLE_DATA_REGISTER)
       .cpus(GROUP_68020_UP_WITH_CPU32)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .affected("-***0")
       .build();
 
 // EOR -------------------------------------------------------------------------
 
     create(M68kTokenTypes.EOR).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER).second(ALTERABLE_DATA)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.EOR).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(ALTERABLE_DATA)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.EOR).dataSizes(GROUP_B)
       .first(IMMEDIATE).second(CCR_REGISTER)
+      .affected("*****")
+      .tested("?????")
       .build();
 
     create(M68kTokenTypes.EOR).dataSizes(GROUP_W)
       .first(IMMEDIATE).second(SR_REGISTER)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .affected("*****")
+      .tested("?????")
       .build();
 
 // EORI ------------------------------------------------------------------------
 
     create(M68kTokenTypes.EORI).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(ALTERABLE_DATA)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.EORI).dataSizes(GROUP_B)
       .first(IMMEDIATE).second(CCR_REGISTER)
+      .affected("*****")
+      .tested("?????")
       .build();
 
     create(M68kTokenTypes.EORI).dataSizes(GROUP_W)
       .first(IMMEDIATE).second(SR_REGISTER)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .affected("*****")
+      .tested("?????")
       .build();
 
 // EXG -------------------------------------------------------------------------
@@ -859,6 +991,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.EXT).dataSizes(GROUP_WL)
       .first(DATA_REGISTER)
+      .affected("-**00")
       .build();
 
 // ILLEGAL ---------------------------------------------------------------------
@@ -905,77 +1038,93 @@ public final class M68kMnemonicRegistry {
       .cpus(EnumSet.of(M68kCpu.CPU32))
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .affected("*****")
       .build();
 
 // LSL -------------------------------------------------------------------------
 
     create(M68kTokenTypes.LSL).dataSizes(GROUP_W)
       .first(ALTERABLE_MEMORY)
+      .affected("***0*")
       .build();
 
     create(M68kTokenTypes.LSL).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER).second(DATA_REGISTER)
+      .affected("***0*")
       .build();
 
     create(M68kTokenTypes.LSL).dataSizes(GROUP_BWL)
       .first(QUICK_IMMEDIATE).second(DATA_REGISTER)
+      .affected("***0*")
       .build();
 
     create(M68kTokenTypes.LSL).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER)
+      .affected("***0*")
       .build();
 
 // LSR -------------------------------------------------------------------------
 
     create(M68kTokenTypes.LSR).dataSizes(GROUP_W)
       .first(ALTERABLE_MEMORY)
+      .affected("***0*")
       .build();
 
     create(M68kTokenTypes.LSR).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER).second(DATA_REGISTER)
+      .affected("***0*")
       .build();
 
     create(M68kTokenTypes.LSR).dataSizes(GROUP_BWL)
       .first(QUICK_IMMEDIATE).second(DATA_REGISTER)
+      .affected("***0*")
       .build();
 
     create(M68kTokenTypes.LSR).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER)
+      .affected("***0*")
       .build();
 
 // MOVE ------------------------------------------------------------------------
 
     create(M68kTokenTypes.MOVE).dataSizes(GROUP_WL)
       .first(ADDRESS_REGISTER).second(ALTERABLE)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.MOVE).dataSizes(GROUP_WL)
       .first(ALL).second(ADDRESS_REGISTER)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.MOVE).dataSizes(GROUP_BWL)
       .first(DATA).second(ALTERABLE_DATA)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.MOVE).dataSizes(GROUP_W)
       .first(CCR_REGISTER).second(ALTERABLE_DATA)
       .cpus(GROUP_68010_UP)
+      .tested("?????")
       .build();
 
     create(M68kTokenTypes.MOVE).dataSizes(GROUP_W)
       .first(SR_REGISTER).second(ALTERABLE_DATA)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED_68010_ABOVE)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .tested("?????")
       .build();
 
     create(M68kTokenTypes.MOVE).dataSizes(GROUP_W)
       .first(DATA).second(CCR_REGISTER)
+      .affected("*****")
       .build();
 
     create(M68kTokenTypes.MOVE).dataSizes(GROUP_W)
       .first(DATA).second(SR_REGISTER)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .affected("*****")
       .build();
 
     create(M68kTokenTypes.MOVE).dataSizes(GROUP_L)
@@ -1062,6 +1211,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.MOVEQ).dataSizes(GROUP_L)
       .first(QUICK_IMMEDIATE).second(DATA_REGISTER)
+      .affected("-**00")
       .build();
 
 // MOVES -----------------------------------------------------------------------
@@ -1084,50 +1234,61 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.MULS).dataSizes(GROUP_W)
       .first(DATA).second(DATA_REGISTER)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.MULS).dataSizes(GROUP_L)
       .first(DATA).second(DATA_REGISTER)
       .cpus(GROUP_68020_UP_WITH_CPU32)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.MULS).dataSizes(GROUP_L)
       .first(DATA).second(DOUBLE_DATA_REGISTER)
       .cpus(GROUP_68020_UP_WITH_CPU32)
+      .affected("-**00")
       .build();
 
 // MULU ------------------------------------------------------------------------
 
     create(M68kTokenTypes.MULU).dataSizes(GROUP_W)
       .first(DATA).second(DATA_REGISTER)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.MULU).dataSizes(GROUP_L)
       .first(DATA).second(DATA_REGISTER)
       .cpus(GROUP_68020_UP_WITH_CPU32)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.MULU).dataSizes(GROUP_L)
       .first(DATA).second(DOUBLE_DATA_REGISTER)
       .cpus(GROUP_68020_UP_WITH_CPU32)
+      .affected("-**00")
       .build();
 
 // NBCD ------------------------------------------------------------------------
 
     create(M68kTokenTypes.NBCD).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .affected("CUAU*")
+      .tested("?-?--")
       .build();
 
 // NEG -------------------------------------------------------------------------
 
     create(M68kTokenTypes.NEG).dataSizes(GROUP_BWL)
       .first(ALTERABLE_DATA)
+      .affected("C****")
       .build();
 
 // NEGX ------------------------------------------------------------------------
 
     create(M68kTokenTypes.NEGX).dataSizes(GROUP_BWL)
       .first(ALTERABLE_DATA)
+      .affected("C****")
+      .tested("?----")
       .build();
 
 // NOP -------------------------------------------------------------------------
@@ -1139,46 +1300,59 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.NOT).dataSizes(GROUP_BWL)
       .first(ALTERABLE_DATA)
+      .affected("-**00")
       .build();
 
 // OR --------------------------------------------------------------------------
 
     create(M68kTokenTypes.OR).dataSizes(GROUP_BWL)
       .first(DATA).second(DATA_REGISTER)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.OR).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER).second(ALTERABLE_MEMORY)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.OR).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(ALTERABLE_DATA)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.OR).dataSizes(GROUP_B)
       .first(IMMEDIATE).second(CCR_REGISTER)
+      .affected("*****")
+      .tested("?????")
       .build();
 
     create(M68kTokenTypes.OR).dataSizes(GROUP_W)
       .first(IMMEDIATE).second(SR_REGISTER)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .affected("OOOOO")
+      .tested("?????")
       .build();
 
 // ORI -------------------------------------------------------------------------
 
     create(M68kTokenTypes.ORI).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(ALTERABLE_DATA)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.ORI).dataSizes(GROUP_B)
       .first(IMMEDIATE).second(CCR_REGISTER)
+      .affected("*****")
+      .tested("?????")
       .build();
 
     create(M68kTokenTypes.ORI).dataSizes(GROUP_W)
       .first(IMMEDIATE).second(SR_REGISTER)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .affected("OOOOO")
+      .tested("?????")
       .build();
 
 // PEA -------------------------------------------------------------------------
@@ -1198,72 +1372,96 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.ROL).dataSizes(GROUP_W)
       .first(ALTERABLE_MEMORY)
+      .affected("-**0*")
       .build();
 
     create(M68kTokenTypes.ROL).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER).second(DATA_REGISTER)
+      .affected("-**0*")
       .build();
 
     create(M68kTokenTypes.ROL).dataSizes(GROUP_BWL)
       .first(QUICK_IMMEDIATE).second(DATA_REGISTER)
+      .affected("-**0*")
       .build();
 
     create(M68kTokenTypes.ROL).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER)
+      .affected("-**0*")
       .build();
 
 // ROR -------------------------------------------------------------------------
 
     create(M68kTokenTypes.ROR).dataSizes(GROUP_W)
       .first(ALTERABLE_MEMORY)
+      .affected("-**0*")
       .build();
 
     create(M68kTokenTypes.ROR).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER).second(DATA_REGISTER)
+      .affected("-**0*")
       .build();
 
     create(M68kTokenTypes.ROR).dataSizes(GROUP_BWL)
       .first(QUICK_IMMEDIATE).second(DATA_REGISTER)
+      .affected("-**0*")
       .build();
 
     create(M68kTokenTypes.ROR).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER)
+      .affected("-**0*")
       .build();
 
 // ROXL ------------------------------------------------------------------------
 
     create(M68kTokenTypes.ROXL).dataSizes(GROUP_W)
       .first(ALTERABLE_MEMORY)
+      .affected("***0*")
+      .tested("?----")
       .build();
 
     create(M68kTokenTypes.ROXL).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER).second(DATA_REGISTER)
+      .affected("***0*")
+      .tested("?----")
       .build();
 
     create(M68kTokenTypes.ROXL).dataSizes(GROUP_BWL)
       .first(QUICK_IMMEDIATE).second(DATA_REGISTER)
+      .affected("***0*")
+      .tested("?----")
       .build();
 
     create(M68kTokenTypes.ROXL).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER)
+      .affected("***0*")
+      .tested("?----")
       .build();
 
 // ROXR ------------------------------------------------------------------------
 
     create(M68kTokenTypes.ROXR).dataSizes(GROUP_W)
       .first(ALTERABLE_MEMORY)
+      .affected("***0*")
+      .tested("?----")
       .build();
 
     create(M68kTokenTypes.ROXR).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER).second(DATA_REGISTER)
+      .affected("***0*")
+      .tested("?----")
       .build();
 
     create(M68kTokenTypes.ROXR).dataSizes(GROUP_BWL)
       .first(QUICK_IMMEDIATE).second(DATA_REGISTER)
+      .affected("***0*")
+      .tested("?----")
       .build();
 
     create(M68kTokenTypes.ROXR).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER)
+      .affected("***0*")
+      .tested("?----")
       .build();
 
 // RTD -------------------------------------------------------------------------
@@ -1279,12 +1477,14 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.RTE)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP_RETURN)
+      .affected("*****")
       .build();
 
 // RTR -------------------------------------------------------------------------
 
     create(M68kTokenTypes.RTR)
       .controlFlow(M68kMnemonic.ControlFlow.RETURN)
+      .affected("*****")
       .build();
 
 // RTS -------------------------------------------------------------------------
@@ -1297,118 +1497,140 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.SBCD).dataSizes(GROUP_B)
       .first(DATA_REGISTER).second(DATA_REGISTER)
+      .affected("CUAU*")
+      .tested("?-?--")
       .build();
 
     create(M68kTokenTypes.SBCD).dataSizes(GROUP_B)
       .first(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT).second(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT)
+      .affected("CUAU*")
+      .tested("?-?--")
       .build();
 
 // ST --------------------------------------------------------------------------
 
     create(M68kTokenTypes.ST).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .tested("-----")
       .build();
 
 // SF --------------------------------------------------------------------------
 
     create(M68kTokenTypes.SF).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .tested("-----")
       .build();
 
 // SHI -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SHI).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .tested("--?-?")
       .build();
 
 // SLS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SLS).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .tested("--?-?")
       .build();
 
 // SCC -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SCC).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .tested("----?")
       .build();
 
 // SHS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SHS).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .tested("----?")
       .build();
 
 // SCS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SCS).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .tested("----?")
       .build();
 
 // SLO -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SLO).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .tested("----?")
       .build();
 
 // SNE -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SNE).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .tested("--?--")
       .build();
 
 // SEQ -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SEQ).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .tested("--?--")
       .build();
 
 // SVC -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SVC).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .tested("---?-")
       .build();
 
 // SVS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SVS).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .tested("---?-")
       .build();
 
 // SPL -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SPL).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .tested("-?---")
       .build();
 
 // SMI -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SMI).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .tested("-?---")
       .build();
 
 // SGE -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SGE).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .tested("-?-?-")
       .build();
 
 // SLT -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SLT).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .tested("-?-?-")
       .build();
 
 // SGT -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SGT).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .tested("-???-")
       .build();
 
 // SLE -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SLE).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .tested("-???-")
       .build();
 
 // STOP ------------------------------------------------------------------------
@@ -1417,28 +1639,34 @@ public final class M68kMnemonicRegistry {
       .first(QUICK_IMMEDIATE)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .affected("*****")
       .build();
 
 // SUB -------------------------------------------------------------------------
 
     create(M68kTokenTypes.SUB).dataSizes(GROUP_BWL)
       .first(DATA).second(DATA_REGISTER)
+      .affected("C****")
       .build();
 
     create(M68kTokenTypes.SUB).dataSizes(GROUP_WL)
       .first(ADDRESS_REGISTER).second(DATA_REGISTER)
+      .affected("C****")
       .build();
 
     create(M68kTokenTypes.SUB).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER).second(ALTERABLE_MEMORY)
+      .affected("C****")
       .build();
 
     create(M68kTokenTypes.SUB).dataSizes(GROUP_WL)
       .first(ALL).second(ADDRESS_REGISTER)
+      .affected("C****")
       .build();
 
     create(M68kTokenTypes.SUB).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(ALTERABLE_DATA)
+      .affected("C****")
       .build();
 
 // SUBA ------------------------------------------------------------------------
@@ -1451,38 +1679,47 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.SUBI).dataSizes(GROUP_BWL)
       .first(IMMEDIATE).second(ALTERABLE_DATA)
+      .affected("C****")
       .build();
 
 // SUBQ ------------------------------------------------------------------------
 
     create(M68kTokenTypes.SUBQ).dataSizes(GROUP_WL)
       .first(QUICK_IMMEDIATE).second(ADDRESS_REGISTER)
+      .affected("C****")
       .build();
 
     create(M68kTokenTypes.SUBQ).dataSizes(GROUP_BWL)
       .first(QUICK_IMMEDIATE).second(ALTERABLE_DATA)
+      .affected("C****")
       .build();
 
 // SUBX ------------------------------------------------------------------------
 
     create(M68kTokenTypes.SUBX).dataSizes(GROUP_BWL)
       .first(DATA_REGISTER).second(DATA_REGISTER)
+      .affected("C*A**")
+      .tested("?-?--")
       .build();
 
     create(M68kTokenTypes.SUBX).dataSizes(GROUP_BWL)
       .first(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT).second(ADDRESS_REGISTER_INDIRECT_PRE_DECREMENT)
+      .affected("C*A**")
+      .tested("?-?--")
       .build();
 
 // SWAP ------------------------------------------------------------------------
 
     create(M68kTokenTypes.SWAP).dataSizes(GROUP_W)
       .first(DATA_REGISTER)
+      .affected("-**00")
       .build();
 
 // TAS -------------------------------------------------------------------------
 
     create(M68kTokenTypes.TAS).dataSizes(GROUP_B)
       .first(ALTERABLE_DATA)
+      .affected("-**00")
       .build();
 
 // TBLS ------------------------------------------------------------------------
@@ -1490,11 +1727,13 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.TBLS).dataSizes(GROUP_BWL)
       .first(CONTROL).second(DATA_REGISTER)
       .cpus(GROUP_CPU32)
+      .affected("-***0")
       .build();
 
     create(M68kTokenTypes.TBLS).dataSizes(GROUP_BWL)
       .first(DOUBLE_DATA_REGISTER).second(DATA_REGISTER)
       .cpus(GROUP_CPU32)
+      .affected("-***0")
       .build();
 
 // TBLSN -----------------------------------------------------------------------
@@ -1502,11 +1741,13 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.TBLSN).dataSizes(GROUP_BWL)
       .first(CONTROL).second(DATA_REGISTER)
       .cpus(GROUP_CPU32)
+      .affected("-***0")
       .build();
 
     create(M68kTokenTypes.TBLSN).dataSizes(GROUP_BWL)
       .first(DOUBLE_DATA_REGISTER).second(DATA_REGISTER)
       .cpus(GROUP_CPU32)
+      .affected("-***0")
       .build();
 
 // TBLU ------------------------------------------------------------------------
@@ -1514,11 +1755,13 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.TBLU).dataSizes(GROUP_BWL)
       .first(CONTROL).second(DATA_REGISTER)
       .cpus(GROUP_CPU32)
+      .affected("-***0")
       .build();
 
     create(M68kTokenTypes.TBLU).dataSizes(GROUP_BWL)
       .first(DOUBLE_DATA_REGISTER).second(DATA_REGISTER)
       .cpus(GROUP_CPU32)
+      .affected("-***0")
       .build();
 
 // TBLUN -----------------------------------------------------------------------
@@ -1526,11 +1769,13 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.TBLUN).dataSizes(GROUP_BWL)
       .first(CONTROL).second(DATA_REGISTER)
       .cpus(GROUP_CPU32)
+      .affected("-***0")
       .build();
 
     create(M68kTokenTypes.TBLUN).dataSizes(GROUP_BWL)
       .first(DOUBLE_DATA_REGISTER).second(DATA_REGISTER)
       .cpus(GROUP_CPU32)
+      .affected("-***0")
       .build();
 
 // TRAP ------------------------------------------------------------------------
@@ -1544,22 +1789,26 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.TRAPV)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
+      .tested("---?-")
       .build();
 
 // TST -------------------------------------------------------------------------
 
     create(M68kTokenTypes.TST).dataSizes(GROUP_BWL)
       .first(ALTERABLE_DATA)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.TST).dataSizes(GROUP_BWL)
       .first(DATA)
       .cpus(GROUP_68020_UP_WITH_CPU32)
+      .affected("-**00")
       .build();
 
     create(M68kTokenTypes.TST).dataSizes(GROUP_WL)
       .first(ADDRESS_REGISTER)
       .cpus(GROUP_68020_UP_WITH_CPU32)
+      .affected("-**00")
       .build();
 
 // UNLK ------------------------------------------------------------------------

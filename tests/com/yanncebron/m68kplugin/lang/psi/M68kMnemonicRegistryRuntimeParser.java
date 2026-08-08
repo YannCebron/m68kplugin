@@ -41,13 +41,17 @@ final class M68kMnemonicRegistryRuntimeParser {
   private static List<M68kMnemonicRuntimeData> allRuntimeData = null;
 
   record M68MnemonicRuntimeInfo(M68kMnemonic.PrivilegedType privilegedType,
-                                M68kMnemonic.ControlFlow controlFlow) {
+                                M68kMnemonic.ControlFlow controlFlow,
+                                M68kMnemonic.ConditionCodes affected, M68kMnemonic.ConditionCodes tested) {
   }
 
   /**
    * No runtime info available.
    */
-  static M68MnemonicRuntimeInfo NO_ENTRY = new M68MnemonicRuntimeInfo(M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING);
+  static M68MnemonicRuntimeInfo NO_ENTRY = new M68MnemonicRuntimeInfo(
+    M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING,
+    M68kMnemonic.ConditionCodes.NONE_AFFECTED, M68kMnemonic.ConditionCodes.NONE_AFFECTED
+  );
 
   static M68MnemonicRuntimeInfo find(IElementType elementType, M68kOperand firstOperand, M68kOperand secondOperand, Set<M68kDataSize> dataSizes, Set<M68kCpu> m68kCpus) {
     M68kMnemonicRuntimeData m68kMnemonicRuntimeData = ContainerUtil.find(getAllRuntimeData(), it ->
@@ -63,7 +67,8 @@ final class M68kMnemonicRegistryRuntimeParser {
 
     allRuntimeData.remove(m68kMnemonicRuntimeData);
 
-    return new M68MnemonicRuntimeInfo(m68kMnemonicRuntimeData.privilegedType, m68kMnemonicRuntimeData.controlFlow);
+    return new M68MnemonicRuntimeInfo(m68kMnemonicRuntimeData.privilegedType, m68kMnemonicRuntimeData.controlFlow,
+      m68kMnemonicRuntimeData.affected, m68kMnemonicRuntimeData.tested);
   }
 
   static void assertAllUsed() {
@@ -103,14 +108,36 @@ final class M68kMnemonicRegistryRuntimeParser {
       line = it.next();
       split = StringUtil.split(line, ", ");
 
-      String privilegedText = split.get(0).strip();
-      M68kMnemonic.PrivilegedType privilegedType = "-".equals(privilegedText) ? M68kMnemonic.PrivilegedType.NONE : M68kMnemonic.PrivilegedType.valueOf(privilegedText);
-      String controlFlowText = split.get(1).strip();
-      M68kMnemonic.ControlFlow controlFlow = "-".equals(controlFlowText) ? M68kMnemonic.ControlFlow.NOTHING : M68kMnemonic.ControlFlow.valueOf(controlFlowText);
+      M68kMnemonic.PrivilegedType privilegedType;
+      M68kMnemonic.ControlFlow controlFlow;
+      M68kMnemonic.ConditionCodes affected = M68kMnemonic.ConditionCodes.NONE_AFFECTED;
+      M68kMnemonic.ConditionCodes tested = M68kMnemonic.ConditionCodes.NONE_AFFECTED;
+      try {
+        String privilegedText = split.get(0).strip();
+        privilegedType = "-".equals(privilegedText) ? M68kMnemonic.PrivilegedType.NONE : M68kMnemonic.PrivilegedType.valueOf(privilegedText);
+        String controlFlowText = split.get(1).strip();
+        controlFlow = "-".equals(controlFlowText) ? M68kMnemonic.ControlFlow.NOTHING : M68kMnemonic.ControlFlow.valueOf(controlFlowText);
+
+        if (split.size() > 2) {
+          String affectedValue = split.get(2).strip();
+          if (!affectedValue.isEmpty()) {
+            affected = M68kMnemonic.ConditionCodes.parseAffected(affectedValue);
+          }
+        }
+
+        if (split.size() > 3) {
+          String testedValue = split.get(3).strip();
+          if (!testedValue.isEmpty()) {
+            tested = M68kMnemonic.ConditionCodes.parseTested(testedValue);
+          }
+        }
+      } catch (IllegalArgumentException e) {
+        throw new IllegalArgumentException("error for '" + mnemonic + "' -> '" + line + "': " + e.getMessage());
+      }
 
       data.add(
-        new M68kMnemonicRuntimeData(elementType, operands.getFirst(), operands.getSecond(), dataSizes,
-          m68kCpus, privilegedType, controlFlow));
+        new M68kMnemonicRuntimeData(elementType, operands.getFirst(), operands.getSecond(), dataSizes, m68kCpus,
+          privilegedType, controlFlow, affected, tested));
     }
 
     assert data.size() == 244 : data.size();
@@ -127,6 +154,7 @@ final class M68kMnemonicRegistryRuntimeParser {
                                          M68kOperand firstOperand, M68kOperand secondOperand,
                                          Set<M68kDataSize> dataSizes, Set<M68kCpu> cpus,
                                          M68kMnemonic.PrivilegedType privilegedType,
-                                         M68kMnemonic.ControlFlow controlFlow) {
+                                         M68kMnemonic.ControlFlow controlFlow,
+                                         M68kMnemonic.ConditionCodes affected, M68kMnemonic.ConditionCodes tested) {
   }
 }

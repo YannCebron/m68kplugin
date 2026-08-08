@@ -4,112 +4,113 @@
 #
 # 2 lines per mnemonic (whitespaces required):
 #
-# "mnemonic", {op1,op2}, SIZE, CPU[s]
-# $PRIVILEGED$, $CONTROL_FLOW$
+# "mnemonic", {op1,op2}, SIZE, CPU
+# $PRIVILEGED$, $CONTROL_FLOW$, $AFFECTED_CC$, $TESTED_CC$
 #
 # $PRIVILEGED$   = -|PRIVILEGED|PRIVILEGED_68010_ABOVE
 # $CONTROL_FLOW$ = -|TRAP|BRANCH|JUMP|RETURN
+# $AFFECTED_CC$  = CC pattern (optional)
+# $TESTED_CC$    = CC pattern ('-'/'?') (optional)
 
 "abcd",     {D_,D_},    B,      m68000up
--,          -
+-,          -,          CUAU*,  ?-?--
 "abcd",     {PA,PA},    B,      m68000up
--,          -
+-,          -,          CUAU*,  ?-?--
 
 "add",      {DA,D_},    BWL,    m68000up
--,          -
+-,          -,          C****
 "add",      {A_,D_},    WL,     m68000up
--,          -
+-,          -,          C****
 "add",      {D_,AM},    BWL,    m68000up
--,          -
+-,          -,          C****
 "add",      {AY,A_},    WL,     m68000up
--,          -
+-,          -,          C****
 "add",      {IM,AD},    BWL,    m68000up
--,          -
+-,          -,          C****
 
 "adda",     {AY,A_},    WL,     m68000up
 -,          -
 
 "addi",     {IM,AD},    BWL,    m68000up
--,          -
+-,          -,          C****
 
 "addq",     {QI,A_},    WL,     m68000up
--,          -
+-,          -,          C****
 "addq",     {QI,AD},    BWL,    m68000up
--,          -
+-,          -,          C****
 
 "addx",     {D_,D_},    BWL,    m68000up
--,          -
+-,          -,          C*A**,  ?-?--
 "addx",     {PA,PA},    BWL,    m68000up
--,          -
-
+-,          -,          C*A**,  ?-?--
 "and",      {DA,D_},    BWL,    m68000up
--,          -
+-,          -,          -**00
 "and",      {D_,AM},    BWL,    m68000up
--,          -
+-,          -,          -**00
 "and",      {IM,AD},    BWL,    m68000up
--,          -
+-,          -,          -**00
 "and",      {IM,_CCR},  B,      m68000up
--,          -
+-,          -,          AAAAA,  ?????
 "and",      {IM,_SR},   W,      m68000up
-PRIVILEGED, TRAP
+PRIVILEGED, TRAP,       AAAAA,  ?????
 
 "andi",     {IM,AD},    BWL,    m68000up
--,          -
+-,          -,          -**00
 "andi",     {IM,_CCR},  B,      m68000up
--,          -
+-,          -,          AAAAA,  ?????
 "andi",     {IM,_SR},   W,      m68000up
-PRIVILEGED, TRAP
+PRIVILEGED, TRAP,       AAAAA,  ?????
 
 "asl",      {AM},       W,      m68000up
--,          -
+-,          -,          *****
 "asl",      {D_,D_},    BWL,    m68000up
--,          -
+-,          -,          *****
 "asl",      {QI,D_},    BWL,    m68000up
--,          -
+-,          -,          *****
 "asl",      {D_},       BWL,    m68000up
--,          -
+-,          -,          *****
 
 "asr",      {AM},       W,      m68000up
--,          -
+-,          -,          ***0*
 "asr",      {D_,D_},    BWL,    m68000up
--,          -
+-,          -,          ***0*
 "asr",      {QI,D_},    BWL,    m68000up
--,          -
+-,          -,          ***0*
 "asr",      {D_},       BWL,    m68000up
--,          -
+-,          -,          ***0*
 
 "bhs",      {BR},       SBWL,   m68000up
--,          BRANCH
+-,          BRANCH,     ,       ----?
 "blo",      {BR},       SBWL,   m68000up
--,          BRANCH
+-,          BRANCH,     ,       ----?
 "bhi",      {BR},       SBWL,   m68000up
--,          BRANCH
+-,          BRANCH,     ,       --?-?
 "bls",      {BR},       SBWL,   m68000up
--,          BRANCH
+-,          BRANCH,     ,       --?-?
 "bcc",      {BR},       SBWL,   m68000up
--,          BRANCH
+-,          BRANCH,     ,       ----?
 "bcs",      {BR},       SBWL,   m68000up
--,          BRANCH
+-,          BRANCH,     ,       ----?
 "bne",      {BR},       SBWL,   m68000up
--,          BRANCH
+-,          BRANCH,     ,       --?--
 "beq",      {BR},       SBWL,   m68000up
--,          BRANCH
+-,          BRANCH,     ,       --?--
 "bvc",      {BR},       SBWL,   m68000up
--,          BRANCH
+-,          BRANCH,     ,       ---?-
 "bvs",      {BR},       SBWL,   m68000up
--,          BRANCH
+-,          BRANCH,     ,       ---?-
 "bpl",      {BR},       SBWL,   m68000up
--,          BRANCH
+-,          BRANCH,     ,       -?---
 "bmi",      {BR},       SBWL,   m68000up
--,          BRANCH
+-,          BRANCH,     ,       -?---
 "bge",      {BR},       SBWL,   m68000up
--,          BRANCH
+-,          BRANCH,     ,       -?-?-
 "blt",      {BR},       SBWL,   m68000up
--,          BRANCH
+-,          BRANCH,     ,       -?-?-
 "bgt",      {BR},       SBWL,   m68000up
--,          BRANCH
+-,          BRANCH,     ,       -???-
 "ble",      {BR},       SBWL,   m68000up
--,          BRANCH
+-,          BRANCH,     ,       -???-
 
 "bra",      {BR},       SBWL,   m68000up
 -,          -
@@ -118,40 +119,40 @@ PRIVILEGED, TRAP
 -,          BRANCH
 
 "bchg",     {D_,D_},    L,      m68000up
--,          -
+-,          -,          --*--
 "bchg",     {D_,AM},    B,      m68000up
--,          -
+-,          -,          --*--
 "bchg",     {QI,D_},    L,      m68000up
--,          -
+-,          -,          --*--
 "bchg",     {QI,AM},    B,      m68000up
--,          -
+-,          -,          --*--
 
 "bclr",     {D_,D_},    L,      m68000up
--,          -
+-,          -,          --*--
 "bclr",     {D_,AM},    B,      m68000up
--,          -
+-,          -,          --*--
 "bclr",     {QI,D_},    L,      m68000up
--,          -
+-,          -,          --*--
 "bclr",     {QI,AM},    B,      m68000up
--,          -
+-,          -,          --*--
 
 "bset",     {D_,D_},    L,      m68000up
--,          -
+-,          -,          --*--
 "bset",     {D_,AM},    B,      m68000up
--,          -
+-,          -,          --*--
 "bset",     {QI,D_},    L,      m68000up
--,          -
+-,          -,          --*--
 "bset",     {QI,AM},    B,      m68000up
--,          -
+-,          -,          --*--
 
 "btst",     {D_,D_},    L,      m68000up
--,          -
+-,          -,          --*--
 "btst",     {D_,MA},    B,      m68000up
--,          -
+-,          -,          --*--
 "btst",     {QI,D_},    L,      m68000up
--,          -
+-,          -,          --*--
 "btst",     {QI,MI},    B,      m68000up
--,          -
+-,          -,          --*--
 
 "bgnd",     {0},        UNS,    cpu32
 -,          -
@@ -160,105 +161,105 @@ PRIVILEGED, TRAP
 -,          TRAP
 
 "chk",      {DA,D_},    W,      m68000up
--,          TRAP
+-,          TRAP,       -*UUU
 "chk",      {DA,D_},    L,      m68020up
--,          TRAP
+-,          TRAP,       -*UUU
 
 "clr",      {AD},       BWL,    m68000up
--,          -
+-,          -,          -0100
 
 "cmp",      {A_,D_},    WL,     m68000up
--,          -
+-,          -,          -****
 "cmp",      {DA,D_},    BWL,    m68000up
--,          -
+-,          -,          -****
 "cmp",      {AY,A_},    WL,     m68000up
--,          -
+-,          -,          -****
 "cmp",      {IM,AD},    BWL,    m68000up
--,          -
+-,          -,          -****
 "cmp",      {IM,DN},    BWL,    m68020up|cpu32
--,          -
+-,          -,          -****
 "cmp",      {AP,AP},    BWL,    m68000up
--,          -
+-,          -,          -****
 
 "cmpa",     {AY,A_},    WL,     m68000up
--,          -
+-,          -,          -****
 
 "cmpi",     {IM,AD},    BWL,    m68000up
--,          -
+-,          -,          -****
 "cmpi",     {IM,DN},    BWL,    m68020up|cpu32
--,          -
+-,          -,          -****
 
 "cmpm",     {AP,AP},    BWL,    m68000up
--,          -
+-,          -,          -****
 
 "dbt",      {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       -----
 "dbf",      {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       -----
 "dbra",     {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       -----
 "dbhi",     {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       --?-?
 "dbls",     {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       --?-?
 "dbcc",     {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       ----?
 "dbhs",     {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       ----?
 "dbcs",     {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       ----?
 "dblo",     {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       ----?
 "dbne",     {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       --?--
 "dbeq",     {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       --?--
 "dbvc",     {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       ---?-
 "dbvs",     {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       ---?-
 "dbpl",     {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       -?---
 "dbmi",     {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       -?---
 "dbge",     {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       -?-?-
 "dblt",     {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       -?-?-
 "dbgt",     {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       -???-
 "dble",     {D_,DB},    W,      m68000up
--,          BRANCH
+-,          BRANCH,     ,       -???-
 
 "divs",     {DA,D_},    W,      m68000up
--,          TRAP
+-,          TRAP,       -***0
 "divs",     {DA,D_},    L,      m68020up|cpu32
--,          TRAP
+-,          TRAP,       -***0
 "divs",     {DA,DD},    L,      m68020up|cpu32
--,          TRAP
+-,          TRAP,       -***0
 
 "divu",     {DA,D_},    W,      m68000up
--,          TRAP
+-,          TRAP,       -***0
 "divu",     {DA,D_},    L,      m68020up|cpu32
--,          TRAP
+-,          TRAP,       -***0
 "divu",     {DA,DD},    L,      m68020up|cpu32
--,          TRAP
+-,          TRAP,       -***0
 
 "eor",      {D_,AD},    BWL,    m68000up
--,          -
+-,          -,          -**00
 "eor",      {IM,AD},    BWL,    m68000up
--,          -
+-,          -,          -**00
 "eor",      {IM,_CCR},  B,      m68000up
--,          -
+-,          -,          *****,  ?????
 "eor",      {IM,_SR},   W,      m68000up
-PRIVILEGED, TRAP
+PRIVILEGED, TRAP,       *****,  ?????
 
 "eori",     {IM,AD},    BWL,    m68000up
--,          -
+-,          -,          -**00
 "eori",     {IM,_CCR},  B,      m68000up
--,          -
+-,          -,          *****,  ?????
 "eori",     {IM,_SR},   W,      m68000up
-PRIVILEGED, TRAP
+PRIVILEGED, TRAP,       *****,  ?????
 
 "exg",      {D_,D_},    L,      m68000up
 -,          -
@@ -270,7 +271,7 @@ PRIVILEGED, TRAP
 -,          -
 
 "ext",      {D_},       WL,     m68000up
--,          -
+-,          -,          -**00
 
 "illegal",  {0},        UNS,    m68000up
 -,          TRAP
@@ -290,40 +291,40 @@ PRIVILEGED, TRAP
 -,          -
 
 "lpstop",   {IM},       W,      m68060|cpu32|apollo
-PRIVILEGED, TRAP
+PRIVILEGED, TRAP,       *****
 
 "lsl",      {AM},       W,      m68000up
--,          -
+-,          -,          ***0*
 "lsl",      {D_,D_},    BWL,    m68000up
--,          -
+-,          -,          ***0*
 "lsl",      {QI,D_},    BWL,    m68000up
--,          -
+-,          -,          ***0*
 "lsl",      {D_},       BWL,    m68000up
--,          -
+-,          -,          ***0*
 
 "lsr",      {AM},       W,      m68000up
--,          -
+-,          -,          ***0*
 "lsr",      {D_,D_},    BWL,    m68000up
--,          -
+-,          -,          ***0*
 "lsr",      {QI,D_},    BWL,    m68000up
--,          -
+-,          -,          ***0*
 "lsr",      {D_},       BWL,    m68000up
--,          -
+-,          -,          ***0*
 
 "move",     {A_,AL},    WL,     m68000up
--,          -
+-,          -,          -**00
 "move",     {AY,A_},    WL,     m68000up
--,          -
+-,          -,          -**00
 "move",     {DA,AD},    BWL,    m68000up
--,          -
+-,          -,          -**00
 "move",     {_CCR,AD},  W,      m68010up
--,          -
+-,          -,          ,       ?????
 "move",     {_SR,AD},   W,      m68000up
-PRIVILEGED_68010_ABOVE, TRAP
+PRIVILEGED_68010_ABOVE, TRAP,  , ?????
 "move",     {DA,_CCR},  W,      m68000up
--,          -
+-,          -,          *****
 "move",     {DA,_SR},   W,      m68000up
-PRIVILEGED, TRAP
+PRIVILEGED, TRAP,       *****
 "move",     {_USP,A_},  L,      m68000up
 PRIVILEGED, TRAP
 "move",     {A_,_USP},  L,      m68000up
@@ -360,7 +361,7 @@ PRIVILEGED, TRAP
 -,          -
 
 "moveq",    {QI,D_},    L,      m68000up
--,          -
+-,          -,          -**00
 
 "moves",    {AM,R_},    BWL,    m68010up
 PRIVILEGED, TRAP
@@ -368,51 +369,51 @@ PRIVILEGED, TRAP
 PRIVILEGED, TRAP
 
 "muls",     {DA,D_},    W,      m68000up
--,          -
+-,          -,          -**00
 "muls",     {DA,D_},    L,      m68020up|cpu32
--,          -
+-,          -,          -**00
 "muls",     {DA,DD},    L,      m68020up|cpu32
--,          -
+-,          -,          -**00
 
 "mulu",     {DA,D_},    W,      m68000up
--,          -
+-,          -,          -**00
 "mulu",     {DA,D_},    L,      m68020up|cpu32
--,          -
+-,          -,          -**00
 "mulu",     {DA,DD},    L,      m68020up|cpu32
--,          -
+-,          -,          -**00
 
 "nbcd",     {AD},       B,      m68000up
--,          -
+-,          -,          CUAU*,  ?-?--
 
 "neg",      {AD},       BWL,    m68000up
--,          -
+-,          -,          C****
 
 "negx",     {AD},       BWL,    m68000up
--,          -
+-,          -,          C****,  ?----
 
 "nop",      {0},        UNS,    m68000up
 -,          -
 
 "not",      {AD},       BWL,    m68000up
--,          -
+-,          -,          -**00
 
 "or",       {DA,D_},    BWL,    m68000up
--,          -
+-,          -,          -**00
 "or",       {D_,AM},    BWL,    m68000up
--,          -
+-,          -,          -**00
 "or",       {IM,AD},    BWL,    m68000up
--,          -
+-,          -,          -**00
 "or",       {IM,_CCR},  B,      m68000up
--,          -
+-,          -,          *****,  ?????
 "or",       {IM,_SR},   W,      m68000up
-PRIVILEGED, TRAP
+PRIVILEGED, TRAP,       OOOOO,  ?????
 
 "ori",      {IM,AD},    BWL,    m68000up
--,          -
+-,          -,          -**00
 "ori",      {IM,_CCR},  B,      m68000up
--,          -
+-,          -,          *****,  ?????
 "ori",      {IM,_SR},   W,      m68000up
-PRIVILEGED, TRAP
+PRIVILEGED, TRAP,       OOOOO,  ?????
 
 "pea",      {CT},       L,      m68000up
 -,          -
@@ -421,163 +422,163 @@ PRIVILEGED, TRAP
 PRIVILEGED, TRAP
 
 "rol",      {AM},       W,      m68000up
--,          -
+-,          -,          -**0*
 "rol",      {D_,D_},    BWL,    m68000up
--,          -
+-,          -,          -**0*
 "rol",      {QI,D_},    BWL,    m68000up
--,          -
+-,          -,          -**0*
 "rol",      {D_},       BWL,    m68000up
--,          -
+-,          -,          -**0*
 
 "ror",      {AM},       W,      m68000up
--,          -
+-,          -,          -**0*
 "ror",      {D_,D_},    BWL,    m68000up
--,          -
+-,          -,          -**0*
 "ror",      {QI,D_},    BWL,    m68000up
--,          -
+-,          -,          -**0*
 "ror",      {D_},       BWL,    m68000up
--,          -
+-,          -,          -**0*
 
 "roxl",     {AM},       W,      m68000up
--,          -
+-,          -,          ***0*,  ?----
 "roxl",     {D_,D_},    BWL,    m68000up
--,          -
+-,          -,          ***0*,  ?----
 "roxl",     {QI,D_},    BWL,    m68000up
--,          -
+-,          -,          ***0*,  ?----
 "roxl",     {D_},       BWL,    m68000up
--,          -
+-,          -,          ***0*,  ?----
 
 "roxr",     {AM},       W,      m68000up
--,          -
+-,          -,          ***0*,  ?----
 "roxr",     {D_,D_},    BWL,    m68000up
--,          -
+-,          -,          ***0*,  ?----
 "roxr",     {QI,D_},    BWL,    m68000up
--,          -
+-,          -,          ***0*,  ?----
 "roxr",     {D_},       BWL,    m68000up
--,          -
+-,          -,          ***0*,  ?----
 
 "rtd",      {QI},       UNS,    m68010up
 -,          RETURN
 
 "rte",      {0},        UNS,    m68000up
-PRIVILEGED, TRAP_RETURN
+PRIVILEGED, TRAP_RETURN, *****
 
 "rtr",      {0},        UNS,    m68000up
--,          RETURN
+-,          RETURN,     *****
 
 "rts",      {0},        UNS,    m68000up
 -,          RETURN
 
 "sbcd",     {D_,D_},    B,      m68000up
--,          -
+-,          -,          CUAU*,  ?-?--
 "sbcd",     {PA,PA},    B,      m68000up
--,          -
+-,          -,          CUAU*,  ?-?--
 
 "st",       {AD},       B,      m68000up
--,          -
+-,          -,          ,       -----
 "sf",       {AD},       B,      m68000up
--,          -
+-,          -,          ,       -----
 "shi",      {AD},       B,      m68000up
--,          -
+-,          -,          ,       --?-?
 "sls",      {AD},       B,      m68000up
--,          -
+-,          -,          ,       --?-?
 "scc",      {AD},       B,      m68000up
--,          -
+-,          -,          ,       ----?
 "shs",      {AD},       B,      m68000up
--,          -
+-,          -,          ,       ----?
 "scs",      {AD},       B,      m68000up
--,          -
+-,          -,          ,       ----?
 "slo",      {AD},       B,      m68000up
--,          -
+-,          -,          ,       ----?
 "sne",      {AD},       B,      m68000up
--,          -
+-,          -,          ,       --?--
 "seq",      {AD},       B,      m68000up
--,          -
+-,          -,          ,       --?--
 "svc",      {AD},       B,      m68000up
--,          -
+-,          -,          ,       ---?-
 "svs",      {AD},       B,      m68000up
--,          -
+-,          -,          ,       ---?-
 "spl",      {AD},       B,      m68000up
--,          -
+-,          -,          ,       -?---
 "smi",      {AD},       B,      m68000up
--,          -
+-,          -,          ,       -?---
 "sge",      {AD},       B,      m68000up
--,          -
+-,          -,          ,       -?-?-
 "slt",      {AD},       B,      m68000up
--,          -
+-,          -,          ,       -?-?-
 "sgt",      {AD},       B,      m68000up
--,          -
+-,          -,          ,       -???-
 "sle",      {AD},       B,      m68000up
--,          -
+-,          -,          ,       -???-
 
 "stop",     {QI},       UNS,    m68000up
-PRIVILEGED, TRAP
+PRIVILEGED, TRAP,       *****
 
 "sub",      {DA,D_},    BWL,    m68000up
--,          -
+-,          -,          C****
 "sub",      {A_,D_},    WL,     m68000up
--,          -
+-,          -,          C****
 "sub",      {D_,AM},    BWL,    m68000up
--,          -
+-,          -,          C****
 "sub",      {AY,A_},    WL,     m68000up
--,          -
+-,          -,          C****
 "sub",      {IM,AD},    BWL,    m68000up
--,          -
+-,          -,          C****
 
 "suba",     {AY,A_},    WL,     m68000up
 -,          -
 
 "subi",     {IM,AD},    BWL,    m68000up
--,          -
+-,          -,          C****
 
 "subq",     {QI,A_},    WL,     m68000up
--,          -
+-,          -,          C****
 "subq",     {QI,AD},    BWL,    m68000up
--,          -
+-,          -,          C****
 
 "subx",     {D_,D_},    BWL,    m68000up
--,          -
+-,          -,          C*A**,  ?-?--
 "subx",     {PA,PA},    BWL,    m68000up
--,          -
+-,          -,          C*A**,  ?-?--
 
 "swap",     {D_},       W,      m68000up
--,          -
+-,          -,          -**00
 
 "tas",      {AD},       B,      m68000up
--,          -
+-,          -,          -**00
 
 "tbls",     {CT,D_},    BWL,    cpu32
--,          -
+-,          -,          -***0
 "tbls",     {DD,D_},    BWL,    cpu32
--,          -
+-,          -,          -***0
 
 "tblsn",    {CT,D_},    BWL,    cpu32
--,          -
+-,          -,          -***0
 "tblsn",    {DD,D_},    BWL,    cpu32
--,          -
+-,          -,          -***0
 
 "tblu",     {CT,D_},    BWL,    cpu32
--,          -
+-,          -,          -***0
 "tblu",     {DD,D_},    BWL,    cpu32
--,          -
+-,          -,          -***0
 
 "tblun",    {CT,D_},    BWL,    cpu32
--,          -
+-,          -,          -***0
 "tblun",    {DD,D_},    BWL,    cpu32
--,          -
+-,          -,          -***0
 
 "trap",     {QI},       UNS,    m68000up
 -,          TRAP
 
 "trapv",    {0},        UNS,    m68000up
--,          TRAP
+-,          TRAP,       ,       ---?-
 
 "tst",      {AD},       BWL,    m68000up
--,          -
+-,          -,          -**00
 "tst",      {DA},       BWL,    m68020up|cpu32
--,          -
+-,          -,          -**00
 "tst",      {A_},       WL,     m68020up|cpu32
--,          -
+-,          -,          -**00
 
 "unlk",     {A_},       UNS,    m68000up
 -,          -
