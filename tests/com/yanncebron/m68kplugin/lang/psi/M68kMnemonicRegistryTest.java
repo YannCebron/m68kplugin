@@ -76,7 +76,7 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
 
     assertEquals(29, totalControlFlowTrap);
     assertEquals(1, totalControlFlowTrapReturn);
-    assertEquals(36, totalControlFlowBranch);
+    assertEquals(37, totalControlFlowBranch);
     assertEquals(2, totalControlFlowJump);
     assertEquals(3, totalControlFlowReturn);
   }

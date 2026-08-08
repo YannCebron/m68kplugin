@@ -533,6 +533,7 @@ public final class M68kMnemonicRegistry {
 
     create(M68kTokenTypes.BRA).dataSizes(GROUP_SBWL)
       .first(BRANCH_DESTINATION)
+      .controlFlow(M68kMnemonic.ControlFlow.BRANCH)
       .build();
 
 // BSR -------------------------------------------------------------------------

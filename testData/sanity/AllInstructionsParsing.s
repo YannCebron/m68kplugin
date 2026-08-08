@@ -974,7 +974,7 @@ label13: bpl         label13
 
 ********************************************************************************
 
-* M68kMnemonic{bra, BRANCH_DESTINATION, NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68000 Family}
+* M68kMnemonic{bra, BRANCH_DESTINATION, NONE, [SINGLE, BYTE, WORD, LONGWORD], MC68000 Family, BRANCH}
 label14: bra         label14
          bra.s       label14
          bra.b       label14
