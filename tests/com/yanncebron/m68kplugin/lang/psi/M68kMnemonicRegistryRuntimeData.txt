@@ -43,6 +43,7 @@
 -,          -,          C*A**,  ?-?--
 "addx",     {PA,PA},    BWL,    m68000up
 -,          -,          C*A**,  ?-?--
+
 "and",      {DA,D_},    BWL,    m68000up
 -,          -,          -**00
 "and",      {D_,AM},    BWL,    m68000up
