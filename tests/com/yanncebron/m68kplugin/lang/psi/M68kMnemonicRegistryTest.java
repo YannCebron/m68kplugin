@@ -20,9 +20,11 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.testFramework.LightPlatformTestCase;
 import com.intellij.util.containers.ContainerUtil;
+import com.intellij.util.containers.MultiMap;
 import com.yanncebron.m68kplugin.parser.MnemonicGeneratedParserDataTest;
 
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * See also {@link MnemonicGeneratedParserDataTest} checking that each variant returns entry via {@link M68kMnemonicRegistry#find}.
@@ -63,6 +65,28 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
       totalControlFlowBranch += all.stream().filter(mnemonic -> mnemonic.controlFlow() == M68kMnemonic.ControlFlow.BRANCH).count();
       totalControlFlowJump += all.stream().filter(mnemonic -> mnemonic.controlFlow() == M68kMnemonic.ControlFlow.JUMP).count();
       totalControlFlowReturn += all.stream().filter(mnemonic -> mnemonic.controlFlow() == M68kMnemonic.ControlFlow.RETURN).count();
+
+      // "unique" mnemonic requires a set of same attribute values (safety net for manual runtime data)
+      MultiMap<String, M68kMnemonic> byName = MultiMap.create();
+      for (M68kMnemonic m68kMnemonic : all) {
+        byName.putValue(m68kMnemonic.getExternalName(), m68kMnemonic);
+      }
+      for (Map.Entry<String, Collection<M68kMnemonic>> entry : byName.entrySet()) {
+        Collection<M68kMnemonic> values = entry.getValue();
+        M68kMnemonic first = ContainerUtil.getFirstItem(values);
+
+        M68kMnemonic.PrivilegedType privilegedType = first.privilegedType();
+        M68kMnemonic.ControlFlow controlFlow = first.controlFlow();
+        M68kMnemonic.ConditionCodes affected = first.affected();
+        M68kMnemonic.ConditionCodes tested = first.tested();
+
+        for (M68kMnemonic value : values) {
+          assertEquals("Privileged mismatch: " + value, privilegedType, value.privilegedType());
+          assertEquals("ControlFlow mismatch: " + value, controlFlow, value.controlFlow());
+          assertEquals("Affected CC mismatch: " + value, affected, value.affected());
+          assertEquals("Tested CC mismatch: " + value, tested, value.tested());
+        }
+      }
     }
 
     assertEquals(2, totalDeprecated);
