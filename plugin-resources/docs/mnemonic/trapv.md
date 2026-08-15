@@ -12,8 +12,3 @@ If the V-bit in the *CCR* is set, then initiate exception processing.
 The exception vector is located at address 01C<sub>16</sub>. This instruction
 is used in arithmetic operations to call the operating system if
 overflow occurs.
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|-|-|-|-|

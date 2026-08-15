@@ -9,8 +9,3 @@ operand and store the result in the destination. Both the source and destination
 
 ## Application
 `MULU D1,D2` multiplies the low-order words of data registers D1 and D2 and puts the 32-bit result in D2. `MULU #$1234,D3` multiplies the low-order word of D3 by the 16-bit literal $1234 and puts the 32-bit result in D3.
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|*|*|0|0|

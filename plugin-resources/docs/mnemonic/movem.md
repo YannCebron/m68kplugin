@@ -38,8 +38,3 @@ Example MOVEM.L D0-D5/A0-A3,-(SP)    ;Save registers
         MOVEM.L (SP)+,D0-D5/A0-A3    ;Restore registers
         RTS                          ;Return
 ```
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|-|-|-|-|

@@ -44,8 +44,3 @@ The unsigned comparisons are:
 | `BLO`    | `BCS` | branch on less than           |
 
 The official mnemonics `BCC` (branch on carry clear) and `BCS` (branch on carry set) can be renamed as `BHS` (branch on higher than or same) and `BLO` (branch on less than), respectively. Many 68000 assemblers support these alternative mnemonics.
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|-|-|-|-|

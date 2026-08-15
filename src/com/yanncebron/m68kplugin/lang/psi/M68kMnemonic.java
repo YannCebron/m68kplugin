@@ -24,6 +24,7 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -138,6 +139,7 @@ public record M68kMnemonic(IElementType elementType,
       '}';
   }
 
+  @SuppressWarnings("UnstableApiUsage")
   public static final class ConditionCodes {
 
     private final Code x;
@@ -194,11 +196,19 @@ public record M68kMnemonic(IElementType elementType,
     }
 
     /**
-     * @return String for UI use.
+     * @return Short string for UI use.
      */
     @NlsSafe
     public String toDisplayText() {
       return "" + x.displayId + n.displayId + z.displayId + v.displayId + c.displayId;
+    }
+
+    /**
+     * @return List of display IDs for use in the mnemonic docs table.
+     */
+    @NlsSafe
+    public List<Character> getTableTexts() {
+      return List.of(x.displayId, n.displayId, z.displayId, v.displayId, c.displayId);
     }
 
     @Override

@@ -8,8 +8,3 @@ The longword address of the instruction immediately following the `BSR` instruct
 
 ## Application
 `BSR` is used to call a procedure or a subroutine. Since it provides relative addressing (and therefore position independent code), its use is preferable to [`JSR`](jsr.md).
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|-|-|-|-|

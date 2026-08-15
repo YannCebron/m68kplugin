@@ -7,8 +7,4 @@
 The operand addressed as the destination and the extend bit are subtracted from zero. `NEGX` is the same as [`NEG`](neg.md) except that the X-bit is also subtracted from zero.
 
 ## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|*|*|*|*|*|
-
 The Z-bit is cleared if the result is non-zero and is unchanged otherwise. The X-bit is set to the same value as the C-bit.

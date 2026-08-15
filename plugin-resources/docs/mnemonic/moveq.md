@@ -8,8 +8,3 @@ Move the specified literal to a data register. The literal data is an eight-bit 
 
 ## Application
 `MOVEQ` is used to load small integers into a data register. Beware of its sign-extension. The two operations `MOVE.B #12,D0` and `MOVEQ #12,D0` are not equivalent. The former has the effect [D0(0:7)] ← 12, while the latter has the effect [D0(0:31)] ← 12 (with sign-extension).
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|*|*|0|0|

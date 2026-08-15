@@ -26,6 +26,3 @@ MC68040 takes an illegal instruction exception.
 For more information on the breakpoint instruction refer to the appropriate user’s manual on bus operation.
 
 This instruction supports breakpoints for debug monitors and real-time hardware emulators.
-
-## Condition Codes
-Not affected.

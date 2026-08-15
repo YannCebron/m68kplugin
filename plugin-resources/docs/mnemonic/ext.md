@@ -9,8 +9,3 @@ Extend the least-significant byte in a data register to a word, or extend the le
 ## Application
 If `[D0] = $12345678, EXT.W D0` results in 12340078<sub>16</sub><br/>
 If `[D0] = $12345678, EXT.L D0` results in 00005678<sub>16</sub>
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|*|*|0|0|

@@ -13,10 +13,6 @@ OR the source operand to the status register and store the result in the status 
 Used to set bits in the SR (i.e., the S, T, and interrupt mask bits). For example, `OR #$8000,SR` sets bit 15 of the SR (i.e., the trace bit).
 
 ## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|*|*|*|*|*|
-
 X is set if bit 4 of data = 1; unchanged otherwise<br/>
 N is set if bit 3 of data = 1; unchanged otherwise<br/>
 Z is set if bit 2 of data = 1; unchanged otherwise<br/>

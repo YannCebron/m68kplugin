@@ -8,8 +8,3 @@ Move the contents of the source operand to the condition code register. The sour
 
 ## Application
 The move to CCR instruction permits the programmer to preset the CCR. For example, `MOVE #0,CCR` clears all the CCR's bits.
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|*|*|*|*|*|

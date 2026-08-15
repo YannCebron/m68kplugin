@@ -10,10 +10,6 @@ EOR the source operand with the contents of the condition code register (i.e., t
 Used to toggle bits in the CCR. For example, `EOR #$0C,CCR` toggles the N- and Z-bits of the CCR.
 
 ## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|*|*|*|*|*|
-
 X:= toggled if bit 4 of data = 1; unchanged otherwise<br/>
 N:= toggled if bit 3 of data = 1; unchanged otherwise<br/>
 Z:= toggled if bit 2 of data = 1; unchanged otherwise<br/>

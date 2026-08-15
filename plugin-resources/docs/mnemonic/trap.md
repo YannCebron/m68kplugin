@@ -16,8 +16,3 @@ The `TRAP` instruction is used to perform operating system calls and is system i
 MOVE.B  #6,D0  ;Set up the display a character parameter in D0
 TRAP    #15    ;Now call the operating system
 ```
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|-|-|-|-|

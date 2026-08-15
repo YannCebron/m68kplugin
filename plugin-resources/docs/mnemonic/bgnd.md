@@ -17,6 +17,3 @@ continues with the instruction pointed to by the current program counter.
 If background mode is not enabled, the processor initiates illegal instruction exception processing.
 The vector number is generated to reference the illegal instruction exception vector.
 Refer to the appropriate user’s manual for detailed information on background mode.
-
-## Condition codes
-Not affected.

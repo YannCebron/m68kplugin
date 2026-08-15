@@ -87,8 +87,3 @@ point places two restrictions on the programmer:
    an integer in the range 0 &le; X &le; 65535, realizing that the table is actually a
    compressed representation of a linearized function in which only every 256th
    value is actually stored in memory.   
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-| – | * | * | * | 0 |

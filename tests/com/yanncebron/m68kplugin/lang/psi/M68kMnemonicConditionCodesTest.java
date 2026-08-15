@@ -16,6 +16,7 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
+import com.intellij.testFramework.UsefulTestCase;
 import junit.framework.TestCase;
 
 public class M68kMnemonicConditionCodesTest extends TestCase {
@@ -41,6 +42,13 @@ public class M68kMnemonicConditionCodesTest extends TestCase {
     assertEquals("***UU", M68kMnemonic.ConditionCodes.parseAffected("CAOUU").toDisplayText());
 
     assertEquals("?-?-?", M68kMnemonic.ConditionCodes.parseTested("?-?-?").toDisplayText());
+  }
+
+  public void testTableTexts() {
+    UsefulTestCase.assertOrderedEquals(M68kMnemonic.ConditionCodes.parseAffected("-01U*").getTableTexts(),
+      '-', '0', '1', 'U', '*');
+    UsefulTestCase.assertOrderedEquals(M68kMnemonic.ConditionCodes.parseAffected("CAOUU").getTableTexts(),
+      '*', '*', '*', 'U', 'U');
   }
 
   public void testParseAffectedInvalidLength() {

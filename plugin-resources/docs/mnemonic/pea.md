@@ -19,8 +19,3 @@ Subroutine MOVEA.L (4,SP),A0   ;A0 points to parameter under return address
            .
            RTS
 ```
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|-|-|-|-|

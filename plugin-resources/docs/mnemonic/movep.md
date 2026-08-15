@@ -17,8 +17,3 @@ MOVEP.L D0,0(A0)
 This code results in the following actions:
 
 ![MOVEP schema](movep.png)
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|-|-|-|-|

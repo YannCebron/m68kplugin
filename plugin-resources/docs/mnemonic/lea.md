@@ -18,8 +18,3 @@ The effective address is computed and loaded into the specified address register
       .
 Table DS.B 100
 ```
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|-|-|-|-|

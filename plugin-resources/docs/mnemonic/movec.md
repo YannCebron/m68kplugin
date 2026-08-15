@@ -9,6 +9,3 @@ Else TRAP
 Moves the contents of the specified control register (Rc) to the specified general register (Rn) or copies the contents
 of the specified general register to the specified control register. This is always a 32-bit transfer, even though the
 control register may be implemented with fewer bits. Unimplemented bits are read as zeros.
-
-## Condition Codes
-Not affected.

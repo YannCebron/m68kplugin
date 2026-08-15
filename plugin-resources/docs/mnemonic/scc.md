@@ -25,9 +25,3 @@ The specified condition code is tested. If the condition is true, the bits at th
 |`SVS` | set on overflow set | V |
 |`SF`  | set on false (i.e., set never) | 0 |
 |`ST`  | set on true (i.e., set always) | 1 |
-
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|-|-|-|-|

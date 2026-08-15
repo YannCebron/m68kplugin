@@ -33,10 +33,3 @@ AGAIN BSR     INPUT     ;Get the data in D1
       MOVE.B  D1,(A0)+  ;Store it
       DBEQ    D0,AGAIN  ;REPEAT until D1 = 0 OR 512 times
 ```
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|-|-|-|-|
-
-Not affected

@@ -12,8 +12,3 @@ The `OR` instruction is used to set selected bits of the operand. For example, w
 ```
 OR.L #$F0000000,D0
 ```
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|*|*|0|0|

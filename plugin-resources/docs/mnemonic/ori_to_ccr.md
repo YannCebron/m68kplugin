@@ -7,10 +7,6 @@
 OR the immediate data with the condition code register (i.e., the least-significant byte of the status register). For example, the Z flag of the CCR can be set by `ORI #$04,CCR`.
 
 ## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|*|*|*|*|*|
-
 X is set if bit 4 of data = 1; unchanged otherwise</br>
 N is set if bit 3 of data = 1; unchanged otherwise</br>
 Z is set if bit 2 of data = 1; unchanged otherwise</br>

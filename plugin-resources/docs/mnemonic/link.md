@@ -19,10 +19,3 @@ Subrtn LINK  A6,#-12    ;Create a 12-byte workspace
        UNLK  A6         ;Collapse the workspace
        RTS              ;Return from subroutine
 ```
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|-|-|-|-|
-
-The LINK instruction does not affect the CCR.

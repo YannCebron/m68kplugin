@@ -16,8 +16,4 @@ CHK    #max_bound,D0   ;Test subscript against 0 and upper bound
 ```
 
 ## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|*|U|U|U|
-
 N: set if [Dn] < 0 ; cleared if [Dn] > [\<ea\>]; undefined otherwise.

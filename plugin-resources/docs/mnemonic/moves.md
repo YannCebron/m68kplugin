@@ -12,7 +12,3 @@ from a location within the address space specified by the source function code (
 register. If the destination is a data register, the source operand replaces the corresponding low-order bits of that
 data register, depending on the size of the operation. If the destination is an address register, the source operand is
 sign-extended to 32 bits and then loaded into that address register.
-
-## Condition Codes
-Not affected.
-                  

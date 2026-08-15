@@ -8,8 +8,3 @@ The stack pointer is loaded from the specified address register and the old cont
 
 ## Application
 The `UNLK` instruction is used in conjunction with the [`LINK`](link.md) instruction. The `LINK` creates a stack frame at the start of a procedure, and the `UNLK` collapses the stack frame prior to a return from the procedure.
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|-|-|-|-|

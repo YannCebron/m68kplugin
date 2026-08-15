@@ -8,9 +8,3 @@ Program execution continues at location [PC] + d. The displacement, d, is a two'
 
 ## Application
 A `BRA` is an unconditional relative jump (or goto). You use a `BRA` instruction to write position independent code, because the destination address (*branch target address*) is specified with respect to the current value of the PC. A [`JMP`](jmp.md) instruction does not produce position independent code.
-
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|-|-|-|-|

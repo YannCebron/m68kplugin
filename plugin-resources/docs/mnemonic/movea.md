@@ -17,8 +17,3 @@ You should appreciate that the `MOVEA` and `LEA` instructions are not interchang
 LEA (Ai),An = [An] ← [Ai]
 MOVEA (Ai),An = [An] ← [M([Ai])]
 ```
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|-|-|-|-|

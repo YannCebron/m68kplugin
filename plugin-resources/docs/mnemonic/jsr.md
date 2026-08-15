@@ -9,8 +9,3 @@
 
 ## Application
 `JSR (Ai)` calls the procedure pointed at by address register Ai. The instruction `JSR (Ai,Dj)` calls the procedure at the location [Ai] + [Dj] which permits dynamically computed addresses.
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|-|-|-|-|

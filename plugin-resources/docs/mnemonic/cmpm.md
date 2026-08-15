@@ -20,8 +20,3 @@ RPT CMPM.W (A0)+,(A1)+    ;Compare pair of words
     .
     .
 ```
-
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|*|*|*|*|
