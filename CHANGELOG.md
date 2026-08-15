@@ -14,7 +14,7 @@
   - _View | Quick Definition_: number of following statements for (local) label 
 - Register reference docs: add diagram for `SR`
 - Mnemonic docs: show "Control Flow" flag for `TRAP`/`TRAP_RETURN`
-- Mnemonic docs: add "Condition Codes"/"Condition Codes (Tested)" with explanations, remove table from reference docs
+- Mnemonic docs: add "Condition Codes"/"Tested" with explanations, remove table from reference docs
 
 ## 0.2.4 - 2026-07-10
 
