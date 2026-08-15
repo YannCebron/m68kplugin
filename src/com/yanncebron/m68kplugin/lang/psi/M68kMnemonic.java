@@ -80,6 +80,30 @@ public record M68kMnemonic(IElementType elementType,
     return addressModes[0].getNotation();
   }
 
+  @Override
+  public @NotNull String toString() {
+    final String cpuText;
+    if (cpus.equals(M68kCpu.GROUP_68000_UP)) cpuText = "MC68000 Family";
+    else if (cpus.equals(M68kCpu.GROUP_68010_UP)) cpuText = "MC68010+";
+    else if (cpus.equals(M68kCpu.GROUP_68020_UP)) cpuText = "MC68020+";
+    else if (cpus.equals(M68kCpu.GROUP_68020_UP_WITH_CPU32)) cpuText = "MC68020+/CPU32";
+    else cpuText = cpus.toString();
+
+    return "M68kMnemonic{" +
+      elementType +
+      ", " + firstOperand +
+      ", " + secondOperand +
+      ", " + dataSizes +
+      ", " + cpuText +
+      (deprecated() ? ", DEPRECATED" : "") +
+      (M68kMnemonicPredicates.privilegedAny().test(this) ? ", " + privilegedType.name() : "") +
+      (controlFlow() != ControlFlow.NOTHING ? ", " + controlFlow : "") +
+      (affected != ConditionCodes.NONE_AFFECTED ? ", " + affected : "") +
+      (tested != ConditionCodes.NONE_AFFECTED ? ", " + tested : "") +
+      '}';
+  }
+
+
   enum PrivilegedType {
     /**
      * Never privileged.
@@ -116,28 +140,6 @@ public record M68kMnemonic(IElementType elementType,
     RETURN
   }
 
-  @Override
-  public @NotNull String toString() {
-    final String cpuText;
-    if (cpus.equals(M68kCpu.GROUP_68000_UP)) cpuText = "MC68000 Family";
-    else if (cpus.equals(M68kCpu.GROUP_68010_UP)) cpuText = "MC68010+";
-    else if (cpus.equals(M68kCpu.GROUP_68020_UP)) cpuText = "MC68020+";
-    else if (cpus.equals(M68kCpu.GROUP_68020_UP_WITH_CPU32)) cpuText = "MC68020+/CPU32";
-    else cpuText = cpus.toString();
-
-    return "M68kMnemonic{" +
-      elementType +
-      ", " + firstOperand +
-      ", " + secondOperand +
-      ", " + dataSizes +
-      ", " + cpuText +
-      (deprecated() ? ", DEPRECATED" : "") +
-      (M68kMnemonicPredicates.privilegedAny().test(this) ? ", " + privilegedType.name() : "") +
-      (controlFlow() != ControlFlow.NOTHING ? ", " + controlFlow : "") +
-      (affected != ConditionCodes.NONE_AFFECTED ? ", " + affected : "") +
-      (tested != ConditionCodes.NONE_AFFECTED ? ", " + tested : "") +
-      '}';
-  }
 
   @SuppressWarnings("UnstableApiUsage")
   public static final class ConditionCodes {
