@@ -23,6 +23,7 @@ import com.yanncebron.m68kplugin.M68kBundle;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
@@ -206,11 +207,33 @@ public record M68kMnemonic(IElementType elementType,
     }
 
     /**
-     * @return List of display IDs for use in the mnemonic docs table.
+     * @return List of display IDs for use in the mnemonic docs.
      */
     @NlsSafe
-    public List<Character> getTableTexts() {
+    public List<Character> getDisplayIds() {
       return List.of(x.displayId, n.displayId, z.displayId, v.displayId, c.displayId);
+    }
+
+    /**
+     * @return List of explanation texts for use in the mnemonic docs.
+     */
+    @Nls
+    public List<String> getDisplayTexts() {
+      List<String> texts = new ArrayList<>(5);
+      texts.add(getDisplayText(x, 0));
+      texts.add(getDisplayText(n, 1));
+      texts.add(getDisplayText(z, 2));
+      texts.add(getDisplayText(v, 3));
+      texts.add(getDisplayText(c, 4));
+      return texts;
+    }
+
+    @Nls
+    private static String getDisplayText(Code code, int idx) {
+      if (code == Code.RESULT) {
+        return M68kBundle.message("documentation.condition.codes.RESULT." + idx);
+      }
+      return M68kBundle.message("documentation.conditions.codes." + code);
     }
 
     @Override
@@ -236,7 +259,7 @@ public record M68kMnemonic(IElementType elementType,
     }
 
     private enum Code {
-      NOT_AFFECTED('-', '-'),
+      NOT_AFFECTED('-', '–'), // displayId: n-dash for better visibility
 
       CLEAR('0', '0'),
       SET('1', '1'),

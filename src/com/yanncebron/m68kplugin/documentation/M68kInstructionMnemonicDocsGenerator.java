@@ -92,8 +92,9 @@ class M68kInstructionMnemonicDocsGenerator {
       insertBreak = true;
     }
 
-    sb.append("<table padding='0' margin='0'><tr>");
-    appendConditionalCodesSection(M68kBundle.message("documentation.section.condition.codes"), firstMnemonic.affected(), false);
+    sb.append("<table padding='0' margin='0' style=\"width: 100%;\"><tr>");
+    appendConditionalCodesSection(M68kBundle.message("documentation.section.condition.codes"),
+      firstMnemonic.affected(), false);
     appendConditionalCodesSection(M68kBundle.message("documentation.section.condition.codes.tested"), firstMnemonic.tested(), true);
     sb.append("</tr></table>");
 
@@ -224,13 +225,14 @@ class M68kInstructionMnemonicDocsGenerator {
     sb.append(DocumentationMarkup.SECTIONS_END);
   }
 
-  private void appendConditionalCodesSection(String sectionName, M68kMnemonic.ConditionCodes value, boolean skipIfNoneAffected) {
+  private void appendConditionalCodesSection(String sectionName, M68kMnemonic.ConditionCodes value,
+                                             boolean skipIfNoneAffected) {
     if (skipIfNoneAffected && value == M68kMnemonic.ConditionCodes.NONE_AFFECTED) {
       sb.append("<td/>");
       return;
     }
 
-    sb.append("<td padding='0' margin='0'>");
+    sb.append("<td valign='top'>");
     sb.append(DocumentationMarkup.SECTIONS_START);
     sb.append(DocumentationMarkup.SECTION_HEADER_START);
     sb.append(sectionName);
@@ -239,20 +241,32 @@ class M68kInstructionMnemonicDocsGenerator {
     if (value == M68kMnemonic.ConditionCodes.NONE_AFFECTED) {
       sb.append(M68kBundle.message("documentation.conditions.codes.not.affected"));
     } else {
-      sb.append("<table><tr>");
-      sb.append("<th>X</th>");
-      sb.append("<th>N</th>");
-      sb.append("<th>Z</th>");
-      sb.append("<th>V</th>");
-      sb.append("<th>C</th>");
-      sb.append("</tr>");
-
-      sb.append("<tr>");
-      for (Character tableText : value.getTableTexts()) {
-        sb.append("<td>");
-        sb.append("&nbsp;").append(tableText).append("</td>");
+      sb.append("<b>");
+      for (int i = 0; i < 5; i++) {
+        sb.append(M68kBundle.message("documentation.condition.codes.label." + i));
+        sb.append("&nbsp;&nbsp;&nbsp;");
       }
-      sb.append("</tr></table>");
+      sb.append("</b>");
+      if (skipIfNoneAffected) {
+        sb.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"); // prevent line-breaks
+        // todo not working for all cases (CLR, OR to SR, ORI to SR)
+      }
+      sb.append("<br/>");
+
+      for (Character tableText : value.getDisplayIds()) {
+        sb.append(tableText);
+        sb.append("&nbsp;&nbsp;&nbsp;");
+      }
+      sb.append("<br/><br/>");
+
+      int i = 0;
+      for (String explanationText : value.getDisplayTexts()) {
+        sb.append(M68kBundle.message("documentation.condition.codes.label." + i));
+        sb.append("&nbsp;&ndash;&nbsp;");
+        sb.append(explanationText);
+        sb.append("<br/>");
+        i++;
+      }
     }
 
     sb.append(DocumentationMarkup.SECTION_END);

@@ -33,22 +33,41 @@ public class M68kMnemonicConditionCodesTest extends TestCase {
   }
 
   public void testNoneAffected() {
-    assertEquals("-----", M68kMnemonic.ConditionCodes.NONE_AFFECTED.toDisplayText());
+    assertEquals("–––––", M68kMnemonic.ConditionCodes.NONE_AFFECTED.toDisplayText());
   }
 
   public void testToDisplayText() {
-    assertEquals("-01U*", M68kMnemonic.ConditionCodes.parseAffected("-01U*").toDisplayText());
+    assertEquals("–01U*", M68kMnemonic.ConditionCodes.parseAffected("-01U*").toDisplayText());
     // different displayId: C, A, O
     assertEquals("***UU", M68kMnemonic.ConditionCodes.parseAffected("CAOUU").toDisplayText());
 
-    assertEquals("?-?-?", M68kMnemonic.ConditionCodes.parseTested("?-?-?").toDisplayText());
+    assertEquals("?–?–?", M68kMnemonic.ConditionCodes.parseTested("?-?-?").toDisplayText());
   }
 
-  public void testTableTexts() {
-    UsefulTestCase.assertOrderedEquals(M68kMnemonic.ConditionCodes.parseAffected("-01U*").getTableTexts(),
-      '-', '0', '1', 'U', '*');
-    UsefulTestCase.assertOrderedEquals(M68kMnemonic.ConditionCodes.parseAffected("CAOUU").getTableTexts(),
+  public void testGetDisplayIds() {
+    UsefulTestCase.assertOrderedEquals(M68kMnemonic.ConditionCodes.parseAffected("-01U*").getDisplayIds(),
+      '–', '0', '1', 'U', '*');
+
+    UsefulTestCase.assertOrderedEquals(M68kMnemonic.ConditionCodes.parseAffected("CAOUU").getDisplayIds(),
       '*', '*', '*', 'U', 'U');
+  }
+
+  public void testGetDisplayTexts() {
+    UsefulTestCase.assertOrderedEquals(M68kMnemonic.ConditionCodes.parseAffected("*****").getDisplayTexts(),
+      "From result (usually the bit shifted out)",
+      "From result (usually if negative)",
+      "From result (usually if zero)",
+      "From result (usually for overflow)",
+      "From result (usually carry or borrow)"
+    );
+
+    UsefulTestCase.assertOrderedEquals(M68kMnemonic.ConditionCodes.parseAffected("CAOUU").getDisplayTexts(),
+      "Set to the value of C-bit",
+      "AND'ed, cleared for zero bit",
+      "OR'ed, set for one bit",
+      "Undefined",
+      "Undefined"
+    );
   }
 
   public void testParseAffectedInvalidLength() {
@@ -58,7 +77,7 @@ public class M68kMnemonicConditionCodesTest extends TestCase {
   public void testParseAffectedInvalidCodes() {
     testInvalid("99999", "id '9' invalid (@0 in '99999')");
 
-    assertEquals("*----", M68kMnemonic.ConditionCodes.parseAffected("C----").toDisplayText());
+    assertEquals("*––––", M68kMnemonic.ConditionCodes.parseAffected("C----").toDisplayText());
     testInvalid("?----", "id '?' forbidden (@0 in '?----')");
 
     testInvalid("-C---", "id 'C' forbidden (@1 in '-C---')");
@@ -75,7 +94,7 @@ public class M68kMnemonicConditionCodesTest extends TestCase {
   }
 
   public void testParseTested() {
-    assertEquals("--??-", M68kMnemonic.ConditionCodes.parseTested("--??-").toDisplayText());
+    assertEquals("––??–", M68kMnemonic.ConditionCodes.parseTested("--??-").toDisplayText());
   }
 
   public void testParseTestedInvalidLength() {
