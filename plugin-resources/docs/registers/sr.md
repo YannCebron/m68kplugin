@@ -19,20 +19,20 @@ zero. I2, I1, and I0 define the interrupt mask level.
 
 #### TRACE MODE: `T1`/`T0`
 
-| T1 | T0 | Trace Mode               |
-|:--:|:--:|--------------------------|
-| 0  | 0  | NO TRACE                 |
-| 1  | 0  | TRACE ON ANY INSTRUCTION |
-| 0  | 1  | TRACE ON CHANGE OF FLOW  |
-| 1  | 1  | UNDEFINED                |
+|   T1    |   T0    | Trace Mode               |
+|:-------:|:-------:|--------------------------|
+| &nbsp;&nbsp;0 | &nbsp;&nbsp;0 | &nbsp;&nbsp;NO TRACE                 |
+| &nbsp;&nbsp;1 | &nbsp;&nbsp;0 | &nbsp;&nbsp;TRACE ON ANY INSTRUCTION |
+| &nbsp;&nbsp;0 | &nbsp;&nbsp;1 | &nbsp;&nbsp;TRACE ON CHANGE OF FLOW  |
+| &nbsp;&nbsp;1 | &nbsp;&nbsp;1 | &nbsp;&nbsp;UNDEFINED                |
 
 #### MASTER/INTERRUPT STATE: `S`/`M`
 
-| S | M | Active Stack |
-|:-:|:-:|--------------|
-| 0 | x | USP          |
-| 1 | 0 | ISP          |
-| 1 | 1 | MSP          |
+|    S    |    M    | Active Stack |
+|:-------:|:-------:|--------------|
+| &nbsp;&nbsp;0 | &nbsp;&nbsp;x | &nbsp;&nbsp;USP          |
+| &nbsp;&nbsp;1 | &nbsp;&nbsp;0 | &nbsp;&nbsp;ISP          |
+| &nbsp;&nbsp;1 | &nbsp;&nbsp;1 | &nbsp;&nbsp;MSP          |
 
 #### INTERRUPT PRIORITY MASK: `I2`/`I1`/`I0`
 
