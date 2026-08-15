@@ -63,17 +63,8 @@ class M68kInstructionMnemonicDocsGenerator {
     assert !filteredMnemonics.isEmpty() : predicate + " for " + allMnemonics;
 
     boolean insertBreak = false;
-    boolean allCpusSame = true;
-    // todo stream.distinct.count
-    Set<M68kCpu> previousCpus = null;
-    for (M68kMnemonic mnemonic : filteredMnemonics) {
-      final Set<M68kCpu> cpus = mnemonic.cpus();
-      if (previousCpus != null && !previousCpus.equals(cpus)) {
-        allCpusSame = false;
-        break;
-      }
-      previousCpus = cpus;
-    }
+    boolean allCpusSame = filteredMnemonics.stream().map(M68kMnemonic::cpus).distinct().count() == 1;
+
     M68kMnemonic firstMnemonic = ContainerUtil.getFirstItem(filteredMnemonics);
 
     if (allCpusSame) {
