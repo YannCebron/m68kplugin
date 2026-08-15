@@ -62,36 +62,31 @@ class M68kInstructionMnemonicDocsGenerator {
     List<M68kMnemonic> filteredMnemonics = allMnemonics.stream().filter(predicate).toList();
     assert !filteredMnemonics.isEmpty() : predicate + " for " + allMnemonics;
 
-    boolean insertBreak = false;
     boolean allCpusSame = filteredMnemonics.stream().map(M68kMnemonic::cpus).distinct().count() == 1;
 
     M68kMnemonic firstMnemonic = ContainerUtil.getFirstItem(filteredMnemonics);
+    sb.append(DocumentationMarkup.SECTIONS_START);
 
     if (allCpusSame) {
       appendCpuSection(firstMnemonic);
-      insertBreak = true;
     }
 
     if (M68kMnemonicPredicates.privilegedAny().test(firstMnemonic)) {
       appendPrivilegedSection(firstMnemonic);
-      insertBreak = true;
     }
 
     M68kMnemonic.ControlFlow controlFlow = firstMnemonic.controlFlow();
     if (controlFlow == M68kMnemonic.ControlFlow.TRAP || controlFlow == M68kMnemonic.ControlFlow.TRAP_RETURN) {
       appendControlFlowSection(firstMnemonic);
-      insertBreak = true;
     }
 
-    sb.append("<table padding='0' margin='0' style=\"width: 100%;\"><tr>");
     appendConditionalCodesSection(M68kBundle.message("documentation.section.condition.codes"),
       firstMnemonic.affected(), false);
-    appendConditionalCodesSection(M68kBundle.message("documentation.section.condition.codes.tested"), firstMnemonic.tested(), true);
-    sb.append("</tr></table>");
+    appendConditionalCodesSection(M68kBundle.message("documentation.section.condition.codes.tested"),
+      firstMnemonic.tested(), true);
 
-    if (insertBreak) {
-      appendBreak();
-    }
+    sb.append(DocumentationMarkup.SECTIONS_END);
+    appendBreak();
 
     // only operands with >1 address mode, otherwise they cannot appear in the table(s)
     Set<M68kAddressMode> allUsedAddressModesFromMultiOperands = new HashSet<>();
@@ -144,7 +139,9 @@ class M68kInstructionMnemonicDocsGenerator {
 
 
       if (!allCpusSame) {
+        sb.append(DocumentationMarkup.SECTIONS_START);
         appendCpuSection(mnemonic);
+        sb.append(DocumentationMarkup.SECTIONS_END);
       }
 
       final M68kAddressMode[] firstAddressModes = mnemonic.firstOperand().getAddressModes();
@@ -181,17 +178,14 @@ class M68kInstructionMnemonicDocsGenerator {
   }
 
   private void appendCpuSection(M68kMnemonic mnemonic) {
-    sb.append(DocumentationMarkup.SECTIONS_START);
     sb.append(DocumentationMarkup.SECTION_HEADER_START);
     sb.append(M68kBundle.message("documentation.section.cpu"));
     sb.append(DocumentationMarkup.SECTION_SEPARATOR);
     M68kDocsGeneratorUtil.appendCpus(sb, mnemonic.cpus());
     sb.append(DocumentationMarkup.SECTION_END);
-    sb.append(DocumentationMarkup.SECTIONS_END);
   }
 
   private void appendPrivilegedSection(M68kMnemonic mnemonic) {
-    sb.append(DocumentationMarkup.SECTIONS_START);
     sb.append(DocumentationMarkup.SECTION_HEADER_START);
     sb.append(M68kBundle.message("documentation.section.privileged"));
     sb.append(DocumentationMarkup.SECTION_SEPARATOR);
@@ -203,28 +197,23 @@ class M68kInstructionMnemonicDocsGenerator {
     }
     sb.append(message);
     sb.append(DocumentationMarkup.SECTION_END);
-    sb.append(DocumentationMarkup.SECTIONS_END);
   }
 
   private void appendControlFlowSection(M68kMnemonic mnemonic) {
-    sb.append(DocumentationMarkup.SECTIONS_START);
     sb.append(DocumentationMarkup.SECTION_HEADER_START);
     sb.append(M68kBundle.message("documentation.section.control.flow"));
     sb.append(DocumentationMarkup.SECTION_SEPARATOR);
     sb.append(mnemonic.controlFlow());
     sb.append(DocumentationMarkup.SECTION_END);
-    sb.append(DocumentationMarkup.SECTIONS_END);
   }
 
-  private void appendConditionalCodesSection(String sectionName, M68kMnemonic.ConditionCodes value,
+  private boolean appendConditionalCodesSection(String sectionName,
+                                                M68kMnemonic.ConditionCodes value,
                                              boolean skipIfNoneAffected) {
     if (skipIfNoneAffected && value == M68kMnemonic.ConditionCodes.NONE_AFFECTED) {
-      sb.append("<td/>");
-      return;
+      return false;
     }
 
-    sb.append("<td valign='top'>");
-    sb.append(DocumentationMarkup.SECTIONS_START);
     sb.append(DocumentationMarkup.SECTION_HEADER_START);
     sb.append(sectionName);
     sb.append(DocumentationMarkup.SECTION_SEPARATOR);
@@ -232,23 +221,22 @@ class M68kInstructionMnemonicDocsGenerator {
     if (value == M68kMnemonic.ConditionCodes.NONE_AFFECTED) {
       sb.append(M68kBundle.message("documentation.conditions.codes.not.affected"));
     } else {
-      sb.append("<b>");
+      sb.append("<table><tr>");
       for (int i = 0; i < 5; i++) {
+        sb.append("<th>");
         sb.append(M68kBundle.message("documentation.condition.codes.label." + i));
-        sb.append("&nbsp;&nbsp;&nbsp;");
+        sb.append("</th>");
       }
-      sb.append("</b>");
-      if (skipIfNoneAffected) {
-        sb.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"); // prevent line-breaks
-        // todo not working for all cases (CLR, OR to SR, ORI to SR)
-      }
-      sb.append("<br/>");
+      sb.append("</tr>");
 
+      sb.append("</tr>");
       for (Character tableText : value.getDisplayIds()) {
+        sb.append("<td>");
+        sb.append("&nbsp;");
         sb.append(tableText);
-        sb.append("&nbsp;&nbsp;&nbsp;");
+        sb.append("</td>");
       }
-      sb.append("<br/><br/>");
+      sb.append("</tr></table>");
 
       int i = 0;
       for (String explanationText : value.getDisplayTexts()) {
@@ -261,8 +249,7 @@ class M68kInstructionMnemonicDocsGenerator {
     }
 
     sb.append(DocumentationMarkup.SECTION_END);
-    sb.append(DocumentationMarkup.SECTIONS_END);
-    sb.append("</td>");
+    return true;
   }
 
   private void appendBreak() {
