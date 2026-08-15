@@ -6,11 +6,6 @@
 ## Description
 OR the immediate data with the destination operand. Store the result in the destination operand.
 
-## Condition codes
-| X | N | Z | V | C |
-|:-:|:-:|:-:|:-:|:-:|
-|-|*|*|0|0|
-
 ## Application
 `ORI` forms the logical OR of the immediate source with the effective address, which may be a memory location. For example,
 
