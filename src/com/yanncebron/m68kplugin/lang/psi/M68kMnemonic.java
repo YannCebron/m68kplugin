@@ -266,11 +266,16 @@ public record M68kMnemonic(IElementType elementType,
 
       UNDEFINED('U', 'U'),
       RESULT('*', '*'),
+
+      // additional "custom" codes
       CARRY('C', '*'),
 
       AND('A', '*'),
       OR('O', '*'),
 
+      IMMEDIATE('I', '*'),
+
+      // Tested only
       TEST('?', '?');
 
       private final char parseId;

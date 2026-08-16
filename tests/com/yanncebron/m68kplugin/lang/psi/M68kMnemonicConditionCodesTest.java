@@ -61,11 +61,11 @@ public class M68kMnemonicConditionCodesTest extends TestCase {
       "From result (usually carry or borrow)"
     );
 
-    UsefulTestCase.assertOrderedEquals(M68kMnemonic.ConditionCodes.parseAffected("CAOUU").getDisplayTexts(),
+    UsefulTestCase.assertOrderedEquals(M68kMnemonic.ConditionCodes.parseAffected("CAOIU").getDisplayTexts(),
       "Set to the value of C-bit",
       "AND'ed, cleared for zero bit",
       "OR'ed, set for one bit",
-      "Undefined",
+      "Set according to the immediate operand",
       "Undefined"
     );
   }

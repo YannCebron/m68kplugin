@@ -1039,7 +1039,7 @@ public final class M68kMnemonicRegistry {
       .cpus(EnumSet.of(M68kCpu.CPU32))
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
-      .affected("*****")
+      .affected("IIIII")
       .build();
 
 // LSL -------------------------------------------------------------------------
@@ -1640,7 +1640,7 @@ public final class M68kMnemonicRegistry {
       .first(QUICK_IMMEDIATE)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP)
-      .affected("*****")
+      .affected("IIIII")
       .build();
 
 // SUB -------------------------------------------------------------------------

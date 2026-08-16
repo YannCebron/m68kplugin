@@ -21,6 +21,3 @@ priority level set by the new status register value, an interrupt exception occu
 otherwise, the interrupt request is ignored. If the bit of the immediate data
 corresponding to the S-bit is off, execution of the instruction will cause a privilege
 violation. An external reset always initiates reset exception processing.
-
-## Condition codes
-Set according to the immediate operand.

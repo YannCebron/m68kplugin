@@ -2187,7 +2187,7 @@ label17: bvs         label17
 
 ********************************************************************************
 
-* M68kMnemonic{lpstop, IMMEDIATE, NONE, [WORD], [CPU32], PRIVILEGED, TRAP, *****}
+* M68kMnemonic{lpstop, IMMEDIATE, NONE, [WORD], [CPU32], PRIVILEGED, TRAP, IIIII}
          lpstop      #42.L
          lpstop.w    #42.L
 
@@ -5808,7 +5808,7 @@ label17: bvs         label17
 
 ********************************************************************************
 
-* M68kMnemonic{stop, QUICK_IMMEDIATE, NONE, [UNSIZED], MC68000 Family, PRIVILEGED, TRAP, *****}
+* M68kMnemonic{stop, QUICK_IMMEDIATE, NONE, [UNSIZED], MC68000 Family, PRIVILEGED, TRAP, IIIII}
          stop      #1
 
 

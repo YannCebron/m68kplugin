@@ -292,7 +292,7 @@ PRIVILEGED, TRAP,       *****,  ?????
 -,          -
 
 "lpstop",   {IM},       W,      m68060|cpu32|apollo
-PRIVILEGED, TRAP,       *****
+PRIVILEGED, TRAP,       IIIII
 
 "lsl",      {AM},       W,      m68000up
 -,          -,          ***0*
@@ -513,7 +513,7 @@ PRIVILEGED, TRAP_RETURN, *****
 -,          -,          ,       -???-
 
 "stop",     {QI},       UNS,    m68000up
-PRIVILEGED, TRAP,       *****
+PRIVILEGED, TRAP,       IIIII
 
 "sub",      {DA,D_},    BWL,    m68000up
 -,          -,          C****
