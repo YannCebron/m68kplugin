@@ -9,6 +9,6 @@ OR the immediate data with the destination operand. Store the result in the dest
 ## Application
 `ORI` forms the logical OR of the immediate source with the effective address, which may be a memory location. For example,
 
-```
-ORI.B #%00000011,(A0)+
+```assembly
+     ORI.B #%00000011,(A0)+
 ```

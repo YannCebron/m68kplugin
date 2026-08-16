@@ -10,7 +10,7 @@ The contents of the specified address register are first pushed onto the stack. 
 ## Application
 The `LINK` and [`UNLK`](unlk.md) pair are used to create local workspace on the top of a procedure's stack. Consider the code:
 
-```
+```assembly
 Subrtn LINK  A6,#-12    ;Create a 12-byte workspace
        .
        MOVE  D3,(-8,A6) ;Access the stack frame via A6

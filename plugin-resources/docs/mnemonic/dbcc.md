@@ -15,7 +15,7 @@ It is important to appreciate that the condition tested by the `DBcc` instructio
 
 We can use the instruction `DBEQ`, decrement and branch on zero, to mechanize the high-level language construct `REPEAT`...`UNTIL`.
 
-```
+```assembly
 LOOP ...            REPEAT
      ...
      ...              [D0] := [D0] - 1

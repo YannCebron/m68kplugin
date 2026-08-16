@@ -1,12 +1,10 @@
 # ANDI to SR - AND immediate to status register
 
 ## Operation
-```
-IF [S] = 1
-  THEN
-    [SR] ← <literal>.[SR]
-  ELSE TRAP
-```
+IF [S] = 1<br/>
+&nbsp;&nbsp;THEN<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[SR] ← <literal>.[SR]<br/>
+&nbsp;&nbsp;ELSE TRAP<br/>
 
 ## Description
 *AND* the immediate data to the status register and store the result in the status register. All bits of the SR are affected.

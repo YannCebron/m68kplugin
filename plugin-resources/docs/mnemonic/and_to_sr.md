@@ -1,12 +1,10 @@
 # AND to SR - AND to status register
 
 ## Operation
-```
-IF [S] = 1
-  THEN
-    [SR] ← [source].[SR]
-  ELSE TRAP
-```
+IF [S] = 1<br/>
+&nbsp;&nbsp;THEN<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[SR] ← [source].[SR]<br/>
+&nbsp;&nbsp;ELSE TRAP
 
 ## Description
 *AND* the source operand to the status register and store the result in the status register. All bits of the SR are affected.

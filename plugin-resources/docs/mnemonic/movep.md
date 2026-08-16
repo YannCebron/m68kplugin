@@ -9,7 +9,7 @@ The `MOVEP` operation moves data between a data register and a byte-oriented mem
 ## Application
 Consider a memory-mapped peripheral located at address $08 0001 which has four 8-bit internal registers mapped at addresses $08 0001, $08 0003, $08 0005, and $08 0007. The longword in data register D0 is to be transferred to this peripheral by the following code.
 
-```
+```assembly
 LEA $080001,A0
 MOVEP.L D0,0(A0)
 ```
