@@ -5347,13 +5347,13 @@ label17: bvs         label17
 
 ********************************************************************************
 
-* M68kMnemonic{rte, NONE, NONE, [UNSIZED], MC68000 Family, PRIVILEGED, TRAP_RETURN, *****}
+* M68kMnemonic{rte, NONE, NONE, [UNSIZED], MC68000 Family, PRIVILEGED, TRAP_RETURN, EEEEE}
          rte
 
 
 ********************************************************************************
 
-* M68kMnemonic{rtr, NONE, NONE, [UNSIZED], MC68000 Family, RETURN, *****}
+* M68kMnemonic{rtr, NONE, NONE, [UNSIZED], MC68000 Family, RETURN, EEEEE}
          rtr
 
 

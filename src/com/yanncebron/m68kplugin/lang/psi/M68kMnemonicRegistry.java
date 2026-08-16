@@ -1478,14 +1478,14 @@ public final class M68kMnemonicRegistry {
     create(M68kTokenTypes.RTE)
       .privileged(M68kMnemonic.PrivilegedType.PRIVILEGED)
       .controlFlow(M68kMnemonic.ControlFlow.TRAP_RETURN)
-      .affected("*****")
+      .affected("EEEEE")
       .build();
 
 // RTR -------------------------------------------------------------------------
 
     create(M68kTokenTypes.RTR)
       .controlFlow(M68kMnemonic.ControlFlow.RETURN)
-      .affected("*****")
+      .affected("EEEEE")
       .build();
 
 // RTS -------------------------------------------------------------------------

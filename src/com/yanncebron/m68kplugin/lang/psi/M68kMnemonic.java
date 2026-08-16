@@ -274,6 +274,7 @@ public record M68kMnemonic(IElementType elementType,
       OR('O', '*'),
 
       IMMEDIATE('I', '*'),
+      PRE_EXCEPTION('E', '*'),
 
       // Tested only
       TEST('?', '?');

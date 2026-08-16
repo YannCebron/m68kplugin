@@ -20,6 +20,3 @@ Proc1 MOVE.W  SR,-(SP)    ;Save old CCR on stack
       .
       RTR                 ;Return and restore CCR (not SR!)
 ```
-
-## Condition codes
-The CCR is restored to its pre-exception state.

@@ -462,10 +462,10 @@ PRIVILEGED, TRAP
 -,          RETURN
 
 "rte",      {0},        UNS,    m68000up
-PRIVILEGED, TRAP_RETURN, *****
+PRIVILEGED, TRAP_RETURN, EEEEE
 
 "rtr",      {0},        UNS,    m68000up
--,          RETURN,     *****
+-,          RETURN,     EEEEE
 
 "rts",      {0},        UNS,    m68000up
 -,          RETURN
