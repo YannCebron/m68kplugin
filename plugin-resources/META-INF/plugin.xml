@@ -19,15 +19,27 @@
   <!--suppress PluginXmlCapitalization -->
   <name>Motorola 68000 Series Assembler</name>
   <vendor email="yann.cebron@gmail.com" url="https://www.yanncebron.com">Yann Cébron</vendor>
-
   <description><![CDATA[
-    Supports <a href="https://en.wikipedia.org/wiki/Motorola_68000_series">Motorola 68000 series</a> assembly language.
-    <br/>
-    <br/>
-    See <a href="https://m68kplugin.yanncebron.com">Documentation</a> for features.
-    <br/>
-    <br/>
-    <em>All product names, trademarks, and registered trademarks are property of their respective owners.</em>
+    Provides rich language support for <a href="https://en.wikipedia.org/wiki/Motorola_68000_series">Motorola 68000
+      series</a> assembly language development.
+
+    <b>Key Features:</b>
+    <ul>
+      <li><b>Syntax Highlighting & Formatting:</b> Customizable color schemes for instructions, registers, directives,
+        and comments.
+      </li>
+      <li><b>Code Completion:</b> Smart completion for labels and macros.</li>
+      <li><b>Navigation & Search:</b> Quick navigation to label definitions, symbol search, and find usages.</li>
+      <li><b>Code Analysis & Inspections:</b> Semantic error checking, unresolved label detection, additional code
+        inspections.
+      </li>
+      <li><b>Refactoring:</b> Safe label renaming across the entire project.</li>
+      <li><b>Documentation:</b> Quick documentation lookup for instructions, directives, and registers.</li>
+    </ul>
+    See <a href="https://m68kplugin.yanncebron.com">Documentation</a> for other features.
+
+    <i>Ideal for retro-programming targeting Amiga, Atari ST, SEGA Genesis/Mega Drive, and embedded M68k assembly
+      development.</i>
     ]]></description>
 
   <depends>com.intellij.modules.platform</depends>
