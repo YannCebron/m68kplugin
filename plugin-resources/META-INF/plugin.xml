@@ -21,11 +21,11 @@
   <vendor email="yann.cebron@gmail.com" url="https://www.yanncebron.com">Yann Cébron</vendor>
   <description><![CDATA[
     Provides rich language support for <a href="https://en.wikipedia.org/wiki/Motorola_68000_series">Motorola 68000
-      series</a> assembly language development.
-
+      series</a> assembly language development in all JetBrains IDEs.
+    <br/>
     <b>Key Features:</b>
     <ul>
-      <li><b>Syntax Highlighting & Formatting:</b> Customizable color schemes for instructions, registers, directives,
+      <li><b>Syntax Highlighting:</b> Customizable color schemes for instructions, registers, directives, literals,
         and comments.
       </li>
       <li><b>Code Completion:</b> Smart completion for labels and macros.</li>
@@ -37,7 +37,7 @@
       <li><b>Documentation:</b> Quick documentation lookup for instructions, directives, and registers.</li>
     </ul>
     See <a href="https://m68kplugin.yanncebron.com">Documentation</a> for other features.
-
+    <br/>
     <i>Ideal for retro-programming targeting Amiga, Atari ST, SEGA Genesis/Mega Drive, and embedded M68k assembly
       development.</i>
     ]]></description>
