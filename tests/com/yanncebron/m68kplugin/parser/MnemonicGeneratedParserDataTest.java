@@ -212,7 +212,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
           dump(variant);
         } catch (AssertionError e) {
-          final String failedVariantText = variant + " ; FAILED " + StringUtil.convertLineSeparators(e.getMessage(), " ");
+          final String failedVariantText = variant + " ; FAILED: " + StringUtil.convertLineSeparators(e.getMessage(), " ");
           failedVariants.add(failedVariantText);
           dump(failedVariantText);
         }
