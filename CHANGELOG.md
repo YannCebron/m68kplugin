@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Changed
+
+### Added
+
+
 ## 0.2.5 - 2026-08-17
 
 ### Changed
