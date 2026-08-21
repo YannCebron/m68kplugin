@@ -1373,6 +1373,7 @@ align_directive ::= ALIGN expression
 }
 cnop_directive ::= CNOP tail_expression_expression
 {
+  pin = 1
   methods = [
     expression = ""
     divisor = "expression[1]"

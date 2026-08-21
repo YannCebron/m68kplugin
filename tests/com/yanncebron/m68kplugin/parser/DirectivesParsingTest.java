@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -319,6 +319,10 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
 
   public void testCnopDirective() throws Exception {
     doCodeTest(" cnop 0,4");
+  }
+
+  public void testCnopDirectiveMissingAllExpressions() throws Exception {
+    doCodeTest(" cnop");
   }
 
   public void testCnopDirectiveMissingSecondExpression() throws Exception {

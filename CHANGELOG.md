@@ -6,6 +6,9 @@
 
 ### Added
 
+### Fixed
+
+- `cnop` directive: fix parsing when missing all arguments
 
 ## 0.2.5 - 2026-08-17
 

@@ -269,12 +269,13 @@ public class M68kDirectivesParser {
   public static boolean cnop_directive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "cnop_directive")) return false;
     if (!nextTokenIs(b, "<directive>", CNOP)) return false;
-    boolean r;
+    boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, CNOP_DIRECTIVE, "<directive>");
     r = consumeToken(b, CNOP);
+    p = r; // pin = 1
     r = r && tail_expression_expression(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */
