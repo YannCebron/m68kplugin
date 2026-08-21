@@ -39,7 +39,7 @@ public final class M68kRegisterDocsGenerator {
   public String getDocumentation(boolean forBrowserPane) {
     StringBuilder sb = new StringBuilder();
     sb.append(DocumentationMarkup.DEFINITION_START);
-    sb.append("<h1><code>").append(StringUtil.toUpperCase(m68kRegister.name())).append("</code></h1>");
+    sb.append("<b>").append(StringUtil.toUpperCase(m68kRegister.name())).append("</b>");
     sb.append(DocumentationMarkup.DEFINITION_END);
 
     sb.append(DocumentationMarkup.SECTIONS_START);

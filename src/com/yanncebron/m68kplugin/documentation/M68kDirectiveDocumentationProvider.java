@@ -104,7 +104,7 @@ public final class M68kDirectiveDocumentationProvider extends AbstractDocumentat
 
     return M68kDocumentationUtil.CSS +
       DocumentationMarkup.DEFINITION_START +
-      "<h1><code>" + StringUtil.toUpperCase(docDirectiveType.toString()) + "</code></h1>" +
+      "<b>" + StringUtil.toUpperCase(docDirectiveType.toString()) + "</b>" +
       DocumentationMarkup.DEFINITION_END +
       DocumentationMarkup.CONTENT_START +
       "<p>" + referenceDoc + "</p>" +

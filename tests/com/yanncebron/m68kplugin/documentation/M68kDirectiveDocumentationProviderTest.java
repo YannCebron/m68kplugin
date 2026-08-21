@@ -67,7 +67,7 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
   public void testDirectiveNoReferenceDocAvailableFallback() {
     doTest(" add<caret>watch", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
-      assertEquals("<style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><h1><code>ADDWATCH</code></h1></pre></div><div class='content'><p>No reference documentation available for 'addwatch'<br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_4.html#Directives-2\">vasm directives docs 1</a><br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_23.html#Extensions-3\">vasm directives docs 2</a><br><br><a href=\"https://github.com/prb28/m68k-instructions-documentation\">Contribute to m68k-instructions-documentation project</a></p></div>", doc);
+      assertEquals("<style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>ADDWATCH</b></pre></div><div class='content'><p>No reference documentation available for 'addwatch'<br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_4.html#Directives-2\">vasm directives docs 1</a><br><br><a href=\"http://sun.hasenbraten.de/vasm/release/vasm_23.html#Extensions-3\">vasm directives docs 2</a><br><br><a href=\"https://github.com/prb28/m68k-instructions-documentation\">Contribute to m68k-instructions-documentation project</a></p></div>", doc);
     });
   }
 
@@ -75,7 +75,7 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
     doTest(" e<caret>rem", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
       assertEquals("""
-        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><h1><code>EREM</code></h1></pre></div><div class='content'><p><h2>Syntax</h2>
+        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>EREM</b></pre></div><div class='content'><p><h2>Syntax</h2>
         <pre><code class="language-assembly">erem
         </code></pre>
         <h2>Description</h2>
@@ -88,7 +88,7 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
     doTest(" if<caret>mi", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
       assertEquals("""
-        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><h1><code>IFMI</code></h1></pre></div><div class='content'><p><h2>Syntax</h2>
+        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>IFMI</b></pre></div><div class='content'><p><h2>Syntax</h2>
         <pre><code class="language-assembly">ifmi &lt;expression&gt;
         </code></pre>
         <h2>Description</h2>
@@ -100,7 +100,7 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
   public void testEremDirectiveReferenceDocForBrowser() {
     String directiveDoc = M68kDirectiveDocumentationProvider.getDirectiveDoc(M68kTokenTypes.EREM);
     assertEquals("""
-      <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><h1><code>EREM</code></h1></pre></div><div class='content'><p><h2>Syntax</h2>
+      <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>EREM</b></pre></div><div class='content'><p><h2>Syntax</h2>
       <pre><code class="language-assembly">erem
       </code></pre>
       <h2>Description</h2>
@@ -112,7 +112,7 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
     doTest("label e<caret>qu 42", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
       assertEquals("""
-        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><h1><code>EQU</code></h1></pre></div><div class='content'><p><h2>Syntax</h2>
+        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>EQU</b></pre></div><div class='content'><p><h2>Syntax</h2>
         <pre><code class="language-assembly">&lt;symbol&gt; equ &lt;expression&gt;
         </code></pre>
         <h2>Description</h2>
@@ -128,7 +128,7 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
     doTest("label <caret>= 42", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
       assertEquals("""
-        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><h1><code>EQU</code></h1></pre></div><div class='content'><p><h2>Syntax</h2>
+        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>EQU</b></pre></div><div class='content'><p><h2>Syntax</h2>
         <pre><code class="language-assembly">&lt;symbol&gt; equ &lt;expression&gt;
         </code></pre>
         <h2>Description</h2>

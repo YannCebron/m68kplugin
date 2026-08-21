@@ -83,7 +83,7 @@ public final class M68kInstructionDocsUtil {
 
     return M68kDocumentationUtil.CSS +
       DocumentationMarkup.DEFINITION_START +
-      "<h1><code>" + mnemonicTitle + "</code></h1>" +
+      "<b>" + mnemonicTitle + "</b><br/>" +
       referenceHeading +
       DocumentationMarkup.DEFINITION_END +
       docText;
