@@ -5,3 +5,4 @@ ifmacrod <macro>
 
 ## Description
 Conditionally assemble the following line if `<macro>` is defined.
+See [ifmacrond](ifmacrond.md) directive.
