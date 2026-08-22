@@ -390,7 +390,8 @@ private m68000_instructions ::=
 
                          add_sub_instructions |
                          mul_div_instructions |
-                         bcd_instructions|
+
+                         bCC_instructions |
 
                          misc_instructions |
 
@@ -400,9 +401,10 @@ private m68000_instructions ::=
                          bit_manipulation_instructions |
                          shift_rotate_instructions |
 
-                         bCC_instructions |
                          dbCC_instructions |
-                         sCC_instructions
+                         sCC_instructions |
+
+                         bcd_instructions
 
 // Common tails
 private tail_data_size_all___imm_alterable_data ::= data_size_all? adm_imm COMMA operand_alterable_data
@@ -423,8 +425,8 @@ private tail_data_size_all___alterable_data ::= data_size_all? operand_alterable
   extends("move.*_instruction") = move_instruction_base
 }
 private move_instructions ::= move_instruction |
-                              movea_instruction |
                               moveq_instruction |
+                              movea_instruction |
                               movem_instruction |
                               movep_instruction |
                               movec_instruction |
@@ -550,8 +552,8 @@ moves_instruction ::= MOVES data_size_all?
 }
 
 // Data Movement =========================================================
-private data_movement_instructions ::= exg_instruction |
-                                       lea_instruction |
+private data_movement_instructions ::= lea_instruction |
+                                       exg_instruction |
                                        pea_instruction |
                                        link_instruction |
                                        unlk_instruction
@@ -584,10 +586,10 @@ unlk_instruction ::= UNLK adm_ard
 
 
 // Jump ==================================================================
-private jump_instructions ::= jsr_instruction|
-                              bsr_instruction |
-                              jmp_instruction |
+private jump_instructions ::= bsr_instruction |
                               rts_instruction |
+                              jsr_instruction |
+                              jmp_instruction |
                               rtd_instruction |
                               rte_instruction |
                               rtr_instruction
@@ -1223,8 +1225,9 @@ private directives ::= dc_directive |
                        equals_directive |
                        macro_call_directive |
                        macro_directive |
-                       rs_directive |
+                       endm_directive |
                        include_directive |
+                       rs_directive |
                        blk_directive |
                        set_directive |
                        equr_directive |
@@ -1242,7 +1245,6 @@ private directives ::= dc_directive |
                        rsreset_directive |
                        opt_directive |
                        org_directive |
-                       endm_directive |
                        mexit_directive |
                        macro_parameter_directive |
                        end_directive |

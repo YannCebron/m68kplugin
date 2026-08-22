@@ -1465,16 +1465,16 @@ public class M68kMnemonicsParser {
   }
 
   /* ********************************************************** */
-  // exg_instruction |
-  //                                        lea_instruction |
+  // lea_instruction |
+  //                                        exg_instruction |
   //                                        pea_instruction |
   //                                        link_instruction |
   //                                        unlk_instruction
   static boolean data_movement_instructions(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "data_movement_instructions")) return false;
     boolean r;
-    r = exg_instruction(b, l + 1);
-    if (!r) r = lea_instruction(b, l + 1);
+    r = lea_instruction(b, l + 1);
+    if (!r) r = exg_instruction(b, l + 1);
     if (!r) r = pea_instruction(b, l + 1);
     if (!r) r = link_instruction(b, l + 1);
     if (!r) r = unlk_instruction(b, l + 1);
@@ -1996,20 +1996,20 @@ public class M68kMnemonicsParser {
   }
 
   /* ********************************************************** */
-  // jsr_instruction|
-  //                               bsr_instruction |
-  //                               jmp_instruction |
+  // bsr_instruction |
   //                               rts_instruction |
+  //                               jsr_instruction |
+  //                               jmp_instruction |
   //                               rtd_instruction |
   //                               rte_instruction |
   //                               rtr_instruction
   static boolean jump_instructions(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "jump_instructions")) return false;
     boolean r;
-    r = jsr_instruction(b, l + 1);
-    if (!r) r = bsr_instruction(b, l + 1);
-    if (!r) r = jmp_instruction(b, l + 1);
+    r = bsr_instruction(b, l + 1);
     if (!r) r = rts_instruction(b, l + 1);
+    if (!r) r = jsr_instruction(b, l + 1);
+    if (!r) r = jmp_instruction(b, l + 1);
     if (!r) r = rtd_instruction(b, l + 1);
     if (!r) r = rte_instruction(b, l + 1);
     if (!r) r = rtr_instruction(b, l + 1);
@@ -2141,15 +2141,15 @@ public class M68kMnemonicsParser {
   //                          jump_instructions |
   //                          add_sub_instructions |
   //                          mul_div_instructions |
-  //                          bcd_instructions|
+  //                          bCC_instructions |
   //                          misc_instructions |
   //                          cmp_instructions |
   //                          logical_operation_instructions |
   //                          bit_manipulation_instructions |
   //                          shift_rotate_instructions |
-  //                          bCC_instructions |
   //                          dbCC_instructions |
-  //                          sCC_instructions
+  //                          sCC_instructions |
+  //                          bcd_instructions
   static boolean m68000_instructions(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "m68000_instructions")) return false;
     boolean r;
@@ -2158,15 +2158,15 @@ public class M68kMnemonicsParser {
     if (!r) r = jump_instructions(b, l + 1);
     if (!r) r = add_sub_instructions(b, l + 1);
     if (!r) r = mul_div_instructions(b, l + 1);
-    if (!r) r = bcd_instructions(b, l + 1);
+    if (!r) r = bCC_instructions(b, l + 1);
     if (!r) r = misc_instructions(b, l + 1);
     if (!r) r = cmp_instructions(b, l + 1);
     if (!r) r = logical_operation_instructions(b, l + 1);
     if (!r) r = bit_manipulation_instructions(b, l + 1);
     if (!r) r = shift_rotate_instructions(b, l + 1);
-    if (!r) r = bCC_instructions(b, l + 1);
     if (!r) r = dbCC_instructions(b, l + 1);
     if (!r) r = sCC_instructions(b, l + 1);
+    if (!r) r = bcd_instructions(b, l + 1);
     return r;
   }
 
@@ -2258,8 +2258,8 @@ public class M68kMnemonicsParser {
 
   /* ********************************************************** */
   // move_instruction |
-  //                               movea_instruction |
   //                               moveq_instruction |
+  //                               movea_instruction |
   //                               movem_instruction |
   //                               movep_instruction |
   //                               movec_instruction |
@@ -2268,8 +2268,8 @@ public class M68kMnemonicsParser {
     if (!recursion_guard_(b, l, "move_instructions")) return false;
     boolean r;
     r = move_instruction(b, l + 1);
-    if (!r) r = movea_instruction(b, l + 1);
     if (!r) r = moveq_instruction(b, l + 1);
+    if (!r) r = movea_instruction(b, l + 1);
     if (!r) r = movem_instruction(b, l + 1);
     if (!r) r = movep_instruction(b, l + 1);
     if (!r) r = movec_instruction(b, l + 1);

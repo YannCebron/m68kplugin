@@ -454,8 +454,9 @@ public class M68kDirectivesParser {
   //                        equals_directive |
   //                        macro_call_directive |
   //                        macro_directive |
-  //                        rs_directive |
+  //                        endm_directive |
   //                        include_directive |
+  //                        rs_directive |
   //                        blk_directive |
   //                        set_directive |
   //                        equr_directive |
@@ -473,7 +474,6 @@ public class M68kDirectivesParser {
   //                        rsreset_directive |
   //                        opt_directive |
   //                        org_directive |
-  //                        endm_directive |
   //                        mexit_directive |
   //                        macro_parameter_directive |
   //                        end_directive |
@@ -554,8 +554,9 @@ public class M68kDirectivesParser {
     if (!r) r = equals_directive(b, l + 1);
     if (!r) r = macro_call_directive(b, l + 1);
     if (!r) r = macro_directive(b, l + 1);
-    if (!r) r = rs_directive(b, l + 1);
+    if (!r) r = endm_directive(b, l + 1);
     if (!r) r = include_directive(b, l + 1);
+    if (!r) r = rs_directive(b, l + 1);
     if (!r) r = blk_directive(b, l + 1);
     if (!r) r = set_directive(b, l + 1);
     if (!r) r = equr_directive(b, l + 1);
@@ -573,7 +574,6 @@ public class M68kDirectivesParser {
     if (!r) r = rsreset_directive(b, l + 1);
     if (!r) r = opt_directive(b, l + 1);
     if (!r) r = org_directive(b, l + 1);
-    if (!r) r = endm_directive(b, l + 1);
     if (!r) r = mexit_directive(b, l + 1);
     if (!r) r = macro_parameter_directive(b, l + 1);
     if (!r) r = end_directive(b, l + 1);
