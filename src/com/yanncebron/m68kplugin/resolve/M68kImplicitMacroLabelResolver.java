@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -97,7 +97,7 @@ public final class M68kImplicitMacroLabelResolver {
   }
 
   /**
-   * Resolve to macro call via given labelName (faster than inspecting all macro call references with varying names).
+   * Resolve to macro call via the given labelName (faster than inspecting all macro call references with varying names).
    */
   @SuppressWarnings("UnstableApiUsage")
   private static void processByLabelName(Processor<M68kMacroCallDirective> processor, GlobalSearchScope scope, Project project, Collection<String> macroNames, @NotNull String labelName) {
@@ -109,6 +109,8 @@ public final class M68kImplicitMacroLabelResolver {
         .restrictFileTypes(M68kFileType.INSTANCE)
         .buildLeafOccurrenceQuery()
         .forEach(textOccurrence -> {
+            ProgressManager.checkCanceled();
+
             M68kMacroCallDirective macroCallDirective = PsiTreeUtil.getParentOfType(textOccurrence.getElement(), M68kMacroCallDirective.class);
             if (macroCallDirective == null) return true;
 
