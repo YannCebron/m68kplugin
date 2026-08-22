@@ -1,5 +1,5 @@
 ## Syntax
-```assembly
+```
 comm <symbol>,<size>
 ```
 

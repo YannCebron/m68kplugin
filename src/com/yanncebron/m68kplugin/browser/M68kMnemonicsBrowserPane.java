@@ -152,7 +152,7 @@ final class M68kMnemonicsBrowserPane extends M68kBrowserPaneBase<M68kMnemonic> {
 
     final String mnemonicDoc = M68kInstructionDocsUtil.getMnemonicDoc(mnemonic, false, predicate);
     final String referenceDoc = isShowReferenceDocs.get() ?
-      "<br/>" + M68kInstructionDocsUtil.getMnemonicReferenceDoc(mnemonic) : "";
+      "<br/>" + M68kInstructionDocsUtil.getMnemonicReferenceDoc(mnemonic, project) : "";
 
     return mnemonicDoc + DocumentationMarkup.CONTENT_START + referenceDoc + DocumentationMarkup.CONTENT_END;
   }

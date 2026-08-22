@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.documentation;
 
 import com.intellij.lang.documentation.DocumentationMarkup;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.Predicates;
 import com.intellij.openapi.util.text.StringUtil;
@@ -67,13 +68,13 @@ public final class M68kInstructionDocsUtil {
   }
 
   @NotNull
-  public static String getMnemonicReferenceDoc(M68kMnemonic m68kMnemonic) {
+  public static String getMnemonicReferenceDoc(M68kMnemonic m68kMnemonic, Project project) {
     final Couple<String> markdownContents = getMarkdownContents(m68kMnemonic);
     if (markdownContents.getFirst() == null) {
       return markdownContents.getSecond();
     }
 
-    String referenceHtml = M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, markdownContents.getFirst(), M68kBrowserPaneBase.M68K_BROWSER_LINK_FUNCTION);
+    String referenceHtml = M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, markdownContents.getFirst(), M68kBrowserPaneBase.M68K_BROWSER_LINK_FUNCTION, project);
     return referenceHtml + M68kDocumentationUtil.MOTOROLA_FOOTER;
   }
 

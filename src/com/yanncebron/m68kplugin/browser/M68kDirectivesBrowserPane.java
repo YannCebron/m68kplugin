@@ -92,7 +92,7 @@ final class M68kDirectivesBrowserPane extends M68kBrowserPaneBase<IElementType> 
 
   @Override
   protected @NotNull String getDocFor(@NotNull IElementType selectedValue) {
-    return M68kDirectiveDocumentationProvider.getDirectiveDoc(selectedValue);
+    return M68kDirectiveDocumentationProvider.getDirectiveDoc(project, selectedValue);
   }
 
   @Override

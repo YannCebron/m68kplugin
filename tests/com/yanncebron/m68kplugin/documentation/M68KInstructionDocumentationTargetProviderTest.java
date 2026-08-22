@@ -82,6 +82,13 @@ public class M68KInstructionDocumentationTargetProviderTest extends BasePlatform
     doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.TBLU, M68kTokenTypes.TBLUN), "<h1>TBLU, TBLUN - Table Lookup and Interpolate (Unsigned)</h1>");
   }
 
+  public void testChkInstructionReferenceDocWithStyledCodeBlock() {
+    Collection<M68kMnemonic> all = M68kMnemonicRegistry.getInstance().findAll(M68kTokenTypes.CHK);
+    doTestReferenceDoc(ContainerUtil.getFirstItem(all),
+      "<div class='styled-code'><pre style=\"padding: 0px; margin: 0px\">",
+      "<span style=\"color:#808080;font-style:italic;\">;Test&#32;subscript");
+  }
+
   public void testAllMnemonicsHaveReferenceDocs() {
     for (IElementType elementType : M68kTokenGroups.INSTRUCTIONS.getTypes()) {
       Set<String> externalNames = new HashSet<>();
@@ -149,7 +156,7 @@ public class M68KInstructionDocumentationTargetProviderTest extends BasePlatform
   }
 
   private void doTestReferenceDoc(M68kMnemonic m68kMnemonic, String... docTextContains) {
-    final String doc = M68kInstructionDocsUtil.getMnemonicReferenceDoc(m68kMnemonic);
+    final String doc = M68kInstructionDocsUtil.getMnemonicReferenceDoc(m68kMnemonic, getProject());
     for (String contain : docTextContains) {
       assertTrue(m68kMnemonic + ": missing '" + contain + "' in " + doc, StringUtil.contains(doc, contain));
     }

@@ -1,5 +1,5 @@
 ## Syntax
-```assembly
+```
 xdef <symbol>[,<symbol>...]
 ```
 

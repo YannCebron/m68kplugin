@@ -1,6 +1,6 @@
 ## Syntax
 
-```assembly
+```
 opt <option>[,<option>...]
 ```
 

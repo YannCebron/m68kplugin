@@ -1,5 +1,5 @@
 ## Syntax
-```assembly
+```
 ifmacrond <macro>
 ```
 

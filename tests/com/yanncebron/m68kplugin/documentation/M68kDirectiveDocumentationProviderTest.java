@@ -18,6 +18,7 @@ package com.yanncebron.m68kplugin.documentation;
 
 import com.intellij.codeInsight.documentation.DocumentationManager;
 import com.intellij.lang.documentation.DocumentationProvider;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -49,7 +50,7 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
   private void assertNoReferenceDoc(TokenSet tokenSet, IElementType... missing) {
     Set<IElementType> noReferenceDoc = new HashSet<>();
     for (IElementType directive : tokenSet.getTypes()) {
-      String referenceDoc = M68kDirectiveDocumentationProvider.getDirectiveDoc(directive);
+      String referenceDoc = M68kDirectiveDocumentationProvider.getDirectiveDoc(getProject(), directive);
       if (referenceDoc.contains(M68kDocumentationUtil.CONTRIBUTION_FOOTER)) {
         noReferenceDoc.add(directive);
       }
@@ -76,7 +77,7 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
       assertEquals("""
         <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>EREM</b></pre></div><div class='content'><p><h2>Syntax</h2>
-        <pre><code class="language-assembly">erem
+        <pre><code>erem
         </code></pre>
         <h2>Description</h2>
         <p>Ends an out-commented block from <a rel="nofollow" href="psi_element://rem">rem</a>. Assembly will continue.</p>
@@ -89,7 +90,7 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
       assertEquals("""
         <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>IFMI</b></pre></div><div class='content'><p><h2>Syntax</h2>
-        <pre><code class="language-assembly">ifmi &lt;expression&gt;
+        <pre><code>ifmi &lt;expression&gt;
         </code></pre>
         <h2>Description</h2>
         <p>Conditionally assemble the following lines if <code>&lt;expression&gt;</code> is less than zero. Equivalent to <a rel="nofollow" href="psi_element://iflt">iflt</a>.</p>
@@ -98,10 +99,10 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
   }
 
   public void testEremDirectiveReferenceDocForBrowser() {
-    String directiveDoc = M68kDirectiveDocumentationProvider.getDirectiveDoc(M68kTokenTypes.EREM);
+    String directiveDoc = M68kDirectiveDocumentationProvider.getDirectiveDoc(getProject(), M68kTokenTypes.EREM);
     assertEquals("""
       <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>EREM</b></pre></div><div class='content'><p><h2>Syntax</h2>
-      <pre><code class="language-assembly">erem
+      <pre><code>erem
       </code></pre>
       <h2>Description</h2>
       <p>Ends an out-commented block from <a rel="nofollow" href="m68kBrowser://rem">rem</a>. Assembly will continue.</p>
@@ -113,7 +114,7 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
       assertEquals("""
         <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>EQU</b></pre></div><div class='content'><p><h2>Syntax</h2>
-        <pre><code class="language-assembly">&lt;symbol&gt; equ &lt;expression&gt;
+        <pre><code>&lt;symbol&gt; equ &lt;expression&gt;
         </code></pre>
         <h2>Description</h2>
         <p>Define a new program symbol with the name <code>&lt;symbol&gt;</code> and assign to it the value of <code>&lt;expression&gt;</code>.
@@ -129,13 +130,22 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
       assertEquals("""
         <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>EQU</b></pre></div><div class='content'><p><h2>Syntax</h2>
-        <pre><code class="language-assembly">&lt;symbol&gt; equ &lt;expression&gt;
+        <pre><code>&lt;symbol&gt; equ &lt;expression&gt;
         </code></pre>
         <h2>Description</h2>
         <p>Define a new program symbol with the name <code>&lt;symbol&gt;</code> and assign to it the value of <code>&lt;expression&gt;</code>.
         Defining <code>&lt;symbol&gt;</code> twice will cause an error.
         See <a rel="nofollow" href="psi_element://set">set</a> directive.</p>
         </p></div>""", doc);
+    });
+  }
+
+  public void testChopDirectiveReferenceDocWithStyledCodeBlock() {
+    doTest(" cn<caret>op", (psiElement, documentationProvider) -> {
+      String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
+      assertNotNull(doc);
+      assertTrue(StringUtil.contains(doc, "<div class='styled-code'><pre style=\"padding: 0px; margin: 0px\">"));
+      assertTrue(StringUtil.contains(doc, "<span style=\"color:#808080;font-style:italic;\">;&#32;align"));
     });
   }
 

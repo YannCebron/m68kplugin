@@ -16,11 +16,11 @@ It is important to appreciate that the condition tested by the `DBcc` instructio
 We can use the instruction `DBEQ`, decrement and branch on zero, to mechanize the high-level language construct `REPEAT`...`UNTIL`.
 
 ```assembly
-LOOP ...            REPEAT
+LOOP ...            ;REPEAT
      ...
-     ...              [D0] := [D0] - 1
+     ...            ;[D0] := [D0] - 1
      ...
-     DBEQ D0,REPEAT UNTIL [D0] = - 1 OR [Z] = 1
+     DBEQ D0,REPEAT ;UNTIL [D0] = - 1 OR [Z] = 1
 ```
 
 ## Application

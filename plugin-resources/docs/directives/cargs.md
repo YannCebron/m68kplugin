@@ -1,5 +1,5 @@
 ## Syntax
-```assembly
+```
 cargs [#<offset>,]<symbol1>[.<size1>][,<symbol2>[.<size2>]]...
 ```
 

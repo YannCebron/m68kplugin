@@ -1,5 +1,5 @@
 ## Syntax
-```assembly
+```
 iif <expression> <statement>
 ```
 

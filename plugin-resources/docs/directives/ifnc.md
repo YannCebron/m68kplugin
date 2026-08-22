@@ -1,5 +1,5 @@
 ## Syntax
-```assembly
+```
 ifnc <string1>,<string2>
 ```
 

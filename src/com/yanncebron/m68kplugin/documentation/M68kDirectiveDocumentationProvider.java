@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.documentation.AbstractDocumentationProvider;
 import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -79,7 +80,7 @@ public final class M68kDirectiveDocumentationProvider extends AbstractDocumentat
       return null;
     }
 
-    return getDirectiveDoc(directiveType, false);
+    return getDirectiveDoc(element.getProject(), directiveType, false);
   }
 
   @Override
@@ -89,18 +90,18 @@ public final class M68kDirectiveDocumentationProvider extends AbstractDocumentat
   }
 
   @NotNull
-  public static String getDirectiveDoc(IElementType directiveType) {
-    return getDirectiveDoc(directiveType, true);
+  public static String getDirectiveDoc(Project project, IElementType directiveType) {
+    return getDirectiveDoc(project, directiveType, true);
   }
 
   @NotNull
-  private static String getDirectiveDoc(IElementType directiveType, boolean forBrowserPane) {
+  private static String getDirectiveDoc(Project project, IElementType directiveType, boolean forBrowserPane) {
     IElementType docDirectiveType = directiveType;
     if (directiveType == M68kTokenTypes.EQ_DIRECTIVE) {
       docDirectiveType = M68kTokenTypes.EQU;
     }
 
-    String referenceDoc = getReferenceDoc(docDirectiveType, forBrowserPane);
+    String referenceDoc = getReferenceDoc(project, docDirectiveType, forBrowserPane);
 
     return M68kDocumentationUtil.CSS +
       DocumentationMarkup.DEFINITION_START +
@@ -111,7 +112,7 @@ public final class M68kDirectiveDocumentationProvider extends AbstractDocumentat
       DocumentationMarkup.CONTENT_END;
   }
 
-  private static String getReferenceDoc(IElementType docDirectiveType, boolean forBrowserPane) {
+  private static String getReferenceDoc(Project project, IElementType docDirectiveType, boolean forBrowserPane) {
     String directiveText = docDirectiveType.toString();
     Couple<String> contents = M68kDocumentationUtil.getMarkdownContents(DOCS_MNEMONIC_ROOT, StringUtil.toLowerCase(directiveText));
     if (contents.getFirst() == null) {
@@ -119,12 +120,12 @@ public final class M68kDirectiveDocumentationProvider extends AbstractDocumentat
     }
 
     if (forBrowserPane) {
-      return M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, contents.getFirst(), M68kBrowserPaneBase.M68K_BROWSER_LINK_FUNCTION);
+      return M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, contents.getFirst(), M68kBrowserPaneBase.M68K_BROWSER_LINK_FUNCTION, project);
     }
 
     // provide "inline" link to handle in getDocumentationElementForLink()
     return M68kDocumentationUtil.getHtmlForMarkdown(DOCS_MNEMONIC_ROOT, contents.getFirst(),
-      link -> DocumentationManagerProtocol.PSI_ELEMENT_PROTOCOL + StringUtil.substringBefore(link, ".md"));
+      link -> DocumentationManagerProtocol.PSI_ELEMENT_PROTOCOL + StringUtil.substringBefore(link, ".md"), project);
   }
 
 }

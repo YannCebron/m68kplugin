@@ -1,5 +1,5 @@
 ## Syntax
-```assembly
+```
 blk.[bdlqswx] <exp>[,<fill>]
 ```
 

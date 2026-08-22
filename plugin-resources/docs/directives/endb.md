@@ -1,5 +1,5 @@
 ## Syntax
-```assembly
+```
 endb <An>
 ```
 

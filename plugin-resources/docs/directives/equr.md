@@ -1,5 +1,5 @@
 ## Syntax
-```assembly
+```
 <symbol> equr <Rn>
 ```
 

@@ -1,5 +1,5 @@
 ## Syntax
-```assembly
+```
 assert <expression>[,<message>]
 ```
 

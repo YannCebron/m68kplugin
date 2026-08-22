@@ -1,5 +1,5 @@
 ## Syntax
-```assembly
+```
 machine <cpu_type>
 ```
 

@@ -13,6 +13,7 @@ This instruction forces the processor to initiate exception processing. The vect
 The `TRAP` instruction is used to perform operating system calls and is system independent. That is, the effect of the call depends on the particular operating environment. For example, the University of Teesside 68000 simulator uses `TRAP #15` to perform I/O. The ASCII character in D1.B is displayed by the following sequence.
 
 ```assembly
-MOVE.B  #6,D0  ;Set up the display a character parameter in D0
-TRAP    #15    ;Now call the operating system
+* TRAP sample
+  MOVE.B  #6,D0  ;Set up the display a character parameter in D0
+  TRAP    #15    ;Now call the operating system
 ```

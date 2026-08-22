@@ -6,6 +6,8 @@
 
 ### Added
 
+- Reference docs: syntax highlighting for code samples
+
 ### Fixed
 
 - `cnop` directive: fix parsing when missing all arguments

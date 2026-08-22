@@ -1,5 +1,5 @@
 ## Syntax
-```assembly
+```
 <label> fo.<size> <expression>
 ```
 

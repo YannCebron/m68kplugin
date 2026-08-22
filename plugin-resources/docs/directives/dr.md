@@ -1,5 +1,5 @@
 ## Syntax
-```assembly
+```
 dr.[bwlbx] <exp1>[,<exp2>...]
 ```
 

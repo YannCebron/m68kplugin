@@ -10,9 +10,10 @@ The contents of the low-order word in the data register specified in the instruc
 The `CHK` instruction can be used to test the bounds of an array element before it is used. By performing this test, you can make certain that you do not access an element outside an array. Consider the following fragment of code:
 
 ```assembly
-MOVE.W subscript,D0    ;Get subscript to test
-CHK    #max_bound,D0   ;Test subscript against 0 and upper bound
-*                      ;TRAP on error ELSE continue if ok
+* CHK sample
+  MOVE.W subscript,D0    ;Get subscript to test
+  CHK    #max_bound,D0   ;Test subscript against 0 and upper bound
+                         ;TRAP on error ELSE continue if ok
 ```
 
 ## Condition codes

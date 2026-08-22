@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,28 +16,36 @@
 
 package com.yanncebron.m68kplugin.documentation;
 
+import com.intellij.lang.Language;
+import com.intellij.lang.documentation.QuickDocHighlightingHelper;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.io.StreamUtil;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.util.ObjectUtils;
+import com.intellij.util.SmartList;
 import com.intellij.util.io.URLUtil;
 import com.yanncebron.m68kplugin.M68kApiBundle;
 import org.commonmark.Extension;
 import org.commonmark.ext.gfm.tables.TablesExtension;
+import org.commonmark.node.FencedCodeBlock;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
-import org.commonmark.renderer.html.DefaultUrlSanitizer;
-import org.commonmark.renderer.html.HtmlRenderer;
+import org.commonmark.renderer.NodeRenderer;
+import org.commonmark.renderer.html.*;
 import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
 
 public final class M68kDocumentationUtil {
@@ -84,18 +92,19 @@ public final class M68kDocumentationUtil {
     }
   }
 
-  public static String getHtmlForMarkdown(String docRoot, String markdownText) {
-    return getHtmlForMarkdown(docRoot, markdownText, Function.identity());
-  }
-
   /**
    * @param docRoot      Markdown files root.
    * @param markdownText Markdown text to render.
    * @param urlFunction  Used to modify existing links.
+   * @param project      Project to enable syntax highlighting for 'assembly' code blocks. {@code null} if not used.
    * @return HTML documentation text.
    */
-  public static String getHtmlForMarkdown(String docRoot, String markdownText, Function<String, String> urlFunction) {
-    List<Extension> extensions = Collections.singletonList(TablesExtension.create());
+  public static String getHtmlForMarkdown(String docRoot, String markdownText, Function<String, String> urlFunction, @Nullable Project project) {
+    List<Extension> extensions = new SmartList<>(TablesExtension.create());
+    if (project != null) {
+      extensions.add(new FencedCodeBlockExtension(project));
+    }
+
     Parser parser = Parser.builder().extensions(extensions).build();
     Node document = parser.parse(markdownText);
     HtmlRenderer renderer = HtmlRenderer.builder()
@@ -133,5 +142,57 @@ public final class M68kDocumentationUtil {
       .sanitizeUrls(true)
       .build();
     return renderer.render(document);
+  }
+
+  /**
+   * Render code blocks with 'assembly' language using IDE's syntax highlighting.
+   */
+  @SuppressWarnings("ClassCanBeRecord")
+  private static class FencedCodeBlockExtension implements HtmlRenderer.HtmlRendererExtension {
+
+    private final Project project;
+
+    private FencedCodeBlockExtension(@NotNull Project project) {
+      this.project = project;
+    }
+
+    @Override
+    public void extend(HtmlRenderer.Builder rendererBuilder) {
+      rendererBuilder.nodeRendererFactory(context -> new FencedCodeBlockNodeRenderer(context, project));
+    }
+
+    private static class FencedCodeBlockNodeRenderer implements NodeRenderer {
+
+      private final HtmlNodeRendererContext context;
+      private final Project project;
+
+      private FencedCodeBlockNodeRenderer(HtmlNodeRendererContext context, Project project) {
+        this.context = context;
+        this.project = project;
+      }
+
+      @Override
+      public Set<Class<? extends Node>> getNodeTypes() {
+        return Set.of(FencedCodeBlock.class);
+      }
+
+      @Override
+      public void render(Node node) {
+        FencedCodeBlock fencedCodeBlock = ObjectUtils.tryCast(node, FencedCodeBlock.class);
+        assert fencedCodeBlock != null : node;
+
+        var info = fencedCodeBlock.getInfo();
+        if (!"assembly".equals(info)) {
+          new CoreHtmlNodeRenderer(context).visit(fencedCodeBlock);
+          return;
+        }
+
+        HtmlWriter htmlWriter = context.getWriter();
+        htmlWriter.line();
+        String m68k = QuickDocHighlightingHelper.getStyledCodeBlock(project, Language.findLanguageByID("M68k"), fencedCodeBlock.getLiteral());
+        htmlWriter.raw(m68k);
+        htmlWriter.line();
+      }
+    }
   }
 }

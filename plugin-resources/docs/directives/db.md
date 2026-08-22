@@ -1,5 +1,5 @@
 ## Syntax
-```assembly
+```
 db <exp1>[,<exp2>,"<string1>",’<string2>’...]
 ```
 
