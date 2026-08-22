@@ -177,6 +177,10 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest(" rsset ");
   }
 
+  public void testRsevenDirective() throws Exception {
+    doCodeTest(" rseven");
+  }
+
   public void testRsresetDirective() throws Exception {
     doCodeTest(" rsreset");
   }

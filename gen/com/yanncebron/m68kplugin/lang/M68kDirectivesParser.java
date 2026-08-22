@@ -471,6 +471,7 @@ public class M68kDirectivesParser {
   //                        incbin_directive |
   //                        incdir_directive |
   //                        rsset_directive |
+  //                        rseven_directive |
   //                        rsreset_directive |
   //                        opt_directive |
   //                        org_directive |
@@ -571,6 +572,7 @@ public class M68kDirectivesParser {
     if (!r) r = incbin_directive(b, l + 1);
     if (!r) r = incdir_directive(b, l + 1);
     if (!r) r = rsset_directive(b, l + 1);
+    if (!r) r = rseven_directive(b, l + 1);
     if (!r) r = rsreset_directive(b, l + 1);
     if (!r) r = opt_directive(b, l + 1);
     if (!r) r = org_directive(b, l + 1);
@@ -1824,6 +1826,18 @@ public class M68kDirectivesParser {
     if (!recursion_guard_(b, l, "rs_directive_2")) return false;
     M68kExpressionParser.expression(b, l + 1, -1);
     return true;
+  }
+
+  /* ********************************************************** */
+  // RSEVEN
+  public static boolean rseven_directive(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "rseven_directive")) return false;
+    if (!nextTokenIs(b, "<directive>", RSEVEN)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, RSEVEN_DIRECTIVE, "<directive>");
+    r = consumeToken(b, RSEVEN);
+    exit_section_(b, l, m, r, false, null);
+    return r;
   }
 
   /* ********************************************************** */

@@ -507,6 +507,7 @@ Z=[zZ]
   {R}{E}{M}                    { yybegin(IN_REM); return REM; }
   {R}{E}{P}{T}                 { yybegin(IN_OPERAND); return REPT; }
   {R}{S} / {DATA_SIZE}?        { yybegin(AFTER_INSTRUCTION); return RS; }
+  {R}{S}{E}{V}{E}{N}           { yybegin(AFTER_OPERAND); return RSEVEN; }
   {R}{S}{R}{E}{S}{E}{T}        { yybegin(AFTER_OPERAND); return RSRESET; }
   {R}{S}{S}{E}{T}              { yybegin(IN_OPERAND); return RSSET; }
   {S}{E}{C}{T}{I}{O}{N}        { yybegin(IN_OPERAND); return SECTION; }

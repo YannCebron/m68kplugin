@@ -1119,6 +1119,10 @@ public class M68kVisitor extends PsiElementVisitor {
     // visitDirective(o);
   }
 
+  public void visitRsevenDirective(@NotNull M68kRsevenDirective o) {
+    visitDirective(o);
+  }
+
   public void visitRsresetDirective(@NotNull M68kRsresetDirective o) {
     visitDirective(o);
   }

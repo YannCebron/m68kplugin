@@ -262,6 +262,7 @@ public final class M68kTokenGroups {
     REM,
     REPT,
     RS,
+    RSEVEN,
     RSRESET,
     RSSET,
     SECTION,

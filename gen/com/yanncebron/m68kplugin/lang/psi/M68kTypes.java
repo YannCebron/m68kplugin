@@ -275,6 +275,7 @@ public interface M68kTypes {
   IElementType ROR_INSTRUCTION = new M68kCompositeElementType("ROR_INSTRUCTION");
   IElementType ROXL_INSTRUCTION = new M68kCompositeElementType("ROXL_INSTRUCTION");
   IElementType ROXR_INSTRUCTION = new M68kCompositeElementType("ROXR_INSTRUCTION");
+  IElementType RSEVEN_DIRECTIVE = new M68kCompositeElementType("RSEVEN_DIRECTIVE");
   IElementType RSRESET_DIRECTIVE = new M68kCompositeElementType("RSRESET_DIRECTIVE");
   IElementType RSSET_DIRECTIVE = new M68kCompositeElementType("RSSET_DIRECTIVE");
   IElementType RS_DIRECTIVE = new M68kCompositeElementType("RS_DIRECTIVE");
@@ -1082,6 +1083,9 @@ public interface M68kTypes {
       }
       else if (type == ROXR_INSTRUCTION) {
         return new M68kRoxrInstructionImpl(node);
+      }
+      else if (type == RSEVEN_DIRECTIVE) {
+        return new M68kRsevenDirectiveImpl(node);
       }
       else if (type == RSRESET_DIRECTIVE) {
         return new M68kRsresetDirectiveImpl(node);

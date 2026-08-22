@@ -1,0 +1,4 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  M68kRsevenDirectiveImpl(RSEVEN_DIRECTIVE)
+    PsiElement(rseven)('rseven')

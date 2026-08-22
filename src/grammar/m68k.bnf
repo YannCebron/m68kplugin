@@ -1211,7 +1211,7 @@ tblun_instruction ::= TBLUN tbl_x_tail
   psiPackage = "com.yanncebron.m68kplugin.lang.psi.directive"
   psiImplPackage = "com.yanncebron.m68kplugin.lang.psi.directive.impl"
   parserClass = "com.yanncebron.m68kplugin.lang.M68kDirectivesParser"
-  implements("(blk|set|equr|reg|even|odd|dc|dcb|dr|ds|dx|align|cnop|incbin|incdir|include|rsset|rsreset|rs)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
+  implements("(blk|set|equr|reg|even|odd|dc|dcb|dr|ds|dx|align|cnop|incbin|incdir|include|rsset|rseven|rsreset|rs)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(opt|org|macro|endm|mexit|macro_parameter|macro_call|end|section|addwatch|jumperr|jumpptr|list|nolist|page|nopage|plen|llen|spc|inline|einline|rem|erem|xdef|xref|rept|endr|fail|printt|printv|load|ttl|idnt|far|near|near_code|init_near|popsection|pushsection|echo|auto|msource|offset|mask2|output|assert|basereg|endb)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(text|cseg|code|code_c|code_f|data|dseg|data_c|data_f|bss|bss_c|bss_f)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
   implements("(machine|fpu|cpu32|(mc68|ac68).*)_directive") = "com.yanncebron.m68kplugin.lang.psi.directive.M68kDirective"
@@ -1242,6 +1242,7 @@ private directives ::= dc_directive |
                        incbin_directive |
                        incdir_directive |
                        rsset_directive |
+                       rseven_directive |
                        rsreset_directive |
                        opt_directive |
                        org_directive |
@@ -1473,6 +1474,7 @@ rsset_directive ::= RSSET expression
 {
   pin = 1
 }
+rseven_directive ::= RSEVEN
 rsreset_directive ::= RSRESET
 {
   pin = 1

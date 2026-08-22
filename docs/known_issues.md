@@ -71,7 +71,6 @@ Unsupported directives, these will display as a false positive
 - `optc`
 - `public`
 - `rorg`
-- `rseven`
 - `showoffset` (PhxAss)
 - `struct`/`estruct`
 - `symdebug`
