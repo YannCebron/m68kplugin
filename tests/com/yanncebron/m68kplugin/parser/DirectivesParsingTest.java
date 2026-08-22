@@ -18,6 +18,10 @@ package com.yanncebron.m68kplugin.parser;
 
 import com.intellij.testFramework.TestDataPath;
 
+/**
+ * @see MacroParsingTest
+ * @see MacroCallParsingTest
+ */
 @TestDataPath("$PROJECT_ROOT/testData/parser/directives")
 public class DirectivesParsingTest extends M68kParsingTestCase {
 
@@ -231,22 +235,6 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
 
   public void testOptDirectiveMissingParameter() throws Exception {
     doCodeTest(" opt ");
-  }
-
-  public void testMacroDirective() throws Exception {
-    doCodeTest("macroName MACRO");
-  }
-
-  public void testMacroDirectiveBeforeLabel() throws Exception {
-    doCodeTest(" macro macroName");
-  }
-
-  public void testMacroDirectiveBeforeLabelMissingLabel() throws Exception {
-    doCodeTest(" macro");
-  }
-
-  public void testEndmDirective() throws Exception {
-    doCodeTest(" endm");
   }
 
   public void testMexitDirective() throws Exception {

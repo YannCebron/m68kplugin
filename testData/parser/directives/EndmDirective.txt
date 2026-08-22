@@ -1,4 +1,0 @@
-M68k.FILE
-  PsiWhiteSpace(' ')
-  M68kEndmDirectiveImpl(ENDM_DIRECTIVE)
-    PsiElement(endm)('endm')
