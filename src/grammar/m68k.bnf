@@ -54,7 +54,7 @@ private line_feed ::= LINEFEED+
 }
 private instruction_or_label ::= instructions | labels
 
-private root_item ::= line_feed | instruction_or_label line_feed?
+private root_item ::= !<<eof>> line_feed | instruction_or_label line_feed?
 {
   recoverWhile = root_item_recover
 }

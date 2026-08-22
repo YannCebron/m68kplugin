@@ -1200,14 +1200,35 @@ public class M68kParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // line_feed | instruction_or_label line_feed?
+  // !<<eof>> line_feed | instruction_or_label line_feed?
   static boolean root_item(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "root_item")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_);
-    r = line_feed(b, l + 1);
+    r = root_item_0(b, l + 1);
     if (!r) r = root_item_1(b, l + 1);
     exit_section_(b, l, m, r, false, M68kParser::root_item_recover);
+    return r;
+  }
+
+  // !<<eof>> line_feed
+  private static boolean root_item_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "root_item_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = root_item_0_0(b, l + 1);
+    r = r && line_feed(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // !<<eof>>
+  private static boolean root_item_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "root_item_0_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_);
+    r = !eof(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
