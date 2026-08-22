@@ -1,0 +1,5 @@
+M68k.FILE
+  PsiWhiteSpace(' ')
+  PsiElement(macro)('macro')
+  PsiErrorElement:id expected
+    <empty list>

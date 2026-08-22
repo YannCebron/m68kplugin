@@ -233,6 +233,14 @@ public class DirectivesParsingTest extends M68kParsingTestCase {
     doCodeTest("macroName MACRO");
   }
 
+  public void testMacroDirectiveBeforeLabel() throws Exception {
+    doCodeTest(" macro macroName");
+  }
+
+  public void testMacroDirectiveBeforeLabelMissingLabel() throws Exception {
+    doCodeTest(" macro");
+  }
+
   public void testEndmDirective() throws Exception {
     doCodeTest(" endm");
   }
