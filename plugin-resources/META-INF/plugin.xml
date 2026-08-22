@@ -266,7 +266,7 @@
         implementation="com.yanncebron.m68kplugin.browser.M68kBrowserDocumentationLinkHandler"/>
 
     <consoleFilterProvider
-        implementation="com.yanncebron.m68kplugin.compiler.M68kVasmConsoleFilterProvider"/>
+        implementation="com.yanncebron.m68kplugin.compiler.M68kAssemblerConsoleFilterProvider"/>
 
 
     <projectConfigurable

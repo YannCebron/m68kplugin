@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
 import org.jetbrains.annotations.NotNull;
 
-final class M68kVasmConsoleFilterProvider implements ConsoleFilterProvider {
+final class M68kAssemblerConsoleFilterProvider implements ConsoleFilterProvider {
 
   @NotNull
   @Override
@@ -33,7 +33,10 @@ final class M68kVasmConsoleFilterProvider implements ConsoleFilterProvider {
       return Filter.EMPTY_ARRAY;
     }
 
-    return new Filter[]{new M68kVasmLineInLocationFilter(project)};
+    return new Filter[]{
+      new M68kVasmLineInLocationFilter(project),
+      new M68kRgAsmLineInLocationFilter(project)
+    };
   }
 
 }

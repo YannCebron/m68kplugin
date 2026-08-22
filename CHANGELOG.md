@@ -7,6 +7,7 @@
 ### Added
 
 - Reference docs: syntax highlighting for code samples
+- Navigate to _file:lineNumber_ location from [rg-asm](https://rg.atari.org/tools/rg-asm/) console messages
 
 ### Fixed
 

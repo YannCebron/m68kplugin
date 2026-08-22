@@ -54,7 +54,8 @@ Use the _i_ toggle button to show chip set information in the list.
 
 ## External Tools
 
-Navigate to _file:lineNumber_ location or label(s) from [vasm](http://sun.hasenbraten.de/vasm/) console messages
+Navigate to _file:lineNumber_ location or label(s) from [vasm](http://sun.hasenbraten.de/vasm/) console messages.
+Navigate to _file:lineNumber_ location from [rg-asm](https://rg.atari.org/tools/rg-asm/) console messages. 
                      
 ![vasm navigation](../assets/ide/vasm_navigation.png)
 
