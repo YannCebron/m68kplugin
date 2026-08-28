@@ -4,10 +4,10 @@ nav_order: 1
 permalink: /
 ---
 
-## Motorola 68000 Series Assembly Language Support for IntelliJ-based IDEs
+## Motorola 68000 Series Assembly Language Support for JetBrains IDEs
 
 Support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_68000_series) assembly language
-in [IntelliJ](https://plugins.jetbrains.com/docs/intellij/intellij-platform.html#ides-based-on-the-intellij-platform)-based IDEs (IntelliJ IDEA, CLion, ...)
+in [JetBrains IDEs](https://www.jetbrains.com/ides/) (IntelliJ IDEA, CLion, ...)
 providing smart code insight, inspections, built-in reference documentation,
 and many more features.
 

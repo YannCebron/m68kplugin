@@ -8,7 +8,7 @@ title: Resources
 1. TOC
 {:toc}
 
-## IntelliJ Platform Tooling
+## JetBrains IDE Tooling
 
 - [MC68000 Assembly Language Plugin](https://github.com/chrisly42/mc68000-asm-plugin)
 

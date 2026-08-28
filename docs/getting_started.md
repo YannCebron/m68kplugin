@@ -25,7 +25,7 @@ See [Changelog](https://github.com/YannCebron/m68kplugin/blob/main/CHANGELOG.md)
 
 Snapshot build artifacts (`m68kplugin-x.y.z.zip`) for [manual installation](https://www.jetbrains.com/help/idea/plugins-settings.html) are available via [GitHub CI](https://github.com/YannCebron/m68kplugin/actions/workflows/build.yml).              
 
-> 🧐 Not familiar with IntelliJ-based IDEs? See [IntelliJ IDEA - Getting Started](https://www.jetbrains.com/help/idea/getting-started.html).
+> 🧐 Not familiar with JetBrains IDEs? See [IntelliJ IDEA - Getting Started](https://www.jetbrains.com/help/idea/getting-started.html).
                
 ## Project Setup
 
