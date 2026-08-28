@@ -32,7 +32,7 @@
 
 - macro call: parameter count mismatch
 - macro block:
-  - `Symbol` API
+  - use `Symbol` API for parameters
   - highlight usages of parameter at caret
   - usage of parameters outside a macro block
   - non-sequential parameter `\n` numbering
@@ -40,7 +40,7 @@
 
 ### Other
 
-- `ReadWriteAccessDetector`
+- highlight read/write access (`ReadWriteAccessDetector`)
   - registers
   - label references
 - instruction: 
@@ -51,7 +51,7 @@
 - highlight returns
 - highlight/navigate control structures:
   - loop ranges
-- unreachable code `ControlFlowProvider`
+- unreachable code (`ControlFlowProvider`)
 
 ## Resolve/Refactor
 
@@ -59,9 +59,7 @@
 
 - local label: in-place rename
 - safe delete
-- rename:
-  - `RenameInputValidatorEx`
-  - `NameSuggestionProvider` ?
+- rename validation/suggestion (`RenameInputValidatorEx`, `NameSuggestionProvider`)
 - unresolved:
   - quick-fix to add `include` for existing label
   - exclusion list setting to filter out dynamic label names
@@ -82,7 +80,7 @@
 
 ## Editing
 
-- `EnterHandlerDelegate` smart indent? or `LineIndentProvider`
+- smart indent (`EnterHandlerDelegate`, or `LineIndentProvider`)
 - formatter
   - upper-/lowercase code style settings
     - mnemonic/directive/conditional assembly
@@ -93,7 +91,7 @@
 - documentation:
   - quick doc for string literal: length
   - render mode for preceding label comments
-  - quick doc for `opt` flags
+  - quick doc for `opt` flags (reference docs exist)
   - quick doc for builtin symbols
   - docs for address mode
 - **WIP** code folding with settings for:
@@ -102,11 +100,11 @@
 - macro block: complete existing/n+1 `\n` everywhere
 - `dc`:
   - join lines
-  - smart enter handler to split a value list / `ListSplitJoinContext`
+  - smart enter handler to split a value list (`ListSplitJoinContext`)
 - surround descriptors: valid address mode variants
-- `FocusModeProvider`
+- highlight only current declaration (`FocusModeProvider`)
 - string literal: support language injection
-- comment: smart enter `CodeDocumentationAwareCommenter`
+- comment: smart enter (`CodeDocumentationAwareCommenter`)
 
 ## Inspections
 
@@ -149,7 +147,7 @@
 
 ## Tools
 
-- show cycles/size in the editor [https://68kcounter-web.vercel.app/](https://68kcounter-web.vercel.app/), [MC680x0 Reference](http://oldwww.nvg.ntnu.no/amiga/MC680x0_Sections/index.HTML)
+- show cycles/size in the editor [https://68kcounter-web.vercel.app/](https://68kcounter-web.vercel.app/), [MC680x0 Reference](http://oldwww.nvg.ntnu.no/amiga/MC680x0_Sections/index.HTML) (`TextAnnotationGutterProvider`)
 
 ## Amiga
 
@@ -157,6 +155,6 @@
   - color-picker/inlays
   - register name completion/inlay
   - register editor doc/_Select In_
-  - http://deadliners.net/gradientmaster/
+  - https://fcondolo.github.io/gradientmaster/
 - support IFF images in IDE [https://github.com/haraldk/TwelveMonkeys](https://github.com/haraldk/TwelveMonkeys)
 - FS-UAE [configuration files](https://fs-uae.net/configuration-files)                         
