@@ -255,6 +255,18 @@
         key="inspection.constant.expression.name" groupKey="inspection.group.name"
         implementationClass="com.yanncebron.m68kplugin.inspections.M68kConstantExpressionInspection"/>
 
+
+    <codeInsight.declarativeInlayProvider
+        group="OTHER_GROUP"
+        implementationClass="com.yanncebron.m68kplugin.editor.inlays.M68kRegisterInlayProvider"
+        isEnabledByDefault="true"
+        language="M68k"
+        bundle="messages.M68kBundle"
+        nameKey="inlay.hint.register.name"
+        descriptionKey="inlay.hint.register.description"
+        providerId="m68k.register"/>
+
+
     <toolWindow
         id="M68kBrowser"
         icon="M68kIcons.TOOL_WINDOW"

@@ -153,6 +153,16 @@ Rename labels and macros using *Refactor \| Rename* across the whole project wit
 
 ## Code Insight
 
+### Inlay Hints
+
+Configured in __Settings \| Editor \| Inlay Hints_ group _Other \| M68k Assembler_
+
+#### CPU for Register
+
+Adds hints for MC68010+ registers (`DFC`, `SFC`, `VBR`)
+
+![Register inlay hint](../assets/editor/inlay_register.png)
+
 ### Intentions
 
 Invoke intentions via <kbd>Alt</kbd>+<kbd>Enter</kbd> or click on the lightbulb popup in editor.

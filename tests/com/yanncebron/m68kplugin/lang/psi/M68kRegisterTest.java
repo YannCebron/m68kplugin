@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@ package com.yanncebron.m68kplugin.lang.psi;
 
 import com.intellij.psi.tree.IElementType;
 import junit.framework.TestCase;
+
+import java.util.Set;
 
 public class M68kRegisterTest extends TestCase {
 
@@ -84,6 +86,16 @@ public class M68kRegisterTest extends TestCase {
     assertFalse(M68kRegister.VBR.isSupported(M68kCpu.M_68000));
     assertFalse(M68kRegister.VBR.isSupported(M68kCpu.GROUP_68000_UP));
     assertFalse(M68kRegister.SR.isSupported(M68kCpu.M_68851));
+  }
+
+
+  public void testCpus() {
+    for (M68kRegister value : M68kRegister.values()) {
+      Set<M68kCpu> cpus = value.getCpus();
+      if (cpus != M68kCpu.GROUP_68000_UP && cpus != M68kCpu.GROUP_68010_UP) {
+        fail(value + " check non-handled CPUs (M68kRegisterInlayProvider, M68kDocsGeneratorUtil)");
+      }
+    }
   }
 
   private void doTest(IElementType elementType, String text, M68kRegister expected) {
