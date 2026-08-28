@@ -155,7 +155,7 @@ Rename labels and macros using *Refactor \| Rename* across the whole project wit
 
 ### Inlay Hints
 
-Configured in __Settings \| Editor \| Inlay Hints_ group _Other \| M68k Assembler_
+Settings and descriptions can be accessed under the group _Other \| M68k Assembler_ in _Settings \| Editor \| Inlay Hints_
 
 #### CPU for Register
 
