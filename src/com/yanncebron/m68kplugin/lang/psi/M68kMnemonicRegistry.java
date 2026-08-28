@@ -128,17 +128,16 @@ public final class M68kMnemonicRegistry {
       }
 
       // operand count / addressing modes
-      boolean hasFirstOperand = mnemonic.hasFirstOperand();
-      boolean hasSecondOperand = mnemonic.hasSecondOperand();
-      if (operandsCount == 0 && !hasFirstOperand && !hasSecondOperand) {
-        return true;
+      if (operandsCount == 0) {
+        return !mnemonic.hasFirstOperand();
       }
 
-      if (operandsCount == 1 && hasFirstOperand && !hasSecondOperand) {
+      boolean hasSecondOperand = mnemonic.hasSecondOperand();
+      if (operandsCount == 1 && !hasSecondOperand) {
         return mnemonic.firstOperand().matches(admList.get(0));
       }
 
-      if (operandsCount == 2 && hasFirstOperand && hasSecondOperand) {
+      if (operandsCount == 2 && hasSecondOperand) {
         return mnemonic.firstOperand().matches(admList.get(0)) &&
           mnemonic.secondOperand().matches(admList.get(1));
       }
