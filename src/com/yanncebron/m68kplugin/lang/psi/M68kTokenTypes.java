@@ -17,11 +17,14 @@
 package com.yanncebron.m68kplugin.lang.psi;
 
 import com.intellij.psi.tree.IElementType;
+import com.yanncebron.m68kplugin.lang.M68kLanguage;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @see M68kTokenGroups
  */
-public abstract class M68kTokenTypes {
+public final class M68kTokenTypes {
 
   public static final IElementType LINEFEED = new M68kTokenType("LINEFEED");
 
@@ -337,4 +340,10 @@ public abstract class M68kTokenTypes {
   public static final IElementType XDEF = new M68kTokenType("xdef");
   public static final IElementType XREF = new M68kTokenType("xref");
 
+  private static class M68kTokenType extends IElementType {
+
+    private M68kTokenType(@NotNull @NonNls String debugName) {
+      super(debugName, M68kLanguage.INSTANCE);
+    }
+  }
 }
