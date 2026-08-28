@@ -88,10 +88,11 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
       assertFalse("no mnemonics for " + instructionType, allMnemonics.isEmpty());
 
       boolean hasFirstOperand = ContainerUtil.exists(allMnemonics, M68kMnemonic::hasFirstOperand);
-      boolean hasSecondOperand = ContainerUtil.exists(allMnemonics, M68kMnemonic::hasSecondOperand);
-      if (!hasFirstOperand && !hasSecondOperand) {
+      if (!hasFirstOperand) {
         continue;
       }
+      boolean hasSecondOperand = ContainerUtil.exists(allMnemonics, M68kMnemonic::hasSecondOperand);
+
       boolean hasDataSize = ContainerUtil.exists(allMnemonics, m68kMnemonic -> !m68kMnemonic.dataSizes().contains(M68kDataSize.UNSIZED));
 
       Set<String> generatedVariants = new HashSet<>();
@@ -127,7 +128,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
               variant = "  " + instructionType + dataSizeText + " " + firstText;
             }
             if (!generatedVariants.add(variant)) {
-              continue; // skip duplicates from unnecessary loop (hasDestinationOperand=false)
+              continue; // skip duplicates from unnecessary loop (hasSecondOperand=false)
             }
 
             String variantOutput = variant + StringUtil.repeat(" ", 30 - variant.length()) + " ; " + firstAddressMode + (hasSecondOperand ? "," + secondAddressMode : "") + " ";
