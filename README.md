@@ -4,14 +4,24 @@
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/17712.svg)](https://plugins.jetbrains.com/plugin/17712)
 ![NoAI](docs/no_ai.png)
 
-## Motorola 68000 Series Assembly Language Support for IntelliJ-based IDEs
+## Motorola 68000 Series Assembly Language Support for JetBrains IDEs
 
-Adds support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_68000_series) assembly language
-in [IntelliJ-](https://plugins.jetbrains.com/docs/intellij/intellij-platform.html#ides-based-on-the-intellij-platform)based IDEs.
+Provides rich language support for [Motorola 68000 series](https://en.wikipedia.org/wiki/Motorola_68000_series) assembly language development in all [JetBrains IDEs](https://www.jetbrains.com/ides/).
+
+**Key Features:**
+
+-   **Syntax Highlighting & Formatting:** Customizable color schemes for instructions, registers, directives, and comments.
+-   **Code Completion:** Smart completion for labels and macros.
+-   **Navigation & Search:** Quick navigation to label definitions, symbol search, and find usages.
+-   **Code Analysis & Inspections:** Semantic error checking, unresolved label detection, additional code inspections.
+-   **Refactoring:** Safe label renaming across the entire project.
+-   **Documentation:** Quick documentation lookup for instructions, directives, and registers.
 
 **📖 Please visit the [Documentation site](https://yanncebron.github.io/m68kplugin/) for the user guide. 📖** 
 
 ![m68plugin](docs/assets/m68kplugin_landing.png)
+
+*Ideal for retro-programming targeting Amiga, Atari ST, SEGA Genesis/Mega Drive, and embedded M68k assembly development.*
 
 Please see [Contributing](CONTRIBUTING.md) on how to submit feedback and contribute to this project.
 
