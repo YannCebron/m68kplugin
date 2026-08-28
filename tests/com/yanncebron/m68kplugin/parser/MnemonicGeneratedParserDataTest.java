@@ -258,17 +258,17 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
     final Collection<M68kMnemonic> allMnemonics = M68kMnemonicRegistry.getInstance().findAll(type);
     assertFalse(type.toString(), allMnemonics.isEmpty());
 
-    final boolean needsLocalBranchLabel =
+    boolean firstOperandLocalLabel =
       M68kTokenGroups.BCC_INSTRUCTIONS.contains(type) ||
         type == M68kTokenTypes.BRA ||
         type == M68kTokenTypes.BSR;
-
+    boolean secondOperandLocalLabel = M68kTokenGroups.DBCC_INSTRUCTIONS.contains(type);
 
     Map<M68kMnemonic, List<String>> result = new LinkedHashMap<>();
     for (M68kMnemonic mnemonic : allMnemonics) {
-      String labelName = "<NOT_BRANCH>";
+      String labelName = "<ERROR_NOT_BRANCH>";
       String labelOrIndent = INDENT;
-      if (needsLocalBranchLabel) {
+      if (firstOperandLocalLabel || secondOperandLocalLabel) {
         labelName = "label" + String.format("%02d", labelCounter++);
         labelOrIndent = labelName + ": ";
       }
@@ -279,11 +279,11 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
       for (String firstText : OPERAND_TEXTS.get(mnemonic.firstOperand())) {
         for (String secondText : OPERAND_TEXTS.get(mnemonic.secondOperand())) {
           if (mnemonic.dataSizes().iterator().next() != M68kDataSize.UNSIZED) {
-            addVariant(variants, labelOrIndent, mnemonicText, needsLocalBranchLabel ? labelName : firstText, secondText, "  ");
+            addVariant(variants, labelOrIndent, mnemonicText, firstOperandLocalLabel ? labelName : firstText, secondOperandLocalLabel ? labelName : secondText, "  ");
           }
           for (M68kDataSize dataSize : mnemonic.dataSizes()) {
             String dataSizeText = dataSize == M68kDataSize.UNSIZED ? "" : dataSize.getText();
-            addVariant(variants, INDENT, mnemonicText, needsLocalBranchLabel ? labelName : firstText, secondText, dataSizeText);
+            addVariant(variants, INDENT, mnemonicText, firstOperandLocalLabel ? labelName : firstText, secondOperandLocalLabel ? labelName : secondText, dataSizeText);
           }
 
         }

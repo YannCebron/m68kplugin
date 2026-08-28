@@ -1,3 +1,5 @@
+********************************************************************************
+
 * M68kMnemonic{abcd, DATA_REGISTER, DATA_REGISTER, [BYTE], MC68000 Family, CUAU*, ?-?--}
          abcd        d0,d0
          abcd.b      d0,d0
@@ -1597,134 +1599,134 @@ label17: bvs         label17
 ********************************************************************************
 
 * M68kMnemonic{dbcc, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, ----?}
-         dbcc        d0,label
-         dbcc.w      d0,label
+label18: dbcc        d0,label18
+         dbcc.w      d0,label18
 
 
 ********************************************************************************
 
 * M68kMnemonic{dbcs, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, ----?}
-         dbcs        d0,label
-         dbcs.w      d0,label
+label19: dbcs        d0,label19
+         dbcs.w      d0,label19
 
 
 ********************************************************************************
 
 * M68kMnemonic{dbeq, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, --?--}
-         dbeq        d0,label
-         dbeq.w      d0,label
+label20: dbeq        d0,label20
+         dbeq.w      d0,label20
 
 
 ********************************************************************************
 
 * M68kMnemonic{dbf, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, -----}
-         dbf         d0,label
-         dbf.w       d0,label
+label21: dbf         d0,label21
+         dbf.w       d0,label21
 
 
 ********************************************************************************
 
 * M68kMnemonic{dbge, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, -?-?-}
-         dbge        d0,label
-         dbge.w      d0,label
+label22: dbge        d0,label22
+         dbge.w      d0,label22
 
 
 ********************************************************************************
 
 * M68kMnemonic{dbgt, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, -???-}
-         dbgt        d0,label
-         dbgt.w      d0,label
+label23: dbgt        d0,label23
+         dbgt.w      d0,label23
 
 
 ********************************************************************************
 
 * M68kMnemonic{dbhi, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, --?-?}
-         dbhi        d0,label
-         dbhi.w      d0,label
+label24: dbhi        d0,label24
+         dbhi.w      d0,label24
 
 
 ********************************************************************************
 
 * M68kMnemonic{dbhs, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, ----?}
-         dbhs        d0,label
-         dbhs.w      d0,label
+label25: dbhs        d0,label25
+         dbhs.w      d0,label25
 
 
 ********************************************************************************
 
 * M68kMnemonic{dble, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, -???-}
-         dble        d0,label
-         dble.w      d0,label
+label26: dble        d0,label26
+         dble.w      d0,label26
 
 
 ********************************************************************************
 
 * M68kMnemonic{dblo, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, ----?}
-         dblo        d0,label
-         dblo.w      d0,label
+label27: dblo        d0,label27
+         dblo.w      d0,label27
 
 
 ********************************************************************************
 
 * M68kMnemonic{dbls, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, --?-?}
-         dbls        d0,label
-         dbls.w      d0,label
+label28: dbls        d0,label28
+         dbls.w      d0,label28
 
 
 ********************************************************************************
 
 * M68kMnemonic{dblt, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, -?-?-}
-         dblt        d0,label
-         dblt.w      d0,label
+label29: dblt        d0,label29
+         dblt.w      d0,label29
 
 
 ********************************************************************************
 
 * M68kMnemonic{dbmi, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, -?---}
-         dbmi        d0,label
-         dbmi.w      d0,label
+label30: dbmi        d0,label30
+         dbmi.w      d0,label30
 
 
 ********************************************************************************
 
 * M68kMnemonic{dbne, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, --?--}
-         dbne        d0,label
-         dbne.w      d0,label
+label31: dbne        d0,label31
+         dbne.w      d0,label31
 
 
 ********************************************************************************
 
 * M68kMnemonic{dbpl, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, -?---}
-         dbpl        d0,label
-         dbpl.w      d0,label
+label32: dbpl        d0,label32
+         dbpl.w      d0,label32
 
 
 ********************************************************************************
 
 * M68kMnemonic{dbra, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, -----}
-         dbra        d0,label
-         dbra.w      d0,label
+label33: dbra        d0,label33
+         dbra.w      d0,label33
 
 
 ********************************************************************************
 
 * M68kMnemonic{dbt, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, -----}
-         dbt         d0,label
-         dbt.w       d0,label
+label34: dbt         d0,label34
+         dbt.w       d0,label34
 
 
 ********************************************************************************
 
 * M68kMnemonic{dbvc, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, ---?-}
-         dbvc        d0,label
-         dbvc.w      d0,label
+label35: dbvc        d0,label35
+         dbvc.w      d0,label35
 
 
 ********************************************************************************
 
 * M68kMnemonic{dbvs, DATA_REGISTER, DBCC_BRANCH_DESTINATION, [WORD], MC68000 Family, BRANCH, ---?-}
-         dbvs        d0,label
-         dbvs.w      d0,label
+label36: dbvs        d0,label36
+         dbvs.w      d0,label36
 
 
 ********************************************************************************
