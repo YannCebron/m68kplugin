@@ -52,6 +52,12 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
       final Collection<M68kMnemonic> all = instance.findAll(instructionsType);
       assertFalse("no mnemonics for '" + instructionsType + "'", all.isEmpty());
 
+      for (M68kMnemonic m68kMnemonic : all) {
+        if (m68kMnemonic.hasSecondOperand()) {
+          assertTrue(m68kMnemonic + " has secondOperand, but no firstOperand", m68kMnemonic.hasFirstOperand());
+        }
+      }
+
       totalDeprecated += ContainerUtil.count(all, M68kMnemonic::deprecated);
 
       totalNone += all.stream().filter(M68kMnemonicPredicates.privilegedAny().negate()).count();
