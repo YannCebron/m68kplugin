@@ -44,7 +44,7 @@ internal class M68kRegisterInlayProvider : InlayHintsProvider {
         ) {
             if (element is M68kAdmWithRegister) {
                 val register = element.register
-                if (register.cpus == M68kCpu.GROUP_68010_UP) {
+                if (register.cpus.equals(M68kCpu.GROUP_68010_UP)) {
                     val offset = element.textRange.endOffset
                     sink.addPresentation(
                         InlineInlayPosition(offset, false),

@@ -26,6 +26,7 @@ public class M68kRegisterInlayProviderTest extends DeclarativeInlayHintsProvider
     doTestProvider("a.s", """
         movec       d0,DFC/*<# 010+ #>*/
         movec.l     VBR/*<# 010+ #>*/,d0
+        movec.l     SFC/*<# 010+ #>*/,d0
       """, new M68kRegisterInlayProvider(), Collections.emptyMap(), false);
   }
 
