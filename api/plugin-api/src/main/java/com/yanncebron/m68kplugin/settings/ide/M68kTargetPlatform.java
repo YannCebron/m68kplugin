@@ -21,6 +21,7 @@ import org.jetbrains.annotations.Nls;
 
 /**
  * @see M68kProjectEnvironment#getTargetPlatform()
+ * @see M68kTargetPlatformDetector
  */
 public enum M68kTargetPlatform {
 
