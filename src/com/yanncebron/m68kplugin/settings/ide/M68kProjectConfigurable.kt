@@ -79,7 +79,7 @@ internal class M68kProjectConfigurable(private val project: Project) :
 
         if (oldTargetPlatform != projectSettings.targetPlatform) {
             val publisher = project.messageBus.syncPublisher(M68kProjectEnvironmentListener.TOPIC)
-            publisher.targetPlatformChanged(projectSettings.targetPlatform);
+            publisher.targetPlatformChanged(projectSettings.targetPlatform)
         }
     }
 }
