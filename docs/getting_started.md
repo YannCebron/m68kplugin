@@ -57,8 +57,11 @@ are stored in `.idea/workspace.xml` and **not** shared (user-local).
 Shared 
 {: .label }
 
-- Generic: basic support (default)
-- Amiga: adds [_Amiga Hardware_](features/ide.md#amiga-hardware) pane in _M68k Browser_
+- _Generic_: basic support (default)
+- _Amiga_: adds [_Amiga Hardware_](features/ide.md#amiga-hardware) pane in _M68k Browser_
+
+If set to _Generic_, the plugin will check the project's contents when opening a project and suggest a matching target platform.
+This notification can be disabled globally or per project via its kebab menu.
 
 ### Editor
 

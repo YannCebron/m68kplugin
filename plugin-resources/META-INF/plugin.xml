@@ -54,6 +54,9 @@
                     dynamic="true">
       <with attribute="factoryClass" implements="com.yanncebron.m68kplugin.browser.M68kBrowserPaneFactory"/>
     </extensionPoint>
+    <extensionPoint name="targetPlatformDetector"
+                    interface="com.yanncebron.m68kplugin.settings.ide.M68kTargetPlatformDetector"
+                    dynamic="true"/>
   </extensionPoints>
 
   <projectListeners>
@@ -62,6 +65,10 @@
   </projectListeners>
 
   <extensions defaultExtensionNs="com.intellij">
+    <notificationGroup id="m68kplugin.target.platform"
+                       displayType="STICKY_BALLOON"
+                       key="notification.target.platform.group"/>
+
     <errorHandler implementation="com.intellij.diagnostic.JetBrainsMarketplaceErrorReportSubmitter"/>
 
     <fileType name="M68k Assembler"
@@ -290,6 +297,8 @@
     <projectService
         serviceInterface="com.yanncebron.m68kplugin.settings.ide.M68kProjectEnvironment"
         serviceImplementation="com.yanncebron.m68kplugin.settings.ide.M68kProjectEnvironmentImpl"/>
+    <postStartupActivity
+        implementation="com.yanncebron.m68kplugin.settings.ide.M68kTargetPlatformDetectionProjectActivity"/>
 
     <fileType name="PLAIN_TEXT" fileNames="FILE_ID.DIZ" extensions="nfo"/>
   </extensions>
