@@ -4,6 +4,8 @@
 
 ### Changed
 
+- M68k Browser: toolwindow icon adapted to New UI
+
 ### Added
 
 - Reference docs: syntax highlighting for code samples
