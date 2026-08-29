@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,38 +16,42 @@
 
 package com.yanncebron.m68kplugin.lang;
 
-import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.yanncebron.m68kplugin.M68kBundle;
-import org.jetbrains.annotations.NonNls;
+import com.yanncebron.m68kplugin.M68kApiBundle;
+import com.yanncebron.m68kplugin.M68kApiIcons;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public class M68kLanguage extends Language {
+import javax.swing.*;
 
-  @NonNls
-  public static final String ID = "M68k";
+@SuppressWarnings("ExtensionClassShouldBeFinalAndNonPublic")
+public final class M68kFileType extends LanguageFileType {
 
-  public static final M68kLanguage INSTANCE = new M68kLanguage();
+  public static final M68kFileType INSTANCE = new M68kFileType();
 
-  private M68kLanguage() {
-    super(ID);
+  private M68kFileType() {
+    super(M68kLanguage.INSTANCE);
   }
 
   @NotNull
   @Override
-  public String getDisplayName() {
-    return M68kBundle.message("general.m68k.assembler");
+  public String getName() {
+    return M68kApiBundle.message("general.m68k.assembler");
+  }
+
+  @NotNull
+  @Override
+  public String getDescription() {
+    return M68kApiBundle.message("general.m68000.assembler");
+  }
+
+  @NotNull
+  @Override
+  public String getDefaultExtension() {
+    return "s";
   }
 
   @Override
-  public boolean isCaseSensitive() {
-    return true;
-  }
-
-  @Nullable
-  @Override
-  public LanguageFileType getAssociatedFileType() {
-    return M68kFileType.INSTANCE;
+  public Icon getIcon() {
+    return M68kApiIcons.FILE;
   }
 }

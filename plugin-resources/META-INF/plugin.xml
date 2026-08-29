@@ -291,6 +291,7 @@
     <projectConfigurable
         id="M68kProjectConfigurable"
         parentId="language"
+        bundle="messages.M68kApiBundle"
         key="general.m68k.assembler"
         instance="com.yanncebron.m68kplugin.settings.ide.M68kProjectConfigurable"
         nonDefaultProject="true"/>

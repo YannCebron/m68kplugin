@@ -23,11 +23,12 @@ import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.SimpleTextAttributes
 import com.intellij.ui.dsl.builder.*
 import com.intellij.ui.dsl.listCellRenderer.listCellRenderer
+import com.yanncebron.m68kplugin.M68kApiBundle
 import com.yanncebron.m68kplugin.M68kBundle
 import org.jetbrains.annotations.NonNls
 
 internal class M68kProjectConfigurable(private val project: Project) :
-    BoundConfigurable(M68kBundle.message("general.m68k.assembler")), SearchableConfigurable {
+    BoundConfigurable(M68kApiBundle.message("general.m68k.assembler")), SearchableConfigurable {
 
     private val projectSettings: M68kProjectSettings
         get() = M68kProjectSettings.getInstance(project)

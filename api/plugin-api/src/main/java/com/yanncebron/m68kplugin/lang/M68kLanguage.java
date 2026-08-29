@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,42 +16,38 @@
 
 package com.yanncebron.m68kplugin.lang;
 
+import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.yanncebron.m68kplugin.M68kBundle;
-import icons.M68kIcons;
+import com.yanncebron.m68kplugin.M68kApiBundle;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
+public class M68kLanguage extends Language {
 
-@SuppressWarnings("ExtensionClassShouldBeFinalAndNonPublic")
-public final class M68kFileType extends LanguageFileType {
+  @NonNls
+  public static final String ID = "M68k";
 
-  public static final M68kFileType INSTANCE = new M68kFileType();
+  public static final M68kLanguage INSTANCE = new M68kLanguage();
 
-  private M68kFileType() {
-    super(M68kLanguage.INSTANCE);
+  private M68kLanguage() {
+    super(ID);
   }
 
   @NotNull
   @Override
-  public String getName() {
-    return M68kBundle.message("general.m68k.assembler");
-  }
-
-  @NotNull
-  @Override
-  public String getDescription() {
-    return M68kBundle.message("general.m68000.assembler");
-  }
-
-  @NotNull
-  @Override
-  public String getDefaultExtension() {
-    return "s";
+  public String getDisplayName() {
+    return M68kApiBundle.message("general.m68k.assembler");
   }
 
   @Override
-  public Icon getIcon() {
-    return M68kIcons.FILE;
+  public boolean isCaseSensitive() {
+    return true;
+  }
+
+  @Nullable
+  @Override
+  public LanguageFileType getAssociatedFileType() {
+    return M68kFileType.INSTANCE;
   }
 }
