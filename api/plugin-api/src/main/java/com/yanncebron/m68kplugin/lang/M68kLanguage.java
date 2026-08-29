@@ -19,19 +19,15 @@ package com.yanncebron.m68kplugin.lang;
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.yanncebron.m68kplugin.M68kApiBundle;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class M68kLanguage extends Language {
 
-  @NonNls
-  public static final String ID = "M68k";
-
   public static final M68kLanguage INSTANCE = new M68kLanguage();
 
   private M68kLanguage() {
-    super(ID);
+    super("M68k");
   }
 
   @NotNull
