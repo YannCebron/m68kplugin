@@ -23,6 +23,8 @@ import javax.swing.*;
 
 public final class M68kIcons {
 
+  public static final Icon PLUGIN = IconLoader.findIcon("/icons/m68kPlugin.svg", M68kIcons.class);
+
   public static final Icon FILE = IconLoader.findIcon("/icons/m68kFile.svg", M68kIcons.class);
 
   public static final Icon TOOL_WINDOW = IconLoader.findIcon("/icons/browserToolWindow.svg", M68kIcons.class);
