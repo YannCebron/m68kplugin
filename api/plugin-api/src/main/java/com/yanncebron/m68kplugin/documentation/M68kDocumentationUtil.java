@@ -84,7 +84,9 @@ public final class M68kDocumentationUtil {
     }
 
     try {
-      return Couple.of(FileUtil.loadTextAndClose(resource), null);
+      String text = FileUtil.loadTextAndClose(resource);
+      text = text.replace("# ", "## ");
+      return Couple.of(text, null);
     } catch (IOException e) {
       String message = M68kApiBundle.message("documentation.error.loading.reference.doc", markdownFileName, e.getMessage());
       LOG.error(message, e);

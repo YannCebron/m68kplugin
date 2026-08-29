@@ -76,10 +76,10 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
     doTest(" e<caret>rem", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
       assertEquals("""
-        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>EREM</b></pre></div><div class='content'><p><h2>Syntax</h2>
+        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>EREM</b></pre></div><div class='content'><p><h3>Syntax</h3>
         <pre><code>erem
         </code></pre>
-        <h2>Description</h2>
+        <h3>Description</h3>
         <p>Ends an out-commented block from <a rel="nofollow" href="psi_element://rem">rem</a>. Assembly will continue.</p>
         </p></div>""", doc);
     });
@@ -89,10 +89,10 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
     doTest(" if<caret>mi", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
       assertEquals("""
-        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>IFMI</b></pre></div><div class='content'><p><h2>Syntax</h2>
+        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>IFMI</b></pre></div><div class='content'><p><h3>Syntax</h3>
         <pre><code>ifmi &lt;expression&gt;
         </code></pre>
-        <h2>Description</h2>
+        <h3>Description</h3>
         <p>Conditionally assemble the following lines if <code>&lt;expression&gt;</code> is less than zero. Equivalent to <a rel="nofollow" href="psi_element://iflt">iflt</a>.</p>
         </p></div>""", doc);
     });
@@ -101,10 +101,10 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
   public void testEremDirectiveReferenceDocForBrowser() {
     String directiveDoc = M68kDirectiveDocumentationProvider.getDirectiveDoc(getProject(), M68kTokenTypes.EREM);
     assertEquals("""
-      <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>EREM</b></pre></div><div class='content'><p><h2>Syntax</h2>
+      <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>EREM</b></pre></div><div class='content'><p><h3>Syntax</h3>
       <pre><code>erem
       </code></pre>
-      <h2>Description</h2>
+      <h3>Description</h3>
       <p>Ends an out-commented block from <a rel="nofollow" href="m68kBrowser://rem">rem</a>. Assembly will continue.</p>
       </p></div>""", directiveDoc);
   }
@@ -113,10 +113,10 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
     doTest("label e<caret>qu 42", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
       assertEquals("""
-        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>EQU</b></pre></div><div class='content'><p><h2>Syntax</h2>
+        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>EQU</b></pre></div><div class='content'><p><h3>Syntax</h3>
         <pre><code>&lt;symbol&gt; equ &lt;expression&gt;
         </code></pre>
-        <h2>Description</h2>
+        <h3>Description</h3>
         <p>Define a new program symbol with the name <code>&lt;symbol&gt;</code> and assign to it the value of <code>&lt;expression&gt;</code>.
         Defining <code>&lt;symbol&gt;</code> twice will cause an error.
         See <a rel="nofollow" href="psi_element://set">set</a> directive.</p>
@@ -129,10 +129,10 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
     doTest("label <caret>= 42", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
       assertEquals("""
-        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>EQU</b></pre></div><div class='content'><p><h2>Syntax</h2>
+        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>EQU</b></pre></div><div class='content'><p><h3>Syntax</h3>
         <pre><code>&lt;symbol&gt; equ &lt;expression&gt;
         </code></pre>
-        <h2>Description</h2>
+        <h3>Description</h3>
         <p>Define a new program symbol with the name <code>&lt;symbol&gt;</code> and assign to it the value of <code>&lt;expression&gt;</code>.
         Defining <code>&lt;symbol&gt;</code> twice will cause an error.
         See <a rel="nofollow" href="psi_element://set">set</a> directive.</p>

@@ -5,6 +5,7 @@
 ### Changed
 
 - M68k Browser: toolwindow icon adapted to New UI
+- Documentation: adjust font sizes
 
 ### Added
 

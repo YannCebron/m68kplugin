@@ -39,47 +39,47 @@ import java.util.Set;
 public class M68KInstructionDocumentationTargetProviderTest extends BasePlatformTestCase {
 
   public void testAslAsrInstructionReferenceDoc() {
-    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.ASL, M68kTokenTypes.ASR), "<h1>ASL, ASR - Arithmetic shift left/right</h1>");
+    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.ASL, M68kTokenTypes.ASR), "<h2>ASL, ASR - Arithmetic shift left/right</h2>");
   }
 
   public void testLslLsrInstructionReferenceDoc() {
-    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.LSL, M68kTokenTypes.LSR), "<h1>LSL, LSR - Logical shift left/right</h1>");
+    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.LSL, M68kTokenTypes.LSR), "<h2>LSL, LSR - Logical shift left/right</h2>");
   }
 
   public void testRolRorInstructionReferenceDoc() {
-    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.ROL, M68kTokenTypes.ROR), "<h1>ROL, ROR - Rotate left/right (without extend)</h1>");
+    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.ROL, M68kTokenTypes.ROR), "<h2>ROL, ROR - Rotate left/right (without extend)</h2>");
   }
 
   public void testRoxlRoxrInstructionReferenceDoc() {
-    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.ROXL, M68kTokenTypes.ROXR), "<h1>ROXL, ROXR - Rotate left/right with extend</h1>");
+    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.ROXL, M68kTokenTypes.ROXR), "<h2>ROXL, ROXR - Rotate left/right with extend</h2>");
   }
 
   public void testDivsDivuInstructionReferenceDoc() {
-    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.DIVS, M68kTokenTypes.DIVU), "<h1>DIVS, DIVU - Signed divide, unsigned divide</h1>");
+    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.DIVS, M68kTokenTypes.DIVU), "<h2>DIVS, DIVU - Signed divide, unsigned divide</h2>");
   }
 
   public void testMulsMuluInstructionReferenceDoc() {
-    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.MULS, M68kTokenTypes.MULU), "<h1>MULS, MULU - Signed multiply, unsigned multiply</h1>");
+    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.MULS, M68kTokenTypes.MULU), "<h2>MULS, MULU - Signed multiply, unsigned multiply</h2>");
   }
 
   public void testBccInstructionsReferenceDoc() {
-    doTestMappedReferenceDoc(M68kTokenGroups.BCC_INSTRUCTIONS, "<h1>Bcc - Branch on condition cc</h1>");
+    doTestMappedReferenceDoc(M68kTokenGroups.BCC_INSTRUCTIONS, "<h2>Bcc - Branch on condition cc</h2>");
   }
 
   public void testDbccInstructionsReferenceDoc() {
-    doTestMappedReferenceDoc(M68kTokenGroups.DBCC_INSTRUCTIONS, "<h1>DBcc - Test condition, decrement, and branch</h1>");
+    doTestMappedReferenceDoc(M68kTokenGroups.DBCC_INSTRUCTIONS, "<h2>DBcc - Test condition, decrement, and branch</h2>");
   }
 
   public void testSccInstructionsReferenceDoc() {
-    doTestMappedReferenceDoc(M68kTokenGroups.SCC_INSTRUCTIONS, "<h1>Scc - Set according to condition cc</h1>");
+    doTestMappedReferenceDoc(M68kTokenGroups.SCC_INSTRUCTIONS, "<h2>Scc - Set according to condition cc</h2>");
   }
 
   public void testTblsXInstructionReferenceDoc() {
-    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.TBLS, M68kTokenTypes.TBLSN), "<h1>TBLS, TBLSN - Table Lookup and Interpolate (Signed)</h1>");
+    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.TBLS, M68kTokenTypes.TBLSN), "<h2>TBLS, TBLSN - Table Lookup and Interpolate (Signed)</h2>");
   }
 
   public void testTbluXInstructionReferenceDoc() {
-    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.TBLU, M68kTokenTypes.TBLUN), "<h1>TBLU, TBLUN - Table Lookup and Interpolate (Unsigned)</h1>");
+    doTestMappedReferenceDoc(TokenSet.create(M68kTokenTypes.TBLU, M68kTokenTypes.TBLUN), "<h2>TBLU, TBLUN - Table Lookup and Interpolate (Unsigned)</h2>");
   }
 
   public void testChkInstructionReferenceDocWithStyledCodeBlock() {
