@@ -16,7 +16,6 @@
 
 package com.yanncebron.m68kplugin.documentation;
 
-import com.intellij.lang.Language;
 import com.intellij.lang.documentation.QuickDocHighlightingHelper;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
@@ -28,6 +27,7 @@ import com.intellij.util.ObjectUtils;
 import com.intellij.util.SmartList;
 import com.intellij.util.io.URLUtil;
 import com.yanncebron.m68kplugin.M68kApiBundle;
+import com.yanncebron.m68kplugin.lang.M68kLanguage;
 import org.commonmark.Extension;
 import org.commonmark.ext.gfm.tables.TablesExtension;
 import org.commonmark.node.FencedCodeBlock;
@@ -191,7 +191,7 @@ public final class M68kDocumentationUtil {
 
         HtmlWriter htmlWriter = context.getWriter();
         htmlWriter.line();
-        String m68k = QuickDocHighlightingHelper.getStyledCodeBlock(project, Language.findLanguageByID("M68k"), fencedCodeBlock.getLiteral());
+        String m68k = QuickDocHighlightingHelper.getStyledCodeBlock(project, M68kLanguage.INSTANCE, fencedCodeBlock.getLiteral());
         htmlWriter.raw(m68k);
         htmlWriter.line();
       }
