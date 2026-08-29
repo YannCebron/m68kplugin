@@ -16,11 +16,11 @@
 
 package com.yanncebron.m68kplugin.settings.ide
 
-import com.intellij.lang.Language
 import com.intellij.model.search.SearchContext
 import com.intellij.model.search.SearchService
 import com.intellij.openapi.project.Project
 import com.intellij.psi.search.GlobalSearchScope
+import com.yanncebron.m68kplugin.lang.M68kFileType
 
 /**
  * Detect the matching target platform from project information (files, text search, ...).
@@ -39,7 +39,7 @@ abstract class M68kTargetPlatformDetector {
             val query = SearchService.getInstance().searchWord(project, word)
                 .caseSensitive(false)
                 .inScope(GlobalSearchScope.allScope(project))
-                .restrictFileTypes(Language.findLanguageByID("M68k")!!.associatedFileType!!)
+                .restrictFileTypes(M68kFileType.INSTANCE)
                 .inContexts(SearchContext.IN_CODE)
                 .buildLeafOccurrenceQuery()
 
