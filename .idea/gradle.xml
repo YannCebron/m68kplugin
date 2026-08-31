@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/api/plugin-api" />
+            <option value="$PROJECT_DIR$/api/psi-api" />
             <option value="$PROJECT_DIR$/platforms/amiga" />
           </set>
         </option>

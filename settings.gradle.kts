@@ -28,5 +28,8 @@ dependencyResolutionManagement {
 include(":plugin-api")
 project(":plugin-api").projectDir = File("api/plugin-api")
 
+include(":psi-api")
+project(":psi-api").projectDir = File("api/psi-api")
+
 include(":amiga")
 project(":amiga").projectDir = File("platforms/amiga")

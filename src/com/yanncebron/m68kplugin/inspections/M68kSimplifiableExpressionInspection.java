@@ -44,11 +44,11 @@ final class M68kSimplifiableExpressionInspection extends LocalInspectionTool imp
 
       @Override
       public void visitParenExpression(@NotNull M68kParenExpression o) {
-        M68kExpression expression = M68kExpressionUtil.unwrapParentheses(o);
+        M68kExpression expression = M68kExpressionUtil.getInstance().unwrapParentheses(o);
         if (expression instanceof M68kUnaryPlusExpression m68kUnaryPlusExpression) {
-          expression = M68kExpressionUtil.unwrapParentheses(m68kUnaryPlusExpression.getOperand());
+          expression = M68kExpressionUtil.getInstance().unwrapParentheses(m68kUnaryPlusExpression.getOperand());
         } else if (expression instanceof M68kUnaryMinusExpression m68kUnaryMinusExpression) {
-          expression = M68kExpressionUtil.unwrapParentheses(m68kUnaryMinusExpression.getOperand());
+          expression = M68kExpressionUtil.getInstance().unwrapParentheses(m68kUnaryMinusExpression.getOperand());
         }
         if (expression instanceof PsiLiteralValue) {
           holder.registerProblem(o,
@@ -107,7 +107,7 @@ final class M68kSimplifiableExpressionInspection extends LocalInspectionTool imp
   }
 
   private void reportSuperfluousZero(ProblemsHolder holder, M68kExpression expression) {
-    if (M68kExpressionUtil.isZeroNumberValue(expression)) {
+    if (M68kExpressionUtil.getInstance().isNumberValue(expression, 0)) {
       holder.registerProblem(expression, M68kBundle.message("inspection.simplifiable.expression.message"));
     }
   }
@@ -125,11 +125,11 @@ final class M68kSimplifiableExpressionInspection extends LocalInspectionTool imp
   }
 
   private boolean isOneNumberValue(M68kExpression expression) {
-    return M68kExpressionUtil.isNumberValue(expression, 1);
+    return M68kExpressionUtil.getInstance().isNumberValue(expression, 1);
   }
 
   private boolean isMinusOneNumberValue(M68kExpression expression) {
-    return M68kExpressionUtil.isNumberValue(expression, -1);
+    return M68kExpressionUtil.getInstance().isNumberValue(expression, -1);
   }
 
 

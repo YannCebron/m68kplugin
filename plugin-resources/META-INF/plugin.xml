@@ -206,6 +206,10 @@
     <problemFileHighlightFilter
         implementation="com.yanncebron.m68kplugin.lang.M68kProblemFileHighlightFilter"/>
 
+    <applicationService
+        serviceInterface="com.yanncebron.m68kplugin.lang.psi.expression.M68kExpressionUtil"
+        serviceImplementation="com.yanncebron.m68kplugin.lang.psi.expression.M68kExpressionUtilImpl"/>
+
     <gotoSymbolContributor
         implementation="com.yanncebron.m68kplugin.navigation.M68kGotoLabelChooseByNameContributor"/>
     <moduleRendererFactory

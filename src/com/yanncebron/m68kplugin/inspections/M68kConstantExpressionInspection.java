@@ -52,7 +52,7 @@ final class M68kConstantExpressionInspection extends LocalInspectionTool {
       }
 
       try {
-        M68kExpressionUtil.computeConstantValue(o);
+        M68kExpressionUtil.getInstance().computeConstantValue(o);
       } catch (M68kConstantEvaluationOverflowException overflowException) {
         holder.registerProblem(o,
           M68kBundle.message("inspection.constant.expression.error.evaluating.expression",
@@ -187,7 +187,7 @@ final class M68kConstantExpressionInspection extends LocalInspectionTool {
     private void checkNumberRange(@Nullable M68kExpression expression, int min, int max) {
       if (expression == null) return;
 
-      Object value = M68kExpressionUtil.computeConstantValueNoOverflow(expression);
+      Object value = M68kExpressionUtil.getInstance().computeConstantValueNoOverflow(expression);
       if (value instanceof Integer intValue) {
         if (intValue < min || intValue > max) {
           holder.registerProblem(expression, M68kBundle.message("inspection.constant.expression.operand.value.out.of.range",

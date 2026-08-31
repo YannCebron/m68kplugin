@@ -20,9 +20,9 @@ import com.intellij.openapi.util.Comparing;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public final class M68kExpressionUtil {
+final class M68kExpressionUtilImpl extends M68kExpressionUtil {
 
-  public static boolean isNumberValue(M68kExpression expression, int expectedValue) {
+  public boolean isNumberValue(@Nullable M68kExpression expression, int expectedValue) {
     expression = unwrapParentheses(expression);
 
     Object m68kNumberExpression = expression;
@@ -34,25 +34,18 @@ public final class M68kExpressionUtil {
       Comparing.equal(numberExpression.getValue(), expectedValue);
   }
 
-  public static boolean isZeroNumberValue(M68kExpression expression) {
-    return isNumberValue(expression, 0);
-  }
-
-  @Nullable
-  public static M68kExpression unwrapParentheses(@Nullable M68kExpression expression) {
+  public @Nullable M68kExpression unwrapParentheses(@Nullable M68kExpression expression) {
     if (expression instanceof M68kParenExpression m68kParenExpression) {
       return unwrapParentheses(m68kParenExpression.getExpression());
     }
     return expression;
   }
 
-  @Nullable
-  public static Object computeConstantValue(@NotNull M68kExpression expression) {
+  public @Nullable Object computeConstantValue(@NotNull M68kExpression expression) {
     return M68kConstantExpressionEvaluator.computeConstantExpression(expression, true);
   }
 
-  @Nullable
-  public static Object computeConstantValueNoOverflow(@NotNull M68kExpression expression) {
+  public @Nullable Object computeConstantValueNoOverflow(@NotNull M68kExpression expression) {
     return M68kConstantExpressionEvaluator.computeConstantExpression(expression, false);
   }
 }

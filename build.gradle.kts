@@ -37,7 +37,9 @@ dependencies {
         intellijIdeaCommunity(properties("platformVersion"))
 
         pluginComposedModule(implementation(project(":plugin-api")))
+        pluginComposedModule(implementation(project(":psi-api")))
         pluginComposedModule(implementation(project(":amiga")))
+
         testFramework(TestFrameworkType.Platform)
 
         jflex("1.10.17")

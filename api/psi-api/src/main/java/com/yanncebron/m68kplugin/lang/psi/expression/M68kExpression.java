@@ -13,18 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import org.jetbrains.intellij.platform.gradle.TestFrameworkType
+package com.yanncebron.m68kplugin.lang.psi.expression;
 
-dependencies {
-    compileOnly(project(":plugin-api"))
-    compileOnly(project(":psi-api"))
+import com.yanncebron.m68kplugin.lang.psi.M68kPsiElement;
 
-    testRuntimeOnly(project(":plugin-api"))
-    testRuntimeOnly(project(":psi-api"))
+public interface M68kExpression extends M68kPsiElement {
 
-    testImplementation("junit:junit:4.13.2")
-
-    intellijPlatform {
-        testFramework(TestFrameworkType.Platform)
-    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,7 +66,7 @@ final class M68kFoldingBuilder extends CustomFoldingBuilder {
     if (!(firstExpression instanceof M68kStringExpression)) return null;
 
     final M68kExpression secondExpression = expressions.get(1);
-    if (!M68kExpressionUtil.isZeroNumberValue(secondExpression)) return null;
+    if (!M68kExpressionUtil.getInstance().isNumberValue(secondExpression, 0)) return null;
 
     return firstExpression.getText();
   }

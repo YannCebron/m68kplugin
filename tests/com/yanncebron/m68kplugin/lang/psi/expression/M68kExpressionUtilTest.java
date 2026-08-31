@@ -27,10 +27,10 @@ public class M68kExpressionUtilTest extends M68kPsiTestCase<M68kDcDirective> {
   }
 
   public void testIsNumberValue() {
-    assertTrue(M68kExpressionUtil.isNumberValue(getExpression("42"), 42));
-    assertTrue(M68kExpressionUtil.isNumberValue(getExpression("+42"), 42));
-    assertTrue(M68kExpressionUtil.isNumberValue(getExpression("-42"), -42));
-    assertTrue(M68kExpressionUtil.isNumberValue(getExpression("-$F"), -15));
+    assertTrue(M68kExpressionUtil.getInstance().isNumberValue(getExpression("42"), 42));
+    assertTrue(M68kExpressionUtil.getInstance().isNumberValue(getExpression("+42"), 42));
+    assertTrue(M68kExpressionUtil.getInstance().isNumberValue(getExpression("-42"), -42));
+    assertTrue(M68kExpressionUtil.getInstance().isNumberValue(getExpression("-$F"), -15));
   }
 
   public void testUnwrapParentheses() {
@@ -40,7 +40,7 @@ public class M68kExpressionUtilTest extends M68kPsiTestCase<M68kDcDirective> {
   }
 
   private void doTestUnwrapParentheses(String expressionText) {
-    M68kExpression unwrappedExpression = M68kExpressionUtil.unwrapParentheses(getExpression(expressionText));
+    M68kExpression unwrappedExpression = M68kExpressionUtil.getInstance().unwrapParentheses(getExpression(expressionText));
     assertNotNull(unwrappedExpression);
     assertEquals("1", unwrappedExpression.getText());
   }
@@ -182,11 +182,11 @@ public class M68kExpressionUtilTest extends M68kPsiTestCase<M68kDcDirective> {
   }
 
   private Object computeConstantValue(String expressionText) {
-    return M68kExpressionUtil.computeConstantValue(getExpression(expressionText));
+    return M68kExpressionUtil.getInstance().computeConstantValue(getExpression(expressionText));
   }
 
   private Object computeConstantValueNoOverflow(String expressionText) {
-    return M68kExpressionUtil.computeConstantValueNoOverflow(getExpression(expressionText));
+    return M68kExpressionUtil.getInstance().computeConstantValueNoOverflow(getExpression(expressionText));
   }
 
   private M68kExpression getExpression(String expressionText) {

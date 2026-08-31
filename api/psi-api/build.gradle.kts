@@ -13,18 +13,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import org.jetbrains.intellij.platform.gradle.TestFrameworkType
-
-dependencies {
-    compileOnly(project(":plugin-api"))
-    compileOnly(project(":psi-api"))
-
-    testRuntimeOnly(project(":plugin-api"))
-    testRuntimeOnly(project(":psi-api"))
-
-    testImplementation("junit:junit:4.13.2")
-
-    intellijPlatform {
-        testFramework(TestFrameworkType.Platform)
-    }
-}
