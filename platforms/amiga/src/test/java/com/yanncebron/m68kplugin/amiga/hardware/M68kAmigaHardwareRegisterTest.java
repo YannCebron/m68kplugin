@@ -141,4 +141,10 @@ public class M68kAmigaHardwareRegisterTest extends TestCase {
     assertEquals(78, hardwareDescriptionFileNames.size());
   }
 
+  public void testFindByAddress() {
+    assertNull(M68kAmigaHardwareRegister.findByAddress(42));
+
+    assertEquals(M68kAmigaHardwareRegister.CIAB_PRA, M68kAmigaHardwareRegister.findByAddress(Integer.parseInt("BFD000", 16)));
+    assertEquals(M68kAmigaHardwareRegister.ADKCON, M68kAmigaHardwareRegister.findByAddress(Integer.parseInt("DFF09E", 16)));
+  }
 }

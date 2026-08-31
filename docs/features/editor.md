@@ -163,6 +163,14 @@ Adds hints for MC68010+ registers (`DFC`, `SFC`, `VBR`)
 
 ![Register inlay hint](../assets/editor/inlay_register.png)
 
+#### Amiga Hardware Register
+
+> [Target platform](../getting_started.md#target-platform) must be set to _Amiga_
+
+Adds hints for hardware registers (hex numbers)
+
+![Amiga Hardware Register inlay hint](../assets/editor/inlay_amiga_hardware_register.png)
+
 ### Intentions
 
 Invoke intentions via <kbd>Alt</kbd>+<kbd>Enter</kbd> or click on the lightbulb popup in editor.

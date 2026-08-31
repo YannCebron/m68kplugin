@@ -18,6 +18,16 @@
 
   <extensions defaultExtensionNs="com.intellij">
 
+    <codeInsight.declarativeInlayProvider
+        group="OTHER_GROUP"
+        implementationClass="com.yanncebron.m68kplugin.amiga.hardware.M68kAmigaHardwareInlayProvider"
+        isEnabledByDefault="true"
+        language="M68k"
+        bundle="messages.M68kAmigaBundle"
+        nameKey="inlay.hint.amiga.hardware.register.name"
+        descriptionKey="inlay.hint.amiga.hardware.register.description"
+        providerId="m68k.amiga.hardware.register"/>
+
     <spellchecker.bundledDictionaryProvider
         implementation="com.yanncebron.m68kplugin.lang.spellchecker.M68kBundledAmigaDictionaryProvider"/>
 

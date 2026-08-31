@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,13 @@ package com.yanncebron.m68kplugin.amiga.hardware;
 import com.intellij.icons.AllIcons;
 import com.intellij.ui.LayeredIcon;
 import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 @SuppressWarnings("SpellCheckingInspection")
@@ -308,6 +312,8 @@ public enum M68kAmigaHardwareRegister {
 
   private final Icon icon;
 
+  private static final Map<Integer, M68kAmigaHardwareRegister> addressMap = new HashMap<>();
+
   M68kAmigaHardwareRegister(String name,
                             String address,
                             String description,
@@ -384,6 +390,22 @@ public enum M68kAmigaHardwareRegister {
 
   public Icon getIcon() {
     return icon;
+  }
+
+  /**
+   * @return Register with the given address or null if none found.
+   */
+  public static @Nullable M68kAmigaHardwareRegister findByAddress(@NotNull Integer address) {
+    if (addressMap.isEmpty()) {
+      initAddressMap();
+    }
+    return addressMap.get(address);
+  }
+
+  private static synchronized void initAddressMap() {
+    for (M68kAmigaHardwareRegister register : values()) {
+      addressMap.put(Integer.parseInt(register.address, 16), register);
+    }
   }
 
   public enum Chipset {

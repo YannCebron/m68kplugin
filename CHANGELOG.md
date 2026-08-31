@@ -12,7 +12,9 @@
 - Reference docs: syntax highlighting for code samples
 - Navigate to _file:lineNumber_ location from [rg-asm](https://rg.atari.org/tools/rg-asm/) console messages
 - Support `rseven` directive
-- Editor inlay hint _CPU for Register_ (MC68010+ registers)
+- Editor inlay hints:
+  - _CPU for Register_ (MC68010+ registers)
+  - _Amiga hardware register name_
 - Suggest the matching project target platform on project open to enable specific features (currently only _Amiga_)
 
 ### Fixed

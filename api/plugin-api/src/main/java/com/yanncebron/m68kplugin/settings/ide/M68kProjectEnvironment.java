@@ -16,7 +16,9 @@
 
 package com.yanncebron.m68kplugin.settings.ide;
 
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.project.Project;
+import org.jetbrains.annotations.TestOnly;
 
 /**
  * Exposes project level environment settings (read-only).
@@ -30,4 +32,7 @@ public abstract class M68kProjectEnvironment {
   }
 
   public abstract M68kTargetPlatform getTargetPlatform();
+
+  @TestOnly
+  public abstract void setTargetPlatform(M68kTargetPlatform targetPlatform, Disposable parentDisposable);
 }

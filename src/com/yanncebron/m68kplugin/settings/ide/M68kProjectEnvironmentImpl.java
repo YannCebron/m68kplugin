@@ -16,7 +16,9 @@
 
 package com.yanncebron.m68kplugin.settings.ide;
 
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Disposer;
 
 final class M68kProjectEnvironmentImpl extends M68kProjectEnvironment {
 
@@ -29,5 +31,12 @@ final class M68kProjectEnvironmentImpl extends M68kProjectEnvironment {
   @Override
   public M68kTargetPlatform getTargetPlatform() {
     return M68kProjectSettings.getInstance(project).getTargetPlatform();
+  }
+
+  @Override
+  public void setTargetPlatform(M68kTargetPlatform targetPlatform, Disposable parentDisposable) {
+    M68kTargetPlatform previous = getTargetPlatform();
+    M68kProjectSettings.getInstance(project).setTargetPlatform(targetPlatform);
+    Disposer.register(parentDisposable, () -> M68kProjectSettings.getInstance(project).setTargetPlatform(previous));
   }
 }
