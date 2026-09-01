@@ -151,7 +151,7 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
   @Override
   protected @NotNull String getDocFor(@NotNull M68kAmigaHardwareRegister selectedValue) {
     return new M68kAmigaHardwareRegisterDocsCreator(selectedValue, getSortedShownRegisters())
-      .generateDoc(isShowReferenceDocs.get());
+      .generateDoc(isShowReferenceDocs.get(), true);
   }
 
   @Override

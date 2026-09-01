@@ -16,6 +16,7 @@
   - _CPU for Register_ (MC68010+ registers)
   - _Amiga hardware register name_
 - Suggest the matching project target platform on project open to enable specific features (currently only _Amiga_)
+- _Amiga hardware register_ documentation in the editor and support _Navigate | Select In..._
 
 ### Fixed
 

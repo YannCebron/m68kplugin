@@ -189,6 +189,9 @@
     <codeFoldingOptionsProvider
         instance="com.yanncebron.m68kplugin.editor.folding.M68kFoldingOptionsProvider"/>
 
+    <platform.backend.documentation.linkHandler
+        order="first"
+        implementation="com.yanncebron.m68kplugin.documentation.M68kDocumentationCopyDataLinkHandler"/>
     <platform.backend.documentation.targetProvider
         implementation="com.yanncebron.m68kplugin.documentation.M68kInstructionDocumentationTargetProvider"/>
     <lang.documentationProvider

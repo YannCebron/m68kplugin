@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package com.yanncebron.m68kplugin.browser;
+package com.yanncebron.m68kplugin.documentation;
 
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.ide.CopyPasteManager;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.platform.backend.documentation.DocumentationLinkHandler;
 import com.intellij.platform.backend.documentation.DocumentationTarget;
@@ -23,21 +25,19 @@ import com.intellij.platform.backend.documentation.LinkResolveResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.datatransfer.StringSelection;
+
 /**
- * Handle a link to another item in the browser by triggering selection in the current pane.
- * This is a bit hacky, but it's the only way to call into UI from DLH.
- *
- * @see M68kBrowserDocumentationTarget
+ * Handle "Copy Data" links with prefix {@link M68kDocumentationUtil#M68K_COPY_DATA_LINK_PREFIX}.
  */
-final class M68kBrowserDocumentationLinkHandler implements DocumentationLinkHandler {
+final class M68kDocumentationCopyDataLinkHandler implements DocumentationLinkHandler {
 
   @Override
   public @Nullable LinkResolveResult resolveLink(@NotNull DocumentationTarget target, @NotNull String url) {
-    if (target instanceof M68kBrowserDocumentationTarget m68kBrowserDocumentationTarget) {
-      if (url.startsWith(M68kBrowserPaneBase.M68K_BROWSER_ITEM_LINK_PREFIX)) {
-        String item = StringUtil.substringAfter(url, M68kBrowserPaneBase.M68K_BROWSER_ITEM_LINK_PREFIX);
-        m68kBrowserDocumentationTarget.selectItem(item);
-      }
+    if (url.startsWith(M68kDocumentationUtil.M68K_COPY_DATA_LINK_PREFIX)) {
+      String copyData = StringUtil.substringAfter(url, M68kDocumentationUtil.M68K_COPY_DATA_LINK_PREFIX);
+      ApplicationManager.getApplication().invokeLater(() -> CopyPasteManager.getInstance().setContents(new StringSelection(copyData)));
+      return LinkResolveResult.resolvedTarget(target);
     }
     return null;
   }

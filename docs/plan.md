@@ -154,7 +154,6 @@
 - copper list:
   - color-picker/inlays
   - register name completion
-  - register editor doc
   - https://fcondolo.github.io/gradientmaster/
 - support IFF images in IDE [https://github.com/haraldk/TwelveMonkeys](https://github.com/haraldk/TwelveMonkeys)
 - FS-UAE [configuration files](https://fs-uae.net/configuration-files)                         

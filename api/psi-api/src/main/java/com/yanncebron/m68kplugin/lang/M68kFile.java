@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,20 +16,7 @@
 
 package com.yanncebron.m68kplugin.lang;
 
-import com.intellij.extapi.psi.PsiFileBase;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.psi.FileViewProvider;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.psi.PsiFile;
 
-public class M68kFile extends PsiFileBase {
-
-  protected M68kFile(@NotNull FileViewProvider viewProvider) {
-    super(viewProvider, M68kLanguage.INSTANCE);
-  }
-
-  @NotNull
-  @Override
-  public FileType getFileType() {
-    return M68kFileType.INSTANCE;
-  }
+public interface M68kFile extends PsiFile {
 }

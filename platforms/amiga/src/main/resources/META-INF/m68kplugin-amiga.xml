@@ -28,6 +28,12 @@
         descriptionKey="inlay.hint.amiga.hardware.register.description"
         providerId="m68k.amiga.hardware.register"/>
 
+    <platform.backend.documentation.targetProvider
+        order="first"
+        implementation="com.yanncebron.m68kplugin.amiga.hardware.M68kAmigaHardwareRegisterDocumentationTargetProvider"/>
+    <platform.backend.documentation.linkHandler
+        implementation="com.yanncebron.m68kplugin.amiga.hardware.M68kAmigaHardwareRegisterDocumentationTargetProvider$M68kAmigaHardwareRegisterSymbolLinkHandler"/>
+
     <spellchecker.bundledDictionaryProvider
         implementation="com.yanncebron.m68kplugin.lang.spellchecker.M68kBundledAmigaDictionaryProvider"/>
 

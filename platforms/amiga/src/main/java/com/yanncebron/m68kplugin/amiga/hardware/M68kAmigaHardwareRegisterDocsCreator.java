@@ -18,13 +18,17 @@ package com.yanncebron.m68kplugin.amiga.hardware;
 
 import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.util.Couple;
+import com.intellij.openapi.util.text.NaturalComparator;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.amiga.M68kAmigaBundle;
 import com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase;
 import com.yanncebron.m68kplugin.documentation.M68kDocumentationUtil;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
 
 import static com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase.M68K_BROWSER_ITEM_LINK_PREFIX;
 
@@ -35,15 +39,18 @@ final class M68kAmigaHardwareRegisterDocsCreator {
   private final M68kAmigaHardwareRegister register;
   private final boolean isHardwareRegister;
 
-  private final List<M68kAmigaHardwareRegister> sortedShownRegisters;
+  private final List<M68kAmigaHardwareRegister> relatedRegisters;
 
-  M68kAmigaHardwareRegisterDocsCreator(M68kAmigaHardwareRegister register, List<M68kAmigaHardwareRegister> sortedShownRegisters) {
+  M68kAmigaHardwareRegisterDocsCreator(M68kAmigaHardwareRegister register, List<M68kAmigaHardwareRegister> visibleRelatedRegisters) {
     this.register = register;
-    this.sortedShownRegisters = sortedShownRegisters;
+    List<M68kAmigaHardwareRegister> toSort = new ArrayList<>(visibleRelatedRegisters);
+    toSort.sort(Comparator.comparing(M68kAmigaHardwareRegister::getName, NaturalComparator.INSTANCE));
+    this.relatedRegisters = toSort;
+
     isHardwareRegister = this.register.getChipset() != M68kAmigaHardwareRegister.Chipset.N_A;
   }
 
-  String generateDoc(boolean includeReferenceDoc) {
+  String generateDoc(boolean includeReferenceDoc, boolean forBrowserPane) {
     StringBuilder sb = new StringBuilder(M68kDocumentationUtil.CSS);
 
     sb.append(DocumentationMarkup.DEFINITION_START);
@@ -59,11 +66,11 @@ final class M68kAmigaHardwareRegisterDocsCreator {
     String address = "$" + register.getAddress();
     String shortAddress = "$0" + address.substring(4);
     sb.append("<code>").append(address).append("</code>")
-      .append("<a href='").append(M68kBrowserPaneBase.M68K_BROWSER_COPY_DATA_LINK_PREFIX).append(address).append("'><icon src='AllIcons.Actions.Copy'/></a>");
+      .append("<a href='").append(M68kDocumentationUtil.M68K_COPY_DATA_LINK_PREFIX).append(address).append("'><icon src='AllIcons.Actions.Copy'/></a>");
     if (isHardwareRegister) {
       sb.append("&nbsp;&ndash;&nbsp;")
         .append("<code>").append(shortAddress).append("</code>")
-        .append("<a href='").append(M68kBrowserPaneBase.M68K_BROWSER_COPY_DATA_LINK_PREFIX).append(shortAddress).append("'><icon src='AllIcons.Actions.Copy'/></a>");
+        .append("<a href='").append(M68kDocumentationUtil.M68K_COPY_DATA_LINK_PREFIX).append(shortAddress).append("'><icon src='AllIcons.Actions.Copy'/></a>");
     }
     sb.append(DocumentationMarkup.SECTION_END);
 
@@ -94,13 +101,13 @@ final class M68kAmigaHardwareRegisterDocsCreator {
       sb.append(DocumentationMarkup.SECTION_END);
     }
 
-    appendRelated(sb);
+    appendRelated(sb, forBrowserPane);
 
     sb.append(DocumentationMarkup.SECTIONS_END);
 
     if (includeReferenceDoc) {
       sb.append(DocumentationMarkup.CONTENT_START);
-      sb.append(getReferenceDoc());
+      sb.append(getReferenceDoc(forBrowserPane));
       if (!isHardwareRegister) {
         sb.append("<br><a href=\"https://www.amigarealm.com/computing/knowledge/hardref/apf.htm\">Amiga Realm Knowledge Base</a>");
       }
@@ -110,17 +117,19 @@ final class M68kAmigaHardwareRegisterDocsCreator {
     return sb.toString();
   }
 
-  private void appendRelated(StringBuilder sb) {
-    List<M68kAmigaHardwareRegister> allRelated = ContainerUtil.filter(sortedShownRegisters,
+  private void appendRelated(StringBuilder sb, boolean forBrowserPane) {
+    List<M68kAmigaHardwareRegister> allRelated = ContainerUtil.filter(relatedRegisters,
       relatedRegister -> relatedRegister.getDescriptionFileName().equals(register.getDescriptionFileName()));
     if (allRelated.size() == 1) return;
+
+    String linkPrefix = forBrowserPane ? M68K_BROWSER_ITEM_LINK_PREFIX : "";
 
     StringBuilder relatedSb = new StringBuilder("<table><tr>");
     int itemCount = 1;
     for (M68kAmigaHardwareRegister related : allRelated) {
       relatedSb.append(DocumentationMarkup.SECTION_START);
       if (related == register) relatedSb.append("<b>");
-      relatedSb.append("<a href='" + M68K_BROWSER_ITEM_LINK_PREFIX).append(related.getName()).append("'>");
+      relatedSb.append("<a href='").append(linkPrefix).append(related.getName()).append("'>");
       relatedSb.append(related.getName()).append("</a>");
       if (related == register) relatedSb.append("</b>");
       relatedSb.append("</td>");
@@ -135,12 +144,13 @@ final class M68kAmigaHardwareRegisterDocsCreator {
     sb.append(DocumentationMarkup.SECTION_END);
   }
 
-  private String getReferenceDoc() {
+  private String getReferenceDoc(boolean forBrowserPane) {
     Couple<String> markdownContents = M68kDocumentationUtil.getMarkdownContents(DOC_ROOT, register.getDescriptionFileName());
     if (markdownContents.getFirst() == null) {
       return markdownContents.getSecond();
     }
 
-    return M68kDocumentationUtil.getHtmlForMarkdown(DOC_ROOT, markdownContents.getFirst(), M68kBrowserPaneBase.M68K_BROWSER_LINK_FUNCTION, null);
+    Function<String, String> linkFunction = forBrowserPane ? M68kBrowserPaneBase.M68K_BROWSER_LINK_FUNCTION : Function.identity();
+    return M68kDocumentationUtil.getHtmlForMarkdown(DOC_ROOT, markdownContents.getFirst(), linkFunction, null);
   }
 }

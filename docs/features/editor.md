@@ -42,7 +42,7 @@ For `macro`/`endm`, `section` and machine directives (`machine`, `mc68010` etc.)
 
 _Hover_: enable _Show quick documentation on hover_ in *Settings \| Editor \| Code Editing*
 
-Use _Navigate \| Select In..._ on current element in editor to open it in the _M68k Browser_ tool window.
+Use _Navigate \| Select In..._ on the current element in the editor to open it in the _M68k Browser_ tool window.
 
 ### Mnemonics
 
@@ -78,6 +78,14 @@ _View \| View Quick Documentation_ Show register reference documentation
 
 ![Number doc](../assets/editor/number_doc.png)
 
+### Amiga Hardware Register
+
+> [Target platform](../getting_started.md#target-platform) must be set to _Amiga_
+
+*View \| Quick Documentation* for matching hexadecimal numbers in code or copperlist
+
+![Amiga Hardware Register doc](../assets/editor/amiga_hardware_register_doc.png)
+ 
 ## Labels
 
 *Navigate \| Declaration or Usages* - <kbd>Ctrl+Click</kbd>

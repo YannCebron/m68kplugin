@@ -77,6 +77,12 @@ public final class M68kDocumentationUtil {
   public static final String MOTOROLA_FOOTER =
     "<br><br><small><em>From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.</em></small>";
 
+  /**
+   * "Copy to clipboard" action link prefix.
+   */
+  @NonNls
+  public static final String M68K_COPY_DATA_LINK_PREFIX = "m68kCopyData://";
+
   public static Couple<String> getMarkdownContents(String docRoot, String markdownFileName) {
     final InputStream resource = M68kDocumentationUtil.class.getResourceAsStream(docRoot + markdownFileName + ".md");
     if (resource == null) {

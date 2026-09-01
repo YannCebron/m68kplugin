@@ -43,7 +43,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.ObjectUtils;
 import com.yanncebron.m68kplugin.M68kBundle;
-import com.yanncebron.m68kplugin.lang.M68kFile;
+import com.yanncebron.m68kplugin.lang.M68kFileImpl;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.conditional.M68kConditionalAssemblyDirective;
@@ -101,7 +101,7 @@ final class M68kProjectStatisticsAction extends BaseAnalysisAction {
           pi.setFraction((double) processed++ / files.size());
 
           final PsiFile psiFile = PsiManager.getInstance(project).findFile(virtualFile);
-          if (!(psiFile instanceof M68kFile m68kPsiFile)) return;
+          if (!(psiFile instanceof M68kFileImpl m68kPsiFile)) return;
 
           pi.setText2("Errors");
           final PsiErrorElement[] errors = m68kPsiFile.findChildrenByClass(PsiErrorElement.class);
