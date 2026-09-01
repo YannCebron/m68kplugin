@@ -22,6 +22,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpressionLiteralType;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kUnaryMinusExpression;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -51,23 +52,33 @@ abstract class M68kNumberExpressionMixIn extends ASTWrapperPsiElement implements
       return isNegative ? -2 : 2;
     }
 
-    IElementType elementType = PsiUtilCore.getElementType(getFirstChild());
-    if (elementType == M68kTokenTypes.DEC_NUMBER) {
+    M68kNumberExpressionLiteralType numberLiteralType = getNumberExpressionLiteralType();
+    if (numberLiteralType == M68kNumberExpressionLiteralType.DECIMAL) {
       return parseNumber(text, isNegative, 10);
     }
 
     text = text.substring(1);
-    if (elementType == M68kTokenTypes.HEX_NUMBER) {
-      return parseNumber(text, isNegative, 16);
-    }
-    if (elementType == M68kTokenTypes.OCT_NUMBER) {
+    if (numberLiteralType == M68kNumberExpressionLiteralType.OCTAL) {
       return parseNumber(text, isNegative, 8);
     }
-    if (elementType == M68kTokenTypes.BIN_NUMBER) {
+    if (numberLiteralType == M68kNumberExpressionLiteralType.HEXADECIMAL) {
+      return parseNumber(text, isNegative, 16);
+    }
+    if (numberLiteralType == M68kNumberExpressionLiteralType.BINARY) {
       return parseNumber(text, isNegative, 2);
     }
+    throw new IllegalArgumentException("Cannot map number: " + getText());
+  }
 
-    throw new IllegalArgumentException("could not determine getValue() for " + elementType + ", '" + text + "'");
+  @Override
+  public @NotNull M68kNumberExpressionLiteralType getNumberExpressionLiteralType() {
+    IElementType elementType = PsiUtilCore.getElementType(getFirstChild());
+    if (elementType == M68kTokenTypes.DEC_NUMBER) return M68kNumberExpressionLiteralType.DECIMAL;
+    if (elementType == M68kTokenTypes.HEX_NUMBER) return M68kNumberExpressionLiteralType.HEXADECIMAL;
+    if (elementType == M68kTokenTypes.BIN_NUMBER) return M68kNumberExpressionLiteralType.BINARY;
+    if (elementType == M68kTokenTypes.OCT_NUMBER) return M68kNumberExpressionLiteralType.OCTAL;
+
+    throw new IllegalArgumentException("Cannot not determine number type for " + elementType + ", '" + getText() + "'");
   }
 
   @Nullable
@@ -79,4 +90,5 @@ abstract class M68kNumberExpressionMixIn extends ASTWrapperPsiElement implements
       return null;
     }
   }
+
 }

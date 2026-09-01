@@ -13,12 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.yanncebron.m68kplugin.lang.psi.expression;
 
-import com.intellij.psi.PsiLiteralValue;
-import org.jetbrains.annotations.NotNull;
-
-public interface M68kNumberExpression extends M68kExpression, PsiLiteralValue {
-
-  @NotNull M68kNumberExpressionLiteralType getNumberExpressionLiteralType();
+/**
+ * @see M68kNumberExpression#getNumberExpressionLiteralType()
+ */
+public enum M68kNumberExpressionLiteralType {
+  DECIMAL,
+  OCTAL,
+  HEXADECIMAL,
+  BINARY
 }

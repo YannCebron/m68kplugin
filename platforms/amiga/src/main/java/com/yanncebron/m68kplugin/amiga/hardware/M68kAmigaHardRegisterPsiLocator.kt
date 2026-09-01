@@ -20,6 +20,7 @@ import com.intellij.psi.util.PsiTreeUtil
 import com.yanncebron.m68kplugin.lang.psi.M68kDataSize
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDcDirective
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpressionLiteralType
 
 internal object M68kAmigaHardRegisterPsiLocator {
 
@@ -30,7 +31,9 @@ internal object M68kAmigaHardRegisterPsiLocator {
      */
     @JvmStatic
     fun findByFullAddress(element: M68kNumberExpression): M68kAmigaHardwareRegister? {
-        if (element.textLength != 7 || !element.textContains('$')) return null
+        if (element.numberExpressionLiteralType != M68kNumberExpressionLiteralType.HEXADECIMAL) return null
+        if (element.textLength != 7) return null
+
         val constantValue = element.value as? Int ?: return null
         if (constantValue < minimumAddressValue) return null
 
@@ -42,7 +45,8 @@ internal object M68kAmigaHardRegisterPsiLocator {
      */
     @JvmStatic
     fun findByCopperList(element: M68kNumberExpression): M68kAmigaHardwareRegister? {
-        if (element.textLength !in 2..4 && !element.textContains('$')) return null
+        if (element.numberExpressionLiteralType != M68kNumberExpressionLiteralType.HEXADECIMAL) return null
+        if (element.textLength !in 3..5) return null
 
         val dcDirective = PsiTreeUtil.getNonStrictParentOfType(element, M68kDcDirective::class.java) ?: return null
         if (dcDirective.dataSize != M68kDataSize.WORD) return null
