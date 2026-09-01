@@ -16,30 +16,25 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 import java.util.Set;
 
 public enum M68kDataSize {
 
-  UNSIZED("<unsized>", null),
+  UNSIZED("<unsized>"),
 
-  SINGLE(".s", M68kTokenTypes.DOT_S),
-  BYTE(".b", M68kTokenTypes.DOT_B),
-  WORD(".w", M68kTokenTypes.DOT_W),
-  LONGWORD(".l", M68kTokenTypes.DOT_L);
+  SINGLE(".s"),
+  BYTE(".b"),
+  WORD(".w"),
+  LONGWORD(".l");
 
   @NonNls
   private final String text;
-  private final IElementType elementType;
 
-  M68kDataSize(@NonNls String text, @Nullable IElementType elementType) {
+  M68kDataSize(@NonNls String text) {
     this.text = text;
-    this.elementType = elementType;
   }
 
   @NonNls
@@ -50,19 +45,6 @@ public enum M68kDataSize {
   public String getTextWithoutDot() {
     assert this != UNSIZED;
     return text.substring(1);
-  }
-
-  @Nullable
-  public IElementType getElementType() {
-    return elementType;
-  }
-
-  @Nullable
-  public static M68kDataSize findByElementType(@NotNull IElementType elementType) {
-    for (M68kDataSize value : values()) {
-      if (elementType == value.getElementType()) return value;
-    }
-    return null;
   }
 
   public static final Set<M68kDataSize> GROUP_SBWL = EnumSet.of(SINGLE, BYTE, WORD, LONGWORD);

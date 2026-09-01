@@ -15,11 +15,11 @@
  */
 package com.yanncebron.m68kplugin.lang.psi.directive;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
 import com.yanncebron.m68kplugin.lang.psi.M68kDataSized;
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kExpression;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public interface M68kDcDirective extends M68kDataSized, M68kDirective {
 

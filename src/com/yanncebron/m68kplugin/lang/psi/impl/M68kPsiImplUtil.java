@@ -18,6 +18,7 @@ package com.yanncebron.m68kplugin.lang.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.tree.IElementType;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncbinDirective;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kIncdirDirective;
@@ -27,29 +28,37 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
+import java.util.Map;
 
-public class M68kPsiImplUtil {
+public final class M68kPsiImplUtil {
+
+  private static final Map<IElementType, M68kDataSize> dataSizeMap = Map.of(
+    M68kTokenTypes.DOT_S, M68kDataSize.SINGLE,
+    M68kTokenTypes.DOT_B, M68kDataSize.BYTE,
+    M68kTokenTypes.DOT_W, M68kDataSize.WORD,
+    M68kTokenTypes.DOT_L, M68kDataSize.LONGWORD
+  );
 
   @Nullable
-  public static M68kDataSize getDataSize(M68kDataSized psiElement) {
+  public static M68kDataSize getDataSize(@NotNull M68kDataSized psiElement) {
     final ASTNode childByType = psiElement.getNode().findChildByType(M68kTokenGroups.DATA_SIZES);
     if (childByType == null) return null;
 
-    return M68kDataSize.findByElementType(childByType.getElementType());
+    return dataSizeMap.get(childByType.getElementType());
   }
 
-  public static boolean isFirstOperand(M68kInstruction instruction, @NotNull M68kAdm operand) {
+  public static boolean isFirstOperand(@NotNull M68kInstruction instruction, @NotNull M68kAdm operand) {
     final ASTNode commaNode = instruction.getNode().findChildByType(M68kTokenTypes.COMMA);
     return commaNode != null && commaNode.getStartOffset() < operand.getNode().getStartOffset();
   }
 
-  public static boolean isSecondOperand(M68kInstruction instruction, @NotNull M68kAdm operand) {
+  public static boolean isSecondOperand(@NotNull M68kInstruction instruction, @NotNull M68kAdm operand) {
     final ASTNode commaNode = instruction.getNode().findChildByType(M68kTokenTypes.COMMA);
     return commaNode != null && commaNode.getStartOffset() > operand.getNode().getStartOffset();
   }
 
   @NotNull
-  public static EnumSet<M68kRegister> getRegisters(M68kRegisterRange range) {
+  public static EnumSet<M68kRegister> getRegisters(@NotNull M68kRegisterRange range) {
     final M68kRegister fromRegister = range.getFrom().getRegister();
 
     final M68kAdmRrd to = range.getTo();
@@ -86,7 +95,7 @@ public class M68kPsiImplUtil {
   }
 
   @Nullable
-  private static String _getStringPath(M68kPsiElement stringDirective) {
+  private static String _getStringPath(@NotNull M68kPsiElement stringDirective) {
     final ASTNode node = stringDirective.getNode().findChildByType(M68kTokenTypes.STRING);
     if (node == null) {
       return null;

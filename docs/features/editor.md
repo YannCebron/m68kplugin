@@ -171,6 +171,8 @@ Adds hints for hardware registers (hex numbers)
 
 ![Amiga Hardware Register inlay hint](../assets/editor/inlay_amiga_hardware_register.png)
 
+![Amiga Hardware Register inlay hint in copperlist](../assets/editor/inlay_amiga_hardware_register_copperlist.png)
+
 ### Intentions
 
 Invoke intentions via <kbd>Alt</kbd>+<kbd>Enter</kbd> or click on the lightbulb popup in editor.

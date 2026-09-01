@@ -33,7 +33,7 @@ public class M68kAmigaHardwareRegisterInlayProviderTest extends DeclarativeInlay
       
         move.b	#0,$bfe001/*<# CIAA_PRA #>*/  ; clear
         btst 		#14,$dff002/*<# DMACONR #>*/ ; blitter busy?
-      """, new M68kAmigaHardwareInlayProvider(), Collections.emptyMap(), false);
+      """, new M68kAmigaHardwareRegisterInlayProvider(), Collections.emptyMap(), false);
   }
 
   public void testHardwareRegisterInlayNumberExpressionNotAmigaTargetPlatform() {
@@ -42,6 +42,21 @@ public class M68kAmigaHardwareRegisterInlayProviderTest extends DeclarativeInlay
       
         move.b	#0,$bfe001  ; clear
         btst 		#14,$dff002 ; blitter busy?
-      """, new M68kAmigaHardwareInlayProvider(), Collections.emptyMap(), false);
+      """, new M68kAmigaHardwareRegisterInlayProvider(), Collections.emptyMap(), false);
+  }
+
+  public void testHardwareRegisterCopperlist() {
+    M68kProjectEnvironment.getInstance(getProject()).setTargetPlatform(M68kTargetPlatform.AMIGA, getTestRootDisposable());
+
+    doTestProvider("a.s", """
+        dc.w $8E/*<# DIWSTRT #>*/,$2c81
+        dc.w $08E/*<# DIWSTRT #>*/,$2c81
+        dc.w $008E/*<# DIWSTRT #>*/,$2c81
+      
+        dc.w $0180/*<# COLOR00 #>*/,$0180 ; only first value
+        dc.w $0180,$0180,$0180            ; only if 2 values
+      
+        dc.l $0180,$0180                  ; only .W
+      """, new M68kAmigaHardwareRegisterInlayProvider(), Collections.emptyMap(), false);
   }
 }

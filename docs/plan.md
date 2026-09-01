@@ -153,7 +153,7 @@
 
 - copper list:
   - color-picker/inlays
-  - register name completion/inlay
+  - register name completion
   - register editor doc/_Select In_
   - https://fcondolo.github.io/gradientmaster/
 - support IFF images in IDE [https://github.com/haraldk/TwelveMonkeys](https://github.com/haraldk/TwelveMonkeys)

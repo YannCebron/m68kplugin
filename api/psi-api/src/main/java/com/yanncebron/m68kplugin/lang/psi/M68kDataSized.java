@@ -15,10 +15,11 @@
  */
 package com.yanncebron.m68kplugin.lang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.Nullable;
 
+/**
+ * @see com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil#getDataSize(M68kDataSized)
+ */
 public interface M68kDataSized extends M68kPsiElement {
 
   @Nullable M68kDataSize getDataSize();
