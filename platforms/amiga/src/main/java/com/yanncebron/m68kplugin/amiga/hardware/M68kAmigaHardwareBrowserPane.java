@@ -17,6 +17,7 @@
 package com.yanncebron.m68kplugin.amiga.hardware;
 
 import com.intellij.icons.AllIcons;
+import com.intellij.ide.SelectInContext;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.actionSystem.ex.ActionUtil;
@@ -26,6 +27,8 @@ import com.intellij.openapi.project.DumbAwareToggleAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.NaturalComparator;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.ui.speedSearch.SpeedSearchUtil;
@@ -34,6 +37,7 @@ import com.yanncebron.m68kplugin.M68kApiBundle;
 import com.yanncebron.m68kplugin.amiga.M68kAmigaBundle;
 import com.yanncebron.m68kplugin.browser.M68kBrowserPaneBase;
 import com.yanncebron.m68kplugin.browser.M68kBrowserPaneFactory;
+import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression;
 import com.yanncebron.m68kplugin.settings.ide.M68kProjectEnvironment;
 import com.yanncebron.m68kplugin.settings.ide.M68kTargetPlatform;
 import org.jetbrains.annotations.NonNls;
@@ -246,6 +250,28 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
     @Override
     public M68kAmigaHardwareBrowserPane createPane(Project project) {
       return new M68kAmigaHardwareBrowserPane(project);
+    }
+
+    @Override
+    public boolean canSelect(SelectInContext context) {
+      return findRegister(context) != null;
+    }
+
+    @Override
+    public @Nullable M68kAmigaHardwareRegister getSelectedItem(SelectInContext context) {
+      return findRegister(context);
+    }
+
+    private static @Nullable M68kAmigaHardwareRegister findRegister(SelectInContext context) {
+      Object selectorInFile = context.getSelectorInFile();
+      if (!(selectorInFile instanceof PsiElement psiElement)) return null;
+
+      M68kNumberExpression numberExpression = PsiTreeUtil.getParentOfType(psiElement, M68kNumberExpression.class);
+      if (numberExpression == null) return null;
+
+      M68kAmigaHardwareRegister register = M68kAmigaHardRegisterPsiLocator.findByFullAddress(numberExpression);
+      if (register != null) return register;
+      return M68kAmigaHardRegisterPsiLocator.findByCopperList(numberExpression);
     }
   }
 }
