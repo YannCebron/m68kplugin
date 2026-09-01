@@ -24,6 +24,9 @@ import com.yanncebron.m68kplugin.M68kBundle
 import com.yanncebron.m68kplugin.lang.M68kFile
 import com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister
 import com.yanncebron.m68kplugin.lang.psi.M68kCpu
+import com.yanncebron.m68kplugin.lang.psi.M68kRegister
+
+private val mc68010UpRegisters = M68kRegister.entries.filter { it.cpus.equals(M68kCpu.GROUP_68010_UP) }.toSet()
 
 internal class M68kRegisterInlayProvider : InlayHintsProvider {
 
@@ -43,8 +46,7 @@ internal class M68kRegisterInlayProvider : InlayHintsProvider {
             sink: InlayTreeSink
         ) {
             if (element is M68kAdmWithRegister) {
-                val register = element.register
-                if (register.cpus.equals(M68kCpu.GROUP_68010_UP)) {
+                if (mc68010UpRegisters.contains(element.register)) {
                     val offset = element.textRange.endOffset
                     sink.addPresentation(
                         InlineInlayPosition(offset, false),
