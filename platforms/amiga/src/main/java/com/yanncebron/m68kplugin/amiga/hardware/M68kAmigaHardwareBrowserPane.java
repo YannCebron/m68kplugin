@@ -269,9 +269,9 @@ public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaH
       M68kNumberExpression numberExpression = PsiTreeUtil.getParentOfType(psiElement, M68kNumberExpression.class);
       if (numberExpression == null) return null;
 
-      M68kAmigaHardwareRegister register = M68kAmigaHardRegisterPsiLocator.findByFullAddress(numberExpression);
+      M68kAmigaHardwareRegister register = M68kAmigaHardwareRegisterPsiLocator.findByFullAddress(numberExpression);
       if (register != null) return register;
-      return M68kAmigaHardRegisterPsiLocator.findByCopperList(numberExpression);
+      return M68kAmigaHardwareRegisterPsiLocator.findByCopperList(numberExpression);
     }
   }
 }

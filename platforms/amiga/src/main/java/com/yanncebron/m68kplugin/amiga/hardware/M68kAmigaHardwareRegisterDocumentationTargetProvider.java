@@ -49,9 +49,9 @@ final class M68kAmigaHardwareRegisterDocumentationTargetProvider implements Docu
     M68kNumberExpression numberExpression = PsiTreeUtil.getParentOfType(psiElement, M68kNumberExpression.class);
     if (numberExpression == null) return Collections.emptyList();
 
-    M68kAmigaHardwareRegister hardwareRegister = M68kAmigaHardRegisterPsiLocator.findByFullAddress(numberExpression);
+    M68kAmigaHardwareRegister hardwareRegister = M68kAmigaHardwareRegisterPsiLocator.findByFullAddress(numberExpression);
     if (hardwareRegister == null) {
-      hardwareRegister = M68kAmigaHardRegisterPsiLocator.findByCopperList(numberExpression);
+      hardwareRegister = M68kAmigaHardwareRegisterPsiLocator.findByCopperList(numberExpression);
     }
     if (hardwareRegister == null) return Collections.emptyList();
 

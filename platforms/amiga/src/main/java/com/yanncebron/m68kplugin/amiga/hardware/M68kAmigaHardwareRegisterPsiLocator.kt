@@ -22,7 +22,7 @@ import com.yanncebron.m68kplugin.lang.psi.directive.M68kDcDirective
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpressionLiteralType
 
-internal object M68kAmigaHardRegisterPsiLocator {
+internal object M68kAmigaHardwareRegisterPsiLocator {
 
     private const val minimumAddressValue = 0xBFD000 // CIAB_PRA
 

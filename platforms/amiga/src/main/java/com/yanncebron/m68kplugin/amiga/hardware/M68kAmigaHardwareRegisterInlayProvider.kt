@@ -47,8 +47,8 @@ internal class M68kAmigaHardwareRegisterInlayProvider : InlayHintsProvider {
             sink: InlayTreeSink
         ) {
             if (element is M68kNumberExpression) {
-                val register = M68kAmigaHardRegisterPsiLocator.findByFullAddress(element)
-                    ?: M68kAmigaHardRegisterPsiLocator.findByCopperList(element)
+                val register = M68kAmigaHardwareRegisterPsiLocator.findByFullAddress(element)
+                    ?: M68kAmigaHardwareRegisterPsiLocator.findByCopperList(element)
                 if (register == null) return
 
                 sink.addPresentation(
