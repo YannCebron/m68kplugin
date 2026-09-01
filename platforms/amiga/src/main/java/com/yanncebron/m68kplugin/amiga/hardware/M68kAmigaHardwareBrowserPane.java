@@ -49,18 +49,18 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaHardwareRegister> {
+final class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaHardwareRegister> {
 
   private Ref<Boolean> isShowCIA;
   private Ref<Boolean> isAnnotateChipset;
   private Ref<Boolean> isShowReferenceDocs;
 
-  public M68kAmigaHardwareBrowserPane(Project project) {
+  private M68kAmigaHardwareBrowserPane(Project project) {
     super(M68kAmigaHardwareRegister.class, project);
   }
 
   @Override
-  protected @Nullable ActionGroup getToolbarActionGroup() {
+  protected ActionGroup getToolbarActionGroup() {
     DefaultActionGroup actionGroup = new DefaultActionGroup();
 
     isShowCIA = Ref.create(Boolean.TRUE);
