@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+ * Unfortunately it's not possible to generate a clean, standalone module containing only
+ * generated PSI interfaces to depend on from psi-api module.
+ * As long as grammar/PSI is far from complete, psi-api module contains selected necessary interfaces to expose.
+ * After generation, remove duplicated PSI from GK in /gen/.
+ */
 {
   parserClass = "com.yanncebron.m68kplugin.lang.M68kParser"
   parserImports = [
@@ -1839,6 +1845,7 @@ private primary_group ::= number_expression | string_expression | label_ref_expr
 number_expression ::= DEC_NUMBER | BIN_NUMBER | HEX_NUMBER | OCT_NUMBER
 {
   implements = "com.intellij.psi.PsiLiteralValue"
+  methods = [ getNumberExpressionLiteralType ]
   mixin = "com.yanncebron.m68kplugin.lang.psi.expression.impl.M68kNumberExpressionMixIn"
 }
 string_expression ::= STRING

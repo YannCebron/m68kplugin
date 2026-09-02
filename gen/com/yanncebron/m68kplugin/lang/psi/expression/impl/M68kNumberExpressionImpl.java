@@ -25,6 +25,7 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTypes.*;
 import com.yanncebron.m68kplugin.lang.psi.expression.*;
 import com.yanncebron.m68kplugin.lang.psi.M68kVisitor;
 import com.yanncebron.m68kplugin.lang.psi.impl.M68kPsiImplUtil;
+import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
 
 public class M68kNumberExpressionImpl extends M68kNumberExpressionMixIn implements M68kNumberExpression {
 
