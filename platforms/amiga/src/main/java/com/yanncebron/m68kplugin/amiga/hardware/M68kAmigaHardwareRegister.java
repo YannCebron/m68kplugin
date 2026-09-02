@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Set;
 
 @SuppressWarnings("SpellCheckingInspection")
-public enum M68kAmigaHardwareRegister {
+enum M68kAmigaHardwareRegister {
 
   CIAB_PRA("CIABPRA", "BFD000", "CIAB Peripheral Data Register A", "CIAB_PRA", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_B),
   CIAB_PRB("CIABPRB", "BFD100", "CIAB Peripheral Data Register B", "CIAB_PRB", Chipset.N_A, false, Access.READ_WRITE, Chip.CIA_B),
