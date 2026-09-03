@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.yanncebron.m68kplugin.compiler;
+package com.yanncebron.m68kplugin.assembler;
 
 import com.intellij.execution.filters.FileHyperlinkInfo;
 import com.intellij.execution.filters.Filter;

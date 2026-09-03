@@ -57,7 +57,7 @@ public final class M68kBuiltinSymbolPsiElement extends FakePsiElement implements
   @Override
   public String getName() {
     String description = StringUtil.defaultIfEmpty(builtinSymbol.getDescription(), builtinSymbol.getName());
-    return description + " (" + builtinSymbol.getCompiler().getDisplayName() + ")";
+    return description + " (" + builtinSymbol.getAssembler().getDisplayName() + ")";
   }
 
   @Override

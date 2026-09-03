@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.yanncebron.m68kplugin.compiler;
+package com.yanncebron.m68kplugin.assembler;
 
-public enum M68kCompiler {
+public enum M68kAssembler {
 
   ANY("any"),
   BASM("BAsm"),
@@ -26,7 +26,7 @@ public enum M68kCompiler {
 
   private final String displayName;
 
-  M68kCompiler(String displayName) {
+  M68kAssembler(String displayName) {
     this.displayName = displayName;
   }
 

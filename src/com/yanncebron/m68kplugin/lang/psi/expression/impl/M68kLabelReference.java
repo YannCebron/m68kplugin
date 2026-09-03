@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -137,7 +137,7 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
         .withItemTextItalic(true)
         .withIcon(value.getIcon())
         .withTailText(" " + value.getDescription())
-        .withTypeText(value.getCompiler().getDisplayName(), AllIcons.Actions.Compile, true);
+        .withTypeText(value.getAssembler().getDisplayName(), AllIcons.Actions.Compile, true);
       variants.add(PrioritizedLookupElement.withPriority(builder, -1));
     }
 
