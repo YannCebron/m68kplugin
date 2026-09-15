@@ -165,13 +165,13 @@ Rename labels and macros using *Refactor \| Rename* across the whole project wit
 
 Settings and descriptions can be accessed under the group _Other \| M68k Assembler_ in _Settings \| Editor \| Inlay Hints_
 
-#### CPU for Register
+#### Inlay: CPU for Register
 
 Adds hints for MC68010+ registers (`DFC`, `SFC`, `VBR`)
 
 ![Register inlay hint](../assets/editor/inlay_register.png)
 
-#### Amiga Hardware Register
+#### Inlay: Amiga Hardware Register
 
 > [Target platform](../getting_started.md#target-platform) must be set to _Amiga_
 

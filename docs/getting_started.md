@@ -58,9 +58,9 @@ Shared
 {: .label }
 
 - _Generic_: basic support (default)
-- _Amiga_: adds [_Amiga Hardware_](features/ide.md#amiga-hardware) pane in _M68k Browser_
+- _Amiga_: adds [_Amiga Hardware_](features/ide.md#amiga-hardware) pane in _M68k Browser_ and [hardware register inlays](features/editor.md#inlay-amiga-hardware-register)
 
-If set to _Generic_, the plugin will check the project's contents when opening a project and suggest a matching target platform.
+If set to _Generic_, the plugin will check the project's contents on opening and suggest a matching target platform.
 This notification can be disabled globally or per project via its kebab menu.
 
 ### Editor
@@ -74,8 +74,8 @@ The maximum number of statements to show.
 
 ## Building
 
-[vasm](http://sun.hasenbraten.de/vasm/) executable can easily be invoked via [External Tools](https://www.jetbrains.com/help/idea/configuring-third-party-tools.html) 
+[vasm](http://sun.hasenbraten.de/vasm/) (or any other assembler) executable can easily be invoked via [External Tools](https://www.jetbrains.com/help/idea/configuring-third-party-tools.html) 
 and mapped to a keyboard shortcut for convenience.
-Warning/error messages in the console provide navigation links to the _file:lineNumber_ or _label name_ source (see [IDE](features/ide.md)).                  
+Warning/error messages in the console provide navigation links to the _file:lineNumber_ or _label name_ source (see [IDE](features/ide.md#external-tools)).                  
 
 Alternatively, any supported build system can be used, e.g., [Makefile](https://plugins.jetbrains.com/plugin/9333-makefile-language).
