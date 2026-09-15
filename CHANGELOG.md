@@ -4,6 +4,7 @@
 
 ### Changed
 
+- Raise the minimum IDE version to 2025.3 (from 2024.1)
 - M68k Browser: toolwindow icon adapted to New UI
 - Documentation: adjust font sizes
 

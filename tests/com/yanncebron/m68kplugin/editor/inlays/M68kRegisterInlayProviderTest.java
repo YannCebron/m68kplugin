@@ -18,8 +18,6 @@ package com.yanncebron.m68kplugin.editor.inlays;
 
 import com.intellij.testFramework.utils.inlays.declarative.DeclarativeInlayHintsProviderTestCase;
 
-import java.util.Collections;
-
 public class M68kRegisterInlayProviderTest extends DeclarativeInlayHintsProviderTestCase {
 
   public void testRegisterInlay68010() {
@@ -27,7 +25,7 @@ public class M68kRegisterInlayProviderTest extends DeclarativeInlayHintsProvider
         movec       d0,DFC/*<# 010+ #>*/
         movec.l     VBR/*<# 010+ #>*/,d0
         movec.l     SFC/*<# 010+ #>*/,d0
-      """, new M68kRegisterInlayProvider(), Collections.emptyMap(), false);
+      """, new M68kRegisterInlayProvider());
   }
 
 }

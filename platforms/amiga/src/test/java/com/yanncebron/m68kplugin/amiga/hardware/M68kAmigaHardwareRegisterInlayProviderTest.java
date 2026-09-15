@@ -20,8 +20,6 @@ import com.intellij.testFramework.utils.inlays.declarative.DeclarativeInlayHints
 import com.yanncebron.m68kplugin.settings.ide.M68kProjectEnvironment;
 import com.yanncebron.m68kplugin.settings.ide.M68kTargetPlatform;
 
-import java.util.Collections;
-
 public class M68kAmigaHardwareRegisterInlayProviderTest extends DeclarativeInlayHintsProviderTestCase {
 
   public void testHardwareRegisterInlayNumberExpression() {
@@ -33,7 +31,7 @@ public class M68kAmigaHardwareRegisterInlayProviderTest extends DeclarativeInlay
       
         move.b	#0,$bfe001/*<# CIAA_PRA #>*/  ; clear
         btst 		#14,$dff002/*<# DMACONR #>*/ ; blitter busy?
-      """, new M68kAmigaHardwareRegisterInlayProvider(), Collections.emptyMap(), false);
+      """, new M68kAmigaHardwareRegisterInlayProvider());
   }
 
   public void testHardwareRegisterInlayNumberExpressionNotAmigaTargetPlatform() {
@@ -42,7 +40,7 @@ public class M68kAmigaHardwareRegisterInlayProviderTest extends DeclarativeInlay
       
         move.b	#0,$bfe001  ; clear
         btst 		#14,$dff002 ; blitter busy?
-      """, new M68kAmigaHardwareRegisterInlayProvider(), Collections.emptyMap(), false);
+      """, new M68kAmigaHardwareRegisterInlayProvider());
   }
 
   public void testHardwareRegisterCopperlist() {
@@ -57,6 +55,6 @@ public class M68kAmigaHardwareRegisterInlayProviderTest extends DeclarativeInlay
         dc.w $0180,$0180,$0180            ; only if 2 values
       
         dc.l $0180,$0180                  ; only .W
-      """, new M68kAmigaHardwareRegisterInlayProvider(), Collections.emptyMap(), false);
+      """, new M68kAmigaHardwareRegisterInlayProvider());
   }
 }

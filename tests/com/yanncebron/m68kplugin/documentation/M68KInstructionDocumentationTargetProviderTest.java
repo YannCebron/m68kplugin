@@ -85,7 +85,7 @@ public class M68KInstructionDocumentationTargetProviderTest extends BasePlatform
   public void testChkInstructionReferenceDocWithStyledCodeBlock() {
     Collection<M68kMnemonic> all = M68kMnemonicRegistry.getInstance().findAll(M68kTokenTypes.CHK);
     doTestReferenceDoc(ContainerUtil.getFirstItem(all),
-      "<div class='styled-code'><pre style=\"padding: 0px; margin: 0px\">",
+      "<pre><code><span style=\"color:#808080;font-style:italic;\">",
       "<span style=\"color:#808080;font-style:italic;\">;Test&#32;subscript");
   }
 

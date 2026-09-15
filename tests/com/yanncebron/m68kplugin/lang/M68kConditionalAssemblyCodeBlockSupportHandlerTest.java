@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ public class M68kConditionalAssemblyCodeBlockSupportHandlerTest extends BasePlat
 
   private void doMatchingRangesTest() {
     myFixture.setReadEditorMarkupModel(true);
-    IdentifierHighlighterPassFactory.doWithHighlightingEnabled(getProject(), getTestRootDisposable(), () -> {
+    IdentifierHighlighterPassFactory.doWithIdentifierHighlightingEnabled(getProject(), () -> {
       myFixture.configureByFile(getTestName(false) + "." + M68kFileType.INSTANCE.getDefaultExtension());
       EditorTestUtil.checkEditorHighlighting(myFixture,
         FileUtil.join(getTestDataPath(), getTestName(false) + ".txt"),

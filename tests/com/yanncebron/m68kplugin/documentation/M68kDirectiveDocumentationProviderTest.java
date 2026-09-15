@@ -31,7 +31,7 @@ import com.yanncebron.m68kplugin.lang.psi.directive.M68kSoDirective;
 import java.util.HashSet;
 import java.util.Set;
 
-@SuppressWarnings("SpellCheckingInspection")
+@SuppressWarnings("removal")
 public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase {
 
   public void testDirectivesWithoutReferenceDoc() {
@@ -144,8 +144,8 @@ public class M68kDirectiveDocumentationProviderTest extends BasePlatformTestCase
     doTest(" cn<caret>op", (psiElement, documentationProvider) -> {
       String doc = documentationProvider.generateDoc(psiElement, getOriginalElement());
       assertNotNull(doc);
-      assertTrue(StringUtil.contains(doc, "<div class='styled-code'><pre style=\"padding: 0px; margin: 0px\">"));
-      assertTrue(StringUtil.contains(doc, "<span style=\"color:#808080;font-style:italic;\">;&#32;align"));
+      assertTrue(doc, StringUtil.contains(doc, "<pre><code><span style=\"color:#808080;font-style:italic;\">"));
+      assertTrue(doc, StringUtil.contains(doc, "<span style=\"color:#808080;font-style:italic;\">;&#32;align"));
     });
   }
 

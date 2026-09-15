@@ -27,6 +27,8 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
 
     intellijPlatform {
+        bundledModule("intellij.spellchecker")
+
         testFramework(TestFrameworkType.Platform)
     }
 }

@@ -26,20 +26,22 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 dependencies {
     testImplementation("junit:junit:4.13.2")
 
     intellijPlatform {
-        intellijIdeaCommunity(properties("platformVersion"))
+        intellijIdea(properties("platformVersion"))
+        bundledModule("intellij.spellchecker")
 
         pluginComposedModule(implementation(project(":plugin-api")))
         pluginComposedModule(implementation(project(":psi-api")))
         pluginComposedModule(implementation(project(":amiga")))
 
-        testFramework(TestFrameworkType.Platform)
+        testFrameworks(TestFrameworkType.Platform, TestFrameworkType.Plugin.NavBar)
+        testBundledPlugin("tanvd.grazi") // spellchecker
 
         jflex("1.10.17")
         grammarKit("2023.3.3")

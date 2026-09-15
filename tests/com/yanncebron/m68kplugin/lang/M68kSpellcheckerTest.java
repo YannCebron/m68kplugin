@@ -16,8 +16,8 @@
 
 package com.yanncebron.m68kplugin.lang;
 
+import com.intellij.grazie.spellcheck.GrazieSpellCheckingInspection;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.spellchecker.inspections.SpellCheckingInspection;
 import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
@@ -28,7 +28,7 @@ public class M68kSpellcheckerTest extends BasePlatformTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    myFixture.enableInspections(new SpellCheckingInspection());
+    myFixture.enableInspections(new GrazieSpellCheckingInspection());
   }
 
   @Override

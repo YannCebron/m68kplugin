@@ -234,7 +234,8 @@ public class M68kLabelResolveTest extends BasePlatformTestCase {
         return List.of(HighlightInfoType.ELEMENT_UNDER_CARET_READ, HighlightInfoType.ELEMENT_UNDER_CARET_WRITE);
       }
     }, getTestRootDisposable());
-    IdentifierHighlighterPassFactory.doWithHighlightingEnabled(getProject(), getTestRootDisposable(), () -> {
+    //noinspection UnstableApiUsage
+    IdentifierHighlighterPassFactory.doWithIdentifierHighlightingEnabled(getProject(), () -> {
       myFixture.setReadEditorMarkupModel(true);
       myFixture.configureByFile(getTestName(true) + ".s");
       myFixture.checkHighlighting();
