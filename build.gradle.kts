@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 import org.jetbrains.intellij.platform.gradle.tasks.VerifyPluginTask.FailureLevel
 
@@ -56,10 +55,6 @@ intellijPlatform {
     pluginVerification {
         ides {
             recommended()
-            select {
-                types = listOf(IntelliJPlatformType.IntellijIdea)
-                sinceBuild = "253"
-            }
         }
         failureLevel.set(listOf(FailureLevel.COMPATIBILITY_PROBLEMS))
     }
