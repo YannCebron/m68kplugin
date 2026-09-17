@@ -22,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.BiConsumer;
 
 final class M68kConstantExpressionVisitor extends M68kVisitor {
@@ -178,6 +179,20 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
   @Override
   public void visitParenExpression(@NotNull M68kParenExpression o) {
     result = getStoredValue(o.getExpression());
+  }
+
+  @Override
+  public void visitEqualsExpression(@NotNull M68kEqualsExpression expression) {
+    handleBinaryNumberExpression(expression, (left, right) -> {
+      result = Objects.equals(left, right) ? -1 : 0;
+    });
+  }
+
+  @Override
+  public void visitNotEqualsExpression(@NotNull M68kNotEqualsExpression expression) {
+    handleBinaryNumberExpression(expression, (left, right) -> {
+      result = Objects.equals(left, right) ? 0 : -1;
+    });
   }
 
   @Override

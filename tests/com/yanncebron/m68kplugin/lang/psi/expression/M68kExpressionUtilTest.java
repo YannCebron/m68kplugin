@@ -193,6 +193,16 @@ public class M68kExpressionUtilTest extends M68kPsiTestCase<M68kDcDirective> {
     assertEquals(-1, computeConstantValue("1&&1"));
   }
 
+  public void testComputeEqualsExpression() {
+    assertEquals(0, computeConstantValue("1=2"));
+    assertEquals(-1, computeConstantValue("1=1"));
+  }
+
+  public void testComputeNotEqualsExpression() {
+    assertEquals(-1, computeConstantValue("1!=2"));
+    assertEquals(0, computeConstantValue("1!=1"));
+  }
+
   private Object computeConstantValue(String expressionText) {
     return M68kExpressionUtil.getInstance().computeConstantValue(getExpression(expressionText));
   }
