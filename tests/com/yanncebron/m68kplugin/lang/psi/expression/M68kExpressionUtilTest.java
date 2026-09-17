@@ -225,6 +225,18 @@ public class M68kExpressionUtilTest extends M68kPsiTestCase<M68kDcDirective> {
     assertEquals(0, computeConstantValue("1<=0"));
   }
 
+  public void testRandomComplexExpressions() {
+    assertEquals(180224, computeConstantValue("((2<<16)|((3<<16)/4))"));
+    assertEquals(40, computeConstantValue("((37+(8-1))&~(8-1))"));
+    assertEquals(61455, computeConstantValue("(~(((1<<(11-4+1))-1)<<4)&$FFFF)"));
+    assertEquals(2, computeConstantValue("((100+50-25*2/5)>>(12/4^2)&(15%8|!0))"));
+    assertEquals(-20240, computeConstantValue("((((1024>>2)<500)&&(255!=0))<<15|(7&3)<<12|~15&$FF)"));
+    assertEquals(-256, computeConstantValue("(((!0+!0+!0)<<12)|-((15-3)*2+1)&~$FF)"));
+    assertEquals(-1, computeConstantValue("(!(0==0)||(100/10==10))&&(200%3!=0)"));
+    assertEquals(-1, computeConstantValue("(((512&(512-1))==0)&&(512!=0))"));
+    assertEquals(-1, computeConstantValue("(((!0||0)&&!(1==2))&&((256/16>10)||(50<=5)))||((!((!0||0)&&!(1==2)))&&((10>5)&&!(10>5)))"));
+  }
+
   private Object computeConstantValue(String expressionText) {
     return M68kExpressionUtil.getInstance().computeConstantValue(getExpression(expressionText));
   }
