@@ -141,11 +141,6 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
   }
 
   @Override
-  public void visitLogicalAndExpression(@NotNull M68kLogicalAndExpression o) {
-    super.visitLogicalAndExpression(o);
-  }
-
-  @Override
   public void visitAndExpression(@NotNull M68kAndExpression expression) {
     handleBinaryNumberExpression(expression, (left, right) -> {
       result = left & right;
@@ -163,6 +158,20 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
   public void visitXorExpression(@NotNull M68kXorExpression expression) {
     handleBinaryNumberExpression(expression, (left, right) -> {
       result = left ^ right;
+    });
+  }
+
+  @Override
+  public void visitLogicalAndExpression(@NotNull M68kLogicalAndExpression expression) {
+    handleBinaryNumberExpression(expression, (left, right) -> {
+      result = (left != 0 && right != 0) ? -1 : 0;
+    });
+  }
+
+  @Override
+  public void visitLogicalOrExpression(@NotNull M68kLogicalOrExpression expression) {
+    handleBinaryNumberExpression(expression, (left, right) -> {
+      result = (left != 0 || right != 0) ? -1 : 0;
     });
   }
 

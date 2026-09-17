@@ -18,6 +18,7 @@
   - _Amiga hardware register name_
 - Suggest the matching project target platform on project open to enable specific features (currently only _Amiga_)
 - _Amiga hardware register_ documentation in the editor and support _Navigate | Select In... | M68k Browser_
+- Constant expression evaluation: logical and (`&&`), logical or (`||`) 
 
 ### Fixed
 
