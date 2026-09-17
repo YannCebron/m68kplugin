@@ -64,8 +64,8 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
   @Override
   public void visitUnaryPlusExpression(@NotNull M68kUnaryPlusExpression o) {
     Object value = getStoredValue(o.getOperand());
-    if (value instanceof Number) {
-      result = ((Number) value).intValue();
+    if (value instanceof Number number) {
+      result = number.intValue();
     }
   }
 
@@ -74,8 +74,8 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
     result = null;
     M68kExpression operand = o.getOperand();
     Object value = getStoredValue(operand);
-    if (value instanceof Number) {
-      int intValue = ((Number) value).intValue();
+    if (value instanceof Number number) {
+      int intValue = number.intValue();
       // plain number literal is already parsed signed
       if (operand instanceof M68kNumberExpression) {
         result = intValue;
@@ -88,8 +88,8 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
   @Override
   public void visitUnaryComplementExpression(@NotNull M68kUnaryComplementExpression o) {
     Object value = getStoredValue(o.getOperand());
-    if (value instanceof Number) {
-      result = ~((Number) value).intValue();
+    if (value instanceof Number number) {
+      result = ~number.intValue();
     }
   }
 
