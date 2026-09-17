@@ -196,6 +196,34 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
   }
 
   @Override
+  public void visitGtExpression(@NotNull M68kGtExpression expression) {
+    handleBinaryNumberExpression(expression, (left, right) -> {
+      result = left > right ? -1 : 0;
+    });
+  }
+
+  @Override
+  public void visitGtEqExpression(@NotNull M68kGtEqExpression expression) {
+    handleBinaryNumberExpression(expression, (left, right) -> {
+      result = left > right || Objects.equals(left, right) ? -1 : 0;
+    });
+  }
+
+  @Override
+  public void visitLtExpression(@NotNull M68kLtExpression expression) {
+    handleBinaryNumberExpression(expression, (left, right) -> {
+      result = left < right ? -1 : 0;
+    });
+  }
+
+  @Override
+  public void visitLtEqExpression(@NotNull M68kLtEqExpression expression) {
+    handleBinaryNumberExpression(expression, (left, right) -> {
+      result = left < right || Objects.equals(left, right) ? -1 : 0;
+    });
+  }
+
+  @Override
   public void visitShiftLeftExpression(@NotNull M68kShiftLeftExpression o) {
     handleBinaryNumberExpression(o, (left, right) -> {
       result = left << right;

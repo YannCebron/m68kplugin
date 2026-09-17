@@ -20,7 +20,9 @@
 - _Amiga hardware register_ documentation in the editor and support _Navigate | Select In... | M68k Browser_
 - Constant expression evaluation: 
   - logical and (`&&`), logical or (`||`) 
-  - equals (`=`/`==`), not equals (`!=`)
+  - equality (`=`/`==`), inequality (`!=`)
+  - greater (`>`), greater or equal (`>=`)
+  - less (`<`), less or equal (`<=`)
 
 ### Fixed
 
