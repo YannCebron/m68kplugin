@@ -52,8 +52,14 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
   }
 
   @Override
-  public void visitStringExpression(@NotNull M68kStringExpression o) {
-    result = o.getValue();
+  public void visitStringExpression(@NotNull M68kStringExpression expression) {
+    if (expression.getValue() instanceof String stringValue) {
+      result = stringValue.substring(0, Math.min(4, stringValue.length()))
+        .chars()
+        .reduce(0, (acc, ch) -> (acc << 8) | ch);
+    } else {
+      result = null;
+    }
   }
 
   @Override

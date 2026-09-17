@@ -19,7 +19,6 @@ package com.yanncebron.m68kplugin.lang.psi.expression;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiLiteralValue;
 import com.intellij.psi.util.CachedValue;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
@@ -103,10 +102,6 @@ final class M68kConstantExpressionEvaluator extends M68kRecursiveElementWalkingV
 
   @Nullable
   static Object computeConstantExpression(M68kExpression expression, boolean throwExceptionOnOverflow) {
-    if (expression instanceof PsiLiteralValue psiLiteralValue) {
-      return psiLiteralValue.getValue();
-    }
-
     M68kConstantExpressionEvaluator evaluator = new M68kConstantExpressionEvaluator(expression.getProject(), throwExceptionOnOverflow);
     expression.accept(evaluator);
     Object result = evaluator.getCached(expression);

@@ -138,6 +138,8 @@ public class M68kConstantExpressionInspectionTest extends BasePlatformTestCase {
         dc.b <error descr="Operand value out of range: -6666 (valid: -128..255)">-6666</error>
         dc.b 127
         dc.b <error descr="Operand value out of range: 6666 (valid: -128..255)">6666</error>
+        dc.b 'a'
+        dc.b "a text",0
       
         dc.w -32768
         dc.w <error descr="Operand value out of range: -66666 (valid: -32768..65535)">-66666</error>

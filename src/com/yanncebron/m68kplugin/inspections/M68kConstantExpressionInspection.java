@@ -47,7 +47,7 @@ final class M68kConstantExpressionInspection extends LocalInspectionTool {
 
     @Override
     public void visitExpression(@NotNull M68kExpression o) {
-      if (o instanceof PsiLiteralValue || o instanceof M68kParenExpression) {
+      if (o instanceof PsiLiteralValue || o instanceof M68kParenExpression || o instanceof M68kStringExpression) {
         return;
       }
 
@@ -185,7 +185,7 @@ final class M68kConstantExpressionInspection extends LocalInspectionTool {
     }
 
     private void checkNumberRange(@Nullable M68kExpression expression, int min, int max) {
-      if (expression == null) return;
+      if (expression == null || expression instanceof M68kStringExpression) return;
 
       Object value = M68kExpressionUtil.getInstance().computeConstantValueNoOverflow(expression);
       if (value instanceof Integer intValue) {

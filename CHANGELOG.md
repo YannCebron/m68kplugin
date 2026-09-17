@@ -23,6 +23,7 @@
   - equality (`=`/`==`), inequality (`!=`)
   - greater (`>`), greater or equal (`>=`)
   - less (`<`), less or equal (`<=`)
+  - string literals (`'A'+1` &rarr; 66)
 
 ### Fixed
 

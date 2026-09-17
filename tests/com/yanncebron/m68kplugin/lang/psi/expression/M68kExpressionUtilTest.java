@@ -45,12 +45,11 @@ public class M68kExpressionUtilTest extends M68kPsiTestCase<M68kDcDirective> {
     assertEquals("1", unwrappedExpression.getText());
   }
 
-  public void testComputeConstantValueLiterals() {
+  public void testComputeConstantNumberLiterals() {
     assertEquals(0, computeConstantValue("$0"));
     assertEquals(1, computeConstantValue("%1"));
+    assertEquals(1, computeConstantValue("@1"));
     assertEquals(-1, computeConstantValue("-1"));
-
-    assertEquals("string", computeConstantValue("\"string\""));
   }
 
   public void testComputeConstantValueParenExpression() {
@@ -223,6 +222,18 @@ public class M68kExpressionUtilTest extends M68kPsiTestCase<M68kDcDirective> {
     assertEquals(-1, computeConstantValue("0<=0"));
     assertEquals(-1, computeConstantValue("0<=1"));
     assertEquals(0, computeConstantValue("1<=0"));
+  }
+
+  public void testComputeStringExpression() {
+    assertEquals(0, computeConstantValue("'\0'"));
+    assertEquals(32, computeConstantValue("' '"));
+    assertEquals(97, computeConstantValue("'a'"));
+    assertEquals(24930, computeConstantValue("'ab'"));
+    assertEquals(1633837924, computeConstantValue("'abcd'"));
+    assertEquals(1633837924, computeConstantValue("'abcdABCD'"));
+
+    assertEquals(98, computeConstantValue("'a'+1"));
+    assertEquals(195, computeConstantValue("'a'+'b'"));
   }
 
   public void testRandomComplexExpressions() {
