@@ -158,7 +158,7 @@ public class M68kExpressionUtilTest extends M68kPsiTestCase<M68kDcDirective> {
 
   public void testComputeConstantValueUnaryNotExpression() {
     assertEquals(0, computeConstantValue("!42"));
-    assertEquals(-1, computeConstantValue("!0"));
+    assertEquals(1, computeConstantValue("!0"));
   }
 
   public void testComputeConstantShiftLeftExpression() {

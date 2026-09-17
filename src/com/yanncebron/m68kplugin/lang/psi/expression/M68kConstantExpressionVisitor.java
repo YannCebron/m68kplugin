@@ -95,8 +95,8 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
   @Override
   public void visitUnaryNotExpression(@NotNull M68kUnaryNotExpression o) {
     Object value = getStoredValue(o.getOperand());
-    if (value instanceof Number) {
-      result = ((Number) value).intValue() == 0 ? -1 : 0;
+    if (value instanceof Number number) {
+      result = number.intValue() == 0 ? 1 : 0;
     }
   }
 
@@ -138,6 +138,11 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
       checkDivisionOverflow(left, right, expression);
       result = right == 0 ? null : left % right;
     });
+  }
+
+  @Override
+  public void visitLogicalAndExpression(@NotNull M68kLogicalAndExpression o) {
+    super.visitLogicalAndExpression(o);
   }
 
   @Override
