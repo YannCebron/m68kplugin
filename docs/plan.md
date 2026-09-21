@@ -108,7 +108,7 @@
 
 ## Inspections
 
-- paired `movem`'s with non-symmetrical register ranges
+- paired `movem`'s with non-symmetrical register ranges, option: support `PUSHM`/`POPM` macros
 - register list:
   - sort
   - optimize notation: `d0/d1/d2` &rarr; `d0-d2`
