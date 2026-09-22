@@ -47,24 +47,26 @@ public class M68KAmigaHardwareRegisterDocsCreatorTest extends UsefulTestCase {
   }
 
   public void testBPL1DAT() {
-    assertEquals("<style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>BPL1DAT</b><br/>Bit plane 1 data (parallel to serial convert)</pre></div><table class='sections'><tr><td valign='top' class='section'><p>Address:</td><td valign='top'><code>$DFF110</code><a href='m68kCopyData://$DFF110'><icon src='AllIcons.Actions.Copy'/></a>&nbsp;&ndash;&nbsp;<code>$0110</code><a href='m68kCopyData://$0110'><icon src='AllIcons.Actions.Copy'/></a></td><tr><td valign='top' class='section'><p>Chip Set (Chips):</td><td valign='top'>OCS (Denise/Lisa)</td><tr><td valign='top' class='section'><p>Access:</td><td valign='top'>Write</td><tr><td valign='top' class='section'><p>Copper Danger:</td><td valign='top'>-</td><tr><td valign='top' class='section'><p>Related:</td><td valign='top'><table><tr><td valign='top'><b><a href='m68kBrowser://BPL1DAT'>BPL1DAT</a></b></td><td valign='top'><a href='m68kBrowser://BPL2DAT'>BPL2DAT</a></td><td valign='top'><a href='m68kBrowser://BPL3DAT'>BPL3DAT</a></td><td valign='top'><a href='m68kBrowser://BPL4DAT'>BPL4DAT</a></td></tr><tr><td valign='top'><a href='m68kBrowser://BPL5DAT'>BPL5DAT</a></td><td valign='top'><a href='m68kBrowser://BPL6DAT'>BPL6DAT</a></td><td valign='top'><a href='m68kBrowser://BPL7DAT'>BPL7DAT</a></td><td valign='top'><a href='m68kBrowser://BPL8DAT'>BPL8DAT</a></td></tr><tr></tr></table></td></table><div class='content'><p>These registers receive the DMA data fetched from RAM by the\n" +
-        "bit plane address pointers described above.\n" +
-        "They may also be rewritten by either micro.\n" +
-        "They act as an 8-word parallel to serial buffer for up\n" +
-        "to 8 memory 'bit planes'. x=1-8 the parallel-to-serial\n" +
-        "conversion is triggered whenever bit plane #1 is\n" +
-        "written, inducing the completion of all bit planes for\n" +
-        "that word (16/32/64 pixels). The MSB is output first,\n" +
-        "and is therefore always on the left.</p>\n" +
-        "</div>",
+    assertEquals("""
+        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>BPL1DAT</b><br/>Bit plane 1 data (parallel to serial convert)</pre></div><table class='sections'><tr><td valign='top' class='section'><p>Address:</td><td valign='top'><code>$DFF110</code><a href='m68kCopyData://$DFF110'><icon src='AllIcons.Actions.Copy'/></a>&nbsp;&ndash;&nbsp;<code>$0110</code><a href='m68kCopyData://$0110'><icon src='AllIcons.Actions.Copy'/></a></td><tr><td valign='top' class='section'><p>Chip Set (Chips):</td><td valign='top'>OCS (Denise/Lisa)</td><tr><td valign='top' class='section'><p>Access:</td><td valign='top'>Write</td><tr><td valign='top' class='section'><p>Copper Danger:</td><td valign='top'>-</td><tr><td valign='top' class='section'><p>Related:</td><td valign='top'><table><tr><td valign='top'><b><a href='m68kBrowser://BPL1DAT'>BPL1DAT</a></b></td><td valign='top'><a href='m68kBrowser://BPL2DAT'>BPL2DAT</a></td><td valign='top'><a href='m68kBrowser://BPL3DAT'>BPL3DAT</a></td><td valign='top'><a href='m68kBrowser://BPL4DAT'>BPL4DAT</a></td></tr><tr><td valign='top'><a href='m68kBrowser://BPL5DAT'>BPL5DAT</a></td><td valign='top'><a href='m68kBrowser://BPL6DAT'>BPL6DAT</a></td><td valign='top'><a href='m68kBrowser://BPL7DAT'>BPL7DAT</a></td><td valign='top'><a href='m68kBrowser://BPL8DAT'>BPL8DAT</a></td></tr><tr></tr></table></td></table><div class='content'><p>These registers receive the DMA data fetched from RAM by the
+        bit plane address pointers described above.
+        They may also be rewritten by either micro.
+        They act as an 8-word parallel to serial buffer for up
+        to 8 memory 'bit planes'. x=1-8 the parallel-to-serial
+        conversion is triggered whenever bit plane #1 is
+        written, inducing the completion of all bit planes for
+        that word (16/32/64 pixels). The MSB is output first,
+        and is therefore always on the left.</p>
+        </div>""",
       getRegisterDoc(M68kAmigaHardwareRegister.BPL1DAT));
   }
 
   public void testBPLHDAT() {
-    assertEquals("<style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>BPLHDAT</b><br/>Ext logic UHRES bit plane identifier</pre></div><table class='sections'><tr><td valign='top' class='section'><p>Address:</td><td valign='top'><code>$DFF07A</code><a href='m68kCopyData://$DFF07A'><icon src='AllIcons.Actions.Copy'/></a>&nbsp;&ndash;&nbsp;<code>$007A</code><a href='m68kCopyData://$007A'><icon src='AllIcons.Actions.Copy'/></a></td><tr><td valign='top' class='section'><p>Chip Set (Chips):</td><td valign='top'>ECS (Agnus/Alice)</td><tr><td valign='top' class='section'><p>Access:</td><td valign='top'>Write</td><tr><td valign='top' class='section'><p>Copper Danger:</td><td valign='top'>✓</td></table><div class='content'><p>This is the number (sign extended) that is added to the UHRES bitplane\n" +
-        "pointer (<a rel=\"nofollow\" href=\"m68kBrowser://BPLHPTH\">BPLHPTL</a>, <a rel=\"nofollow\" href=\"m68kBrowser://BPLHPTH\">BPLHPTH</a>) every line, and then another 2 is added, just like\n" +
-        "the other modulos.</p>\n" +
-        "</div>",
+    assertEquals("""
+        <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>BPLHDAT</b><br/>Ext logic UHRES bit plane identifier</pre></div><table class='sections'><tr><td valign='top' class='section'><p>Address:</td><td valign='top'><code>$DFF07A</code><a href='m68kCopyData://$DFF07A'><icon src='AllIcons.Actions.Copy'/></a>&nbsp;&ndash;&nbsp;<code>$007A</code><a href='m68kCopyData://$007A'><icon src='AllIcons.Actions.Copy'/></a></td><tr><td valign='top' class='section'><p>Chip Set (Chips):</td><td valign='top'>ECS (Agnus/Alice)</td><tr><td valign='top' class='section'><p>Access:</td><td valign='top'>Write</td><tr><td valign='top' class='section'><p>Copper Danger:</td><td valign='top'>✓</td></table><div class='content'><p>This is the number (sign extended) that is added to the UHRES bitplane
+        pointer (<a rel="nofollow" href="m68kBrowser://BPLHPTH">BPLHPTL</a>, <a rel="nofollow" href="m68kBrowser://BPLHPTH">BPLHPTH</a>) every line, and then another 2 is added, just like
+        the other modulos.</p>
+        </div>""",
       getRegisterDoc(M68kAmigaHardwareRegister.BPLHDAT));
   }
 
