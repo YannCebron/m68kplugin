@@ -149,37 +149,27 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
 
   @Override
   public void visitAndExpression(@NotNull M68kAndExpression expression) {
-    handleBinaryNumberExpression(expression, (left, right) -> {
-      result = left & right;
-    });
+    handleBinaryNumberExpression(expression, (left, right) -> result = left & right);
   }
 
   @Override
   public void visitOrExpression(@NotNull M68kOrExpression expression) {
-    handleBinaryNumberExpression(expression, (left, right) -> {
-      result = left | right;
-    });
+    handleBinaryNumberExpression(expression, (left, right) -> result = left | right);
   }
 
   @Override
   public void visitXorExpression(@NotNull M68kXorExpression expression) {
-    handleBinaryNumberExpression(expression, (left, right) -> {
-      result = left ^ right;
-    });
+    handleBinaryNumberExpression(expression, (left, right) -> result = left ^ right);
   }
 
   @Override
   public void visitLogicalAndExpression(@NotNull M68kLogicalAndExpression expression) {
-    handleBinaryNumberExpression(expression, (left, right) -> {
-      result = (left != 0 && right != 0) ? -1 : 0;
-    });
+    handleBinaryNumberExpression(expression, (left, right) -> result = (left != 0 && right != 0) ? -1 : 0);
   }
 
   @Override
   public void visitLogicalOrExpression(@NotNull M68kLogicalOrExpression expression) {
-    handleBinaryNumberExpression(expression, (left, right) -> {
-      result = (left != 0 || right != 0) ? -1 : 0;
-    });
+    handleBinaryNumberExpression(expression, (left, right) -> result = (left != 0 || right != 0) ? -1 : 0);
   }
 
   @Override
@@ -189,59 +179,42 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
 
   @Override
   public void visitEqualsExpression(@NotNull M68kEqualsExpression expression) {
-    handleBinaryNumberExpression(expression, (left, right) -> {
-      result = Objects.equals(left, right) ? -1 : 0;
-    });
+    handleBinaryNumberExpression(expression, (left, right) -> result = Objects.equals(left, right) ? -1 : 0);
   }
 
   @Override
   public void visitNotEqualsExpression(@NotNull M68kNotEqualsExpression expression) {
-    handleBinaryNumberExpression(expression, (left, right) -> {
-      result = Objects.equals(left, right) ? 0 : -1;
-    });
+    handleBinaryNumberExpression(expression, (left, right) -> result = Objects.equals(left, right) ? 0 : -1);
   }
 
   @Override
   public void visitGtExpression(@NotNull M68kGtExpression expression) {
-    handleBinaryNumberExpression(expression, (left, right) -> {
-      result = left > right ? -1 : 0;
-    });
+    handleBinaryNumberExpression(expression, (left, right) -> result = left > right ? -1 : 0);
   }
 
   @Override
   public void visitGtEqExpression(@NotNull M68kGtEqExpression expression) {
-    handleBinaryNumberExpression(expression, (left, right) -> {
-      result = left > right || Objects.equals(left, right) ? -1 : 0;
-    });
+    handleBinaryNumberExpression(expression, (left, right) -> result = left > right || Objects.equals(left, right) ? -1 : 0);
   }
 
   @Override
   public void visitLtExpression(@NotNull M68kLtExpression expression) {
-    handleBinaryNumberExpression(expression, (left, right) -> {
-      result = left < right ? -1 : 0;
-    });
+    handleBinaryNumberExpression(expression, (left, right) -> result = left < right ? -1 : 0);
   }
 
   @Override
   public void visitLtEqExpression(@NotNull M68kLtEqExpression expression) {
-    handleBinaryNumberExpression(expression, (left, right) -> {
-      result = left < right || Objects.equals(left, right) ? -1 : 0;
-    });
+    handleBinaryNumberExpression(expression, (left, right) -> result = left < right || Objects.equals(left, right) ? -1 : 0);
   }
 
   @Override
   public void visitShiftLeftExpression(@NotNull M68kShiftLeftExpression o) {
-    handleBinaryNumberExpression(o, (left, right) -> {
-      result = left << right;
-    });
+    handleBinaryNumberExpression(o, (left, right) -> result = left << right);
   }
 
   @Override
   public void visitShiftRightExpression(@NotNull M68kShiftRightExpression o) {
-    handleBinaryNumberExpression(o, (left, right) -> {
-      result = left >> right;
-    });
-
+    handleBinaryNumberExpression(o, (left, right) -> result = left >> right);
   }
 
   private void handleBinaryNumberExpression(M68kBinaryExpression expression, BiConsumer<Integer, Integer> func) {
