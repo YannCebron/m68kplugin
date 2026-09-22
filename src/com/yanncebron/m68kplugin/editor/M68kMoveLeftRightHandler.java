@@ -34,53 +34,22 @@ final class M68kMoveLeftRightHandler extends MoveElementLeftRightHandler {
   @NotNull
   @Override
   public PsiElement @NotNull [] getMovableSubElements(@NotNull PsiElement element) {
-    if (element instanceof M68kDcDirective directive) {
-      return directive.getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
-    }
-    if (element instanceof M68kDrDirective directive) {
-      return directive.getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
-    }
-    if (element instanceof M68kOptDirective directive) {
-      return directive.getOptDirectiveArgList().toArray(PsiElement.EMPTY_ARRAY);
-    }
-    if (element instanceof M68kPrintvDirective directive) {
-      return directive.getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
-    }
-    if (element instanceof M68kXdefDirective directive) {
-      return directive.getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
-    }
-    if (element instanceof M68kXrefDirective directive) {
-      return directive.getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
-    }
-
-    if (element instanceof M68kIfcConditionalAssemblyDirective directive) {
-      return getElements(directive.getArg1(), directive.getArg2());
-    }
-    if (element instanceof M68kIfncConditionalAssemblyDirective directive) {
-      return getElements(directive.getArg1(), directive.getArg2());
-    }
-
-    if (element instanceof M68kBinaryExpression instruction) {
-      return getElements(instruction.getLeft(), instruction.getRight());
-    }
-
-    if (element instanceof M68kAdmRegisterList registerList) {
-      return registerList.getRegisterRangeList().toArray(PsiElement.EMPTY_ARRAY);
-    }
-
-    if (element instanceof M68kAdmDoubleDrd doubleDrd) {
-      return getElements(doubleDrd.getFirst(), doubleDrd.getSecond());
-    }
-
-    if (element instanceof M68kMacroCallDirective directive) {
-      return directive.getMacroCallParameterList().toArray(PsiElement.EMPTY_ARRAY);
-    }
-
-    if (element instanceof M68kInstruction instruction) {
-      return getMovableSubElementsForInstruction(instruction);
-    }
-
-    return PsiElement.EMPTY_ARRAY;
+    return switch (element) {
+      case M68kDcDirective directive -> directive.getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
+      case M68kDrDirective directive -> directive.getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
+      case M68kOptDirective directive -> directive.getOptDirectiveArgList().toArray(PsiElement.EMPTY_ARRAY);
+      case M68kPrintvDirective directive -> directive.getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
+      case M68kXdefDirective directive -> directive.getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
+      case M68kXrefDirective directive -> directive.getExpressionList().toArray(PsiElement.EMPTY_ARRAY);
+      case M68kIfcConditionalAssemblyDirective directive -> getElements(directive.getArg1(), directive.getArg2());
+      case M68kIfncConditionalAssemblyDirective directive -> getElements(directive.getArg1(), directive.getArg2());
+      case M68kBinaryExpression instruction -> getElements(instruction.getLeft(), instruction.getRight());
+      case M68kAdmRegisterList registerList -> registerList.getRegisterRangeList().toArray(PsiElement.EMPTY_ARRAY);
+      case M68kAdmDoubleDrd doubleDrd -> getElements(doubleDrd.getFirst(), doubleDrd.getSecond());
+      case M68kMacroCallDirective directive -> directive.getMacroCallParameterList().toArray(PsiElement.EMPTY_ARRAY);
+      case M68kInstruction instruction -> getMovableSubElementsForInstruction(instruction);
+      default -> PsiElement.EMPTY_ARRAY;
+    };
   }
 
   static @NotNull PsiElement @NotNull [] getMovableSubElementsForInstruction(M68kInstruction instruction) {
