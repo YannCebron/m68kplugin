@@ -204,6 +204,7 @@ final class M68kAmigaHardwareBrowserPane extends M68kBrowserPaneBase<M68kAmigaHa
     @Override
     public void update(@NotNull AnActionEvent e) {
       e.getPresentation().setText(getSelectedChipset().getDisplayName());
+      //noinspection DialogTitleCapitalization
       e.getPresentation().setDescription(M68kAmigaBundle.message("toolwindow.tab.amiga.hardware.choose.chipset"));
     }
 
