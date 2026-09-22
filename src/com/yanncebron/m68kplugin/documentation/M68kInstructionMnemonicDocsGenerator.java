@@ -207,11 +207,11 @@ class M68kInstructionMnemonicDocsGenerator {
     sb.append(DocumentationMarkup.SECTION_END);
   }
 
-  private boolean appendConditionalCodesSection(String sectionName,
-                                                M68kMnemonic.ConditionCodes value,
+  private void appendConditionalCodesSection(String sectionName,
+                                             M68kMnemonic.ConditionCodes value,
                                              boolean skipIfNoneAffected) {
     if (skipIfNoneAffected && value == M68kMnemonic.ConditionCodes.NONE_AFFECTED) {
-      return false;
+      return;
     }
 
     sb.append(DocumentationMarkup.SECTION_HEADER_START);
@@ -249,7 +249,6 @@ class M68kInstructionMnemonicDocsGenerator {
     }
 
     sb.append(DocumentationMarkup.SECTION_END);
-    return true;
   }
 
   private void appendBreak() {
