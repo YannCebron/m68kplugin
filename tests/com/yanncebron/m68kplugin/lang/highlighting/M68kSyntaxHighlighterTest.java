@@ -68,6 +68,7 @@ public class M68kSyntaxHighlighterTest extends BasePlatformTestCase {
 
       final String tokenText = getTokenText(iterator);
       final String tokenTypeName = tokenType.toString();
+      //noinspection UnstableApiUsage
       final String textAttributeKeyNames = StringUtil.join(iterator.getTextAttributesKeys(), TextAttributesKey::getExternalName, "/");
       final String line = tokenTypeName + " ('" + tokenText + "') - " + textAttributeKeyNames + "\n";
       result.append(line);

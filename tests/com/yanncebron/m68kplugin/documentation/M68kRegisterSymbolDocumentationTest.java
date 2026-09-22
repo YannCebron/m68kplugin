@@ -68,6 +68,7 @@ public class M68kRegisterSymbolDocumentationTest extends BasePlatformTestCase {
     }
   }
 
+  @SuppressWarnings({"JetBrainsInternalApiUsage", "OverrideOnly"})
   private void doTest(String source, String expectedPresentableText, String expectedHtml) {
     myFixture.configureByText("a.s", source);
 

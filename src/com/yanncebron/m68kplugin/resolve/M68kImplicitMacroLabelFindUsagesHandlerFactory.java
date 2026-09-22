@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,6 @@ import java.util.List;
 /**
  * "Find Usages" for implicit macro label name parameter.
  */
-@SuppressWarnings("UnstableApiUsage")
 final class M68kImplicitMacroLabelFindUsagesHandlerFactory extends FindUsagesHandlerFactory {
 
   @Override

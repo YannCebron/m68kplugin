@@ -24,7 +24,6 @@ import org.jetbrains.annotations.NotNull;
 
 final class M68kTemplateContextType extends TemplateContextType {
 
-  @SuppressWarnings("DialogTitleCapitalization")
   public M68kTemplateContextType() {
     super(M68kApiBundle.message("general.m68k.assembler"));
   }

@@ -99,7 +99,6 @@ public final class M68kImplicitMacroLabelResolver {
   /**
    * Resolve to macro call via the given labelName (faster than inspecting all macro call references with varying names).
    */
-  @SuppressWarnings("UnstableApiUsage")
   private static void processByLabelName(Processor<M68kMacroCallDirective> processor, GlobalSearchScope scope, Project project, Collection<String> macroNames, @NotNull String labelName) {
     ProgressManager.getInstance().runProcess(() -> {
       SearchService.getInstance().searchWord(project, labelName)

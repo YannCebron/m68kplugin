@@ -142,7 +142,6 @@ public record M68kMnemonic(IElementType elementType,
   }
 
 
-  @SuppressWarnings("UnstableApiUsage")
   public static final class ConditionCodes {
 
     private final Code x;

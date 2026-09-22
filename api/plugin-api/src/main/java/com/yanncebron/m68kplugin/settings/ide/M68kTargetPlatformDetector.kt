@@ -26,7 +26,6 @@ import com.yanncebron.m68kplugin.lang.M68kFileType
  * Detect the matching target platform from project information (files, text search, ...).
  * The project is guaranteed to contain at least one assembly source file.
  */
-@Suppress("UnstableApiUsage")
 abstract class M68kTargetPlatformDetector {
 
     abstract fun detect(project: Project): M68kTargetPlatform?

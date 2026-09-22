@@ -50,6 +50,7 @@ public class M68kAmigaHardwareRegisterDocumentationTargetProviderTest extends Ba
     doTest(" dc.w $00A<caret>A,$0", EXPECTED_PRESENTABLE_TEXT, EXPECTED_HTML);
   }
 
+  @SuppressWarnings({"JetBrainsInternalApiUsage", "OverrideOnly"})
   private void doTest(String source, String expectedPresentableText, String expectedHtml) {
     myFixture.configureByText("a.s", source);
 
