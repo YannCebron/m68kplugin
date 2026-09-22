@@ -32,7 +32,7 @@ internal class M68kAmigaHardwareRegisterInlayProvider : InlayHintsProvider, Dumb
         editor: Editor
     ): InlayHintsCollector? {
         val project = file.project
-        if (project.isDefault) return null;
+        if (project.isDefault) return null
 
         if (M68kProjectEnvironment.getInstance(project).targetPlatform == M68kTargetPlatform.AMIGA) {
             return AmigaHardwareRegisterCollector()
@@ -55,8 +55,9 @@ internal class M68kAmigaHardwareRegisterInlayProvider : InlayHintsProvider, Dumb
                 sink.addPresentation(
                     InlineInlayPosition(element.textRange.endOffset, true),
                     tooltip = register.description,
-                    hasBackground = true
-                ) {
+                    hintFormat = HintFormat.default
+                )
+                {
                     text(register.name)
                 }
             }

@@ -52,7 +52,7 @@ internal class M68kRegisterInlayProvider : InlayHintsProvider, DumbAware {
                     sink.addPresentation(
                         InlineInlayPosition(offset, false),
                         tooltip = M68kBundle.message("cpu.group.GROUP_68010_UP"),
-                        hasBackground = true
+                        hintFormat = HintFormat.default
                     ) {
                         text(M68kBundle.message("inlay.hint.register.GROUP_68010_UP"))
                     }
