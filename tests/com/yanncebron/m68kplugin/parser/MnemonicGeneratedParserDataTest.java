@@ -119,10 +119,10 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
             }
 
             // enough to test against first notation variant
-            String firstText = ADDRESS_MODE_TEXT.get(firstAddressMode).get(0);
+            String firstText = ADDRESS_MODE_TEXT.get(firstAddressMode).getFirst();
             String variant;
             if (hasSecondOperand) {
-              String secondText = ADDRESS_MODE_TEXT.get(secondAddressMode).get(0);
+              String secondText = ADDRESS_MODE_TEXT.get(secondAddressMode).getFirst();
               variant = "  " + instructionType + dataSizeText + " " + firstText + "," + secondText;
             } else {
               variant = "  " + instructionType + dataSizeText + " " + firstText;

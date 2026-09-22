@@ -87,7 +87,7 @@ public final class M68kMnemonicRegistry {
     }
 
     if (filtered.size() == 1) {
-      return filtered.get(0);
+      return filtered.getFirst();
     }
 
     // multiple matches: sort by
@@ -110,7 +110,7 @@ public final class M68kMnemonicRegistry {
       return Integer.compare(o1SecondOperandAddressModesCount, o2SecondOperandAddressModesCount);
     });
 
-    return multipleMatches.get(0);
+    return multipleMatches.getFirst();
   }
 
   @NotNull
@@ -134,7 +134,7 @@ public final class M68kMnemonicRegistry {
 
       boolean hasSecondOperand = mnemonic.hasSecondOperand();
       if (operandsCount == 1 && !hasSecondOperand) {
-        return mnemonic.firstOperand().matches(admList.get(0));
+        return mnemonic.firstOperand().matches(admList.getFirst());
       }
 
       if (operandsCount == 2 && hasSecondOperand) {

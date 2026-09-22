@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ public class MovemInstructionPsiTest extends M68kPsiTestCase<M68kMovemInstructio
     final List<M68kRegisterRange> registerRangeList = registerList.getRegisterRangeList();
     assertSize(3, registerRangeList);
 
-    final M68kRegisterRange firstRegisterRange = registerRangeList.get(0);
+    final M68kRegisterRange firstRegisterRange = registerRangeList.getFirst();
     final M68kAdmRrd firstFrom = firstRegisterRange.getFrom();
     assertNotNull(firstFrom);
     assertEquals(M68kRegister.D1, firstFrom.getRegister());
