@@ -34,7 +34,7 @@ import icons.M68kIcons
 
 internal class M68kTargetPlatformDetectionProjectActivity : ProjectActivity {
 
-    private val EP_NAME: ExtensionPointName<M68kTargetPlatformDetector> =
+    private val epName: ExtensionPointName<M68kTargetPlatformDetector> =
         ExtensionPointName.create("com.yanncebron.m68kplugin.targetPlatformDetector")
 
     init {
@@ -55,7 +55,7 @@ internal class M68kTargetPlatformDetectionProjectActivity : ProjectActivity {
             return
         }
 
-        for (detector in EP_NAME.extensionList) {
+        for (detector in epName.extensionList) {
             val targetPlatform = detector.detect(project)
             if (targetPlatform != null) {
                 showNotification(project, targetPlatform)
