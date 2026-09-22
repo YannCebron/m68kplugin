@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,7 +63,11 @@ import java.util.*;
 @VisibleForTesting
 public final class M68kUnresolvedLabelReferenceInspection extends LocalInspectionTool {
 
-  @SuppressWarnings("UnstableApiUsage")
+  @Override
+  public boolean isDumbAware() {
+    return false;
+  }
+
   public final List<@NlsSafe String> labelDefiningMacros = new ArrayList<>();
 
   private static final String INSPECTION_SHORT_NAME = InspectionProfileEntry.getShortName(M68kUnresolvedLabelReferenceInspection.class.getSimpleName());
@@ -107,7 +111,7 @@ public final class M68kUnresolvedLabelReferenceInspection extends LocalInspectio
         if (project.isDefault() || DumbService.isDumb(project)) return null;
 
         // todo collect all _suitable_ macros
-        Collection<String> macroNames = StubIndex.getInstance().getAllKeys(M68kStubIndexKeys.MACRO, project);
+        Collection<String> macroNames = new ArrayList<>(StubIndex.getInstance().getAllKeys(M68kStubIndexKeys.MACRO, project));
         macroNames.removeAll(labelDefiningMacros);
         List<String> sortedMacroNames = new ArrayList<>(macroNames);
         sortedMacroNames.sort(NaturalComparator.INSTANCE);
