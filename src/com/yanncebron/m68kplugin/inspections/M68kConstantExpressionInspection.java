@@ -33,6 +33,11 @@ import org.jetbrains.annotations.Nullable;
 final class M68kConstantExpressionInspection extends LocalInspectionTool {
 
   @Override
+  public boolean isDumbAware() {
+    return false;
+  }
+
+  @Override
   public @NotNull PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly, @NotNull LocalInspectionToolSession session) {
     return new ExpressionVisitor(holder);
   }
@@ -47,7 +52,7 @@ final class M68kConstantExpressionInspection extends LocalInspectionTool {
 
     @Override
     public void visitExpression(@NotNull M68kExpression o) {
-      if (o instanceof PsiLiteralValue || o instanceof M68kParenExpression || o instanceof M68kStringExpression) {
+      if (o instanceof PsiLiteralValue || o instanceof M68kParenExpression) {
         return;
       }
 
