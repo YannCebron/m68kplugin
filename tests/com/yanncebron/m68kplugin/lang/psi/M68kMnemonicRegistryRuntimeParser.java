@@ -48,7 +48,7 @@ final class M68kMnemonicRegistryRuntimeParser {
   /**
    * No runtime info available.
    */
-  static M68MnemonicRuntimeInfo NO_ENTRY = new M68MnemonicRuntimeInfo(
+  static final M68MnemonicRuntimeInfo NO_ENTRY = new M68MnemonicRuntimeInfo(
     M68kMnemonic.PrivilegedType.NONE, M68kMnemonic.ControlFlow.NOTHING,
     M68kMnemonic.ConditionCodes.NONE_AFFECTED, M68kMnemonic.ConditionCodes.NONE_AFFECTED
   );
