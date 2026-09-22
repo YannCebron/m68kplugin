@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.yanncebron.m68kplugin.editor.navigation;
 import com.intellij.ide.navigationToolbar.AbstractNavBarModelExtension;
 import com.intellij.ide.ui.UISettings;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.actionSystem.DataMap;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.Ref;
 import com.intellij.psi.PsiElement;
@@ -39,13 +39,13 @@ import org.jetbrains.annotations.Nullable;
 final class M68kNavBarModelExtension extends AbstractNavBarModelExtension {
 
   @Override
-  public PsiElement getLeafElement(@NotNull DataContext dataContext) {
+  public PsiElement getLeafElement(@NotNull DataMap dataMap) {
     if (!UISettings.getInstance().getShowMembersInNavigationBar()) {
       return null;
     }
 
-    PsiFile psiFile = dataContext.getData(CommonDataKeys.PSI_FILE);
-    Editor editor = dataContext.getData(CommonDataKeys.EDITOR);
+    PsiFile psiFile = dataMap.get(CommonDataKeys.PSI_FILE);
+    Editor editor = dataMap.get(CommonDataKeys.EDITOR);
     if (psiFile == null || !psiFile.isValid() || editor == null) return null;
 
     PsiElement psiElement = psiFile.findElementAt(editor.getCaretModel().getOffset());
