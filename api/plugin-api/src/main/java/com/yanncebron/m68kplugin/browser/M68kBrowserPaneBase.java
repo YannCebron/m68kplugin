@@ -61,7 +61,7 @@ import java.util.function.Function;
  * @param <T> must implement {@link #equals(Object)} to keep the current selection upon list model update
  * @see M68kBrowserPaneFactory
  */
-@SuppressWarnings("UnstableApiUsage")
+@SuppressWarnings({"UnstableApiUsage", "JetBrainsInternalApiUsage"})
 public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel implements Place.Navigator, Disposable {
 
   /**
@@ -255,12 +255,9 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
   }
 
   @Override
-  public @Nullable Object getData(@NotNull @NonNls String dataId) {
-    if (History.KEY.is(dataId)) {
-      return history;
-    }
-
-    return super.getData(dataId);
+  public void uiDataSnapshot(@NotNull DataSink sink) {
+    super.uiDataSnapshot(sink);
+    sink.set(History.KEY, history);
   }
 
   @Override

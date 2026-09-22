@@ -84,7 +84,7 @@ final class M68kImplicitMacroLabelFindUsagesHandlerFactory extends FindUsagesHan
 
       private void processLabels(Processor<? super TextOccurrence> processor, SearchScope searchScope, String label) {
         ReadAction.run(() -> SearchService.getInstance().searchWord(getProject(), label)
-          .inContexts(SearchContext.IN_CODE)
+          .inContexts(SearchContext.inCode())
           .caseSensitive(true)
           .inScope(searchScope)
           .restrictFileTypes(M68kFileType.INSTANCE)

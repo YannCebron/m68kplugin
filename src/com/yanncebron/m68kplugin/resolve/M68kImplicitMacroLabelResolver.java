@@ -102,7 +102,7 @@ public final class M68kImplicitMacroLabelResolver {
   private static void processByLabelName(Processor<M68kMacroCallDirective> processor, GlobalSearchScope scope, Project project, Collection<String> macroNames, @NotNull String labelName) {
     ProgressManager.getInstance().runProcess(() -> {
       SearchService.getInstance().searchWord(project, labelName)
-        .inContexts(SearchContext.IN_CODE)
+        .inContexts(SearchContext.inCode())
         .caseSensitive(true)
         .inScope(scope)
         .restrictFileTypes(M68kFileType.INSTANCE)
