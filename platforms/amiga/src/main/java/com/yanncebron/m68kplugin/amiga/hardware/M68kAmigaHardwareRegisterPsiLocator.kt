@@ -24,7 +24,7 @@ import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpressionLiteral
 
 internal object M68kAmigaHardwareRegisterPsiLocator {
 
-    private const val minimumAddressValue = 0xBFD000 // CIAB_PRA
+    private const val MINIMUM_ADDRESS_VALUE = 0xBFD000 // CIAB_PRA
 
     /**
      * `$xxxXXX` expression in code for all registers.
@@ -35,7 +35,7 @@ internal object M68kAmigaHardwareRegisterPsiLocator {
         if (element.textLength != 7) return null
 
         val constantValue = element.value as? Int ?: return null
-        if (constantValue < minimumAddressValue) return null
+        if (constantValue < MINIMUM_ADDRESS_VALUE) return null
 
         return M68kAmigaHardwareRegister.findByAddress(constantValue)
     }
