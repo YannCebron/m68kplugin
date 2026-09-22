@@ -18,13 +18,14 @@ package com.yanncebron.m68kplugin.amiga.hardware
 
 import com.intellij.codeInsight.hints.declarative.*
 import com.intellij.openapi.editor.Editor
+import com.intellij.openapi.project.DumbAware
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpression
 import com.yanncebron.m68kplugin.settings.ide.M68kProjectEnvironment
 import com.yanncebron.m68kplugin.settings.ide.M68kTargetPlatform
 
-internal class M68kAmigaHardwareRegisterInlayProvider : InlayHintsProvider {
+internal class M68kAmigaHardwareRegisterInlayProvider : InlayHintsProvider, DumbAware {
 
     override fun createCollector(
         file: PsiFile,

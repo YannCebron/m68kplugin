@@ -18,6 +18,7 @@ package com.yanncebron.m68kplugin.editor.inlays
 
 import com.intellij.codeInsight.hints.declarative.*
 import com.intellij.openapi.editor.Editor
+import com.intellij.openapi.project.DumbAware
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.yanncebron.m68kplugin.M68kBundle
@@ -28,7 +29,7 @@ import com.yanncebron.m68kplugin.lang.psi.M68kRegister
 
 private val mc68010UpRegisters = M68kRegister.entries.filter { it.cpus.equals(M68kCpu.GROUP_68010_UP) }.toSet()
 
-internal class M68kRegisterInlayProvider : InlayHintsProvider {
+internal class M68kRegisterInlayProvider : InlayHintsProvider, DumbAware {
 
     override fun createCollector(
         file: PsiFile,
