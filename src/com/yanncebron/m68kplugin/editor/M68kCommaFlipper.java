@@ -45,10 +45,6 @@ final class M68kCommaFlipper implements FlipCommaIntention.Flipper {
         M68kMoveLeftRightHandler.getMovableSubElementsForInstruction(m68kInstruction).length == 2;
     }
 
-    if (left instanceof M68kOptDirectiveArg && right instanceof M68kOptDirectiveArg) {
-      return true;
-    }
-
-    return false;
+    return left instanceof M68kOptDirectiveArg && right instanceof M68kOptDirectiveArg;
   }
 }
