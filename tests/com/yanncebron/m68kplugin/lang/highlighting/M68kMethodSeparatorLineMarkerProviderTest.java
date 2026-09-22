@@ -78,6 +78,7 @@ public class M68kMethodSeparatorLineMarkerProviderTest extends BasePlatformTestC
     }
   }
 
+  @SuppressWarnings("JetBrainsInternalApiUsage")
   private List<LineMarkerInfo<?>> getLineMarkerInfos(String text) {
     myFixture.configureByText("test.s", text);
     myFixture.doHighlighting();

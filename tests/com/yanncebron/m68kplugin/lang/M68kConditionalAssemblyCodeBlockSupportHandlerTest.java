@@ -56,6 +56,7 @@ public class M68kConditionalAssemblyCodeBlockSupportHandlerTest extends BasePlat
 
   private void doMatchingRangesTest() {
     myFixture.setReadEditorMarkupModel(true);
+    //noinspection JetBrainsInternalApiUsage
     IdentifierHighlighterPassFactory.doWithIdentifierHighlightingEnabled(getProject(), () -> {
       myFixture.configureByFile(getTestName(false) + "." + M68kFileType.INSTANCE.getDefaultExtension());
       EditorTestUtil.checkEditorHighlighting(myFixture,

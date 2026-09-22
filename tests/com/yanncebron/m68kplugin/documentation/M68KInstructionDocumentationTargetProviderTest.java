@@ -35,7 +35,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@SuppressWarnings("UnstableApiUsage")
+@SuppressWarnings({"UnstableApiUsage", "JetBrainsInternalApiUsage"})
 public class M68KInstructionDocumentationTargetProviderTest extends BasePlatformTestCase {
 
   public void testAslAsrInstructionReferenceDoc() {
