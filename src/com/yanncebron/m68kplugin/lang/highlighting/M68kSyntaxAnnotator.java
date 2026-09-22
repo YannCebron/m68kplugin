@@ -45,44 +45,50 @@ final class M68kSyntaxAnnotator implements Annotator, DumbAware {
     if (holder.isBatchMode()) return;
     if (!(element instanceof M68kPsiElement)) return;
 
-    if (element instanceof M68kInstruction m68kInstruction) {
-      if (element instanceof M68kDataSized) {
-        annotateMacroParameters(holder, element);
-      }
-
-      M68kMnemonic m68kMnemonic = M68kMnemonicRegistry.getInstance().find(m68kInstruction);
-      if (m68kMnemonic == null) return;
-
-      if (m68kMnemonic.deprecated()) {
-        holder.newAnnotation(HighlightSeverity.WARNING, M68kBundle.message("highlight.deprecated.mnemonic"))
-          .highlightType(ProblemHighlightType.LIKE_DEPRECATED)
-          .create();
-      }
-
-      if (m68kInstruction instanceof M68kPrivilegedInstruction && M68kMnemonicPredicates.privilegedAny().test(m68kMnemonic)) {
-        String message;
-        if (M68kMnemonicPredicates.privileged68010Above().test(m68kMnemonic)) {
-          message = M68kBundle.message("highlight.privileged.instruction.68010.or.above");
-        } else {
-          message = M68kBundle.message("highlight.privileged.instruction");
+    switch (element) {
+      case M68kInstruction m68kInstruction -> {
+        if (element instanceof M68kDataSized) {
+          annotateMacroParameters(holder, element);
         }
-        holder.newAnnotation(HighlightSeverity.INFORMATION, message)
-          .textAttributes(M68kTextAttributes.PRIVILEGED_INSTRUCTION).create();
+
+        M68kMnemonic m68kMnemonic = M68kMnemonicRegistry.getInstance().find(m68kInstruction);
+        if (m68kMnemonic == null) return;
+
+        if (m68kMnemonic.deprecated()) {
+          holder.newAnnotation(HighlightSeverity.WARNING, M68kBundle.message("highlight.deprecated.mnemonic"))
+            .highlightType(ProblemHighlightType.LIKE_DEPRECATED)
+            .create();
+        }
+
+        if (m68kInstruction instanceof M68kPrivilegedInstruction && M68kMnemonicPredicates.privilegedAny().test(m68kMnemonic)) {
+          String message;
+          if (M68kMnemonicPredicates.privileged68010Above().test(m68kMnemonic)) {
+            message = M68kBundle.message("highlight.privileged.instruction.68010.or.above");
+          } else {
+            message = M68kBundle.message("highlight.privileged.instruction");
+          }
+          holder.newAnnotation(HighlightSeverity.INFORMATION, message)
+            .textAttributes(M68kTextAttributes.PRIVILEGED_INSTRUCTION).create();
+        }
       }
-    } else if (element instanceof M68kLabel) {
-      TextAttributesKey key = M68kTextAttributes.LABEL;
-      M68kDirectiveWithLabel directiveWithLabel = PsiTreeUtil.getParentOfType(element, M68kDirectiveWithLabel.class);
-      if (directiveWithLabel != null) {
-        key = directiveWithLabel instanceof M68kMacroDirective ? M68kTextAttributes.MACRO_LABEL : M68kTextAttributes.SYMBOL_LABEL;
+      case M68kLabel ignored -> {
+        TextAttributesKey key = M68kTextAttributes.LABEL;
+        M68kDirectiveWithLabel directiveWithLabel = PsiTreeUtil.getParentOfType(element, M68kDirectiveWithLabel.class);
+        if (directiveWithLabel != null) {
+          key = directiveWithLabel instanceof M68kMacroDirective ? M68kTextAttributes.MACRO_LABEL : M68kTextAttributes.SYMBOL_LABEL;
+        }
+        doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), key, true);
       }
-      doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), key, true);
-    } else if (element instanceof M68kLocalLabel) {
-      doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LOCAL_LABEL, true);
-    } else if (element instanceof M68kLabelRefExpression) {
-      annotateMacroParameters(holder, element);
-      annotateBuiltinSymbol(holder, element);
-    } else if (element instanceof M68kMacroParameterDirective) {
-      doAnnotate(holder, element.getNode(), M68kTextAttributes.MACRO_PARAMETER, false);
+      case M68kLocalLabel ignored ->
+        doAnnotate(holder, element.getNode().findChildByType(M68kTokenTypes.ID), M68kTextAttributes.LOCAL_LABEL, true);
+      case M68kLabelRefExpression ignored -> {
+        annotateMacroParameters(holder, element);
+        annotateBuiltinSymbol(holder, element);
+      }
+      case M68kMacroParameterDirective ignored ->
+        doAnnotate(holder, element.getNode(), M68kTextAttributes.MACRO_PARAMETER, false);
+      default -> {
+      }
     }
   }
 
