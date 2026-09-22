@@ -16,7 +16,6 @@
 
 package com.yanncebron.m68kplugin.lang.findUsages;
 
-import com.intellij.lang.HelpID;
 import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lang.findUsages.FindUsagesProvider;
@@ -49,7 +48,7 @@ final class M68kFindUsagesProvider implements FindUsagesProvider {
 
   @Override
   public String getHelpId(@NotNull PsiElement psiElement) {
-    return HelpID.FIND_OTHER_USAGES;
+    return null;
   }
 
   @NotNull
