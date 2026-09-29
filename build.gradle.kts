@@ -86,6 +86,7 @@ tasks {
     }
 
     generateLexer {
+        purgeOldFiles.set(false)
         sourceFile.set(file("src/grammar/_M68kLexer.flex"))
         skeleton.set(file("src/grammar/idea-flex.skeleton"))
         targetRootOutputDir.set(file("gen"))
