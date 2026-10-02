@@ -19,7 +19,6 @@ package com.yanncebron.m68kplugin.parser;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.ArrayUtil;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.FactoryMap;
@@ -102,13 +101,23 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
         String dataSizeText = dataSize == M68kDataSize.UNSIZED ? "" : dataSize.getText();
 
         for (M68kAddressMode firstAddressMode : M68kAddressMode.values()) {
+          // enough to test against first notation variant
+          String firstText = ADDRESS_MODE_TEXT.get(firstAddressMode).getFirst();
+          String variant = "  " + instructionType + dataSizeText + " " + firstText;
+
           for (M68kAddressMode secondAddressMode : M68kAddressMode.values()) {
+            if (hasSecondOperand) {
+              String secondText = ADDRESS_MODE_TEXT.get(secondAddressMode).getFirst();
+              variant = "  " + instructionType + dataSizeText + " " + firstText + "," + secondText;
+            } else if (!generatedVariants.add(variant)) {
+              continue; // skip duplicates from unnecessary loop (hasSecondOperand=false)
+            }
 
             boolean foundValid = false;
             for (M68kMnemonic known : allMnemonics) {
               if ((dataSize == M68kDataSize.UNSIZED || known.dataSizes().contains(dataSize)) &&
-                containsAddressMode(known.firstOperand(), firstAddressMode) &&
-                (!known.hasSecondOperand() || containsAddressMode(known.secondOperand(), secondAddressMode))) {
+                operandContainsAddressMode(known.firstOperand(), firstAddressMode) &&
+                (!known.hasSecondOperand() || operandContainsAddressMode(known.secondOperand(), secondAddressMode))) {
                 foundValid = true;
                 break;
               }
@@ -118,20 +127,6 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
               continue;
             }
 
-            // enough to test against first notation variant
-            String firstText = ADDRESS_MODE_TEXT.get(firstAddressMode).getFirst();
-            String variant;
-            if (hasSecondOperand) {
-              String secondText = ADDRESS_MODE_TEXT.get(secondAddressMode).getFirst();
-              variant = "  " + instructionType + dataSizeText + " " + firstText + "," + secondText;
-            } else {
-              variant = "  " + instructionType + dataSizeText + " " + firstText;
-            }
-            if (!generatedVariants.add(variant)) {
-              continue; // skip duplicates from unnecessary loop (hasSecondOperand=false)
-            }
-
-            String variantOutput = variant + StringUtil.repeat(" ", 30 - variant.length()) + " ; " + firstAddressMode + (hasSecondOperand ? "," + secondAddressMode : "") + " ";
             total++;
             myFile = createPsiFile("a", variant);
             M68kPsiElement m68kPsiElement = M68kPsiTreeUtil.getContainingInstructionOrDirective(myFile.findElementAt(3));
@@ -139,14 +134,18 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
             M68kInstruction m68kInstruction = assertInstanceOf(m68kPsiElement, M68kInstruction.class);
 
             if (PsiTreeUtil.hasErrorElements(myFile)) {
-              dump(variantOutput + "failed expectedly");
+              if (DUMP) {
+                String variantOutput = getVariantOutput(variant, firstAddressMode, hasSecondOperand, secondAddressMode);
+                dump(variantOutput + "failed expectedly");
+              }
             } else {
+              String variantOutput = getVariantOutput(variant, firstAddressMode, hasSecondOperand, secondAddressMode);
               // check that adm's match if no parser error (IMMEDIATE vs QUICK_IMMEDIATE, LABEL vs ABSOLUTE etc.)
               try {
                 M68kMnemonic foundMnemonic = M68kMnemonicRegistry.getInstance().find(m68kInstruction);
                 if (foundMnemonic != null) {
                   matchedByMnemonicCount++;
-                  dump(variantOutput + "no parser error, but found matching mnemonic: " + foundMnemonic);
+                  if (DUMP) dump(variantOutput + "no parser error, but found matching mnemonic: " + foundMnemonic);
                   continue;
                 }
               } catch (AssertionError expected) {
@@ -163,13 +162,21 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
     }
 
     assertEquals(172930, total);
-    assertEquals(19759, skippedValidCount);
+    assertEquals(6634, skippedValidCount);
     assertEquals(1449, matchedByMnemonicCount);
     assertEmpty(failedVariants);
   }
 
-  private static boolean containsAddressMode(M68kOperand m68kOperand, M68kAddressMode addressMode) {
-    return ArrayUtil.find(m68kOperand.getAddressModes(), addressMode) != -1;
+  private static boolean operandContainsAddressMode(M68kOperand m68kOperand, M68kAddressMode addressMode) {
+    for (M68kAddressMode mode : m68kOperand.getAddressModes()) {
+      if (mode == addressMode) return true;
+    }
+    return false;
+  }
+
+  private static @NotNull String getVariantOutput(String variant, M68kAddressMode firstAddressMode, boolean hasSecondOperand, M68kAddressMode secondAddressMode) {
+    int pad = Math.max(1, 30 - variant.length());
+    return variant + " ".repeat(pad) + " ; " + firstAddressMode + (hasSecondOperand ? "," + secondAddressMode : "") + " ";
   }
 
   /**
@@ -235,7 +242,7 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
       assertTrue("PSI missing extending M68kPrivilegedInstruction", psiIsPrivileged);
     } else {
       Collection<M68kMnemonic> allMnemonics = M68kMnemonicRegistry.getInstance().findAll(instruction.getNode().getFirstChildNode().getElementType());
-      boolean atLeastOnePrivilegedMnemonic = allMnemonics.stream().anyMatch(M68kMnemonicPredicates.privilegedAny());
+      boolean atLeastOnePrivilegedMnemonic = ContainerUtil.exists(allMnemonics, M68kMnemonicPredicates.privilegedAny()::test);
       if (atLeastOnePrivilegedMnemonic) {
         assertTrue("PSI missing extending M68kPrivilegedInstruction", psiIsPrivileged);
       } else {
