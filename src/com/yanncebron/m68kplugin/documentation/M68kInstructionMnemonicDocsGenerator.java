@@ -88,12 +88,12 @@ class M68kInstructionMnemonicDocsGenerator {
     appendBreak();
 
     // only operands with >1 address mode, otherwise they cannot appear in the table(s)
-    Set<M68kAddressMode> allUsedAddressModesFromMultiOperands = new HashSet<>();
+    Set<M68kAddressMode> allUsedAddressModesFromMultiOperands = EnumSet.noneOf(M68kAddressMode.class);
     for (M68kMnemonic mnemonic : filteredMnemonics) {
       Set<M68kAddressMode> firstAddressModes = mnemonic.firstOperand().getAddressModes();
-      if (firstAddressModes.size() > 1) ContainerUtil.addAll(allUsedAddressModesFromMultiOperands, firstAddressModes);
+      if (firstAddressModes.size() > 1) allUsedAddressModesFromMultiOperands.addAll(firstAddressModes);
       Set<M68kAddressMode> secondAddressModes = mnemonic.secondOperand().getAddressModes();
-      if (secondAddressModes.size() > 1) ContainerUtil.addAll(allUsedAddressModesFromMultiOperands, secondAddressModes);
+      if (secondAddressModes.size() > 1) allUsedAddressModesFromMultiOperands.addAll(secondAddressModes);
     }
 
     for (Iterator<M68kMnemonic> iterator = filteredMnemonics.iterator(); iterator.hasNext(); ) {
@@ -227,7 +227,7 @@ class M68kInstructionMnemonicDocsGenerator {
       }
       sb.append("</tr>");
 
-      sb.append("</tr>");
+      sb.append("<tr>");
       for (Character tableText : value.getDisplayIds()) {
         sb.append("<td>");
         sb.append("&nbsp;");
