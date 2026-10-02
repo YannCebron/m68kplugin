@@ -23,11 +23,10 @@ import com.yanncebron.m68kplugin.M68kBundle;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * @see M68kMnemonicRegistry
@@ -121,14 +120,14 @@ public record M68kMnemonic(IElementType elementType,
      */
     PRIVILEGED_68010_ABOVE(M68kCpu.GROUP_68010_UP::contains);
 
-    private final Function<M68kCpu, Boolean> privilegedFunction;
+    private final Predicate<M68kCpu> privilegedPredicate;
 
-    PrivilegedType(Function<M68kCpu, Boolean> privilegedFunction) {
-      this.privilegedFunction = privilegedFunction;
+    PrivilegedType(Predicate<M68kCpu> privilegedPredicate) {
+      this.privilegedPredicate = privilegedPredicate;
     }
 
     public boolean isPrivileged(M68kCpu m68kCpu) {
-      return privilegedFunction.apply(m68kCpu);
+      return privilegedPredicate.test(m68kCpu);
     }
   }
 
@@ -218,13 +217,13 @@ public record M68kMnemonic(IElementType elementType,
      */
     @Nls
     public List<String> getDisplayTexts() {
-      List<String> texts = new ArrayList<>(5);
-      texts.add(getDisplayText(x, 0));
-      texts.add(getDisplayText(n, 1));
-      texts.add(getDisplayText(z, 2));
-      texts.add(getDisplayText(v, 3));
-      texts.add(getDisplayText(c, 4));
-      return texts;
+      return List.of(
+        getDisplayText(x, 0),
+        getDisplayText(n, 1),
+        getDisplayText(z, 2),
+        getDisplayText(v, 3),
+        getDisplayText(c, 4)
+      );
     }
 
     @Nls
