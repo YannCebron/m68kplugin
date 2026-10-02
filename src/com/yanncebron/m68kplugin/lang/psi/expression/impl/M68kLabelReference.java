@@ -23,7 +23,6 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.codeInspection.util.InspectionMessage;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Condition;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.presentation.java.SymbolPresentationUtil;
@@ -45,7 +44,10 @@ import icons.M68kIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Reference to label or builtin symbol.
@@ -109,7 +111,7 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
       List<M68kMacroCallDirective> implicitMacroLabelMacroCallDirectives = new SmartList<>();
       Processor<M68kMacroCallDirective> macroCallDirectiveProcessor = Processors.cancelableCollectProcessor(implicitMacroLabelMacroCallDirectives);
       M68kImplicitMacroLabelResolver.processMacrosDefiningLabels(macroCallDirectiveProcessor, getCurrentFileSearchScope(psiElement), psiElement, labelName);
-      if (labels.isEmpty()) {
+      if (implicitMacroLabelMacroCallDirectives.isEmpty()) {
         M68kImplicitMacroLabelResolver.processMacrosDefiningLabels(macroCallDirectiveProcessor, getIncludeSearchScope(psiElement), psiElement, labelName);
       }
 
@@ -194,9 +196,9 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
 
   private static void processLocalLabels(PsiElement element, @Nullable M68kLocalLabelMode localLabelMode, Processor<M68kLocalLabel> processor) {
     Processor<M68kPsiElement> localLabelProcessor = m68kPsiElement -> {
-      if (m68kPsiElement instanceof M68kLocalLabel &&
-        (localLabelMode == null || localLabelMode.matches(m68kPsiElement.getText()))) {
-        return processor.process((M68kLocalLabel) m68kPsiElement);
+      if (m68kPsiElement instanceof M68kLocalLabel localLabel &&
+        (localLabelMode == null || localLabelMode.matches(localLabel.getText()))) {
+        return processor.process(localLabel);
       }
       return true;
     };
@@ -230,11 +232,19 @@ class M68kLabelReference extends PsiReferenceBase.Poly<M68kLabelRefExpressionMix
     });
   }
 
-  private static final EnumSet<M68kLabelBase.LabelKind> NON_RELEVANT_LABEL_KINDS = EnumSet.of(M68kLabelBase.LabelKind.EQUR, M68kLabelBase.LabelKind.REG, M68kLabelBase.LabelKind.MACRO);
-  private static final Condition<M68kLabel> RELEVANT_LABEL_CONDITION = m68kLabel -> !NON_RELEVANT_LABEL_KINDS.contains(m68kLabel.getLabelKind());
 
   private static Collection<M68kLabel> getStubLabels(String key, Project project, GlobalSearchScope scope) {
-    return ContainerUtil.filter(StubIndex.getElements(M68kStubIndexKeys.LABEL, key, project, scope, M68kLabel.class), RELEVANT_LABEL_CONDITION);
+    return ContainerUtil.filter(
+      StubIndex.getElements(M68kStubIndexKeys.LABEL, key, project, scope, M68kLabel.class),
+      M68kLabelReference::isRelevantLabel
+    );
+  }
+
+  private static boolean isRelevantLabel(@NotNull M68kLabel label) {
+    M68kLabelBase.LabelKind kind = label.getLabelKind();
+    return kind != M68kLabelBase.LabelKind.EQUR &&
+      kind != M68kLabelBase.LabelKind.REG &&
+      kind != M68kLabelBase.LabelKind.MACRO;
   }
 
   private static GlobalSearchScope getIncludeSearchScope(PsiElement element) {
