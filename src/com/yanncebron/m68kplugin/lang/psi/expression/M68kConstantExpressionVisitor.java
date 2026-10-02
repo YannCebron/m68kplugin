@@ -194,7 +194,7 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
 
   @Override
   public void visitGtEqExpression(@NotNull M68kGtEqExpression expression) {
-    handleBinaryNumberExpression(expression, (left, right) -> result = left > right || Objects.equals(left, right) ? -1 : 0);
+    handleBinaryNumberExpression(expression, (left, right) -> result = left >= right ? -1 : 0);
   }
 
   @Override
@@ -204,7 +204,7 @@ final class M68kConstantExpressionVisitor extends M68kVisitor {
 
   @Override
   public void visitLtEqExpression(@NotNull M68kLtEqExpression expression) {
-    handleBinaryNumberExpression(expression, (left, right) -> result = left < right || Objects.equals(left, right) ? -1 : 0);
+    handleBinaryNumberExpression(expression, (left, right) -> result = left <= right ? -1 : 0);
   }
 
   @Override
