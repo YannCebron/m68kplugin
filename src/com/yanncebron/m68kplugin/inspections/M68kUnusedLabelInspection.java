@@ -42,7 +42,7 @@ final class M68kUnusedLabelInspection extends LocalInspectionTool implements Cle
 
       @Override
       public void visitLocalLabel(@NotNull M68kLocalLabel m68kLocalLabel) {
-        final PsiReference firstReference = ReferencesSearch.search(m68kLocalLabel).findFirst();
+        final PsiReference firstReference = ReferencesSearch.search(m68kLocalLabel, m68kLocalLabel.getUseScope()).findFirst();
         if (firstReference != null) {
           return;
         }
