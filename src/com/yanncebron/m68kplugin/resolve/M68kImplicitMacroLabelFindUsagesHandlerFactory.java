@@ -70,7 +70,7 @@ final class M68kImplicitMacroLabelFindUsagesHandlerFactory extends FindUsagesHan
       public boolean processElementUsages(@NotNull PsiElement element, @NotNull Processor<? super UsageInfo> processor, @NotNull FindUsagesOptions options) {
         String label = M68kImplicitMacroLabelResolver.getFirstParameterText((M68kMacroCallDirective) element);
 
-        processLabels(textOccurrence -> {
+        return processLabels(textOccurrence -> {
           M68kMacroCallDirective macroCallDirective = PsiTreeUtil.getParentOfType(textOccurrence.getElement(), M68kMacroCallDirective.class);
           if (macroCallDirective != null) return true; // skip declaration
 
@@ -78,12 +78,10 @@ final class M68kImplicitMacroLabelFindUsagesHandlerFactory extends FindUsagesHan
           assert labelRefExpression != null;
           return processor.process(new UsageInfo(labelRefExpression));
         }, options.searchScope, label);
-
-        return true;
       }
 
-      private void processLabels(Processor<? super TextOccurrence> processor, SearchScope searchScope, String label) {
-        ReadAction.run(() -> SearchService.getInstance().searchWord(getProject(), label)
+      private boolean processLabels(Processor<? super TextOccurrence> processor, SearchScope searchScope, String label) {
+        return ReadAction.compute(() -> SearchService.getInstance().searchWord(getProject(), label)
           .inContexts(SearchContext.inCode())
           .caseSensitive(true)
           .inScope(searchScope)
