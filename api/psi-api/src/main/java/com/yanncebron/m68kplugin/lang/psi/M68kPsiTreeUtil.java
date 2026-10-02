@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,10 +30,10 @@ public final class M68kPsiTreeUtil {
                                                  Processor<M68kPsiElement> processor,
                                                  Class<? extends M68kPsiElement>... stopAtElements) {
     for (PsiElement child = element.getPrevSibling(); child != null; child = child.getPrevSibling()) {
-      if (!(child instanceof M68kPsiElement)) continue;
+      if (!(child instanceof M68kPsiElement m68kPsiElement)) continue;
 
       if (PsiTreeUtil.instanceOf(child, stopAtElements)) return true;
-      if (!processor.process((M68kPsiElement) child)) return false;
+      if (!processor.process(m68kPsiElement)) return false;
     }
     return true;
   }
@@ -43,10 +43,10 @@ public final class M68kPsiTreeUtil {
                                                 Processor<M68kPsiElement> processor,
                                                 Class<? extends M68kPsiElement>... stopAtElements) {
     for (PsiElement child = element.getNextSibling(); child != null; child = child.getNextSibling()) {
-      if (!(child instanceof M68kPsiElement)) continue;
+      if (!(child instanceof M68kPsiElement m68kPsiElement)) continue;
 
       if (PsiTreeUtil.instanceOf(child, stopAtElements)) return true;
-      if (!processor.process((M68kPsiElement) child)) return false;
+      if (!processor.process(m68kPsiElement)) return false;
     }
     return true;
   }
