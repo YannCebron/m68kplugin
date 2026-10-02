@@ -40,6 +40,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.regex.Pattern;
 
 /**
  * Resolves to labels defined implicitly in macros defined by user.
@@ -49,6 +50,8 @@ import java.util.Collection;
  * @see M68kUnresolvedLabelReferenceInspection
  */
 public final class M68kImplicitMacroLabelResolver {
+
+  private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\s{2,}");
 
   private M68kImplicitMacroLabelResolver() {
   }
@@ -80,7 +83,7 @@ public final class M68kImplicitMacroLabelResolver {
 
     for (String macroName : macroNames) {
       for (M68kLabel macro : StubIndex.getElements(M68kStubIndexKeys.MACRO, macroName, project, scope, M68kLabel.class)) {
-        ReferencesSearch.search(macro, scope).forEach(psiReference -> {
+        boolean continueSearch = ReferencesSearch.search(macro, scope).forEach(psiReference -> {
           ProgressManager.checkCanceled();
 
           PsiElement element = psiReference.getElement();
@@ -92,6 +95,8 @@ public final class M68kImplicitMacroLabelResolver {
 
           return processor.process(macroCallDirective);
         });
+
+        if (!continueSearch) return;
       }
     }
   }
@@ -131,6 +136,6 @@ public final class M68kImplicitMacroLabelResolver {
   }
 
   public static @NotNull @NonNls String getImplicitMacroLabelLocationString(M68kMacroCallDirective macroCallDirective) {
-    return macroCallDirective.getText().replaceAll("\\s{2,}", " ").trim();
+    return WHITESPACE_PATTERN.matcher(macroCallDirective.getText()).replaceAll(" ").trim();
   }
 }
