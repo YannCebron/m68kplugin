@@ -48,10 +48,11 @@ internal object M68kAmigaHardwareRegisterPsiLocator {
         if (element.numberExpressionLiteralType != M68kNumberExpressionLiteralType.HEXADECIMAL) return null
         if (element.textLength !in 3..5) return null
 
-        val dcDirective = PsiTreeUtil.getNonStrictParentOfType(element, M68kDcDirective::class.java) ?: return null
+        val dcDirective = PsiTreeUtil.getParentOfType(element, M68kDcDirective::class.java) ?: return null
         if (dcDirective.dataSize != M68kDataSize.WORD) return null
-        if (dcDirective.expressionList.size != 2) return null
-        if (!dcDirective.expressionList.first().equals(element)) return null
+
+        val expressionList = dcDirective.expressionList
+        if (expressionList.size != 2 || expressionList[0] != element) return null
 
         val constantValue = element.value as? Int ?: return null
         if (constantValue.and(1) == 1) return null // register address = even
