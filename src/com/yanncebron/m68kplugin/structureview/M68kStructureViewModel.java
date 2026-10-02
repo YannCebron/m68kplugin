@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,9 +37,11 @@ import javax.swing.*;
 import java.util.EnumSet;
 import java.util.function.Predicate;
 
-public class M68kStructureViewModel extends StructureViewModelBase implements StructureViewModel.ElementInfoProvider {
+class M68kStructureViewModel extends StructureViewModelBase implements StructureViewModel.ElementInfoProvider {
 
-  public M68kStructureViewModel(M68kFile psiFile, Editor editor) {
+  private static final Filter[] FILTERS = createFilters();
+
+  M68kStructureViewModel(M68kFile psiFile, Editor editor) {
     super(psiFile, editor, new M68kRootStructureViewTreeElement(psiFile));
     withSorters(Sorter.ALPHA_SORTER);
     withSuitableClasses(M68kLabelBase.class, M68kIncludeDirective.class, M68kIncbinDirective.class);
@@ -53,50 +55,47 @@ public class M68kStructureViewModel extends StructureViewModelBase implements St
   @Override
   public boolean isAlwaysLeaf(StructureViewTreeElement element) {
     final Object value = element.getValue();
-    if (value instanceof M68kLabel) {
-      return ((M68kLabel) value).getLabelKind() != M68kLabelBase.LabelKind.GLOBAL;
+    if (value instanceof M68kLabel label) {
+      return label.getLabelKind() != M68kLabelBase.LabelKind.GLOBAL;
     }
-    return value instanceof M68kIncludeDirective ||
-      value instanceof M68kIncbinDirective;
+    return value instanceof M68kIncludeDirective || value instanceof M68kIncbinDirective;
   }
 
   @NotNull
   @Override
   public Filter @NotNull [] getFilters() {
+    return FILTERS;
+  }
+
+  private static Filter[] createFilters() {
+    final EnumSet<M68kLabelBase.LabelKind> assignmentKinds = EnumSet.of(
+      M68kLabelBase.LabelKind.EQU, M68kLabelBase.LabelKind.EQUALS,
+      M68kLabelBase.LabelKind.SET, M68kLabelBase.LabelKind.EQUR,
+      M68kLabelBase.LabelKind.FO, M68kLabelBase.LabelKind.SO
+    );
+
     return new Filter[]{
       createFilter(psiElement -> psiElement instanceof M68kIncludeDirective || psiElement instanceof M68kIncbinDirective,
         M68kBundle.message("structure.view.filter.includes"), M68kIcons.INCLUDE, "SHOW_INCLUDES"),
-      createFilter(createLabelFilteringFunction(EnumSet.of(M68kLabelBase.LabelKind.GLOBAL)),
+      createFilter(psiElement -> psiElement instanceof M68kLabel label && label.getLabelKind() == M68kLabelBase.LabelKind.GLOBAL,
         M68kBundle.message("structure.view.filter.labels"), M68kIcons.LABEL_GLOBAL, "SHOW_LABELS"),
       createFilter(psiElement -> psiElement instanceof M68kLocalLabel,
         M68kBundle.message("structure.view.filter.local.labels"), M68kIcons.LABEL_LOCAL, "SHOW_LOCAL_LABELS"),
-      createFilter(createLabelFilteringFunction(EnumSet.of(M68kLabelBase.LabelKind.MACRO)),
+      createFilter(psiElement -> psiElement instanceof M68kLabel label && label.getLabelKind() == M68kLabelBase.LabelKind.MACRO,
         M68kBundle.message("structure.view.filter.macros"), M68kIcons.LABEL_MACRO, "SHOW_MACROS"),
-      createFilter(createLabelFilteringFunction(
-        EnumSet.of(M68kLabelBase.LabelKind.EQU, M68kLabelBase.LabelKind.EQUALS,
-          M68kLabelBase.LabelKind.SET, M68kLabelBase.LabelKind.EQUR,
-          M68kLabelBase.LabelKind.FO, M68kLabelBase.LabelKind.SO)),
+      createFilter(psiElement -> psiElement instanceof M68kLabel label && assignmentKinds.contains(label.getLabelKind()),
         M68kBundle.message("structure.view.filter.assignments"), M68kIcons.LABEL_EQU, "SHOW_ASSIGNMENTS")
     };
   }
 
-  private static Predicate<PsiElement> createLabelFilteringFunction(EnumSet<M68kLabelBase.LabelKind> kinds) {
-    return psiElement -> {
-      if (!(psiElement instanceof M68kLabel label)) {
-        return false;
-      }
-
-      return kinds.contains(label.getLabelKind());
-    };
-  }
-
   private static Filter createFilter(Predicate<PsiElement> filter, @NotNull String text, Icon icon, @NotNull String name) {
+    final ActionPresentation presentation = new ActionPresentationData(text, null, icon);
     return new Filter() {
       @Override
       public boolean isVisible(TreeElement treeNode) {
-        if (!(treeNode instanceof PsiTreeElementBase)) return false;
+        if (!(treeNode instanceof PsiTreeElementBase<?> baseNode)) return false;
 
-        return !filter.test(((PsiTreeElementBase<?>) treeNode).getElement());
+        return !filter.test(baseNode.getElement());
       }
 
       @Override
@@ -106,12 +105,11 @@ public class M68kStructureViewModel extends StructureViewModelBase implements St
 
       @Override
       public @NotNull ActionPresentation getPresentation() {
-        return new ActionPresentationData(text, null, icon);
+        return presentation;
       }
 
       @Override
-      @NotNull
-      public String getName() {
+      public @NotNull String getName() {
         return name;
       }
     };
