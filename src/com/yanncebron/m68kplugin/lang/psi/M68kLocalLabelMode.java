@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,18 +20,20 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.Function;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.Predicate;
+
 public enum M68kLocalLabelMode {
 
   DOT(string -> '.' + string, text -> StringUtil.startsWithChar(text, '.')),
   DOLLAR(string -> string + '$', text -> StringUtil.endsWithChar(text, '$'));
 
   private final Function<String, String> nameFunction;
-  private final Function<String, Boolean> matchFunction;
+  private final Predicate<String> matchPredicate;
 
   M68kLocalLabelMode(Function<String, String> nameFunction,
-                     Function<String, Boolean> matchFunction) {
+                     Predicate<String> matchPredicate) {
     this.nameFunction = nameFunction;
-    this.matchFunction = matchFunction;
+    this.matchPredicate = matchPredicate;
   }
 
   public String getPatchedName(M68kLocalLabel localLabel) {
@@ -43,7 +45,7 @@ public enum M68kLocalLabelMode {
   }
 
   public boolean matches(String labelText) {
-    return matchFunction.fun(StringUtil.trimEnd(labelText, ':'));
+    return matchPredicate.test(StringUtil.trimEnd(labelText, ':'));
   }
 
   @Nullable
