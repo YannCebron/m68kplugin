@@ -42,14 +42,11 @@ abstract class M68kNumberExpressionMixIn extends ASTWrapperPsiElement implements
     boolean isNegative = getParent() instanceof M68kUnaryMinusExpression;
 
     // no need to parse most frequent values '0', '1'/'-1', '2'/'-2'
-    if ("0".equals(text)) {
-      return 0;
-    }
-    if ("1".equals(text)) {
-      return isNegative ? -1 : 1;
-    }
-    if ("2".equals(text)) {
-      return isNegative ? -2 : 2;
+    if (text.length() == 1) {
+      char ch = text.charAt(0);
+      if (ch == '0') return 0;
+      if (ch == '1') return isNegative ? -1 : 1;
+      if (ch == '2') return isNegative ? -2 : 2;
     }
 
     M68kNumberExpressionLiteralType numberLiteralType = getNumberExpressionLiteralType();
@@ -58,16 +55,12 @@ abstract class M68kNumberExpressionMixIn extends ASTWrapperPsiElement implements
     }
 
     text = text.substring(1);
-    if (numberLiteralType == M68kNumberExpressionLiteralType.OCTAL) {
-      return parseNumber(text, isNegative, 8);
-    }
-    if (numberLiteralType == M68kNumberExpressionLiteralType.HEXADECIMAL) {
-      return parseNumber(text, isNegative, 16);
-    }
-    if (numberLiteralType == M68kNumberExpressionLiteralType.BINARY) {
-      return parseNumber(text, isNegative, 2);
-    }
-    throw new IllegalArgumentException("Cannot map number: " + getText());
+    return switch (numberLiteralType) {
+      case OCTAL -> parseNumber(text, isNegative, 8);
+      case HEXADECIMAL -> parseNumber(text, isNegative, 16);
+      case BINARY -> parseNumber(text, isNegative, 2);
+      default -> throw new IllegalArgumentException("Cannot map number: " + getText());
+    };
   }
 
   @Override
@@ -84,8 +77,11 @@ abstract class M68kNumberExpressionMixIn extends ASTWrapperPsiElement implements
   @Nullable
   private static Integer parseNumber(String text, boolean isNegative, int radix) {
     try {
-      long longValue = Long.parseLong(isNegative ? "-" + text : text, radix);
-      return Long.valueOf(longValue).intValue();
+      long longValue = Long.parseLong(text, radix);
+      if (isNegative) {
+        longValue = -longValue;
+      }
+      return (int) longValue;
     } catch (NumberFormatException e) {
       return null;
     }
