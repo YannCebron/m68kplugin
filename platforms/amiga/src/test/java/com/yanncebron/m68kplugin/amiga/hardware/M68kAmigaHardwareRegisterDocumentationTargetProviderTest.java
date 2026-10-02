@@ -32,7 +32,20 @@ import static com.intellij.platform.backend.documentation.impl.ImplKt.computeDoc
 public class M68kAmigaHardwareRegisterDocumentationTargetProviderTest extends BasePlatformTestCase {
 
   private static final String EXPECTED_PRESENTABLE_TEXT = "AUD0DAT";
-  private static final String EXPECTED_HTML = "<style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>AUD0DAT</b><br/>Audio channel 0 data</pre></div><table class='sections'><tr><td valign='top' class='section'><p>Address:</td><td valign='top'><code>$DFF0AA</code><a href='m68kCopyData://$DFF0AA'><icon src='AllIcons.Actions.Copy'/></a>&nbsp;&ndash;&nbsp;<code>$00AA</code><a href='m68kCopyData://$00AA'><icon src='AllIcons.Actions.Copy'/></a></td><tr><td valign='top' class='section'><p>Chip Set (Chips):</td><td valign='top'>OCS (Paula)</td><tr><td valign='top' class='section'><p>Access:</td><td valign='top'>Write</td><tr><td valign='top' class='section'><p>Copper Danger:</td><td valign='top'>-</td><tr><td valign='top' class='section'><p>Related:</td><td valign='top'><table><tr><td valign='top'><b><a href='AUD0DAT'>AUD0DAT</a></b></td><td valign='top'><a href='AUD1DAT'>AUD1DAT</a></td><td valign='top'><a href='AUD2DAT'>AUD2DAT</a></td><td valign='top'><a href='AUD3DAT'>AUD3DAT</a></td></tr><tr></tr></table></td></table><div class='content'><p>This reg is the audio channel x (x=0,1,2,3) DMA\ndata buffer. It contains 2 bytes of data (each\nbyte is a two's complement signed integer) that\nare outputted sequentially (with digital to analog\nconversion) to the audio output pins. With maximum\nvolume, each byte can drive the audio outputs\nwith 0.8 volts (peak to peak,typ). The audio DMA\nchannel controller automatically transfers data\nto this reg from RAM. The processor can also\nwrite directly to this reg. When the DMA data is\nfinished (words outputted=length) and the data in\nthis reg has been used, an audio channel interrupt\nrequest is set.</p>\n</div>";
+  private static final String EXPECTED_HTML = "<style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>AUD0DAT</b><br/>Audio channel 0 data</pre></div><table class='sections'><tr><td valign='top' class='section'><p>Address:</td><td valign='top'><code>$DFF0AA</code><a href='m68kCopyData://$DFF0AA'><icon src='AllIcons.Actions.Copy'/></a>&nbsp;&ndash;&nbsp;<code>$00AA</code><a href='m68kCopyData://$00AA'><icon src='AllIcons.Actions.Copy'/></a></td><tr><td valign='top' class='section'><p>Chip Set (Chips):</td><td valign='top'>OCS (Paula)</td><tr><td valign='top' class='section'><p>Access:</td><td valign='top'>Write</td><tr><td valign='top' class='section'><p>Copper Danger:</td><td valign='top'>-</td><tr><td valign='top' class='section'><p>Related:</td><td valign='top'><table><tr><td><b><a href='AUD0DAT'>AUD0DAT</a></b></td><td><a href='AUD1DAT'>AUD1DAT</a></td><td><a href='AUD2DAT'>AUD2DAT</a></td><td><a href='AUD3DAT'>AUD3DAT</a></td></tr></table></td></table><div class='content'><p>This reg is the audio channel x (x=0,1,2,3) DMA\n" +
+    "data buffer. It contains 2 bytes of data (each\n" +
+    "byte is a two's complement signed integer) that\n" +
+    "are outputted sequentially (with digital to analog\n" +
+    "conversion) to the audio output pins. With maximum\n" +
+    "volume, each byte can drive the audio outputs\n" +
+    "with 0.8 volts (peak to peak,typ). The audio DMA\n" +
+    "channel controller automatically transfers data\n" +
+    "to this reg from RAM. The processor can also\n" +
+    "write directly to this reg. When the DMA data is\n" +
+    "finished (words outputted=length) and the data in\n" +
+    "this reg has been used, an audio channel interrupt\n" +
+    "request is set.</p>\n" +
+    "</div>";
 
   public void testHardwareRegisterFullAddress() {
     M68kProjectEnvironment.getInstance(getProject()).setTargetPlatform(M68kTargetPlatform.AMIGA, getTestRootDisposable());

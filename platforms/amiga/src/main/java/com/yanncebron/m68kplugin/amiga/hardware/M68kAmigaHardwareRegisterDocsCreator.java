@@ -125,15 +125,18 @@ final class M68kAmigaHardwareRegisterDocsCreator {
     String linkPrefix = forBrowserPane ? M68K_BROWSER_ITEM_LINK_PREFIX : "";
 
     StringBuilder relatedSb = new StringBuilder("<table><tr>");
-    int itemCount = 1;
+    int itemCount = 0;
     for (M68kAmigaHardwareRegister related : allRelated) {
-      relatedSb.append(DocumentationMarkup.SECTION_START);
+      if (itemCount > 0 && itemCount % 4 == 0) {
+        relatedSb.append("</tr><tr>");
+      }
+      relatedSb.append("<td>");
       if (related == register) relatedSb.append("<b>");
       relatedSb.append("<a href='").append(linkPrefix).append(related.getName()).append("'>");
       relatedSb.append(related.getName()).append("</a>");
       if (related == register) relatedSb.append("</b>");
       relatedSb.append("</td>");
-      if (itemCount++ % 4 == 0) relatedSb.append("</tr><tr>");
+      itemCount++;
     }
     relatedSb.append("</tr></table>");
 
