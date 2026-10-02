@@ -25,10 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.yanncebron.m68kplugin.lang.psi.M68kCpu.*;
 import static com.yanncebron.m68kplugin.lang.psi.M68kDataSize.*;
@@ -47,6 +44,25 @@ public final class M68kMnemonicRegistry {
 
   private static final M68kMnemonicRegistry INSTANCE = new M68kMnemonicRegistry();
 
+  // multiple matches: sort by
+  // 1. not deprecated
+  // 2. min(addressMode.count), so IMMEDIATE wins over DATA etc.
+  private static final Comparator<M68kMnemonic> specifityComparator = (o1, o2) -> {
+    if (o1.deprecated() != o2.deprecated()) {
+      return Boolean.compare(o1.deprecated(), o2.deprecated());
+    }
+
+    final int o1FirstOperandAddressModesCount = o1.firstOperand().getAddressModes().length;
+    final int o2FirstOperandAddressModesCount = o2.firstOperand().getAddressModes().length;
+    if (o1FirstOperandAddressModesCount != o2FirstOperandAddressModesCount) {
+      return Integer.compare(o1FirstOperandAddressModesCount, o2FirstOperandAddressModesCount);
+    }
+
+    final int o1SecondOperandAddressModesCount = o1.secondOperand().getAddressModes().length;
+    final int o2SecondOperandAddressModesCount = o2.secondOperand().getAddressModes().length;
+    return Integer.compare(o1SecondOperandAddressModesCount, o2SecondOperandAddressModesCount);
+  };
+
   public static M68kMnemonicRegistry getInstance() {
     return INSTANCE;
   }
@@ -56,7 +72,7 @@ public final class M68kMnemonicRegistry {
    *
    * @return empty list if none registered or elementType is not instruction.
    */
-  public Collection<M68kMnemonic> findAll(@NotNull IElementType elementType) {
+  public @Unmodifiable Collection<M68kMnemonic> findAll(@NotNull IElementType elementType) {
     return mnemonics.get(elementType);
   }
 
@@ -90,25 +106,8 @@ public final class M68kMnemonicRegistry {
       return filtered.getFirst();
     }
 
-    // multiple matches: sort by
-    // 1. not deprecated
-    // 2. min(addressMode.count), so IMMEDIATE wins over DATA etc.
     List<M68kMnemonic> multipleMatches = new SmartList<>(filtered);
-    multipleMatches.sort((o1, o2) -> {
-      if (o1.deprecated()) {
-        return 1;
-      }
-
-      final int o1FirstOperandAddressModesCount = o1.firstOperand().getAddressModes().length;
-      final int o2FirstOperandAddressModesCount = o2.firstOperand().getAddressModes().length;
-      if (o1FirstOperandAddressModesCount != o2FirstOperandAddressModesCount) {
-        return Integer.compare(o1FirstOperandAddressModesCount, o2FirstOperandAddressModesCount);
-      }
-
-      final int o1SecondOperandAddressModesCount = o1.secondOperand().getAddressModes().length;
-      final int o2SecondOperandAddressModesCount = o2.secondOperand().getAddressModes().length;
-      return Integer.compare(o1SecondOperandAddressModesCount, o2SecondOperandAddressModesCount);
-    });
+    multipleMatches.sort(specifityComparator);
 
     return multipleMatches.getFirst();
   }
@@ -128,21 +127,22 @@ public final class M68kMnemonicRegistry {
       }
 
       // operand count / addressing modes
-      if (operandsCount == 0) {
-        return !mnemonic.hasFirstOperand();
+      switch (operandsCount) {
+        case 0 -> {
+          return !mnemonic.hasFirstOperand();
+        }
+        case 1 -> {
+          return !mnemonic.hasSecondOperand() && mnemonic.firstOperand().matches(admList.getFirst());
+        }
+        case 2 -> {
+          return mnemonic.hasSecondOperand() &&
+            mnemonic.firstOperand().matches(admList.get(0)) &&
+            mnemonic.secondOperand().matches(admList.get(1));
+        }
+        default -> {
+          return false;
+        }
       }
-
-      boolean hasSecondOperand = mnemonic.hasSecondOperand();
-      if (operandsCount == 1 && !hasSecondOperand) {
-        return mnemonic.firstOperand().matches(admList.getFirst());
-      }
-
-      if (operandsCount == 2 && hasSecondOperand) {
-        return mnemonic.firstOperand().matches(admList.get(0)) &&
-          mnemonic.secondOperand().matches(admList.get(1));
-      }
-
-      return false;
     });
   }
 
