@@ -111,7 +111,9 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
     initList();
 
     int selectedValueIdx = PropertiesComponent.getInstance(project).getInt(getSelectedIdxKey(), -1);
-    list.setSelectedIndex(selectedValueIdx);
+    if (selectedValueIdx >= 0 && selectedValueIdx < list.getItemsCount()) {
+      list.setSelectedIndex(selectedValueIdx);
+    }
   }
 
   private @NotNull String getSelectedIdxKey() {
@@ -215,7 +217,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
     if (documentationComponent == null) {
       documentationComponent = DocumentationUtil.documentationComponent(project, target.createPointer(), target.computePresentation(), this);
     }
-    splitter.setSecondComponent(documentationComponent.getComponent());
+    splitter.setSecondComponent(documentationComponent.getComponent()); // replace "Nothing selected" panel always
     documentationComponent.resetBrowser(target.createPointer(), target.computePresentation());
   }
 
@@ -227,7 +229,6 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
     list.setBorder(JBUI.Borders.empty());
     list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     list.setFixedCellHeight(JBUI.CurrentTheme.List.rowHeight());
-    list.setFixedCellWidth(list.getWidth());
 
     list.setCellRenderer(getListCellRenderer());
     list.addListSelectionListener(e -> {
@@ -284,6 +285,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
 
   @Override
   public void dispose() {
+    documentationComponent = null;
   }
 
   /**
@@ -301,7 +303,7 @@ public abstract class M68kBrowserPaneBase<T> extends SimpleToolWindowPanel imple
           return;
         }
       }
-    });
+    }, project.getDisposed());
   }
 
   void selectItem(Object /* T */ element) {
