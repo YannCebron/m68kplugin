@@ -84,7 +84,7 @@ final class M68kColorSettingsPage implements ColorSettingsPage, RainbowColorSett
     createDescriptor("color.settings.group.supervisor.registers", "attribute.descriptor.sfc.register", M68kTextAttributes.SFC_REGISTER),
     createDescriptor("color.settings.group.supervisor.registers", "attribute.descriptor.sr.register", M68kTextAttributes.SR_REGISTER),
     createDescriptor("color.settings.group.supervisor.registers", "attribute.descriptor.ssp.register", M68kTextAttributes.SSP_REGISTER),
-    createDescriptor("color.settings.group.supervisor.registers", "attribute.descriptor.vbr.register", M68kTextAttributes.SFC_REGISTER),
+    createDescriptor("color.settings.group.supervisor.registers", "attribute.descriptor.vbr.register", M68kTextAttributes.VBR_REGISTER),
   };
 
   private static AttributesDescriptor createDescriptor(String groupKey, String typeKey, TextAttributesKey textAttributesKey) {

@@ -28,7 +28,7 @@
 ### Fixed
 
 - `cnop` directive: fix parsing when missing all arguments
-- Syntax highlighting: `SFC` register used setting of `DFC` register
+- Syntax highlighting: fix `SFC`/`VBR` register settings 
 
 ## 0.2.5 - 2026-08-17
 
