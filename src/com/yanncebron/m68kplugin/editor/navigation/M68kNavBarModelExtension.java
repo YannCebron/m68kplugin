@@ -21,13 +21,11 @@ import com.intellij.ide.ui.UISettings;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataMap;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.util.Ref;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.CommonProcessors;
 import com.intellij.util.ObjectUtils;
-import com.intellij.util.Processor;
 import com.yanncebron.m68kplugin.lang.M68kLanguage;
 import com.yanncebron.m68kplugin.lang.psi.*;
 import com.yanncebron.m68kplugin.lang.psi.directive.M68kDirectiveWithLabel;
@@ -60,25 +58,22 @@ final class M68kNavBarModelExtension extends AbstractNavBarModelExtension {
     if (m68kDirectiveWithLabel != null) return m68kDirectiveWithLabel.getLabel();
 
     // 3. anywhere else: search backwards to next label/macro
-    Ref<M68kLabelBase> foundLabel = Ref.create();
-    Processor<M68kPsiElement> processor = m68kPsiElement -> {
-      if (m68kPsiElement instanceof M68kLabelBase m68kLabelBase) {
-        foundLabel.set(m68kLabelBase);
-        return false;
+    CommonProcessors.FindFirstProcessor<M68kPsiElement> processor = new CommonProcessors.FindFirstProcessor<>() {
+      @Override
+      protected boolean accept(M68kPsiElement m68kPsiElement) {
+        return m68kPsiElement instanceof M68kLabelBase || m68kPsiElement instanceof M68kMacroDirective;
       }
-
-      if (m68kPsiElement instanceof M68kMacroDirective m68kMacroDirective) {
-        foundLabel.set(m68kMacroDirective.getLabel());
-        return false;
-      }
-
-      return true;
     };
 
     M68kPsiElement containing = M68kPsiTreeUtil.getContainingInstructionOrDirective(psiElement);
     M68kPsiTreeUtil.processSiblingsBackwards(ObjectUtils.chooseNotNull(containing, psiElement), processor,
       M68kEndmDirective.class);
-    return foundLabel.get();
+
+    PsiElement found = processor.getFoundValue();
+    if (found instanceof M68kMacroDirective m68kMacroDirective) {
+      return m68kMacroDirective.getLabel();
+    }
+    return found;
   }
 
   private static boolean isNotRelevant(@Nullable PsiElement element) {
