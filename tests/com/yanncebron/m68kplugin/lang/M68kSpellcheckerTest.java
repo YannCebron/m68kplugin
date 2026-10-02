@@ -18,61 +18,58 @@ package com.yanncebron.m68kplugin.lang;
 
 import com.intellij.grazie.spellcheck.GrazieSpellCheckingInspection;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.testFramework.TestDataPath;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.yanncebron.m68kplugin.lang.psi.M68kTokenGroups;
 
-@TestDataPath("$PROJECT_ROOT/testData/spellchecker")
 public class M68kSpellcheckerTest extends BasePlatformTestCase {
 
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-    myFixture.enableInspections(new GrazieSpellCheckingInspection());
-  }
-
-  @Override
-  protected String getTestDataPath() {
-    return "testData/spellchecker";
-  }
-
   public void testLabel() {
-    doTest();
+    doTest("""
+      correctLabel
+      .correctLocalLabel
+      
+      <TYPO descr="Typo: In word 'abcdegh'">abcdegh</TYPO>
+      .<TYPO descr="Typo: In word 'abcdegh'">abcdegh</TYPO>
+      """);
   }
 
   public void testComment() {
-    doTest();
+    doTest("""
+      ; A comment with <TYPO descr="Typo: In word 'abcdegh'">abcdegh</TYPO>
+      
+      ; but we know about some bundled words: btst bitplane bltbmod BLTBMOD scroller pretracker
+      """);
   }
 
   public void testStringExpression() {
-    doTest();
+    doTest(" dc.b 'A String with <TYPO descr=\"Typo: In word 'abcdegh'\">abcdegh</TYPO>',0");
   }
 
   public void testAllMnemonics() {
-    for (IElementType elementType : M68kTokenGroups.INSTRUCTIONS.getTypes()) {
-      doTestElementType(elementType);
-    }
+    doTestElementTypes(M68kTokenGroups.INSTRUCTIONS.getTypes());
   }
 
   public void testAllDirectives() {
-    for (IElementType elementType : M68kTokenGroups.DIRECTIVES.getTypes()) {
-      doTestElementType(elementType);
-    }
+    doTestElementTypes(M68kTokenGroups.DIRECTIVES.getTypes());
   }
 
   public void testAllConditionalDirectives() {
-    for (IElementType elementType : M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES.getTypes()) {
-      doTestElementType(elementType);
+    doTestElementTypes(M68kTokenGroups.CONDITIONAL_ASSEMBLY_DIRECTIVES.getTypes());
+  }
+
+  private void doTestElementTypes(IElementType[] elements) {
+    StringBuilder sb = new StringBuilder();
+    for (IElementType element : elements) {
+      sb.append("; ").append(element);
+      sb.append("\n");
     }
+    doTest(sb.toString());
   }
 
-  private void doTestElementType(IElementType element) {
-    myFixture.configureByText("a.s", "; " + element.toString());
+  private void doTest(String fileText) {
+    myFixture.configureByText("a.s", fileText);
+    myFixture.enableInspections(new GrazieSpellCheckingInspection());
     myFixture.testHighlighting(false, false, true);
-  }
-
-  private void doTest() {
-    myFixture.testHighlighting(false, false, true, getTestName(true) + ".s");
   }
 
 }
