@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +38,11 @@ public interface M68kStubElementTypesHolder {
 
   IStubElementType<M68kLabelStub, M68kLabel> LABEL =
     new M68kStubElementType<>("LABEL") {
+
+      private static final TokenSet IGNORED_VALUE_TOKENS = TokenSet.orSet(
+        TokenSet.WHITE_SPACE,
+        M68kTokenGroups.DATA_SIZES
+      );
 
       @NotNull
       @Override
@@ -140,9 +145,7 @@ public interface M68kStubElementTypesHolder {
           final IElementType type = child.getTokenType();
           if (type == valueDelimiterTokenType) {
             expectingInit = true;
-          } else if (expectingInit &&
-            !TokenSet.WHITE_SPACE.contains(type) &&
-            !M68kTokenGroups.DATA_SIZES.contains(type)) {
+          } else if (expectingInit && !IGNORED_VALUE_TOKENS.contains(type)) {
             return LightTreeUtil.toFilteredString(tree, child, null);
           }
         }
