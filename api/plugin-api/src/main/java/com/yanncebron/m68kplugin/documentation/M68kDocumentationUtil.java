@@ -84,12 +84,11 @@ public final class M68kDocumentationUtil {
   public static final String M68K_COPY_DATA_LINK_PREFIX = "m68kCopyData://";
 
   public static Couple<String> getMarkdownContents(String docRoot, String markdownFileName) {
-    final InputStream resource = M68kDocumentationUtil.class.getResourceAsStream(docRoot + markdownFileName + ".md");
+    try (InputStream resource = M68kDocumentationUtil.class.getResourceAsStream(docRoot + markdownFileName + ".md")) {
     if (resource == null) {
       return Couple.of(null, M68kApiBundle.message("documentation.no.reference.doc", markdownFileName));
     }
 
-    try {
       String text = FileUtil.loadTextAndClose(resource);
       text = text.replace("# ", "## ");
       return Couple.of(text, null);
@@ -137,10 +136,13 @@ public final class M68kDocumentationUtil {
           try {
             final URL resourceUrl = M68kDocumentationUtil.class.getResource(docRoot + sanitizedUrl);
             assert resourceUrl != null : sanitizedUrl;
-            final InputStream is = URLUtil.openStream(resourceUrl);
+            try (InputStream is = URLUtil.openStream(resourceUrl)) {
             final File tempFile = FileUtil.createTempFile("m68k", ".png", true);
-            StreamUtil.copy(is, new FileOutputStream(tempFile));
+              try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+                StreamUtil.copy(is, fos);
+              }
             return FileUtil.getUrl(tempFile);
+            }
           } catch (IOException e) {
             LOG.error("Error sanitizing URL '" + url + "'", e);
             return sanitizedUrl;
