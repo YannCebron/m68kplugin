@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.codeInsight.completion.PlainTextSymbolCompletionContributor;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.presentation.java.SymbolPresentationUtil;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -50,6 +51,9 @@ final class M68kPlainTextSymbolCompletionContributor implements PlainTextSymbolC
     final String filePath = SymbolPresentationUtil.getFilePathPresentation(file);
     List<LookupElement> variants = new ArrayList<>();
     for (String name : names) {
+      if (!prefix.isEmpty() && !StringUtil.startsWithIgnoreCase(name, prefix)) {
+        continue;
+      }
       final Collection<M68kLabel> labels = StubIndex.getElements(M68kStubIndexKeys.LABEL, name, project, scope, M68kLabel.class);
       for (M68kLabel label : labels) {
         variants.add(LookupElementBuilder.createWithIcon(label).withTypeText(filePath, true));
