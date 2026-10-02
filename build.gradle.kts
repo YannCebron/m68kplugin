@@ -96,7 +96,7 @@ tasks {
     withType<PrepareSandboxTask> {
         disabledPlugins.addAll(provider {
             intellijPlatform.productInfo.bundledPlugins.filter {
-                it != "tanvd.grazi" && it != "com.intellij.dev"
+                it != "tanvd.grazi" && it != "com.intellij.dev" && it != "org.intellij.plugins.markdown"
             }
         })
     }
