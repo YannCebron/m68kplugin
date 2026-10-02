@@ -19,6 +19,7 @@ package com.yanncebron.m68kplugin.browser;
 import com.intellij.ide.SelectInContext;
 import com.intellij.ide.SelectInTarget;
 import com.intellij.openapi.project.DumbAware;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.EmptyRunnable;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ToolWindow;
@@ -29,6 +30,7 @@ import com.intellij.util.ObjectUtils;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.M68kFileType;
 import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
@@ -39,46 +41,48 @@ final class M68kBrowserSelectInTarget implements SelectInTarget, DumbAware {
     VirtualFile virtualFile = context.getVirtualFile();
     if (virtualFile.getFileType() != M68kFileType.INSTANCE) return false;
 
-    for (M68kBrowserPaneFactoryEP factory : M68kBrowserToolWindowFactory.BROWSER_PANE_FACTORY_EP.getExtensionList()) {
-      M68kBrowserPaneFactory<?, ?> instance = factory.getInstance();
-      if (!instance.isAvailable(context.getProject())) continue;
-
-      if (instance.canSelect(context)) {
-        return true;
-      }
-    }
-    return false;
+    return findMatchingFactory(context) != null;
   }
 
   @Override
   public void selectIn(SelectInContext context, boolean requestFocus) {
+    M68kBrowserPaneFactoryEP factory = findMatchingFactory(context);
+    if (factory == null) return;
+
+    M68kBrowserPaneFactory<?, ?> instance = factory.getInstance();
+    Object selectedItem = instance.getSelectedItem(context);
+    if (selectedItem == null) return;
+
+    ToolWindow toolWindow = ToolWindowManager.getInstance(context.getProject()).getToolWindow(M68kBrowserToolWindowFactory.TOOLWINDOW_ID);
+    assert toolWindow != null;
+
+    ContentManager contentManager = toolWindow.getContentManager();
+    Content content = contentManager.findContent(factory.getDisplayName());
+    assert content != null : factory;
+    contentManager.setSelectedContent(content);
+
+    JComponent component = content.getComponent();
+    M68kBrowserPaneBase<?> browserPaneBase = ObjectUtils.tryCast(component, M68kBrowserPaneBase.class);
+    assert browserPaneBase != null : component;
+    browserPaneBase.selectItem(selectedItem);
+
+    if (requestFocus) {
+      toolWindow.activate(EmptyRunnable.getInstance());
+    }
+  }
+
+  @Nullable
+  private static M68kBrowserPaneFactoryEP findMatchingFactory(SelectInContext context) {
+    Project project = context.getProject();
     for (M68kBrowserPaneFactoryEP factory : M68kBrowserToolWindowFactory.BROWSER_PANE_FACTORY_EP.getExtensionList()) {
       M68kBrowserPaneFactory<?, ?> instance = factory.getInstance();
-      if (!instance.isAvailable(context.getProject())) continue;
+      if (!instance.isAvailable(project)) continue;
 
-      if (!instance.canSelect(context)) continue;
-
-      Object selectedItem = instance.getSelectedItem(context);
-      if (selectedItem == null) return;
-
-      ToolWindow toolWindow = ToolWindowManager.getInstance(context.getProject()).getToolWindow(M68kBrowserToolWindowFactory.TOOLWINDOW_ID);
-      assert toolWindow != null;
-
-      ContentManager contentManager = toolWindow.getContentManager();
-      Content content = contentManager.findContent(factory.getDisplayName());
-      assert content != null : factory;
-      contentManager.setSelectedContent(content);
-
-      JComponent component = content.getComponent();
-      M68kBrowserPaneBase<?> browserPaneBase = ObjectUtils.tryCast(component, M68kBrowserPaneBase.class);
-      assert browserPaneBase != null : component;
-      browserPaneBase.selectItem(selectedItem);
-
-      if (requestFocus) {
-        toolWindow.activate(EmptyRunnable.getInstance());
+      if (instance.canSelect(context)) {
+        return factory;
       }
-      return;
     }
+    return null;
   }
 
   @Override
