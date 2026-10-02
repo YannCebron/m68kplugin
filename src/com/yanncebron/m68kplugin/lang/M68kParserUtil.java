@@ -27,11 +27,10 @@ import com.yanncebron.m68kplugin.lang.psi.expression.M68kGtExpression;
 @SuppressWarnings("BooleanMethodIsAlwaysInverted")
 class M68kParserUtil extends GeneratedParserUtilBase {
 
-  private static final Key<Object> INSIDE_MACRO_CALL = Key.create("inside macro call");
+  private static final Key<Boolean> INSIDE_MACRO_CALL = Key.create("inside macro call");
 
   static boolean afterWhitespace(PsiBuilder b, @SuppressWarnings("unused") int level) {
-    final IElementType left = b.rawLookup(-1);
-    return left == TokenType.WHITE_SPACE;
+    return b.rawLookup(-1) == TokenType.WHITE_SPACE;
   }
 
   static boolean enterMacroCall(PsiBuilder b, @SuppressWarnings("unused") int level) {
@@ -45,7 +44,7 @@ class M68kParserUtil extends GeneratedParserUtilBase {
   }
 
   static boolean insideMacroCall(PsiBuilder b, @SuppressWarnings("unused") int level) {
-    return b.getUserData(INSIDE_MACRO_CALL) != null;
+    return Boolean.TRUE.equals(b.getUserData(INSIDE_MACRO_CALL));
   }
 
   /**
@@ -53,7 +52,7 @@ class M68kParserUtil extends GeneratedParserUtilBase {
    * as {@link com.yanncebron.m68kplugin.lang.psi.M68kRegisterRange}
    * to avoid precedence conflict with {@link com.yanncebron.m68kplugin.lang.psi.M68kAdmRrd}.
    */
-  static boolean registerRangeStandaloneRegisterValid(PsiBuilder b, @SuppressWarnings("unused") int level) {
+  static boolean registerRangeStandaloneRegisterValid(PsiBuilder b, int level) {
     if (!insideMacroCall(b, level)) return true;
 
     IElementType left = b.rawLookup(-1);
