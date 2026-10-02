@@ -60,7 +60,7 @@ import java.util.regex.Pattern;
  */
 class M68kVasmLineInLocationFilter implements Filter, DumbAware {
 
-  private static final Pattern PATTERN = Pattern.compile(".*line (\\d+) of \"([0-9 a-z_A-Z\\-\\\\./]+)\".*");
+  private static final Pattern PATTERN = Pattern.compile(".*line (\\d+) of \"([0-9 a-zA-Z_\\\\./-]+)\".*");
 
   private final Project project;
 
@@ -74,19 +74,19 @@ class M68kVasmLineInLocationFilter implements Filter, DumbAware {
     final int lineIdx = StringUtil.indexOf(line, "line");
     if (lineIdx == -1) return null;
 
-    if (StringUtil.indexOf(line, "of \"") == -1) {
+    if (StringUtil.indexOf(line, "of \"", lineIdx) == -1) {
       return null;
     }
 
-    final Matcher matcher = PATTERN.matcher(line.substring(0, line.length() - 1)); // strip NL
-    if (!matcher.matches()) {
+    final Matcher matcher = PATTERN.matcher(line);
+    if (!matcher.find(lineIdx)) {
       return null;
     }
 
     final String lineText = matcher.group(1);
     int lineNumber = 0;
     try {
-      lineNumber = Integer.parseInt(lineText) - 1;
+      lineNumber = Math.max(0, Integer.parseInt(lineText) - 1);
     } catch (NumberFormatException ignored) {
     }
 
@@ -99,7 +99,7 @@ class M68kVasmLineInLocationFilter implements Filter, DumbAware {
     if (!matchingFiles.isEmpty()) {
       final HyperlinkInfo filesHyperlinkInfo = HyperlinkInfoFactory.getInstance()
         .createMultipleFilesHyperlinkInfo(new ArrayList<>(matchingFiles), lineNumber, project);
-      return new Result(initialOffset + lineIdx, initialOffset + matcher.end(2) + 1, filesHyperlinkInfo);
+      return new Result(initialOffset + matcher.start(), initialOffset + matcher.end(2) + 1, filesHyperlinkInfo);
     }
 
     return new Result(initialOffset + matcher.start(2), initialOffset + matcher.end(2), createLabelHyperlinkInfo(location));

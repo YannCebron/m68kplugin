@@ -66,7 +66,7 @@ final class M68kRgAsmLineInLocationFilter implements Filter, DumbAware {
 
     int lineNumber = 0;
     try {
-      lineNumber = Integer.parseInt(matcher.group(2)) - 1;
+      lineNumber = Math.max(0, Integer.parseInt(matcher.group(2)) - 1);
     } catch (NumberFormatException ignored) {
     }
 
