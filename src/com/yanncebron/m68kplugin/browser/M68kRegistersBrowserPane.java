@@ -127,7 +127,7 @@ final class M68kRegistersBrowserPane extends M68kBrowserPaneBase<M68kRegister> {
       return admWithRegister == null ? null : admWithRegister.getRegister();
     }
 
-    private @Nullable M68kAdmWithRegister findAdmWithRegister(SelectInContext context) {
+    private static @Nullable M68kAdmWithRegister findAdmWithRegister(SelectInContext context) {
       Object selectorInFile = context.getSelectorInFile();
       if (!(selectorInFile instanceof PsiElement psiElement)) return null;
 
