@@ -77,7 +77,7 @@ public class M68kSyntaxHighlighter extends SyntaxHighlighterBase {
     keys.put(M68kTokenTypes.SR, M68kTextAttributes.SR_REGISTER);
     keys.put(M68kTokenTypes.CCR, M68kTextAttributes.CCR_REGISTER);
     keys.put(M68kTokenTypes.DFC, M68kTextAttributes.DFC_REGISTER);
-    keys.put(M68kTokenTypes.SFC, M68kTextAttributes.DFC_REGISTER);
+    keys.put(M68kTokenTypes.SFC, M68kTextAttributes.SFC_REGISTER);
     keys.put(M68kTokenTypes.VBR, M68kTextAttributes.VBR_REGISTER);
   }
 
