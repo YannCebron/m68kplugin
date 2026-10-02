@@ -22,7 +22,7 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
-public class M68kTextAttributes {
+public final class M68kTextAttributes {
 
   public static final TextAttributesKey INSTRUCTION =
     createTextAttributesKey("M68K_INSTRUCTION", DefaultLanguageHighlighterColors.KEYWORD);
