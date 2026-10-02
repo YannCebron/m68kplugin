@@ -16,6 +16,9 @@
 
 package com.yanncebron.m68kplugin.lang.psi;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * @see M68kAddressMode
  */
@@ -278,22 +281,23 @@ public enum M68kOperand {
     M68kAddressMode.CONTROL_REGISTER_SFC,
     M68kAddressMode.CONTROL_REGISTER_VBR);
 
-  private final M68kAddressMode[] addressModes;
+  private final Set<M68kAddressMode> addressModes;
   private final String notation;
 
   M68kOperand(M68kAddressMode... addressModes) {
-    this.addressModes = addressModes;
-    notation = addressModes.length == 1 ? addressModes[0].getNotation() : "<" + this + ">";
+    this.addressModes = addressModes.length == 0 ? EnumSet.noneOf(M68kAddressMode.class) :
+      EnumSet.of(addressModes[0], addressModes);
+    notation = addressModes.length == 1 ? addressModes[0].getNotation() : "<" + name() + ">";
   }
 
   public boolean matches(M68kAdm givenAdm) {
-    for (M68kAddressMode addressMode : getAddressModes()) {
+    for (M68kAddressMode addressMode : addressModes) {
       if (addressMode.matches(givenAdm)) return true;
     }
     return false;
   }
 
-  public M68kAddressMode[] getAddressModes() {
+  public Set<M68kAddressMode> getAddressModes() {
     return addressModes;
   }
 

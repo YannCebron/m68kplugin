@@ -75,9 +75,9 @@ public record M68kMnemonic(IElementType elementType,
   }
 
   private String getOperandRegisterExternalName(M68kOperand operand) {
-    M68kAddressMode[] addressModes = operand.getAddressModes();
-    assert addressModes.length == 1 : this;
-    return addressModes[0].getNotation();
+    Set<M68kAddressMode> addressModes = operand.getAddressModes();
+    assert addressModes.size() == 1 : this;
+    return addressModes.iterator().next().getNotation();
   }
 
   @Override

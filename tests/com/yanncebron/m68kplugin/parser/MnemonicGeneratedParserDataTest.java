@@ -115,11 +115,12 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
 
             boolean foundValid = false;
             for (M68kMnemonic known : allMnemonics) {
-              if ((dataSize == M68kDataSize.UNSIZED || known.dataSizes().contains(dataSize)) &&
-                operandContainsAddressMode(known.firstOperand(), firstAddressMode) &&
-                (!known.hasSecondOperand() || operandContainsAddressMode(known.secondOperand(), secondAddressMode))) {
-                foundValid = true;
-                break;
+              if ((dataSize == M68kDataSize.UNSIZED || known.dataSizes().contains(dataSize))) {
+                if (known.firstOperand().getAddressModes().contains(firstAddressMode) &&
+                  (!known.hasSecondOperand() || known.secondOperand().getAddressModes().contains(secondAddressMode))) {
+                  foundValid = true;
+                  break;
+                }
               }
             }
             if (foundValid) {
@@ -165,13 +166,6 @@ public class MnemonicGeneratedParserDataTest extends M68kParsingTestCase {
     assertEquals(6634, skippedValidCount);
     assertEquals(1449, matchedByMnemonicCount);
     assertEmpty(failedVariants);
-  }
-
-  private static boolean operandContainsAddressMode(M68kOperand m68kOperand, M68kAddressMode addressMode) {
-    for (M68kAddressMode mode : m68kOperand.getAddressModes()) {
-      if (mode == addressMode) return true;
-    }
-    return false;
   }
 
   private static @NotNull String getVariantOutput(String variant, M68kAddressMode firstAddressMode, boolean hasSecondOperand, M68kAddressMode secondAddressMode) {

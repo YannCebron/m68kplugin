@@ -274,9 +274,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
   private static boolean addressModesOverlap(M68kOperand first, M68kOperand second, String reason) {
     if (first == M68kOperand.NONE || second == M68kOperand.NONE) return false;
 
-    Set<M68kAddressMode> firstAddressModes = Set.of(first.getAddressModes());
-    Set<M68kAddressMode> secondAddressModes = Set.of(second.getAddressModes());
-    boolean overlap = secondAddressModes.containsAll(firstAddressModes);
+    boolean overlap = second.getAddressModes().containsAll(first.getAddressModes());
     if (overlap && LOG_MNEMONIC_CLEANUP) System.out.println(reason);
     return overlap;
   }

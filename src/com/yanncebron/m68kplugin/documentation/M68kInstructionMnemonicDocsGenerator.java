@@ -20,7 +20,6 @@ import com.intellij.lang.documentation.DocumentationMarkup;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.util.text.Strings;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.util.ArrayUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.yanncebron.m68kplugin.M68kBundle;
 import com.yanncebron.m68kplugin.lang.psi.*;
@@ -91,10 +90,10 @@ class M68kInstructionMnemonicDocsGenerator {
     // only operands with >1 address mode, otherwise they cannot appear in the table(s)
     Set<M68kAddressMode> allUsedAddressModesFromMultiOperands = new HashSet<>();
     for (M68kMnemonic mnemonic : filteredMnemonics) {
-      M68kAddressMode[] firstAddressModes = mnemonic.firstOperand().getAddressModes();
-      if (firstAddressModes.length > 1) ContainerUtil.addAll(allUsedAddressModesFromMultiOperands, firstAddressModes);
-      M68kAddressMode[] secondAddressModes = mnemonic.secondOperand().getAddressModes();
-      if (secondAddressModes.length > 1) ContainerUtil.addAll(allUsedAddressModesFromMultiOperands, secondAddressModes);
+      Set<M68kAddressMode> firstAddressModes = mnemonic.firstOperand().getAddressModes();
+      if (firstAddressModes.size() > 1) ContainerUtil.addAll(allUsedAddressModesFromMultiOperands, firstAddressModes);
+      Set<M68kAddressMode> secondAddressModes = mnemonic.secondOperand().getAddressModes();
+      if (secondAddressModes.size() > 1) ContainerUtil.addAll(allUsedAddressModesFromMultiOperands, secondAddressModes);
     }
 
     for (Iterator<M68kMnemonic> iterator = filteredMnemonics.iterator(); iterator.hasNext(); ) {
@@ -144,10 +143,9 @@ class M68kInstructionMnemonicDocsGenerator {
         sb.append(DocumentationMarkup.SECTIONS_END);
       }
 
-      final M68kAddressMode[] firstAddressModes = mnemonic.firstOperand().getAddressModes();
-      final M68kAddressMode[] secondAddressModes = mnemonic.secondOperand().getAddressModes();
-      if (firstAddressModes.length <= 1 &&
-        secondAddressModes.length <= 1) {
+      final Set<M68kAddressMode> firstAddressModes = mnemonic.firstOperand().getAddressModes();
+      final Set<M68kAddressMode> secondAddressModes = mnemonic.secondOperand().getAddressModes();
+      if (firstAddressModes.size() <= 1 && secondAddressModes.size() <= 1) {
         if (iterator.hasNext()) {
           appendBreak();
         }
@@ -266,8 +264,8 @@ class M68kInstructionMnemonicDocsGenerator {
 
   private void appendAddressModes(String label,
                                   Set<M68kAddressMode> allPossibleAddressModes,
-                                  M68kAddressMode[] addressModes) {
-    if (addressModes.length <= 1) return;
+                                  Set<M68kAddressMode> addressModes) {
+    if (addressModes.size() <= 1) return;
 
     sb.append("<tr>");
     DocumentationMarkup.SECTION_HEADER_CELL.attr("width", "15%").appendTo(sb);
@@ -278,7 +276,7 @@ class M68kInstructionMnemonicDocsGenerator {
       if (!allPossibleAddressModes.contains(value)) continue;
 
       sb.append("<td style=\"text-align:center;\">");
-      if (ArrayUtil.contains(value, addressModes)) {
+      if (addressModes.contains(value)) {
         sb.append(M68kDocumentationUtil.CHECK_MARK);
       }
       sb.append("</td>");

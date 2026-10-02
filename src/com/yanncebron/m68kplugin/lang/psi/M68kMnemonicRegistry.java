@@ -52,14 +52,14 @@ public final class M68kMnemonicRegistry {
       return Boolean.compare(o1.deprecated(), o2.deprecated());
     }
 
-    final int o1FirstOperandAddressModesCount = o1.firstOperand().getAddressModes().length;
-    final int o2FirstOperandAddressModesCount = o2.firstOperand().getAddressModes().length;
+    final int o1FirstOperandAddressModesCount = o1.firstOperand().getAddressModes().size();
+    final int o2FirstOperandAddressModesCount = o2.firstOperand().getAddressModes().size();
     if (o1FirstOperandAddressModesCount != o2FirstOperandAddressModesCount) {
       return Integer.compare(o1FirstOperandAddressModesCount, o2FirstOperandAddressModesCount);
     }
 
-    final int o1SecondOperandAddressModesCount = o1.secondOperand().getAddressModes().length;
-    final int o2SecondOperandAddressModesCount = o2.secondOperand().getAddressModes().length;
+    final int o1SecondOperandAddressModesCount = o1.secondOperand().getAddressModes().size();
+    final int o2SecondOperandAddressModesCount = o2.secondOperand().getAddressModes().size();
     return Integer.compare(o1SecondOperandAddressModesCount, o2SecondOperandAddressModesCount);
   };
 
