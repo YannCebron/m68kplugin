@@ -25,6 +25,8 @@ import com.yanncebron.m68kplugin.lang.psi.expression.M68kNumberExpressionLiteral
 internal object M68kAmigaHardwareRegisterPsiLocator {
 
     private const val MINIMUM_ADDRESS_VALUE = 0xBFD000 // CIAB_PRA
+    private const val BASE_ADDRESS = 0xDFF000
+    private const val MAX_ADDRESS_OFFSET = 0x1FC // FMODE
 
     /**
      * `$xxxXXX` expression in code for all registers.
@@ -35,7 +37,7 @@ internal object M68kAmigaHardwareRegisterPsiLocator {
         if (element.textLength != 7) return null
 
         val constantValue = element.value as? Int ?: return null
-        if (constantValue < MINIMUM_ADDRESS_VALUE) return null
+        if (constantValue < MINIMUM_ADDRESS_VALUE || constantValue > BASE_ADDRESS + MAX_ADDRESS_OFFSET) return null
 
         return M68kAmigaHardwareRegister.findByAddress(constantValue)
     }
@@ -56,8 +58,8 @@ internal object M68kAmigaHardwareRegisterPsiLocator {
 
         val constantValue = element.value as? Int ?: return null
         if (constantValue.and(1) == 1) return null // register address = even
-        if (constantValue > 0x1FC) return null     // highest register address (FMODE)
+        if (constantValue > MAX_ADDRESS_OFFSET) return null
 
-        return M68kAmigaHardwareRegister.findByAddress(constantValue + 0xDFF000)
+        return M68kAmigaHardwareRegister.findByAddress(BASE_ADDRESS + constantValue)
     }
 }
