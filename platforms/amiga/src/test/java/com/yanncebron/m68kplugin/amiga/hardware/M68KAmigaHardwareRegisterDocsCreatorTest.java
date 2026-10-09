@@ -17,13 +17,15 @@
 package com.yanncebron.m68kplugin.amiga.hardware;
 
 import com.intellij.testFramework.UsefulTestCase;
+import junit.framework.TestCase;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class M68KAmigaHardwareRegisterDocsCreatorTest extends UsefulTestCase {
+@SuppressWarnings("SpellCheckingInspection")
+public class M68KAmigaHardwareRegisterDocsCreatorTest extends TestCase {
 
   public void testRegistersWithoutReferenceDocs() {
     Set<M68kAmigaHardwareRegister> withoutDoc = new HashSet<>();
@@ -37,7 +39,7 @@ public class M68KAmigaHardwareRegisterDocsCreatorTest extends UsefulTestCase {
       }
     }
 
-   assertEmpty(withoutDoc);
+   UsefulTestCase.assertEmpty(withoutDoc);
   }
 
   public void testCIAA_CRA() {
