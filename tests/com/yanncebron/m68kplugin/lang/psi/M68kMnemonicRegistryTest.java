@@ -250,6 +250,11 @@ public class M68kMnemonicRegistryTest extends LightPlatformTestCase {
         M68kMnemonic.ConditionCodes.NONE_AFFECTED, M68kMnemonic.ConditionCodes.NONE_AFFECTED));
   }
 
+  public void testFindReturnsNullOnParseError() {
+    // Incomplete instruction with missing operand — should parse with error elements
+    doTestFind("add.b", null);
+  }
+
   private void doTestFind(String instructionText, M68kMnemonic expectedMnemonic) {
     PsiFile psiFile = createLightFile("a.s", " " + instructionText);
     final M68kPsiElement instruction = M68kPsiTreeUtil.getContainingInstructionOrDirective(psiFile.findElementAt(2));
