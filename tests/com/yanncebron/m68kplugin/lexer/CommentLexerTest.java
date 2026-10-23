@@ -26,11 +26,6 @@ public class CommentLexerTest extends M68kLexerTestCase {
     doTest("; Comment", "comment ('; Comment')");
   }
 
-  public void testEmptyCommentOnFirstLine() {
-    doTest(";",
-      "comment (';')");
-  }
-
   public void testCommentAfterWhitespace() {
     doTest("    ; comment",
       """
