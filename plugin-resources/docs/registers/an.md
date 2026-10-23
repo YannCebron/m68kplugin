@@ -10,7 +10,7 @@ exception handling.
 In the user programming model, A7 refers to the user stack pointer
 (USP).
 
-In the supervisor programming model register, A7 refers to the interrupt stack pointer,
+In the supervisor programming model, A7 refers to the interrupt stack pointer,
 A7’(ISP) and the master stack pointer, A7" (MSP). The supervisor stack pointer is the active
 stack pointer (ISP or MSP). For processors that do not support ISP or MSP, the system stack
 is the system stack pointer (SSP). The ISP and MSP are general-purpose address registers

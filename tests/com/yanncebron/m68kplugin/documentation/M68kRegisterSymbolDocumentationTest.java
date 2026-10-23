@@ -54,7 +54,8 @@ public class M68kRegisterSymbolDocumentationTest extends BasePlatformTestCase {
   public void testSfcRegister() {
     doTest(" movec S<caret>FC,d0", "SFC", """
       <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>SFC</b></pre></div><table class='sections'><tr><td valign='top' class='section'><p>CPU:</td><td valign='top'>MC68010+</td></table><div class='content'><h2>Alternate Function Code Registers (<code>SFC</code> and <code>DFC</code>)</h2>
-      <p>The alternate function code registers contain 3-bit function codes. Function codes can be
+      <p>The SFC and DFC are 32-bit registers where only the lower 3 bits are used;
+      the upper 28 bits are reserved and ignored. These 3-bit function codes can be
       considered extensions of the 32-bit logical address that optionally provides as many as eight
       4-Gbyte address spaces. The processor automatically generates function codes to select
       address spaces for data and programs at the user and supervisor modes. Certain

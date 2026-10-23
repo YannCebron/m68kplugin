@@ -36,4 +36,9 @@ zero. I2, I1, and I0 define the interrupt mask level.
 
 #### INTERRUPT PRIORITY MASK: `I2`/`I1`/`I0`
 
+The I2, I1, and I0 bits form a 3-bit value (0–7) defining the interrupt mask level.
+Only interrupts with a priority level higher than the mask level can be recognized.
+A mask level of 0 enables all maskable interrupts. A mask level of 7 disables all
+maskable interrupts.
+
 ### _7–0 USER BYTE ([CCR](ccr.md))_
