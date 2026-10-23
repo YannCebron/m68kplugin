@@ -1,4 +1,4 @@
-# MOVE USP - Copy data from USP
+# MOVE from USP - Copy data from USP to destination
 
 ## Operation
 IF [S] = 1<br/>
