@@ -59,6 +59,7 @@ Unsupported directives, these will display as a false positive
 - `entry`, `extrn`, `global`, `export` == `xdef`
 - `elif`
 - `equrl`
+- `fequ`
 - `fequr`
 - `fequrl`
 - `freg`
@@ -75,20 +76,6 @@ Unsupported directives, these will display as a false positive
 - `struct`/`estruct`
 - `symdebug`
 - `weak`
-
---- 
-MadMac assembler specific ([vasm Docs](http://sun.hasenbraten.de/vasm/release/vasm_5.html)) (a dot may optionally precede all directives):
-
-- `abs`
-- `assert`
-- `dphrase`
-- `globl`
-- `long`
-- `macundef`
-- `nlist`
-- `offset`
-- `phrase`
-- `qphrase`
 
 #### Directives with known limitations
 
