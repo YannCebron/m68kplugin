@@ -1,7 +1,7 @@
 # OR - OR logical
 
 ## Operation
-[destination] ← [source] + [destination]
+[destination] ← [source] ∨ [destination]
 
 ## Description
 OR the source operand to the destination operand, and store the result in the destination location.

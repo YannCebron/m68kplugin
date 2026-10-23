@@ -1,7 +1,7 @@
 # ORI - OR immediate
 
 ## Operation
-[destination] ← \<literal\> + [destination]
+[destination] ← \<literal\> ∨ [destination]
 
 ## Description
 OR the immediate data with the destination operand. Store the result in the destination operand.

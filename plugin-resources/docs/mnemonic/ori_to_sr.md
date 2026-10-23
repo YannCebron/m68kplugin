@@ -3,7 +3,7 @@
 ## Operation
 IF [S] = 1<br/>
 &nbsp;&nbsp;THEN<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[SR] ← \<literal\> + [SR]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[SR] ← \<literal\> ∨ [SR]<br/>
 &nbsp;&nbsp;ELSE TRAP
 
 ## Description
