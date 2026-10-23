@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,7 +69,7 @@ final class M68kDirectivesInspection extends LocalInspectionTool implements Dumb
             endElement.set(psiElement);
             return true;
           });
-          ProblemDescriptor problemDescriptor = holder.getManager().createProblemDescriptor(nextSibling, endElement.get(), M68kBundle.message("highlight.no.content.after.end.directive"), ProblemHighlightType.LIKE_MARKED_FOR_REMOVAL, isOnTheFly);
+          ProblemDescriptor problemDescriptor = holder.getManager().createProblemDescriptor(nextSibling, endElement.get(), M68kBundle.message("inspection.directives.no.content.after.end"), ProblemHighlightType.LIKE_MARKED_FOR_REMOVAL, isOnTheFly);
           holder.registerProblem(problemDescriptor);
         }
       }
@@ -173,7 +173,7 @@ final class M68kDirectivesInspection extends LocalInspectionTool implements Dumb
   }
 
   private static void addUnmatchedProblem(M68kDirective m68kDirective, ProblemsHolder holder, boolean forwards, @NonNls String matchingDirectiveText) {
-    final String key = forwards ? "highlight.unmatched.directive.missing.closing" : "highlight.unmatched.directive.missing.opening";
+    final String key = forwards ? "inspection.directives.unmatched.missing.closing" : "inspection.directives.unmatched.missing.opening";
     holder.registerProblem(m68kDirective, M68kBundle.message(key, matchingDirectiveText));
   }
 
