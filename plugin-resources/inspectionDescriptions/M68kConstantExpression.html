@@ -6,7 +6,7 @@ Highlights problems with constant expressions.
 
 <h3>Expression overflow</h3>
 
-Addition, subtraction, multiplication or division overflow or division by 0.
+Arithmetic overflow or division by 0.
 
 <h3>Instruction operand value</h3>
 
@@ -21,7 +21,7 @@ Addition, subtraction, multiplication or division overflow or division by 0.
     </tr>
     <tr>
         <td><code>BCHG, BTST, BCLR</code></td>
-        <td>1..8</td>
+        <td>0..255</td>
     </tr>
     <tr>
         <td><code>ASL, ASR, LSL, LSR, ROXL, ROXR</code></td>
@@ -58,7 +58,7 @@ Addition, subtraction, multiplication or division overflow or division by 0.
     </tr>
     <tr>
         <td><code>dc.b</code></td>
-        <td>-128..127</td>
+        <td>-128..255</td>
     </tr>
     <tr>
         <td><code>dc.w</code></td>
