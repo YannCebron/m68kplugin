@@ -95,9 +95,13 @@ final class M68kBrowserToolWindowFactory implements ToolWindowFactory, DumbAware
     @Override
     public void targetPlatformChanged(M68kTargetPlatform targetPlatform) {
       ToolWindow toolWindow = ToolWindowManager.getInstance(project).getToolWindow(M68kBrowserToolWindowFactory.TOOLWINDOW_ID);
-      assert toolWindow != null;
+      if (toolWindow == null) return;
 
-      initPanes(project, toolWindow, null);
+      ContentManager contentManager = toolWindow.getContentManager();
+      Content selectedContent = contentManager.getSelectedContent();
+      String activePane = selectedContent != null ? selectedContent.getUserData(PANE_FQN_KEY) : null;
+
+      initPanes(project, toolWindow, activePane);
     }
   }
 
