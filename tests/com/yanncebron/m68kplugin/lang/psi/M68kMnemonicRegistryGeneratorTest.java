@@ -320,6 +320,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
     printDivider();
 
+    System.out.println("    MultiMap<IElementType, M68kMnemonic> mnemonics = MultiMap.createLinked();\n");
     System.out.println("// Total mnemonics: " + supportedMnemonics);
 
     IElementType lastElementType = null;
@@ -337,7 +338,7 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
       String cpuText = getCpuText(cpus);
 
       System.out.println();
-      System.out.print("create(" + tokenText + ")");
+      System.out.print("create(mnemonics, " + tokenText + ")");
       if (dataSizeText != null) {
         System.out.println(".dataSizes(" + dataSizeText + ")");
       } else {
@@ -372,7 +373,9 @@ public class M68kMnemonicRegistryGeneratorTest extends TestCase {
 
       lastElementType = mnemonic.elementType();
     }
+
     System.out.println();
+    System.out.println("    registry = freezeMnemonics(mnemonics);");
     System.out.println();
   }
 

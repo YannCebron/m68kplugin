@@ -41,7 +41,7 @@ public record M68kMnemonic(IElementType elementType,
                            PrivilegedType privilegedType,
                            ControlFlow controlFlow,
                            ConditionCodes affected,
-                           ConditionCodes tested) {
+                           ConditionCodes tested) implements Comparable<M68kMnemonic> {
 
   private static final Set<M68kOperand> SPECIAL_REGISTER_OPERANDS = Set.of(
     M68kOperand.CCR_REGISTER,
@@ -72,6 +72,23 @@ public record M68kMnemonic(IElementType elementType,
   public boolean hasSpecialRegisterOperands() {
     return SPECIAL_REGISTER_OPERANDS.contains(firstOperand) ||
       SPECIAL_REGISTER_OPERANDS.contains(secondOperand);
+  }
+
+  @Override
+  public int compareTo(@NotNull M68kMnemonic other) {
+    if (deprecated != other.deprecated) {
+      return Boolean.compare(deprecated, other.deprecated);
+    }
+
+    int firstOperandCompare = Integer.compare(addressModesCount(firstOperand), addressModesCount(other.firstOperand));
+    if (firstOperandCompare != 0) {
+      return firstOperandCompare;
+    }
+    return Integer.compare(addressModesCount(secondOperand), addressModesCount(other.secondOperand));
+  }
+
+  private static int addressModesCount(M68kOperand operand) {
+    return operand.getAddressModes().size();
   }
 
   private String getOperandRegisterExternalName(M68kOperand operand) {
