@@ -3,9 +3,6 @@ title: Getting Started
 nav_order: 2
 ---
 
-# Getting Started
-   
-
 #### About this guide
 
 This guide uses the following notations to distinguish certain items:
