@@ -1,6 +1,6 @@
 # BKPT - Breakpoint
 
-## Operation 
+## Operation
 Run Breakpoint Acknowledge Cycle; TRAP As Illegal Instruction
 
 ## Description
