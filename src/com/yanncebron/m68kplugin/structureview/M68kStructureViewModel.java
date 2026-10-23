@@ -71,7 +71,8 @@ class M68kStructureViewModel extends StructureViewModelBase implements Structure
     final EnumSet<M68kLabelBase.LabelKind> assignmentKinds = EnumSet.of(
       M68kLabelBase.LabelKind.EQU, M68kLabelBase.LabelKind.EQUALS,
       M68kLabelBase.LabelKind.SET, M68kLabelBase.LabelKind.EQUR,
-      M68kLabelBase.LabelKind.FO, M68kLabelBase.LabelKind.SO
+      M68kLabelBase.LabelKind.FO, M68kLabelBase.LabelKind.SO,
+      M68kLabelBase.LabelKind.REG
     );
 
     return new Filter[]{
