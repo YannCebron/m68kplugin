@@ -1746,7 +1746,8 @@ output_directive ::= OUTPUT STRING
 
 // Expressions  ============================================================
 // http://sun.hasenbraten.de/vasm/release/vasm_2.html#Expressions
-;{
+;
+{
   parserClass = "com.yanncebron.m68kplugin.lang.M68kExpressionParser"
   psiPackage = "com.yanncebron.m68kplugin.lang.psi.expression"
   psiImplPackage="com.yanncebron.m68kplugin.lang.psi.expression.impl"
