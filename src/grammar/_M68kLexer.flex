@@ -542,7 +542,8 @@ DATA_SIZE_L=[.][lL]
   "="                          { yybegin(IN_OPERAND); return EQ_DIRECTIVE; }
 
   // anything else is macro name
-  {MACRO_NAME} / {DATA_SIZE}?  { yybegin(AFTER_INSTRUCTION); return MACRO_CALL_ID; }
+  {MACRO_NAME}                { yybegin(AFTER_INSTRUCTION); return MACRO_CALL_ID; }
+  {MACRO_NAME} {DATA_SIZE}    { yybegin(AFTER_INSTRUCTION); pushbackDataSize(); return MACRO_CALL_ID; }
 
   {COMMENT}                    { return COMMENT; }
 }
