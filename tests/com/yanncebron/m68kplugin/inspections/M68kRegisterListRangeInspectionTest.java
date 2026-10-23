@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,18 +21,17 @@ import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 
 public class M68kRegisterListRangeInspectionTest extends BasePlatformTestCase {
 
+  M68kRegisterListRangeInspection myInspection = new M68kRegisterListRangeInspection();
+
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    myFixture.enableInspections(new M68kRegisterListRangeInspection());
+    myFixture.enableInspections(myInspection);
   }
 
   public void testRegisterRangeMixedRegisterTypes() {
-    final M68kRegisterListRangeInspection inspection = new M68kRegisterListRangeInspection();
-    myFixture.enableInspections(inspection);
-
     doTest(" movem.l d0-a1,(a7)");
-    inspection.allowMixedTypes = false;
+    myInspection.allowMixedTypes = false;
     doTest(" movem.l <error descr=\"Mixed register types\">d0-a1</error>,(a7)");
   }
 
