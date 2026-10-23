@@ -172,29 +172,27 @@ public final class M68kUnresolvedLabelReferenceInspection extends LocalInspectio
     PsiPolyVariantReference reference = ObjectUtils.tryCast(psiElement.getReference(), PsiPolyVariantReference.class);
     assert reference != null : psiElement;
 
+    M68kMacroCallDirective macroCallDirective = PsiTreeUtil.getParentOfType(psiElement, M68kMacroCallDirective.class);
+
     // skip resolve if known defining macro call declaration
-    if (!labelDefiningMacros.isEmpty()) {
-      M68kMacroCallDirective macroCallDirective = PsiTreeUtil.getParentOfType(psiElement, M68kMacroCallDirective.class);
-      if (macroCallDirective != null) {
-        String macroName = macroCallDirective.getMacroNameElement().getText();
-        if (labelDefiningMacros.contains(macroName)) {
-          return;
-        }
+    if (!labelDefiningMacros.isEmpty() && macroCallDirective != null) {
+      String macroName = macroCallDirective.getMacroNameElement().getText();
+      if (labelDefiningMacros.contains(macroName)) {
+        return;
       }
     }
 
     boolean unresolved = reference.multiResolve(false).length == 0;
     if (unresolved) {
       // skip '\1' in labelRef
-      if (psiElement.textContains('\\') && !(psiElement.textContains('@'))) {
+      String text = psiElement.getText();
+      if (text.contains("\\") && !text.contains("@")) {
         return;
       }
 
       if (isUsageInPotentiallyNonResolvingConditionalAssemblyDirective(psiElement)) {
         holder.registerProblem(reference, ProblemHighlightType.WEAK_WARNING);
-      } else if (isUsageInMacroCall(psiElement)) {
-        M68kMacroCallDirective macroCallDirective = PsiTreeUtil.getParentOfType(psiElement, M68kMacroCallDirective.class);
-        assert macroCallDirective != null;
+      } else if (macroCallDirective != null) {
         if (isSuitableAsImplicitMacro(macroCallDirective)) {
           holder.registerProblemForReference(reference, ProblemHighlightType.WEAK_WARNING,
             ProblemsHolder.unresolvedReferenceMessage(reference),
@@ -205,9 +203,9 @@ public final class M68kUnresolvedLabelReferenceInspection extends LocalInspectio
 
       } else {
         List<LocalQuickFix> macroCandidateFixes = new SmartList<>();
-        Processor<M68kMacroCallDirective> macroCallDirectiveProcessor = macroCallDirective -> {
-          if (isSuitableAsImplicitMacro(macroCallDirective)) {
-            macroCandidateFixes.add(createAddMacroFix(macroCallDirective));
+        Processor<M68kMacroCallDirective> macroCallDirectiveProcessor = mcd -> {
+          if (isSuitableAsImplicitMacro(mcd)) {
+            macroCandidateFixes.add(createAddMacroFix(mcd));
           }
           return true;
         };
@@ -241,7 +239,4 @@ public final class M68kUnresolvedLabelReferenceInspection extends LocalInspectio
       conditionalAssemblyDirective instanceof M68kIfmacrondConditionalAssemblyDirective;
   }
 
-  private static boolean isUsageInMacroCall(M68kPsiElement psiElement) {
-    return PsiTreeUtil.getParentOfType(psiElement, M68kMacroCallDirective.class) != null;
-  }
 }
