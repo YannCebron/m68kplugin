@@ -55,8 +55,6 @@ final class M68kBrowserToolWindowFactory implements ToolWindowFactory, DumbAware
     toolWindow.addContentManagerListener(new ContentManagerListener() {
       @Override
       public void selectionChanged(@NotNull ContentManagerEvent event) {
-        if (event.getOperation() != ContentManagerEvent.ContentOperation.add) return;
-
         String paneKey = event.getContent().getUserData(PANE_FQN_KEY);
         PropertiesComponent.getInstance(project).setValue(ACTIVE_PANE, paneKey);
       }
