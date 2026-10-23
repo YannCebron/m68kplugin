@@ -29,6 +29,7 @@
 
 - `cnop` directive: fix parsing when missing all arguments
 - Syntax highlighting: fix `SFC`/`VBR` register settings 
+- Highlighting and resolving: various performance improvements
 - Various smaller performance improvements
 
 ## 0.2.5 - 2026-08-17
