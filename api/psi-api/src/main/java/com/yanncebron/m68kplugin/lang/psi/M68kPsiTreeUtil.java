@@ -29,10 +29,11 @@ public final class M68kPsiTreeUtil {
   public static boolean processSiblingsBackwards(PsiElement element,
                                                  Processor<M68kPsiElement> processor,
                                                  Class<? extends M68kPsiElement>... stopAtElements) {
+    boolean hasStops = stopAtElements.length > 0;
     for (PsiElement child = element.getPrevSibling(); child != null; child = child.getPrevSibling()) {
       if (!(child instanceof M68kPsiElement m68kPsiElement)) continue;
 
-      if (PsiTreeUtil.instanceOf(child, stopAtElements)) return true;
+      if (hasStops && PsiTreeUtil.instanceOf(child, stopAtElements)) return true;
       if (!processor.process(m68kPsiElement)) return false;
     }
     return true;
@@ -42,10 +43,11 @@ public final class M68kPsiTreeUtil {
   public static boolean processSiblingsForwards(PsiElement element,
                                                 Processor<M68kPsiElement> processor,
                                                 Class<? extends M68kPsiElement>... stopAtElements) {
+    boolean hasStops = stopAtElements.length > 0;
     for (PsiElement child = element.getNextSibling(); child != null; child = child.getNextSibling()) {
       if (!(child instanceof M68kPsiElement m68kPsiElement)) continue;
 
-      if (PsiTreeUtil.instanceOf(child, stopAtElements)) return true;
+      if (hasStops && PsiTreeUtil.instanceOf(child, stopAtElements)) return true;
       if (!processor.process(m68kPsiElement)) return false;
     }
     return true;
