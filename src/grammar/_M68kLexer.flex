@@ -30,19 +30,21 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
     this((java.io.Reader)null);
   }
 
+  private char prevChar() {
+    return getTokenStart() > 0 ? zzBuffer.charAt(getTokenStart() - 1) : (char) -1;
+  }
+
   private boolean afterSpaceOrComma() {
-    char previousChar = charAt(-1);
-    return Character.isSpaceChar(previousChar) || previousChar == ',';
+    char c = prevChar();
+    return c == ' ' || c == '\t' || c == ',';
   }
 
   /**
    * Whether given {@code '*'} is "current PC" symbol instead of {@link MUL}.
    */
-  private boolean isCurrentPcSymbol(){
-    if (afterSpaceOrComma()) return true;
-    
-    char previousChar = charAt(-1);
-    return previousChar == '-' || previousChar == '+' || previousChar == '(';
+  private boolean isCurrentPcSymbol() {
+    char c = prevChar();
+    return c == ' ' || c == '\t' || c == ',' || c == '-' || c == '+' || c == '(';
   }
 
   /**
@@ -50,11 +52,6 @@ import static com.yanncebron.m68kplugin.lang.psi.M68kTokenTypes.*;
    */
   private void pushbackDataSize() {
     yypushback(2);
-  }
-
-  private char charAt(final int offset) {
-    final int loc = getTokenStart() + offset;
-    return 0 <= loc && loc < zzBuffer.length() ? zzBuffer.charAt(loc) : (char) -1;
   }
 
   int operandSpaceCount = 0;
