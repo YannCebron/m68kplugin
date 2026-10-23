@@ -1,3 +1,8 @@
+---
+title: Plans
+nav_order: 5
+---
+
 # Plans
 {: .no_toc }
 
