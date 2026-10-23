@@ -305,40 +305,27 @@ adm_quick ::= HASH expression
   implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdm"
 }
 
+// special registers
+{
+  implements("adm_(sr|ccr|usp|dfc|sfc|vbr)") = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
+  mixin("adm_(sr|ccr|usp|dfc|sfc|vbr)") = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
+}
 adm_sr ::= SR
 {
   name = "SR"
-  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
-  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
 }
 adm_ccr ::= CCR
 {
   name = "CCR"
-  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
-  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
 }
 adm_usp ::= USP
 {
   name = "USP"
-  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
-  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
 }
 
 adm_dfc ::= DFC
-{
-  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
-  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
-}
 adm_sfc ::= SFC
-{
-  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
-  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
-}
 adm_vbr ::= VBR
-{
-  implements = "com.yanncebron.m68kplugin.lang.psi.M68kAdmWithRegister"
-  mixin = "com.yanncebron.m68kplugin.lang.psi.impl.M68kAdmWithRegisterMixIn"
-}
 
 // register list
 private register_range_real ::= adm_rrd MINUS adm_rrd
