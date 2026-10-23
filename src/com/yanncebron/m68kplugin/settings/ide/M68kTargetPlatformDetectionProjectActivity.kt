@@ -20,7 +20,7 @@ import com.intellij.notification.Notification
 import com.intellij.notification.NotificationAction
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.application.readActionBlocking
+import com.intellij.openapi.application.readAction
 import com.intellij.openapi.extensions.ExtensionNotApplicableException
 import com.intellij.openapi.extensions.ExtensionPointName
 import com.intellij.openapi.options.ShowSettingsUtil
@@ -49,7 +49,7 @@ internal class M68kTargetPlatformDetectionProjectActivity : ProjectActivity {
             return
         }
 
-        if (readActionBlocking {
+        if (readAction {
                 !FileTypeIndex.containsFileOfType(M68kFileType.INSTANCE, GlobalSearchScope.allScope(project))
             }) {
             return
