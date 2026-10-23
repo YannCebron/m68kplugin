@@ -111,8 +111,7 @@ public class MinimalLexerTest extends M68kLexerTestCase {
       """
         WHITE_SPACE ('  ')
         id ('label')
-        : (':')
-        """);
+        : (':')""");
   }
 
   public void testUnderscoreTwiceLabel() {
