@@ -21,7 +21,6 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.util.io.StreamUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.SmartList;
@@ -39,11 +38,10 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Base64;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
@@ -51,6 +49,14 @@ import java.util.function.Function;
 public final class M68kDocumentationUtil {
 
   private static final Logger LOG = Logger.getInstance(M68kDocumentationUtil.class);
+
+  /**
+   * Cached CommonMark parser with tables extension only.
+   * CommonMark parsers are thread-safe and can be reused across calls.
+   */
+  private static final Parser PARSER_WITH_TABLES = Parser.builder()
+    .extensions(List.of(TablesExtension.create()))
+    .build();
 
   /**
    * Make tables non-wrappable.
@@ -85,9 +91,9 @@ public final class M68kDocumentationUtil {
 
   public static Couple<String> getMarkdownContents(String docRoot, String markdownFileName) {
     try (InputStream resource = M68kDocumentationUtil.class.getResourceAsStream(docRoot + markdownFileName + ".md")) {
-    if (resource == null) {
-      return Couple.of(null, M68kApiBundle.message("documentation.no.reference.doc", markdownFileName));
-    }
+      if (resource == null) {
+        return Couple.of(null, M68kApiBundle.message("documentation.no.reference.doc", markdownFileName));
+      }
 
       String text = FileUtil.loadTextAndClose(resource);
       text = text.replace("# ", "## ");
@@ -107,15 +113,17 @@ public final class M68kDocumentationUtil {
    * @return HTML documentation text.
    */
   public static String getHtmlForMarkdown(String docRoot, String markdownText, Function<String, String> urlFunction, @Nullable Project project) {
-    List<Extension> extensions = new SmartList<>(TablesExtension.create());
-    if (project != null) {
+    List<Extension> extensions;
+    if (project == null) {
+      extensions = null;
+    } else {
+      extensions = new SmartList<>(TablesExtension.create());
       extensions.add(new FencedCodeBlockExtension(project));
     }
 
-    Parser parser = Parser.builder().extensions(extensions).build();
-    Node document = parser.parse(markdownText);
+    Node document = (extensions == null ? PARSER_WITH_TABLES : Parser.builder().extensions(extensions).build()).parse(markdownText);
     HtmlRenderer renderer = HtmlRenderer.builder()
-      .extensions(extensions)
+      .extensions(extensions != null ? extensions : List.of(TablesExtension.create()))
       .urlSanitizer(new DefaultUrlSanitizer() {
 
         @Override
@@ -137,11 +145,9 @@ public final class M68kDocumentationUtil {
             final URL resourceUrl = M68kDocumentationUtil.class.getResource(docRoot + sanitizedUrl);
             assert resourceUrl != null : sanitizedUrl;
             try (InputStream is = URLUtil.openStream(resourceUrl)) {
-            final File tempFile = FileUtil.createTempFile("m68k", ".png", true);
-              try (FileOutputStream fos = new FileOutputStream(tempFile)) {
-                StreamUtil.copy(is, fos);
-              }
-            return FileUtil.getUrl(tempFile);
+              byte[] bytes = is.readAllBytes();
+              String base64 = Base64.getEncoder().encodeToString(bytes);
+              return "data:image/png;base64," + base64;
             }
           } catch (IOException e) {
             LOG.error("Error sanitizing URL '" + url + "'", e);
