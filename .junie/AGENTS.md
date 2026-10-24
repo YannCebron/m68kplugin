@@ -47,11 +47,22 @@ When implementing or verifying domain-specific behavior (such as M68k instructio
 
 1. **Read `authoritative-sources.properties` in the `.m68kplugin` directory under the user's home folder** — get the local paths for the configured authoritative sources. If a path is missing, ask the user for it, then write it to this file.
 2. **Extract PDF sources to text if needed** — if a local source is a PDF and no extracted text directory exists, extract the content to Markdown files stored in `~/.m68kplugin/`. Try available PDF extraction tools such as `pdftotext`, `mutool`, or Python libraries. If no tool is available, open the PDF directly using the `open` tool to read sections on demand. Store extracted text in a directory named after the source identifier (e.g., `~/.m68kplugin/m68000-prm/`). Update `authoritative-sources.properties` to point to the extracted text directory. If automatic extraction is not possible, ask the user to provide the extracted text.
-3. **Consult the local authoritative sources** — navigate to the referenced section for the definitive specification. Use the extracted text directory if available; otherwise, open the PDF directly.
+3. **Consult the local authoritative sources** — navigate to the referenced section for the definitive specification. Use the extracted text directory if available; otherwise, open the source directly.
 4. **Fallback to online resources** — if a local copy is unavailable, use the online URL listed for that source.
 5. **Cross-reference with other authoritative sources** — examine how the same concept is implemented or documented elsewhere, especially for edge cases, syntax variations, or tool-specific behavior.
 6. **If sources disagree, STOP** — present the contradicting facts to the user and let the user choose which source is correct.
 7. **If still unsure, ask the user** — never guess or assume behavior without evidence from these sources.
+
+### Citation Format
+
+When referencing authoritative sources, use **bold** formatting with the source identifier and location.
+
+Examples:
+
+- **m68000-prm: 5.3.2** — references section 5.3.2 of the M68000 PRM.
+- **vasm: cpus/m68k/opcodes.h:5678** — references line 5678 in the vasm source file.
+
+Use this format only in chat responses.
 
 ### What Must Be Fact-Checked
 
