@@ -37,6 +37,8 @@ The authoritative sources for this project are:
 2. **vasm Sources** (the vasm assembler) — identifier: `vasm`
    - Online: https://sun.hasenbraten.de/vasm/
    - The source directory contains both code and documentation files. Consult the local documentation before using online resources.
+   - **Before navigating to vasm source files, read `.junie/vasm-knowledgebase.md`** to find the relevant directories, functions, or opcode definitions. The knowledge base covers: directory structure, opcode definitions, operand types, special registers, CPU models, CPU support flags, directive flags, directives, key functions, and navigation tips.
+   - **IMPORTANT:** The knowledge base may contain inaccurate or incomplete information. Always verify facts against the actual vasm source files before making changes.
 
 For each source, ask the user for a local copy; if provided, store the path in `authoritative-sources.properties` and inform the user where it is saved.
 The `authoritative-sources.properties` file is located in the `.m68kplugin` directory under the user's home folder (e.g., `~/.m68kplugin/` on macOS/Linux, `%USERPROFILE%\.m68kplugin\` on Windows).
