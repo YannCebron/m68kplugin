@@ -64,3 +64,43 @@ For M68k-related work, the following must always be verified against authoritati
 
 After any executed skill has finished, present the new findings, updates, improvements, and learnings clearly to the user and wait for confirmation before proceeding. Then ask the user to update the skill with the new findings.
 
+## Language — ASD-STE100 Simplified Technical English
+
+All output, generated code, generated documentation, and any other artifacts must use **ASD-STE100 Simplified Technical English**.
+This rule applies to source comments, documentation pages, error messages, commit messages, and chat responses.
+
+### Writing Rules
+
+Follow these ASD-STE100 rules:
+
+1. **Use only approved words** or technical nouns. Do not use unapproved words except as technical nouns. (Rule 1.1)
+2. **Use one meaning per word.** Do not use a word with more than one meaning. For example, use "obey" for instructions, not "follow". (Rule 1.3)
+3. **Use the active voice.** In descriptive text, you can use the passive voice only when the agent is unknown. Write "The parser reads the token" instead of "The token is read by the parser". (Rule 3.6)
+4. **Use short sentences.** A descriptive sentence must have no more than 25 words. An instruction sentence must have no more than 20 words. (Rules 5.1, 6.3)
+5. **Use the imperative mood for instructions.** Write "Run the test" instead of "You should run the test". (Rule 5.3)
+6. **Use only approved modal verbs.** The dictionary approves "can", "will", and "must". Do not use "should", "would", "may", "might", or "could". (Rule 3.2)
+   - Use "must" for requirements.
+   - Use "can" for possibilities.
+   - Use "will" for future facts.
+7. **Use only approved verb forms and tenses.** Do not use the present perfect tense. Use the infinitive, imperative, simple present, simple past, or simple future. (Rule 3.2)
+8. **Do not use technical nouns as verbs.** For example, write "Lubricate the linkage with oil" instead of "Oil the linkage". (Rule 1.7)
+9. **Use one name per item.** Do not call the same item "config" in one place and "settings" in another. (Rule 1.11)
+10. **Use an approved verb to describe an action,** not a noun. Write "Compress the file" instead of "Perform compression of the file". (Rule 3.7)
+11. **Write one instruction per sentence.** Do not combine multiple instructions in one sentence. (Rule 5.2)
+
+### Technical Nouns from Authoritative Sources
+
+You can use words that are not in the ASD-STE100 dictionary when they are **technical nouns** from the authoritative sources.
+
+### Examples
+
+**Good:**
+- "The parser reads the instruction mnemonic."
+- "You must regenerate the parser after modifying the grammar file."
+- "The MC68020 supports the Base Register addressing mode."
+
+**Not Good:**
+- "The instruction mnemonic is read by the parser." (passive voice)
+- "You should regenerate the parser." (unapproved modal "should")
+- "The 68020 can use base register mode." (inconsistent terminology)
+
