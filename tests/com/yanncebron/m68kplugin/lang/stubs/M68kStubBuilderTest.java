@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Authors
+ * Copyright 2026 The Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -173,6 +173,23 @@ public class M68kStubBuilderTest extends LightPlatformTestCase {
   public void testLocalLabelNotStubbed() {
     doTest(".localLabel",
       "PsiFileStubImpl\n");
+  }
+
+  public void testMultipleLabels() {
+    doTest("label1 equ 1\nlabel2 equ 2",
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['label1', EQU, '1']
+          LABEL:M68kLabelStubImpl['label2', EQU, '2']
+        """);
+  }
+
+  public void testLabelWithInstruction() {
+    doTest("myLabel: move.l d0, d1",
+      """
+        PsiFileStubImpl
+          LABEL:M68kLabelStubImpl['myLabel', GLOBAL, 'null']
+        """);
   }
 
   private void doTest(String source, String expected) {
