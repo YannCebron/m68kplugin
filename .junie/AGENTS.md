@@ -55,3 +55,8 @@ When implementing or verifying M68k instruction behavior, addressing modes, regi
 - Instruction encoding and byte patterns
 - CPU mode restrictions (e.g., supervisor-only instructions)
 - Behavior differences between M68000, M68010, M68020, M68030, M68040, M68060
+
+## Confirming Skill Results
+
+After any executed skill has finished, present the new findings, updates, improvements, and learnings clearly to the user and wait for confirmation before proceeding. Then ask the user to update the skill with the new findings.
+
