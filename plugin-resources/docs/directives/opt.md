@@ -221,4 +221,4 @@ Enable optimization of multiplications into shifts (refer to `-opt-mul`).
 
 #### oz
 
-Enable optimization for size, even if the code becomes slower (refer to `-opt-size`). 
+Enable optimization for size, even if the code becomes slower (refer to `-opt-size`).
