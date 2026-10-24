@@ -20,11 +20,13 @@ After modifying `src/grammar/_M68kLexer.flex`, regenerate via Gradle: `./gradlew
 
 ## Retrieving Relevant Facts
 
-Every decision related to M68k mnemonics, instructions, or internals must be based on exact, fact-checked evidence from authoritative sources. Never rely on web searches, guesses, or facts deduced only from this project's source code. If unsure, ask the user to confirm manually.
+Every decision must be based on exact, fact-checked evidence from authoritative sources. Never rely on web searches, guesses, or facts deduced only from this project's source code. If unsure, ask the user to confirm manually.
+
+This rule applies to everything, including but not limited to executed skills. When any task requires domain-specific knowledge, consult the authoritative sources listed below or ask the user for the definitive reference. Skills must ensure their steps follow this rule.
 
 ### Authoritative Sources
 
-The only authoritative sources are:
+The authoritative sources for this project are:
 
 1. **M68000 Family Programmer's Reference Manual** (NXP) — identifier: `m68000-prm`
    - Online: https://www.nxp.com/docs/en/reference-manual/M68000PRM.pdf
@@ -38,15 +40,17 @@ The `authoritative-sources.properties` file is located in the `.m68kplugin` dire
 
 ### How to Retrieve Facts
 
-When implementing or verifying M68k instruction behavior, addressing modes, register usage, condition codes, or assembler directives:
+When implementing or verifying domain-specific behavior (such as M68k instruction behavior, addressing modes, register usage, condition codes, or assembler directives):
 
 1. **Read `authoritative-sources.properties` in the `.m68kplugin` directory under the user's home folder** — get the local paths for the configured authoritative sources. If a path is missing, ask the user for it, then write it to this file.
 2. **Consult the local authoritative sources** — navigate to the referenced section for the definitive specification.
 3. **Fallback to online resources** — if a local copy is unavailable, use the online URL listed for that source.
-4. **Cross-reference with other authoritative sources** — examine how the same instruction or directive is implemented or documented elsewhere, especially for edge cases, syntax variations, or assembler-specific behavior.
+4. **Cross-reference with other authoritative sources** — examine how the same concept is implemented or documented elsewhere, especially for edge cases, syntax variations, or tool-specific behavior.
 5. **If still unsure, ask the user** — never guess or assume behavior without evidence from these sources.
 
 ### What Must Be Fact-Checked
+
+For M68k-related work, the following must always be verified against authoritative sources:
 
 - Instruction mnemonics and their valid syntax
 - Addressing modes and operand combinations
