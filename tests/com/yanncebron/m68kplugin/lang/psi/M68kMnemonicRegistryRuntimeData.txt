@@ -1,16 +1,36 @@
 # Licensed under the Apache License, Version 2.0 (the "License")
 #
 # Runtime information via M68kMnemonicRegistryRuntimeParser
+# Parsed by M68kMnemonicRegistryRuntimeParser.readRuntimeData()
 #
-# 2 lines per mnemonic (whitespaces required):
+# 2 lines per mnemonic entry (whitespaces between commas are required):
 #
-# "mnemonic", {op1,op2}, SIZE, CPU
-# $PRIVILEGED$, $CONTROL_FLOW$, $AFFECTED_CC$, $TESTED_CC$
+# Line 1: "mnemonic", {op1,op2}, SIZE, CPU
+#   Format matches the vasm `opcodes.h` entry data for each mnemonic.
+#   Refer to `vasm/cpus/m68k/opcodes.h` for the source values.
+# Line 2: $PRIVILEGED$, $CONTROL_FLOW$, $AFFECTED_CC$, $TESTED_CC$
 #
-# $PRIVILEGED$   = -|PRIVILEGED|PRIVILEGED_68010_ABOVE
-# $CONTROL_FLOW$ = -|TRAP|BRANCH|JUMP|RETURN
-# $AFFECTED_CC$  = CC pattern (optional)
-# $TESTED_CC$    = CC pattern ('-'/'?') (optional)
+# --- Line 1 fields ---
+#
+# "mnemonic" — instruction name in double quotes, e.g. "move", "addq"
+#
+# {op1,op2} — vasm operand codes from `opcodes.h`, mapped to `M68kOperand` enum
+# Single operand: {OP} — second operand defaults to NONE
+#
+# SIZE — data size shorthand from `opcodes.h`, mapped to `M68kDataSize.GROUP_*`
+#
+# CPU — CPU shorthand from `opcodes.h`, mapped to `M68kCpu` enum
+# Multiple CPUs can be combined with '|', e.g. "m68020up|cpu32"
+#
+# --- Line 2 fields ---
+#
+# $PRIVILEGED$ — maps to `M68kMnemonic.PrivilegedType` enum
+#
+# $CONTROL_FLOW$ — maps to `M68kMnemonic.ControlFlow` enum
+#
+# $AFFECTED_CC$ — 5-character pattern for condition codes X N Z V C (optional, omit if none)
+#
+# $TESTED_CC$ — 5-character pattern for condition codes tested before branching (optional, omit if none)
 
 "abcd",     {D_,D_},    B,      m68000up
 -,          -,          CUAU*,  ?-?--
