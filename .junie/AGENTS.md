@@ -2,17 +2,13 @@
 
 ## Regenerating the Parser
 
-After modifying `src/grammar/m68k.bnf`, the parser must be regenerated manually via the IDE.
+After modifying `src/grammar/m68k.bnf`, the parser must be regenerated via the IDE.
 
 **Steps:**
 
-1. Ask the user to regenerate the parser by right-clicking `src/grammar/m68k.bnf` and selecting **Generate Parser and Actions**.
-2. Wait for confirmation.
-3. Remove any PSI duplicates in `gen/` that also exist in `api/psi-api/`:
-   ```
-   comm -12 <(cd api/psi-api/src/main/java && find . -name "*.java" | sort) <(cd gen && find . -name "*.java" | sort) | sed 's|^\./||' | while read f; do rm -f "gen/$f"; done
-   ```
-   This finds and deletes duplicates in a single pipeline.
+1. Regenerate the parser by invoking the "Generate Parser Code" IDE action on `src/grammar/m68k.bnf` via the `execute_tool` tool.
+2. If the automatic generation fails, ask the user to invoke the action manually. Do not attempt to generate the parser via Gradle.
+3. Remove any PSI duplicates in `gen/` that also exist in `api/psi-api/`. First, use `glob_search` to find all `.java` files in `api/psi-api/src/main/java/` (pattern: `api/psi-api/src/main/java/**/*.java`). Then, for each file found, compute the matching path in `gen/` by replacing the `api/psi-api/src/main/java/` prefix with `gen/`. If the file exists in `gen/`, delete it by running `rm <path-to-file>` via the `bash` tool. Run one `rm` command per file. Do not use loops or complex shell scripts.
 
 ## Code style rule
 
