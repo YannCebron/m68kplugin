@@ -19,4 +19,3 @@ Please [leave a comment and rating](https://plugins.jetbrains.com/plugin/17712-m
 
 Visit the [Project Homepage on GitHub](https://github.com/YannCebron/m68kplugin) for Credits, License, and Code of Conduct.
              
-This software is free of code built using AI ![NoAI](no_ai.png)
