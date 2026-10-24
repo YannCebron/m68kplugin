@@ -18,6 +18,8 @@ After modifying `src/grammar/m68k.bnf`, the parser must be regenerated manually 
 
 Any change to the lexer file, BNF grammar, Java code, tests, or documentation must follow the same naming conventions, style, and semantics as existing code. Copy the pattern from similar files and rules already in the project.
 
+If a source file carries a copyright header, update the year to the current year.
+
 ## Regenerating the Lexer
 
 After modifying `src/grammar/_M68kLexer.flex`, regenerate via Gradle: `./gradlew generateLexer`.
