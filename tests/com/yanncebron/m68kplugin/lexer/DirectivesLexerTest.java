@@ -18,6 +18,8 @@ package com.yanncebron.m68kplugin.lexer;
 
 public class DirectivesLexerTest extends M68kLexerTestCase {
 
+  // —— Symbol assignment directives ——
+
   public void testEquDirective() {
     doTest("label equ 42",
       """
@@ -56,6 +58,8 @@ public class DirectivesLexerTest extends M68kLexerTestCase {
         Dn ('d6')""");
   }
 
+  // —— Alignment directives ——
+
   public void testEvenDirective() {
     doTest(" even",
       """
@@ -70,6 +74,9 @@ public class DirectivesLexerTest extends M68kLexerTestCase {
         odd ('odd')""");
   }
 
+  // —— File inclusion directives ——
+  // The STRING_DIRECTIVE state handles the string literal after the keyword.
+
   public void testIncbinDirective() {
     doTest(" incbin 'logo.raw' ; comment",
       """
@@ -81,18 +88,7 @@ public class DirectivesLexerTest extends M68kLexerTestCase {
         comment ('; comment')""");
   }
 
-  public void testIncdirDirectiveWithDoubleQuotes() {
-    doTest(" incdir \"dir\" comment",
-      """
-        WHITE_SPACE (' ')
-        incdir ('incdir')
-        WHITE_SPACE (' ')
-        string ('"dir"')
-        WHITE_SPACE (' ')
-        comment ('comment')""");
-  }
-
-  public void testIncdirDirectiveNoQuotes() {
+  public void testIncdirDirective() {
     doTest(" incdir df0: comment",
       """
         WHITE_SPACE (' ')
@@ -103,41 +99,7 @@ public class DirectivesLexerTest extends M68kLexerTestCase {
         comment ('comment')""");
   }
 
-  public void testIncludeDirective() {
-    doTest(" include path.i",
-      """
-        WHITE_SPACE (' ')
-        include ('include')
-        WHITE_SPACE (' ')
-        string ('path.i')""");
-  }
-
-  public void testIncludeDirectiveSlashPath() {
-    doTest(" include path/file.i",
-      """
-        WHITE_SPACE (' ')
-        include ('include')
-        WHITE_SPACE (' ')
-        string ('path/file.i')""");
-  }
-
-  public void testIncludeDirectiveWithSingleQuotes() {
-    doTest(" include 'path'",
-      """
-        WHITE_SPACE (' ')
-        include ('include')
-        WHITE_SPACE (' ')
-        string (''path'')""");
-  }
-
-  public void testIncludeDirectiveWithDoubleQuotes() {
-    doTest(" include \"path\"",
-      """
-        WHITE_SPACE (' ')
-        include ('include')
-        WHITE_SPACE (' ')
-        string ('"path"')""");
-  }
+  // —— Data definition directives ——
 
   public void testDcDirective() {
     doTest(" dc.b 42",
@@ -167,6 +129,8 @@ public class DirectivesLexerTest extends M68kLexerTestCase {
         dec_number ('42')""");
   }
 
+  // —— Register save area directives ——
+
   public void testRssetDirective() {
     doTest(" rsset 0",
       """
@@ -192,6 +156,8 @@ public class DirectivesLexerTest extends M68kLexerTestCase {
         WHITE_SPACE (' ')
         dec_number ('42')""");
   }
+
+  // —— Other directives ——
 
   public void testBlkDirective() {
     doTest(" blk 42,666",

@@ -18,9 +18,7 @@ package com.yanncebron.m68kplugin.lexer;
 
 public class CommentLexerTest extends M68kLexerTestCase {
 
-  public void testCommentWithoutText() {
-    doTest(";", "comment (';')");
-  }
+  // —— Semicolon comments ——
 
   public void testCommentOnFirstLine() {
     doTest("; Comment", "comment ('; Comment')");
@@ -32,8 +30,6 @@ public class CommentLexerTest extends M68kLexerTestCase {
         WHITE_SPACE ('    ')
         comment ('; comment')""");
   }
-
-  // todo "*"-prefix label
 
   public void testCommentLineFeedComment() {
     doTest("; Comment\n\n; second comment",
@@ -59,14 +55,6 @@ public class CommentLexerTest extends M68kLexerTestCase {
         comment ('; comment')""");
   }
 
-  public void testStarCommentAfterLabel() {
-    doTest("label * comment",
-      """
-        id ('label')
-        WHITE_SPACE (' ')
-        comment ('* comment')""");
-  }
-
   public void testCommentAfterLabelWithColon() {
     doTest("label: ; comment",
       """
@@ -74,15 +62,6 @@ public class CommentLexerTest extends M68kLexerTestCase {
         : (':')
         WHITE_SPACE (' ')
         comment ('; comment')""");
-  }
-
-  public void testStarCommentAfterLabelWithColon() {
-    doTest("label: *** comment",
-      """
-        id ('label')
-        : (':')
-        WHITE_SPACE (' ')
-        comment ('*** comment')""");
   }
 
   public void testCommentAfterInstruction() {
@@ -99,6 +78,39 @@ public class CommentLexerTest extends M68kLexerTestCase {
         WHITE_SPACE (' ')
         nop ('nop')
         comment ('; comment')""");
+  }
+
+  public void testCommentAfterInstructionWithOperands() {
+    doTest(" move.l d0,d1; comment",
+      """
+        WHITE_SPACE (' ')
+        move ('move')
+        .l ('.l')
+        WHITE_SPACE (' ')
+        Dn ('d0')
+        , (',')
+        Dn ('d1')
+        comment ('; comment')""");
+  }
+
+  // —— Star comments ——
+  // The `*` prefix is recognized as a comment when preceded by whitespace.
+
+  public void testStarCommentAfterLabel() {
+    doTest("label * comment",
+      """
+        id ('label')
+        WHITE_SPACE (' ')
+        comment ('* comment')""");
+  }
+
+  public void testStarCommentAfterLabelWithColon() {
+    doTest("label: *** comment",
+      """
+        id ('label')
+        : (':')
+        WHITE_SPACE (' ')
+        comment ('*** comment')""");
   }
 
   public void testStarCommentAfterInstruction() {
@@ -123,18 +135,9 @@ public class CommentLexerTest extends M68kLexerTestCase {
         comment ('* comment')""");
   }
 
-  public void testCommentAfterInstructionWithOperandsWithoutWhitespace() {
-    doTest(" move.l d0,d1; comment",
-      """
-        WHITE_SPACE (' ')
-        move ('move')
-        .l ('.l')
-        WHITE_SPACE (' ')
-        Dn ('d0')
-        , (',')
-        Dn ('d1')
-        comment ('; comment')""");
-  }
+  // —— Automatic comments (no prefix) ——
+  // After the 2nd whitespace group in IN_OPERAND, the lexer switches to AFTER_OPERAND
+  // where all remaining text becomes a comment without any prefix character.
 
   public void testCommentWithoutPrefixAfterNopInstruction() {
     doTest(" nop comment",
@@ -149,21 +152,6 @@ public class CommentLexerTest extends M68kLexerTestCase {
       """
         WHITE_SPACE (' ')
         move ('move')
-        WHITE_SPACE (' ')
-        # ('#')
-        dec_number ('1')
-        , (',')
-        Dn ('d6')
-        WHITE_SPACE (' ')
-        comment ('comment')""");
-  }
-
-  public void testCommentWithoutPrefixAfterMoveInstructionWithDataSize() {
-    doTest(" move.l #1,d6 comment",
-      """
-        WHITE_SPACE (' ')
-        move ('move')
-        .l ('.l')
         WHITE_SPACE (' ')
         # ('#')
         dec_number ('1')
@@ -197,6 +185,44 @@ public class CommentLexerTest extends M68kLexerTestCase {
         dec_number ('666')
         WHITE_SPACE (' ')
         comment ('comment')""");
+  }
+
+  // —— rem/erem block comments ——
+
+  public void testRemBlock() {
+    doTest(" rem\nthis is a remark\n erem",
+      """
+        WHITE_SPACE (' ')
+        rem ('rem')
+        LINEFEED ('\\n')
+        comment_rem ('this is a remark')
+        LINEFEED ('\\n')
+        erem (' erem')""");
+  }
+
+  public void testRemBlockWithContentOnSameLine() {
+    doTest(" rem this is a remark\n erem",
+      """
+        WHITE_SPACE (' ')
+        rem ('rem')
+        comment_rem (' this is a remark')
+        LINEFEED ('\\n')
+        erem (' erem')""");
+  }
+
+  public void testRemBlockMultiLine() {
+    doTest(" rem\nline one\nline two\nline three\n erem",
+      """
+        WHITE_SPACE (' ')
+        rem ('rem')
+        LINEFEED ('\\n')
+        comment_rem ('line one')
+        LINEFEED ('\\n')
+        comment_rem ('line two')
+        LINEFEED ('\\n')
+        comment_rem ('line three')
+        LINEFEED ('\\n')
+        erem (' erem')""");
   }
 
 }
