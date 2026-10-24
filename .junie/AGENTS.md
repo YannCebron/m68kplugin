@@ -51,7 +51,8 @@ When implementing or verifying domain-specific behavior (such as M68k instructio
 2. **Consult the local authoritative sources** — navigate to the referenced section for the definitive specification.
 3. **Fallback to online resources** — if a local copy is unavailable, use the online URL listed for that source.
 4. **Cross-reference with other authoritative sources** — examine how the same concept is implemented or documented elsewhere, especially for edge cases, syntax variations, or tool-specific behavior.
-5. **If still unsure, ask the user** — never guess or assume behavior without evidence from these sources.
+5. **If sources disagree, STOP** — present the contradicting facts to the user and let the user choose which source is correct.
+6. **If still unsure, ask the user** — never guess or assume behavior without evidence from these sources.
 
 ### What Must Be Fact-Checked
 
