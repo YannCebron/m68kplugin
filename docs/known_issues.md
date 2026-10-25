@@ -119,19 +119,18 @@ This affects data definition and offset directives that accept floating-point va
 
 ### Macros
 
-- macro declaration variants:
-  - `macro<$macroName$>` (not supported by vasm)
 - special symbols
-  - `\@!`
-  - `\@?`
   - `\@@`
+  - `\@@!`
+  - `\@@?`
+  - `\@@@@`
   - `\#`
   - `\?n`
   - `\.`
   - `\+`
   - `\-`
   - `\<symbolname>`
-  - `\@<symbolname>`
+  - `\<$symbolname>`
 - valid label
   - `\1`
   - `\1\3\2 equ \4`
