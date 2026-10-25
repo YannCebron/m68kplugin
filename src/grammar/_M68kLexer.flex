@@ -456,7 +456,7 @@ DATA_SIZE_L=[.][lL]
   "dcb" {DATA_SIZE}?                           { yybegin(AFTER_INSTRUCTION); pushbackDataSizeIfPresent(); return DCB; }
   "dr" {DATA_SIZE}?                            { yybegin(AFTER_INSTRUCTION); pushbackDataSizeIfPresent(); return DR; }
   "ds" {DATA_SIZE}?                            { yybegin(AFTER_INSTRUCTION); pushbackDataSizeIfPresent(); return DS; }
-  "dseg" {DATA_SIZE}?                          { yybegin(AFTER_INSTRUCTION); pushbackDataSizeIfPresent(); return DSEG; }
+  "dseg"                                       { yybegin(AFTER_OPERAND); return DSEG; }
   "dx" {DATA_SIZE}?                            { yybegin(AFTER_INSTRUCTION); pushbackDataSizeIfPresent(); return DX; }
   "echo"                                       { yybegin(STRING_DIRECTIVE); return ECHO; }
   "einline"                                    { yybegin(AFTER_OPERAND); return EINLINE; }
