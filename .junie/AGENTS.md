@@ -89,6 +89,10 @@ For M68k-related work, the following must always be verified against authoritati
 
 After any executed skill has finished, present the new findings, updates, improvements, and learnings clearly to the user and wait for confirmation before proceeding. Then ask the user to update the skill with the new findings.
 
+## Reading vasm Knowledge Base
+
+Before navigating to vasm source files or verifying behavior against vasm, read `.junie/vasm-knowledgebase.md` to locate the relevant code quickly.
+
 ## Recording vasm Verification Findings
 
 After verifying behavior against vasm, record any new findings in `.junie/vasm-verification-learnings.md`.
