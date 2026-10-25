@@ -140,6 +140,7 @@ This affects data definition and offset directives that accept floating-point va
 ### Misc
 
 - string literals:
-  - `'\'` and `''''` are valid
+  - vasm disables escape sequences by default; the plugin always handles them
+  - vasm supports quote doubling (`''''` or `""""`) to include a quote character; the plugin does not
 - add an option to allow whitespaces in instruction arguments ([Issue](https://github.com/YannCebron/m68kplugin/issues/47))
 - support `equr`/`reg` replacement names: `jsr _LVO_Something(MY_A7_CUSTOM_NAME)`
