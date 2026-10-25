@@ -40,6 +40,12 @@ The authoritative sources for this project are:
    - **Before navigating to vasm source files, read `.junie/vasm-knowledgebase.md`** to find the relevant directories, functions, or opcode definitions. The knowledge base covers: directory structure, opcode definitions, operand types, special registers, CPU models, CPU support flags, directive flags, directives, key functions, and navigation tips.
    - **IMPORTANT:** The knowledge base may contain inaccurate or incomplete information. Always verify facts against the actual vasm source files before making changes.
 
+3. **vasm Executable** (the vasm assembler binary) — identifier: `vasm-executable`
+   - Ask the user for the local path to the vasm executable compiled for `mot` syntax.
+   - Store the path in `authoritative-sources.properties` under the `vasm-executable` key.
+   - Run the executable with no arguments to retrieve the version string, then store it in `authoritative-sources.properties` under the `vasm-executable.version` key.
+   - Use the executable to fact-check by assembling test code and comparing the output with expected behavior.
+
 For each source, ask the user for a local copy; if provided, store the path in `authoritative-sources.properties` and inform the user where it is saved.
 The `authoritative-sources.properties` file is located in the `.m68kplugin` directory under the user's home folder (e.g., `~/.m68kplugin/` on macOS/Linux, `%USERPROFILE%\.m68kplugin\` on Windows).
 
@@ -50,10 +56,11 @@ When implementing or verifying domain-specific behavior (such as M68k instructio
 1. **Read `authoritative-sources.properties` in the `.m68kplugin` directory under the user's home folder** — get the local paths for the configured authoritative sources. If a path is missing, ask the user for it, then write it to this file.
 2. **Extract PDF sources to text if needed** — if a local source is a PDF and no extracted text directory exists, extract the content to Markdown files stored in `~/.m68kplugin/`. Try available PDF extraction tools such as `pdftotext`, `mutool`, or Python libraries. If no tool is available, open the PDF directly using the `open` tool to read sections on demand. Store extracted text in a directory named after the source identifier (e.g., `~/.m68kplugin/m68000-prm/`). Update `authoritative-sources.properties` to point to the extracted text directory. If automatic extraction is not possible, ask the user to provide the extracted text.
 3. **Consult the local authoritative sources** — navigate to the referenced section for the definitive specification. Use the extracted text directory if available; otherwise, open the source directly.
-4. **Fallback to online resources** — if a local copy is unavailable, use the online URL listed for that source.
-5. **Cross-reference with other authoritative sources** — examine how the same concept is implemented or documented elsewhere, especially for edge cases, syntax variations, or tool-specific behavior.
-6. **If sources disagree, STOP** — present the contradicting facts to the user and let the user choose which source is correct.
-7. **If still unsure, ask the user** — never guess or assume behavior without evidence from these sources.
+4. **Fact-check with the vasm executable** — if the `vasm-executable` path is configured, invoke the vasm executable with test code to verify assembler behavior. Create a temporary assembly file with the test code, run the executable with the `mot` syntax flag, and examine the output (such as generated object files, error messages, or listing files) to confirm expected behavior. When reporting fact-check results, include the vasm version stored in `authoritative-sources.properties` under the `vasm-executable.version` key.
+5. **Fallback to online resources** — if a local copy is unavailable, use the online URL listed for that source.
+6. **Cross-reference with other authoritative sources** — examine how the same concept is implemented or documented elsewhere, especially for edge cases, syntax variations, or tool-specific behavior.
+7. **If sources disagree, STOP** — present the contradicting facts to the user and let the user choose which source is correct.
+8. **If still unsure, ask the user** — never guess or assume behavior without evidence from these sources.
 
 ### Citation Format
 
