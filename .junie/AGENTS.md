@@ -89,6 +89,14 @@ For M68k-related work, the following must always be verified against authoritati
 
 After any executed skill has finished, present the new findings, updates, improvements, and learnings clearly to the user and wait for confirmation before proceeding. Then ask the user to update the skill with the new findings.
 
+## Recording vasm Verification Findings
+
+After verifying behavior against vasm, record any new findings in `.junie/vasm-verification-learnings.md`.
+
+This includes lessons learned from false positives, test design mistakes, exit code misinterpretation, or any other insight about how vasm parses operands or how to correctly test assembler behavior.
+
+Update the knowledge base when a verification reveals incorrect assumptions about vasm behavior, operand types, or parsing order.
+
 ## Language — ASD-STE100 Simplified Technical English
 
 All output, generated code, generated documentation, and any other artifacts must use **ASD-STE100 Simplified Technical English**.
