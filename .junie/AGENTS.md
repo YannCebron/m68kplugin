@@ -101,6 +101,16 @@ This includes lessons learned from false positives, test design mistakes, exit c
 
 Update the knowledge base when a verification reveals incorrect assumptions about vasm behavior, operand types, or parsing order.
 
+## Updating Documentation
+
+After completing a change, check if `docs/known_issues.md` or `docs/plan.md` requires an update.
+
+- If a change resolves a known issue, removes a limitation, or adds support for a previously unsupported feature, update `docs/known_issues.md` by removing or modifying the affected entry.
+- If a change implements a planned feature listed in `docs/plan.md`, update `docs/plan.md` by removing or modifying the completed item.
+- If a change introduces a new limitation or workaround, add it to `docs/known_issues.md`.
+
+Review both files before submitting the final result to ensure the documentation reflects the current state.
+
 ## Language — ASD-STE100 Simplified Technical English
 
 All output, generated code, generated documentation, and any other artifacts must use **ASD-STE100 Simplified Technical English**.
