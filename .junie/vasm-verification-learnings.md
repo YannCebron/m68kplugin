@@ -40,6 +40,14 @@ Control registers use the SEA (Special Extension And Addressing) mechanism. Inst
 
 The registry is generated from vasm's `opcodes.h` and maps operand types correctly. When the registry says an instruction accepts certain operand types, it reflects the actual opcode definitions.
 
+## Directive Argument Handling
+
+When a vasm directive appears to accept arguments, check whether the handler actually parses them. Some handlers ignore the remaining text on the line.
+
+**Example:** `clrfo 0` and `clrso 0` assemble without errors. The test suggests vasm accepts arguments. But the handlers (`handle_clrfo` and `handle_rsreset`) call `number_expr(0)`, which creates a zero value without parsing any input. The handlers ignore whatever follows the directive name. Testing `clrfo garbage text here` also succeeds.
+
+**Correct test method:** Check the handler function in vasm source code. If it calls `number_expr(0)` instead of `parse_expr` or similar, the argument is ignored. Check the vasm documentation to see if arguments are documented.
+
 ## Verification Procedure
 
 When verifying whether vasm accepts a specific operand type for an instruction:
