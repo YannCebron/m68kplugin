@@ -54,12 +54,15 @@ public class M68kRegisterSymbolDocumentationTest extends BasePlatformTestCase {
   public void testSfcRegister() {
     doTest(" movec S<caret>FC,d0", "SFC", """
       <style>table { white-space: nowrap; } blockquote { padding-left: 10px; padding-right: 10px; padding-bottom: 5px; }</style><div class='definition'><pre><b>SFC</b></pre></div><table class='sections'><tr><td valign='top' class='section'><p>CPU:</td><td valign='top'>MC68010+</td></table><div class='content'><h2>Alternate Function Code Registers (<code>SFC</code> and <code>DFC</code>)</h2>
-      <p>The SFC and DFC are 32-bit registers where only the lower 3 bits are used;
-      the upper 28 bits are reserved and ignored. These 3-bit function codes can be
-      considered extensions of the 32-bit logical address that optionally provides as many as eight
-      4-Gbyte address spaces. The processor automatically generates function codes to select
-      address spaces for data and programs at the user and supervisor modes. Certain
-      instructions use SFC and DFC to specify the function codes for operations.</p>
+      <p>The SFC and DFC are 32-bit registers with only bits 0-2 implemented. These bits contain
+      the address space values for the read or write operands of MOVES, PFLUSH, and PTEST
+      instructions. Values transfer to and from the SFC and DFC by using the MOVEC instruction.
+      These are long-word transfers; the upper 29 bits are read as zeros and are ignored when
+      written.</p>
+      <p>Function codes can be considered extensions of the 32-bit logical address that optionally
+      provides as many as eight 4-Gbyte address spaces. The processor automatically generates
+      function codes to select address spaces for data and programs at the user and supervisor
+      modes. Certain instructions use SFC and DFC to specify the function codes for operations.</p>
       <br><br><small><em>From MOTOROLA M68000 FAMILY Programmer's reference manual. Copyright 1992 by Motorola Inc./NXP. Adapted with permission.</em></small></div>""");
   }
 
