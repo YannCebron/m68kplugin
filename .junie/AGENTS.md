@@ -49,6 +49,22 @@ To run all tests in a specific module, omit the `--tests` filter:
 ./gradlew :amiga:test
 ```
 
+## Using IntelliJ Platform Sources
+
+When looking for IntelliJ Platform or library source code, always prefer the sources attached to the project's dependencies over web searches or external repositories.
+
+The IntelliJ Platform Gradle plugin provides the SDK with attached sources as a project dependency. Use IDE features like **Go to Declaration** and **Find Usages** to navigate Platform APIs, PSI structures, run configurations, test frameworks, and other IDE internals.
+
+For high-level API overview and how-to guides, use the **JetBrains Plugin Documentation** at https://plugins.jetbrains.com/docs/intellij/welcome.html.
+
+**Rules:**
+
+1. **Use IDE navigation first** — when you need to understand a Platform class, interface, or method, use the IDE's Go to Declaration feature to open the source directly from the dependency.
+2. **Use IDE events for context** — if the user references recently opened or edited files from Platform libraries, check IDE activity to locate those files.
+3. **Use Plugin Documentation for overviews** — when you need high-level API concepts or how-to guides, consult the JetBrains Plugin Documentation first.
+4. **Fallback to web search** — only use web search for Platform documentation when the attached sources and Plugin Documentation do not contain the needed information.
+5. **Cross-reference with attached sources** — if web search returns Platform documentation, verify the information against the attached dependency sources before applying it.
+
 ## Retrieving Relevant Facts
 
 Every decision must be based on exact, fact-checked evidence from authoritative sources. Never rely on web searches, guesses, or facts deduced only from this project's source code. If unsure, ask the user to confirm manually.
