@@ -185,4 +185,20 @@ public class LabelLexerTest extends M68kLexerTestCase {
         id ('.l')""");
   }
 
+  // —— Labels with dots ——
+
+  public void testLabelWithDots() {
+    doTest("my.label",
+      "id ('my.label')");
+  }
+
+  public void testLabelWithDotsAndColon() {
+    doTest("my.label: nop",
+      """
+        id ('my.label')
+        : (':')
+        WHITE_SPACE (' ')
+        nop ('nop')""");
+  }
+
 }

@@ -1,0 +1,7 @@
+M68k.FILE
+  M68kLabelImpl(LABEL)
+    PsiElement(id)('my.label')
+    PsiElement(:)(':')
+  PsiWhiteSpace(' ')
+  M68kNopInstructionImpl(NOP_INSTRUCTION)
+    PsiElement(nop)('nop')

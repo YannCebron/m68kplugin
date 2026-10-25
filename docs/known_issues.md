@@ -108,11 +108,9 @@ This affects data definition and offset directives that accept floating-point va
 ### Labels
 
 - single-digit local label `1$`
-- allow `@` (Devpac)
-- `-ldots` option: allow dots within identifiers
 - `-localu` option: allow local labels starting with `_` instead of `.` (Devpac)
 - ending with double-colon `::` automatically exported (`xdef`)
-- allow referencing `global_name\local_name` syntax (PhxAss)
+- referencing `global_name\local_name` syntax (PhxAss)
 
 ### Builtin Symbols
 
