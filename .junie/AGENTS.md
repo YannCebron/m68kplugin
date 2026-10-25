@@ -14,7 +14,7 @@ After modifying `src/grammar/m68k.bnf`, the parser must be regenerated via the I
 
 Any change to the lexer file, BNF grammar, Java code, tests, or documentation must follow the same naming conventions, style, and semantics as existing code. Copy the pattern from similar files and rules already in the project.
 
-If a source file carries a copyright header, update the year to the current year.
+When modifying a file with a copyright header, you must update the year to the current year. Check the copyright header before saving any changes to a source file.
 
 ## Regenerating the Lexer
 
