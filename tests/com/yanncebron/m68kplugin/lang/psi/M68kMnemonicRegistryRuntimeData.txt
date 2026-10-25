@@ -410,7 +410,7 @@ PRIVILEGED, TRAP
 -,          -,          C****
 
 "negx",     {AD},       BWL,    m68000up
--,          -,          C****,  ?----
+-,          -,          C*A**,  ?-?--
 
 "nop",      {0},        UNS,    m68000up
 -,          -

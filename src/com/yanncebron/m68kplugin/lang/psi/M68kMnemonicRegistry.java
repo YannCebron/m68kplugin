@@ -1275,8 +1275,8 @@ public final class M68kMnemonicRegistry {
 
     create(mnemonics, M68kTokenTypes.NEGX).dataSizes(GROUP_BWL)
       .first(ALTERABLE_DATA)
-      .affected("C****")
-      .tested("?----")
+      .affected("C*A**")
+      .tested("?-?--")
       .build();
 
 // NOP -------------------------------------------------------------------------
