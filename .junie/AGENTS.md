@@ -20,6 +20,35 @@ When modifying a file with a copyright header, you must update the year to the c
 
 After modifying `src/grammar/_M68kLexer.flex`, regenerate via Gradle: `./gradlew generateLexer`.
 
+## Running Tests
+
+The project has multiple Gradle modules. Running `./gradlew test` without specifying a module will search all modules and fail if the test class is not found in the default module.
+
+### Main Module Tests
+
+Tests in `tests/` belong to the main module. Always prefix with `:test`:
+
+```bash
+./gradlew :test --tests "com.yanncebron.m68kplugin.lang.psi.M68kMnemonicRegistryGeneratorTest"
+```
+
+### Amiga Platform Tests
+
+Tests in `platforms/amiga/src/test/` belong to the `amiga` module. Use `:amiga:test`:
+
+```bash
+./gradlew :amiga:test --tests "com.yanncebron.m68kplugin.amiga.hardware.M68kAmigaHardwareRegisterGeneratorTest"
+```
+
+### Running All Tests
+
+To run all tests in a specific module, omit the `--tests` filter:
+
+```bash
+./gradlew :test
+./gradlew :amiga:test
+```
+
 ## Retrieving Relevant Facts
 
 Every decision must be based on exact, fact-checked evidence from authoritative sources. Never rely on web searches, guesses, or facts deduced only from this project's source code. If unsure, ask the user to confirm manually.
