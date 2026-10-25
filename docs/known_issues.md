@@ -114,7 +114,13 @@ This affects data definition and offset directives that accept floating-point va
 
 ### Builtin Symbols
 
-- `REPTN`: only valid inside `rept`
+- `_LK`: wrong name, vasm uses `__LK` (Devpac)
+- `__MOVEMREGS`: wrong name, vasm uses `_MOVEMREGS` (BAsm)
+- ` MOVEMSIZE`: missing, vasm defines it with a leading space (BAsm)
+
+#### Visibility
+
+- `REPTN`: only valid inside `rept` or `irp`
 - `CARG`, `NARG`: only valid inside `macro`
 
 ### Macros
