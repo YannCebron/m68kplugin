@@ -50,13 +50,13 @@ Unsupported directives, these will display as a false positive
 
 
 - `.sdreg`
-- `cargs` (Devpac)
+- `cargs` (Devpac, PhxAss)
 - `comm`
-- `comment`
+- `comment` (Devpac, PhxAss)
 - `common`
 - `db`/`dw`/`dl` == `dc.b|w|l`
-- `debug`
-- `dsource`
+- `debug` (PhxAss)
+- `dsource` (PhxAss)
 - `entry`, `extrn`, `global`, `export` == `xdef`
 - `elif`
 - `equrl`
@@ -67,20 +67,43 @@ Unsupported directives, these will display as a false positive
 - `iif` (Devpac)
 - `image`
 - `import` == `xref`
+- `local`
 - `mcf5XXX`
-- `module`
+- `module` (Devpac, PhxAss)
 - `nref` (PhxAss)
-- `optc`
-- `public`
-- `rorg`
+- `optc` (PhxAss)
+- `public` (PhxAss)
+- `rorg` (Devpac, PhxAss)
 - `showoffset` (PhxAss)
 - `struct`/`estruct`
-- `symdebug`
+- `symdebug` (PhxAss)
+- `vdebug`
 - `weak`
 
 #### Directives with known limitations
 
-- `printt`: multiple strings
+- `echo`: vasm supports both expressions and strings; the plugin parses only strings
+- `include`: vasm supports angle-bracket paths (`<file.i>`); the plugin parses only quoted strings
+- `incdir`: vasm supports angle-bracket paths and multiple comma-separated paths; the plugin parses only one quoted string
+- `org`: vasm supports `org * + expr` to reserve bytes; the plugin parses only `org expression`
+- `printt`: vasm supports multiple comma-separated strings; the plugin parses only one string
+- `rept`: vasm supports an optional iterator name as second parameter; the plugin parses only the count
+- `xref`: vasm supports `xref.l` variant for long references; the plugin does not parse the `.l` suffix
+
+##### Floating-point suffixes
+
+vasm supports floating-point suffixes `.s`, `.d`, `.x`, and `.p`; the plugin does not parse floating-point suffixes.
+
+This affects data definition and offset directives that accept floating-point values. Code using these suffixes will show syntax errors.
+
+- `blk`
+- `dc`
+- `dcb`
+- `ds`
+- `dx`
+- `fo`
+- `rs`
+- `so`
 
 ### Labels
 
