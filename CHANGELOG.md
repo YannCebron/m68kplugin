@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.2.6 - 2026-11-01
+
 ### Changed
 
 - Raise the minimum IDE version to 2025.3 (from 2024.1)
